@@ -1,15 +1,19 @@
 // app/api/ical/[feed]/route.ts
+import type { NextRequest } from 'next/server';
 
 function pad(n: number) { return String(n).padStart(2, '0'); }
 function ymd(d: Date) { return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`; }
-function next(d: Date) {
+function nextDay(d: Date) {
   const n = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1));
   return ymd(n);
 }
 
-// No Next 15, ctx.params é uma Promise. Use await:
-export async function GET(_req: Request, ctx: any) {
-  const { feed = 'all' } = await ctx.params;
+// Next.js 15: context.params é uma Promise<{ feed: string }>
+export async function GET(
+  _req: NextRequest,
+  context: { params: Promise<{ feed: string }> }
+): Promise<Response> {
+  const { feed = 'all' } = await context.params;
 
   const today = new Date();
   const ics =
@@ -21,7 +25,7 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:demo-${feed}-${ymd(today)}@santosdodia.com
 DTSTART;VALUE=DATE:${ymd(today)}
-DTEND;VALUE=DATE:${next(today)}
+DTEND;VALUE=DATE:${nextDay(today)}
 RRULE:FREQ=YEARLY
 SUMMARY:Santos do Dia (exemplo)
 CATEGORIES:Santo
