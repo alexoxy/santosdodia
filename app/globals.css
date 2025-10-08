@@ -1,14 +1,12 @@
 /* Tema minimalista santosdodia.com */
 
 :root {
-  --paper: #F8F7F3;   /* fundo tipo papel */
-  --ink:   #1F2937;   /* texto */
-  --pine:  #2D5A27;   /* acento verde */
-  --gold:  #C9A227;   /* acento dourado */
-  --line:  #E5E7EB;   /* linhas suaves */
+  --paper: #F8F7F3;
+  --ink:   #1F2937;
+  --pine:  #2D5A27;
+  --gold:  #C9A227;
+  --line:  #E5E7EB;
   --radius: 12px;
-
-  /* as fontes virão do layout via next/font/google */
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
 }
@@ -18,18 +16,17 @@ html, body { height: 100%; margin: 0; }
 body {
   background: var(--paper);
   color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
 .card {
   background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(6px);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
+  backdrop-filter: blur(6px);
 }
 
 .btn {
@@ -45,4 +42,3 @@ body {
 h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); margin: 0; }
 .lead { color: rgba(31,41,55,.8); font-size: 15px; }
 header, footer { background: rgba(255,255,255,0.8); border-color: var(--line); }
-nav a { color: var(--pine); text-decoration: none; }
