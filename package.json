@@ -20,4 +20,7 @@
     "eslint": "^9.11.1",
     "eslint-config-next": "15.5.4"
   },
-  "engines":
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
