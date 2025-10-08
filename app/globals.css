@@ -1,26 +1,48 @@
-@import "tailwindcss";
+/* Tema minimalista santosdodia.com */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #F8F7F3;   /* fundo tipo papel */
+  --ink:   #1F2937;   /* texto */
+  --pine:  #2D5A27;   /* acento verde */
+  --gold:  #C9A227;   /* acento dourado */
+  --line:  #E5E7EB;   /* linhas suaves */
+  --radius: 12px;
+
+  /* as fontes virão do layout via next/font/google */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
 }
+
+.container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+.card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 8px; text-decoration: none;
+  font-weight: 600; font-size: 14px; cursor: pointer; transition: filter .15s;
+}
+.btn-primary { background: var(--pine); color: #fff; }
+.btn-accent  { background: var(--gold); color: #fff; }
+.btn-ghost   { color: var(--pine); }
+.btn:hover { filter: brightness(1.05); }
+
+h1, h2, h3 { font-family: var(--font-serif); color: var(--ink); margin: 0; }
+.lead { color: rgba(31,41,55,.8); font-size: 15px; }
+header, footer { background: rgba(255,255,255,0.8); border-color: var(--line); }
+nav a { color: var(--pine); text-decoration: none; }
