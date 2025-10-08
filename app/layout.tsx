@@ -25,9 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
 
-        <main className="container">
-          {children}
-        </main>
+        <main className="container">{children}</main>
 
         <footer style={{ borderTop: '1px solid var(--line)' }}>
           <div className="container" style={{ textAlign: 'center', fontSize: 12, color: 'rgba(31,41,55,.7)', paddingTop: 12, paddingBottom: 12 }}>
