@@ -7,10 +7,9 @@ function next(d: Date) {
   return ymd(n);
 }
 
-// Nota: no Next 15, context.params é uma Promise.
-// Não tipamos rigidamente para evitar conflitos de versão.
+// No Next 15, ctx.params é uma Promise. Use await:
 export async function GET(_req: Request, ctx: any) {
-  const { feed = 'all' } = await ctx.params; // <- await no params
+  const { feed = 'all' } = await ctx.params;
 
   const today = new Date();
   const ics =
