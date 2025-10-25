@@ -1,4 +1,5 @@
 import './globals.css';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'santosdodia.com — Calendário de Santos',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer style={{ borderTop: '1px solid #E5E7EB', textAlign: 'center', fontSize: 12, padding: '12px 16px' }}>
           © {new Date().getFullYear()} santosdodia.com
         </footer>
+        <Analytics />
       </body>
     </html>
   );
