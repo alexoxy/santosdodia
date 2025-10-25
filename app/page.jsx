@@ -1,9 +1,8 @@
 export default function Home() {
   return (
-    <div>
-      <h1 style={{ fontSize: 32, margin: 0 }}>Calendário de Santos</h1>
-      <p style={{ opacity: 0.8 }}>Católica e Ortodoxa — simples, devocional e em vários idiomas.</p>
-      <p><a href="/api/ical/all">Baixar ICS (exemplo)</a></p>
-    </div>
+    <main>
+      <h1>Santos do Dia</h1>
+      <p>O site está vazio por agora. Vamos começar de novo!</p>
+    </main>
   );
 }
