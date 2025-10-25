@@ -1,19 +1,17 @@
-// app/api/ical/[feed]/route.ts
-import type { NextRequest } from 'next/server';
+// app/api/ical/[feed]/route.js
 
-function pad(n: number) { return String(n).padStart(2, '0'); }
-function ymd(d: Date) { return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`; }
-function nextDay(d: Date) {
+function pad(n) { return String(n).padStart(2, '0'); }
+function ymd(d) { return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}`; }
+function nextDay(d) {
   const n = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1));
   return ymd(n);
 }
 
-// Next.js 15: context.params é uma Promise<{ feed: string }>
 export async function GET(
-  _req: NextRequest,
-  context: { params: Promise<{ feed: string }> }
-): Promise<Response> {
-  const { feed = 'all' } = await context.params;
+  _req,
+  context
+) {
+  const feed = context.params.feed ?? 'all';
 
   const today = new Date();
   const ics =

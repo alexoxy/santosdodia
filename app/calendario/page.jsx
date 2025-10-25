@@ -2,25 +2,22 @@
 
 import { useMemo, useState } from 'react';
 
-type Tradition = 'todas' | 'catolica' | 'ortodoxa';
-type Feast = { date: string; saint: string; tradition: 'catolica' | 'ortodoxa' };
-
 // Grelha do mês
-function monthMatrix(year:number, month:number) {
+function monthMatrix(year, month) {
   // month: 0..11
   const first = new Date(Date.UTC(year, month, 1));
   // segunda=0
   const startDay = (first.getUTCDay() + 6) % 7;
   const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
-  const cells: (number | null)[] = Array(startDay).fill(null).concat(
-    Array.from({length: daysInMonth}, (_,i)=>i+1)
+  const cells = Array(startDay).fill(null).concat(
+    Array.from({ length: daysInMonth }, (_, i) => i + 1)
   );
   while (cells.length % 7 !== 0) cells.push(null);
   return Array.from({length: cells.length/7}, (_,w)=>cells.slice(w*7, w*7+7));
 }
 
 // MOCK: só para ver a interface. Depois ligamos à base de dados.
-function sampleFeasts(year:number, month:number): Feast[] {
+function sampleFeasts(year, month) {
   return [
     { date: `${year}-${String(month+1).padStart(2,'0')}-01`, saint: 'Santa Teresa (ex.)', tradition: 'catolica' },
     { date: `${year}-${String(month+1).padStart(2,'0')}-07`, saint: 'São João (ex.)', tradition: 'catolica' },
@@ -34,7 +31,7 @@ export default function CalendarioPage() {
   const today = new Date();
   const [year, setYear] = useState(today.getUTCFullYear());
   const [month, setMonth] = useState(today.getUTCMonth()); // 0..11
-  const [trad, setTrad] = useState<Tradition>('todas');
+  const [trad, setTrad] = useState('todas');
 
   const matrix = useMemo(()=>monthMatrix(year, month), [year, month]);
   const feasts = useMemo(()=>sampleFeasts(year, month), [year, month]);

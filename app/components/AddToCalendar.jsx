@@ -1,21 +1,15 @@
 'use client';
 
-type Props = {
-  feedPath: string;   // Ex.: "/api/ical/all"
-  title?: string;     // Nome do calendário (subscrição)
-  dateISO?: string;   // Para evento único: "YYYY-MM-DD"
-};
-
-function getOrigin(): string {
+function getOrigin() {
   if (typeof window !== 'undefined' && window.location?.origin) {
     return window.location.origin;
   }
-  const env = (process as any)?.env?.NEXT_PUBLIC_SITE_URL;
+  const env = typeof process !== 'undefined' ? process?.env?.NEXT_PUBLIC_SITE_URL : undefined;
   if (typeof env === 'string' && env.length > 0) return env;
   return 'https://santosdodia.com';
 }
 
-function buildAbsoluteUrl(path: string, origin: string): string {
+function buildAbsoluteUrl(path, origin) {
   try {
     return new URL(path, origin).toString();
   } catch {
@@ -23,7 +17,7 @@ function buildAbsoluteUrl(path: string, origin: string): string {
   }
 }
 
-function googleEventLink(dateISO: string, title: string): string {
+function googleEventLink(dateISO, title) {
   const parts = dateISO.split('-').map((n) => parseInt(n, 10));
   const y = parts[0];
   const m = parts[1];
@@ -36,12 +30,12 @@ function googleEventLink(dateISO: string, title: string): string {
   return `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${start}/${end}&text=${text}&details=${details}`;
 }
 
-function outlookEventLink(dateISO: string, title: string): string {
+function outlookEventLink(dateISO, title) {
   const subject = encodeURIComponent(title);
   return `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&allday=true&startdt=${dateISO}&enddt=${dateISO}&subject=${subject}`;
 }
 
-export default function AddToCalendar(props: Props) {
+export default function AddToCalendar(props) {
   const title = props.title ? String(props.title) : 'Santos do Dia';
   const origin = getOrigin();
   const httpsUrl = buildAbsoluteUrl(props.feedPath, origin);
@@ -51,8 +45,8 @@ export default function AddToCalendar(props: Props) {
   const outlookSubscribe = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(httpsUrl)}&name=${encodeURIComponent(title)}`;
   const office365Subscribe = `https://outlook.office.com/calendar/0/addfromweb?url=${encodeURIComponent(httpsUrl)}&name=${encodeURIComponent(title)}`;
 
-  let googleEvent: string | null = null;
-  let outlookEvent: string | null = null;
+  let googleEvent = null;
+  let outlookEvent = null;
 
   if (props.dateISO && /^\d{4}-\d{2}-\d{2}$/.test(props.dateISO)) {
     googleEvent = googleEventLink(props.dateISO, title);

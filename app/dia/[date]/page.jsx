@@ -1,11 +1,9 @@
-// app/dia/[date]/page.tsx
+// app/dia/[date]/page.jsx
 import AddToCalendar from '../../components/AddToCalendar';
 
-type Feast = { name: string; tradition: 'catolica' | 'ortodoxa'; notes?: string; };
-
-function getMockFeasts(dateISO: string): Feast[] {
+function getMockFeasts(dateISO) {
   const day = dateISO.slice(-2);
-  const map: Record<string, Feast[]> = {
+  const map = {
     '01': [{ name: 'Santa Teresa (ex.)', tradition: 'catolica' }],
     '07': [
       { name: 'São João (ex.)', tradition: 'catolica' },
@@ -17,7 +15,7 @@ function getMockFeasts(dateISO: string): Feast[] {
   return map[day] || [{ name: 'Sem registos (exemplo).', tradition: 'catolica' }];
 }
 
-function isValidDate(iso: string) {
+function isValidDate(iso) {
   const m = iso.match(/^\d{4}-\d{2}-\d{2}$/);
   if (!m) return false;
   const [y, mo, d] = iso.split('-').map(Number);
@@ -25,9 +23,8 @@ function isValidDate(iso: string) {
   return dt.getUTCFullYear() === y && (dt.getUTCMonth() + 1) === mo && dt.getUTCDate() === d;
 }
 
-export default async function DiaPage({ params }: { params: Promise<{ date: string }> }) {
-  const { date } = await params; // Next 15: params como Promise
-  const dateISO = date;
+export default function DiaPage({ params }) {
+  const dateISO = params.date;
 
   if (!isValidDate(dateISO)) {
     return (
@@ -36,7 +33,7 @@ export default async function DiaPage({ params }: { params: Promise<{ date: stri
         <p className="lead">Usa AAAA-MM-DD. Ex.: <a href="/dia/2025-11-07">/dia/2025-11-07</a></p>
       </div>
     );
-    }
+  }
 
   const feasts = getMockFeasts(dateISO);
   const d = new Date(dateISO + 'T00:00:00Z');
