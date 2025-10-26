@@ -1,4 +1,4 @@
-import { availableFeeds, getAllFeasts } from '../../../data/feasts';
+import { availableFeeds, getAllFeasts } from '../../../../data/feasts.js';
 
 function toIcsDate(dateISO) {
   return dateISO.replace(/-/g, '');
