@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Católica e Ortodoxa, em vários idiomas, com iCal/Google/Outlook.'
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <body>
