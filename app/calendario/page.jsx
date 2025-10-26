@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { getMonthlyFeasts } from '../../data/feasts.js';
+import { getMonthlyFeasts } from '@/data/feasts.js';
 
 function monthMatrix(year, month) {
   const first = new Date(Date.UTC(year, month, 1));

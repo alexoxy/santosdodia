@@ -1,6 +1,6 @@
 import AddToCalendar from '../../components/AddToCalendar';
 import CandleButton from '../../components/CandleButton';
-import { getFeastsForDate } from '../../../data/feasts.js';
+import { getFeastsForDate } from '@/data/feasts.js';
 
 function isValidDate(iso) {
   const m = iso.match(/^\d{4}-\d{2}-\d{2}$/);
