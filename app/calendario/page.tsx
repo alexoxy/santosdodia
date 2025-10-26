@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from 'react';
 
-type Tradition = 'todas' | 'catolica' | 'ortodoxa';
-type Feast = { date: string; saint: string; tradition: 'catolica' | 'ortodoxa' };
+import { getMonthlyFeasts, type Tradition as FeastTradition } from '../../data/feasts';
+
+type TraditionFilter = 'todas' | FeastTradition;
 
 // Grelha do mês
 function monthMatrix(year:number, month:number) {
@@ -19,25 +20,22 @@ function monthMatrix(year:number, month:number) {
   return Array.from({length: cells.length/7}, (_,w)=>cells.slice(w*7, w*7+7));
 }
 
-// MOCK: só para ver a interface. Depois ligamos à base de dados.
-function sampleFeasts(year:number, month:number): Feast[] {
-  return [
-    { date: `${year}-${String(month+1).padStart(2,'0')}-01`, saint: 'Santa Teresa (ex.)', tradition: 'catolica' },
-    { date: `${year}-${String(month+1).padStart(2,'0')}-07`, saint: 'São João (ex.)', tradition: 'catolica' },
-    { date: `${year}-${String(month+1).padStart(2,'0')}-07`, saint: 'Santa Pelágia (ex.)', tradition: 'ortodoxa' },
-    { date: `${year}-${String(month+1).padStart(2,'0')}-15`, saint: 'Santo Inácio (ex.)', tradition: 'catolica' },
-    { date: `${year}-${String(month+1).padStart(2,'0')}-23`, saint: 'São Sérgio (ex.)', tradition: 'ortodoxa' },
-  ];
-}
-
 export default function CalendarioPage() {
   const today = new Date();
   const [year, setYear] = useState(today.getUTCFullYear());
   const [month, setMonth] = useState(today.getUTCMonth()); // 0..11
-  const [trad, setTrad] = useState<Tradition>('todas');
+  const [trad, setTrad] = useState<TraditionFilter>('todas');
 
   const matrix = useMemo(()=>monthMatrix(year, month), [year, month]);
-  const feasts = useMemo(()=>sampleFeasts(year, month), [year, month]);
+  const feasts = useMemo(()=>{
+    const tradition = trad === 'todas' ? undefined : trad;
+    return getMonthlyFeasts(year, month, tradition).map((feast) => ({
+      date: feast.dateISO,
+      name: feast.name,
+      tradition: feast.tradition,
+      notes: feast.notes
+    }));
+  }, [year, month, trad]);
 
   function prevMonth() {
     const m = new Date(Date.UTC(year, month, 1)); m.setUTCMonth(m.getUTCMonth() - 1);
@@ -50,8 +48,6 @@ export default function CalendarioPage() {
 
   const monthName = new Intl.DateTimeFormat('pt', { month: 'long', timeZone:'UTC' })
     .format(new Date(Date.UTC(year, month, 1)));
-
-  const filtered = feasts.filter(f => trad === 'todas' || f.tradition === trad);
 
   return (
     <div className="space-y-4">
@@ -74,7 +70,7 @@ export default function CalendarioPage() {
           ))}
           {matrix.flat().map((day, idx) => {
             const dateStr = day ? `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}` : '';
-            const items = day ? filtered.filter(f => f.date === dateStr) : [];
+            const items = day ? feasts.filter(f => f.date === dateStr) : [];
             const isToday = day &&
               day === today.getUTCDate() &&
               month === today.getUTCMonth() && year === today.getUTCFullYear();
@@ -90,8 +86,13 @@ export default function CalendarioPage() {
                 </div>
                 <div style={{display:'grid', gap:4}}>
                   {items.map((f, i)=>(
-                    <a key={i} href={`/dia/${dateStr}`} style={{ fontSize:12, color:'var(--ink)', textDecoration:'none' }}>
-                      • {f.saint} {f.tradition === 'catolica' ? '(Cat.)' : '(Ort.)'}
+                    <a
+                      key={i}
+                      href={`/dia/${dateStr}`}
+                      className="calendar-link"
+                      title={f.notes ?? undefined}
+                    >
+                      • {f.name} {f.tradition === 'catolica' ? '(Cat.)' : '(Ort.)'}
                     </a>
                   ))}
                 </div>
@@ -99,6 +100,9 @@ export default function CalendarioPage() {
             );
           })}
         </div>
+        {feasts.length === 0 ? (
+          <p className="lead" style={{ marginTop: 12 }}>Sem registos para este mês nesta tradição. Volta mais tarde!</p>
+        ) : null}
       </div>
 
       <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>

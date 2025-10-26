@@ -1,21 +1,9 @@
 // app/dia/[date]/page.tsx
 import AddToCalendar from '../../components/AddToCalendar';
+import CandleButton from '../../components/CandleButton';
+import { getFeastsForDate } from '../../../data/feasts';
 
-type Feast = { name: string; tradition: 'catolica' | 'ortodoxa'; notes?: string; };
-
-function getMockFeasts(dateISO: string): Feast[] {
-  const day = dateISO.slice(-2);
-  const map: Record<string, Feast[]> = {
-    '01': [{ name: 'Santa Teresa (ex.)', tradition: 'catolica' }],
-    '07': [
-      { name: 'São João (ex.)', tradition: 'catolica' },
-      { name: 'Santa Pelágia (ex.)', tradition: 'ortodoxa' }
-    ],
-    '15': [{ name: 'Santo Inácio (ex.)', tradition: 'catolica' }],
-    '23': [{ name: 'São Sérgio (ex.)', tradition: 'ortodoxa' }],
-  };
-  return map[day] || [{ name: 'Sem registos (exemplo).', tradition: 'catolica' }];
-}
+type Feast = ReturnType<typeof getFeastsForDate>[number];
 
 function isValidDate(iso: string) {
   const m = iso.match(/^\d{4}-\d{2}-\d{2}$/);
@@ -36,9 +24,9 @@ export default async function DiaPage({ params }: { params: Promise<{ date: stri
         <p className="lead">Usa AAAA-MM-DD. Ex.: <a href="/dia/2025-11-07">/dia/2025-11-07</a></p>
       </div>
     );
-    }
+  }
 
-  const feasts = getMockFeasts(dateISO);
+  const feasts: Feast[] = getFeastsForDate(dateISO);
   const d = new Date(dateISO + 'T00:00:00Z');
   const nice = new Intl.DateTimeFormat('pt', { dateStyle: 'full', timeZone: 'UTC' }).format(d);
 
@@ -47,16 +35,18 @@ export default async function DiaPage({ params }: { params: Promise<{ date: stri
       <section className="card">
         <h1 style={{ fontSize: 26, marginBottom: 4 }}>Santos de {nice}</h1>
         <div style={{ display: 'grid', gap: 12 }}>
+          {feasts.length === 0 ? (
+            <p className="lead">Ainda não temos santos associados a esta data. Volta em breve!</p>
+          ) : null}
           {feasts.map((f, i) => (
-            <div key={i} style={{ borderTop: i ? '1px solid var(--line)' : 'none', paddingTop: i ? 12 : 0 }}>
+            <div key={f.id} style={{ borderTop: i ? '1px solid var(--line)' : 'none', paddingTop: i ? 12 : 0 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
                 <div>
                   <div style={{ fontFamily: 'var(--font-serif)', fontSize: 18 }}>{f.name}</div>
                   <div className="lead" style={{ fontSize: 13 }}>{f.tradition === 'catolica' ? 'Católica' : 'Ortodoxa'}</div>
+                  {f.notes ? <p className="feast-notes">{f.notes}</p> : null}
                 </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <a className="btn btn-primary" href="#" onClick={(e)=>{e.preventDefault(); alert('Em breve: acender vela');}}>Acender vela</a>
-                </div>
+                <CandleButton dateISO={dateISO} />
               </div>
             </div>
           ))}
