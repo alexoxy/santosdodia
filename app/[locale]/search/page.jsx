@@ -6,7 +6,8 @@ import { searchSaints } from '../../../lib/saints';
 export const dynamic = 'force-dynamic';
 
 export default async function SearchPage({ params, searchParams }) {
-  const localeInfo = getLocaleDefinition(params.locale);
+  const { locale: localeParam } = await params;
+  const localeInfo = getLocaleDefinition(localeParam);
   const locale = localeInfo.code;
   const messages = getMessages(locale);
   const paramBag = new URLSearchParams(searchParams);

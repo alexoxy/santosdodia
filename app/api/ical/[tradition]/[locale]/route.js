@@ -17,8 +17,8 @@ function resolveTitle(dictionary, saints, tradition) {
 }
 
 export async function GET(request, { params }) {
-  const { tradition } = params;
-  const localeInfo = getLocaleDefinition(params.locale);
+  const { tradition, locale: localeParam } = await params;
+  const localeInfo = getLocaleDefinition(localeParam);
   const locale = localeInfo.code;
   const dictionary = getMessages(locale);
   if (tradition !== 'all' && !TRADITIONS[tradition]) {

@@ -5,9 +5,10 @@ import { getAllSaints } from '../../../../lib/saints';
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
-  const locale = getLocaleDefinition(params.locale).code;
+  const { locale: localeParam, slug } = await params;
+  const locale = getLocaleDefinition(localeParam).code;
   const saints = await getAllSaints(locale);
-  const saint = saints.find((entry) => entry.slug === params.slug);
+  const saint = saints.find((entry) => entry.slug === slug);
 
   if (!saint) {
     return { title: 'Santo não encontrado' };
@@ -20,10 +21,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function SaintPage({ params }) {
-  const locale = getLocaleDefinition(params.locale).code;
+  const { locale: localeParam, slug } = await params;
+  const locale = getLocaleDefinition(localeParam).code;
   const messages = getMessages(locale);
   const saints = await getAllSaints(locale);
-  const saint = saints.find((entry) => entry.slug === params.slug);
+  const saint = saints.find((entry) => entry.slug === slug);
 
   if (!saint) {
     notFound();

@@ -4,7 +4,8 @@ import { getLocaleDefinition, getMessages, translate } from '../../lib/i18n';
 import { getLastSyncInfo } from '../../lib/saints';
 
 export async function generateMetadata({ params }) {
-  const locale = getLocaleDefinition(params.locale).code;
+  const { locale: localeParam } = await params;
+  const locale = getLocaleDefinition(localeParam).code;
   const messages = getMessages(locale);
   return {
     title: messages.siteTitle,
@@ -13,7 +14,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function LocaleLayout({ children, params }) {
-  const localeInfo = getLocaleDefinition(params.locale);
+  const { locale: localeParam } = await params;
+  const localeInfo = getLocaleDefinition(localeParam);
   const locale = localeInfo.code;
   const messages = getMessages(locale);
   const syncInfo = getLastSyncInfo();

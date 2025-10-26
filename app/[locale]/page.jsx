@@ -18,7 +18,8 @@ function pickHighlight(today) {
 }
 
 export default async function LocaleHome({ params }) {
-  const localeInfo = getLocaleDefinition(params.locale);
+  const { locale: localeParam } = await params;
+  const localeInfo = getLocaleDefinition(localeParam);
   const locale = localeInfo.code;
   const messages = getMessages(locale);
 
