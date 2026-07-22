@@ -1,0 +1,1 @@
+export default function NotFound(){return <section className="message-card"><span className="eyebrow">404</span><h1>Page not found</h1><p>The requested page or observance could not be found.</p><a className="btn btn-primary" href="/">Return home</a></section>}

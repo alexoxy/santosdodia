@@ -1,0 +1,1 @@
+import type { Metadata } from 'next';import SearchExplorer from '../components/SearchExplorer';export const metadata:Metadata={title:'Explore Saints and Feasts',description:'Search Christian observances by saint, feast, patronage, country and tradition.'};export default function ExplorePage(){return <SearchExplorer/>}
