@@ -1,6 +1,86 @@
 'use client';
-import { useMemo,useState } from 'react';import { getMonthlyObservances,type Category,type Tradition } from '../../data/observances';import { localize } from '../../lib/i18n';import { useLanguage } from './LanguageProvider';
-const cats:Category[]=['saint','feast','marian','apostle','martyr','fast'],regions=['PT','ES','IT','FR','GR','RU','GB','GLOBAL'];
-function matrix(y:number,m:number){const start=(new Date(Date.UTC(y,m,1)).getUTCDay()+6)%7,days=new Date(Date.UTC(y,m+1,0)).getUTCDate(),cells:(number|null)[]=[...Array.from({length:start},()=>null),...Array.from({length:days},(_,i)=>i+1)];while(cells.length%7)cells.push(null);return cells}
-function iso(y:number,m:number,d:number){return`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
-export default function CalendarExplorer(){const now=new Date(),{locale,copy,country}=useLanguage();const[y,setY]=useState(now.getFullYear()),[m,setM]=useState(now.getMonth()),[trad,setTrad]=useState<'all'|Tradition>('all'),[cat,setCat]=useState<'all'|Category>('all'),[region,setRegion]=useState('all');const items=useMemo(()=>getMonthlyObservances(y,m,locale,{tradition:trad==='all'?undefined:trad,category:cat==='all'?undefined:cat,country:region==='all'||region==='GLOBAL'?undefined:region}),[y,m,locale,trad,cat,region]);const days=useMemo(()=>{const base=new Date(Date.UTC(2026,0,5));return Array.from({length:7},(_,i)=>new Intl.DateTimeFormat(locale,{weekday:'short',timeZone:'UTC'}).format(new Date(base.getTime()+i*86400000)))},[locale]);const names=new Intl.DisplayNames([locale],{type:'region'});function shift(n:number){const d=new Date(Date.UTC(y,m+n,1));setY(d.getUTCFullYear());setM(d.getUTCMonth())}const p=new URLSearchParams({locale});if(trad!=='all')p.set('tradition',trad);if(cat!=='all')p.set('category',cat);if(region!=='all'&&region!=='GLOBAL')p.set('country',region);return <div className="page-stack"><section className="page-hero compact-hero"><div><span className="eyebrow">{copy.global} · {copy.beta}</span><h1>{copy.calendarTitle}</h1><p>{copy.calendarIntro}</p></div><div className="hero-symbol">☼</div></section><section className="filter-panel"><div className="filter-group"><label>{copy.tradition}</label><select value={trad} onChange={e=>setTrad(e.target.value as 'all'|Tradition)}><option value="all">{copy.all}</option><option value="catholic">{copy.catholic}</option><option value="orthodox">{copy.orthodox}</option></select></div><div className="filter-group"><label>{copy.category}</label><select value={cat} onChange={e=>setCat(e.target.value as 'all'|Category)}><option value="all">{copy.allCategories}</option>{cats.map(x=><option key={x} value={x}>{copy[x]}</option>)}</select></div><div className="filter-group"><label>{copy.country}</label><select value={region} onChange={e=>setRegion(e.target.value)}><option value="all">{copy.allRegions}</option>{regions.map(x=><option key={x} value={x}>{x==='GLOBAL'?copy.global:names.of(x)}</option>)}</select></div>{country&&regions.includes(country)?<button className="btn btn-tertiary filter-action" onClick={()=>setRegion(country)}>{copy.localSuggestion}</button>:null}</section><section className="calendar-card"><div className="calendar-toolbar"><button className="icon-button" onClick={()=>shift(-1)}>←</button><h2>{new Intl.DateTimeFormat(locale,{month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(Date.UTC(y,m,1)))}</h2><button className="icon-button" onClick={()=>shift(1)}>→</button></div><div className="calendar-scroll"><div className="calendar-grid">{days.map(d=><div className="weekday" key={d}>{d}</div>)}{matrix(y,m).map((d,i)=>{const date=d?iso(y,m,d):'',list=d?items.filter(x=>x.dateISO===date):[],today=d&&date===iso(now.getFullYear(),now.getMonth(),now.getDate());return <div className={`calendar-cell${d?'':' blank'}${today?' is-today':''}`} key={`${date}-${i}`}>{d?<><a className="day-number" href={`/day/${date}`}>{d}</a><div className="calendar-items">{list.map(x=><a className={`calendar-observance ${x.traditions[0]}`} href={`/day/${date}`} key={x.id}>{localize(x.names,locale)}</a>)}</div></>:null}</div>})}</div></div>{!items.length?<div className="empty-state inline"><span>✦</span><p>{copy.noResults}</p></div>:null}</section><section className="subscription-strip"><div><span className="eyebrow">ICS · Google · Apple · Outlook</span><h2>{copy.addCalendar}</h2></div><div className="button-row"><a className="btn btn-primary" href={`/api/ical/all?${p}`}>{copy.feedAll}</a><a className="btn btn-secondary" href={`/api/ical/catholic?locale=${locale}`}>{copy.feedCatholic}</a><a className="btn btn-secondary" href={`/api/ical/orthodox?locale=${locale}`}>{copy.feedOrthodox}</a></div></section></div>}
+import { useEffect, useMemo, useState } from 'react';
+import {
+  getMonthlyObservances,
+  traditionClass,
+  traditionLabel,
+  TRADITIONS,
+  type Category,
+  type Observance,
+  type Tradition
+} from '../../data/observances';
+import { useLanguage } from './LanguageProvider';
+
+const categories: Category[] = ['saint','feast','marian','apostle','martyr','fast'];
+const regions = ['PT','ES','IT','FR','DE','PL','GR','RU','GB','EG','ET','AM','GLOBAL'];
+
+function matrix(year:number,month:number){
+  const start=(new Date(Date.UTC(year,month,1)).getUTCDay()+6)%7;
+  const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+  const cells:(number|null)[]=[...Array.from({length:start},()=>null),...Array.from({length:days},(_,i)=>i+1)];
+  while(cells.length%7)cells.push(null);return cells;
+}
+function iso(year:number,month:number,day:number){return`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`}
+
+export default function CalendarExplorer(){
+  const now=new Date(),{locale,copy,country}=useLanguage();
+  const[year,setYear]=useState(now.getFullYear()),[month,setMonth]=useState(now.getMonth());
+  const[tradition,setTradition]=useState<'all'|Tradition>('all');
+  const[category,setCategory]=useState<'all'|Category>('all');
+  const[region,setRegion]=useState('all');
+  const[loading,setLoading]=useState(false);
+  const fallback=useMemo(()=>getMonthlyObservances(year,month,locale,{
+    tradition:tradition==='all'?undefined:tradition,
+    category:category==='all'?undefined:category,
+    country:region==='all'||region==='GLOBAL'?undefined:region
+  }),[year,month,locale,tradition,category,region]);
+  const[items,setItems]=useState<Observance[]>(fallback);
+
+  useEffect(()=>{setItems(fallback)},[fallback]);
+  useEffect(()=>{
+    const controller=new AbortController();
+    const params=new URLSearchParams({year:String(year),month:String(month+1),locale,live:'1'});
+    if(tradition!=='all')params.set('tradition',tradition);
+    if(category!=='all')params.set('category',category);
+    if(region!=='all'&&region!=='GLOBAL')params.set('country',region);
+    setLoading(true);
+    fetch(`/api/v1/observances?${params}`,{signal:controller.signal})
+      .then(response=>response.ok?response.json():Promise.reject(new Error('Calendar request failed')))
+      .then(payload=>{if(Array.isArray(payload?.data))setItems(payload.data)})
+      .catch(error=>{if(error?.name!=='AbortError')setItems(fallback)})
+      .finally(()=>{if(!controller.signal.aborted)setLoading(false)});
+    return()=>controller.abort();
+  },[year,month,locale,tradition,category,region,fallback]);
+
+  const weekdays=useMemo(()=>{
+    const base=new Date(Date.UTC(2026,0,5));
+    return Array.from({length:7},(_,index)=>new Intl.DateTimeFormat(locale,{weekday:'short',timeZone:'UTC'}).format(new Date(base.getTime()+index*86400000)));
+  },[locale]);
+  const regionNames=new Intl.DisplayNames([locale],{type:'region'});
+  function shift(value:number){const date=new Date(Date.UTC(year,month+value,1));setYear(date.getUTCFullYear());setMonth(date.getUTCMonth())}
+
+  const feedParams=new URLSearchParams({locale});
+  if(tradition!=='all')feedParams.set('tradition',tradition);
+  if(category!=='all')feedParams.set('category',category);
+  if(region!=='all'&&region!=='GLOBAL')feedParams.set('country',region);
+
+  return <div className="page-stack">
+    <section className="page-hero compact-hero"><div><span className="eyebrow">{copy.global} · {copy.liveData}</span><h1>{copy.calendarTitle}</h1><p>{copy.calendarIntro}</p></div><div className="hero-symbol">☼</div></section>
+    <section className="filter-panel">
+      <div className="filter-group"><label>{copy.tradition}</label><select value={tradition} onChange={event=>setTradition(event.target.value as 'all'|Tradition)}><option value="all">{copy.all}</option>{TRADITIONS.map(value=><option key={value} value={value}>{traditionLabel(copy,value)}</option>)}</select></div>
+      <div className="filter-group"><label>{copy.category}</label><select value={category} onChange={event=>setCategory(event.target.value as 'all'|Category)}><option value="all">{copy.allCategories}</option>{categories.map(value=><option key={value} value={value}>{copy[value]}</option>)}</select></div>
+      <div className="filter-group"><label>{copy.country}</label><select value={region} onChange={event=>setRegion(event.target.value)}><option value="all">{copy.allRegions}</option>{regions.map(value=><option key={value} value={value}>{value==='GLOBAL'?copy.global:regionNames.of(value)}</option>)}</select></div>
+      {country&&regions.includes(country)?<button className="btn btn-tertiary filter-action" onClick={()=>setRegion(country)}>{copy.localSuggestion}</button>:null}
+    </section>
+    <section className="calendar-card">
+      <div className="calendar-toolbar"><button className="icon-button" aria-label={copy.previous} onClick={()=>shift(-1)}>←</button><h2>{new Intl.DateTimeFormat(locale,{month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(Date.UTC(year,month,1)))}</h2><button className="icon-button" aria-label={copy.next} onClick={()=>shift(1)}>→</button></div>
+      {loading?<div className="data-loading" aria-live="polite">{copy.loading}</div>:null}
+      <div className="calendar-scroll"><div className="calendar-grid">{weekdays.map(day=><div className="weekday" key={day}>{day}</div>)}{matrix(year,month).map((day,index)=>{
+        const date=day?iso(year,month,day):'',list=day?items.filter(item=>item.dateISO===date):[],today=Boolean(day&&date===iso(now.getFullYear(),now.getMonth(),now.getDate()));
+        return <div className={`calendar-cell${day?'':' blank'}${today?' is-today':''}`} key={`${date}-${index}`}>{day?<><a className="day-number" href={`/day/${date}`}>{day}</a><div className="calendar-items">{list.slice(0,8).map(item=><a className={`calendar-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{item.name}</a>)}</div>{list.length>8?<a className="calendar-more" href={`/day/${date}`}>+{list.length-8}</a>:null}</>:null}</div>
+      })}</div></div>
+      {!loading&&!items.length?<div className="empty-state inline"><span>✦</span><p>{copy.noResults}</p></div>:null}
+    </section>
+    <section className="subscription-strip"><div><span className="eyebrow">ICS · Google · Apple · Outlook</span><h2>{copy.addCalendar}</h2></div><div className="button-row"><a className="btn btn-primary" href={`/api/ical/all?${feedParams}`}>{copy.feedAll}</a><a className="btn btn-secondary" href={`/api/ical/roman-catholic?locale=${locale}`}>{copy.feedCatholic}</a><a className="btn btn-secondary" href={`/api/ical/eastern-orthodox?locale=${locale}`}>{copy.feedOrthodox}</a></div></section>
+  </div>;
+}
