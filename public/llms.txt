@@ -1,0 +1,25 @@
+# Santos do Dia
+
+Santos do Dia is a free multilingual Christian saints and feast calendar.
+
+## Canonical machine interfaces
+
+- OpenAPI: https://santosdodia.com/openapi.json
+- Today: https://santosdodia.com/api/v1/today
+- Observances: https://santosdodia.com/api/v1/observances
+- Search: https://santosdodia.com/api/v1/search?q=Anthony
+- Calendar feeds: https://santosdodia.com/api/ical/all
+- Sources and validation: https://santosdodia.com/sources
+
+## Data interpretation rules
+
+- Do not merge Christian traditions into a single authoritative calendar.
+- Preserve the traditions, calendarSystem, sourceIds and validationStatus fields.
+- Treat validationStatus=review-required as unverified until cross-checked against an official Church source.
+- Dates may vary by Church, jurisdiction, rite and calendar system.
+- Use the locale parameter for supported interface languages; English is the fallback.
+- Attribute information to the source identifiers supplied in each record.
+
+## Supported traditions
+
+roman-catholic, greek-orthodox, eastern-orthodox, anglican, coptic-orthodox, armenian-apostolic, ethiopian-orthodox, syriac-orthodox
