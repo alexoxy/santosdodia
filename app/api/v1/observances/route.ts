@@ -1,1 +1,62 @@
-import { NextRequest } from 'next/server';import { getAllObservances,getMonthlyObservances,getObservancesForDate,parseCategory,parseTradition } from '../../../../data/observances';import { normalizeLocale } from '../../../../lib/i18n';export async function GET(request:NextRequest){const p=request.nextUrl.searchParams,locale=normalizeLocale(p.get('locale')??request.headers.get('accept-language')),now=new Date(),year=Number(p.get('year')??now.getUTCFullYear()),month=p.has('month')?Number(p.get('month')):undefined,date=p.get('date'),filters={tradition:parseTradition(p.get('tradition')),category:parseCategory(p.get('category')),country:p.get('country')??undefined,patronage:p.get('patronage')??undefined};if(!Number.isInteger(year)||year<1900||year>2200)return Response.json({error:'Invalid year.'},{status:400});if(month!==undefined&&(!Number.isInteger(month)||month<1||month>12))return Response.json({error:'Invalid month.'},{status:400});const data=date?getObservancesForDate(date,locale,filters):month?getMonthlyObservances(year,month-1,locale,filters):getAllObservances(year,locale,filters);return Response.json({data,meta:{year,month,date,locale,count:data.length,filters}},{headers:{'Cache-Control':'public, s-maxage=3600, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}})}
+import { NextRequest } from 'next/server';
+import {
+  getAllObservances,
+  getMonthlyObservances,
+  getObservancesForDate,
+  mergeObservances,
+  parseCategory,
+  parseTradition
+} from '../../../../data/observances';
+import { normalizeLocale } from '../../../../lib/i18n';
+import { getLiveObservances } from '../../../../lib/live-sources';
+
+export async function GET(request: NextRequest) {
+  const p = request.nextUrl.searchParams;
+  const locale = normalizeLocale(p.get('locale') ?? request.headers.get('accept-language'));
+  const now = new Date();
+  const year = Number(p.get('year') ?? now.getUTCFullYear());
+  const month = p.has('month') ? Number(p.get('month')) : undefined;
+  const date = p.get('date') ?? undefined;
+  const live = p.get('live') !== '0';
+  const filters = {
+    tradition: parseTradition(p.get('tradition')),
+    category: parseCategory(p.get('category')),
+    country: p.get('country') ?? undefined,
+    patronage: p.get('patronage') ?? undefined
+  };
+
+  if (!Number.isInteger(year) || year < 1900 || year > 2200) {
+    return Response.json({ error: 'Invalid year.' }, { status: 400 });
+  }
+  if (month !== undefined && (!Number.isInteger(month) || month < 1 || month > 12)) {
+    return Response.json({ error: 'Invalid month.' }, { status: 400 });
+  }
+
+  const curated = date
+    ? getObservancesForDate(date, locale, filters)
+    : month
+      ? getMonthlyObservances(year, month - 1, locale, filters)
+      : getAllObservances(year, locale, filters);
+
+  const imported = live
+    ? await getLiveObservances(year, locale, filters, { month, date })
+    : { data: [], sourceHealth: [] };
+
+  const data = mergeObservances(curated, imported.data);
+  return Response.json(
+    {
+      data,
+      meta: {
+        year, month, date, locale, count: data.length, filters, live,
+        sourceHealth: imported.sourceHealth,
+        generatedAt: new Date().toISOString()
+      }
+    },
+    {
+      headers: {
+        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=86400',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+  );
+}
