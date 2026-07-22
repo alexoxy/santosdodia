@@ -1,1 +1,17 @@
-import { NextRequest } from 'next/server';import { getObservancesForDate,parseCategory,parseTradition } from '../../../../data/observances';import { normalizeLocale } from '../../../../lib/i18n';export async function GET(request:NextRequest){const p=request.nextUrl.searchParams,locale=normalizeLocale(p.get('locale')??request.headers.get('accept-language')),date=p.get('date')??new Date().toISOString().slice(0,10),filters={tradition:parseTradition(p.get('tradition')),category:parseCategory(p.get('category')),country:p.get('country')??undefined},data=getObservancesForDate(date,locale,filters);return Response.json({data,meta:{date,locale,count:data.length,filters,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}})}
+import { NextRequest } from 'next/server';
+import { getObservancesForDate, mergeObservances, parseCategory, parseTradition } from '../../../../data/observances';
+import { normalizeLocale } from '../../../../lib/i18n';
+import { getLiveObservances } from '../../../../lib/live-sources';
+
+export async function GET(request:NextRequest){
+  const params=request.nextUrl.searchParams;
+  const locale=normalizeLocale(params.get('locale')??request.headers.get('accept-language'));
+  const date=params.get('date')??new Date().toISOString().slice(0,10);
+  const year=Number(date.slice(0,4));
+  const filters={tradition:parseTradition(params.get('tradition')),category:parseCategory(params.get('category')),country:params.get('country')??undefined};
+  const curated=getObservancesForDate(date,locale,filters);
+  const live=params.get('live')!=='0';
+  const imported=live?await getLiveObservances(year,locale,filters,{date}):{data:[],sourceHealth:[]};
+  const data=mergeObservances(curated,imported.data);
+  return Response.json({data,meta:{date,locale,count:data.length,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
+}
