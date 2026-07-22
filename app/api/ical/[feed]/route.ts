@@ -1,7 +1,7 @@
 // app/api/ical/[feed]/route.ts
 import type { NextRequest } from 'next/server';
 
-import { availableFeeds, getAllFeasts } from '../../../data/feasts';
+import { availableFeeds, getAllFeasts } from '../../../../data/feasts';
 
 type FeedKey = keyof typeof availableFeeds;
 
@@ -104,6 +104,7 @@ export async function GET(_req: NextRequest, context: { params: Promise<Params> 
   return new Response(calendar, {
     headers: {
       'Content-Type': 'text/calendar; charset=utf-8',
+      'Content-Disposition': `inline; filename="santos-${candidate}.ics"`,
       'Cache-Control': 's-maxage=3600, stale-while-revalidate=86400'
     }
   });
