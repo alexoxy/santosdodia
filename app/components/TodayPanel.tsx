@@ -1,4 +1,37 @@
 'use client';
-import { useMemo } from 'react';import { getObservancesForDate } from '../../data/observances';import { localize } from '../../lib/i18n';import { useLanguage } from './LanguageProvider';
-function localDateISO(){const d=new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-export default function TodayPanel(){const{locale,copy,country,countryName}=useLanguage();const dateISO=localDateISO();const items=useMemo(()=>getObservancesForDate(dateISO,locale),[dateISO,locale]);const label=new Intl.DateTimeFormat(locale,{dateStyle:'full'}).format(new Date(`${dateISO}T12:00:00`));return <section className="today-panel"><div className="today-date-card"><span className="eyebrow">{copy.today}</span><strong className="today-day">{new Date(`${dateISO}T12:00:00`).getDate()}</strong><span className="today-date-label">{label}</span>{countryName?<span className="region-pill">{copy.suggestedRegion}: {countryName}</span>:null}</div><div className="today-content"><div className="section-heading compact"><div><span className="eyebrow">{copy.beta}</span><h2>{copy.saintsToday}</h2></div><a className="text-link" href={`/day/${dateISO}`}>{copy.openDay} →</a></div>{items.length?<div className="observance-list">{items.map(x=><article className="observance-row" key={x.id}><div className={`tradition-dot ${x.traditions[0]}`}/><div><h3>{localize(x.names,locale)}</h3><p>{x.traditions.map(t=>t==='catholic'?copy.catholic:copy.orthodox).join(' · ')} · {copy[x.category]}</p></div></article>)}</div>:<div className="empty-state"><span>✦</span><p>{copy.noObservances}</p></div>}<div className="today-actions"><a className="btn btn-primary" href="/calendar">{copy.viewCalendar}</a><a className="btn btn-secondary" href={`/api/ical/all?locale=${locale}${country?`&country=${country}`:''}`}>{copy.downloadIcs}</a></div></div></section>}
+import { useEffect, useMemo, useState } from 'react';
+import { getObservancesForDate, traditionClass, traditionLabel, type Observance } from '../../data/observances';
+import { useLanguage } from './LanguageProvider';
+
+function localDateISO(){const date=new Date();return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`}
+
+export default function TodayPanel(){
+  const{locale,copy,country,countryName}=useLanguage();
+  const dateISO=localDateISO();
+  const fallback=useMemo(()=>getObservancesForDate(dateISO,locale),[dateISO,locale]);
+  const[items,setItems]=useState<Observance[]>(fallback);
+  const[loading,setLoading]=useState(false);
+
+  useEffect(()=>{setItems(fallback)},[fallback]);
+  useEffect(()=>{
+    const controller=new AbortController();
+    const params=new URLSearchParams({date:dateISO,locale,live:'1'});
+    setLoading(true);
+    fetch(`/api/v1/observances?${params}`,{signal:controller.signal})
+      .then(response=>response.ok?response.json():Promise.reject(new Error('Today request failed')))
+      .then(payload=>{if(Array.isArray(payload?.data))setItems(payload.data)})
+      .catch(error=>{if(error?.name!=='AbortError')setItems(fallback)})
+      .finally(()=>{if(!controller.signal.aborted)setLoading(false)});
+    return()=>controller.abort();
+  },[dateISO,locale,fallback]);
+
+  const label=new Intl.DateTimeFormat(locale,{dateStyle:'full'}).format(new Date(`${dateISO}T12:00:00`));
+  return <section className="today-panel">
+    <div className="today-date-card"><span className="eyebrow">{copy.today}</span><strong className="today-day">{new Date(`${dateISO}T12:00:00`).getDate()}</strong><span className="today-date-label">{label}</span>{countryName?<span className="region-pill">{copy.suggestedRegion}: {countryName}</span>:null}</div>
+    <div className="today-content">
+      <div className="section-heading compact"><div><span className="eyebrow">{loading?copy.loading:copy.liveData}</span><h2>{copy.saintsToday}</h2></div><a className="text-link" href={`/day/${dateISO}`}>{copy.openDay} →</a></div>
+      {items.length?<div className="observance-list">{items.slice(0,12).map(item=><article className="observance-row" key={item.id}><div className={`tradition-dot ${traditionClass(item.traditions[0])}`}/><div><h3>{item.name}</h3><p>{item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')} · {copy[item.category]}</p></div></article>)}</div>:<div className="empty-state"><span>✦</span><p>{loading?copy.loading:copy.noObservances}</p></div>}
+      <div className="today-actions"><a className="btn btn-primary" href="/calendar">{copy.viewCalendar}</a><a className="btn btn-secondary" href={`/api/ical/all?locale=${locale}${country?`&country=${country}`:''}`}>{copy.downloadIcs}</a></div>
+    </div>
+  </section>;
+}
