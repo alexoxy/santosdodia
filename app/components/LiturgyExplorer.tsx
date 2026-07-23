@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect,useMemo,useState } from 'react';
+import { useCallback,useEffect,useMemo,useState } from 'react';
 import type { LitcalCalendarRef,LitcalDayResult,LitcalEvent } from '../../lib/litcal-mirror';
 import { liturgyUi } from '../../lib/liturgy-i18n';
 import { useLanguage } from './LanguageProvider';
@@ -10,7 +10,6 @@ function todayISO(){const date=new Date();return`${date.getFullYear()}-${String(
 function calendarValue(calendar:LitcalCalendarRef){return calendar.kind==='general'?'general':`${calendar.kind}:${calendar.id}`}
 function parseCalendar(value:string):LitcalCalendarRef{if(value==='general')return{kind:'general'};const[kind,id]=value.split(':');return kind==='nation'?{kind:'nation',id}:kind==='diocese'?{kind:'diocese',id}:{kind:'general'}}
 function colourValue(event:LitcalEvent){const rawValue=event.raw.color??event.raw.colour??event.colour;const raw=Array.isArray(rawValue)?rawValue[0]:rawValue;if(!raw)return'#d8b35c';const normalized=String(raw).toLowerCase();const map:Record<string,string>={white:'#f4efe2',red:'#a84444',green:'#3f7754',purple:'#71558c',violet:'#71558c',rose:'#c87991',pink:'#c87991',black:'#24272b',gold:'#cba54d'};return map[normalized]??'#d8b35c'}
-function textValue(value:unknown):string{if(typeof value==='string')return value;if(typeof value==='number'||typeof value==='boolean')return String(value);if(Array.isArray(value))return value.map(textValue).filter(Boolean).join(' · ');if(value&&typeof value==='object')return Object.values(value as Record<string,unknown>).map(textValue).filter(Boolean).join(' · ');return''}
 function readingRows(value:unknown):string[]{if(!value)return[];if(Array.isArray(value))return value.flatMap(readingRows);if(typeof value==='string'||typeof value==='number')return[String(value)];if(typeof value==='object')return Object.values(value as Record<string,unknown>).flatMap(readingRows);return[]}
 
 function EventCard({event,copy}:{event:LitcalEvent;copy:(typeof liturgyUi)[keyof typeof liturgyUi]}){
@@ -30,13 +29,13 @@ export default function LiturgyExplorer(){
  const[date,setDate]=useState(todayISO());const[calendar,setCalendar]=useState<LitcalCalendarRef>({kind:'general'});
  const[calendars,setCalendars]=useState<LitcalCalendarRef[]>([{kind:'general',label:copy.generalCalendar}]);
  const[result,setResult]=useState<LitcalDayResult|null>(null);const[loading,setLoading]=useState(true);const[error,setError]=useState('');
- const query=useMemo(()=>{const params=new URLSearchParams({date,locale,kind:calendar.kind});if(calendar.id)params.set('calendar',calendar.id);return params},[date,locale,calendar]);
+ const query=useMemo(()=>{const params=new URLSearchParams({date,locale,kind:calendar.kind});if(calendar.id)params.set('calendar',calendar.id);return params.toString()},[date,locale,calendar.kind,calendar.id]);
  const regionNames=useMemo(()=>{try{return new Intl.DisplayNames([locale],{type:'region'})}catch{return undefined}},[locale]);
  function calendarLabel(item:LitcalCalendarRef){if(item.kind==='general')return copy.generalCalendar;if(item.kind==='nation')return`${regionNames?.of(item.id??'')??item.id} — ${copy.nationalCalendar}`;return item.label??`${item.id} — ${copy.diocesanCalendar}`}
  useEffect(()=>{fetch('/api/v1/litcal/calendars').then(response=>response.ok?response.json():null).then(payload=>{if(Array.isArray(payload?.data))setCalendars(payload.data)}).catch(()=>undefined)},[]);
  useEffect(()=>{const fromUrl=new URLSearchParams(window.location.search).get('date');if(fromUrl&&/^\d{4}-\d{2}-\d{2}$/.test(fromUrl))setDate(fromUrl)},[]);
- function load(){setLoading(true);setError('');fetch(`/api/v1/liturgy?${query}`).then(response=>response.ok?response.json():Promise.reject(new Error('request failed'))).then(payload=>setResult(payload.data)).catch(()=>{setError(copy.sourceUnavailable);setResult(null)}).finally(()=>setLoading(false))}
- useEffect(()=>{load()},[query.toString()]);
+ const load=useCallback(()=>{setLoading(true);setError('');fetch(`/api/v1/liturgy?${query}`).then(response=>response.ok?response.json():Promise.reject(new Error('request failed'))).then(payload=>setResult(payload.data)).catch(()=>{setError(copy.sourceUnavailable);setResult(null)}).finally(()=>setLoading(false))},[query,copy.sourceUnavailable]);
+ useEffect(()=>{load()},[load]);
  const sourceLabel=result?.source==='primary'?copy.sourcePrimary:result?.source==='mirror'?copy.sourceMirror:copy.sourceFallback;
  return <div className={styles.page}>
   <section className={styles.hero}><span className={styles.eyebrow}>LitCal · {copy.generalCalendar}</span><h1>{copy.title}</h1><p>{copy.intro}</p></section>
