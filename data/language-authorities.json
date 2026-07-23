@@ -1,0 +1,12 @@
+{
+  "en": {"variant":"en-GB","editorial":"Oxford English Dictionary / Merriam-Webster","automated":"LanguageTool en-GB","reference":"https://www.oed.com/"},
+  "es": {"variant":"es","editorial":"Real Academia Española — Diccionario de la lengua española","automated":"LanguageTool es","reference":"https://dle.rae.es/"},
+  "pt": {"variant":"pt-PT","editorial":"Dicionário Priberam da Língua Portuguesa","automated":"LanguageTool pt-PT and Hunspell pt-PT","reference":"https://dicionario.priberam.org/"},
+  "fr": {"variant":"fr","editorial":"Dictionnaire de l’Académie française","automated":"LanguageTool fr","reference":"https://www.dictionnaire-academie.fr/"},
+  "fil": {"variant":"fil","editorial":"Komisyon sa Wikang Filipino","automated":"script and curated terminology validation","reference":"https://kwf.gov.ph/"},
+  "ru": {"variant":"ru","editorial":"Грамота.ру","automated":"LanguageTool ru","reference":"https://gramota.ru/"},
+  "sw": {"variant":"sw","editorial":"Baraza la Kiswahili la Taifa","automated":"script and curated terminology validation","reference":"https://www.bakita.go.tz/"},
+  "de": {"variant":"de-DE","editorial":"Duden","automated":"LanguageTool de-DE","reference":"https://www.duden.de/"},
+  "it": {"variant":"it","editorial":"Treccani / Accademia della Crusca","automated":"LanguageTool it","reference":"https://www.treccani.it/vocabolario/"},
+  "pl": {"variant":"pl","editorial":"Wielki słownik języka polskiego / PWN","automated":"LanguageTool pl","reference":"https://wsjp.pl/"}
+}
