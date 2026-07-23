@@ -1,6 +1,6 @@
 {
   "name": "santosdodia",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "data:sync": "node scripts/sync-observances.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
-    "litcal:source": "bash scripts/mirror-litcal-source.sh"
+    "litcal:source": "bash scripts/mirror-litcal-source.sh",
+    "translations:sync": "node scripts/sync-name-translations.mjs",
+    "translations:validate": "node scripts/validate-language-quality.mjs",
+    "translations:grammar": "node scripts/audit-languagetool.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
