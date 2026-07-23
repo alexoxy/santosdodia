@@ -1,0 +1,987 @@
+{
+  "generatedAt": "2026-07-23T09:23:30.133Z",
+  "upstream": "https://litcal.johnromanodorazio.com/api/v5",
+  "years": [
+    2025,
+    2026,
+    2027,
+    2028
+  ],
+  "siteLocales": [
+    "en_US",
+    "es_ES",
+    "pt_PT",
+    "fr_FR",
+    "ru_RU",
+    "de_DE",
+    "it_IT",
+    "pl_PL"
+  ],
+  "calendarCounts": {
+    "national": 5,
+    "diocesan": 12
+  },
+  "health": [
+    {
+      "label": "calendar catalogue",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendars",
+      "file": "data/litcal-mirror/catalog.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:17.099Z"
+    },
+    {
+      "label": "OpenAPI schema",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/schemas/openapi.json",
+      "file": "data/litcal-mirror/openapi.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:17.745Z"
+    },
+    {
+      "label": "decrees",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/decrees",
+      "file": "data/litcal-mirror/decrees.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.002Z"
+    },
+    {
+      "label": "general 2025 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/en_US.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.153Z"
+    },
+    {
+      "label": "general 2025 ru_RU",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=ru_RU&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/ru_RU.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:18.318Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2025 pt_PT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=pt_PT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/pt_PT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:18.155Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2025 es_ES",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=es_ES&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/es_ES.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:18.153Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2025 de_DE",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=de_DE&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/de_DE.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:18.496Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2025 pl_PL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=pl_PL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/pl_PL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:18.599Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "nation VA 2025 la_VA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/VA/2025?locale=la_VA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/VA/2025/la_VA.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.649Z"
+    },
+    {
+      "label": "general 2025 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/it_IT.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.587Z"
+    },
+    {
+      "label": "general 2025 fr_FR",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2025?locale=fr_FR&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2025/fr_FR.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.156Z"
+    },
+    {
+      "label": "nation CA 2025 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2025?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2025/en_CA.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.757Z"
+    },
+    {
+      "label": "nation CA 2025 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2025?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2025/fr_CA.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.882Z"
+    },
+    {
+      "label": "nation IT 2025 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/IT/2025?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/IT/2025/it_IT.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:18.942Z"
+    },
+    {
+      "label": "nation NL 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/NL/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/NL/2025/nl_NL.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.007Z"
+    },
+    {
+      "label": "nation US 2025 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/US/2025?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/US/2025/en_US.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.144Z"
+    },
+    {
+      "label": "diocese charlo_ca 2025 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2025?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2025/en_CA.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.171Z"
+    },
+    {
+      "label": "diocese charlo_ca 2025 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2025?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2025/fr_CA.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.217Z"
+    },
+    {
+      "label": "diocese socaap_it 2025 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/socaap_it/2025?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/socaap_it/2025/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.440Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese agrige_it 2025 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/agrige_it/2025?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/agrige_it/2025/it_IT.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.301Z"
+    },
+    {
+      "label": "diocese bredad_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/bredad_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/bredad_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.482Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese romamo_it 2025 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/romamo_it/2025?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/romamo_it/2025/it_IT.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.334Z"
+    },
+    {
+      "label": "diocese grolee_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/grolee_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/grolee_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.551Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese roermo_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/roermo_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/roermo_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.590Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese rotter_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/rotter_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/rotter_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.601Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese sherto_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/sherto_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/sherto_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.663Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese utrech_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/utrech_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/utrech_nl/2025/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.704Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese boston_us 2025 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/boston_us/2025?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/boston_us/2025/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.709Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese haaams_nl 2025 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/haaams_nl/2025?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/haaams_nl/2025/nl_NL.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:19.581Z"
+    },
+    {
+      "label": "general 2026 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.773Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 pt_PT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=pt_PT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/pt_PT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.817Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 es_ES",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=es_ES&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/es_ES.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.817Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 fr_FR",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=fr_FR&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/fr_FR.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.855Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 ru_RU",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=ru_RU&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/ru_RU.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.885Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.930Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2026 de_DE",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=de_DE&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/de_DE.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.926Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2026 pl_PL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=pl_PL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2026/pl_PL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.968Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation VA 2026 la_VA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/VA/2026?locale=la_VA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/VA/2026/la_VA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:19.996Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation CA 2026 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2026?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2026/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.043Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation CA 2026 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2026?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2026/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.074Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation IT 2026 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/IT/2026?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/IT/2026/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.081Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation NL 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/NL/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/NL/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.107Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation US 2026 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/US/2026?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/US/2026/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.156Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese charlo_ca 2026 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2026?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2026/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.183Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese charlo_ca 2026 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2026?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2026/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.193Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese agrige_it 2026 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/agrige_it/2026?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/agrige_it/2026/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.218Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese socaap_it 2026 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/socaap_it/2026?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/socaap_it/2026/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.291Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese bredad_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/bredad_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/bredad_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.306Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese grolee_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/grolee_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/grolee_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.329Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese haaams_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/haaams_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/haaams_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.400Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese romamo_it 2026 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/romamo_it/2026?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/romamo_it/2026/it_IT.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:20.269Z"
+    },
+    {
+      "label": "diocese roermo_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/roermo_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/roermo_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.419Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese rotter_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/rotter_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/rotter_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.441Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese sherto_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/sherto_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/sherto_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.512Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese utrech_nl 2026 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/utrech_nl/2026?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/utrech_nl/2026/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.525Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese boston_us 2026 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/boston_us/2026?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/boston_us/2026/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.531Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.552Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 pt_PT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=pt_PT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/pt_PT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.638Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 fr_FR",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=fr_FR&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/fr_FR.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.644Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 es_ES",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=es_ES&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/es_ES.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.621Z",
+      "error": "503 Service Unavailable"
+    },
+    {
+      "label": "general 2027 ru_RU",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=ru_RU&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/ru_RU.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.663Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 de_DE",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=de_DE&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/de_DE.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.753Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.757Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "general 2027 pl_PL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2027?locale=pl_PL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2027/pl_PL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.769Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation VA 2027 la_VA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/VA/2027?locale=la_VA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/VA/2027/la_VA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.774Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation CA 2027 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2027?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2027/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.866Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation CA 2027 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2027?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2027/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.869Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation IT 2027 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/IT/2027?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/IT/2027/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.877Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation NL 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/NL/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/NL/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.884Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese charlo_ca 2027 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2027?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2027/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.985Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese charlo_ca 2027 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2027?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2027/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.982Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese agrige_it 2027 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/agrige_it/2027?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/agrige_it/2027/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:20.995Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "nation US 2027 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/US/2027?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/US/2027/en_US.json",
+      "ok": true,
+      "checkedAt": "2026-07-23T09:21:20.980Z"
+    },
+    {
+      "label": "diocese romamo_it 2027 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/romamo_it/2027?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/romamo_it/2027/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.093Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese socaap_it 2027 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/socaap_it/2027?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/socaap_it/2027/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.094Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese bredad_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/bredad_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/bredad_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.105Z",
+      "error": "429 Too Many Requests"
+    },
+    {
+      "label": "diocese grolee_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/grolee_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/grolee_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.152Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "label": "diocese haaams_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/haaams_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/haaams_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.202Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "label": "diocese roermo_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/roermo_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/roermo_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.207Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "label": "diocese rotter_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/rotter_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/rotter_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:21:21.216Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "label": "diocese sherto_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/sherto_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/sherto_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:06.154Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:06.216Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese utrech_nl 2027 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/utrech_nl/2027?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/utrech_nl/2027/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:06.203Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese boston_us 2027 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/boston_us/2027?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/boston_us/2027/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:06.207Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 es_ES",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=es_ES&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/es_ES.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:16.178Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 ru_RU",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=ru_RU&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/ru_RU.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:16.679Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 pt_PT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=pt_PT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/pt_PT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:16.677Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 fr_FR",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=fr_FR&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/fr_FR.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:16.678Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 de_DE",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=de_DE&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/de_DE.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:26.670Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation VA 2028 la_VA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/VA/2028?locale=la_VA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/VA/2028/la_VA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:27.172Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:27.170Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "general 2028 pl_PL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/2028?locale=pl_PL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/general/2028/pl_PL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:27.171Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation CA 2028 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2028?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2028/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:37.165Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation CA 2028 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/CA/2028?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/CA/2028/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:37.665Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation NL 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/NL/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/NL/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:37.667Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation IT 2028 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/IT/2028?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/IT/2028/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:37.666Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "nation US 2028 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/nation/US/2028?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/nation/US/2028/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:47.658Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese agrige_it 2028 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/agrige_it/2028?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/agrige_it/2028/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:48.160Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese charlo_ca 2028 en_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2028?locale=en_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2028/en_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:48.158Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese charlo_ca 2028 fr_CA",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/charlo_ca/2028?locale=fr_CA&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/charlo_ca/2028/fr_CA.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:48.159Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese romamo_it 2028 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/romamo_it/2028?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/romamo_it/2028/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:58.150Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese grolee_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/grolee_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/grolee_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:58.652Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese socaap_it 2028 it_IT",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/socaap_it/2028?locale=it_IT&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/socaap_it/2028/it_IT.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:58.650Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese bredad_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/bredad_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/bredad_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:22:58.651Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese haaams_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/haaams_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/haaams_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:08.644Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese sherto_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/sherto_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/sherto_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:09.146Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese roermo_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/roermo_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/roermo_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:09.145Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese rotter_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/rotter_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/rotter_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:09.146Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese utrech_nl 2028 nl_NL",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/utrech_nl/2028?locale=nl_NL&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/utrech_nl/2028/nl_NL.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:19.137Z",
+      "error": "fetch failed"
+    },
+    {
+      "label": "diocese boston_us 2028 en_US",
+      "url": "https://litcal.johnromanodorazio.com/api/v5/calendar/diocese/boston_us/2028?locale=en_US&year_type=CIVIL",
+      "file": "data/litcal-mirror/calendars/diocese/boston_us/2028/en_US.json",
+      "ok": false,
+      "stale": false,
+      "checkedAt": "2026-07-23T09:23:19.637Z",
+      "error": "fetch failed"
+    }
+  ]
+}

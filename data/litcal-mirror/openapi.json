@@ -1,0 +1,5421 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "description": "Liturgical Calendar API endpoint (development - unstable)",
+      "url": "https://litcal.johnromanodorazio.com/api/dev"
+    },
+    {
+      "description": "Liturgical Calendar API endpoint (production - stable)",
+      "url": "https://litcal.johnromanodorazio.com/api/v5"
+    }
+  ],
+  "info": {
+    "description": "An API which allows to retrieve data about the **Roman Calendar** for any given year, between 1970 and 9999. The data strives for historical accuracy (memorials and feast days are only generated from the year in which they were effectively introduced). The data is based on original sources (Roman Missals, Decrees of the Dicastery for Divine Worship and the Discipline of the Sacraments, Mysterii Paschalis, etc.), not on data copied or retrieved from online sources which may not be accurate. The API offers multiple locales and multiple calendars, from the **General Roman Calendar** to national or diocesan calendars.",
+    "version": "5.7",
+    "title": "Liturgical Calendar",
+    "contact": {
+      "email": "priest@johnromanodorazio.com",
+      "name": "Rev. John R. D'Orazio"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "tags": [
+    {
+      "name": "Main API endpoint",
+      "description": "Retrieve a liturgical calendar"
+    },
+    {
+      "name": "Authentication",
+      "description": "JWT-based authentication (login and token refresh)"
+    },
+    {
+      "name": "Calendars Index",
+      "description": "Retrieve information about available calendars"
+    },
+    {
+      "name": "Liturgical events",
+      "description": "All liturgical events by key without the calendar calculation"
+    },
+    {
+      "name": "Calendar Source Data",
+      "description": "Retrieve / create / update / delete source data for National, Diocesan or Wider Region calendars "
+    },
+    {
+      "name": "Missals",
+      "description": "Retrieve / create / update / delete Roman Missal definitions"
+    },
+    {
+      "name": "Decrees",
+      "description": "Retrieve / create / update / delete Decrees of the Dicastery for Divine Worship and the Discipline of the Sacraments"
+    },
+    {
+      "name": "Easter",
+      "description": "Dates of easter whether gregorian or julian from 1583 to 1999"
+    },
+    {
+      "name": "Unit Tests",
+      "description": "Retrieve / create / update / delete unit tests"
+    }
+  ],
+  "paths": {
+    "/calendar": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events for the General Roman Calendar for each day of the current year",
+        "operationId": "retrieveGeneralRomanCalendarGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          },
+          {
+            "$ref": "#/components/parameters/EpiphanyParam"
+          },
+          {
+            "$ref": "#/components/parameters/AscensionParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorpusChristiParam"
+          },
+          {
+            "$ref": "#/components/parameters/EternalHighPriestParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events for the General Roman Calendar for each day of the current year",
+        "operationId": "retrieveGeneralRomanCalendarPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrieveCalendarRequestBody"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                },
+                "GeneralRomanCalendarTweaked": {
+                  "$ref": "#/components/examples/GeneralRomanCalendarTweakedRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrieveCalendarRequestBody"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                },
+                "GeneralRomanCalendarTweaked": {
+                  "$ref": "#/components/examples/GeneralRomanCalendarTweakedRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/calendar/{year}": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the General Roman Calendar for each day of the given year",
+        "operationId": "retrieveGeneralRomanCalendarForYearGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/YearPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          },
+          {
+            "$ref": "#/components/parameters/EpiphanyParam"
+          },
+          {
+            "$ref": "#/components/parameters/AscensionParam"
+          },
+          {
+            "$ref": "#/components/parameters/CorpusChristiParam"
+          },
+          {
+            "$ref": "#/components/parameters/EternalHighPriestParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the General Roman Calendar for each day of the given year",
+        "operationId": "retrieveGeneralRomanCalendarForYearPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1970,
+              "maximum": 9999
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrieveCalendarRequestBody"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                },
+                "GeneralRomanCalendarTweaked": {
+                  "$ref": "#/components/examples/GeneralRomanCalendarTweakedRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RetrieveCalendarRequestBody"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                },
+                "GeneralRomanCalendarTweaked": {
+                  "$ref": "#/components/examples/GeneralRomanCalendarTweakedRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/calendar/nation/{calendar_id}": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given nation for each day of the current year",
+        "operationId": "retrieveNationalCalendarGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/NationalCalendarIdPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given nation for each day of the current year",
+        "operationId": "retrieveNationalCalendarPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IT",
+                "US",
+                "NL",
+                "VA",
+                "CA"
+              ],
+              "summary": "uppercase two letter ISO 3166 code of a nation for which the liturgical calendar has been defined"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/calendar/nation/{calendar_id}/{year}": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given nation for each day of a given year",
+        "operationId": "retrieveNationalCalendarForYearGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/NationalCalendarIdPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given nation for each day of a given year",
+        "operationId": "retrieveNationalCalendarForYearPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IT",
+                "US",
+                "NL",
+                "VA",
+                "CA"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1970,
+              "maximum": 9999
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/calendar/diocese/{calendar_id}": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given diocese for each day of the current year",
+        "operationId": "retrieveDiocesanCalendarGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/DiocesanCalendarIdPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given diocese for each day of the current year",
+        "operationId": "retrieveDiocesanCalendarPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/calendar/diocese/{calendar_id}/{year}": {
+      "get": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given diocese for each day of a given year",
+        "operationId": "retrieveDiocesanCalendarForYearGET",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "$ref": "#/components/parameters/DiocesanCalendarIdPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearPathParam"
+          },
+          {
+            "$ref": "#/components/parameters/YearTypeParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Main API endpoint"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve liturgical events from the liturgical calendar for a given diocese for each day of a given year",
+        "operationId": "retrieveDiocesanCalendarForYearPOST",
+        "description": "By passing in the appropriate options, you can retrieve data for the liturgical calendar for any given year",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "$ref": "#/components/parameters/AcceptHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          },
+          {
+            "in": "path",
+            "name": "year",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1970,
+              "maximum": 9999
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CivilOrLiturgicalYear"
+              },
+              "examples": {
+                "LiturgicalYearCalendar": {
+                  "$ref": "#/components/examples/LiturgicalYearRequestBody"
+                },
+                "CivilYearCalendar": {
+                  "$ref": "#/components/examples/CivilYearRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LitCal200"
+          },
+          "304": {
+            "description": "Not Modified: client should use cached results seeing that the response has not changed"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable406"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "418": {
+            "$ref": "#/components/responses/IMATeapot418"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Authenticate user and obtain JWT tokens",
+        "operationId": "authLogin",
+        "description": "Authenticate with username and password to obtain access and refresh tokens. Tokens are returned in the response body AND set as HttpOnly cookies (litcal_access_token, litcal_refresh_token). Browser clients should use the cookie-based authentication (preferred for XSS protection), while server-to-server clients can use the Bearer token in the Authorization header.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK: Authentication successful. Tokens returned in response body and set as HttpOnly cookies.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests429"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Refresh access token using refresh token",
+        "operationId": "authRefresh",
+        "description": "Use a valid refresh token to obtain a new access token without re-authenticating with username/password.\n\n**Token Sources (in order of precedence):**\n1. **HttpOnly Cookie** (preferred): The refresh token is automatically read from the `litcal_refresh_token` cookie if present. Browser-based clients using cookie authentication can call this endpoint without a request body.\n2. **Request Body** (fallback): If no cookie is present, the refresh token must be provided in the JSON request body.\n\n**Usage:**\n- **Browser clients**: Use `credentials: 'include'` in fetch requests. No request body needed if cookies were set by `/auth/login`.\n- **Server/API clients**: Send the refresh token in the request body.",
+        "requestBody": {
+          "required": false,
+          "description": "Optional when using cookie-based authentication. Required for clients that don't send cookies.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK: Token refresh successful, new access token returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Logout user session",
+        "operationId": "authLogout",
+        "description": "Performs a stateless logout by clearing HttpOnly auth cookies and logging the event. Since JWTs are stateless, the client must also discard any stored access and refresh tokens. The endpoint extracts the username from the token (if available) for audit logging purposes.",
+        "responses": {
+          "200": {
+            "description": "OK: Logout successful, cookies cleared",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Logged out successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Get current authenticated user information",
+        "operationId": "authMe",
+        "description": "Returns information about the currently authenticated user. Supports both HttpOnly cookie-based authentication and Bearer token in Authorization header. Essential for cookie-based authentication where JavaScript cannot read HttpOnly cookies.",
+        "responses": {
+          "200": {
+            "description": "OK: User information returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          }
+        }
+      }
+    },
+    "/calendars": {
+      "get": {
+        "tags": [
+          "Calendars Index"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve an index of current supported national and diocesan calendars and relative locales, settings, etc.",
+        "operationId": "retrieveMetadataGET",
+        "responses": {
+          "200": {
+            "description": "OK: An index of currently supported national and diocesan calendars and relative locales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalMetadata"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Calendars Index"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve an index of current supported national and diocesan calendars and relative locales, settings, etc.",
+        "operationId": "retrieveMetadataPOST",
+        "responses": {
+          "200": {
+            "description": "OK: An index of currently supported national and diocesan calendars and relative locales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalMetadata"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/events": {
+      "get": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the General Roman Calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsGET",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Efesini 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "gospel_acclamation": "Matteo 23, 9b.10b",
+                        "gospel": "Matteo 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Corinzi 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "gospel_acclamation": "Matteo 24, 42a.44",
+                        "gospel": "Luca 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "en",
+                    "national_calendar": "US",
+                    "diocesan_calendar": "boston_us"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the General Roman Calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsPOST",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Ef 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 23, 9b.10b",
+                        "gospel": "Mt 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Cor 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 24, 42a.44",
+                        "gospel": "Lc 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "la",
+                    "national_calendar": null,
+                    "diocesan_calendar": null
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/events/nation/{calendar_id}": {
+      "get": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the given national calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsForNationalCalendarGET",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IT",
+                "US",
+                "NL",
+                "VA",
+                "CA"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Ef 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 23, 9b.10b",
+                        "gospel": "Mt 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Cor 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 24, 42a.44",
+                        "gospel": "Lc 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "en",
+                    "national_calendar": "US",
+                    "diocesan_calendar": "boston_us"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the given national calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsForNationalCalendarPOST",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "IT",
+                "US",
+                "NL",
+                "VA",
+                "CA"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Ef 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 23, 9b.10b",
+                        "gospel": "Mt 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Cor 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 24, 42a.44",
+                        "gospel": "Lc 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "la",
+                    "national_calendar": null,
+                    "diocesan_calendar": null
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/events/diocese/{calendar_id}": {
+      "get": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the given diocesan calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsForDiocesanCalendarGET",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Efesini 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "second_reading": "",
+                        "gospel_acclamation": "Matteo 23, 9b.10b",
+                        "gospel": "Matteo 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Corinzi 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "second_reading": "",
+                        "gospel_acclamation": "Matteo 24, 42a.44",
+                        "gospel": "Luca 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "en",
+                    "national_calendar": "US",
+                    "diocesan_calendar": "boston_us"
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Liturgical events"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all possible liturgical events from the given diocesan calendar even if they won't appear in the Liturgical Calendar one year or the other; useful mostly for frontend select inputs to choose an `event_key` that corresponds with an actual liturgical event",
+        "operationId": "retrieveEventsForDiocesanCalendarPOST",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AcceptLanguageHeader"
+          },
+          {
+            "in": "path",
+            "name": "calendar_id",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A collection of all possible liturgical events that can be found in a liturgical calendar produced by the LitCal API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LitCalAllFestivitiesResponse"
+                },
+                "example": {
+                  "litcal_events": {
+                    "StsBasilGreg": {
+                      "month": 1,
+                      "day": 2,
+                      "event_key": "StsBasilGreg",
+                      "grade": 3,
+                      "common": [
+                        "Proper"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "Ef 4, 1-7.11-13",
+                        "responsorial_psalm": "Salmo 23",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 23, 9b.10b",
+                        "gospel": "Mt 23, 8-12"
+                      },
+                      "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                      "missal": "VATICAN_1970"
+                    },
+                    "StRayPenyafort": {
+                      "month": 1,
+                      "day": 7,
+                      "event_key": "StRayPenyafort",
+                      "grade": 2,
+                      "common": [
+                        "Pastors:For One Pastor"
+                      ],
+                      "calendar": "GENERAL ROMAN",
+                      "color": [
+                        "white"
+                      ],
+                      "readings": {
+                        "first_reading": "2 Cor 5, 14-20",
+                        "responsorial_psalm": "Salmo 103",
+                        "second_reading": "",
+                        "gospel_acclamation": "Mt 24, 42a.44",
+                        "gospel": "Lc 12, 35-40"
+                      },
+                      "name": "Sancti Raimundi de Penyafort, presbyteri",
+                      "missal": "VATICAN_1970"
+                    }
+                  },
+                  "settings": {
+                    "locale": "la",
+                    "national_calendar": null,
+                    "diocesan_calendar": null
+                  }
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "304 Not Modified"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/data/nation": {
+      "put": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Create a national calendar data resource",
+        "operationId": "nationalCalendarDataPUT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./NationalCalendar.json"
+              },
+              "examples": {
+                "ItalyNationalCalendar": {
+                  "$ref": "#/components/examples/NationalCalendarRequestBody"
+                },
+                "USANationalCalendar": {
+                  "$ref": "#/components/examples/NationalCalendarUSRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "examples": [
+                        "National calendar created or updated for nation {NATION}"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict409"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      }
+    },
+    "/data/widerregion": {
+      "put": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Create a wider region data resource",
+        "operationId": "widerregionDataPUT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./WiderRegionCalendar.json"
+              },
+              "examples": {
+                "EuropeWiderRegion": {
+                  "$ref": "#/components/examples/WiderRegionCalendarRequestBody"
+                },
+                "AsiaWiderRegion": {
+                  "$ref": "#/components/examples/WiderRegionCalendarAsiaRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "examples": [
+                        "Wider region calendar created or updated for region {REGION}"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict409"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      }
+    },
+    "/data/diocese": {
+      "put": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Create a diocesan calendar data resource",
+        "operationId": "diocesanDataPUT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./DiocesanCalendar.json"
+              },
+              "examples": {
+                "BostonDiocesan": {
+                  "$ref": "#/components/examples/DiocesanCalendarRequestBody"
+                },
+                "RomeDiocesan": {
+                  "$ref": "#/components/examples/DiocesanCalendarRomeRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "examples": [
+                        "Diocesan calendar created or updated for diocese {DIOCESE}"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict409"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      }
+    },
+    "/data/nation/{key}": {
+      "get": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a national calendar data resource",
+        "operationId": "nationalDataGET",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/Nation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: National calendar data resource retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./NationalCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a national calendar data resource",
+        "operationId": "nationalDataPOST",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/Nation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: Regional calendar data resource (whether national, or diocesan, or wider region) retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./NationalCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Update a national calendar data resource",
+        "operationId": "nationalDataPATCH",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2,45}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./NationalCalendar.json"
+              },
+              "examples": {
+                "ItalyNationalCalendar": {
+                  "$ref": "#/components/examples/NationalCalendarRequestBody"
+                },
+                "USANationalCalendar": {
+                  "$ref": "#/components/examples/NationalCalendarUSRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created. Even when updating an existing resource, we will still get the same 201 Created because we are basically overwriting the previous resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "National calendar created or updated for nation {NATION}"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Delete a national calendar data resource",
+        "operationId": "nationalDataDELETE",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeleteSuccess200"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/data/diocese/{key}": {
+      "get": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a diocesan calendar data resource",
+        "operationId": "diocesanDataGET",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: Regional calendar data resource (whether national, or diocesan, or wider region) retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./DiocesanCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a diocesan calendar data resource",
+        "operationId": "diocesanDataPOST",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: Regional calendar data resource (whether national, or diocesan, or wider region) retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./DiocesanCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Update a diocesan calendar data resource",
+        "operationId": "diocesanDataPATCH",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./DiocesanCalendar.json"
+              },
+              "examples": {
+                "BostonDiocesan": {
+                  "$ref": "#/components/examples/DiocesanCalendarRequestBody"
+                },
+                "RomeDiocesan": {
+                  "$ref": "#/components/examples/DiocesanCalendarRomeRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created. Even when updating an existing resource, we will still get the same 201 Created because we are basically overwriting the previous resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "Diocesan calendar created or updated for diocese {DIOCESE}"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Delete a diocesan calendar data resource",
+        "operationId": "diocesanDataDELETE",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeleteSuccess200"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/data/widerregion/{key}": {
+      "get": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a wider region calendar data resource",
+        "operationId": "widerregionDataGET",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: Regional calendar data resource (whether national, or diocesan, or wider region) retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./WiderRegionCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a wider region calendar data resource",
+        "operationId": "widerregionDataPOST",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: Regional calendar data resource (whether national, or diocesan, or wider region) retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./WiderRegionCalendar.json"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Update a wider region calendar data resource",
+        "operationId": "widerregionDataPATCH",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./WiderRegionCalendar.json"
+              },
+              "examples": {
+                "EuropeWiderRegion": {
+                  "$ref": "#/components/examples/WiderRegionCalendarRequestBody"
+                },
+                "AsiaWiderRegion": {
+                  "$ref": "#/components/examples/WiderRegionCalendarAsiaRequestBody"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created. Even when updating an existing resource, we will still get the same 201 Created because we are basically overwriting the previous resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "example": "Wider region calendar created or updated for region {REGION}"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Calendar Source Data"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Delete a wider region calendar data resource",
+        "operationId": "widerregionDataDELETE",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DeleteSuccess200"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden403"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/easter": {
+      "get": {
+        "tags": [
+          "Easter"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve the date of Easter, both gregorian and julian, for the years 1583 to 1999",
+        "operationId": "easterGET",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "locale",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "de",
+                "en",
+                "es",
+                "fr",
+                "it",
+                "pt",
+                "la",
+                "nl"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "dates of easter whether gregorian or julian from 1583 to 1999",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "EasterDates": {
+                      "type": "array",
+                      "description": "will contain exactly 8417 items, however cannot define so in schema otherwise it will generate 8417 example items!",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "gregorianEaster": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": -12204000000,
+                            "maximum": 253378195200
+                          },
+                          "julianEaster": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": -12204864000,
+                            "maximum": 253379750400
+                          },
+                          "westernJulianEaster": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": -12204000000,
+                            "maximum": 253386057600
+                          },
+                          "coinciding": {
+                            "type": "boolean"
+                          },
+                          "gregorianDateString": {
+                            "type": "string"
+                          },
+                          "julianDateString": {
+                            "type": "string"
+                          },
+                          "westernJulianDateString": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "lastCoincidenceString": {
+                      "type": "string",
+                      "const": "Sunday, April 24th, 2698"
+                    },
+                    "lastCoincidence": {
+                      "type": "integer",
+                      "const": 22983264000
+                    }
+                  }
+                },
+                "example": {
+                  "EasterDates": [
+                    {
+                      "gregorianEaster": -12204000000,
+                      "julianEaster": -12204864000,
+                      "westernJulianEaster": -12204000000,
+                      "coinciding": true,
+                      "gregorianDateString": "string",
+                      "julianDateString": "string",
+                      "westernJulianDateString": "string"
+                    },
+                    {
+                      "gregorianEaster": -12204000000,
+                      "julianEaster": -12204864000,
+                      "westernJulianEaster": -12204000000,
+                      "coinciding": true,
+                      "gregorianDateString": "string",
+                      "julianDateString": "string",
+                      "westernJulianDateString": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest400"
+          }
+        }
+      }
+    },
+    "/missals": {
+      "get": {
+        "tags": [
+          "Missals"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve the index of defined Roman Missals",
+        "operationId": "missalsGET",
+        "responses": {
+          "200": {
+            "description": "OK: an index of defined Roman Missals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "litcal_missals": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./LitCalMissalsPath.json#/definitions/Missal"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/missals/{missal_id}": {
+      "get": {
+        "tags": [
+          "Missals"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a Roman Missal by its ID",
+        "operationId": "missalGET",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "missal_id",
+            "schema": {
+              "$ref": "./CommonDef.json#/definitions/MissalID"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: the data for the requested Roman Missal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./LitCalMissalsPath.json#/definitions/Missal"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/decrees": {
+      "get": {
+        "tags": [
+          "Decrees"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve the index of defined Decrees of the Dicastery for Divine Worship and the Discipline of the Sacraments",
+        "operationId": "decreesGET",
+        "responses": {
+          "200": {
+            "description": "OK: an index of defined Decrees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "litcal_decrees": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./LitCalDecreesSource.json#/definitions/LitCalDecree"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/decrees/{decree_id}": {
+      "get": {
+        "tags": [
+          "Decrees"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve the data for a Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments",
+        "operationId": "decreeByIdGET",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "decree_id",
+            "schema": {
+              "type": "string",
+              "pattern": "[A-Z][A-Za-z]+_(Upgrade|Create|NameChange|Doctor)"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: an index of defined Decrees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./LitCalDecreesSource.json#/definitions/LitCalDecree"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    },
+    "/tests": {
+      "get": {
+        "tags": [
+          "Unit Tests"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve all the unit tests defined in the API `tests` folder as an index useful for frontend processing",
+        "operationId": "retrieveTestIndexGET",
+        "responses": {
+          "200": {
+            "description": "OK: An index of currently defined Unit Tests useful for guaranteeing the health of the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnitTestArray"
+                },
+                "example": [
+                  {
+                    "name": "MaryMotherChurchTest",
+                    "event_key": "MaryMotherChurch",
+                    "description": "The memorial 'Mary Mother of the Church' was added in 2018 by Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments on the Monday after Pentecost",
+                    "test_type": "exactCorrespondenceSince",
+                    "year_since": 2018,
+                    "assertions": [
+                      {
+                        "year": 2017,
+                        "expected_value": null,
+                        "assert": "eventNotExists",
+                        "assertion": "The memorial 'Mary Mother of the Church' should not exist before the year 2018"
+                      },
+                      {
+                        "year": 2018,
+                        "expected_value": "2018-05-21T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "The memorial 'Mary Mother of the Church' should be created on the expected date"
+                      },
+                      {
+                        "year": 2019,
+                        "expected_value": "2019-06-10T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "The memorial 'Mary Mother of the Church' should be created on the expected date"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NativityJohnBaptistTest",
+                    "event_key": "NativityJohnBaptist",
+                    "description": "When the Nativity of John the Baptist coincides with the Solemnity of the Sacred Heart, is it correctly moved to June 23?",
+                    "test_type": "exactCorrespondence",
+                    "assertions": [
+                      {
+                        "year": 2022,
+                        "expected_value": "2022-06-23T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "Nativity of John the Baptist should be moved to June 23"
+                      },
+                      {
+                        "year": 2033,
+                        "expected_value": "2033-06-23T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "Nativity of John the Baptist should be moved to June 23"
+                      },
+                      {
+                        "year": 2044,
+                        "expected_value": "2044-06-23T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "Nativity of John the Baptist should be moved to June 23"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "PrayerUnbornTest",
+                    "event_key": "PrayerUnborn",
+                    "description": "USA: The National Day of Prayer for the Unborn is set to Jan 22 as per the 2011 Roman Missal issued by the USCCB, however if it coincides with a Sunday or a Solemnity, it should be moved to Jan 23",
+                    "test_type": "exactCorrespondenceSince",
+                    "year_since": 2011,
+                    "applies_to": {
+                      "national_calendar": "US"
+                    },
+                    "assertions": [
+                      {
+                        "year": 2010,
+                        "expected_value": null,
+                        "assert": "eventNotExists",
+                        "assertion": "should not exist before 2011"
+                      },
+                      {
+                        "year": 2011,
+                        "expected_value": "2011-01-22T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date January 22"
+                      },
+                      {
+                        "year": 2012,
+                        "expected_value": "2012-01-23T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date January 23",
+                        "comment": "this test is significant since January 22nd falls on a Sunday, so the National Day of Prayer for the Unborn should have been moved to January 23rd"
+                      },
+                      {
+                        "year": 2045,
+                        "expected_value": "2045-01-23T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date January 23",
+                        "comment": "this test is significant since January 22nd falls on a Sunday, so the National Day of Prayer for the Unborn should have been moved to January 23rd"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "StJaneFrancesDeChantalTest",
+                    "event_key": "StJaneFrancesDeChantal",
+                    "description": "Saint Jane Frances de Chantal was moved from December 12 to August 12 in the 2002 Latin Edition of the Roman Missal, to allow bishops conferences to insert Our Lady of Guadalupe as an optional memorial on December 12. DOES ST JANE FRANCES DE CHANTAL FALL ON THE RIGHT DAY BOTH BEFORE AND AFTER 2002, OR IT CORRECTLY OVERRIDEN BY GREATER FESTIVITIES?",
+                    "test_type": "variableCorrespondence",
+                    "assertions": [
+                      {
+                        "year": 2001,
+                        "expected_value": "2001-12-12T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date December 12"
+                      },
+                      {
+                        "year": 2002,
+                        "expected_value": "2002-08-12T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date August 12"
+                      },
+                      {
+                        "year": 2010,
+                        "expected_value": "2010-08-12T00:00:00+00:00",
+                        "assert": "eventExists AND hasExpectedDate",
+                        "assertion": "should fall on expected date August 12",
+                        "comment": "this test is significant since December 12th falls on a Sunday, so the memorial would have been suppressed if it hadn't been moved"
+                      },
+                      {
+                        "year": 1971,
+                        "expected_value": null,
+                        "assert": "eventNotExists",
+                        "assertion": "should not exist, December 12th is a Sunday"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Unit Tests"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Create a new unit test in the API `tests` folder",
+        "operationId": "testsIndexPUT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ExactOrVariableCorrespondenceUnitTest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExactCorrespondenceSinceUnitTest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExactCorrespondenceUntilUnitTest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "201 Created. Even when updating an existing resource, we will still get the same 201 Created because we are basically overwriting the previous resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "const": "OK"
+                    },
+                    "response": {
+                      "type": "string",
+                      "const": "Resource Created"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "response"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      }
+    },
+    "/tests/{test_name}": {
+      "get": {
+        "tags": [
+          "Unit Tests"
+        ],
+        "security": [
+          {}
+        ],
+        "summary": "Retrieve a single unit test defined in the API `tests` by its name",
+        "operationId": "retrieveTestByNameGET",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "test_name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK: A Unit Test useful for guaranteeing the health of the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ExactOrVariableCorrespondenceUnitTest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ExactCorrespondenceSinceUnitTest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ExactCorrespondenceUntilUnitTest"
+                    }
+                  ]
+                },
+                "example": {
+                  "name": "MaryMotherChurchTest",
+                  "event_key": "MaryMotherChurch",
+                  "description": "The memorial 'Mary Mother of the Church' was added in 2018 by Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments on the Monday after Pentecost",
+                  "test_type": "exactCorrespondenceSince",
+                  "year_since": 2018,
+                  "assertions": [
+                    {
+                      "year": 2017,
+                      "expected_value": null,
+                      "assert": "eventNotExists",
+                      "assertion": "The memorial 'Mary Mother of the Church' should not exist before the year 2018"
+                    },
+                    {
+                      "year": 2018,
+                      "expected_value": "2018-05-21T00:00:00+00:00",
+                      "assert": "eventExists AND hasExpectedDate",
+                      "assertion": "The memorial 'Mary Mother of the Church' should be created on the expected date"
+                    },
+                    {
+                      "year": 2019,
+                      "expected_value": "2019-06-10T00:00:00+00:00",
+                      "assert": "eventExists AND hasExpectedDate",
+                      "assertion": "The memorial 'Mary Mother of the Church' should be created on the expected date"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Unit Tests"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Update an existing unit test in the API `tests` folder",
+        "operationId": "updateTestByNamePATCH",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "test_name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+            },
+            "description": "The name of the unit test to update (without .json extension)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ExactOrVariableCorrespondenceUnitTest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExactCorrespondenceSinceUnitTest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ExactCorrespondenceUntilUnitTest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200 OK. The unit test was updated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "example": "Unit Test ExampleTest updated successfully."
+                    }
+                  },
+                  "required": [
+                    "response"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          },
+          "415": {
+            "$ref": "#/components/responses/UnsupportedMediaType415"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity422"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable503"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Unit Tests"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "CookieAuth": []
+          }
+        ],
+        "summary": "Delete a unit test from the API `tests` folder",
+        "operationId": "deleteTestByNameDELETE",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "test_name",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+            },
+            "description": "The name of the unit test to delete (without .json extension)"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "204 No Content. The unit test was deleted successfully."
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized401"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound404"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LitCalXML": {
+        "type": "object",
+        "properties": {
+          "LitCal": {
+            "type": "object",
+            "description": "the liturgical events that make up the requested Liturgical Calendar for the given year",
+            "properties": {
+              "LitCalEvent": {
+                "type": "object",
+                "description": "a liturgical event",
+                "properties": {
+                  "eventKey": {
+                    "type": "string",
+                    "examples": [
+                      "StsBasilGreg"
+                    ],
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "Name": {
+                    "type": "string",
+                    "description": "the name of the Liturgical Event, localized according to the requested locale or the requested calendar (will be in English for the national USA calendar, Italian for the national Italian calendar, etc.)",
+                    "examples": [
+                      "Saints Basil the Great and Gregory Nazianzen, bishops and doctors"
+                    ]
+                  },
+                  "Color": {
+                    "type": "object",
+                    "description": "the liturgical color used for the current liturgical event. The color name is CSS ready, therefore it will always be in English. For display in other locales, the ***colorLcl*** element can be used",
+                    "properties": {
+                      "option": {
+                        "type": "string",
+                        "enum": [
+                          "green",
+                          "red",
+                          "white",
+                          "purple",
+                          "rose"
+                        ],
+                        "examples": [
+                          "green",
+                          "red",
+                          "white",
+                          "purple",
+                          "rose"
+                        ]
+                      },
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "ColorLcl": {
+                    "type": "object",
+                    "description": "the liturgical color used for the current liturgical event, localized according to the current requested locale",
+                    "properties": {
+                      "option": {
+                        "type": "string",
+                        "examples": [
+                          "verde",
+                          "rosso",
+                          "bianco",
+                          "viola",
+                          "rosa"
+                        ]
+                      },
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "Type": {
+                    "type": "string",
+                    "description": "whether the liturgical event is a fixed or a mobile liturgical event",
+                    "enum": [
+                      "fixed",
+                      "mobile"
+                    ],
+                    "examples": [
+                      "fixed",
+                      "mobile"
+                    ]
+                  },
+                  "Grade": {
+                    "description": "The logical importance of the celebration, represented as a number from 0 to 7, used to calculate precedence compared to other possible events. The importance or precedence value will determine whether one event may suppress another event or have it moved to the next possible open slot according to certain criteria. A general association with liturgical terminology would be as follows * 0 = WEEKDAY * 1 = COMMEMORATION * 2 = OPTIONAL MEMORIAL * 3 = MEMORIAL * 4 = FEAST * 5 = FEAST OF THE LORD * 6 = SOLEMNITY * 7 = event that has precedence over a solemnity However this association is not suitable for displaying the actual *grade* (or *rank*) of the liturgical event in liturgical terms, because some events have a logical importance that does not correspond with their portrayed grade, for example \"All Souls Day\" is called a \"Commemoration\" and yet it is given the same importance as a solemnity. Thus \"All Souls Day\" will have a grade of 6, but should be displayed as \"Commemoration\" rather than as \"Solemnity\". Therefore the ***displayGrade*** property should be checked first, and if empty then the above indicated association should be valid and can be used",
+                    "type": "integer",
+                    "format": "int32",
+                    "enum": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ],
+                    "examples": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ]
+                  },
+                  "GradeLcl": {
+                    "description": "The logical importance of the celebration, represented in human readable form and localized according to the current requested locale",
+                    "type": "string",
+                    "examples": [
+                      "weekday",
+                      "Feast",
+                      "SOLEMNITY"
+                    ]
+                  },
+                  "GradeAbbr": {
+                    "description": "The logical importance of the celebration, represented in abbreviated human readable form and localized according to the current requested locale",
+                    "type": "string",
+                    "examples": [
+                      "w",
+                      "F",
+                      "S"
+                    ]
+                  },
+                  "DisplayGrade": {
+                    "type": "string",
+                    "description": "will often be empty, in which case the ***grade*** or ***gradeLcl*** properties can be used, for the purpose of displaying the rank of the current liturgical event. If non empty, will contain the localized rank of the liturgical event and should be used instead of the ***grade*** or ***gradeLcl*** properties for display purposes"
+                  },
+                  "Common": {
+                    "type": "object",
+                    "description": "if the current liturgical event commemorates a saint, this value if non empty will indicate whether the readings are to be taken from the Proper of Saints (in which case it will have a value of \"Proper\") or from one of the Commons. In the latter case, if there is more than one possible common, the multiple possible commons will be listed as a comma separated list. Each common can be further specified by a particular category, in which case the specific category within the common will be separated from the common by a colon. Since we are dealing with a logical data structure the values are not localized, localization should be handled by the requesting application",
+                    "properties": {
+                      "option": {
+                        "type": "string",
+                        "examples": [
+                          "Proper",
+                          "Martyrs"
+                        ]
+                      },
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    }
+                  },
+                  "CommonLcl": {
+                    "type": "string",
+                    "description": "human readable form of the ***common***, localized according to the current requested locale",
+                    "examples": [
+                      "Proprio",
+                      "Martiri"
+                    ]
+                  },
+                  "Date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "an ISO 8601 (RFC 3339) date-time string in UTC time. The time part is always a zero value seeing that we deal only with all day events, and time is not of importance.",
+                    "pattern": "^(?:1969-(?:11-(?:29|30)|12-(?:0[1-9]|[12][0-9]|3[01]))|19[7-9]\\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|[2-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))T00:00:00\\+00:00$",
+                    "examples": [
+                      "2020-01-02T00:00:00+00:00"
+                    ]
+                  },
+                  "EventIdx": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "progressive index, one for each liturgical event. Not really very useful. The ***eventKey*** attribute that identifies the liturgical event is more useful.",
+                    "examples": [
+                      157
+                    ]
+                  },
+                  "LiturgicalYear": {
+                    "type": "string",
+                    "description": "description of the liturgical cycle localized according to the requested locale (or national calendar). This property will only be present for events where it is applicable (Sundays or weekdays of Ordinary Time, Solemnities, Feasts of the Lord, in practice those liturgical events the texts of which are based on the liturgical cycle). When present, it will have a localized value of `YEAR A`, `YEAR B`, or `YEAR C` for festive events or a value of `YEAR I`, `YEAR II` for weekday events (whereas if an application makes a request for the Italian language or the national Italian calendar, the values will contain `ANNO` instead of `YEAR`, and likewise for any localization requested).",
+                    "examples": [
+                      "YEAR I",
+                      "YEAR II",
+                      "YEAR A",
+                      "YEAR B",
+                      "YEAR C"
+                    ]
+                  },
+                  "LiturgicalSeason": {
+                    "type": "string",
+                    "enum": [
+                      "ORDINARY_TIME",
+                      "ADVENT",
+                      "CHRISTMAS",
+                      "LENT",
+                      "EASTER_TRIDUUM",
+                      "EASTER"
+                    ],
+                    "description": "Liturgical season that the current liturgical event falls in. Is not present for Vigil Mass events, however in this case it can be retrieved from the 'parent' event using the `isVigilFor` property"
+                  },
+                  "DayOfTheWeekIso8601": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 7,
+                    "description": "ISO 8601 representation of the day of the week, 1 for Monday, 7 for Sunday"
+                  },
+                  "Month": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 12,
+                    "description": "Numeric representation of the month of the current liturgical event, 1 for January, 12 for December"
+                  },
+                  "Day": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 31,
+                    "description": "Numeric representation of the day of the month of the current liturgical event"
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "minimum": 1970,
+                    "maximum": 9999,
+                    "description": "Year of the current liturgical event"
+                  },
+                  "HasVigilMass": {
+                    "type": "boolean",
+                    "description": "present for applicable events such as Solemnities or Sundays. Will have a boolean value of `true` if the expected Vigil Mass is confirmed, and of `false` if the expected Vigil Mass is superseded by another liturgical event. Sometimes this will be established from year to year for specific coincidences by the Dicastery for Divine Worship and the Discipline of the Sacraments.",
+                    "examples": [
+                      false,
+                      true
+                    ]
+                  },
+                  "HasVesperI": {
+                    "type": "boolean",
+                    "description": "present for applicable events such as Solemnities or Sundays. Will have a boolean value of `true` if the expected First Vespers are confirmed, and of `false` if the expected First Vespers are superseded by another liturgical event. Sometimes this will be established from year to year for specific coincidences by the Dicastery for Divine Worship and the Discipline of the Sacraments.",
+                    "examples": [
+                      false,
+                      true
+                    ]
+                  },
+                  "HasVesperII": {
+                    "type": "boolean",
+                    "description": "present for applicable events such as Solemnities or Sundays. Will have a boolean value of `true` if the expected Second Vespers are confirmed, and of `false` if the expected Second Vespers are superseded by another liturgical event. Sometimes this will be established from year to year for specific coincidences by the Dicastery for Divine Worship and the Discipline of the Sacraments.",
+                    "examples": [
+                      false,
+                      true
+                    ]
+                  },
+                  "IsVigilMass": {
+                    "type": "boolean",
+                    "description": "present for applicable events such as Solemnities or Sundays. Will have a boolean value of 'true' if the event is a Vigil Mass for a Solemnity or Sunday",
+                    "examples": [
+                      false,
+                      true
+                    ]
+                  },
+                  "IsVigilFor": {
+                    "type": "string",
+                    "description": "present for applicable events such as Solemnities or Sundays. If the event is a Vigil Mass, will indicate the `eventKey` attribute of the `LitCalEvent` for which the current event is a Vigil Mass",
+                    "examples": [
+                      "Advent3",
+                      "Christmas"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "Settings": {
+            "type": "object",
+            "description": "echoes back the settings that were requested for the generation of this specific liturgical calendar, as feedback to be sure that the requested settings were correctly applied",
+            "properties": {
+              "Year": {
+                "type": "integer",
+                "format": "int32",
+                "description": "the year for which the liturgical calendar was requested",
+                "examples": [
+                  2020
+                ]
+              },
+              "Epiphany": {
+                "type": "string",
+                "enum": [
+                  "JAN6",
+                  "SUNDAY_JAN2_JAN8"
+                ],
+                "description": "whether Epiphany was set to be celebrated on January 6th or on the Sunday between January 2nd and January 8th",
+                "examples": [
+                  "JAN6",
+                  "SUNDAY_JAN2_JAN8"
+                ]
+              },
+              "Ascension": {
+                "type": "string",
+                "enum": [
+                  "SUNDAY",
+                  "THURSDAY"
+                ],
+                "description": "whether Ascension was set to be celebrated on Thursday or on Sunday",
+                "examples": [
+                  "SUNDAY",
+                  "THURSDAY"
+                ]
+              },
+              "CorpusChristi": {
+                "type": "string",
+                "enum": [
+                  "SUNDAY",
+                  "THURSDAY"
+                ],
+                "description": "whether Corpus Christi was set to be celebrated on Thursday or on Sunday",
+                "examples": [
+                  "SUNDAY",
+                  "THURSDAY"
+                ]
+              },
+              "YearType": {
+                "type": "string",
+                "enum": [
+                  "CIVIL",
+                  "LITURGICAL"
+                ],
+                "description": "whether the API calculated a calendar for the solar year (Jan 1 - Dec 31) or the liturgical year (First Sunday of Advent of the preceding year including vigil Mass - Saturday of the 34th week of Ordinary Time)",
+                "examples": [
+                  "CIVIL",
+                  "LITURGICAL"
+                ]
+              },
+              "Locale": {
+                "type": "string",
+                "description": "the locale which has either been specifically requested using the `locale` parameter, or set by the requested national calendar",
+                "examples": [
+                  "en",
+                  "nl_NL"
+                ]
+              },
+              "ReturnType": {
+                "type": "string",
+                "enum": [
+                  "JSON",
+                  "XML",
+                  "ICS",
+                  "YML"
+                ],
+                "description": "the type of data that was requested",
+                "examples": [
+                  "XML"
+                ]
+              },
+              "EternalHighPriest": {
+                "type": "boolean",
+                "description": "whether the celebration of Jesus Christ Eternal High Priest is applicable to the current requested calendar",
+                "examples": [
+                  false,
+                  true
+                ]
+              }
+            }
+          },
+          "Metadata": {
+            "type": "object",
+            "description": "contains information about the current endpoint versioning, and keys of liturgical events that can have precedence over others, useful for further calculations of a local calendar",
+            "properties": {
+              "Solemnities": {
+                "type": "object",
+                "description": "the keys of this object identify the liturgical event",
+                "properties": {
+                  "LitCalEvent": {
+                    "type": "object",
+                    "description": "a liturgical event that has a rank of solemnity, and which can therefore supersede a feast or a memorial",
+                    "properties": {
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      },
+                      "EventKey": {
+                        "type": "string"
+                      },
+                      "Date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "the date of the liturgical event in the liturgical calendar for the given year (the time will be zeroed out because it is not of importance), in RFC 3339 format"
+                      },
+                      "TimezoneType": {
+                        "type": "integer",
+                        "description": "describes the timezone type set on the DateTime object in the endpoint's PHP backend (only DateTime objects with type 3 timezones attached will allow for DST correction). The timezone will always be set to \"UTC\" and therefore the timezone type should always be of type 3, see https://www.php.net/manual/en/timezones.others.php",
+                        "format": "int32",
+                        "enum": [
+                          3
+                        ]
+                      },
+                      "Timezone": {
+                        "type": "string",
+                        "description": "the timezone set on the DateTime object in the endpoint's PHP backend (it will always be set to \"UTC\", in order to ensure the date will remain unchanged anywhere in the world)",
+                        "enum": [
+                          "UTC"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Feasts": {
+                "type": "object",
+                "description": "the keys of this object identify the liturgical event",
+                "properties": {
+                  "LitCalEvent": {
+                    "type": "object",
+                    "description": "a liturgical event that has a rank of feast or memorial, and which can therefore supersede a feast (if this event is a higher ranking feast of the Lord, of the BVM, of John the Baptist etc.), a memorial (if this event is a feast) or an optional memorial  (if this event is a memorial)",
+                    "properties": {
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      },
+                      "EventKey": {
+                        "type": "string"
+                      },
+                      "Date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "the date of the liturgical event in the liturgical calendar for the given year (the time will be zeroed out because it is not of importance), in RFC 3339 format"
+                      },
+                      "TimezoneType": {
+                        "type": "integer",
+                        "description": "describes the timezone type set on the DateTime object in the endpoint's PHP backend (only DateTime objects with type 3 timezones attached will allow for DST correction). The timezone will always be set to \"UTC\" and therefore the timezone type should always be of type 3, see https://www.php.net/manual/en/timezones.others.php",
+                        "format": "int32",
+                        "enum": [
+                          3
+                        ]
+                      },
+                      "Timezone": {
+                        "type": "string",
+                        "description": "the timezone set on the DateTime object in the endpoint's PHP backend (it will always be set to \"UTC\", in order to ensure the date will remain unchanged anywhere in the world)",
+                        "enum": [
+                          "UTC"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Memorials": {
+                "type": "object",
+                "description": "the keys of this object identify the liturgical event",
+                "properties": {
+                  "LitCalEvent": {
+                    "type": "object",
+                    "description": "a liturgical event that has a rank of feast or memorial, and which can therefore supersede a feast (if this event is a higher ranking feast of the Lord, of the BVM, of John the Baptist etc.), a memorial (if this event is a feast) or an optional memorial  (if this event is a memorial)",
+                    "properties": {
+                      "idx": {
+                        "type": "integer",
+                        "xml": {
+                          "attribute": true
+                        }
+                      },
+                      "EventKey": {
+                        "type": "string"
+                      },
+                      "Date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "the date of the liturgical event in the liturgical calendar for the given year (the time will be zeroed out because it is not of importance), in RFC 3339 format"
+                      },
+                      "TimezoneType": {
+                        "type": "integer",
+                        "description": "describes the timezone type set on the DateTime object in the endpoint's PHP backend (only DateTime objects with type 3 timezones attached will allow for DST correction). The timezone will always be set to \"UTC\" and therefore the timezone type should always be of type 3, see https://www.php.net/manual/en/timezones.others.php",
+                        "format": "int32",
+                        "enum": [
+                          3
+                        ]
+                      },
+                      "Timezone": {
+                        "type": "string",
+                        "description": "the timezone set on the DateTime object in the endpoint's PHP backend (it will always be set to \"UTC\", in order to ensure the date will remain unchanged anywhere in the world)",
+                        "enum": [
+                          "UTC"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Version": {
+                "type": "string",
+                "description": "current endpoint version"
+              },
+              "Timestamp": {
+                "description": "timestamp at which the current calendar calculation was first requested / produced",
+                "type": "integer",
+                "format": "int64",
+                "minimum": 1501027200,
+                "maximum": 253402300799
+              },
+              "DateTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "RFC 3339 representation of the date and time at which the current calendar calculation was first requested / produced"
+              },
+              "RequestHeaders": {
+                "type": "object",
+                "description": "echoes back the request headers that were received by the endpoint, for debugging purposes",
+                "properties": {
+                  "Accept-Language": {
+                    "type": "string",
+                    "examples": [
+                      "la-VA",
+                      "it-IT",
+                      "en-US"
+                    ]
+                  },
+                  "Accept": {
+                    "type": "string",
+                    "examples": [
+                      "application/json",
+                      "application/yaml",
+                      "application/xml",
+                      "text/calendar"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "Messages": {
+            "type": "object",
+            "description": "an array containing all of the significant operations done in the calculation of the requested Liturgical Calendar, with links to the Decrees of the Dicastery for Divine Worship and the Discipline of the Sacraments where applicable. Useful for understanding how or why the calculations were done, and what changes have been applied in the generation of the Calendar for the specific year requested.",
+            "properties": {
+              "Message": {
+                "type": "string",
+                "examples": [
+                  "<i>'4th Sunday of Ordinary Time'</i> is superseded by the FEAST OF THE LORD <i>'Presentation of the Lord'</i> in the year 2020.",
+                  "<i>'31st Sunday of Ordinary Time'</i> is superseded by the SOLEMNITY <i>'All Saints Day'</i> in the year 2020.",
+                  "The FEAST <i>'Saints Philip and James, Apostles'</i>, usually celebrated on <b>May 3rd</b>, is suppressed by the <i>celebration with precedence over solemnities</i> <i>'Fourth Sunday of Easter'</i> in the year 2020."
+                ]
+              },
+              "idx": {
+                "type": "integer",
+                "xml": {
+                  "attribute": true
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "LiturgicalCalendar",
+          "namespace": "http://www.bibleget.io/catholicliturgy"
+        }
+      },
+      "LitCalMetadata": {
+        "type": "object",
+        "properties": {
+          "litcal_metadata": {
+            "type": "object",
+            "properties": {
+              "national_calendars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "calendar_id": {
+                      "$ref": "./CommonDef.json#/definitions/Nation"
+                    },
+                    "missals": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./CommonDef.json#/definitions/MissalID"
+                      }
+                    },
+                    "wider_regions": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+                      }
+                    },
+                    "dioceses": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+                      }
+                    },
+                    "settings": {
+                      "$ref": "./CommonDef.json#/definitions/CalendarSettings"
+                    }
+                  }
+                }
+              },
+              "national_calendars_keys": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3,45}$"
+                }
+              },
+              "diocesan_calendars": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "calendar_id": {
+                      "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+                    },
+                    "nation": {
+                      "type": "string",
+                      "description": "Uppercase English name of the nation that corresponds to the current diocesan calendar"
+                    },
+                    "diocese": {
+                      "type": "string",
+                      "description": "Actual name of the diocese, including spaces, hyphens, apostrophes or any other character"
+                    },
+                    "group": {
+                      "type": "string",
+                      "description": "Named group of diocesan calendars which can be pooled together"
+                    },
+                    "settings": {
+                      "$ref": "./CommonDef.json#/definitions/CalendarSettings"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "nation",
+                    "diocese"
+                  ]
+                }
+              },
+              "diocesan_calendars_keys": {
+                "type": "array",
+                "items": {
+                  "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+                }
+              },
+              "diocesan_groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "group_name": {
+                      "type": "string",
+                      "description": "Named groups of diocesan calendars which can be pooled together"
+                    },
+                    "dioceses": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+                      }
+                    }
+                  }
+                }
+              },
+              "wider_regions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+                    },
+                    "locales": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "./CommonDef.json#/definitions/Locale"
+                      }
+                    },
+                    "api_path": {
+                      "type": "string",
+                      "description": "API URL with which to request the localized wider region data"
+                    }
+                  }
+                }
+              },
+              "wider_regions_keys": {
+                "type": "array",
+                "items": {
+                  "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RetrieveCalendarRequestBody": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/GeneralRomanCalendarRequestBody"
+          },
+          {
+            "$ref": "#/components/schemas/GeneralRomanCalendarTweakedRequestBody"
+          }
+        ]
+      },
+      "GeneralRomanCalendarRequestBody": {
+        "type": "object",
+        "title": "General Roman Calendar",
+        "description": "The liturgical calendar in Latin, as used in the Vatican, basis of all other national and diocesan calendars. The only permitted parameters are `year`, `year_type`, and `return_type` (though it's preferable to request the media type using the `Accept` header)",
+        "additionalProperties": false,
+        "properties": {
+          "year_type": {
+            "type": "string",
+            "enum": [
+              "CIVIL",
+              "LITURGICAL"
+            ]
+          }
+        }
+      },
+      "GeneralRomanCalendarTweakedRequestBody": {
+        "type": "object",
+        "title": "General Roman Calendar translated",
+        "description": "General Roman Calendar in another language or with tweaked parameters, perhaps for testing purposes",
+        "additionalProperties": false,
+        "properties": {
+          "epiphany": {
+            "type": "string",
+            "enum": [
+              "JAN6",
+              "SUNDAY_JAN2_JAN8"
+            ]
+          },
+          "ascension": {
+            "type": "string",
+            "enum": [
+              "THURSDAY",
+              "SUNDAY"
+            ]
+          },
+          "corpus_christi": {
+            "type": "string",
+            "enum": [
+              "THURSDAY",
+              "SUNDAY"
+            ]
+          },
+          "eternal_high_priest": {
+            "type": "boolean"
+          },
+          "year_type": {
+            "type": "string",
+            "enum": [
+              "CIVIL",
+              "LITURGICAL"
+            ]
+          }
+        }
+      },
+      "CivilOrLiturgicalYear": {
+        "type": "object",
+        "title": "Liturgical or Civil year",
+        "description": "The liturgical year starts from the First Sunday of Advent of the preceding year and ends on the Saturday of the 34th week of Ordinary Time, as opposed to the civil year which starts on Jan 1st and ends on Dec 31st",
+        "additionalProperties": false,
+        "properties": {
+          "year_type": {
+            "type": "string",
+            "enum": [
+              "CIVIL",
+              "LITURGICAL"
+            ],
+            "default": "LITURGICAL"
+          }
+        }
+      },
+      "UnitTestArray": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/ExactOrVariableCorrespondenceUnitTest"
+            },
+            {
+              "$ref": "#/components/schemas/ExactCorrespondenceSinceUnitTest"
+            },
+            {
+              "$ref": "#/components/schemas/ExactCorrespondenceUntilUnitTest"
+            }
+          ]
+        }
+      },
+      "ExactOrVariableCorrespondenceUnitTest": {
+        "title": "Exact or Variable Existence",
+        "description": "test that the liturgical event exists on an expected date in a given year or does not exist in a given year",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "identifies the Unit Test, and follows the pattern `{event_key}Test`",
+            "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+          },
+          "event_key": {
+            "type": "string",
+            "description": "the liturgical event we are testing, must be the exact key of a corresponding liturgical event in the LitCal API",
+            "pattern": "^([a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:[A-Z][a-zA-Z0-9]+)*(?:_\\d+)?(?:_vigil)?$"
+          },
+          "description": {
+            "type": "string",
+            "description": "describes what the test intends to accomplish"
+          },
+          "test_type": {
+            "type": "string",
+            "description": "* `exactCorrespondence`: the liturgical event should exist on an expected date for each of the years defined in the `years` array\n* `variableCorrespondence`: the liturgical event should not exist for certain years, and should exist on an expected date for other years",
+            "enum": [
+              "exactCorrespondence",
+              "variableCorrespondence"
+            ]
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventExistsAndHasExpectedDateAssertion"
+                },
+                {
+                  "$ref": "#/components/schemas/EventNotExistsAssertion"
+                }
+              ]
+            }
+          },
+          "applies_to": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          },
+          "excludes": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          }
+        },
+        "required": [
+          "name",
+          "event_key",
+          "description",
+          "test_type",
+          "assertions"
+        ]
+      },
+      "ExactCorrespondenceSinceUnitTest": {
+        "title": "Exact Existence Since Year",
+        "description": "test that the liturgical event exists on an expected date starting from a given year",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "identifies the Unit Test, and follows the pattern `{event_key}Test`",
+            "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+          },
+          "event_key": {
+            "type": "string",
+            "description": "the liturgical event we are testing, must be the exact key of a corresponding liturgical event in the LitCal API",
+            "pattern": "^([a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:[A-Z][a-zA-Z0-9]+)*(?:_\\d+)?(?:_vigil)?$"
+          },
+          "description": {
+            "type": "string",
+            "description": "describes what the test intends to accomplish"
+          },
+          "test_type": {
+            "type": "string",
+            "description": "the liturgical event should exist on an expected date starting from the year indicated in the `yearSince` key, before such year the liturgical event should not exist",
+            "const": "exactCorrespondenceSince"
+          },
+          "year_since": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1970,
+            "maximum": 9999
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventExistsAndHasExpectedDateAssertion"
+                },
+                {
+                  "$ref": "#/components/schemas/EventNotExistsAssertion"
+                }
+              ]
+            }
+          },
+          "applies_to": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          },
+          "excludes": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          }
+        },
+        "required": [
+          "name",
+          "event_key",
+          "description",
+          "test_type",
+          "assertions",
+          "year_since"
+        ]
+      },
+      "ExactCorrespondenceUntilUnitTest": {
+        "title": "Exact Existence Until Year",
+        "description": "test that the liturgical event exists on an expected date up until a given year",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "identifies the Unit Test, and follows the pattern `{event_key}Test`",
+            "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?Test$"
+          },
+          "event_key": {
+            "type": "string",
+            "description": "the liturgical event we are testing, must be the exact key of a corresponding liturgical event in the LitCal API",
+            "pattern": "^([a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:[A-Z][a-zA-Z0-9]+)*(?:_\\d+)?(?:_vigil)?$"
+          },
+          "description": {
+            "type": "string",
+            "description": "describes what the test intends to accomplish"
+          },
+          "test_type": {
+            "type": "string",
+            "description": "the liturgical event should exist on an expected date until the year indicated in the `yearUntil` key, after such year the liturgical event should not exist",
+            "const": "exactCorrespondenceUntil"
+          },
+          "year_until": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1970,
+            "maximum": 9999
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EventExistsAndHasExpectedDateAssertion"
+                },
+                {
+                  "$ref": "#/components/schemas/EventNotExistsAssertion"
+                }
+              ]
+            }
+          },
+          "applies_to": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          },
+          "excludes": {
+            "$ref": "./LitCalTest.json#/definitions/AppliesToOrExcludes"
+          }
+        },
+        "required": [
+          "name",
+          "event_key",
+          "description",
+          "test_type",
+          "assertions",
+          "year_until"
+        ]
+      },
+      "LitCalAllFestivitiesResponse": {
+        "type": "object",
+        "properties": {
+          "litcal_events": {
+            "type": "object",
+            "patternProperties": {
+              "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?$": {
+                "type": "object",
+                "properties": {
+                  "month": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 12
+                  },
+                  "day": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 31
+                  },
+                  "event_key": {
+                    "type": "string",
+                    "pattern": "^(?:[a-z]+_[a-z]+_)?[A-Z][a-zA-Z0-9]+(?:_\\d+)?(?:_vigil)?$",
+                    "description": "corresponds to the `event_key` property of liturgical events in the output of the LitCal API and similar endpoints"
+                  },
+                  "grade": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 7
+                  },
+                  "common": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "calendar": {
+                    "type": "string",
+                    "const": "GENERAL ROMAN"
+                  },
+                  "color": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "white",
+                        "red",
+                        "green",
+                        "rose",
+                        "purple"
+                      ]
+                    }
+                  },
+                  "readings": {
+                    "type": "object",
+                    "properties": {
+                      "first_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm": {
+                        "type": "string"
+                      },
+                      "second_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_2": {
+                        "type": "string"
+                      },
+                      "third_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_3": {
+                        "type": "string"
+                      },
+                      "fourth_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_4": {
+                        "type": "string"
+                      },
+                      "fifth_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_5": {
+                        "type": "string"
+                      },
+                      "sixth_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_6": {
+                        "type": "string"
+                      },
+                      "seventh_reading": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_7": {
+                        "type": "string"
+                      },
+                      "epistle": {
+                        "type": "string"
+                      },
+                      "responsorial_psalm_epistle": {
+                        "type": "string"
+                      },
+                      "gospel_acclamation": {
+                        "type": "string"
+                      },
+                      "gospel": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The actual name of the liturgical event as defined in the latest edition of the source Roman Missal indicated in the key `MISSAL` (i.e. if the Missal is the Latin edition of the Roman Missal, the name should be from the latest edition of the Latin Roman Missal)"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mobile",
+                      "fixed"
+                    ]
+                  },
+                  "missal": {
+                    "type": "string",
+                    "enum": [
+                      "VATICAN_1970",
+                      "VATICAN_2002",
+                      "VATICAN_2008"
+                    ],
+                    "description": "When a liturgical event is defined in a Roman Missal, this property will be present with an indication of the Roman Missal in question"
+                  },
+                  "decree": {
+                    "type": "string",
+                    "description": "When a liturgical event is defined ex-novo by a decree of the Dicastery for Divine Worship rather than by a Roman Missal, this property will be present with a reference to the decree"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "month",
+                  "day",
+                  "event_key",
+                  "grade",
+                  "common",
+                  "calendar",
+                  "color",
+                  "readings",
+                  "name"
+                ]
+              }
+            }
+          },
+          "settings": {
+            "type": "object",
+            "oneOf": [
+              {
+                "title": "Diocesan Calendar requested",
+                "properties": {
+                  "locale": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z]$",
+                    "description": "indicates the locale used to produce localized data in litcal_events"
+                  },
+                  "national_calendar": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{2}$",
+                    "description": "indicates the National Calendar used to produce the data in litcal_events"
+                  },
+                  "diocesan_calendar": {
+                    "type": "string",
+                    "pattern": "^[a-z]{6}_[a-z]{2}$",
+                    "description": "indicates the Diocesan Calendar used to produce the data in litcal_events"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "title": "National Calendar requested",
+                "properties": {
+                  "locale": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z]$",
+                    "description": "indicates the locale used to produce localized data in litcal_events"
+                  },
+                  "national_calendar": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{2}$",
+                    "description": "indicates the National Calendar used to produce the data in litcal_events"
+                  },
+                  "diocesan_calendar": {
+                    "type": "null"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "title": "Universal Roman Calendar requested",
+                "properties": {
+                  "locale": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z]$",
+                    "description": "indicates the locale used to produce localized data in litcal_events"
+                  },
+                  "national_calendar": {
+                    "type": "null"
+                  },
+                  "diocesan_calendar": {
+                    "type": "null"
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventExistsAndHasExpectedDateAssertion": {
+        "title": "Event exists and has expected date value",
+        "description": "Expect that a liturgical event be present in the calendar on the expected date in the given year",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "year": {
+            "description": "the year we are testing against",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1970,
+            "maximum": 9999
+          },
+          "expected_value": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assert": {
+            "type": "string",
+            "const": "eventExists AND hasExpectedDate"
+          },
+          "assertion": {
+            "type": "string",
+            "description": "descriptive form of the `assert` statement"
+          },
+          "comment": {
+            "type": "string",
+            "description": "any extra information about the significance of the expected value for this year compared to other years"
+          }
+        },
+        "required": [
+          "year",
+          "expected_value",
+          "assert",
+          "assertion"
+        ]
+      },
+      "EventNotExistsAssertion": {
+        "title": "Event not exists",
+        "description": "Expect that the liturgical event not be present in the calendar in the given year",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "year": {
+            "description": "the year we are testing against",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1970,
+            "maximum": 9999
+          },
+          "expected_value": {
+            "type": "null"
+          },
+          "assert": {
+            "type": "string",
+            "const": "eventNotExists"
+          },
+          "assertion": {
+            "type": "string",
+            "description": "descriptive form of the `assert` statement"
+          },
+          "comment": {
+            "type": "string",
+            "description": "any extra information about the significance of the expected value for this year compared to other years"
+          }
+        },
+        "required": [
+          "year",
+          "expected_value",
+          "assert",
+          "assertion"
+        ]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username for authentication"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Password for authentication"
+          },
+          "remember_me": {
+            "type": "boolean",
+            "default": false,
+            "description": "When true, the refresh token cookie persists beyond the browser session (with Max-Age/Expires). When false (default), the refresh token is stored as a session cookie that is deleted when the browser closes."
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "description": "Authentication response containing JWT tokens. Note: These tokens are also set as HttpOnly cookies (litcal_access_token, litcal_refresh_token) for browser-based clients. Browser clients should rely on cookies for authentication rather than storing tokens in localStorage/sessionStorage.",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "JWT access token valid for 1 hour (configurable via JWT_EXPIRY). Also set as HttpOnly cookie 'litcal_access_token'."
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "JWT refresh token valid for 7 days (configurable via JWT_REFRESH_EXPIRY). Also set as HttpOnly cookie 'litcal_refresh_token'."
+          },
+          "token_type": {
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ],
+            "description": "Token type, always 'Bearer'"
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Access token expiry time in seconds"
+          }
+        },
+        "required": [
+          "access_token",
+          "refresh_token",
+          "token_type",
+          "expires_in"
+        ]
+      },
+      "RefreshRequest": {
+        "type": "object",
+        "description": "Request body for token refresh. This body is optional when using cookie-based authentication, as the server will read the refresh token from the `litcal_refresh_token` HttpOnly cookie first.",
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "description": "Valid refresh token obtained from /auth/login. Required if the `litcal_refresh_token` cookie is not present. When both cookie and body are provided, the cookie takes precedence."
+          }
+        },
+        "example": {
+          "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+      },
+      "RefreshResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "New JWT access token"
+          },
+          "token_type": {
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ],
+            "description": "Token type, always 'Bearer'"
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Access token expiry time in seconds"
+          }
+        },
+        "required": [
+          "access_token",
+          "token_type",
+          "expires_in"
+        ]
+      },
+      "MeResponse": {
+        "type": "object",
+        "properties": {
+          "authenticated": {
+            "type": "boolean",
+            "description": "Whether the user is authenticated",
+            "example": true
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of the authenticated user",
+            "example": "admin"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Roles assigned to the user",
+            "example": [
+              "admin"
+            ]
+          },
+          "exp": {
+            "type": "integer",
+            "description": "Token expiration timestamp (Unix epoch)",
+            "example": 1735689600
+          }
+        },
+        "required": [
+          "authenticated"
+        ]
+      }
+    },
+    "parameters": {
+      "AcceptLanguageHeader": {
+        "in": "header",
+        "name": "Accept-Language",
+        "description": "The header advertises which languages the client is able to understand, and which locale variant is preferred. (By languages, we mean natural languages, such as English, and not programming languages.)",
+        "schema": {
+          "$ref": "./CommonDef.json#/definitions/AcceptLanguage"
+        },
+        "examples": {
+          "latin": {
+            "value": "la-VA",
+            "summary": "Latin (Vatican)"
+          },
+          "italian": {
+            "value": "it-IT",
+            "summary": "Italian (Italy)"
+          },
+          "english": {
+            "value": "en-US",
+            "summary": "English (United States)"
+          }
+        }
+      },
+      "AcceptHeader": {
+        "in": "header",
+        "name": "Accept",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/json",
+            "application/xml",
+            "application/yaml",
+            "text/calendar"
+          ],
+          "default": "application/json"
+        }
+      },
+      "YearTypeParam": {
+        "in": "query",
+        "name": "year_type",
+        "description": "Whether to return a civil year (Jan 1 - Dec 31) or liturgical year (First Sunday of Advent through Saturday of 34th week of Ordinary Time)",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "CIVIL",
+            "LITURGICAL"
+          ],
+          "default": "LITURGICAL"
+        }
+      },
+      "EpiphanyParam": {
+        "in": "query",
+        "name": "epiphany",
+        "description": "When Epiphany is celebrated: on January 6th or on the Sunday between January 2nd and 8th",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "JAN6",
+            "SUNDAY_JAN2_JAN8"
+          ]
+        }
+      },
+      "AscensionParam": {
+        "in": "query",
+        "name": "ascension",
+        "description": "When Ascension is celebrated: on Thursday (40 days after Easter) or on Sunday (7th Sunday of Easter)",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "THURSDAY",
+            "SUNDAY"
+          ]
+        }
+      },
+      "CorpusChristiParam": {
+        "in": "query",
+        "name": "corpus_christi",
+        "description": "When Corpus Christi is celebrated: on Thursday after Trinity Sunday or on the following Sunday",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "THURSDAY",
+            "SUNDAY"
+          ]
+        }
+      },
+      "EternalHighPriestParam": {
+        "in": "query",
+        "name": "eternal_high_priest",
+        "description": "Whether to include the Feast of Jesus Christ, Eternal High Priest (Thursday after Pentecost)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "YearPathParam": {
+        "in": "path",
+        "name": "year",
+        "required": true,
+        "description": "The calendar year for which to retrieve liturgical events",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1970,
+          "maximum": 9999
+        }
+      },
+      "NationalCalendarIdPathParam": {
+        "in": "path",
+        "name": "calendar_id",
+        "required": true,
+        "description": "Uppercase two letter ISO 3166 code of a nation for which the liturgical calendar has been defined",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "IT",
+            "US",
+            "NL",
+            "VA",
+            "CA"
+          ]
+        }
+      },
+      "DiocesanCalendarIdPathParam": {
+        "in": "path",
+        "name": "calendar_id",
+        "required": true,
+        "description": "Identifier for a diocesan calendar",
+        "schema": {
+          "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+        }
+      }
+    },
+    "examples": {
+      "LiturgicalYearRequestBody": {
+        "summary": "Liturgical Year Calendar request",
+        "description": "The liturgical year starts from the First Sunday of Advent of the preceding year and ends on the Saturday of the 34th week of Ordinary Time",
+        "value": {
+          "year_type": "LITURGICAL"
+        }
+      },
+      "CivilYearRequestBody": {
+        "summary": "Civil Year Calendar request",
+        "description": "The civil year starts on Jan 1st and ends on Dec 31st of the requested year",
+        "value": {
+          "year_type": "CIVIL"
+        }
+      },
+      "GeneralRomanCalendarTweakedRequestBody": {
+        "summary": "General Roman Calendar with settings tweaked similarly to how a National or Diocesan calendar would set them",
+        "description": "Request the data of the General Roman calendar with a few underlying parameters tweaked",
+        "value": {
+          "epiphany": "SUNDAY_JAN2_JAN8",
+          "ascension": "SUNDAY",
+          "corpus_christi": "THURSDAY",
+          "eternal_high_priest": true
+        }
+      },
+      "NationalCalendarRequestBody": {
+        "summary": "National Calendar for Italy",
+        "description": "Example of a national calendar definition for Italy with patron saints and settings",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "StCatherineSiena",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1939,
+                "until_year": 1999,
+                "url": "https://www.vatican.va/content/pius-xii/it/briefs/documents/hf_p-xii_brief_19390618_patroni-italia.html"
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "StFrancisAssisi",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1939,
+                "url": "https://www.vatican.va/content/pius-xii/it/briefs/documents/hf_p-xii_brief_19390618_patroni-italia.html"
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "StNicholas",
+                "grade": 3
+              },
+              "metadata": {
+                "action": "setProperty",
+                "property": "grade",
+                "since_year": 2017,
+                "url": "https://liturgico.chiesacattolica.it/memoria-di-san-nicola/"
+              }
+            }
+          ],
+          "settings": {
+            "epiphany": "JAN6",
+            "ascension": "SUNDAY",
+            "corpus_christi": "SUNDAY",
+            "eternal_high_priest": false,
+            "holydays_of_obligation": {
+              "Christmas": true,
+              "Epiphany": true,
+              "Ascension": false,
+              "CorpusChristi": false,
+              "MaryMotherOfGod": true,
+              "ImmaculateConception": true,
+              "Assumption": true,
+              "StJoseph": false,
+              "StsPeterPaulAp": false,
+              "AllSaints": true
+            }
+          },
+          "metadata": {
+            "nation": "IT",
+            "wider_region": "Europe",
+            "missals": [
+              "IT_1983",
+              "IT_2020"
+            ],
+            "locales": [
+              "it_IT"
+            ]
+          },
+          "i18n": {
+            "it_IT": {
+              "StCatherineSiena": "Santa Caterina da Siena, vergine e dottore della Chiesa, patrona d'Italia",
+              "StFrancisAssisi": "San Francesco d'Assisi, patrono d'Italia"
+            }
+          }
+        }
+      },
+      "NationalCalendarUSRequestBody": {
+        "summary": "National Calendar for USA",
+        "description": "Example of a national calendar definition for USA with moved events and new celebrations",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "ImmaculateConception",
+                "grade": 6
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1970
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "StVincentDeacon",
+                "day": 23,
+                "month": 1
+              },
+              "metadata": {
+                "action": "moveEvent",
+                "missal": "US_2011",
+                "reason": "National Day of Prayer for the Unborn",
+                "since_year": 1970
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "ThanksgivingDay",
+                "color": [
+                  "white"
+                ],
+                "grade": 3,
+                "strtotime": "fourth thursday of november",
+                "common": []
+              },
+              "metadata": {
+                "action": "createNew",
+                "since_year": 1970
+              }
+            }
+          ],
+          "settings": {
+            "epiphany": "SUNDAY_JAN2_JAN8",
+            "ascension": "SUNDAY",
+            "corpus_christi": "SUNDAY",
+            "eternal_high_priest": false,
+            "holydays_of_obligation": {
+              "Christmas": true,
+              "Epiphany": false,
+              "Ascension": true,
+              "CorpusChristi": false,
+              "MaryMotherOfGod": true,
+              "ImmaculateConception": true,
+              "Assumption": true,
+              "StJoseph": false,
+              "StsPeterPaulAp": false,
+              "AllSaints": true
+            }
+          },
+          "metadata": {
+            "nation": "US",
+            "locales": [
+              "en_US"
+            ],
+            "wider_region": "Americas",
+            "missals": [
+              "US_2011"
+            ]
+          },
+          "i18n": {
+            "en_US": {
+              "ThanksgivingDay": "Thanksgiving Day"
+            }
+          }
+        }
+      },
+      "DiocesanCalendarRequestBody": {
+        "summary": "Diocesan Calendar for Archdiocese of Boston",
+        "description": "Example of a diocesan calendar definition with local celebrations",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "DedicationoftheCathedraloftheHolyCross",
+                "color": [
+                  "white"
+                ],
+                "grade": 4,
+                "common": [
+                  "Dedication of a Church"
+                ],
+                "day": 8,
+                "month": 12
+              },
+              "metadata": {
+                "form_rownum": 1,
+                "since_year": 1970
+              }
+            }
+          ],
+          "settings": {
+            "epiphany": "JAN6",
+            "ascension": "THURSDAY",
+            "corpus_christi": "THURSDAY"
+          },
+          "metadata": {
+            "diocese_id": "boston_us",
+            "diocese_name": "Archdiocese of Boston (Massachusetts)",
+            "nation": "US",
+            "locales": [
+              "en_US"
+            ],
+            "timezone": "America/New_York"
+          },
+          "i18n": {
+            "en_US": {
+              "DedicationoftheCathedraloftheHolyCross": "Dedication of the Cathedral of the Holy Cross"
+            }
+          }
+        }
+      },
+      "DiocesanCalendarRomeRequestBody": {
+        "summary": "Diocesan Calendar for Diocese of Rome",
+        "description": "Example of a diocesan calendar definition for the Diocese of Rome",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "DedicationoftheBasilicaofStJohnLateran",
+                "color": [
+                  "white"
+                ],
+                "grade": 6,
+                "common": [
+                  "Dedication of a Church"
+                ],
+                "day": 9,
+                "month": 11
+              },
+              "metadata": {
+                "form_rownum": 1,
+                "since_year": 1970
+              }
+            }
+          ],
+          "settings": {
+            "epiphany": "JAN6",
+            "ascension": "SUNDAY",
+            "corpus_christi": "SUNDAY"
+          },
+          "metadata": {
+            "diocese_id": "romamo_it",
+            "diocese_name": "Diocesi di Roma",
+            "nation": "IT",
+            "locales": [
+              "it_IT"
+            ],
+            "timezone": "Europe/Rome"
+          },
+          "i18n": {
+            "it_IT": {
+              "DedicationoftheBasilicaofStJohnLateran": "Dedicazione della Basilica Lateranense"
+            }
+          }
+        }
+      },
+      "WiderRegionCalendarRequestBody": {
+        "summary": "Wider Region Calendar for Europe",
+        "description": "Example of a wider region calendar definition for Europe with patron saints",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "StBenedict",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1964,
+                "url": "https://www.vatican.va/content/paul-vi/la/apost_letters/documents/hf_p-vi_apl_19641024_pacis-nuntius.html",
+                "url_lang_map": {
+                  "it": "it",
+                  "es": "es",
+                  "la": "la"
+                }
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "StsCyrilMethodius",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1980,
+                "url": "https://www.vatican.va/content/john-paul-ii/la/apost_letters/1980/documents/hf_jp-ii_apl_31121980_egregiae-virtutis.html",
+                "url_lang_map": {
+                  "es": "es",
+                  "it": "it",
+                  "la": "la",
+                  "pt": "pt"
+                }
+              }
+            },
+            {
+              "liturgical_event": {
+                "event_key": "StBridget",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1999,
+                "url": "https://www.vatican.va/content/john-paul-ii/en/motu_proprio/documents/hf_jp-ii_motu-proprio_01101999_co-patronesses-europe.html",
+                "url_lang_map": {
+                  "de": "de",
+                  "en": "en",
+                  "es": "es",
+                  "fr": "fr",
+                  "it": "it",
+                  "la": "la",
+                  "pt": "pt"
+                }
+              }
+            }
+          ],
+          "national_calendars": {
+            "Bulgaria": "BG",
+            "Czechia": "CZ",
+            "Croatia": "HR",
+            "Denmark": "DK",
+            "Italy": "IT",
+            "Netherlands": "NL",
+            "Poland": "PL",
+            "Spain": "ES"
+          },
+          "metadata": {
+            "locales": [
+              "it_IT",
+              "nl_NL",
+              "pl_PL",
+              "es_ES",
+              "de_DE",
+              "fr_FR"
+            ],
+            "wider_region": "Europe"
+          },
+          "i18n": {
+            "it_IT": {
+              "StBenedict": "San Benedetto, abate, patrono d'Europa",
+              "StsCyrilMethodius": "Santi Cirillo, monaco, e Metodio, vescovo, patroni d'Europa",
+              "StBridget": "Santa Brigida, religiosa, patrona d'Europa"
+            },
+            "en_GB": {
+              "StBenedict": "Saint Benedict, Abbot, Patron of Europe",
+              "StsCyrilMethodius": "Saints Cyril, Monk, and Methodius, Bishop, Patrons of Europe",
+              "StBridget": "Saint Bridget, Religious, Patroness of Europe"
+            }
+          }
+        }
+      },
+      "WiderRegionCalendarAsiaRequestBody": {
+        "summary": "Wider Region Calendar for Asia",
+        "description": "Example of a wider region calendar definition for Asia",
+        "value": {
+          "litcal": [
+            {
+              "liturgical_event": {
+                "event_key": "StFrancisXavier",
+                "grade": 4
+              },
+              "metadata": {
+                "action": "makePatron",
+                "since_year": 1927,
+                "url": "https://www.vatican.va/content/pius-xi/la/encyclicals/documents/hf_p-xi_enc_19271215_rerum-ecclesiae.html",
+                "url_lang_map": {
+                  "la": "la"
+                }
+              }
+            }
+          ],
+          "national_calendars": {
+            "Japan": "JP",
+            "China": "CN"
+          },
+          "metadata": {
+            "locales": [
+              "ja_JP",
+              "zh_Hans_CN"
+            ],
+            "wider_region": "Asia"
+          },
+          "i18n": {
+            "ja_JP": {
+              "StFrancisXavier": "聖フランシスコ・ザビエル司祭"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "DeleteSuccess200": {
+        "description": "200 OK: the resource was successfully deleted from the server. Per RFC 9110 Section 9.3.5, we use 200 (not 204) because the response includes a representation describing the status.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "success": {
+                  "type": "string",
+                  "description": "A message indicating successful deletion",
+                  "examples": [
+                    "Calendar data \"nation/US\" deletion successful.",
+                    "Calendar data \"diocese/US_BOSTON\" deletion successful.",
+                    "Calendar data \"widerregion/Americas\" deletion successful."
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        }
+      },
+      "UnprocessableEntity422": {
+        "description": "422 Unprocessable Entity. The request body does not conform to its defined schema",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422",
+              "title": "Unprocessable Entity",
+              "status": 422,
+              "detail": "The request body does not conform to the defined schema"
+            }
+          }
+        }
+      },
+      "BadRequest400": {
+        "description": "400 Bad Request. The request parameters do not conform to the defined schema",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400",
+              "title": "Bad Request",
+              "status": 400,
+              "detail": "The request parameters do not conform to the defined schema"
+            }
+          }
+        }
+      },
+      "Unauthorized401": {
+        "description": "401 Unauthorized. Authentication is required and has failed or has not been provided. This response is returned when the JWT token is missing, invalid, or expired.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401",
+              "title": "Unauthorized",
+              "status": 401,
+              "detail": "Authentication is required. The JWT token is missing, invalid, or expired."
+            }
+          }
+        }
+      },
+      "Forbidden403": {
+        "description": "403 Forbidden. The request was valid but the server is refusing action. The user might not have the necessary permissions for the resource.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+              "title": "Forbidden",
+              "status": 403,
+              "detail": "You do not have the necessary permissions for this resource"
+            }
+          }
+        }
+      },
+      "NotFound404": {
+        "description": "404 Not Found. The resource requested or one of its dependencies was not found",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+              "title": "Not Found",
+              "status": 404,
+              "detail": "The requested resource was not found"
+            }
+          }
+        }
+      },
+      "NotAcceptable406": {
+        "description": "406 Not Acceptable",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406",
+              "title": "Not Acceptable",
+              "status": 406,
+              "detail": "The requested content type is not supported"
+            }
+          }
+        }
+      },
+      "Conflict409": {
+        "description": "409 Conflict. The request could not be completed due to a conflict with the current state of the resource. This typically occurs when trying to create a resource that already exists.",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409",
+              "title": "Conflict",
+              "status": 409,
+              "detail": "A resource with this identifier already exists"
+            }
+          }
+        }
+      },
+      "UnsupportedMediaType415": {
+        "description": "415 Unsupported Media Type",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415",
+              "title": "Unsupported Media Type",
+              "status": 415,
+              "detail": "The request content type is not supported"
+            }
+          }
+        }
+      },
+      "IMATeapot418": {
+        "description": "418 I'm a teapot",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418",
+              "title": "I'm a teapot",
+              "status": 418,
+              "detail": "The server refuses to brew coffee because it is, permanently, a teapot"
+            }
+          }
+        }
+      },
+      "TooManyRequests429": {
+        "description": "429 Too Many Requests. The user has sent too many requests in a given amount of time (rate limiting). The response includes a Retry-After header indicating how long to wait before retrying.",
+        "headers": {
+          "Retry-After": {
+            "description": "Number of seconds to wait before retrying the request",
+            "schema": {
+              "type": "integer",
+              "example": 847
+            }
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "./Problem.json"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "retryAfter": {
+                      "type": "integer",
+                      "description": "Number of seconds to wait before retrying the request"
+                    }
+                  }
+                }
+              ]
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+              "title": "Too Many Requests",
+              "status": 429,
+              "detail": "Too many login attempts. Please try again later.",
+              "retryAfter": 847
+            }
+          }
+        }
+      },
+      "ServiceUnavailable503": {
+        "description": "503 Service Unavailable",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "./Problem.json"
+            },
+            "example": {
+              "type": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+              "title": "Service Unavailable",
+              "status": 503,
+              "detail": "The server is currently unable to handle the request"
+            }
+          }
+        }
+      },
+      "LitCal200": {
+        "description": "OK: liturgical events for a given year according to the requested criteria",
+        "headers": {
+          "X-LitCal-Starttime": {
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "High resolution timestamp in nanoseconds that indicates the start time of the calculation of the current liturgical calendar response"
+          },
+          "X-LitCal-Endtime": {
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "High resolution timestamp in nanoseconds that indicates the end time of the calculation of the current liturgical calendar response"
+          },
+          "X-LitCal-Executiontime": {
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Total time in nanoseconds in which the calculation of the current liturgical calendar response was produced (difference between X-LitCal-Starttime and X-LitCal-Endtime, average is usually about 5ms!)"
+          },
+          "X-LitCal-Generated": {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Calculation",
+                "ClientCache",
+                "ServerCache"
+              ]
+            },
+            "description": "Indicates whether the current response was produced from: a fresh calculation since the response to the given request had not yet been calculated, or from client cache since the response has not changed since last request, or from server cache since the client had not yet made this same request but the calculation had already been done formerly on the server"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "./LitCal.json"
+            }
+          },
+          "application/yaml": {
+            "schema": {
+              "$ref": "./LitCal.json"
+            }
+          },
+          "text/calendar": {
+            "schema": {
+              "type": "string"
+            },
+            "example": "BEGIN:VCALENDAR\nPRODID:-//John Romano D'Orazio//Liturgical Calendar V1.0//EN\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nX-MS-OLK-FORCEINSPECTOROPEN:FALSE\nX-WR-CALNAME:Roman Catholic Universal Liturgical Calendar LA\nX-WR-TIMEZONE:Europe/Vatican\nX-PUBLISHED-TTL:PT1D\nBEGIN:VEVENT\nCLASS:PUBLIC\nDTSTART;VALUE=DATE:20291231\nDTSTAMP:20240422T062620Z\nUID:c0e7126a841a70761e4057e58b5e2d52\nCREATED:\nDESCRIPTION:\\nSOLLEMNITAS\\nalbus\nLAST-MODIFIED:\nSUMMARY;LANGUAGE=la:SOLLEMNITAS SANCTÆ DEI GENITRICIS MARIÆ Missa in Vigi\n  lia\nTRANSP:TRANSPARENT\nX-MICROSOFT-CDO-ALLDAYEVENT:TRUE\nX-MICROSOFT-DISALLOW-COUNTER:TRUE\nX-ALT-DESC;FMTTYPE=text/html:<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.\n  2//EN\">\\n<HTML>\\n<BODY>\\n\\n<P DIR=LTR><BR><B>SOLLEMNITAS</B><BR><B><I><\n  SPAN LANG=la><FONT FACE=\"Calibri\" COLOR=\"#AAAAAA\">albus</FONT></SPAN></\n  I></B><BR>ANNUM B</P>\\n\\n</BODY>\\n</HTML>\nEND:VEVENT\nEND:VCALENDAR"
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/LitCalXML"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT access token obtained from /auth/login or /auth/refresh endpoint. Include in Authorization header as: `Authorization: Bearer <token>`. This method is suitable for server-to-server communication or non-browser clients."
+      },
+      "CookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "litcal_access_token",
+        "description": "HttpOnly cookie containing JWT access token, automatically set by /auth/login endpoint. This is the preferred authentication method for browser-based clients as it protects tokens from XSS attacks. Requires `credentials: 'include'` in fetch requests for cross-origin scenarios."
+      }
+    }
+  }
+}

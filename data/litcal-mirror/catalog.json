@@ -1,8 +1,414 @@
 {
   "litcal_metadata": {
-    "national_calendars": [],
-    "diocesan_calendars": [],
-    "wider_regions": []
-  },
-  "mirror_status": "awaiting initial synchronization"
+    "national_calendars": [
+      {
+        "calendar_id": "VA",
+        "locales": [
+          "la_VA"
+        ],
+        "missals": [
+          "EDITIO_TYPICA_1970",
+          "EDITIO_TYPICA_1971",
+          "EDITIO_TYPICA_1975",
+          "EDITIO_TYPICA_2002",
+          "EDITIO_TYPICA_2008"
+        ],
+        "settings": {
+          "epiphany": "JAN6",
+          "ascension": "THURSDAY",
+          "corpus_christi": "THURSDAY",
+          "eternal_high_priest": false,
+          "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": true,
+            "Ascension": true,
+            "CorpusChristi": true,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": true,
+            "Assumption": true,
+            "StJoseph": true,
+            "StsPeterPaulAp": true,
+            "AllSaints": true
+          }
+        }
+      },
+      {
+        "calendar_id": "CA",
+        "locales": [
+          "en_CA",
+          "fr_CA"
+        ],
+        "missals": [
+          "CA_2011",
+          "CA_2016"
+        ],
+        "settings": {
+          "epiphany": "SUNDAY_JAN2_JAN8",
+          "ascension": "SUNDAY",
+          "corpus_christi": "SUNDAY",
+          "eternal_high_priest": false,
+          "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": false,
+            "Ascension": false,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": false,
+            "Assumption": false,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": false
+          }
+        },
+        "wider_region": "Americas",
+        "dioceses": [
+          "charlo_ca"
+        ]
+      },
+      {
+        "calendar_id": "IT",
+        "locales": [
+          "it_IT"
+        ],
+        "missals": [
+          "IT_1983",
+          "IT_2020"
+        ],
+        "settings": {
+          "epiphany": "JAN6",
+          "ascension": "SUNDAY",
+          "corpus_christi": "SUNDAY",
+          "eternal_high_priest": false,
+          "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": true,
+            "Ascension": false,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": true,
+            "Assumption": true,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": true
+          }
+        },
+        "wider_region": "Europe",
+        "dioceses": [
+          "agrige_it",
+          "romamo_it",
+          "socaap_it"
+        ]
+      },
+      {
+        "calendar_id": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "missals": [
+          "NL_1978"
+        ],
+        "settings": {
+          "epiphany": "SUNDAY_JAN2_JAN8",
+          "ascension": "THURSDAY",
+          "corpus_christi": "SUNDAY",
+          "eternal_high_priest": true,
+          "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": false,
+            "Ascension": true,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": false,
+            "Assumption": true,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": true
+          }
+        },
+        "wider_region": "Europe",
+        "dioceses": [
+          "bredad_nl",
+          "grolee_nl",
+          "haaams_nl",
+          "roermo_nl",
+          "rotter_nl",
+          "sherto_nl",
+          "utrech_nl"
+        ]
+      },
+      {
+        "calendar_id": "US",
+        "locales": [
+          "en_US"
+        ],
+        "missals": [
+          "US_2011"
+        ],
+        "settings": {
+          "epiphany": "SUNDAY_JAN2_JAN8",
+          "ascension": "SUNDAY",
+          "corpus_christi": "SUNDAY",
+          "eternal_high_priest": false,
+          "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": false,
+            "Ascension": true,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": true,
+            "Assumption": true,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": true
+          }
+        },
+        "wider_region": "Americas",
+        "dioceses": [
+          "boston_us"
+        ]
+      }
+    ],
+    "national_calendars_keys": [
+      "VA",
+      "CA",
+      "IT",
+      "NL",
+      "US"
+    ],
+    "diocesan_calendars": [
+      {
+        "calendar_id": "charlo_ca",
+        "diocese": "Charlottetown",
+        "nation": "CA",
+        "locales": [
+          "en_CA",
+          "fr_CA"
+        ],
+        "timezone": "America/Halifax"
+      },
+      {
+        "calendar_id": "agrige_it",
+        "diocese": "Arcidiocesi di Agrigento",
+        "nation": "IT",
+        "locales": [
+          "it_IT"
+        ],
+        "timezone": "Europe/Rome",
+        "settings": {
+          "epiphany": "JAN6",
+          "ascension": "SUNDAY",
+          "corpus_christi": "SUNDAY"
+        }
+      },
+      {
+        "calendar_id": "romamo_it",
+        "diocese": "Diocesi di Roma",
+        "nation": "IT",
+        "locales": [
+          "it_IT"
+        ],
+        "timezone": "Europe/Rome",
+        "group": "Diocesi del Lazio"
+      },
+      {
+        "calendar_id": "socaap_it",
+        "diocese": "Diocesi di Sora - Cassino - Aquino - Pontecorvo",
+        "nation": "IT",
+        "locales": [
+          "it_IT"
+        ],
+        "timezone": "Europe/Rome",
+        "group": "Diocesi del Lazio"
+      },
+      {
+        "calendar_id": "bredad_nl",
+        "diocese": "Breda",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "grolee_nl",
+        "diocese": "Groningen–Leeuwarden",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "haaams_nl",
+        "diocese": "Haarlem–Amsterdam",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "roermo_nl",
+        "diocese": "Roermond",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "rotter_nl",
+        "diocese": "Rotterdam",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "sherto_nl",
+        "diocese": "’s-Hertogenbosch",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "utrech_nl",
+        "diocese": "Utrecht",
+        "nation": "NL",
+        "locales": [
+          "nl_NL"
+        ],
+        "timezone": "Europe/Amsterdam"
+      },
+      {
+        "calendar_id": "boston_us",
+        "diocese": "Archdiocese of Boston (Massachusetts)",
+        "nation": "US",
+        "locales": [
+          "en_US"
+        ],
+        "timezone": "America/New_York",
+        "settings": {
+          "epiphany": "JAN6",
+          "ascension": "THURSDAY",
+          "corpus_christi": "THURSDAY"
+        }
+      }
+    ],
+    "diocesan_calendars_keys": [
+      "charlo_ca",
+      "agrige_it",
+      "romamo_it",
+      "socaap_it",
+      "bredad_nl",
+      "grolee_nl",
+      "haaams_nl",
+      "roermo_nl",
+      "rotter_nl",
+      "sherto_nl",
+      "utrech_nl",
+      "boston_us"
+    ],
+    "diocesan_groups": [
+      {
+        "group_name": "Diocesi del Lazio",
+        "dioceses": [
+          "romamo_it",
+          "socaap_it"
+        ]
+      }
+    ],
+    "wider_regions": [
+      {
+        "name": "Americas",
+        "locales": [
+          "en_CA",
+          "en_US",
+          "es_AR",
+          "es_BO",
+          "es_BR",
+          "es_BZ",
+          "es_CL",
+          "es_CO",
+          "es_CR",
+          "es_CU",
+          "es_DO",
+          "es_EC",
+          "es_GT",
+          "es_HN",
+          "es_MX",
+          "es_NI",
+          "es_PA",
+          "es_PE",
+          "es_PR",
+          "es_PY",
+          "es_SV",
+          "fr_CA",
+          "pt_BR"
+        ],
+        "api_path": "https://litcal.johnromanodorazio.com/api/v5/data/widerregion/Americas?locale={locale}"
+      },
+      {
+        "name": "Asia",
+        "locales": [
+          "ja_JP",
+          "zh_Hans_CN"
+        ],
+        "api_path": "https://litcal.johnromanodorazio.com/api/v5/data/widerregion/Asia?locale={locale}"
+      },
+      {
+        "name": "Europe",
+        "locales": [
+          "bg_BG",
+          "cs_CZ",
+          "da_DK",
+          "de_AT",
+          "de_BE",
+          "de_CH",
+          "de_DE",
+          "de_LI",
+          "de_LU",
+          "el_CY",
+          "el_GR",
+          "es_ES",
+          "et_EE",
+          "fi_FI",
+          "fr_BE",
+          "fr_FR",
+          "ga_IE",
+          "hr_HR",
+          "it_CH",
+          "it_IT",
+          "lb_LU",
+          "lt_LT",
+          "lv_LV",
+          "mt_MT",
+          "nl_NL",
+          "pl_PL",
+          "pt_PT",
+          "ro_RO",
+          "sk_SK",
+          "sl_SI",
+          "sv_SE",
+          "tr_CY"
+        ],
+        "api_path": "https://litcal.johnromanodorazio.com/api/v5/data/widerregion/Europe?locale={locale}"
+      }
+    ],
+    "wider_regions_keys": [
+      "Americas",
+      "Asia",
+      "Europe"
+    ],
+    "locales": [
+      "en",
+      "fr",
+      "it",
+      "la",
+      "nl"
+    ]
+  }
 }

@@ -1,0 +1,5679 @@
+{
+  "generatedAt": "2026-07-23T09:24:20.644Z",
+  "locales": {
+    "en": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "If a new sentence starts here, add a space and start with an uppercase letter.",
+          "offset": 9,
+          "length": 2,
+          "rule": "LC_AFTER_PERIOD",
+          "category": "CASING",
+          "replacements": [
+            " Ma",
+            " ma"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 12,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Made",
+            "Cadre",
+            "Mare",
+            "Madge",
+            "Padre"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 21,
+          "length": 3,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Did",
+            "Do",
+            "Die",
+            "Duo",
+            "Rio"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 25,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Mess",
+            "Massa",
+            "Messy",
+            "Tessa",
+            "Mesa"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 31,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Della",
+            "delta",
+            "Ella",
+            "Bella",
+            "Delia"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 37,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Virginia",
+            "vigil",
+            "vigils",
+            "Sicilia",
+            "Vidalia"
+          ]
+        },
+        {
+          "message": "If a new sentence starts here, add a space and start with an uppercase letter.",
+          "offset": 54,
+          "length": 2,
+          "rule": "LC_AFTER_PERIOD",
+          "category": "CASING",
+          "replacements": [
+            " Ma",
+            " ma"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 57,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Made",
+            "Cadre",
+            "Mare",
+            "Madge",
+            "Padre"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 66,
+          "length": 3,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Did",
+            "Do",
+            "Die",
+            "Duo",
+            "Rio"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 76,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Basilica",
+            "Basil",
+            "Basilar",
+            "Basilan",
+            "Basildon"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 84,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Mango",
+            "Magna",
+            "Magnon",
+            "Mag no"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 101,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": []
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 113,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "escort",
+            "viscous",
+            "Vasco",
+            "Visconti",
+            "Muscovy"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 123,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "dot tori"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 131,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Beria",
+            "Ferial",
+            "FERA",
+            "Faria",
+            "Peria"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 137,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Peoria",
+            "progeria"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 151,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Genaro"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 159,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "Lentissimo"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 178,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 185,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 231,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 238,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 244,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 258,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 266,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 274,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 283,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 288,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 295,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 301,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 307,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 315,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 323,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 332,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 337,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 344,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 353,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 359,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 365,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 373,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 382,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 388,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 402,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 414,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 426,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 436,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 448,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 475,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 488,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 496,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 502,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 516,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 524,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 530,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 544,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 552,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 558,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 573,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 581,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 587,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 602,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 610,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 632,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 638,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 644,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 669,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 676,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 688,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 708,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 718,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 723,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 743,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 753,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 761,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 769,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 781,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 801,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 811,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 821,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 833,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 853,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 863,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 871,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 883,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 903,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 913,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 929,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 943,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 950,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 962,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 982,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 992,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1018,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1028,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1047,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1057,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1063,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1069,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1080,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1099,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1109,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1116,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1122,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1130,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1150,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1180,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1204,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1212,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1217,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1225,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1235,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1243,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1253,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1259,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1267,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1287,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1311,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1321,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1329,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1337,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1343,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1351,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1371,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1405,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1415,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1423,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1449,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1462,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1481,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1491,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1497,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1503,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1515,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1534,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1544,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1551,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1557,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1563,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1583,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1593,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1605,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1613,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1625,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1643,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1655,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1663,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1673,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1679,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1685,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1705,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1715,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1723,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1729,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1735,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1755,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1767,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1829,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1839,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1846,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1852,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1858,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1878,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1888,
+          "length": 13,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1914,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1920,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1926,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1970,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1977,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1983,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 1990,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2010,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2024,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2032,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2042,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2050,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2055,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2073,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2081,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2089,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2095,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2102,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2122,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2132,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2144,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2154,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2164,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2191,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2214,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2221,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2231,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2239,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2247,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2253,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2260,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2280,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2290,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2297,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2303,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2310,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2330,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2340,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2349,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2364,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2375,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2384,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2394,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2413,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2423,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2429,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2435,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2445,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2464,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2480,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2492,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2500,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2508,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2521,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2541,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2551,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2563,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2582,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2592,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2605,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2625,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2635,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2643,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2656,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2676,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2692,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2701,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2711,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2720,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2729,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2746,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2753,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2766,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2786,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2799,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2818,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2828,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2834,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2840,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2851,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2870,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2880,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2887,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2893,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2899,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2919,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        },
+        {
+          "message": "Possible spelling mistake found.",
+          "offset": 2935,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_EN_GB",
+          "category": "TYPOS",
+          "replacements": [
+            "(suggestion limit reached)"
+          ]
+        }
+      ]
+    },
+    "es": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Se ha encontrado un posible error ortográfico.",
+          "offset": 97,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_ES",
+          "category": "TYPOS",
+          "replacements": [
+            "Emiliana",
+            "Emiliano",
+            "Emilia ni"
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "enabled": true,
+      "matches": []
+    },
+    "fr": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 0,
+          "length": 10,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Fortissimo",
+            "Pianissimo",
+            "Kantisme",
+            "Nantissiez",
+            "Salticidé"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 16,
+          "length": 2,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "de",
+            "du",
+            "dit",
+            "si",
+            "dix"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 19,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Gesse",
+            "Geu",
+            "Fessu"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 24,
+          "length": 8,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Épiphanie"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 90,
+          "length": 7,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Émilien",
+            "Émilie",
+            "Émollient",
+            "Émilienne",
+            "Émirien"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 231,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 256,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 279,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "2 aime",
+            "2 aimé",
+            "2 été",
+            "2 même",
+            "2 aide"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 330,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "2 aime",
+            "2 aimé",
+            "2 été",
+            "2 même",
+            "2 aide"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 429,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 451,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 476,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 557,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 605,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 653,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 704,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 752,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 851,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "2 aime",
+            "2 aimé",
+            "2 été",
+            "2 même",
+            "2 aide"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 903,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "2 aime",
+            "2 aimé",
+            "2 été",
+            "2 même",
+            "2 aide"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 936,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1016,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1067,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1115,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "3 aime",
+            "3 aimé",
+            "3 été",
+            "3 même",
+            "3 aide"
+          ]
+        },
+        {
+          "message": "Le guillemet ouvrant est suivi d’une espace insécable.",
+          "offset": 1129,
+          "length": 3,
+          "rule": "FRENCH_WHITESPACE",
+          "category": "MISC",
+          "replacements": [
+            "« du"
+          ]
+        },
+        {
+          "message": "Le guillemet fermant est précédé d’une espace insécable.",
+          "offset": 1139,
+          "length": 10,
+          "rule": "FRENCH_WHITESPACE",
+          "category": "MISC",
+          "replacements": [
+            "Ordinaire »"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1169,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "3 aime",
+            "3 aimé",
+            "3 été",
+            "3 même",
+            "3 aide"
+          ]
+        },
+        {
+          "message": "Le guillemet ouvrant est suivi d’une espace insécable.",
+          "offset": 1183,
+          "length": 3,
+          "rule": "FRENCH_WHITESPACE",
+          "category": "MISC",
+          "replacements": [
+            "« du"
+          ]
+        },
+        {
+          "message": "Le guillemet fermant est précédé d’une espace insécable.",
+          "offset": 1193,
+          "length": 10,
+          "rule": "FRENCH_WHITESPACE",
+          "category": "MISC",
+          "replacements": [
+            "Ordinaire »"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1204,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1267,
+          "length": 6,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Merci",
+            "Méric",
+            "Mer ici"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1282,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1334,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1383,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1522,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1571,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1653,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1705,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1772,
+          "length": 7,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Bachota",
+            "Baquait",
+            "Baqueta",
+            "Baraïta"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1788,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "5 aime",
+            "5 aimé",
+            "5 été",
+            "5 même",
+            "5 aide"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1840,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "5 aime",
+            "5 aimé",
+            "5 été",
+            "5 même",
+            "5 aide"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 1880,
+          "length": 12,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Scolastique"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1901,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 1987,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2039,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2088,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2138,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2190,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2223,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2270,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2317,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2367,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2414,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2464,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2516,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2549,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2597,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2645,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2696,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2744,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2795,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2844,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 2896,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2929,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 2977,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3025,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3046,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3061,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3082,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3100,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Le nom de ce supplicié se termine par une consonne pour le différencier du supplice appelé « le martyre ».",
+          "offset": 3151,
+          "length": 8,
+          "rule": "D_N_E_OU_E",
+          "category": "AGREEMENT",
+          "replacements": [
+            "martyrs"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3160,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3176,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3202,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3245,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3264,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3303,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3342,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3384,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3423,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3465,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 3505,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3510,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 3548,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3553,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3572,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3611,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3650,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3689,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3731,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 3771,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3776,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 3814,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3819,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3838,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3951,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 3994,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4034,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4077,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 4118,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4123,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 4161,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4166,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4185,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4225,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4265,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4308,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4348,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4391,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 4432,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4437,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 4475,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4480,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4499,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4539,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4579,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4622,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4662,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4705,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4746,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4815,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4865,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4892,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4919,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 4964,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5011,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5041,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5071,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5104,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5134,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5167,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5198,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5203,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5225,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5278,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5283,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5305,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5339,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5413,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5455,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5494,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5499,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5537,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5542,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5561,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5601,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5641,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5684,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5724,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5767,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5808,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5813,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 5851,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5856,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5875,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5915,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 5991,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6031,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6074,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6115,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6120,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6158,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6163,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6182,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6222,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6262,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6305,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6360,
+          "length": 6,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6379,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6422,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6463,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6468,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6506,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6511,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6530,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6568,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6622,
+          "length": 7,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6662,
+          "length": 7,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6670,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6757,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 6800,
+          "length": 4,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6824,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6863,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6905,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6947,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 6987,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7031,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7082,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7129,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7176,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7224,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7273,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "dimanche"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7303,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7350,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7397,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7447,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 7497,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 7550,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7584,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7632,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7683,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7842,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7891,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7940,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 7992,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8073,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8123,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8176,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8210,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8261,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8312,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8366,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8417,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8469,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8522,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8556,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8605,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8698,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8747,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "vendredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8799,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8849,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 8902,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 8936,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9007,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9086,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9134,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9187,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9221,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9287,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9342,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9395,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9448,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9482,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9611,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "jeudi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9663,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9772,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 9825,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9881,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 9980,
+          "length": 8,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mercredi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10140,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 10193,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 10246,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10280,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10329,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10410,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 10488,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 10541,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10575,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "lundi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10630,
+          "length": 5,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "mardi"
+          ]
+        },
+        {
+          "message": "Les jours de la semaine s’écrivent sans majuscule.",
+          "offset": 10700,
+          "length": 6,
+          "rule": "JOURS",
+          "category": "CAT_MAJUSCULES",
+          "replacements": [
+            "samedi"
+          ]
+        },
+        {
+          "message": "Faute de frappe possible trouvée.",
+          "offset": 10756,
+          "length": 5,
+          "rule": "FR_SPELLING_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "(limite de suggestion atteinte)"
+          ]
+        }
+      ]
+    },
+    "ru": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Возможно найдена орфографическая ошибка.",
+          "offset": 106,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_RU_RU",
+          "category": "TYPOS",
+          "replacements": [
+            "Эмилиане",
+            "Емилиане",
+            "Эмилевне",
+            "Эмилиан",
+            "Эмилиана"
+          ]
+        }
+      ]
+    },
+    "de": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Möglicher Tippfehler gefunden.",
+          "offset": 0,
+          "length": 8,
+          "rule": "GERMAN_SPELLER_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Epiphanias",
+            "Epiphanie",
+            "Epiphanes"
+          ]
+        },
+        {
+          "message": "Möglicher Tippfehler gefunden.",
+          "offset": 53,
+          "length": 8,
+          "rule": "GERMAN_SPELLER_RULE",
+          "category": "TYPOS",
+          "replacements": [
+            "Emiliano"
+          ]
+        }
+      ]
+    },
+    "it": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 6,
+          "length": 2,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Es",
+            "MS",
+            "S",
+            "SMS",
+            "SOS"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 51,
+          "length": 2,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Es",
+            "MS",
+            "S",
+            "SMS",
+            "SOS"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 101,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Nazzareno",
+            "Pallanzeno",
+            "Nazareno"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 231,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Domasi",
+            "Omasi",
+            "Tombasi",
+            "Tonasi",
+            "Tosasi"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 426,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Pentafora",
+            "Pentafore"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 488,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Cimarla",
+            "Rimarrà",
+            "Zimarra",
+            "Ci marra"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 734,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Pontiere",
+            "Pontieri",
+            "Portiera",
+            "Portiere",
+            "Portieri"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 1606,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Medici",
+            "Melici",
+            "Merci",
+            "Meriti",
+            "Metrici"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 2044,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Angario",
+            "Angariò"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 2203,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Midi",
+            "Miei",
+            "Mii",
+            "Miii",
+            "Mili"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 2364,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Baita",
+            "Bandita",
+            "Bardita",
+            "Barrita",
+            "Basita"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 3187,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Damiana",
+            "Damiano"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 3675,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Area",
+            "Arei",
+            "Areo",
+            "Areò",
+            "Darè"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 4570,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Cusano"
+          ]
+        },
+        {
+          "message": "Probabile errore: ripetizione di spazio",
+          "offset": 5800,
+          "length": 2,
+          "rule": "WHITESPACE_RULE",
+          "category": "TYPOGRAPHY",
+          "replacements": [
+            " "
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 5955,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Ferrere",
+            "Ferrar",
+            "Ferrea",
+            "Ferree",
+            "Ferrei"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 6128,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "Alle",
+            "Balle",
+            "Calle",
+            "Dalle",
+            "Falle"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 7012,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 7050,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 7062,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 8461,
+          "length": 10,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 8546,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 9135,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 10079,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 10444,
+          "length": 12,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 10491,
+          "length": 12,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 11383,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 11388,
+          "length": 4,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 11714,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 11725,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12411,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12419,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12775,
+          "length": 9,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12820,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12860,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 12939,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 13058,
+          "length": 6,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 13179,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 13200,
+          "length": 3,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 13820,
+          "length": 7,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 13970,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 14418,
+          "length": 5,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 14451,
+          "length": 11,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        }
+      ]
+    },
+    "pl": {
+      "enabled": true,
+      "matches": [
+        {
+          "message": "Wykryto prawdopodobny błąd pisowni",
+          "offset": 53,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_PL_PL",
+          "category": "TYPOS",
+          "replacements": [
+            "Emilian",
+            "Emiliano",
+            "Emiliana",
+            "Emiliami",
+            "Emilianie"
+          ]
+        }
+      ]
+    }
+  }
+}

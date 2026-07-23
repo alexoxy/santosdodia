@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-07-23T09:24:06.257Z",
+  "catalogGeneratedAt": "2026-07-23T09:24:06.102Z",
+  "entries": 1335,
+  "critical": [],
+  "coverage": {
+    "en": {
+      "labels": 1335,
+      "authority": {
+        "variant": "en-GB",
+        "editorial": "Oxford English Dictionary / Merriam-Webster",
+        "automated": "LanguageTool en-GB",
+        "reference": "https://www.oed.com/"
+      }
+    },
+    "es": {
+      "labels": 8,
+      "authority": {
+        "variant": "es",
+        "editorial": "Real Academia Española — Diccionario de la lengua española",
+        "automated": "LanguageTool es",
+        "reference": "https://dle.rae.es/"
+      }
+    },
+    "pt": {
+      "labels": 8,
+      "authority": {
+        "variant": "pt-PT",
+        "editorial": "Dicionário Priberam da Língua Portuguesa",
+        "automated": "LanguageTool pt-PT and Hunspell pt-PT",
+        "reference": "https://dicionario.priberam.org/"
+      }
+    },
+    "fr": {
+      "labels": 388,
+      "authority": {
+        "variant": "fr",
+        "editorial": "Dictionnaire de l’Académie française",
+        "automated": "LanguageTool fr",
+        "reference": "https://www.dictionnaire-academie.fr/"
+      }
+    },
+    "fil": {
+      "labels": 3,
+      "authority": {
+        "variant": "fil",
+        "editorial": "Komisyon sa Wikang Filipino",
+        "automated": "script and curated terminology validation",
+        "reference": "https://kwf.gov.ph/"
+      }
+    },
+    "ru": {
+      "labels": 7,
+      "authority": {
+        "variant": "ru",
+        "editorial": "Грамота.ру",
+        "automated": "LanguageTool ru",
+        "reference": "https://gramota.ru/"
+      }
+    },
+    "sw": {
+      "labels": 6,
+      "authority": {
+        "variant": "sw",
+        "editorial": "Baraza la Kiswahili la Taifa",
+        "automated": "script and curated terminology validation",
+        "reference": "https://www.bakita.go.tz/"
+      }
+    },
+    "de": {
+      "labels": 7,
+      "authority": {
+        "variant": "de-DE",
+        "editorial": "Duden",
+        "automated": "LanguageTool de-DE",
+        "reference": "https://www.duden.de/"
+      }
+    },
+    "it": {
+      "labels": 1198,
+      "authority": {
+        "variant": "it",
+        "editorial": "Treccani / Accademia della Crusca",
+        "automated": "LanguageTool it",
+        "reference": "https://www.treccani.it/vocabolario/"
+      }
+    },
+    "pl": {
+      "labels": 7,
+      "authority": {
+        "variant": "pl",
+        "editorial": "Wielki słownik języka polskiego / PWN",
+        "automated": "LanguageTool pl",
+        "reference": "https://wsjp.pl/"
+      }
+    }
+  }
+}
