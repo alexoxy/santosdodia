@@ -36,23 +36,23 @@ export async function GET(request: NextRequest) {
       : getAllObservances(year, locale, filters);
 
   const imported = live
-    ? await getLiveObservances(year, 'en', filters, { month, date })
+    ? await getLiveObservances(year, locale, filters, { month, date })
     : { data: [], sourceHealth: [] };
 
-  const merged=mergeObservances(curated, imported.data);
-  const data=merged.map(item=>({
+  const merged = mergeObservances(curated, imported.data);
+  const data = merged.map(item => ({
     ...item,
-    originalName:item.name,
-    name:displayObservanceName(item.names,locale,item.name),
-    summary:item.summaries?.[locale],
-    patronages:displayPatronages(item.patronages,locale)
-  })).filter(item=>Boolean(item.name));
-  const withheld=merged.length-data.length;
+    originalName: item.name,
+    name: displayObservanceName(item.names, locale, item.name),
+    summary: item.summaries?.[locale],
+    patronages: displayPatronages(item.patronages, locale)
+  })).filter(item => Boolean(item.name));
+  const withheld = merged.length - data.length;
 
   return Response.json({
     data,
-    meta:{year,month,date,locale,count:data.length,withheldForTranslation:withheld,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}
-  },{
-    headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}
+    meta: { year, month, date, locale, count: data.length, withheldForTranslation: withheld, filters, live, sourceHealth: imported.sourceHealth, generatedAt: new Date().toISOString() }
+  }, {
+    headers: { 'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=86400', 'Access-Control-Allow-Origin': '*' }
   });
 }
