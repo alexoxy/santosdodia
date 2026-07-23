@@ -1,17 +1,22 @@
-import { defineConfig, globalIgnores } from 'eslint/config';
-import nextVitals from 'eslint-config-next/core-web-vitals.js';
-import nextTypeScript from 'eslint-config-next/typescript.js';
+import { FlatCompat } from '@eslint/eslintrc';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export default defineConfig([
-  ...nextVitals,
-  ...nextTypeScript,
-  globalIgnores([
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-    'data/generated/**',
-    'data/litcal-mirror/**',
-    'reports/**'
-  ])
-]);
+const filename = fileURLToPath(import.meta.url);
+const directory = path.dirname(filename);
+const compat = new FlatCompat({ baseDirectory: directory });
+
+export default [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    ignores: [
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'data/generated/**',
+      'data/litcal-mirror/**',
+      'reports/**'
+    ]
+  }
+];
