@@ -5,10 +5,9 @@ export type LiveStreamSource={
  id:string;
  tradition:Tradition;
  organization:string;
- liveUrl:string;
- archiveUrl:string;
+ liveUrl?:string;
+ archiveUrl?:string;
  sourceUrl:string;
- embedUrl?:string;
  descriptions:LocalizedText;
  languages:string[];
  verifiedAt:string;
@@ -17,8 +16,8 @@ export type LiveStreamSource={
 export const LIVE_STREAM_SOURCES:LiveStreamSource[]=[
  {
   id:'vatican-media',tradition:'roman-catholic',organization:'Vatican News · Vatican Media',
-  liveUrl:'https://www.vaticannews.va/pt/epg.html',archiveUrl:'https://www.vaticannews.va/pt.html',sourceUrl:'https://www.vaticannews.va/pt/faq.html',embedUrl:'https://www.vaticannews.va/widget/embed.html',
-  descriptions:{en:'Official Vatican programming, papal celebrations, radio and live coverage.',pt:'Programação oficial do Vaticano, celebrações papais, rádio e transmissões em direto.',es:'Programación oficial del Vaticano, celebraciones papales, radio y emisiones en directo.',fr:'Programmation officielle du Vatican, célébrations papales, radio et directs.'},languages:['pt','en','es','fr','it','de','pl'],verifiedAt:'2026-07-23'
+  liveUrl:'https://www.youtube.com/@VaticanNews/live',archiveUrl:'https://www.youtube.com/@VaticanNews',sourceUrl:'https://www.vaticannews.va/pt/epg.html',
+  descriptions:{en:'Official Vatican News YouTube live page and archive for papal celebrations and Vatican Media coverage.',pt:'Página oficial de diretos e arquivo do Vatican News no YouTube, com celebrações papais e cobertura do Vatican Media.',es:'Página oficial de directos y archivo de Vatican News en YouTube, con celebraciones papales y cobertura de Vatican Media.',fr:'Page officielle des directs et archives de Vatican News sur YouTube, avec célébrations papales et couverture de Vatican Media.'},languages:['pt','en','es','fr','it','de','pl'],verifiedAt:'2026-07-23'
  },
  {
   id:'goarch-live',tradition:'greek-orthodox',organization:'Greek Orthodox Archdiocese of America',
@@ -42,17 +41,17 @@ export const LIVE_STREAM_SOURCES:LiveStreamSource[]=[
  },
  {
   id:'mother-see-media',tradition:'armenian-apostolic',organization:'Mother See of Holy Etchmiadzin',
-  liveUrl:'https://www.armenianchurch.org/en/videos/',archiveUrl:'https://www.armenianchurch.org/en/videos/',sourceUrl:'https://www.armenianchurch.org/en',
-  descriptions:{en:'Official video and service coverage from the Mother See of Holy Etchmiadzin.',pt:'Vídeos e cobertura oficial de celebrações da Santa Sé de Etchmiadzin.',es:'Vídeos y cobertura oficial de celebraciones de la Santa Sede de Etchmiadzin.',fr:'Vidéos et couverture officielle des offices du Saint-Siège d’Etchmiadzin.'},languages:['hy','en'],verifiedAt:'2026-07-23'
+  archiveUrl:'https://www.armenianchurch.org/en/videos/',sourceUrl:'https://www.armenianchurch.org/en',
+  descriptions:{en:'Official video and service archive from the Mother See of Holy Etchmiadzin.',pt:'Arquivo oficial de vídeos e celebrações da Santa Sé de Etchmiadzin.',es:'Archivo oficial de vídeos y celebraciones de la Santa Sede de Etchmiadzin.',fr:'Archives officielles des vidéos et offices du Saint-Siège d’Etchmiadzin.'},languages:['hy','en'],verifiedAt:'2026-07-23'
  },
  {
   id:'ethiopian-orthodox-media',tradition:'ethiopian-orthodox',organization:'Ethiopian Orthodox Tewahedo Church',
-  liveUrl:'https://www.ethiopianorthodox.org/english/indexenglish.html',archiveUrl:'https://www.ethiopianorthodox.org/churchmusic/liturgyinenglish/geeze.html',sourceUrl:'https://www.ethiopianorthodox.org/',
-  descriptions:{en:'Official church video, liturgy, hymn and sermon resources, used as a continuous media fallback.',pt:'Recursos oficiais de vídeo, liturgia, hinos e homilias, utilizados como alternativa permanente quando não existe direto.',es:'Recursos oficiales de vídeo, liturgia, himnos y homilías, disponibles cuando no hay directo.',fr:'Ressources officielles vidéo, liturgiques, musicales et homilétiques lorsque aucun direct n’est disponible.'},languages:['am','gez','en'],verifiedAt:'2026-07-23'
+  archiveUrl:'https://www.ethiopianorthodox.org/churchmusic/liturgyinenglish/geeze.html',sourceUrl:'https://www.ethiopianorthodox.org/',
+  descriptions:{en:'Official church liturgy, hymn and sermon resources. No stable live page is currently listed.',pt:'Recursos oficiais de liturgia, hinos e homilias. Não está atualmente indicada uma página estável de transmissão em direto.',es:'Recursos oficiales de liturgia, himnos y homilías. Actualmente no se indica una página estable de emisión en directo.',fr:'Ressources officielles de liturgie, de chants et d’homélies. Aucune page de direct stable n’est actuellement indiquée.'},languages:['am','gez','en'],verifiedAt:'2026-07-23'
  },
  {
   id:'syriac-orthodox-media',tradition:'syriac-orthodox',organization:'Syriac Orthodox Church',
-  liveUrl:'https://www.syriacorthodox.church/activities/social-media',archiveUrl:'https://www.syriacorthodox.church/activities/social-media',sourceUrl:'https://syriacpatriarchate.org/',
-  descriptions:{en:'Official church social-media directory with live masses, services and vespers.',pt:'Diretório oficial de redes sociais com missas, celebrações e vésperas em direto.',es:'Directorio oficial de redes sociales con misas, celebraciones y vísperas en directo.',fr:'Répertoire officiel des médias sociaux proposant messes, offices et vêpres en direct.'},languages:['syr','ar','en'],verifiedAt:'2026-07-23'
+  archiveUrl:'https://www.syriacorthodox.church/activities/social-media',sourceUrl:'https://syriacpatriarchate.org/',
+  descriptions:{en:'Official church social-media directory. Live links vary by event and are therefore not presented as permanent streams.',pt:'Diretório oficial de redes sociais. As ligações em direto variam conforme o evento e, por isso, não são apresentadas como transmissões permanentes.',es:'Directorio oficial de redes sociales. Los enlaces en directo varían según el evento y no se presentan como emisiones permanentes.',fr:'Répertoire officiel des médias sociaux. Les liens en direct varient selon l’événement et ne sont donc pas présentés comme des flux permanents.'},languages:['syr','ar','en'],verifiedAt:'2026-07-23'
  }
 ];
