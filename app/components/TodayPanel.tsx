@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import { getObservancesForDate, traditionClass, traditionLabel, type Observance } from '../../data/observances';
+import { displayObservanceName } from '../../lib/locale-display';
 import { useLanguage } from './LanguageProvider';
 
 function localDateISO(){const date=new Date();return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`}
@@ -30,7 +31,7 @@ export default function TodayPanel(){
     <div className="today-date-card"><span className="eyebrow">{copy.today}</span><strong className="today-day">{new Date(`${dateISO}T12:00:00`).getDate()}</strong><span className="today-date-label">{label}</span>{countryName?<span className="region-pill">{copy.suggestedRegion}: {countryName}</span>:null}</div>
     <div className="today-content">
       <div className="section-heading compact"><div><span className="eyebrow">{loading?copy.loading:copy.liveData}</span><h2>{copy.saintsToday}</h2></div><a className="text-link" href={`/day/${dateISO}`}>{copy.openDay} →</a></div>
-      {items.length?<div className="observance-list">{items.slice(0,12).map(item=><article className="observance-row" key={item.id}><div className={`tradition-dot ${traditionClass(item.traditions[0])}`}/><div><h3>{item.name}</h3><p>{item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')} · {copy[item.category]}</p></div></article>)}</div>:<div className="empty-state"><span>✦</span><p>{loading?copy.loading:copy.noObservances}</p></div>}
+      {items.length?<div className="observance-list">{items.slice(0,12).map(item=><article className="observance-row" key={item.id}><div className={`tradition-dot ${traditionClass(item.traditions[0])}`}/><div><h3>{displayObservanceName(item.names,locale,item.name)}</h3><p>{item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')} · {copy[item.category]}</p></div></article>)}</div>:<div className="empty-state"><span>✦</span><p>{loading?copy.loading:copy.noObservances}</p></div>}
       <div className="today-actions"><a className="btn btn-primary" href="/calendar">{copy.viewCalendar}</a><a className="btn btn-secondary" href={`/api/ical/all?locale=${locale}${country?`&country=${country}`:''}`}>{copy.downloadIcs}</a></div>
     </div>
   </section>;
