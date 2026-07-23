@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import CalendarExplorer from '../components/CalendarExplorer';
+import TraditionFeeds from '../components/TraditionFeeds';
 
-export const metadata:Metadata={
-  title:'Global Christian Saints Calendar',
-  description:'Browse verified saints, feasts and commemorations from Roman Catholic, Orthodox, Anglican and Oriental Orthodox traditions.'
-};
-export default function CalendarPage(){return <CalendarExplorer/>}
+export const metadata:Metadata={title:'Christian Saints Calendars',description:'Browse saints and feasts and subscribe to Roman Catholic, Orthodox, Anglican, Coptic, Armenian, Ethiopian and Syriac calendars.'};
+export default function CalendarPage(){return <div className="page-stack"><CalendarExplorer/><TraditionFeeds/></div>}
