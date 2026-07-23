@@ -3,8 +3,6 @@ import { APEX_HOSTNAME, SITE_ORIGIN } from './lib/site';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
   outputFileTracingIncludes: {
     '/api/v1/liturgy': ['./data/litcal-mirror/**/*'],
     '/api/v1/litcal/calendars': ['./data/litcal-mirror/**/*'],
