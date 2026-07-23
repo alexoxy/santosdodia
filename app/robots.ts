@@ -1,1 +1,10 @@
-import type { MetadataRoute } from 'next';export default function robots():MetadataRoute.Robots{return{rules:{userAgent:'*',allow:'/',disallow:['/api/v1/context']},sitemap:'https://santosdodia.com/sitemap.xml',host:'https://santosdodia.com'}}
+import type { MetadataRoute } from 'next';
+import { SITE_ORIGIN } from '../lib/site';
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: { userAgent: '*', allow: '/', disallow: ['/api/v1/context'] },
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
+    host: SITE_ORIGIN
+  };
+}
