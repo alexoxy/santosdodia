@@ -1,0 +1,760 @@
+Generated: 2026-07-23T21:10:30Z
+Commit: 5077af416b75fc5cf8e977542a0d4d50af5b27e1
+Lint exit: 2
+TypeScript exit: 2
+Build exit: 0
+
+===== ESLint =====
+
+> santosdodia@3.1.0 lint
+> eslint .
+
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.5
+
+ESLint couldn't find an eslint.config.(js|mjs|cjs) file.
+
+From ESLint v9.0.0, the default configuration file is now eslint.config.js.
+If you are using a .eslintrc.* file, please follow the migration guide
+to update your configuration file to the new format:
+
+https://eslint.org/docs/latest/use/configure/migration-guide
+
+If you still have problems after following the migration guide, please stop by
+https://eslint.org/chat/help to chat with the team.
+
+
+===== TypeScript =====
+lib/i18n.ts(60,2): error TS2322: Type '"Calendario"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(60,27): error TS2322: Type '"Buscar"' is not assignable to type '"Search"'.
+lib/i18n.ts(60,47): error TS2322: Type '"Fuentes"' is not assignable to type '"Sources"'.
+lib/i18n.ts(60,68): error TS2322: Type '"Un calendario cristiano global"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(61,2): error TS2322: Type '"Descubre los santos y fiestas recordados hoy."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(62,2): error TS2322: Type '"Celebraciones verificadas de las principales tradiciones cristianas, búsqueda multilingüe y suscripciones de calendario, gratis para todos."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(63,2): error TS2322: Type '"Hoy"' is not assignable to type '"Today"'.
+lib/i18n.ts(63,14): error TS2322: Type '"Abrir calendario"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(63,46): error TS2322: Type '"Buscar celebraciones"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(63,77): error TS2322: Type '"Todas las tradiciones"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(64,2): error TS2322: Type '"Celebraciones de hoy"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(64,37): error TS2322: Type '"Aún no hay celebraciones verificadas para esta fecha."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(65,2): error TS2322: Type '"Abrir día"' is not assignable to type '"Open day"'.
+lib/i18n.ts(65,22): error TS2322: Type '"Añadir al calendario"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(65,57): error TS2322: Type '"Descargar ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(66,45): error TS2322: Type '"Calendario cristiano de santos"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(67,2): error TS2322: Type '"Consulta celebraciones verificadas y crea un calendario por tradición, fecha, región o tema."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(68,2): error TS2322: Type '"Anterior"' is not assignable to type '"Previous"'.
+lib/i18n.ts(68,22): error TS2322: Type '"Siguiente"' is not assignable to type '"Next"'.
+lib/i18n.ts(68,39): error TS2322: Type '"Tradición"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(68,61): error TS2322: Type '"Categoría"' is not assignable to type '"Category"'.
+lib/i18n.ts(68,82): error TS2322: Type '"Región"' is not assignable to type '"Region"'.
+lib/i18n.ts(69,2): error TS2322: Type '"Todas las categorías"' is not assignable to type '"All categories"'.
+lib/i18n.ts(69,39): error TS2322: Type '"Todas las regiones"' is not assignable to type '"All regions"'.
+lib/i18n.ts(69,71): error TS2322: Type '"Santo"' is not assignable to type '"Saint"'.
+lib/i18n.ts(69,85): error TS2322: Type '"Fiesta"' is not assignable to type '"Feast"'.
+lib/i18n.ts(69,100): error TS2322: Type '"Mariana"' is not assignable to type '"Marian"'.
+lib/i18n.ts(70,2): error TS2322: Type '"Apóstol"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(70,20): error TS2322: Type '"Mártir"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(70,36): error TS2322: Type '"Ayuno"' is not assignable to type '"Fast"'.
+lib/i18n.ts(70,49): error TS2322: Type '"Buscar santos y fiestas"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(71,2): error TS2322: Type '"Busca por nombre, patronazgo, país, categoría o tradición cristiana."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(72,2): error TS2322: Type '"Buscar San Antonio, médicos, Portugal…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(72,61): error TS2322: Type '"resultados"' is not assignable to type '"results"'.
+lib/i18n.ts(72,82): error TS2322: Type '"No hay celebraciones coincidentes."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(73,2): error TS2322: Type '"Fuentes y validación"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(73,38): error TS2322: Type '"Cada registro conserva su fuente, tradición, sistema de calendario y estado de validación."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(74,2): error TS2322: Type '"Encender una vela"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(74,29): error TS2322: Type '"Vela encendida"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(74,56): error TS2322: Type '"Todavía no se ha encendido una vela en este dispositivo."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(75,2): error TS2322: Type '"en este dispositivo"' is not assignable to type '"on this device"'.
+lib/i18n.ts(75,36): error TS2322: Type '"Región sugerida"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(75,70): error TS2322: Type '"Base de datos en actualización continua"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(76,2): error TS2322: Type '"Cómo funciona el calendario"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(76,60): error TS2322: Type '"Un proyecto de calendario cristiano gratuito e independiente."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(77,2): error TS2322: Type '"Las fechas y celebraciones pueden variar según la Iglesia, jurisdicción, rito y sistema de calendario."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(78,2): error TS2322: Type '"Fecha no válida"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(78,32): error TS2322: Type '"Volver al calendario"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(78,68): error TS2322: Type '"Celebraciones del"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(79,2): error TS2322: Type '"Calendario combinado"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(79,33): error TS2322: Type '"Calendario católico romano"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(79,75): error TS2322: Type '"Calendario ortodoxo"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(80,2): error TS2322: Type '"Fuente oficial"' is not assignable to type '"Official source"'.
+lib/i18n.ts(80,34): error TS2322: Type '"Fuente de referencia"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(80,73): error TS2322: Type '"Estado de traducción"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(81,2): error TS2322: Type '"Usar mi región"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(81,35): error TS2322: Type '"Limpiar"' is not assignable to type '"Clear"'.
+lib/i18n.ts(81,51): error TS2322: Type '"Cargando celebraciones verificadas…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(82,2): error TS2322: Type '"Datos de fuentes en vivo"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(82,38): error TS2322: Type '"Última comprobación"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(82,72): error TS2322: Type '"Validación"' is not assignable to type '"Validation"'.
+lib/i18n.ts(82,96): error TS2322: Type '"Verificado"' is not assignable to type '"Verified"'.
+lib/i18n.ts(83,2): error TS2322: Type '"Revisión necesaria"' is not assignable to type '"Review required"'.
+lib/i18n.ts(83,38): error TS2322: Type '"Patronazgo"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(83,61): error TS2322: Type '"Sistema de calendario"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(84,2): error TS2322: Type '"Acceso legible por máquinas"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(84,46): error TS2322: Type '"JSON estructurado, ICS y OpenAPI están disponibles para buscadores y agentes de IA."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(85,2): error TS2322: Type '"Católica romana"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(85,34): error TS2322: Type '"Ortodoxa griega"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(85,66): error TS2322: Type '"Ortodoxa oriental"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(86,2): error TS2322: Type '"Anglicana"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(86,23): error TS2322: Type '"Ortodoxa copta"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(86,55): error TS2322: Type '"Apostólica armenia"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(87,2): error TS2322: Type '"Ortodoxa etíope Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(87,47): error TS2322: Type '"Ortodoxa siríaca"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(91,2): error TS2322: Type '"Calendário"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(91,27): error TS2322: Type '"Pesquisar"' is not assignable to type '"Search"'.
+lib/i18n.ts(91,50): error TS2322: Type '"Fontes"' is not assignable to type '"Sources"'.
+lib/i18n.ts(91,70): error TS2322: Type '"Um calendário cristão global"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(92,2): error TS2322: Type '"Descubra os santos e festas recordados hoje."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(93,2): error TS2322: Type '"Celebrações verificadas das principais tradições cristãs, pesquisa multilingue e subscrições de calendário — gratuitamente para todos."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(94,2): error TS2322: Type '"Hoje"' is not assignable to type '"Today"'.
+lib/i18n.ts(94,15): error TS2322: Type '"Abrir calendário"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(94,47): error TS2322: Type '"Pesquisar celebrações"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(94,79): error TS2322: Type '"Todas as tradições"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(95,2): error TS2322: Type '"Celebrações de hoje"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(95,36): error TS2322: Type '"Ainda não existem celebrações verificadas para esta data."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(96,2): error TS2322: Type '"Abrir dia"' is not assignable to type '"Open day"'.
+lib/i18n.ts(96,22): error TS2322: Type '"Adicionar ao calendário"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(96,60): error TS2322: Type '"Descarregar ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(97,45): error TS2322: Type '"Calendário cristão de santos"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(98,2): error TS2322: Type '"Consulte celebrações verificadas e construa um calendário por tradição, data, região ou tema."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(99,2): error TS2322: Type '"Anterior"' is not assignable to type '"Previous"'.
+lib/i18n.ts(99,22): error TS2322: Type '"Seguinte"' is not assignable to type '"Next"'.
+lib/i18n.ts(99,38): error TS2322: Type '"Tradição"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(99,59): error TS2322: Type '"Categoria"' is not assignable to type '"Category"'.
+lib/i18n.ts(99,80): error TS2322: Type '"Região"' is not assignable to type '"Region"'.
+lib/i18n.ts(100,2): error TS2322: Type '"Todas as categorias"' is not assignable to type '"All categories"'.
+lib/i18n.ts(100,38): error TS2322: Type '"Todas as regiões"' is not assignable to type '"All regions"'.
+lib/i18n.ts(100,68): error TS2322: Type '"Santo"' is not assignable to type '"Saint"'.
+lib/i18n.ts(100,82): error TS2322: Type '"Festa"' is not assignable to type '"Feast"'.
+lib/i18n.ts(100,96): error TS2322: Type '"Mariana"' is not assignable to type '"Marian"'.
+lib/i18n.ts(101,2): error TS2322: Type '"Apóstolo"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(101,21): error TS2322: Type '"Mártir"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(101,37): error TS2322: Type '"Jejum"' is not assignable to type '"Fast"'.
+lib/i18n.ts(101,50): error TS2322: Type '"Pesquisar santos e festas"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(102,2): error TS2322: Type '"Pesquise por nome, padroeiro, país, categoria ou tradição cristã."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(103,2): error TS2322: Type '"Pesquisar Santo António, médicos, Portugal…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(103,66): error TS2322: Type '"resultados"' is not assignable to type '"results"'.
+lib/i18n.ts(103,87): error TS2322: Type '"Nenhuma celebração encontrada."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(104,2): error TS2322: Type '"Fontes e validação"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(104,36): error TS2322: Type '"Cada registo conserva a fonte, tradição, sistema de calendário e estado de validação."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(105,2): error TS2322: Type '"Acender uma vela"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(105,28): error TS2322: Type '"Vela acesa"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(105,51): error TS2322: Type '"Ainda não foi acesa uma vela neste dispositivo."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(106,2): error TS2322: Type '"neste dispositivo"' is not assignable to type '"on this device"'.
+lib/i18n.ts(106,34): error TS2322: Type '"Região sugerida"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(106,68): error TS2322: Type '"Base em atualização contínua"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(107,2): error TS2322: Type '"Como funciona o calendário"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(107,59): error TS2322: Type '"Um projeto de calendário cristão gratuito e independente."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(108,2): error TS2322: Type '"As datas e celebrações podem variar consoante a Igreja, jurisdição, rito e sistema de calendário."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(109,2): error TS2322: Type '"Data inválida"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(109,30): error TS2322: Type '"Voltar ao calendário"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(109,66): error TS2322: Type '"Celebrações em"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(110,2): error TS2322: Type '"Feed combinado"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(110,27): error TS2322: Type '"Feed católico romano"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(110,63): error TS2322: Type '"Feed ortodoxo"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(111,2): error TS2322: Type '"Fonte oficial"' is not assignable to type '"Official source"'.
+lib/i18n.ts(111,33): error TS2322: Type '"Fonte de referência"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(111,71): error TS2322: Type '"Estado da tradução"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(112,2): error TS2322: Type '"Usar a minha região"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(112,40): error TS2322: Type '"Limpar"' is not assignable to type '"Clear"'.
+lib/i18n.ts(112,55): error TS2322: Type '"A carregar celebrações verificadas…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(113,2): error TS2322: Type '"Dados de fontes em tempo real"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(113,43): error TS2322: Type '"Última verificação"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(113,76): error TS2322: Type '"Validação"' is not assignable to type '"Validation"'.
+lib/i18n.ts(113,99): error TS2322: Type '"Verificado"' is not assignable to type '"Verified"'.
+lib/i18n.ts(114,2): error TS2322: Type '"Revisão necessária"' is not assignable to type '"Review required"'.
+lib/i18n.ts(114,38): error TS2322: Type '"Padroeiro"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(114,60): error TS2322: Type '"Sistema de calendário"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(115,2): error TS2322: Type '"Acesso legível por máquinas"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(115,46): error TS2322: Type '"JSON estruturado, ICS e OpenAPI estão disponíveis para motores de pesquisa e agentes de IA."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(116,2): error TS2322: Type '"Católica Romana"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(116,34): error TS2322: Type '"Ortodoxa Grega"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(116,65): error TS2322: Type '"Ortodoxa Oriental"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(117,2): error TS2322: Type '"Anglicana"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(117,23): error TS2322: Type '"Ortodoxa Copta"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(117,55): error TS2322: Type '"Apostólica Arménia"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(118,2): error TS2322: Type '"Ortodoxa Etíope Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(118,47): error TS2322: Type '"Ortodoxa Siríaca"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(122,2): error TS2322: Type '"Calendrier"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(122,27): error TS2322: Type '"Rechercher"' is not assignable to type '"Search"'.
+lib/i18n.ts(122,72): error TS2322: Type '"Un calendrier chrétien mondial"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(123,2): error TS2322: Type '"Découvrez les saints et fêtes commémorés aujourd’hui."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(124,2): error TS2322: Type '"Célébrations vérifiées des principales traditions chrétiennes, recherche multilingue et abonnements au calendrier — gratuitement."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(125,2): error TS2322: Type '"Aujourd’hui"' is not assignable to type '"Today"'.
+lib/i18n.ts(125,22): error TS2322: Type '"Ouvrir le calendrier"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(125,58): error TS2322: Type '"Rechercher des célébrations"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(125,96): error TS2322: Type '"Toutes les traditions"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(126,2): error TS2322: Type '"Célébrations du jour"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(126,37): error TS2322: Type '"Aucune célébration vérifiée n’est encore disponible pour cette date."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(127,2): error TS2322: Type '"Ouvrir le jour"' is not assignable to type '"Open day"'.
+lib/i18n.ts(127,27): error TS2322: Type '"Ajouter au calendrier"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(127,63): error TS2322: Type '"Télécharger ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(128,45): error TS2322: Type '"Calendrier chrétien des saints"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(129,2): error TS2322: Type '"Parcourez les célébrations vérifiées et créez un calendrier par tradition, date, région ou thème."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(130,2): error TS2322: Type '"Précédent"' is not assignable to type '"Previous"'.
+lib/i18n.ts(130,23): error TS2322: Type '"Suivant"' is not assignable to type '"Next"'.
+lib/i18n.ts(130,60): error TS2322: Type '"Catégorie"' is not assignable to type '"Category"'.
+lib/i18n.ts(130,81): error TS2322: Type '"Région"' is not assignable to type '"Region"'.
+lib/i18n.ts(131,2): error TS2322: Type '"Toutes les catégories"' is not assignable to type '"All categories"'.
+lib/i18n.ts(131,40): error TS2322: Type '"Toutes les régions"' is not assignable to type '"All regions"'.
+lib/i18n.ts(131,86): error TS2322: Type '"Fête"' is not assignable to type '"Feast"'.
+lib/i18n.ts(131,99): error TS2322: Type '"Mariale"' is not assignable to type '"Marian"'.
+lib/i18n.ts(132,2): error TS2322: Type '"Apôtre"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(132,35): error TS2322: Type '"Jeûne"' is not assignable to type '"Fast"'.
+lib/i18n.ts(132,48): error TS2322: Type '"Rechercher saints et fêtes"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(133,2): error TS2322: Type '"Recherchez par nom, patronage, pays, catégorie ou tradition chrétienne."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(134,2): error TS2322: Type '"Rechercher saint Antoine, médecins, Portugal…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(134,68): error TS2322: Type '"résultats"' is not assignable to type '"results"'.
+lib/i18n.ts(134,88): error TS2322: Type '"Aucune célébration correspondante."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(135,2): error TS2322: Type '"Sources et validation"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(135,39): error TS2322: Type '"Chaque entrée conserve sa source, sa tradition, son calendrier et son statut de validation."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(136,2): error TS2322: Type '"Allumer une bougie"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(136,30): error TS2322: Type '"Bougie allumée"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(136,57): error TS2322: Type '"Aucune bougie n’a encore été allumée sur cet appareil."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(137,2): error TS2322: Type '"sur cet appareil"' is not assignable to type '"on this device"'.
+lib/i18n.ts(137,33): error TS2322: Type '"Région suggérée"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(137,67): error TS2322: Type '"Base continuellement mise à jour"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(138,2): error TS2322: Type '"Fonctionnement du calendrier"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(138,45): error TS2322: Type '"Mondial"' is not assignable to type '"Global"'.
+lib/i18n.ts(138,62): error TS2322: Type '"Un projet gratuit et indépendant de calendrier chrétien."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(139,2): error TS2322: Type '"Les dates et célébrations peuvent varier selon l’Église, la juridiction, le rite et le calendrier."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(140,2): error TS2322: Type '"Date invalide"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(140,30): error TS2322: Type '"Retour au calendrier"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(140,66): error TS2322: Type '"Célébrations du"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(141,2): error TS2322: Type '"Flux combiné"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(141,25): error TS2322: Type '"Flux catholique romain"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(141,63): error TS2322: Type '"Flux orthodoxe"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(142,2): error TS2322: Type '"Source officielle"' is not assignable to type '"Official source"'.
+lib/i18n.ts(142,37): error TS2322: Type '"Source de référence"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(142,75): error TS2322: Type '"État de la traduction"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(143,2): error TS2322: Type '"Utiliser ma région"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(143,39): error TS2322: Type '"Effacer"' is not assignable to type '"Clear"'.
+lib/i18n.ts(143,55): error TS2322: Type '"Chargement des célébrations vérifiées…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(144,2): error TS2322: Type '"Données de sources en direct"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(144,42): error TS2322: Type '"Dernière vérification"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(144,102): error TS2322: Type '"Vérifié"' is not assignable to type '"Verified"'.
+lib/i18n.ts(145,2): error TS2322: Type '"Révision nécessaire"' is not assignable to type '"Review required"'.
+lib/i18n.ts(145,61): error TS2322: Type '"Système de calendrier"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(146,2): error TS2322: Type '"Accès lisible par machine"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(146,44): error TS2322: Type '"JSON structuré, ICS et OpenAPI sont disponibles pour les moteurs de recherche et les agents d’IA."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(147,2): error TS2322: Type '"Catholique romaine"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(147,37): error TS2322: Type '"Orthodoxe grecque"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(147,71): error TS2322: Type '"Orthodoxe orientale"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(148,2): error TS2322: Type '"Anglicane"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(148,23): error TS2322: Type '"Orthodoxe copte"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(148,56): error TS2322: Type '"Apostolique arménienne"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(149,2): error TS2322: Type '"Orthodoxe éthiopienne Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(149,53): error TS2322: Type '"Orthodoxe syriaque"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(153,2): error TS2322: Type '"Kalendaryo"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(153,27): error TS2322: Type '"Maghanap"' is not assignable to type '"Search"'.
+lib/i18n.ts(153,49): error TS2322: Type '"Mga sanggunian"' is not assignable to type '"Sources"'.
+lib/i18n.ts(153,77): error TS2322: Type '"Isang pandaigdigang kalendaryong Kristiyano"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(154,2): error TS2322: Type '"Tuklasin ang mga santo at kapistahang ginugunita ngayon."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(155,2): error TS2322: Type '"Beripikadong paggunita mula sa pangunahing tradisyong Kristiyano, maraming wika at mga subscription sa kalendaryo — libre para sa lahat."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(156,2): error TS2322: Type '"Ngayon"' is not assignable to type '"Today"'.
+lib/i18n.ts(156,17): error TS2322: Type '"Buksan ang kalendaryo"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(156,54): error TS2322: Type '"Maghanap ng paggunita"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(156,86): error TS2322: Type '"Lahat ng tradisyon"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(157,2): error TS2322: Type '"Mga paggunita ngayon"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(157,37): error TS2322: Type '"Wala pang beripikadong paggunita para sa petsang ito."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(158,2): error TS2322: Type '"Buksan ang araw"' is not assignable to type '"Open day"'.
+lib/i18n.ts(158,28): error TS2322: Type '"Idagdag sa kalendaryo"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(158,64): error TS2322: Type '"I-download ang ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(159,45): error TS2322: Type '"Kalendaryong Kristiyano ng mga santo"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(160,2): error TS2322: Type '"Tingnan ang beripikadong paggunita at bumuo ng kalendaryo ayon sa tradisyon, petsa, rehiyon o paksa."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(161,2): error TS2322: Type '"Nakaraan"' is not assignable to type '"Previous"'.
+lib/i18n.ts(161,22): error TS2322: Type '"Susunod"' is not assignable to type '"Next"'.
+lib/i18n.ts(161,37): error TS2322: Type '"Tradisyon"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(161,59): error TS2322: Type '"Kategorya"' is not assignable to type '"Category"'.
+lib/i18n.ts(161,80): error TS2322: Type '"Rehiyon"' is not assignable to type '"Region"'.
+lib/i18n.ts(162,2): error TS2322: Type '"Lahat ng kategorya"' is not assignable to type '"All categories"'.
+lib/i18n.ts(162,37): error TS2322: Type '"Lahat ng rehiyon"' is not assignable to type '"All regions"'.
+lib/i18n.ts(162,67): error TS2322: Type '"Santo"' is not assignable to type '"Saint"'.
+lib/i18n.ts(162,81): error TS2322: Type '"Kapistahan"' is not assignable to type '"Feast"'.
+lib/i18n.ts(163,2): error TS2322: Type '"Apostol"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(163,20): error TS2322: Type '"Martir"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(163,36): error TS2322: Type '"Pag-aayuno"' is not assignable to type '"Fast"'.
+lib/i18n.ts(163,54): error TS2322: Type '"Maghanap ng mga santo at kapistahan"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(164,2): error TS2322: Type '"Maghanap ayon sa pangalan, patronahe, bansa, kategorya o tradisyong Kristiyano."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(165,2): error TS2322: Type '"Hanapin si San Antonio, mga doktor, Portugal…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(165,68): error TS2322: Type '"mga resulta"' is not assignable to type '"results"'.
+lib/i18n.ts(165,90): error TS2322: Type '"Walang katugmang paggunita."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(166,2): error TS2322: Type '"Mga sanggunian at pagpapatunay"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(166,48): error TS2322: Type '"Bawat tala ay may sanggunian, tradisyon, sistema ng kalendaryo at katayuan ng pagpapatunay."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(167,2): error TS2322: Type '"Magsindi ng kandila"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(167,31): error TS2322: Type '"Nakasindi ang kandila"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(167,65): error TS2322: Type '"Wala pang kandilang sinindihan sa device na ito."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(168,2): error TS2322: Type '"sa device na ito"' is not assignable to type '"on this device"'.
+lib/i18n.ts(168,33): error TS2322: Type '"Iminungkahing rehiyon"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(168,73): error TS2322: Type '"Patuloy na ina-update na datos"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(169,2): error TS2322: Type '"Paano gumagana ang kalendaryo"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(169,46): error TS2322: Type '"Pandaigdigan"' is not assignable to type '"Global"'.
+lib/i18n.ts(169,68): error TS2322: Type '"Isang libre at independiyenteng proyektong kalendaryong Kristiyano."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(170,2): error TS2322: Type '"Maaaring mag-iba ang mga petsa ayon sa Simbahan, hurisdiksiyon, rito at sistema ng kalendaryo."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(171,2): error TS2322: Type '"Hindi wastong petsa"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(171,36): error TS2322: Type '"Bumalik sa kalendaryo"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(171,73): error TS2322: Type '"Mga paggunita sa"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(172,2): error TS2322: Type '"Pinagsamang feed"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(173,2): error TS2322: Type '"Opisyal na sanggunian"' is not assignable to type '"Official source"'.
+lib/i18n.ts(173,41): error TS2322: Type '"Sanggunian"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(173,70): error TS2322: Type '"Katayuan ng salin"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(174,2): error TS2322: Type '"Gamitin ang aking rehiyon"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(174,46): error TS2322: Type '"I-clear"' is not assignable to type '"Clear"'.
+lib/i18n.ts(174,62): error TS2322: Type '"Kinukuha ang beripikadong paggunita…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(175,2): error TS2322: Type '"Live na datos ng sanggunian"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(175,41): error TS2322: Type '"Huling sinuri"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(175,69): error TS2322: Type '"Pagpapatunay"' is not assignable to type '"Validation"'.
+lib/i18n.ts(175,95): error TS2322: Type '"Beripikado"' is not assignable to type '"Verified"'.
+lib/i18n.ts(176,2): error TS2322: Type '"Kailangang suriin"' is not assignable to type '"Review required"'.
+lib/i18n.ts(176,37): error TS2322: Type '"Patronahe"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(176,59): error TS2322: Type '"Sistema ng kalendaryo"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(177,2): error TS2322: Type '"Access na nababasa ng makina"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(177,47): error TS2322: Type '"Ang structured JSON, ICS at OpenAPI ay magagamit ng search engine at AI agents."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(184,2): error TS2322: Type '"Календарь"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(184,26): error TS2322: Type '"Поиск"' is not assignable to type '"Search"'.
+lib/i18n.ts(184,45): error TS2322: Type '"Источники"' is not assignable to type '"Sources"'.
+lib/i18n.ts(184,68): error TS2322: Type '"Всемирный христианский календарь"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(185,2): error TS2322: Type '"Узнайте, каких святых и праздники вспоминают сегодня."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(186,2): error TS2322: Type '"Проверенные памятные даты основных христианских традиций, многоязычный поиск и подписки на календарь — бесплатно."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(187,2): error TS2322: Type '"Сегодня"' is not assignable to type '"Today"'.
+lib/i18n.ts(187,18): error TS2322: Type '"Открыть календарь"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(187,51): error TS2322: Type '"Найти памятные даты"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(187,81): error TS2322: Type '"Все традиции"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(188,2): error TS2322: Type '"Памятные даты сегодня"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(188,38): error TS2322: Type '"Для этой даты пока нет проверенных записей."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(189,2): error TS2322: Type '"Открыть день"' is not assignable to type '"Open day"'.
+lib/i18n.ts(189,25): error TS2322: Type '"Добавить в календарь"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(189,60): error TS2322: Type '"Скачать ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(190,45): error TS2322: Type '"Христианский календарь святых"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(191,2): error TS2322: Type '"Просматривайте проверенные даты и создавайте календарь по традиции, дате, региону или теме."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(192,2): error TS2322: Type '"Назад"' is not assignable to type '"Previous"'.
+lib/i18n.ts(192,19): error TS2322: Type '"Вперёд"' is not assignable to type '"Next"'.
+lib/i18n.ts(192,33): error TS2322: Type '"Традиция"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(192,54): error TS2322: Type '"Категория"' is not assignable to type '"Category"'.
+lib/i18n.ts(192,75): error TS2322: Type '"Регион"' is not assignable to type '"Region"'.
+lib/i18n.ts(193,2): error TS2322: Type '"Все категории"' is not assignable to type '"All categories"'.
+lib/i18n.ts(193,32): error TS2322: Type '"Все регионы"' is not assignable to type '"All regions"'.
+lib/i18n.ts(193,57): error TS2322: Type '"Святой"' is not assignable to type '"Saint"'.
+lib/i18n.ts(193,72): error TS2322: Type '"Праздник"' is not assignable to type '"Feast"'.
+lib/i18n.ts(193,89): error TS2322: Type '"Богородичный"' is not assignable to type '"Marian"'.
+lib/i18n.ts(194,2): error TS2322: Type '"Апостол"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(194,20): error TS2322: Type '"Мученик"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(194,37): error TS2322: Type '"Пост"' is not assignable to type '"Fast"'.
+lib/i18n.ts(194,49): error TS2322: Type '"Поиск святых и праздников"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(195,2): error TS2322: Type '"Ищите по имени, покровительству, стране, категории или христианской традиции."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(196,2): error TS2322: Type '"Святой Антоний, врачи, Португалия…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(196,57): error TS2322: Type '"результатов"' is not assignable to type '"results"'.
+lib/i18n.ts(196,79): error TS2322: Type '"Совпадений нет."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(197,2): error TS2322: Type '"Источники и проверка"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(197,38): error TS2322: Type '"Каждая запись хранит источник, традицию, календарную систему и статус проверки."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(198,2): error TS2322: Type '"Зажечь свечу"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(198,24): error TS2322: Type '"Свеча зажжена"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(198,50): error TS2322: Type '"На этом устройстве сегодня ещё не зажигали свечу."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(199,2): error TS2322: Type '"на этом устройстве"' is not assignable to type '"on this device"'.
+lib/i18n.ts(199,35): error TS2322: Type '"Предлагаемый регион"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(199,73): error TS2322: Type '"Постоянно обновляемая база"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(200,2): error TS2322: Type '"Как работает календарь"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(200,39): error TS2322: Type '"Весь мир"' is not assignable to type '"Global"'.
+lib/i18n.ts(200,57): error TS2322: Type '"Бесплатный независимый проект христианского календаря."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(201,2): error TS2322: Type '"Даты могут различаться в зависимости от Церкви, юрисдикции, обряда и календаря."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(202,2): error TS2322: Type '"Неверная дата"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(202,30): error TS2322: Type '"Назад к календарю"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(202,63): error TS2322: Type '"Памятные даты на"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(203,2): error TS2322: Type '"Общий канал"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(203,24): error TS2322: Type '"Римско-католический канал"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(203,65): error TS2322: Type '"Православный канал"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(204,2): error TS2322: Type '"Официальный источник"' is not assignable to type '"Official source"'.
+lib/i18n.ts(204,40): error TS2322: Type '"Справочный источник"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(204,78): error TS2322: Type '"Статус перевода"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(205,2): error TS2322: Type '"Использовать мой регион"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(205,44): error TS2322: Type '"Очистить"' is not assignable to type '"Clear"'.
+lib/i18n.ts(205,61): error TS2322: Type '"Загрузка проверенных дат…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(206,2): error TS2322: Type '"Данные из источников"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(206,34): error TS2322: Type '"Последняя проверка"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(206,67): error TS2322: Type '"Проверка"' is not assignable to type '"Validation"'.
+lib/i18n.ts(206,89): error TS2322: Type '"Проверено"' is not assignable to type '"Verified"'.
+lib/i18n.ts(207,2): error TS2322: Type '"Требуется проверка"' is not assignable to type '"Review required"'.
+lib/i18n.ts(207,38): error TS2322: Type '"Покровительство"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(207,66): error TS2322: Type '"Календарная система"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(208,2): error TS2322: Type '"Машиночитаемый доступ"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(208,40): error TS2322: Type '"Структурированные JSON, ICS и OpenAPI доступны поисковым системам и агентам ИИ."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(209,2): error TS2322: Type '"Римско-католическая"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(209,38): error TS2322: Type '"Греческая православная"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(209,77): error TS2322: Type '"Восточная православная"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(210,2): error TS2322: Type '"Англиканская"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(210,26): error TS2322: Type '"Коптская православная"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(210,65): error TS2322: Type '"Армянская апостольская"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(211,2): error TS2322: Type '"Эфиопская православная Тевахедо"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(211,54): error TS2322: Type '"Сирийская православная"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(215,2): error TS2322: Type '"Kalenda"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(215,24): error TS2322: Type '"Tafuta"' is not assignable to type '"Search"'.
+lib/i18n.ts(215,44): error TS2322: Type '"Vyanzo"' is not assignable to type '"Sources"'.
+lib/i18n.ts(215,64): error TS2322: Type '"Kalenda ya Kikristo ya dunia"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(216,2): error TS2322: Type '"Gundua watakatifu na sikukuu zinazokumbukwa leo."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(217,2): error TS2322: Type '"Maadhimisho yaliyothibitishwa ya mapokeo makuu ya Kikristo, utafutaji wa lugha nyingi na usajili wa kalenda — bure kwa wote."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(218,2): error TS2322: Type '"Leo"' is not assignable to type '"Today"'.
+lib/i18n.ts(218,14): error TS2322: Type '"Fungua kalenda"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(218,44): error TS2322: Type '"Tafuta maadhimisho"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(218,73): error TS2322: Type '"Mapokeo yote"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(219,2): error TS2322: Type '"Maadhimisho ya leo"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(219,35): error TS2322: Type '"Bado hakuna maadhimisho yaliyothibitishwa kwa tarehe hii."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(220,2): error TS2322: Type '"Fungua siku"' is not assignable to type '"Open day"'.
+lib/i18n.ts(220,24): error TS2322: Type '"Ongeza kwenye kalenda"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(220,60): error TS2322: Type '"Pakua ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(221,45): error TS2322: Type '"Kalenda ya watakatifu wa Kikristo"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(222,2): error TS2322: Type '"Tazama maadhimisho yaliyothibitishwa na unda kalenda kwa mapokeo, tarehe, eneo au mada."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(223,2): error TS2322: Type '"Iliyotangulia"' is not assignable to type '"Previous"'.
+lib/i18n.ts(223,27): error TS2322: Type '"Inayofuata"' is not assignable to type '"Next"'.
+lib/i18n.ts(223,45): error TS2322: Type '"Mapokeo"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(223,65): error TS2322: Type '"Aina"' is not assignable to type '"Category"'.
+lib/i18n.ts(223,81): error TS2322: Type '"Eneo"' is not assignable to type '"Region"'.
+lib/i18n.ts(224,2): error TS2322: Type '"Aina zote"' is not assignable to type '"All categories"'.
+lib/i18n.ts(224,28): error TS2322: Type '"Maeneo yote"' is not assignable to type '"All regions"'.
+lib/i18n.ts(224,53): error TS2322: Type '"Mtakatifu"' is not assignable to type '"Saint"'.
+lib/i18n.ts(224,71): error TS2322: Type '"Sikukuu"' is not assignable to type '"Feast"'.
+lib/i18n.ts(224,87): error TS2322: Type '"Ya Maria"' is not assignable to type '"Marian"'.
+lib/i18n.ts(225,2): error TS2322: Type '"Mtume"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(225,18): error TS2322: Type '"Shahidi"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(225,35): error TS2322: Type '"Mfungo"' is not assignable to type '"Fast"'.
+lib/i18n.ts(225,49): error TS2322: Type '"Tafuta watakatifu na sikukuu"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(226,2): error TS2322: Type '"Tafuta kwa jina, ulezi, nchi, aina au mapokeo ya Kikristo."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(227,2): error TS2322: Type '"Tafuta Mtakatifu Antoni, madaktari, Ureno…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(227,65): error TS2322: Type '"matokeo"' is not assignable to type '"results"'.
+lib/i18n.ts(227,83): error TS2322: Type '"Hakuna maadhimisho yanayolingana."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(228,2): error TS2322: Type '"Vyanzo na uthibitishaji"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(228,41): error TS2322: Type '"Kila rekodi huhifadhi chanzo, mapokeo, mfumo wa kalenda na hali ya uthibitishaji."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(229,2): error TS2322: Type '"Washa mshumaa"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(229,25): error TS2322: Type '"Mshumaa umewashwa"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(229,55): error TS2322: Type '"Hakuna mshumaa uliowashwa kwenye kifaa hiki leo."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(230,2): error TS2322: Type '"kwenye kifaa hiki"' is not assignable to type '"on this device"'.
+lib/i18n.ts(230,34): error TS2322: Type '"Eneo lililopendekezwa"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(230,74): error TS2322: Type '"Hifadhidata inayosasishwa daima"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(231,2): error TS2322: Type '"Jinsi kalenda inavyofanya kazi"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(231,47): error TS2322: Type '"Dunia"' is not assignable to type '"Global"'.
+lib/i18n.ts(231,62): error TS2322: Type '"Mradi huru na wa bure wa kalenda ya Kikristo."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(232,2): error TS2322: Type '"Tarehe zinaweza kutofautiana kulingana na Kanisa, mamlaka, ibada na mfumo wa kalenda."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(233,2): error TS2322: Type '"Tarehe si sahihi"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(233,33): error TS2322: Type '"Rudi kwenye kalenda"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(233,68): error TS2322: Type '"Maadhimisho ya"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(234,2): error TS2322: Type '"Mlisho wa pamoja"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(234,29): error TS2322: Type '"Mlisho wa Kikatoliki wa Roma"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(234,73): error TS2322: Type '"Mlisho wa Kiorthodoksi"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(235,2): error TS2322: Type '"Chanzo rasmi"' is not assignable to type '"Official source"'.
+lib/i18n.ts(235,32): error TS2322: Type '"Chanzo cha marejeo"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(235,69): error TS2322: Type '"Hali ya tafsiri"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(236,2): error TS2322: Type '"Tumia eneo langu"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(236,37): error TS2322: Type '"Futa"' is not assignable to type '"Clear"'.
+lib/i18n.ts(236,50): error TS2322: Type '"Inapakia maadhimisho yaliyothibitishwa…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(237,2): error TS2322: Type '"Data ya moja kwa moja"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(237,35): error TS2322: Type '"Ilikaguliwa mwisho"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(237,68): error TS2322: Type '"Uthibitishaji"' is not assignable to type '"Validation"'.
+lib/i18n.ts(237,95): error TS2322: Type '"Imethibitishwa"' is not assignable to type '"Verified"'.
+lib/i18n.ts(238,2): error TS2322: Type '"Inahitaji ukaguzi"' is not assignable to type '"Review required"'.
+lib/i18n.ts(238,37): error TS2322: Type '"Ulezi"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(238,55): error TS2322: Type '"Mfumo wa kalenda"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(239,2): error TS2322: Type '"Ufikiaji unaosomeka na mashine"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(239,49): error TS2322: Type '"JSON, ICS na OpenAPI zilizopangwa zinapatikana kwa injini za utafutaji na mawakala wa AI."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(240,2): error TS2322: Type '"Katoliki ya Roma"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(240,35): error TS2322: Type '"Orthodoksi ya Kigiriki"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(240,74): error TS2322: Type '"Orthodoksi ya Mashariki"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(241,2): error TS2322: Type '"Anglikana"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(241,23): error TS2322: Type '"Orthodoksi ya Kikopti"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(241,62): error TS2322: Type '"Kitume cha Armenia"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(242,2): error TS2322: Type '"Orthodoksi ya Ethiopia Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(242,54): error TS2322: Type '"Orthodoksi ya Kisiria"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(246,2): error TS2322: Type '"Kalender"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(246,25): error TS2322: Type '"Suche"' is not assignable to type '"Search"'.
+lib/i18n.ts(246,44): error TS2322: Type '"Quellen"' is not assignable to type '"Sources"'.
+lib/i18n.ts(246,65): error TS2322: Type '"Ein globaler christlicher Kalender"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(247,2): error TS2322: Type '"Entdecken Sie die Heiligen und Feste des heutigen Tages."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(248,2): error TS2322: Type '"Geprüfte Gedenktage wichtiger christlicher Traditionen, mehrsprachige Suche und Kalenderabonnements — kostenlos."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(249,2): error TS2322: Type '"Heute"' is not assignable to type '"Today"'.
+lib/i18n.ts(249,16): error TS2322: Type '"Kalender öffnen"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(249,47): error TS2322: Type '"Gedenktage suchen"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(249,75): error TS2322: Type '"Alle Traditionen"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(250,2): error TS2322: Type '"Gedenktage heute"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(250,33): error TS2322: Type '"Für dieses Datum sind noch keine geprüften Gedenktage verfügbar."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(251,2): error TS2322: Type '"Tag öffnen"' is not assignable to type '"Open day"'.
+lib/i18n.ts(251,23): error TS2322: Type '"Zum Kalender hinzufügen"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(251,61): error TS2322: Type '"ICS herunterladen"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(252,45): error TS2322: Type '"Christlicher Heiligenkalender"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(253,2): error TS2322: Type '"Durchsuchen Sie geprüfte Gedenktage und erstellen Sie Kalender nach Tradition, Datum, Region oder Thema."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(254,2): error TS2322: Type '"Zurück"' is not assignable to type '"Previous"'.
+lib/i18n.ts(254,20): error TS2322: Type '"Weiter"' is not assignable to type '"Next"'.
+lib/i18n.ts(254,56): error TS2322: Type '"Kategorie"' is not assignable to type '"Category"'.
+lib/i18n.ts(255,2): error TS2322: Type '"Alle Kategorien"' is not assignable to type '"All categories"'.
+lib/i18n.ts(255,34): error TS2322: Type '"Alle Regionen"' is not assignable to type '"All regions"'.
+lib/i18n.ts(255,61): error TS2322: Type '"Heilige"' is not assignable to type '"Saint"'.
+lib/i18n.ts(255,77): error TS2322: Type '"Fest"' is not assignable to type '"Feast"'.
+lib/i18n.ts(255,90): error TS2322: Type '"Marianisch"' is not assignable to type '"Marian"'.
+lib/i18n.ts(256,2): error TS2322: Type '"Apostel"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(256,20): error TS2322: Type '"Märtyrer"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(256,38): error TS2322: Type '"Fasten"' is not assignable to type '"Fast"'.
+lib/i18n.ts(256,52): error TS2322: Type '"Heilige und Feste suchen"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(257,2): error TS2322: Type '"Suche nach Name, Patronat, Land, Kategorie oder christlicher Tradition."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(258,2): error TS2322: Type '"Heiliger Antonius, Ärzte, Portugal…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(258,58): error TS2322: Type '"Ergebnisse"' is not assignable to type '"results"'.
+lib/i18n.ts(258,79): error TS2322: Type '"Keine passenden Gedenktage."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(259,2): error TS2322: Type '"Quellen und Prüfung"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(259,37): error TS2322: Type '"Jeder Eintrag enthält Quelle, Tradition, Kalendersystem und Prüfstatus."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(260,2): error TS2322: Type '"Kerze anzünden"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(260,26): error TS2322: Type '"Kerze angezündet"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(260,55): error TS2322: Type '"Auf diesem Gerät wurde heute noch keine Kerze angezündet."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(261,2): error TS2322: Type '"auf diesem Gerät"' is not assignable to type '"on this device"'.
+lib/i18n.ts(261,33): error TS2322: Type '"Vorgeschlagene Region"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(261,73): error TS2322: Type '"Laufend aktualisierter Datensatz"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(262,2): error TS2322: Type '"So funktioniert der Kalender"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(262,61): error TS2322: Type '"Ein kostenloses, unabhängiges christliches Kalenderprojekt."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(263,2): error TS2322: Type '"Daten können je nach Kirche, Jurisdiktion, Ritus und Kalendersystem abweichen."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(264,2): error TS2322: Type '"Ungültiges Datum"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(264,33): error TS2322: Type '"Zurück zum Kalender"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(264,68): error TS2322: Type '"Gedenktage am"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(265,2): error TS2322: Type '"Kombinierter Feed"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(265,30): error TS2322: Type '"Römisch-katholischer Feed"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(265,71): error TS2322: Type '"Orthodoxer Feed"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(266,2): error TS2322: Type '"Offizielle Quelle"' is not assignable to type '"Official source"'.
+lib/i18n.ts(266,37): error TS2322: Type '"Referenzquelle"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(266,70): error TS2322: Type '"Übersetzungsstatus"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(267,2): error TS2322: Type '"Meine Region verwenden"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(267,43): error TS2322: Type '"Löschen"' is not assignable to type '"Clear"'.
+lib/i18n.ts(267,59): error TS2322: Type '"Geprüfte Gedenktage werden geladen…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(268,2): error TS2322: Type '"Live-Quelldaten"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(268,29): error TS2322: Type '"Zuletzt geprüft"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(268,59): error TS2322: Type '"Prüfung"' is not assignable to type '"Validation"'.
+lib/i18n.ts(268,80): error TS2322: Type '"Geprüft"' is not assignable to type '"Verified"'.
+lib/i18n.ts(269,2): error TS2322: Type '"Prüfung erforderlich"' is not assignable to type '"Review required"'.
+lib/i18n.ts(269,40): error TS2322: Type '"Patronat"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(269,61): error TS2322: Type '"Kalendersystem"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(270,2): error TS2322: Type '"Maschinenlesbarer Zugriff"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(270,44): error TS2322: Type '"Strukturiertes JSON, ICS und OpenAPI stehen Suchmaschinen und KI-Agenten zur Verfügung."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(271,2): error TS2322: Type '"Römisch-katholisch"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(271,37): error TS2322: Type '"Griechisch-orthodox"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(271,73): error TS2322: Type '"Ostorthodox"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(272,2): error TS2322: Type '"Anglikanisch"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(272,26): error TS2322: Type '"Koptisch-orthodox"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(272,61): error TS2322: Type '"Armenisch-apostolisch"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(273,2): error TS2322: Type '"Äthiopisch-orthodox Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(273,51): error TS2322: Type '"Syrisch-orthodox"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(277,2): error TS2322: Type '"Calendario"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(277,27): error TS2322: Type '"Cerca"' is not assignable to type '"Search"'.
+lib/i18n.ts(277,46): error TS2322: Type '"Fonti"' is not assignable to type '"Sources"'.
+lib/i18n.ts(277,65): error TS2322: Type '"Un calendario cristiano globale"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(278,2): error TS2322: Type '"Scopri i santi e le feste ricordati oggi."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(279,2): error TS2322: Type '"Ricorrenze verificate delle principali tradizioni cristiane, ricerca multilingue e abbonamenti al calendario — gratis per tutti."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(280,2): error TS2322: Type '"Oggi"' is not assignable to type '"Today"'.
+lib/i18n.ts(280,15): error TS2322: Type '"Apri il calendario"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(280,49): error TS2322: Type '"Cerca ricorrenze"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(280,76): error TS2322: Type '"Tutte le tradizioni"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(281,2): error TS2322: Type '"Ricorrenze di oggi"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(281,35): error TS2322: Type '"Non sono ancora disponibili ricorrenze verificate per questa data."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(282,2): error TS2322: Type '"Apri il giorno"' is not assignable to type '"Open day"'.
+lib/i18n.ts(282,27): error TS2322: Type '"Aggiungi al calendario"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(282,64): error TS2322: Type '"Scarica ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(283,45): error TS2322: Type '"Calendario cristiano dei santi"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(284,2): error TS2322: Type '"Consulta ricorrenze verificate e crea un calendario per tradizione, data, regione o tema."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(285,2): error TS2322: Type '"Precedente"' is not assignable to type '"Previous"'.
+lib/i18n.ts(285,24): error TS2322: Type '"Successivo"' is not assignable to type '"Next"'.
+lib/i18n.ts(285,42): error TS2322: Type '"Tradizione"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(285,65): error TS2322: Type '"Categoria"' is not assignable to type '"Category"'.
+lib/i18n.ts(285,86): error TS2322: Type '"Regione"' is not assignable to type '"Region"'.
+lib/i18n.ts(286,2): error TS2322: Type '"Tutte le categorie"' is not assignable to type '"All categories"'.
+lib/i18n.ts(286,37): error TS2322: Type '"Tutte le regioni"' is not assignable to type '"All regions"'.
+lib/i18n.ts(286,67): error TS2322: Type '"Santo"' is not assignable to type '"Saint"'.
+lib/i18n.ts(286,81): error TS2322: Type '"Festa"' is not assignable to type '"Feast"'.
+lib/i18n.ts(286,95): error TS2322: Type '"Mariana"' is not assignable to type '"Marian"'.
+lib/i18n.ts(287,2): error TS2322: Type '"Apostolo"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(287,21): error TS2322: Type '"Martire"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(287,38): error TS2322: Type '"Digiuno"' is not assignable to type '"Fast"'.
+lib/i18n.ts(287,53): error TS2322: Type '"Cerca santi e feste"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(288,2): error TS2322: Type '"Cerca per nome, patronato, paese, categoria o tradizione cristiana."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(289,2): error TS2322: Type '"Cerca Sant’Antonio, medici, Portogallo…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(289,62): error TS2322: Type '"risultati"' is not assignable to type '"results"'.
+lib/i18n.ts(289,82): error TS2322: Type '"Nessuna ricorrenza corrispondente."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(290,2): error TS2322: Type '"Fonti e validazione"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(290,37): error TS2322: Type '"Ogni voce conserva fonte, tradizione, sistema di calendario e stato di validazione."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(291,2): error TS2322: Type '"Accendi una candela"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(291,31): error TS2322: Type '"Candela accesa"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(291,58): error TS2322: Type '"Nessuna candela è stata accesa su questo dispositivo oggi."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(292,2): error TS2322: Type '"su questo dispositivo"' is not assignable to type '"on this device"'.
+lib/i18n.ts(292,38): error TS2322: Type '"Regione suggerita"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(292,74): error TS2322: Type '"Dati aggiornati continuamente"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(293,2): error TS2322: Type '"Come funziona il calendario"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(293,44): error TS2322: Type '"Globale"' is not assignable to type '"Global"'.
+lib/i18n.ts(293,61): error TS2322: Type '"Un progetto gratuito e indipendente di calendario cristiano."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(294,2): error TS2322: Type '"Date e ricorrenze possono variare secondo Chiesa, giurisdizione, rito e sistema di calendario."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(295,2): error TS2322: Type '"Data non valida"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(295,32): error TS2322: Type '"Torna al calendario"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(295,67): error TS2322: Type '"Ricorrenze del"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(296,2): error TS2322: Type '"Feed combinato"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(296,27): error TS2322: Type '"Feed cattolico romano"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(296,64): error TS2322: Type '"Feed ortodosso"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(297,2): error TS2322: Type '"Fonte ufficiale"' is not assignable to type '"Official source"'.
+lib/i18n.ts(297,35): error TS2322: Type '"Fonte di riferimento"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(297,74): error TS2322: Type '"Stato della traduzione"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(298,2): error TS2322: Type '"Usa la mia regione"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(298,39): error TS2322: Type '"Cancella"' is not assignable to type '"Clear"'.
+lib/i18n.ts(298,56): error TS2322: Type '"Caricamento delle ricorrenze verificate…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(299,2): error TS2322: Type '"Dati da fonti in tempo reale"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(299,42): error TS2322: Type '"Ultimo controllo"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(299,73): error TS2322: Type '"Validazione"' is not assignable to type '"Validation"'.
+lib/i18n.ts(299,98): error TS2322: Type '"Verificato"' is not assignable to type '"Verified"'.
+lib/i18n.ts(300,2): error TS2322: Type '"Revisione necessaria"' is not assignable to type '"Review required"'.
+lib/i18n.ts(300,40): error TS2322: Type '"Patronato"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(300,62): error TS2322: Type '"Sistema di calendario"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(301,2): error TS2322: Type '"Accesso leggibile dalle macchine"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(301,51): error TS2322: Type '"JSON strutturato, ICS e OpenAPI sono disponibili per motori di ricerca e agenti IA."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(302,2): error TS2322: Type '"Cattolica romana"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(302,35): error TS2322: Type '"Ortodossa greca"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(302,67): error TS2322: Type '"Ortodossa orientale"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(303,2): error TS2322: Type '"Anglicana"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(303,23): error TS2322: Type '"Ortodossa copta"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(303,56): error TS2322: Type '"Apostolica armena"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(304,2): error TS2322: Type '"Ortodossa etiope Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(304,48): error TS2322: Type '"Ortodossa siriaca"' is not assignable to type '"Syriac Orthodox"'.
+lib/i18n.ts(308,2): error TS2322: Type '"Kalendarz"' is not assignable to type '"Calendar"'.
+lib/i18n.ts(308,26): error TS2322: Type '"Szukaj"' is not assignable to type '"Search"'.
+lib/i18n.ts(308,46): error TS2322: Type '"Źródła"' is not assignable to type '"Sources"'.
+lib/i18n.ts(308,66): error TS2322: Type '"Globalny kalendarz chrześcijański"' is not assignable to type '"A global Christian calendar"'.
+lib/i18n.ts(309,2): error TS2322: Type '"Poznaj świętych i święta wspominane dzisiaj."' is not assignable to type '"Discover the saints and feasts remembered today."'.
+lib/i18n.ts(310,2): error TS2322: Type '"Zweryfikowane obchody głównych tradycji chrześcijańskich, wyszukiwanie wielojęzyczne i subskrypcje kalendarza — bezpłatnie."' is not assignable to type '"Verified observances from major Christian traditions, multilingual search and calendar subscriptions — free for everyone."'.
+lib/i18n.ts(311,2): error TS2322: Type '"Dzisiaj"' is not assignable to type '"Today"'.
+lib/i18n.ts(311,18): error TS2322: Type '"Otwórz kalendarz"' is not assignable to type '"Open calendar"'.
+lib/i18n.ts(311,50): error TS2322: Type '"Szukaj obchodów"' is not assignable to type '"Search observances"'.
+lib/i18n.ts(311,76): error TS2322: Type '"Wszystkie tradycje"' is not assignable to type '"All traditions"'.
+lib/i18n.ts(312,2): error TS2322: Type '"Dzisiejsze obchody"' is not assignable to type '"Observances for today"'.
+lib/i18n.ts(312,35): error TS2322: Type '"Brak jeszcze zweryfikowanych obchodów dla tej daty."' is not assignable to type '"No verified observances are available for this date yet."'.
+lib/i18n.ts(313,2): error TS2322: Type '"Otwórz dzień"' is not assignable to type '"Open day"'.
+lib/i18n.ts(313,25): error TS2322: Type '"Dodaj do kalendarza"' is not assignable to type '"Add to calendar"'.
+lib/i18n.ts(313,59): error TS2322: Type '"Pobierz ICS"' is not assignable to type '"Download ICS"'.
+lib/i18n.ts(314,45): error TS2322: Type '"Chrześcijański kalendarz świętych"' is not assignable to type '"Christian saints calendar"'.
+lib/i18n.ts(315,2): error TS2322: Type '"Przeglądaj zweryfikowane obchody i twórz kalendarz według tradycji, daty, regionu lub tematu."' is not assignable to type '"Browse verified observances and build a calendar by tradition, date, region or theme."'.
+lib/i18n.ts(316,2): error TS2322: Type '"Poprzedni"' is not assignable to type '"Previous"'.
+lib/i18n.ts(316,23): error TS2322: Type '"Następny"' is not assignable to type '"Next"'.
+lib/i18n.ts(316,39): error TS2322: Type '"Tradycja"' is not assignable to type '"Tradition"'.
+lib/i18n.ts(316,60): error TS2322: Type '"Kategoria"' is not assignable to type '"Category"'.
+lib/i18n.ts(317,2): error TS2322: Type '"Wszystkie kategorie"' is not assignable to type '"All categories"'.
+lib/i18n.ts(317,38): error TS2322: Type '"Wszystkie regiony"' is not assignable to type '"All regions"'.
+lib/i18n.ts(317,69): error TS2322: Type '"Święty"' is not assignable to type '"Saint"'.
+lib/i18n.ts(317,84): error TS2322: Type '"Święto"' is not assignable to type '"Feast"'.
+lib/i18n.ts(317,99): error TS2322: Type '"Maryjne"' is not assignable to type '"Marian"'.
+lib/i18n.ts(318,2): error TS2322: Type '"Apostoł"' is not assignable to type '"Apostle"'.
+lib/i18n.ts(318,20): error TS2322: Type '"Męczennik"' is not assignable to type '"Martyr"'.
+lib/i18n.ts(318,39): error TS2322: Type '"Post"' is not assignable to type '"Fast"'.
+lib/i18n.ts(318,51): error TS2322: Type '"Szukaj świętych i świąt"' is not assignable to type '"Search saints and feasts"'.
+lib/i18n.ts(319,2): error TS2322: Type '"Szukaj według imienia, patronatu, kraju, kategorii lub tradycji chrześcijańskiej."' is not assignable to type '"Search by name, patronage, country, category or Christian tradition."'.
+lib/i18n.ts(320,2): error TS2322: Type '"Święty Antoni, lekarze, Portugalia…"' is not assignable to type '"Search Saint Anthony, doctors, Portugal…"'.
+lib/i18n.ts(320,58): error TS2322: Type '"wyników"' is not assignable to type '"results"'.
+lib/i18n.ts(320,76): error TS2322: Type '"Brak pasujących obchodów."' is not assignable to type '"No matching observances."'.
+lib/i18n.ts(321,2): error TS2322: Type '"Źródła i walidacja"' is not assignable to type '"Sources and validation"'.
+lib/i18n.ts(321,36): error TS2322: Type '"Każdy wpis zachowuje źródło, tradycję, system kalendarza i status weryfikacji."' is not assignable to type '"Every record keeps its source, tradition, calendar system and validation status."'.
+lib/i18n.ts(322,2): error TS2322: Type '"Zapal świecę"' is not assignable to type '"Light a candle"'.
+lib/i18n.ts(322,24): error TS2322: Type '"Świeca zapalona"' is not assignable to type '"Candle lit"'.
+lib/i18n.ts(322,52): error TS2322: Type '"Na tym urządzeniu nie zapalono dziś jeszcze świecy."' is not assignable to type '"No candle has been lit on this device today."'.
+lib/i18n.ts(323,2): error TS2322: Type '"na tym urządzeniu"' is not assignable to type '"on this device"'.
+lib/i18n.ts(323,34): error TS2322: Type '"Sugerowany region"' is not assignable to type '"Suggested region"'.
+lib/i18n.ts(323,70): error TS2322: Type '"Stale aktualizowany zbiór"' is not assignable to type '"Continuously updated dataset"'.
+lib/i18n.ts(324,2): error TS2322: Type '"Jak działa kalendarz"' is not assignable to type '"How the calendar works"'.
+lib/i18n.ts(324,37): error TS2322: Type '"Globalny"' is not assignable to type '"Global"'.
+lib/i18n.ts(324,55): error TS2322: Type '"Bezpłatny i niezależny projekt kalendarza chrześcijańskiego."' is not assignable to type '"A free, independent Christian calendar project."'.
+lib/i18n.ts(325,2): error TS2322: Type '"Daty mogą się różnić zależnie od Kościoła, jurysdykcji, obrządku i systemu kalendarza."' is not assignable to type '"Dates and observances may vary by Church, jurisdiction, rite and calendar system."'.
+lib/i18n.ts(326,2): error TS2322: Type '"Nieprawidłowa data"' is not assignable to type '"Invalid date"'.
+lib/i18n.ts(326,35): error TS2322: Type '"Wróć do kalendarza"' is not assignable to type '"Back to calendar"'.
+lib/i18n.ts(326,69): error TS2322: Type '"Obchody dnia"' is not assignable to type '"Observances on"'.
+lib/i18n.ts(327,2): error TS2322: Type '"Kanał łączony"' is not assignable to type '"Combined feed"'.
+lib/i18n.ts(327,26): error TS2322: Type '"Kanał rzymskokatolicki"' is not assignable to type '"Roman Catholic feed"'.
+lib/i18n.ts(327,64): error TS2322: Type '"Kanał prawosławny"' is not assignable to type '"Orthodox feed"'.
+lib/i18n.ts(328,2): error TS2322: Type '"Źródło oficjalne"' is not assignable to type '"Official source"'.
+lib/i18n.ts(328,36): error TS2322: Type '"Źródło referencyjne"' is not assignable to type '"Reference source"'.
+lib/i18n.ts(328,74): error TS2322: Type '"Status tłumaczenia"' is not assignable to type '"Translation status"'.
+lib/i18n.ts(329,2): error TS2322: Type '"Użyj mojego regionu"' is not assignable to type '"Use my region"'.
+lib/i18n.ts(329,40): error TS2322: Type '"Wyczyść"' is not assignable to type '"Clear"'.
+lib/i18n.ts(329,56): error TS2322: Type '"Ładowanie zweryfikowanych obchodów…"' is not assignable to type '"Loading verified observances…"'.
+lib/i18n.ts(330,2): error TS2322: Type '"Dane źródłowe na żywo"' is not assignable to type '"Live source data"'.
+lib/i18n.ts(330,35): error TS2322: Type '"Ostatnio sprawdzono"' is not assignable to type '"Last checked"'.
+lib/i18n.ts(330,69): error TS2322: Type '"Walidacja"' is not assignable to type '"Validation"'.
+lib/i18n.ts(330,92): error TS2322: Type '"Zweryfikowano"' is not assignable to type '"Verified"'.
+lib/i18n.ts(331,2): error TS2322: Type '"Wymaga przeglądu"' is not assignable to type '"Review required"'.
+lib/i18n.ts(331,36): error TS2322: Type '"Patronat"' is not assignable to type '"Patronage"'.
+lib/i18n.ts(331,57): error TS2322: Type '"System kalendarza"' is not assignable to type '"Calendar system"'.
+lib/i18n.ts(332,2): error TS2322: Type '"Dostęp maszynowy"' is not assignable to type '"Machine-readable access"'.
+lib/i18n.ts(332,35): error TS2322: Type '"Ustrukturyzowane JSON, ICS i OpenAPI są dostępne dla wyszukiwarek i agentów AI."' is not assignable to type '"Structured JSON, ICS and OpenAPI are available for search engines and AI agents."'.
+lib/i18n.ts(333,2): error TS2322: Type '"Rzymskokatolicka"' is not assignable to type '"Roman Catholic"'.
+lib/i18n.ts(333,35): error TS2322: Type '"Greckoprawosławna"' is not assignable to type '"Greek Orthodox"'.
+lib/i18n.ts(333,69): error TS2322: Type '"Wschodnioprawosławna"' is not assignable to type '"Eastern Orthodox"'.
+lib/i18n.ts(334,2): error TS2322: Type '"Anglikańska"' is not assignable to type '"Anglican"'.
+lib/i18n.ts(334,25): error TS2322: Type '"Koptyjskoprawosławna"' is not assignable to type '"Coptic Orthodox"'.
+lib/i18n.ts(334,63): error TS2322: Type '"Ormiańska apostolska"' is not assignable to type '"Armenian Apostolic"'.
+lib/i18n.ts(335,2): error TS2322: Type '"Etiopska prawosławna Tewahedo"' is not assignable to type '"Ethiopian Orthodox Tewahedo"'.
+lib/i18n.ts(335,52): error TS2322: Type '"Syryjskoprawosławna"' is not assignable to type '"Syriac Orthodox"'.
+
+===== Next build =====
+
+> santosdodia@3.1.0 build
+> next build
+
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   ▲ Next.js 15.5.20
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.0s
+   Skipping validation of types
+   Skipping linting
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+   	- incremental was set to true
+   	- include was updated to add '.next/types/**/*.ts'
+   	- plugins was updated to add { name: 'next' }
+
+   The following mandatory changes were made to your tsconfig.json:
+
+   	- esModuleInterop was set to true (requirement for SWC / babel)
+
+   Collecting page data ...
+   Generating static pages (0/21) ...
+   Generating static pages (5/21) 
+   Generating static pages (10/21) 
+   Generating static pages (15/21) 
+ ✓ Generating static pages (21/21)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    1.69 kB         166 kB
+├ ƒ /_not-found                            154 B         103 kB
+├ ƒ /api/ical/[feed]                       154 B         103 kB
+├ ƒ /api/v1/context                        154 B         103 kB
+├ ƒ /api/v1/litcal/calendars               154 B         103 kB
+├ ƒ /api/v1/liturgy                        154 B         103 kB
+├ ƒ /api/v1/observances                    154 B         103 kB
+├ ƒ /api/v1/search                         154 B         103 kB
+├ ƒ /api/v1/today                          154 B         103 kB
+├ ƒ /calendar                            2.15 kB         167 kB
+├ ƒ /calendario                          2.15 kB         167 kB
+├ ƒ /day/[date]                          2.27 kB         167 kB
+├ ƒ /developers                            154 B         103 kB
+├ ƒ /dia/[date]                          2.27 kB         167 kB
+├ ƒ /explore                             1.41 kB         166 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ƒ /liturgy                             6.56 kB         120 kB
+├ ƒ /openapi.json                          154 B         103 kB
+├ ○ /robots.txt                            154 B         103 kB
+├ ○ /sitemap.xml                           154 B         103 kB
+└ ƒ /sources                             2.83 kB         123 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-3981a3d1f3561bd8.js       46.2 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
