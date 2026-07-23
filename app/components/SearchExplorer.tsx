@@ -7,6 +7,7 @@ import {
   type Observance,
   type Tradition
 } from '../../data/observances';
+import { displayObservanceName, displayPatronages } from '../../lib/locale-display';
 import { useLanguage } from './LanguageProvider';
 
 export default function SearchExplorer(){
@@ -42,12 +43,15 @@ export default function SearchExplorer(){
         <select value={tradition} onChange={event=>setTradition(event.target.value as 'all'|Tradition)}><option value="all">{copy.all}</option>{TRADITIONS.map(value=><option key={value} value={value}>{traditionLabel(copy,value)}</option>)}</select>
       </div>
       <div className="results-heading"><strong>{loading?copy.loading:`${items.length} ${copy.results}`}</strong><span>{q||copy.all}</span></div>
-      {items.length?<div className="result-grid">{items.map(item=><article className="result-card" key={item.id}>
-        <div className="result-meta"><span>{new Intl.DateTimeFormat(locale,{month:'short',day:'numeric',timeZone:'UTC'}).format(new Date(`${item.dateISO}T00:00:00Z`))}</span><span>{item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')}</span></div>
-        <h2>{item.name}</h2>{item.summary?<p>{item.summary}</p>:null}
-        <div className="tag-row"><span>{copy[item.category]}</span>{item.validationStatus?<span>{item.validationStatus==='review-required'?copy.reviewRequired:copy.verified}</span>:null}{(item.patronages??[]).slice(0,2).map(value=><span key={value}>{value}</span>)}</div>
-        <a className="text-link" href={`/day/${item.dateISO}`}>{copy.openDay} →</a>
-      </article>)}</div>:<div className="empty-state"><span>✦</span><p>{copy.noResults}</p></div>}
+      {items.length?<div className="result-grid">{items.map(item=>{
+        const patronages=displayPatronages(item.patronages,locale);
+        return <article className="result-card" key={item.id}>
+          <div className="result-meta"><span>{new Intl.DateTimeFormat(locale,{month:'short',day:'numeric',timeZone:'UTC'}).format(new Date(`${item.dateISO}T00:00:00Z`))}</span><span>{item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')}</span></div>
+          <h2>{displayObservanceName(item.names,locale,item.name)}</h2>{item.summary&&item.summaries?.[locale]?<p>{item.summaries[locale]}</p>:null}
+          <div className="tag-row"><span>{copy[item.category]}</span>{item.validationStatus?<span>{item.validationStatus==='review-required'?copy.reviewRequired:copy.verified}</span>:null}{patronages.slice(0,2).map(value=><span key={value}>{value}</span>)}</div>
+          <a className="text-link" href={`/day/${item.dateISO}`}>{copy.openDay} →</a>
+        </article>;
+      })}</div>:<div className="empty-state"><span>✦</span><p>{copy.noResults}</p></div>}
     </section>
   </div>;
 }
