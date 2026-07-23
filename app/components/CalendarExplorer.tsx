@@ -9,6 +9,7 @@ import {
   type Observance,
   type Tradition
 } from '../../data/observances';
+import { displayObservanceName } from '../../lib/locale-display';
 import { useLanguage } from './LanguageProvider';
 
 const categories: Category[] = ['saint','feast','marian','apostle','martyr','fast'];
@@ -77,7 +78,7 @@ export default function CalendarExplorer(){
       {loading?<div className="data-loading" aria-live="polite">{copy.loading}</div>:null}
       <div className="calendar-scroll"><div className="calendar-grid">{weekdays.map(day=><div className="weekday" key={day}>{day}</div>)}{matrix(year,month).map((day,index)=>{
         const date=day?iso(year,month,day):'',list=day?items.filter(item=>item.dateISO===date):[],today=Boolean(day&&date===iso(now.getFullYear(),now.getMonth(),now.getDate()));
-        return <div className={`calendar-cell${day?'':' blank'}${today?' is-today':''}`} key={`${date}-${index}`}>{day?<><a className="day-number" href={`/day/${date}`}>{day}</a><div className="calendar-items">{list.slice(0,8).map(item=><a className={`calendar-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{item.name}</a>)}</div>{list.length>8?<a className="calendar-more" href={`/day/${date}`}>+{list.length-8}</a>:null}</>:null}</div>
+        return <div className={`calendar-cell${day?'':' blank'}${today?' is-today':''}`} key={`${date}-${index}`}>{day?<><a className="day-number" href={`/day/${date}`}>{day}</a><div className="calendar-items">{list.slice(0,8).map(item=><a className={`calendar-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{displayObservanceName(item.names,locale,item.name)}</a>)}</div>{list.length>8?<a className="calendar-more" href={`/day/${date}`}>+{list.length-8}</a>:null}</>:null}</div>
       })}</div></div>
       {!loading&&!items.length?<div className="empty-state inline"><span>✦</span><p>{copy.noResults}</p></div>:null}
     </section>
