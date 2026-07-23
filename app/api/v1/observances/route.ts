@@ -26,12 +26,8 @@ export async function GET(request: NextRequest) {
     patronage: p.get('patronage') ?? undefined
   };
 
-  if (!Number.isInteger(year) || year < 1900 || year > 2200) {
-    return Response.json({ error: 'Invalid year.' }, { status: 400 });
-  }
-  if (month !== undefined && (!Number.isInteger(month) || month < 1 || month > 12)) {
-    return Response.json({ error: 'Invalid month.' }, { status: 400 });
-  }
+  if (!Number.isInteger(year) || year < 1900 || year > 2200) return Response.json({ error: 'Invalid year.' }, { status: 400 });
+  if (month !== undefined && (!Number.isInteger(month) || month < 1 || month > 12)) return Response.json({ error: 'Invalid month.' }, { status: 400 });
 
   const curated = date
     ? getObservancesForDate(date, locale, filters)
@@ -43,27 +39,20 @@ export async function GET(request: NextRequest) {
     ? await getLiveObservances(year, 'en', filters, { month, date })
     : { data: [], sourceHealth: [] };
 
-  const data = mergeObservances(curated, imported.data).map(item=>({
+  const merged=mergeObservances(curated, imported.data);
+  const data=merged.map(item=>({
     ...item,
     originalName:item.name,
     name:displayObservanceName(item.names,locale,item.name),
     summary:item.summaries?.[locale],
     patronages:displayPatronages(item.patronages,locale)
-  }));
-  return Response.json(
-    {
-      data,
-      meta: {
-        year, month, date, locale, count: data.length, filters, live,
-        sourceHealth: imported.sourceHealth,
-        generatedAt: new Date().toISOString()
-      }
-    },
-    {
-      headers: {
-        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=86400',
-        'Access-Control-Allow-Origin': '*'
-      }
-    }
-  );
+  })).filter(item=>Boolean(item.name));
+  const withheld=merged.length-data.length;
+
+  return Response.json({
+    data,
+    meta:{year,month,date,locale,count:data.length,withheldForTranslation:withheld,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}
+  },{
+    headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}
+  });
 }
