@@ -1,8 +1,8 @@
-Generated: 2026-07-23T21:16:02Z
-Commit: 46d1c9cc569549f4fa603d869ba63dee9f30818f
-Lint exit: 2
+Generated: 2026-07-23T21:17:49Z
+Commit: ead0564a93590c919f75185c82980a2258914c6e
+Lint exit: 1
 TypeScript exit: 0
-Build exit: 0
+Build exit: 1
 
 ===== ESLint =====
 
@@ -10,21 +10,28 @@ Build exit: 0
 > eslint .
 
 
-Oops! Something went wrong! :(
+/home/runner/work/santosdodia/santosdodia/app/components/LiturgyExplorer.tsx
+  13:10  warning  'textValue' is defined but never used                                                                                                     @typescript-eslint/no-unused-vars
+  39:25  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array                                   react-hooks/exhaustive-deps
+  39:26  warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
 
-ESLint: 9.39.5
+/home/runner/work/santosdodia/santosdodia/app/components/SiteChrome.tsx
+  12:11  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
 
-TypeError: nextVitals is not iterable
-    at file:///home/runner/work/santosdodia/santosdodia/eslint.config.mjs?mtime=1784841333781:6:6
-    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
-    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
-    at async dynamicImportConfig (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:186:17)
-    at async loadConfigFile (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:276:9)
-    at async ConfigLoader.calculateConfigArray (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:589:23)
-    at async #calculateConfigArray (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:743:23)
-    at async directoryFilter (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/eslint/eslint-helpers.js:309:5)
-    at async NodeHfs.<anonymous> (file:///home/runner/work/santosdodia/santosdodia/node_modules/@humanfs/core/src/hfs.js:586:29)
-    at async NodeHfs.walk (file:///home/runner/work/santosdodia/santosdodia/node_modules/@humanfs/core/src/hfs.js:614:3)
+/home/runner/work/santosdodia/santosdodia/app/not-found.tsx
+  1:195  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+/home/runner/work/santosdodia/santosdodia/eslint.config.mjs
+  9:1  warning  Assign array to a variable before exporting as module default  import/no-anonymous-default-export
+
+/home/runner/work/santosdodia/santosdodia/lib/live-sources.ts
+  116:10  warning  'year' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/runner/work/santosdodia/santosdodia/postcss.config.mjs
+  1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+✖ 8 problems (2 errors, 6 warnings)
+
 
 ===== TypeScript =====
 
@@ -42,58 +49,23 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.20
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 5.4s
+ ✓ Compiled successfully in 6.2s
    Linting and checking validity of types ...
- ⨯ ESLint: nextVitals is not iterable
 
-   We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
-   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+Failed to compile.
 
-   	- incremental was set to true
-   	- include was updated to add '.next/types/**/*.ts'
-   	- plugins was updated to add { name: 'next' }
+./app/components/LiturgyExplorer.tsx
+13:10  Warning: 'textValue' is defined but never used.  @typescript-eslint/no-unused-vars
+39:25  Warning: React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+39:26  Warning: React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked.  react-hooks/exhaustive-deps
 
-   The following mandatory changes were made to your tsconfig.json:
+./app/components/SiteChrome.tsx
+12:11  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
 
-   	- esModuleInterop was set to true (requirement for SWC / babel)
+./app/not-found.tsx
+1:195  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
 
-   Collecting page data ...
-   Generating static pages (0/21) ...
-   Generating static pages (5/21) 
-   Generating static pages (10/21) 
-   Generating static pages (15/21) 
- ✓ Generating static pages (21/21)
-   Finalizing page optimization ...
-   Collecting build traces ...
+./lib/live-sources.ts
+116:10  Warning: 'year' is assigned a value but never used.  @typescript-eslint/no-unused-vars
 
-Route (app)                                 Size  First Load JS
-┌ ƒ /                                    1.69 kB         162 kB
-├ ƒ /_not-found                            154 B         103 kB
-├ ƒ /api/ical/[feed]                       154 B         103 kB
-├ ƒ /api/v1/context                        154 B         103 kB
-├ ƒ /api/v1/litcal/calendars               154 B         103 kB
-├ ƒ /api/v1/liturgy                        154 B         103 kB
-├ ƒ /api/v1/observances                    154 B         103 kB
-├ ƒ /api/v1/search                         154 B         103 kB
-├ ƒ /api/v1/today                          154 B         103 kB
-├ ƒ /calendar                            2.15 kB         163 kB
-├ ƒ /calendario                          2.15 kB         163 kB
-├ ƒ /day/[date]                          2.27 kB         163 kB
-├ ƒ /developers                            154 B         103 kB
-├ ƒ /dia/[date]                          2.27 kB         163 kB
-├ ƒ /explore                             1.41 kB         162 kB
-├ ○ /icon.svg                                0 B            0 B
-├ ƒ /liturgy                             6.56 kB         116 kB
-├ ƒ /openapi.json                          154 B         103 kB
-├ ○ /robots.txt                            154 B         103 kB
-├ ○ /sitemap.xml                           154 B         103 kB
-└ ƒ /sources                             2.83 kB         118 kB
-+ First Load JS shared by all             102 kB
-  ├ chunks/255-3981a3d1f3561bd8.js       46.2 kB
-  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
-  └ other shared chunks (total)          1.93 kB
-
-
-○  (Static)   prerendered as static content
-ƒ  (Dynamic)  server-rendered on demand
-
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
