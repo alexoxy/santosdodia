@@ -8,6 +8,7 @@ import {
   parseTradition
 } from '../../../../data/observances';
 import { normalizeLocale } from '../../../../lib/i18n';
+import { displayObservanceName, displayPatronages } from '../../../../lib/locale-display';
 import { getLiveObservances } from '../../../../lib/live-sources';
 
 export async function GET(request: NextRequest) {
@@ -39,10 +40,16 @@ export async function GET(request: NextRequest) {
       : getAllObservances(year, locale, filters);
 
   const imported = live
-    ? await getLiveObservances(year, locale, filters, { month, date })
+    ? await getLiveObservances(year, 'en', filters, { month, date })
     : { data: [], sourceHealth: [] };
 
-  const data = mergeObservances(curated, imported.data);
+  const data = mergeObservances(curated, imported.data).map(item=>({
+    ...item,
+    originalName:item.name,
+    name:displayObservanceName(item.names,locale,item.name),
+    summary:item.summaries?.[locale],
+    patronages:displayPatronages(item.patronages,locale)
+  }));
   return Response.json(
     {
       data,
