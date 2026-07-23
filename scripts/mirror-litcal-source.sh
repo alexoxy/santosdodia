@@ -2,7 +2,7 @@
 set -euo pipefail
 
 UPSTREAM="https://github.com/Liturgical-Calendar/LiturgicalCalendarAPI.git"
-BRANCH="stable"
+BRANCH="master"
 TARGET="vendor/litcal-api"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
@@ -16,10 +16,11 @@ cat > "$TARGET/UPSTREAM_MIRROR.json" <<EOF
 {
   "repository": "$UPSTREAM",
   "branch": "$BRANCH",
+  "upstreamLabel": "stable",
   "commit": "$UPSTREAM_SHA",
   "mirroredAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
   "license": "Apache-2.0",
   "note": "Exact production source mirror excluding generated dependency and cache directories."
 }
 EOF
-printf 'Mirrored LitCal stable commit %s\n' "$UPSTREAM_SHA"
+printf 'Mirrored LitCal stable production commit %s\n' "$UPSTREAM_SHA"
