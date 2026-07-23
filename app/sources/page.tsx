@@ -17,7 +17,6 @@ export default function SourcesPage(){
       <div className="source-list">{SOURCE_CATALOG.map(source=><article className="source-card" key={source.id}><div>
         <span className="source-kind">{source.kind==='official'?copy.sourceOfficial:copy.sourceReference}</span>
         <h3>{source.name}</h3>
-        <p>{source.authority} · {source.updateMode}</p>
         <div className="tag-row">{source.traditions.map(value=><span key={value}>{traditionLabel(copy,value)}</span>)}</div>
       </div><a className="text-link" href={source.url} target="_blank" rel="noreferrer">{copy.navSources} ↗</a></article>)}</div>
     </section>
