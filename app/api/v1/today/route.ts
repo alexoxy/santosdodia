@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { getObservancesForDate, mergeObservances, parseCategory, parseTradition } from '../../../../data/observances';
 import { normalizeLocale } from '../../../../lib/i18n';
+import { displayObservanceName, displayPatronages } from '../../../../lib/locale-display';
 import { getLiveObservances } from '../../../../lib/live-sources';
 
 export async function GET(request:NextRequest){
@@ -11,7 +12,13 @@ export async function GET(request:NextRequest){
   const filters={tradition:parseTradition(params.get('tradition')),category:parseCategory(params.get('category')),country:params.get('country')??undefined};
   const curated=getObservancesForDate(date,locale,filters);
   const live=params.get('live')!=='0';
-  const imported=live?await getLiveObservances(year,locale,filters,{date}):{data:[],sourceHealth:[]};
-  const data=mergeObservances(curated,imported.data);
+  const imported=live?await getLiveObservances(year,'en',filters,{date}):{data:[],sourceHealth:[]};
+  const data=mergeObservances(curated,imported.data).map(item=>({
+    ...item,
+    originalName:item.name,
+    name:displayObservanceName(item.names,locale,item.name),
+    summary:item.summaries?.[locale],
+    patronages:displayPatronages(item.patronages,locale)
+  }));
   return Response.json({data,meta:{date,locale,count:data.length,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
 }
