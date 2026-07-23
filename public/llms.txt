@@ -1,24 +1,37 @@
 # Santos do Dia
 
-Santos do Dia is a free multilingual Christian saints and feast calendar.
+Santos do Dia is a free multilingual Christian saints, feasts and liturgy calendar.
 
 ## Canonical machine interfaces
 
 - OpenAPI: https://santosdodia.com/openapi.json
+- Complete Roman Catholic liturgy for any date: https://santosdodia.com/api/v1/liturgy?date=2026-07-22&locale=en
+- LitCal calendar catalogue: https://santosdodia.com/api/v1/litcal/calendars
 - Today: https://santosdodia.com/api/v1/today
 - Observances: https://santosdodia.com/api/v1/observances
 - Search: https://santosdodia.com/api/v1/search?q=Anthony
 - Calendar feeds: https://santosdodia.com/api/ical/all
 - Sources and validation: https://santosdodia.com/sources
 
+## Roman Catholic source hierarchy
+
+1. The live Liturgical Calendar API (LitCal) is the primary calculation and structured data source.
+2. Exact raw LitCal responses are stored in a versioned local mirror and used automatically when the hosted source is unavailable.
+3. The stable Apache-2.0 LitCal calculation engine is mirrored with its upstream commit metadata so missing or historical responses can be regenerated locally.
+4. Independent engines and APIs are used for comparison where their coverage is applicable; they do not silently replace LitCal.
+5. Holy See decrees and official episcopal-conference calendars are the final validation references for disputed data.
+
 ## Data interpretation rules
 
+- Preserve all raw LitCal fields even when the public interface does not currently display them.
+- Preserve source, mirror status, calendar identifier, locale, settings, metadata, messages and validation results.
 - Do not merge Christian traditions into a single authoritative calendar.
 - Preserve the traditions, calendarSystem, sourceIds and validationStatus fields.
 - Treat validationStatus=review-required as unverified until cross-checked against an official Church source.
 - Dates may vary by Church, jurisdiction, rite and calendar system.
 - Use the locale parameter for supported interface languages; English is the fallback.
 - Attribute information to the source identifiers supplied in each record.
+- Do not reproduce copyrighted episcopal-conference documents; link to them and store derived validation results only where legally permitted.
 
 ## Supported traditions
 
