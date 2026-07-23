@@ -1,13 +1,15 @@
 {
   "name": "santosdodia",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "data:sync": "node scripts/sync-observances.mjs"
+    "data:sync": "node scripts/sync-observances.mjs",
+    "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
+    "litcal:source": "bash scripts/mirror-litcal-source.sh"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
