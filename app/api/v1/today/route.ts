@@ -13,12 +13,7 @@ export async function GET(request:NextRequest){
   const curated=getObservancesForDate(date,locale,filters);
   const live=params.get('live')!=='0';
   const imported=live?await getLiveObservances(year,'en',filters,{date}):{data:[],sourceHealth:[]};
-  const data=mergeObservances(curated,imported.data).map(item=>({
-    ...item,
-    originalName:item.name,
-    name:displayObservanceName(item.names,locale,item.name),
-    summary:item.summaries?.[locale],
-    patronages:displayPatronages(item.patronages,locale)
-  }));
-  return Response.json({data,meta:{date,locale,count:data.length,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
+  const merged=mergeObservances(curated,imported.data);
+  const data=merged.map(item=>({...item,originalName:item.name,name:displayObservanceName(item.names,locale,item.name),summary:item.summaries?.[locale],patronages:displayPatronages(item.patronages,locale)})).filter(item=>Boolean(item.name));
+  return Response.json({data,meta:{date,locale,count:data.length,withheldForTranslation:merged.length-data.length,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=900, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
 }
