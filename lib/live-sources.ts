@@ -113,7 +113,7 @@ function makeObservance(args: {
   category?: Category;
   summary?: string;
 }): Observance {
-  const [year, month, day] = args.dateISO.split('-').map(Number);
+  const [, month, day] = args.dateISO.split('-').map(Number);
   return {
     id: `${args.sourceId}-${args.externalId ? slug(args.externalId) : slug(args.name)}-${args.dateISO}`,
     externalId: args.externalId,
