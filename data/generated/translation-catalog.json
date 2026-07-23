@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T09:24:06.102Z",
+  "generatedAt": "2026-07-23T22:24:08.388Z",
   "entries": {
     "maria-ss-ma-madre-di-dio-messa-della-vigilia": {
       "canonical": "Maria Ss.ma Madre di Dio Messa della vigilia",
@@ -1463,7 +1463,7 @@
       "canonical": "Annunciazione del Signore",
       "labels": {
         "en": "Annunciation",
-        "it": "Annunciazione",
+        "it": "Annunciazione del Signore",
         "es": "Anunciación",
         "pt": "Anunciação",
         "fr": "Annonciation",
@@ -14995,6 +14995,303 @@
       "canonical": "The Holy Innocents, Martyrs",
       "labels": {
         "en": "The Holy Innocents, Martyrs"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "diocesi-di-sora-cassino-aquino-pontecorvo-santa-restituta": {
+      "canonical": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Santa Restituta",
+      "labels": {
+        "en": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Santa Restituta",
+        "it": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Santa Restituta"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "diocesi-di-sora-cassino-aquino-pontecorvo-dedicazione-della-chiesa-madre-di-cassino-in-cassino-messa-della-vigilia": {
+      "canonical": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino) Messa della vigilia",
+      "labels": {
+        "en": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino) Messa della vigilia",
+        "it": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino) Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "diocesi-di-sora-cassino-aquino-pontecorvo-dedicazione-della-chiesa-madre-di-cassino-in-cassino": {
+      "canonical": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino)",
+      "labels": {
+        "en": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino)",
+        "it": "[ Diocesi di Sora - Cassino - Aquino - Pontecorvo ] Dedicazione della Chiesa Madre di Cassino (in Cassino)"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "sabato-della-seconda-settimana-del-tempo-ordinario": {
+      "canonical": "Sabato della Seconda Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Sabato della Seconda Settimana del Tempo Ordinario",
+        "it": "Sabato della Seconda Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "giovedi-della-quarta-settimana-del-tempo-ordinario": {
+      "canonical": "Giovedì della Quarta Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Giovedì della Quarta Settimana del Tempo Ordinario",
+        "it": "Giovedì della Quarta Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "mercoledi-della-quarta-settimana-di-pasqua": {
+      "canonical": "Mercoledì della Quarta Settimana di Pasqua",
+      "labels": {
+        "en": "Mercoledì della Quarta Settimana di Pasqua",
+        "it": "Mercoledì della Quarta Settimana di Pasqua"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "san-beda-il-venerabile-sacerdote-e-dottore": {
+      "canonical": "San Beda il Venerabile, sacerdote e dottore",
+      "labels": {
+        "en": "San Beda il Venerabile, sacerdote e dottore",
+        "it": "San Beda il Venerabile, sacerdote e dottore"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "san-gregorio-vii-papa": {
+      "canonical": "San Gregorio VII, papa",
+      "labels": {
+        "en": "San Gregorio VII, papa",
+        "it": "San Gregorio VII, papa"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "santa-maria-maddalena-de-pazzi-vergine": {
+      "canonical": "Santa Maria Maddalena de Pazzi, vergine",
+      "labels": {
+        "en": "Santa Maria Maddalena de Pazzi, vergine",
+        "it": "Santa Maria Maddalena de Pazzi, vergine"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "mercoledi-della-nona-settimana-del-tempo-ordinario": {
+      "canonical": "Mercoledì della Nona Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Mercoledì della Nona Settimana del Tempo Ordinario",
+        "it": "Mercoledì della Nona Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "x-domenica-del-tempo-ordinario-messa-della-vigilia": {
+      "canonical": "X Domenica del Tempo Ordinario Messa della vigilia",
+      "labels": {
+        "en": "X Domenica del Tempo Ordinario Messa della vigilia",
+        "it": "X Domenica del Tempo Ordinario Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "x-domenica-del-tempo-ordinario": {
+      "canonical": "X Domenica del Tempo Ordinario",
+      "labels": {
+        "en": "X Domenica del Tempo Ordinario",
+        "it": "X Domenica del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "san-benedetto-abate-patrono-d-europa-messa-della-vigilia": {
+      "canonical": "San Benedetto, abate, patrono d'Europa Messa della vigilia",
+      "labels": {
+        "en": "San Benedetto, abate, patrono d'Europa Messa della vigilia",
+        "it": "San Benedetto, abate, patrono d'Europa Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "sabato-della-sedicesima-settimana-del-tempo-ordinario": {
+      "canonical": "Sabato della Sedicesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Sabato della Sedicesima Settimana del Tempo Ordinario",
+        "it": "Sabato della Sedicesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-diciassettesima-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Diciassettesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Diciassettesima Settimana del Tempo Ordinario",
+        "it": "Venerdì della Diciassettesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "lunedi-della-diciannovesima-settimana-del-tempo-ordinario": {
+      "canonical": "Lunedì della Diciannovesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Lunedì della Diciannovesima Settimana del Tempo Ordinario",
+        "it": "Lunedì della Diciannovesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-diciannovesima-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Diciannovesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Diciannovesima Settimana del Tempo Ordinario",
+        "it": "Venerdì della Diciannovesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "giovedi-della-ventesima-settimana-del-tempo-ordinario": {
+      "canonical": "Giovedì della Ventesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Giovedì della Ventesima Settimana del Tempo Ordinario",
+        "it": "Giovedì della Ventesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "giovedi-della-vent-unesima-settimana-del-tempo-ordinario": {
+      "canonical": "Giovedì della Vent­unesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Giovedì della Vent­unesima Settimana del Tempo Ordinario",
+        "it": "Giovedì della Vent­unesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "martedi-della-venti-seiesima-settimana-del-tempo-ordinario": {
+      "canonical": "Martedì della Venti­seiesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Martedì della Venti­seiesima Settimana del Tempo Ordinario",
+        "it": "Martedì della Venti­seiesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "sabato-della-vent-ottesima-settimana-del-tempo-ordinario": {
+      "canonical": "Sabato della Vent­ottesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Sabato della Vent­ottesima Settimana del Tempo Ordinario",
+        "it": "Sabato della Vent­ottesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "xxxi-domenica-del-tempo-ordinario-messa-della-vigilia": {
+      "canonical": "XXXI Domenica del Tempo Ordinario Messa della vigilia",
+      "labels": {
+        "en": "XXXI Domenica del Tempo Ordinario Messa della vigilia",
+        "it": "XXXI Domenica del Tempo Ordinario Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "xxxi-domenica-del-tempo-ordinario": {
+      "canonical": "XXXI Domenica del Tempo Ordinario",
+      "labels": {
+        "en": "XXXI Domenica del Tempo Ordinario",
+        "it": "XXXI Domenica del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "lunedi-della-trenta-duesima-settimana-del-tempo-ordinario": {
+      "canonical": "Lunedì della Trenta­duesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Lunedì della Trenta­duesima Settimana del Tempo Ordinario",
+        "it": "Lunedì della Trenta­duesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "sabato-della-trenta-treesima-settimana-del-tempo-ordinario": {
+      "canonical": "Sabato della Trenta­treesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Sabato della Trenta­treesima Settimana del Tempo Ordinario",
+        "it": "Sabato della Trenta­treesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "lunedi-della-seconda-settimana-dell-avvento": {
+      "canonical": "Lunedì della Seconda Settimana dell'Avvento",
+      "labels": {
+        "en": "Lunedì della Seconda Settimana dell'Avvento",
+        "it": "Lunedì della Seconda Settimana dell'Avvento"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-quarta-settimana-dell-avvento": {
+      "canonical": "Venerdì della Quarta Settimana dell'Avvento",
+      "labels": {
+        "en": "Venerdì della Quarta Settimana dell'Avvento",
+        "it": "Venerdì della Quarta Settimana dell'Avvento"
       },
       "sources": [
         "litcal"

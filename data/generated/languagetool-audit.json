@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T09:24:20.644Z",
+  "generatedAt": "2026-07-23T22:24:27.540Z",
   "locales": {
     "en": {
       "enabled": true,
@@ -5358,7 +5358,7 @@
         },
         {
           "message": "Probabile errore: ripetizione di spazio",
-          "offset": 5800,
+          "offset": 5812,
           "length": 2,
           "rule": "WHITESPACE_RULE",
           "category": "TYPOGRAPHY",
@@ -5368,7 +5368,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 5955,
+          "offset": 5967,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5382,7 +5382,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 6128,
+          "offset": 6140,
           "length": 5,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5396,18 +5396,8 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 7012,
+          "offset": 7024,
           "length": 6,
-          "rule": "MORFOLOGIK_RULE_IT_IT",
-          "category": "TYPOS",
-          "replacements": [
-            "(è stato raggiunto il limite dei suggerimenti)"
-          ]
-        },
-        {
-          "message": "Trovato un probabile errore di battitura.",
-          "offset": 7050,
-          "length": 8,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
           "replacements": [
@@ -5426,7 +5416,17 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 8461,
+          "offset": 7074,
+          "length": 8,
+          "rule": "MORFOLOGIK_RULE_IT_IT",
+          "category": "TYPOS",
+          "replacements": [
+            "(è stato raggiunto il limite dei suggerimenti)"
+          ]
+        },
+        {
+          "message": "Trovato un probabile errore di battitura.",
+          "offset": 8473,
           "length": 10,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5436,7 +5436,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 8546,
+          "offset": 8558,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5446,7 +5446,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 9135,
+          "offset": 9147,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5456,7 +5456,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 10079,
+          "offset": 10091,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5466,7 +5466,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 10444,
+          "offset": 10456,
           "length": 12,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5476,7 +5476,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 10491,
+          "offset": 10503,
           "length": 12,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5486,7 +5486,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 11383,
+          "offset": 11395,
           "length": 4,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5496,7 +5496,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 11388,
+          "offset": 11400,
           "length": 4,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5506,7 +5506,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 11714,
+          "offset": 11726,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5516,7 +5516,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 11725,
+          "offset": 11737,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5526,7 +5526,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12411,
+          "offset": 12423,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5536,7 +5536,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12419,
+          "offset": 12431,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5546,7 +5546,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12775,
+          "offset": 12787,
           "length": 9,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5556,7 +5556,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12820,
+          "offset": 12832,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5566,7 +5566,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12860,
+          "offset": 12872,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5576,7 +5576,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 12939,
+          "offset": 12951,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5586,7 +5586,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 13058,
+          "offset": 13070,
           "length": 6,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5596,7 +5596,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 13179,
+          "offset": 13191,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5606,7 +5606,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 13200,
+          "offset": 13212,
           "length": 3,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5616,7 +5616,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 13820,
+          "offset": 13832,
           "length": 7,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5626,7 +5626,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 13970,
+          "offset": 13982,
           "length": 5,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5636,7 +5636,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 14418,
+          "offset": 14430,
           "length": 5,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
@@ -5646,7 +5646,7 @@
         },
         {
           "message": "Trovato un probabile errore di battitura.",
-          "offset": 14451,
+          "offset": 14463,
           "length": 11,
           "rule": "MORFOLOGIK_RULE_IT_IT",
           "category": "TYPOS",
