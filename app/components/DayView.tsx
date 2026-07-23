@@ -8,6 +8,7 @@ import {
   traditionLabel,
   type Observance
 } from '../../data/observances';
+import { displayCalendarSystem, displayObservanceName, displayPatronages } from '../../lib/locale-display';
 import AddToCalendar from './AddToCalendar';
 import CandleButton from './CandleButton';
 import { useLanguage } from './LanguageProvider';
@@ -40,11 +41,12 @@ export default function DayView({dateISO}:{dateISO:string}){
     {loading?<div className="data-loading" aria-live="polite">{copy.loading}</div>:null}
     <section className="day-list">{items.length?items.map(item=>{
       const sources=item.sourceIds.map(sourceId=>SOURCE_CATALOG.find(source=>source.id===sourceId)).filter(Boolean);
+      const patronages=displayPatronages(item.patronages,locale);
       return <article className="day-observance" key={item.id}>
         <div className="day-observance-main"><div className={`tradition-emblem ${traditionClass(item.traditions[0])}`}>✦</div><div>
-          <div className="tag-row">{item.traditions.map(value=><span key={value}>{traditionLabel(copy,value)}</span>)}<span>{copy[item.category]}</span><span>{item.calendarSystem}</span><span>{item.validationStatus==='review-required'?copy.reviewRequired:copy.verified}</span></div>
-          <h2>{item.name}</h2>{item.summary?<p>{item.summary}</p>:null}
-          {item.patronages?.length?<div className="patronage-line"><strong>{copy.patronage}:</strong> {item.patronages.join(' · ')}</div>:null}
+          <div className="tag-row">{item.traditions.map(value=><span key={value}>{traditionLabel(copy,value)}</span>)}<span>{copy[item.category]}</span><span>{displayCalendarSystem(item.calendarSystem,locale)}</span><span>{item.validationStatus==='review-required'?copy.reviewRequired:copy.verified}</span></div>
+          <h2>{displayObservanceName(item.names,locale,item.name)}</h2>{item.summaries?.[locale]?<p>{item.summaries[locale]}</p>:null}
+          {patronages.length?<div className="patronage-line"><strong>{copy.patronage}:</strong> {patronages.join(' · ')}</div>:null}
           {sources.length?<div className="source-inline"><strong>{copy.navSources}:</strong> {sources.map((source,index)=><span key={source!.id}>{index?' · ':''}<a href={source!.url} target="_blank" rel="noreferrer">{source!.name}</a></span>)}</div>:null}
         </div></div>
         <CandleButton observanceId={item.id} dateISO={dateISO}/>
