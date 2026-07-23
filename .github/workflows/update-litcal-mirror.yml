@@ -1,4 +1,4 @@
-name: Update LitCal mirror
+name: Update LitCal mirror and translations
 
 on:
   schedule:
@@ -9,6 +9,12 @@ on:
     paths:
       - 'scripts/sync-litcal-mirror.mjs'
       - 'scripts/mirror-litcal-source.sh'
+      - 'scripts/sync-name-translations.mjs'
+      - 'scripts/validate-language-quality.mjs'
+      - 'scripts/audit-languagetool.mjs'
+      - 'data/language-authorities.json'
+      - 'lib/language-quality.ts'
+      - 'lib/locale-display.ts'
       - '.github/workflows/update-litcal-mirror.yml'
 
 permissions:
@@ -19,9 +25,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  mirror-and-validate:
+  mirror-translate-and-validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Check out Santos do Dia
         uses: actions/checkout@v4
@@ -49,19 +55,33 @@ jobs:
       - name: Mirror structured LitCal responses
         run: npm run litcal:sync
 
+      - name: Build multilingual observance catalogue
+        env:
+          MAX_WIKIDATA_LOOKUPS: '150'
+        run: npm run translations:sync
+
+      - name: Enforce script and vocabulary rules
+        run: npm run translations:validate
+
+      - name: Run advisory grammar and spelling audit
+        continue-on-error: true
+        env:
+          LANGUAGE_TOOL_URL: https://api.languagetool.org/v2/check
+        run: npm run translations:grammar
+
       - name: Validate production application
         run: npm run build
 
-      - name: Commit mirror updates
+      - name: Commit mirror and translation updates
         shell: bash
         run: |
-          git config user.name 'santosdodia-litcal-bot'
+          git config user.name 'santosdodia-language-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A data/litcal-mirror
+          git add -A data/litcal-mirror data/generated/translation-catalog.json data/generated/translation-quality.json data/generated/languagetool-audit.json
           if [ -d vendor/litcal-api ]; then git add -A vendor/litcal-api; fi
           if git diff --cached --quiet; then
-            echo 'No LitCal mirror changes.'
+            echo 'No mirror or translation changes.'
             exit 0
           fi
-          git commit -m 'Update local LitCal mirror'
+          git commit -m 'Update LitCal mirror and validated translations'
           git push
