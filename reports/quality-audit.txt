@@ -1,5 +1,5 @@
-Generated: 2026-07-23T21:21:55Z
-Commit: 321a973b3ba901be92f7395b931ed6b18952740d
+Generated: 2026-07-23T21:23:01Z
+Commit: 64cb6bd0eb5a2f24a759bd748dbf6a0566d46362
 Lint exit: 0
 TypeScript exit: 0
 Build exit: 0
@@ -8,12 +8,6 @@ Build exit: 0
 
 > santosdodia@3.1.0 lint
 > eslint .
-
-
-/home/runner/work/santosdodia/santosdodia/lib/live-sources.ts
-  116:10  warning  'year' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
-✖ 1 problem (0 errors, 1 warning)
 
 
 ===== TypeScript =====
@@ -32,13 +26,8 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.20
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 6.9s
+ ✓ Compiled successfully in 6.0s
    Linting and checking validity of types ...
-
-./lib/live-sources.ts
-116:10  Warning: 'year' is assigned a value but never used.  @typescript-eslint/no-unused-vars
-
-info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
    Collecting page data ...
    Generating static pages (0/21) ...
    Generating static pages (5/21) 
