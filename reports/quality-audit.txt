@@ -1,5 +1,5 @@
-Generated: 2026-07-23T21:14:28Z
-Commit: c37c851333705f74aee626e0f0a06ae908f274ff
+Generated: 2026-07-23T21:16:02Z
+Commit: 46d1c9cc569549f4fa603d869ba63dee9f30818f
 Lint exit: 2
 TypeScript exit: 0
 Build exit: 0
@@ -14,15 +14,17 @@ Oops! Something went wrong! :(
 
 ESLint: 9.39.5
 
-Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/home/runner/work/santosdodia/santosdodia/node_modules/eslint-config-next/core-web-vitals' imported from /home/runner/work/santosdodia/santosdodia/eslint.config.mjs
-Did you mean to import "eslint-config-next/core-web-vitals.js"?
-    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
-    at moduleResolve (node:internal/modules/esm/resolve:861:10)
-    at defaultResolve (node:internal/modules/esm/resolve:985:11)
-    at #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
-    at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
-    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
-    at ModuleJob._link (node:internal/modules/esm/module_job:182:49)
+TypeError: nextVitals is not iterable
+    at file:///home/runner/work/santosdodia/santosdodia/eslint.config.mjs?mtime=1784841333781:6:6
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async dynamicImportConfig (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:186:17)
+    at async loadConfigFile (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:276:9)
+    at async ConfigLoader.calculateConfigArray (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:589:23)
+    at async #calculateConfigArray (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/config/config-loader.js:743:23)
+    at async directoryFilter (/home/runner/work/santosdodia/santosdodia/node_modules/eslint/lib/eslint/eslint-helpers.js:309:5)
+    at async NodeHfs.<anonymous> (file:///home/runner/work/santosdodia/santosdodia/node_modules/@humanfs/core/src/hfs.js:586:29)
+    at async NodeHfs.walk (file:///home/runner/work/santosdodia/santosdodia/node_modules/@humanfs/core/src/hfs.js:614:3)
 
 ===== TypeScript =====
 
@@ -40,9 +42,9 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.20
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 6.0s
-   Skipping validation of types
-   Skipping linting
+ ✓ Compiled successfully in 5.4s
+   Linting and checking validity of types ...
+ ⨯ ESLint: nextVitals is not iterable
 
    We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
    The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
