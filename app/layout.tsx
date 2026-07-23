@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import './traditions.css';
 import './features.css';
+import './biographies.css';
 import LanguageProvider from './components/LanguageProvider';
 import SiteChrome from './components/SiteChrome';
 import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '../lib/i18n';
