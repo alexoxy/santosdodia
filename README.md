@@ -1,28 +1,32 @@
 # www.santosdodia.com
 
-A free, global and multilingual Christian calendar focused on Catholic and Orthodox saints, feasts and commemorations.
+A free, global and multilingual Christian discovery service for saints, patronages, feast dates, official media and calendar subscriptions.
 
 Production: https://www.santosdodia.com
 
 ## Product scope
 
-- Browser-sensitive interface with English fallback
-- Catholic, Orthodox and combined calendar views
-- Search by name, patronage, country, category and tradition
-- Daily pages and calendar subscriptions for Apple, Google and Outlook
+- Find patron saints by profession, cause, place, date, name and Christian tradition
+- Individual saint profiles with patronages, dates, traditions and traceable sources
+- Free virtual candles stored only on the visitor's device
+- Catholic, Orthodox, Anglican and Oriental Orthodox calendar views
+- Calendar feeds by tradition and individual annual saint feeds
+- Official live-stream directories and media archives with editorial OSINT verification
 - Public REST API, JSON responses, ICS feeds and OpenAPI specification
-- Source provenance and translation status embedded in the data model
+- Consolidated copyright, licensing and source-provenance page linked from the footer
+- Browser-sensitive interface with English fallback
 
-The current dataset is a curated beta. Dates may vary by Church, jurisdiction, rite and calendar system.
+The current dataset is a curated beta. Dates and patronage associations may vary by Church, jurisdiction, rite, local tradition and calendar system.
 
 ## Development
 
 ```bash
-npm install
-npm run dev
+npm ci
+npm run lint
+npx tsc --noEmit
 npm run build
 ```
 
-Public endpoints: `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/openapi.json`.
+Public endpoints: `/api/v1/discover`, `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/api/ical/saint/{id}`, `/openapi.json`.
 
-The `main` branch is connected to Vercel. Preview deployments are generated for pull requests before production integration. The canonical production host is `www.santosdodia.com`; the apex host redirects to it.
+The `main` branch is connected to Vercel. Preview deployments are validated before production integration. The canonical production host is `www.santosdodia.com`; the apex host redirects to it.
