@@ -1,0 +1,67 @@
+name: Update LitCal mirror
+
+on:
+  schedule:
+    - cron: '35 3 * * 2'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/sync-litcal-mirror.mjs'
+      - 'scripts/mirror-litcal-source.sh'
+      - '.github/workflows/update-litcal-mirror.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: litcal-mirror-update
+  cancel-in-progress: false
+
+jobs:
+  mirror-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out Santos do Dia
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Mirror upstream Apache-2.0 source
+        shell: bash
+        run: |
+          if npm run litcal:source; then
+            echo 'Upstream source mirror refreshed.'
+          else
+            echo 'Upstream source mirror unavailable; retaining the last committed version.'
+          fi
+
+      - name: Mirror structured LitCal responses
+        run: npm run litcal:sync
+
+      - name: Validate production application
+        run: npm run build
+
+      - name: Commit mirror updates
+        shell: bash
+        run: |
+          git config user.name 'santosdodia-litcal-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A data/litcal-mirror
+          if [ -d vendor/litcal-api ]; then git add -A vendor/litcal-api; fi
+          if git diff --cached --quiet; then
+            echo 'No LitCal mirror changes.'
+            exit 0
+          fi
+          git commit -m 'Update local LitCal mirror'
+          git push
