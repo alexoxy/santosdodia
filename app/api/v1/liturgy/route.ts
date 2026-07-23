@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { normalizeLocale } from '../../../../lib/i18n';
+import { localizeLitcalDay } from '../../../../lib/litcal-localization';
 import { getLitcalDay, type LitcalCalendarRef } from '../../../../lib/litcal-mirror';
 import { validateRomanDay } from '../../../../lib/roman-validation';
 
@@ -17,8 +18,9 @@ export async function GET(request:NextRequest){
  if(!validDate(date))return Response.json({error:'Invalid date.'},{status:400});
  const locale=normalizeLocale(params.get('locale')??request.headers.get('accept-language'));
  const calendar=calendarFromParams(params);
- const result=await getLitcalDay({date,locale,calendar});
+ const canonical=await getLitcalDay({date,locale,calendar});
  const country=calendar.kind==='nation'?calendar.id:params.get('country')??undefined;
- const validation=params.get('validate')==='0'?[]:await validateRomanDay({date,country,litcal:result});
- return Response.json({data:{...result,validation},meta:{date,locale,calendar,provider:'Liturgical Calendar API',license:'Apache-2.0',sourceHierarchy:['live-litcal','local-response-mirror','local-source-mirror','independent-validation']}},{headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
+ const validation=params.get('validate')==='0'?[]:await validateRomanDay({date,country,litcal:canonical});
+ const localized=localizeLitcalDay(canonical,locale);
+ return Response.json({data:{...localized,validation},meta:{date,locale,calendar,provider:'Liturgical Calendar API',license:'Apache-2.0',sourceHierarchy:['live-litcal','local-response-mirror','local-source-mirror','independent-validation']}},{headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}});
 }
