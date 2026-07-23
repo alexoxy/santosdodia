@@ -1,5 +1,6 @@
 'use client';
 import { localeLabels, SUPPORTED_LOCALES, type Locale } from '../../lib/i18n';
+import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { useLanguage } from './LanguageProvider';
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
@@ -14,6 +15,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           </a>
           <nav className="main-nav" aria-label="Primary navigation">
             <a href="/calendar">{copy.navCalendar}</a>
+            <a href="/liturgy">{liturgyLabel(locale)}</a>
             <a href="/explore">{copy.navExplore}</a>
             <a href="/sources">{copy.navSources}</a>
           </nav>
@@ -37,6 +39,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
           </div>
           <div className="footer-links">
             <a href="/calendar">{copy.navCalendar}</a>
+            <a href="/liturgy">{liturgyLabel(locale)}</a>
             <a href="/explore">{copy.navExplore}</a>
             <a href="/sources">{copy.navSources}</a>
           </div>
