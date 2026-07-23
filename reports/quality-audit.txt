@@ -1,5 +1,5 @@
-Generated: 2026-07-23T21:17:49Z
-Commit: ead0564a93590c919f75185c82980a2258914c6e
+Generated: 2026-07-23T21:19:53Z
+Commit: a09bbb0041e408e1eeedec0a10fc8cdb99a78d1c
 Lint exit: 1
 TypeScript exit: 0
 Build exit: 1
@@ -9,11 +9,6 @@ Build exit: 1
 > santosdodia@3.1.0 lint
 > eslint .
 
-
-/home/runner/work/santosdodia/santosdodia/app/components/LiturgyExplorer.tsx
-  13:10  warning  'textValue' is defined but never used                                                                                                     @typescript-eslint/no-unused-vars
-  39:25  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array                                   react-hooks/exhaustive-deps
-  39:26  warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
 
 /home/runner/work/santosdodia/santosdodia/app/components/SiteChrome.tsx
   12:11  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
@@ -30,7 +25,7 @@ Build exit: 1
 /home/runner/work/santosdodia/santosdodia/postcss.config.mjs
   1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
 
-✖ 8 problems (2 errors, 6 warnings)
+✖ 5 problems (2 errors, 3 warnings)
 
 
 ===== TypeScript =====
@@ -49,15 +44,10 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.20
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 6.2s
+ ✓ Compiled successfully in 6.1s
    Linting and checking validity of types ...
 
 Failed to compile.
-
-./app/components/LiturgyExplorer.tsx
-13:10  Warning: 'textValue' is defined but never used.  @typescript-eslint/no-unused-vars
-39:25  Warning: React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
-39:26  Warning: React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked.  react-hooks/exhaustive-deps
 
 ./app/components/SiteChrome.tsx
 12:11  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
