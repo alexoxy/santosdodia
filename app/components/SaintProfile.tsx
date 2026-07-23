@@ -7,6 +7,7 @@ import { displayCalendarSystem,displayObservanceName,displayPatronages } from '.
 import { getFeatureCopy } from '../../lib/feature-copy';
 import AddToCalendar from './AddToCalendar';
 import CandleButton from './CandleButton';
+import OsintBiography from './OsintBiography';
 import { useLanguage } from './LanguageProvider';
 
 export default function SaintProfile({id}:{id:string}){
@@ -22,6 +23,7 @@ export default function SaintProfile({id}:{id:string}){
     <h2>{feature.associatedWith}</h2>
     {patronages.length?<div className="patronage-cloud">{patronages.map(value=><span key={value}>{value}</span>)}</div>:<p>{copy.disclaimer}</p>}
     {biography?<section className="saint-biography"><span className="eyebrow">{historyCopy.history}</span><h2>{biography.title}</h2><p className="biography-lead">{biography.summary}</p><div className="biography-text">{biography.paragraphs.map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div><div className="biography-facts"><h3>{historyCopy.keyFacts}</h3><dl>{biography.facts.map(fact=><div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl></div><div className="biography-provenance"><div><h3>{historyCopy.sources}</h3><p>{historyCopy.editorial}</p></div><span>{historyCopy.verified}: {biography.verifiedAt}</span></div><div className="biography-source-links">{biography.sources.map(source=><a href={source.url} target="_blank" rel="noreferrer" key={source.url}><strong>{source.name}</strong><span>{source.publisher} · {source.language.toUpperCase()}</span></a>)}</div></section>:item.summary?<p className="profile-summary">{item.summary}</p>:null}
+    {!biography?<OsintBiography id={item.id}/>:null}
     <div className="profile-date-link"><strong>{dateLabel}</strong><Link className="text-link" href={`/day/${item.dateISO}`}>{feature.openDay} →</Link></div>
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
     {sources.length?<section className="profile-sources"><h3>{copy.navSources}</h3>{sources.map(source=><a href={source!.url} target="_blank" rel="noreferrer" key={source!.id}><strong>{source!.name}</strong><span>{source!.authority}</span></a>)}</section>:null}
