@@ -4,14 +4,14 @@ Santos do Dia is a free multilingual Christian saints, feasts and liturgy calend
 
 ## Canonical machine interfaces
 
-- OpenAPI: https://santosdodia.com/openapi.json
-- Complete Roman Catholic liturgy for any date: https://santosdodia.com/api/v1/liturgy?date=2026-07-22&locale=en
-- LitCal calendar catalogue: https://santosdodia.com/api/v1/litcal/calendars
-- Today: https://santosdodia.com/api/v1/today
-- Observances: https://santosdodia.com/api/v1/observances
-- Search: https://santosdodia.com/api/v1/search?q=Anthony
-- Calendar feeds: https://santosdodia.com/api/ical/all
-- Sources and validation: https://santosdodia.com/sources
+- OpenAPI: https://www.santosdodia.com/openapi.json
+- Complete Roman Catholic liturgy for any date: https://www.santosdodia.com/api/v1/liturgy?date=2026-07-22&locale=en
+- LitCal calendar catalogue: https://www.santosdodia.com/api/v1/litcal/calendars
+- Today: https://www.santosdodia.com/api/v1/today
+- Observances: https://www.santosdodia.com/api/v1/observances
+- Search: https://www.santosdodia.com/api/v1/search?q=Anthony
+- Calendar feeds: https://www.santosdodia.com/api/ical/all
+- Sources and validation: https://www.santosdodia.com/sources
 
 ## Roman Catholic source hierarchy
 
