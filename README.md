@@ -1,6 +1,8 @@
-# santosdodia.com
+# www.santosdodia.com
 
 A free, global and multilingual Christian calendar focused on Catholic and Orthodox saints, feasts and commemorations.
+
+Production: https://www.santosdodia.com
 
 ## Product scope
 
@@ -23,4 +25,4 @@ npm run build
 
 Public endpoints: `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/openapi.json`.
 
-The `main` branch is connected to Vercel. Preview deployments are generated for pull requests before production integration.
+The `main` branch is connected to Vercel. Preview deployments are generated for pull requests before production integration. The canonical production host is `www.santosdodia.com`; the apex host redirects to it.
