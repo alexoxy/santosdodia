@@ -6,7 +6,7 @@ const filename = fileURLToPath(import.meta.url);
 const directory = path.dirname(filename);
 const compat = new FlatCompat({ baseDirectory: directory });
 
-export default [
+const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     ignores: [
@@ -20,3 +20,5 @@ export default [
     ]
   }
 ];
+
+export default eslintConfig;
