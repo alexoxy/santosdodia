@@ -1,8 +1,8 @@
-Generated: 2026-07-23T21:19:53Z
-Commit: a09bbb0041e408e1eeedec0a10fc8cdb99a78d1c
-Lint exit: 1
+Generated: 2026-07-23T21:21:55Z
+Commit: 321a973b3ba901be92f7395b931ed6b18952740d
+Lint exit: 0
 TypeScript exit: 0
-Build exit: 1
+Build exit: 0
 
 ===== ESLint =====
 
@@ -10,22 +10,10 @@ Build exit: 1
 > eslint .
 
 
-/home/runner/work/santosdodia/santosdodia/app/components/SiteChrome.tsx
-  12:11  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
-
-/home/runner/work/santosdodia/santosdodia/app/not-found.tsx
-  1:195  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
-
-/home/runner/work/santosdodia/santosdodia/eslint.config.mjs
-  9:1  warning  Assign array to a variable before exporting as module default  import/no-anonymous-default-export
-
 /home/runner/work/santosdodia/santosdodia/lib/live-sources.ts
   116:10  warning  'year' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-/home/runner/work/santosdodia/santosdodia/postcss.config.mjs
-  1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
-
-✖ 5 problems (2 errors, 3 warnings)
+✖ 1 problem (0 errors, 1 warning)
 
 
 ===== TypeScript =====
@@ -44,18 +32,50 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.20
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 6.1s
+ ✓ Compiled successfully in 6.9s
    Linting and checking validity of types ...
-
-Failed to compile.
-
-./app/components/SiteChrome.tsx
-12:11  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
-
-./app/not-found.tsx
-1:195  Error: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
 
 ./lib/live-sources.ts
 116:10  Warning: 'year' is assigned a value but never used.  @typescript-eslint/no-unused-vars
 
 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/21) ...
+   Generating static pages (5/21) 
+   Generating static pages (10/21) 
+   Generating static pages (15/21) 
+ ✓ Generating static pages (21/21)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    1.69 kB         162 kB
+├ ƒ /_not-found                            153 B         103 kB
+├ ƒ /api/ical/[feed]                       153 B         103 kB
+├ ƒ /api/v1/context                        153 B         103 kB
+├ ƒ /api/v1/litcal/calendars               153 B         103 kB
+├ ƒ /api/v1/liturgy                        153 B         103 kB
+├ ƒ /api/v1/observances                    153 B         103 kB
+├ ƒ /api/v1/search                         153 B         103 kB
+├ ƒ /api/v1/today                          153 B         103 kB
+├ ƒ /calendar                            2.15 kB         163 kB
+├ ƒ /calendario                          2.15 kB         163 kB
+├ ƒ /day/[date]                          2.27 kB         163 kB
+├ ƒ /developers                            153 B         103 kB
+├ ƒ /dia/[date]                          2.27 kB         163 kB
+├ ƒ /explore                             1.41 kB         162 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ƒ /liturgy                             6.58 kB         116 kB
+├ ƒ /openapi.json                          153 B         103 kB
+├ ○ /robots.txt                            153 B         103 kB
+├ ○ /sitemap.xml                           153 B         103 kB
+└ ƒ /sources                             2.83 kB         118 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-3981a3d1f3561bd8.js       46.2 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
