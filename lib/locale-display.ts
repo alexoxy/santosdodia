@@ -10,20 +10,16 @@ function clean(value:string){return value.normalize('NFC').replace(/\s+/g,' ').t
 function catalogLabel(source:string,locale:Locale){return entries[canonicalNameKey(source)]?.labels?.[locale]}
 
 export function displayObservanceName(names:LocalizedText,locale:Locale,originalName?:string){
- const source=clean(names.en??originalName??'');
+ const source=clean(names.en??originalName??names[locale]??'');
  const exact=clean(names[locale]??'');
- if(exact)return exact;
+ if(exact&&isPublishableLocalizedName(exact,locale))return exact;
  const stored=clean(catalogLabel(source,locale)??'');
  if(stored&&isPublishableLocalizedName(stored,locale))return stored;
  const generated=clean(localizeObservanceName(names,locale,originalName));
  if(generated&&isPublishableLocalizedName(generated,locale))return generated;
- return source||clean(originalName??'');
+ if(locale==='en'&&source&&isPublishableLocalizedName(source,'en'))return source;
+ return'';
 }
 
-export function displayPatronages(values:string[]|undefined,locale:Locale){
- return (values??[]).map(value=>localizePatronage(value,locale)).filter(Boolean);
-}
-
-export function displayCalendarSystem(value:string,locale:Locale){
- return localizeCalendarSystem(value,locale);
-}
+export function displayPatronages(values:string[]|undefined,locale:Locale){return(values??[]).map(value=>localizePatronage(value,locale)).filter(Boolean)}
+export function displayCalendarSystem(value:string,locale:Locale){return localizeCalendarSystem(value,locale)}
