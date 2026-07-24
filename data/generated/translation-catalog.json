@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T22:24:08.388Z",
+  "generatedAt": "2026-07-24T09:39:27.254Z",
   "entries": {
     "maria-ss-ma-madre-di-dio-messa-della-vigilia": {
       "canonical": "Maria Ss.ma Madre di Dio Messa della vigilia",
@@ -15292,6 +15292,196 @@
       "labels": {
         "en": "Venerdì della Quarta Settimana dell'Avvento",
         "it": "Venerdì della Quarta Settimana dell'Avvento"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-3rd-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 3rd Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 3rd Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-5th-week-of-ordinary-time": {
+      "canonical": "Friday of the 5th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 5th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saint-turibius-of-mogrovejo-bishop": {
+      "canonical": "Saint Turibius of Mogrovejo, Bishop",
+      "labels": {
+        "en": "Saint Turibius of Mogrovejo, Bishop"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saint-mark-the-evangelist": {
+      "canonical": "Saint Mark the Evangelist",
+      "labels": {
+        "en": "Saint Mark the Evangelist"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "monday-of-the-6th-week-of-easter": {
+      "canonical": "Monday of the 6th Week of Easter",
+      "labels": {
+        "en": "Monday of the 6th Week of Easter"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "wednesday-of-the-8th-week-of-ordinary-time": {
+      "canonical": "Wednesday of the 8th Week of Ordinary Time",
+      "labels": {
+        "en": "Wednesday of the 8th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-9th-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 9th Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 9th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "thursday-of-the-9th-week-of-ordinary-time": {
+      "canonical": "Thursday of the 9th Week of Ordinary Time",
+      "labels": {
+        "en": "Thursday of the 9th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saturday-of-the-9th-week-of-ordinary-time": {
+      "canonical": "Saturday of the 9th Week of Ordinary Time",
+      "labels": {
+        "en": "Saturday of the 9th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saint-cyril-of-alexandria-bishop-and-doctor-of-the-church": {
+      "canonical": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+      "labels": {
+        "en": "Saint Cyril of Alexandria, Bishop and Doctor of the Church"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "thursday-of-the-17th-week-of-ordinary-time": {
+      "canonical": "Thursday of the 17th Week of Ordinary Time",
+      "labels": {
+        "en": "Thursday of the 17th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "wednesday-of-the-18th-week-of-ordinary-time": {
+      "canonical": "Wednesday of the 18th Week of Ordinary Time",
+      "labels": {
+        "en": "Wednesday of the 18th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-18th-week-of-ordinary-time": {
+      "canonical": "Friday of the 18th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 18th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-25th-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 25th Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 25th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "monday-of-the-26th-week-of-ordinary-time": {
+      "canonical": "Monday of the 26th Week of Ordinary Time",
+      "labels": {
+        "en": "Monday of the 26th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saturday-of-the-26th-week-of-ordinary-time": {
+      "canonical": "Saturday of the 26th Week of Ordinary Time",
+      "labels": {
+        "en": "Saturday of the 26th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-28th-week-of-ordinary-time": {
+      "canonical": "Friday of the 28th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 28th Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-31st-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 31st Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 31st Week of Ordinary Time"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "monday-of-the-34th-week-of-ordinary-time": {
+      "canonical": "Monday of the 34th Week of Ordinary Time",
+      "labels": {
+        "en": "Monday of the 34th Week of Ordinary Time"
       },
       "sources": [
         "litcal"
