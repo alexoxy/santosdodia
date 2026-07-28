@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-24T09:39:27.384Z",
-  "catalogGeneratedAt": "2026-07-24T09:39:27.254Z",
-  "entries": 1381,
+  "generatedAt": "2026-07-28T06:14:51.994Z",
+  "catalogGeneratedAt": "2026-07-28T06:14:51.820Z",
+  "entries": 2483,
   "critical": [],
   "coverage": {
     "en": {
-      "labels": 1381,
+      "labels": 1389,
       "authority": {
         "variant": "en-GB",
         "editorial": "Oxford English Dictionary / Merriam-Webster",
@@ -77,7 +77,7 @@
       }
     },
     "it": {
-      "labels": 1225,
+      "labels": 1231,
       "authority": {
         "variant": "it",
         "editorial": "Treccani / Accademia della Crusca",
