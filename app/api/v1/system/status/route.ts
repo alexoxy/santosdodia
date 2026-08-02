@@ -1,5 +1,6 @@
 import { calendarEngineChecks, calendarEngineHealthy } from '../../../../../lib/knowledge/calendar-self-check';
 import { CHURCHES } from '../../../../../data/knowledge/churches';
+import { JURISDICTIONS } from '../../../../../data/knowledge/jurisdictions';
 import { KNOWLEDGE_SOURCES, ingestibleSources } from '../../../../../data/knowledge/source-registry';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +15,7 @@ export async function GET() {
       calendarEngine: { healthy, checks: calendarChecks },
       knowledgeBase: {
         churches: CHURCHES.length,
+        jurisdictions: JURISDICTIONS.length,
         sources: KNOWLEDGE_SOURCES.length,
         ingestibleSources: ingestibleSources().length
       }
