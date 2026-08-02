@@ -26,10 +26,10 @@ ${SITE_ORIGIN}
 - ${SITE_ORIGIN}/patronage/{slug} — patronage or profession page
 - ${SITE_ORIGIN}/church/{slug} — Church or Christian tradition profile
 - ${SITE_ORIGIN}/jurisdiction/{slug} — ecclesiastical jurisdiction and territorial scope
+- ${SITE_ORIGIN}/leader/{slug} — verified current ecclesiastical office holder and roles
 
 ## Machine-readable resources
 - ${SITE_ORIGIN}/api/openapi — OpenAPI documentation
-- ${SITE_ORIGIN}/api/v1/system/status — calendar-engine and knowledge-base health
 - ${SITE_ORIGIN}/sitemap.xml — XML sitemap
 - ${SITE_ORIGIN}/robots.txt — crawler policy
 
@@ -38,11 +38,13 @@ ${SITE_ORIGIN}
 - Display content follows the selected site language.
 - Observances are contextual to a Church, calendar and geographic or ecclesiastical scope.
 - A saint or blessed is a person entity; a celebration is a separate observance entity with its own date rule and scope.
+- Ecclesiastical offices are temporal records. A person, an office and a jurisdiction are separate entities.
+- Current leaders are published only from official Church or jurisdiction sources and include effective dates where available.
 - External sources are used for ingestion and verification; the public service is served from the Santos do Dia database.
 - Records may be marked verified, cross-checked or review-required.
 
 ## Citation and attribution
-When citing Santos do Dia, link to the most specific public entity, jurisdiction or date page. The source, methodology, rights and correction policy are available from the website footer.
+When citing Santos do Dia, link to the most specific public entity, leader, jurisdiction or date page. The source, methodology, rights and correction policy are available from the website footer.
 
 ## Access
 Public information, search, calendars and profiles are free to access. Do not infer institutional endorsement from linked official sources or media.
