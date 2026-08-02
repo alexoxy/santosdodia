@@ -3,6 +3,7 @@ import {
   type Observance,
   type SourceRecord
 } from '../data/observances';
+import { claimEvidenceFor } from './claim-evidence';
 
 const AUTHORITATIVE_SOURCE_IDS = new Set(
   SOURCE_CATALOG
@@ -15,6 +16,7 @@ export type PublicationAssessment = {
   reason:
     | 'verified-authoritative-source'
     | 'cross-checked-independent-sources'
+    | 'claim-evidence-corroborated'
     | 'review-required'
     | 'imported'
     | 'missing-authoritative-source'
@@ -39,7 +41,14 @@ export function assessPublication(item: Observance): PublicationAssessment {
   }
 
   if (item.sourceIds.length < 2) {
-    return { publishable: false, reason: 'insufficient-independent-sources' };
+    const corroborated = claimEvidenceFor(item.id).some(evidence =>
+      evidence.status === 'corroborated' &&
+      (evidence.source.kind === 'official' || evidence.source.kind === 'scholarly') &&
+      evidence.claimType.startsWith('observance-name')
+    );
+    return corroborated
+      ? { publishable: true, reason: 'claim-evidence-corroborated' }
+      : { publishable: false, reason: 'insufficient-independent-sources' };
   }
 
   return hasAuthoritativeSource
