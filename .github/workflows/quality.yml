@@ -40,12 +40,28 @@ jobs:
           npm run start -- --hostname 127.0.0.1 > /tmp/santosdodia-next.log 2>&1 &
           server_pid=$!
           trap 'kill $server_pid || true' EXIT
+
           for attempt in {1..30}; do
-            if curl --fail --silent --show-error http://127.0.0.1:3000/api/v1/system/status > /tmp/santosdodia-status.json; then
-              cat /tmp/santosdodia-status.json
+            http_code="$(curl --silent --show-error --output /tmp/santosdodia-status.json --write-out '%{http_code}' http://127.0.0.1:3000/api/v1/system/status || true)"
+
+            if [ "$http_code" = "000" ]; then
+              sleep 1
+              continue
+            fi
+
+            echo "Health endpoint returned HTTP ${http_code}:"
+            cat /tmp/santosdodia-status.json || true
+            echo
+
+            if [ "$http_code" = "200" ] && node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/santosdodia-status.json','utf8')); if(body.status!=='ok') process.exit(1)"; then
               exit 0
             fi
-            sleep 1
+
+            echo "Application health check did not pass."
+            cat /tmp/santosdodia-next.log || true
+            exit 1
           done
-          cat /tmp/santosdodia-next.log
+
+          echo "Application did not become reachable within 30 seconds."
+          cat /tmp/santosdodia-next.log || true
           exit 1
