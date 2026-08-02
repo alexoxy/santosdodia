@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint && npm run build",
     "data:sync": "node scripts/sync-observances.mjs",
+    "osint:monitor": "node scripts/monitor-ecclesiastical-osint.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
     "litcal:source": "bash scripts/mirror-litcal-source.sh",
     "translations:sync": "node scripts/sync-name-translations.mjs",
