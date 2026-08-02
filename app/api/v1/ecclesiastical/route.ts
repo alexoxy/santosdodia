@@ -41,6 +41,7 @@ export async function GET(request: Request) {
   const entity = selection(url.searchParams.get('entity'));
   const churchId = url.searchParams.get('church');
   const countryCode = url.searchParams.get('country')?.trim().toUpperCase();
+  const regionCode = url.searchParams.get('region')?.trim();
   const limit = boundedInteger(url.searchParams.get('limit'), 50, 1, 100);
   const offset = boundedInteger(url.searchParams.get('offset'), 0, 0, 1_000_000);
 
@@ -51,8 +52,9 @@ export async function GET(request: Request) {
   const jurisdictions = JURISDICTIONS
     .filter(jurisdiction => {
       if (churchId && !churchIds.has(jurisdiction.churchId)) return false;
-      if (!countryCode) return true;
-      return jurisdiction.geography.some(place => place.level === 'global' || (place.level === 'country' && place.code === countryCode));
+      if (countryCode && !jurisdiction.geography.some(place => place.level === 'global' || (place.level === 'country' && place.code === countryCode))) return false;
+      if (regionCode && jurisdiction.id !== regionCode && jurisdiction.parentJurisdictionId !== regionCode && !jurisdiction.geography.some(place => place.code === regionCode)) return false;
+      return true;
     })
     .sort((a, b) => localizedFieldValue(a.name, locale).localeCompare(localizedFieldValue(b.name, locale), locale));
   const jurisdictionIds = new Set(jurisdictions.map(jurisdiction => jurisdiction.id));
@@ -83,6 +85,7 @@ export async function GET(request: Request) {
       entity,
       church: churchId ?? null,
       country: countryCode ?? null,
+      region: regionCode ?? null,
       generatedAt: new Date().toISOString(),
       access: 'free',
       runtimeExternalDependency: false,
