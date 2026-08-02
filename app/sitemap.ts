@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const todayISO = now.toISOString().slice(0, 10);
   const dailyLastModified = new Date(`${todayISO}T00:00:00.000Z`);
 
-  const staticRoutes: MetadataRoute.Sitemap = [
+  const staticRouteDefinitions = [
     { path: '', changeFrequency: 'daily', priority: 1, lastModified: dailyLastModified },
     { path: '/explore', changeFrequency: 'weekly', priority: 0.95 },
     { path: '/calendar', changeFrequency: 'weekly', priority: 0.9 },
@@ -25,7 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/sources', changeFrequency: 'monthly', priority: 0.65 },
     { path: '/copyright', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/developers', changeFrequency: 'monthly', priority: 0.6 }
-  ].map(route => ({ ...route, url: `${SITE_ORIGIN}${route.path}` }));
+  ] as const;
+
+  const staticRoutes: MetadataRoute.Sitemap = staticRouteDefinitions.map(route => ({
+    ...route,
+    url: `${SITE_ORIGIN}${route.path}`
+  }));
 
   const observances = getAllObservances(year);
   const days: MetadataRoute.Sitemap = observances.map(item => ({
