@@ -18,19 +18,22 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version-file: .node-version
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
 
       - name: Synchronise source data
         run: npm run data:sync
+
+      - name: Audit curated data and snapshot schema
+        run: npm run data:audit
 
       - name: Validate production build
         run: npm run build
