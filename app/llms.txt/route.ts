@@ -30,7 +30,11 @@ ${SITE_ORIGIN}
 - ${SITE_ORIGIN}/leader/{slug} — verified current ecclesiastical office holder and roles
 
 ## Machine-readable resources
-- ${SITE_ORIGIN}/api/openapi — OpenAPI documentation
+- ${SITE_ORIGIN}/openapi.json — OpenAPI 3.1 interface description
+- ${SITE_ORIGIN}/api/v1/ecclesiastical — localized Churches, jurisdictions and verified active office holders
+- ${SITE_ORIGIN}/api/v1/today — contextual daily observances
+- ${SITE_ORIGIN}/api/v1/search — multilingual saint and observance search
+- ${SITE_ORIGIN}/api/v1/observances — filtered observance catalogue
 - ${SITE_ORIGIN}/sitemap.xml — XML sitemap
 - ${SITE_ORIGIN}/robots.txt — crawler policy
 
@@ -42,13 +46,14 @@ ${SITE_ORIGIN}
 - Ecclesiastical offices are temporal records. A person, an office and a jurisdiction are separate entities.
 - Current leaders are published only from official Church or jurisdiction sources and include effective dates where available.
 - External sources are used for ingestion and verification; the public service is served from the Santos do Dia database.
+- Machine-readable ecclesiastical data contains public institutional facts only and excludes private contact details.
 - Records may be marked verified, cross-checked or review-required.
 
 ## Citation and attribution
 When citing Santos do Dia, link to the most specific public entity, leader, jurisdiction or date page. The source, methodology, rights and correction policy are available from the website footer.
 
 ## Access
-Public information, search, calendars and profiles are free to access. Do not infer institutional endorsement from linked official sources or media.
+Public information, search, calendars, profiles and machine-readable catalogues are free to access. Do not infer institutional endorsement from linked official sources or media.
 `;
 
   return new Response(body, {
