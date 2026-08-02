@@ -4,6 +4,8 @@ A free, global and multilingual Christian discovery service for saints, patronag
 
 Production: https://www.santosdodia.com
 
+Product plan: [docs/product-plan.md](docs/product-plan.md)
+
 ## Product scope
 
 - Find patron saints by profession, cause, place, date, name and Christian tradition
@@ -29,4 +31,4 @@ npm run build
 
 Public endpoints: `/api/v1/discover`, `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/api/ical/saint/{id}`, `/openapi.json`.
 
-The `main` branch is connected to Vercel. Preview deployments are validated before production integration. The canonical production host is `www.santosdodia.com`; the apex host redirects to it.
+The GitHub repository is the source of truth. Production runs on Cloudflare Workers through OpenNext. The canonical production host is `www.santosdodia.com`; the apex host redirects to it. Vercel deployment is retired and the GitHub-to-Dropbox backup workflow is not part of the architecture.
