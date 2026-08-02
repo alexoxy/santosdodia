@@ -6,6 +6,10 @@ Production: https://www.santosdodia.com
 
 Product plan: [docs/product-plan.md](docs/product-plan.md)
 
+Data quality baseline: [docs/data-quality-baseline.md](docs/data-quality-baseline.md)
+
+Verified-profile standard: [docs/verified-profile-standard.md](docs/verified-profile-standard.md)
+
 ## Product scope
 
 - Find patron saints by profession, cause, place, date, name and Christian tradition
@@ -24,10 +28,11 @@ The current dataset is a curated beta. Dates and patronage associations may vary
 
 ```bash
 npm ci
-npm run lint
-npx tsc --noEmit
-npm run build
+npm run check
+npm run cloudflare:build
 ```
+
+`npm run check` performs the curated-data audit, typecheck, lint and Next.js production build.
 
 Public endpoints: `/api/v1/discover`, `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/api/ical/saint/{id}`, `/openapi.json`.
 
