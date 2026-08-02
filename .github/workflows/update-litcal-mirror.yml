@@ -1,5 +1,6 @@
 name: Update LitCal mirror and translations
 
+# Synchronization is fail-safe: stale valid snapshots are preserved and reported.
 on:
   schedule:
     - cron: '35 3 * * 2'
