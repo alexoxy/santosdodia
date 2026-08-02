@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - vercel-preview
+      - cloudflare-preview
       - 'agent/**'
   workflow_dispatch:
 
@@ -18,43 +18,32 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Use Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
+
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=optional
+
       - name: Audit installed runtime dependencies
-        run: npm audit --omit=dev --omit=optional --audit-level=high
-      - name: Verify Vercel deployment policy
-        run: |
-          node <<'NODE'
-          const config = require('./vercel.json');
-          const deployment = config.git?.deploymentEnabled;
-          const expected = { '**': false, main: true, 'vercel-preview': true };
-          const actualKeys = Object.keys(deployment ?? {}).sort();
-          const expectedKeys = Object.keys(expected).sort();
-          if (JSON.stringify(actualKeys) !== JSON.stringify(expectedKeys)) {
-            throw new Error(`Unexpected Vercel deployment branches: ${actualKeys.join(', ')}`);
-          }
-          for (const [branch, value] of Object.entries(expected)) {
-            if (deployment[branch] !== value) {
-              throw new Error(`Vercel deployment policy mismatch for ${branch}`);
-            }
-          }
-          console.log('Vercel deployments are limited to main and vercel-preview.');
-          NODE
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Typecheck
         run: npm run typecheck
+
       - name: Lint
         run: npm run lint
+
       - name: Build
         run: npm run build
+
       - name: Production smoke test
         shell: bash
         run: |
