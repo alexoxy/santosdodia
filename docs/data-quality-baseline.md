@@ -97,12 +97,19 @@ This restores a schema-valid fallback without inventing source data. The next co
 
 The live LitCal integration creates records marked `verified`, while the Orthodox aggregator creates `review-required` records. This distinction is directionally correct, but imported source status must not bypass the minimum verified-profile standard.
 
-Dynamic records require:
+A central publication policy now evaluates dynamically imported records before they reach public API, page and calendar consumers. The default public path accepts:
+
+- `verified` records backed by an official or scholarly source;
+- `cross-checked` records with at least two source references and at least one official or scholarly source.
+
+It withholds `review-required`, `imported`, single-source `cross-checked` and records without an authoritative source. Curated records remain subject to their separate editorial remediation queue rather than being silently removed.
+
+Dynamic records still require:
 
 - source-health visibility;
 - schema and duplication checks;
 - explicit source and retrieval dates;
-- exclusion of review-gated data from surfaces labelled verified.
+- editorial confirmation that nominally distinct sources are genuinely independent.
 
 ## Automatic enforcement introduced
 
@@ -132,7 +139,7 @@ Hard structural failures stop the quality pipeline. Editorial debt remains visib
 2. Review the five single-source `cross-checked` records and either add an independent source or reclassify them.
 3. Confirm source independence for the 35 multi-source `cross-checked` records.
 4. Populate a controlled dynamic snapshot for the current and following year.
-5. Prevent `review-required` and `imported` records from appearing on surfaces described as verified.
+5. Confirm the publication gate on public API, page and ICS paths through the quality pipeline.
 6. Introduce structured, source-specific patronage assertions before expanding patronage discovery.
 7. Add sourced editorial summaries incrementally, beginning with the highest-demand records.
 
