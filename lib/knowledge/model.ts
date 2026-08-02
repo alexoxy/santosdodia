@@ -75,9 +75,17 @@ export type CalendarSystem =
   | 'armenian'
   | 'mixed';
 
+export type CalendarVariant =
+  | 'default'
+  | 'armenian-mother-see'
+  | 'armenian-jerusalem'
+  | 'coptic-alexandrian'
+  | 'ethiopian-bahire-hasab';
+
 export type FixedDateRule = {
   type: 'fixed';
   calendar: CalendarSystem;
+  variant?: CalendarVariant;
   month: number;
   day: number;
 };
@@ -85,6 +93,9 @@ export type FixedDateRule = {
 export type RelativeDateAnchor =
   | 'gregorian-easter'
   | 'orthodox-easter'
+  | 'coptic-easter'
+  | 'ethiopian-easter'
+  | 'armenian-easter'
   | 'pentecost'
   | 'advent-start'
   | 'christmas';
@@ -92,6 +103,7 @@ export type RelativeDateAnchor =
 export type RelativeDateRule = {
   type: 'relative';
   calendar: CalendarSystem;
+  variant?: CalendarVariant;
   anchor: RelativeDateAnchor;
   offsetDays: number;
   weekdayAdjustment?: {
@@ -103,6 +115,7 @@ export type RelativeDateRule = {
 export type AnnualPublishedDateRule = {
   type: 'annual-published';
   calendar: CalendarSystem;
+  variant?: CalendarVariant;
   sourceId: EntityId;
   fallbackRule?: FixedDateRule | RelativeDateRule;
 };
