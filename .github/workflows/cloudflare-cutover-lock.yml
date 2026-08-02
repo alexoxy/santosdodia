@@ -1,73 +1,14 @@
-name: Validate Cloudflare cutover
+name: Archived Cloudflare cutover validator
 
 on:
-  push:
-    branches:
-      - agent/cloudflare-cutover
-    paths:
-      - package.json
-      - .github/workflows/cloudflare-cutover-lock.yml
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: cloudflare-cutover-${{ github.ref }}
-  cancel-in-progress: true
+  contents: read
 
 jobs:
-  validate:
+  archived:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.ref_name }}
-          fetch-depth: 0
-
-      - name: Use Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Refresh package lock
-        run: npm install --package-lock-only --ignore-scripts --include=optional
-
-      - name: Install locked dependencies
-        run: npm ci --include=optional
-
-      - name: Audit installed runtime
-        run: npm audit --omit=dev --audit-level=high
-
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Build Next.js
-        run: npm run build
-
-      - name: Build Cloudflare Worker
-        run: npm run cloudflare:build
-
-      - name: Verify OpenNext output
-        run: |
-          test -s .open-next/worker.js
-          test -d .open-next/assets
-
-      - name: Commit refreshed lockfile
-        run: |
-          if git diff --quiet -- package-lock.json; then
-            echo "package-lock.json is already synchronized."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package-lock.json
-          git commit -m "chore(cloudflare): remove Vercel dependency from lockfile"
-          git push
+      - name: Archived
+        run: echo "Cutover validation completed; this workflow is retained inert until repository cleanup."
