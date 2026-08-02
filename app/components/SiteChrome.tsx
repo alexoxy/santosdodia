@@ -12,6 +12,10 @@ const skipLabels: Partial<Record<Locale,string>> = {
  de:'Zum Inhalt springen',it:'Vai al contenuto',pl:'Przejdź do treści',ru:'Перейти к содержимому',
  fil:'Lumaktaw sa nilalaman',sw:'Ruka hadi kwenye maudhui'
 };
+const churchLabels: Partial<Record<Locale,string>> = {
+ en:'Churches',pt:'Igrejas',es:'Iglesias',fr:'Églises',de:'Kirchen',it:'Chiese',pl:'Kościoły',
+ ru:'Церкви',fil:'Mga Simbahan',sw:'Makanisa'
+};
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
  const { locale, setLocale, copy, church, setChurch } = useLanguage();
@@ -29,7 +33,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   <main className="site-main" id="main-content" tabIndex={-1}>{children}</main>
   <footer className="site-footer"><div className="footer-grid">
    <div><div className="brand footer-brand"><span className="brand-mark small" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></div><p>{copy.footer}</p></div>
-   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
+   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
   </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><span>{copy.disclaimer}</span></div></div></footer>
   <style jsx global>{`
    .locale-coverage-notice{display:flex;align-items:center;justify-content:center;gap:10px;min-height:36px;padding:6px 16px;border-top:1px solid rgba(16,42,67,.08);background:#fff7df;color:#5f4a16;font-size:.78rem;text-align:center}
