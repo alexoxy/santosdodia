@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-08-02T23:52:29.142Z",
+  "completedAt": "2026-08-02T23:52:33.540Z",
+  "source": {
+    "id": "catholic-hierarchy",
+    "name": "Catholic-Hierarchy",
+    "baseUrl": "https://www.catholic-hierarchy.org/",
+    "host": "www.catholic-hierarchy.org",
+    "authority": "specialist-reference-directory",
+    "churchFamilies": [
+      "catholic"
+    ],
+    "coverage": [
+      "living bishops",
+      "dioceses",
+      "offices",
+      "historical succession",
+      "countries"
+    ],
+    "adapter": "catholic-hierarchy",
+    "refreshHours": 168,
+    "requestsPerSecond": 0.25,
+    "active": true
+  },
+  "options": {
+    "source": "catholic-hierarchy",
+    "country": "pt",
+    "maxCountries": 1,
+    "retainHtml": false,
+    "dryRun": false
+  },
+  "counts": {
+    "countries": 1,
+    "records": 17,
+    "events": 0,
+    "snapshots": 2,
+    "failures": 0
+  },
+  "sourceId": "catholic-hierarchy",
+  "countries": [
+    {
+      "code": "pt",
+      "name": "Portugal",
+      "url": "https://www.catholic-hierarchy.org/country/pt.html"
+    }
+  ],
+  "records": [
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:la",
+        "name": "All",
+        "externalIds": {
+          "catholic-hierarchy": "la"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/la.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:la:bishops-all",
+        "title": "Bishops All",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:ll",
+        "name": "Living",
+        "externalIds": {
+          "catholic-hierarchy": "ll"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/ll.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:ll:living",
+        "title": "Living",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:ld",
+        "name": "Deceased",
+        "externalIds": {
+          "catholic-hierarchy": "ld"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/ld.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:ld:deceased",
+        "title": "Deceased",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sage",
+        "name": "Youngest",
+        "externalIds": {
+          "catholic-hierarchy": "sage"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sage.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sage:seniority-youngest",
+        "title": "Seniority Youngest",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sage2",
+        "name": "Oldest",
+        "externalIds": {
+          "catholic-hierarchy": "sage2"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sage2.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sage2:oldest",
+        "title": "Oldest",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sordp",
+        "name": "Most Junior as Priest",
+        "externalIds": {
+          "catholic-hierarchy": "sordp"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sordp.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sordp:most-junior-as-priest",
+        "title": "Most Junior as Priest",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sordp2",
+        "name": "Most Senior as Priest",
+        "externalIds": {
+          "catholic-hierarchy": "sordp2"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sordp2.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sordp2:most-senior-as-priest",
+        "title": "Most Senior as Priest",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sordb",
+        "name": "Most Junior as Bishop",
+        "externalIds": {
+          "catholic-hierarchy": "sordb"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sordb.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sordb:most-junior-as-bishop",
+        "title": "Most Junior as Bishop",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:sordb2",
+        "name": "Most Senior as Bishop",
+        "externalIds": {
+          "catholic-hierarchy": "sordb2"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/sordb2.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:sordb2:most-senior-as-bishop",
+        "title": "Most Senior as Bishop",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:s75",
+        "name": "Active Near Age Limit",
+        "externalIds": {
+          "catholic-hierarchy": "s75"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/s75.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:s75:active-near-age-limit",
+        "title": "Active Near Age Limit",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:scardc3",
+        "name": "Electors",
+        "externalIds": {
+          "catholic-hierarchy": "scardc3"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/scardc3.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:scardc3:cardinals-electors",
+        "title": "Cardinals Electors",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:scardb3",
+        "name": "Non-Voting",
+        "externalIds": {
+          "catholic-hierarchy": "scardb3"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/scardb3.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:scardb3:non-voting",
+        "title": "Non-Voting",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:scardx1",
+        "name": "Cardinal-Bishops",
+        "externalIds": {
+          "catholic-hierarchy": "scardx1"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/scardx1.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:scardx1:cardinal-bishops",
+        "title": "Cardinal-Bishops",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:scardy1",
+        "name": "Cardinal-Priests",
+        "externalIds": {
+          "catholic-hierarchy": "scardy1"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/scardy1.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:scardy1:cardinal-priests",
+        "title": "Cardinal-Priests",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:scardz1",
+        "name": "Cardinal-Deacons",
+        "externalIds": {
+          "catholic-hierarchy": "scardz1"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/scardz1.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:scardz1:cardinal-deacons",
+        "title": "Cardinal-Deacons",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:spope0",
+        "name": "Popes",
+        "externalIds": {
+          "catholic-hierarchy": "spope0"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/spope0.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:spope0:popes",
+        "title": "Popes",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    },
+    {
+      "recordType": "current-office-reference",
+      "person": {
+        "id": "person:catholic-hierarchy:bvacant",
+        "name": "Vacant",
+        "externalIds": {
+          "catholic-hierarchy": "bvacant"
+        },
+        "sourceUrl": "https://www.catholic-hierarchy.org/bishop/bvacant.html"
+      },
+      "office": {
+        "id": "office:catholic-hierarchy:bvacant:vacant",
+        "title": "Vacant",
+        "status": "provisional"
+      },
+      "geography": {
+        "countryCode": "PT",
+        "countryName": "Portugal"
+      },
+      "source": {
+        "id": "catholic-hierarchy",
+        "url": "https://www.catholic-hierarchy.org/country/bptqv.html",
+        "confidence": "provisional"
+      }
+    }
+  ],
+  "events": [],
+  "snapshots": [
+    {
+      "sourceId": "catholic-hierarchy",
+      "sourceUrl": "https://www.catholic-hierarchy.org/country/",
+      "retrievedAt": "2026-08-02T23:52:29.535Z",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "lastModified": "Sat, 01 Aug 2026 00:24:16 GMT",
+      "contentHash": "55275980d2dcfaa20127aa1aa8f59b655b20aa58328f946693d522f2736c0f96"
+    },
+    {
+      "sourceId": "catholic-hierarchy",
+      "sourceUrl": "https://www.catholic-hierarchy.org/country/bptqv.html",
+      "retrievedAt": "2026-08-02T23:52:33.538Z",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "lastModified": "Tue, 28 Jul 2026 13:29:47 GMT",
+      "contentHash": "8cda69e2dcea094d4b24d532ed77b3d9faaf467c54b17de236773f5ec2241a3f"
+    }
+  ],
+  "failures": []
+}
