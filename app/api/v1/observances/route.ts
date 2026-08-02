@@ -4,12 +4,14 @@ import { normalizeLocale } from '../../../../lib/i18n';
 import { displayObservanceName, displayPatronages } from '../../../../lib/locale-display';
 import { getChurchObservances } from '../../../../lib/church-sources';
 
+const emptyImport={data:[],sourceHealth:[],publication:{received:0,published:0,withheld:0,reasons:{}}};
+
 export async function GET(request: NextRequest) {
  const p=request.nextUrl.searchParams;const locale=normalizeLocale(p.get('locale')??request.headers.get('accept-language'));const now=new Date();const year=Number(p.get('year')??now.getUTCFullYear());const month=p.has('month')?Number(p.get('month')):undefined;const date=p.get('date')??undefined;const live=p.get('live')!=='0';
  const filters={tradition:parseTradition(p.get('tradition')),category:parseCategory(p.get('category')),country:p.get('country')??undefined,patronage:p.get('patronage')??undefined};
  if(!Number.isInteger(year)||year<1900||year>2200)return Response.json({error:'Invalid year.'},{status:400});if(month!==undefined&&(!Number.isInteger(month)||month<1||month>12))return Response.json({error:'Invalid month.'},{status:400});
  const curated=date?getObservancesForDate(date,locale,filters):month?getMonthlyObservances(year,month-1,locale,filters):getAllObservances(year,locale,filters);
- const imported=live?await getChurchObservances(year,locale,filters,{month,date}):{data:[],sourceHealth:[]};const merged=mergeObservances(curated,imported.data);
+ const imported=live?await getChurchObservances(year,locale,filters,{month,date}):emptyImport;const merged=mergeObservances(curated,imported.data);
  const data=merged.map(item=>({...item,originalName:item.name,name:displayObservanceName(item.names,locale,item.name),summary:item.summaries?.[locale]??item.summary,patronages:displayPatronages(item.patronages,locale)})).filter(item=>Boolean(item.name));
- return Response.json({data,meta:{year,month,date,locale,count:data.length,withheldForTranslation:merged.length-data.length,filters,live,sourceHealth:imported.sourceHealth,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}})
+ return Response.json({data,meta:{year,month,date,locale,count:data.length,withheldForTranslation:merged.length-data.length,filters,live,sourceHealth:imported.sourceHealth,publication:imported.publication,generatedAt:new Date().toISOString()}},{headers:{'Cache-Control':'public, s-maxage=1800, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}})
 }
