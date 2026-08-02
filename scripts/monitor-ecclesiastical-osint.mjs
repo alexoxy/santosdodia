@@ -50,7 +50,6 @@ function extractSections(html) {
   const paragraphs = htmlToParagraphs(html);
   const sections = [];
   let current;
-
   for (const paragraph of paragraphs) {
     if (isChangeHeading(paragraph)) {
       if (current?.body.length) sections.push(current);
@@ -72,6 +71,26 @@ function extractSections(html) {
     });
 }
 
+async function readLimitedBody(response, url) {
+  const declaredLength = Number(response.headers.get('content-length') ?? 0);
+  if (declaredLength > MAX_BYTES) throw new Error(`Declared response exceeds ${MAX_BYTES} bytes: ${url}`);
+  if (!response.body) return Buffer.alloc(0);
+  const reader = response.body.getReader();
+  const chunks = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > MAX_BYTES) {
+      await reader.cancel();
+      throw new Error(`Response exceeds ${MAX_BYTES} bytes: ${url}`);
+    }
+    chunks.push(Buffer.from(value));
+  }
+  return Buffer.concat(chunks, total);
+}
+
 async function fetchText(url) {
   const parsed = new URL(url);
   if (!ALLOWED_HOSTS.has(parsed.hostname)) throw new Error(`Host not allowed: ${parsed.hostname}`);
@@ -86,9 +105,10 @@ async function fetchText(url) {
         'user-agent': 'SantosDoDia-OSINT-Monitor/1.0 (+https://www.santosdodia.com/copyright)'
       }
     });
+    const finalUrl = new URL(response.url);
+    if (!ALLOWED_HOSTS.has(finalUrl.hostname)) throw new Error(`Redirected host not allowed: ${finalUrl.hostname}`);
     if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
-    const buffer = Buffer.from(await response.arrayBuffer());
-    if (buffer.byteLength > MAX_BYTES) throw new Error(`Response exceeds ${MAX_BYTES} bytes: ${url}`);
+    const buffer = await readLimitedBody(response, url);
     return {
       text: buffer.toString('utf8'),
       etag: response.headers.get('etag') ?? undefined,
@@ -116,9 +136,19 @@ function dateFromUrl(url) {
   return match ? `${match[1]}-${match[2]}-${match[3]}` : undefined;
 }
 
-function contentFingerprint(indexHash, documents, failures) {
+function targetMonths(now) {
+  if (process.env.OSINT_YEAR && process.env.OSINT_MONTH) {
+    return [{ year: String(process.env.OSINT_YEAR), month: String(process.env.OSINT_MONTH).padStart(2, '0') }];
+  }
+  return [-1, 0].map(offset => {
+    const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + offset, 1));
+    return { year: String(date.getUTCFullYear()), month: String(date.getUTCMonth() + 1).padStart(2, '0') };
+  });
+}
+
+function contentFingerprint(indexes, documents, failures) {
   return sha256(JSON.stringify({
-    indexHash,
+    indexes: indexes.map(index => ({ url: index.url, contentHash: index.contentHash })),
     documents: documents.map(document => ({
       url: document.url,
       publishedAt: document.publishedAt,
@@ -140,20 +170,27 @@ async function existingFingerprint(filePath) {
 
 async function main() {
   const now = new Date();
-  const year = String(process.env.OSINT_YEAR ?? now.getUTCFullYear());
-  const month = String(process.env.OSINT_MONTH ?? now.getUTCMonth() + 1).padStart(2, '0');
-  const indexUrl = `https://press.vatican.va/content/salastampa/en/bollettino/pubblico/${year}/${month}.html`;
-  const fetchedAt = new Date().toISOString();
-  const index = await fetchText(indexUrl);
-  const indexHash = sha256(index.text);
-  const links = bulletinLinks(index.text, indexUrl);
-  const documents = [];
+  const fetchedAt = now.toISOString();
+  const indexes = [];
+  const allLinks = [];
   const failures = [];
 
-  for (const url of links) {
+  for (const target of targetMonths(now)) {
+    const url = `https://press.vatican.va/content/salastampa/en/bollettino/pubblico/${target.year}/${target.month}.html`;
+    try {
+      const index = await fetchText(url);
+      indexes.push({ url, contentHash: sha256(index.text), etag: index.etag, lastModified: index.lastModified });
+      allLinks.push(...bulletinLinks(index.text, url));
+    } catch (error) {
+      failures.push({ url, stage: 'index', error: error instanceof Error ? error.message : String(error) });
+    }
+  }
+
+  if (!indexes.length) throw new Error('No official source index could be fetched.');
+  const documents = [];
+  for (const url of [...new Set(allLinks)]) {
     try {
       const page = await fetchText(url);
-      const sections = extractSections(page.text);
       documents.push({
         sourceId: 'holy-see-bulletin',
         url,
@@ -162,32 +199,32 @@ async function main() {
         etag: page.etag,
         lastModified: page.lastModified,
         contentType: page.contentType,
-        sections
+        sections: extractSections(page.text)
       });
     } catch (error) {
-      failures.push({ url, error: error instanceof Error ? error.message : String(error) });
+      failures.push({ url, stage: 'document', error: error instanceof Error ? error.message : String(error) });
     }
   }
 
+  indexes.sort((a, b) => a.url.localeCompare(b.url));
   documents.sort((a, b) => a.url.localeCompare(b.url));
-  failures.sort((a, b) => a.url.localeCompare(b.url));
-  const fingerprint = contentFingerprint(indexHash, documents, failures);
+  failures.sort((a, b) => `${a.url}:${a.stage}`.localeCompare(`${b.url}:${b.stage}`));
+  const fingerprint = contentFingerprint(indexes, documents, failures);
   await mkdir(OUTPUT_DIR, { recursive: true });
   const filePath = path.join(OUTPUT_DIR, 'holy-see-latest.json');
   const previousFingerprint = await existingFingerprint(filePath);
-
   if (previousFingerprint === fingerprint) {
-    console.log(`No source changes detected for ${year}-${month}.`);
+    console.log('No official source changes detected across the monitored month boundary.');
     return;
   }
 
   const output = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     sourceId: 'holy-see-bulletin',
-    indexUrl,
+    indexUrls: indexes.map(index => index.url),
     fetchedAt,
     contentFingerprint: fingerprint,
-    indexHash,
+    indexes,
     documentCount: documents.length,
     sectionCount: documents.reduce((sum, document) => sum + document.sections.length, 0),
     failureCount: failures.length,
@@ -197,8 +234,7 @@ async function main() {
 
   await writeFile(filePath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
   console.log(`Wrote ${filePath}: ${output.documentCount} documents, ${output.sectionCount} sections, ${output.failureCount} failures.`);
-
-  if (!documents.length && links.length) process.exitCode = 2;
+  if (!documents.length && allLinks.length) process.exitCode = 2;
 }
 
 main().catch(error => {
