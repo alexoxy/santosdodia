@@ -13,7 +13,9 @@ on:
       - 'scripts/validate-language-quality.mjs'
       - 'scripts/audit-languagetool.mjs'
       - 'scripts/audit-data-quality.mjs'
+      - 'scripts/audit-claim-evidence.mjs'
       - 'data/language-authorities.json'
+      - 'data/editorial-claim-evidence.json'
       - 'lib/language-quality.ts'
       - 'lib/locale-display.ts'
       - '.github/workflows/update-litcal-mirror.yml'
@@ -67,6 +69,9 @@ jobs:
       - name: Audit curated data and generated snapshot schema
         run: npm run data:audit
 
+      - name: Audit claim-specific editorial evidence
+        run: npm run claims:audit
+
       - name: Run advisory grammar and spelling audit
         continue-on-error: true
         env:
@@ -88,4 +93,6 @@ jobs:
             exit 0
           fi
           git commit -m 'Update LitCal mirror and validated translations'
-          git push
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
