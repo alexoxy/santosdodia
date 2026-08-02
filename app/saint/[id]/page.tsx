@@ -1,8 +1,95 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import SaintProfile from '../../components/SaintProfile';
 import { getAllObservances } from '../../../data/observances';
 import { getObservanceById } from '../../../data/discovery';
+import { SITE_ORIGIN } from '../../../lib/site';
 
-export function generateStaticParams(){const year=new Date().getUTCFullYear();return getAllObservances(year).map(item=>({id:item.id}))}
-export async function generateMetadata({params}:{params:Promise<{id:string}>}):Promise<Metadata>{const{id}=await params;const item=getObservanceById(id,new Date().getUTCFullYear(),'en');return item?{title:item.name,description:`Feast date, Christian traditions, patronages, sources and an individual calendar feed for ${item.name}.`,alternates:{canonical:`/saint/${id}`}}:{title:'Saint not found'}}
-export default async function SaintPage({params}:{params:Promise<{id:string}>}){const{id}=await params;return <SaintProfile id={id}/>}
+const YEAR = new Date().getUTCFullYear();
+
+export function generateStaticParams() {
+  return getAllObservances(YEAR).map(item => ({ id: item.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const item = getObservanceById(id, YEAR, 'en');
+  if (!item) return { title: 'Saint not found' };
+  const description = item.summary ?? `Feast date, Christian traditions, patronages and calendar information for ${item.name}.`;
+  const canonical = `/saint/${id}`;
+  const keywords = [...new Set([
+    item.name,
+    ...Object.values(item.names).filter((value): value is string => Boolean(value)),
+    ...(item.patronages ?? []),
+    ...item.traditions
+  ])];
+  return {
+    title: item.name,
+    description,
+    keywords,
+    alternates: { canonical },
+    openGraph: { title: item.name, description, url: canonical, type: 'profile' },
+    twitter: { card: 'summary', title: item.name, description }
+  };
+}
+
+export default async function SaintPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const item = getObservanceById(id, YEAR, 'en');
+  if (!item) notFound();
+
+  const url = `${SITE_ORIGIN}/saint/${id}`;
+  const alternateNames = [...new Set(Object.values(item.names).filter((value): value is string => Boolean(value) && value !== item.name))];
+  const properties = [
+    { name: 'Feast date', value: item.dateISO },
+    { name: 'Category', value: item.category },
+    { name: 'Calendar system', value: item.calendarSystem },
+    { name: 'Christian traditions', value: item.traditions.join(', ') },
+    ...(item.patronages?.length ? [{ name: 'Patronages', value: item.patronages.join(', ') }] : []),
+    ...(item.countries?.length ? [{ name: 'Geographic scope', value: item.countries.join(', ') }] : [])
+  ];
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfilePage',
+        '@id': url,
+        url,
+        name: item.name,
+        description: item.summary,
+        mainEntity: { '@id': `${url}#observance` },
+        isPartOf: { '@type': 'WebSite', '@id': `${SITE_ORIGIN}/#website`, name: 'Santos do Dia', url: SITE_ORIGIN }
+      },
+      {
+        '@type': 'DefinedTerm',
+        '@id': `${url}#observance`,
+        name: item.name,
+        alternateName: alternateNames,
+        description: item.summary,
+        identifier: item.id,
+        termCode: item.id,
+        inDefinedTermSet: {
+          '@type': 'DefinedTermSet',
+          name: 'Santos do Dia Christian observances',
+          url: `${SITE_ORIGIN}/calendar`
+        },
+        additionalProperty: properties.map(property => ({
+          '@type': 'PropertyValue',
+          name: property.name,
+          value: property.value
+        })),
+        subjectOf: {
+          '@type': 'DataDownload',
+          name: `${item.name} calendar feed`,
+          encodingFormat: 'text/calendar',
+          contentUrl: `${SITE_ORIGIN}/api/ical/saint/${item.id}`
+        }
+      }
+    ]
+  };
+
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <SaintProfile id={id} />
+  </>;
+}
