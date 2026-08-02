@@ -37,6 +37,19 @@ export const JURISDICTIONS: Jurisdiction[] = [
     sourceIds: ['oca-world-churches']
   },
   {
+    id: 'jurisdiction:oca:metropolitan-see',
+    churchId: 'church:orthodox-church-america',
+    level: 'autocephalous-church',
+    name: name({ en: 'Orthodox Church in America', pt: 'Igreja Ortodoxa na América', es: 'Iglesia Ortodoxa en América', fr: 'Église orthodoxe en Amérique' }, 'official'),
+    geography: [
+      { level: 'country', code: 'US' },
+      { level: 'country', code: 'CA' },
+      { level: 'country', code: 'MX' }
+    ],
+    officialUrl: 'https://www.oca.org/',
+    sourceIds: ['oca-world-churches', 'oca-calendar']
+  },
+  {
     id: 'jurisdiction:anglican:communion',
     churchId: 'church:anglican',
     level: 'global-church',
