@@ -1,0 +1,58 @@
+name: Cloudflare portability
+
+on:
+  push:
+    branches:
+      - agent/cloudflare-portability
+      - cloudflare-preview
+    paths:
+      - package.json
+      - package-lock.json
+      - .npmrc
+      - .node-version
+      - wrangler.jsonc
+      - open-next.config.ts
+      - public/_headers
+      - next.config.ts
+      - app/**
+      - lib/**
+      - data/**
+      - .github/workflows/cloudflare-portability.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-portability-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit installed runtime
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Build Cloudflare Worker
+        run: npm run cloudflare:build
+
+      - name: Verify OpenNext output
+        run: |
+          test -s .open-next/worker.js
+          test -d .open-next/assets
+          echo "Worker output: $(du -h .open-next/worker.js | cut -f1)"
+          echo "Static assets: $(find .open-next/assets -type f | wc -l) files"
