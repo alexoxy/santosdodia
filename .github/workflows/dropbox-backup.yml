@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Require Dropbox configuration
+      - name: Check Dropbox configuration
+        id: config
         shell: bash
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -32,17 +33,22 @@ jobs:
           [[ -n "$DROPBOX_APP_KEY" ]] || missing+=(DROPBOX_APP_KEY)
           [[ -n "$DROPBOX_APP_SECRET" ]] || missing+=(DROPBOX_APP_SECRET)
           [[ -n "$DROPBOX_REFRESH_TOKEN" ]] || missing+=(DROPBOX_REFRESH_TOKEN)
+
           if (( ${#missing[@]} > 0 )); then
-            printf 'Missing required repository secrets: %s\n' "${missing[*]}" >&2
-            exit 1
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            printf '::notice::Dropbox backup is inactive. Missing repository secrets: %s\n' "${missing[*]}"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Checkout complete history
+        if: steps.config.outputs.enabled == 'true'
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Create verified backup files
+        if: steps.config.outputs.enabled == 'true'
         id: archive
         shell: bash
         run: |
@@ -94,6 +100,7 @@ jobs:
           echo "checksums=$checksums" >> "$GITHUB_OUTPUT"
 
       - name: Obtain short-lived Dropbox token
+        if: steps.config.outputs.enabled == 'true'
         shell: bash
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -115,6 +122,7 @@ jobs:
           printf '%s' "$token" > /tmp/dropbox-access-token
 
       - name: Upload backup set to Dropbox
+        if: steps.config.outputs.enabled == 'true'
         shell: bash
         env:
           BUNDLE: ${{ steps.archive.outputs.bundle }}
