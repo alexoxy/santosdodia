@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { JURISDICTIONS, jurisdictionById } from '../../../data/knowledge/jurisdictions';
 import { churchById } from '../../../data/knowledge/churches';
 import { activeOfficesForJurisdiction, officeHolder } from '../../../data/knowledge/ecclesiastical-state';
+import { JURISDICTIONS, jurisdictionById } from '../../../data/knowledge/jurisdictions';
 import { ecclesiasticalPageCopy, officeLabel } from '../../../lib/knowledge/ecclesiastical-display';
 import { jurisdictionBreadcrumbs } from '../../../lib/knowledge/jurisdiction-resolver';
-import { churchPath, jurisdictionBySlug, jurisdictionPath, localizedFieldValue } from '../../../lib/knowledge/routes';
+import { churchPath, jurisdictionBySlug, jurisdictionPath, localizedFieldValue, personPath } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
 
@@ -24,11 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       : locale === 'fr'
         ? `${name} : juridiction ecclésiale, Église, territoire, direction et contexte calendaire dans Santos do Dia.`
         : `${name}: ecclesiastical jurisdiction, Church, territory, leadership and calendar context in Santos do Dia.`;
+  const canonical = jurisdictionPath(jurisdiction);
   return {
     title: name,
     description,
-    alternates: { canonical: jurisdictionPath(jurisdiction) },
-    openGraph: { type: 'website', title: name, description, url: `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}` }
+    alternates: { canonical },
+    openGraph: { type: 'website', title: name, description, url: `${SITE_ORIGIN}${canonical}` },
+    twitter: { card: 'summary', title: name, description }
   };
 }
 
@@ -42,7 +44,9 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
   const name = localizedFieldValue(jurisdiction.name, locale);
   const churchName = localizedFieldValue(church.name, locale);
   const breadcrumbs = jurisdictionBreadcrumbs(jurisdiction);
-  const children = JURISDICTIONS.filter(candidate => candidate.parentJurisdictionId === jurisdiction.id);
+  const children = JURISDICTIONS
+    .filter(candidate => candidate.parentJurisdictionId === jurisdiction.id)
+    .sort((a, b) => localizedFieldValue(a.name, locale).localeCompare(localizedFieldValue(b.name, locale), locale));
   const parent = jurisdiction.parentJurisdictionId ? jurisdictionById(jurisdiction.parentJurisdictionId) : undefined;
   const offices = activeOfficesForJurisdiction(jurisdiction.id);
   const leaders = offices.map(office => ({ office, person: officeHolder(office) })).filter(item => item.person);
@@ -53,6 +57,7 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
     '@id': `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}#organization`,
     name,
     url: `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}`,
+    ...(jurisdiction.officialUrl ? { sameAs: jurisdiction.officialUrl } : {}),
     parentOrganization: parent ? {
       '@type': 'Organization',
       name: localizedFieldValue(parent.name, locale),
@@ -66,6 +71,7 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
     member: leaders.map(({ office, person }) => ({
       '@type': 'Person',
       name: localizedFieldValue(person!.name, locale),
+      url: `${SITE_ORIGIN}${personPath(person!)}`,
       jobTitle: officeLabel(office.officeType, locale)
     })),
     subOrganization: children.map(child => ({
@@ -94,8 +100,8 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
     <section className="search-card">
       <div className="section-heading compact"><div><span className="eyebrow">{ui.currentLeadership}</span><h2>{ui.currentLeadership}</h2></div></div>
       {leaders.length ? <div className="result-grid">{leaders.map(({ office, person }) => <article className="result-card" key={office.id}>
-        <div className="result-meta"><span>{officeLabel(office.officeType, locale)}</span><span>{office.status}</span></div>
-        <h2>{localizedFieldValue(person!.name, locale)}</h2>
+        <div className="result-meta"><span>{officeLabel(office.officeType, locale)}</span><span>{ui.active}</span></div>
+        <h2><Link href={personPath(person!)}>{localizedFieldValue(person!.name, locale)}</Link></h2>
         <div className="tag-row">
           {office.appointedAt ? <span>{ui.officeSince}: {dateFormatter.format(new Date(`${office.appointedAt}T00:00:00Z`))}</span> : null}
           {office.installedAt ? <span>{ui.installed}: {dateFormatter.format(new Date(`${office.installedAt}T00:00:00Z`))}</span> : null}
@@ -108,22 +114,23 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
       <div className="feature-grid">
         <article className="feature-card">
           <span className="feature-number">01</span><h3>{churchName}</h3>
-          <p>Christian tradition and calendar family.</p>
+          <p>{ui.traditionAndCalendar}</p>
           <Link className="text-link" href={churchPath(church)}>{ui.openChurch} →</Link>
         </article>
         <article className="feature-card">
           <span className="feature-number">02</span><h3>{jurisdiction.level.replaceAll('-', ' ')}</h3>
-          <p>Canonical level represented by this record.</p>
+          <p>{ui.canonicalLevel}</p>
         </article>
         <article className="feature-card">
           <span className="feature-number">03</span><h3>{jurisdiction.geography.map(scope => scope.code).join(' · ')}</h3>
-          <p>Geographic scope used to determine which local celebrations apply.</p>
+          <p>{ui.geographicScope}</p>
         </article>
         <article className="feature-card">
           <span className="feature-number">04</span><h3>{children.length}</h3>
-          <p>Direct child jurisdiction{children.length === 1 ? '' : 's'} currently modelled.</p>
+          <p>{ui.modelledChildren}</p>
         </article>
       </div>
+      {jurisdiction.officialUrl ? <p><a className="text-link" href={jurisdiction.officialUrl} rel="noreferrer" target="_blank">{ui.officialWebsite} ↗</a></p> : null}
     </section>
 
     {children.length ? <section className="search-card">
