@@ -45,6 +45,24 @@ export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
     notes: 'Reference implementation for Roman calendar calculations and territorial calendars.'
   },
   {
+    id: 'portuguese-episcopal-conference-directory',
+    name: 'Portuguese Episcopal Conference diocesan directory',
+    url: 'https://www.conferenciaepiscopal.pt/v1/dioceses/',
+    churchFamily: 'catholic',
+    role: 'authority', methods: ['html'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Official Portuguese ecclesiastical provinces, dioceses, office holders and institutional contacts.'
+  },
+  {
+    id: 'leiria-fatima-diocese',
+    name: 'Diocese of Leiria-Fátima',
+    url: 'https://www.leiria-fatima.pt/diocese/',
+    churchFamily: 'catholic',
+    role: 'authority', methods: ['html', 'pdf'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Official diocesan history, jurisdiction, appointments, parishes, local patrons and celebrations.'
+  },
+  {
     id: 'oca-calendar',
     name: 'Orthodox Church in America calendar and directory',
     url: 'https://www.oca.org/calendar',
@@ -52,6 +70,15 @@ export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
     role: 'authority', methods: ['html'], storagePolicy: 'structured-facts',
     licenceStatus: 'official-publication', cadence: 'weekly',
     notes: 'Daily commemorations, readings, movable cycles and ecclesiastical directories.'
+  },
+  {
+    id: 'oca-world-churches',
+    name: 'Orthodox Church in America world churches directory',
+    url: 'https://www.oca.org/directories/world-churches',
+    churchFamily: 'eastern-orthodox',
+    role: 'verification', methods: ['html'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Index of autocephalous and autonomous Orthodox Churches, primates and official websites.'
   },
   {
     id: 'goarch-calendar',
@@ -72,6 +99,24 @@ export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
     notes: 'Official feasts, festivals, commemorations and calendar rules.'
   },
   {
+    id: 'anglican-communion-directory',
+    name: 'Anglican Communion directory',
+    url: 'https://www.anglicancommunion.org/structures/member-churches.aspx',
+    churchFamily: 'anglican',
+    role: 'authority', methods: ['html'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Official member Churches, provinces, dioceses, people and institutions across the Communion.'
+  },
+  {
+    id: 'coptic-orthodox-dioceses',
+    name: 'Coptic Orthodox Church dioceses',
+    url: 'https://copticorthodox.church/en/dioceses/',
+    churchFamily: 'oriental-orthodox',
+    role: 'authority', methods: ['html'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Official diocesan directory and current bishops and metropolitans.'
+  },
+  {
     id: 'mother-see-etchmiadzin',
     name: 'Mother See of Holy Etchmiadzin',
     url: 'https://www.armenianchurch.org/en/Liturgical-Calendar/',
@@ -79,6 +124,15 @@ export const KNOWLEDGE_SOURCES: KnowledgeSource[] = [
     role: 'authority', methods: ['html', 'pdf'], storagePolicy: 'structured-facts',
     licenceStatus: 'official-publication', cadence: 'weekly',
     notes: 'Armenian Apostolic liturgical calendar and official announcements.'
+  },
+  {
+    id: 'mother-see-dioceses',
+    name: 'Mother See of Holy Etchmiadzin diocesan directory',
+    url: 'https://www.armenianchurch.org/en/Dioceses/',
+    churchFamily: 'oriental-orthodox',
+    role: 'authority', methods: ['html'], storagePolicy: 'structured-facts',
+    licenceStatus: 'official-publication', cadence: 'weekly',
+    notes: 'Official Armenian Apostolic dioceses in Armenia and the diaspora.'
   },
   {
     id: 'ethiopian-orthodox-calendar',
