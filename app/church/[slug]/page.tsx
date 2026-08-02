@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { CHURCHES } from '../../../data/knowledge/churches';
 import { jurisdictionsForChurch } from '../../../data/knowledge/jurisdictions';
 import { activeOfficesForJurisdiction, officeHolder } from '../../../data/knowledge/ecclesiastical-state';
 import { ecclesiasticalPageCopy, officeLabel } from '../../../lib/knowledge/ecclesiastical-display';
-import { churchBySlug, churchPath, entitySlug, jurisdictionPath, localizedFieldValue } from '../../../lib/knowledge/routes';
+import { churchBySlug, churchPath, jurisdictionPath, localizedFieldValue } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
 
-export function generateStaticParams() {
-  return CHURCHES.map(church => ({ slug: entitySlug(church.id) }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const [{ slug }, locale] = await Promise.all([params, serverLocale()]);
