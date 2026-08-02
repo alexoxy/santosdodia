@@ -33,7 +33,7 @@ function slug(value){return value.toLowerCase().normalize('NFD').replace(/[\u030
 function links(html,baseUrl){
  const output=[];
  for(const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
-  try{output.push({url:new URL(match[1],baseUrl).toString(),text:stripTags(match[2])})}catch{/* invalid link */}
+  try{output.push({url:new URL(match[1],baseUrl).toString(),text:stripTags(match[2]),index:match.index??0,end:(match.index??0)+match[0].length})}catch{/* invalid link */}
  }
  return output;
 }
@@ -96,19 +96,40 @@ function countryEntries(html,baseUrl){
  }
  return [...entries.values()];
 }
+function localListItem(html,link){
+ const start=html.lastIndexOf('<li',link.index);
+ const end=html.indexOf('</li>',link.end);
+ if(start<0||end<0)return html.slice(Math.max(0,link.index-500),Math.min(html.length,link.end+500));
+ return html.slice(start,end+5);
+}
+function withoutMetrics(value){
+ return value.replace(/\s*\([^)]*\d[^)]*\)\s*$/,'').replace(/\s+/g,' ').trim();
+}
+function officeTitle(line,personName,jurisdictionName){
+ const clean=withoutMetrics(line);
+ const position=clean.indexOf(personName);
+ const suffix=position>=0?clean.slice(position+personName.length).replace(/^[\s,:;–—-]+/,'').trim():'';
+ if(suffix)return suffix;
+ return jurisdictionName?`Current office holder of ${jurisdictionName}`:'Current ecclesiastical office holder';
+}
 function parseCatholicHierarchyLeaders(html,pageUrl,country){
  const records=[];
- for(const match of html.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gi)){
-  const block=match[1],blockLinks=links(block,pageUrl);
-  const personLink=blockLinks.find(item=>/\/bishop\/[^/]+\.html$/i.test(new URL(item.url).pathname));
-  if(!personLink)continue;
-  const jurisdictionLink=blockLinks.find(item=>/\/diocese\/[^/]+\.html$/i.test(new URL(item.url).pathname));
+ const personLinks=links(html,pageUrl).filter(item=>{
+  const pathname=new URL(item.url).pathname;
+  const id=externalId(item.url);
+  return /^\/bishop\/b[^/]+\.html$/i.test(pathname)&&/^b[a-z0-9_-]+$/i.test(id)&&item.text.length>=4;
+ });
+ for(const personLink of personLinks){
+  const block=localListItem(html,personLink),blockLinks=links(block,pageUrl);
+  const jurisdictionLink=blockLinks.find(item=>/^\/diocese\/d[^/]+\.html$/i.test(new URL(item.url).pathname));
   const line=stripTags(block);if(!line)continue;
   const personExternalId=externalId(personLink.url),jurisdictionExternalId=jurisdictionLink?externalId(jurisdictionLink.url):undefined;
+  const jurisdictionName=jurisdictionLink?.text||line.slice(0,Math.max(0,line.indexOf(':'))).trim()||undefined;
+  const title=officeTitle(line,personLink.text,jurisdictionName);
   records.push({
    recordType:'current-office-reference',
    person:{id:`person:catholic-hierarchy:${personExternalId}`,name:personLink.text,externalIds:{'catholic-hierarchy':personExternalId},sourceUrl:personLink.url},
-   office:{id:`office:catholic-hierarchy:${personExternalId}:${jurisdictionExternalId??slug(line)}`,title:line,jurisdictionExternalId,jurisdictionName:jurisdictionLink?.text,status:'provisional'},
+   office:{id:`office:catholic-hierarchy:${personExternalId}:${jurisdictionExternalId??slug(title)}`,title,jurisdictionExternalId,jurisdictionName,status:'provisional'},
    geography:{countryCode:country.code.toUpperCase(),countryName:country.name},
    source:{id:'catholic-hierarchy',url:pageUrl,confidence:'provisional'}
   });
@@ -134,7 +155,7 @@ async function syncCatholicHierarchy(source,options){
  const records=[],failures=[];
  for(const country of countries){
   const url=new URL(`/country/b${country.code}qv.html`,source.baseUrl).toString();
-  try{const page=await fetchPage(source,url);snapshots.push(await persistSnapshot(source,page,options.retainHtml));records.push(...parseCatholicHierarchyLeaders(page.body,page.url,country));console.log(`OK ${country.code}: ${records.length} cumulative office references`)}
+  try{const page=await fetchPage(source,url);snapshots.push(await persistSnapshot(source,page,options.retainHtml));const parsed=parseCatholicHierarchyLeaders(page.body,page.url,country);if(!parsed.length)throw new Error('No real bishop profile links were parsed');records.push(...parsed);console.log(`OK ${country.code}: ${parsed.length} office references`)}
   catch(error){failures.push({country:country.code,url,error:error instanceof Error?error.message:String(error)});console.warn(`FAILED ${country.code}: ${failures.at(-1).error}`)}
  }
  return{sourceId:source.id,countries,records,events:[],snapshots,failures};
