@@ -25,6 +25,9 @@ cloudflare-env.d.ts
 # production
 /build
 
+# private source snapshots
+/data/generated/ecclesiastical-directory/snapshots/
+
 # misc
 .DS_Store
 *.pem
