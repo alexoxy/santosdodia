@@ -51,10 +51,11 @@ Work:
 
 - make `main` the definitive production branch in Cloudflare;
 - verify the canonical host, redirects, static assets and Cloudflare Worker runtime;
-- run the full quality gate: typecheck, lint, Next.js build and OpenNext build;
+- run the full quality gate: data audit, typecheck, lint, Next.js build and OpenNext build;
 - verify all documented public endpoints against production behaviour;
 - remove stale Vercel references and keep the retired Dropbox workflow removed;
 - record the current dataset size, language coverage, source coverage and known gaps;
+- enforce publication gates so unreviewed imports do not appear as verified content;
 - avoid blind release retries: every failed release must produce an identified cause before another attempt.
 
 Exit criteria:
@@ -62,7 +63,9 @@ Exit criteria:
 - one successful production deployment from the intended branch;
 - canonical domain and API/ICS endpoints validated;
 - documentation matches the deployed architecture;
-- baseline data-quality report committed to the repository.
+- baseline data-quality report committed to the repository;
+- minimum verified-profile standard documented;
+- dynamic publication policy enforced by the quality pipeline.
 
 ### P1 — Trusted data foundation
 
