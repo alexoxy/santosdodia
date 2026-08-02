@@ -1,1 +1,6 @@
-import type { Metadata } from 'next';import DayView from '../../components/DayView';export const metadata:Metadata={title:'Daily Observances',description:'Catholic and Orthodox saints and feasts for a selected date.'};export default async function DayPage({params}:{params:Promise<{date:string}>}){const{date}=await params;return <DayView dateISO={date}/>}
+import { permanentRedirect } from 'next/navigation';
+
+export default async function LegacyDayPage({ params }: { params: Promise<{ date: string }> }) {
+  const { date } = await params;
+  permanentRedirect(`/day/${date}`);
+}
