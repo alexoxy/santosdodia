@@ -56,6 +56,8 @@ jobs:
           fi
 
       - name: Mirror structured LitCal responses
+        env:
+          LITCAL_MIN_AVAILABLE_RATIO: '0.8'
         run: npm run litcal:sync
 
       - name: Build multilingual observance catalogue
@@ -93,6 +95,20 @@ jobs:
             exit 0
           fi
           git commit -m 'Update LitCal mirror and validated translations'
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+
+          for attempt in 1 2 3; do
+            echo "Publishing generated data, attempt ${attempt}/3..."
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo 'Generated data conflicts with newer main changes; refusing automatic conflict resolution.'
+              git rebase --abort || true
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo 'Unable to publish generated data after three concurrent-update retries.'
+          exit 1
