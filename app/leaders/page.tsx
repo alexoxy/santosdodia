@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import LeadersExplorer, { type LeaderDirectoryRow } from '../components/LeadersExplorer';
 import { ECCLESIASTICAL_OFFICES, ECCLESIASTICAL_PEOPLE } from '../../data/knowledge/ecclesiastical-state';
 import { jurisdictionById } from '../../data/knowledge/jurisdictions';
 import { churchById } from '../../data/knowledge/churches';
@@ -11,10 +11,10 @@ import { SITE_ORIGIN } from '../../lib/site';
 export const dynamic = 'force-dynamic';
 
 const copy = {
-  en: { title: 'Christian leaders and current office holders', intro: 'Verified current ecclesiastical roles published from official Church and jurisdiction sources.', eyebrow: 'Churches · jurisdictions · offices', open: 'Open leader profile', directory: 'Verified directory' },
-  pt: { title: 'Líderes cristãos e titulares atuais', intro: 'Cargos eclesiais atuais verificados a partir de fontes oficiais das Igrejas e jurisdições.', eyebrow: 'Igrejas · jurisdições · cargos', open: 'Abrir perfil do líder', directory: 'Diretório verificado' },
-  es: { title: 'Líderes cristianos y titulares actuales', intro: 'Cargos eclesiásticos actuales verificados a partir de fuentes oficiales de Iglesias y jurisdicciones.', eyebrow: 'Iglesias · jurisdicciones · cargos', open: 'Abrir perfil del líder', directory: 'Directorio verificado' },
-  fr: { title: 'Responsables chrétiens et titulaires actuels', intro: 'Fonctions ecclésiales actuelles vérifiées à partir de sources officielles des Églises et juridictions.', eyebrow: 'Églises · juridictions · fonctions', open: 'Ouvrir le profil du responsable', directory: 'Répertoire vérifié' }
+  en: { title: 'Christian leaders and current office holders', intro: 'Explore current ecclesiastical leadership by Church, country and region. Each role retains its sources and review date.', eyebrow: 'Churches · countries · regions', directory: 'Source-traceable directory' },
+  pt: { title: 'Líderes cristãos e titulares atuais', intro: 'Explore a liderança eclesial atual por Igreja, país e região. Cada cargo conserva as respetivas fontes e data de revisão.', eyebrow: 'Igrejas · países · regiões', directory: 'Diretório com fontes rastreáveis' },
+  es: { title: 'Líderes cristianos y titulares actuales', intro: 'Explore el liderazgo eclesiástico actual por Iglesia, país y región. Cada cargo conserva sus fuentes y fecha de revisión.', eyebrow: 'Iglesias · países · regiones', directory: 'Directorio con fuentes trazables' },
+  fr: { title: 'Responsables chrétiens et titulaires actuels', intro: 'Explorez les responsables ecclésiaux par Église, pays et région. Chaque fonction conserve ses sources et sa date de révision.', eyebrow: 'Églises · pays · régions', directory: 'Répertoire aux sources traçables' }
 } as const;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,10 +26,30 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LeadersPage() {
   const locale = await serverLocale();
   const text = copy[locale as keyof typeof copy] ?? copy.en;
-  const rows = ECCLESIASTICAL_PEOPLE.map(person => {
-    const offices = ECCLESIASTICAL_OFFICES.filter(office => office.personId === person.id && office.status === 'active');
-    return { person, offices };
+  const regionNames = new Intl.DisplayNames([locale], { type: 'region' });
+  const rows: LeaderDirectoryRow[] = ECCLESIASTICAL_PEOPLE.map(person => {
+    const offices = ECCLESIASTICAL_OFFICES.filter(office => office.personId === person.id && office.status === 'active').map(office => {
+      const jurisdiction = jurisdictionById(office.jurisdictionId);
+      const church = jurisdiction ? churchById(jurisdiction.churchId) : undefined;
+      const country = jurisdiction?.geography.find(scope => scope.level === 'country');
+      const subdivision = jurisdiction?.geography.find(scope => scope.level === 'subdivision');
+      const parent = jurisdiction?.parentJurisdictionId ? jurisdictionById(jurisdiction.parentJurisdictionId) : undefined;
+      return {
+        id: office.id,
+        title: officeLabel(office.officeType, locale),
+        jurisdictionName: jurisdiction ? localizedFieldValue(jurisdiction.name, locale) : '',
+        churchId: church?.id ?? 'church:unknown',
+        churchName: church ? localizedFieldValue(church.name, locale) : '',
+        tradition: church?.tradition,
+        countryCode: country?.code,
+        countryName: country?.code ? regionNames.of(country.code) ?? country.code : undefined,
+        regionCode: subdivision?.code ?? (parent?.level === 'province' ? parent.id : undefined),
+        regionName: parent?.level === 'province' ? localizedFieldValue(parent.name, locale) : subdivision ? localizedFieldValue(jurisdiction!.name, locale) : undefined
+      };
+    });
+    return { id: person.id, name: localizedFieldValue(person.name, locale), href: personPath(person), offices };
   }).filter(row => row.offices.length);
+
   const structured = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -39,27 +59,16 @@ export default async function LeadersPage() {
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: rows.map((row, index) => ({
-        '@type': 'ListItem', position: index + 1, url: `${SITE_ORIGIN}${personPath(row.person)}`,
-        item: { '@type': 'Person', name: localizedFieldValue(row.person.name, locale) }
+        '@type': 'ListItem', position: index + 1, url: `${SITE_ORIGIN}${row.href}`,
+        item: { '@type': 'Person', name: row.name }
       }))
     }
   };
 
   return <div className="page-stack">
     <section className="page-hero compact-hero"><div><span className="eyebrow">{text.eyebrow}</span><h1>{text.title}</h1><p>{text.intro}</p></div><div className="hero-symbol" aria-hidden="true">✦</div></section>
-    <section className="search-card">
-      <div className="section-heading compact"><div><span className="eyebrow">{text.directory}</span><h2>{rows.length}</h2></div></div>
-      <div className="result-grid">{rows.map(({ person, offices }) => <article className="result-card" key={person.id}>
-        <div className="result-meta"><span>{offices.length}</span><span>verified</span></div>
-        <h2>{localizedFieldValue(person.name, locale)}</h2>
-        {offices.map(office => {
-          const jurisdiction = jurisdictionById(office.jurisdictionId);
-          const church = jurisdiction ? churchById(jurisdiction.churchId) : undefined;
-          return <p key={office.id}>{officeLabel(office.officeType, locale)}{jurisdiction ? ` · ${localizedFieldValue(jurisdiction.name, locale)}` : ''}{church ? ` · ${localizedFieldValue(church.name, locale)}` : ''}</p>;
-        })}
-        <Link className="text-link" href={personPath(person)}>{text.open} →</Link>
-      </article>)}</div>
-    </section>
+    <div className="section-heading compact"><div><span className="eyebrow">{text.directory}</span><h2>{rows.length}</h2></div></div>
+    <LeadersExplorer rows={rows} locale={locale}/>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
   </div>;
 }
