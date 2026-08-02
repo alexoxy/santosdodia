@@ -34,7 +34,7 @@ jobs:
           node <<'NODE'
           const config = require('./vercel.json');
           const deployment = config.git?.deploymentEnabled;
-          const expected = { '*': false, main: true, 'vercel-preview': true };
+          const expected = { '**': false, main: true, 'vercel-preview': true };
           const actualKeys = Object.keys(deployment ?? {}).sort();
           const expectedKeys = Object.keys(expected).sort();
           if (JSON.stringify(actualKeys) !== JSON.stringify(expectedKeys)) {
