@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getObservancesForDate, searchObservances, traditionLabel, TRADITIONS, type Observance } from '../../data/observances';
 import { getObservanceById, getObservancesForTopic, getPopularTopics, parseDiscoveryDate, searchDiscoveryTopics, topicDescription, topicLabel, topicPath } from '../../data/discovery';
+import { validationStatusLabel } from '../../lib/claim-evidence';
 import { localizedSummary, fallbackLanguageLabel } from '../../lib/content-locale';
 import { yearInTimeZone } from '../../lib/date-context';
 import { displayObservanceName, displayPatronages } from '../../lib/locale-display';
@@ -86,7 +87,7 @@ export default function SearchExplorer() {
           <h2>{name}</h2>
           <span className={`scope-label scope-${scope.kind}`}>{scope.label}</span>
           {summary ? <><p lang={summary.language}>{summary.text}</p>{summary.isFallback ? <small className="translation-fallback">{fallbackLanguageLabel(locale)}</small> : null}</> : null}
-          <div className="tag-row"><span>{copy[item.category]}</span>{item.validationStatus ? <span>{item.validationStatus === 'review-required' ? copy.reviewRequired : copy.verified}</span> : null}{patronages.slice(0, 3).map(value => <span key={value}>{value}</span>)}</div>
+          <div className="tag-row"><span>{copy[item.category]}</span>{item.validationStatus ? <span>{validationStatusLabel(item.validationStatus,locale)}</span> : null}{patronages.slice(0, 3).map(value => <span key={value}>{value}</span>)}</div>
           <div className="saint-preview-links">{hasProfile ? <Link className="btn btn-primary" href={`/saint/${item.id}`}>{feature.openProfile}</Link> : null}<Link className="text-link" href={`/day/${item.dateISO}`}>{feature.openDay} →</Link></div>
         </article> : null;
       })}</div> : <div className="empty-state"><span>✦</span><p>{feature.noMatch}</p></div>}
