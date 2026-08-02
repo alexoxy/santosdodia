@@ -38,6 +38,9 @@ jobs:
       - name: Audit curated data quality
         run: npm run data:audit
 
+      - name: Validate API and OpenAPI contracts
+        run: npm run api:validate
+
       - name: Typecheck
         run: npm run typecheck
 
