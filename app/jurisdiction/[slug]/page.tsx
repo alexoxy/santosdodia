@@ -6,13 +6,11 @@ import { churchById } from '../../../data/knowledge/churches';
 import { activeOfficesForJurisdiction, officeHolder } from '../../../data/knowledge/ecclesiastical-state';
 import { ecclesiasticalPageCopy, officeLabel } from '../../../lib/knowledge/ecclesiastical-display';
 import { jurisdictionBreadcrumbs } from '../../../lib/knowledge/jurisdiction-resolver';
-import { churchPath, entitySlug, jurisdictionBySlug, jurisdictionPath, localizedFieldValue } from '../../../lib/knowledge/routes';
+import { churchPath, jurisdictionBySlug, jurisdictionPath, localizedFieldValue } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
 
-export function generateStaticParams() {
-  return JURISDICTIONS.map(jurisdiction => ({ slug: entitySlug(jurisdiction.id) }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const [{ slug }, locale] = await Promise.all([params, serverLocale()]);
