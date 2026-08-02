@@ -42,7 +42,9 @@
     "wrangler": "4.114.0"
   },
   "overrides": {
-    "brace-expansion": "1.1.17",
+    "minimatch@3.1.5": {
+      "brace-expansion": "1.1.17"
+    },
     "next": {
       "postcss": "8.5.18",
       "sharp": "0.35.3"
