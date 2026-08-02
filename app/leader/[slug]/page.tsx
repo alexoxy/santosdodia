@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ECCLESIASTICAL_OFFICES, ECCLESIASTICAL_PEOPLE } from '../../../data/knowledge/ecclesiastical-state';
+import { ECCLESIASTICAL_OFFICES } from '../../../data/knowledge/ecclesiastical-state';
 import { jurisdictionById } from '../../../data/knowledge/jurisdictions';
 import { churchById } from '../../../data/knowledge/churches';
 import { officeLabel } from '../../../lib/knowledge/ecclesiastical-display';
-import { churchPath, entitySlug, jurisdictionPath, localizedFieldValue, personBySlug, personPath } from '../../../lib/knowledge/routes';
+import { churchPath, jurisdictionPath, localizedFieldValue, personBySlug, personPath } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
+
+export const dynamic = 'force-dynamic';
 
 const copy = {
   en: { currentRoles: 'Current ecclesiastical roles', born: 'Born', appointed: 'Appointed', installed: 'Installed or enthroned', church: 'Church', jurisdiction: 'Jurisdiction', verified: 'Officially verified record', intro: 'Current ecclesiastical offices represented in the Santos do Dia knowledge base.' },
@@ -15,10 +17,6 @@ const copy = {
   es: { currentRoles: 'Cargos eclesiásticos actuales', born: 'Nacimiento', appointed: 'Nombrado o elegido', installed: 'Instalado o entronizado', church: 'Iglesia', jurisdiction: 'Jurisdicción', verified: 'Registro verificado oficialmente', intro: 'Cargos eclesiásticos actuales representados en la base de conocimiento de Santos do Dia.' },
   fr: { currentRoles: 'Fonctions ecclésiales actuelles', born: 'Naissance', appointed: 'Nommé ou élu', installed: 'Installé ou intronisé', church: 'Église', jurisdiction: 'Juridiction', verified: 'Entrée vérifiée officiellement', intro: 'Fonctions ecclésiales actuelles représentées dans la base de connaissances de Santos do Dia.' }
 } as const;
-
-export function generateStaticParams() {
-  return ECCLESIASTICAL_PEOPLE.map(person => ({ slug: entitySlug(person.id) }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const [{ slug }, locale] = await Promise.all([params, serverLocale()]);
