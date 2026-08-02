@@ -44,9 +44,12 @@ export function adaptLegacyObservance(item: LegacyObservance): KnowledgeObservan
     churchId: CHURCH_IDS[tradition],
     calendarId: `calendar:${tradition}`,
     name: localizedName(item),
+    // Legacy month/day values are already Gregorian civil dates. The legacy
+    // calendarSystem field describes the ecclesial calendar context, not the
+    // coordinate system in which month/day were stored.
     dateRule: {
       type: 'fixed',
-      calendar: item.calendarSystem,
+      calendar: 'gregorian',
       month: item.month,
       day: item.day
     },
