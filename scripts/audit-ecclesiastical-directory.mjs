@@ -7,6 +7,7 @@ const errors=[];
 const warnings=[];
 const allowedAuthority=new Set(['official-church-or-jurisdiction','official-appointment-bulletin','academic-directory','specialist-reference-directory','corroborated-osint']);
 const ids=new Set();
+const navigationNames=new Set(['all','living','deceased','youngest','oldest','most junior as priest','most senior as priest','most junior as bishop','most senior as bishop','active near age limit','electors','non-voting','cardinal-bishops','cardinal-priests','cardinal-deacons','popes']);
 
 if(registry.schemaVersion!==1)errors.push('Source registry schemaVersion must be 1.');
 if(!Array.isArray(registry.sources)||!registry.sources.length)errors.push('Source registry must contain active sources.');
@@ -28,7 +29,14 @@ try{
   if(!ids.has(payload.sourceId))errors.push(`${file}: unknown sourceId ${payload.sourceId}`);
   const officeIds=new Set();
   for(const record of payload.records??[]){
-   if(!record?.person?.id||!record?.person?.name)errors.push(`${file}: record without person identity`);
+   const personName=String(record?.person?.name??'').trim();
+   if(!record?.person?.id||!personName)errors.push(`${file}: record without person identity`);
+   if(navigationNames.has(personName.toLowerCase()))errors.push(`${file}: navigation label parsed as person: ${personName}`);
+   if(payload.sourceId==='catholic-hierarchy'){
+    const externalId=record?.person?.externalIds?.['catholic-hierarchy'];
+    if(typeof externalId!=='string'||!/^b[a-z0-9_-]+$/i.test(externalId))errors.push(`${file}: invalid Catholic-Hierarchy person identifier for ${personName||'<unknown>'}`);
+    if(!record?.person?.sourceUrl||!/^https:\/\/www\.catholic-hierarchy\.org\/bishop\/b[^/]+\.html$/i.test(record.person.sourceUrl))errors.push(`${file}: invalid Catholic-Hierarchy person URL for ${personName||'<unknown>'}`);
+   }
    if(!record?.office?.id)errors.push(`${file}: record without office identity`);
    else if(officeIds.has(record.office.id))errors.push(`${file}: duplicate office ${record.office.id}`);
    else officeIds.add(record.office.id);
