@@ -13,7 +13,7 @@ export function localizedSummary(item:SummarySource,locale:Locale):LocalizedCont
   const english=clean(item.summaries?.en??item.summary);
   return english?{text:english,language:'en',isFallback:false}:undefined;
  }
- if(localeCoverage(locale).status==='beta'){
+ if(localeCoverage(locale)==='beta'){
   const english=clean(item.summaries?.en??item.summary);
   return english?{text:english,language:'en',isFallback:true}:undefined;
  }
