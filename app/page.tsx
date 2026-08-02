@@ -3,6 +3,7 @@ import Link from 'next/link';
 import TodayPanel from './components/TodayPanel';
 import PatronageSearch from './components/PatronageSearch';
 import VaticanLiveFeature from './components/VaticanLiveFeature';
+import EntryPoints from './components/EntryPoints';
 import { getAllObservances, TRADITIONS } from '../data/observances';
 import { SUPPORTED_LOCALES } from '../lib/i18n';
 import { getFeatureCopy } from '../lib/feature-copy';
@@ -13,12 +14,6 @@ export default function HomePage() {
   const feature = getFeatureCopy(locale);
   const year = Number(new Intl.DateTimeFormat('en', { year: 'numeric', timeZone }).format(new Date()));
   const count = getAllObservances(year, locale).length;
-  const features = [
-    [feature.byProfession, feature.findIntro],
-    [feature.byPlace, copy.disclaimer],
-    [feature.byDate, copy.calendarIntro],
-    [feature.officialSource, copy.sourcesIntro],
-  ];
 
   return <div className="page-stack home-page">
     <TodayPanel />
@@ -43,7 +38,7 @@ export default function HomePage() {
       </div>
     </section>
 
-    <VaticanLiveFeature />
+    <EntryPoints />
 
     <section className="discovery-section">
       <article className="discovery-callout">
@@ -60,16 +55,6 @@ export default function HomePage() {
       </article>
     </section>
 
-    <section className="feature-section">
-      <div className="section-heading">
-        <div><span className="eyebrow">Santos do Dia</span><h2>{copy.methodology}</h2></div>
-        <Link className="text-link" href="/copyright">{feature.navCopyright} →</Link>
-      </div>
-      <div className="feature-grid">
-        {features.map(([title, body], index) => <article className="feature-card" key={title}>
-          <span className="feature-number">0{index + 1}</span><h3>{title}</h3><p>{body}</p>
-        </article>)}
-      </div>
-    </section>
+    <VaticanLiveFeature />
   </div>;
 }
