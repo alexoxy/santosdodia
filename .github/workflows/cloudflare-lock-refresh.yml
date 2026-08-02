@@ -6,6 +6,8 @@ on:
       - agent/cloudflare-portability
     paths:
       - package.json
+      - .npmrc
+      - .node-version
       - wrangler.jsonc
       - open-next.config.ts
       - public/_headers
@@ -33,17 +35,17 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
 
       - name: Refresh package lock
-        run: npm install --package-lock-only --ignore-scripts
+        run: npm install --package-lock-only --ignore-scripts --include=optional
 
       - name: Install locked dependencies
-        run: npm ci
+        run: npm ci --include=optional
 
       - name: Audit installed runtime
-        run: npm audit --omit=dev --omit=optional --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Build Cloudflare Worker
         run: npm run cloudflare:build
