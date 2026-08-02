@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "sourcePriority": [
+      "official-church-or-jurisdiction",
+      "official-appointment-bulletin",
+      "academic-directory",
+      "specialist-reference-directory",
+      "corroborated-osint"
+    ],
+    "publishActiveOfficeMinimum": "one authoritative source or two independent corroborating sources",
+    "retainNormalizedFacts": true,
+    "retainSourceSnapshots": true,
+    "neverReplaceAuthoritativeWithReferenceOnly": true
+  },
+  "sources": [
+    {
+      "id": "holy-see-bulletin",
+      "name": "Holy See Press Office — Resignations and Appointments",
+      "baseUrl": "https://press.vatican.va/content/salastampa/en/bollettino.html",
+      "host": "press.vatican.va",
+      "authority": "official-appointment-bulletin",
+      "churchFamilies": ["catholic"],
+      "coverage": ["appointments", "resignations", "successions", "jurisdiction changes"],
+      "adapter": "holy-see-bulletin",
+      "refreshHours": 24,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "catholic-hierarchy",
+      "name": "Catholic-Hierarchy",
+      "baseUrl": "https://www.catholic-hierarchy.org/",
+      "host": "www.catholic-hierarchy.org",
+      "authority": "specialist-reference-directory",
+      "churchFamilies": ["catholic"],
+      "coverage": ["living bishops", "dioceses", "offices", "historical succession", "countries"],
+      "adapter": "catholic-hierarchy",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.25,
+      "active": true
+    },
+    {
+      "id": "gcatholic",
+      "name": "GCatholic",
+      "baseUrl": "https://gcatholic.org/",
+      "host": "gcatholic.org",
+      "authority": "specialist-reference-directory",
+      "churchFamilies": ["catholic"],
+      "coverage": ["jurisdictions", "leaders", "appointments", "countries", "regions"],
+      "adapter": "gcatholic",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.25,
+      "active": true
+    },
+    {
+      "id": "orthodoxia-fribourg",
+      "name": "Orthodoxia — University of Fribourg",
+      "baseUrl": "https://orthodoxia.ch/en/orthodoxia",
+      "host": "orthodoxia.ch",
+      "authority": "academic-directory",
+      "churchFamilies": ["eastern-orthodox", "oriental-orthodox"],
+      "coverage": ["Orthodox bishops", "Oriental Orthodox bishops", "church affiliation"],
+      "adapter": "orthodoxia",
+      "refreshHours": 336,
+      "requestsPerSecond": 0.25,
+      "active": true
+    },
+    {
+      "id": "anglican-communion",
+      "name": "Anglican Communion Office",
+      "baseUrl": "https://www.anglicancommunion.org/structures/member-churches.aspx",
+      "host": "www.anglicancommunion.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["anglican"],
+      "coverage": ["member Churches", "provinces", "primates", "regions"],
+      "adapter": "anglican-communion",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "oca-world-churches",
+      "name": "Orthodox Church in America — World Churches",
+      "baseUrl": "https://www.oca.org/directories/world-churches",
+      "host": "www.oca.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["eastern-orthodox"],
+      "coverage": ["autocephalous Churches", "primates", "jurisdictions"],
+      "adapter": "official-directory",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "goarch-directory",
+      "name": "Greek Orthodox Archdiocese Annual Directory",
+      "baseUrl": "https://www.goarch.org/directory",
+      "host": "www.goarch.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["eastern-orthodox"],
+      "coverage": ["hierarchs", "metropolises", "Orthodox jurisdictions"],
+      "adapter": "official-directory",
+      "refreshHours": 336,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "coptic-orthodox-dioceses",
+      "name": "Coptic Orthodox Church",
+      "baseUrl": "https://copticorthodox.church/en/dioceses/",
+      "host": "copticorthodox.church",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["oriental-orthodox"],
+      "coverage": ["dioceses", "bishops", "patriarchate"],
+      "adapter": "official-directory",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "mother-see-dioceses",
+      "name": "Mother See of Holy Etchmiadzin",
+      "baseUrl": "https://www.armenianchurch.org/en/dioceses",
+      "host": "www.armenianchurch.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["oriental-orthodox"],
+      "coverage": ["dioceses", "primates", "Catholicosate"],
+      "adapter": "official-directory",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.5,
+      "active": true
+    },
+    {
+      "id": "ethiopian-orthodox-directory",
+      "name": "Ethiopian Orthodox Tewahedo Church",
+      "baseUrl": "https://www.ethiopianorthodox.org/",
+      "host": "www.ethiopianorthodox.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["oriental-orthodox"],
+      "coverage": ["patriarchate", "dioceses", "bishops"],
+      "adapter": "official-directory",
+      "refreshHours": 336,
+      "requestsPerSecond": 0.25,
+      "active": true
+    },
+    {
+      "id": "syriac-orthodox-patriarchate",
+      "name": "Syriac Orthodox Patriarchate of Antioch",
+      "baseUrl": "https://syriacpatriarchate.org/",
+      "host": "syriacpatriarchate.org",
+      "authority": "official-church-or-jurisdiction",
+      "churchFamilies": ["oriental-orthodox"],
+      "coverage": ["patriarchate", "archdioceses", "bishops"],
+      "adapter": "official-directory",
+      "refreshHours": 336,
+      "requestsPerSecond": 0.25,
+      "active": true
+    }
+  ]
+}
