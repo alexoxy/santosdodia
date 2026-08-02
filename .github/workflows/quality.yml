@@ -18,7 +18,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -41,6 +41,9 @@ jobs:
       - name: Audit claim-specific editorial evidence
         run: npm run claims:audit
 
+      - name: Audit ecclesiastical directory sources and records
+        run: npm run leaders:audit
+
       - name: Validate API and OpenAPI contracts
         run: npm run api:validate
 
@@ -50,8 +53,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build
+      - name: Build Next.js application
         run: npm run build
+
+      - name: Build Cloudflare Worker
+        run: npm run cloudflare:build
 
       - name: Production smoke test
         shell: bash
