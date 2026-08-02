@@ -60,6 +60,10 @@ async function mirrored(label,url,file){
  catch(error){const previous=await existing(file);health.push({label,url,file:path.relative('.',file),ok:Boolean(previous),stale:Boolean(previous),checkedAt,error:error instanceof Error?error.message:String(error)});console.warn(`FAILED ${label}: ${error instanceof Error?error.message:error}`)}
 }
 
+if(!Number.isFinite(MIN_AVAILABLE_RATIO)||MIN_AVAILABLE_RATIO<=0||MIN_AVAILABLE_RATIO>1){
+ throw new Error(`Invalid LITCAL_MIN_AVAILABLE_RATIO: ${MIN_AVAILABLE_RATIO}`);
+}
+
 await mkdir(ROOT,{recursive:true});
 await mirrored('calendar catalogue',`${BASE}/calendars`,path.join(ROOT,'catalog.json'));
 await mirrored('OpenAPI schema',`${BASE}/schemas/openapi.json`,path.join(ROOT,'openapi.json'));
@@ -79,13 +83,19 @@ await pool(tasks);
 const available=health.filter(item=>item.ok).length;
 const fresh=health.filter(item=>item.ok&&!item.stale).length;
 const stale=health.filter(item=>item.ok&&item.stale).length;
+const unavailable=health.filter(item=>!item.ok).length;
 const ratio=health.length?available/health.length:0;
-const criticalLabels=[`general ${currentYear} en_US`,`general ${currentYear} pt_PT`];
-const unavailableCritical=criticalLabels.filter(label=>!health.some(item=>item.label===label&&item.ok));
 
-if(!Number.isFinite(MIN_AVAILABLE_RATIO)||MIN_AVAILABLE_RATIO<=0||MIN_AVAILABLE_RATIO>1){
- throw new Error(`Invalid LITCAL_MIN_AVAILABLE_RATIO: ${MIN_AVAILABLE_RATIO}`);
-}
+// The runtime already falls back from a requested locale to the committed en_US
+// mirror. Therefore en_US for the current year is the only locale whose absence
+// makes the Roman calendar unusable. Missing localized mirrors remain visible in
+// the manifest and are recovered on a later successful run.
+const criticalLabels=[`general ${currentYear} en_US`];
+const unavailableCritical=criticalLabels.filter(label=>!health.some(item=>item.label===label&&item.ok));
+const status=unavailableCritical.length||ratio<MIN_AVAILABLE_RATIO?'blocked':stale||unavailable?'degraded':'healthy';
+const manifest={generatedAt:new Date().toISOString(),upstream:BASE,status,years:YEARS,siteLocales:SITE_LOCALES,calendarCounts:{national:national.length,diocesan:diocesan.length},availability:{available,total:health.length,ratio:Number(ratio.toFixed(4)),fresh,stale,unavailable,minimumRatio:MIN_AVAILABLE_RATIO},critical:{required:criticalLabels,unavailable:unavailableCritical},health};
+await writeJson(path.join(ROOT,'manifest.json'),manifest);
+
 if(unavailableCritical.length){
  throw new Error(`LitCal mirror integrity gate failed; unavailable critical resources: ${unavailableCritical.join(', ')}`);
 }
@@ -93,6 +103,4 @@ if(ratio<MIN_AVAILABLE_RATIO){
  throw new Error(`LitCal mirror integrity gate failed; ${available}/${health.length} resources available (${(ratio*100).toFixed(1)}%), minimum ${(MIN_AVAILABLE_RATIO*100).toFixed(1)}%`);
 }
 
-const manifest={generatedAt:new Date().toISOString(),upstream:BASE,years:YEARS,siteLocales:SITE_LOCALES,calendarCounts:{national:national.length,diocesan:diocesan.length},availability:{available,total:health.length,ratio:Number(ratio.toFixed(4)),fresh,stale,minimumRatio:MIN_AVAILABLE_RATIO},health};
-await writeJson(path.join(ROOT,'manifest.json'),manifest);
-console.log(`LitCal mirror updated: ${available}/${health.length} resources available; ${fresh} fresh; ${stale} stale.`);
+console.log(`LitCal mirror updated (${status}): ${available}/${health.length} resources available; ${fresh} fresh; ${stale} stale; ${unavailable} unavailable.`);
