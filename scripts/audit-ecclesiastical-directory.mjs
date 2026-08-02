@@ -7,7 +7,7 @@ const errors=[];
 const warnings=[];
 const allowedAuthority=new Set(['official-church-or-jurisdiction','official-appointment-bulletin','academic-directory','specialist-reference-directory','corroborated-osint']);
 const ids=new Set();
-const navigationNames=new Set(['all','living','deceased','youngest','oldest','most junior as priest','most senior as priest','most junior as bishop','most senior as bishop','active near age limit','electors','non-voting','cardinal-bishops','cardinal-priests','cardinal-deacons','popes']);
+const navigationNames=new Set(['all','living','deceased','youngest','oldest','most junior as priest','most senior as priest','most junior as bishop','most senior as bishop','active near age limit','electors','non-voting','cardinal-bishops','cardinal-priests','cardinal-deacons','popes','vacant']);
 
 if(registry.schemaVersion!==1)errors.push('Source registry schemaVersion must be 1.');
 if(!Array.isArray(registry.sources)||!registry.sources.length)errors.push('Source registry must contain active sources.');
@@ -30,11 +30,17 @@ try{
   const officeIds=new Set();
   for(const record of payload.records??[]){
    const personName=String(record?.person?.name??'').trim();
+   const officeTitle=String(record?.office?.title??'').trim();
    if(!record?.person?.id||!personName)errors.push(`${file}: record without person identity`);
-   if(navigationNames.has(personName.toLowerCase()))errors.push(`${file}: navigation label parsed as person: ${personName}`);
+   if(navigationNames.has(personName.toLowerCase()))errors.push(`${file}: navigation or vacancy label parsed as person: ${personName}`);
+   if(personName.includes('�'))errors.push(`${file}: invalid character encoding in person name: ${personName}`);
+   if(!officeTitle)errors.push(`${file}: record without office title for ${personName||'<unknown>'}`);
+   if(/[<>]/.test(officeTitle)||/writea|href=/i.test(officeTitle))errors.push(`${file}: HTML contamination in office title for ${personName||'<unknown>'}`);
+   if(officeTitle.includes('�'))errors.push(`${file}: invalid character encoding in office title for ${personName||'<unknown>'}`);
    if(payload.sourceId==='catholic-hierarchy'){
     const externalId=record?.person?.externalIds?.['catholic-hierarchy'];
     if(typeof externalId!=='string'||!/^b[a-z0-9_-]+$/i.test(externalId))errors.push(`${file}: invalid Catholic-Hierarchy person identifier for ${personName||'<unknown>'}`);
+    if(externalId==='bvacant')errors.push(`${file}: Catholic-Hierarchy vacancy pseudo-profile cannot be a person`);
     if(!record?.person?.sourceUrl||!/^https:\/\/www\.catholic-hierarchy\.org\/bishop\/b[^/]+\.html$/i.test(record.person.sourceUrl))errors.push(`${file}: invalid Catholic-Hierarchy person URL for ${personName||'<unknown>'}`);
    }
    if(!record?.office?.id)errors.push(`${file}: record without office identity`);
