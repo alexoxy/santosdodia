@@ -38,7 +38,7 @@ jobs:
 
       - name: Checkout complete history
         if: steps.config.outputs.enabled == 'true'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
