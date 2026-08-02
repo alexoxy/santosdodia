@@ -44,7 +44,7 @@ jobs:
       - name: Commit candidate snapshot
         id: changes
         run: |
-          if git diff --quiet -- data/generated/osint; then
+          if [ -z "$(git status --porcelain -- data/generated/osint)" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
