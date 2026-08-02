@@ -1,0 +1,60 @@
+name: Seed Portugal ecclesiastical directory
+
+on:
+  push:
+    branches:
+      - agent/global-leaders-directory
+    paths:
+      - '.github/workflows/seed-portugal-ecclesiastical-directory.yml'
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=optional
+
+      - name: Import Catholic-Hierarchy Portugal references
+        run: npm run leaders:sync -- --source=catholic-hierarchy --country=pt --max-countries=1
+
+      - name: Import GCatholic current events
+        run: npm run leaders:sync -- --source=gcatholic
+
+      - name: Audit imported normalized records
+        run: npm run leaders:audit
+
+      - name: Commit bounded seed data to feature branch
+        shell: bash
+        run: |
+          git config user.name 'santosdodia-directory-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/generated/ecclesiastical-directory/*.json
+          git commit -m 'data(leaders): seed Portugal and current Catholic events'
+          git push origin HEAD:agent/global-leaders-directory
+
+      - name: Record seed completion in issue 10
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 10,
+              body: `✅ The first normalized local copy was generated on \`agent/global-leaders-directory\`: Catholic-Hierarchy Portugal references and current GCatholic events. Raw HTML was not committed.`
+            })
