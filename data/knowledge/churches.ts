@@ -19,8 +19,13 @@ export const CHURCHES: Church[] = [
   },
   {
     id: 'church:eastern-orthodox', family: 'eastern-orthodox', tradition: 'eastern-orthodox',
-    name: name({ en: 'Eastern Orthodox Churches', pt: 'Igrejas Ortodoxas Orientais Bizantinas', es: 'Iglesias ortodoxas orientales bizantinas', fr: 'Églises orthodoxes orientales byzantines' }),
-    canonicalUrl: 'https://www.oca.org/', calendarSystems: ['julian', 'revised-julian'], sourceIds: ['oca-calendar']
+    name: name({ en: 'Eastern Orthodox Churches', pt: 'Igrejas Ortodoxas de tradição bizantina', es: 'Iglesias ortodoxas de tradición bizantina', fr: 'Églises orthodoxes de tradition byzantine' }),
+    canonicalUrl: 'https://www.oca.org/directories/world-churches', calendarSystems: ['julian', 'revised-julian'], sourceIds: ['oca-world-churches']
+  },
+  {
+    id: 'church:orthodox-church-america', family: 'eastern-orthodox', tradition: 'eastern-orthodox',
+    name: name({ en: 'Orthodox Church in America', pt: 'Igreja Ortodoxa na América', es: 'Iglesia Ortodoxa en América', fr: 'Église orthodoxe en Amérique' }, 'official'),
+    canonicalUrl: 'https://www.oca.org/', calendarSystems: ['julian', 'revised-julian'], sourceIds: ['oca-calendar', 'oca-world-churches']
   },
   {
     id: 'church:anglican', family: 'anglican', tradition: 'anglican',
@@ -30,7 +35,7 @@ export const CHURCHES: Church[] = [
   {
     id: 'church:coptic-orthodox', family: 'oriental-orthodox', tradition: 'coptic-orthodox',
     name: name({ en: 'Coptic Orthodox Church', pt: 'Igreja Copta Ortodoxa', es: 'Iglesia copta ortodoxa', fr: 'Église copte orthodoxe' }),
-    canonicalUrl: 'https://copticorthodox.church/', calendarSystems: ['coptic'], sourceIds: []
+    canonicalUrl: 'https://copticorthodox.church/', calendarSystems: ['coptic'], sourceIds: ['coptic-orthodox-dioceses']
   },
   {
     id: 'church:armenian-apostolic', family: 'oriental-orthodox', tradition: 'armenian-apostolic',
