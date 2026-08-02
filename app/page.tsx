@@ -2,15 +2,17 @@
 import Link from 'next/link';
 import TodayPanel from './components/TodayPanel';
 import PatronageSearch from './components/PatronageSearch';
+import VaticanLiveFeature from './components/VaticanLiveFeature';
 import { getAllObservances, TRADITIONS } from '../data/observances';
 import { SUPPORTED_LOCALES } from '../lib/i18n';
 import { getFeatureCopy } from '../lib/feature-copy';
 import { useLanguage } from './components/LanguageProvider';
 
 export default function HomePage() {
-  const { locale, copy } = useLanguage();
+  const { locale, copy, timeZone } = useLanguage();
   const feature = getFeatureCopy(locale);
-  const count = getAllObservances(new Date().getFullYear(), locale).length;
+  const year = Number(new Intl.DateTimeFormat('en', { year: 'numeric', timeZone }).format(new Date()));
+  const count = getAllObservances(year, locale).length;
   const features = [
     [feature.byProfession, feature.findIntro],
     [feature.byPlace, copy.disclaimer],
@@ -40,6 +42,8 @@ export default function HomePage() {
         <div className="visual-caption">Saints · Feasts · Places · Calendars</div>
       </div>
     </section>
+
+    <VaticanLiveFeature />
 
     <section className="discovery-section">
       <article className="discovery-callout">
