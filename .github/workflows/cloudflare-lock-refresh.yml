@@ -1,4 +1,4 @@
-name: Refresh Cloudflare dependency lock
+name: Validate Cloudflare portability
 
 on:
   push:
@@ -6,19 +6,23 @@ on:
       - agent/cloudflare-portability
     paths:
       - package.json
+      - wrangler.jsonc
+      - open-next.config.ts
+      - public/_headers
+      - .github/workflows/cloudflare-lock-refresh.yml
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: cloudflare-lock-refresh-${{ github.ref }}
+  group: cloudflare-portability-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  refresh:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -35,8 +39,21 @@ jobs:
       - name: Refresh package lock
         run: npm install --package-lock-only --ignore-scripts
 
-      - name: Verify locked installation
+      - name: Install locked dependencies
         run: npm ci
+
+      - name: Audit installed runtime
+        run: npm audit --omit=dev --omit=optional --audit-level=high
+
+      - name: Build Cloudflare Worker
+        run: npm run cloudflare:build
+
+      - name: Verify OpenNext output
+        run: |
+          test -s .open-next/worker.js
+          test -d .open-next/assets
+          echo "Worker output: $(du -h .open-next/worker.js | cut -f1)"
+          echo "Static assets: $(find .open-next/assets -type f | wc -l) files"
 
       - name: Commit refreshed lockfile
         run: |
