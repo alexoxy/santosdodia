@@ -29,6 +29,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Audit installed runtime dependencies
+        run: npm audit --omit=dev --omit=optional --audit-level=high
       - name: Verify Vercel deployment policy
         run: |
           node <<'NODE'
