@@ -1,4 +1,5 @@
 import { calendarEngineChecks, calendarEngineHealthy } from '../../../../../lib/knowledge/calendar-self-check';
+import { holySeeParserChecks, holySeeParserHealthy } from '../../../../../lib/ingestion/holy-see-self-check';
 import { CHURCHES } from '../../../../../data/knowledge/churches';
 import { JURISDICTIONS } from '../../../../../data/knowledge/jurisdictions';
 import { KNOWLEDGE_SOURCES, ingestibleSources } from '../../../../../data/knowledge/source-registry';
@@ -7,12 +8,22 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const calendarChecks = calendarEngineChecks();
-  const healthy = calendarEngineHealthy();
+  const parserChecks = holySeeParserChecks();
+  const calendarHealthy = calendarEngineHealthy();
+  const parserHealthy = holySeeParserHealthy();
+  const healthy = calendarHealthy && parserHealthy;
+
   return Response.json({
     status: healthy ? 'ok' : 'degraded',
     checkedAt: new Date().toISOString(),
     services: {
-      calendarEngine: { healthy, checks: calendarChecks },
+      calendarEngine: { healthy: calendarHealthy, checks: calendarChecks },
+      officialSourceParsers: {
+        healthy: parserHealthy,
+        parsers: {
+          holySeeBulletin: { healthy: parserHealthy, checks: parserChecks }
+        }
+      },
       knowledgeBase: {
         churches: CHURCHES.length,
         jurisdictions: JURISDICTIONS.length,
