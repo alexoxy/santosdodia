@@ -1,0 +1,116 @@
+name: Production health
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-health
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check canonical homepage and Cloudflare response
+        shell: bash
+        run: |
+          set -euo pipefail
+          headers="$(mktemp)"
+          body="$(mktemp)"
+
+          curl --silent --show-error --fail --location \
+            --retry 3 --retry-all-errors --max-time 30 \
+            --dump-header "$headers" --output "$body" \
+            https://www.santosdodia.com/
+
+          grep -qi '^cf-ray:' "$headers" || {
+            echo 'Expected Cloudflare cf-ray response header was not present.'
+            cat "$headers"
+            exit 1
+          }
+
+          test -s "$body" || {
+            echo 'Homepage returned an empty body.'
+            exit 1
+          }
+
+      - name: Check apex redirect
+        shell: bash
+        run: |
+          set -euo pipefail
+          final_url="$(curl --silent --show-error --fail --location \
+            --retry 3 --retry-all-errors --max-time 30 \
+            --output /dev/null --write-out '%{url_effective}' \
+            https://santosdodia.com/)"
+
+          case "$final_url" in
+            https://www.santosdodia.com/*) ;;
+            *) echo "Unexpected canonical URL: $final_url"; exit 1 ;;
+          esac
+
+      - name: Check system status API
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(curl --silent --show-error --fail --location \
+            --retry 3 --retry-all-errors --max-time 30 \
+            https://www.santosdodia.com/api/v1/system/status)"
+
+          STATUS_RESPONSE="$response" node - <<'NODE'
+          const body = JSON.parse(process.env.STATUS_RESPONSE ?? '{}');
+          if (body.status !== 'ok') {
+            console.error('Unexpected system status response:', body);
+            process.exit(1);
+          }
+          NODE
+
+      - name: Check OpenAPI contract endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(curl --silent --show-error --fail --location \
+            --retry 3 --retry-all-errors --max-time 30 \
+            https://www.santosdodia.com/openapi.json)"
+
+          OPENAPI_RESPONSE="$response" node - <<'NODE'
+          const body = JSON.parse(process.env.OPENAPI_RESPONSE ?? '{}');
+          if (typeof body.openapi !== 'string' || !body.paths || typeof body.paths !== 'object') {
+            console.error('Invalid OpenAPI response.');
+            process.exit(1);
+          }
+          NODE
+
+      - name: Check ICS feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(curl --silent --show-error --fail --location \
+            --retry 3 --retry-all-errors --max-time 30 \
+            https://www.santosdodia.com/api/ical/all)"
+
+          printf '%s' "$response" | grep -q '^BEGIN:VCALENDAR' || {
+            echo 'ICS response does not begin with BEGIN:VCALENDAR.'
+            exit 1
+          }
+          printf '%s' "$response" | grep -q 'END:VCALENDAR' || {
+            echo 'ICS response does not contain END:VCALENDAR.'
+            exit 1
+          }
+
+      - name: Record success summary
+        run: |
+          {
+            echo '## SantosDia production health'
+            echo '- Canonical homepage: OK'
+            echo '- Cloudflare response header: OK'
+            echo '- Apex redirect: OK'
+            echo '- System status API: OK'
+            echo '- OpenAPI endpoint: OK'
+            echo '- ICS feed: OK'
+          } >> "$GITHUB_STEP_SUMMARY"
