@@ -1,0 +1,150 @@
+name: Dropbox code backup
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - vercel-preview
+  schedule:
+    - cron: '17 3 * * 0'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dropbox-backup-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check Dropbox configuration
+        id: config
+        shell: bash
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          if [[ -n "$DROPBOX_APP_KEY" && -n "$DROPBOX_APP_SECRET" && -n "$DROPBOX_REFRESH_TOKEN" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Dropbox backup is prepared but inactive. Configure DROPBOX_APP_KEY, DROPBOX_APP_SECRET and DROPBOX_REFRESH_TOKEN as repository secrets."
+          fi
+
+      - name: Checkout complete history
+        if: steps.config.outputs.enabled == 'true'
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Create verified backup files
+        if: steps.config.outputs.enabled == 'true'
+        id: archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          stamp="$(date -u +'%Y%m%dT%H%M%SZ')"
+          short_sha="${GITHUB_SHA:0:12}"
+          base="santosdodia-${stamp}-${short_sha}"
+          mkdir -p backup
+
+          bundle="backup/${base}.bundle"
+          source_archive="backup/${base}-source.tar.gz"
+          manifest="backup/${base}-manifest.json"
+          checksums="backup/${base}.sha256"
+
+          git bundle create "$bundle" --all
+          git bundle verify "$bundle"
+          git archive --format=tar.gz --prefix=santosdodia/ -o "$source_archive" "$GITHUB_SHA"
+
+          bundle_sha="$(sha256sum "$bundle" | awk '{print $1}')"
+          source_sha="$(sha256sum "$source_archive" | awk '{print $1}')"
+
+          jq -n \
+            --arg repository "$GITHUB_REPOSITORY" \
+            --arg ref "$GITHUB_REF_NAME" \
+            --arg commit "$GITHUB_SHA" \
+            --arg created_at "$stamp" \
+            --arg bundle "$(basename "$bundle")" \
+            --arg bundle_sha256 "$bundle_sha" \
+            --arg source_archive "$(basename "$source_archive")" \
+            --arg source_sha256 "$source_sha" \
+            '{
+              schemaVersion: 1,
+              repository: $repository,
+              ref: $ref,
+              commit: $commit,
+              createdAtUtc: $created_at,
+              excludesSecrets: true,
+              files: [
+                {name: $bundle, type: "git-bundle", sha256: $bundle_sha256},
+                {name: $source_archive, type: "source-archive", sha256: $source_sha256}
+              ]
+            }' > "$manifest"
+
+          sha256sum "$bundle" "$source_archive" "$manifest" > "$checksums"
+
+          echo "bundle=$bundle" >> "$GITHUB_OUTPUT"
+          echo "source_archive=$source_archive" >> "$GITHUB_OUTPUT"
+          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
+          echo "checksums=$checksums" >> "$GITHUB_OUTPUT"
+
+      - name: Obtain short-lived Dropbox token
+        if: steps.config.outputs.enabled == 'true'
+        shell: bash
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          response="$(curl --fail --silent --show-error \
+            --user "${DROPBOX_APP_KEY}:${DROPBOX_APP_SECRET}" \
+            --data-urlencode "refresh_token=${DROPBOX_REFRESH_TOKEN}" \
+            --data "grant_type=refresh_token" \
+            https://api.dropboxapi.com/oauth2/token)"
+          token="$(jq -r '.access_token // empty' <<< "$response")"
+          if [[ -z "$token" ]]; then
+            echo "Dropbox did not return an access token." >&2
+            exit 1
+          fi
+          echo "::add-mask::$token"
+          printf '%s' "$token" > /tmp/dropbox-access-token
+
+      - name: Upload backup set to Dropbox
+        if: steps.config.outputs.enabled == 'true'
+        shell: bash
+        env:
+          BUNDLE: ${{ steps.archive.outputs.bundle }}
+          SOURCE_ARCHIVE: ${{ steps.archive.outputs.source_archive }}
+          MANIFEST: ${{ steps.archive.outputs.manifest }}
+          CHECKSUMS: ${{ steps.archive.outputs.checksums }}
+        run: |
+          set -euo pipefail
+          token="$(cat /tmp/dropbox-access-token)"
+
+          upload_file() {
+            local source="$1"
+            local destination="$2"
+            local api_arg
+            api_arg="$(jq -nc --arg path "$destination" '{path:$path,mode:"add",autorename:true,mute:true,strict_conflict:false}')"
+            curl --fail --silent --show-error \
+              --request POST \
+              --url https://content.dropboxapi.com/2/files/upload \
+              --header "Authorization: Bearer ${token}" \
+              --header "Dropbox-API-Arg: ${api_arg}" \
+              --header "Content-Type: application/octet-stream" \
+              --data-binary "@${source}" >/dev/null
+          }
+
+          upload_file "$BUNDLE" "/Santos do Dia/06_Backups_Codigo/01_Git_Bundles/$(basename "$BUNDLE")"
+          upload_file "$SOURCE_ARCHIVE" "/Santos do Dia/06_Backups_Codigo/02_Source_Archives/$(basename "$SOURCE_ARCHIVE")"
+          upload_file "$MANIFEST" "/Santos do Dia/06_Backups_Codigo/03_Manifests_Checksums/$(basename "$MANIFEST")"
+          upload_file "$CHECKSUMS" "/Santos do Dia/06_Backups_Codigo/03_Manifests_Checksums/$(basename "$CHECKSUMS")"
+
+          echo "Dropbox backup uploaded for ${GITHUB_REPOSITORY}@${GITHUB_SHA}."
