@@ -1,18 +1,64 @@
 import type { MetadataRoute } from 'next';
 import { getAllObservances } from '../data/observances';
-import { DISCOVERY_TOPICS,topicPath } from '../data/discovery';
+import { DISCOVERY_TOPICS, topicPath } from '../data/discovery';
 import { CHURCHES } from '../data/knowledge/churches';
-import { JURISDICTIONS } from '../data/knowledge/jurisdictions';
 import { ECCLESIASTICAL_PEOPLE } from '../data/knowledge/ecclesiastical-state';
+import { JURISDICTIONS } from '../data/knowledge/jurisdictions';
 import { churchPath, jurisdictionPath, personPath } from '../lib/knowledge/routes';
 import { SITE_ORIGIN } from '../lib/site';
 
-export default function sitemap():MetadataRoute.Sitemap{
- const year=new Date().getUTCFullYear(),now=new Date();
- const staticRoutes=['','/calendar','/holidays','/liturgy','/explore','/live','/churches','/leaders','/copyright','/developers'].map((path,index)=>({url:`${SITE_ORIGIN}${path}`,lastModified:now,changeFrequency:(index===0?'daily':'weekly') as 'daily'|'weekly',priority:index===0?1:path==='/explore'?0.95:path==='/calendar'||path==='/liturgy'||path==='/churches'?0.9:path==='/leaders'?0.78:path==='/holidays'||path==='/live'?0.85:0.65}));
- const observances=getAllObservances(year),days=observances.map(item=>({url:`${SITE_ORIGIN}/day/${item.dateISO}`,lastModified:now,changeFrequency:'weekly' as const,priority:0.65})),saints=observances.map(item=>({url:`${SITE_ORIGIN}/saint/${item.id}`,lastModified:now,changeFrequency:'monthly' as const,priority:0.8})),topics=DISCOVERY_TOPICS.map(topic=>({url:`${SITE_ORIGIN}${topicPath(topic)}`,lastModified:now,changeFrequency:'monthly' as const,priority:topic.popular?0.85:0.7}));
- const churches=CHURCHES.map(church=>({url:`${SITE_ORIGIN}${churchPath(church)}`,lastModified:now,changeFrequency:'monthly' as const,priority:0.75}));
- const jurisdictions=JURISDICTIONS.map(jurisdiction=>({url:`${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}`,lastModified:now,changeFrequency:'weekly' as const,priority:jurisdiction.level==='diocese'||jurisdiction.level==='eparchy'?0.78:0.72}));
- const leaders=ECCLESIASTICAL_PEOPLE.map(person=>({url:`${SITE_ORIGIN}${personPath(person)}`,lastModified:now,changeFrequency:'weekly' as const,priority:0.76}));
- return[...new Map([...staticRoutes,...days,...saints,...topics,...churches,...jurisdictions,...leaders].map(item=>[item.url,item])).values()]
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const todayISO = now.toISOString().slice(0, 10);
+  const dailyLastModified = new Date(`${todayISO}T00:00:00.000Z`);
+
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { path: '', changeFrequency: 'daily', priority: 1, lastModified: dailyLastModified },
+    { path: '/explore', changeFrequency: 'weekly', priority: 0.95 },
+    { path: '/calendar', changeFrequency: 'weekly', priority: 0.9 },
+    { path: '/liturgy', changeFrequency: 'daily', priority: 0.9, lastModified: dailyLastModified },
+    { path: '/churches', changeFrequency: 'weekly', priority: 0.9 },
+    { path: '/holidays', changeFrequency: 'weekly', priority: 0.85 },
+    { path: '/live', changeFrequency: 'daily', priority: 0.85, lastModified: dailyLastModified },
+    { path: '/leaders', changeFrequency: 'weekly', priority: 0.78 },
+    { path: '/sources', changeFrequency: 'monthly', priority: 0.65 },
+    { path: '/copyright', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/developers', changeFrequency: 'monthly', priority: 0.6 }
+  ].map(route => ({ ...route, url: `${SITE_ORIGIN}${route.path}` }));
+
+  const observances = getAllObservances(year);
+  const days: MetadataRoute.Sitemap = observances.map(item => ({
+    url: `${SITE_ORIGIN}/day/${item.dateISO}`,
+    changeFrequency: item.dateISO === todayISO ? 'daily' : 'monthly',
+    priority: item.dateISO === todayISO ? 0.9 : 0.65,
+    ...(item.dateISO === todayISO ? { lastModified: dailyLastModified } : {})
+  }));
+  const saints: MetadataRoute.Sitemap = observances.map(item => ({
+    url: `${SITE_ORIGIN}/saint/${item.id}`,
+    changeFrequency: 'monthly',
+    priority: 0.8
+  }));
+  const topics: MetadataRoute.Sitemap = DISCOVERY_TOPICS.map(topic => ({
+    url: `${SITE_ORIGIN}${topicPath(topic)}`,
+    changeFrequency: 'monthly',
+    priority: topic.popular ? 0.85 : 0.7
+  }));
+  const churches: MetadataRoute.Sitemap = CHURCHES.map(church => ({
+    url: `${SITE_ORIGIN}${churchPath(church)}`,
+    changeFrequency: 'monthly',
+    priority: 0.75
+  }));
+  const jurisdictions: MetadataRoute.Sitemap = JURISDICTIONS.map(jurisdiction => ({
+    url: `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}`,
+    changeFrequency: 'weekly',
+    priority: jurisdiction.level === 'diocese' || jurisdiction.level === 'eparchy' ? 0.78 : 0.72
+  }));
+  const leaders: MetadataRoute.Sitemap = ECCLESIASTICAL_PEOPLE.map(person => ({
+    url: `${SITE_ORIGIN}${personPath(person)}`,
+    changeFrequency: 'weekly',
+    priority: 0.76
+  }));
+
+  return [...new Map([...staticRoutes, ...days, ...saints, ...topics, ...churches, ...jurisdictions, ...leaders].map(item => [item.url, item])).values()];
 }
