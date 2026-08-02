@@ -9,7 +9,7 @@ export async function GET() {
     const snapshot = JSON.parse(await readFile(filePath, 'utf8')) as {
       schemaVersion?: number;
       sourceId?: string;
-      indexUrl?: string;
+      indexUrls?: string[];
       fetchedAt?: string;
       contentFingerprint?: string;
       documentCount?: number;
@@ -21,8 +21,9 @@ export async function GET() {
     return Response.json({
       status: 'ok',
       available: true,
+      schemaVersion: snapshot.schemaVersion,
       sourceId: snapshot.sourceId,
-      indexUrl: snapshot.indexUrl,
+      monitoredIndexes: snapshot.indexUrls ?? [],
       fetchedAt: snapshot.fetchedAt,
       fingerprint: snapshot.contentFingerprint,
       documents: snapshot.documentCount ?? 0,
