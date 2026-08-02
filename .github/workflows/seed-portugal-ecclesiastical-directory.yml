@@ -11,6 +11,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:
+  group: seed-portugal-ecclesiastical-directory
+  cancel-in-progress: true
+
 jobs:
   seed:
     runs-on: ubuntu-latest
@@ -39,22 +43,43 @@ jobs:
       - name: Audit imported normalized records
         run: npm run leaders:audit
 
+      - name: Build transactional staging SQL
+        run: npm run leaders:sql
+
+      - name: Summarize corrected seed
+        id: summary
+        shell: bash
+        run: |
+          records=$(node -p "require('./data/generated/ecclesiastical-directory/catholic-hierarchy.json').counts.records")
+          events=$(node -p "require('./data/generated/ecclesiastical-directory/gcatholic.json').counts.events")
+          echo "records=${records}" >> "$GITHUB_OUTPUT"
+          echo "events=${events}" >> "$GITHUB_OUTPUT"
+
       - name: Commit bounded seed data to feature branch
         shell: bash
         run: |
           git config user.name 'santosdodia-directory-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add data/generated/ecclesiastical-directory/*.json
-          git commit -m 'data(leaders): seed Portugal and current Catholic events'
+          git add data/generated/ecclesiastical-directory/*.json db/seeds/ecclesiastical-directory.sql
+          if git diff --cached --quiet; then
+            echo 'Corrected seed is already current.'
+            exit 0
+          fi
+          git commit -m 'data(leaders): correct Portugal seed and stage SQL'
+          git fetch origin agent/global-leaders-directory
+          git rebase origin/agent/global-leaders-directory
           git push origin HEAD:agent/global-leaders-directory
 
-      - name: Record seed completion in issue 10
+      - name: Record corrected seed completion in issue 10
         uses: actions/github-script@v7
+        env:
+          RECORDS: ${{ steps.summary.outputs.records }}
+          EVENTS: ${{ steps.summary.outputs.events }}
         with:
           script: |
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 10,
-              body: `✅ The first normalized local copy was generated on \`agent/global-leaders-directory\`: Catholic-Hierarchy Portugal references and current GCatholic events. Raw HTML was not committed.`
+              body: `✅ Corrected Portugal seed completed: ${process.env.RECORDS} real Catholic-Hierarchy person/office references and ${process.env.EVENTS} current GCatholic events. Navigation links are rejected by audit. Transactional staging SQL was generated; raw HTML was not committed.`
             })
