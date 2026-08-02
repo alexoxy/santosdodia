@@ -29,6 +29,23 @@ CREATE TABLE IF NOT EXISTS source_snapshots (
   UNIQUE(source_id, source_url, content_hash)
 );
 
+CREATE TABLE IF NOT EXISTS source_ingest_records (
+  id TEXT PRIMARY KEY,
+  source_id TEXT NOT NULL REFERENCES source_registry(id),
+  external_record_id TEXT NOT NULL,
+  record_type TEXT NOT NULL,
+  payload_json TEXT NOT NULL,
+  content_hash TEXT NOT NULL,
+  source_url TEXT NOT NULL,
+  confidence TEXT NOT NULL,
+  resolution_status TEXT NOT NULL DEFAULT 'unresolved',
+  canonical_entity_type TEXT,
+  canonical_entity_id TEXT,
+  first_seen_at TEXT NOT NULL,
+  last_seen_at TEXT NOT NULL,
+  UNIQUE(source_id, external_record_id, content_hash)
+);
+
 CREATE TABLE IF NOT EXISTS churches (
   id TEXT PRIMARY KEY,
   family TEXT NOT NULL,
@@ -131,6 +148,8 @@ CREATE TABLE IF NOT EXISTS sync_runs (
   error_json TEXT
 );
 
+CREATE INDEX IF NOT EXISTS idx_ingest_records_source ON source_ingest_records(source_id, record_type, resolution_status);
+CREATE INDEX IF NOT EXISTS idx_ingest_records_canonical ON source_ingest_records(canonical_entity_type, canonical_entity_id);
 CREATE INDEX IF NOT EXISTS idx_jurisdictions_church ON jurisdictions(church_id);
 CREATE INDEX IF NOT EXISTS idx_jurisdictions_country_region ON jurisdictions(country_code, region_code);
 CREATE INDEX IF NOT EXISTS idx_people_name ON people(canonical_name);
