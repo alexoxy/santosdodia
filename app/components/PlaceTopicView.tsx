@@ -57,9 +57,18 @@ export default function PlaceTopicView({ slug, locale }: { slug: string; locale:
   const year = new Date().getFullYear();
   const items = getObservancesForTopic(topic, year, locale);
   const countryCode = COUNTRY_CODES[slug];
-  const jurisdictions = countryCode
+  const countryJurisdictions = countryCode
     ? JURISDICTIONS.filter(jurisdiction => jurisdiction.geography.some(scope => scope.level === 'country' && scope.code === countryCode))
     : [];
+  const conference = countryJurisdictions.find(jurisdiction => jurisdiction.level === 'episcopal-conference');
+  const jurisdictions = conference
+    ? countryJurisdictions
+      .filter(jurisdiction => jurisdiction.id === conference.id || jurisdiction.parentJurisdictionId === conference.id)
+      .sort((a, b) => {
+        const order = { 'episcopal-conference': 0, province: 1, ordinariate: 2 } as Record<string, number>;
+        return (order[a.level] ?? 9) - (order[b.level] ?? 9) || localizedFieldValue(a.name, locale).localeCompare(localizedFieldValue(b.name, locale), locale);
+      })
+    : countryJurisdictions;
 
   return <div className="page-stack">
     <section className="page-hero compact-hero discovery-hero">
@@ -113,6 +122,11 @@ export default function PlaceTopicView({ slug, locale }: { slug: string; locale:
         {jurisdictions.map(jurisdiction => {
           const church = churchById(jurisdiction.churchId);
           const offices = ECCLESIASTICAL_OFFICES.filter(office => office.jurisdictionId === jurisdiction.id && office.status === 'active');
+          const children = jurisdiction.level === 'province'
+            ? countryJurisdictions
+              .filter(child => child.parentJurisdictionId === jurisdiction.id)
+              .sort((a, b) => localizedFieldValue(a.name, locale).localeCompare(localizedFieldValue(b.name, locale), locale))
+            : [];
           return <article className="saint-preview" key={jurisdiction.id}>
             <div>
               <div className="tag-row">
@@ -128,6 +142,12 @@ export default function PlaceTopicView({ slug, locale }: { slug: string; locale:
                   {officeLabel(office.officeType, locale)}
                 </p> : null;
               })}
+              {children.length ? <>
+                <h4>{ecclesiasticalCopy.childJurisdictions}</h4>
+                <div className="related-mini">
+                  {children.map(child => <Link href={jurisdictionPath(child)} key={child.id}>{localizedFieldValue(child.name, locale)}</Link>)}
+                </div>
+              </> : null}
               <div className="saint-preview-links">
                 <Link className="btn btn-secondary" href={jurisdictionPath(jurisdiction)}>{ecclesiasticalCopy.openJurisdiction}</Link>
                 {church ? <Link className="text-link" href={churchPath(church)}>{ecclesiasticalCopy.openChurch} →</Link> : null}
