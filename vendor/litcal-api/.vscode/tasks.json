@@ -1,0 +1,103 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            "APP_PROTOCOL": "http",
+            "APP_HOST": "localhost",
+            "APP_PORT": "8000"
+        }
+    },
+    "tasks": [
+        {
+            "label": "launch-browser",
+            "type": "shell",
+            "windows": {
+                "command": "cmd",
+                "args": [
+                    "/c",
+                    "start \"\" \"${APP_PROTOCOL}://${APP_HOST}:${APP_PORT}\""
+                ],
+                "problemMatcher": []
+            },
+            "linux": {
+                "command": "/bin/bash",
+                "args": [
+                    "-c",
+                    "if grep -q microsoft /proc/version; then powershell.exe Start-Process \"${APP_PROTOCOL}://${APP_HOST}:${APP_PORT}\"; else xdg-open \"${APP_PROTOCOL}://${APP_HOST}:${APP_PORT}\"; fi"
+                  ],
+                "problemMatcher": []
+            },
+            "osx": {
+                "command": "open",
+                "args": [
+                    "${APP_PROTOCOL}://${APP_HOST}:${APP_PORT}"
+                ],
+                "problemMatcher": []
+            }
+        },
+        {
+            "label": "api-server-no-browser",
+            "type": "shell",
+            "command": "./start-server.sh",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "RUN_MODE": "vscode",
+                    "PHP_CLI_SERVER_WORKERS": "6"
+                }
+            },
+            "windows": {
+                "command": "bash",
+                "args": [
+                    "-lc",
+                    "./start-server.sh"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}",
+                    "env": {
+                        "RUN_MODE": "vscode",
+                        "PHP_CLI_SERVER_WORKERS": "6"
+                    }
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^❌ (.*)$",
+                    "message": 1,
+                    "file": 1
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^Starting PHP built-in web server\\.\\.\\.$",
+                    "endsPattern": "^\\[\\d+\\]\\s+\\[.*?\\]\\s+PHP \\d+\\.\\d+\\.\\d+ Development Server \\(https?:\\/\\/[^)]+\\) started$"
+                }
+            }
+        },
+        {
+            "label": "litcal-api-with-browser",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "api-server-no-browser",
+                "launch-browser"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "litcal-tests-websockets",
+            "type": "shell",
+            "command": "php public/LitCalTestServer.php",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

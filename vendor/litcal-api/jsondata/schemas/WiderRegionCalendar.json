@@ -1,0 +1,572 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "WiderRegionCalendar",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "litcal": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/LitCal"
+            },
+            "minItems": 1
+        },
+        "national_calendars": {
+            "$ref": "#/definitions/NationalCalendars"
+        },
+        "metadata": {
+            "$ref": "#/definitions/CalendarMetadata"
+        },
+        "i18n": {
+            "$ref": "#/definitions/CalendarI18n"
+        }
+    },
+    "required": [
+        "litcal",
+        "national_calendars",
+        "metadata"
+    ],
+    "definitions": {
+        "LitCal": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/LitCalCreateNew"
+                },
+                {
+                    "$ref": "#/definitions/LitCalMakePatron"
+                }
+            ]
+        },
+        "LitCalCreateNew": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "$ref": "#/definitions/LiturgicalEventCreateNew"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/MetadataCreateNew"
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalCreateNew"
+        },
+        "LitCalMakePatron": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "$ref": "#/definitions/LiturgicalEventMakePatron"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/MetadataMakePatron"
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalMakePatron"
+        },
+        "LiturgicalEventCreateNew": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "event_key": {
+                    "$ref": "./CommonDef.json#/definitions/EventKey"
+                },
+                "color": {
+                    "$ref": "./CommonDef.json#/definitions/LitColor"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "day": {
+                    "$ref": "./CommonDef.json#/definitions/Day"
+                },
+                "month": {
+                    "$ref": "./CommonDef.json#/definitions/Month"
+                },
+                "common": {
+                    "$ref": "./CommonDef.json#/definitions/LitCommon"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "event_key",
+                "color",
+                "day",
+                "month",
+                "common",
+                "grade"
+            ],
+            "title": "LiturgicalEventCreateNew"
+        },
+        "LiturgicalEventMakePatron": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "event_key": {
+                    "$ref": "./CommonDef.json#/definitions/EventKey"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "event_key",
+                "grade"
+            ],
+            "title": "LiturgicalEventMakePatron"
+        },
+        "MetadataCreateNew": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "const": "createNew"
+                },
+                "since_year": {
+                    "type": "integer",
+                    "minimum": 1970,
+                    "maximum": 9999
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "url_lang_map": {
+                    "$ref": "#/definitions/UrlLangMap"
+                },
+                "until_year": {
+                    "type": "integer",
+                    "minimum": 1970,
+                    "maximum": 9999
+                }
+            },
+            "required": [
+                "action",
+                "since_year",
+                "url",
+                "url_lang_map"
+            ],
+            "title": "MetadataCreateNew"
+        },
+        "MetadataMakePatron": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "const": "makePatron"
+                },
+                "since_year": {
+                    "type": "integer",
+                    "minimum": 1800,
+                    "maximum": 9999
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "url_lang_map": {
+                    "$ref": "#/definitions/UrlLangMap"
+                },
+                "until_year": {
+                    "type": "integer",
+                    "minimum": 1970,
+                    "maximum": 9999
+                }
+            },
+            "required": [
+                "action",
+                "since_year",
+                "url",
+                "url_lang_map"
+            ],
+            "title": "MetadataMakePatron"
+        },
+        "UrlLangMap": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "de": {
+                    "type": "string",
+                    "description": "German",
+                    "enum": [
+                        "de",
+                        "ge"
+                    ]
+                },
+                "en": {
+                    "type": "string",
+                    "description": "English",
+                    "enum": [
+                        "en"
+                    ]
+                },
+                "es": {
+                    "type": "string",
+                    "description": "Spanish",
+                    "enum": [
+                        "es",
+                        "sp"
+                    ]
+                },
+                "fr": {
+                    "type": "string",
+                    "description": "French",
+                    "enum": [
+                        "fr"
+                    ]
+                },
+                "it": {
+                    "type": "string",
+                    "description": "Italian",
+                    "enum": [
+                        "it"
+                    ]
+                },
+                "la": {
+                    "type": "string",
+                    "description": "Latin",
+                    "enum": [
+                        "la"
+                    ]
+                },
+                "pl": {
+                    "type": "string",
+                    "description": "Polish",
+                    "enum": [
+                        "pl"
+                    ]
+                },
+                "pt": {
+                    "type": "string",
+                    "description": "Portuguese",
+                    "enum": [
+                        "po",
+                        "pt"
+                    ]
+                },
+                "zh": {
+                    "type": "string",
+                    "description": "Chinese",
+                    "enum": [
+                        "zh"
+                    ]
+                }
+            }
+        },
+        "NationalCalendars": {
+            "type": "object",
+            "propertyNames": {
+                "enum": [
+                    "Afghanistan",
+                    "Åland Islands",
+                    "Albania",
+                    "Algeria",
+                    "American Samoa",
+                    "Andorra",
+                    "Angola",
+                    "Anguilla",
+                    "Antigua & Barbuda",
+                    "Argentina",
+                    "Armenia",
+                    "Aruba",
+                    "Australia",
+                    "Austria",
+                    "Azerbaijan",
+                    "Bahamas",
+                    "Bahrain",
+                    "Bangladesh",
+                    "Barbados",
+                    "Belarus",
+                    "Belgium",
+                    "Belize",
+                    "Benin",
+                    "Bermuda",
+                    "Bhutan",
+                    "Bolivia",
+                    "Bosnia & Herzegovina",
+                    "Botswana",
+                    "Brazil",
+                    "British Indian Ocean Territory",
+                    "British Virgin Islands",
+                    "Brunei",
+                    "Bulgaria",
+                    "Burkina Faso",
+                    "Burundi",
+                    "Cambodia",
+                    "Cameroon",
+                    "Canada",
+                    "Canary Islands",
+                    "Cape Verde",
+                    "Caribbean Netherlands",
+                    "Cayman Islands",
+                    "Central African Republic",
+                    "Ceuta & Melilla",
+                    "Chad",
+                    "Chile",
+                    "China",
+                    "Christmas Island",
+                    "Cocos (Keeling) Islands",
+                    "Colombia",
+                    "Comoros",
+                    "Congo - Brazzaville",
+                    "Congo - Kinshasa",
+                    "Cook Islands",
+                    "Costa Rica",
+                    "Côte d’Ivoire",
+                    "Croatia",
+                    "Cuba",
+                    "Curaçao",
+                    "Cyprus",
+                    "Czechia",
+                    "Denmark",
+                    "Diego Garcia",
+                    "Djibouti",
+                    "Dominica",
+                    "Dominican Republic",
+                    "Ecuador",
+                    "Egypt",
+                    "El Salvador",
+                    "Equatorial Guinea",
+                    "Eritrea",
+                    "Estonia",
+                    "Eswatini",
+                    "Ethiopia",
+                    "Europe",
+                    "Falkland Islands",
+                    "Faroe Islands",
+                    "Fiji",
+                    "Finland",
+                    "France",
+                    "French Guiana",
+                    "French Polynesia",
+                    "Gabon",
+                    "Gambia",
+                    "Georgia",
+                    "Germany",
+                    "Ghana",
+                    "Gibraltar",
+                    "Greece",
+                    "Greenland",
+                    "Grenada",
+                    "Guadeloupe",
+                    "Guam",
+                    "Guatemala",
+                    "Guernsey",
+                    "Guinea",
+                    "Guinea-Bissau",
+                    "Guyana",
+                    "Haiti",
+                    "Honduras",
+                    "Hong Kong SAR China",
+                    "Hungary",
+                    "Iceland",
+                    "India",
+                    "Indonesia",
+                    "Iran",
+                    "Iraq",
+                    "Ireland",
+                    "Isle of Man",
+                    "Israel",
+                    "Italy",
+                    "Jamaica",
+                    "Japan",
+                    "Jersey",
+                    "Jordan",
+                    "Kazakhstan",
+                    "Kenya",
+                    "Kiribati",
+                    "Kosovo",
+                    "Kuwait",
+                    "Kyrgyzstan",
+                    "Laos",
+                    "Latin America",
+                    "Latvia",
+                    "Lebanon",
+                    "Lesotho",
+                    "Liberia",
+                    "Libya",
+                    "Liechtenstein",
+                    "Lithuania",
+                    "Luxembourg",
+                    "Macao SAR China",
+                    "Madagascar",
+                    "Malawi",
+                    "Malaysia",
+                    "Mali",
+                    "Malta",
+                    "Marshall Islands",
+                    "Martinique",
+                    "Mauritania",
+                    "Mauritius",
+                    "Mayotte",
+                    "Mexico",
+                    "Micronesia",
+                    "Moldova",
+                    "Monaco",
+                    "Mongolia",
+                    "Montenegro",
+                    "Montserrat",
+                    "Morocco",
+                    "Mozambique",
+                    "Myanmar (Burma)",
+                    "Namibia",
+                    "Nauru",
+                    "Nepal",
+                    "Netherlands",
+                    "New Caledonia",
+                    "New Zealand",
+                    "Nicaragua",
+                    "Niger",
+                    "Nigeria",
+                    "Niue",
+                    "Norfolk Island",
+                    "North Korea",
+                    "North Macedonia",
+                    "Northern Mariana Islands",
+                    "Norway",
+                    "Oman",
+                    "Pakistan",
+                    "Palau",
+                    "Palestinian Territories",
+                    "Panama",
+                    "Papua New Guinea",
+                    "Paraguay",
+                    "Peru",
+                    "Philippines",
+                    "Pitcairn Islands",
+                    "Poland",
+                    "Portugal",
+                    "Puerto Rico",
+                    "Qatar",
+                    "Réunion",
+                    "Romania",
+                    "Russia",
+                    "Rwanda",
+                    "Samoa",
+                    "San Marino",
+                    "São Tomé & Príncipe",
+                    "Saudi Arabia",
+                    "Senegal",
+                    "Serbia",
+                    "Seychelles",
+                    "Sierra Leone",
+                    "Singapore",
+                    "Sint Maarten",
+                    "Slovakia",
+                    "Slovenia",
+                    "Solomon Islands",
+                    "Somalia",
+                    "South Africa",
+                    "South Korea",
+                    "South Sudan",
+                    "Spain",
+                    "Sri Lanka",
+                    "St. Barthélemy",
+                    "St. Helena",
+                    "St. Kitts & Nevis",
+                    "St. Lucia",
+                    "St. Martin",
+                    "St. Pierre & Miquelon",
+                    "St. Vincent & Grenadines",
+                    "Sudan",
+                    "Suriname",
+                    "Svalbard & Jan Mayen",
+                    "Sweden",
+                    "Switzerland",
+                    "Syria",
+                    "Taiwan",
+                    "Tajikistan",
+                    "Tanzania",
+                    "Thailand",
+                    "Timor-Leste",
+                    "Togo",
+                    "Tokelau",
+                    "Tonga",
+                    "Trinidad & Tobago",
+                    "Tunisia",
+                    "Turkey",
+                    "Turkmenistan",
+                    "Turks & Caicos Islands",
+                    "Tuvalu",
+                    "U.S. Outlying Islands",
+                    "U.S. Virgin Islands",
+                    "Uganda",
+                    "Ukraine",
+                    "United Arab Emirates",
+                    "United Kingdom",
+                    "United States",
+                    "Uruguay",
+                    "Uzbekistan",
+                    "Vanuatu",
+                    "Vatican City",
+                    "Venezuela",
+                    "Vietnam",
+                    "Wallis & Futuna",
+                    "Western Sahara",
+                    "World",
+                    "Yemen",
+                    "Zambia",
+                    "Zimbabwe"
+                ]
+            },
+            "additionalProperties": {
+                "type": "string",
+                "pattern": "[A-Z1-9]{2,3}"
+            },
+            "minProperties": 1,
+            "title": "NationalCalendars"
+        },
+        "CalendarMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "locales": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/Locale"
+                    },
+                    "minItems": 1
+                },
+                "wider_region": {
+                    "type": "string",
+                    "enum": [
+                        "Africa",
+                        "Americas",
+                        "Asia",
+                        "Europe",
+                        "Oceania"
+                    ]
+                }
+            },
+            "required": [
+                "wider_region",
+                "locales"
+            ],
+            "title": "CalendarMetadata"
+        },
+        "CalendarI18n": {
+            "type": "object",
+            "description": "A JSON object of the form { \"locale\": { \"key\": \"value\" } }, used only in PUT and PATCH requests.",
+            "additionalProperties": {
+                "$ref": "./LitCalTranslation.json"
+            },
+            "propertyNames": {
+                "$ref": "./CommonDef.json#/definitions/Locale"
+            }
+        }
+    }
+}

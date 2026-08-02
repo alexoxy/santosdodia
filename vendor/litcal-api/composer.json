@@ -1,0 +1,112 @@
+{
+    "name": "liturgical-calendar/api",
+    "description": "an API for a perpetual Catholic Liturgical Calendar",
+    "authors": [
+        {
+            "name": "John R. D'Orazio",
+            "email": "priest@johnromanodorazio.com"
+        }
+    ],
+    "type": "library",
+    "keywords": ["api","rest","restful","liturgy","calendar","liturgical","universal","roman","catholic"],
+    "homepage": "https://litcal.johnromanodorazio.com",
+    "require": {
+        "php": ">=8.4",
+        "ext-calendar": "*",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-date": "*",
+        "ext-dom": "*",
+        "ext-gettext": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-simplexml": "*",
+        "ext-xml": "*",
+        "ext-zip": "*",
+        "swaggest/json-schema": "~0.12",
+        "sabre/vobject": "^4.5 || ^5.0",
+        "vlucas/phpdotenv": "^5.6",
+        "nyholm/psr7": "^1.8",
+        "laminas/laminas-httphandlerrunner": "^2.12",
+        "nyholm/psr7-server": "^1.1",
+        "psr/http-server-middleware": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "guzzlehttp/guzzle": "^7.10",
+        "react/filesystem": "0.2.x-dev",
+        "psr/log": "^3.0",
+        "monolog/monolog": "^3.9",
+        "firebase/php-jwt": "^6.11 || ^7.0",
+        "symfony/cache": "^8.0",
+        "plesk/ratchetphp": "^1.0",
+        "symfony/yaml": "^8.0",
+        "doctrine/dbal": "^4.4",
+        "doctrine/migrations": "^3.9"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
+        "phpstan/phpstan": "^2.0@stable",
+        "php-parallel-lint/php-parallel-lint": "^1.4",
+        "php-parallel-lint/php-console-highlighter": "^1.0",
+        "captainhook/captainhook-phar": "^5.25",
+        "captainhook/hook-installer": "^1.0",
+        "phpunit/phpunit": "^12.3@stable"
+    },
+    "suggest": {
+        "ext-redis": "Required only for the long-lived `bin/reconcile-outbox consumer` (XREADGROUP) and best-effort outbox notifications. The backstop drains everything regardless when ext-redis is absent."
+    },
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "LiturgicalCalendar\\Api\\": "src/"
+        },
+        "files": ["src/pgettext.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LiturgicalCalendar\\Tests\\": "phpunit_tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
+    "scripts": {
+        "post-install-cmd": [
+            "LiturgicalCalendar\\Api\\Utilities::postInstall"
+        ],
+        "post-update-cmd": [
+            "LiturgicalCalendar\\Api\\Utilities::postInstall"
+        ],
+        "lint": "phpcs",
+        "lint:fix": "phpcbf",
+        "lint:md": "npx --yes markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#vendor\" \"#.worktrees\" \"#.aider*\" \"#.superpowers\"",
+        "lint:md:fix": "npx --yes markdownlint-cli2 --fix \"**/*.md\" \"#node_modules\" \"#vendor\" \"#.worktrees\" \"#.aider*\" \"#.superpowers\"",
+        "lint:openapi": "npx --yes @redocly/cli lint",
+        "analyse": "phpstan analyse",
+        "parallel-lint": "parallel-lint --exclude .git --exclude vendor .",
+        "test": "phpunit --testdox --display-warnings --exclude-group golden-master-generate",
+        "test:quick": "phpunit --testdox --display-warnings --exclude-group slow --exclude-group golden-master-generate",
+        "test:coverage": "phpunit --display-warnings --coverage-clover coverage.xml --log-junit junit.xml",
+        "test:coverage:full": "./scripts/coverage-with-server.sh",
+        "coverage:merge": "@php scripts/merge-pcov-coverage.php coverage.xml coverage/pcov-server coverage.merged.xml",
+        "start": "./start-server.sh",
+        "stop": "./stop-server.sh",
+        "ws:start": "./ws-start-server.sh",
+        "ws:stop": "./ws-stop-server.sh",
+        "db:migrate": "@php bin/doctrine-migrations migrate --no-interaction",
+        "db:migrations:status": "@php bin/doctrine-migrations status",
+        "db:migrations:generate": "@php bin/doctrine-migrations generate",
+        "db:migrations:sync": "@php bin/doctrine-migrations sync-metadata-storage",
+        "db:migrations:mark-applied": "@php bin/doctrine-migrations version --add --all --no-interaction",
+        "reconciler:consumer": "@php bin/reconcile-outbox consumer",
+        "reconciler:backstop": "@php bin/reconcile-outbox backstop"
+    },
+    "config": {
+        "allow-plugins": {
+            "captainhook/captainhook-phar": true,
+            "captainhook/hook-installer": true
+        }
+    }
+}

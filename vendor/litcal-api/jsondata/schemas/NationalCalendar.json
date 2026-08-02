@@ -1,0 +1,460 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "NationalCalendar",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "litcal": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#/definitions/LitCalMoveLiturgicalEvent"
+                    },
+                    {
+                        "$ref": "#/definitions/LitCalSetPropertyGrade"
+                    },
+                    {
+                        "$ref": "#/definitions/LitCalSetPropertyName"
+                    },
+                    {
+                        "$ref": "#/definitions/LitCalMakePatron"
+                    },
+                    {
+                        "$ref": "#/definitions/LitCalCreateNewFixed"
+                    },
+                    {
+                        "$ref": "#/definitions/LitCalCreateNewMobile"
+                    }
+                ]
+            }
+        },
+        "settings": {
+            "$ref": "#/definitions/Settings"
+        },
+        "metadata": {
+            "$ref": "#/definitions/NationalCalendarMetadata"
+        },
+        "i18n": {
+            "$ref": "#/definitions/NationalCalendarI18n"
+        }
+    },
+    "required": [
+        "litcal",
+        "metadata",
+        "settings"
+    ],
+    "definitions": {
+        "LitCalCreateNewFixed": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "color": {
+                            "$ref": "./CommonDef.json#/definitions/LitColor"
+                        },
+                        "grade": {
+                            "$ref": "./CommonDef.json#/definitions/LitGrade"
+                        },
+                        "grade_display": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "day": {
+                            "$ref": "./CommonDef.json#/definitions/Day"
+                        },
+                        "month": {
+                            "$ref": "./CommonDef.json#/definitions/Month"
+                        },
+                        "common": {
+                            "$ref": "./CommonDef.json#/definitions/LitCommon"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "should only be present on /events path, not in original resource where it will be present in the i18n file"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "color",
+                        "grade",
+                        "day",
+                        "month",
+                        "common"
+                    ],
+                    "title": "LiturgicalEvent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/LitCalMetadataCreateNew"
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalCreateNewFixed"
+        },
+        "LitCalCreateNewMobile": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "color": {
+                            "$ref": "./CommonDef.json#/definitions/LitColor"
+                        },
+                        "grade": {
+                            "$ref": "./CommonDef.json#/definitions/LitGrade"
+                        },
+                        "common": {
+                            "$ref": "./CommonDef.json#/definitions/LitCommon"
+                        },
+                        "strtotime": {
+                            "type": "string",
+                            "description": "supports PHP strtotime string format",
+                            "minLength": 1
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "should only be present on /events path, not in original resource where it will be present in the i18n file"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "color",
+                        "grade",
+                        "common",
+                        "strtotime"
+                    ],
+                    "title": "LiturgicalEventCreateNewMobile"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/LitCalMetadataCreateNew"
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalCreateNewMobile"
+        },
+        "LitCalMetadataCreateNew": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "const": "createNew"
+                },
+                "since_year": {
+                    "type": "integer"
+                },
+                "until_year": {
+                    "type": "integer"
+                },
+                "rules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/ConditionalRule"
+                    },
+                    "description": "An array of conditional rules that apply to this event, for example moving the date if it falls on a Sunday."
+                }
+            },
+            "required": [
+                "action",
+                "since_year"
+            ],
+            "title": "LitCalMetadataCreateNew"
+        },
+        "LitCalSetPropertyGrade": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "grade": {
+                            "$ref": "./CommonDef.json#/definitions/LitGrade"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "grade"
+                    ]
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "since_year": {
+                            "type": "integer"
+                        },
+                        "until_year": {
+                            "type": "integer"
+                        },
+                        "action": {
+                            "type": "string",
+                            "const": "setProperty"
+                        },
+                        "property": {
+                            "type": "string",
+                            "const": "grade"
+                        },
+                        "url": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": [
+                        "action",
+                        "since_year",
+                        "property"
+                    ]
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalSetPropertyGrade"
+        },
+        "LitCalSetPropertyName": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "name"
+                    ]
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "since_year": {
+                            "type": "integer"
+                        },
+                        "until_year": {
+                            "type": "integer"
+                        },
+                        "action": {
+                            "type": "string",
+                            "const": "setProperty"
+                        },
+                        "property": {
+                            "type": "string",
+                            "const": "name"
+                        },
+                        "url": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": [
+                        "action",
+                        "since_year",
+                        "property"
+                    ]
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalSetPropertyName"
+        },
+        "LitCalMoveLiturgicalEvent": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "month": {
+                            "$ref": "./CommonDef.json#/definitions/Month"
+                        },
+                        "day": {
+                            "$ref": "./CommonDef.json#/definitions/Day"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "month",
+                        "day"
+                    ]
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "since_year": {
+                            "type": "integer"
+                        },
+                        "until_year": {
+                            "type": "integer"
+                        },
+                        "action": {
+                            "type": "string",
+                            "const": "moveEvent"
+                        },
+                        "missal": {
+                            "$ref": "./CommonDef.json#/definitions/MissalID"
+                        },
+                        "reason": {
+                            "type": "string",
+                            "minLength": 1
+                        }
+                    },
+                    "required": [
+                        "action",
+                        "since_year",
+                        "missal",
+                        "reason"
+                    ]
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalMoveLiturgicalEvent"
+        },
+        "LitCalMakePatron": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "liturgical_event": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "event_key": {
+                            "$ref": "./CommonDef.json#/definitions/EventKey"
+                        },
+                        "grade": {
+                            "$ref": "./CommonDef.json#/definitions/LitGrade"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "event_key",
+                        "grade"
+                    ]
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "since_year": {
+                            "type": "integer"
+                        },
+                        "until_year": {
+                            "type": "integer"
+                        },
+                        "action": {
+                            "type": "string",
+                            "const": "makePatron"
+                        },
+                        "url": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    "required": [
+                        "action",
+                        "since_year"
+                    ]
+                }
+            },
+            "required": [
+                "liturgical_event",
+                "metadata"
+            ],
+            "title": "LitCalMakePatron"
+        },
+        "NationalCalendarMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nation": {
+                    "$ref": "./CommonDef.json#/definitions/Nation"
+                },
+                "locales": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/Locale"
+                    }
+                },
+                "wider_region": {
+                    "$ref": "./CommonDef.json#/definitions/WiderRegionNames"
+                },
+                "missals": {
+                    "$ref": "./CommonDef.json#/definitions/Missals"
+                }
+            },
+            "required": [
+                "nation",
+                "locales",
+                "wider_region",
+                "missals"
+            ],
+            "title": "NationalCalendarMetadata"
+        },
+        "Settings": {
+            "$ref": "./CommonDef.json#/definitions/CalendarSettings",
+            "title": "Settings"
+        },
+        "NationalCalendarI18n": {
+            "type": "object",
+            "description": "A JSON object of the form { \"locale\": { \"key\": \"value\" } }, used only in PUT and PATCH requests.",
+            "additionalProperties": {
+                "$ref": "./LitCalTranslation.json"
+            },
+            "propertyNames": {
+                "$ref": "./CommonDef.json#/definitions/Locale"
+            }
+        }
+    }
+}

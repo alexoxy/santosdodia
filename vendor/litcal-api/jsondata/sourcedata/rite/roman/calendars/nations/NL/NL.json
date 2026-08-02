@@ -1,0 +1,123 @@
+{
+    "litcal": [
+        {
+            "liturgical_event": {
+                "event_key": "StPeterCanisius",
+                "grade": 3
+            },
+            "metadata": {
+                "action": "setProperty",
+                "property": "grade",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "HLidwina",
+                "color": [ "white" ],
+                "grade": 4,
+                "day": 4,
+                "month": 6,
+                "common": [ "Proper" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "MartelarenGorcum",
+                "color": [ "red" ],
+                "grade": 4,
+                "day": 9,
+                "month": 7,
+                "common": [ "Proper" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "Brandsma",
+                "color": [ "red" ],
+                "grade": 3,
+                "day": 27,
+                "month": 7,
+                "common": [ "Martyrs" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "VerjaardagWijdingKerken",
+                "color": [ "white" ],
+                "grade": 6,
+                "day": 25,
+                "month": 10,
+                "common": [ "Proper" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "Verkondigers",
+                "color": [ "white" ],
+                "grade": 4,
+                "day": 6,
+                "month": 11,
+                "common": [ "Proper" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "Willibrord",
+                "color": [ "white" ],
+                "grade": 6,
+                "day": 7,
+                "month": 11,
+                "common": [ "Proper" ]
+            },
+            "metadata": {
+                "action": "createNew",
+                "since_year": 1979
+            }
+        }
+    ],
+    "settings": {
+        "epiphany": "SUNDAY_JAN2_JAN8",
+        "ascension": "THURSDAY",
+        "corpus_christi": "SUNDAY",
+        "eternal_high_priest": true,
+        "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": false,
+            "Ascension": true,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": false,
+            "Assumption": true,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": true
+        }
+    },
+    "metadata": {
+        "nation": "NL",
+        "locales": [ "nl_NL" ],
+        "wider_region": "Europe",
+        "missals": [ "NL_1978" ]
+    }
+}

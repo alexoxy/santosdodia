@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T06:14:51.820Z",
+  "generatedAt": "2026-08-02T23:30:51.315Z",
   "entries": {
     "7": {
       "canonical": "Мч. Феодота Анкирского и с ним 7-и мчцц. дев: Текусы, Александры, Клавдии, Фаины, Евфрасии, Матроны и Иулии",
@@ -13543,7 +13543,7 @@
       "labels": {
         "en": "Friday - Christmas Weekday",
         "fr": "Vendredi - Férie de Noël",
-        "it": "Feria propria del 10 gennaio"
+        "it": "Feria propria del 7 gennaio"
       },
       "sources": [
         "litcal",
@@ -13568,7 +13568,7 @@
       "labels": {
         "en": "Saturday - Christmas Weekday",
         "fr": "Samedi - Férie de Noël",
-        "it": "Feria propria del 11 gennaio"
+        "it": "Feria propria del 8 gennaio"
       },
       "sources": [
         "litcal",
@@ -13633,7 +13633,7 @@
       "labels": {
         "en": "Tuesday - Christmas Weekday",
         "fr": "Mardi - Férie de Noël",
-        "it": "Feria propria del 7 gennaio"
+        "it": "Feria propria del 4 gennaio"
       },
       "sources": [
         "litcal",
@@ -13658,7 +13658,7 @@
       "labels": {
         "en": "Wednesday - Christmas Weekday",
         "fr": "Mercredi - Férie de Noël",
-        "it": "Feria propria del 8 gennaio"
+        "it": "Feria propria del 5 gennaio"
       },
       "sources": [
         "litcal",
@@ -13671,7 +13671,7 @@
       "labels": {
         "en": "Thursday - Christmas Weekday",
         "fr": "Jeudi - Férie de Noël",
-        "it": "Feria propria del 9 gennaio"
+        "it": "Feria propria del 7 gennaio"
       },
       "sources": [
         "litcal",
@@ -20090,7 +20090,9 @@
     "monday-christmas-weekday": {
       "canonical": "Monday - Christmas Weekday",
       "labels": {
-        "en": "Monday - Christmas Weekday"
+        "en": "Monday - Christmas Weekday",
+        "fr": "Lundi - Férie de Noël",
+        "it": "Feria propria del 3 gennaio"
       },
       "sources": [
         "litcal",
@@ -20161,7 +20163,8 @@
     "saint-paul-vi-pope": {
       "canonical": "Saint Paul VI, Pope",
       "labels": {
-        "en": "Saint Paul VI, Pope"
+        "en": "Saint Paul VI, Pope",
+        "it": "San Paolo VI, Papa"
       },
       "sources": [
         "litcal",
@@ -20172,7 +20175,9 @@
     "thursday-of-the-11th-week-of-ordinary-time": {
       "canonical": "Thursday of the 11th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 11th Week of Ordinary Time"
+        "en": "Thursday of the 11th Week of Ordinary Time",
+        "fr": "Jeudi de la Onzième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Undicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20183,7 +20188,8 @@
     "saint-romuald-abbot": {
       "canonical": "Saint Romuald, Abbot",
       "labels": {
-        "en": "Saint Romuald, Abbot"
+        "en": "Saint Romuald, Abbot",
+        "it": "San Romualdo, abate"
       },
       "sources": [
         "litcal",
@@ -20244,7 +20250,8 @@
     "saint-paul-of-the-cross-priest": {
       "canonical": "Saint Paul of the Cross, Priest",
       "labels": {
-        "en": "Saint Paul of the Cross, Priest"
+        "en": "Saint Paul of the Cross, Priest",
+        "it": "San Paolo della Croce, sacerdote"
       },
       "sources": [
         "litcal",
@@ -20325,7 +20332,9 @@
     "friday-of-the-1st-week-of-ordinary-time": {
       "canonical": "Friday of the 1st Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 1st Week of Ordinary Time"
+        "en": "Friday of the 1st Week of Ordinary Time",
+        "fr": "Vendredi de la Première Semaine du Temps Ordinaire",
+        "it": "Venerdì della Prima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20336,7 +20345,9 @@
     "tuesday-of-the-2nd-week-of-ordinary-time": {
       "canonical": "Tuesday of the 2nd Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 2nd Week of Ordinary Time"
+        "en": "Tuesday of the 2nd Week of Ordinary Time",
+        "fr": "Mardi de la Deuxième Semaine du Temps Ordinaire",
+        "it": "Martedì della Seconda Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20347,7 +20358,9 @@
     "friday-of-the-2nd-week-of-ordinary-time": {
       "canonical": "Friday of the 2nd Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 2nd Week of Ordinary Time"
+        "en": "Friday of the 2nd Week of Ordinary Time",
+        "fr": "Vendredi de la Deuxième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Seconda Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20358,7 +20371,9 @@
     "saturday-of-the-2nd-week-of-ordinary-time": {
       "canonical": "Saturday of the 2nd Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 2nd Week of Ordinary Time"
+        "en": "Saturday of the 2nd Week of Ordinary Time",
+        "fr": "Samedi de la Deuxième Semaine du Temps Ordinaire",
+        "it": "Sabato della Seconda Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20369,7 +20384,8 @@
     "saints-timothy-and-titus-bishops": {
       "canonical": "Saints Timothy and Titus, Bishops",
       "labels": {
-        "en": "Saints Timothy and Titus, Bishops"
+        "en": "Saints Timothy and Titus, Bishops",
+        "it": "Santi Timoteo e Tito, vescovi"
       },
       "sources": [
         "litcal",
@@ -20380,7 +20396,9 @@
     "friday-of-the-3rd-week-of-ordinary-time": {
       "canonical": "Friday of the 3rd Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 3rd Week of Ordinary Time"
+        "en": "Friday of the 3rd Week of Ordinary Time",
+        "fr": "Vendredi de la Troisième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Terza Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20391,7 +20409,9 @@
     "4th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "4th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "4th Sunday of Ordinary Time Vigil Mass"
+        "en": "4th Sunday of Ordinary Time Vigil Mass",
+        "fr": "4ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "IV Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -20402,7 +20422,9 @@
     "4th-sunday-of-ordinary-time": {
       "canonical": "4th Sunday of Ordinary Time",
       "labels": {
-        "en": "4th Sunday of Ordinary Time"
+        "en": "4th Sunday of Ordinary Time",
+        "fr": "4ème dimanche du temps ordinaire",
+        "it": "IV Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20413,7 +20435,9 @@
     "wednesday-of-the-4th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 4th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 4th Week of Ordinary Time"
+        "en": "Wednesday of the 4th Week of Ordinary Time",
+        "fr": "Mercredi de la Quatrième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Quarta Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20424,7 +20448,9 @@
     "thursday-of-the-4th-week-of-ordinary-time": {
       "canonical": "Thursday of the 4th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 4th Week of Ordinary Time"
+        "en": "Thursday of the 4th Week of Ordinary Time",
+        "fr": "Jeudi de la Quatrième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Quarta Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20435,7 +20461,9 @@
     "monday-of-the-5th-week-of-ordinary-time": {
       "canonical": "Monday of the 5th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 5th Week of Ordinary Time"
+        "en": "Monday of the 5th Week of Ordinary Time",
+        "fr": "Lundi de la Cinquième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Quinta Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20446,7 +20474,8 @@
     "saint-polycarp-bishop-and-martyr": {
       "canonical": "Saint Polycarp, Bishop and Martyr",
       "labels": {
-        "en": "Saint Polycarp, Bishop and Martyr"
+        "en": "Saint Polycarp, Bishop and Martyr",
+        "it": "San Policarpo, vescovo e martire"
       },
       "sources": [
         "litcal",
@@ -20457,7 +20486,9 @@
     "wednesday-of-the-2nd-week-of-lent": {
       "canonical": "Wednesday of the 2nd Week of Lent",
       "labels": {
-        "en": "Wednesday of the 2nd Week of Lent"
+        "en": "Wednesday of the 2nd Week of Lent",
+        "fr": "Mercredi de la Deuxième semaine de Carême",
+        "it": "Mercoledì della Seconda Settimana di Quaresima"
       },
       "sources": [
         "litcal",
@@ -20468,7 +20499,9 @@
     "tuesday-of-the-3rd-week-of-lent": {
       "canonical": "Tuesday of the 3rd Week of Lent",
       "labels": {
-        "en": "Tuesday of the 3rd Week of Lent"
+        "en": "Tuesday of the 3rd Week of Lent",
+        "fr": "Mardi de la Troisième semaine de Carême",
+        "it": "Martedì della Terza Settimana di Quaresima"
       },
       "sources": [
         "litcal",
@@ -20479,7 +20512,9 @@
     "saint-frances-of-rome-religious": {
       "canonical": "Saint Frances of Rome, Religious",
       "labels": {
-        "en": "Saint Frances of Rome, Religious"
+        "en": "Saint Frances of Rome, Religious",
+        "fr": "Sainte Françoise Romaine, religieuse",
+        "it": "Santa Francesca Romana, religiosa"
       },
       "sources": [
         "litcal",
@@ -20490,7 +20525,9 @@
     "tuesday-of-the-2nd-week-of-easter": {
       "canonical": "Tuesday of the 2nd Week of Easter",
       "labels": {
-        "en": "Tuesday of the 2nd Week of Easter"
+        "en": "Tuesday of the 2nd Week of Easter",
+        "fr": "Mardi de la Deuxième semaine de Pâques",
+        "it": "Martedì della Seconda Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20501,7 +20538,9 @@
     "friday-of-the-2nd-week-of-easter": {
       "canonical": "Friday of the 2nd Week of Easter",
       "labels": {
-        "en": "Friday of the 2nd Week of Easter"
+        "en": "Friday of the 2nd Week of Easter",
+        "fr": "Vendredi de la Deuxième semaine de Pâques",
+        "it": "Venerdì della Seconda Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20512,7 +20551,9 @@
     "saturday-of-the-2nd-week-of-easter": {
       "canonical": "Saturday of the 2nd Week of Easter",
       "labels": {
-        "en": "Saturday of the 2nd Week of Easter"
+        "en": "Saturday of the 2nd Week of Easter",
+        "fr": "Samedi de la Deuxième semaine de Pâques",
+        "it": "Sabato della Seconda Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20523,7 +20564,8 @@
     "saint-martin-i-pope-and-martyr": {
       "canonical": "Saint Martin I, Pope and Martyr",
       "labels": {
-        "en": "Saint Martin I, Pope and Martyr"
+        "en": "Saint Martin I, Pope and Martyr",
+        "it": "San Martino I, papa e martire"
       },
       "sources": [
         "litcal",
@@ -20534,7 +20576,9 @@
     "wednesday-of-the-4th-week-of-easter": {
       "canonical": "Wednesday of the 4th Week of Easter",
       "labels": {
-        "en": "Wednesday of the 4th Week of Easter"
+        "en": "Wednesday of the 4th Week of Easter",
+        "fr": "Mercredi de la Quatrième semaine de Pâques",
+        "it": "Mercoledì della Quarta Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20545,7 +20589,8 @@
     "saint-anselm-bishop-and-doctor-of-the-church": {
       "canonical": "Saint Anselm, Bishop and Doctor of the Church",
       "labels": {
-        "en": "Saint Anselm, Bishop and Doctor of the Church"
+        "en": "Saint Anselm, Bishop and Doctor of the Church",
+        "it": "Sant'Anselmo di Canterbury, vescovo e dottore della Chiesa"
       },
       "sources": [
         "litcal",
@@ -20556,7 +20601,8 @@
     "saint-george-martyr": {
       "canonical": "Saint George, Martyr",
       "labels": {
-        "en": "Saint George, Martyr"
+        "en": "Saint George, Martyr",
+        "it": "San Giorgio, martire"
       },
       "sources": [
         "litcal",
@@ -20567,7 +20613,8 @@
     "saint-adalbert-bishop-and-martyr": {
       "canonical": "Saint Adalbert, Bishop and Martyr",
       "labels": {
-        "en": "Saint Adalbert, Bishop and Martyr"
+        "en": "Saint Adalbert, Bishop and Martyr",
+        "it": "Sant'Adalberto, vescovo e martire"
       },
       "sources": [
         "litcal",
@@ -20578,7 +20625,8 @@
     "saint-fidelis-of-sigmaringen-priest-and-martyr": {
       "canonical": "Saint Fidelis of Sigmaringen, Priest and Martyr",
       "labels": {
-        "en": "Saint Fidelis of Sigmaringen, Priest and Martyr"
+        "en": "Saint Fidelis of Sigmaringen, Priest and Martyr",
+        "it": "San Fedele di Sigmaringen, sacerdote e martire"
       },
       "sources": [
         "litcal",
@@ -20589,7 +20637,9 @@
     "saturday-of-the-6th-week-of-easter": {
       "canonical": "Saturday of the 6th Week of Easter",
       "labels": {
-        "en": "Saturday of the 6th Week of Easter"
+        "en": "Saturday of the 6th Week of Easter",
+        "fr": "Samedi de la Sixième semaine de Pâques",
+        "it": "Sabato della Sesta Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20600,7 +20650,9 @@
     "tuesday-of-the-7th-week-of-easter": {
       "canonical": "Tuesday of the 7th Week of Easter",
       "labels": {
-        "en": "Tuesday of the 7th Week of Easter"
+        "en": "Tuesday of the 7th Week of Easter",
+        "fr": "Mardi de la Septième semaine de Pâques",
+        "it": "Martedì della Settima Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20611,7 +20663,9 @@
     "thursday-of-the-7th-week-of-easter": {
       "canonical": "Thursday of the 7th Week of Easter",
       "labels": {
-        "en": "Thursday of the 7th Week of Easter"
+        "en": "Thursday of the 7th Week of Easter",
+        "fr": "Jeudi de la Septième semaine de Pâques",
+        "it": "Giovedì della Settima Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -20622,7 +20676,8 @@
     "saint-john-i-pope-and-martyr": {
       "canonical": "Saint John I, Pope and Martyr",
       "labels": {
-        "en": "Saint John I, Pope and Martyr"
+        "en": "Saint John I, Pope and Martyr",
+        "it": "San Giovanni I, papa e martire"
       },
       "sources": [
         "litcal",
@@ -20633,7 +20688,8 @@
     "saint-bede-the-venerable-priest-and-doctor-of-the-church": {
       "canonical": "Saint Bede the Venerable, Priest and Doctor of the Church",
       "labels": {
-        "en": "Saint Bede the Venerable, Priest and Doctor of the Church"
+        "en": "Saint Bede the Venerable, Priest and Doctor of the Church",
+        "it": "San Beda il Venerabile, sacerdote e dottore"
       },
       "sources": [
         "litcal",
@@ -20644,7 +20700,8 @@
     "saint-gregory-vii-pope": {
       "canonical": "Saint Gregory VII, Pope",
       "labels": {
-        "en": "Saint Gregory VII, Pope"
+        "en": "Saint Gregory VII, Pope",
+        "it": "San Gregorio VII, papa"
       },
       "sources": [
         "litcal",
@@ -20655,7 +20712,9 @@
     "saint-mary-magdalene-de-pazzi-virgin": {
       "canonical": "Saint Mary Magdalene de Pazzi, Virgin",
       "labels": {
-        "en": "Saint Mary Magdalene de Pazzi, Virgin"
+        "en": "Saint Mary Magdalene de Pazzi, Virgin",
+        "fr": "Sainte Marie-Madeleine de Pazzi, vierge",
+        "it": "Santa Maria Maddalena de Pazzi, vergine"
       },
       "sources": [
         "litcal",
@@ -20666,7 +20725,9 @@
     "thursday-of-the-8th-week-of-ordinary-time": {
       "canonical": "Thursday of the 8th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 8th Week of Ordinary Time"
+        "en": "Thursday of the 8th Week of Ordinary Time",
+        "fr": "Jeudi de la Huitième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Ottava Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20677,7 +20738,9 @@
     "friday-of-the-8th-week-of-ordinary-time": {
       "canonical": "Friday of the 8th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 8th Week of Ordinary Time"
+        "en": "Friday of the 8th Week of Ordinary Time",
+        "fr": "Vendredi de la Huitième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Ottava Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20688,7 +20751,9 @@
     "saturday-of-the-8th-week-of-ordinary-time": {
       "canonical": "Saturday of the 8th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 8th Week of Ordinary Time"
+        "en": "Saturday of the 8th Week of Ordinary Time",
+        "fr": "Samedi de la Huitième Semaine du Temps Ordinaire",
+        "it": "Sabato della Ottava Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20699,7 +20764,8 @@
     "saint-justin-martyr": {
       "canonical": "Saint Justin Martyr",
       "labels": {
-        "en": "Saint Justin Martyr"
+        "en": "Saint Justin Martyr",
+        "it": "San Giustino martire"
       },
       "sources": [
         "litcal",
@@ -20710,7 +20776,9 @@
     "wednesday-of-the-9th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 9th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 9th Week of Ordinary Time"
+        "en": "Wednesday of the 9th Week of Ordinary Time",
+        "fr": "Mercredi de la Neuvième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Nona Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20721,7 +20789,9 @@
     "10th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "10th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "10th Sunday of Ordinary Time Vigil Mass"
+        "en": "10th Sunday of Ordinary Time Vigil Mass",
+        "fr": "10ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "X Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -20732,7 +20802,9 @@
     "10th-sunday-of-ordinary-time": {
       "canonical": "10th Sunday of Ordinary Time",
       "labels": {
-        "en": "10th Sunday of Ordinary Time"
+        "en": "10th Sunday of Ordinary Time",
+        "fr": "10ème dimanche du temps ordinaire",
+        "it": "X Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20743,7 +20815,9 @@
     "monday-of-the-10th-week-of-ordinary-time": {
       "canonical": "Monday of the 10th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 10th Week of Ordinary Time"
+        "en": "Monday of the 10th Week of Ordinary Time",
+        "fr": "Lundi de la Dixième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Decima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20754,7 +20828,9 @@
     "wednesday-of-the-10th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 10th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 10th Week of Ordinary Time"
+        "en": "Wednesday of the 10th Week of Ordinary Time",
+        "fr": "Mercredi de la Dixième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Decima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20765,7 +20841,8 @@
     "saint-ephrem-deacon-and-doctor-of-the-church": {
       "canonical": "Saint Ephrem, Deacon and Doctor of the Church",
       "labels": {
-        "en": "Saint Ephrem, Deacon and Doctor of the Church"
+        "en": "Saint Ephrem, Deacon and Doctor of the Church",
+        "it": "Sant'Efrem, diacono e dottore"
       },
       "sources": [
         "litcal",
@@ -20776,7 +20853,9 @@
     "11th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "11th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "11th Sunday of Ordinary Time Vigil Mass"
+        "en": "11th Sunday of Ordinary Time Vigil Mass",
+        "fr": "11ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "XI Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -20787,7 +20866,9 @@
     "11th-sunday-of-ordinary-time": {
       "canonical": "11th Sunday of Ordinary Time",
       "labels": {
-        "en": "11th Sunday of Ordinary Time"
+        "en": "11th Sunday of Ordinary Time",
+        "fr": "11ème dimanche du temps ordinaire",
+        "it": "XI Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20798,7 +20879,9 @@
     "saturday-of-the-11th-week-of-ordinary-time": {
       "canonical": "Saturday of the 11th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 11th Week of Ordinary Time"
+        "en": "Saturday of the 11th Week of Ordinary Time",
+        "fr": "Samedi de la Onzième Semaine du Temps Ordinaire",
+        "it": "Sabato della Undicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20809,7 +20892,9 @@
     "tuesday-of-the-12th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 12th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 12th Week of Ordinary Time"
+        "en": "Tuesday of the 12th Week of Ordinary Time",
+        "fr": "Mardi de la Douzième Semaine du Temps Ordinaire",
+        "it": "Martedì della Dodicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20820,7 +20905,8 @@
     "saint-paulinus-of-nola-bishop": {
       "canonical": "Saint Paulinus of Nola, Bishop",
       "labels": {
-        "en": "Saint Paulinus of Nola, Bishop"
+        "en": "Saint Paulinus of Nola, Bishop",
+        "it": "San Paolino da Nola, vescovo"
       },
       "sources": [
         "litcal",
@@ -20831,7 +20917,8 @@
     "saints-john-fisher-bishop-and-thomas-more-martyrs": {
       "canonical": "Saints John Fisher, Bishop, and Thomas More, Martyrs",
       "labels": {
-        "en": "Saints John Fisher, Bishop, and Thomas More, Martyrs"
+        "en": "Saints John Fisher, Bishop, and Thomas More, Martyrs",
+        "it": "Santi Giovanni Fisher, vescovo e martire e Tommaso Moro, martire"
       },
       "sources": [
         "litcal",
@@ -20842,7 +20929,9 @@
     "friday-of-the-12th-week-of-ordinary-time": {
       "canonical": "Friday of the 12th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 12th Week of Ordinary Time"
+        "en": "Friday of the 12th Week of Ordinary Time",
+        "fr": "Vendredi de la Douzième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Dodicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20853,7 +20942,9 @@
     "saturday-of-the-12th-week-of-ordinary-time": {
       "canonical": "Saturday of the 12th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 12th Week of Ordinary Time"
+        "en": "Saturday of the 12th Week of Ordinary Time",
+        "fr": "Samedi de la Douzième Semaine du Temps Ordinaire",
+        "it": "Sabato della Dodicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20864,7 +20955,9 @@
     "13th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "13th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "13th Sunday of Ordinary Time Vigil Mass"
+        "en": "13th Sunday of Ordinary Time Vigil Mass",
+        "fr": "13ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "XIII Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -20875,7 +20968,9 @@
     "13th-sunday-of-ordinary-time": {
       "canonical": "13th Sunday of Ordinary Time",
       "labels": {
-        "en": "13th Sunday of Ordinary Time"
+        "en": "13th Sunday of Ordinary Time",
+        "fr": "13ème dimanche du temps ordinaire",
+        "it": "XIII Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20886,7 +20981,9 @@
     "thursday-of-the-13th-week-of-ordinary-time": {
       "canonical": "Thursday of the 13th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 13th Week of Ordinary Time"
+        "en": "Thursday of the 13th Week of Ordinary Time",
+        "fr": "Jeudi de la Treizième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Tredicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20897,7 +20994,8 @@
     "saint-maria-goretti-virgin-and-martyr": {
       "canonical": "Saint Maria Goretti, Virgin and Martyr",
       "labels": {
-        "en": "Saint Maria Goretti, Virgin and Martyr"
+        "en": "Saint Maria Goretti, Virgin and Martyr",
+        "it": "Santa Maria Goretti, vergine e martire"
       },
       "sources": [
         "litcal",
@@ -20908,7 +21006,9 @@
     "friday-of-the-14th-week-of-ordinary-time": {
       "canonical": "Friday of the 14th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 14th Week of Ordinary Time"
+        "en": "Friday of the 14th Week of Ordinary Time",
+        "fr": "Vendredi de la Quatorzième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Quattordicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20919,7 +21019,9 @@
     "tuesday-of-the-15th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 15th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 15th Week of Ordinary Time"
+        "en": "Tuesday of the 15th Week of Ordinary Time",
+        "fr": "Mardi de la Quinzième Semaine du Temps Ordinaire",
+        "it": "Martedì della Quindicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20930,7 +21032,8 @@
     "saint-henry": {
       "canonical": "Saint Henry",
       "labels": {
-        "en": "Saint Henry"
+        "en": "Saint Henry",
+        "it": "Sant'Enrico"
       },
       "sources": [
         "litcal",
@@ -20941,7 +21044,9 @@
     "tuesday-of-the-16th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 16th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 16th Week of Ordinary Time"
+        "en": "Tuesday of the 16th Week of Ordinary Time",
+        "fr": "Mardi de la Seizième Semaine du Temps Ordinaire",
+        "it": "Martedì della Sedicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20952,7 +21057,8 @@
     "saint-apollinaris-bishop-and-martyr": {
       "canonical": "Saint Apollinaris, Bishop and Martyr",
       "labels": {
-        "en": "Saint Apollinaris, Bishop and Martyr"
+        "en": "Saint Apollinaris, Bishop and Martyr",
+        "it": "Sant'Apollinare, vescovo e martire"
       },
       "sources": [
         "litcal",
@@ -20963,7 +21069,9 @@
     "friday-of-the-16th-week-of-ordinary-time": {
       "canonical": "Friday of the 16th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 16th Week of Ordinary Time"
+        "en": "Friday of the 16th Week of Ordinary Time",
+        "fr": "Vendredi de la Seizième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Sedicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20974,7 +21082,9 @@
     "saturday-of-the-16th-week-of-ordinary-time": {
       "canonical": "Saturday of the 16th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 16th Week of Ordinary Time"
+        "en": "Saturday of the 16th Week of Ordinary Time",
+        "fr": "Samedi de la Seizième Semaine du Temps Ordinaire",
+        "it": "Sabato della Sedicesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20985,7 +21095,9 @@
     "tuesday-of-the-17th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 17th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 17th Week of Ordinary Time"
+        "en": "Tuesday of the 17th Week of Ordinary Time",
+        "fr": "Mardi de la Dix-septième Semaine du Temps Ordinaire",
+        "it": "Martedì della Diciassettesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -20996,7 +21108,9 @@
     "friday-of-the-17th-week-of-ordinary-time": {
       "canonical": "Friday of the 17th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 17th Week of Ordinary Time"
+        "en": "Friday of the 17th Week of Ordinary Time",
+        "fr": "Vendredi de la Dix-septième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Diciassettesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21007,7 +21121,9 @@
     "monday-of-the-18th-week-of-ordinary-time": {
       "canonical": "Monday of the 18th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 18th Week of Ordinary Time"
+        "en": "Monday of the 18th Week of Ordinary Time",
+        "fr": "Lundi de la Dix-huitième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Diciottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21018,7 +21134,9 @@
     "monday-of-the-19th-week-of-ordinary-time": {
       "canonical": "Monday of the 19th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 19th Week of Ordinary Time"
+        "en": "Monday of the 19th Week of Ordinary Time",
+        "fr": "Lundi de la Dix-neuvième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Diciannovesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21029,7 +21147,8 @@
     "saint-lawrence-deacon-and-martyr": {
       "canonical": "Saint Lawrence, Deacon and Martyr",
       "labels": {
-        "en": "Saint Lawrence, Deacon and Martyr"
+        "en": "Saint Lawrence, Deacon and Martyr",
+        "it": "San Lorenzo, diacono e martire"
       },
       "sources": [
         "litcal",
@@ -21040,7 +21159,9 @@
     "thursday-of-the-19th-week-of-ordinary-time": {
       "canonical": "Thursday of the 19th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 19th Week of Ordinary Time"
+        "en": "Thursday of the 19th Week of Ordinary Time",
+        "fr": "Jeudi de la Dix-neuvième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Diciannovesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21051,7 +21172,9 @@
     "friday-of-the-19th-week-of-ordinary-time": {
       "canonical": "Friday of the 19th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 19th Week of Ordinary Time"
+        "en": "Friday of the 19th Week of Ordinary Time",
+        "fr": "Vendredi de la Dix-neuvième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Diciannovesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21062,7 +21185,9 @@
     "wednesday-of-the-20th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 20th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 20th Week of Ordinary Time"
+        "en": "Wednesday of the 20th Week of Ordinary Time",
+        "fr": "Mercredi de la Vingtième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Ventesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21073,7 +21198,9 @@
     "thursday-of-the-20th-week-of-ordinary-time": {
       "canonical": "Thursday of the 20th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 20th Week of Ordinary Time"
+        "en": "Thursday of the 20th Week of Ordinary Time",
+        "fr": "Jeudi de la Vingtième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Ventesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21084,7 +21211,8 @@
     "saint-bartholomew-apostle": {
       "canonical": "Saint Bartholomew, Apostle",
       "labels": {
-        "en": "Saint Bartholomew, Apostle"
+        "en": "Saint Bartholomew, Apostle",
+        "it": "San Bartolomeo, apostolo"
       },
       "sources": [
         "litcal",
@@ -21095,7 +21223,9 @@
     "wednesday-of-the-21st-week-of-ordinary-time": {
       "canonical": "Wednesday of the 21st Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 21st Week of Ordinary Time"
+        "en": "Wednesday of the 21st Week of Ordinary Time",
+        "fr": "Mercredi de la Vingt-et-unième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Vent­unesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21106,7 +21236,9 @@
     "thursday-of-the-21st-week-of-ordinary-time": {
       "canonical": "Thursday of the 21st Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 21st Week of Ordinary Time"
+        "en": "Thursday of the 21st Week of Ordinary Time",
+        "fr": "Jeudi de la Vingt-et-unième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Vent­unesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21117,7 +21249,9 @@
     "wednesday-of-the-22nd-week-of-ordinary-time": {
       "canonical": "Wednesday of the 22nd Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 22nd Week of Ordinary Time"
+        "en": "Wednesday of the 22nd Week of Ordinary Time",
+        "fr": "Mercredi de la Vingt-deuxième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Venti­duesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21128,7 +21262,9 @@
     "monday-of-the-23rd-week-of-ordinary-time": {
       "canonical": "Monday of the 23rd Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 23rd Week of Ordinary Time"
+        "en": "Monday of the 23rd Week of Ordinary Time",
+        "fr": "Lundi de la Vingt-troisième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Venti­treesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21139,7 +21275,9 @@
     "saturday-of-the-23rd-week-of-ordinary-time": {
       "canonical": "Saturday of the 23rd Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 23rd Week of Ordinary Time"
+        "en": "Saturday of the 23rd Week of Ordinary Time",
+        "fr": "Samedi de la Vingt-troisième Semaine du Temps Ordinaire",
+        "it": "Sabato della Venti­treesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21150,7 +21288,9 @@
     "24th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "24th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "24th Sunday of Ordinary Time Vigil Mass"
+        "en": "24th Sunday of Ordinary Time Vigil Mass",
+        "fr": "24ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "XXIV Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -21161,7 +21301,9 @@
     "24th-sunday-of-ordinary-time": {
       "canonical": "24th Sunday of Ordinary Time",
       "labels": {
-        "en": "24th Sunday of Ordinary Time"
+        "en": "24th Sunday of Ordinary Time",
+        "fr": "24ème dimanche du temps ordinaire",
+        "it": "XXIV Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21172,7 +21314,9 @@
     "saturday-of-the-24th-week-of-ordinary-time": {
       "canonical": "Saturday of the 24th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 24th Week of Ordinary Time"
+        "en": "Saturday of the 24th Week of Ordinary Time",
+        "fr": "Samedi de la Vingt-quatrième Semaine du Temps Ordinaire",
+        "it": "Sabato della Venti­quattresima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21183,7 +21327,8 @@
     "saint-matthew-apostle-and-evangelist": {
       "canonical": "Saint Matthew, Apostle and Evangelist",
       "labels": {
-        "en": "Saint Matthew, Apostle and Evangelist"
+        "en": "Saint Matthew, Apostle and Evangelist",
+        "it": "San Matteo apostolo ed evangelista"
       },
       "sources": [
         "litcal",
@@ -21194,7 +21339,9 @@
     "saturday-of-the-25th-week-of-ordinary-time": {
       "canonical": "Saturday of the 25th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 25th Week of Ordinary Time"
+        "en": "Saturday of the 25th Week of Ordinary Time",
+        "fr": "Samedi de la Vingt-cinquième Semaine du Temps Ordinaire",
+        "it": "Sabato della Venti­cinquesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21205,7 +21352,9 @@
     "tuesday-of-the-26th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 26th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 26th Week of Ordinary Time"
+        "en": "Tuesday of the 26th Week of Ordinary Time",
+        "fr": "Mardi de la Vingt-sixième Semaine du Temps Ordinaire",
+        "it": "Martedì della Venti­seiesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21216,7 +21365,8 @@
     "saint-wenceslaus-martyr": {
       "canonical": "Saint Wenceslaus, Martyr",
       "labels": {
-        "en": "Saint Wenceslaus, Martyr"
+        "en": "Saint Wenceslaus, Martyr",
+        "it": "San Venceslao, martire"
       },
       "sources": [
         "litcal",
@@ -21227,7 +21377,8 @@
     "saint-lawrence-ruiz-and-companions-martyrs": {
       "canonical": "Saint Lawrence Ruiz and Companions, Martyrs",
       "labels": {
-        "en": "Saint Lawrence Ruiz and Companions, Martyrs"
+        "en": "Saint Lawrence Ruiz and Companions, Martyrs",
+        "it": "Santi Lorenzo Ruiz e compagni martiri"
       },
       "sources": [
         "litcal",
@@ -21238,7 +21389,9 @@
     "tuesday-of-the-27th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 27th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 27th Week of Ordinary Time"
+        "en": "Tuesday of the 27th Week of Ordinary Time",
+        "fr": "Mardi de la Vingt-septième Semaine du Temps Ordinaire",
+        "it": "Martedì della Venti­settesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21249,7 +21402,9 @@
     "saint-faustina-kowalska": {
       "canonical": "Saint Faustina Kowalska",
       "labels": {
-        "en": "Saint Faustina Kowalska"
+        "en": "Saint Faustina Kowalska",
+        "fr": "Sainte Faustine Kowalska",
+        "it": "Santa Faustina Kowalska"
       },
       "sources": [
         "litcal",
@@ -21260,7 +21415,9 @@
     "wednesday-of-the-28th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 28th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 28th Week of Ordinary Time"
+        "en": "Wednesday of the 28th Week of Ordinary Time",
+        "fr": "Mercredi de la Vingt-huitième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Vent­ottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21271,7 +21428,9 @@
     "saturday-of-the-28th-week-of-ordinary-time": {
       "canonical": "Saturday of the 28th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 28th Week of Ordinary Time"
+        "en": "Saturday of the 28th Week of Ordinary Time",
+        "fr": "Samedi de la Vingt-huitième Semaine du Temps Ordinaire",
+        "it": "Sabato della Vent­ottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21282,7 +21441,8 @@
     "saints-john-de-brebeuf-and-isaac-jogues-priests-and-companions-martyrs": {
       "canonical": "Saints John de Brébeuf and Isaac Jogues, Priests, and Companions, Martyrs",
       "labels": {
-        "en": "Saints John de Brébeuf and Isaac Jogues, Priests, and Companions, Martyrs"
+        "en": "Saints John de Brébeuf and Isaac Jogues, Priests, and Companions, Martyrs",
+        "it": "Santi Giovanni Brebeuf e Isacco Jogues, sacerdoti e compagni martiri"
       },
       "sources": [
         "litcal",
@@ -21293,7 +21453,9 @@
     "tuesday-of-the-30th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 30th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 30th Week of Ordinary Time"
+        "en": "Tuesday of the 30th Week of Ordinary Time",
+        "fr": "Mardi de la Trentième Semaine du Temps Ordinaire",
+        "it": "Martedì della Trentesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21304,7 +21466,9 @@
     "saturday-of-the-30th-week-of-ordinary-time": {
       "canonical": "Saturday of the 30th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 30th Week of Ordinary Time"
+        "en": "Saturday of the 30th Week of Ordinary Time",
+        "fr": "Samedi de la Trentième Semaine du Temps Ordinaire",
+        "it": "Sabato della Trentesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21315,7 +21479,9 @@
     "31st-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "31st Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "31st Sunday of Ordinary Time Vigil Mass"
+        "en": "31st Sunday of Ordinary Time Vigil Mass",
+        "fr": "31ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "XXXI Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -21326,7 +21492,9 @@
     "31st-sunday-of-ordinary-time": {
       "canonical": "31st Sunday of Ordinary Time",
       "labels": {
-        "en": "31st Sunday of Ordinary Time"
+        "en": "31st Sunday of Ordinary Time",
+        "fr": "31ème dimanche du temps ordinaire",
+        "it": "XXXI Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21337,7 +21505,9 @@
     "32nd-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "32nd Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "32nd Sunday of Ordinary Time Vigil Mass"
+        "en": "32nd Sunday of Ordinary Time Vigil Mass",
+        "fr": "32ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "XXXII Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
         "litcal",
@@ -21348,7 +21518,9 @@
     "32nd-sunday-of-ordinary-time": {
       "canonical": "32nd Sunday of Ordinary Time",
       "labels": {
-        "en": "32nd Sunday of Ordinary Time"
+        "en": "32nd Sunday of Ordinary Time",
+        "fr": "32ème dimanche du temps ordinaire",
+        "it": "XXXII Domenica del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21359,7 +21531,9 @@
     "monday-of-the-32nd-week-of-ordinary-time": {
       "canonical": "Monday of the 32nd Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 32nd Week of Ordinary Time"
+        "en": "Monday of the 32nd Week of Ordinary Time",
+        "fr": "Lundi de la Trente-deuxième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Trenta­duesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21370,7 +21544,9 @@
     "monday-of-the-33rd-week-of-ordinary-time": {
       "canonical": "Monday of the 33rd Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 33rd Week of Ordinary Time"
+        "en": "Monday of the 33rd Week of Ordinary Time",
+        "fr": "Lundi de la Trente-troisième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Trenta­treesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21381,7 +21557,9 @@
     "saint-margaret-of-scotland": {
       "canonical": "Saint Margaret of Scotland",
       "labels": {
-        "en": "Saint Margaret of Scotland"
+        "en": "Saint Margaret of Scotland",
+        "fr": "Sainte Marguerite d'Écosse",
+        "it": "Santa Margherita di Scozia"
       },
       "sources": [
         "litcal",
@@ -21392,7 +21570,9 @@
     "saint-gertrude-the-great-virgin": {
       "canonical": "Saint Gertrude the Great, Virgin",
       "labels": {
-        "en": "Saint Gertrude the Great, Virgin"
+        "en": "Saint Gertrude the Great, Virgin",
+        "fr": "Sainte Gertrude, vierge",
+        "it": "Santa Geltrude, vergine"
       },
       "sources": [
         "litcal",
@@ -21403,7 +21583,9 @@
     "friday-of-the-33rd-week-of-ordinary-time": {
       "canonical": "Friday of the 33rd Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 33rd Week of Ordinary Time"
+        "en": "Friday of the 33rd Week of Ordinary Time",
+        "fr": "Vendredi de la Trente-troisième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Trenta­treesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21414,7 +21596,9 @@
     "saturday-of-the-33rd-week-of-ordinary-time": {
       "canonical": "Saturday of the 33rd Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 33rd Week of Ordinary Time"
+        "en": "Saturday of the 33rd Week of Ordinary Time",
+        "fr": "Samedi de la Trente-troisième Semaine du Temps Ordinaire",
+        "it": "Sabato della Trenta­treesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21425,7 +21609,8 @@
     "saint-clement-i-pope-and-martyr": {
       "canonical": "Saint Clement I, Pope and Martyr",
       "labels": {
-        "en": "Saint Clement I, Pope and Martyr"
+        "en": "Saint Clement I, Pope and Martyr",
+        "it": "San Clemente I, papa e martire"
       },
       "sources": [
         "litcal",
@@ -21436,7 +21621,8 @@
     "saint-columban-religious": {
       "canonical": "Saint Columban, Religious",
       "labels": {
-        "en": "Saint Columban, Religious"
+        "en": "Saint Columban, Religious",
+        "it": "San Colombano, abate"
       },
       "sources": [
         "litcal",
@@ -21457,7 +21643,8 @@
     "saint-andrew-apostle": {
       "canonical": "Saint Andrew, Apostle",
       "labels": {
-        "en": "Saint Andrew, Apostle"
+        "en": "Saint Andrew, Apostle",
+        "it": "Sant'Andrea apostolo"
       },
       "sources": [
         "litcal",
@@ -21468,7 +21655,9 @@
     "wednesday-of-the-1st-week-of-advent": {
       "canonical": "Wednesday of the 1st Week of Advent",
       "labels": {
-        "en": "Wednesday of the 1st Week of Advent"
+        "en": "Wednesday of the 1st Week of Advent",
+        "fr": "Mercredi de la Première semaine de l'Avent",
+        "it": "Mercoledì della Prima Settimana dell'Avvento"
       },
       "sources": [
         "litcal",
@@ -21479,7 +21668,9 @@
     "monday-of-the-2nd-week-of-advent": {
       "canonical": "Monday of the 2nd Week of Advent",
       "labels": {
-        "en": "Monday of the 2nd Week of Advent"
+        "en": "Monday of the 2nd Week of Advent",
+        "fr": "Lundi de la Deuxième semaine de l'Avent",
+        "it": "Lunedì della Seconda Settimana dell'Avvento"
       },
       "sources": [
         "litcal",
@@ -21490,7 +21681,8 @@
     "saint-ambrose-bishop-and-doctor-of-the-church": {
       "canonical": "Saint Ambrose, Bishop and Doctor of the Church",
       "labels": {
-        "en": "Saint Ambrose, Bishop and Doctor of the Church"
+        "en": "Saint Ambrose, Bishop and Doctor of the Church",
+        "it": "Sant'Ambrogio, vescovo e dottore"
       },
       "sources": [
         "litcal",
@@ -21501,7 +21693,9 @@
     "saturday-of-the-2nd-week-of-advent": {
       "canonical": "Saturday of the 2nd Week of Advent",
       "labels": {
-        "en": "Saturday of the 2nd Week of Advent"
+        "en": "Saturday of the 2nd Week of Advent",
+        "fr": "Samedi de la Deuxième semaine de l'Avent",
+        "it": "Sabato della Seconda Settimana dell'Avvento"
       },
       "sources": [
         "litcal",
@@ -21512,7 +21706,8 @@
     "saint-john-of-the-cross-priest-and-doctor-of-the-church": {
       "canonical": "Saint John of the Cross, Priest and Doctor of the Church",
       "labels": {
-        "en": "Saint John of the Cross, Priest and Doctor of the Church"
+        "en": "Saint John of the Cross, Priest and Doctor of the Church",
+        "it": "San Giovanni della Croce, sacerdote e dottore"
       },
       "sources": [
         "litcal",
@@ -21523,7 +21718,8 @@
     "saint-peter-canisius-priest-and-doctor-of-the-church": {
       "canonical": "Saint Peter Canisius, Priest and Doctor of the Church",
       "labels": {
-        "en": "Saint Peter Canisius, Priest and Doctor of the Church"
+        "en": "Saint Peter Canisius, Priest and Doctor of the Church",
+        "it": "San Pietro Canisio, sacerdote e dottore"
       },
       "sources": [
         "litcal",
@@ -21534,7 +21730,9 @@
     "thursday-of-the-4th-week-of-advent": {
       "canonical": "Thursday of the 4th Week of Advent",
       "labels": {
-        "en": "Thursday of the 4th Week of Advent"
+        "en": "Thursday of the 4th Week of Advent",
+        "fr": "Jeudi de la Quatrième semaine de l'Avent",
+        "it": "Giovedì della Quarta Settimana dell'Avvento"
       },
       "sources": [
         "litcal",
@@ -21545,7 +21743,9 @@
     "friday-of-the-4th-week-of-advent": {
       "canonical": "Friday of the 4th Week of Advent",
       "labels": {
-        "en": "Friday of the 4th Week of Advent"
+        "en": "Friday of the 4th Week of Advent",
+        "fr": "Vendredi de la Quatrième semaine de l'Avent",
+        "it": "Venerdì della Quarta Settimana dell'Avvento"
       },
       "sources": [
         "litcal",
@@ -21556,7 +21756,8 @@
     "the-holy-innocents-martyrs": {
       "canonical": "The Holy Innocents, Martyrs",
       "labels": {
-        "en": "The Holy Innocents, Martyrs"
+        "en": "The Holy Innocents, Martyrs",
+        "it": "Santi Innocenti, martiri"
       },
       "sources": [
         "litcal",
@@ -21864,7 +22065,9 @@
     "tuesday-of-the-3rd-week-of-ordinary-time": {
       "canonical": "Tuesday of the 3rd Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 3rd Week of Ordinary Time"
+        "en": "Tuesday of the 3rd Week of Ordinary Time",
+        "fr": "Mardi de la Troisième Semaine du Temps Ordinaire",
+        "it": "Martedì della Terza Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21875,7 +22078,9 @@
     "friday-of-the-5th-week-of-ordinary-time": {
       "canonical": "Friday of the 5th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 5th Week of Ordinary Time"
+        "en": "Friday of the 5th Week of Ordinary Time",
+        "fr": "Vendredi de la Cinquième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Quinta Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21886,7 +22091,8 @@
     "saint-turibius-of-mogrovejo-bishop": {
       "canonical": "Saint Turibius of Mogrovejo, Bishop",
       "labels": {
-        "en": "Saint Turibius of Mogrovejo, Bishop"
+        "en": "Saint Turibius of Mogrovejo, Bishop",
+        "it": "San Turibio di Mongrovejo, vescovo"
       },
       "sources": [
         "litcal",
@@ -21897,7 +22103,8 @@
     "saint-mark-the-evangelist": {
       "canonical": "Saint Mark the Evangelist",
       "labels": {
-        "en": "Saint Mark the Evangelist"
+        "en": "Saint Mark the Evangelist",
+        "it": "San Marco Evangelista"
       },
       "sources": [
         "litcal",
@@ -21908,7 +22115,9 @@
     "monday-of-the-6th-week-of-easter": {
       "canonical": "Monday of the 6th Week of Easter",
       "labels": {
-        "en": "Monday of the 6th Week of Easter"
+        "en": "Monday of the 6th Week of Easter",
+        "fr": "Lundi de la Sixième semaine de Pâques",
+        "it": "Lunedì della Sesta Settimana di Pasqua"
       },
       "sources": [
         "litcal",
@@ -21919,7 +22128,9 @@
     "wednesday-of-the-8th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 8th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 8th Week of Ordinary Time"
+        "en": "Wednesday of the 8th Week of Ordinary Time",
+        "fr": "Mercredi de la Huitième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Ottava Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21930,7 +22141,9 @@
     "tuesday-of-the-9th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 9th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 9th Week of Ordinary Time"
+        "en": "Tuesday of the 9th Week of Ordinary Time",
+        "fr": "Mardi de la Neuvième Semaine du Temps Ordinaire",
+        "it": "Martedì della Nona Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21941,7 +22154,9 @@
     "thursday-of-the-9th-week-of-ordinary-time": {
       "canonical": "Thursday of the 9th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 9th Week of Ordinary Time"
+        "en": "Thursday of the 9th Week of Ordinary Time",
+        "fr": "Jeudi de la Neuvième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Nona Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal"
@@ -21951,7 +22166,9 @@
     "saturday-of-the-9th-week-of-ordinary-time": {
       "canonical": "Saturday of the 9th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 9th Week of Ordinary Time"
+        "en": "Saturday of the 9th Week of Ordinary Time",
+        "fr": "Samedi de la Neuvième Semaine du Temps Ordinaire",
+        "it": "Sabato della Nona Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21962,7 +22179,8 @@
     "saint-cyril-of-alexandria-bishop-and-doctor-of-the-church": {
       "canonical": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
       "labels": {
-        "en": "Saint Cyril of Alexandria, Bishop and Doctor of the Church"
+        "en": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+        "it": "San Cirillo di Alessandria, vescovo e dottore"
       },
       "sources": [
         "litcal",
@@ -21973,7 +22191,9 @@
     "thursday-of-the-17th-week-of-ordinary-time": {
       "canonical": "Thursday of the 17th Week of Ordinary Time",
       "labels": {
-        "en": "Thursday of the 17th Week of Ordinary Time"
+        "en": "Thursday of the 17th Week of Ordinary Time",
+        "fr": "Jeudi de la Dix-septième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Diciassettesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21984,7 +22204,9 @@
     "wednesday-of-the-18th-week-of-ordinary-time": {
       "canonical": "Wednesday of the 18th Week of Ordinary Time",
       "labels": {
-        "en": "Wednesday of the 18th Week of Ordinary Time"
+        "en": "Wednesday of the 18th Week of Ordinary Time",
+        "fr": "Mercredi de la Dix-huitième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Diciottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -21995,7 +22217,9 @@
     "friday-of-the-18th-week-of-ordinary-time": {
       "canonical": "Friday of the 18th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 18th Week of Ordinary Time"
+        "en": "Friday of the 18th Week of Ordinary Time",
+        "fr": "Vendredi de la Dix-huitième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Diciottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22006,7 +22230,9 @@
     "tuesday-of-the-25th-week-of-ordinary-time": {
       "canonical": "Tuesday of the 25th Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 25th Week of Ordinary Time"
+        "en": "Tuesday of the 25th Week of Ordinary Time",
+        "fr": "Mardi de la Vingt-cinquième Semaine du Temps Ordinaire",
+        "it": "Martedì della Venti­cinquesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22017,7 +22243,9 @@
     "monday-of-the-26th-week-of-ordinary-time": {
       "canonical": "Monday of the 26th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 26th Week of Ordinary Time"
+        "en": "Monday of the 26th Week of Ordinary Time",
+        "fr": "Lundi de la Vingt-sixième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Venti­seiesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22028,7 +22256,9 @@
     "saturday-of-the-26th-week-of-ordinary-time": {
       "canonical": "Saturday of the 26th Week of Ordinary Time",
       "labels": {
-        "en": "Saturday of the 26th Week of Ordinary Time"
+        "en": "Saturday of the 26th Week of Ordinary Time",
+        "fr": "Samedi de la Vingt-sixième Semaine du Temps Ordinaire",
+        "it": "Sabato della Venti­seiesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22039,7 +22269,9 @@
     "friday-of-the-28th-week-of-ordinary-time": {
       "canonical": "Friday of the 28th Week of Ordinary Time",
       "labels": {
-        "en": "Friday of the 28th Week of Ordinary Time"
+        "en": "Friday of the 28th Week of Ordinary Time",
+        "fr": "Vendredi de la Vingt-huitième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Vent­ottesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22050,7 +22282,9 @@
     "tuesday-of-the-31st-week-of-ordinary-time": {
       "canonical": "Tuesday of the 31st Week of Ordinary Time",
       "labels": {
-        "en": "Tuesday of the 31st Week of Ordinary Time"
+        "en": "Tuesday of the 31st Week of Ordinary Time",
+        "fr": "Mardi de la Trente-et-unième Semaine du Temps Ordinaire",
+        "it": "Martedì della Trent­unesima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -22061,7 +22295,9 @@
     "monday-of-the-34th-week-of-ordinary-time": {
       "canonical": "Monday of the 34th Week of Ordinary Time",
       "labels": {
-        "en": "Monday of the 34th Week of Ordinary Time"
+        "en": "Monday of the 34th Week of Ordinary Time",
+        "fr": "Lundi de la Trente-quatrième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Trenta­quattresima Settimana del Tempo Ordinario"
       },
       "sources": [
         "litcal",
@@ -24930,22 +25166,303 @@
     "9th-sunday-of-ordinary-time-vigil-mass": {
       "canonical": "9th Sunday of Ordinary Time Vigil Mass",
       "labels": {
-        "en": "9th Sunday of Ordinary Time Vigil Mass"
+        "en": "9th Sunday of Ordinary Time Vigil Mass",
+        "fr": "9ème dimanche du temps ordinaire Messe de la Veille",
+        "it": "IX Domenica del Tempo Ordinario Messa della vigilia"
       },
       "sources": [
-        "source-snapshot"
+        "source-snapshot",
+        "litcal"
       ],
-      "confidence": 0.85
+      "confidence": 0.98
     },
     "9th-sunday-of-ordinary-time": {
       "canonical": "9th Sunday of Ordinary Time",
       "labels": {
-        "en": "9th Sunday of Ordinary Time"
+        "en": "9th Sunday of Ordinary Time",
+        "fr": "9ème dimanche du temps ordinaire",
+        "it": "IX Domenica del Tempo Ordinario"
       },
       "sources": [
-        "source-snapshot"
+        "source-snapshot",
+        "litcal"
       ],
-      "confidence": 0.85
+      "confidence": 0.98
+    },
+    "arcidiocesi-di-agrigento-san-vito-martire": {
+      "canonical": "[ Arcidiocesi di Agrigento ] San Vito, martire",
+      "labels": {
+        "en": "[ Arcidiocesi di Agrigento ] San Vito, martire",
+        "it": "[ Arcidiocesi di Agrigento ] San Vito, martire"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "sabato-della-sesta-settimana-del-tempo-ordinario": {
+      "canonical": "Sabato della Sesta Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Sabato della Sesta Settimana del Tempo Ordinario",
+        "it": "Sabato della Sesta Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-nona-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Nona Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Nona Settimana del Tempo Ordinario",
+        "it": "Venerdì della Nona Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-decima-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Decima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Decima Settimana del Tempo Ordinario",
+        "it": "Venerdì della Decima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "santa-brigida-religiosa-patrona-d-europa-messa-della-vigilia": {
+      "canonical": "Santa Brigida, religiosa, patrona d'Europa Messa della vigilia",
+      "labels": {
+        "en": "Santa Brigida, religiosa, patrona d'Europa Messa della vigilia",
+        "it": "Santa Brigida, religiosa, patrona d'Europa Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "trasfigurazione-del-signore-messa-della-vigilia": {
+      "canonical": "Trasfigurazione del Signore Messa della vigilia",
+      "labels": {
+        "en": "Trasfigurazione del Signore Messa della vigilia",
+        "it": "Trasfigurazione del Signore Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-ventesima-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Ventesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Ventesima Settimana del Tempo Ordinario",
+        "it": "Venerdì della Ventesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "venerdi-della-vent-unesima-settimana-del-tempo-ordinario": {
+      "canonical": "Venerdì della Vent­unesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Venerdì della Vent­unesima Settimana del Tempo Ordinario",
+        "it": "Venerdì della Vent­unesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "lunedi-della-venti-quattresima-settimana-del-tempo-ordinario": {
+      "canonical": "Lunedì della Venti­quattresima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Lunedì della Venti­quattresima Settimana del Tempo Ordinario",
+        "it": "Lunedì della Venti­quattresima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "martedi-della-venti-quattresima-settimana-del-tempo-ordinario": {
+      "canonical": "Martedì della Venti­quattresima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Martedì della Venti­quattresima Settimana del Tempo Ordinario",
+        "it": "Martedì della Venti­quattresima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "giovedi-della-venti-seiesima-settimana-del-tempo-ordinario": {
+      "canonical": "Giovedì della Venti­seiesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Giovedì della Venti­seiesima Settimana del Tempo Ordinario",
+        "it": "Giovedì della Venti­seiesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "martedi-della-trenta-duesima-settimana-del-tempo-ordinario": {
+      "canonical": "Martedì della Trenta­duesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Martedì della Trenta­duesima Settimana del Tempo Ordinario",
+        "it": "Martedì della Trenta­duesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "mercoledi-della-trenta-duesima-settimana-del-tempo-ordinario": {
+      "canonical": "Mercoledì della Trenta­duesima Settimana del Tempo Ordinario",
+      "labels": {
+        "en": "Mercoledì della Trenta­duesima Settimana del Tempo Ordinario",
+        "it": "Mercoledì della Trenta­duesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "saturday-of-the-6th-week-of-ordinary-time": {
+      "canonical": "Saturday of the 6th Week of Ordinary Time",
+      "labels": {
+        "en": "Saturday of the 6th Week of Ordinary Time",
+        "fr": "Samedi de la Sixième Semaine du Temps Ordinaire",
+        "it": "Sabato della Sesta Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-9th-week-of-ordinary-time": {
+      "canonical": "Friday of the 9th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 9th Week of Ordinary Time",
+        "fr": "Vendredi de la Neuvième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Nona Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-10th-week-of-ordinary-time": {
+      "canonical": "Friday of the 10th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 10th Week of Ordinary Time",
+        "fr": "Vendredi de la Dixième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Decima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "the-transfiguration-of-the-lord-vigil-mass": {
+      "canonical": "The Transfiguration of the Lord Vigil Mass",
+      "labels": {
+        "en": "The Transfiguration of the Lord Vigil Mass",
+        "fr": "La Transfiguration du Seigneur Messe de la Veille",
+        "it": "Trasfigurazione del Signore Messa della vigilia"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-20th-week-of-ordinary-time": {
+      "canonical": "Friday of the 20th Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 20th Week of Ordinary Time",
+        "fr": "Vendredi de la Vingtième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Ventesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "friday-of-the-21st-week-of-ordinary-time": {
+      "canonical": "Friday of the 21st Week of Ordinary Time",
+      "labels": {
+        "en": "Friday of the 21st Week of Ordinary Time",
+        "fr": "Vendredi de la Vingt-et-unième Semaine du Temps Ordinaire",
+        "it": "Venerdì della Vent­unesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "monday-of-the-24th-week-of-ordinary-time": {
+      "canonical": "Monday of the 24th Week of Ordinary Time",
+      "labels": {
+        "en": "Monday of the 24th Week of Ordinary Time",
+        "fr": "Lundi de la Vingt-quatrième Semaine du Temps Ordinaire",
+        "it": "Lunedì della Venti­quattresima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-24th-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 24th Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 24th Week of Ordinary Time",
+        "fr": "Mardi de la Vingt-quatrième Semaine du Temps Ordinaire",
+        "it": "Martedì della Venti­quattresima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "thursday-of-the-26th-week-of-ordinary-time": {
+      "canonical": "Thursday of the 26th Week of Ordinary Time",
+      "labels": {
+        "en": "Thursday of the 26th Week of Ordinary Time",
+        "fr": "Jeudi de la Vingt-sixième Semaine du Temps Ordinaire",
+        "it": "Giovedì della Venti­seiesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "tuesday-of-the-32nd-week-of-ordinary-time": {
+      "canonical": "Tuesday of the 32nd Week of Ordinary Time",
+      "labels": {
+        "en": "Tuesday of the 32nd Week of Ordinary Time",
+        "fr": "Mardi de la Trente-deuxième Semaine du Temps Ordinaire",
+        "it": "Martedì della Trenta­duesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
+    },
+    "wednesday-of-the-32nd-week-of-ordinary-time": {
+      "canonical": "Wednesday of the 32nd Week of Ordinary Time",
+      "labels": {
+        "en": "Wednesday of the 32nd Week of Ordinary Time",
+        "fr": "Mercredi de la Trente-deuxième Semaine du Temps Ordinaire",
+        "it": "Mercoledì della Trenta­duesima Settimana del Tempo Ordinario"
+      },
+      "sources": [
+        "litcal"
+      ],
+      "confidence": 0.98
     }
   }
 }

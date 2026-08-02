@@ -1,0 +1,39 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "PropriumDeTempore",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/LitEvent"
+    },
+    "definitions": {
+        "LitEvent": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "event_key": {
+                    "$ref": "./CommonDef.json#/definitions/EventKey"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "type": {
+                    "$ref": "./CommonDef.json#/definitions/LitEventType"
+                },
+                "color": {
+                    "$ref": "./CommonDef.json#/definitions/LitColor"
+                },
+                "is_dominical": {
+                    "type": "boolean",
+                    "description": "Whether the event is \"of the Lord\" (dominical). Optional; used by the Ambrosian proprium to distinguish Sundays and solemnities/feasts of the Lord from weekday ferie."
+                },
+                "is_aliturgical": {
+                    "type": "boolean",
+                    "description": "Whether the event is aliturgical (no Mass is celebrated). Used by the Ambrosian proprium for the aliturgical Fridays of Lent."
+                }
+            },
+            "required": [
+                "event_key"
+            ]
+        }
+    }
+}

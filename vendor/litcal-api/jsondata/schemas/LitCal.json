@@ -1,0 +1,1038 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "LitCal",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "settings": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/NationalCalendarSettings"
+                },
+                {
+                    "$ref": "#/definitions/DiocesanCalendarSettings"
+                },
+                {
+                    "$ref": "#/definitions/GeneralRomanCalendarSettings"
+                }
+            ]
+        },
+        "metadata": {
+            "type": "object",
+            "description": "contains information about the current API version, how and when the current response was produced, and keys of liturgical events that can have precedence over others, useful for further calculations of a local calendar",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 5,
+                    "pattern": "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$"
+                },
+                "timestamp": {
+                    "type": "integer",
+                    "description": "Certainly cannot be any earlier than the start of the project itself July 26, 2017; we'll set the max to Dec 12th, 9999",
+                    "minimum": 1501027200,
+                    "maximum": 253402214400
+                },
+                "date_time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "request_headers": {
+                    "type": "object",
+                    "properties": {
+                        "Accept": {
+                            "type": "string",
+                            "description": "If present, must contain at least one of the acceptable media types, or the '*/*' wildcard (sent by clients such as curl or browsers that do not specify an explicit Accept)",
+                            "pattern": "(?:text/html|application/xml|application/json|text/calendar|application/yaml|\\*/\\*)"
+                        },
+                        "Accept-Language": {
+                            "$ref": "./CommonDef.json#/definitions/AcceptLanguage"
+                        },
+                        "X-Requested-With": {
+                            "type": "string",
+                            "description": "Will only appear for AJAX requests, and will only ever have a value of XMLHttpRequest",
+                            "const": "XMLHttpRequest"
+                        },
+                        "Origin": {
+                            "type": "string",
+                            "description": "The Origin header is sent by the browser for CORS requests",
+                            "format": "uri"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "solemnities_lord_bvm": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "solemnities_lord_bvm_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "solemnities": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "solemnities_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "feasts_lord": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "feasts_lord_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "feasts": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "feasts_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "memorials": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "memorials_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "suppressed_events": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "suppressed_events_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "reinstated_events": {
+                    "$ref": "#/definitions/DateTimeObjectCollection"
+                },
+                "reinstated_events_keys": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    }
+                },
+                "diocese_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "version",
+                "request_headers",
+                "solemnities_lord_bvm",
+                "solemnities_lord_bvm_keys",
+                "solemnities",
+                "solemnities_keys",
+                "feasts_lord",
+                "feasts_lord_keys",
+                "feasts",
+                "feasts_keys",
+                "memorials",
+                "memorials_keys"
+            ]
+        },
+        "litcal": {
+            "type": "array",
+            "description": "the liturgical events that make up the requested Liturgical Calendar for the given year",
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/LiturgicalEvent"
+                    },
+                    {
+                        "$ref": "#/definitions/LiturgicalEventVigil"
+                    }
+                ]
+            }
+        },
+        "messages": {
+            "type": "array",
+            "description": "an array containing all of the significant operations done in the calculation of the requested Liturgical Calendar, with links to the Decrees of the Dicastery for Divine Worship and the Discipline of the Sacraments where applicable. Useful for understanding how or why the calculations were done, and what changes have been applied in the generation of the Calendar for the specific year requested.",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "settings",
+        "metadata",
+        "litcal",
+        "messages"
+    ],
+    "examples": [
+        {
+            "settings": {
+                "year": 1970,
+                "epiphany": "JAN6",
+                "ascension": "SUNDAY",
+                "corpus_christi": "SUNDAY",
+                "year_type": "CIVIL",
+                "locale": "it_IT",
+                "return_type": "JSON",
+                "national_calendar": "IT",
+                "diocesan_calendar": "romamo_it",
+                "eternal_high_priest": false,
+                "holydays_of_obligation": {
+                    "Christmas": true,
+                    "Epiphany": true,
+                    "Ascension": false,
+                    "CorpusChristi": false,
+                    "MaryMotherOfGod": true,
+                    "ImmaculateConception": true,
+                    "Assumption": true,
+                    "StJoseph": false,
+                    "StsPeterPaulAp": false,
+                    "AllSaints": true
+                }
+            },
+            "metadata": {
+                "version": "5.3",
+                "timestamp": 1501027200,
+                "date_time": "2024-05-02T03:32:58.936Z",
+                "request_headers": {
+                    "Accept-Language": "it-IT,it;q=0.9",
+                    "Accept": "application/json"
+                },
+                "solemnities_lord_bvm": [
+                    {
+                        "event_key": "Christmas",
+                        "date": "2023-12-25T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "Assumption",
+                        "date": "2023-08-15T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "solemnities_lord_bvm_keys": [
+                    "Christmas",
+                    "Assumption"
+                ],
+                "solemnities": [
+                    {
+                        "event_key": "StsPeterPaulAp",
+                        "date": "2023-06-29T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "AllSaints",
+                        "date": "2023-11-01T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "solemnities_keys": [
+                    "StsPeterPaulAp",
+                    "AllSaints"
+                ],
+                "feasts_lord": [
+                    {
+                        "event_key": "BaptismLord",
+                        "date": "2023-01-08T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "Presentation",
+                        "date": "2023-02-02T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "feasts_lord_keys": [
+                    "BaptismLord",
+                    "Presentation"
+                ],
+                "feasts": [
+                    {
+                        "event_key": "ConversionStPaul",
+                        "date": "2023-01-25T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "StMarkEvangelist",
+                        "date": "2023-04-25T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "feasts_keys": [
+                    "ConversionStPaul",
+                    "StMarkEvangelist"
+                ],
+                "memorials": [
+                    {
+                        "event_key": "ImmaculateHeart",
+                        "date": "2023-06-17T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "StsBasilGreg",
+                        "date": "2023-01-02T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "memorials_keys": [
+                    "ImmaculateHeart",
+                    "StsBasilGreg"
+                ],
+                "suppressed_events": [
+                    {
+                        "event_key": "ChairStPeter",
+                        "date": "2023-02-22T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    },
+                    {
+                        "event_key": "StMatthiasAp",
+                        "date": "2023-05-14T00:00:00+00:00",
+                        "timezone_type": 3,
+                        "timezone": "UTC"
+                    }
+                ],
+                "suppressed_events_keys": [
+                    "ChairStPeter",
+                    "StMatthiasAp"
+                ],
+                "reinstated_events": [],
+                "reinstated_events_keys": []
+            },
+            "litcal": [
+                {
+                    "event_key": "MaryMotherOfGod",
+                    "event_idx": 39,
+                    "name": "SOLLEMNITAS SANCTÆ DEI GENITRICIS MARIÆ",
+                    "color": [
+                        "white"
+                    ],
+                    "color_lcl": [
+                        "albus"
+                    ],
+                    "grade": 6,
+                    "grade_lcl": "SOLLEMNITAS",
+                    "grade_abbr": "S",
+                    "grade_display": null,
+                    "common": [],
+                    "common_lcl": "",
+                    "type": "fixed",
+                    "date": "2023-01-01T00:00:00+00:00",
+                    "year": 2023,
+                    "month": 1,
+                    "month_short": "Ian.",
+                    "month_long": "Ianuarius",
+                    "day": 1,
+                    "day_of_the_week_iso8601": 7,
+                    "day_of_the_week_short": "Dom.",
+                    "day_of_the_week_long": "Dominica",
+                    "readings": {
+                        "first_reading": "Numeri 6:22-27",
+                        "responsorial_psalm": "Psalmo 66 (67)",
+                        "second_reading": "Galatas 4:4-7",
+                        "gospel_acclamation": "Hebræos 1:1-2",
+                        "gospel": "Lucam 2:16-21"
+                    },
+                    "has_vigil_mass": true,
+                    "has_vesper_i": true,
+                    "has_vesper_ii": true,
+                    "psalter_week": 0,
+                    "liturgical_season": "CHRISTMAS",
+                    "liturgical_season_lcl": "Tempus Nativitatis"
+                },
+                {
+                    "event_key": "StsBasilGreg",
+                    "event_idx": 154,
+                    "name": "Sancti Basilii Magni et Gregorii Nazianzeni, episcoporum et Ecclesiæ doctorum",
+                    "color": [
+                        "white"
+                    ],
+                    "color_lcl": [
+                        "albus"
+                    ],
+                    "grade": 3,
+                    "grade_lcl": "Memoria obligatoria",
+                    "grade_abbr": "M",
+                    "grade_display": null,
+                    "common": [
+                        "Proper"
+                    ],
+                    "common_lcl": "Proprio",
+                    "type": "fixed",
+                    "date": "2023-01-02T00:00:00+00:00",
+                    "year": 2023,
+                    "month": 1,
+                    "month_short": "Ian.",
+                    "month_long": "Ianuarius",
+                    "day": 2,
+                    "day_of_the_week_iso8601": 1,
+                    "day_of_the_week_short": "Fer. II",
+                    "day_of_the_week_long": "Feria II",
+                    "readings": {
+                        "first_reading": "Ephesios 4, 1-7.11-13",
+                        "responsorial_psalm": "Psalmo 23",
+                        "gospel_acclamation": "Matthæum 23, 9b.10b",
+                        "gospel": "Matthæum 23, 8-12"
+                    },
+                    "psalter_week": 0,
+                    "liturgical_season": "CHRISTMAS",
+                    "liturgical_season_lcl": "Tempus Nativitatis"
+                }
+            ],
+            "messages": [
+                "The Solemnity 'Sancti Ioseph Sponsi Beatæ Mariæ Virginis' falls on Dominica IV in Quadragesima in the year 2023, the celebration has been transferred to the following Monday (20 Martius) as per the <a href=\"http://www.cultodivino.va/content/cultodivino/it/rivista-notitiae/indici-annate/1990/284-285.html\">Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments</a>.",
+                "'Dominica XVIII «Per Annum»' is superseded by the FESTUM DOMINI 'In Transfiguratione Domini' in the year 2023."
+            ]
+        }
+    ],
+    "definitions": {
+        "DateTimeObjectCollection": {
+            "type": "array",
+            "title": "Date Time Object Collection",
+            "description": "a collection of date-time objects representing liturgical events, such as the solemnities of the Lord and the Blessed Virgin Mary, solemnities, feasts of the Lord, feasts, memorials, suppressed events, or reinstated events",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "event_key": {
+                        "$ref": "./CommonDef.json#/definitions/EventKey"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:1969-(?:11-(?:29|30)|12-(?:0[1-9]|[12][0-9]|3[01]))|19[7-9]\\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|[2-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))T00:00:00\\+00:00$"
+                    },
+                    "timezone_type": {
+                        "type": "integer",
+                        "const": 3
+                    },
+                    "timezone": {
+                        "type": "string",
+                        "const": "UTC"
+                    }
+                }
+            }
+        },
+        "LiturgicalEventVigil": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "Liturgical Event Vigil (Evening Mass)",
+            "description": "When we say vigil, it is in the broad sense of the term, as in the evening Mass on the day preceding the main celebration, where the readings are often the same as those of the day of the main celebration.",
+            "properties": {
+                "event_idx": {
+                    "type": "integer",
+                    "title": "Event Index",
+                    "description": "A sequential index number assigned to each liturgical event in the calendar, starting from 0 for the first event that is calculated. This index helps to uniquely identify and reference each event within the liturgical calendar for that year, seeing that the `event_key` property might not be unique.",
+                    "minimum": 0,
+                    "maximum": 2000
+                },
+                "event_key": {
+                    "$ref": "./CommonDef.json#/definitions/EventKeyVigilMass"
+                },
+                "name": {
+                    "type": "string",
+                    "title": "Liturgical Event Name",
+                    "description": "the localized full name of the liturgical event in the locale requested and according to the current requested calendar (i.e. General Roman Calendar, National Calendar, Diocesan Calendar)"
+                },
+                "date": {
+                    "type": "string",
+                    "title": "Liturgical Event Date",
+                    "description": "the date of the liturgical event in ISO 8601 (RFC 3339) format, always at midnight UTC time",
+                    "format": "date-time",
+                    "pattern": "^(?:1969-(?:11-(?:29|30)|12-(?:0[1-9]|[12][0-9]|3[01]))|19[7-9]\\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|[2-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))T00:00:00\\+00:00$"
+                },
+                "color": {
+                    "$ref": "./CommonDef.json#/definitions/LitColor"
+                },
+                "color_lcl": {
+                    "type": "array",
+                    "title": "Liturgical Color Localized",
+                    "description": "an array of localized strings describing the liturgical color(s) associated with the celebration; if more than one liturgical common is associated with a celebration, there may be more than one color associated with the celebration",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                "type": {
+                    "$ref": "./CommonDef.json#/definitions/LitEventType"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "grade_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Grade Localized",
+                    "description": "a localized string describing the liturgical grade of the celebration, such as 'Solemnity', 'Feast', 'Memorial', etc., according to the locale requested"
+                },
+                "grade_abbr": {
+                    "type": "string",
+                    "title": "Liturgical Grade Abbreviation",
+                    "description": "a localized abbreviation for the liturgical grade of the celebration, such as 'S' for Solemnity, 'F' for Feast, 'M' for Memorial, etc."
+                },
+                "grade_display": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Liturgical Grade Display",
+                    "description": "a localized string for display purposes that may differ from the standard name of the liturgical grade; can be null if no special display name is needed, or an empty string if no particular grade is meant to be shown. For example, for Higher Grade Solemnities it would be undesirable to display 'Solemnity with precedence over other solemnities', so this property would be an empty string in that case; or for All Souls Day which is logically treated as a Solemnity but displayed as a 'Commemoration' or as an 'Optional memorial' (according to local translations), so a localized string such as 'Commemoration' or 'Optional memorial' would be appropriate."
+                },
+                "common": {
+                    "$ref": "./CommonDef.json#/definitions/LitCommon"
+                },
+                "common_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Common Localized",
+                    "description": "a localized string describing the liturgical Proper or common(s) (if any) associated with the celebration, according to the locale requested"
+                },
+                "day_of_the_week_iso8601": {
+                    "type": "integer",
+                    "title": "Day of the Week ISO 8601",
+                    "description": "the day of the week for the liturgical event, following the ISO 8601 standard where Monday is 1 and Sunday is 7",
+                    "minimum": 1,
+                    "maximum": 7
+                },
+                "month": {
+                    "type": "integer",
+                    "title": "Month",
+                    "description": "the month for the liturgical event, represented as an integer from 1 (January) to 12 (December)",
+                    "minimum": 1,
+                    "maximum": 12
+                },
+                "day": {
+                    "type": "integer",
+                    "title": "Day",
+                    "description": "the day of the month for the liturgical event, represented as an integer from 1 to 31 depending on the month",
+                    "minimum": 1,
+                    "maximum": 31
+                },
+                "year": {
+                    "type": "integer",
+                    "title": "Year",
+                    "description": "the year for the liturgical event, between 1969 and 9999; will have the same value for all events when requesting a CIVIL year calendar, but may differ when requesting a LITURGICAL year calendar (i.e. events from the first Sunday of Advent to December 31 will have the previous year as their year value, and events from January 1 to the last Saturday following Christ the King will have the requested year as their year value)",
+                    "minimum": 1969,
+                    "maximum": 9999
+                },
+                "month_short": {
+                    "type": "string",
+                    "title": "Month Short Name",
+                    "description": "a localized abbreviated string for the month of the liturgical event, such as 'gen.' for January if Italian was requested"
+                },
+                "month_long": {
+                    "type": "string",
+                    "title": "Month Long Name",
+                    "description": "a localized full string for the month of the liturgical event, such as 'gennaio' for January if Italian was requested"
+                },
+                "day_of_the_week_short": {
+                    "type": "string",
+                    "title": "Day of the Week Short Name",
+                    "description": "a localized abbreviated string for the day of the week of the liturgical event, such as 'lun.' for Monday if Italian was requested"
+                },
+                "day_of_the_week_long": {
+                    "type": "string",
+                    "title": "Day of the Week Long Name",
+                    "description": "a localized full string for the day of the week of the liturgical event, such as 'lunedi' for Monday if Italian was requested"
+                },
+                "liturgical_year": {
+                    "type": "string",
+                    "title": "Liturgical Year",
+                    "description": "a localized string representing the liturgical year designation (YEAR A, YEAR B, or YEAR C for Sundays and Solemnities; YEAR I or YEAR II for weekdays) according to the liturgical calendar cycle in use for the requested year"
+                },
+                "is_vigil_mass": {
+                    "const": true,
+                    "title": "Is Vigil Mass",
+                    "description": "the property will only exist and will be true if the celebration is a Vigil Mass (i.e., the evening Mass on the day before a solemnity or sunday where the readings may be the same as those used on the day itself); otherwise the property will be absent"
+                },
+                "is_vigil_for": {
+                    "type": "string",
+                    "title": "Is Vigil For",
+                    "description": "the `event_key` of the main celebration for which this vigil mass is being held"
+                },
+                "liturgical_season": {
+                    "type": "string",
+                    "title": "Liturgical Season",
+                    "description": "an enumeration value of the liturgical season in which the event falls, one of: ADVENT, CHRISTMAS, LENT, EASTER_TRIDUUM, EASTER, ORDINARY_TIME, AFTER_EPIPHANY, AFTER_PENTECOST",
+                    "enum": [
+                        "ADVENT",
+                        "CHRISTMAS",
+                        "LENT",
+                        "EASTER_TRIDUUM",
+                        "EASTER",
+                        "ORDINARY_TIME",
+                        "AFTER_EPIPHANY",
+                        "AFTER_PENTECOST"
+                    ]
+                },
+                "liturgical_season_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Season Localized",
+                    "description": "a localized string representing the name of the liturgical season in which the event falls, according to the locale requested"
+                },
+                "psalter_week": {
+                    "type": "integer",
+                    "title": "Psalter Week",
+                    "description": "the psalter week (1 to 4) for the liturgical event, used in the Liturgy of the Hours, if applicable; otherwise 0",
+                    "minimum": 0,
+                    "maximum": 4
+                },
+                "readings": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "holy_day_of_obligation": {
+                    "const": true,
+                    "title": "Is Holy Day of Obligation",
+                    "description": "the property will only exist and will be true if the celebration is a Holy Day of Obligation, according to the calendar requested; otherwise the property will be absent"
+                },
+                "is_dominical": {
+                    "type": "boolean",
+                    "description": "True if the event is 'of the Lord' (dominical). Present only for rites that classify dominical events (Ambrosian)."
+                },
+                "is_aliturgical": {
+                    "type": "boolean",
+                    "description": "True if the event is aliturgical (no Mass celebrated), e.g. the aliturgical Fridays of Ambrosian Lent."
+                }
+            },
+            "required": [
+                "event_idx",
+                "event_key",
+                "name",
+                "date",
+                "color",
+                "color_lcl",
+                "type",
+                "grade",
+                "grade_lcl",
+                "grade_abbr",
+                "grade_display",
+                "common",
+                "common_lcl",
+                "day_of_the_week_iso8601",
+                "month",
+                "day",
+                "year",
+                "month_short",
+                "month_long",
+                "day_of_the_week_short",
+                "day_of_the_week_long",
+                "is_vigil_mass",
+                "is_vigil_for",
+                "liturgical_season",
+                "liturgical_season_lcl",
+                "psalter_week",
+                "readings"
+            ]
+        },
+        "LiturgicalEvent": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "Liturgical Event",
+            "description": "a liturgical event in the calendar, such as a solemnity, feast, memorial, temporal celebration, weekday etc.",
+            "properties": {
+                "event_idx": {
+                    "type": "integer",
+                    "title": "Event Index",
+                    "description": "A sequential index number assigned to each liturgical event in the calendar, starting from 0 for the first event that is calculated. This index helps to uniquely identify and reference each event within the liturgical calendar for that year, seeing that the `event_key` property might not be unique.",
+                    "minimum": 0,
+                    "maximum": 2000
+                },
+                "event_key": {
+                    "$ref": "./CommonDef.json#/definitions/EventKeyNonVigilMass"
+                },
+                "name": {
+                    "type": "string",
+                    "title": "Liturgical Event Name",
+                    "description": "the localized full name of the liturgical event in the locale requested and according to the current requested calendar (i.e. General Roman Calendar, National Calendar, Diocesan Calendar)"
+                },
+                "date": {
+                    "type": "string",
+                    "title": "Liturgical Event Date",
+                    "description": "the date of the liturgical event in ISO 8601 (RFC 3339) format, always at midnight UTC time",
+                    "format": "date-time",
+                    "pattern": "^(?:1969-(?:11-(?:29|30)|12-(?:0[1-9]|[12][0-9]|3[01]))|19[7-9]\\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])|[2-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))T00:00:00\\+00:00$"
+                },
+                "color": {
+                    "$ref": "./CommonDef.json#/definitions/LitColor"
+                },
+                "color_lcl": {
+                    "type": "array",
+                    "title": "Liturgical Color Localized",
+                    "description": "an array of localized strings describing the liturgical color(s) associated with the celebration; if more than one liturgical common is associated with a celebration, there may be more than one color associated with the celebration",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                },
+                "type": {
+                    "$ref": "./CommonDef.json#/definitions/LitEventType"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "grade_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Grade Localized",
+                    "description": "a localized string describing the liturgical grade of the celebration, such as 'Solemnity', 'Feast', 'Memorial', etc., according to the locale requested"
+                },
+                "grade_abbr": {
+                    "type": "string",
+                    "title": "Liturgical Grade Abbreviation",
+                    "description": "a localized abbreviation for the liturgical grade of the celebration, such as 'S' for Solemnity, 'F' for Feast, 'M' for Memorial, etc."
+                },
+                "grade_display": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "title": "Liturgical Grade Display",
+                    "description": "a localized string for display purposes that may differ from the standard name of the liturgical grade; can be null if no special display name is needed, or an empty string if no particular grade is meant to be shown. For example, for Higher Grade Solemnities it would be undesirable to display 'Solemnity with precedence over other solemnities', so this property would be an empty string in that case; or for All Souls Day which is logically treated as a Solemnity but displayed as a 'Commemoration' or as an 'Optional memorial' (according to local translations), so a localized string such as 'Commemoration' or 'Optional memorial' would be appropriate."
+                },
+                "common": {
+                    "$ref": "./CommonDef.json#/definitions/LitCommon"
+                },
+                "common_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Common Localized",
+                    "description": "a localized string describing the liturgical Proper or common(s) (if any) associated with the celebration, according to the locale requested"
+                },
+                "day_of_the_week_iso8601": {
+                    "type": "integer",
+                    "title": "Day of the Week ISO 8601",
+                    "description": "the day of the week for the liturgical event, following the ISO 8601 standard where Monday is 1 and Sunday is 7",
+                    "minimum": 1,
+                    "maximum": 7
+                },
+                "month": {
+                    "type": "integer",
+                    "title": "Month",
+                    "description": "the month for the liturgical event, represented as an integer from 1 (January) to 12 (December)",
+                    "minimum": 1,
+                    "maximum": 12
+                },
+                "day": {
+                    "type": "integer",
+                    "title": "Day",
+                    "description": "the day of the month for the liturgical event, represented as an integer from 1 to 31 depending on the month",
+                    "minimum": 1,
+                    "maximum": 31
+                },
+                "year": {
+                    "type": "integer",
+                    "title": "Year",
+                    "description": "the year for the liturgical event, between 1969 and 9999; will have the same value for all events when requesting a CIVIL year calendar, but may differ when requesting a LITURGICAL year calendar (i.e. events from the first Sunday of Advent to December 31 will have the previous year as their year value, and events from January 1 to the last Saturday following Christ the King will have the requested year as their year value)",
+                    "minimum": 1969,
+                    "maximum": 9999
+                },
+                "month_short": {
+                    "type": "string",
+                    "title": "Month Short Name",
+                    "description": "a localized abbreviated string for the month of the liturgical event, such as 'gen.' for January if Italian was requested"
+                },
+                "month_long": {
+                    "type": "string",
+                    "title": "Month Long Name",
+                    "description": "a localized full string for the month of the liturgical event, such as 'gennaio' for January if Italian was requested"
+                },
+                "day_of_the_week_short": {
+                    "type": "string",
+                    "title": "Day of the Week Short Name",
+                    "description": "a localized abbreviated string for the day of the week of the liturgical event, such as 'lun.' for Monday if Italian was requested"
+                },
+                "day_of_the_week_long": {
+                    "type": "string",
+                    "title": "Day of the Week Long Name",
+                    "description": "a localized full string for the day of the week of the liturgical event, such as 'lunedì' for Monday if Italian was requested"
+                },
+                "liturgical_year": {
+                    "type": "string",
+                    "title": "Liturgical Year",
+                    "description": "a localized string representing the liturgical year designation (YEAR A, YEAR B, or YEAR C for Sundays and Solemnities; YEAR I or YEAR II for weekdays) according to the liturgical calendar cycle in use for the requested year"
+                },
+                "liturgical_season": {
+                    "type": "string",
+                    "title": "Liturgical Season",
+                    "description": "an enumeration value of the liturgical season in which the event falls, one of: ADVENT, CHRISTMAS, LENT, EASTER_TRIDUUM, EASTER, ORDINARY_TIME, AFTER_EPIPHANY, AFTER_PENTECOST",
+                    "enum": [
+                        "ADVENT",
+                        "CHRISTMAS",
+                        "LENT",
+                        "EASTER_TRIDUUM",
+                        "EASTER",
+                        "ORDINARY_TIME",
+                        "AFTER_EPIPHANY",
+                        "AFTER_PENTECOST"
+                    ]
+                },
+                "liturgical_season_lcl": {
+                    "type": "string",
+                    "title": "Liturgical Season Localized",
+                    "description": "a localized string representing the name of the liturgical season in which the event falls, according to the locale requested"
+                },
+                "has_vigil_mass": {
+                    "type": "boolean",
+                    "title": "Has Vigil Mass",
+                    "description": "indicates whether the celebration has an associated Vigil Mass (i.e., the evening Mass on the day before the main celebration where the readings may be the same as those used on the day itself)"
+                },
+                "has_vesper_i": {
+                    "type": "boolean",
+                    "title": "Has Vesper I",
+                    "description": "indicates whether the celebration has First Vespers (the vespers of the evening prior to the main celebration)"
+                },
+                "has_vesper_ii": {
+                    "type": "boolean",
+                    "title": "Has Vesper II",
+                    "description": "indicates whether the celebration has Second Vespers (the vespers of the evening of the day of the main celebration)"
+                },
+                "psalter_week": {
+                    "type": "integer",
+                    "title": "Psalter Week",
+                    "description": "the psalter week (1 to 4) for the liturgical event, used in the Liturgy of the Hours, if applicable; otherwise 0",
+                    "minimum": 0,
+                    "maximum": 4
+                },
+                "readings": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "holy_day_of_obligation": {
+                    "const": true,
+                    "title": "Is Holy Day of Obligation",
+                    "description": "the property will only exist and will be true if the celebration is a Holy Day of Obligation, according to the calendar requested; otherwise the property will be absent"
+                },
+                "is_dominical": {
+                    "type": "boolean",
+                    "description": "True if the event is 'of the Lord' (dominical). Present only for rites that classify dominical events (Ambrosian)."
+                },
+                "is_aliturgical": {
+                    "type": "boolean",
+                    "description": "True if the event is aliturgical (no Mass celebrated), e.g. the aliturgical Fridays of Ambrosian Lent."
+                }
+            },
+            "required": [
+                "event_idx",
+                "event_key",
+                "name",
+                "date",
+                "color",
+                "color_lcl",
+                "type",
+                "grade",
+                "grade_lcl",
+                "grade_abbr",
+                "grade_display",
+                "common",
+                "common_lcl",
+                "day_of_the_week_iso8601",
+                "month",
+                "day",
+                "year",
+                "month_short",
+                "month_long",
+                "day_of_the_week_short",
+                "day_of_the_week_long",
+                "liturgical_season",
+                "liturgical_season_lcl",
+                "psalter_week",
+                "readings"
+            ]
+        },
+        "GeneralRomanCalendarSettings": {
+            "type": "object",
+            "title": "General Roman Calendar Settings",
+            "description": ".the settings that were utilized (and possibly requested) to generate the General Roman Calendar",
+            "additionalProperties": false,
+            "properties": {
+                "year": {
+                    "$ref": "./CommonDef.json#/definitions/Year"
+                },
+                "year_type": {
+                    "type": "string",
+                    "enum": [
+                        "CIVIL",
+                        "LITURGICAL"
+                    ]
+                },
+                "epiphany": {
+                    "$ref": "./CommonDef.json#/definitions/Epiphany"
+                },
+                "ascension": {
+                    "$ref": "./CommonDef.json#/definitions/Ascension"
+                },
+                "corpus_christi": {
+                    "$ref": "./CommonDef.json#/definitions/CorpusChristi"
+                },
+                "locale": {
+                    "$ref": "./CommonDef.json#/definitions/Locale"
+                },
+                "return_type": {
+                    "type": "string",
+                    "enum": [
+                        "ICS",
+                        "JSON",
+                        "XML",
+                        "YML"
+                    ]
+                },
+                "eternal_high_priest": {
+                    "type": "boolean"
+                },
+                "holydays_of_obligation": {
+                    "$ref": "./CommonDef.json#/definitions/HolyDaysOfObligation"
+                }
+            },
+            "required": [
+                "year",
+                "epiphany",
+                "ascension",
+                "corpus_christi",
+                "locale",
+                "return_type",
+                "year_type",
+                "eternal_high_priest",
+                "holydays_of_obligation"
+            ]
+        },
+        "NationalCalendarSettings": {
+            "type": "object",
+            "title": "National Calendar Settings",
+            "description": "the settings utilized (and possibly requested) to generate the national calendar",
+            "additionalProperties": false,
+            "properties": {
+                "year": {
+                    "$ref": "./CommonDef.json#/definitions/Year"
+                },
+                "year_type": {
+                    "type": "string",
+                    "enum": [
+                        "CIVIL",
+                        "LITURGICAL"
+                    ]
+                },
+                "epiphany": {
+                    "$ref": "./CommonDef.json#/definitions/Epiphany"
+                },
+                "ascension": {
+                    "$ref": "./CommonDef.json#/definitions/Ascension"
+                },
+                "corpus_christi": {
+                    "$ref": "./CommonDef.json#/definitions/CorpusChristi"
+                },
+                "locale": {
+                    "$ref": "./CommonDef.json#/definitions/Locale"
+                },
+                "return_type": {
+                    "type": "string",
+                    "enum": [
+                        "ICS",
+                        "JSON",
+                        "XML",
+                        "YML"
+                    ]
+                },
+                "eternal_high_priest": {
+                    "type": "boolean"
+                },
+                "holydays_of_obligation": {
+                    "$ref": "./CommonDef.json#/definitions/HolyDaysOfObligation"
+                },
+                "national_calendar": {
+                    "$ref": "./CommonDef.json#/definitions/Nation"
+                }
+            },
+            "required": [
+                "year",
+                "epiphany",
+                "ascension",
+                "corpus_christi",
+                "locale",
+                "return_type",
+                "year_type",
+                "eternal_high_priest",
+                "national_calendar",
+                "holydays_of_obligation"
+            ]
+        },
+        "DiocesanCalendarSettings": {
+            "type": "object",
+            "title": "Diocesan Calendar Settings",
+            "description": "the settings that were utilized (and possibly requested) to generate the diocesan calendar",
+            "additionalProperties": false,
+            "properties": {
+                "year": {
+                    "$ref": "./CommonDef.json#/definitions/Year"
+                },
+                "year_type": {
+                    "type": "string",
+                    "enum": [
+                        "CIVIL",
+                        "LITURGICAL"
+                    ]
+                },
+                "epiphany": {
+                    "$ref": "./CommonDef.json#/definitions/Epiphany"
+                },
+                "ascension": {
+                    "$ref": "./CommonDef.json#/definitions/Ascension"
+                },
+                "corpus_christi": {
+                    "$ref": "./CommonDef.json#/definitions/CorpusChristi"
+                },
+                "locale": {
+                    "$ref": "./CommonDef.json#/definitions/Locale"
+                },
+                "return_type": {
+                    "type": "string",
+                    "enum": [
+                        "ICS",
+                        "JSON",
+                        "XML",
+                        "YML"
+                    ]
+                },
+                "eternal_high_priest": {
+                    "type": "boolean"
+                },
+                "holydays_of_obligation": {
+                    "$ref": "./CommonDef.json#/definitions/HolyDaysOfObligation"
+                },
+                "national_calendar": {
+                    "$ref": "./CommonDef.json#/definitions/Nation"
+                },
+                "diocesan_calendar": {
+                    "$ref": "./CommonDef.json#/definitions/DiocesanCalendarId"
+                }
+            },
+            "required": [
+                "year",
+                "epiphany",
+                "ascension",
+                "corpus_christi",
+                "locale",
+                "return_type",
+                "year_type",
+                "eternal_high_priest",
+                "holydays_of_obligation",
+                "national_calendar",
+                "diocesan_calendar"
+            ]
+        }
+    }
+}

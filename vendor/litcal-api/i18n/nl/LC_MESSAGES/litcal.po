@@ -1,0 +1,1752 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# John R. D'Orazio <priest@johnromanodorazio.com>, 2022, 2023.
+# Steven van Roode <stevenvanroode@gmail.com>, 2022.
+# "John R. D'Orazio" <priest@johnromanodorazio.com>, 2024, 2025, 2026.
+# Weblate Admin <admin@example.com>, 2024.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-24 15:45+0000\n"
+"PO-Revision-Date: 2026-06-22 13:52+0000\n"
+"Last-Translator: \"John R. D'Orazio\" <priest@johnromanodorazio.com>\n"
+"Language-Team: Dutch <https://translate.johnromanodorazio.com/projects/"
+"liturgical-calendar/liturgical-calendar-api/api-strings/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:32
+msgid "green"
+msgstr "groen"
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:34
+msgid "purple"
+msgstr "paars"
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:36
+msgid "white"
+msgstr "wit"
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:38
+msgid "red"
+msgstr "rood"
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:40
+msgid "rose"
+msgstr "roze"
+
+#. translators: context = liturgical color (Ambrosian "morello"/violet)
+#: src/Enum/LitColor.php:42
+msgid "morello"
+msgstr ""
+
+#. translators: context = liturgical color
+#: src/Enum/LitColor.php:44
+msgid "black"
+msgstr ""
+
+#. translators: context = from the Proper of the festivity (as opposed to a Common)
+#: src/Enum/LitCommon.php:166
+msgid "Proper"
+msgstr "Eigen"
+
+#. translators: context = from the Common of the Dedication of a Church
+#: src/Enum/LitCommon.php:168
+msgid "Dedication of a Church"
+msgstr "Kerkwijding"
+
+#. translators: context = from the Common of the Blessed Virgin Mary
+#: src/Enum/LitCommon.php:170
+msgid "Blessed Virgin Mary"
+msgstr "H. Maagd Maria"
+
+#. translators: context = from the Common of Martyrs
+#: src/Enum/LitCommon.php:172
+msgid "Martyrs"
+msgstr "Martelaren"
+
+#. translators: context = from the Common of Pastors
+#: src/Enum/LitCommon.php:174
+msgid "Pastors"
+msgstr "Herders"
+
+#. translators: context = from the Common of Doctors
+#: src/Enum/LitCommon.php:176
+msgid "Doctors"
+msgstr "Kerkleraren"
+
+#. translators: context = from the Common of Virgins
+#: src/Enum/LitCommon.php:178
+msgid "Virgins"
+msgstr "Maagden"
+
+#. translators: context = from the Common of Holy Men and Women
+#: src/Enum/LitCommon.php:180
+msgid "Holy Men and Women"
+msgstr "Heilige mannen en vrouwen"
+
+#. translators: context = from the Common of Martyrs: For One Martyr
+#: src/Enum/LitCommon.php:182
+msgid "For One Martyr"
+msgstr "Voor een martelaar"
+
+#. translators: context = from the Common of Martyrs: For Several Martyrs
+#: src/Enum/LitCommon.php:184
+msgid "For Several Martyrs"
+msgstr "Voor meer martelaren"
+
+#. translators: context = from the Common of Martyrs: For Missionary Martyrs
+#: src/Enum/LitCommon.php:186
+msgid "For Missionary Martyrs"
+msgstr "Voor missionarissen-martelaren"
+
+#. translators: context = from the Common of Martyrs: For One Missionary Martyr
+#: src/Enum/LitCommon.php:188
+msgid "For One Missionary Martyr"
+msgstr "Voor een missionaire martelaar"
+
+#. translators: context = from the Common of Martyrs: For Several Missionary Martyrs
+#: src/Enum/LitCommon.php:190
+msgid "For Several Missionary Martyrs"
+msgstr "Voor meer missionarissen-martelaren"
+
+#. translators: context = from the Common of Martyrs: For a Virgin Martyr
+#: src/Enum/LitCommon.php:192
+msgid "For a Virgin Martyr"
+msgstr "Voor een maagd-martelares"
+
+#. translators: context = from the Common of Martyrs: For a Holy Woman Martyr
+#: src/Enum/LitCommon.php:194
+msgid "For a Holy Woman Martyr"
+msgstr "Voor een heilige martelares"
+
+#. translators: context = from the Common of Pastors: For a Pope
+#: src/Enum/LitCommon.php:196
+msgid "For a Pope"
+msgstr "Voor een Paus"
+
+#. translators: context = from the Common of Pastors: For a Bishop
+#: src/Enum/LitCommon.php:198
+msgid "For a Bishop"
+msgstr "Voor een bisschop"
+
+#. translators: context = from the Common of Pastors: For One Pastor
+#: src/Enum/LitCommon.php:200
+msgid "For One Pastor"
+msgstr "Voor één priester"
+
+#. translators: context = from the Common of Pastors: For Several Pastors
+#: src/Enum/LitCommon.php:202
+msgid "For Several Pastors"
+msgstr "Voor meerdere priesters"
+
+#. translators: context = from the Common of Pastors: For Founders of a Church
+#: src/Enum/LitCommon.php:204
+msgid "For Founders of a Church"
+msgstr "Voor stichters van een plaatselijke kerk"
+
+#. translators: context = from the Common of Pastors: For One Founder
+#: src/Enum/LitCommon.php:206
+msgid "For One Founder"
+msgstr "Voor één stichter"
+
+#. translators: context = from the Common of Pastors: For Several Founders
+#: src/Enum/LitCommon.php:208
+msgid "For Several Founders"
+msgstr "Voor meerdere stichters"
+
+#. translators: context = from the Common of Pastors: For Missionaries
+#: src/Enum/LitCommon.php:210
+msgid "For Missionaries"
+msgstr "Voor missionarissen"
+
+#. translators: context = from the Common of Virgins: For One Virgin
+#: src/Enum/LitCommon.php:212
+msgid "For One Virgin"
+msgstr "Voor één maagd"
+
+#. translators: context = from the Common of Virgins: For Several Virgins
+#: src/Enum/LitCommon.php:214
+msgid "For Several Virgins"
+msgstr "Voor meerdere maagden"
+
+#. translators: context = from the Common of Holy Men and Women: For Several Saints
+#: src/Enum/LitCommon.php:216
+msgid "For Several Saints"
+msgstr "Voor meerdere heiligen"
+
+#. translators: context = from the Common of Holy Men and Women: For One Saint
+#: src/Enum/LitCommon.php:218
+msgid "For One Saint"
+msgstr "Voor één heilige"
+
+#. translators: context = from the Common of Holy Men and Women: For an Abbot
+#: src/Enum/LitCommon.php:220
+msgid "For an Abbot"
+msgstr "Voor een abt"
+
+#. translators: context = from the Common of Holy Men and Women: For a Monk
+#: src/Enum/LitCommon.php:222
+msgid "For a Monk"
+msgstr "Voor een monnik"
+
+#. translators: context = from the Common of Holy Men and Women: For a Nun
+#: src/Enum/LitCommon.php:224
+msgid "For a Nun"
+msgstr "Voor een non"
+
+#. translators: context = from the Common of Holy Men and Women: For Religious
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitCommon.php:226 src/Enum/LitMassVariousNeeds.php:237
+msgid "For Religious"
+msgstr "Voor kloosterlingen"
+
+#. translators: context = from the Common of Holy Men and Women: For Those Who Practiced Works of Mercy
+#: src/Enum/LitCommon.php:228
+msgid "For Those Who Practiced Works of Mercy"
+msgstr "Voor hen die werken van barmhartigheid hebben verricht"
+
+#. translators: context = from the Common of Holy Men and Women: For Educators
+#: src/Enum/LitCommon.php:230
+msgid "For Educators"
+msgstr "Voor opvoeders"
+
+#. translators: context = from the Common of Holy Men and Women: For Holy Women
+#: src/Enum/LitCommon.php:232
+msgid "For Holy Women"
+msgstr "Voor heilige vrouwen"
+
+#. translators: "From the Common [of the] Blessed Virgin Mary|Dedication of a Church" (singular feminine). Latin: leave empty!
+#: src/Enum/LitCommon.php:256
+msgctxt "(SING_FEMM)"
+msgid "of the"
+msgstr "voor de"
+
+#. translators: "From the Common [of] Virgins" (plural feminine). Latin: leave empty!
+#: src/Enum/LitCommon.php:258
+msgctxt "(PLUR_FEMM)"
+msgid "of"
+msgstr "voor"
+
+#. translators: "From the Common [of] Martyrs|Pastors|Doctors|Holy Men and Women" (plural masculine). Latin: leave empty!
+#: src/Enum/LitCommon.php:260
+msgctxt "(PLUR_MASC)"
+msgid "of"
+msgstr "voor"
+
+#. translators: "From the Common [of the] (no current cases)" (singular masculine). Latin: leave empty!
+#: src/Enum/LitCommon.php:262
+msgctxt "(SING_MASC)"
+msgid "of the"
+msgstr "voor de"
+
+#. translators: liturgical rank. Keep lowercase
+#: src/Enum/LitGrade.php:137
+msgid "weekday"
+msgstr "weekdag"
+
+#. translators: liturgical rank 'WEEKDAY' in abbreviated form
+#: src/Enum/LitGrade.php:139
+msgid "w"
+msgstr ""
+
+#. translators: liturgical rank. Keep lowercase
+#: src/Enum/LitGrade.php:144
+#, fuzzy
+msgid "commemoration"
+msgstr "Vrije gedachtenis"
+
+#. translators: liturgical rank 'COMMEMORATION' in abbreviated form
+#: src/Enum/LitGrade.php:146
+msgid "m*"
+msgstr ""
+
+#. translators: liturgical rank. Keep lowercase
+#: src/Enum/LitGrade.php:151
+#, fuzzy
+msgid "optional memorial"
+msgstr "Vrije gedachtenis"
+
+#. translators: liturgical rank 'OPTIONAL MEMORIAL' in abbreviated form
+#: src/Enum/LitGrade.php:153
+msgid "m"
+msgstr ""
+
+#. translators: liturgical rank. Keep Capitalized
+#: src/Enum/LitGrade.php:158
+msgid "Memorial"
+msgstr "Gedachtenis"
+
+#. translators: liturgical rank 'MEMORIAL' in abbreviated form
+#: src/Enum/LitGrade.php:160
+msgid "M"
+msgstr ""
+
+#. translators: liturgical rank. Keep UPPERCASE
+#: src/Enum/LitGrade.php:165
+msgid "FEAST"
+msgstr "FEEST"
+
+#. translators: liturgical rank 'FEAST' in abbreviated form
+#: src/Enum/LitGrade.php:167
+msgid "F"
+msgstr ""
+
+#. translators: liturgical rank. Keep UPPERCASE
+#: src/Enum/LitGrade.php:172
+msgid "FEAST OF THE LORD"
+msgstr "FEEST VAN DE HEER"
+
+#. translators: liturgical rank 'FEAST OF THE LORD' in abbreviated form
+#: src/Enum/LitGrade.php:174
+msgid "F✝"
+msgstr ""
+
+#. translators: liturgical rank. Keep UPPERCASE
+#: src/Enum/LitGrade.php:179
+msgid "SOLEMNITY"
+msgstr "HOOGFEEST"
+
+#. translators: liturgical rank 'SOLEMNITY' in abbreviated form
+#: src/Enum/LitGrade.php:181
+msgid "S"
+msgstr ""
+
+#. translators: liturgical rank. Keep lowercase
+#: src/Enum/LitGrade.php:186
+msgid "celebration with precedence over solemnities"
+msgstr "viering met voorrang op hoogfeesten"
+
+#. translators: liturgical rank 'HIGHER SOLEMNITY' in abbreviated form
+#: src/Enum/LitGrade.php:188
+msgid "S✝"
+msgstr ""
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:207
+msgid "For the Church"
+msgstr "Voor de Kerk"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:209
+msgid "For the Pope"
+msgstr "Voor de paus"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:211
+msgid "For the Bishop"
+msgstr "Voor de bisschop"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:213
+msgid "For the Election of a Pope or a Bishop"
+msgstr "Voor de verkiezing van een paus of een bisschop"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:215
+msgid "For a Council or a Synod"
+msgstr "Voor een concilie of een synode"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:217
+msgid "For Priests"
+msgstr "Voor priesters"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:219
+msgid "For the Priest Himself"
+msgstr "Voor de Priester Zelf"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:221
+msgid "On the Anniversary of His Ordination"
+msgstr "Op de verjaardag van zijn wijding"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:223
+msgid "For Ministers of the Church"
+msgstr "Voor bedienaren van de Kerk"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:225
+msgid "For Vocations to Holy Orders"
+msgstr "Voor roepingen tot de Heilige Wijdingen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:227
+msgid "For the Laity"
+msgstr "Voor de leken"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:229
+msgid "On the Anniversaries of Marriage: On Any Anniversary"
+msgstr "Op de Huwelijksverjaardagen: Op Elke Verjaardag"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:231
+msgid "On the Anniversaries of Marriage: On the Twenty-Fifth Anniversary"
+msgstr "Op de Huwelijksverjaardagen: Op de Vijfentwintigste Verjaardag"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:233
+msgid "On the Anniversaries of Marriage: On the Fiftieth Anniversary"
+msgstr "Op de Huwelijksverjaardagen: Op het Vijftigste Huwelijksjubileum"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:235
+msgid "For the Family"
+msgstr "Voor de Familie"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:239
+msgid "On the Twenty-Fifth or Fiftieth Anniversary of Religious Profession"
+msgstr ""
+"Bij het Vijfentwintigste of Vijftigste Jubileum van Religieuze Professie"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:241
+msgid "For Vocations to Religious Life"
+msgstr "Voor roepingen tot het religieuze leven"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:243
+msgid "For Promoting Harmony"
+msgstr "Voor het Bevorderen van Harmonie"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:245
+msgid "For Reconciliation"
+msgstr "Voor Verzoening"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:247
+msgid "For the Unity of Christians"
+msgstr "Voor de Eenheid van Christenen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:249
+msgid "For the Evangelization of Peoples"
+msgstr "Voor de Evangelisatie van Volkeren"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:251
+msgid "For Persecuted Christians"
+msgstr "Voor vervolgde christenen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:253
+msgid "For a Spiritual or Pastoral Gathering"
+msgstr "Voor een spirituele of pastorale bijeenkomst"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:255
+msgid "For the Nation or State"
+msgstr "Voor de natie of staat"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:257
+msgid "For Those in Public Office"
+msgstr "Voor degenen in openbare ambten"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:259
+msgid "For a Governing Assembly"
+msgstr "Voor een Besturende Vergadering"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:261
+msgid "For the Head of State or Ruler"
+msgstr "Voor het staatshoofd of de heerser"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:263
+msgid "At the Beginning of the Civil Year"
+msgstr "Aan het begin van het burgerlijk jaar"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:265
+msgid "For the Sanctification of Human Labor"
+msgstr "Voor de Heiliging van Menselijke Arbeid"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:267
+msgid "At Seedtime"
+msgstr "Bij zaaitijd"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:269
+msgid "After the Harvest"
+msgstr "Na de Oogst"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:271
+msgid "For the Progress of Peoples"
+msgstr "Voor de Vooruitgang van Volkeren"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:273
+msgid "For the Preservation of Peace and Justice"
+msgstr "Voor het behoud van vrede en rechtvaardigheid"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:275
+msgid "In Time of War or Civil Disturbance"
+msgstr "In tijden van oorlog of burgerlijke onrust"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:277
+msgid "For Refugees and Exiles"
+msgstr "Voor Vluchtelingen en Ballingen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:279
+msgid "In Time of Famine or for Those Suffering Hunger"
+msgstr "In tijden van hongersnood of voor hen die honger lijden"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:281
+msgid "In Time of Earthquake"
+msgstr "Tijdens Aardbeving"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:283
+msgid "For Rain"
+msgstr "Voor Regen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:285
+msgid "For Fine Weather"
+msgstr "Voor goed weer"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:287
+msgid "For an End to Storms"
+msgstr "Voor een einde aan stormen"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:289
+msgid "For the Forgiveness of Sins"
+msgstr "Voor de Vergeving van Zonden"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:291
+msgid "For Chastity"
+msgstr "Voor kuisheid"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:293
+msgid "For Charity"
+msgstr "Voor Liefdadigheid"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:295
+msgid "For Relatives and Friends"
+msgstr "Voor familie en vrienden"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:297
+msgid "For Our Oppressors"
+msgstr "Voor onze onderdrukkers"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:299
+msgid "For Those Held in Captivity"
+msgstr "Voor degenen die in gevangenschap verkeren"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:301
+msgid "For Those in Prison"
+msgstr "Voor degenen in de gevangenis"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:303
+msgid "For the Sick"
+msgstr "Voor de Zieken"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:305
+msgid "For the Dying"
+msgstr "Voor de Stervenden"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:307
+msgid "For the Grace of a Happy Death"
+msgstr "Voor de Genade van een Gelukkige Dood"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:309
+msgid "In Any Need"
+msgstr "In elke nood"
+
+#. translators: context = Masses and Prayers for Various Needs and Occasions
+#: src/Enum/LitMassVariousNeeds.php:311
+msgid "For Giving Thanks to God"
+msgstr "Om God te bedanken"
+
+#: src/Enum/LitMassVariousNeeds.php:328
+msgid "Masses and Prayers for Various Needs and Occasions"
+msgstr "Missen en Gebeden voor Verschillende Behoeften en Gelegenheden"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:161
+msgid "Advent"
+msgstr "Adventstijd"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:163
+msgid "Christmas"
+msgstr "Kersttijd"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:165
+msgid "Lent"
+msgstr "Vastentijd"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:167
+msgid "Easter Triduum"
+msgstr "Paastriduüm"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:169
+msgid "Easter"
+msgstr "Pasen"
+
+#. translators: context = liturgical season
+#: src/Enum/LitSeason.php:171
+msgid "Ordinary Time"
+msgstr "Gewone tijd"
+
+#. translators: context = liturgical season (Ambrosian rite)
+#: src/Enum/LitSeason.php:173
+#, fuzzy
+msgid "After Epiphany"
+msgstr "%s na Driekoningen"
+
+#. translators: context = liturgical season (Ambrosian rite)
+#: src/Enum/LitSeason.php:175
+#, fuzzy
+msgid "After Pentecost"
+msgstr "Na de Oogst"
+
+#. translators: %s is a day number (17, 18, etc.) - for Advent weekdays Dec 17-24
+#: src/FerialEventNameGenerator.php:366
+#, php-format
+msgid "December %s"
+msgstr ""
+
+#. translators: %s is an ordinal number (1st, 2nd, 3rd)
+#. translators: %s is an ordinal number (first, second...)
+#: src/FerialEventNameGenerator.php:382 src/Handlers/CalendarHandler.php:2091
+#, php-format
+msgid "of the %s Week of Advent"
+msgstr "in de %s week van de advent"
+
+#. translators: %s is an ordinal number (2nd, 3rd, etc.) - Day of Christmas Octave
+#. translators: %s is an ordinal number (first, second...)
+#: src/FerialEventNameGenerator.php:401 src/Handlers/CalendarHandler.php:2151
+#, php-format
+msgid "%s Day of the Octave of Christmas"
+msgstr "%s dag onder het octaaf van Kerstmis"
+
+#. translators: %s is a day number (2, 3, etc.) - for Christmas weekdays Jan 2-6
+#. translators: %s is a day number (7, 8, etc.) - for days after Epiphany
+#: src/FerialEventNameGenerator.php:418 src/FerialEventNameGenerator.php:452
+#, php-format
+msgid "January %s"
+msgstr ""
+
+#. translators: %s is a day of the week - for days after Epiphany
+#: src/FerialEventNameGenerator.php:435
+#, php-format
+msgid "%s after Epiphany"
+msgstr "%s na Driekoningen"
+
+#. translators: Day after Ash Wednesday pattern
+#: src/FerialEventNameGenerator.php:467 src/Handlers/CalendarHandler.php:2230
+msgid "after Ash Wednesday"
+msgstr "na Aswoensdag"
+
+#. translators: %s is an ordinal number (1st, 2nd, 3rd)
+#. translators: %s is an ordinal number (first, second...)
+#: src/FerialEventNameGenerator.php:484 src/Handlers/CalendarHandler.php:2209
+#, php-format
+msgid "of the %s Week of Lent"
+msgstr "in de %s week van de veertigdagentijd"
+
+#. translators: %s is a day of the week - Easter Octave pattern
+#: src/FerialEventNameGenerator.php:501
+#, php-format
+msgid "%s within the Octave of Easter"
+msgstr "%s in het Paasoctaaf"
+
+#. translators: %s is an ordinal number (2nd, 3rd, etc.)
+#: src/FerialEventNameGenerator.php:517 src/Handlers/CalendarHandler.php:3219
+#, php-format
+msgid "of the %s Week of Easter"
+msgstr "na de %s zondag van pasen"
+
+#. translators: %s is an ordinal number (1st, 2nd, etc.)
+#: src/FerialEventNameGenerator.php:535 src/Handlers/CalendarHandler.php:3291
+#: src/Handlers/CalendarHandler.php:3339
+#, php-format
+msgid "of the %s Week of Ordinary Time"
+msgstr "in de %s week door het jaar"
+
+#. translators: %s is a day of the week - Holy Week pattern
+#: src/FerialEventNameGenerator.php:552
+#, php-format
+msgid "%s of Holy Week"
+msgstr "%s van de Goede Week"
+
+#: src/Handlers/CalendarHandler.php:443
+#, php-format
+msgid ""
+"The name of the diocese could not be derived from the diocese ID \"%s\"."
+msgstr ""
+"De naam van het bisdom kon niet worden afgeleid van het bisdom-ID \"%s\"."
+
+#: src/Handlers/CalendarHandler.php:809
+#, php-format
+msgid ""
+"Only years from 1970 and after are supported. You tried requesting the year "
+"%d."
+msgstr ""
+"Alleen jaren vanaf 1970 worden ondersteund. U probeert het jaar %d op te "
+"vragen."
+
+#: src/Handlers/CalendarHandler.php:816
+#, php-format
+msgid "Only years until 9999 are supported. You tried requesting the year %d."
+msgstr ""
+"Alleen jaren tot 9999 worden ondersteund. Je hebt geprobeerd het jaar %d op "
+"te vragen."
+
+#: src/Handlers/CalendarHandler.php:976
+#, php-format
+msgid ""
+"The Ambrosian comune sanctorale event `%1$s` from the %2$s was skipped "
+"because a liturgical event with the same key was already defined by the "
+"Proprium de Tempore, which takes precedence."
+msgstr ""
+
+#. translators: 1: Solemnity name, 2: Coinciding Solemnity name, 3: Requested calendar year, 4: Description of the reason for the transferral (ex. the Saturday preceding Palm Sunday), 5: actual date for the transferral, 6: Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments
+#. translators: 1: Solemnity name, 2: Coinciding Solemnity name, 3: Requested calendar year, 4: Explicatory string for the transferral (ex. the Saturday preceding Palm Sunday), 5: actual date for the transferral, 6: Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments
+#. translators:
+#.  1: Solemnity name,
+#.  2: Coinciding Solemnity name,
+#.  3: Requested calendar year,
+#.  4: Explicatory string for the transferral,
+#.  5: actual date for the transferral,
+#.  6: Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments
+#.
+#. translators: 1: Solemnity name, 2: Coinciding Solemnity name, 3: Requested calendar year, 4: Explicatory string for the transferral, 5: actual date for the transferral, 6: Reference to the norm that governs the transferral
+#: src/Handlers/CalendarHandler.php:1571 src/Handlers/CalendarHandler.php:1591
+#: src/Handlers/CalendarHandler.php:1642 src/Handlers/CalendarHandler.php:1694
+#, php-format
+msgid ""
+"The Solemnity '%1$s' falls on %2$s in the year %3$d, the celebration has "
+"been transferred to %4$s (%5$s) as per the %6$s."
+msgstr ""
+"Het hoogfeest van '%1$s' valt op %2$s in het jaar %3$d, de viering is "
+"verplaatst naar %4$s (%5$s) overeenkomstig %6$s."
+
+#: src/Handlers/CalendarHandler.php:1575
+msgid "the Saturday preceding Palm Sunday"
+msgstr "de zaterdag voorafgaand aan Palmzondag"
+
+#: src/Handlers/CalendarHandler.php:1578 src/Handlers/CalendarHandler.php:1598
+#: src/Handlers/CalendarHandler.php:1648 src/Handlers/CalendarHandler.php:1746
+#: src/Handlers/CalendarHandler.php:2328 src/Handlers/CalendarHandler.php:2622
+#: src/Handlers/CalendarHandler.php:3097 src/Handlers/CalendarHandler.php:3113
+#: src/Handlers/CalendarHandler.php:3131 src/Handlers/CalendarHandler.php:3170
+#: src/Models/Calendar/LiturgicalEventCollection.php:1734
+#: src/Models/Decrees/DecreeEventMetadata.php:54
+#: src/Models/RegionalData/NationalData/LitCalItemMakePatronMetadata.php:49
+msgid ""
+"Decree of the Dicastery for Divine Worship and the Discipline of the "
+"Sacraments"
+msgstr ""
+"Decreet van de Dicasterie voor de Goddelijke Eredienst en de Discipline van "
+"de Sacramenten"
+
+#: src/Handlers/CalendarHandler.php:1595
+msgid "the Monday following the Second Sunday of Easter"
+msgstr "maandag na de tweede zondag van pasen"
+
+#: src/Handlers/CalendarHandler.php:1646
+msgid "the following Monday"
+msgstr "de volgende maandag"
+
+#: src/Handlers/CalendarHandler.php:1698
+#, fuzzy
+msgid "the following day"
+msgstr "de volgende maandag"
+
+#: src/Handlers/CalendarHandler.php:1700
+msgid "General Norms for the Liturgical Year and the Calendar"
+msgstr ""
+
+#. translators: 1: Solemnity name, 2: Coinciding Solemnity name, 3: Requested calendar year
+#: src/Handlers/CalendarHandler.php:1705 src/Handlers/CalendarHandler.php:1720
+#, php-format
+msgid ""
+"The Solemnity '%1$s' coincides with the Solemnity '%2$s' in the year %3$d. "
+"We should ask the Dicastery for Divine Worship and the Discipline of the "
+"Sacraments what to do about this!"
+msgstr ""
+"Het hoogfeest van '%1$s' valt samen met het hoogfeest van '%2$s' in het jaar "
+"%3$d. We moeten het dicasterie voor de Goddelijke Eredienst en de Regeling "
+"van de Sacramenten vragen wat we hieraan moeten doen!"
+
+#. translators:
+#.  1: LiturgicalEvent name,
+#.  2: Coinciding LiturgicalEvent name,
+#.  3: Requested calendar year,
+#.  4: Decree of the Dicastery for Divine Worship and the Discipline of the Sacraments
+#.
+#: src/Handlers/CalendarHandler.php:1758
+#, php-format
+msgid ""
+"Seeing that the Solemnity '%1$s' coincides with the Solemnity '%2$s' in the "
+"year %3$d, it has been anticipated by one day as per %4$s."
+msgstr ""
+"Omdat het hoogfeest van '%1$s' samenvalt met het hoogfeest van '%2$s' in het "
+"jaar %3$d, wordt het een dag eerder gevierd overeenkomstig %4$s."
+
+#. translators: 1: LiturgicalEvent name (Christmas), 2: Requested calendar year, 3: LiturgicalEvent name (Holy Family), 4: New date for Holy Family
+#: src/Handlers/CalendarHandler.php:1843
+#, php-format
+msgid ""
+"'%1$s' falls on a Sunday in the year %2$d, therefore the Feast '%3$s' is "
+"celebrated on %4$s rather than on the Sunday after Christmas."
+msgstr ""
+"'%1$s' valt op een zondag in het jaar %2$d, daarom wordt het feest van "
+"'%3$s' gevierd op %4$s in plaats van op de zondag na Kerstmis."
+
+#. translators: You can ignore this translation if the Feast has not been inserted by the Episcopal Conference
+#: src/Handlers/CalendarHandler.php:1869
+msgid "Our Lord Jesus Christ, The Eternal High Priest"
+msgstr "Onze Heer Christus Eeuwige Hogepriester"
+
+#. translators: 1: National Calendar, 2: Requested calendar year, 3: source of the rule
+#: src/Handlers/CalendarHandler.php:1881
+#, php-format
+msgid ""
+"In 2012, Pope Benedict XVI gave faculty to the Episcopal Conferences to "
+"insert the Feast of Our Lord Jesus Christ the Eternal High Priest in their "
+"own liturgical calendars on the Thursday after Pentecost: applicable to the "
+"calendar '%1$s' in the year '%2$d' (%3$s)."
+msgstr ""
+"In 2012 verleende paus Benedictus XVI de bevoegdheid aan de bisschoppelijke "
+"conferenties om het feest van Onze Heer Jezus Christus, de Eeuwige "
+"Hogepriester, in hun eigen liturgische kalenders in te voegen op de "
+"donderdag na Pinksteren: van toepassing op de kalender '%1$s' in het jaar "
+"'%2$d' (%3$s)."
+
+#. translators: 1: LiturgicalEvent name, 2: Superseding LiturgicalEvent grade, 3: Superseding LiturgicalEvent name, 4: Requested calendar year
+#: src/Handlers/CalendarHandler.php:1942 src/Handlers/CalendarHandler.php:1988
+#, php-format
+msgid "'%1$s' is superseded by the %2$s '%3$s' in the year %4$d."
+msgstr "'%1$s' wordt vervangen door het %2$s van '%3$s' in het jaar %4$d."
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Day of the liturgical event
+#.  4. Year from which the liturgical event has been added
+#.  5. Source of the information
+#.  6. Requested calendar year
+#.
+#. translators:
+#.  1. Grade or rank of the liturgical event being created
+#.  2. Name of the liturgical event being created
+#.  3. Indication of the mobile date for the liturgical event being created
+#.  4. Year from which the liturgical event has been added
+#.  5. Source of the information
+#.  6. Requested calendar year
+#.
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Date of the liturgical event (localized date for fixed events, or mobile date expression for some mobile events)
+#.  4. Year from which the liturgical event has been added
+#.  5. Source of the information
+#.  6. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:2265 src/Handlers/CalendarHandler.php:2715
+#: src/Handlers/CalendarHandler.php:2940 src/Handlers/CalendarHandler.php:3804
+#, php-format
+msgid ""
+"The %1$s '%2$s' has been added on %3$s since the year %4$d (%5$s), "
+"applicable to the year %6$d."
+msgstr ""
+"De %1$s '%2$s' is toegevoegd op %3$s vanaf %4$d (%5$s), van toepassing in "
+"het jaar %6$d."
+
+#: src/Handlers/CalendarHandler.php:2310 src/Handlers/CalendarHandler.php:2500
+msgid ""
+"Vatican Press conference: Presentation of the Editio Typica Tertia of the "
+"Roman Missal"
+msgstr ""
+"Persconferentie van het Vaticaan: presentatie van de derde standaarduitgave "
+"van het Romeins Missaal"
+
+#: src/Handlers/CalendarHandler.php:2375
+#, php-format
+msgid ""
+"The %1$s '%2$s' either falls between 17 Dec. and 24 Dec., or during the "
+"Octave of Christmas, or on the weekdays of the Lenten season in the year "
+"%3$d, rank reduced to Commemoration."
+msgstr ""
+"De %1$s '%2$s' valt tussen 17 en 24 december, of tijdens het Octaaf van "
+"Kerstmis, of op de weekdagen van de veertigdagentijd in %3$d, de rang is "
+"teruggebracht naar vrije gedachtenis."
+
+#. translators:
+#.  1. Grade or rank of the liturgical event that has been superseded
+#.  2. Name of the liturgical event that has been superseded
+#.  3. Grade or rank of the liturgical event that is superseding
+#.  4. Name of the liturgical event that is superseding
+#.  5. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:2413 src/Handlers/CalendarHandler.php:2461
+#, php-format
+msgid "The %1$s '%2$s' is superseded by the %3$s '%4$s' in the year %5$d."
+msgstr "De %1$s '%2$s' wordt in het jaar %5$d vervangen door de %3$s '%4$s'."
+
+#: src/Handlers/CalendarHandler.php:2494
+msgid "Apostolic Constitution Missale Romanum"
+msgstr "Apostolische Constitutie Missale Romanum"
+
+#. translators:
+#.  1. Grade or rank of the liturgical event that has been superseded
+#.  2. Name of the liturgical event that has been superseded
+#.  3. Edition of the Roman Missal
+#.  4. Year in which the Edition of the Roman Missal was published
+#.  5. Any possible decrees or sources about the edition of the Roman Missal
+#.  6. Date in which the superseded liturgical event is usually celebrated
+#.  7. Grade or rank of the liturgical event that is superseding
+#.  8. Name of the liturgical event that is superseding
+#.  9. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:2523
+#, php-format
+msgid ""
+"The %1$s '%2$s', added in the %3$s of the Roman Missal since the year %4$d "
+"(%5$s) and usually celebrated on %6$s, is suppressed by the %7$s '%8$s' in "
+"the year %9$d."
+msgstr ""
+"De %1$s '%2$s', toegevoegd aan de %3$s aan het Romeins Missaal vanaf %4$d "
+"(%5$s) en gewoonlijk gevierd op %6$s, wordt vervangen door de %7$s '%8$s' in "
+"het jaar %9$d."
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Day of the liturgical event
+#.  4. Year from which the liturgical event has been added
+#.  5. Source of the information
+#.  6. Grade or rank of the superseding liturgical event
+#.  7. Name of the superseding liturgical event
+#.  8. Requested calendar year
+#.
+#. translators:
+#.  1. Grade or rank of the liturgical event being created
+#.  2. Name of the liturgical event being created
+#.  3. Indication of the mobile date for the liturgical event being created
+#.  4. Year from which the liturgical event has been added
+#.  5. Source of the information
+#.  6. Grade or rank of superseding liturgical event
+#.  7. Name of superseding liturgical event
+#.  8. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:2569 src/Handlers/CalendarHandler.php:2995
+#, php-format
+msgid ""
+"The %1$s '%2$s', added on %3$s since the year %4$d (%5$s), is however "
+"superseded by the %6$s '%7$s' in the year %8$d."
+msgstr ""
+"De %1$s '%2$s', toegevoegd op %3$s vanaf het jaar %4$d (%5$s), wordt "
+"vervangen door het %6$s '%7$s' in het jaar %8$d."
+
+#. translators:
+#.  1. Name of the first coinciding Memorial
+#.  2. Name of the second coinciding Memorial
+#.  3. Requested calendar year
+#.  4. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:2617
+#, php-format
+msgid ""
+"The Memorial '%1$s' coincides with another Memorial '%2$s' in the year %3$d. "
+"They are both reduced in rank to optional memorials (%4$s)."
+msgstr ""
+"De gedachtenis '%1$s' valt samen met een andere gedachtenis '%2$s' in het "
+"jaar %3$d. Zij worden beide in rang teruggebracht tot vrije gedachtenis "
+"(%4$s)."
+
+#. translators: 1. Name of the mobile liturgical event being created, 2. Name of the liturgical event that it is relative to
+#: src/Handlers/CalendarHandler.php:2666
+#, php-format
+msgid ""
+"Cannot create mobile liturgical event '%1$s': can only be relative to "
+"liturgical event with key '%2$s' using keywords %3$s"
+msgstr ""
+"Kan mobiel liturgisch evenement '%1$s' niet aanmaken: kan alleen relatief "
+"zijn aan liturgisch evenement met sleutel '%2$s' via trefwoorden %3$s"
+
+#. translators: 1. Name of the mobile liturgical event being created, 2. Name of the liturgical event that it is relative to
+#: src/Handlers/CalendarHandler.php:2680
+#, php-format
+msgid ""
+"Cannot create mobile liturgical event '%1$s' relative to liturgical event "
+"with key '%2$s'"
+msgstr ""
+"Kan mobiele liturgische gebeurtenis '%1$s' niet aanmaken ten opzichte van "
+"liturgische gebeurtenis met sleutel '%2$s'"
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. New name of the liturgical event
+#.  4. Year from which the grade has been changed
+#.  5. Requested calendar year
+#.  6. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:2771
+#, php-format
+msgid ""
+"The name of the %1$s '%2$s' has been changed to %3$s since the year %4$d, "
+"applicable to the year %5$d (%6$s)."
+msgstr ""
+"De naam van de %1$s '%2$s' is veranderd in %3$s vanaf het jaar %4$d, van "
+"toepassing in het jaar %5$d (%6$s)."
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. New grade of the liturgical event
+#.  4. Year from which the grade has been changed
+#.  5. Requested calendar year
+#.  6. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:2793
+#, php-format
+msgid ""
+"The %1$s '%2$s' has been raised to the rank of %3$s since the year %4$d, "
+"applicable to the year %5$d (%6$s)."
+msgstr ""
+"De %1$s '%2$s' is verhoogd tot de rang van %3$s vanaf het jaar %4$d, van "
+"toepassing in het jaar %5$d (%6$s)."
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. New grade of the liturgical event
+#.  4. Year from which the grade has been changed
+#.  5. Requested calendar year
+#.  6. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:2803
+#, php-format
+msgid ""
+"The %1$s '%2$s' has been lowered to the rank of %3$s since the year %4$d, "
+"applicable to the year %5$d (%6$s)."
+msgstr ""
+"De %1$s '%2$s' is in rang verlaagd tot %3$s vanaf het jaar %4$d, van "
+"toepassing in het jaar %5$d (%6$s)."
+
+#. translators:
+#.  1. Name of the liturgical event
+#.  2. Year in which was declared Doctor
+#.  3. Requested calendar year
+#.  4. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:2856
+#, php-format
+msgid ""
+"'%1$s' has been declared a Doctor of the Church since the year %2$d, "
+"applicable to the year %3$d (%4$s)."
+msgstr ""
+"'%1$s' is tot Kerkleraar uitgeroepen vanaf het jaar %2$d, van toepassing in "
+"het jaar %3$d (%4$s)."
+
+#. translators:
+#.  1. Requested calendar year
+#.  2. Grade or rank of suppressed liturgical event
+#.  3. Name of suppressed liturgical event
+#.  4. Grade or rank of the liturgical event being created
+#.  5. Name of the liturgical event being created
+#.  6. Indication of the mobile date for the liturgical event being created
+#.  7. Year from which the liturgical event has been added
+#.  8. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:3022
+#, php-format
+msgid ""
+"In the year %1$d, the %2$s '%3$s' has been suppressed by the %4$s '%5$s', "
+"added on %6$s since the year %7$d (%8$s)."
+msgstr ""
+"In het jaar %1$d, de %2$s '%3$s' is vervangen door de %4$s '%5$s', "
+"toegevoegd op %6$s vanaf het jaar %7$d (%8$s)."
+
+#. translators: 1: LiturgicalEvent name, 2: Source of the information, 3: Requested calendar year
+#: src/Handlers/CalendarHandler.php:3094
+#, php-format
+msgid ""
+"The optional memorial '%1$s' has been transferred from Dec. 12 to Aug. 12 "
+"since the year 2002 (%2$s), applicable to the year %3$d."
+msgstr ""
+"De vrije gedachtenis '%1$s' is verplaatst van 12 december naar 12 augustus "
+"vanaf het jaar 2002 (%2$s), van toepassing in het jaar %3$d."
+
+#. translators: 1: LiturgicalEvent name, 2: Source of the information, 3: Requested calendar year
+#: src/Handlers/CalendarHandler.php:3110
+#, php-format
+msgid ""
+"The optional memorial '%1$s', which would have been superseded this year by "
+"a Sunday or Solemnity were it on Dec. 12, has however been transferred to "
+"Aug. 12 since the year 2002 (%2$s), applicable to the year %3$d."
+msgstr ""
+"De vrije gedachtenis '%1$s', die dit jaar vervangen zou worden door een "
+"zondag of hoogfeest als het op 12 december gevierd zou worden, is echter "
+"vanaf het jaar 2002 verplaatst naar 12 augustus (%2$s), van toepassing in "
+"het jaar %3$d."
+
+#. translators: 1: LiturgicalEvent name, 2: Source of the information, 3: Requested calendar year, 4: Coinciding LiturgicalEvent grade, 5: Coinciding LiturgicalEvent name
+#: src/Handlers/CalendarHandler.php:3128
+#, php-format
+msgid ""
+"The optional memorial '%1$s' has been transferred from Dec. 12 to Aug. 12 "
+"since the year 2002 (%2$s), applicable to the year %3$d. However, it is "
+"superseded by the %4$s '%5$s' in the year %3$d."
+msgstr ""
+"De facultatieve herdenking '%1$s' is sinds het jaar 2002 (%2$s) verplaatst "
+"van 12 december naar 12 augustus, van toepassing op het jaar %3$d. Echter, "
+"in het jaar %3$d wordt het overschaduwd door de %4$s '%5$s'."
+
+#. translators: 1: LiturgicalEvent name, 2: Source of the information
+#: src/Handlers/CalendarHandler.php:3167
+#, php-format
+msgid ""
+"The Feast '%1$s' would have been suppressed this year ( 2009 ) since it "
+"falls on a Sunday, however being the Year of the Apostle Paul, as per the "
+"%2$s it has been reinstated so that local churches can optionally celebrate "
+"the memorial."
+msgstr ""
+"Het feest '%1$s' zou dit jaar (2009) komen te vervallen omdat het op een "
+"zondag valt, maar vanwege het Paulusjaar is het, overeenkomstig %2$s "
+"hersteld, zodat lokale kerken de gedachtenis naar keuze kunnen vieren."
+
+#: src/Handlers/CalendarHandler.php:3382
+msgid "Saturday Memorial of the Blessed Virgin Mary"
+msgstr "Maria op zaterdag"
+
+#. translators: 1: wider_region, 2: metadata, 3: calendar_id
+#: src/Handlers/CalendarHandler.php:3457
+#, php-format
+msgid ""
+"Could not find a %1$s property in the %2$s for the National Calendar %3$s."
+msgstr ""
+"Kon de %1$s eigenschap niet vinden in de %2$s voor de Nationale Kalender "
+"%3$s."
+
+#. translators: 1: Event key, 2: Original date, 3: New date, 4: Requested calendar year
+#: src/Handlers/CalendarHandler.php:3487
+#, php-format
+msgid ""
+"The liturgical event '%1$s' has been moved from %2$s to %3$s due to "
+"conditional rules in the year %4$d."
+msgstr ""
+"De liturgische gebeurtenis '%1$s' is verplaatst van %2$s naar %3$s vanwege "
+"voorwaardelijke regels in het jaar %4$d."
+
+#. translators:
+#.  1. Grade of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Date on which the liturgical event is usually celebrated
+#.  4. Grade of the superseding liturgical event
+#.  5. Name of the superseding liturgical event
+#.  6. Requested calendar year
+#.  7. National or wider region calendar
+#.
+#: src/Handlers/CalendarHandler.php:3550
+#, php-format
+msgid ""
+"The %1$s '%2$s', usually celebrated on %3$s, was suppressed by the %4$s "
+"'%5$s' in the year %6$d, however being elevated to a Patronal festivity for "
+"the Calendar %7$s, it has been reinstated."
+msgstr ""
+"Het %1$s '%2$s', dat gewoonlijk op %3$s werd gevierd, werd onderdrukt door "
+"de %4$s '%5$s' in het jaar %6$d, maar na verheffing tot een Patronale "
+"feestdag voor de Kalender %7$s, is het hersteld."
+
+#. translators:
+#.  1. Grade of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Date on which the liturgical event is usually celebrated
+#.  4. Grade of the superseding liturgical event
+#.  5. Name of the superseding liturgical event
+#.  6. Requested calendar year
+#.  7. National or wider region calendar
+#.
+#: src/Handlers/CalendarHandler.php:3570
+#, php-format
+msgid ""
+"The %1$s '%2$s', usually celebrated on %3$s, was suppressed by the %4$s "
+"'%5$s' in the year %6$d, and though it would be elevated to a Patronal "
+"festivity for the Calendar %7$s, it has not been reinstated."
+msgstr ""
+"De %1$s '%2$s', die gewoonlijk op %3$s wordt gevierd, werd in het jaar %6$d "
+"onderdrukt door de %4$s '%5$s', en hoewel het zou worden verheven tot een "
+"patroonfeest voor de kalender %7$s, is het niet hersteld."
+
+#. translators:
+#.  1. Name of the first coinciding Memorial
+#.  2. Name of the second coinciding Memorial
+#.  3. Requested calendar year
+#.  4. Source of the information
+#.
+#: src/Handlers/CalendarHandler.php:3654
+#, php-format
+msgid ""
+"The Memorial '%1$s' coincides with another Memorial '%2$s' in the year %3$d. "
+"They are both reduced in rank to optional memorials."
+msgstr ""
+"De gedachtenis '%1$s' valt samen met een andere gedachtenis '%2$s' in het "
+"jaar %3$d. Ze zijn beide teruggebracht naar de rang van vrije gedachtenis."
+
+#. translators: 1. LiturgicalEvent name, 2. LiturgicalEvent date, 3. Coinciding liturgical event name, 4. Requested calendar year
+#: src/Handlers/CalendarHandler.php:3677
+#, php-format
+msgid ""
+"The Feast '%1$s', usually celebrated on %2$s, coincides with another Feast "
+"'%3$s' in the year %4$d! Does something need to be done about this?"
+msgstr ""
+"Het Feest '%1$s', dat meestal wordt gevierd op %2$s, valt samen met een "
+"ander Feest '%3$s' in het jaar %4$d! Moet er iets gedaan worden?"
+
+#. translators: 1. LiturgicalEvent name, 2. LiturgicalEvent date, 3. Coinciding liturgical event name, 4. Requested calendar year
+#: src/Handlers/CalendarHandler.php:3697
+#, php-format
+msgid ""
+"The Solemnity '%1$s', usually celebrated on %2$s, coincides with the Sunday "
+"or Solemnity '%3$s' in the year %4$d! Does something need to be done about "
+"this?"
+msgstr ""
+"Het hoogfeest '%1$s', gewoonlijk gevierd op %2$s, valt samen met de zondag "
+"of het hoogfeest '%3$s' in het jaar %4$d. Moet hier iets aan gedaan worden?"
+
+#: src/Handlers/CalendarHandler.php:3737
+#, php-format
+msgid ""
+"Cannot create liturgical event with key \"%1$s\": the day (%2$d) of the "
+"liturgical event is greater than the number of days (%3$d) in the month "
+"(%4$d) of the liturgical event year (%5$d)."
+msgstr ""
+"Kan liturgisch evenement met sleutel \"%1$s\" niet maken: de dag (%2$d) van "
+"het liturgisch evenement is groter dan het aantal dagen (%3$d) in de maand "
+"(%4$d) van het liturgisch evenementjaar (%5$d)."
+
+#: src/Handlers/CalendarHandler.php:3762
+msgid ""
+"We should be creating a new liturgical event, however we do not seem to have "
+"the correct date information in order to proceed"
+msgstr ""
+"We zouden een nieuwe liturgische gebeurtenis moeten creëren, maar we lijken "
+"niet de juiste datumgegevens te hebben om verder te gaan"
+
+#. translators:
+#.  1. Grade or rank of the liturgical event
+#.  2. Name of the liturgical event
+#.  3. Date of the liturgical event (localized date for fixed events, or mobile date expression for some mobile events)
+#.  4. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3820
+#, php-format
+msgid ""
+"The %1$s '%2$s' was not added to the calendar on %3$s because it conflicts "
+"with an existing liturgical event in the year %4$d."
+msgstr ""
+"De %1$s '%2$s' is niet toegevoegd aan de kalender op %3$s omdat het "
+"conflicteert met een bestaand liturgisch evenement in het jaar %4$d."
+
+#. translators:
+#.  1. Liturgical grade
+#.  2. Original name of the liturgical event
+#.  3. New name of the liturgical event
+#.  4. ID of the national calendar
+#.  5. Year from which the name has been changed
+#.  6. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3889
+#, php-format
+msgid ""
+"The name of the %1$s '%2$s' has been changed to '%3$s' in the national "
+"calendar '%4$s' since the year %5$d, applicable to the year %6$d."
+msgstr ""
+"De naam van de %1$s '%2$s' is veranderd naar '%3$s' in de nationale kalender "
+"'%4$s' sinds het jaar %5$d, van toepassing op het jaar %6$d."
+
+#. translators:
+#.  1. Event key of the liturgical event
+#.  2. New name of the liturgical event
+#.  3. ID of the national calendar
+#.  4. Year from which the name has been changed
+#.  5. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3907
+#, php-format
+msgid ""
+"The name of the celebration '%1$s' has been changed to '%2$s' in the "
+"national calendar '%3$s' since the year %4$d, but could not be applied to "
+"the year %5$d because the celebration was not found."
+msgstr ""
+"De naam van de viering '%1$s' is veranderd naar '%2$s' in de nationale "
+"kalender '%3$s' sinds het jaar %4$d, maar kon niet worden toegepast op het "
+"jaar %5$d omdat de viering niet werd gevonden."
+
+#. translators:
+#.  1. Original liturgical grade
+#.  2. Name of the liturgical event
+#.  3. New liturgical grade
+#.  4. ID of the national calendar
+#.  5. Year from which the grade has been changed
+#.  6. Source of the information
+#.  7. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3934
+#, php-format
+msgid ""
+"The grade of the %1$s '%2$s' has been changed to '%3$s' in the national "
+"calendar '%4$s' since the year %5$d (%6$s), applicable to the year %7$d."
+msgstr ""
+"De rang van de %1$s '%2$s' is veranderd naar '%3$s' in de nationale kalender "
+"'%4$s' sinds het jaar %5$d (%6$s), van toepassing op het jaar %7$d."
+
+#. translators:
+#.  1. Event key of the liturgical event
+#.  2. New name of the liturgical event
+#.  3. ID of the national calendar
+#.  4. Year from which the name has been changed
+#.  5. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3953
+#, php-format
+msgid ""
+"The grade of the celebration '%1$s' has been changed to '%2$s' in the "
+"national calendar '%3$s' since the year %4$d (%5$s), but could not be "
+"applied to the year %6$d because the celebration was not found."
+msgstr ""
+"De graad van de viering '%1$s' is veranderd naar '%2$s' in de nationale "
+"kalender '%3$s' sinds het jaar %4$d (%5$s), maar kon niet worden toegepast "
+"op het jaar %6$d omdat de viering niet werd gevonden."
+
+#. translators:
+#.  1. Liturgical grade
+#.  2. Name of the liturgical event
+#.  3. Original date of the liturgical event
+#.  4. New date of the liturgical event
+#.  5. Year from which the date has been changed
+#.  6. ID of the national calendar
+#.  7. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:3988
+#, php-format
+msgid ""
+"The %1$s '%2$s' has been moved from %3$s to %4$s since the year %5$d in the "
+"national calendar '%6$s', applicable to the year %7$d."
+msgstr ""
+"De %1$s '%2$s' is sinds het jaar %5$d in de nationale kalender '%6$s' "
+"verplaatst van %3$s naar %4$s, van toepassing op het jaar %7$d."
+
+#. translators:
+#.  1. Name of the liturgical event
+#.  2. New date of the liturgical event
+#.  3. Year from which the date has been changed
+#.  4. ID of the national calendar
+#.  5. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:4007
+#, php-format
+msgid ""
+"The liturgical event '%1$s' has been moved to %2$s since the year %3$d in "
+"the national calendar '%4$s', but cannot be applied in the year %5$d simply "
+"because we could not find the data for it from the Roman Missal events."
+msgstr ""
+"De liturgische gebeurtenis '%1$s' is sinds het jaar %3$d verplaatst naar "
+"%2$s in de nationale kalender '%4$s', maar kan in het jaar %5$d niet worden "
+"toegepast omdat we de gegevens ervoor niet konden vinden in de "
+"gebeurtenissen van het Romeins Missaal."
+
+#. translators:
+#.  1. event_key of the liturgical event
+#.  2. New date of the liturgical event
+#.  3. Year from which the date has been changed
+#.  4. ID of the national calendar
+#.  5. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:4038
+#, php-format
+msgid ""
+"The liturgical event '%1$s' has been moved to %2$s since the year %3$d in "
+"the national calendar '%4$s', but this could not take place in the year %5$d "
+"since the new date %2$s seems to be a Sunday or a liturgical event of "
+"greater rank."
+msgstr ""
+"De liturgische gebeurtenis '%1$s' is sinds het jaar %3$d verplaatst naar "
+"%2$s in de nationale kalender '%4$s', maar dit kon niet plaatsvinden in het "
+"jaar %5$d omdat de nieuwe datum %2$s op een zondag lijkt te vallen of een "
+"liturgische gebeurtenis van hogere rang is."
+
+#. translators: 1. Country name, 2. List of missals
+#: src/Handlers/CalendarHandler.php:4077
+#, php-format
+msgid "Found Missals for region %1$s: %2$s."
+msgstr "Missalen gevonden voor regio %1$s: %2$s."
+
+#. translators: Name of the Roman Missal
+#: src/Handlers/CalendarHandler.php:4101
+#, php-format
+msgid "Found a sanctorale data file for %s"
+msgstr "Er is een sanctorale data bestand gevonden voor %s"
+
+#. translators:
+#.  1. LiturgicalEvent grade
+#.  2. LiturgicalEvent name
+#.  3. LiturgicalEvent date
+#.  4. Edition of the Roman Missal
+#.  5. Superseding liturgical event grade
+#.  6. Superseding liturgical event name
+#.  7. Requested calendar year
+#.
+#: src/Handlers/CalendarHandler.php:4137
+#, php-format
+msgid ""
+"The %1$s '%2$s' (%3$s), added to the national calendar in the %4$s, is "
+"superseded by the %5$s '%6$s' in the year %7$d"
+msgstr ""
+"De %1$s '%2$s' (%3$s), toegevoegd aan de nationale kalender in de %4$s, "
+"wordt vervangen door de %5$s '%6$s' in het jaar %7$d"
+
+#. translators: Name of the Roman Missal
+#: src/Handlers/CalendarHandler.php:4151
+#, php-format
+msgid "Could not find a sanctorale data file for %s"
+msgstr "Een sanctorale data bestand voor %s is niet gevonden"
+
+#. translators: 1. LiturgicalEvent grade, 2. LiturgicalEvent name, 3. New liturgical event name, 4: Requested calendar year, 5. Old date, 6. New date
+#: src/Handlers/CalendarHandler.php:4225
+#, php-format
+msgid ""
+"The %1$s '%2$s' is transferred from %5$s to %6$s as per the %7$s, to make "
+"room for '%3$s': applicable to the year %4$d."
+msgstr ""
+"De %1$s '%2$s' wordt verplaatst van %5$s naar %6$s overeenkomstig de %7$s, "
+"om plaats te maken voor '%3$s': van toepassing in het jaar %4$d."
+
+#. translators: 1. LiturgicalEvent grade, 2. LiturgicalEvent name, 3. Old date, 4. New date, 5. Source of the information, 6. New liturgical event name, 7. Superseding liturgical event grade, 8. Superseding liturgical event name, 9: Requested calendar year
+#: src/Handlers/CalendarHandler.php:4243
+#, php-format
+msgid ""
+"The %1$s '%2$s' would have been transferred from %3$s to %4$s as per the "
+"%5$s, to make room for '%6$s', however it is suppressed by the %7$s '%8$s' "
+"in the year %9$d."
+msgstr ""
+"De %1$s '%2$s' zou verplaatst worden van %3$s naar %4$s overeenkomstig de "
+"%5$s, om plaats te maken voor '%6$s', maar wordt vervangen door %7$s '%8$s' "
+"in het jaar %9$d."
+
+#. translators: 1. Name of the mobile liturgical event being created, 2. Name of the liturgical event that it is relative to
+#: src/Handlers/CalendarHandler.php:4440
+#, php-format
+msgid ""
+"Cannot create mobile liturgical event '%1$s' relative to liturgical event "
+"with key '%2$s', liturgical event does not exist."
+msgstr ""
+"Kan mobiel liturgisch evenement '%1$s' niet maken ten opzichte van "
+"liturgisch evenement met sleutel '%2$s', liturgisch evenement bestaat niet."
+
+#. translators: 1. Name of the mobile liturgical event being created, 2. event_key of the liturgical event that it is relative to, 3. List of valid keywords
+#: src/Handlers/CalendarHandler.php:4456
+#, php-format
+msgid ""
+"Cannot create mobile liturgical event '%1$s': the `strtotime.relative_time` "
+"property can only express relativity to the liturgical event with key '%2$s' "
+"using keywords %3$s."
+msgstr ""
+"Kan mobiele liturgische gebeurtenis '%1$s' niet aanmaken: de eigenschap "
+"`strtotime.relative_time` kan alleen relatieve tijd uitdrukken ten opzichte "
+"van de liturgische gebeurtenis met sleutel '%2$s' met behulp van trefwoorden "
+"%3$s."
+
+#. translators: Do not translate 'strtotime'! 1. Name of the mobile liturgical event being created
+#: src/Handlers/CalendarHandler.php:4534
+#, php-format
+msgid ""
+"Cannot create mobile liturgical event '%1$s': 'strtotime' property must be "
+"either an object or a string, instead it is of type '%2$s'."
+msgstr ""
+"Kan mobiele liturgische gebeurtenis '%1$s' niet aanmaken: 'strtotime'-"
+"eigenschap moet een object of een string zijn, in plaats daarvan is het van "
+"type '%2$s'."
+
+#. translators: 1: LiturgicalEvent name, 2: Name of the diocese, 3: LiturgicalEvent date, 4: Coinciding liturgical event name, 5: Requested calendar year
+#: src/Handlers/CalendarHandler.php:4614
+#, php-format
+msgid ""
+"The Solemnity '%1$s', proper to the calendar of the %2$s and usually "
+"celebrated on %3$s, coincides with the Sunday or Solemnity '%4$s' in the "
+"year %5$d! Does something need to be done about this?"
+msgstr ""
+"De plechtigheid '%1$s', eigen aan de kalender van de %2$s en meestal gevierd "
+"op %3$s, valt samen met de zondag of plechtigheid '%4$s' in het jaar %5$d! "
+"Moet hier iets aan gedaan worden?"
+
+#. translators: 1: LiturgicalEvent grade, 2: LiturgicalEvent name, 3: Name of the diocese, 4: LiturgicalEvent date, 5: Coinciding liturgical event name, 6: Requested calendar year
+#: src/Handlers/CalendarHandler.php:4639
+#, php-format
+msgid ""
+"The %1$s '%2$s', proper to the calendar of the %3$s and usually celebrated "
+"on %4$s, is suppressed by the %5$s %6$s in the year %7$d."
+msgstr ""
+"Het feest %1$s '%2$s', behorend tot de kalender van de %3$s en gewoonlijk "
+"gevierd op %4$s, wordt onderdrukt door de %5$s %6$s in het jaar %7$d."
+
+#: src/Handlers/CalendarHandler.php:4938
+msgid "Error converting Liturgical Calendar to XML."
+msgstr "Fout bij het omzetten van de liturgische kalender naar XML."
+
+#: src/Handlers/CalendarHandler.php:4969
+msgid "Error serializing Liturgical Calendar."
+msgstr "Fout bij serialiseren van Liturgische Kalender."
+
+#. translators: Christmas weekday name pattern
+#: src/LocaleDateFormatter.php:169
+#, php-format
+msgid "%s - Christmas Weekday"
+msgstr "%s van de kersttijd"
+
+#: src/Models/Calendar/LitCommons.php:200
+msgid "From the Common"
+msgstr "Gemeenschappelijke"
+
+#. translators: when there are multiple possible commons, this will be the glue "[; or] From the Common of..."
+#. translators: context alternate name for a liturgical event, e.g. Second Sunday of Easter `or` Divine Mercy Sunday
+#. translators: when there are multiple possible commons, this will be the glue "[; or] From the Common of..."
+#: src/Models/Calendar/LitCommons.php:228
+#: src/Models/Calendar/LiturgicalEvent.php:143
+#: src/Models/Calendar/Temporale/RomanTemporale.php:256
+#: src/Models/EventsPath/LiturgicalEventAbstract.php:104 src/Utilities.php:450
+#: src/Utilities.php:456
+msgid "or"
+msgstr "of"
+
+#. translators: in reference to the cycle of liturgical years (A, B, C; I, II)
+#: src/Models/Calendar/LiturgicalEventCollection.php:173
+msgid "YEAR"
+msgstr "JAAR"
+
+#: src/Models/Calendar/LiturgicalEventCollection.php:174
+msgid "Vigil Mass"
+msgstr "Vigiliemis"
+
+#: src/Models/Calendar/LiturgicalEventCollection.php:1728
+#, php-format
+msgid ""
+"The Vigil Mass for the %1$s '%2$s' coincides with the %3$s '%4$s' in the "
+"year %5$d. As per %6$s, the first has precedence, therefore the Vigil Mass "
+"is confirmed as are I Vespers."
+msgstr ""
+"De vigiliemis voor de %1$s '%2$s' valt samen met de %3$s '%4$s' in het jaar "
+"%5$d. Overeenkomstig %6$s heeft de eerste voorrang, waardoor de vigiliemis "
+"en het avondgebed op de vooravond zijn vastgesteld."
+
+#: src/Models/Calendar/LiturgicalEventCollection.php:1743
+#, php-format
+msgid ""
+"The Vigil Mass for the %1$s '%2$s' coincides with the %3$s '%4$s' in the "
+"year %5$d. Since the first Solemnity has precedence, it will have Vespers I "
+"and a vigil Mass, whereas the last Solemnity will not have either Vespers II "
+"or an evening Mass."
+msgstr ""
+"De vigiliemis van de %1$s '%2$s' valt samen met de %3$s '%4$s' in het jaar "
+"%5$d. Omdat het eerste hoogfeest voorrang heeft, heeft het een avondgebed op "
+"de vooravond en een vigiliemis, terwijl het tweede hoogfeest geen avondgebed "
+"of een avondmis heeft."
+
+#: src/Models/Calendar/LiturgicalEventCollection.php:1753
+#, php-format
+msgid ""
+"The Vigil Mass for the %1$s '%2$s' coincides with the %3$s '%4$s' in the "
+"year %5$d. This last Solemnity takes precedence, therefore it will maintain "
+"Vespers II and an evening Mass, while the first Solemnity will not have a "
+"Vigil Mass or Vespers I."
+msgstr ""
+"De vigiliemis voor de %1$s '%2$s' valt samen met de %3$s '%4$s' in het jaar "
+"%5$d. Het tweede hoogfeest heeft voorrang, waardoor het een avondgebed op de "
+"vooravond en een avondmis behoudt, terwijl het eerste hoogfeest geen "
+"vigiliemis of avondgebed heeft."
+
+#: src/Models/Calendar/LiturgicalEventCollection.php:1838
+#, php-format
+msgid ""
+"The Vigil Mass for the %1$s '%2$s' coincides with the %3$s '%4$s' in the "
+"year %5$d. We should ask the Dicastery for Divine Worship and the Discipline "
+"of the Sacraments what to do about this!"
+msgstr ""
+"De Vigilie Mis voor de %1$s '%2$s' valt samen met de %3$s '%4$s' in het jaar "
+"%5$d. We moeten de Dicasterie voor de Goddelijke Eredienst en de Discipline "
+"van de Sacramenten vragen wat we hieraan moeten doen!"
+
+#. translators: as instituted on the day of the canonization of St Faustina Kowalska by Pope John Paul II in the year 2000
+#: src/Models/Calendar/Temporale/RomanTemporale.php:260
+msgid "Divine Mercy Sunday"
+msgstr "Barmhartige zondag"
+
+#, php-format
+#~ msgid ""
+#~ "Error receiving or parsing info from GitHub about latest release: %s."
+#~ msgstr ""
+#~ "Fout bij het ontvangen of verwerken van informatie van GitHub over de "
+#~ "nieuwste release: %s."
+
+#~ msgid ""
+#~ "The %1$s '%2$s', added on %3$s since the year %4$d (%5$s), is however "
+#~ "superseded by a %6$s '%7$s' in the year %8$d."
+#~ msgstr ""
+#~ "De %1$s '%2$s', toegevoegd op %3$s vanaf het jaar %4$d (%5$s), wordt "
+#~ "echter vervangen door een %6$s '%7$s' in het jaar %8$d."
+
+#~ msgid "pink"
+#~ msgstr "roze"
+
+#~ msgid "Decree of the Congregation for Divine Worship"
+#~ msgstr "Decreet van de Congregatie voor de Goddelijke Eredienst"
+
+#~ msgid "The Diocesan calendar \"%s\" was not found in the index file."
+#~ msgstr ""
+#~ "De diocesane kalender \"%s\" werd niet gevonden in het indexbestand."
+
+#~ msgid ""
+#~ "There was an error trying to decode localized JSON data for the "
+#~ "Temporale: %s"
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van gelokaliseerde JSON-"
+#~ "gegevens voor de Temporale: %s"
+
+#~ msgid ""
+#~ "There was an error trying to retrieve localized data for the Temporale."
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het ophalen van gelokaliseerde gegevens "
+#~ "voor de Temporale."
+
+#~ msgid "There was an error trying to decode JSON data for the Temporale: %s"
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van JSON-gegevens voor de "
+#~ "Temporale: %s"
+
+#~ msgid "There was an error trying to retrieve data for the Temporale."
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het ophalen van gegevens voor de Temporale."
+
+#~ msgid "Translation data for the sanctorale from %s could not be found."
+#~ msgstr ""
+#~ "Vertaalgegevens voor het eigen van de heiligen van %s kon niet worden "
+#~ "gevonden."
+
+#~ msgid ""
+#~ "There was an error trying to decode JSON localization data for the "
+#~ "Sanctorale for the Missal %1$s: %2$s"
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van JSON-lokalisatiegegevens "
+#~ "voor het Sanctorale voor het Missaal %1$s: %2$s"
+
+#, fuzzy
+#~ msgid "Data for the Sanctorale from %s could not be found."
+#~ msgstr ""
+#~ "Gegevens voor het eigen van de heiligen van %s kon niet worden gevonden."
+
+#~ msgid ""
+#~ "There was an error trying to decode JSON data for the Sanctorale for the "
+#~ "Missal %1$s: %2$s."
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van JSON-gegevens voor het "
+#~ "Sanctorale voor het Missaal %1$s: %2$s."
+
+#, fuzzy
+#~ msgid "Could not find the Sanctorale data"
+#~ msgstr "Een sanctorale data bestand voor %s is niet gevonden"
+
+#~ msgid ""
+#~ "There was an error trying to decode translation data for Memorials based "
+#~ "on Decrees of the Congregation for Divine Worship: %s"
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van vertaalgegevens voor "
+#~ "Herdenkingen op basis van Decreten van de Congregatie voor de Goddelijke "
+#~ "Eredienst: %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not find translation data for Memorials based on Decrees of the "
+#~ "Congregation for Divine Worship"
+#~ msgstr "Decreet van de Congregatie voor de Goddelijke Eredienst"
+
+#~ msgid ""
+#~ "There was an error trying to decode JSON data for Memorials based on "
+#~ "Decrees of the Congregation for Divine Worship: %s"
+#~ msgstr ""
+#~ "Er is een fout opgetreden bij het decoderen van JSON-gegevens voor "
+#~ "Herdenkingen op basis van Decreten van de Congregatie voor de Goddelijke "
+#~ "Eredienst: %s"
+
+#~ msgid "before"
+#~ msgstr "voor"
+
+#~ msgid "after"
+#~ msgstr "na"
+
+#~ msgid ""
+#~ "Cannot create mobile festivity '%1$s': when the 'strtotime' property is "
+#~ "an object, it must have properties %2$s"
+#~ msgstr ""
+#~ "Kan het verplaatsbare feest '%1$s' niet genereren: indien de eigenschap "
+#~ "'strtotime' een object is, moet het de eigenschappen '%2$s' hebben"
+
+#~ msgid ""
+#~ "Cannot create mobile festivity '%1$s' without a 'strtotime' property!"
+#~ msgstr ""
+#~ "Kan het verplaatsbare feest '%1$s' niet genereren zonder de eigenschap "
+#~ "'strtotime'!"
+
+#~ msgid "Error retrieving and decoding Wider Region data from file %s."
+#~ msgstr ""
+#~ "Fout bij het ophalen en decoderen van Wider Region data uit bestand %s."
+
+#, fuzzy
+#~| msgid "Error retrieving and decoding National data from file %s."
+#~ msgid "Error retrieving and decoding National Calendar data from file %s."
+#~ msgstr "Fout bij het ophalen en decoderen van National data uit bestand %s."
+
+#~ msgctxt "(SING_FEMM)"
+#~ msgid "of"
+#~ msgstr "voor"
+
+#~ msgctxt "(SING_MASC)"
+#~ msgid "of"
+#~ msgstr "voor"
+
+#~ msgid "%s day before Epiphany"
+#~ msgstr "%s dag voor de Openbaring des Heren"

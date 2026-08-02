@@ -1,0 +1,335 @@
+<?php
+
+namespace LiturgicalCalendar\Api\Http\Middleware;
+
+use LiturgicalCalendar\Api\Http\Exception\ApiException;
+use LiturgicalCalendar\Api\Http\Exception\TooManyRequestsException;
+use LiturgicalCalendar\Api\Http\Logs\LoggerFactory;
+use Monolog\Logger;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+class ErrorHandlingMiddleware implements MiddlewareInterface
+{
+    /** @var resource */
+    private $stderr;
+    private ResponseFactoryInterface $responseFactory;
+    private bool $debug;
+    private Logger $debugLogger;
+    private Logger $errorLogger;
+
+    // Store the current request so processors can use it
+    private ?ServerRequestInterface $currentRequest = null;
+
+    /**
+     * List of allowed origins for CORS.
+     * If ['*'] (default), all origins are allowed for non-credentialed requests.
+     * For credentialed requests (cookies), specific origins must be listed.
+     *
+     * @var string[]
+     */
+    private array $allowedOrigins;
+
+    /**
+     * Optional callable to validate origins dynamically.
+     * When set, takes precedence over the $allowedOrigins array.
+     * Signature: fn(string $origin): bool
+     *
+     * This allows for future extensibility where applications can define
+     * their own allowed origins (e.g., per-API-key origin restrictions).
+     *
+     * @var callable(string): bool|null
+     */
+    private $originValidator;
+
+    /**
+     * Constructor for the ErrorHandlingMiddleware.
+     *
+     * @param ResponseFactoryInterface $responseFactory The PSR-7 response factory.
+     * @param bool $debug Whether to enable debug level logging.
+     * @param string[] $allowedOrigins List of allowed origins for CORS (default: ['*']).
+     * @param callable(string): bool|null $originValidator Optional callable to validate origins dynamically.
+     *
+     * @throws \RuntimeException If unable to open php://stderr for writing.
+     */
+    public function __construct(
+        ResponseFactoryInterface $responseFactory,
+        bool $debug = false,
+        array $allowedOrigins = ['*'],
+        ?callable $originValidator = null
+    ) {
+        $this->responseFactory = $responseFactory;
+        $this->debug           = $debug;
+        $this->allowedOrigins  = $allowedOrigins;
+        $this->originValidator = $originValidator;
+        $debugLogger           = LoggerFactory::create('api', null, 30, $debug, true, true);
+        $this->debugLogger     = $debugLogger;
+        $errorLogger           = LoggerFactory::create('api-error', null, 30, $debug, true, true);
+        $this->errorLogger     = $errorLogger;
+        $stderr                = fopen('php://stderr', 'w');
+        if ($stderr === false) {
+            throw new \RuntimeException('Failed to open php://stderr for writing.');
+        }
+
+        $this->stderr = $stderr;
+
+        // Catch fatal errors
+        register_shutdown_function([$this, 'handleShutdown']);
+
+        // Catch uncaught exceptions globally
+        set_exception_handler([$this, 'handleUncaughtException']);
+
+        // Escalate PHP warnings/notices to exceptions
+        set_error_handler([$this, 'handlePhpWarning']);
+    }
+
+    /**
+     * Check if an origin is allowed for CORS.
+     *
+     * First checks the custom originValidator callable if set.
+     * Falls back to checking the allowedOrigins array.
+     *
+     * @param string $origin The origin to validate.
+     * @return bool True if the origin is allowed, false otherwise.
+     */
+    private function isAllowedOrigin(string $origin): bool
+    {
+        if ($origin === '') {
+            return false;
+        }
+
+        // Use custom validator if provided
+        if ($this->originValidator !== null) {
+            return ( $this->originValidator )($origin);
+        }
+
+        // Check if wildcard is allowed (allows all origins)
+        if (count($this->allowedOrigins) === 1 && $this->allowedOrigins[0] === '*') {
+            return true;
+        }
+
+        // Check against explicit list
+        return in_array($origin, $this->allowedOrigins, true);
+    }
+
+    /**
+     * This middleware will catch any exceptions thrown by the handler, log them, and
+     * return a response with a status of 500 and a JSON body that conforms to the
+     * application/problem+json format.
+     *
+     * The response will contain a 'type' key with the value 'about:blank'. A 'title' key
+     * with the value 'Internal Server Error', and a 'status' key with the value 500.
+     *
+     * If the exception is an instance of ApiException, then it will define its own
+     * structure for the response. Otherwise, if debug mode is enabled, then the response
+     * will contain additional information, such as the file and line number of the error,
+     * and a trace of the error.
+     *
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $this->currentRequest = $request;
+
+        try {
+            return $handler->handle($request);
+        } catch (\Throwable $e) {
+            $this->logException($e, 'error');
+
+            // Default values
+            $status  = 500;
+            $problem = [
+                'type'   => 'about:blank',
+                'title'  => 'Internal Server Error',
+                'status' => $status,
+                'detail' => $this->debug ? $e->getMessage() : 'An unexpected error occurred.',
+            ];
+
+            $retryAfter = null;
+            if ($e instanceof ApiException) {
+                // Let the ApiException define its structure
+                $status  = $e->getStatus();
+                $problem = $e->toArray($this->debug);
+
+                // Handle rate limiting with Retry-After header
+                if ($e instanceof TooManyRequestsException && $e->getRetryAfter() > 0) {
+                    $retryAfter = $e->getRetryAfter();
+                }
+            } elseif ($this->debug) {
+                // For non-ApiExceptions in debug mode, add trace info
+                $problem['file']  = $e->getFile();
+                $problem['line']  = $e->getLine();
+                $problem['trace'] = explode("\n", $e->getTraceAsString());
+            }
+
+            $response = $this->responseFactory->createResponse($status);
+
+            // Add Retry-After header for rate limiting
+            if ($retryAfter !== null) {
+                $response = $response->withHeader('Retry-After', (string) $retryAfter);
+            }
+
+            $responseBody = json_encode($problem, JSON_PRETTY_PRINT | JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+            if (false === $responseBody) {
+                error_log('Failed to encode error to application/problem+json: ' . json_last_error_msg());
+                $response->getBody()->write('{"type":"about:blank","title":"Internal Server Error","status":500}');
+                return $response->withHeader('Content-Type', 'application/problem+json');
+            }
+
+            $response
+                ->getBody()
+                ->write($responseBody);
+
+            // Handle CORS headers for error responses
+            $origin = $request->getHeaderLine('Origin');
+
+            $response = $response->withHeader('Content-Type', 'application/problem+json');
+
+            // When an Origin header is present, the request may be credentialed (cookies).
+            // For credentialed requests, browsers require:
+            // 1. Access-Control-Allow-Origin to be a specific origin (not *)
+            // 2. Access-Control-Allow-Credentials: true
+            // This applies to all endpoints since the frontend uses credentials: 'include' globally.
+            if ($origin !== '') {
+                // Only reflect the origin if it passes validation
+                if ($this->isAllowedOrigin($origin)) {
+                    return $response
+                        ->withHeader('Access-Control-Allow-Origin', $origin)
+                        ->withHeader('Access-Control-Allow-Credentials', 'true');
+                }
+                // Origin not allowed - don't add CORS headers (browser will block the request)
+                // This prevents unauthorized origins from receiving credentialed responses
+                return $response;
+            }
+
+            // For requests without Origin header (e.g., same-origin, curl), use wildcard
+            return $response->withHeader('Access-Control-Allow-Origin', '*');
+        }
+    }
+
+    /**
+     * Format a byte count into a human-readable string, with units.
+     * @param int $bytes The number of bytes to format.
+     * @return string The formatted string, e.g. "1.23 KB".
+     */
+    private static function formatBytes(int $bytes): string
+    {
+        $units       = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $power       = $bytes > 0 ? (int) floor(log((float) $bytes, 1024)) : 0;
+        $scaledValue = (float) ( $bytes / ( 1024 ** $power ) );
+        return number_format($scaledValue, 2) . ' ' . $units[$power];
+    }
+
+    /**
+     * Handles PHP warnings by throwing an \Exception if the error is not fatal.
+     * Does not handle fatal errors, as they are handled by PHP itself.
+     * Does not handle E_STRICT errors, as they are only thrown in development mode.
+     * Does not handle E_PARSE errors, as they are only thrown in development mode.
+     * Does not handle E_CORE_ERROR errors, as they are only thrown when a core PHP extension has an error.
+     * Does not handle E_COMPILE_ERROR errors, as they are only thrown when a PHP extension has an error at compile-time.
+     * Does not handle E_ERROR errors, as they are fatal and handled by PHP itself.
+     *
+     * @param int $errno The level of the error raised.
+     * @param string $errstr The error message.
+     * @param string $errfile The file the error was raised in.
+     * @param int $errline The line the error was raised on.
+     * @return bool Whether the error was escalated and thrown as an exception.
+     */
+    public function handlePhpWarning(int $errno, string $errstr, string $errfile, int $errline): bool
+    {
+        if (!( error_reporting() & $errno )) {
+            return false; // respect current error_reporting
+        }
+
+        // Only escalate non-fatal errors
+        switch ($errno) {
+            case E_WARNING:
+            case E_NOTICE:
+            case E_USER_WARNING:
+            case E_USER_NOTICE:
+            case E_DEPRECATED:
+            case E_USER_DEPRECATED:
+            case E_RECOVERABLE_ERROR:
+                throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+
+            default:
+                // For fatal errors, let PHP handle them (or use register_shutdown_function)
+                return false;
+        }
+    }
+
+
+    /**
+     * Catch fatal errors at shutdown
+     */
+    public function handleShutdown(): void
+    {
+        $error = error_get_last();
+        if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR], true)) {
+            $exception = new \ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']);
+            $this->logException($exception, 'critical');
+        }
+    }
+
+    /**
+     * Catch uncaught exceptions and log them at critical level.
+     * This function is called by a registered shutdown function.
+     * It will log the exception and then exit with a status code of 1.
+     *
+     * @param \Throwable $e The uncaught exception to log.
+     */
+    public function handleUncaughtException(\Throwable $e): void
+    {
+        $this->logException($e, 'critical');
+        exit(1);
+    }
+
+    /**
+     * Log an exception with some context information.
+     *
+     * The exception is logged at the specified severity, and the context
+     * information is available to processors (like the JSON formatter)
+     * for final output.
+     *
+     * The context information includes the request method, URI, request ID,
+     * and the exception object itself.
+     *
+     * @param \Throwable $e The exception to log.
+     * @param string $severity The severity at which to log the exception.
+     */
+    private function logException(\Throwable $e, string $severity = 'error'): void
+    {
+        $method = $this->currentRequest?->getMethod() ?? 'N/A';
+        $uri    = $this->currentRequest?->getUri()?->__toString() ?? 'N/A';
+
+        $fullMessage = sprintf(
+            "[%s %s] %s in %s:%d | memory_peak_usage=%s\nStack trace:\n%s",
+            $method,
+            $uri,
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
+            self::formatBytes(memory_get_peak_usage(true)),
+            $e->getTraceAsString()
+        );
+
+        // context is available to processors, but only used by JSON formatter for final output
+        $context = [
+            'type'       => 'request',
+            'request'    => $this->currentRequest,
+            'request_id' => $this->currentRequest?->getAttribute('request_id'),
+            'exception'  => $e,
+        ];
+
+        $this->errorLogger->{$severity}($fullMessage, $context);
+        $this->debugLogger->{$severity}($fullMessage, $context);
+
+        fwrite($this->stderr, $fullMessage . PHP_EOL);
+    }
+}

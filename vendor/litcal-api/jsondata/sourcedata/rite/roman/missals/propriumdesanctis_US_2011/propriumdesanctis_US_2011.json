@@ -1,0 +1,203 @@
+[
+    {
+        "month": 1,
+        "day": 4,
+        "event_key": "StElizabethSeton",
+        "grade": 3,
+        "grade_display": null,
+        "common": [
+            "Proper"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 1,
+        "day": 5,
+        "event_key": "StJohnNeumann",
+        "grade": 3,
+        "grade_display": null,
+        "common": [
+            "Proper"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 1,
+        "day": 6,
+        "event_key": "StAndreBessette",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Holy Men and Women:For Religious"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 3,
+        "day": 3,
+        "event_key": "StKatharineDrexel",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Virgins:For One Virgin"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 5,
+        "day": 10,
+        "event_key": "StDamienVeuster",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Pastors:For Missionaries"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 5,
+        "day": 15,
+        "event_key": "StIsidore",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Holy Men and Women:For One Saint"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 7,
+        "day": 1,
+        "event_key": "JuniperoSerra",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Pastors:For One Pastor",
+            "Pastors:For Missionaries"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 7,
+        "day": 4,
+        "event_key": "IndependenceDay",
+        "grade": 3,
+        "grade_display": "National Holiday",
+        "common": [
+            "Proper"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 7,
+        "day": 14,
+        "event_key": "KateriTekakwitha",
+        "grade": 3,
+        "grade_display": null,
+        "common": [
+            "Virgins:For One Virgin"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 9,
+        "day": 9,
+        "event_key": "StPeterClaver",
+        "grade": 3,
+        "grade_display": null,
+        "common": [
+            "Pastors:For One Pastor",
+            "Holy Men and Women:For Those Who Practiced Works of Mercy"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 10,
+        "day": 6,
+        "event_key": "MarieDurocher",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Virgins:For One Virgin"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 11,
+        "day": 13,
+        "event_key": "StFrancesXCabrini",
+        "grade": 3,
+        "grade_display": null,
+        "common": [
+            "Virgins:For One Virgin",
+            "Holy Men and Women:For Those Who Practiced Works of Mercy"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 11,
+        "day": 18,
+        "event_key": "StRoseDuchesne",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Virgins:For One Virgin"
+        ],
+        "calendar": "US",
+        "color": [
+            "white"
+        ]
+    },
+    {
+        "month": 11,
+        "day": 23,
+        "event_key": "MiguelPro",
+        "grade": 2,
+        "grade_display": null,
+        "common": [
+            "Martyrs:For One Martyr",
+            "Pastors:For One Pastor"
+        ],
+        "calendar": "US",
+        "color": [
+            "white",
+            "red"
+        ]
+    }
+]

@@ -1,0 +1,63 @@
+{
+    "litcal": [
+        {
+            "liturgical_event": {
+                "event_key": "StCatherineSiena",
+                "grade": 4
+            },
+            "metadata": {
+                "action": "makePatron",
+                "since_year": 1939,
+                "until_year": 1999,
+                "url": "https:\/\/www.vatican.va\/content\/pius-xii\/it\/briefs\/documents\/hf_p-xii_brief_19390618_patroni-italia.html"
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "StFrancisAssisi",
+                "grade": 4
+            },
+            "metadata": {
+                "action": "makePatron",
+                "since_year": 1939,
+                "url": "https:\/\/www.vatican.va\/content\/pius-xii\/it\/briefs\/documents\/hf_p-xii_brief_19390618_patroni-italia.html"
+            }
+        },
+        {
+            "liturgical_event": {
+                "event_key": "StNicholas",
+                "grade": 3
+            },
+            "metadata": {
+                "action": "setProperty",
+                "property": "grade",
+                "since_year": 2017,
+                "url": "https:\/\/liturgico.chiesacattolica.it\/memoria-di-san-nicola\/"
+            }
+        }
+    ],
+    "settings": {
+        "epiphany": "JAN6",
+        "ascension": "SUNDAY",
+        "corpus_christi": "SUNDAY",
+        "eternal_high_priest": false,
+        "holydays_of_obligation": {
+            "Christmas": true,
+            "Epiphany": true,
+            "Ascension": false,
+            "CorpusChristi": false,
+            "MaryMotherOfGod": true,
+            "ImmaculateConception": true,
+            "Assumption": true,
+            "StJoseph": false,
+            "StsPeterPaulAp": false,
+            "AllSaints": true
+        }
+    },
+    "metadata": {
+        "nation": "IT",
+        "wider_region": "Europe",
+        "missals": [ "IT_1983", "IT_2020" ],
+        "locales": [ "it_IT" ]
+    }
+}

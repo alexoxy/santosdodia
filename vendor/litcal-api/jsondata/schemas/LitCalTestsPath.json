@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "LitCalTestsPath",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "litcal_tests": {
+            "type": "array",
+            "items": {
+                "$ref": "./LitCalTest.json"
+            }
+        }
+    },
+    "required": ["litcal_tests"]
+}

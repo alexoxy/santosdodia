@@ -20636,11 +20636,11 @@
   },
   "metadata": {
     "version": "5.7",
-    "timestamp": 1783675707,
-    "date_time": "2026-07-10T11:28:27+02:00",
+    "timestamp": 1785556116,
+    "date_time": "2026-08-01T05:48:36+02:00",
     "request_headers": {
-      "Accept-Language": "zh-CN,zh;q=0.9",
-      "Origin": "https://web-sandbox.oaiusercontent.com",
+      "Accept-Language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+      "X-Requested-With": "plus.H1",
       "Accept": "application/json"
     },
     "solemnities_lord_bvm": [

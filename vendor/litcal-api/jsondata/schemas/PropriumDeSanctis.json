@@ -1,0 +1,102 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/PropriumDeSanctis"
+    },
+    "definitions": {
+        "PropriumDeSanctis": {
+            "$comment": "TODO: Language edition missals require the grade_display field, should all missals require it? or should we try to define two different schemas?",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "month": {
+                    "$ref": "./CommonDef.json#/definitions/Month"
+                },
+                "day": {
+                    "$ref": "./CommonDef.json#/definitions/Day"
+                },
+                "event_key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "grade": {
+                    "$ref": "./CommonDef.json#/definitions/LitGrade"
+                },
+                "grade_display": {
+                    "type": ["string", "null"]
+                },
+                "common": {
+                    "$ref": "./CommonDef.json#/definitions/LitCommon"
+                },
+                "calendar": {
+                    "$ref": "#/definitions/Calendar"
+                },
+                "color": {
+                    "$ref": "./CommonDef.json#/definitions/LitColor"
+                },
+                "is_dominical": {
+                    "type": "boolean",
+                    "description": "Marks a feast or solemnity of the Lord, used by the Ambrosian precedence classifier. Optional; omitted for events where the distinction does not apply."
+                }
+            },
+            "required": [
+                "calendar",
+                "color",
+                "common",
+                "day",
+                "grade",
+                "month",
+                "event_key"
+            ],
+            "title": "PropriumDeSanctis"
+        },
+        "ReadingsWithVigil": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "vigil": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "day": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                }
+            },
+            "required": [
+                "vigil",
+                "day"
+            ],
+            "title": "ReadingsWithVigil"
+        },
+        "ReadingsChristmas": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "vigil": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "night": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "dawn": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                },
+                "day": {
+                    "$ref": "./CommonDef.json#/definitions/Readings"
+                }
+            },
+            "required": [
+                "vigil",
+                "night",
+                "dawn",
+                "day"
+            ],
+            "title": "ReadingsChristmas"
+        },
+        "Calendar": {
+            "$ref": "./CommonDef.json#/definitions/Calendar"
+        }
+    }
+}
