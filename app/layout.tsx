@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { cookies, headers } from 'next/headers';
-import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import './traditions.css';
 import './features.css';
@@ -12,6 +11,7 @@ import SiteChrome from './components/SiteChrome';
 import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '../lib/i18n';
 import { parseTradition, TRADITIONS } from '../data/observances';
 import { SITE_ORIGIN } from '../lib/site';
+import { countryFromHeaders } from '../lib/request-geo';
 
 const siteDescription = 'Discover who is celebrated today in your country, region and Christian tradition. Search saints, patronages, calendars, movable feasts, religious holidays and liturgical information.';
 
@@ -77,7 +77,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const saved = cookieStore.get('sdd-locale')?.value;
   const savedChurch = cookieStore.get('sdd-tradition')?.value;
   const initialLocale = saved ? normalizeLocale(saved) : localeFromAcceptLanguage(requestHeaders.get('accept-language'));
-  const initialCountry = requestHeaders.get('x-vercel-ip-country') ?? undefined;
+  const initialCountry = countryFromHeaders(requestHeaders);
   const initialChurch = savedChurch === 'all' ? 'all' : parseTradition(savedChurch) ?? 'roman-catholic';
 
   const structured = {
@@ -140,7 +140,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SiteChrome>{children}</SiteChrome>
       </LanguageProvider>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
-      <Analytics />
     </body>
   </html>;
 }
