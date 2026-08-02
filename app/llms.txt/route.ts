@@ -18,6 +18,7 @@ ${SITE_ORIGIN}
 - ${SITE_ORIGIN}/live — official Christian live media and archives
 - ${SITE_ORIGIN}/holidays — religious holidays by country
 - ${SITE_ORIGIN}/churches — Christian Churches, traditions and jurisdictions
+- ${SITE_ORIGIN}/leaders — verified current ecclesiastical office holders
 
 ## Entity pages
 - ${SITE_ORIGIN}/saint/{id} — saint or observance profile
