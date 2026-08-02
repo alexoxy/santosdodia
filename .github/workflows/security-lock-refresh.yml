@@ -1,5 +1,6 @@
 name: Security lock refresh
 
+# Temporary one-shot workflow for the August 2026 dependency hardening.
 on:
   push:
     branches: [main]
