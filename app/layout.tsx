@@ -6,6 +6,7 @@ import './traditions.css';
 import './features.css';
 import './biographies.css';
 import './holidays.css';
+import './performance.css';
 import LanguageProvider from './components/LanguageProvider';
 import SiteChrome from './components/SiteChrome';
 import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '../lib/i18n';
