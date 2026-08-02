@@ -48,6 +48,13 @@ function extractPersonNames(text: string): string[] {
   return unique(names).filter(name => !/^(Holy Father|His Holiness|Roman Church)$/i.test(name));
 }
 
+function normalizeJurisdictionName(value: string): string {
+  return clean(value)
+    .replace(/\s+(?:submitted|presented|who|which|and has).*$/i, '')
+    .replace(new RegExp(`^the\\s+${JURISDICTION_WORDS}\\s+of\\s+`, 'i'), '')
+    .trim();
+}
+
 function extractJurisdictionNames(text: string): string[] {
   const names: string[] = [];
   const direct = new RegExp(`\\b${JURISDICTION_WORDS}\\s+of\\s+([^.;:]+)`, 'giu');
@@ -56,7 +63,7 @@ function extractJurisdictionNames(text: string): string[] {
   const office = new RegExp(`\\b${OFFICE_WORDS}\\s+of\\s+([^.;:]+)`, 'giu');
   for (const match of text.matchAll(office)) names.push(match[1]);
 
-  return unique(names).map(value => value.replace(/\s+(?:submitted|presented|who|which|and has).*$/i, '').trim());
+  return unique(names.map(normalizeJurisdictionName));
 }
 
 function confidenceFor(changeTypes: EcclesiasticalChangeType[], people: string[], jurisdictions: string[]): IngestionCandidate['confidence'] {
