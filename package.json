@@ -21,6 +21,7 @@
     "data:sync": "node scripts/sync-observances.mjs",
     "leaders:audit": "node scripts/audit-ecclesiastical-directory.mjs",
     "leaders:sync": "node scripts/sync-ecclesiastical-directory.mjs",
+    "leaders:sql": "node scripts/build-ecclesiastical-staging-sql.mjs",
     "osint:monitor": "node scripts/monitor-ecclesiastical-osint.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
     "litcal:source": "bash scripts/mirror-litcal-source.sh",
