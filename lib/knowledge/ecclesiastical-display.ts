@@ -23,7 +23,10 @@ const pageCopy = {
     canonicalLevel: 'Canonical level represented by this record.',
     geographicScope: 'Geographic scope used to determine which local celebrations apply.',
     modelledChildren: 'Direct child jurisdictions currently modelled.',
-    active: 'Active', officialWebsite: 'Official website'
+    active: 'Active', officialWebsite: 'Official website',
+    churchProfileIntro: 'Calendars, jurisdictions and celebrations connected with this Christian Church or tradition.',
+    calendarEngineDescription: 'Fixed and movable celebrations are resolved by the calendar engine associated with this tradition.',
+    jurisdictionDirectoryPending: 'Jurisdiction records are being added from official Church directories.'
   },
   pt: {
     currentLeadership: 'Liderança atual', officeSince: 'No cargo desde', installed: 'Instalado ou entronizado',
@@ -35,7 +38,10 @@ const pageCopy = {
     canonicalLevel: 'Nível canónico representado por este registo.',
     geographicScope: 'Âmbito geográfico usado para determinar quais as celebrações locais aplicáveis.',
     modelledChildren: 'Jurisdições diretamente dependentes atualmente modeladas.',
-    active: 'Ativo', officialWebsite: 'Site oficial'
+    active: 'Ativo', officialWebsite: 'Site oficial',
+    churchProfileIntro: 'Calendários, jurisdições e celebrações ligadas a esta Igreja ou tradição cristã.',
+    calendarEngineDescription: 'As celebrações fixas e móveis são resolvidas pelo motor de calendário associado a esta tradição.',
+    jurisdictionDirectoryPending: 'As jurisdições estão a ser acrescentadas a partir dos diretórios oficiais das Igrejas.'
   },
   es: {
     currentLeadership: 'Liderazgo actual', officeSince: 'En el cargo desde', installed: 'Instalado o entronizado',
@@ -47,7 +53,10 @@ const pageCopy = {
     canonicalLevel: 'Nivel canónico representado por este registro.',
     geographicScope: 'Ámbito geográfico utilizado para determinar qué celebraciones locales corresponden.',
     modelledChildren: 'Jurisdicciones dependientes directas actualmente modeladas.',
-    active: 'Activo', officialWebsite: 'Sitio oficial'
+    active: 'Activo', officialWebsite: 'Sitio oficial',
+    churchProfileIntro: 'Calendarios, jurisdicciones y celebraciones vinculadas a esta Iglesia o tradición cristiana.',
+    calendarEngineDescription: 'Las celebraciones fijas y móviles son resueltas por el motor de calendario asociado a esta tradición.',
+    jurisdictionDirectoryPending: 'Las jurisdicciones se están incorporando desde los directorios oficiales de las Iglesias.'
   },
   fr: {
     currentLeadership: 'Direction actuelle', officeSince: 'En fonction depuis', installed: 'Installé ou intronisé',
@@ -59,7 +68,10 @@ const pageCopy = {
     canonicalLevel: 'Niveau canonique représenté par cette entrée.',
     geographicScope: 'Périmètre géographique utilisé pour déterminer les célébrations locales applicables.',
     modelledChildren: 'Juridictions directement dépendantes actuellement modélisées.',
-    active: 'Actif', officialWebsite: 'Site officiel'
+    active: 'Actif', officialWebsite: 'Site officiel',
+    churchProfileIntro: 'Calendriers, juridictions et célébrations liés à cette Église ou tradition chrétienne.',
+    calendarEngineDescription: 'Les célébrations fixes et mobiles sont résolues par le moteur calendaire associé à cette tradition.',
+    jurisdictionDirectoryPending: 'Les juridictions sont ajoutées à partir des annuaires officiels des Églises.'
   }
 } as const;
 
