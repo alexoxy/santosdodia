@@ -39,10 +39,12 @@ function classify(heading: string, body: string): EcclesiasticalChangeType[] {
 
 function extractPersonNames(text: string): string[] {
   const names: string[] = [];
-  const titledName = /\b(?:H\.E\.\s+Mons\.|His Excellency(?:\s+Mons\.)?|Bishop|Archbishop|Cardinal|Mons\.|Msgr\.|The Reverend(?:\s+Father|\s+Sister)?|Reverend(?:\s+Father|\s+Sister)?|Father)\s+([\p{Lu}][\p{L}'’.-]+(?:\s+(?:[\p{Lu}][\p{L}'’.-]+|[\p{Lu}]\.)){1,7})/gu;
+  const nameWord = "[\\p{Lu}][\\p{L}'’\\-]+";
+  const initial = '[\\p{Lu}]\\.';
+  const titledName = new RegExp(`\\b(?:H\\.E\\.\\s+Mons\\.|His Excellency(?:\\s+Mons\\.)?|Bishop|Archbishop|Cardinal|Mons\\.|Msgr\\.|The Reverend(?:\\s+Father|\\s+Sister)?|Reverend(?:\\s+Father|\\s+Sister)?|Father)\\s+(${nameWord}(?:\\s+(?:${nameWord}|${initial})){1,7})`, 'gu');
   for (const match of text.matchAll(titledName)) names.push(match[1]);
 
-  const appointed = /(?:has appointed|has named)\s+(?:the\s+)?(?:Reverend\s+Sister|Reverend\s+Father|Reverend|Bishop|Archbishop|Cardinal|Dr\.)?\s*([\p{Lu}][\p{L}'’.-]+(?:\s+(?:[\p{Lu}][\p{L}'’.-]+|[\p{Lu}]\.)){1,7})\s*,/gu;
+  const appointed = new RegExp(`(?:has appointed|has named)\\s+(?:the\\s+)?(?:Reverend\\s+Sister|Reverend\\s+Father|Reverend|Bishop|Archbishop|Cardinal|Dr\\.)?\\s*(${nameWord}(?:\\s+(?:${nameWord}|${initial})){1,7})\\s*,`, 'gu');
   for (const match of text.matchAll(appointed)) names.push(match[1]);
 
   return unique(names).filter(name => !/^(Holy Father|His Holiness|Roman Church)$/i.test(name));
