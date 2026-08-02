@@ -1,6 +1,6 @@
 'use client';
 import { useEffect,useMemo,useState } from 'react';
-import { getMonthlyObservances,traditionClass,traditionLabel,TRADITIONS,type Category,type Observance,type Tradition } from '../../data/observances';
+import { getMonthlyObservances,traditionClass,traditionLabel,TRADITIONS,type Category,type Observance } from '../../data/observances';
 import { displayObservanceName } from '../../lib/locale-display';
 import { useLanguage,type ChurchPreference } from './LanguageProvider';
 
@@ -13,8 +13,8 @@ export default function CalendarExplorer(){
  const now=new Date(),{locale,copy,country,church,setChurch}=useLanguage();const[year,setYear]=useState(now.getFullYear()),[month,setMonth]=useState(now.getMonth()),[category,setCategory]=useState<'all'|Category>('all'),[region,setRegion]=useState(country??'GLOBAL'),[countries,setCountries]=useState<Country[]>([]),[loading,setLoading]=useState(false);
  useEffect(()=>{if(country&&region==='GLOBAL')setRegion(country)},[country,region]);
  useEffect(()=>{fetch('/api/v1/religious-holidays?mode=countries').then(response=>response.ok?response.json():null).then(payload=>{if(Array.isArray(payload?.data))setCountries(payload.data)}).catch(()=>undefined)},[]);
- const filters={tradition:church==='all'?undefined:church,category:category==='all'?undefined:category,country:region==='GLOBAL'?undefined:region};
- const fallback=useMemo(()=>getMonthlyObservances(year,month,locale,filters),[year,month,locale,church,category,region]);const[items,setItems]=useState<Observance[]>(fallback);
+ const filters=useMemo(()=>({tradition:church==='all'?undefined:church,category:category==='all'?undefined:category,country:region==='GLOBAL'?undefined:region}),[church,category,region]);
+ const fallback=useMemo(()=>getMonthlyObservances(year,month,locale,filters),[year,month,locale,filters]);const[items,setItems]=useState<Observance[]>(fallback);
  useEffect(()=>{setItems(fallback)},[fallback]);
  useEffect(()=>{const controller=new AbortController(),params=new URLSearchParams({year:String(year),month:String(month+1),locale,live:'1'});if(church!=='all')params.set('tradition',church);if(category!=='all')params.set('category',category);if(region!=='GLOBAL')params.set('country',region);setLoading(true);fetch(`/api/v1/observances?${params}`,{signal:controller.signal}).then(response=>response.ok?response.json():Promise.reject(new Error('Calendar request failed'))).then(payload=>{if(Array.isArray(payload?.data))setItems(payload.data)}).catch(error=>{if(error?.name!=='AbortError')setItems(fallback)}).finally(()=>{if(!controller.signal.aborted)setLoading(false)});return()=>controller.abort()},[year,month,locale,church,category,region,fallback]);
  const weekdays=useMemo(()=>{const base=new Date(Date.UTC(2026,0,5));return Array.from({length:7},(_,index)=>new Intl.DateTimeFormat(locale,{weekday:'short',timeZone:'UTC'}).format(new Date(base.getTime()+index*86400000)))},[locale]);
