@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const ALLOWED_HOSTS = new Set(['press.vatican.va']);
@@ -82,7 +82,7 @@ async function fetchText(url) {
       signal: controller.signal,
       redirect: 'follow',
       headers: {
-        'accept': 'text/html,application/xhtml+xml',
+        accept: 'text/html,application/xhtml+xml',
         'user-agent': 'SantosDoDia-OSINT-Monitor/1.0 (+https://www.santosdodia.com/copyright)'
       }
     });
@@ -116,6 +116,28 @@ function dateFromUrl(url) {
   return match ? `${match[1]}-${match[2]}-${match[3]}` : undefined;
 }
 
+function contentFingerprint(indexHash, documents, failures) {
+  return sha256(JSON.stringify({
+    indexHash,
+    documents: documents.map(document => ({
+      url: document.url,
+      publishedAt: document.publishedAt,
+      contentHash: document.contentHash,
+      sections: document.sections
+    })),
+    failures
+  }));
+}
+
+async function existingFingerprint(filePath) {
+  try {
+    const existing = JSON.parse(await readFile(filePath, 'utf8'));
+    return typeof existing.contentFingerprint === 'string' ? existing.contentFingerprint : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 async function main() {
   const now = new Date();
   const year = String(process.env.OSINT_YEAR ?? now.getUTCFullYear());
@@ -123,6 +145,7 @@ async function main() {
   const indexUrl = `https://press.vatican.va/content/salastampa/en/bollettino/pubblico/${year}/${month}.html`;
   const fetchedAt = new Date().toISOString();
   const index = await fetchText(indexUrl);
+  const indexHash = sha256(index.text);
   const links = bulletinLinks(index.text, indexUrl);
   const documents = [];
   const failures = [];
@@ -135,7 +158,6 @@ async function main() {
         sourceId: 'holy-see-bulletin',
         url,
         publishedAt: dateFromUrl(url),
-        fetchedAt,
         contentHash: sha256(page.text),
         etag: page.etag,
         lastModified: page.lastModified,
@@ -147,12 +169,25 @@ async function main() {
     }
   }
 
+  documents.sort((a, b) => a.url.localeCompare(b.url));
+  failures.sort((a, b) => a.url.localeCompare(b.url));
+  const fingerprint = contentFingerprint(indexHash, documents, failures);
+  await mkdir(OUTPUT_DIR, { recursive: true });
+  const filePath = path.join(OUTPUT_DIR, 'holy-see-latest.json');
+  const previousFingerprint = await existingFingerprint(filePath);
+
+  if (previousFingerprint === fingerprint) {
+    console.log(`No source changes detected for ${year}-${month}.`);
+    return;
+  }
+
   const output = {
     schemaVersion: 1,
     sourceId: 'holy-see-bulletin',
     indexUrl,
     fetchedAt,
-    indexHash: sha256(index.text),
+    contentFingerprint: fingerprint,
+    indexHash,
     documentCount: documents.length,
     sectionCount: documents.reduce((sum, document) => sum + document.sections.length, 0),
     failureCount: failures.length,
@@ -160,8 +195,6 @@ async function main() {
     failures
   };
 
-  await mkdir(OUTPUT_DIR, { recursive: true });
-  const filePath = path.join(OUTPUT_DIR, 'holy-see-latest.json');
   await writeFile(filePath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
   console.log(`Wrote ${filePath}: ${output.documentCount} documents, ${output.sectionCount} sections, ${output.failureCount} failures.`);
 
