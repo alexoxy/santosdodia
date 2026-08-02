@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import { APEX_HOSTNAME, SITE_ORIGIN } from './lib/site';
 
 const securityHeaders = [
   { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
@@ -25,16 +24,6 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: securityHeaders
-      }
-    ];
-  },
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: APEX_HOSTNAME }],
-        destination: `${SITE_ORIGIN}/:path*`,
-        permanent: true
       }
     ];
   }
