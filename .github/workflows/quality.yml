@@ -35,6 +35,9 @@ jobs:
       - name: Audit installed runtime dependencies
         run: npm audit --omit=dev --audit-level=high
 
+      - name: Audit curated data quality
+        run: npm run data:audit
+
       - name: Typecheck
         run: npm run typecheck
 
