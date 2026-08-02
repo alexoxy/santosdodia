@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-02",
+  "evidence": [
+    {
+      "observanceId": "our-lady-lourdes",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Lourdes — 02-11",
+      "status": "corroborated",
+      "source": {
+        "name": "Sanctuary of Our Lady of Lourdes",
+        "url": "https://www.lourdes-france.com/en/feast-of-our-lady-of-lourdes/",
+        "kind": "official"
+      },
+      "unresolvedClaims": ["patronage:sick people", "patronage:pilgrims"]
+    },
+    {
+      "observanceId": "fatima",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Fátima — 05-13",
+      "status": "corroborated",
+      "source": {
+        "name": "Shrine of Fatima",
+        "url": "https://www.fatima.pt/en/",
+        "kind": "official"
+      },
+      "unresolvedClaims": ["patronage:peace"]
+    },
+    {
+      "observanceId": "anthony-lisbon",
+      "claimType": "observance-name-date-and-local-rank",
+      "claimValue": "Saint Anthony of Lisbon — 06-13 — solemnity in Lisbon",
+      "status": "corroborated",
+      "source": {
+        "name": "Patriarchate of Lisbon diocesan calendar 2025–2026",
+        "url": "https://www.patriarcado-lisboa.pt/site/docs/2025797programa_2025-26-web.pdf",
+        "kind": "official"
+      },
+      "unresolvedClaims": ["patronage:lost items", "patronage:travellers", "patronage:marriage"]
+    },
+    {
+      "observanceId": "our-lady-carmel",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Mount Carmel — 07-16",
+      "status": "corroborated",
+      "source": {
+        "name": "Holy See",
+        "url": "https://www.vatican.va/content/francesco/en/motu_proprio/documents/20210716-motu-proprio-traditionis-custodes.html",
+        "kind": "official"
+      },
+      "unresolvedClaims": ["patronage:sailors", "patronage:Carmelite Order"]
+    },
+    {
+      "observanceId": "teresa-avila",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Saint Teresa of Jesus — 10-15",
+      "status": "corroborated",
+      "source": {
+        "name": "Holy See",
+        "url": "https://www.vatican.va/content/john-paul-ii/pt/messages/pont_messages/1982/documents/hf_jp-ii_mes_19821015_teresiano.html",
+        "kind": "official"
+      },
+      "unresolvedClaims": ["patronage:writers", "patronage:contemplative prayer"]
+    }
+  ]
+}
