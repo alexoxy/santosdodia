@@ -32,6 +32,19 @@ function readmePaths(source) {
   return new Set([...source.matchAll(/`(\/api\/[^`]+|\/openapi\.json)`/g)].map(match => match[1]));
 }
 
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function routeMatches(template, candidate) {
+  const pattern = `^${escapeRegex(template).replace(/\\\{[^/]+\\\}/g, '[^/]+')}$`;
+  return new RegExp(pattern).test(candidate);
+}
+
+function hasMatchingPath(paths, candidate) {
+  return [...paths].some(path => routeMatches(path, candidate) || routeMatches(candidate, path));
+}
+
 const [routeFiles, openApiSource, readme] = await Promise.all([
   filesUnder(appRoot),
   readFile(openApiRoute, 'utf8'),
@@ -45,12 +58,12 @@ const errors = [];
 const warnings = [];
 
 for (const path of openApiPaths) {
-  if (!actualRoutes.has(path)) errors.push(`OpenAPI documents a route that does not exist: ${path}`);
+  if (!hasMatchingPath(actualRoutes, path)) errors.push(`OpenAPI documents a route that does not exist: ${path}`);
 }
 
 for (const path of publicReadmePaths) {
-  if (!actualRoutes.has(path)) errors.push(`README documents a route that does not exist: ${path}`);
-  if (path.startsWith('/api/') && !path.startsWith('/api/v1/system/') && !openApiPaths.has(path)) {
+  if (!hasMatchingPath(actualRoutes, path)) errors.push(`README documents a route that does not exist: ${path}`);
+  if (path.startsWith('/api/') && !path.startsWith('/api/v1/system/') && !hasMatchingPath(openApiPaths, path)) {
     warnings.push(`README route is not represented in OpenAPI: ${path}`);
   }
 }
@@ -61,7 +74,7 @@ const publicApiRoutes = [...actualRoutes]
 
 for (const path of publicApiRoutes) {
   if (path === '/api/v1/system/status') continue;
-  if (!openApiPaths.has(path)) warnings.push(`Public route is not represented in OpenAPI: ${path}`);
+  if (!hasMatchingPath(openApiPaths, path)) warnings.push(`Public route is not represented in OpenAPI: ${path}`);
 }
 
 const report = {
