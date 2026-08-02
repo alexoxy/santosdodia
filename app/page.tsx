@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import TodayPanel from './components/TodayPanel';
 import PatronageSearch from './components/PatronageSearch';
-import VaticanLiveFeature from './components/VaticanLiveFeature';
+import ProgressiveVaticanLive from './components/ProgressiveVaticanLive';
 import EntryPoints from './components/EntryPoints';
 import { getAllObservances, TRADITIONS } from '../data/observances';
 import { SUPPORTED_LOCALES } from '../lib/i18n';
@@ -55,6 +55,6 @@ export default function HomePage() {
       </article>
     </section>
 
-    <VaticanLiveFeature />
+    <ProgressiveVaticanLive />
   </div>;
 }
