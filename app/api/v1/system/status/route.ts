@@ -2,6 +2,7 @@ import { calendarEngineChecks, calendarEngineHealthy } from '../../../../../lib/
 import { holySeeParserChecks, holySeeParserHealthy } from '../../../../../lib/ingestion/holy-see-self-check';
 import { CHURCHES } from '../../../../../data/knowledge/churches';
 import { JURISDICTIONS } from '../../../../../data/knowledge/jurisdictions';
+import { ECCLESIASTICAL_ASSERTIONS, ECCLESIASTICAL_OFFICES, ECCLESIASTICAL_PEOPLE } from '../../../../../data/knowledge/ecclesiastical-state';
 import { KNOWLEDGE_SOURCES, ingestibleSources } from '../../../../../data/knowledge/source-registry';
 
 export const dynamic = 'force-dynamic';
@@ -11,7 +12,8 @@ export async function GET() {
   const parserChecks = holySeeParserChecks();
   const calendarHealthy = calendarEngineHealthy();
   const parserHealthy = holySeeParserHealthy();
-  const healthy = calendarHealthy && parserHealthy;
+  const stateHealthy = ECCLESIASTICAL_OFFICES.every(office => ECCLESIASTICAL_PEOPLE.some(person => person.id === office.personId) && JURISDICTIONS.some(jurisdiction => jurisdiction.id === office.jurisdictionId));
+  const healthy = calendarHealthy && parserHealthy && stateHealthy;
 
   return Response.json({
     status: healthy ? 'ok' : 'degraded',
@@ -23,6 +25,12 @@ export async function GET() {
         parsers: {
           holySeeBulletin: { healthy: parserHealthy, checks: parserChecks }
         }
+      },
+      ecclesiasticalState: {
+        healthy: stateHealthy,
+        people: ECCLESIASTICAL_PEOPLE.length,
+        activeOffices: ECCLESIASTICAL_OFFICES.filter(office => office.status === 'active').length,
+        assertions: ECCLESIASTICAL_ASSERTIONS.length
       },
       knowledgeBase: {
         churches: CHURCHES.length,
