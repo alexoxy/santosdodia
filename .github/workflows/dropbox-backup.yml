@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - vercel-preview
   schedule:
     - cron: '17 3 * * 0'
 
@@ -13,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: dropbox-backup-${{ github.ref }}
+  group: dropbox-backup-main
   cancel-in-progress: false
 
 jobs:
@@ -21,29 +20,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Check Dropbox configuration
-        id: config
+      - name: Require Dropbox configuration
         shell: bash
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
         run: |
-          if [[ -n "$DROPBOX_APP_KEY" && -n "$DROPBOX_APP_SECRET" && -n "$DROPBOX_REFRESH_TOKEN" ]]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Dropbox backup is prepared but inactive. Configure DROPBOX_APP_KEY, DROPBOX_APP_SECRET and DROPBOX_REFRESH_TOKEN as repository secrets."
+          set -euo pipefail
+          missing=()
+          [[ -n "$DROPBOX_APP_KEY" ]] || missing+=(DROPBOX_APP_KEY)
+          [[ -n "$DROPBOX_APP_SECRET" ]] || missing+=(DROPBOX_APP_SECRET)
+          [[ -n "$DROPBOX_REFRESH_TOKEN" ]] || missing+=(DROPBOX_REFRESH_TOKEN)
+          if (( ${#missing[@]} > 0 )); then
+            printf 'Missing required repository secrets: %s\n' "${missing[*]}" >&2
+            exit 1
           fi
 
       - name: Checkout complete history
-        if: steps.config.outputs.enabled == 'true'
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Create verified backup files
-        if: steps.config.outputs.enabled == 'true'
         id: archive
         shell: bash
         run: |
@@ -95,7 +94,6 @@ jobs:
           echo "checksums=$checksums" >> "$GITHUB_OUTPUT"
 
       - name: Obtain short-lived Dropbox token
-        if: steps.config.outputs.enabled == 'true'
         shell: bash
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -117,7 +115,6 @@ jobs:
           printf '%s' "$token" > /tmp/dropbox-access-token
 
       - name: Upload backup set to Dropbox
-        if: steps.config.outputs.enabled == 'true'
         shell: bash
         env:
           BUNDLE: ${{ steps.archive.outputs.bundle }}
