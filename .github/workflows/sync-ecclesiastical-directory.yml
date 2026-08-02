@@ -79,6 +79,9 @@ jobs:
       - name: Audit imported records
         run: npm run leaders:audit
 
+      - name: Build transactional staging SQL
+        run: npm run leaders:sql
+
       - name: Validate repository
         run: npm run check
 
@@ -96,7 +99,7 @@ jobs:
         run: |
           git config user.name 'santosdodia-directory-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add data/generated/ecclesiastical-directory/*.json
+          git add data/generated/ecclesiastical-directory/*.json db/seeds/ecclesiastical-directory.sql
           if git diff --cached --quiet; then
             echo 'No normalized directory changes.'
             exit 0
