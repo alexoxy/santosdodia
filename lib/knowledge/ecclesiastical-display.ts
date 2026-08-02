@@ -18,28 +18,48 @@ const pageCopy = {
     churchAndTerritory: 'Church and territory', jurisdictionContext: 'Jurisdiction context', childJurisdictions: 'Child jurisdictions',
     structure: 'Structure', openJurisdiction: 'Open jurisdiction', openChurch: 'Open Church profile', allChurches: 'All Churches',
     calendars: 'Calendar systems', datesRepresented: 'How dates are represented', jurisdictions: 'Jurisdictions',
-    noLeadership: 'No current office holder has yet been published for this record.'
+    noLeadership: 'No current office holder has yet been published for this record.',
+    traditionAndCalendar: 'Christian tradition and calendar family represented by this jurisdiction.',
+    canonicalLevel: 'Canonical level represented by this record.',
+    geographicScope: 'Geographic scope used to determine which local celebrations apply.',
+    modelledChildren: 'Direct child jurisdictions currently modelled.',
+    active: 'Active', officialWebsite: 'Official website'
   },
   pt: {
     currentLeadership: 'Liderança atual', officeSince: 'No cargo desde', installed: 'Instalado ou entronizado',
     churchAndTerritory: 'Igreja e território', jurisdictionContext: 'Contexto da jurisdição', childJurisdictions: 'Jurisdições dependentes',
     structure: 'Estrutura', openJurisdiction: 'Abrir jurisdição', openChurch: 'Abrir perfil da Igreja', allChurches: 'Todas as Igrejas',
     calendars: 'Sistemas de calendário', datesRepresented: 'Como as datas são representadas', jurisdictions: 'Jurisdições',
-    noLeadership: 'Ainda não foi publicado um titular atual para este registo.'
+    noLeadership: 'Ainda não foi publicado um titular atual para este registo.',
+    traditionAndCalendar: 'Tradição cristã e família de calendários representadas por esta jurisdição.',
+    canonicalLevel: 'Nível canónico representado por este registo.',
+    geographicScope: 'Âmbito geográfico usado para determinar quais as celebrações locais aplicáveis.',
+    modelledChildren: 'Jurisdições diretamente dependentes atualmente modeladas.',
+    active: 'Ativo', officialWebsite: 'Site oficial'
   },
   es: {
     currentLeadership: 'Liderazgo actual', officeSince: 'En el cargo desde', installed: 'Instalado o entronizado',
     churchAndTerritory: 'Iglesia y territorio', jurisdictionContext: 'Contexto de la jurisdicción', childJurisdictions: 'Jurisdicciones dependientes',
     structure: 'Estructura', openJurisdiction: 'Abrir jurisdicción', openChurch: 'Abrir perfil de la Iglesia', allChurches: 'Todas las Iglesias',
     calendars: 'Sistemas de calendario', datesRepresented: 'Cómo se representan las fechas', jurisdictions: 'Jurisdicciones',
-    noLeadership: 'Todavía no se ha publicado un titular actual para este registro.'
+    noLeadership: 'Todavía no se ha publicado un titular actual para este registro.',
+    traditionAndCalendar: 'Tradición cristiana y familia de calendarios representadas por esta jurisdicción.',
+    canonicalLevel: 'Nivel canónico representado por este registro.',
+    geographicScope: 'Ámbito geográfico utilizado para determinar qué celebraciones locales corresponden.',
+    modelledChildren: 'Jurisdicciones dependientes directas actualmente modeladas.',
+    active: 'Activo', officialWebsite: 'Sitio oficial'
   },
   fr: {
     currentLeadership: 'Direction actuelle', officeSince: 'En fonction depuis', installed: 'Installé ou intronisé',
     churchAndTerritory: 'Église et territoire', jurisdictionContext: 'Contexte de la juridiction', childJurisdictions: 'Juridictions dépendantes',
     structure: 'Structure', openJurisdiction: 'Ouvrir la juridiction', openChurch: 'Ouvrir le profil de l’Église', allChurches: 'Toutes les Églises',
     calendars: 'Systèmes calendaires', datesRepresented: 'Comment les dates sont représentées', jurisdictions: 'Juridictions',
-    noLeadership: 'Aucun titulaire actuel n’a encore été publié pour cette entrée.'
+    noLeadership: 'Aucun titulaire actuel n’a encore été publié pour cette entrée.',
+    traditionAndCalendar: 'Tradition chrétienne et famille calendaire représentées par cette juridiction.',
+    canonicalLevel: 'Niveau canonique représenté par cette entrée.',
+    geographicScope: 'Périmètre géographique utilisé pour déterminer les célébrations locales applicables.',
+    modelledChildren: 'Juridictions directement dépendantes actuellement modélisées.',
+    active: 'Actif', officialWebsite: 'Site officiel'
   }
 } as const;
 
