@@ -12,6 +12,7 @@ on:
       - 'scripts/sync-name-translations.mjs'
       - 'scripts/validate-language-quality.mjs'
       - 'scripts/audit-languagetool.mjs'
+      - 'scripts/audit-data-quality.mjs'
       - 'data/language-authorities.json'
       - 'lib/language-quality.ts'
       - 'lib/locale-display.ts'
@@ -30,17 +31,18 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out Santos do Dia
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version-file: .node-version
+          cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --include=optional
 
       - name: Mirror upstream Apache-2.0 source
         shell: bash
@@ -61,6 +63,9 @@ jobs:
 
       - name: Enforce script and vocabulary rules
         run: npm run translations:validate
+
+      - name: Audit curated data and generated snapshot schema
+        run: npm run data:audit
 
       - name: Run advisory grammar and spelling audit
         continue-on-error: true
