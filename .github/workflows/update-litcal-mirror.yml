@@ -1,6 +1,7 @@
-name: Update LitCal mirror and translations
+name: Prepare LitCal staging package
 
-# Synchronization is fail-safe: stale valid snapshots are preserved and reported.
+# External data is never published directly. This workflow prepares a bounded,
+# validated artifact for Dropbox staging, editorial review and later DB promotion.
 on:
   schedule:
     - cron: '35 3 * * 2'
@@ -15,6 +16,7 @@ on:
       - 'scripts/audit-languagetool.mjs'
       - 'scripts/audit-data-quality.mjs'
       - 'scripts/audit-claim-evidence.mjs'
+      - 'scripts/audit-repository-hygiene.mjs'
       - 'data/language-authorities.json'
       - 'data/editorial-claim-evidence.json'
       - 'lib/language-quality.ts'
@@ -22,21 +24,19 @@ on:
       - '.github/workflows/update-litcal-mirror.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: litcal-mirror-update
+  group: litcal-staging-package
   cancel-in-progress: false
 
 jobs:
-  mirror-translate-and-validate:
+  prepare-validate-and-package:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Check out Santos do Dia
+      - name: Check out SantosDia
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -47,16 +47,13 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
 
-      - name: Mirror upstream Apache-2.0 source
-        shell: bash
-        run: |
-          if npm run litcal:source; then
-            echo 'Upstream source mirror refreshed.'
-          else
-            echo 'Upstream source mirror unavailable; retaining the last committed version.'
-          fi
+      - name: Audit repository hygiene
+        run: npm run repo:audit
 
-      - name: Mirror structured LitCal responses
+      - name: Record compact upstream provenance
+        run: npm run litcal:source
+
+      - name: Prepare structured LitCal responses
         env:
           LITCAL_MIN_AVAILABLE_RATIO: '0.8'
         run: npm run litcal:sync
@@ -84,32 +81,30 @@ jobs:
       - name: Validate production application
         run: npm run build
 
-      - name: Commit mirror and translation updates
+      - name: Create staging manifest
         shell: bash
         run: |
-          git config user.name 'santosdodia-language-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add -A data/litcal-mirror data/generated/translation-catalog.json data/generated/translation-quality.json data/generated/languagetool-audit.json
-          if [ -d vendor/litcal-api ]; then git add -A vendor/litcal-api; fi
-          if git diff --cached --quiet; then
-            echo 'No mirror or translation changes.'
-            exit 0
-          fi
-          git commit -m 'Update LitCal mirror and validated translations'
+          cat > data/generated/litcal-staging-manifest.json <<EOF
+          {
+            "schemaVersion": 1,
+            "workflowRun": "${GITHUB_RUN_ID}",
+            "sourceCommit": "${GITHUB_SHA}",
+            "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "status": "provisional",
+            "promotionAllowed": false,
+            "nextGate": "Dropbox archive, normalization review and transactional database promotion"
+          }
+          EOF
 
-          for attempt in 1 2 3; do
-            echo "Publishing generated data, attempt ${attempt}/3..."
-            git fetch origin main
-            if ! git rebase origin/main; then
-              echo 'Generated data conflicts with newer main changes; refusing automatic conflict resolution.'
-              git rebase --abort || true
-              exit 1
-            fi
-            if git push origin HEAD:main; then
-              exit 0
-            fi
-            sleep $((attempt * 5))
-          done
-
-          echo 'Unable to publish generated data after three concurrent-update retries.'
-          exit 1
+      - name: Upload bounded staging package
+        uses: actions/upload-artifact@v6
+        with:
+          name: litcal-staging-${{ github.run_id }}
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            data/litcal-mirror/
+            data/generated/translation-catalog.json
+            data/generated/translation-quality.json
+            data/generated/languagetool-audit.json
+            data/generated/litcal-staging-manifest.json
