@@ -78,14 +78,24 @@ Migration is reviewed; package is idempotent; transaction and rollback are teste
 
 Language quality, Church/date-engine correctness, jurisdiction filters, source links and last-verification metadata are confirmed.
 
-## Current implementation order
+## Current implementation status
 
-1. Remove the full LitCal upstream mirror and replace it with a compact provenance manifest.
-2. Replace the monolithic runtime snapshot with a bounded compact fallback.
-3. Validate the repository budgets and full quality pipeline.
-4. Review D1 schema, staging tables, promotion transactions and rollback.
-5. Validate calendar engines before importing additional observances.
-6. Resume leaders and calendar content only through bounded Dropbox packages.
+Completed in the stabilization branch:
+
+1. The full LitCal upstream source mirror was removed from the active tree.
+2. Runtime and LitCal fallback data were compacted and bounded by repository budgets.
+3. Dependency, repository, data, calendar, API, TypeScript, lint, Next.js and Cloudflare gates were validated.
+4. D1 migrations were separated into a canonical directory core and a multi-Church calendar layer.
+5. Database tests now exercise migration application, idempotent promotion, foreign keys, global uniqueness and rollback.
+6. Scheduled source updates now produce provisional staging artifacts rather than publishing directly.
+
+Next controlled phase:
+
+1. provision an isolated D1 test database and apply migrations;
+2. archive the first validated calendar package in Dropbox;
+3. promote a bounded non-production package and verify rollback;
+4. add multi-year official reference vectors for each Church-specific date engine;
+5. publish content only after the staging and product gates pass.
 
 ## History cleanup
 
