@@ -6,6 +6,7 @@ const ROOT=process.cwd();
 const REGISTRY_PATH=path.join(ROOT,'data','ecclesiastical-source-registry.json');
 const GENERATED_ROOT=path.join(ROOT,'data','generated','ecclesiastical-directory');
 const OUTPUT_PATH=path.join(ROOT,'db','seeds','ecclesiastical-directory.sql');
+const DROPBOX_ROOT='/Santos do Dia/02_Dados_Eclesiasticos/';
 
 function quote(value){return `'${String(value??'').replaceAll("'","''")}'`}
 function nullable(value){return value===undefined||value===null?'NULL':quote(value)}
@@ -17,11 +18,19 @@ function stable(value){
 }
 function json(value){return JSON.stringify(stable(value))}
 function sourceInsert(source){
- return `INSERT INTO source_registry (id,name,base_url,host,authority,adapter,refresh_hours,requests_per_second,active,updated_at) VALUES (${quote(source.id)},${quote(source.name)},${quote(source.baseUrl)},${quote(source.host)},${quote(source.authority)},${quote(source.adapter)},${Number(source.refreshHours)},${Number(source.requestsPerSecond)},${source.active?1:0},CURRENT_TIMESTAMP) ON CONFLICT(id) DO UPDATE SET name=excluded.name,base_url=excluded.base_url,host=excluded.host,authority=excluded.authority,adapter=excluded.adapter,refresh_hours=excluded.refresh_hours,requests_per_second=excluded.requests_per_second,active=excluded.active,updated_at=CURRENT_TIMESTAMP;`;
+ return `INSERT INTO source_registry (id,name,base_url,host,authority,adapter,usage_policy,copyright_policy,refresh_hours,requests_per_second,active,updated_at) VALUES (${quote(source.id)},${quote(source.name)},${quote(source.baseUrl)},${quote(source.host)},${quote(source.authority)},${quote(source.adapter)},${quote(source.usagePolicy??'reference-only')},${nullable(source.copyrightPolicy)},${Number(source.refreshHours)},${Number(source.requestsPerSecond)},${source.active?1:0},CURRENT_TIMESTAMP) ON CONFLICT(id) DO UPDATE SET name=excluded.name,base_url=excluded.base_url,host=excluded.host,authority=excluded.authority,adapter=excluded.adapter,usage_policy=excluded.usage_policy,copyright_policy=excluded.copyright_policy,refresh_hours=excluded.refresh_hours,requests_per_second=excluded.requests_per_second,active=excluded.active,updated_at=CURRENT_TIMESTAMP;`;
 }
 function ingestInsert({sourceId,externalId,recordType,payload,sourceUrl,confidence,observedAt}){
  const payloadJson=json(payload),contentHash=sha256(payloadJson),id=`ingest:${sourceId}:${sha256(`${externalId}:${contentHash}`).slice(0,32)}`;
  return `INSERT INTO source_ingest_records (id,source_id,external_record_id,record_type,payload_json,content_hash,source_url,confidence,resolution_status,first_seen_at,last_seen_at) VALUES (${quote(id)},${quote(sourceId)},${quote(externalId)},${quote(recordType)},${quote(payloadJson)},${quote(contentHash)},${quote(sourceUrl)},${quote(confidence)},'unresolved',${quote(observedAt)},${quote(observedAt)}) ON CONFLICT(id) DO UPDATE SET payload_json=excluded.payload_json,source_url=excluded.source_url,confidence=excluded.confidence,last_seen_at=excluded.last_seen_at;`;
+}
+function snapshotInsert(sourceId,snapshot){
+ const dropboxPath=String(snapshot.dropboxPath??'');
+ const manifestSha256=String(snapshot.manifestSha256??'');
+ if(!dropboxPath.startsWith(DROPBOX_ROOT))throw new Error(`Snapshot ${snapshot.sourceUrl??'unknown'} is not archived under ${DROPBOX_ROOT}`);
+ if(!/^[a-f0-9]{64}$/.test(manifestSha256))throw new Error(`Snapshot ${snapshot.sourceUrl??'unknown'} lacks a valid manifest SHA-256`);
+ const id=`snapshot:${sourceId}:${snapshot.contentHash}`;
+ return `INSERT INTO source_snapshots (id,source_id,source_url,retrieved_at,http_status,content_type,content_hash,content_bytes,etag,last_modified,dropbox_path,manifest_sha256,content_encoding) VALUES (${quote(id)},${quote(sourceId)},${quote(snapshot.sourceUrl)},${quote(snapshot.retrievedAt)},${Number(snapshot.httpStatus)},${nullable(snapshot.contentType)},${quote(snapshot.contentHash)},${snapshot.contentBytes===undefined||snapshot.contentBytes===null?'NULL':Number(snapshot.contentBytes)},${nullable(snapshot.etag)},${nullable(snapshot.lastModified)},${quote(dropboxPath)},${quote(manifestSha256)},${quote(snapshot.contentEncoding??'binary')}) ON CONFLICT(id) DO UPDATE SET retrieved_at=excluded.retrieved_at,http_status=excluded.http_status,content_type=excluded.content_type,content_bytes=excluded.content_bytes,etag=excluded.etag,last_modified=excluded.last_modified,dropbox_path=excluded.dropbox_path,manifest_sha256=excluded.manifest_sha256,content_encoding=excluded.content_encoding;`;
 }
 
 const registry=JSON.parse(await readFile(REGISTRY_PATH,'utf8'));
@@ -30,7 +39,7 @@ for(const source of registry.sources??[])lines.push(sourceInsert(source));
 
 let files=[];
 try{files=(await readdir(GENERATED_ROOT)).filter(file=>file.endsWith('.json')).sort()}catch(error){if(error?.code!=='ENOENT')throw error}
-let recordCount=0;
+let recordCount=0,snapshotCount=0;
 for(const file of files){
  const payload=JSON.parse(await readFile(path.join(GENERATED_ROOT,file),'utf8'));
  const sourceId=payload.sourceId,observedAt=payload.completedAt??payload.startedAt??new Date(0).toISOString();
@@ -45,11 +54,11 @@ for(const file of files){
   recordCount+=1;
  }
  for(const snapshot of payload.snapshots??[]){
-  const id=`snapshot:${sourceId}:${snapshot.contentHash}`;
-  lines.push(`INSERT INTO source_snapshots (id,source_id,source_url,retrieved_at,http_status,content_type,content_hash,etag,last_modified,body,body_encoding) VALUES (${quote(id)},${quote(sourceId)},${quote(snapshot.sourceUrl)},${quote(snapshot.retrievedAt)},${Number(snapshot.httpStatus)},${nullable(snapshot.contentType)},${quote(snapshot.contentHash)},${nullable(snapshot.etag)},${nullable(snapshot.lastModified)},NULL,'metadata-only') ON CONFLICT(id) DO UPDATE SET retrieved_at=excluded.retrieved_at,http_status=excluded.http_status,content_type=excluded.content_type,etag=excluded.etag,last_modified=excluded.last_modified;`);
+  lines.push(snapshotInsert(sourceId,snapshot));
+  snapshotCount+=1;
  }
 }
 lines.push('COMMIT;','');
 await mkdir(path.dirname(OUTPUT_PATH),{recursive:true});
 await writeFile(OUTPUT_PATH,lines.join('\n'),'utf8');
-console.log(`Wrote ${path.relative(ROOT,OUTPUT_PATH)} with ${registry.sources?.length??0} sources and ${recordCount} staging records.`);
+console.log(`Wrote ${path.relative(ROOT,OUTPUT_PATH)} with ${registry.sources?.length??0} sources, ${recordCount} staging records and ${snapshotCount} Dropbox-backed snapshots.`);
