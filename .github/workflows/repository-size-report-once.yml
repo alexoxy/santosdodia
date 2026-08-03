@@ -1,0 +1,65 @@
+name: One-time repository size inventory
+
+on:
+  push:
+    branches: [agent/architecture-stabilization]
+    paths:
+      - '.github/workflows/repository-size-report-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-repository-size-inventory
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout stabilization branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/architecture-stabilization
+          fetch-depth: 0
+
+      - name: Build inventory and self-delete
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const { statSync, writeFileSync } = require('node:fs');
+          const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+          const entries = files.map(file => ({ file, bytes: statSync(file).size })).sort((a,b)=>b.bytes-a.bytes);
+          const groups = new Map();
+          for (const entry of entries) {
+            const group = entry.file.includes('/') ? entry.file.split('/')[0] : '(root)';
+            groups.set(group, (groups.get(group) ?? 0) + entry.bytes);
+          }
+          const total = entries.reduce((sum,item)=>sum+item.bytes,0);
+          const mib = bytes => (bytes / 1024 / 1024).toFixed(2);
+          const lines = [
+            '# Repository size inventory', '',
+            `Generated: ${new Date().toISOString()}`, '',
+            `Tracked files: ${entries.length}`, '',
+            `Tracked working-tree size: ${mib(total)} MiB`, '',
+            '## Size by top-level path', '',
+            '| Path | MiB |', '|---|---:|',
+            ...[...groups.entries()].sort((a,b)=>b[1]-a[1]).map(([name,bytes])=>`| \`${name}\` | ${mib(bytes)} |`),
+            '', '## 40 largest tracked files', '',
+            '| File | MiB | Bytes |', '|---|---:|---:|',
+            ...entries.slice(0,40).map(({file,bytes})=>`| \`${file.replaceAll('|','\\|')}\` | ${mib(bytes)} | ${bytes} |`),
+            ''
+          ];
+          writeFileSync('docs/repository-size-inventory.md', lines.join('\n'));
+          NODE
+
+          git config user.name 'santosdodia-hygiene-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add docs/repository-size-inventory.md
+          git rm .github/workflows/repository-size-report-once.yml
+          git commit -m 'docs(hygiene): record repository size inventory'
+          git push origin HEAD:agent/architecture-stabilization
