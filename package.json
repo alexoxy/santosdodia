@@ -22,6 +22,7 @@
     "leaders:audit": "node scripts/audit-ecclesiastical-directory.mjs",
     "leaders:sync": "node scripts/sync-ecclesiastical-directory.mjs",
     "leaders:sql": "node scripts/build-ecclesiastical-staging-sql.mjs",
+    "leaders:approved-sql": "node scripts/build-portugal-leaders-seed.mjs",
     "osint:monitor": "node scripts/monitor-ecclesiastical-osint.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
     "litcal:source": "bash scripts/mirror-litcal-source.sh",
