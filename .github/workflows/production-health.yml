@@ -20,6 +20,8 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      HEALTH_USER_AGENT: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36 SantosDiaHealth/1.0
     steps:
       - name: Check canonical homepage and Cloudflare response
         shell: bash
@@ -28,7 +30,10 @@ jobs:
           headers="$(mktemp)"
           body="$(mktemp)"
 
-          curl --silent --show-error --fail --location \
+          curl --silent --show-error --fail --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+            --header 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.6' \
             --retry 3 --retry-all-errors --max-time 30 \
             --dump-header "$headers" --output "$body" \
             https://www.santosdodia.com/
@@ -45,10 +50,13 @@ jobs:
           }
 
       - name: Check apex redirect
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
-          final_url="$(curl --silent --show-error --fail --location \
+          final_url="$(curl --silent --show-error --fail --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.6' \
             --retry 3 --retry-all-errors --max-time 30 \
             --output /dev/null --write-out '%{url_effective}' \
             https://santosdodia.com/)"
@@ -59,10 +67,14 @@ jobs:
           esac
 
       - name: Check system status API
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
-          response="$(curl --silent --show-error --fail --location \
+          response="$(curl --silent --show-error --fail --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: application/json' \
+            --header 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.6' \
             --retry 3 --retry-all-errors --max-time 30 \
             https://www.santosdodia.com/api/v1/system/status)"
 
@@ -75,10 +87,13 @@ jobs:
           NODE
 
       - name: Check OpenAPI contract endpoint
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
-          response="$(curl --silent --show-error --fail --location \
+          response="$(curl --silent --show-error --fail --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: application/json' \
             --retry 3 --retry-all-errors --max-time 30 \
             https://www.santosdodia.com/openapi.json)"
 
@@ -91,10 +106,13 @@ jobs:
           NODE
 
       - name: Check ICS feed
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
-          response="$(curl --silent --show-error --fail --location \
+          response="$(curl --silent --show-error --fail --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: text/calendar,*/*;q=0.8' \
             --retry 3 --retry-all-errors --max-time 30 \
             https://www.santosdodia.com/api/ical/all)"
 
@@ -107,14 +125,12 @@ jobs:
             exit 1
           }
 
-      - name: Record success summary
+      - name: Record probe summary
+        if: always()
         run: |
           {
             echo '## SantosDia production health'
-            echo '- Canonical homepage: OK'
-            echo '- Cloudflare response header: OK'
-            echo '- Apex redirect: OK'
-            echo '- System status API: OK'
-            echo '- OpenAPI endpoint: OK'
-            echo '- ICS feed: OK'
+            echo '- All probes use a browser-like user agent and Portuguese language preference.'
+            echo '- Every endpoint is checked even when an earlier probe fails.'
+            echo '- Review the individual step result for homepage, redirect, status API, OpenAPI and ICS.'
           } >> "$GITHUB_STEP_SUMMARY"
