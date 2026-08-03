@@ -16,7 +16,7 @@ const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
 const failures = [];
 let totalBytes = 0;
 let generatedFiles = 0;
-const largeFiles = [];
+const fileSizes = [];
 
 const forbiddenPrefixes = [
   'vendor/litcal-api/',
@@ -32,6 +32,7 @@ const forbiddenGeneratedExtensions = /\.(?:html?|pdf|zip|gz|tar|tgz|sqlite|db|sq
 for (const file of files) {
   const size = statSync(file).size;
   totalBytes += size;
+  fileSizes.push({ file, size });
 
   if (file.startsWith('data/generated/')) generatedFiles += 1;
 
@@ -45,8 +46,6 @@ for (const file of files) {
 
   if (size > limits.singleFileBytes) {
     failures.push(`tracked file exceeds ${limits.singleFileBytes / MIB} MiB: ${file} (${(size / MIB).toFixed(2)} MiB)`);
-  } else if (size > MIB) {
-    largeFiles.push(`${file} (${(size / MIB).toFixed(2)} MiB)`);
   }
 }
 
@@ -60,8 +59,13 @@ if (generatedFiles > limits.generatedFiles) {
   failures.push(`generated data file count ${generatedFiles} exceeds limit ${limits.generatedFiles}`);
 }
 
+const largest = fileSizes
+  .sort((a, b) => b.size - a.size)
+  .slice(0, 20)
+  .map(({ file, size }) => `${file} (${(size / MIB).toFixed(2)} MiB)`);
+
 console.log(`Repository hygiene: ${files.length} tracked files, ${(totalBytes / MIB).toFixed(2)} MiB, ${generatedFiles} generated data files.`);
-if (largeFiles.length) console.log(`Tracked files above 1 MiB:\n- ${largeFiles.join('\n- ')}`);
+console.log(`Largest tracked files:\n- ${largest.join('\n- ')}`);
 
 if (failures.length) {
   console.error(`Repository hygiene failed with ${failures.length} issue(s):\n- ${failures.join('\n- ')}`);
