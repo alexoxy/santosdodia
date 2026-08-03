@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "run": {
+    "id": "calendar-test-2026",
+    "createdAt": "2026-08-03T10:55:00+01:00",
+    "retrievedAt": "2026-08-03T10:50:00+01:00",
+    "dropboxManifestPath": "/Santos do Dia/02_Dados_Eclesiasticos/99_Manifestos/calendar-test-2026.json",
+    "manifestSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "status": "validated",
+    "validationReportPath": "/Santos do Dia/02_Dados_Eclesiasticos/02_Validacao/relatorios/calendar-test-2026.md"
+  },
+  "sources": [
+    {
+      "id": "oca-paschal-cycle",
+      "churchId": "eastern-orthodox",
+      "jurisdictionId": "oca",
+      "name": "OCA Paschal Cycle",
+      "url": "https://www.oca.org/fs/paschal-cycle",
+      "authority": "official-jurisdiction",
+      "usagePolicy": "Structured dates and source metadata only.",
+      "copyrightPolicy": "Do not reproduce biographies, icons or substantial text.",
+      "active": true
+    }
+  ],
+  "policies": [
+    {
+      "id": "oca-calendar-policy",
+      "churchId": "eastern-orthodox",
+      "jurisdictionId": "oca",
+      "engineId": "byzantine-paschalion",
+      "fixedDatePolicy": "julian-fixed-dates",
+      "calendarSystem": "julian-paschalion",
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "sourceId": "oca-paschal-cycle",
+      "validationStatus": "verified"
+    }
+  ],
+  "rules": [
+    {
+      "id": "oca-pascha-rule",
+      "churchId": "eastern-orthodox",
+      "jurisdictionId": "oca",
+      "canonicalEventId": "pascha",
+      "ruleType": "annual-source-table",
+      "calendarSystem": "julian-paschalion",
+      "anchorEventId": null,
+      "offsetDays": null,
+      "month": null,
+      "day": null,
+      "nativeMonth": null,
+      "nativeDay": null,
+      "weekdayRule": null,
+      "dateRangeStart": null,
+      "dateRangeEnd": null,
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": "2026-12-31",
+      "sourceId": "oca-paschal-cycle",
+      "validationStatus": "verified"
+    }
+  ],
+  "occurrences": [
+    {
+      "id": "oca-pascha-2026",
+      "churchId": "eastern-orthodox",
+      "jurisdictionId": "oca",
+      "canonicalEventId": "pascha",
+      "dateIso": "2026-04-12",
+      "endDateIso": null,
+      "nativeCalendarSystem": "julian-paschalion",
+      "nativeYear": 2026,
+      "nativeMonth": null,
+      "nativeDay": null,
+      "rankCode": "great-feast",
+      "colourCode": null,
+      "ruleId": "oca-pascha-rule",
+      "sourceId": "oca-paschal-cycle",
+      "sourceRecordUrl": "https://www.oca.org/fs/paschal-cycle",
+      "sourceRecordHash": "test-record-hash",
+      "validationStatus": "verified",
+      "publicationStatus": "publishable"
+    }
+  ],
+  "labels": [
+    {
+      "occurrenceId": "oca-pascha-2026",
+      "locale": "en",
+      "name": "Pascha",
+      "description": null,
+      "translationStatus": "source",
+      "sourceLocale": "en"
+    },
+    {
+      "occurrenceId": "oca-pascha-2026",
+      "locale": "pt",
+      "name": "Páscoa Ortodoxa",
+      "description": null,
+      "translationStatus": "reviewed",
+      "sourceLocale": "en"
+    }
+  ]
+}
