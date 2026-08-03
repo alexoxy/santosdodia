@@ -76,7 +76,7 @@
       "ruleId": "oca-pascha-rule",
       "sourceId": "oca-paschal-cycle",
       "sourceRecordUrl": "https://www.oca.org/fs/paschal-cycle",
-      "sourceRecordHash": "test-record-hash",
+      "sourceRecordHash": "85cae288f788619fc941f33ec18aba3988cf15f73b0d4f35edf33fed9b537532",
       "validationStatus": "verified",
       "publicationStatus": "publishable"
     }
