@@ -1,6 +1,6 @@
 name: One-time security lock refresh
 
-# Attempt 2: patched brace-expansion 2.1.4.
+# Attempt 3: patched dependencies and valid calendar staging fixture.
 on:
   push:
     branches: [agent/architecture-stabilization]
