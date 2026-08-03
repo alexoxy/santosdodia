@@ -6,8 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: ecclesiastical-osint-monitor
@@ -19,21 +18,16 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v6
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Start candidate branch
-        run: git checkout -B automation/osint-candidates
 
       - name: Fetch official source changes
         run: npm run osint:monitor
@@ -41,34 +35,20 @@ jobs:
       - name: Validate generated JSON
         run: node -e "JSON.parse(require('node:fs').readFileSync('data/generated/osint/holy-see-latest.json','utf8'))"
 
-      - name: Commit candidate snapshot
-        id: changes
-        run: |
-          if [ -z "$(git status --porcelain -- data/generated/osint)" ]; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git config user.name "santosdodia-osint-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/generated/osint
-          git commit -m "chore(osint): refresh official ecclesiastical candidates"
-          git push --force origin automation/osint-candidates
-          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Upload candidate package for Dropbox staging
+        uses: actions/upload-artifact@v4
+        with:
+          name: ecclesiastical-osint-candidates-${{ github.run_id }}
+          path: data/generated/osint/
+          if-no-files-found: error
+          retention-days: 30
 
-      - name: Open or update candidate pull request
-        if: steps.changes.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Record staging summary
         run: |
-          existing="$(gh pr list --head automation/osint-candidates --base main --state open --json number --jq '.[0].number // empty')"
-          if [ -z "$existing" ]; then
-            gh pr create \
-              --base main \
-              --head automation/osint-candidates \
-              --title "OSINT: official ecclesiastical source candidates" \
-              --body "Automated candidate snapshot from allow-listed official sources. This pull request does not directly publish leaders or modify canonical records. Parser health, reconciliation thresholds and the normal quality workflow must pass before any candidate can be promoted."
-          else
-            gh pr edit "$existing" \
-              --title "OSINT: official ecclesiastical source candidates" \
-              --body "Automated candidate snapshot from allow-listed official sources. This pull request does not directly publish leaders or modify canonical records. Parser health, reconciliation thresholds and the normal quality workflow must pass before any candidate can be promoted."
-          fi
+          {
+            echo '## Ecclesiastical OSINT staging'
+            echo '- Official-source candidate JSON: validated'
+            echo '- GitHub publication or pull request: not attempted'
+            echo '- Next gate: archive in Dropbox, normalize, review and approve before database promotion'
+            echo "- Workflow run: ${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"
