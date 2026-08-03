@@ -1,0 +1,63 @@
+name: Validate multi-Church calendar delivery
+
+on:
+  push:
+    branches:
+      - agent/multichurch-calendar-engines
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: validate-multichurch-calendar
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=optional
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Audit Church-specific engines
+        run: npm run calendar:audit
+
+      - name: Test Dropbox staging SQL gate
+        run: npm run calendar:staging-test
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Build Cloudflare Worker
+        run: npm run cloudflare:build
+
+      - name: Record validation on tracker
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESULT: ${{ job.status }}
+          COMMIT_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          gh issue comment 11 --body "Multi-Church calendar delivery validation: **${RESULT}**. Commit: \`${COMMIT_SHA}\`. Workflow run: \`${RUN_ID}\`. Checks: dependency audit, calendar-engine separation, guarded staging SQL, typecheck, lint, Next.js build and Cloudflare Worker build."
