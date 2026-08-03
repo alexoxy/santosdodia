@@ -1,0 +1,59 @@
+name: One-time runtime fallback compaction
+
+on:
+  push:
+    branches: [agent/architecture-stabilization]
+    paths:
+      - '.github/workflows/compact-runtime-fallback-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-runtime-fallback-compaction
+  cancel-in-progress: false
+
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout stabilization branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/architecture-stabilization
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+
+      - name: Build compact fallback and update runtime import
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/build-runtime-fallback.mjs \
+            data/generated/source-snapshot.json \
+            data/generated/runtime-fallback.json
+
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const path = 'lib/live-sources.ts';
+          const before = fs.readFileSync(path, 'utf8');
+          const after = before.replace(
+            "import snapshot from '../data/generated/source-snapshot.json';",
+            "import snapshot from '../data/generated/runtime-fallback.json';"
+          );
+          if (after === before) throw new Error('Expected source snapshot import was not found.');
+          fs.writeFileSync(path, after);
+          NODE
+
+          git config user.name 'santosdodia-hygiene-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/generated/runtime-fallback.json lib/live-sources.ts
+          git rm data/generated/source-snapshot.json
+          git rm .github/workflows/compact-runtime-fallback-once.yml
+          git commit -m 'refactor(data): replace monolithic source snapshot with compact runtime fallback'
+          git push origin HEAD:agent/architecture-stabilization
