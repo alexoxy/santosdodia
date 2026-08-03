@@ -10,7 +10,7 @@ on:
       - 'scripts/audit-ecclesiastical-directory.mjs'
       - 'scripts/build-ecclesiastical-sql.mjs'
       - 'data/ecclesiastical-source-registry.json'
-      - 'db/migrations/0001_ecclesiastical-directory.sql'
+      - 'db/migrations/0001_ecclesiastical_directory.sql'
 
 permissions:
   contents: read
@@ -99,6 +99,8 @@ jobs:
           RECORDS: ${{ steps.summary.outputs.records }}
           FAILURES: ${{ steps.summary.outputs.failures }}
           GCATHOLIC_OUTCOME: ${{ steps.gcatholic.outcome }}
+          RUN_ID: ${{ github.run_id }}
+          HEAD_SHA: ${{ github.sha }}
         with:
           script: |
             const gcatholic = process.env.GCATHOLIC_OUTCOME === 'success'
@@ -108,5 +110,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 10,
-              body: `✅ Portugal staging validation completed with ${process.env.RECORDS} provisional Catholic-Hierarchy records and ${process.env.FAILURES} fetch failures. ${gcatholic} No generated data was committed or published. The artifacts must be archived and reviewed in Dropbox before database promotion.`
+              body: `✅ Portugal staging validation completed with ${process.env.RECORDS} provisional Catholic-Hierarchy records and ${process.env.FAILURES} fetch failures. ${gcatholic} No generated data was committed or published. GitHub Actions run: ${process.env.RUN_ID}; commit: ${process.env.HEAD_SHA}. The artifacts must be archived and reviewed in Dropbox before database promotion.`
             });
