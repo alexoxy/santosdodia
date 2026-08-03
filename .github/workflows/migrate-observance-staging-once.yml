@@ -1,0 +1,156 @@
+name: One-time observance staging migration
+
+on:
+  push:
+    branches: [agent/architecture-stabilization]
+    paths:
+      - '.github/workflows/migrate-observance-staging-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-observance-staging-migration
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout stabilization branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/architecture-stabilization
+          fetch-depth: 0
+
+      - name: Migrate snapshot consumers and workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require('node:fs');
+
+          function replaceExact(file, before, after) {
+            const text = fs.readFileSync(file, 'utf8');
+            if (!text.includes(before)) throw new Error(`Expected text not found in ${file}: ${before}`);
+            fs.writeFileSync(file, text.replace(before, after));
+          }
+
+          replaceExact(
+            'scripts/audit-data-quality.mjs',
+            "const snapshotPath = resolve(root, 'data/generated/source-snapshot.json');",
+            "const snapshotPath = resolve(root, process.env.DYNAMIC_SNAPSHOT_PATH ?? 'data/generated/runtime-fallback.json');"
+          );
+
+          replaceExact(
+            'scripts/sync-name-translations.mjs',
+            "const SNAPSHOT=path.join(ROOT,'generated','source-snapshot.json');",
+            "const SNAPSHOT=path.join(ROOT,'generated','runtime-fallback.json');"
+          );
+          replaceExact(
+            'scripts/sync-name-translations.mjs',
+            "if(!entry.sources.includes('source-snapshot'))entry.sources.push('source-snapshot');",
+            "if(!entry.sources.includes('runtime-fallback'))entry.sources.push('runtime-fallback');"
+          );
+
+          replaceExact(
+            'scripts/sync-observances.mjs',
+            "const outputPath = new URL('../data/generated/source-snapshot.json', import.meta.url);",
+            "const outputPath = new URL(process.env.OBSERVANCE_STAGING_OUTPUT ?? '../staging/observances/source-snapshot.json', import.meta.url);\nconst runtimeFallbackPath = new URL('../data/generated/runtime-fallback.json', import.meta.url);"
+          );
+          replaceExact(
+            'scripts/sync-observances.mjs',
+            "async function previousSnapshot(){\n try{return JSON.parse(await readFile(outputPath,'utf8'))}catch{return{generatedAt:null,years:{},sourceHealth:[]}}\n}",
+            "async function previousSnapshot(){\n for(const candidate of [outputPath,runtimeFallbackPath]){\n  try{return JSON.parse(await readFile(candidate,'utf8'))}catch{}\n }\n return{generatedAt:null,years:{},sourceHealth:[]};\n}"
+          );
+
+          const baseline = 'docs/data-quality-baseline.md';
+          if (fs.existsSync(baseline)) {
+            fs.writeFileSync(baseline, fs.readFileSync(baseline, 'utf8').replaceAll('source-snapshot.json', 'runtime-fallback.json'));
+          }
+          NODE
+
+          cat > .github/workflows/update-observances.yml <<'EOF'
+          name: Prepare observance staging package
+
+          on:
+            schedule:
+              - cron: '15 4 * * 1'
+            workflow_dispatch:
+
+          permissions:
+            contents: read
+
+          concurrency:
+            group: observance-staging-package
+            cancel-in-progress: false
+
+          jobs:
+            prepare-and-validate:
+              runs-on: ubuntu-latest
+              timeout-minutes: 30
+              steps:
+                - name: Check out repository
+                  uses: actions/checkout@v6
+
+                - name: Set up Node.js
+                  uses: actions/setup-node@v6
+                  with:
+                    node-version-file: .node-version
+                    cache: npm
+
+                - name: Install dependencies
+                  run: npm ci --include=optional
+
+                - name: Audit repository hygiene
+                  run: npm run repo:audit
+
+                - name: Synchronise raw source data into staging
+                  run: npm run data:sync
+
+                - name: Build compact runtime candidate
+                  run: node scripts/build-runtime-fallback.mjs staging/observances/source-snapshot.json staging/observances/runtime-fallback.json
+
+                - name: Audit curated data and candidate snapshot
+                  env:
+                    DYNAMIC_SNAPSHOT_PATH: staging/observances/runtime-fallback.json
+                  run: npm run data:audit
+
+                - name: Audit claim-specific editorial evidence
+                  run: npm run claims:audit
+
+                - name: Validate production build
+                  run: npm run build
+
+                - name: Write staging manifest
+                  shell: bash
+                  run: |
+                    cat > staging/observances/STAGING_MANIFEST.json <<MANIFEST
+                    {
+                      "schemaVersion": 1,
+                      "workflowRun": "${GITHUB_RUN_ID}",
+                      "sourceCommit": "${GITHUB_SHA}",
+                      "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+                      "status": "provisional",
+                      "promotionAllowed": false,
+                      "nextGate": "Archive in Dropbox, review validation report and promote transactionally"
+                    }
+                    MANIFEST
+
+                - name: Upload bounded staging package
+                  uses: actions/upload-artifact@v6
+                  with:
+                    name: observance-staging-${{ github.run_id }}
+                    retention-days: 7
+                    if-no-files-found: error
+                    path: staging/observances/
+          EOF
+
+          git config user.name 'santosdodia-hygiene-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add scripts/audit-data-quality.mjs scripts/sync-name-translations.mjs scripts/sync-observances.mjs docs/data-quality-baseline.md .github/workflows/update-observances.yml
+          git rm .github/workflows/migrate-observance-staging-once.yml
+          git commit -m 'refactor(data): stage observance updates without automatic publication'
+          git push origin HEAD:agent/architecture-stabilization
