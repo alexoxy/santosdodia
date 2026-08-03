@@ -1,4 +1,4 @@
-name: Update observance data
+name: Prepare observance staging package
 
 on:
   schedule:
@@ -6,21 +6,19 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: observance-data-update
+  group: observance-staging-package
   cancel-in-progress: false
 
 jobs:
-  sync-and-validate:
+  prepare-and-validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -31,29 +29,50 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
 
-      - name: Synchronise source data
-        run: npm run data:sync
+      - name: Audit repository hygiene
+        run: npm run repo:audit
 
-      - name: Audit curated data and snapshot schema
+      - name: Synchronise sources into an isolated staging directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run data:sync
+          mkdir -p staging/observances
+          mv data/generated/source-snapshot.json staging/observances/source-snapshot.json
+
+      - name: Build compact runtime candidate
+        run: node scripts/build-runtime-fallback.mjs staging/observances/source-snapshot.json staging/observances/runtime-fallback.json
+
+      - name: Audit curated data against the candidate
+        env:
+          RUNTIME_SNAPSHOT_PATH: staging/observances/runtime-fallback.json
         run: npm run data:audit
 
       - name: Audit claim-specific editorial evidence
         run: npm run claims:audit
 
-      - name: Validate production build
+      - name: Validate application build
         run: npm run build
 
-      - name: Commit changed snapshot
+      - name: Write provisional staging manifest
         shell: bash
         run: |
-          if git diff --quiet -- data/generated/source-snapshot.json; then
-            echo "No source data changes."
-            exit 0
-          fi
-          git config user.name "santosdodia-data-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/generated/source-snapshot.json
-          git commit -m "Update verified observance snapshot"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          cat > staging/observances/STAGING_MANIFEST.json <<MANIFEST
+          {
+            "schemaVersion": 1,
+            "workflowRun": "${GITHUB_RUN_ID}",
+            "sourceCommit": "${GITHUB_SHA}",
+            "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "status": "provisional",
+            "promotionAllowed": false,
+            "nextGate": "Archive in Dropbox, verify provenance and promote transactionally"
+          }
+          MANIFEST
+
+      - name: Upload bounded staging package
+        uses: actions/upload-artifact@v6
+        with:
+          name: observance-staging-${{ github.run_id }}
+          retention-days: 7
+          if-no-files-found: error
+          path: staging/observances/
