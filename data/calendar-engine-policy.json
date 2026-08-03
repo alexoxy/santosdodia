@@ -1,0 +1,50 @@
+{
+  "roman-catholic": {
+    "engine": "western-gregorian",
+    "fixedDatePolicy": "gregorian",
+    "publicationStatus": "calculated",
+    "sourceIds": ["litcal-api"]
+  },
+  "anglican": {
+    "engine": "western-gregorian",
+    "fixedDatePolicy": "gregorian",
+    "publicationStatus": "calculated",
+    "sourceIds": ["church-of-england-common-worship"]
+  },
+  "greek-orthodox": {
+    "engine": "byzantine-paschalion",
+    "fixedDatePolicy": "revised-julian-default",
+    "publicationStatus": "calculated-with-jurisdiction-warning",
+    "sourceIds": ["goarch-calendar"]
+  },
+  "eastern-orthodox": {
+    "engine": "byzantine-paschalion",
+    "fixedDatePolicy": "jurisdiction-required",
+    "publicationStatus": "calculated-with-jurisdiction-warning",
+    "sourceIds": ["oca-paschal-cycle"]
+  },
+  "coptic-orthodox": {
+    "engine": "coptic-native-calendar",
+    "fixedDatePolicy": "coptic-native-date",
+    "publicationStatus": "staging-only",
+    "sourceIds": ["coptic-patriarchate-rites"]
+  },
+  "armenian-apostolic": {
+    "engine": "armenian-annual-source",
+    "fixedDatePolicy": "official-annual-calendar",
+    "publicationStatus": "staging-only",
+    "sourceIds": ["mother-see-liturgical-calendar"]
+  },
+  "ethiopian-orthodox": {
+    "engine": "ethiopian-native-calendar",
+    "fixedDatePolicy": "ethiopian-native-date",
+    "publicationStatus": "staging-only",
+    "sourceIds": ["ethiopian-orthodox-calendar"]
+  },
+  "syriac-orthodox": {
+    "engine": "syriac-annual-source",
+    "fixedDatePolicy": "jurisdiction-required",
+    "publicationStatus": "staging-only",
+    "sourceIds": ["syriac-orthodox-calendar"]
+  }
+}
