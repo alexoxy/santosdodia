@@ -44,6 +44,12 @@ jobs:
       - name: Audit ecclesiastical directory sources and records
         run: npm run leaders:audit
 
+      - name: Audit Church-specific calendar engines
+        run: npm run calendar:audit
+
+      - name: Test guarded calendar staging SQL generation
+        run: npm run calendar:staging-test
+
       - name: Validate API and OpenAPI contracts
         run: npm run api:validate
 
