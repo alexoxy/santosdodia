@@ -7,9 +7,11 @@ CREATE TABLE IF NOT EXISTS source_registry (
   host TEXT NOT NULL,
   authority TEXT NOT NULL,
   adapter TEXT NOT NULL,
+  usage_policy TEXT NOT NULL DEFAULT 'reference-only',
+  copyright_policy TEXT,
   refresh_hours INTEGER NOT NULL,
   requests_per_second REAL NOT NULL,
-  active INTEGER NOT NULL DEFAULT 1,
+  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0,1)),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -22,10 +24,12 @@ CREATE TABLE IF NOT EXISTS source_snapshots (
   http_status INTEGER NOT NULL,
   content_type TEXT,
   content_hash TEXT NOT NULL,
+  content_bytes INTEGER CHECK (content_bytes IS NULL OR content_bytes >= 0),
   etag TEXT,
   last_modified TEXT,
-  body BLOB,
-  body_encoding TEXT NOT NULL DEFAULT 'utf8',
+  dropbox_path TEXT NOT NULL CHECK (dropbox_path LIKE '/Santos do Dia/02_Dados_Eclesiasticos/%'),
+  manifest_sha256 TEXT NOT NULL CHECK (length(manifest_sha256) = 64),
+  content_encoding TEXT NOT NULL DEFAULT 'binary',
   UNIQUE(source_id, source_url, content_hash)
 );
 
@@ -53,7 +57,7 @@ CREATE TABLE IF NOT EXISTS churches (
   canonical_name TEXT NOT NULL,
   canonical_url TEXT,
   parent_church_id TEXT REFERENCES churches(id),
-  active INTEGER NOT NULL DEFAULT 1,
+  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0,1)),
   first_seen_at TEXT NOT NULL,
   last_verified_at TEXT NOT NULL
 );
@@ -79,7 +83,7 @@ CREATE TABLE IF NOT EXISTS people (
   canonical_name TEXT NOT NULL,
   birth_date TEXT,
   death_date TEXT,
-  active INTEGER NOT NULL DEFAULT 1,
+  active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0,1)),
   first_seen_at TEXT NOT NULL,
   last_verified_at TEXT NOT NULL
 );
@@ -134,6 +138,18 @@ CREATE TABLE IF NOT EXISTS source_assertions (
   confidence TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS validation_records (
+  id TEXT PRIMARY KEY,
+  entity_type TEXT NOT NULL,
+  entity_id TEXT NOT NULL,
+  validation_status TEXT NOT NULL CHECK (validation_status IN ('provisional','cross-checked','verified','rejected','retired')),
+  validator TEXT NOT NULL,
+  report_dropbox_path TEXT CHECK (report_dropbox_path IS NULL OR report_dropbox_path LIKE '/Santos do Dia/02_Dados_Eclesiasticos/%'),
+  evidence_json TEXT,
+  validated_at TEXT NOT NULL,
+  supersedes_id TEXT REFERENCES validation_records(id)
+);
+
 CREATE TABLE IF NOT EXISTS sync_runs (
   id TEXT PRIMARY KEY,
   source_id TEXT NOT NULL REFERENCES source_registry(id),
@@ -157,3 +173,4 @@ CREATE INDEX IF NOT EXISTS idx_offices_status ON ecclesiastical_offices(status);
 CREATE INDEX IF NOT EXISTS idx_offices_jurisdiction ON ecclesiastical_offices(jurisdiction_id);
 CREATE INDEX IF NOT EXISTS idx_assertions_subject ON source_assertions(subject_type, subject_id, field);
 CREATE INDEX IF NOT EXISTS idx_snapshots_source_date ON source_snapshots(source_id, retrieved_at);
+CREATE INDEX IF NOT EXISTS idx_validation_entity ON validation_records(entity_type, entity_id, validated_at);
