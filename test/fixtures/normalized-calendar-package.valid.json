@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "packageId": "normalized-calendar-test",
+  "run": {
+    "createdAt": "2026-08-03T22:40:00+01:00",
+    "retrievedAt": "2026-08-03T22:35:00+01:00",
+    "manifestPath": "/Santos do Dia/02_Dados_Eclesiasticos/99_Manifestos/normalized-calendar-test.json",
+    "status": "provisional",
+    "publicationAllowed": false,
+    "promotionAllowed": false
+  },
+  "sources": [
+    {
+      "id": "official-test-calendar",
+      "churchId": "eastern-orthodox",
+      "url": "https://example.org/official-calendar",
+      "authority": "official-jurisdiction",
+      "factsSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "policies": [
+    {
+      "churchId": "eastern-orthodox",
+      "engineId": "byzantine-paschalion",
+      "fixedDatePolicy": "jurisdiction-required",
+      "calendarSystem": "julian-paschalion",
+      "sourceId": "official-test-calendar",
+      "validationStatus": "verified"
+    }
+  ],
+  "events": [
+    {
+      "id": "test-pascha-2026",
+      "churchId": "eastern-orthodox",
+      "canonicalEventId": "test-pascha",
+      "dateISO": "2026-04-12",
+      "rule": {
+        "type": "annual-source-table"
+      },
+      "nativeDate": null,
+      "sourceId": "official-test-calendar",
+      "sourceRecordHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "validationStatus": "verified",
+      "publicationStatus": "withheld",
+      "names": {
+        "en": {
+          "value": "Test Pascha",
+          "status": "source"
+        },
+        "pt": {
+          "value": "Páscoa de teste",
+          "status": "reviewed",
+          "sourceLocale": "en"
+        }
+      }
+    }
+  ]
+}
