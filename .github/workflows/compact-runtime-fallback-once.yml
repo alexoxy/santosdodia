@@ -42,11 +42,38 @@ jobs:
           const fs = require('node:fs');
           const path = 'lib/live-sources.ts';
           const before = fs.readFileSync(path, 'utf8');
-          const after = before.replace(
+          const oldFunction = `function snapshotItems(year: number): Observance[] {
+            const items = SNAPSHOT.years?.[String(year)]?.observations;
+            return Array.isArray(items) ? items : [];
+          }`;
+          const newFunction = `function snapshotItems(year: number, locale: Locale): Observance[] {
+            const items = SNAPSHOT.years?.[String(year)]?.observations;
+            if (!Array.isArray(items)) return [];
+            return items.flatMap(raw => {
+              const item = raw as Partial<Observance>;
+              const names = item.names;
+              const name = names
+                ? names[locale] ?? names.en ?? Object.values(names).find(value => typeof value === 'string' && value.trim())
+                : undefined;
+              if (!item.id || !item.dateISO || !name || !item.traditions || !item.category || !item.calendarSystem) return [];
+              const [, month, day] = item.dateISO.split('-').map(Number);
+              return [{ ...item, month, day, name } as Observance];
+            });
+          }`;
+
+          let after = before.replace(
             "import snapshot from '../data/generated/source-snapshot.json';",
             "import snapshot from '../data/generated/runtime-fallback.json';"
           );
-          if (after === before) throw new Error('Expected source snapshot import was not found.');
+          after = after.replace(oldFunction, newFunction);
+          after = after.replace(
+            'const fallback = live.length ? [] : snapshotItems(year);',
+            'const fallback = live.length ? [] : snapshotItems(year, locale);'
+          );
+
+          if (after === before || after.includes("source-snapshot.json") || after.includes('snapshotItems(year);')) {
+            throw new Error('Runtime fallback migration did not update all expected code paths.');
+          }
           fs.writeFileSync(path, after);
           NODE
 
