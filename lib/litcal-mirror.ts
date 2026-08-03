@@ -73,8 +73,10 @@ function normalizeEvent(raw:unknown,index:number):LitcalEvent|undefined{
   colour:Array.isArray(colourValue)?stringList(colourValue):text(colourValue),
   common:Array.isArray(commonValue)?stringList(commonValue):text(commonValue),
   season:text(item.liturgical_season_lcl??item.liturgical_season??item.season_lcl??item.season),
-  sundayCycle:text(item.sunday_cycle??item.year_cycle??item.cycle),weekdayCycle:text(item.weekday_cycle),
-  psalterWeek:text(item.psalter_week??item.psalterWeek),liturgicalYear:text(item.liturgical_year??item.liturgicalYear),
+  sundayCycle:text(item.sunday_cycle??item.year_cycle??item.cycle??item.sundayCycle),
+  weekdayCycle:text(item.weekday_cycle??item.weekdayCycle),
+  psalterWeek:text(item.psalter_week??item.psalterWeek),
+  liturgicalYear:text(item.liturgical_year??item.liturgicalYear),
   readings:item.readings??item.lectionary??item.reading,raw:item
  };
 }
