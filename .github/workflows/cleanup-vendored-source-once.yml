@@ -1,0 +1,43 @@
+name: One-time vendored source cleanup
+
+on:
+  push:
+    branches: [agent/architecture-stabilization]
+    paths:
+      - '.github/workflows/cleanup-vendored-source-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-vendored-source-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout stabilization branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/architecture-stabilization
+          fetch-depth: 0
+
+      - name: Remove legacy mirror and self-delete workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'santosdodia-hygiene-bot'
+          git config user.email 'actions@users.noreply.github.com'
+
+          git rm -r --ignore-unmatch vendor/litcal-api
+          git rm --ignore-unmatch .github/workflows/cleanup-vendored-source-once.yml
+
+          if git diff --cached --quiet; then
+            echo 'No vendored source cleanup was required.'
+            exit 0
+          fi
+
+          git commit -m 'chore(hygiene): remove vendored LitCal source tree'
+          git push origin HEAD:agent/architecture-stabilization
