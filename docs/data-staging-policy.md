@@ -52,6 +52,13 @@ A dataset may be promoted to the site database only when all of the following ar
 - rollback material is available;
 - a publication manifest identifies exactly which records were inserted, updated, closed or withheld.
 
+## Transfer integrity
+
+- Text-oriented UTF-8 files may be stored directly through the connected Dropbox file tools.
+- Binary files, compressed archives and base64 reconstructions are not considered valid merely because a file was created. Their byte length and cryptographic checksum must be independently verified.
+- A transfer with a size or checksum discrepancy is quarantined and excluded from normalization and database-loading steps.
+- Until a byte-preserving Dropbox upload action is available, normalized CSV or JSON files plus source URLs, retrieval metadata and source hashes are the authoritative staging representation. GitHub Actions artifacts remain temporary diagnostic material only.
+
 ## Failure behaviour
 
 - Unexpected response types, empty payloads, parser structure changes or partial coverage fail closed.
