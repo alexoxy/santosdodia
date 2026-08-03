@@ -19,12 +19,16 @@ if(result.status!==0){
 const sql=fs.readFileSync(output,'utf8');
 const required=[
  'BEGIN IMMEDIATE;',
- 'INSERT OR REPLACE INTO calendar_import_runs',
- 'INSERT OR REPLACE INTO calendar_sources',
- 'INSERT OR REPLACE INTO jurisdiction_calendar_policies',
- 'INSERT OR REPLACE INTO calendar_rules',
- 'INSERT OR REPLACE INTO calendar_occurrences',
- 'INSERT OR REPLACE INTO calendar_occurrence_labels',
+ 'INSERT INTO calendar_import_runs',
+ 'INSERT INTO source_registry',
+ 'INSERT INTO calendar_sources',
+ 'INSERT INTO calendar_observances',
+ 'INSERT INTO jurisdiction_calendar_policies',
+ 'INSERT INTO calendar_rules',
+ 'INSERT INTO calendar_occurrences',
+ 'INSERT INTO calendar_occurrence_assertions',
+ 'INSERT INTO calendar_occurrence_labels',
+ 'ON CONFLICT',
  "'2026-04-12'",
  "'Páscoa Ortodoxa'",
  'COMMIT;'
@@ -33,6 +37,10 @@ const missing=required.filter(token=>!sql.includes(token));
 if(missing.length){
  console.error(`Generated SQL is missing ${missing.length} required token(s):`);
  for(const token of missing)console.error(`- ${token}`);
+ process.exit(1);
+}
+if(sql.includes('INSERT OR REPLACE')){
+ console.error('Generated SQL uses destructive INSERT OR REPLACE semantics.');
  process.exit(1);
 }
 
