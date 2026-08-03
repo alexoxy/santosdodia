@@ -1,3 +1,4 @@
+# Probe policy revision: 2026-08-03
 name: Production health
 
 on:
