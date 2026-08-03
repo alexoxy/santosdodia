@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
 
+      - name: Audit repository hygiene and data economy
+        run: npm run repo:audit
+
       - name: Audit all installed dependencies
         run: npm audit --audit-level=high
 
