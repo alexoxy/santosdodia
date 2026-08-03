@@ -14,7 +14,7 @@
       "id": "official-test-calendar",
       "churchId": "eastern-orthodox",
       "url": "https://example.org/official-calendar",
-      "authority": "official-jurisdiction",
+      "authority": "official-church-department",
       "factsSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     }
   ],
