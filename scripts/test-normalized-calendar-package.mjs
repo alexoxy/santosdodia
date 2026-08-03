@@ -44,6 +44,9 @@ try {
   if (canonical.sources.length !== 1 || canonical.policies.length !== 1 || canonical.rules.length !== 1) {
     throw new Error('Canonical source, policy or rule count is incorrect.');
   }
+  if (canonical.sources[0].authority !== 'official-church') {
+    throw new Error('Official Church department authority was not normalized to the canonical source authority.');
+  }
   if (canonical.occurrences.length !== 1 || canonical.labels.length !== 2) {
     throw new Error('Canonical occurrence or label count is incorrect.');
   }
