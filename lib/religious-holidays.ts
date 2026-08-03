@@ -1,9 +1,15 @@
+import enginePolicyJson from '../data/calendar-engine-policy.json';
 import { localize,type Locale,type LocalizedText } from './i18n';
 import type { Tradition } from '../data/observances';
 
 export type HolidayKind='fixed'|'movable';
 export type ReligiousHoliday={id:string;date:string;name:string;kind:HolidayKind;publicHoliday:boolean;tradition?:Tradition;localName?:string;source:string};
 export type NagerHoliday={date:string;localName:string;name:string;countryCode:string;fixed:boolean;global:boolean;counties?:string[]|null;types?:string[]};
+export type CalendarEngineId='western-gregorian'|'byzantine-paschalion'|'coptic-native-calendar'|'armenian-annual-source'|'ethiopian-native-calendar'|'syriac-annual-source';
+export type CalendarPublicationStatus='calculated'|'calculated-with-jurisdiction-warning'|'staging-only';
+export type CalendarEnginePolicy={engine:CalendarEngineId;fixedDatePolicy:string;publicationStatus:CalendarPublicationStatus;sourceIds:string[]};
+
+const ENGINE_POLICY=enginePolicyJson as Record<Tradition,CalendarEnginePolicy>;
 
 const LABELS:Record<string,LocalizedText>={
  christmas:{en:'Christmas Day',pt:'Natal',es:'Navidad',fr:'Noël',de:'Weihnachten',it:'Natale',pl:'Boże Narodzenie',ru:'Рождество Христово',fil:'Pasko',sw:'Krismasi'},
@@ -30,17 +36,48 @@ const LABELS:Record<string,LocalizedText>={
  immaculate:{en:'Immaculate Conception',pt:'Imaculada Conceição',es:'Inmaculada Concepción',fr:'Immaculée Conception',de:'Mariä Empfängnis',it:'Immacolata Concezione',pl:'Niepokalane Poczęcie',ru:'Непорочное зачатие',fil:'Kalinis-linisang Paglilihi',sw:'Mkingiwa Dhambi ya Asili'},
  reformation:{en:'Reformation Day',pt:'Dia da Reforma',es:'Día de la Reforma',fr:'Fête de la Réformation',de:'Reformationstag',it:'Festa della Riforma',pl:'Święto Reformacji',ru:'День Реформации',fil:'Araw ng Repormasyon',sw:'Siku ya Matengenezo'}
 };
+
 function addDays(date:Date,days:number){const next=new Date(date);next.setUTCDate(next.getUTCDate()+days);return next}
 function iso(date:Date){return date.toISOString().slice(0,10)}
 export function gregorianEaster(year:number){const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m+114)/31),day=(h+l-7*m+114)%31+1;return new Date(Date.UTC(year,month-1,day))}
 export function orthodoxEaster(year:number){const a=year%4,b=year%7,c=year%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7,month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1,julian=new Date(Date.UTC(year,month-1,day)),shift=Math.floor(year/100)-Math.floor(year/400)-2;return addDays(julian,shift)}
 function fixed(year:number,month:number,day:number){return new Date(Date.UTC(year,month-1,day))}
 function label(key:string,locale:Locale){return localize(LABELS[key]??{en:key},locale)}
-function entry(key:string,date:Date,locale:Locale,kind:HolidayKind,tradition:Tradition):ReligiousHoliday{return{id:`${tradition}-${key}-${iso(date)}`,date:iso(date),name:label(key,locale),kind,publicHoliday:false,tradition,source:'calculated-liturgical-calendar'}}
+function entry(key:string,date:Date,locale:Locale,kind:HolidayKind,tradition:Tradition,source='calculated-liturgical-calendar'):ReligiousHoliday{return{id:`${tradition}-${key}-${iso(date)}`,date:iso(date),name:label(key,locale),kind,publicHoliday:false,tradition,source}}
+
 function westernDates(year:number,locale:Locale,tradition:Tradition){const easter=gregorianEaster(year);return[
  entry('epiphany',fixed(year,1,6),locale,'fixed',tradition),entry('joseph',fixed(year,3,19),locale,'fixed',tradition),entry('annunciation',fixed(year,3,25),locale,'fixed',tradition),entry('ashWednesday',addDays(easter,-46),locale,'movable',tradition),entry('palmSunday',addDays(easter,-7),locale,'movable',tradition),entry('maundyThursday',addDays(easter,-3),locale,'movable',tradition),entry('goodFriday',addDays(easter,-2),locale,'movable',tradition),entry('holySaturday',addDays(easter,-1),locale,'movable',tradition),entry('easter',easter,locale,'movable',tradition),entry('easterMonday',addDays(easter,1),locale,'movable',tradition),entry('ascension',addDays(easter,39),locale,'movable',tradition),entry('pentecost',addDays(easter,49),locale,'movable',tradition),entry('corpusChristi',addDays(easter,60),locale,'movable',tradition),entry('peterPaul',fixed(year,6,29),locale,'fixed',tradition),entry('assumption',fixed(year,8,15),locale,'fixed',tradition),entry('cross',fixed(year,9,14),locale,'fixed',tradition),entry('allSaints',fixed(year,11,1),locale,'fixed',tradition),entry('allSouls',fixed(year,11,2),locale,'fixed',tradition),entry('immaculate',fixed(year,12,8),locale,'fixed',tradition),entry('christmas',fixed(year,12,25),locale,'fixed',tradition)
- ]}
-function easternDates(year:number,locale:Locale,tradition:Tradition){const easter=orthodoxEaster(year);return[entry('epiphany',fixed(year,1,19),locale,'fixed',tradition),entry('annunciation',fixed(year,4,7),locale,'fixed',tradition),entry('palmSunday',addDays(easter,-7),locale,'movable',tradition),entry('goodFriday',addDays(easter,-2),locale,'movable',tradition),entry('holySaturday',addDays(easter,-1),locale,'movable',tradition),entry('easter',easter,locale,'movable',tradition),entry('ascension',addDays(easter,39),locale,'movable',tradition),entry('pentecost',addDays(easter,49),locale,'movable',tradition),entry('peterPaul',fixed(year,7,12),locale,'fixed',tradition),entry('assumption',fixed(year,8,28),locale,'fixed',tradition),entry('cross',fixed(year,9,27),locale,'fixed',tradition),entry('christmas',fixed(year,1,7),locale,'fixed',tradition)]}
-export function calculatedChurchDates(year:number,locale:Locale,tradition:'all'|Tradition){const traditions:Tradition[]=tradition==='all'?['roman-catholic','anglican','greek-orthodox','eastern-orthodox','coptic-orthodox','armenian-apostolic','ethiopian-orthodox','syriac-orthodox']:[tradition];return traditions.flatMap(value=>['greek-orthodox','eastern-orthodox','coptic-orthodox','ethiopian-orthodox','syriac-orthodox'].includes(value)?easternDates(year,locale,value):westernDates(year,locale,value)).sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name))}
+]}
+
+function byzantineNewCalendarDates(year:number,locale:Locale,tradition:Tradition){const pascha=orthodoxEaster(year),source='calculated-byzantine-new-calendar';return[
+ entry('epiphany',fixed(year,1,6),locale,'fixed',tradition,source),
+ entry('annunciation',fixed(year,3,25),locale,'fixed',tradition,source),
+ entry('palmSunday',addDays(pascha,-7),locale,'movable',tradition,source),
+ entry('goodFriday',addDays(pascha,-2),locale,'movable',tradition,source),
+ entry('holySaturday',addDays(pascha,-1),locale,'movable',tradition,source),
+ entry('easter',pascha,locale,'movable',tradition,source),
+ entry('ascension',addDays(pascha,39),locale,'movable',tradition,source),
+ entry('pentecost',addDays(pascha,49),locale,'movable',tradition,source),
+ entry('peterPaul',fixed(year,6,29),locale,'fixed',tradition,source),
+ entry('assumption',fixed(year,8,15),locale,'fixed',tradition,source),
+ entry('cross',fixed(year,9,14),locale,'fixed',tradition,source),
+ entry('christmas',fixed(year,12,25),locale,'fixed',tradition,source)
+]}
+
+export function calendarEnginePolicy(tradition:Tradition):CalendarEnginePolicy{return ENGINE_POLICY[tradition]}
+
+function datesForTradition(year:number,locale:Locale,tradition:Tradition):ReligiousHoliday[]{
+ const policy=calendarEnginePolicy(tradition);
+ if(policy.publicationStatus==='staging-only')return[];
+ if(policy.engine==='western-gregorian')return westernDates(year,locale,tradition);
+ if(policy.engine==='byzantine-paschalion')return byzantineNewCalendarDates(year,locale,tradition);
+ return[];
+}
+
+export function calculatedChurchDates(year:number,locale:Locale,tradition:'all'|Tradition){
+ const traditions:Tradition[]=tradition==='all'?['roman-catholic','anglican','greek-orthodox','eastern-orthodox','coptic-orthodox','armenian-apostolic','ethiopian-orthodox','syriac-orthodox']:[tradition];
+ return traditions.flatMap(value=>datesForTradition(year,locale,value)).sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name))
+}
+
 export function inferChristianHoliday(name:string){const n=name.toLowerCase();if(/christmas eve|nochebuena|heiligabend/.test(n))return'christmasEve';if(/christmas|nativity/.test(n))return'christmas';if(/st\.? stephen|saint stephen|boxing day/.test(n))return'stephen';if(/epiphany|three kings|theophany/.test(n))return'epiphany';if(/good friday/.test(n))return'goodFriday';if(/holy saturday/.test(n))return'holySaturday';if(/easter monday/.test(n))return'easterMonday';if(/easter|pascha/.test(n))return'easter';if(/ascension/.test(n))return'ascension';if(/pentecost|whit sunday/.test(n))return'pentecost';if(/whit monday/.test(n))return'pentecost';if(/corpus christi/.test(n))return'corpusChristi';if(/assumption/.test(n))return'assumption';if(/all saints/.test(n))return'allSaints';if(/all souls/.test(n))return'allSouls';if(/immaculate conception/.test(n))return'immaculate';if(/reformation/.test(n))return'reformation';if(/annunciation/.test(n))return'annunciation';if(/saint joseph|st\.? joseph/.test(n))return'joseph';if(/peter.*paul|paul.*peter/.test(n))return'peterPaul';return undefined}
 export function localizePublicHoliday(item:NagerHoliday,locale:Locale):ReligiousHoliday|undefined{const key=inferChristianHoliday(`${item.name} ${item.localName}`);if(!key)return;return{id:`public-${item.countryCode}-${item.date}-${key}`,date:item.date,name:label(key,locale),kind:item.fixed?'fixed':'movable',publicHoliday:true,localName:item.localName,source:'nager-date-public-holidays'}}
