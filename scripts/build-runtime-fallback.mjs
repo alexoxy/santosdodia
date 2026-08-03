@@ -10,10 +10,13 @@ if (!source || typeof source !== 'object' || !source.years || typeof source.year
   throw new Error('Source snapshot does not contain a years object.');
 }
 
+// name, month and day are intentionally omitted: they are reconstructed from
+// localized names and dateISO at runtime. The complete source package remains
+// in Dropbox staging for reconstruction and editorial audit.
 const allowedKeys = [
-  'id', 'externalId', 'month', 'day', 'dateISO', 'traditions', 'category',
-  'calendarSystem', 'names', 'name', 'countries', 'regions', 'jurisdictions',
-  'patronages', 'sourceIds', 'translationStatus', 'validationStatus', 'lastVerified'
+  'id', 'dateISO', 'traditions', 'category', 'calendarSystem', 'names',
+  'countries', 'patronages', 'sourceIds', 'translationStatus',
+  'validationStatus', 'lastVerified'
 ];
 
 function compactObservation(value) {
@@ -22,7 +25,10 @@ function compactObservation(value) {
   for (const key of allowedKeys) {
     if (value[key] !== undefined && value[key] !== null) compact[key] = value[key];
   }
-  return compact.id && compact.dateISO && compact.name ? compact : undefined;
+  if (!compact.names && typeof value.name === 'string' && value.name.trim()) {
+    compact.names = { en: value.name.trim() };
+  }
+  return compact.id && compact.dateISO && compact.names ? compact : undefined;
 }
 
 const years = {};
