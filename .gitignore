@@ -25,8 +25,24 @@ cloudflare-env.d.ts
 # production
 /build
 
-# private source snapshots
+# Dropbox-first staging and generated diagnostics
+/artifacts/
+/staging/
+/tmp/
+/data/generated/litcal-staging-manifest.json
+/data/generated/calendar-staging/
 /data/generated/ecclesiastical-directory/snapshots/
+
+# External source trees are never vendored; only compact provenance manifests
+# and validated normalized responses may be tracked.
+/vendor/litcal-api/
+
+# local databases and raw captures
+*.sqlite
+*.sqlite3
+*.db
+*.html.gz
+*.snapshot.html
 
 # misc
 .DS_Store
