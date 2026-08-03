@@ -19,7 +19,7 @@ The Dropbox staging root for the ecclesiastical directory is:
 
 `/Santos do Dia/02_Dados_Eclesiasticos`
 
-The same pattern should be used for comparable imports when an external API is incomplete, unavailable, rate-limited, unstable or unsuitable for runtime use.
+The same pattern applies to comparable imports when an external API is incomplete, unavailable, rate-limited, unstable or unsuitable for runtime use.
 
 ## Responsibilities
 
