@@ -50,11 +50,17 @@ jobs:
       - name: Audit Church-specific calendar engines
         run: npm run calendar:audit
 
+      - name: Test calendar engines against official reference dates
+        run: npm run calendar:reference-test
+
       - name: Test guarded calendar staging SQL generation
         run: npm run calendar:staging-test
 
       - name: Test database migrations, idempotency and rollback
         run: npm run db:migrations-test
+
+      - name: Test portable D1 SQL parsing
+        run: npm run db:sql-parser-test
 
       - name: Test Wrangler D1 local compatibility
         run: npm run db:d1-local-test
