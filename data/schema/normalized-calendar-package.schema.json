@@ -33,7 +33,7 @@
           "jurisdictionId": { "type": ["string", "null"] },
           "name": { "type": "string" },
           "url": { "type": "string", "format": "uri" },
-          "authority": { "enum": ["official-church", "official-jurisdiction", "official-local-church", "reference-engine", "reference-directory", "osint-corroboration"] },
+          "authority": { "enum": ["official-church", "official-church-department", "official-jurisdiction", "official-local-church", "reference-engine", "reference-directory", "osint-corroboration"] },
           "factsSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
           "usagePolicy": { "type": "string" },
           "copyrightPolicy": { "type": ["string", "null"] }
