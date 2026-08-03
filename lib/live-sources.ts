@@ -1,4 +1,4 @@
-import snapshot from '../data/generated/source-snapshot.json';
+import snapshot from '../data/generated/runtime-fallback.json';
 import {
   mergeObservances,
   type Category,
@@ -209,9 +209,19 @@ function parseOrthodox(payload: unknown, locale: Locale): Observance[] {
   return output;
 }
 
-function snapshotItems(year: number): Observance[] {
+function snapshotItems(year: number, locale: Locale): Observance[] {
   const items = SNAPSHOT.years?.[String(year)]?.observations;
-  return Array.isArray(items) ? items : [];
+  if (!Array.isArray(items)) return [];
+  return items.flatMap(raw => {
+    const item = raw as Partial<Observance>;
+    const names = item.names;
+    const name = names
+      ? names[locale] ?? names.en ?? Object.values(names).find(value => typeof value === 'string' && value.trim())
+      : undefined;
+    if (!item.id || !item.dateISO || !name || !item.traditions || !item.category || !item.calendarSystem) return [];
+    const [, month, day] = item.dateISO.split('-').map(Number);
+    return [{ ...item, month, day, name } as Observance];
+  });
 }
 
 function sourceWanted(filters: ObservanceFilters, candidates: Tradition[]): boolean {
@@ -257,7 +267,7 @@ export async function getLiveObservances(
 
   const settled = await Promise.all(tasks);
   const live = settled.flatMap(item => item.data);
-  const fallback = live.length ? [] : snapshotItems(year);
+  const fallback = live.length ? [] : snapshotItems(year, locale);
   const data = mergeObservances(live, fallback)
     .filter(item => matchesFilters(item, filters) && withinRange(item, range.month, range.date));
 
