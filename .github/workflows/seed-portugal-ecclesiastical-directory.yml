@@ -1,4 +1,4 @@
-name: Seed Portugal ecclesiastical directory
+name: Validate Portugal ecclesiastical staging
 
 on:
   push:
@@ -6,24 +6,27 @@ on:
       - agent/global-leaders-directory
     paths:
       - '.github/workflows/seed-portugal-ecclesiastical-directory.yml'
+      - 'scripts/sync-ecclesiastical-directory.mjs'
+      - 'scripts/audit-ecclesiastical-directory.mjs'
+      - 'scripts/build-ecclesiastical-sql.mjs'
+      - 'data/ecclesiastical-source-registry.json'
+      - 'db/migrations/0001_ecclesiastical-directory.sql'
 
 permissions:
-  contents: write
+  contents: read
   issues: write
 
 concurrency:
-  group: seed-portugal-ecclesiastical-directory
+  group: validate-portugal-ecclesiastical-staging
   cancel-in-progress: true
 
 jobs:
-  seed:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v6
@@ -34,52 +37,76 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
 
-      - name: Import Catholic-Hierarchy Portugal references
-        run: npm run leaders:sync -- --source=catholic-hierarchy --country=pt --max-countries=1
+      - name: Start from an empty staging workspace
+        run: |
+          rm -rf data/generated/ecclesiastical-directory
+          rm -f db/seeds/ecclesiastical-directory.sql
+          mkdir -p data/generated/ecclesiastical-directory
 
-      - name: Import GCatholic current events
-        run: npm run leaders:sync -- --source=gcatholic
+      - name: Import Catholic-Hierarchy Portugal into staging
+        run: npm run leaders:sync -- --source=catholic-hierarchy --country=pt --max-countries=1 --retain-html
 
-      - name: Audit imported normalized records
+      - name: Audit Portugal normalized records
         run: npm run leaders:audit
 
       - name: Build transactional staging SQL
         run: npm run leaders:sql
 
-      - name: Summarize corrected seed
+      - name: Validate staged SQL exists
+        run: test -s db/seeds/ecclesiastical-directory.sql
+
+      - name: Summarize Portugal staging
         id: summary
         shell: bash
         run: |
           records=$(node -p "require('./data/generated/ecclesiastical-directory/catholic-hierarchy.json').counts.records")
-          events=$(node -p "require('./data/generated/ecclesiastical-directory/gcatholic.json').counts.events")
+          failures=$(node -p "require('./data/generated/ecclesiastical-directory/catholic-hierarchy.json').counts.failures")
           echo "records=${records}" >> "$GITHUB_OUTPUT"
-          echo "events=${events}" >> "$GITHUB_OUTPUT"
+          echo "failures=${failures}" >> "$GITHUB_OUTPUT"
 
-      - name: Commit bounded seed data to feature branch
-        shell: bash
-        run: |
-          git config user.name 'santosdodia-directory-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add data/generated/ecclesiastical-directory/*.json db/seeds/ecclesiastical-directory.sql
-          if git diff --cached --quiet; then
-            echo 'Corrected seed is already current.'
-            exit 0
-          fi
-          git commit -m 'data(leaders): correct Portugal seed and stage SQL'
-          git fetch origin agent/global-leaders-directory
-          git rebase origin/agent/global-leaders-directory
-          git push origin HEAD:agent/global-leaders-directory
+      - name: Upload Portugal staging package
+        uses: actions/upload-artifact@v4
+        with:
+          name: portugal-ecclesiastical-staging-${{ github.run_id }}
+          path: |
+            data/generated/ecclesiastical-directory/catholic-hierarchy.json
+            data/generated/ecclesiastical-directory/snapshots/catholic-hierarchy/
+            db/seeds/ecclesiastical-directory.sql
+            db/migrations/0001_ecclesiastical_directory.sql
+            docs/data-staging-policy.md
+          if-no-files-found: error
+          retention-days: 30
 
-      - name: Record corrected seed completion in issue 10
+      - name: Probe GCatholic news separately
+        id: gcatholic
+        continue-on-error: true
+        run: npm run leaders:sync -- --source=gcatholic --retain-html
+
+      - name: Upload GCatholic diagnostic package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gcatholic-diagnostic-${{ github.run_id }}
+          path: |
+            data/generated/ecclesiastical-directory/gcatholic.json
+            data/generated/ecclesiastical-directory/snapshots/gcatholic/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Record staging result in issue 10
         uses: actions/github-script@v7
         env:
           RECORDS: ${{ steps.summary.outputs.records }}
-          EVENTS: ${{ steps.summary.outputs.events }}
+          FAILURES: ${{ steps.summary.outputs.failures }}
+          GCATHOLIC_OUTCOME: ${{ steps.gcatholic.outcome }}
         with:
           script: |
+            const gcatholic = process.env.GCATHOLIC_OUTCOME === 'success'
+              ? 'GCatholic probe completed and remains subject to separate validation.'
+              : 'GCatholic probe failed closed; no empty or unexpected response was accepted.';
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: 10,
-              body: `✅ Corrected Portugal seed completed: ${process.env.RECORDS} real Catholic-Hierarchy person/office references and ${process.env.EVENTS} current GCatholic events. Navigation links are rejected by audit. Transactional staging SQL was generated; raw HTML was not committed.`
-            })
+              body: `✅ Portugal staging validation completed with ${process.env.RECORDS} provisional Catholic-Hierarchy records and ${process.env.FAILURES} fetch failures. ${gcatholic} No generated data was committed or published. The artifacts must be archived and reviewed in Dropbox before database promotion.`
+            });
