@@ -18,7 +18,7 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -55,6 +55,9 @@ jobs:
 
       - name: Test database migrations, idempotency and rollback
         run: npm run db:migrations-test
+
+      - name: Test Wrangler D1 local compatibility
+        run: npm run db:d1-local-test
 
       - name: Validate API and OpenAPI contracts
         run: npm run api:validate
