@@ -1,6 +1,6 @@
 name: One-time security lock refresh
 
-# Attempt 3: patched dependencies and valid calendar staging fixture.
+# Attempt 4: validate compact fallback typing and database migration gate.
 on:
   push:
     branches: [agent/architecture-stabilization]
