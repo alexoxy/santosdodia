@@ -73,7 +73,7 @@ export function jdnToGregorian(jdn: number): CivilDate {
   return { year, month, day };
 }
 
-export function orthodoxEaster(year: number): CivilDate {
+function alexandrianPaschalion(year: number): CivilDate {
   const a = year % 4;
   const b = year % 7;
   const c = year % 19;
@@ -82,6 +82,26 @@ export function orthodoxEaster(year: number): CivilDate {
   const month = Math.floor((d + e + 114) / 31);
   const day = ((d + e + 114) % 31) + 1;
   return jdnToGregorian(julianDateToJdn({ year, month, day }));
+}
+
+// These Churches currently resolve their Paschal date through the same
+// Alexandrian/Julian computus, but they remain distinct semantic engines. This
+// prevents a future Church-specific exception or authoritative annual table
+// from silently changing every other tradition.
+export function orthodoxEaster(year: number): CivilDate {
+  return alexandrianPaschalion(year);
+}
+
+export function copticEaster(year: number): CivilDate {
+  return alexandrianPaschalion(year);
+}
+
+export function ethiopianEaster(year: number): CivilDate {
+  return alexandrianPaschalion(year);
+}
+
+export function syriacEaster(year: number): CivilDate {
+  return alexandrianPaschalion(year);
 }
 
 function isAlexandrianLeapYear(year: number): boolean {
@@ -190,9 +210,10 @@ function resolveFixed(rule: FixedDateRule, year: number): DateResolution {
 
 function easterForRule(rule: RelativeDateRule, year: number): DateResolution | CivilDate {
   if (rule.anchor === 'gregorian-easter') return gregorianEaster(year);
-  if (rule.anchor === 'orthodox-easter' || rule.anchor === 'coptic-easter' || rule.anchor === 'ethiopian-easter') {
-    return orthodoxEaster(year);
-  }
+  if (rule.anchor === 'orthodox-easter') return orthodoxEaster(year);
+  if (rule.anchor === 'coptic-easter') return copticEaster(year);
+  if (rule.anchor === 'ethiopian-easter') return ethiopianEaster(year);
+  if (rule.anchor === 'syriac-easter') return syriacEaster(year);
   if (rule.anchor === 'armenian-easter') {
     if (rule.variant === 'armenian-jerusalem') {
       return {
@@ -207,7 +228,12 @@ function easterForRule(rule: RelativeDateRule, year: number): DateResolution | C
 
 function pentecostAnchor(rule: RelativeDateRule, year: number): DateResolution | CivilDate {
   const calendar: CalendarSystem = rule.calendar;
-  if (calendar === 'julian' || calendar === 'coptic' || calendar === 'ethiopian') return addDays(orthodoxEaster(year), 49);
+  if (calendar === 'coptic') return addDays(copticEaster(year), 49);
+  if (calendar === 'ethiopian') return addDays(ethiopianEaster(year), 49);
+  if (calendar === 'julian') {
+    const easter = rule.variant === 'syriac-west' ? syriacEaster(year) : orthodoxEaster(year);
+    return addDays(easter, 49);
+  }
   if (calendar === 'armenian' && rule.variant === 'armenian-jerusalem') {
     return {
       status: 'unsupported',
@@ -229,6 +255,7 @@ function resolveRelative(rule: RelativeDateRule, year: number): DateResolution {
     case 'coptic-easter':
     case 'ethiopian-easter':
     case 'armenian-easter':
+    case 'syriac-easter':
       anchor = easterForRule(rule, year);
       break;
     case 'pentecost':
