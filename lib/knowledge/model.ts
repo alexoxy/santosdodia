@@ -80,7 +80,8 @@ export type CalendarVariant =
   | 'armenian-mother-see'
   | 'armenian-jerusalem'
   | 'coptic-alexandrian'
-  | 'ethiopian-bahire-hasab';
+  | 'ethiopian-bahire-hasab'
+  | 'syriac-west';
 
 export type FixedDateRule = {
   type: 'fixed';
@@ -96,6 +97,7 @@ export type RelativeDateAnchor =
   | 'coptic-easter'
   | 'ethiopian-easter'
   | 'armenian-easter'
+  | 'syriac-easter'
   | 'pentecost'
   | 'advent-start'
   | 'christmas';
