@@ -30,8 +30,8 @@ export function splitSqlStatements(sql) {
 }
 
 export function portableD1Statements(sql) {
-  const forbidden = /^(?:PRAGMA\s+foreign_keys\s*=|BEGIN(?:\s+IMMEDIATE|\s+TRANSACTION)?|COMMIT|ROLLBACK)$/i;
-  return splitSqlStatements(sql).filter(statement => !forbidden.test(statement.trim()));
+  const control = /^(?:PRAGMA\s+foreign_keys\s*=\s*(?:ON|OFF|1|0)|BEGIN(?:\s+IMMEDIATE|\s+TRANSACTION)?|COMMIT|ROLLBACK)$/i;
+  return splitSqlStatements(sql).filter(statement => !control.test(statement.trim()));
 }
 
 export function serializeSqlStatements(statements) {
