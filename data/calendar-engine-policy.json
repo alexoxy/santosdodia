@@ -24,25 +24,25 @@
     "sourceIds": ["oca-paschal-cycle"]
   },
   "coptic-orthodox": {
-    "engine": "coptic-native-calendar",
+    "engine": "coptic-native-and-paschalion",
     "fixedDatePolicy": "coptic-native-date",
     "publicationStatus": "staging-only",
     "sourceIds": ["coptic-patriarchate-rites"]
   },
   "armenian-apostolic": {
-    "engine": "armenian-annual-source",
+    "engine": "armenian-mother-see-calendar",
     "fixedDatePolicy": "official-annual-calendar",
     "publicationStatus": "staging-only",
     "sourceIds": ["mother-see-liturgical-calendar"]
   },
   "ethiopian-orthodox": {
-    "engine": "ethiopian-native-calendar",
+    "engine": "ethiopian-native-and-bahire-hasab",
     "fixedDatePolicy": "ethiopian-native-date",
     "publicationStatus": "staging-only",
     "sourceIds": ["ethiopian-orthodox-calendar"]
   },
   "syriac-orthodox": {
-    "engine": "syriac-annual-source",
+    "engine": "syriac-paschalion-and-annual-source",
     "fixedDatePolicy": "jurisdiction-required",
     "publicationStatus": "staging-only",
     "sourceIds": ["syriac-orthodox-calendar"]
