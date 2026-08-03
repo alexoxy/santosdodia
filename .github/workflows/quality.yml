@@ -68,6 +68,9 @@ jobs:
       - name: Test Wrangler D1 local compatibility
         run: npm run db:d1-local-test
 
+      - name: Test remote D1 staging rollback safeguards
+        run: npm run db:d1-remote-safety-test
+
       - name: Validate API and OpenAPI contracts
         run: npm run api:validate
 
