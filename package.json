@@ -51,7 +51,7 @@
   },
   "overrides": {
     "minimatch@3.1.5": {
-      "brace-expansion": "2.1.2"
+      "brace-expansion": "2.1.4"
     },
     "next": {
       "postcss": "8.5.23",
