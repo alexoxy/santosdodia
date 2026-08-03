@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "retrievedAt": "2026-08-03T21:20:00+01:00",
+  "publicationAllowed": false,
+  "sources": [
+    {
+      "id": "oca-paschal-cycle",
+      "churchId": "eastern-orthodox",
+      "authority": "official-jurisdiction",
+      "url": "https://www.oca.org/fs/paschal-cycle",
+      "notes": "Published Pascha, Ascension and Pentecost dates for 2026-2030."
+    },
+    {
+      "id": "coptic-rites",
+      "churchId": "coptic-orthodox",
+      "authority": "official-church",
+      "url": "https://copticorthodox.church/%D8%A7%D9%84%D9%83%D9%86%D9%8A%D8%B3%D8%A9-%D8%A7%D9%84%D9%82%D8%A8%D8%B7%D9%8A%D8%A9/coptic-rites/",
+      "notes": "Official Coptic native and corresponding civil dates for major fixed feasts."
+    },
+    {
+      "id": "coptic-resurrection-2026",
+      "churchId": "coptic-orthodox",
+      "authority": "official-church",
+      "url": "https://copticorthodox.church/en/2026/04/11/h-h-pope-tawadros-ii-prays-the-liturgy-of-the-glorious-feast-of-the-resurrection-at-st-marks-cathedral-in-abbassia/",
+      "notes": "Official report of the Resurrection liturgy beginning on Saturday evening, April 11, 2026, for the Sunday feast on April 12."
+    },
+    {
+      "id": "armenian-calendar-2026",
+      "churchId": "armenian-apostolic",
+      "authority": "official-church",
+      "url": "https://www.armenianchurch.org/en/Liturgical-Calendar/",
+      "notes": "Mother See of Holy Etchmiadzin liturgical calendar for 2026."
+    },
+    {
+      "id": "armenian-easter-2026",
+      "churchId": "armenian-apostolic",
+      "authority": "official-church",
+      "url": "https://www.armenianchurch.org/en/Liturgical-Calendar/27",
+      "notes": "Holy Easter on April 5, 2026."
+    },
+    {
+      "id": "armenian-ascension-2026",
+      "churchId": "armenian-apostolic",
+      "authority": "official-church",
+      "url": "https://www.armenianchurch.org/en/Liturgical-Calendar/31",
+      "notes": "Ascension on May 14, 2026, forty days after Easter using inclusive liturgical counting."
+    },
+    {
+      "id": "syriac-easter-table",
+      "churchId": "syriac-orthodox",
+      "authority": "official-jurisdiction",
+      "url": "https://soc-wus.org/ourchurch/calendar.html",
+      "notes": "Official archdiocesan explanation and year tables for the Orthodox Easter cycle."
+    },
+    {
+      "id": "ethiopian-bahera-hasab",
+      "churchId": "ethiopian-orthodox",
+      "authority": "official-church-department",
+      "url": "https://esderos.eotcmk.org/seminary/course/info.php?id=21",
+      "notes": "Holy-Synod-blessed Sunday School department course describing Bahera Hasab and the Alexandrian Apokty cycle used by Oriental Churches."
+    },
+    {
+      "id": "ethiopian-new-year",
+      "churchId": "ethiopian-orthodox",
+      "authority": "official-church-department",
+      "url": "https://eotcmk.org/e/ethiopian-new-year/",
+      "notes": "Ethiopian New Year on September 11."
+    },
+    {
+      "id": "ethiopian-assumption",
+      "churchId": "ethiopian-orthodox",
+      "authority": "official-church-department",
+      "url": "https://eotcmk.org/e/the-feast-of-the-assumption-of-saint-mary/",
+      "notes": "Assumption of Saint Mary on August 22."
+    }
+  ],
+  "vectors": [
+    { "id": "oca-pascha-2026", "kind": "easter", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2026, "expectedDateISO": "2026-04-12", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pascha-2027", "kind": "easter", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2027, "expectedDateISO": "2027-05-02", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pascha-2028", "kind": "easter", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2028, "expectedDateISO": "2028-04-16", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pascha-2029", "kind": "easter", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2029, "expectedDateISO": "2029-04-08", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pascha-2030", "kind": "easter", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2030, "expectedDateISO": "2030-04-28", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+
+    { "id": "oca-ascension-2026", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2026, "offsetDays": 39, "expectedDateISO": "2026-05-21", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-ascension-2027", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2027, "offsetDays": 39, "expectedDateISO": "2027-06-10", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-ascension-2028", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2028, "offsetDays": 39, "expectedDateISO": "2028-05-25", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-ascension-2029", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2029, "offsetDays": 39, "expectedDateISO": "2029-05-17", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-ascension-2030", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2030, "offsetDays": 39, "expectedDateISO": "2030-06-06", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+
+    { "id": "oca-pentecost-2026", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2026, "offsetDays": 49, "expectedDateISO": "2026-05-31", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pentecost-2027", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2027, "offsetDays": 49, "expectedDateISO": "2027-06-20", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pentecost-2028", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2028, "offsetDays": 49, "expectedDateISO": "2028-06-04", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pentecost-2029", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2029, "offsetDays": 49, "expectedDateISO": "2029-05-27", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+    { "id": "oca-pentecost-2030", "kind": "easter-offset", "churchId": "eastern-orthodox", "engineId": "byzantine-paschalion", "year": 2030, "offsetDays": 49, "expectedDateISO": "2030-06-16", "sourceId": "oca-paschal-cycle", "validationStatus": "verified" },
+
+    { "id": "coptic-nativity-2026", "kind": "native-fixed", "churchId": "coptic-orthodox", "engineId": "coptic-native-v1", "nativeYear": 1742, "nativeMonth": 4, "nativeDay": 29, "expectedDateISO": "2026-01-07", "sourceId": "coptic-rites", "validationStatus": "verified" },
+    { "id": "coptic-annunciation-2026", "kind": "native-fixed", "churchId": "coptic-orthodox", "engineId": "coptic-native-v1", "nativeYear": 1742, "nativeMonth": 7, "nativeDay": 29, "expectedDateISO": "2026-04-07", "sourceId": "coptic-rites", "validationStatus": "verified" },
+    { "id": "coptic-nayrouz-2026", "kind": "native-fixed", "churchId": "coptic-orthodox", "engineId": "coptic-native-v1", "nativeYear": 1743, "nativeMonth": 1, "nativeDay": 1, "expectedDateISO": "2026-09-11", "sourceId": "coptic-rites", "validationStatus": "verified" },
+    { "id": "coptic-easter-2026", "kind": "easter", "churchId": "coptic-orthodox", "engineId": "coptic-paschalion-v1", "year": 2026, "expectedDateISO": "2026-04-12", "sourceId": "coptic-resurrection-2026", "validationStatus": "verified" },
+
+    { "id": "ethiopian-new-year-2026", "kind": "native-fixed", "churchId": "ethiopian-orthodox", "engineId": "ethiopian-native-v1", "nativeYear": 2019, "nativeMonth": 1, "nativeDay": 1, "expectedDateISO": "2026-09-11", "sourceId": "ethiopian-new-year", "validationStatus": "verified" },
+    { "id": "ethiopian-assumption-2026", "kind": "native-fixed", "churchId": "ethiopian-orthodox", "engineId": "ethiopian-native-v1", "nativeYear": 2018, "nativeMonth": 12, "nativeDay": 16, "expectedDateISO": "2026-08-22", "sourceId": "ethiopian-assumption", "validationStatus": "verified" },
+    { "id": "ethiopian-easter-2026", "kind": "easter", "churchId": "ethiopian-orthodox", "engineId": "ethiopian-paschalion-v1", "year": 2026, "expectedDateISO": "2026-04-12", "sourceId": "ethiopian-bahera-hasab", "validationStatus": "cross-checked" },
+
+    { "id": "armenian-easter-2026", "kind": "easter", "churchId": "armenian-apostolic", "engineId": "armenian-easter-v1", "year": 2026, "expectedDateISO": "2026-04-05", "sourceId": "armenian-easter-2026", "validationStatus": "verified" },
+    { "id": "armenian-ascension-2026", "kind": "easter-offset", "churchId": "armenian-apostolic", "engineId": "armenian-easter-v1", "year": 2026, "offsetDays": 39, "expectedDateISO": "2026-05-14", "sourceId": "armenian-ascension-2026", "validationStatus": "verified" },
+
+    { "id": "syriac-easter-2026", "kind": "easter", "churchId": "syriac-orthodox", "engineId": "syriac-paschalion-v1", "year": 2026, "expectedDateISO": "2026-04-12", "sourceId": "syriac-easter-table", "validationStatus": "verified" }
+  ]
+}
