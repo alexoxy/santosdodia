@@ -23,13 +23,18 @@ export type LiveSourceResult = {
 };
 
 type UnknownRecord = Record<string, unknown>;
+type CompactSnapshotObservance = Partial<Omit<Observance, 'month' | 'day' | 'name'>> &
+  Pick<Observance, 'id' | 'dateISO'>;
 type SnapshotShape = {
   generatedAt: string | null;
-  years: Record<string, { observations?: Observance[] }>;
+  years: Record<string, { observations?: CompactSnapshotObservance[] }>;
   sourceHealth: SourceHealth[];
 };
 
-const SNAPSHOT = snapshot as SnapshotShape;
+// The checked-in fallback intentionally omits fields that are derivable from
+// dateISO. Runtime validation below reconstructs them before returning an
+// Observance, so the compact JSON remains bounded without weakening callers.
+const SNAPSHOT = snapshot as unknown as SnapshotShape;
 const API_TIMEOUT_MS = 14_000;
 
 const litcalLocales: Partial<Record<Locale, string>> = {
@@ -212,8 +217,7 @@ function parseOrthodox(payload: unknown, locale: Locale): Observance[] {
 function snapshotItems(year: number, locale: Locale): Observance[] {
   const items = SNAPSHOT.years?.[String(year)]?.observations;
   if (!Array.isArray(items)) return [];
-  return items.flatMap(raw => {
-    const item = raw as Partial<Observance>;
+  return items.flatMap(item => {
     const names = item.names;
     const name = names
       ? names[locale] ?? names.en ?? Object.values(names).find(value => typeof value === 'string' && value.trim())
