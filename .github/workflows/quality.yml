@@ -53,6 +53,9 @@ jobs:
       - name: Test guarded calendar staging SQL generation
         run: npm run calendar:staging-test
 
+      - name: Test database migrations, idempotency and rollback
+        run: npm run db:migrations-test
+
       - name: Validate API and OpenAPI contracts
         run: npm run api:validate
 
