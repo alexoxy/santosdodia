@@ -53,6 +53,9 @@ jobs:
       - name: Test calendar engines against official reference dates
         run: npm run calendar:reference-test
 
+      - name: Test Dropbox normalized package conversion
+        run: npm run calendar:normalize-test
+
       - name: Test guarded calendar staging SQL generation
         run: npm run calendar:staging-test
 
