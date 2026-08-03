@@ -8,7 +8,7 @@ if (!targetModule) {
 }
 
 const root = process.cwd();
-const runtimeSnapshot = path.join(root, 'data', 'generated', 'runtime-fallback.json');
+const runtimeSnapshot = path.resolve(root, process.env.RUNTIME_SNAPSHOT_PATH ?? 'data/generated/runtime-fallback.json');
 const legacySnapshot = path.join(root, 'data', 'generated', 'source-snapshot.json');
 let createdCompatibilityFile = false;
 
