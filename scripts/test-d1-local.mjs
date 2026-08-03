@@ -2,13 +2,16 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { serializeSqlStatements } from './sql-statement-list.mjs';
 
 const root = process.cwd();
 const work = fs.mkdtempSync(path.join(os.tmpdir(), 'santosdia-d1-'));
 const persist = path.join(work, 'state');
 const config = path.join(work, 'wrangler.d1-test.jsonc');
 const seed = path.join(work, 'seed.sql');
-const packageSql = path.join(work, 'calendar-package.sql');
+const generatedSql = path.join(work, 'calendar-package.generated.sql');
+const batchJson = path.join(work, 'calendar-package.d1-batch.json');
+const portableSql = path.join(work, 'calendar-package.d1-execute.sql');
 const wrangler = path.join(root, 'node_modules', '.bin', process.platform === 'win32' ? 'wrangler.cmd' : 'wrangler');
 
 function run(command, args, options = {}) {
@@ -74,11 +77,28 @@ try {
   run(process.execPath, [
     'scripts/build-calendar-staging-sql.mjs',
     '--input', 'test/fixtures/calendar-staging.valid.json',
-    '--output', packageSql
+    '--output', generatedSql
+  ]);
+  run(process.execPath, [
+    'scripts/prepare-d1-calendar-package.mjs',
+    '--input', generatedSql,
+    '--output', batchJson
   ]);
 
-  d1(['execute', 'DATA_DB', '--file', packageSql, '--yes']);
-  d1(['execute', 'DATA_DB', '--file', packageSql, '--yes']);
+  const batchPackage = JSON.parse(fs.readFileSync(batchJson, 'utf8'));
+  if (batchPackage.execution !== 'D1Database.batch' || batchPackage.atomic !== true) {
+    throw new Error('The D1 package does not declare atomic batch execution.');
+  }
+  if (!Array.isArray(batchPackage.statements) || batchPackage.statements.length !== batchPackage.statementCount) {
+    throw new Error('The D1 package statement count is inconsistent.');
+  }
+  fs.writeFileSync(portableSql, serializeSqlStatements(batchPackage.statements), 'utf8');
+
+  // Wrangler validates that every generated statement is accepted by the same
+  // local D1 engine used by Workers. Production promotion uses the identical
+  // statement list through D1Database.batch(), which supplies atomic rollback.
+  d1(['execute', 'DATA_DB', '--file', portableSql, '--yes']);
+  d1(['execute', 'DATA_DB', '--file', portableSql, '--yes']);
 
   const output = d1([
     'execute', 'DATA_DB',
