@@ -15,23 +15,15 @@ on:
         required: false
         type: string
       package_url:
-        description: Single-use Dropbox download URL (required for promote)
+        description: Single-use Dropbox URL for the immutable normalized package
         required: false
         type: string
-      package_sha256:
-        description: Exact SHA-256 of downloaded normalized package
+      approval_url:
+        description: Single-use Dropbox URL for the staging approval manifest
         required: false
         type: string
-      manifest_sha256:
-        description: Canonical manifest SHA-256 stored with the package
-        required: false
-        type: string
-      validation_report_path:
-        description: Dropbox validation report path
-        required: false
-        type: string
-      run_id:
-        description: Calendar import run ID
+      approval_canonical_sha256:
+        description: SHA-256 of compact canonical approval JSON
         required: false
         type: string
       confirmation:
@@ -105,51 +97,66 @@ jobs:
           }
           test -n "${{ inputs.database_id }}"
           test -n "${{ inputs.package_url }}"
-          test -n "${{ inputs.package_sha256 }}"
-          test -n "${{ inputs.manifest_sha256 }}"
-          test -n "${{ inputs.validation_report_path }}"
-          test -n "${{ inputs.run_id }}"
+          test -n "${{ inputs.approval_url }}"
+          test -n "${{ inputs.approval_canonical_sha256 }}"
 
-      - name: Validate Dropbox source and hashes
+      - name: Validate Dropbox sources and approval hash
         if: inputs.operation == 'promote'
         env:
           PACKAGE_URL: ${{ inputs.package_url }}
-          PACKAGE_SHA256: ${{ inputs.package_sha256 }}
-          MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+          APPROVAL_URL: ${{ inputs.approval_url }}
+          APPROVAL_SHA256: ${{ inputs.approval_canonical_sha256 }}
         run: |
           node - <<'NODE'
-          const url = new URL(process.env.PACKAGE_URL);
-          if (!url.hostname.endsWith('.dropboxusercontent.com')) throw new Error('Package URL must be a direct Dropbox download URL.');
-          for (const [name, value] of [['PACKAGE_SHA256', process.env.PACKAGE_SHA256], ['MANIFEST_SHA256', process.env.MANIFEST_SHA256]]) {
-            if (!/^[a-f0-9]{64}$/.test(value ?? '')) throw new Error(`${name} must be a lowercase SHA-256.`);
+          for (const [name, value] of [['PACKAGE_URL', process.env.PACKAGE_URL], ['APPROVAL_URL', process.env.APPROVAL_URL]]) {
+            const url = new URL(value);
+            if (!url.hostname.endsWith('.dropboxusercontent.com')) throw new Error(`${name} must be a direct Dropbox download URL.`);
+          }
+          if (!/^[a-f0-9]{64}$/.test(process.env.APPROVAL_SHA256 ?? '')) {
+            throw new Error('APPROVAL_SHA256 must be a lowercase SHA-256.');
           }
           NODE
 
-      - name: Download normalized Dropbox package
+      - name: Download immutable package and approval
         if: inputs.operation == 'promote'
         env:
           PACKAGE_URL: ${{ inputs.package_url }}
-          PACKAGE_SHA256: ${{ inputs.package_sha256 }}
+          APPROVAL_URL: ${{ inputs.approval_url }}
         shell: bash
         run: |
           curl --fail-with-body --location --proto '=https' --tlsv1.2 \
             --retry 2 --retry-all-errors --connect-timeout 15 --max-time 120 \
             --output /tmp/calendar-normalized.json "$PACKAGE_URL"
-          echo "$PACKAGE_SHA256  /tmp/calendar-normalized.json" | sha256sum --check --strict
+          curl --fail-with-body --location --proto '=https' --tlsv1.2 \
+            --retry 2 --retry-all-errors --connect-timeout 15 --max-time 120 \
+            --output /tmp/calendar-approval.json "$APPROVAL_URL"
 
-      - name: Enforce staging-only package policy
+      - name: Verify approval identity and apply it in temporary storage
         if: inputs.operation == 'promote'
+        id: approval
+        env:
+          EXPECTED_APPROVAL_SHA256: ${{ inputs.approval_canonical_sha256 }}
+        shell: bash
         run: |
           node - <<'NODE'
+          const { createHash } = require('node:crypto');
           const fs = require('node:fs');
-          const body = JSON.parse(fs.readFileSync('/tmp/calendar-normalized.json', 'utf8'));
-          if (body?.run?.status !== 'validated') throw new Error('Package is not validated.');
-          if (body?.run?.promotionAllowed !== true) throw new Error('Package is not approved for staging promotion.');
-          if (body?.run?.publicationAllowed !== false) throw new Error('Staging package must explicitly prohibit publication.');
-          if (!Array.isArray(body.events) || body.events.length === 0) throw new Error('Package has no events.');
-          if (body.events.some(event => event.publicationStatus !== 'withheld')) {
-            throw new Error('Every staging occurrence must remain withheld.');
-          }
+          const approval = JSON.parse(fs.readFileSync('/tmp/calendar-approval.json', 'utf8'));
+          const actual = createHash('sha256').update(JSON.stringify(approval)).digest('hex');
+          if (actual !== process.env.EXPECTED_APPROVAL_SHA256) throw new Error('Approval canonical SHA-256 mismatch.');
+          NODE
+          node scripts/apply-calendar-staging-approval.mjs \
+            --package /tmp/calendar-normalized.json \
+            --approval /tmp/calendar-approval.json \
+            --output /tmp/calendar-approved.json \
+            --metadata-output /tmp/calendar-approval-metadata.json
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const metadata = JSON.parse(fs.readFileSync('/tmp/calendar-approval-metadata.json', 'utf8'));
+          const output = process.env.GITHUB_OUTPUT;
+          fs.appendFileSync(output, `run_id=${metadata.approvalId}\n`);
+          fs.appendFileSync(output, `manifest_sha256=${metadata.manifestSha256}\n`);
+          fs.appendFileSync(output, `validation_report_path=${metadata.validationReportPath}\n`);
           NODE
 
       - name: Build canonical and atomic D1 packages
@@ -157,10 +164,10 @@ jobs:
         shell: bash
         run: |
           node scripts/normalize-calendar-staging-package.mjs \
-            --input /tmp/calendar-normalized.json \
+            --input /tmp/calendar-approved.json \
             --output /tmp/calendar-canonical.json \
-            --manifest-sha256 "${{ inputs.manifest_sha256 }}" \
-            --validation-report-path "${{ inputs.validation_report_path }}"
+            --manifest-sha256 "${{ steps.approval.outputs.manifest_sha256 }}" \
+            --validation-report-path "${{ steps.approval.outputs.validation_report_path }}"
           node scripts/build-calendar-staging-sql.mjs \
             --input /tmp/calendar-canonical.json \
             --output /tmp/calendar-staging.sql
@@ -200,7 +207,7 @@ jobs:
           node scripts/manage-d1-staging.mjs apply \
             --database-id "${{ inputs.database_id }}" \
             --package /tmp/calendar-d1-batch.json \
-            --run-id "${{ inputs.run_id }}" \
+            --run-id "${{ steps.approval.outputs.run_id }}" \
             --output reports/d1-staging-promotion.json
 
       - name: Publish promotion receipt
@@ -208,6 +215,8 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: d1-staging-promotion-receipt
-          path: reports/d1-staging-promotion.json
+          path: |
+            reports/d1-staging-promotion.json
+            /tmp/calendar-approval-metadata.json
           if-no-files-found: error
           retention-days: 30
