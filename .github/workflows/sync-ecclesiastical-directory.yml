@@ -1,4 +1,4 @@
-name: Sync ecclesiastical directory
+name: Prepare ecclesiastical directory ingestion
 
 on:
   workflow_dispatch:
@@ -29,27 +29,25 @@ on:
         default: '5'
         type: string
       retain_html:
-        description: Retain compressed source pages as a private workflow artifact
+        description: Include compressed source pages in the private staging artifact
         required: true
-        default: false
+        default: true
         type: boolean
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: ecclesiastical-directory-${{ inputs.source }}
   cancel-in-progress: false
 
 jobs:
-  sync-audit-and-publish:
+  prepare-audited-staging-package:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Use Node.js
         uses: actions/setup-node@v6
@@ -85,36 +83,70 @@ jobs:
       - name: Validate repository
         run: npm run check
 
-      - name: Upload retained source snapshots
-        if: ${{ inputs.retain_html }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ecclesiastical-source-snapshots-${{ inputs.source }}-${{ github.run_id }}
-          path: data/generated/ecclesiastical-directory/snapshots/
-          if-no-files-found: ignore
-          retention-days: 30
-
-      - name: Commit normalized source data
+      - name: Build staging manifest
         shell: bash
         run: |
-          git config user.name 'santosdodia-directory-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add data/generated/ecclesiastical-directory/*.json db/seeds/ecclesiastical-directory.sql
-          if git diff --cached --quiet; then
-            echo 'No normalized directory changes.'
-            exit 0
-          fi
-          git commit -m "data(leaders): refresh ${{ inputs.source }} directory"
+          mkdir -p data/generated/ecclesiastical-directory/staging
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const crypto = require('node:crypto');
+          const root = 'data/generated/ecclesiastical-directory';
+          const files = [];
+          function walk(dir) {
+            if (!fs.existsSync(dir)) return;
+            for (const name of fs.readdirSync(dir)) {
+              const full = path.join(dir, name);
+              const stat = fs.statSync(full);
+              if (stat.isDirectory()) walk(full);
+              else if (!full.endsWith('/staging/manifest.json')) {
+                const body = fs.readFileSync(full);
+                files.push({
+                  path: full,
+                  bytes: body.length,
+                  sha256: crypto.createHash('sha256').update(body).digest('hex')
+                });
+              }
+            }
+          }
+          walk(root);
+          if (fs.existsSync('db/seeds/ecclesiastical-directory.sql')) {
+            const full = 'db/seeds/ecclesiastical-directory.sql';
+            const body = fs.readFileSync(full);
+            files.push({path: full, bytes: body.length, sha256: crypto.createHash('sha256').update(body).digest('hex')});
+          }
+          const manifest = {
+            schemaVersion: 1,
+            generatedAt: new Date().toISOString(),
+            source: process.env.SOURCE,
+            country: process.env.COUNTRY || null,
+            maxCountries: process.env.MAX_COUNTRIES,
+            destinationPolicy: 'Dropbox staging before database promotion',
+            dropboxRoot: '/Santos do Dia/02_Dados_Eclesiasticos',
+            publicationAllowed: false,
+            files
+          };
+          fs.writeFileSync(path.join(root, 'staging', 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+          NODE
+        env:
+          SOURCE: ${{ inputs.source }}
+          COUNTRY: ${{ inputs.country }}
+          MAX_COUNTRIES: ${{ inputs.max_countries }}
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo 'Generated directory conflicts with newer main changes; refusing automatic resolution.'
-              exit 1
-            fi
-            if git push origin HEAD:main; then exit 0; fi
-            sleep $((attempt * 5))
-          done
-          echo 'Unable to publish normalized directory data after three attempts.'
-          exit 1
+      - name: Upload audited staging package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ecclesiastical-staging-${{ inputs.source }}-${{ github.run_id }}
+          path: |
+            data/generated/ecclesiastical-directory/
+            db/seeds/ecclesiastical-directory.sql
+            db/migrations/0001_ecclesiastical_directory.sql
+            docs/data-staging-policy.md
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Explain promotion boundary
+        run: |
+          echo 'This workflow does not commit generated data and does not publish to the site.'
+          echo 'The artifact must first be archived and validated under /Santos do Dia/02_Dados_Eclesiasticos in Dropbox.'
+          echo 'A separate controlled operation promotes approved records into the site database.'
