@@ -1,0 +1,89 @@
+name: One-time LitCal mirror compaction
+
+on:
+  push:
+    branches: [agent/architecture-stabilization]
+    paths:
+      - '.github/workflows/compact-litcal-mirror-once.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-time-litcal-mirror-compaction
+  cancel-in-progress: false
+
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout stabilization branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/architecture-stabilization
+          fetch-depth: 0
+
+      - name: Compact all runtime fallback calendars
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module - <<'NODE'
+          import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
+          import path from 'node:path';
+          import { compactLitcalPayload } from './scripts/litcal-compact.mjs';
+
+          const root = 'data/litcal-mirror/calendars';
+          async function walk(directory) {
+            const output = [];
+            for (const entry of await readdir(directory, { withFileTypes: true })) {
+              const target = path.join(directory, entry.name);
+              if (entry.isDirectory()) output.push(...await walk(target));
+              else if (entry.isFile() && entry.name.endsWith('.json')) output.push(target);
+            }
+            return output;
+          }
+
+          const files = await walk(root);
+          let beforeBytes = 0;
+          let afterBytes = 0;
+          let eventCount = 0;
+          for (const file of files) {
+            const before = await readFile(file, 'utf8');
+            beforeBytes += (await stat(file)).size;
+            const compact = compactLitcalPayload(JSON.parse(before));
+            if (!Number.isInteger(compact.eventCount) || compact.eventCount < 0) throw new Error(`Invalid event count for ${file}`);
+            eventCount += compact.eventCount;
+            const serialized = `${JSON.stringify(compact)}\n`;
+            afterBytes += Buffer.byteLength(serialized);
+            await writeFile(file, serialized, 'utf8');
+          }
+
+          if (!files.length || !eventCount) throw new Error('No LitCal calendar files or events were compacted.');
+          if (afterBytes >= beforeBytes * 0.5) {
+            throw new Error(`Compaction ratio is insufficient: ${beforeBytes} -> ${afterBytes} bytes.`);
+          }
+
+          const manifest = {
+            schemaVersion: 1,
+            migratedAt: new Date().toISOString(),
+            fileCount: files.length,
+            eventCount,
+            beforeBytes,
+            afterBytes,
+            reductionRatio: Number((1 - afterBytes / beforeBytes).toFixed(4)),
+            rawRecovery: 'Legacy raw payloads remain recoverable from Git history until the separately approved history-cleanup operation. Future raw snapshots are archived in Dropbox before normalization.',
+            activeTreeFormat: 'santosdia-litcal-runtime-fallback'
+          };
+          await writeFile('data/litcal-mirror/compaction-manifest.json', `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+          console.log(JSON.stringify(manifest, null, 2));
+          NODE
+
+          git config user.name 'santosdodia-hygiene-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/litcal-mirror/calendars data/litcal-mirror/compaction-manifest.json
+          git rm --ignore-unmatch data/litcal-mirror/openapi.json data/litcal-mirror/decrees.json
+          git rm .github/workflows/compact-litcal-mirror-once.yml
+          git commit -m 'refactor(litcal): compact response mirror and remove unused payloads'
+          git push origin HEAD:agent/architecture-stabilization
