@@ -1,0 +1,213 @@
+name: D1 staging control
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Safe staging operation
+        required: true
+        type: choice
+        options:
+          - provision
+          - promote
+      database_id:
+        description: D1 staging UUID (required for promote)
+        required: false
+        type: string
+      package_url:
+        description: Single-use Dropbox download URL (required for promote)
+        required: false
+        type: string
+      package_sha256:
+        description: Exact SHA-256 of downloaded normalized package
+        required: false
+        type: string
+      manifest_sha256:
+        description: Canonical manifest SHA-256 stored with the package
+        required: false
+        type: string
+      validation_report_path:
+        description: Dropbox validation report path
+        required: false
+        type: string
+      run_id:
+        description: Calendar import run ID
+        required: false
+        type: string
+      confirmation:
+        description: Exact operation confirmation phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: d1-staging-control
+  cancel-in-progress: false
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Require Cloudflare staging credentials
+        shell: bash
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "CLOUDFLARE_ACCOUNT_ID is missing"; exit 1; }
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "CLOUDFLARE_API_TOKEN is missing"; exit 1; }
+
+      - name: Guard provision request
+        if: inputs.operation == 'provision'
+        shell: bash
+        run: |
+          test "${{ inputs.confirmation }}" = "PROVISION_SANTOSDIA_D1_STAGING" || {
+            echo "Provision confirmation phrase is incorrect."
+            exit 1
+          }
+
+      - name: Provision or reuse EU staging database
+        if: inputs.operation == 'provision'
+        run: node scripts/manage-d1-staging.mjs provision --output reports/d1-staging-provision.json
+
+      - name: Publish provision receipt
+        if: inputs.operation == 'provision'
+        uses: actions/upload-artifact@v6
+        with:
+          name: d1-staging-provision-receipt
+          path: reports/d1-staging-provision.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Guard promotion request
+        if: inputs.operation == 'promote'
+        shell: bash
+        run: |
+          test "${{ inputs.confirmation }}" = "PROMOTE_WITHHELD_TO_D1_STAGING" || {
+            echo "Promotion confirmation phrase is incorrect."
+            exit 1
+          }
+          test -n "${{ inputs.database_id }}"
+          test -n "${{ inputs.package_url }}"
+          test -n "${{ inputs.package_sha256 }}"
+          test -n "${{ inputs.manifest_sha256 }}"
+          test -n "${{ inputs.validation_report_path }}"
+          test -n "${{ inputs.run_id }}"
+
+      - name: Validate Dropbox source and hashes
+        if: inputs.operation == 'promote'
+        env:
+          PACKAGE_URL: ${{ inputs.package_url }}
+          PACKAGE_SHA256: ${{ inputs.package_sha256 }}
+          MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+        run: |
+          node - <<'NODE'
+          const url = new URL(process.env.PACKAGE_URL);
+          if (!url.hostname.endsWith('.dropboxusercontent.com')) throw new Error('Package URL must be a direct Dropbox download URL.');
+          for (const [name, value] of [['PACKAGE_SHA256', process.env.PACKAGE_SHA256], ['MANIFEST_SHA256', process.env.MANIFEST_SHA256]]) {
+            if (!/^[a-f0-9]{64}$/.test(value ?? '')) throw new Error(`${name} must be a lowercase SHA-256.`);
+          }
+          NODE
+
+      - name: Download normalized Dropbox package
+        if: inputs.operation == 'promote'
+        env:
+          PACKAGE_URL: ${{ inputs.package_url }}
+          PACKAGE_SHA256: ${{ inputs.package_sha256 }}
+        shell: bash
+        run: |
+          curl --fail-with-body --location --proto '=https' --tlsv1.2 \
+            --retry 2 --retry-all-errors --connect-timeout 15 --max-time 120 \
+            --output /tmp/calendar-normalized.json "$PACKAGE_URL"
+          echo "$PACKAGE_SHA256  /tmp/calendar-normalized.json" | sha256sum --check --strict
+
+      - name: Enforce staging-only package policy
+        if: inputs.operation == 'promote'
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/calendar-normalized.json', 'utf8'));
+          if (body?.run?.status !== 'validated') throw new Error('Package is not validated.');
+          if (body?.run?.promotionAllowed !== true) throw new Error('Package is not approved for staging promotion.');
+          if (body?.run?.publicationAllowed !== false) throw new Error('Staging package must explicitly prohibit publication.');
+          if (!Array.isArray(body.events) || body.events.length === 0) throw new Error('Package has no events.');
+          if (body.events.some(event => event.publicationStatus !== 'withheld')) {
+            throw new Error('Every staging occurrence must remain withheld.');
+          }
+          NODE
+
+      - name: Build canonical and atomic D1 packages
+        if: inputs.operation == 'promote'
+        shell: bash
+        run: |
+          node scripts/normalize-calendar-staging-package.mjs \
+            --input /tmp/calendar-normalized.json \
+            --output /tmp/calendar-canonical.json \
+            --manifest-sha256 "${{ inputs.manifest_sha256 }}" \
+            --validation-report-path "${{ inputs.validation_report_path }}"
+          node scripts/build-calendar-staging-sql.mjs \
+            --input /tmp/calendar-canonical.json \
+            --output /tmp/calendar-staging.sql
+          node scripts/prepare-d1-calendar-package.mjs \
+            --input /tmp/calendar-staging.sql \
+            --output /tmp/calendar-d1-batch.json
+
+      - name: Generate ephemeral staging binding
+        if: inputs.operation == 'promote'
+        run: |
+          node scripts/write-d1-staging-config.mjs \
+            --database-id "${{ inputs.database_id }}" \
+            --output /tmp/wrangler.d1-staging.json
+
+      - name: Verify target is the staging database
+        if: inputs.operation == 'promote'
+        shell: bash
+        run: |
+          npx wrangler d1 info CALENDAR_DB --config /tmp/wrangler.d1-staging.json --json > /tmp/d1-info.json
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const value = JSON.parse(fs.readFileSync('/tmp/d1-info.json', 'utf8'));
+          const database = Array.isArray(value) ? value[0] : value;
+          if (database?.name !== 'santosdodia-staging') throw new Error(`Refusing target database ${database?.name ?? 'unknown'}.`);
+          if (database?.uuid !== process.env.EXPECTED_DATABASE_ID) throw new Error('D1 database UUID does not match the requested staging UUID.');
+          NODE
+        env:
+          EXPECTED_DATABASE_ID: ${{ inputs.database_id }}
+
+      - name: Apply D1 migrations with Cloudflare backup
+        if: inputs.operation == 'promote'
+        run: npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.d1-staging.json
+
+      - name: Apply atomic withheld package and prove idempotency
+        if: inputs.operation == 'promote'
+        run: |
+          node scripts/manage-d1-staging.mjs apply \
+            --database-id "${{ inputs.database_id }}" \
+            --package /tmp/calendar-d1-batch.json \
+            --run-id "${{ inputs.run_id }}" \
+            --output reports/d1-staging-promotion.json
+
+      - name: Publish promotion receipt
+        if: inputs.operation == 'promote'
+        uses: actions/upload-artifact@v6
+        with:
+          name: d1-staging-promotion-receipt
+          path: reports/d1-staging-promotion.json
+          if-no-files-found: error
+          retention-days: 30
