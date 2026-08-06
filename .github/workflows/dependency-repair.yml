@@ -1,0 +1,50 @@
+name: Dependency repair
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.ref == 'refs/heads/agent/osint-data-platform-foundation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/osint-data-platform-foundation
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Repair audited dependencies
+        run: npm audit fix --package-lock-only --ignore-scripts
+
+      - name: Install repaired dependency graph
+        run: npm ci --include=optional
+
+      - name: Verify high-severity audit gate
+        run: npm audit --audit-level=high
+
+      - name: Show repaired js-yaml resolution
+        run: npm ls js-yaml --all
+
+      - name: Commit repaired manifest and lockfile
+        shell: bash
+        run: |
+          if git diff --quiet -- package.json package-lock.json; then
+            echo "No dependency changes were produced."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "fix(deps): repair audited js-yaml vulnerability"
+          git push origin HEAD:agent/osint-data-platform-foundation
