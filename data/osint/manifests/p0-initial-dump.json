@@ -1,24 +1,30 @@
 {
-  "manifestVersion": "1.0",
+  "manifestVersion": "1.1",
   "mode": "archive-only",
   "publish": false,
+  "policyRegistry": "data/osint/policies/p0-policy-registry.json",
   "sources": [
-    {"id":"holy-see-vatican","url":"https://www.vatican.va/"},
-    {"id":"holy-see-press-office","url":"https://press.vatican.va/"},
-    {"id":"vatican-news-liturgical-holidays-pt","url":"https://www.vaticannews.va/pt/feriados-liturgicos.html"},
-    {"id":"portugal-national-liturgy-secretariat","url":"https://www.liturgia.pt/"},
-    {"id":"catholic-hierarchy","url":"https://www.catholic-hierarchy.org/"},
-    {"id":"gcatholic","url":"https://gcatholic.org/"},
-    {"id":"arautos-liturgia-diaria","url":"https://www.arautos.org/liturgia-diaria"},
-    {"id":"goarch-planner","url":"https://www.goarch.org/chapel/planner"},
-    {"id":"orthodox-calendar-api-ispovednik","url":"https://api.ispovednik.org/"},
-    {"id":"orthodox-church-in-america","url":"https://www.oca.org/"},
-    {"id":"coptic-orthodox-patriarchate","url":"https://copticorthodox.church/"},
-    {"id":"armenian-apostolic-church","url":"https://www.armenianchurch.org/"},
-    {"id":"anglican-communion-office","url":"https://www.anglicancommunion.org/"},
-    {"id":"church-of-england","url":"https://www.churchofengland.org/"},
-    {"id":"episcopal-church-usa","url":"https://www.episcopalchurch.org/"},
-    {"id":"wikidata","url":"https://www.wikidata.org/"},
-    {"id":"openbible","url":"https://openbible.com/"}
+    {"id":"holy-see-vatican","url":"https://www.vatican.va/","enabled":false},
+    {"id":"holy-see-press-office","url":"https://press.vatican.va/","enabled":false},
+    {"id":"vatican-news-liturgical-holidays-pt","url":"https://www.vaticannews.va/pt/feriados-liturgicos.html","enabled":false},
+    {"id":"portugal-national-liturgy-secretariat","url":"https://www.liturgia.pt/","enabled":false},
+    {"id":"catholic-hierarchy","url":"https://www.catholic-hierarchy.org/","enabled":false},
+    {"id":"gcatholic","url":"https://gcatholic.org/","enabled":false},
+    {"id":"arautos-liturgia-diaria","url":"https://www.arautos.org/liturgia-diaria","enabled":false},
+    {"id":"goarch-planner","url":"https://www.goarch.org/chapel/planner","enabled":false},
+    {"id":"orthodox-calendar-api-ispovednik","url":"https://api.ispovednik.org/","enabled":false},
+    {"id":"orthodox-church-in-america","url":"https://www.oca.org/","enabled":false},
+    {"id":"coptic-orthodox-patriarchate","url":"https://copticorthodox.church/","enabled":false},
+    {"id":"armenian-apostolic-church","url":"https://www.armenianchurch.org/","enabled":false},
+    {"id":"anglican-communion-office","url":"https://www.anglicancommunion.org/","enabled":false},
+    {"id":"church-of-england","url":"https://www.churchofengland.org/","enabled":false},
+    {"id":"episcopal-church-usa","url":"https://www.episcopalchurch.org/","enabled":false},
+    {
+      "id":"wikidata",
+      "url":"https://www.wikidata.org/",
+      "enabled":true,
+      "adapter":"scripts/osint/adapters/wikidata-saints.mjs"
+    },
+    {"id":"openbible","url":"https://openbible.com/","enabled":false}
   ]
 }
