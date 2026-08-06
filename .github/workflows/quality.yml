@@ -40,6 +40,9 @@ jobs:
       - name: Audit all installed dependencies
         run: npm audit --audit-level=high
 
+      - name: Test Wikidata staging normalization
+        run: npm run osint:normalize-test
+
       - name: Audit curated data quality
         run: npm run data:audit
 
