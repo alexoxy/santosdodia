@@ -1,17 +1,12 @@
-import { CHURCHES } from '../../../../../data/knowledge/churches';
-import { ECCLESIASTICAL_ASSERTIONS, ECCLESIASTICAL_OFFICES, ECCLESIASTICAL_PEOPLE } from '../../../../../data/knowledge/ecclesiastical-state';
+import { ECCLESIASTICAL_OFFICES, ECCLESIASTICAL_PEOPLE } from '../../../../../data/knowledge/ecclesiastical-state';
 import { JURISDICTIONS } from '../../../../../data/knowledge/jurisdictions';
-import { KNOWLEDGE_SOURCES, ingestibleSources } from '../../../../../data/knowledge/source-registry';
-import { holySeeParserChecks, holySeeParserHealthy } from '../../../../../lib/ingestion/holy-see-self-check';
-import { calendarEngineChecks, calendarEngineHealthy } from '../../../../../lib/knowledge/calendar-self-check';
-import { jurisdictionHierarchyChecks, jurisdictionHierarchyHealthy } from '../../../../../lib/knowledge/jurisdiction-self-check';
+import { holySeeParserHealthy } from '../../../../../lib/ingestion/holy-see-self-check';
+import { calendarEngineHealthy } from '../../../../../lib/knowledge/calendar-self-check';
+import { jurisdictionHierarchyHealthy } from '../../../../../lib/knowledge/jurisdiction-self-check';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const calendarChecks = calendarEngineChecks();
-  const parserChecks = holySeeParserChecks();
-  const hierarchyChecks = jurisdictionHierarchyChecks();
   const calendarHealthy = calendarEngineHealthy();
   const parserHealthy = holySeeParserHealthy();
   const hierarchyHealthy = jurisdictionHierarchyHealthy();
@@ -22,35 +17,17 @@ export async function GET() {
     status: healthy ? 'ok' : 'degraded',
     checkedAt: new Date().toISOString(),
     services: {
-      calendarEngine: { healthy: calendarHealthy, checks: calendarChecks },
-      officialSourceParsers: {
-        healthy: parserHealthy,
-        parsers: {
-          holySeeBulletin: { healthy: parserHealthy, checks: parserChecks }
-        }
-      },
-      ecclesiasticalState: {
-        healthy: stateHealthy,
-        people: ECCLESIASTICAL_PEOPLE.length,
-        activeOffices: ECCLESIASTICAL_OFFICES.filter(office => office.status === 'active').length,
-        assertions: ECCLESIASTICAL_ASSERTIONS.length
-      },
-      jurisdictionHierarchy: {
-        healthy: hierarchyHealthy,
-        checks: hierarchyChecks
-      },
-      knowledgeBase: {
-        churches: CHURCHES.length,
-        jurisdictions: JURISDICTIONS.length,
-        sources: KNOWLEDGE_SOURCES.length,
-        ingestibleSources: ingestibleSources().length
-      }
+      calendarEngine: { healthy: calendarHealthy },
+      officialSourceParsers: { healthy: parserHealthy },
+      ecclesiasticalState: { healthy: stateHealthy },
+      jurisdictionHierarchy: { healthy: hierarchyHealthy }
     }
   }, {
     status: healthy ? 200 : 503,
     headers: {
       'cache-control': 'no-store',
-      'content-type': 'application/json; charset=utf-8'
+      'content-type': 'application/json; charset=utf-8',
+      'x-content-type-options': 'nosniff'
     }
   });
 }

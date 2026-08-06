@@ -24,6 +24,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/leaders', changeFrequency: 'weekly', priority: 0.78 },
     { path: '/sources', changeFrequency: 'monthly', priority: 0.65 },
     { path: '/copyright', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/privacy', changeFrequency: 'yearly', priority: 0.55 },
+    { path: '/terms', changeFrequency: 'yearly', priority: 0.55 },
+    { path: '/faq', changeFrequency: 'monthly', priority: 0.65 },
+    { path: '/corrections', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/developers', changeFrequency: 'monthly', priority: 0.6 }
   ] as const;
 

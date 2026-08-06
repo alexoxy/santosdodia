@@ -20,6 +20,7 @@ Verified-profile standard: [docs/verified-profile-standard.md](docs/verified-pro
 - Official live-stream directories and media archives with editorial OSINT verification
 - Public REST API, JSON responses, ICS feeds and OpenAPI specification
 - Consolidated copyright, licensing and source-provenance page linked from the footer
+- Privacy, terms, FAQ and correction/rights-request pages linked from the footer
 - Browser-sensitive interface with English fallback
 
 The current dataset is a curated beta. Dates and patronage associations may vary by Church, jurisdiction, rite, local tradition and calendar system.

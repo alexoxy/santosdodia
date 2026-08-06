@@ -5,6 +5,7 @@ import { localeOptionLabel } from '../../lib/locale-coverage';
 import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observances';
 import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { getFeatureCopy } from '../../lib/feature-copy';
+import { getInstitutionalCopy } from '../../lib/institutional-copy';
 import { useLanguage, type ChurchPreference } from './LanguageProvider';
 
 const skipLabels: Partial<Record<Locale,string>> = {
@@ -25,6 +26,7 @@ const leaderLabels: Partial<Record<Locale,string>> = {
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
  const { locale, setLocale, copy, church, setChurch } = useLanguage();
  const feature=getFeatureCopy(locale);
+ const institutional=getInstitutionalCopy(locale);
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
  return <div className="site-shell">
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
@@ -40,6 +42,6 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   <footer className="site-footer"><div className="footer-grid">
    <div><div className="brand footer-brand"><span className="brand-mark small" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></div><p>{copy.footer}</p></div>
    <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/leaders">{leaderLabels[locale]??leaderLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
-  </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><span>{copy.disclaimer}</span></div></div></footer>
+  </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><Link href="/privacy">{institutional.nav.privacy}</Link><Link href="/terms">{institutional.nav.terms}</Link><Link href="/faq">{institutional.nav.faq}</Link><Link href="/corrections">{institutional.nav.corrections}</Link><span>{copy.disclaimer}</span></div></div></footer>
  </div>
 }
