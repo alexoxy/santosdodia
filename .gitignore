@@ -33,8 +33,9 @@ cloudflare-env.d.ts
 /data/generated/calendar-staging/
 /data/generated/ecclesiastical-directory/snapshots/
 
-# OSINT raw and policy-evidence captures are archived externally, never committed
+# OSINT raw, normalized staging and policy-evidence captures are archived externally, never committed
 /data/osint/runs/
+/data/osint/staging/
 /data/osint/policy-runs/
 
 # External source trees are never vendored; only compact provenance manifests
