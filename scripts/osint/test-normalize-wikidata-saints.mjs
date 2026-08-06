@@ -30,6 +30,8 @@ try {
   assert.equal(first.qualityReport.metrics.duplicatedQids, 1);
   assert.equal(first.qualityReport.metrics.dateConflicts.birth, 1);
   assert.equal(first.qualityReport.metrics.invalidDateNodes.birth, 1);
+  assert.equal(first.qualityReport.sourceFieldCoverage.birthPlaces, 'not_acquired');
+  assert.equal(first.reviewQueue.length, 3);
 
   const q1 = first.entities.find((entity) => entity.qid === 'Q1');
   assert.equal(q1.status, 'needs_review');
@@ -44,7 +46,7 @@ try {
   assert.equal(q3.canonicalName, 'Q3');
   assert.ok(q3.quality.warnings.includes('canonical_name_falls_back_to_qid'));
 
-  for (const filename of ['entities.jsonl', 'conflicts.jsonl', 'quality-report.json', 'staging-manifest.json']) {
+  for (const filename of ['entities.jsonl', 'conflicts.jsonl', 'review-queue.csv', 'quality-report.json', 'staging-manifest.json']) {
     const firstBytes = await readFile(join(firstOutput, filename));
     const secondBytes = await readFile(join(secondOutput, filename));
     assert.deepEqual(firstBytes, secondBytes, `${filename} must be deterministic`);
