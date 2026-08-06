@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.santosdodia.com/schemas/source-registry.schema.json",
+  "title": "SantosDia OSINT source registry",
+  "type": "object",
+  "required": ["version", "sources"],
+  "properties": {
+    "version": {"type": "string"},
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source"}
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "url", "traditions", "domains", "authority", "languages", "fetch"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$"},
+        "name": {"type": "string", "minLength": 2},
+        "url": {"type": "string", "format": "uri"},
+        "publisher": {"type": "string"},
+        "jurisdictions": {"type": "array", "items": {"type": "string"}, "default": []},
+        "traditions": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "domains": {"type": "array", "minItems": 1, "items": {"enum": ["calendar", "saints", "hierarchy", "scripture", "media", "documents", "places", "institutes", "news"]}},
+        "authority": {"type": "integer", "minimum": 0, "maximum": 100},
+        "independenceGroup": {"type": "string"},
+        "languages": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "formats": {"type": "array", "items": {"enum": ["html", "json", "xml", "rss", "atom", "ics", "csv", "pdf", "sparql", "api", "dump", "media"]}},
+        "licence": {"type": "object", "properties": {"status": {"enum": ["open", "restricted", "unknown", "metadata-only"]}, "name": {"type": "string"}, "url": {"type": "string", "format": "uri"}}, "required": ["status"]},
+        "robotsPolicy": {"enum": ["allowed", "conditional", "disallowed", "unknown"]},
+        "fetch": {"type": "object", "required": ["mode", "cadence"], "properties": {"mode": {"enum": ["api", "dump", "feed", "html", "pdf", "manual-seed"]}, "cadence": {"enum": ["hourly", "daily", "weekly", "monthly", "on-change", "one-time"]}, "entrypoints": {"type": "array", "items": {"type": "string", "format": "uri"}}, "rateLimitPerMinute": {"type": "integer", "minimum": 1}, "enabled": {"type": "boolean", "default": true}}},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
