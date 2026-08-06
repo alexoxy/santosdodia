@@ -10,6 +10,10 @@ Data quality baseline: [docs/data-quality-baseline.md](docs/data-quality-baselin
 
 Verified-profile standard: [docs/verified-profile-standard.md](docs/verified-profile-standard.md)
 
+OSINT data-platform architecture: [docs/osint-data-platform.md](docs/osint-data-platform.md)
+
+OSINT acquisition runbook: [docs/osint-acquisition-runbook.md](docs/osint-acquisition-runbook.md)
+
 ## Product scope
 
 - Find patron saints by profession, cause, place, date, name and Christian tradition
@@ -33,8 +37,8 @@ npm run check
 npm run cloudflare:build
 ```
 
-`npm run check` performs the curated-data audit, typecheck, lint and Next.js production build.
+`npm run check` performs repository and OSINT registry audits, curated-data checks, typecheck, lint and the Next.js production build.
 
 Public endpoints: `/api/v1/discover`, `/api/v1/today`, `/api/v1/observances`, `/api/v1/search`, `/api/ical/all`, `/api/ical/saint/{id}`, `/openapi.json`.
 
-The GitHub repository is the source of truth. Production runs on Cloudflare Workers through OpenNext. The canonical production host is `www.santosdodia.com`; the apex host redirects to it. Vercel deployment is retired and the GitHub-to-Dropbox backup workflow is not part of the architecture.
+The GitHub repository is the code and schema source of truth. Production runs on Cloudflare Workers through OpenNext. The canonical production host is `www.santosdodia.com`; the apex host redirects to it. Raw OSINT source objects are archived outside Git and are never used as direct production content.

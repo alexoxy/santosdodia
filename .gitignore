@@ -33,6 +33,10 @@ cloudflare-env.d.ts
 /data/generated/calendar-staging/
 /data/generated/ecclesiastical-directory/snapshots/
 
+# OSINT raw and policy-evidence captures are archived externally, never committed
+/data/osint/runs/
+/data/osint/policy-runs/
+
 # External source trees are never vendored; only compact provenance manifests
 # and validated normalized responses may be tracked.
 /vendor/litcal-api/

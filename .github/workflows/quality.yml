@@ -6,6 +6,9 @@ on:
       - main
       - cloudflare-preview
       - 'agent/**'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
