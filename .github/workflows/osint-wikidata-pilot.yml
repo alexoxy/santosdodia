@@ -1,16 +1,16 @@
 name: OSINT Wikidata pilot archive
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/wikidata-pilot-archive
+      - main
 
 permissions:
   contents: read
 
 concurrency:
-  group: osint-wikidata-pilot-${{ github.ref }}
-  cancel-in-progress: false
+  group: osint-wikidata-pilot-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   archive-only-pilot:
