@@ -1,0 +1,24 @@
+{
+  "manifestVersion": "1.0",
+  "mode": "archive-only",
+  "publish": false,
+  "sources": [
+    {"id":"holy-see-vatican","url":"https://www.vatican.va/"},
+    {"id":"holy-see-press-office","url":"https://press.vatican.va/"},
+    {"id":"vatican-news-liturgical-holidays-pt","url":"https://www.vaticannews.va/pt/feriados-liturgicos.html"},
+    {"id":"portugal-national-liturgy-secretariat","url":"https://www.liturgia.pt/"},
+    {"id":"catholic-hierarchy","url":"https://www.catholic-hierarchy.org/"},
+    {"id":"gcatholic","url":"https://gcatholic.org/"},
+    {"id":"arautos-liturgia-diaria","url":"https://www.arautos.org/liturgia-diaria"},
+    {"id":"goarch-planner","url":"https://www.goarch.org/chapel/planner"},
+    {"id":"orthodox-calendar-api-ispovednik","url":"https://api.ispovednik.org/"},
+    {"id":"orthodox-church-in-america","url":"https://www.oca.org/"},
+    {"id":"coptic-orthodox-patriarchate","url":"https://copticorthodox.church/"},
+    {"id":"armenian-apostolic-church","url":"https://www.armenianchurch.org/"},
+    {"id":"anglican-communion-office","url":"https://www.anglicancommunion.org/"},
+    {"id":"church-of-england","url":"https://www.churchofengland.org/"},
+    {"id":"episcopal-church-usa","url":"https://www.episcopalchurch.org/"},
+    {"id":"wikidata","url":"https://www.wikidata.org/"},
+    {"id":"openbible","url":"https://openbible.com/"}
+  ]
+}
