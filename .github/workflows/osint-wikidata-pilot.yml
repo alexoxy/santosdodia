@@ -4,12 +4,13 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: osint-wikidata-pilot-pr-${{ github.event.pull_request.number }}
+  group: osint-wikidata-pilot-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
