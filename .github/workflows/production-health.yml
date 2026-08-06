@@ -29,22 +29,25 @@ jobs:
         run: |
           set -euo pipefail
           headers="$(mktemp)"; body="$(mktemp)"
-          status="$(curl --silent --show-error --location --compressed --http1.1 \
+          result="$(curl --silent --show-error --location --compressed --http1.1 \
             --user-agent "$HEALTH_USER_AGENT" \
             --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
             --header 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.6' \
             --retry 2 --retry-all-errors --max-time 30 \
-            --dump-header "$headers" --output "$body" --write-out '%{http_code}' \
+            --dump-header "$headers" --output "$body" --write-out '%{http_code} %{url_effective}' \
             https://www.santosdodia.com/)"
+          status="${result%% *}"; final_url="${result#* }"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
             echo '::warning::Homepage probe was blocked by the Cloudflare WAF; DNS, TLS and Cloudflare edge were reachable.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "Homepage returned HTTP $status"; cat "$headers"; exit 1; }
+          [ "$final_url" = 'https://www.santosdodia.com/' ] || { echo "Unexpected homepage URL: $final_url"; exit 1; }
+          case "$final_url" in *':path'*|*'%3Apath'*|*'%3apath'*) echo "Literal route placeholder leaked into URL: $final_url"; exit 1 ;; esac
           grep -qi '^cf-ray:' "$headers" || { echo 'Cloudflare cf-ray header missing.'; exit 1; }
           test -s "$body" || { echo 'Homepage returned an empty body.'; exit 1; }
 
-      - name: Probe apex redirect
+      - name: Probe apex path redirect
         if: always()
         shell: bash
         run: |
@@ -55,14 +58,15 @@ jobs:
             --header 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.6' \
             --retry 2 --retry-all-errors --max-time 30 \
             --dump-header "$headers" --output "$body" --write-out '%{http_code} %{url_effective}' \
-            https://santosdodia.com/)"
+            https://santosdodia.com/faq)"
           status="${result%% *}"; final_url="${result#* }"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
             echo '::warning::Apex probe was blocked by the Cloudflare WAF after reaching the edge.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "Apex request returned HTTP $status"; exit 1; }
-          case "$final_url" in https://www.santosdodia.com/*) ;; *) echo "Unexpected canonical URL: $final_url"; exit 1 ;; esac
+          [ "$final_url" = 'https://www.santosdodia.com/faq' ] || { echo "Apex redirect lost or corrupted the path: $final_url"; exit 1; }
+          case "$final_url" in *':path'*|*'%3Apath'*|*'%3apath'*) echo "Literal route placeholder leaked into URL: $final_url"; exit 1 ;; esac
 
       - name: Probe status API
         if: always()
