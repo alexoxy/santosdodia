@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.santosdodia.com/schemas/wikidata-saint-staging.schema.json",
+  "title": "Wikidata saint staging entity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "stagingVersion",
+    "id",
+    "entityType",
+    "qid",
+    "canonicalName",
+    "canonicalSlug",
+    "status",
+    "names",
+    "descriptions",
+    "dates",
+    "media",
+    "provenance",
+    "scope",
+    "quality",
+    "publish"
+  ],
+  "properties": {
+    "stagingVersion": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^wikidata:Q[1-9][0-9]*$" },
+    "entityType": { "const": "saint" },
+    "qid": { "type": "string", "pattern": "^Q[1-9][0-9]*$" },
+    "canonicalName": { "type": "string", "minLength": 1 },
+    "canonicalSlug": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["candidate", "needs_review"] },
+    "names": { "type": "array", "items": { "type": "object" } },
+    "descriptions": { "type": "array", "items": { "type": "object" } },
+    "dates": { "type": "object" },
+    "media": { "type": "object" },
+    "provenance": { "type": "object" },
+    "scope": { "type": "object" },
+    "quality": { "type": "object" },
+    "publish": { "const": false }
+  }
+}

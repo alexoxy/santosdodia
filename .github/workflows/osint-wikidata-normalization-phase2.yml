@@ -1,0 +1,77 @@
+name: OSINT Wikidata normalization staging
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: GitHub Actions run ID containing the immutable Wikidata archive
+        required: true
+        type: string
+      source_artifact_name:
+        description: Exact name of the source artifact
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: osint-wikidata-normalization-${{ inputs.source_run_id }}
+  cancel-in-progress: false
+
+jobs:
+  normalize-staging-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+
+      - name: Test deterministic normalizer
+        run: npm run osint:normalize-test
+
+      - name: Download immutable source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact_name }}
+          path: artifacts/wikidata-source
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.source_run_id }}
+
+      - name: Normalize source into staging
+        shell: bash
+        run: |
+          run_dir="$(find artifacts/wikidata-source/data/osint/runs/wikidata -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+          test -n "$run_dir"
+          npm run osint:normalize -- "$run_dir" "data/osint/staging/wikidata/run-${{ inputs.source_run_id }}"
+
+      - name: Verify closed publication gate
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = 'data/osint/staging/wikidata/run-${{ inputs.source_run_id }}';
+          const manifest = JSON.parse(fs.readFileSync(`${path}/staging-manifest.json`, 'utf8'));
+          const report = JSON.parse(fs.readFileSync(`${path}/quality-report.json`, 'utf8'));
+          if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Output is not staging-only.');
+          if (report.publicationGate?.allowed !== false) throw new Error('Publication gate must remain closed.');
+          if (!Number.isInteger(manifest.entityCount) || manifest.entityCount < 1) throw new Error('No staging entities were produced.');
+          if (report.metrics?.inputRows < manifest.entityCount) throw new Error('Normalization row invariant failed.');
+          if (!fs.existsSync(`${path}/review-queue.csv`)) throw new Error('Review queue is missing.');
+          console.log(JSON.stringify({ manifest, metrics: report.metrics, publicationGate: report.publicationGate }, null, 2));
+          NODE
+
+      - name: Upload staging artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: santosdodia-wikidata-staging-${{ github.run_id }}
+          path: data/osint/staging/wikidata/run-${{ inputs.source_run_id }}/
+          if-no-files-found: error
+          retention-days: 7
