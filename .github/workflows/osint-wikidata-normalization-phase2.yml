@@ -1,24 +1,24 @@
-name: OSINT Wikidata normalization phase 2
+name: OSINT Wikidata normalization staging
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/osint-wikidata-normalization-phase2.yml'
-      - 'scripts/osint/normalize-wikidata-saints.mjs'
-      - 'scripts/osint/test-normalize-wikidata-saints.mjs'
-      - 'data/osint/schemas/wikidata-saint-staging.schema.json'
-      - 'package.json'
   workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: GitHub Actions run ID containing the immutable Wikidata archive
+        required: true
+        type: string
+      source_artifact_name:
+        description: Exact name of the source artifact
+        required: true
+        type: string
 
 permissions:
   actions: read
   contents: read
 
 concurrency:
-  group: osint-wikidata-normalization-phase2-${{ github.ref }}
-  cancel-in-progress: true
+  group: osint-wikidata-normalization-${{ inputs.source_run_id }}
+  cancel-in-progress: false
 
 jobs:
   normalize-staging-only:
@@ -36,49 +36,42 @@ jobs:
       - name: Test deterministic normalizer
         run: npm run osint:normalize-test
 
-      - name: Download immutable pilot artifact
+      - name: Download immutable source artifact
         uses: actions/download-artifact@v4
         with:
-          name: santosdodia-wikidata-pilot-31129525508
-          path: artifacts/wikidata-pilot
+          name: ${{ inputs.source_artifact_name }}
+          path: artifacts/wikidata-source
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: alexoxy/santosdodia
-          run-id: 31129525508
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.source_run_id }}
 
-      - name: Normalize pilot into staging
+      - name: Normalize source into staging
         shell: bash
         run: |
-          run_dir="$(find artifacts/wikidata-pilot/data/osint/runs/wikidata -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+          run_dir="$(find artifacts/wikidata-source/data/osint/runs/wikidata -mindepth 1 -maxdepth 1 -type d | head -n 1)"
           test -n "$run_dir"
-          npm run osint:normalize -- "$run_dir" data/osint/staging/wikidata/phase2-31129525508
+          npm run osint:normalize -- "$run_dir" "data/osint/staging/wikidata/run-${{ inputs.source_run_id }}"
 
-      - name: Verify staging publication gate and pilot totals
+      - name: Verify closed publication gate
         shell: bash
         run: |
           node <<'NODE'
           const fs = require('node:fs');
-          const path = 'data/osint/staging/wikidata/phase2-31129525508';
+          const path = 'data/osint/staging/wikidata/run-${{ inputs.source_run_id }}';
           const manifest = JSON.parse(fs.readFileSync(`${path}/staging-manifest.json`, 'utf8'));
           const report = JSON.parse(fs.readFileSync(`${path}/quality-report.json`, 'utf8'));
           if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Output is not staging-only.');
           if (report.publicationGate?.allowed !== false) throw new Error('Publication gate must remain closed.');
-          const expected = {
-            inputRows: 500,
-            uniqueEntities: 469,
-            duplicateRowsCollapsed: 31,
-            duplicatedQids: 23,
-          };
-          for (const [key, value] of Object.entries(expected)) {
-            if (report.metrics?.[key] !== value) throw new Error(`Unexpected ${key}: ${report.metrics?.[key]}`);
-          }
-          if (manifest.conflictCount !== 20) throw new Error(`Unexpected conflict count: ${manifest.conflictCount}`);
+          if (!Number.isInteger(manifest.entityCount) || manifest.entityCount < 1) throw new Error('No staging entities were produced.');
+          if (report.metrics?.inputRows < manifest.entityCount) throw new Error('Normalization row invariant failed.');
+          if (!fs.existsSync(`${path}/review-queue.csv`)) throw new Error('Review queue is missing.');
           console.log(JSON.stringify({ manifest, metrics: report.metrics, publicationGate: report.publicationGate }, null, 2));
           NODE
 
       - name: Upload staging artifact
         uses: actions/upload-artifact@v4
         with:
-          name: santosdodia-wikidata-phase2-staging-${{ github.run_id }}
-          path: data/osint/staging/wikidata/phase2-31129525508/
+          name: santosdodia-wikidata-staging-${{ github.run_id }}
+          path: data/osint/staging/wikidata/run-${{ inputs.source_run_id }}/
           if-no-files-found: error
           retention-days: 7
