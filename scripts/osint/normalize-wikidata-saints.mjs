@@ -183,6 +183,7 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     warnings.push('Conflicting dates were preserved as candidates; no conflicting value was selected as canonical.');
   }
   warnings.push('Wikidata saint classification does not establish inclusion in a specific Christian tradition or liturgical calendar.');
+  warnings.push('Birth and death places were not acquired by the pilot query and cannot be validated in this phase.');
 
   const sourceFingerprint = sha256Hex(Buffer.from(sourceDocuments.map((document) => document.sha256).join('\n')));
   const manifest = {
@@ -197,6 +198,7 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     files: {
       entities: 'entities.jsonl',
       conflicts: 'conflicts.jsonl',
+      reviewQueue: 'review-queue.csv',
       qualityReport: 'quality-report.json',
     },
   };
@@ -208,19 +210,33 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     sourceDocuments,
     metrics,
     warnings,
+    sourceFieldCoverage: {
+      wikidataIdentifiers: 'validated',
+      labels: 'acquired',
+      descriptions: 'partially_acquired',
+      birthDates: 'partially_acquired',
+      deathDates: 'partially_acquired',
+      images: 'partially_acquired',
+      portugueseArticles: 'partially_acquired',
+      birthPlaces: 'not_acquired',
+      deathPlaces: 'not_acquired',
+    },
     publicationGate: {
       allowed: false,
       reason: 'staging_only_requires_scope_validation_editorial_review_and_explicit_publication_approval',
     },
   };
 
+  const reviewQueue = entities.filter((entity) => entity.status === 'needs_review');
+
   await mkdir(outputDir, { recursive: true });
   await writeFile(join(outputDir, 'entities.jsonl'), jsonLines(entities), 'utf8');
   await writeFile(join(outputDir, 'conflicts.jsonl'), jsonLines(conflicts), 'utf8');
+  await writeFile(join(outputDir, 'review-queue.csv'), reviewQueueCsv(reviewQueue), 'utf8');
   await writeFile(join(outputDir, 'quality-report.json'), `${JSON.stringify(qualityReport, null, 2)}\n`, 'utf8');
   await writeFile(join(outputDir, 'staging-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
 
-  return { manifest, qualityReport, entities, conflicts };
+  return { manifest, qualityReport, entities, conflicts, reviewQueue };
 }
 
 async function loadSource(inputPath) {
@@ -343,6 +359,25 @@ function compareQids(a, b) {
   const left = BigInt(a.slice(1));
   const right = BigInt(b.slice(1));
   return left < right ? -1 : left > right ? 1 : 0;
+}
+
+function reviewQueueCsv(entities) {
+  const header = ['qid', 'canonical_name', 'warnings', 'conflict_ids', 'birth_candidates', 'death_candidates', 'portuguese_article'];
+  const rows = entities.map((entity) => [
+    entity.qid,
+    entity.canonicalName,
+    entity.quality.warnings.join('|'),
+    entity.quality.conflictIds.join('|'),
+    entity.dates.birth.candidates.map((candidate) => candidate.date).join('|'),
+    entity.dates.death.candidates.map((candidate) => candidate.date).join('|'),
+    entity.media.portugueseArticles[0] ?? '',
+  ]);
+  return `${[header, ...rows].map((row) => row.map(csvCell).join(',')).join('\n')}\n`;
+}
+
+function csvCell(value) {
+  const text = String(value ?? '');
+  return /[",\n\r]/u.test(text) ? `"${text.replace(/"/gu, '""')}"` : text;
 }
 
 function jsonLines(values) {
