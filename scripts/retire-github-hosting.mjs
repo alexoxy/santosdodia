@@ -80,8 +80,12 @@ export async function assertCloudflareProduction(fetchImpl, siteUrl) {
 
 async function disablePages(fetchImpl, token, repository) {
   const response = await github(fetchImpl, token, `/repos/${repository}/pages`, { method: "DELETE" });
+  if (response.status === 204) return { status: "disabled" };
+  if (response.status === 404) return { status: "already-disabled" };
+  if (response.status === 403) {
+    return { status: "permission-blocked", detail: await bodyText(response) };
+  }
   await expect(response, [204, 404], "Disable GitHub Pages");
-  return response.status === 204;
 }
 
 async function deleteDeployment(fetchImpl, token, repository, deployment) {
@@ -170,7 +174,7 @@ export async function retireGithubHosting({
       .map((environment) => [environment, retired.filter((deployment) => deployment.environment === environment).length]),
   );
 
-  const pagesDisabled = await disablePages(fetchImpl, token, repository);
+  const pages = await disablePages(fetchImpl, token, repository);
   for (const deployment of retired) await deleteDeployment(fetchImpl, token, repository, deployment);
   const environmentsDeleted = await deleteRetiredEnvironments(fetchImpl, token, repository, deployments);
   const branches = await deleteMergedBranches(fetchImpl, token, repository);
@@ -184,7 +188,7 @@ export async function retireGithubHosting({
     siteUrl,
     beforeHealth,
     afterHealth,
-    pagesDisabled,
+    pages,
     deploymentsDeleted: retired.length,
     retiredByEnvironment,
     environmentsDeleted,
@@ -206,7 +210,7 @@ async function main() {
   if (process.env.GITHUB_STEP_SUMMARY) {
     await writeFile(
       process.env.GITHUB_STEP_SUMMARY,
-      `## Retired hosting cleanup\n\n- GitHub Pages disabled: ${report.pagesDisabled}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health mode: ${report.afterHealth.mode}\n`,
+      `## Retired hosting cleanup\n\n- GitHub Pages: ${report.pages.status}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health mode: ${report.afterHealth.mode}\n`,
       { encoding: "utf8", flag: "a" },
     );
   }
