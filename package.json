@@ -43,7 +43,7 @@
     "osint:normalize": "node scripts/osint/normalize-wikidata-saints.mjs",
     "osint:normalize-test": "node scripts/osint/test-normalize-wikidata-saints.mjs",
     "repo:audit": "node scripts/audit-repository-hygiene.mjs",
-    "litcal:sync": "node scripts/sync-litcal-mirror.sh",
+    "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
     "litcal:source": "bash scripts/mirror-litcal-source.sh",
     "translations:sync": "node scripts/with-runtime-snapshot.mjs scripts/sync-name-translations.mjs",
     "translations:validate": "node scripts/validate-language-quality.mjs",
