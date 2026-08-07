@@ -86,7 +86,7 @@ export default function TodayPanel() {
         <div className="section-heading compact">
           <div>
             <span className="eyebrow">
-              {loading ? copy.loading : copy.liveData}
+              {loading ? copy.loading : copy.approvedData}
             </span>
             <h2>{copy.saintsToday}</h2>
           </div>
