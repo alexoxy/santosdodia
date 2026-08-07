@@ -43,6 +43,7 @@ concurrency:
 
 jobs:
   prepare-audited-staging-package:
+    environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -122,7 +123,7 @@ jobs:
             country: process.env.COUNTRY || null,
             maxCountries: process.env.MAX_COUNTRIES,
             destinationPolicy: 'Dropbox staging before database promotion',
-            dropboxRoot: '/Santos do Dia/02_Dados_Eclesiasticos',
+            dropboxRoot: `/archive/ecclesiastical-directory/${process.env.SOURCE}`,
             publicationAllowed: false,
             files
           };
@@ -145,8 +146,21 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Archive audited staging package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream ecclesiastical-directory/${{ inputs.source }}
+          --source data/generated/ecclesiastical-directory
+          --source db/seeds/ecclesiastical-directory.sql
+          --source db/migrations/0001_ecclesiastical_directory.sql
+          --source docs/data-staging-policy.md
+
       - name: Explain promotion boundary
         run: |
           echo 'This workflow does not commit generated data and does not publish to the site.'
-          echo 'The artifact must first be archived and validated under /Santos do Dia/02_Dados_Eclesiasticos in Dropbox.'
+          echo 'The artifact is archived and validated under /archive/ecclesiastical-directory in the Dropbox App Folder.'
           echo 'A separate controlled operation promotes approved records into the site database.'
