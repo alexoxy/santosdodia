@@ -32,6 +32,7 @@ on:
         type: string
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -59,6 +60,20 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --include=optional
 
+      - name: Guard Cloudflare Free daily remote-operation budget
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          mkdir -p reports
+          node scripts/cloudflare-free-guardrails.mjs action-budget \
+            --workflow d1-staging.yml \
+            --repository "${{ github.repository }}" \
+            --current-run-id "${{ github.run_id }}" \
+            --token-env GITHUB_TOKEN \
+            > reports/cloudflare-free-daily-budget.json
+          cat reports/cloudflare-free-daily-budget.json
+
       - name: Require Cloudflare staging credentials
         shell: bash
         run: |
@@ -83,7 +98,9 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: d1-staging-provision-receipt
-          path: reports/d1-staging-provision.json
+          path: |
+            reports/d1-staging-provision.json
+            reports/cloudflare-free-daily-budget.json
           if-no-files-found: error
           retention-days: 30
 
@@ -159,6 +176,15 @@ jobs:
           fs.appendFileSync(output, `validation_report_path=${metadata.validationReportPath}\n`);
           NODE
 
+      - name: Guard approved package against Cloudflare Free limits
+        if: inputs.operation == 'promote'
+        shell: bash
+        run: |
+          node scripts/cloudflare-free-guardrails.mjs calendar-package \
+            --input /tmp/calendar-approved.json \
+            > reports/cloudflare-free-package-estimate.json
+          cat reports/cloudflare-free-package-estimate.json
+
       - name: Build canonical and atomic D1 packages
         if: inputs.operation == 'promote'
         shell: bash
@@ -174,6 +200,15 @@ jobs:
           node scripts/prepare-d1-calendar-package.mjs \
             --input /tmp/calendar-staging.sql \
             --output /tmp/calendar-d1-batch.json
+
+      - name: Guard atomic D1 batch against Cloudflare Free limits
+        if: inputs.operation == 'promote'
+        shell: bash
+        run: |
+          node scripts/cloudflare-free-guardrails.mjs d1-batch \
+            --input /tmp/calendar-d1-batch.json \
+            > reports/cloudflare-free-d1-estimate.json
+          cat reports/cloudflare-free-d1-estimate.json
 
       - name: Generate ephemeral staging binding
         if: inputs.operation == 'promote'
@@ -217,6 +252,9 @@ jobs:
           name: d1-staging-promotion-receipt
           path: |
             reports/d1-staging-promotion.json
+            reports/cloudflare-free-daily-budget.json
+            reports/cloudflare-free-package-estimate.json
+            reports/cloudflare-free-d1-estimate.json
             /tmp/calendar-approval-metadata.json
           if-no-files-found: error
           retention-days: 30
