@@ -52,6 +52,13 @@ jobs:
           test -n "$run_dir"
           npm run osint:normalize -- "$run_dir" "data/osint/staging/wikidata/run-${{ inputs.source_run_id }}"
 
+      - name: Guard OSINT batch size
+        shell: bash
+        run: |
+          staging_path="data/osint/staging/wikidata/run-${{ inputs.source_run_id }}"
+          record_count="$(node -e "const fs=require('node:fs'); const report=JSON.parse(fs.readFileSync('${staging_path}/quality-report.json','utf8')); process.stdout.write(String(report.metrics?.inputRows ?? ''));" )"
+          node scripts/cloudflare-free-guardrails.mjs osint-records --count "$record_count"
+
       - name: Verify closed publication gate
         shell: bash
         run: |
