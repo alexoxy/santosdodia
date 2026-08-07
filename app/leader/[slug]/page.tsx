@@ -8,6 +8,7 @@ import { officeLabel } from '../../../lib/knowledge/ecclesiastical-display';
 import { churchPath, jurisdictionPath, localizedFieldValue, personBySlug, personPath } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
+import { serializeStructuredData } from '../../../lib/structured-data';
 
 export const dynamic = 'force-dynamic';
 
@@ -90,6 +91,6 @@ export default async function LeaderPage({ params }: { params: Promise<{ slug: s
         </div>
       </article>)}</div>
     </section>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
   </div>;
 }

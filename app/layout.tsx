@@ -12,6 +12,7 @@ import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '..
 import { parseTradition, TRADITIONS } from '../data/observances';
 import { SITE_ORIGIN } from '../lib/site';
 import { countryFromHeaders } from '../lib/request-geo';
+import { serializeStructuredData } from '../lib/structured-data';
 
 const siteDescription = 'Discover who is celebrated today in your country, region and Christian tradition. Search saints, patronages, calendars, movable feasts, religious holidays and liturgical information.';
 
@@ -139,7 +140,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialChurch={initialChurch}>
         <SiteChrome>{children}</SiteChrome>
       </LanguageProvider>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
     </body>
   </html>;
 }

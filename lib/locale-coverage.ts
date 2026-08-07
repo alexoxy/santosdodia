@@ -1,15 +1,18 @@
-import type { Locale } from './i18n';
+import type { Locale } from "./i18n";
 
-export type LocaleCoverage='complete';
+export type LocaleCoverage = "complete";
 
-export function localeCoverage(_locale:Locale):LocaleCoverage{
- return 'complete';
+export function localeCoverage(locale: Locale): LocaleCoverage {
+  void locale;
+  return "complete";
 }
 
-export function localeOptionLabel(_locale:Locale,label:string){
- return label;
+export function localeOptionLabel(locale: Locale, label: string) {
+  void locale;
+  return label;
 }
 
-export function localeCoverageNotice(_locale:Locale){
- return '';
+export function localeCoverageNotice(locale: Locale) {
+  void locale;
+  return "";
 }

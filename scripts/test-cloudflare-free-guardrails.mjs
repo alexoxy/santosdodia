@@ -71,10 +71,19 @@ const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'santosdodia-cf-guar
 fs.mkdirSync(path.join(temporaryRoot, '.github/workflows'), { recursive: true });
 fs.writeFileSync(path.join(temporaryRoot, 'wrangler.jsonc'), JSON.stringify({
   preview_urls: false,
-  observability: { enabled: true }
+  observability: { enabled: true, head_sampling_rate: 0.1 }
 }, null, 2));
 fs.writeFileSync(path.join(temporaryRoot, '.github/workflows/quality.yml'), 'name: Quality\non: pull_request\n');
 assert.equal(auditRepository(temporaryRoot, policy).workflowFilesChecked, 1);
+fs.writeFileSync(path.join(temporaryRoot, 'wrangler.jsonc'), JSON.stringify({
+  preview_urls: false,
+  observability: { enabled: true, head_sampling_rate: 1 }
+}, null, 2));
+assert.throws(() => auditRepository(temporaryRoot, policy), /sampled at 10%/);
+fs.writeFileSync(path.join(temporaryRoot, 'wrangler.jsonc'), JSON.stringify({
+  preview_urls: false,
+  observability: { enabled: true, head_sampling_rate: 0.1 }
+}, null, 2));
 fs.writeFileSync(path.join(temporaryRoot, '.github/workflows/deploy.yml'), 'run: npm run cloudflare:deploy\n');
 assert.throws(() => auditRepository(temporaryRoot, policy), /deployment command is forbidden/);
 fs.rmSync(temporaryRoot, { recursive: true, force: true });

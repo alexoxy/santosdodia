@@ -4,6 +4,7 @@ import PatronageTopicView from '../../components/PatronageTopicView';
 import { DISCOVERY_TOPICS, getDiscoveryTopic, getObservancesForTopic, topicDescription, topicLabel } from '../../../data/discovery';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
+import { serializeStructuredData } from '../../../lib/structured-data';
 
 export function generateStaticParams() {
   return DISCOVERY_TOPICS.filter(topic => topic.kind !== 'place').map(topic => ({ slug: topic.slug }));
@@ -59,7 +60,7 @@ export default async function PatronagePage({ params }: { params: Promise<{ slug
   };
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
     <PatronageTopicView kind={kind} slug={slug} locale={locale} />
   </>;
 }

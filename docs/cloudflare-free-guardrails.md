@@ -18,6 +18,7 @@ The internal caps are deliberately lower than the Cloudflare Free limits:
 - no more than 10,000 statements in one D1 batch;
 - one OSINT acquisition per UTC day, with at most 500 records;
 - at most one Cloudflare deployment per UTC day when a deployment workflow is separately approved;
+- Workers Logs sampled at 10%, with an internal target of at most 100,000 events per day against the Free-plan allowance of 200,000;
 - R2 writes disabled;
 - production writes disabled;
 - DNS writes disabled;
@@ -37,6 +38,7 @@ The D1 caps represent at most 20% of the free daily read allowance and 25% of th
 - rejects autonomous Cloudflare deployment, DNS-write or R2-write commands in GitHub workflows;
 - requires Cloudflare preview URLs to remain disabled;
 - requires observability to remain enabled.
+- requires Workers Logs head sampling to remain at 10%.
 
 The D1 staging workflow must run these gates before any remote Cloudflare mutation. Normalization and local builds do not consume D1 read or write quotas.
 

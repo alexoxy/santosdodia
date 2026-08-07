@@ -1,24 +1,27 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { FlatCompat } from "@eslint/eslintrc";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const filename = fileURLToPath(import.meta.url);
 const directory = path.dirname(filename);
 const compat = new FlatCompat({ baseDirectory: directory });
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: [
-      '.next/**',
-      'out/**',
-      'build/**',
-      'next-env.d.ts',
-      'data/generated/**',
-      'data/litcal-mirror/**',
-      'reports/**'
-    ]
-  }
+      ".next/**",
+      ".open-next/**",
+      ".wrangler/**",
+      "out/**",
+      "build/**",
+      "staging/**",
+      "next-env.d.ts",
+      "data/generated/**",
+      "data/litcal-mirror/**",
+      "reports/**",
+    ],
+  },
 ];
 
 export default eslintConfig;

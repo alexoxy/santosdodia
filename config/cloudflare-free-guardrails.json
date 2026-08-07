@@ -5,6 +5,7 @@
   "officialLimits": {
     "workersRequestsPerDay": 100000,
     "workersCpuMsPerRequest": 10,
+    "workersLogsEventsPerDay": 200000,
     "d1RowsReadPerDay": 5000000,
     "d1RowsWrittenPerDay": 100000,
     "d1StorageBytes": 5368709120,
@@ -21,6 +22,8 @@
     "osintAcquisitionsPerUtcDay": 1,
     "osintMaxRecordsPerAcquisition": 500,
     "cloudflareDeploymentsPerUtcDay": 1,
+    "workersLogsTargetEventsPerDay": 100000,
+    "workersLogsHeadSamplingRate": 0.1,
     "r2WritesEnabled": false,
     "productionWritesEnabled": false,
     "dnsWritesEnabled": false,
@@ -31,6 +34,11 @@
     {
       "name": "Workers limits",
       "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "lastVerified": "2026-08-07"
+    },
+    {
+      "name": "Workers Logs",
+      "url": "https://developers.cloudflare.com/workers/observability/logs/workers-logs/",
       "lastVerified": "2026-08-07"
     },
     {

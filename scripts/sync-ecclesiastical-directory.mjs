@@ -37,7 +37,6 @@ function stripTags(value){
   .replace(/<[^>]+>/g,' '))
   .replace(/\s+/g,' ').trim();
 }
-function slug(value){return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,110)}
 function links(html,baseUrl){
  const output=[];
  for(const match of html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
