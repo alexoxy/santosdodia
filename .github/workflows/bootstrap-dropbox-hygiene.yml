@@ -69,6 +69,7 @@ jobs:
         run: node scripts/retire-reviewed-obsolete-branches.mjs
 
       - name: Preserve bootstrap evidence for troubleshooting
+        if: always()
         uses: actions/upload-artifact@v6
         with:
           name: dropbox-hygiene-bootstrap-${{ github.run_id }}
