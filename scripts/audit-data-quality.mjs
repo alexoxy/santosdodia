@@ -208,6 +208,7 @@ const traditions = environment.get('TRADITIONS') ?? [];
 const categories = environment.get('CATEGORIES') ?? [];
 const locales = i18nEnvironment.get('SUPPORTED_LOCALES') ?? [];
 const sourceCatalog = environment.get('SOURCE_CATALOG') ?? [];
+const editorialReviews = environment.get('EDITORIAL_REVIEWS') ?? {};
 const sourceById = new Map(sourceCatalog.map(source => [source.id, source]));
 const dNode = unwrap(observanceInitializers.get('D'));
 
@@ -221,9 +222,11 @@ for (const element of dNode.elements) {
   const call = unwrap(element);
   if (!ts.isCallExpression(call) || !ts.isIdentifier(call.expression) || call.expression.text !== 'entry') continue;
   const args = call.arguments;
+  const id = evaluate(args[0]);
   const extra = evaluate(args[8]) ?? {};
+  const editorial = editorialReviews[id] ?? {};
   records.push({
-    id: evaluate(args[0]),
+    id,
     month: evaluate(args[1]),
     day: evaluate(args[2]),
     traditions: evaluate(args[3]) ?? [],
@@ -233,8 +236,10 @@ for (const element of dNode.elements) {
     sourceIds: evaluate(args[7]) ?? [],
     translationStatus: extra.translationStatus ?? 'official-name',
     validationStatus: extra.validationStatus ?? 'cross-checked',
-    lastVerified: extra.lastVerified,
-    summaries: extra.summaries,
+    lastVerified: extra.lastVerified ?? editorial.lastVerified,
+    summaries: extra.summaries ?? editorial.summaries,
+    summarySourceIds: extra.summarySourceIds ?? editorial.sourceIds,
+    summaryTranslationStatus: extra.summaryTranslationStatus ?? (editorial.summaries ? 'editorial' : undefined),
     patronages: extra.patronages,
     countries: extra.countries,
     externalId: extra.externalId
@@ -267,6 +272,19 @@ for (const record of records) {
   for (const sourceId of record.sourceIds ?? []) {
     if (!sourceById.has(sourceId)) recordErrors.push(`unknown source ${sourceId}`);
   }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(record.lastVerified ?? '')) recordErrors.push('missing or invalid lastVerified date');
+  else if (record.lastVerified > new Date().toISOString().slice(0, 10)) recordErrors.push('lastVerified date is in the future');
+  if (!record.summaries?.en || !record.summaries?.pt) recordErrors.push('missing reviewed English or Portuguese summary');
+  if (record.summaryTranslationStatus !== 'editorial') recordErrors.push('summary is not editorially reviewed');
+  if (!Array.isArray(record.summarySourceIds) || !record.summarySourceIds.length) {
+    recordErrors.push('missing claim-level summary sources');
+  } else {
+    for (const sourceId of record.summarySourceIds) {
+      if (!sourceById.has(sourceId)) recordErrors.push(`unknown summary source ${sourceId}`);
+      if (!record.sourceIds.includes(sourceId)) recordErrors.push(`summary source ${sourceId} is not a record source`);
+    }
+  }
+  if (record.patronages?.length) recordErrors.push('patronage claims require claim-level provenance and must remain withheld');
   if (recordErrors.length) hardErrors.push(`${prefix}: ${recordErrors.join('; ')}`);
 
   const authoritativeSources = (record.sourceIds ?? [])
@@ -284,12 +302,8 @@ for (const record of records) {
   }
 
   if (record.validationStatus === 'cross-checked' && record.sourceIds.length < 2) {
-    warnings.push(`${prefix}: marked cross-checked but has only ${record.sourceIds.length} source`);
+    hardErrors.push(`${prefix}: cross-checked status requires at least two independent sources`);
   }
-  if (['verified', 'cross-checked'].includes(record.validationStatus) && !record.lastVerified) {
-    warnings.push(`${prefix}: no lastVerified date`);
-  }
-  if (!record.summaries || !Object.keys(record.summaries).length) warnings.push(`${prefix}: no editorial summary`);
 }
 
 const coverage = key => {

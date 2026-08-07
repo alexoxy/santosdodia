@@ -13,7 +13,9 @@ export type DiscoveryTopic={
   popular?:boolean;
 };
 
-export const DISCOVERY_TOPICS:DiscoveryTopic[]=[
+// These candidates are retained for editorial review, but are not part of the
+// public read model until every association has claim-level provenance.
+const DISCOVERY_TOPIC_CANDIDATES:DiscoveryTopic[]=[
   {slug:'medicos',kind:'profession',labels:{en:'Doctors and healthcare workers',pt:'Médicos e profissionais de saúde',es:'Médicos y profesionales sanitarios',fr:'Médecins et professionnels de santé'},descriptions:{en:'Saints traditionally associated with medicine, healing and care for the sick.',pt:'Santos tradicionalmente associados à medicina, à cura e ao cuidado dos doentes.',es:'Santos tradicionalmente asociados con la medicina, la curación y el cuidado de los enfermos.',fr:'Saints traditionnellement associés à la médecine, à la guérison et au soin des malades.'},terms:['doctor','doctors','physician','physicians','medicine','medical','health','healthcare','medico','medicos','médico','médicos','medicina','saude','saúde','enfermeiro','enfermeiros','nurse','nurses'],observanceIds:['luke-evangelist','our-lady-lourdes'],popular:true},
   {slug:'professores',kind:'profession',labels:{en:'Teachers and education',pt:'Professores e educação',es:'Profesores y educación',fr:'Enseignants et éducation'},descriptions:{en:'Saints associated with teaching, study and education.',pt:'Santos associados ao ensino, ao estudo e à educação.',es:'Santos asociados con la enseñanza, el estudio y la educación.',fr:'Saints associés à l’enseignement, à l’étude et à l’éducation.'},terms:['teacher','teachers','education','school','student','students','professor','professors','professoras','professores','ensino','educacao','educação','estudante','estudantes'],observanceIds:['basil-the-great'],popular:true},
   {slug:'militares',kind:'profession',labels:{en:'Military personnel and scouts',pt:'Militares e escuteiros',es:'Militares y exploradores',fr:'Militaires et scouts'},descriptions:{en:'Saints traditionally associated with soldiers, military service and scouts.',pt:'Santos tradicionalmente associados aos soldados, ao serviço militar e aos escuteiros.',es:'Santos tradicionalmente asociados con los soldados, el servicio militar y los exploradores.',fr:'Saints traditionnellement associés aux soldats, au service militaire et aux scouts.'},terms:['soldier','soldiers','military','army','armed forces','scout','scouts','militar','militares','soldado','soldados','forcas armadas','forças armadas','escuteiro','escuteiros'],observanceIds:['george'],popular:true},
@@ -35,6 +37,11 @@ export const DISCOVERY_TOPICS:DiscoveryTopic[]=[
   {slug:'espanha',kind:'place',labels:{en:'Spain',pt:'Espanha',es:'España',fr:'Espagne'},descriptions:{en:'Saints and pilgrimage traditions associated with Spain.',pt:'Santos e tradições de peregrinação associados a Espanha.',es:'Santos y tradiciones de peregrinación asociados con España.',fr:'Saints et traditions de pèlerinage associés à l’Espagne.'},terms:['spain','espana','españa','espanha'],observanceIds:['james-greater','teresa-avila']},
   {slug:'alexandria',kind:'place',labels:{en:'Alexandria',pt:'Alexandria',es:'Alejandría',fr:'Alexandrie'},descriptions:{en:'Saints and traditions associated with Alexandria.',pt:'Santos e tradições associados a Alexandria.',es:'Santos y tradiciones asociados con Alejandría.',fr:'Saints et traditions associés à Alexandrie.'},terms:['alexandria','alejandria','alejandría','alexandrie'],observanceIds:['mark-evangelist']}
 ];
+
+// Fail closed: publishing a topic requires a future evidence-backed promotion.
+// The editorial audit asserts that this public collection stays empty while the
+// candidate queue has `withheld-pending-claim-evidence` status.
+export const DISCOVERY_TOPICS:DiscoveryTopic[]=DISCOVERY_TOPIC_CANDIDATES.filter(() => false);
 
 export function normalizeDiscovery(value:string){return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
 export function topicLabel(topic:DiscoveryTopic,locale:Locale){return localize(topic.labels,locale)}

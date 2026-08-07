@@ -140,4 +140,4 @@ A converted Gregorian date must not replace the original calendar context.
 
 ## Enforcement
 
-`npm run data:audit` performs the structural audit and reports editorial-quality warnings. Hard structural errors fail the quality pipeline. Editorial warnings remain visible until remediated and must not be silently reclassified.
+`npm run data:audit` performs the structural and editorial audit. Missing review dates, sourced summaries, source independence or claim-level provenance are hard failures in the quality pipeline; they may not be downgraded to warnings or silently reclassified.
