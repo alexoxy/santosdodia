@@ -110,6 +110,7 @@ async function deleteDeployment(fetchImpl, token, repository, deployment) {
 
 async function deleteRetiredEnvironments(fetchImpl, token, repository, deployments) {
   const deleted = [];
+  const permissionBlocked = [];
   for (const environment of RETIRED_ENVIRONMENTS) {
     const hasUnrelatedDeployment = deployments.some(
       (deployment) => deployment.environment === environment && !isRetiredDeployment(deployment),
@@ -121,10 +122,14 @@ async function deleteRetiredEnvironments(fetchImpl, token, repository, deploymen
       `/repos/${repository}/environments/${encodeURIComponent(environment)}`,
       { method: "DELETE" },
     );
+    if (response.status === 403) {
+      permissionBlocked.push(environment);
+      continue;
+    }
     await expect(response, [204, 404], `Delete retired environment ${environment}`);
     if (response.status === 204) deleted.push(environment);
   }
-  return deleted;
+  return { deleted, permissionBlocked };
 }
 
 async function deleteMergedBranches(fetchImpl, token, repository) {
@@ -176,7 +181,7 @@ export async function retireGithubHosting({
 
   const pages = await disablePages(fetchImpl, token, repository);
   for (const deployment of retired) await deleteDeployment(fetchImpl, token, repository, deployment);
-  const environmentsDeleted = await deleteRetiredEnvironments(fetchImpl, token, repository, deployments);
+  const environments = await deleteRetiredEnvironments(fetchImpl, token, repository, deployments);
   const branches = await deleteMergedBranches(fetchImpl, token, repository);
 
   const remaining = (await collectPages(fetchImpl, token, repository, "deployments")).filter(isRetiredDeployment);
@@ -191,7 +196,8 @@ export async function retireGithubHosting({
     pages,
     deploymentsDeleted: retired.length,
     retiredByEnvironment,
-    environmentsDeleted,
+    environmentsDeleted: environments.deleted,
+    environmentsPermissionBlocked: environments.permissionBlocked,
     branchesDeleted: branches.deleted,
     branchesRetained: branches.retained,
   };
@@ -210,7 +216,7 @@ async function main() {
   if (process.env.GITHUB_STEP_SUMMARY) {
     await writeFile(
       process.env.GITHUB_STEP_SUMMARY,
-      `## Retired hosting cleanup\n\n- GitHub Pages: ${report.pages.status}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health mode: ${report.afterHealth.mode}\n`,
+      `## Retired hosting cleanup\n\n- GitHub Pages: ${report.pages.status}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Environments permission-blocked: ${report.environmentsPermissionBlocked.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health mode: ${report.afterHealth.mode}\n`,
       { encoding: "utf8", flag: "a" },
     );
   }

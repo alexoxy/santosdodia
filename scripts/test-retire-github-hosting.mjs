@@ -99,6 +99,8 @@ assert.deepEqual(report.pages, { status: "disabled" });
 assert.deepEqual(report.beforeHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
 assert.deepEqual(report.afterHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
 assert.deepEqual(report.retiredByEnvironment, { Production: 1, "github-pages": 1 });
+assert.deepEqual(report.environmentsDeleted, ["Production", "Preview", "github-pages"]);
+assert.deepEqual(report.environmentsPermissionBlocked, []);
 assert.deepEqual(report.branchesDeleted, ["agent/merged"]);
 assert.match(report.branchesRetained.find((item) => item.name === "agent/unique").reason, /2 unique/);
 assert.equal(deployments.some((item) => item.id === 3), true);
@@ -119,7 +121,7 @@ async function permissionBlockedFetch(url, init = {}) {
     return json([{ name: "main", protected: true }]);
   }
   if ((init.method ?? "GET") === "DELETE" && parsed.pathname.includes("/environments/")) {
-    return json({ message: "Not Found" }, 404);
+    return json({ message: "Resource not accessible by integration" }, 403);
   }
   return json({ message: `Unexpected request: ${init.method ?? "GET"} ${parsed.pathname}` }, 500);
 }
@@ -132,5 +134,7 @@ const permissionBlocked = await retireGithubHosting({
 });
 assert.equal(permissionBlocked.pages.status, "permission-blocked");
 assert.match(permissionBlocked.pages.detail, /Resource not accessible by integration/);
+assert.deepEqual(permissionBlocked.environmentsDeleted, []);
+assert.deepEqual(permissionBlocked.environmentsPermissionBlocked, ["Production", "Preview", "github-pages"]);
 
 console.log("Retired deployment and merged-branch selectors passed.");
