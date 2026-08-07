@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import {
+  assertCloudflareProduction,
   isMergedBranch,
   isRetiredDeployment,
   retireGithubHosting,
@@ -14,6 +15,23 @@ assert.equal(isRetiredDeployment({ performed_via_github_app: { slug: "github-act
 assert.equal(isMergedBranch({ ahead_by: 0 }), true);
 assert.equal(isMergedBranch({ ahead_by: 1 }), false);
 assert.equal(isMergedBranch({}), false);
+
+const wafProtected = await assertCloudflareProduction(
+  async () => new Response("blocked", {
+    status: 403,
+    headers: { server: "cloudflare", "cf-ray": "test-LIS" },
+  }),
+  "https://www.santosdodia.com",
+);
+assert.deepEqual(wafProtected, { checkedAt: null, mode: "cloudflare-waf-protected" });
+
+await assert.rejects(
+  () => assertCloudflareProduction(
+    async () => new Response("forbidden", { status: 403, headers: { server: "cloudflare" } }),
+    "https://www.santosdodia.com",
+  ),
+  /HTTP 403/,
+);
 
 const deployments = [
   { id: 1, creator: { login: "vercel[bot]" }, environment: "Production" },
@@ -77,6 +95,8 @@ const report = await retireGithubHosting({
   siteUrl: "https://www.santosdodia.com",
 });
 assert.equal(report.deploymentsDeleted, 2);
+assert.deepEqual(report.beforeHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
+assert.deepEqual(report.afterHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
 assert.deepEqual(report.retiredByEnvironment, { Production: 1, "github-pages": 1 });
 assert.deepEqual(report.branchesDeleted, ["agent/merged"]);
 assert.match(report.branchesRetained.find((item) => item.name === "agent/unique").reason, /2 unique/);
