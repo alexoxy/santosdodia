@@ -46,7 +46,7 @@
     "osint:dump": "node scripts/osint/run-manifest.mjs",
     "osint:normalize": "node scripts/osint/normalize-wikidata-saints.mjs",
     "osint:normalize-test": "node scripts/osint/test-normalize-wikidata-saints.mjs",
-    "repo:audit": "node scripts/audit-repository-hygiene.mjs",
+    "repo:audit": "node scripts/audit-repository-hygiene.mjs && node scripts/audit-retired-hosting.mjs && node scripts/test-retired-hosting-audit.mjs && node scripts/test-retire-github-hosting.mjs",
     "sources:freshness": "node scripts/audit-source-freshness.mjs",
     "publication:boundary-test": "node scripts/test-publication-boundaries.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",

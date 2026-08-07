@@ -1,0 +1,33 @@
+name: Retire stale hosting
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/retire-github-hosting.yml'
+      - 'scripts/retire-github-hosting.mjs'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+  deployments: write
+  pages: write
+
+concurrency:
+  group: retire-stale-hosting
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Retire Vercel, GitHub Pages and merged branches
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SANTOSDIA_SITE_URL: https://www.santosdodia.com
+        run: node scripts/retire-github-hosting.mjs
