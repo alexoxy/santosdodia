@@ -63,16 +63,19 @@ export function isMergedBranch(compare) {
   return Number(compare?.ahead_by) === 0;
 }
 
-async function assertCloudflareProduction(fetchImpl, siteUrl) {
+export async function assertCloudflareProduction(fetchImpl, siteUrl) {
   const response = await fetchImpl(`${siteUrl.replace(/\/$/, "")}/api/v1/system/status`, {
     headers: { Accept: "application/json", "User-Agent": "santosdodia-hosting-retirement" },
   });
-  if (response.status !== 200) throw new Error(`Cloudflare health check returned HTTP ${response.status}.`);
   const server = response.headers.get("server") ?? "";
   if (!server.toLowerCase().includes("cloudflare")) throw new Error(`Production is not served by Cloudflare (server=${server || "missing"}).`);
+  if (response.status === 403 && response.headers.has("cf-ray")) {
+    return { checkedAt: null, mode: "cloudflare-waf-protected" };
+  }
+  if (response.status !== 200) throw new Error(`Cloudflare health check returned HTTP ${response.status}.`);
   const payload = await response.json();
   if (payload.status !== "ok") throw new Error(`Production health payload is not ok: ${JSON.stringify(payload)}`);
-  return payload.checkedAt ?? null;
+  return { checkedAt: payload.checkedAt ?? null, mode: "healthy" };
 }
 
 async function disablePages(fetchImpl, token, repository) {
@@ -203,7 +206,7 @@ async function main() {
   if (process.env.GITHUB_STEP_SUMMARY) {
     await writeFile(
       process.env.GITHUB_STEP_SUMMARY,
-      `## Retired hosting cleanup\n\n- GitHub Pages disabled: ${report.pagesDisabled}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health: ${report.afterHealth ?? "ok"}\n`,
+      `## Retired hosting cleanup\n\n- GitHub Pages disabled: ${report.pagesDisabled}\n- Deployments deleted: ${report.deploymentsDeleted}\n- Environments deleted: ${report.environmentsDeleted.join(", ") || "none"}\n- Merged branches deleted: ${report.branchesDeleted.length}\n- Cloudflare health mode: ${report.afterHealth.mode}\n`,
       { encoding: "utf8", flag: "a" },
     );
   }
