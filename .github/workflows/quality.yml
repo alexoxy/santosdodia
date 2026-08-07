@@ -37,6 +37,12 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Audit Cloudflare Free operating boundary
+        run: npm run cloudflare:guardrails-audit
+
+      - name: Test Cloudflare Free guardrails
+        run: npm run cloudflare:guardrails-test
+
       - name: Audit all installed dependencies
         run: npm audit --audit-level=high
 

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "plan": "workers-free",
+  "resetTimezone": "UTC",
+  "officialLimits": {
+    "workersRequestsPerDay": 100000,
+    "workersCpuMsPerRequest": 10,
+    "d1RowsReadPerDay": 5000000,
+    "d1RowsWrittenPerDay": 100000,
+    "d1StorageBytes": 5368709120,
+    "r2StorageBytesMonth": 10737418240,
+    "r2ClassAOperationsPerMonth": 1000000,
+    "r2ClassBOperationsPerMonth": 10000000,
+    "workersBuildMinutesPerMonth": 3000
+  },
+  "autonomousLimits": {
+    "d1RemoteOperationsPerUtcDay": 1,
+    "d1EstimatedRowsReadPerOperation": 1000000,
+    "d1EstimatedRowsWrittenPerOperation": 25000,
+    "d1MaxStatementsPerBatch": 10000,
+    "osintAcquisitionsPerUtcDay": 1,
+    "osintMaxRecordsPerAcquisition": 500,
+    "cloudflareDeploymentsPerUtcDay": 1,
+    "r2WritesEnabled": false,
+    "productionWritesEnabled": false,
+    "dnsWritesEnabled": false,
+    "secretsWritesEnabled": false,
+    "paymentsEnabled": false
+  },
+  "sources": [
+    {
+      "name": "Workers limits",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "lastVerified": "2026-08-07"
+    },
+    {
+      "name": "D1 pricing",
+      "url": "https://developers.cloudflare.com/d1/platform/pricing/",
+      "lastVerified": "2026-08-07"
+    },
+    {
+      "name": "R2 pricing",
+      "url": "https://developers.cloudflare.com/r2/pricing/",
+      "lastVerified": "2026-08-07"
+    },
+    {
+      "name": "Workers Builds limits",
+      "url": "https://developers.cloudflare.com/workers/ci-cd/builds/limits-and-pricing/",
+      "lastVerified": "2026-08-07"
+    }
+  ]
+}
