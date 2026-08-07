@@ -1,0 +1,69 @@
+name: Source freshness audit
+
+on:
+  schedule:
+    - cron: '29 8 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-freshness
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate registries and automation policy
+        run: |
+          npm run osint:registry-audit
+          npm run leaders:audit
+          npm run automation:audit
+
+      - name: Check a bounded rotating source window
+        run: npm run sources:freshness -- --network --max-urls 60 --output staging/source-freshness/report.json
+
+      - name: Write review-only manifest
+        run: |
+          cat > staging/source-freshness/STAGING_MANIFEST.json <<MANIFEST
+          {
+            "schemaVersion": 1,
+            "workflowRun": "${GITHUB_RUN_ID}",
+            "sourceCommit": "${GITHUB_SHA}",
+            "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "status": "review-candidates-only",
+            "automaticDeletion": false,
+            "automaticPublication": false
+          }
+          MANIFEST
+
+      - name: Upload source freshness report
+        uses: actions/upload-artifact@v6
+        with:
+          name: source-freshness-${{ github.run_id }}
+          path: staging/source-freshness/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Archive source freshness report in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream source-freshness --source staging/source-freshness
