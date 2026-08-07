@@ -24,13 +24,19 @@ async function fetchImpl(url, init = {}) {
   const parsed = new URL(url);
   if (parsed.pathname.endsWith('/git/ref/heads/main')) return response({ object: { sha: mainSha } });
   if (parsed.pathname.endsWith('/pulls')) return response([]);
-  const marker = '/git/ref/heads/';
-  if (parsed.pathname.includes(marker)) {
-    const branch = parsed.pathname.split(marker)[1].split('/').map(decodeURIComponent).join('/');
+  const readMarker = '/git/ref/heads/';
+  const deleteMarker = '/git/refs/heads/';
+  if (parsed.pathname.includes(deleteMarker)) {
+    const branch = parsed.pathname.split(deleteMarker)[1].split('/').map(decodeURIComponent).join('/');
     if ((init.method ?? 'GET') === 'DELETE') {
       deleted.push(branch);
       return response(null, 204);
     }
+    return response({ message: 'Delete endpoint requires DELETE' }, 405);
+  }
+  if (parsed.pathname.includes(readMarker)) {
+    const branch = parsed.pathname.split(readMarker)[1].split('/').map(decodeURIComponent).join('/');
+    if ((init.method ?? 'GET') === 'DELETE') return response({ message: 'Wrong singular delete endpoint' }, 404);
     return branchShas.has(branch) ? response({ object: { sha: branchShas.get(branch) } }) : response({ message: 'Not Found' }, 404);
   }
   return response({ message: 'Unexpected request' }, 500);

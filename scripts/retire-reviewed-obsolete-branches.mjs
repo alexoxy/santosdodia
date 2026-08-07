@@ -31,8 +31,10 @@ export async function retireReviewedBranches({ fetchImpl, token, repository, exp
   const deleted = [];
   const alreadyAbsent = [];
   for (const [branch, expectedSha] of TARGETS) {
-    const refPath = `/repos/${repository}/git/ref/heads/${branch.split('/').map(encodeURIComponent).join('/')}`;
-    const refResponse = await api(refPath);
+    const encodedBranch = branch.split('/').map(encodeURIComponent).join('/');
+    const readRefPath = `/repos/${repository}/git/ref/heads/${encodedBranch}`;
+    const deleteRefPath = `/repos/${repository}/git/refs/heads/${encodedBranch}`;
+    const refResponse = await api(readRefPath);
     if (refResponse.status === 404) {
       alreadyAbsent.push(branch);
       continue;
@@ -41,7 +43,7 @@ export async function retireReviewedBranches({ fetchImpl, token, repository, exp
     if (ref?.object?.sha !== expectedSha) throw new Error(`${branch} moved: expected ${expectedSha}, found ${ref?.object?.sha ?? '<missing>'}`);
     const pulls = await json(await api(`/repos/${repository}/pulls?state=open&head=${encodeURIComponent(`${owner}:${branch}`)}&per_page=1`), `Check open PRs for ${branch}`);
     if (pulls.length) throw new Error(`${branch} has an open pull request and will not be deleted.`);
-    const response = await api(refPath, { method: 'DELETE' });
+    const response = await api(deleteRefPath, { method: 'DELETE' });
     if (response.status !== 204) await json(response, `Delete ${branch}`);
     deleted.push(branch);
   }
