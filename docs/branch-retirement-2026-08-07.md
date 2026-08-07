@@ -1,5 +1,7 @@
 # Reviewed branch retirement — 2026-08-07
 
+_Completed on 2026-08-07. The repository now retains only protected `main` and the Cloudflare deployment branch `cloudflare-preview`._
+
 Ten divergent branches were retained by the generic hosting cleanup because they had commits not reachable from `main`. Their contents were reviewed before deletion; none remains a valid source of truth.
 
 | Branch | Reviewed head | Decision |
@@ -16,3 +18,5 @@ Ten divergent branches were retained by the generic hosting cleanup because they
 | `codex/evaluate-all-code-in-main` | `fc96874` | Abandoned JavaScript conversion predating the current TypeScript/Next/Cloudflare architecture. |
 
 Deletion is guarded by exact full SHAs, an unchanged `main` SHA and absence of open pull requests. `main` and `cloudflare-preview` are excluded from the target allowlist.
+
+The one-time workflow and deletion scripts were removed after Dropbox receipts were verified and the branch inventory confirmed the expected two surviving refs. This document is the durable audit trail.
