@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   monitor:
+    environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -47,6 +48,13 @@ jobs:
           path: data/generated/osint/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Archive candidate package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream ecclesiastical-osint --source data/generated/osint
 
       - name: Record staging summary
         run: |

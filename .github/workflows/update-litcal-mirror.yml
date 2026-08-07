@@ -32,6 +32,7 @@ concurrency:
 
 jobs:
   prepare-validate-and-package:
+    environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -108,3 +109,17 @@ jobs:
             data/generated/translation-quality.json
             data/generated/languagetool-audit.json
             data/generated/litcal-staging-manifest.json
+
+      - name: Archive bounded staging package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream litcal
+          --source data/litcal-mirror
+          --source data/generated/translation-catalog.json
+          --source data/generated/translation-quality.json
+          --source data/generated/languagetool-audit.json
+          --source data/generated/litcal-staging-manifest.json

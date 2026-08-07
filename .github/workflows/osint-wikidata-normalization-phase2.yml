@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   normalize-staging-only:
+    environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -82,3 +83,10 @@ jobs:
           path: data/osint/staging/wikidata/run-${{ inputs.source_run_id }}/
           if-no-files-found: error
           retention-days: 7
+
+      - name: Archive normalized staging package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream wikidata-normalized --source data/osint/staging/wikidata/run-${{ inputs.source_run_id }}

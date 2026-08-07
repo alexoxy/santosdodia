@@ -37,6 +37,9 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Test bounded Dropbox archive hygiene
+        run: npm run dropbox:archive-test
+
       - name: Audit Cloudflare Free operating boundary
         run: npm run cloudflare:guardrails-audit
 
