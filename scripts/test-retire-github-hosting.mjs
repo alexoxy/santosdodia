@@ -95,6 +95,7 @@ const report = await retireGithubHosting({
   siteUrl: "https://www.santosdodia.com",
 });
 assert.equal(report.deploymentsDeleted, 2);
+assert.deepEqual(report.pages, { status: "disabled" });
 assert.deepEqual(report.beforeHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
 assert.deepEqual(report.afterHealth, { checkedAt: "2026-08-07T12:00:00Z", mode: "healthy" });
 assert.deepEqual(report.retiredByEnvironment, { Production: 1, "github-pages": 1 });
@@ -104,5 +105,32 @@ assert.equal(deployments.some((item) => item.id === 3), true);
 assert.equal(requests.some((request) => request.includes("deployments/3")), false);
 assert.equal(requests.some((request) => request.includes("heads/agent%2Funique")), false);
 assert.equal(pagesDeploymentDeleteAttempts, 2);
+
+async function permissionBlockedFetch(url, init = {}) {
+  const parsed = new URL(url);
+  if (parsed.hostname === "www.santosdodia.com") {
+    return json({ status: "ok", checkedAt: "2026-08-07T12:00:00Z" }, 200, { server: "cloudflare" });
+  }
+  if ((init.method ?? "GET") === "DELETE" && parsed.pathname.endsWith("/pages")) {
+    return json({ message: "Resource not accessible by integration" }, 403);
+  }
+  if ((init.method ?? "GET") === "GET" && parsed.pathname.endsWith("/deployments")) return json([]);
+  if ((init.method ?? "GET") === "GET" && parsed.pathname.endsWith("/branches")) {
+    return json([{ name: "main", protected: true }]);
+  }
+  if ((init.method ?? "GET") === "DELETE" && parsed.pathname.includes("/environments/")) {
+    return json({ message: "Not Found" }, 404);
+  }
+  return json({ message: `Unexpected request: ${init.method ?? "GET"} ${parsed.pathname}` }, 500);
+}
+
+const permissionBlocked = await retireGithubHosting({
+  fetchImpl: permissionBlockedFetch,
+  repository: "alexoxy/santosdodia",
+  token: "test-token",
+  siteUrl: "https://www.santosdodia.com",
+});
+assert.equal(permissionBlocked.pages.status, "permission-blocked");
+assert.match(permissionBlocked.pages.detail, /Resource not accessible by integration/);
 
 console.log("Retired deployment and merged-branch selectors passed.");
