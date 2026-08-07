@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!item) return { title: "Saint not found" };
   const description =
     item.summary ??
-    `Feast date, Christian traditions, patronages and calendar information for ${item.name}.`;
+    `Feast date, Christian traditions, reviewed sources and calendar information for ${item.name}.`;
   const canonical = `/saint/${id}`;
   const keywords = [
     ...new Set([

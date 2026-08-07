@@ -12,7 +12,7 @@ ${SITE_ORIGIN}
 
 ## Main public sections
 - ${SITE_ORIGIN}/ — today's contextual celebrations
-- ${SITE_ORIGIN}/explore — search saints, dates, places, professions and patronages
+- ${SITE_ORIGIN}/explore — search reviewed saints and observances by name and date
 - ${SITE_ORIGIN}/calendar — Christian calendars and subscriptions
 - ${SITE_ORIGIN}/liturgy — liturgical context and readings
 - ${SITE_ORIGIN}/live — official Christian live media and archives
@@ -24,7 +24,6 @@ ${SITE_ORIGIN}
 - ${SITE_ORIGIN}/saint/{id} — saint or observance profile
 - ${SITE_ORIGIN}/day/{YYYY-MM-DD} — celebrations on a civil date
 - ${SITE_ORIGIN}/place/{slug} — geographic discovery page
-- ${SITE_ORIGIN}/patronage/{slug} — patronage or profession page
 - ${SITE_ORIGIN}/church/{slug} — Church or Christian tradition profile
 - ${SITE_ORIGIN}/jurisdiction/{slug} — ecclesiastical jurisdiction and territorial scope
 - ${SITE_ORIGIN}/leader/{slug} — verified current ecclesiastical office holder and roles

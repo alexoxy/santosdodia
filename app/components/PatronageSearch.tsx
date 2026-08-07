@@ -36,12 +36,9 @@ export default function PatronageSearch({ compact = false }: { compact?: boolean
       />
       <button className="btn btn-primary" type="submit">{copy.findButton}</button>
     </form>
-    <div className="search-intents" aria-label={copy.findEyebrow}>
-      <span>{copy.byProfession}</span><span>{copy.byPlace}</span><span>{copy.byDate}</span><span>{copy.bySaint}</span>
-    </div>
-    <div className="popular-topics">
+    {popular.length ? <div className="popular-topics">
       <strong>{copy.popular}</strong>
       <div>{popular.map(topic => <Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic, locale)}</Link>)}</div>
-    </div>
+    </div> : null}
   </section>;
 }

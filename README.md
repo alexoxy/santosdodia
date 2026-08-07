@@ -1,6 +1,6 @@
 # www.santosdodia.com
 
-A free, global and multilingual Christian discovery service for saints, patronages, feast dates, official media and calendar subscriptions.
+A free, global and multilingual Christian discovery service for saints, feast dates, official media and calendar subscriptions.
 
 Production: https://www.santosdodia.com
 
@@ -16,8 +16,8 @@ OSINT acquisition runbook: [docs/osint-acquisition-runbook.md](docs/osint-acquis
 
 ## Product scope
 
-- Find patron saints by profession, cause, place, date, name and Christian tradition
-- Individual saint profiles with patronages, dates, traditions and traceable sources
+- Find saints and observances by date, name and Christian tradition
+- Individual saint profiles with dates, traditions, reviewed summaries and traceable sources
 - Free virtual candles stored only on the visitor's device
 - Catholic, Orthodox, Anglican and Oriental Orthodox calendar views
 - Calendar feeds by tradition and individual annual saint feeds
@@ -27,7 +27,7 @@ OSINT acquisition runbook: [docs/osint-acquisition-runbook.md](docs/osint-acquis
 - Privacy, terms, FAQ and correction/rights-request pages linked from the footer
 - Browser-sensitive interface with English fallback
 
-The current dataset is a curated beta. Dates and patronage associations may vary by Church, jurisdiction, rite, local tradition and calendar system.
+The current dataset is a curated beta. Dates and observances may vary by Church, jurisdiction, rite, local tradition and calendar system. Patronage and place associations remain withheld until each claim has direct provenance.
 
 ## Development
 

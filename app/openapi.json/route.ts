@@ -31,14 +31,14 @@ export async function GET() {
       title: "Santos do Dia machine interface",
       version: "3.6.0",
       description:
-        "Machine-readable saints, Christian Church calendars, patronages, ecclesiastical jurisdictions and religious leaders with traceable source tiers.",
+        "Machine-readable saints, Christian Church calendars, ecclesiastical jurisdictions and religious leaders with traceable source tiers.",
     },
     servers: [{ url: SITE_ORIGIN }],
     paths: {
       "/api/v1/discover": {
         get: {
           summary:
-            "Discover patron saints by profession, cause, place, date or name",
+            "Discover reviewed saints and observances by date or name",
           parameters: [
             {
               name: "q",
@@ -99,7 +99,6 @@ export async function GET() {
               in: "query",
               schema: { type: "string", format: "date" },
             },
-            { name: "patronage", in: "query", schema: { type: "string" } },
             ...filterParameters,
           ],
           responses: {
@@ -113,7 +112,7 @@ export async function GET() {
       "/api/v1/search": {
         get: {
           summary:
-            "Search localized saint names, patronages, regions and traditions",
+            "Search localized saint names, regions and traditions",
           parameters: [
             { name: "q", in: "query", schema: { type: "string" } },
             { name: "year", in: "query", schema: { type: "integer" } },

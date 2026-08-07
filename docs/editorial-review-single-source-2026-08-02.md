@@ -1,6 +1,6 @@
 # Editorial review — single-source curated records
 
-_Date: 2026-08-02_
+_Initial review: 2026-08-02 · remediated: 2026-08-07_
 
 ## Scope
 
@@ -8,23 +8,26 @@ This review covers five curated records labelled `cross-checked` while carrying 
 
 ## Results
 
-| Record | Date reviewed | Institutional corroboration | Date/name conclusion | Unresolved claims |
+| Record | Date reviewed | Institutional corroboration | Date/name conclusion | Patronage treatment |
 | --- | --- | --- | --- | --- |
-| `our-lady-lourdes` | 11 February | Official Sanctuary of Lourdes | Corroborated | Patronages: sick people; pilgrims |
-| `fatima` | 13 May | Official Shrine of Fatima | Corroborated | Patronage: peace |
-| `anthony-lisbon` | 13 June | Patriarchate of Lisbon diocesan calendar | Corroborated, including local solemnity in Lisbon | Patronages: lost items; travellers; marriage |
-| `our-lady-carmel` | 16 July | Holy See liturgical references | Corroborated | Patronages: sailors; Carmelite Order |
-| `teresa-avila` | 15 October | Holy See Teresian reference | Corroborated | Patronages: writers; contemplative prayer |
+| `our-lady-lourdes` | 11 February | Official Sanctuary of Lourdes | Corroborated | Withheld in the review queue |
+| `fatima` | 13 May | Official Shrine of Fatima | Corroborated | Withheld in the review queue |
+| `anthony-lisbon` | 13 June | Patriarchate of Lisbon diocesan calendar | Corroborated, including local solemnity in Lisbon | Withheld in the review queue |
+| `our-lady-carmel` | 16 July | Order of Carmelites | Corroborated | Withheld in the review queue |
+| `teresa-avila` | 15 October | Holy See Teresian reference | Corroborated | Withheld in the review queue |
 
-## Editorial decision
+## Remediation decision
 
-The records are not mechanically relabelled yet. Their current source list applies to the entire record, while the institutional sources reviewed above directly corroborate the observance date and identity but not every patronage.
+The five institutional references are now catalogued as independent sources for the observance identity and date. All five records have a sourced English and Portuguese editorial summary and a recorded review date of 2026-08-07.
 
-The next model change must support claim-specific provenance for:
+Patronage strings are not inferred from the observance sources. All 39 previously public patronage claims and five additional place/association candidates were removed from the public read model and preserved in `data/editorial-patronage-review-queue.json` with publication status `withheld-pending-claim-evidence`.
 
-- observance identity and date;
-- patronages;
-- geographic or jurisdictional scope;
-- editorial summaries.
+The same gate now covers the 20 profession, cause and place topic candidates (33 saint-topic associations). Their definitions remain available for editorial work, but the public topic collection, sitemap, discovery API and static route generation stay empty until claim-level evidence supports promotion.
 
-Until then, this review is retained as evidence for the date/name claims and the automatic audit continues to report the source-count mismatch.
+The quality gate now requires:
+
+- a valid `lastVerified` date for every curated record;
+- English and Portuguese editorial summaries;
+- claim-level summary sources that also belong to the record source set;
+- at least two independent sources for `cross-checked` records;
+- zero patronage claims or association-topic pages in the public read model until claim-specific evidence exists.

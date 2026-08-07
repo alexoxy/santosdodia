@@ -14,7 +14,7 @@ import { SITE_ORIGIN } from '../lib/site';
 import { countryFromHeaders } from '../lib/request-geo';
 import { serializeStructuredData } from '../lib/structured-data';
 
-const siteDescription = 'Discover who is celebrated today in your country, region and Christian tradition. Search saints, patronages, calendars, movable feasts, religious holidays and liturgical information.';
+const siteDescription = 'Discover who is celebrated today in your country, region and Christian tradition. Search saints, calendars, movable feasts, religious holidays and liturgical information.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   category: 'reference',
   keywords: [
     'saint of the day', 'saints celebrated today', 'saints by country', 'local saints calendar',
-    'patron saint', 'patron saint by profession', 'Christian calendar', 'liturgical calendar',
+    'saints today', 'Christian observances', 'Christian calendar', 'liturgical calendar',
     'Roman Catholic calendar', 'Orthodox calendar', 'Coptic calendar', 'Anglican calendar',
     'movable Christian feasts', 'religious holidays by country', 'daily readings'
   ],
