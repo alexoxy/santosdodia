@@ -79,6 +79,9 @@ jobs:
       - name: Test immutable Dropbox staging approvals
         run: npm run calendar:approval-test
 
+      - name: Test publication-safe D1 calendar reads
+        run: npm run calendar:read-model-test
+
       - name: Test guarded calendar staging SQL generation
         run: npm run calendar:staging-test
 
