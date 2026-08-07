@@ -9,6 +9,7 @@ import { jurisdictionBreadcrumbs } from '../../../lib/knowledge/jurisdiction-res
 import { churchPath, jurisdictionBySlug, jurisdictionPath, localizedFieldValue, personPath } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
+import { serializeStructuredData } from '../../../lib/structured-data';
 
 export const dynamic = 'force-dynamic';
 
@@ -141,6 +142,6 @@ export default async function JurisdictionPage({ params }: { params: Promise<{ s
         <Link className="text-link" href={jurisdictionPath(child)}>{ui.openJurisdiction} →</Link>
       </article>)}</div>
     </section> : null}
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
   </div>;
 }

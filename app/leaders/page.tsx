@@ -7,6 +7,7 @@ import { officeLabel } from '../../lib/knowledge/ecclesiastical-display';
 import { localizedFieldValue, personPath } from '../../lib/knowledge/routes';
 import { serverLocale } from '../../lib/server-locale';
 import { SITE_ORIGIN } from '../../lib/site';
+import { serializeStructuredData } from '../../lib/structured-data';
 
 export const dynamic = 'force-dynamic';
 
@@ -69,6 +70,6 @@ export default async function LeadersPage() {
     <section className="page-hero compact-hero"><div><span className="eyebrow">{text.eyebrow}</span><h1>{text.title}</h1><p>{text.intro}</p></div><div className="hero-symbol" aria-hidden="true">✦</div></section>
     <div className="section-heading compact"><div><span className="eyebrow">{text.directory}</span><h2>{rows.length}</h2></div></div>
     <LeadersExplorer rows={rows} locale={locale}/>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
   </div>;
 }

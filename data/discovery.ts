@@ -1,5 +1,6 @@
-import { getAllObservances, getObservancesForDate, searchObservances, type Observance } from './observances';
+import type { Observance } from './observances';
 import { localize, type Locale, type LocalizedText } from '../lib/i18n';
+import { getPublicAllObservances, getPublicObservancesForDate, searchPublicObservances } from '../lib/public-observances';
 
 export type DiscoveryKind='profession'|'cause'|'place';
 export type DiscoveryTopic={
@@ -41,8 +42,8 @@ export function topicDescription(topic:DiscoveryTopic,locale:Locale){return loca
 export function topicPath(topic:DiscoveryTopic){return topic.kind==='place'?`/place/${topic.slug}`:`/patronage/${topic.slug}`}
 export function getDiscoveryTopic(kind:DiscoveryKind,slug:string){return DISCOVERY_TOPICS.find(topic=>topic.kind===kind&&topic.slug===slug)}
 export function getPopularTopics(){return DISCOVERY_TOPICS.filter(topic=>topic.popular)}
-export function getObservanceById(id:string,year:number,locale:Locale='en'){return getAllObservances(year,locale).find(item=>item.id===id)}
-export function getObservancesForTopic(topic:DiscoveryTopic,year:number,locale:Locale='en'):Observance[]{const wanted=new Set(topic.observanceIds);return getAllObservances(year,locale).filter(item=>wanted.has(item.id))}
+export function getObservanceById(id:string,year:number,locale:Locale='en'){return getPublicAllObservances(year,locale).find(item=>item.id===id)}
+export function getObservancesForTopic(topic:DiscoveryTopic,year:number,locale:Locale='en'):Observance[]{const wanted=new Set(topic.observanceIds);return getPublicAllObservances(year,locale).filter(item=>wanted.has(item.id))}
 export function topicsForObservance(id:string){return DISCOVERY_TOPICS.filter(topic=>topic.observanceIds.includes(id))}
 
 function scoreTopic(topic:DiscoveryTopic,query:string,locale:Locale){
@@ -64,5 +65,5 @@ export function parseDiscoveryDate(query:string,year=new Date().getFullYear()){
   return undefined;
 }
 export function searchDiscoveryObservances(query:string,year:number,locale:Locale='en'){
-  const date=parseDiscoveryDate(query,year);return date?getObservancesForDate(date,locale):searchObservances(query,year,locale);
+  const date=parseDiscoveryDate(query,year);return date?getPublicObservancesForDate(date,locale):searchPublicObservances(query,year,locale);
 }

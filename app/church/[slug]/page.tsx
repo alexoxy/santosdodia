@@ -7,6 +7,7 @@ import { ecclesiasticalPageCopy, officeLabel } from '../../../lib/knowledge/eccl
 import { churchBySlug, churchPath, jurisdictionPath, localizedFieldValue, personPath } from '../../../lib/knowledge/routes';
 import { serverLocale } from '../../../lib/server-locale';
 import { SITE_ORIGIN } from '../../../lib/site';
+import { serializeStructuredData } from '../../../lib/structured-data';
 
 export const dynamic = 'force-dynamic';
 
@@ -129,6 +130,6 @@ export default async function ChurchPage({ params }: { params: Promise<{ slug: s
         })}
       </div> : <div className="empty-state"><span>✦</span><p>{ui.jurisdictionDirectoryPending}</p></div>}
     </section>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
   </div>;
 }

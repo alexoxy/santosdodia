@@ -5,6 +5,7 @@ import { jurisdictionsForChurch } from '../../data/knowledge/jurisdictions';
 import { churchPath, jurisdictionPath, localizedFieldValue } from '../../lib/knowledge/routes';
 import { serverLocale } from '../../lib/server-locale';
 import { SITE_ORIGIN } from '../../lib/site';
+import { serializeStructuredData } from '../../lib/structured-data';
 
 const copy = {
   en: { title: 'Christian Churches and liturgical traditions', intro: 'Explore how different Christian Churches organise their calendars, jurisdictions and celebrations.', eyebrow: 'Churches · traditions · calendars', directory: 'Knowledge directory', represented: 'Churches and traditions represented', jurisdictions: 'jurisdictions', open: 'Open Church profile', browse: 'Browse the hierarchy', modelled: 'Jurisdictions already modelled' },
@@ -83,6 +84,6 @@ export default async function ChurchesPage() {
         )}
       </div>
     </section>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
   </div>;
 }

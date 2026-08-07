@@ -33,6 +33,7 @@ export function loadGuardrails(filePath = DEFAULT_POLICY_PATH) {
   const requiredOfficial = {
     workersRequestsPerDay: 100_000,
     workersCpuMsPerRequest: 10,
+    workersLogsEventsPerDay: 200_000,
     d1RowsReadPerDay: 5_000_000,
     d1RowsWrittenPerDay: 100_000,
     d1StorageBytes: 5 * 1024 ** 3,
@@ -57,6 +58,8 @@ export function loadGuardrails(filePath = DEFAULT_POLICY_PATH) {
   if (autonomous.d1RemoteOperationsPerUtcDay !== 1) throw new Error('D1 remote staging operations must remain limited to one per UTC day.');
   if (autonomous.osintAcquisitionsPerUtcDay !== 1) throw new Error('OSINT acquisitions must remain limited to one per UTC day.');
   if (autonomous.cloudflareDeploymentsPerUtcDay !== 1) throw new Error('Cloudflare deployments must remain limited to one per UTC day.');
+  if (autonomous.workersLogsTargetEventsPerDay !== 100_000) throw new Error('Workers Logs internal target must remain 100000 events per day.');
+  if (autonomous.workersLogsHeadSamplingRate !== 0.1) throw new Error('Workers Logs head sampling must remain at 10%.');
   if (autonomous.osintMaxRecordsPerAcquisition > 500) throw new Error('OSINT acquisition cap may not exceed 500 records.');
   if (autonomous.d1EstimatedRowsReadPerOperation > Math.floor(official.d1RowsReadPerDay * 0.2)) {
     throw new Error('D1 read cap exceeds 20% of the free daily allowance.');
@@ -199,6 +202,7 @@ export function auditRepository(root = process.cwd(), policy = loadGuardrails())
   const wrangler = fs.readFileSync(wranglerPath, 'utf8');
   if (!/"preview_urls"\s*:\s*false/.test(wrangler)) throw new Error('Cloudflare preview URLs must remain disabled.');
   if (!/"observability"\s*:\s*\{[\s\S]*?"enabled"\s*:\s*true/.test(wrangler)) throw new Error('Cloudflare observability must remain enabled.');
+  if (!/"observability"\s*:\s*\{[\s\S]*?"head_sampling_rate"\s*:\s*0\.1/.test(wrangler)) throw new Error('Cloudflare observability must remain sampled at 10%.');
   if (/"r2_buckets"\s*:/.test(wrangler) && policy.autonomousLimits.r2WritesEnabled !== true) {
     throw new Error('R2 bindings are forbidden while autonomous R2 writes are disabled.');
   }
