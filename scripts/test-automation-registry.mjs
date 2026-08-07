@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {
+  discoverAutomationInventory,
+  validateAutomationRegistry
+} from './audit-automation-registry.mjs';
+
+const registry = JSON.parse(fs.readFileSync('config/automation-registry.json', 'utf8'));
+const inventory = discoverAutomationInventory();
+const baseline = validateAutomationRegistry(registry, inventory);
+assert.equal(baseline.ok, true, baseline.errors.join('\n'));
+
+const withUnregisteredSchedule = structuredClone(inventory);
+withUnregisteredSchedule.workflows.set('.github/workflows/unregistered.yml', { crons: ['7 7 * * *'] });
+assert.match(validateAutomationRegistry(registry, withUnregisteredSchedule).errors.join('\n'), /Scheduled workflow is not registered/);
+
+const wrongCron = structuredClone(registry);
+wrongCron.tasks.find((task) => task.id === 'observance-refresh').crons = ['0 0 * * *'];
+assert.match(validateAutomationRegistry(wrongCron, inventory).errors.join('\n'), /cron mismatch/);
+
+const unsafePublication = structuredClone(registry);
+unsafePublication.tasks.find((task) => task.id === 'observance-refresh').publicationMode = 'automatic-production';
+assert.match(validateAutomationRegistry(unsafePublication, inventory).errors.join('\n'), /forbidden publicationMode/);
+
+const requestTimeFetch = structuredClone(registry);
+requestTimeFetch.policy.requestTimeExternalAcquisition = true;
+assert.match(validateAutomationRegistry(requestTimeFetch, inventory).errors.join('\n'), /Request-time external acquisition/);
+
+const missingProducer = structuredClone(registry);
+missingProducer.tasks.find((task) => task.id === 'source-freshness').producerScripts = ['scripts/missing-producer.mjs'];
+assert.match(validateAutomationRegistry(missingProducer, inventory).errors.join('\n'), /references missing producer/);
+
+console.log(`Automation registry passed: ${baseline.summary.scheduledTasks} schedules and ${baseline.summary.producerScripts} producer entrypoints.`);

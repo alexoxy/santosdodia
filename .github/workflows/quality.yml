@@ -37,6 +37,12 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Audit automation registry
+        run: npm run automation:audit
+
+      - name: Test automation registry safeguards
+        run: npm run automation:test
+
       - name: Test bounded Dropbox archive hygiene
         run: npm run dropbox:archive-test
 
