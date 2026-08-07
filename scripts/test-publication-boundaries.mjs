@@ -57,6 +57,11 @@ for (const escape of ["\\\\u0026", "\\\\u003c", "\\\\u003e"]) {
     failures.push(`structured-data serializer is missing ${escape}`);
 }
 
+const interfaceCopy = await readFile(path.join(root, "lib/i18n.ts"), "utf8");
+if (/\bliveData\b|Live source data|fuentes en vivo|fontes em tempo real|sources en direct/.test(interfaceCopy)) {
+  failures.push("public interface copy still claims request-time live source data");
+}
+
 if (failures.length) {
   console.error(`Publication boundary failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);

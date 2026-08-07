@@ -121,7 +121,7 @@ export default function CalendarExplorer() {
       <section className="page-hero compact-hero">
         <div>
           <span className="eyebrow">
-            {copy.global} · {copy.liveData}
+            {copy.global} · {copy.approvedData}
           </span>
           <h1>{copy.calendarTitle}</h1>
           <p>{copy.calendarIntro}</p>
