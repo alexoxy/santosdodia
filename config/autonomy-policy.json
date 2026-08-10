@@ -7,22 +7,57 @@
     "productionMustRemainAvailableOnAgentFailure": true,
     "lastKnownGoodWinsOnUncertainty": true,
     "everyMutationRequiresProvenance": true,
-    "everyProductionPromotionRequiresRollback": true
+    "everyProductionPromotionRequiresRollback": true,
+    "dropboxIsTheImmutableBoundaryBetweenAgents": true,
+    "noAgentMaySkipAStage": true
   },
   "agents": [
-    {"id":"source-scout","role":"discover and rank candidate sources","productionWrite":false},
-    {"id":"acquisition","role":"fetch approved sources and archive immutable evidence","productionWrite":false},
-    {"id":"normalizer","role":"normalize source-specific records into canonical candidates","productionWrite":false},
-    {"id":"resolver","role":"deduplicate identities and preserve conflicting assertions","productionWrite":false},
-    {"id":"validator","role":"score authority, independence, freshness and conflicts","productionWrite":false},
-    {"id":"publisher","role":"promote only candidates satisfying the automatic publication contract","productionWrite":false},
-    {"id":"auditor","role":"compare production against the promoted package and trigger rollback when invariants fail","productionWrite":false}
+    {
+      "id": "scout",
+      "role": "discover sources, assess authority/access/licence, acquire approved evidence and archive immutable raw packages in Dropbox",
+      "reads": ["public-web", "source-registry", "policy-registry"],
+      "writes": ["dropbox:raw", "dropbox:source-candidates", "dropbox:receipts"],
+      "productionWrite": false
+    },
+    {
+      "id": "normalizer",
+      "role": "consume verified Dropbox raw packages, extract facts, deduplicate, resolve identities, cross-check assertions, preserve conflicts and archive normalized packages",
+      "reads": ["dropbox:raw"],
+      "writes": ["dropbox:normalized", "dropbox:conflicts", "dropbox:validation"],
+      "internetAccess": false,
+      "productionWrite": false
+    },
+    {
+      "id": "importer",
+      "role": "consume verified normalized packages, apply idempotent D1 staging imports, verify counts and invariants, retain rollback bookmarks and later promote only when gates permit",
+      "reads": ["dropbox:normalized"],
+      "writes": ["cloudflare-d1:staging", "dropbox:import-receipts"],
+      "internetAccess": false,
+      "productionWrite": false
+    }
   ],
   "acquisition": {
     "maxSourcesPerCycle": 4,
     "requiredPolicyDecision": "approved",
     "requireSourceSpecificAdapter": true,
-    "failClosedOnSourceError": true
+    "failClosedOnSourceError": true,
+    "archiveBeforeDownstreamUse": true
+  },
+  "normalization": {
+    "requireVerifiedDropboxIndex": true,
+    "requireRawSha256Match": true,
+    "requireUpstreamRunLineage": true,
+    "preserveConflictingAssertions": true,
+    "neverFetchSourceAtNormalizationTime": true
+  },
+  "import": {
+    "target": "cloudflare-d1-staging",
+    "requireVerifiedDropboxIndex": true,
+    "requireNormalizedSha256Match": true,
+    "requireIdempotencyKey": true,
+    "requirePreImportBookmark": true,
+    "requirePostImportVerification": true,
+    "automaticRollbackOnFailure": true
   },
   "promotion": {
     "automaticProductionWrites": false,
@@ -39,14 +74,16 @@
   },
   "sourcePipelines": {
     "wikidata": {
+      "lane": "saints",
       "normalizer": "scripts/osint/normalize-wikidata-saints.mjs",
       "publicationClass": "discovery-and-enrichment",
       "canAutoPromoteAlone": false
     }
   },
-  "futureRuntime": {
-    "batchOrchestration": "github-actions",
-    "durablePromotionAndRollback": "cloudflare-workflows",
-    "canonicalDatabase": "cloudflare-d1"
+  "runtime": {
+    "orchestration": "github-actions",
+    "archive": "dropbox",
+    "canonicalDatabase": "cloudflare-d1",
+    "futureDurablePromotionAndRollback": "cloudflare-workflows"
   }
 }
