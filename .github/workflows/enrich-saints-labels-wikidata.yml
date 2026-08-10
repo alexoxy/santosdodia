@@ -1,0 +1,150 @@
+name: Enrich Saints multilingual labels from Wikidata
+
+on:
+  schedule:
+    - cron: '13,28,43,58 * * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/saints-label-enrichment-v2.json'
+      - 'scripts/enrichment/plan-wikidata-label-run.mjs'
+      - 'scripts/enrichment/fetch-wikidata-label-chunk.mjs'
+      - 'scripts/enrichment/finalize-wikidata-label-run.mjs'
+      - 'scripts/enrichment/test-wikidata-label-pipeline.mjs'
+      - '.github/workflows/enrich-saints-labels-wikidata.yml'
+      - 'config/automation-registry.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-labels-wikidata-v2
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+      - name: Audit safety contracts
+        run: |
+          npm run repo:audit
+          npm run automation:audit
+          node scripts/enrichment/test-wikidata-label-pipeline.mjs
+
+      - name: Pull verified global identity ledger
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream baseline/saints/v1/identity/wikidata/recognition-v1
+          --destination staging/label-enrichment/identity
+      - name: Extract identity ledger safely
+        run: >-
+          node scripts/archive/extract-safe-tar.mjs
+          --archive staging/label-enrichment/identity/package.tar.gz
+          --destination staging/label-enrichment/identity/extracted
+      - name: Pull previous label watermark if present
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream enrichment-progress/saints/v1/wikidata/labels-v2
+          --destination staging/label-enrichment/previous
+          --allow-missing
+      - name: Extract previous watermark if present
+        shell: bash
+        run: |
+          if [ -f staging/label-enrichment/previous/package.tar.gz ]; then
+            node scripts/archive/extract-safe-tar.mjs --archive staging/label-enrichment/previous/package.tar.gz --destination staging/label-enrichment/previous/extracted
+          fi
+      - name: Resolve verified identity inputs
+        id: inputs
+        shell: bash
+        run: |
+          manifest="$(find staging/label-enrichment/identity/extracted -type f -name identity-manifest.json | sort | tail -n 1)"
+          report="$(find staging/label-enrichment/identity/extracted -type f -name identity-report.json | sort | tail -n 1)"
+          ledger="$(find staging/label-enrichment/identity/extracted -type f -name identity-ledger.jsonl | sort | tail -n 1)"
+          previous="$(find staging/label-enrichment/previous/extracted -type f -name label-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          test -n "$manifest" && test -n "$report" && test -n "$ledger"
+          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
+          echo "report=$report" >> "$GITHUB_OUTPUT"
+          echo "ledger=$ledger" >> "$GITHUB_OUTPUT"
+          echo "previous=$previous" >> "$GITHUB_OUTPUT"
+      - name: Plan next multilingual evidence chunk
+        id: plan
+        shell: bash
+        env:
+          MANIFEST: ${{ steps.inputs.outputs.manifest }}
+          REPORT: ${{ steps.inputs.outputs.report }}
+          LEDGER: ${{ steps.inputs.outputs.ledger }}
+          PREVIOUS: ${{ steps.inputs.outputs.previous }}
+        run: |
+          args=(--identity-manifest "$MANIFEST" --identity-report "$REPORT" --identity-ledger "$LEDGER" --output staging/label-enrichment/plan.json)
+          if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
+          node scripts/enrichment/plan-wikidata-label-run.mjs "${args[@]}"
+          node -e "const fs=require('node:fs');const p=JSON.parse(fs.readFileSync('staging/label-enrichment/plan.json','utf8'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_run='+p.shouldRun+'\nraw_stream='+p.rawStream+'\nnormalized_stream='+p.normalizedStream+'\nprogress_stream='+p.progressStream+'\n');"
+      - name: Fetch exact-QID multilingual source evidence
+        if: steps.plan.outputs.should_run == 'true'
+        run: >-
+          node scripts/enrichment/fetch-wikidata-label-chunk.mjs
+          --plan staging/label-enrichment/plan.json
+          --raw-output staging/label-enrichment/output/labels-raw.json
+          --normalized-output staging/label-enrichment/output/labels-normalized.json
+      - name: Archive immutable RAW multilingual evidence
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.raw_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs --stream "$STREAM"
+          --source staging/label-enrichment/output/labels-raw.json
+          --source staging/label-enrichment/plan.json
+      - name: Archive normalized multilingual source evidence
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.normalized_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs --stream "$STREAM"
+          --source staging/label-enrichment/output/labels-normalized.json
+          --source staging/label-enrichment/plan.json
+      - name: Advance label watermark only after verified archives
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        env:
+          PREVIOUS: ${{ steps.inputs.outputs.previous }}
+        run: |
+          args=(--plan staging/label-enrichment/plan.json --raw staging/label-enrichment/output/labels-raw.json --normalized staging/label-enrichment/output/labels-normalized.json --output staging/label-enrichment/output/label-progress.json)
+          if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
+          node scripts/enrichment/finalize-wikidata-label-run.mjs "${args[@]}"
+      - name: Archive verified label watermark
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.progress_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs --stream "$STREAM"
+          --source staging/label-enrichment/output/label-progress.json
