@@ -61,6 +61,18 @@ jobs:
       - name: Audit Saints Baseline language editor
         run: node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
 
+      - name: Test chunked Saints Baseline D1 import watermarks
+        run: npm run saints:baseline-import-test
+
+      - name: Audit reviewed-only Saints Baseline D1 importer
+        run: npm run saints:baseline-importer-audit
+
+      - name: Test reviewed D1 chunk and withheld-name semantics
+        run: npm run db:reviewed-chunk-test
+
+      - name: Test shared autonomous D1 daily budget
+        run: npm run db:d1-budget-test
+
       - name: Test temporal core and calendar bridge
         run: npm run temporal:test
 
