@@ -7,6 +7,8 @@ import {
   type Category,
   type Observance,
 } from "../../data/observances";
+import { dateISOInTimeZone } from "../../lib/date-context";
+import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
 import { useLanguage, type ChurchPreference } from "./LanguageProvider";
@@ -35,10 +37,12 @@ function iso(year: number, month: number, day: number) {
 type Country = { countryCode: string; name: string };
 
 export default function CalendarExplorer() {
-  const now = new Date(),
-    { locale, copy, country, church, setChurch } = useLanguage();
-  const [year, setYear] = useState(now.getFullYear()),
-    [month, setMonth] = useState(now.getMonth()),
+  const { locale, copy, country, timeZone, church, setChurch } = useLanguage();
+  const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
+  const todayYear = Number(todayISO.slice(0, 4));
+  const todayMonth = Number(todayISO.slice(5, 7)) - 1;
+  const [year, setYear] = useState(todayYear),
+    [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
     [region, setRegion] = useState(country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
@@ -76,6 +80,7 @@ export default function CalendarExplorer() {
         year: String(year),
         month: String(month + 1),
         locale,
+        timezone: timeZone,
       });
     if (church !== "all") params.set("tradition", church);
     if (category !== "all") params.set("category", category);
@@ -97,7 +102,7 @@ export default function CalendarExplorer() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [year, month, locale, church, category, region, fallback]);
+  }, [year, month, locale, timeZone, church, category, region, fallback]);
   const weekdays = useMemo(() => {
     const base = new Date(Date.UTC(2026, 0, 5));
     return Array.from({ length: 7 }, (_, index) =>
@@ -116,6 +121,7 @@ export default function CalendarExplorer() {
   const feedParams = new URLSearchParams({ locale });
   if (category !== "all") feedParams.set("category", category);
   if (region !== "GLOBAL") feedParams.set("country", region);
+  const monthTitle = formatMonthYear(iso(year, month, 1), locale, "heading");
   return (
     <div className="page-stack">
       <section className="page-hero compact-hero">
@@ -193,13 +199,7 @@ export default function CalendarExplorer() {
           >
             ←
           </button>
-          <h2>
-            {new Intl.DateTimeFormat(locale, {
-              month: "long",
-              year: "numeric",
-              timeZone: "UTC",
-            }).format(new Date(Date.UTC(year, month, 1)))}
-          </h2>
+          <h2>{monthTitle}</h2>
           <button
             className="icon-button"
             aria-label={copy.next}
@@ -223,11 +223,7 @@ export default function CalendarExplorer() {
             {matrix(year, month).map((day, index) => {
               const date = day ? iso(year, month, day) : "",
                 list = day ? items.filter((item) => item.dateISO === date) : [],
-                today = Boolean(
-                  day &&
-                    date ===
-                      iso(now.getFullYear(), now.getMonth(), now.getDate()),
-                );
+                today = Boolean(day && date === todayISO);
               return (
                 <div
                   className={`calendar-cell${day ? "" : " blank"}${today ? " is-today" : ""}`}
