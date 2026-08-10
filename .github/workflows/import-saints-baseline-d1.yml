@@ -19,6 +19,7 @@ env:
   LANGUAGE_REVIEW_VERSION: '1.1'
   D1_IMPORT_VERSION: '1.0'
   D1_ENTITY_LIMIT: '200'
+  D1_MAX_OPERATIONS_PER_DAY: '1'
   REVIEW_PROGRESS_STREAM: baseline-reviewed-progress/saints/v1/wikidata/recognition-v1
   REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
   IMPORT_PROGRESS_STREAM: baseline-import-progress/saints/v1/wikidata/recognition-v1
@@ -117,6 +118,7 @@ jobs:
             --review-version "$LANGUAGE_REVIEW_VERSION"
             --import-version "$D1_IMPORT_VERSION"
             --entity-limit "$D1_ENTITY_LIMIT"
+            --max-operations-per-day "$D1_MAX_OPERATIONS_PER_DAY"
             --reviewed-prefix "$REVIEWED_STREAM_PREFIX"
             --receipt-prefix "$IMPORT_RECEIPT_PREFIX"
           )
