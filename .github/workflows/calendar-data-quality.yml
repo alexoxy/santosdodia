@@ -8,10 +8,16 @@ on:
       - 'scripts/calendar/**'
       - 'scripts/enrichment/**'
       - 'scripts/discovery/**'
+      - 'scripts/dropbox/list-archive-chunks.mjs'
+      - 'scripts/dropbox/pull-stream-set.mjs'
+      - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/sync-litcal-mirror.mjs'
       - 'config/saints-profile-enrichment-v1.json'
+      - 'config/saints-label-enrichment-v2.json'
       - '.github/workflows/harvest-vatican-saints.yml'
       - '.github/workflows/enrich-saints-profile-wikidata.yml'
+      - '.github/workflows/enrich-saints-labels-wikidata.yml'
+      - '.github/workflows/build-saints-navigation-exports.yml'
       - '.github/workflows/update-litcal-mirror.yml'
       - '.github/workflows/calendar-data-quality.yml'
       - 'config/automation-registry.json'
@@ -54,13 +60,18 @@ jobs:
           node scripts/calendar/test-normalize-vatican-saints.mjs
           node scripts/calendar/test-vatican-reference-policy.mjs
 
-      - name: Test profile enrichment safeguards
+      - name: Test profile and multilingual enrichment safeguards
         run: |
           node scripts/enrichment/test-wikidata-profile-core.mjs
           node scripts/enrichment/test-wikidata-profile-pipeline.mjs
+          node scripts/enrichment/test-wikidata-label-pipeline.mjs
 
-      - name: Test map timeline and calendar exports
-        run: node scripts/discovery/test-navigation-exports.mjs
+      - name: Test navigation assembly and export gates
+        run: |
+          node scripts/discovery/test-enrichment-chunk-set.mjs
+          node scripts/discovery/test-assemble-navigation-source.mjs
+          node scripts/discovery/test-navigation-readiness.mjs
+          node scripts/discovery/test-navigation-exports.mjs
 
       - name: Typecheck and lint application
         run: |

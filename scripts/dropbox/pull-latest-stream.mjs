@@ -5,6 +5,7 @@ import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
+import { fileURLToPath } from 'node:url';
 import { refreshDropboxAccessToken } from './oauth.mjs';
 
 const CONTENT_BLOCK_BYTES = 4 * 1024 * 1024;
@@ -23,10 +24,7 @@ function validateStream(stream) {
 
 async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) {
   const response = await fetch('https://content.dropboxapi.com/2/files/download', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Dropbox-API-Arg': JSON.stringify({ path: remotePath }),
-    },
+    headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
     signal: AbortSignal.timeout(120000),
   });
   if (!response.ok) {
@@ -39,10 +37,7 @@ async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) 
 
 async function downloadFile(token, remotePath, destination) {
   const response = await fetch('https://content.dropboxapi.com/2/files/download', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Dropbox-API-Arg': JSON.stringify({ path: remotePath }),
-    },
+    headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
     signal: AbortSignal.timeout(120000),
   });
   if (!response.ok || !response.body) throw new Error(`Dropbox download failed for ${remotePath} (HTTP ${response.status}).`);
@@ -65,35 +60,24 @@ async function dropboxContentHash(filePath) {
   return aggregate.digest('hex');
 }
 
-export async function pullLatestStream({ stream, destination, allowMissing = false }) {
+export async function pullLatestStream({ stream, destination, allowMissing = false, accessToken = null }) {
   validateStream(stream);
   const output = path.resolve(destination);
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
 
-  const token = await refreshDropboxAccessToken();
+  const token = accessToken ?? await refreshDropboxAccessToken();
   const indexPath = `/archive/${stream}/index.json`;
   const indexBytes = await downloadBytes(token, indexPath, { allowNotFound: allowMissing });
   if (indexBytes === null) {
-    const receipt = {
-      schemaVersion: 1,
-      stream,
-      consumedAt: new Date().toISOString(),
-      sourceIndexPath: indexPath,
-      verified: false,
-      missing: true,
-    };
+    const receipt = { schemaVersion: 1, stream, consumedAt: new Date().toISOString(), sourceIndexPath: indexPath, verified: false, missing: true };
     await writeFile(path.join(output, 'consumer-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
     return receipt;
   }
   const index = JSON.parse(indexBytes.toString('utf8'));
-  if (index.schemaVersion !== 1 || index.stream !== stream || index.updatedAfterVerifiedUpload !== true) {
-    throw new Error(`Dropbox stream index is not a verified SantosDia index: ${indexPath}`);
-  }
+  if (index.schemaVersion !== 1 || index.stream !== stream || index.updatedAfterVerifiedUpload !== true) throw new Error(`Dropbox stream index is not a verified SantosDia index: ${indexPath}`);
   const current = index.current;
-  if (!current?.archivePath || !current?.sha256 || !current?.dropboxContentHash) {
-    throw new Error(`Dropbox stream index is incomplete: ${indexPath}`);
-  }
+  if (!current?.archivePath || !current?.sha256 || !current?.dropboxContentHash) throw new Error(`Dropbox stream index is incomplete: ${indexPath}`);
 
   const archive = path.join(output, 'package.tar.gz');
   await downloadFile(token, current.archivePath, archive);
@@ -103,18 +87,7 @@ export async function pullLatestStream({ stream, destination, allowMissing = fal
   if (contentHash !== current.dropboxContentHash) throw new Error(`Dropbox content hash mismatch for ${current.archivePath}.`);
 
   await writeFile(path.join(output, 'index.json'), indexBytes, { mode: 0o600 });
-  const receipt = {
-    schemaVersion: 1,
-    stream,
-    consumedAt: new Date().toISOString(),
-    sourceIndexPath: indexPath,
-    archivePath: current.archivePath,
-    sha256,
-    dropboxContentHash: contentHash,
-    sourceRun: current.run ?? null,
-    verified: true,
-    missing: false,
-  };
+  const receipt = { schemaVersion: 1, stream, consumedAt: new Date().toISOString(), sourceIndexPath: indexPath, archivePath: current.archivePath, sha256, dropboxContentHash: contentHash, sourceRun: current.run ?? null, verified: true, missing: false };
   await writeFile(path.join(output, 'consumer-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
   return receipt;
 }
@@ -126,7 +99,9 @@ async function main() {
   process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`Dropbox stream intake failed: ${error instanceof Error ? error.message : String(error)}\n`);
-  process.exitCode = 1;
-});
+if (path.resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    process.stderr.write(`Dropbox stream intake failed: ${error instanceof Error ? error.message : String(error)}\n`);
+    process.exitCode = 1;
+  });
+}

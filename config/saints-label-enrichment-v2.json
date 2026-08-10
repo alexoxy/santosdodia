@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "enrichmentId": "saints-labels-v2",
+  "sourceId": "wikidata",
+  "identityStream": "baseline/saints/v1/identity/wikidata/recognition-v1",
+  "progressStream": "enrichment-progress/saints/v1/wikidata/labels-v2",
+  "rawStream": "enrichment/saints/v1/raw/wikidata/labels-v2",
+  "normalizedStream": "enrichment/saints/v1/normalized/wikidata/labels-v2",
+  "apiEndpoint": "https://www.wikidata.org/w/api.php",
+  "entityLimitPerRun": 200,
+  "apiBatchSize": 50,
+  "requestDelayMs": 12000,
+  "requestTimeoutMs": 60000,
+  "maxAttempts": 4,
+  "locales": [
+    {"siteLocale":"en","wikidataLanguage":"en","expectedScript":"Latn"},
+    {"siteLocale":"es","wikidataLanguage":"es","expectedScript":"Latn"},
+    {"siteLocale":"pt","wikidataLanguage":"pt","expectedScript":"Latn"},
+    {"siteLocale":"fr","wikidataLanguage":"fr","expectedScript":"Latn"},
+    {"siteLocale":"fil","wikidataLanguage":"tl","expectedScript":"Latn"},
+    {"siteLocale":"ru","wikidataLanguage":"ru","expectedScript":"Cyrl"},
+    {"siteLocale":"sw","wikidataLanguage":"sw","expectedScript":"Latn"},
+    {"siteLocale":"de","wikidataLanguage":"de","expectedScript":"Latn"},
+    {"siteLocale":"it","wikidataLanguage":"it","expectedScript":"Latn"},
+    {"siteLocale":"pl","wikidataLanguage":"pl","expectedScript":"Latn"}
+  ],
+  "policy": {
+    "exactQidInputOnly": true,
+    "nameSearchForbidden": true,
+    "languageFallbacksForbidden": true,
+    "sourceEvidenceOnly": true,
+    "automaticCanonicalNameSelection": false,
+    "automaticPublication": false,
+    "productionPublication": false,
+    "d1ProductionMutation": false,
+    "paidUsageAuthorized": false,
+    "onQuotaExhausted": "wait-for-reset"
+  }
+}

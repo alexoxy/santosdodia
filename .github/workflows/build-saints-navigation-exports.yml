@@ -1,0 +1,191 @@
+name: Build Saints navigation exports
+
+on:
+  schedule:
+    - cron: '31 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/discovery/**'
+      - 'scripts/dropbox/list-archive-chunks.mjs'
+      - 'scripts/dropbox/pull-stream-set.mjs'
+      - 'scripts/dropbox/pull-latest-stream.mjs'
+      - '.github/workflows/build-saints-navigation-exports.yml'
+      - 'config/automation-registry.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-navigation-exports-v1
+  cancel-in-progress: false
+
+jobs:
+  assemble-and-export:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit export contracts
+        run: |
+          npm run repo:audit
+          npm run automation:audit
+          node scripts/discovery/test-enrichment-chunk-set.mjs
+          node scripts/discovery/test-assemble-navigation-source.mjs
+          node scripts/discovery/test-navigation-readiness.mjs
+          node scripts/discovery/test-navigation-exports.mjs
+
+      - name: Pull current identity root
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream baseline/saints/v1/identity/wikidata/recognition-v1
+          --destination staging/navigation/identity
+
+      - name: Pull enrichment watermarks and Vatican calendar if present
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/profile-v1 --destination staging/navigation/profile-progress --allow-missing
+          node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/labels-v2 --destination staging/navigation/label-progress --allow-missing
+          node scripts/dropbox/pull-latest-stream.mjs --stream calendar/vatican-saints/v1/pt --destination staging/navigation/vatican --allow-missing
+
+      - name: Extract verified root and optional inputs
+        shell: bash
+        run: |
+          node scripts/archive/extract-safe-tar.mjs --archive staging/navigation/identity/package.tar.gz --destination staging/navigation/identity/extracted
+          for lane in profile-progress label-progress vatican; do
+            if [ -f "staging/navigation/$lane/package.tar.gz" ]; then
+              node scripts/archive/extract-safe-tar.mjs --archive "staging/navigation/$lane/package.tar.gz" --destination "staging/navigation/$lane/extracted"
+            fi
+          done
+          mkdir -p staging/navigation/profile-chunks staging/navigation/label-chunks
+
+      - name: Resolve input paths
+        id: inputs
+        shell: bash
+        run: |
+          manifest="$(find staging/navigation/identity/extracted -type f -name identity-manifest.json | sort | tail -n 1)"
+          report="$(find staging/navigation/identity/extracted -type f -name identity-report.json | sort | tail -n 1)"
+          ledger="$(find staging/navigation/identity/extracted -type f -name identity-ledger.jsonl | sort | tail -n 1)"
+          profile_progress="$(find staging/navigation/profile-progress/extracted -type f -name profile-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          label_progress="$(find staging/navigation/label-progress/extracted -type f -name label-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          vatican="$(find staging/navigation/vatican/extracted -type f -name normalized.json 2>/dev/null | sort | tail -n 1 || true)"
+          test -n "$manifest" && test -n "$report" && test -n "$ledger"
+          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
+          echo "report=$report" >> "$GITHUB_OUTPUT"
+          echo "ledger=$ledger" >> "$GITHUB_OUTPUT"
+          echo "profile_progress=$profile_progress" >> "$GITHUB_OUTPUT"
+          echo "label_progress=$label_progress" >> "$GITHUB_OUTPUT"
+          echo "vatican=$vatican" >> "$GITHUB_OUTPUT"
+
+      - name: Discover and validate profile chunks
+        if: steps.inputs.outputs.profile_progress != ''
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          PROGRESS: ${{ steps.inputs.outputs.profile_progress }}
+        shell: bash
+        run: |
+          node scripts/dropbox/list-archive-chunks.mjs --stream-prefix enrichment/saints/v1/normalized/wikidata/profile-v1 --output staging/navigation/profile-listing.json
+          node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/profile-listing.json --progress "$PROGRESS" --chunk-size 40 --output staging/navigation/profile-chunk-audit.json
+          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/profile-listing.json --destination staging/navigation/profile-chunks
+
+      - name: Discover and validate multilingual label chunks
+        if: steps.inputs.outputs.label_progress != ''
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          PROGRESS: ${{ steps.inputs.outputs.label_progress }}
+        shell: bash
+        run: |
+          node scripts/dropbox/list-archive-chunks.mjs --stream-prefix enrichment/saints/v1/normalized/wikidata/labels-v2 --output staging/navigation/label-listing.json
+          node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/label-listing.json --progress "$PROGRESS" --chunk-size 200 --output staging/navigation/label-chunk-audit.json
+          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/label-listing.json --destination staging/navigation/label-chunks
+
+      - name: Extract all verified enrichment chunks
+        shell: bash
+        run: |
+          for root in staging/navigation/profile-chunks staging/navigation/label-chunks; do
+            while IFS= read -r archive; do
+              destination="${archive%/package.tar.gz}/extracted"
+              node scripts/archive/extract-safe-tar.mjs --archive "$archive" --destination "$destination"
+            done < <(find "$root" -type f -name package.tar.gz | sort)
+          done
+
+      - name: Assemble canonical navigation source
+        env:
+          IDENTITY_MANIFEST: ${{ steps.inputs.outputs.manifest }}
+          IDENTITY_REPORT: ${{ steps.inputs.outputs.report }}
+          IDENTITY_LEDGER: ${{ steps.inputs.outputs.ledger }}
+          VATICAN: ${{ steps.inputs.outputs.vatican }}
+        shell: bash
+        run: |
+          args=(
+            --identity-manifest "$IDENTITY_MANIFEST"
+            --identity-report "$IDENTITY_REPORT"
+            --identity-ledger "$IDENTITY_LEDGER"
+            --profiles-dir staging/navigation/profile-chunks
+            --labels-dir staging/navigation/label-chunks
+            --output staging/navigation/output/navigation-source.json
+          )
+          if [ -n "$VATICAN" ]; then args+=(--vatican "$VATICAN"); fi
+          node scripts/discovery/assemble-navigation-source.mjs "${args[@]}"
+
+      - name: Audit partial or freeze-ready state
+        run: >-
+          node scripts/discovery/audit-navigation-readiness.mjs
+          --input staging/navigation/output/navigation-source.json
+          --output staging/navigation/output/readiness.json
+
+      - name: Build deterministic staging exports
+        run: >-
+          node scripts/discovery/build-navigation-exports.mjs
+          --input staging/navigation/output/navigation-source.json
+          --output staging/navigation/output/exports
+          --mode staging
+          --locale pt
+
+      - name: Archive canonical navigation source in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream navigation/saints/v1/source
+          --source staging/navigation/output/navigation-source.json
+          --source staging/navigation/output/readiness.json
+
+      - name: Archive export bundle in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream navigation/saints/v1/exports/pt
+          --source staging/navigation/output/exports
+          --source staging/navigation/output/readiness.json
