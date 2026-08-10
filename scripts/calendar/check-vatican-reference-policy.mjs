@@ -3,11 +3,21 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+function userAgentBlocks(text) {
+  return String(text)
+    .replace(/\r\n?/gu, '\n')
+    .split(/(?=^\s*User-agent:\s*)/gimu)
+    .map((block) => block.trim())
+    .filter(Boolean);
+}
+
 export function assessVaticanRobots(text) {
   const normalized = String(text).replace(/\r\n?/gu, '\n');
-  const globalBlock = /user-agent:\s*\*[\s\S]*?disallow:\s*\/\s*(?:\n|$)/iu.test(normalized);
-  const allowsRoot = /user-agent:\s*\*[\s\S]*?allow:\s*\/\s*(?:\n|$)/iu.test(normalized);
-  const contentSignal = normalized.match(/content-signal:\s*([^\n]+)/iu)?.[1]?.toLowerCase() ?? '';
+  const globalBlocks = userAgentBlocks(normalized).filter((block) => /^\s*User-agent:\s*\*\s*$/imu.test(block.split('\n')[0] ?? ''));
+  const globalText = globalBlocks.join('\n');
+  const globalBlock = /^\s*Disallow:\s*\/\s*$/gimu.test(globalText);
+  const allowsRoot = /^\s*Allow:\s*\/\s*$/gimu.test(globalText);
+  const contentSignal = globalText.match(/^\s*Content-Signal:\s*([^\n]+)/imu)?.[1]?.toLowerCase() ?? '';
   const searchAllowed = /(?:^|,)\s*search=yes(?:,|$)/u.test(contentSignal);
   const referenceUse = /(?:^|,)\s*use=reference(?:,|$)/u.test(contentSignal);
   const trainingBlocked = /(?:^|,)\s*ai-train=no(?:,|$)/u.test(contentSignal);
