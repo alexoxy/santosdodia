@@ -54,13 +54,9 @@ function issuesFor(value, locale) {
     if (LATIN.test(value) && !CYRILLIC.test(value)) issues.push('unexpected-script-for-locale');
   } else if (supported.has(locale)) {
     if (LETTER.test(value) && !LATIN.test(value)) issues.push('required-latin-script-missing');
-    if (CYRILLIC.test(value) || GREEK.test(value) || ARMENIAN.test(value) || ETHIOPIC.test(value) || ARABIC_SYRIAC.test(value)) {
-      issues.push('unexpected-script-for-locale');
-    }
+    if (CYRILLIC.test(value) || GREEK.test(value) || ARMENIAN.test(value) || ETHIOPIC.test(value) || ARABIC_SYRIAC.test(value)) issues.push('unexpected-script-for-locale');
   }
-  if (locale === 'pt' && /\b(?:Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\s+De\b/u.test(value)) {
-    issues.push('pt-date-preposition-capitalized');
-  }
+  if (locale === 'pt' && /\b(?:Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\s+De\b/u.test(value)) issues.push('pt-date-preposition-capitalized');
   return [...new Set(issues)];
 }
 
@@ -78,10 +74,11 @@ function jsonLines(values) {
   return values.length ? `${values.map((value) => JSON.stringify(value)).join('\n')}\n` : '';
 }
 
-const reviewed = [];
+const fieldDecisions = [];
 const withheld = [];
 const advisory = [];
 const localeCoverage = Object.fromEntries(supportedLocales.map((locale) => [locale, 0]));
+const localeEntityStatus = Object.fromEntries(supportedLocales.map((locale) => [locale, { missing: 0, withheld: 0, sourceOnly: 0 }]));
 const nameDecisions = [];
 const translationQueue = [];
 const entityLocaleNames = new Map();
@@ -110,15 +107,11 @@ for (const entity of entities) {
         authorityVariant: authorities[locale]?.variant ?? null,
         issues,
         gate: decision.status,
-        publicationEligible: decision.publicationEligible,
+        publicationEligible: false,
       };
-      reviewed.push(record);
-      if (decision.status === 'withheld') {
-        withheld.push({ entityId: entity.id, locale, field, issues: decision.blockingIssues, value });
-      }
-      for (const issue of issues.filter((issue) => !WITHHOLD_ISSUES.has(issue))) {
-        advisory.push({ entityId: entity.id, locale, field, issue, value });
-      }
+      fieldDecisions.push(record);
+      if (decision.status === 'withheld') withheld.push({ entityId: entity.id, locale, field, issues: decision.blockingIssues, value });
+      for (const issue of issues.filter((issue) => !WITHHOLD_ISSUES.has(issue))) advisory.push({ entityId: entity.id, locale, field, issue, value });
       if (field === 'names') {
         const nameDecision = {
           reviewVersion: REVIEW_VERSION,
@@ -143,7 +136,6 @@ for (const entity of entities) {
   }
 }
 
-const entityLocaleCoverage = [];
 for (const entity of entities) {
   const localeMap = entityLocaleNames.get(entity.id);
   for (const locale of supportedLocales) {
@@ -154,40 +146,32 @@ for (const entity of entities) {
     if (candidates.length === 0) {
       status = 'missing';
       action = 'find-or-create-validated-localized-name';
+      localeEntityStatus[locale].missing += 1;
     } else if (usable.length === 0) {
       status = 'withheld';
       action = 'replace-invalid-localized-name';
+      localeEntityStatus[locale].withheld += 1;
     } else {
       status = 'source-only';
       action = 'verify-localized-name';
+      localeEntityStatus[locale].sourceOnly += 1;
     }
-    const coverage = {
+    translationQueue.push({
+      queueVersion: 1,
       entityId: entity.id,
       qid: entity.qid ?? null,
       locale,
-      status,
-      candidateCount: candidates.length,
-      usableCandidateCount: usable.length,
+      reason: status,
+      action,
+      candidateNames: usable.map((item) => item.name),
+      rejectedNames: candidates.filter((item) => item.scriptGate === 'withheld').map((item) => ({ name: item.name, issues: item.blockingIssues })),
+      authority: authorities[locale]?.editorial ?? null,
+      variant: authorities[locale]?.variant ?? null,
       canonicalDisplayEligible: false,
       requiredQuality: policy.translationGate?.autoPublishStatuses ?? ['official','editorial','verified-machine-assisted'],
-    };
-    entityLocaleCoverage.push(coverage);
-    if (status !== 'verified') {
-      translationQueue.push({
-        queueVersion: 1,
-        entityId: entity.id,
-        qid: entity.qid ?? null,
-        locale,
-        reason: status,
-        action,
-        candidateNames: usable.map((item) => item.name),
-        rejectedNames: candidates.filter((item) => item.scriptGate === 'withheld').map((item) => ({ name: item.name, issues: item.blockingIssues })),
-        authority: authorities[locale]?.editorial ?? null,
-        variant: authorities[locale]?.variant ?? null,
-        doNotFallbackToEnglish: locale !== 'en',
-        doNotInventCanonicalName: true,
-      });
-    }
+      doNotFallbackToEnglish: locale !== 'en',
+      doNotInventCanonicalName: true,
+    });
   }
 }
 
@@ -203,9 +187,11 @@ const report = {
   generatedAt: new Date().toISOString(),
   publicationAllowed: false,
   targetQualityGate: policy.translationGate,
-  reviewedFieldCount: reviewed.length,
+  entityCount: entities.length,
+  reviewedFieldCount: fieldDecisions.length,
+  localizedNameDecisionCount: nameDecisions.length,
   localeCoverage,
-  entityLocaleCoverage,
+  localeEntityStatus,
   batchFatalCount: 0,
   criticalCount: 0,
   withheldCount: withheld.length,
@@ -213,7 +199,11 @@ const report = {
   translationQueueCount: translationQueue.length,
   withheld,
   advisory,
-  fields: reviewed,
+  detailFiles: {
+    fields: 'linguistic-field-decisions.jsonl',
+    localizedNames: 'localized-name-decisions.jsonl',
+    translationQueue: 'translation-queue.jsonl',
+  },
   policy: {
     localeIsolation: true,
     sourceOnlyIsNotCanonical: true,
@@ -232,6 +222,7 @@ for (const entry of fs.readdirSync(input, { withFileTypes: true })) {
   else fs.copyFileSync(source, destination);
 }
 fs.writeFileSync(path.join(output, 'linguistic-review.json'), `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+fs.writeFileSync(path.join(output, 'linguistic-field-decisions.jsonl'), jsonLines(fieldDecisions), 'utf8');
 fs.writeFileSync(path.join(output, 'localized-name-decisions.jsonl'), jsonLines(nameDecisions), 'utf8');
 fs.writeFileSync(path.join(output, 'translation-queue.jsonl'), jsonLines(translationQueue), 'utf8');
 const reviewedManifest = {
@@ -239,6 +230,7 @@ const reviewedManifest = {
   stage: 'linguistically-reviewed',
   linguisticReviewVersion: REVIEW_VERSION,
   linguisticReview: 'linguistic-review.json',
+  linguisticFieldDecisions: 'linguistic-field-decisions.jsonl',
   localizedNameDecisions: 'localized-name-decisions.jsonl',
   translationQueue: 'translation-queue.jsonl',
   linguisticCriticalCount: 0,
@@ -248,7 +240,7 @@ const reviewedManifest = {
   publish: false,
 };
 fs.writeFileSync(path.join(output, 'staging-manifest.json'), `${JSON.stringify(reviewedManifest, null, 2)}\n`, 'utf8');
-console.log(JSON.stringify({ reviewedFieldCount: reviewed.length, localeCoverage, withheldCount: withheld.length, advisoryCount: advisory.length, translationQueueCount: translationQueue.length }, null, 2));
+console.log(JSON.stringify({ entityCount: entities.length, reviewedFieldCount: fieldDecisions.length, localizedNameDecisionCount: nameDecisions.length, localeCoverage, localeEntityStatus, withheldCount: withheld.length, advisoryCount: advisory.length, translationQueueCount: translationQueue.length }, null, 2));
 
 async function sha256(value) {
   const bytes = new TextEncoder().encode(value);
