@@ -3,7 +3,7 @@
   "baselineId": "saints-v1",
   "sourceId": "wikidata",
   "queryVersion": "recognition-v1",
-  "adapterVersion": "1.3",
+  "adapterVersion": "1.2",
   "normalizationVersion": "1.1",
   "languageReviewVersion": "1.1",
   "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
