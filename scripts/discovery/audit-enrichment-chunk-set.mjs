@@ -12,9 +12,11 @@ export function auditEnrichmentChunkSet({ listing, progress, chunkSize }) {
   if (progress?.schemaVersion !== 1 || !Number.isSafeInteger(progress?.nextEntityOffset) || !Number.isSafeInteger(progress?.identityCount)) throw new Error('Enrichment progress has the wrong schema.');
   const expectedOffsets = [];
   for (let offset = 0; offset < progress.nextEntityOffset; offset += chunkSize) expectedOffsets.push(offset);
-  const actualOffsets = listing.chunks.map((chunk) => chunk.startEntityOffset);
+  const committedChunks = listing.chunks.filter((chunk) => chunk.startEntityOffset < progress.nextEntityOffset);
+  const futureChunks = listing.chunks.filter((chunk) => chunk.startEntityOffset >= progress.nextEntityOffset);
+  const committedOffsets = committedChunks.map((chunk) => chunk.startEntityOffset);
   const errors = [];
-  if (JSON.stringify(actualOffsets) !== JSON.stringify(expectedOffsets)) errors.push(`chunk offsets do not match watermark: expected=${expectedOffsets.join(',')} actual=${actualOffsets.join(',')}`);
+  if (JSON.stringify(committedOffsets) !== JSON.stringify(expectedOffsets)) errors.push(`committed chunk offsets do not match watermark: expected=${expectedOffsets.join(',')} actual=${committedOffsets.join(',')}`);
   if (progress.nextEntityOffset > progress.identityCount) errors.push('watermark exceeds identity count');
   if (progress.completed === true && progress.nextEntityOffset !== progress.identityCount) errors.push('completed watermark does not equal identity count');
   if (progress.completed !== true && progress.nextEntityOffset >= progress.identityCount) errors.push('incomplete watermark is at or beyond identity count');
@@ -27,8 +29,11 @@ export function auditEnrichmentChunkSet({ listing, progress, chunkSize }) {
     identityCount: progress.identityCount,
     nextEntityOffset: progress.nextEntityOffset,
     expectedChunkCount: expectedOffsets.length,
-    actualChunkCount: actualOffsets.length,
+    committedChunkCount: committedChunks.length,
+    futureChunkCount: futureChunks.length,
     completed: progress.completed === true,
+    chunks: committedChunks,
+    futureChunks,
     errors
   };
 }
