@@ -5,7 +5,7 @@ import { planBaselineImport } from './plan-wikidata-baseline-import.mjs';
 import { finalizeBaselineImport } from './finalize-wikidata-baseline-import.mjs';
 
 const common = {
-  queryVersion: 'recognition-v1', normalizationVersion: '1.1', reviewVersion: '1.1', importVersion: '1.0', entityLimit: 125,
+  queryVersion: 'recognition-v1', normalizationVersion: '1.1', reviewVersion: '1.1', importVersion: '1.0', entityLimit: 125, maxOperationsPerDay: 1,
   reviewedStreamPrefix: 'baseline/saints/v1/reviewed/wikidata/recognition-v1',
   receiptStreamPrefix: 'baseline-import-receipts/saints/v1/wikidata/recognition-v1',
 };
