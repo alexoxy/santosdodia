@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const DEFAULT_ROOT = path.resolve('data/litcal-mirror/calendars/general');
-const DEFAULT_LOCALES = ['en_US', 'pt_PT'];
+const DEFAULT_LOCALES = ['en_US'];
 
 function argument(name) {
   const index = process.argv.indexOf(name);
@@ -81,10 +81,10 @@ export function auditLitcalDailyCoverage({ root = DEFAULT_ROOT, years, locales =
           eventCount: 0,
           invalidDates: 0,
           missingDates: civilDatesForYear(year),
-          errors: ['critical locale calendar is missing']
+          errors: ['critical reference calendar is missing']
         };
         results.push(result);
-        errors.push(`${year} ${locale}: critical locale calendar is missing`);
+        errors.push(`${year} ${locale}: critical reference calendar is missing`);
         continue;
       }
 
@@ -108,8 +108,9 @@ export function auditLitcalDailyCoverage({ root = DEFAULT_ROOT, years, locales =
   return {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
-    invariant: 'Every civil day in every critical LitCal locale must contain at least one liturgical event.',
-    criticalLocales: [...locales],
+    invariant: 'Every civil day in every critical LitCal reference stream must contain at least one liturgical event.',
+    referenceLocales: [...locales],
+    languageReadinessGate: 'separate-post-normalization',
     years: [...selectedYears],
     ok: errors.length === 0,
     errors,
