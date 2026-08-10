@@ -9,8 +9,9 @@ function argument(name, fallback = null) {
   return index >= 0 ? process.argv[index + 1] : fallback;
 }
 function readJson(filePath) { return JSON.parse(fs.readFileSync(filePath, 'utf8')); }
+function utcDay(value) { return new Date(value).toISOString().slice(0, 10); }
 
-export function finalizeBaselineImport({ plan, reviewedManifest, reviewedReceipt, upstreamSummary, d1Batch, d1Receipt }) {
+export function finalizeBaselineImport({ plan, reviewedManifest, reviewedReceipt, upstreamSummary, d1Batch, d1Receipt, now = new Date() }) {
   if (plan?.shouldRun !== true) throw new Error('Cannot finalize an import plan that did not run.');
   if (reviewedManifest?.mode !== 'staging' || reviewedManifest?.publish !== false || reviewedManifest?.stage !== 'linguistically-reviewed') throw new Error('Importer input must remain linguistically-reviewed staging-only.');
   if (reviewedManifest.queryVersion !== plan.queryVersion || reviewedManifest.stagingVersion !== plan.normalizationVersion || reviewedManifest.linguisticReviewVersion !== plan.languageReviewVersion) throw new Error('Reviewed package pipeline version mismatch.');
@@ -36,7 +37,14 @@ export function finalizeBaselineImport({ plan, reviewedManifest, reviewedReceipt
   const caughtUpAfterChunk = completedSourceBatch && upstreamSummary.nextPage === plan.upstreamNextPage;
   if (upstreamSummary.nextPage > plan.upstreamNextPage) throw new Error('Imported source shard advances beyond language-review watermark.');
   const previous = plan.previousProgress;
-  const now = new Date().toISOString();
+  const timestamp = new Date(now).toISOString();
+  const day = utcDay(timestamp);
+  const previousBudget = previous?.dailyBudget;
+  const previousToday = previousBudget?.utcDay === day ? Number(previousBudget.successfulImports ?? 0) : 0;
+  if (!Number.isSafeInteger(previousToday) || previousToday < 0) throw new Error('Previous import progress has an invalid daily budget counter.');
+  const successfulImportsToday = previousToday + 1;
+  if (successfulImportsToday > plan.maxOperationsPerDay) throw new Error('Verified import would exceed the planned daily D1 bootstrap operation budget.');
+
   return {
     schemaVersion: 1,
     baselineId: 'saints-v1',
@@ -45,11 +53,18 @@ export function finalizeBaselineImport({ plan, reviewedManifest, reviewedReceipt
     normalizationVersion: plan.normalizationVersion,
     languageReviewVersion: plan.languageReviewVersion,
     d1ImportVersion: plan.d1ImportVersion,
-    updatedAt: now,
+    updatedAt: timestamp,
     sourceCompleted: plan.sourceCompleted === true && caughtUpAfterChunk,
     caughtUp: caughtUpAfterChunk,
     successfulImports: Number(previous?.successfulImports ?? 0) + 1,
     cumulativeEntitiesImported: Number(previous?.cumulativeEntitiesImported ?? 0) + d1Batch.entityCount,
+    dailyBudget: {
+      utcDay: day,
+      successfulImports: successfulImportsToday,
+      maximum: plan.maxOperationsPerDay,
+      remaining: Math.max(0, plan.maxOperationsPerDay - successfulImportsToday),
+      countsOnlyVerifiedImports: true
+    },
     lastImported: {
       sourceRunId: upstreamSummary.runId,
       sourceStartPage: upstreamSummary.startPage,
@@ -64,8 +79,8 @@ export function finalizeBaselineImport({ plan, reviewedManifest, reviewedReceipt
       receiptStream: plan.receiptStream,
       idempotencyKey: d1Batch.idempotencyKey,
       statementsSha256: d1Batch.statementsSha256,
-      importedAt: now,
-    },
+      importedAt: timestamp
+    }
   };
 }
 
@@ -79,7 +94,7 @@ async function main() {
     reviewedReceipt: readJson(path.resolve(values['--reviewed-receipt'])),
     upstreamSummary: readJson(path.resolve(values['--upstream-summary'])),
     d1Batch: readJson(path.resolve(values['--d1-batch'])),
-    d1Receipt: readJson(path.resolve(values['--d1-receipt'])),
+    d1Receipt: readJson(path.resolve(values['--d1-receipt']))
   });
   const output = path.resolve(values['--output']);
   fs.mkdirSync(path.dirname(output), { recursive: true });
