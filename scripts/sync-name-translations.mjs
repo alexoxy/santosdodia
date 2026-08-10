@@ -1,5 +1,6 @@
 import {readdir,readFile,writeFile,mkdir} from 'node:fs/promises';
 import path from 'node:path';
+import {normalizeDisplayLabel} from './linguistic/normalize-display-label.mjs';
 
 const ROOT=path.resolve('data');
 const MIRROR=path.join(ROOT,'litcal-mirror','calendars');
@@ -21,7 +22,7 @@ function eventId(item,index){return text(item.event_key??item.event_idx??item.id
 function eventName(item){return text(item.name_lcl??item.name??item.title??item.event_name??record(item.event)?.name)}
 async function json(file,fallback){try{return JSON.parse(await readFile(file,'utf8'))}catch{return fallback}}
 async function files(dir){const out=[];try{for(const entry of await readdir(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())out.push(...await files(full));else if(entry.name.endsWith('.json'))out.push(full)}}catch{}return out}
-function ensure(entries,canonical){const id=key(canonical);if(!id)return null;entries[id]??={canonical,labels:{en:canonical},sources:[],confidence:0};return entries[id]}
+function ensure(entries,canonical){const normalized=normalizeDisplayLabel(canonical);const id=key(normalized);if(!id)return null;entries[id]??={canonical:normalized,labels:{en:normalized},sources:[],confidence:0};return entries[id]}
 
 const previous=await json(OUTPUT,{generatedAt:null,entries:{}});const entries=previous.entries??{};
 const groups=new Map();for(const file of await files(MIRROR)){const locale=LITCAL_LOCALES[path.basename(file,'.json')];if(!locale)continue;const dir=path.dirname(file);if(!groups.has(dir))groups.set(dir,{});groups.get(dir)[locale]=file}
@@ -41,6 +42,6 @@ async function wikidata(entry){
  entry.qid=choice.id;if(!entry.sources.includes('wikidata'))entry.sources.push('wikidata');entry.confidence=Math.max(entry.confidence??0,religious.test(choice.description??'')?0.88:0.65);
 }
 let lookups=0;for(const entry of Object.values(entries)){if(lookups>=MAX_WIKIDATA)break;const missing=SITE_LOCALES.filter(locale=>!entry.labels?.[locale]);if(!missing.length)continue;try{await wikidata(entry);lookups++;await new Promise(resolve=>setTimeout(resolve,120))}catch(error){console.warn(`Wikidata failed for ${entry.canonical}: ${error instanceof Error?error.message:error}`)}}
-for(const entry of Object.values(entries))for(const locale of Object.keys(entry.labels??{}))if(!safe(entry.labels[locale],locale))delete entry.labels[locale];
+for(const entry of Object.values(entries)){entry.canonical=normalizeDisplayLabel(entry.canonical);for(const locale of Object.keys(entry.labels??{})){const normalized=normalizeDisplayLabel(entry.labels[locale]);if(!safe(normalized,locale))delete entry.labels[locale];else entry.labels[locale]=normalized}}
 await mkdir(path.dirname(OUTPUT),{recursive:true});await writeFile(OUTPUT,`${JSON.stringify({generatedAt:new Date().toISOString(),entries},null,2)}\n`,'utf8');
 console.log(`Translation catalog: ${Object.keys(entries).length} entries; ${lookups} Wikidata lookups.`);
