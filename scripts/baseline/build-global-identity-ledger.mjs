@@ -3,7 +3,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 const BATCH_PATTERN = /^batch-(\d{6})$/u;
 const QID_PATTERN = /^Q[1-9]\d*$/u;
