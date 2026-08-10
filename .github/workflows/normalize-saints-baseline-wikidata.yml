@@ -5,6 +5,8 @@ on:
   workflow_run:
     workflows: ['Build Saints Baseline v1 candidates']
     types: [completed]
+  schedule:
+    - cron: '43 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,8 +25,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  normalize-latest-batch:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+  normalize-next-batch:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -94,7 +96,7 @@ jobs:
         run: |
           set -euo pipefail
           receipt='staging/baseline-normalizer/normalized-progress/consumer-receipt.json'
-          missing="$(node -e "const r=require('./' + process.argv[1]); process.stdout.write(String(r.missing===true))" "$receipt")"
+          missing="$(node -e "const fs=require('node:fs'); const r=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); process.stdout.write(String(r.missing===true));" "$receipt")"
           if [ "$missing" = 'true' ]; then
             exit 0
           fi
@@ -113,7 +115,7 @@ jobs:
           test -n "$progress"
           cp "$progress" staging/baseline-normalizer/normalized-progress.json
 
-      - name: Plan idempotent normalization
+      - name: Plan ordered idempotent normalization
         id: plan
         shell: bash
         run: |
@@ -133,7 +135,7 @@ jobs:
           node <<'NODE'
           const fs = require('node:fs');
           const p = JSON.parse(fs.readFileSync('staging/baseline-normalizer/plan.json','utf8'));
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${p.shouldRun}\nraw_stream=${p.rawStream}\nnormalized_stream=${p.normalizedStream}\nstart_page=${p.sourceStartPage}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${p.shouldRun}\nraw_stream=${p.rawStream}\nnormalized_stream=${p.normalizedStream}\nstart_page=${p.targetStartPage}\n`);
           NODE
 
       - name: Pull exact immutable RAW batch from Dropbox
@@ -172,10 +174,11 @@ jobs:
           const summary = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
           const plan = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
           if (summary.queryVersion !== plan.queryVersion) throw new Error('RAW queryVersion mismatch.');
-          if (summary.runId !== plan.sourceRunId) throw new Error('RAW runId does not match acquisition watermark.');
-          if (summary.startPage !== plan.sourceStartPage) throw new Error('RAW startPage does not match acquisition watermark.');
+          if (summary.startPage !== plan.targetStartPage) throw new Error('RAW startPage does not match planned backlog position.');
+          if (plan.expectedSourceRunId && summary.runId !== plan.expectedSourceRunId) throw new Error('Latest RAW runId does not match acquisition watermark.');
           NODE
           printf '%s\n' "$run_dir" > staging/baseline-normalizer/run-dir.txt
+          cp "$summary" staging/baseline-normalizer/raw-summary.json
 
       - name: Normalize from Dropbox RAW only
         if: steps.plan.outputs.should_run == 'true'
@@ -214,6 +217,7 @@ jobs:
           --stream "$NORMALIZED_STREAM"
           --source staging/baseline-normalizer/normalized
           --source staging/baseline-normalizer/plan.json
+          --source staging/baseline-normalizer/raw-summary.json
 
       - name: Finalize normalization watermark
         if: steps.plan.outputs.should_run == 'true'
@@ -222,6 +226,7 @@ jobs:
           --plan staging/baseline-normalizer/plan.json
           --manifest staging/baseline-normalizer/normalized/staging-manifest.json
           --raw-receipt staging/baseline-normalizer/raw/consumer-receipt.json
+          --raw-summary staging/baseline-normalizer/raw-summary.json
           --output staging/baseline-normalizer/progress/progress.json
 
       - name: Advance verified normalization watermark
@@ -242,6 +247,7 @@ jobs:
           name: saints-baseline-normalized-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
           path: |
             staging/baseline-normalizer/plan.json
+            staging/baseline-normalizer/raw-summary.json
             staging/baseline-normalizer/normalized/staging-manifest.json
             staging/baseline-normalizer/normalized/quality-report.json
             staging/baseline-normalizer/progress/progress.json
@@ -250,4 +256,4 @@ jobs:
 
       - name: Report no-op
         if: steps.plan.outputs.should_run != 'true'
-        run: echo 'Latest acquisition batch is already normalized; no work performed.'
+        run: echo 'Normalization watermark is caught up with acquisition; no work performed.'
