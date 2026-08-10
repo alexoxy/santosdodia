@@ -32,6 +32,7 @@ if (wikidataEpoch.schemaVersion !== 1 || wikidataEpoch.baselineId !== 'saints-v1
 }
 if (wikidataEpoch.queryVersion !== 'recognition-v1') errors.push('Active Wikidata baseline queryVersion must be recognition-v1.');
 if (wikidataEpoch.adapterVersion !== '1.2') errors.push('Active Wikidata baseline adapterVersion must remain aligned with query epoch recognition-v1.');
+if (wikidataEpoch.normalizationVersion !== '1.1') errors.push('Active Wikidata baseline normalizationVersion must be 1.1 for recognition-aware neutral person staging.');
 if (wikidataEpoch.progressStream !== 'baseline-progress/saints/v1/wikidata/recognition-v1') errors.push('Active Wikidata baseline progress stream is not query-versioned.');
 if (wikidataEpoch.rawStreamPrefix !== 'baseline/saints/v1/raw/wikidata/recognition-v1') errors.push('Active Wikidata baseline RAW stream is not query-versioned.');
 if (wikidataEpoch.policy?.resumeOnlySameQueryVersion !== true || wikidataEpoch.policy?.startNewVersionAtPageZero !== true || wikidataEpoch.policy?.legacyEpochsRemainAuditOnly !== true || wikidataEpoch.policy?.productionPublication !== false) {
@@ -109,6 +110,11 @@ if (!wikidataAdapter.includes('?recognitionStatusLabel')) errors.push('Wikidata 
 if (!wikidataAdapter.includes('queryVersion,')) errors.push('Wikidata adapter summary/receipts must preserve the query epoch.');
 if (!wikidataAdapter.includes("String(page).padStart(4, '0')")) errors.push('Wikidata page archive naming must remain compatible with the current normalizer.');
 
+const normalizer = fs.readFileSync(path.join(root, 'scripts/osint/normalize-wikidata-saints.mjs'), 'utf8');
+if (!normalizer.includes(`const NORMALIZATION_VERSION = '${wikidataEpoch.normalizationVersion}';`)) errors.push('Wikidata normalizer version differs from active baseline epoch configuration.');
+if (!normalizer.includes("entityType: 'historical-person'")) errors.push('Wikidata candidate normalizer must stage neutral historical-person entities.');
+if (!normalizer.includes("churchConfirmed: false")) errors.push('Wikidata candidate recognition must remain explicitly unconfirmed by a Church.');
+
 const report = {
   ok: errors.length === 0,
   errors,
@@ -117,6 +123,7 @@ const report = {
   sourceCount: sourceIds.size,
   baselineCandidateSourceCount: baselineSources.sources?.length ?? 0,
   activeWikidataQueryVersion: wikidataEpoch.queryVersion,
+  activeWikidataNormalizationVersion: wikidataEpoch.normalizationVersion,
   legacyWikidataEpochs: legacyEpochs.length,
   generatedAt: new Date().toISOString(),
 };
