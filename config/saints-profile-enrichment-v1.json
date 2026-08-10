@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "enrichmentId": "saints-profile-v1",
+  "sourceId": "wikidata",
+  "identityScheme": "wikidata",
+  "identityStream": "baseline/saints/v1/identity/wikidata/recognition-v1",
+  "progressStream": "enrichment-progress/saints/v1/wikidata/profile-v1",
+  "rawStream": "enrichment/saints/v1/raw/wikidata/profile-v1",
+  "normalizedStream": "enrichment/saints/v1/normalized/wikidata/profile-v1",
+  "chunkSize": 40,
+  "maxQueriesPerRun": 1,
+  "minimumDelaySeconds": 12,
+  "fields": [
+    "birthDate",
+    "deathDate",
+    "birthPlace",
+    "deathPlace",
+    "burialPlace",
+    "workLocation",
+    "citizenship",
+    "occupation",
+    "gender",
+    "placeCoordinates"
+  ],
+  "placeRelationTypes": ["birth", "death", "burial", "activity"],
+  "policy": {
+    "exactQidInputOnly": true,
+    "nameSearchForbidden": true,
+    "nameOnlyMergeForbidden": true,
+    "rawClaimsAreEvidenceOnly": true,
+    "historicalAndCurrentGeographySeparated": true,
+    "coordinatesRequirePlaceEntity": true,
+    "productionPublication": false,
+    "d1ProductionMutation": false,
+    "paidUsageAuthorized": false,
+    "onQuotaExhausted": "wait-for-reset"
+  }
+}

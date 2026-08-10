@@ -12,6 +12,8 @@ on:
       - 'scripts/sync-litcal-mirror.mjs'
       - 'scripts/mirror-litcal-source.sh'
       - 'scripts/sync-name-translations.mjs'
+      - 'scripts/calendar/audit-litcal-daily-coverage.mjs'
+      - 'scripts/calendar/test-litcal-daily-coverage.mjs'
       - 'scripts/validate-language-quality.mjs'
       - 'scripts/audit-languagetool.mjs'
       - 'scripts/audit-data-quality.mjs'
@@ -59,6 +61,12 @@ jobs:
           LITCAL_MIN_AVAILABLE_RATIO: '0.8'
         run: npm run litcal:sync
 
+      - name: Enforce complete civil-day liturgy coverage
+        run: |
+          node scripts/calendar/test-litcal-daily-coverage.mjs
+          node scripts/calendar/audit-litcal-daily-coverage.mjs \
+            --output data/generated/litcal-daily-coverage.json
+
       - name: Build multilingual observance catalogue
         env:
           MAX_WIKIDATA_LOOKUPS: '150'
@@ -93,7 +101,8 @@ jobs:
             "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
             "status": "provisional",
             "promotionAllowed": false,
-            "nextGate": "Dropbox archive, normalization review and transactional database promotion"
+            "dailyCoverageGate": "passed",
+            "nextGate": "Dropbox archive, language readiness, normalization review and transactional database promotion"
           }
           EOF
 
@@ -105,6 +114,7 @@ jobs:
           if-no-files-found: error
           path: |
             data/litcal-mirror/
+            data/generated/litcal-daily-coverage.json
             data/generated/translation-catalog.json
             data/generated/translation-quality.json
             data/generated/languagetool-audit.json
@@ -119,6 +129,7 @@ jobs:
           node scripts/archive-to-dropbox.mjs
           --stream litcal
           --source data/litcal-mirror
+          --source data/generated/litcal-daily-coverage.json
           --source data/generated/translation-catalog.json
           --source data/generated/translation-quality.json
           --source data/generated/languagetool-audit.json

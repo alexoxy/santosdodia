@@ -1,0 +1,68 @@
+name: Calendar and discovery data quality
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/calendar/**'
+      - 'scripts/enrichment/**'
+      - 'scripts/discovery/**'
+      - 'scripts/sync-litcal-mirror.mjs'
+      - 'config/saints-profile-enrichment-v1.json'
+      - '.github/workflows/harvest-vatican-saints.yml'
+      - '.github/workflows/enrich-saints-profile-wikidata.yml'
+      - '.github/workflows/update-litcal-mirror.yml'
+      - '.github/workflows/calendar-data-quality.yml'
+      - 'config/automation-registry.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: calendar-data-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit repository and automation registry
+        run: |
+          npm run repo:audit
+          npm run automation:audit
+          npm run automation:test
+
+      - name: Test complete daily calendar invariants
+        run: |
+          node scripts/calendar/test-litcal-daily-coverage.mjs
+          node scripts/calendar/test-harvest-vatican-saints.mjs
+          node scripts/calendar/test-normalize-vatican-saints.mjs
+          node scripts/calendar/test-vatican-reference-policy.mjs
+
+      - name: Test profile enrichment safeguards
+        run: |
+          node scripts/enrichment/test-wikidata-profile-core.mjs
+          node scripts/enrichment/test-wikidata-profile-pipeline.mjs
+
+      - name: Test map timeline and calendar exports
+        run: node scripts/discovery/test-navigation-exports.mjs
+
+      - name: Typecheck and lint application
+        run: |
+          npm run typecheck
+          npm run lint
