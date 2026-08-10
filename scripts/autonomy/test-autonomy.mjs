@@ -1,14 +1,27 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
-import { buildAutonomyPlan } from './build-plan.mjs';
+import { assertFinancialGuardrails, buildAutonomyPlan } from './build-plan.mjs';
+
+const zeroSpend = {
+  authorizedSpendEur: 0,
+  paidUsageAuthorized: false,
+  paidOverageAuthorized: false,
+  automaticPlanUpgradeAuthorized: false,
+  automaticPurchaseAuthorized: false,
+  onFreeQuotaExhausted: 'wait-for-reset',
+  onBillingUncertainty: 'fail-closed',
+  scope: 'all-platforms',
+};
 
 function fixture(overrides = {}) {
+  const policyOverride = overrides.autonomyPolicy ?? {};
   const autonomyPolicy = {
     schemaVersion: 1,
     targetMode: 'fully-autonomous',
     phase: 'shadow',
     agents: [],
+    financialGuardrails: zeroSpend,
     acquisition: { maxSourcesPerCycle: 4, requiredPolicyDecision: 'approved' },
     promotion: { automaticProductionWrites: false },
     sourcePipelines: {
@@ -18,7 +31,11 @@ function fixture(overrides = {}) {
         canAutoPromoteAlone: true,
       },
     },
-    ...overrides.autonomyPolicy,
+    ...policyOverride,
+    financialGuardrails: {
+      ...zeroSpend,
+      ...(policyOverride.financialGuardrails ?? {}),
+    },
   };
   return {
     autonomyPolicy,
@@ -41,6 +58,8 @@ function fixture(overrides = {}) {
   assert.equal(plan.phase, 'shadow');
   assert.equal(plan.promotion.mode, 'hold');
   assert.equal(plan.promotion.productionMutationAllowed, false);
+  assert.equal(plan.financialGuardrails.authorizedSpendEur, 0);
+  assert.equal(plan.financialGuardrails.onFreeQuotaExhausted, 'wait-for-reset');
   assert.deepEqual(plan.acquisition.selected.map((item) => item.sourceId), ['alpha']);
 }
 
@@ -67,11 +86,19 @@ function fixture(overrides = {}) {
 }
 
 {
+  assert.throws(() => assertFinancialGuardrails({ financialGuardrails: { ...zeroSpend, authorizedSpendEur: 1 } }), /exactly 0 EUR/u);
+  assert.throws(() => assertFinancialGuardrails({ financialGuardrails: { ...zeroSpend, paidOverageAuthorized: true } }), /paidOverageAuthorized must remain false/u);
+  assert.throws(() => assertFinancialGuardrails({ financialGuardrails: { ...zeroSpend, onFreeQuotaExhausted: 'buy-more' } }), /wait for reset/u);
+  assert.throws(() => assertFinancialGuardrails({ financialGuardrails: { ...zeroSpend, onBillingUncertainty: 'continue' } }), /fail closed/u);
+}
+
+{
   const plan = buildAutonomyPlan();
   assert.equal(plan.phase, 'shadow');
   assert.equal(plan.promotion.productionMutationAllowed, false);
+  assert.equal(plan.financialGuardrails.authorizedSpendEur, 0);
   assert.deepEqual(plan.acquisition.selected.map((item) => item.sourceId), ['wikidata']);
   assert.ok(plan.acquisition.heldCount >= 1);
 }
 
-console.log('Autonomy policy and planner tests passed.');
+console.log('Autonomy policy, zero-spend guardrails and planner tests passed.');
