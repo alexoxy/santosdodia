@@ -35,7 +35,7 @@ function uppercaseFirstLetter(value: string, localeTag: string): string {
 function applyContext(value: string, localeTag: string, context: DateTextContext): string {
   if (context === 'running') return value;
   // Sentence/heading casing changes only the first lexical character. Never
-  // title-case every word: that corrupts grammar such as "Agosto De 2026".
+  // title-case every word: Portuguese date prepositions must remain lowercase.
   return uppercaseFirstLetter(value, localeTag);
 }
 
