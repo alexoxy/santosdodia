@@ -34,17 +34,22 @@ export async function fetchPageWithRetry({
   sleepImpl = sleep,
   requestUrl = endpoint,
   requestInit,
+  requestTimeoutMs = 90000,
+  signalFactory = (timeoutMs) => AbortSignal.timeout(timeoutMs),
   maxAttempts = 4,
   retryBaseMs = 5000,
   retryMaximumMs = 60000,
   now = () => Date.now(),
 }) {
   if (!Number.isInteger(maxAttempts) || maxAttempts < 1) throw new Error('maxAttempts must be at least 1.');
+  if (!Number.isInteger(requestTimeoutMs) || requestTimeoutMs < 1000) throw new Error('requestTimeoutMs must be at least 1000ms.');
+  if (requestInit?.signal) throw new Error('requestInit.signal must not be supplied; the retry helper owns a fresh timeout signal per attempt.');
   const attempts = [];
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     const startedAt = new Date(now()).toISOString();
+    const signal = signalFactory(requestTimeoutMs);
     try {
-      const response = await fetchImpl(requestUrl, requestInit);
+      const response = await fetchImpl(requestUrl, { ...requestInit, signal });
       const bytes = Buffer.from(await response.arrayBuffer());
       const finishedAt = new Date(now()).toISOString();
       const retryable = !response.ok && isRetryableStatus(response.status);
@@ -57,6 +62,7 @@ export async function fetchPageWithRetry({
         retryable,
         retryAfter: response.headers?.get?.('retry-after') ?? null,
         byteSize: bytes.length,
+        requestTimeoutMs,
       };
       attempts.push(record);
       if (response.ok || !retryable || attempt === maxAttempts) return { response, bytes, attempts };
@@ -73,6 +79,7 @@ export async function fetchPageWithRetry({
         errorName: error?.name ?? 'Error',
         errorMessage: error instanceof Error ? error.message : String(error),
         retryable: true,
+        requestTimeoutMs,
       };
       attempts.push(record);
       if (attempt === maxAttempts) {
@@ -97,6 +104,7 @@ export async function runWikidataAdapter({
   sleepImpl = sleep,
   now = () => Date.now(),
   uuid = randomUUID,
+  signalFactory = (timeoutMs) => AbortSignal.timeout(timeoutMs),
 } = {}) {
   const queryVersion = env.OSINT_WIKIDATA_QUERY_VERSION || 'recognition-v1';
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(queryVersion)) throw new Error('Invalid OSINT_WIKIDATA_QUERY_VERSION.');
@@ -104,6 +112,7 @@ export async function runWikidataAdapter({
   const startPage = boundedInteger(env.OSINT_WIKIDATA_START_PAGE, 0, 0, 1000000);
   const maxPages = boundedInteger(env.OSINT_WIKIDATA_MAX_PAGES, 1, 1, 200);
   const delayMs = boundedInteger(env.OSINT_WIKIDATA_DELAY_MS, 10000, 1000, 60000);
+  const requestTimeoutMs = boundedInteger(env.OSINT_WIKIDATA_REQUEST_TIMEOUT_MS, 90000, 30000, 180000);
   const retryAttempts = boundedInteger(env.OSINT_WIKIDATA_RETRY_ATTEMPTS, 4, 1, 6);
   const retryBaseMs = boundedInteger(env.OSINT_WIKIDATA_RETRY_BASE_MS, 5000, 1000, 30000);
   const retryMaximumMs = boundedInteger(env.OSINT_WIKIDATA_RETRY_MAX_MS, 60000, 1000, 120000);
@@ -127,7 +136,15 @@ export async function runWikidataAdapter({
     pageSize,
     startPage,
     maxPages,
-    retryPolicy: { maxAttempts: retryAttempts, baseDelayMs: retryBaseMs, maximumDelayMs: retryMaximumMs, statuses: ['429', '5xx'], networkErrors: true },
+    retryPolicy: {
+      maxAttempts: retryAttempts,
+      requestTimeoutMs,
+      freshTimeoutPerAttempt: true,
+      baseDelayMs: retryBaseMs,
+      maximumDelayMs: retryMaximumMs,
+      statuses: ['429', '5xx'],
+      networkErrors: true,
+    },
     pages: [],
     totalBindings: 0,
     exhausted: false,
@@ -155,8 +172,9 @@ export async function runWikidataAdapter({
             'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
           },
           body,
-          signal: AbortSignal.timeout(90000),
         },
+        requestTimeoutMs,
+        signalFactory,
         maxAttempts: retryAttempts,
         retryBaseMs,
         retryMaximumMs,
@@ -185,7 +203,7 @@ export async function runWikidataAdapter({
           redirects: response.redirected ? [response.url] : [],
         },
         content: { sha256, bytes: bytes.length, archivePath, mimeType: 'application/sparql-results+json' },
-        request: { page, pageSize, offset, querySha256: createHash('sha256').update(query).digest('hex') },
+        request: { page, pageSize, offset, querySha256: createHash('sha256').update(query).digest('hex'), timeoutMs: requestTimeoutMs },
       };
 
       let bindingCount = 0;
