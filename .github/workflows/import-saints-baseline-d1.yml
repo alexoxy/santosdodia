@@ -291,7 +291,7 @@ jobs:
       - name: Import chunk with idempotency and rollback verification
         if: steps.budget.outputs.allowed == 'true'
         run: |
-          node scripts/manage-d1-knowledge-staging.mjs \
+          npm run db:knowledge-import -- \
             --database-id "${{ steps.staging.outputs.database_id }}" \
             --package staging/baseline-import/d1-batch.json \
             --output reports/d1-knowledge-import.json
