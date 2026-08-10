@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "targetMode": "fully-autonomous",
+  "phase": "shadow",
+  "principles": {
+    "requestTimeExternalAcquisition": false,
+    "productionMustRemainAvailableOnAgentFailure": true,
+    "lastKnownGoodWinsOnUncertainty": true,
+    "everyMutationRequiresProvenance": true,
+    "everyProductionPromotionRequiresRollback": true
+  },
+  "agents": [
+    {"id":"source-scout","role":"discover and rank candidate sources","productionWrite":false},
+    {"id":"acquisition","role":"fetch approved sources and archive immutable evidence","productionWrite":false},
+    {"id":"normalizer","role":"normalize source-specific records into canonical candidates","productionWrite":false},
+    {"id":"resolver","role":"deduplicate identities and preserve conflicting assertions","productionWrite":false},
+    {"id":"validator","role":"score authority, independence, freshness and conflicts","productionWrite":false},
+    {"id":"publisher","role":"promote only candidates satisfying the automatic publication contract","productionWrite":false},
+    {"id":"auditor","role":"compare production against the promoted package and trigger rollback when invariants fail","productionWrite":false}
+  ],
+  "acquisition": {
+    "maxSourcesPerCycle": 4,
+    "requiredPolicyDecision": "approved",
+    "requireSourceSpecificAdapter": true,
+    "failClosedOnSourceError": true
+  },
+  "promotion": {
+    "automaticProductionWrites": false,
+    "minimumConfidence": 0.92,
+    "minimumIndependentSources": 2,
+    "allowSingleAuthoritativeSource": true,
+    "authoritativeClasses": ["A1", "A2"],
+    "maximumOpenHighSeverityConflicts": 0,
+    "requireStableCanonicalIdentity": true,
+    "requireCompleteProvenance": true,
+    "requireBaselineComparison": true,
+    "requireRollbackPackage": true,
+    "requirePostPromotionHealthCheck": true
+  },
+  "sourcePipelines": {
+    "wikidata": {
+      "normalizer": "scripts/osint/normalize-wikidata-saints.mjs",
+      "publicationClass": "discovery-and-enrichment",
+      "canAutoPromoteAlone": false
+    }
+  },
+  "futureRuntime": {
+    "batchOrchestration": "github-actions",
+    "durablePromotionAndRollback": "cloudflare-workflows",
+    "canonicalDatabase": "cloudflare-d1"
+  }
+}
