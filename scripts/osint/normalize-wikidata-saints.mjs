@@ -4,7 +4,7 @@ import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const NORMALIZATION_VERSION = '1.0';
+const NORMALIZATION_VERSION = '1.1';
 const LANGUAGE_PRIORITY = ['pt', 'en', 'es', 'it', 'fr', 'de', 'pl', 'ru', 'uk', 'el', 'la', ''];
 const PAGE_FILE_PATTERN = /^\d{4}-[a-f0-9]{64}\.json$/u;
 const QID_PATTERN = /^Q[1-9]\d*$/u;
@@ -56,6 +56,8 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     entitiesWithInvalidDateNodes: 0,
     labelFallbackToQid: 0,
     labelLanguages: {},
+    recognitionStatusCounts: {},
+    entitiesMissingRecognitionStatus: 0,
     dateConflicts: { birth: 0, death: 0 },
     invalidDateNodes: { birth: 0, death: 0 },
     missing: {
@@ -79,6 +81,7 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
       metrics.labelLanguages[language] = (metrics.labelLanguages[language] ?? 0) + 1;
     }
     const descriptions = collectLocalizedValues(rows, 'itemDescription');
+    const recognitionStatuses = collectRecognitionStatuses(rows);
     const birth = collectDates(rows, 'birth');
     const death = collectDates(rows, 'death');
     const images = collectUris(rows, 'image');
@@ -91,11 +94,16 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     if (images.length === 0) metrics.missing.image += 1;
     if (portugueseArticles.length === 0) metrics.missing.portugueseArticle += 1;
     if (images.length > 1) metrics.multipleImages += 1;
+    if (recognitionStatuses.length === 0) metrics.entitiesMissingRecognitionStatus += 1;
+    for (const recognition of recognitionStatuses) {
+      metrics.recognitionStatusCounts[recognition.qid] = (metrics.recognitionStatusCounts[recognition.qid] ?? 0) + 1;
+    }
 
     metrics.invalidDateNodes.birth += birth.invalidNodes.length;
     metrics.invalidDateNodes.death += death.invalidNodes.length;
 
     const entityWarnings = [];
+    if (recognitionStatuses.length === 0) entityWarnings.push('recognition_status_missing_or_legacy_raw');
     const hasInvalidDateNodes = birth.invalidNodes.length > 0 || death.invalidNodes.length > 0;
     if (hasInvalidDateNodes) metrics.entitiesWithInvalidDateNodes += 1;
     if (birth.invalidNodes.length) entityWarnings.push('birth_contains_non_literal_or_unsupported_value');
@@ -134,11 +142,16 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     entities.push({
       stagingVersion: NORMALIZATION_VERSION,
       id: `wikidata:${qid}`,
-      entityType: 'saint',
+      entityType: 'historical-person',
       qid,
       canonicalName,
       canonicalSlug: `${slugify(canonicalName) || qid.toLowerCase()}-${qid.toLowerCase()}`,
       status: needsReview ? 'needs_review' : 'candidate',
+      recognition: {
+        sourceStatusCandidates: recognitionStatuses,
+        resolutionStatus: recognitionStatuses.length > 0 ? 'source_candidates' : 'missing',
+        churchConfirmed: false,
+      },
       names: labels.map((entry) => ({
         language: entry.language || 'und',
         name: entry.value,
@@ -156,12 +169,14 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
       },
       provenance: {
         sourceId: 'wikidata',
+        queryVersion: source.summary?.queryVersion ?? null,
         licence: 'CC0-1.0',
         sourceDocuments: [...new Set(rows.map((row) => row.sourceSha256))].sort(),
         rawRowCount: rows.length,
       },
       scope: {
-        wikidataClass: 'Q43115',
+        candidateUniverse: 'wikidata-recognition',
+        churchRecognition: 'unverified',
         liturgicalCalendarEligibility: 'unverified',
       },
       quality: {
@@ -182,7 +197,7 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
   if (conflicts.length > 0) {
     warnings.push('Conflicting dates were preserved as candidates; no conflicting value was selected as canonical.');
   }
-  warnings.push('Wikidata saint classification does not establish inclusion in a specific Christian tradition or liturgical calendar.');
+  warnings.push('Wikidata recognition-status and saint-classification claims are discovery evidence only; they do not establish Church recognition, category or liturgical-calendar inclusion.');
   warnings.push('Birth and death places were not acquired by the pilot query and cannot be validated in this phase.');
 
   const sourceFingerprint = sha256Hex(Buffer.from(sourceDocuments.map((document) => document.sha256).join('\n')));
@@ -190,6 +205,7 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     stagingVersion: NORMALIZATION_VERSION,
     sourceId: 'wikidata',
     sourceRunId: source.summary?.runId ?? null,
+    queryVersion: source.summary?.queryVersion ?? null,
     sourceFingerprint,
     mode: 'staging',
     publish: false,
@@ -207,11 +223,13 @@ export async function normalizeWikidataSaints(inputPath, outputDir) {
     reportVersion: NORMALIZATION_VERSION,
     sourceId: 'wikidata',
     sourceRunId: source.summary?.runId ?? null,
+    queryVersion: source.summary?.queryVersion ?? null,
     sourceDocuments,
     metrics,
     warnings,
     sourceFieldCoverage: {
       wikidataIdentifiers: 'validated',
+      recognitionStatuses: 'acquired_or_legacy_missing',
       labels: 'acquired',
       descriptions: 'partially_acquired',
       birthDates: 'partially_acquired',
@@ -283,6 +301,27 @@ function collectLocalizedValues(rows, field) {
     map.set(`${language}\u0000${value}`, { language, value });
   }
   return [...map.values()].sort((a, b) => languageRank(a.language) - languageRank(b.language) || a.value.localeCompare(b.value));
+}
+
+function collectRecognitionStatuses(rows) {
+  const map = new Map();
+  for (const { binding } of rows) {
+    const qid = extractQid(binding?.recognitionStatus?.value);
+    if (!qid) continue;
+    const current = map.get(qid) ?? { qid, labels: new Map() };
+    const labelNode = binding?.recognitionStatusLabel;
+    if (labelNode && typeof labelNode.value === 'string' && labelNode.value.trim()) {
+      const language = typeof labelNode['xml:lang'] === 'string' ? labelNode['xml:lang'].toLowerCase() : '';
+      const value = labelNode.value.trim();
+      current.labels.set(`${language}\u0000${value}`, { language: language || 'und', value });
+    }
+    map.set(qid, current);
+  }
+  return [...map.values()].sort((a, b) => compareQids(a.qid, b.qid)).map((entry) => ({
+    qid: entry.qid,
+    labels: [...entry.labels.values()].sort((a, b) => languageRank(a.language === 'und' ? '' : a.language) - languageRank(b.language === 'und' ? '' : b.language) || a.value.localeCompare(b.value)),
+    evidenceType: 'wikidata-recognition-status',
+  }));
 }
 
 function collectUris(rows, field) {
@@ -362,10 +401,11 @@ function compareQids(a, b) {
 }
 
 function reviewQueueCsv(entities) {
-  const header = ['qid', 'canonical_name', 'warnings', 'conflict_ids', 'birth_candidates', 'death_candidates', 'portuguese_article'];
+  const header = ['qid', 'canonical_name', 'recognition_status_qids', 'warnings', 'conflict_ids', 'birth_candidates', 'death_candidates', 'portuguese_article'];
   const rows = entities.map((entity) => [
     entity.qid,
     entity.canonicalName,
+    (entity.recognition?.sourceStatusCandidates ?? []).map((item) => item.qid).join('|'),
     entity.quality.warnings.join('|'),
     entity.quality.conflictIds.join('|'),
     entity.dates.birth.candidates.map((candidate) => candidate.date).join('|'),
