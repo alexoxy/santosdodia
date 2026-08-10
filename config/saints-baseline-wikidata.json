@@ -30,6 +30,7 @@
     "languageReviewReadsDropboxOnly": true,
     "languageFailuresAreLocaleIsolated": true,
     "sourceOnlyNamesAreNotCanonical": true,
+    "transientSourceFailuresRetryWithoutCursorAdvance": true,
     "productionPublication": false
   }
 }
