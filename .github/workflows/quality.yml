@@ -55,6 +55,12 @@ jobs:
       - name: Audit Dropbox-only Saints Baseline normalizer
         run: npm run saints:baseline-normalizer-audit
 
+      - name: Test locale-isolated Saints Baseline language review
+        run: node scripts/baseline/test-wikidata-baseline-language-review.mjs
+
+      - name: Audit Saints Baseline language editor
+        run: node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
+
       - name: Test temporal core and calendar bridge
         run: npm run temporal:test
 
