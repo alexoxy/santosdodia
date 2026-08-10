@@ -21,43 +21,57 @@ export function planBaselineNormalization({ sourceProgress, normalizedProgress =
   if (!sourceProgress || sourceProgress.schemaVersion !== 1) throw new Error('Source acquisition progress is missing or invalid.');
   if (sourceProgress.baselineId !== 'saints-v1' || sourceProgress.sourceId !== 'wikidata') throw new Error('Source progress has the wrong baseline/source identity.');
   if (sourceProgress.queryVersion !== queryVersion) throw new Error(`Source progress query version ${sourceProgress.queryVersion ?? 'missing'} does not match ${queryVersion}.`);
-  const sourceRun = sourceProgress.lastRun;
-  if (!sourceRun || !Number.isInteger(sourceRun.startPage) || !Number.isInteger(sourceRun.nextPage) || !sourceRun.runId) {
+  const latest = sourceProgress.lastRun;
+  if (!latest || !Number.isInteger(latest.startPage) || !Number.isInteger(latest.nextPage) || !latest.runId) {
     throw new Error('Source progress does not contain a complete lastRun watermark.');
   }
-  if (sourceRun.queryVersion !== queryVersion) throw new Error('Source lastRun belongs to a different query epoch.');
-  if (sourceRun.nextPage <= sourceRun.startPage) throw new Error('Source lastRun did not advance its watermark.');
+  if (latest.queryVersion !== queryVersion) throw new Error('Source lastRun belongs to a different query epoch.');
+  if (latest.nextPage <= latest.startPage) throw new Error('Source lastRun did not advance its watermark.');
+  if (!Number.isInteger(sourceProgress.nextPage) || sourceProgress.nextPage !== latest.nextPage) {
+    throw new Error('Source acquisition watermark is internally inconsistent.');
+  }
 
+  let targetStartPage = 0;
+  let previous = null;
   if (normalizedProgress) {
     if (normalizedProgress.schemaVersion !== 1 || normalizedProgress.baselineId !== 'saints-v1' || normalizedProgress.sourceId !== 'wikidata') {
       throw new Error('Normalization progress has the wrong identity/schema.');
     }
     if (normalizedProgress.queryVersion !== queryVersion) throw new Error('Normalization progress belongs to a different query epoch.');
     if (normalizedProgress.normalizationVersion !== normalizationVersion) throw new Error('Normalization progress belongs to a different normalizer version.');
-    const previous = normalizedProgress.lastNormalized;
-    if (previous && Number(previous.sourceStartPage) > sourceRun.startPage) {
-      throw new Error('Normalization watermark is ahead of acquisition watermark.');
-    }
-    if (previous?.sourceRunId === sourceRun.runId && previous?.sourceStartPage === sourceRun.startPage) {
-      return {
-        schemaVersion: 1,
-        baselineId: 'saints-v1',
-        sourceId: 'wikidata',
-        queryVersion,
-        normalizationVersion,
-        shouldRun: false,
-        reason: 'latest-source-run-already-normalized',
-        sourceRunId: sourceRun.runId,
-        sourceStartPage: sourceRun.startPage,
-        sourceNextPage: sourceRun.nextPage,
-        sourceCompleted: sourceProgress.completed === true,
-        rawStream: `${rawStreamPrefix}/${batchId(sourceRun.startPage)}`,
-        normalizedStream: `${normalizedStreamPrefix}/${batchId(sourceRun.startPage)}`,
-        previousProgress: normalizedProgress,
-      };
+    previous = normalizedProgress.lastNormalized ?? null;
+    if (previous) {
+      if (!Number.isInteger(previous.sourceStartPage) || !Number.isInteger(previous.sourceNextPage) || previous.sourceNextPage <= previous.sourceStartPage) {
+        throw new Error('Normalization progress contains an invalid lastNormalized watermark.');
+      }
+      targetStartPage = previous.sourceNextPage;
     }
   }
 
+  if (targetStartPage > sourceProgress.nextPage) throw new Error('Normalization watermark is ahead of acquisition watermark.');
+  const caughtUp = targetStartPage === sourceProgress.nextPage;
+  const rawStream = `${rawStreamPrefix}/${batchId(targetStartPage)}`;
+  const normalizedStream = `${normalizedStreamPrefix}/${batchId(targetStartPage)}`;
+  if (caughtUp) {
+    return {
+      schemaVersion: 1,
+      baselineId: 'saints-v1',
+      sourceId: 'wikidata',
+      queryVersion,
+      normalizationVersion,
+      shouldRun: false,
+      reason: 'normalization-caught-up',
+      targetStartPage,
+      acquisitionNextPage: sourceProgress.nextPage,
+      sourceCompleted: sourceProgress.completed === true,
+      expectedSourceRunId: null,
+      rawStream,
+      normalizedStream,
+      previousProgress: normalizedProgress,
+    };
+  }
+
+  const targetIsLatest = targetStartPage === latest.startPage;
   return {
     schemaVersion: 1,
     baselineId: 'saints-v1',
@@ -65,28 +79,28 @@ export function planBaselineNormalization({ sourceProgress, normalizedProgress =
     queryVersion,
     normalizationVersion,
     shouldRun: true,
-    reason: normalizedProgress ? 'new-source-run' : 'no-normalization-watermark',
-    sourceRunId: sourceRun.runId,
-    sourceStartPage: sourceRun.startPage,
-    sourceNextPage: sourceRun.nextPage,
+    reason: previous ? (targetIsLatest ? 'normalize-latest-source-run' : 'drain-normalization-backlog') : 'start-normalization-at-page-zero',
+    targetStartPage,
+    acquisitionNextPage: sourceProgress.nextPage,
     sourceCompleted: sourceProgress.completed === true,
-    rawStream: `${rawStreamPrefix}/${batchId(sourceRun.startPage)}`,
-    normalizedStream: `${normalizedStreamPrefix}/${batchId(sourceRun.startPage)}`,
+    expectedSourceRunId: targetIsLatest ? latest.runId : null,
+    rawStream,
+    normalizedStream,
     previousProgress: normalizedProgress,
   };
 }
 
 async function main() {
-  const sourceProgressPath = path.resolve(argument('--source-progress'));
+  const sourceProgressArg = argument('--source-progress');
   const normalizedProgressPath = argument('--normalized-progress');
   const queryVersion = argument('--query-version');
   const normalizationVersion = argument('--normalization-version');
   const rawStreamPrefix = argument('--raw-prefix');
   const normalizedStreamPrefix = argument('--normalized-prefix');
-  if (!sourceProgressPath || !queryVersion || !normalizationVersion || !rawStreamPrefix || !normalizedStreamPrefix) {
+  if (!sourceProgressArg || !queryVersion || !normalizationVersion || !rawStreamPrefix || !normalizedStreamPrefix) {
     throw new Error('Missing required normalization planner arguments.');
   }
-  const sourceProgress = readJson(sourceProgressPath);
+  const sourceProgress = readJson(path.resolve(sourceProgressArg));
   const normalizedProgress = normalizedProgressPath && fs.existsSync(path.resolve(normalizedProgressPath))
     ? readJson(path.resolve(normalizedProgressPath))
     : null;
