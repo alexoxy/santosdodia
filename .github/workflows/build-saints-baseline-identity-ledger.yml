@@ -15,9 +15,12 @@ on:
       - 'scripts/archive/validate-tar-entries.mjs'
       - 'scripts/archive/extract-safe-tar.mjs'
       - 'scripts/baseline/build-global-identity-ledger.mjs'
+      - 'scripts/baseline/build-global-language-coverage.mjs'
       - 'scripts/baseline/plan-global-identity-ledger.mjs'
       - 'scripts/baseline/verify-global-identity-ledger.mjs'
+      - 'scripts/baseline/verify-global-language-coverage.mjs'
       - 'scripts/baseline/test-global-identity-ledger.mjs'
+      - 'scripts/baseline/test-global-language-coverage.mjs'
       - 'scripts/baseline/audit-global-identity-ledger.mjs'
       - 'scripts/dropbox/list-archive-batches.mjs'
       - 'scripts/dropbox/test-list-archive-batches.mjs'
@@ -37,6 +40,7 @@ env:
   NORMALIZATION_VERSION: '1.1'
   LANGUAGE_REVIEW_VERSION: '1.1'
   IDENTITY_VERSION: '1.0'
+  LANGUAGE_COVERAGE_VERSION: '1.0'
   REVIEW_PROGRESS_STREAM: baseline-reviewed-progress/saints/v1/wikidata/recognition-v1
   REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
   IDENTITY_STREAM: baseline/saints/v1/identity/wikidata/recognition-v1
@@ -93,10 +97,12 @@ jobs:
           node scripts/archive/extract-safe-tar.mjs --archive "$src" --destination "$dst"
           manifest="$(find "$dst" -type f -name identity-manifest.json | sort | tail -n 1)"
           batches="$(find "$dst" -type f -name source-batches.json | sort | tail -n 1)"
+          coverage="$(find "$dst" -type f -name language-coverage-report.json | sort | tail -n 1 || true)"
           test -n "$manifest"
           test -n "$batches"
           cp "$manifest" staging/baseline-identity/previous-manifest.json
           cp "$batches" staging/baseline-identity/previous-source-batches.json
+          if [ -n "$coverage" ]; then cp "$coverage" staging/baseline-identity/previous-language-coverage.json; fi
 
       - name: Plan global identity rebuild
         id: plan
@@ -107,10 +113,12 @@ jobs:
             --review-progress staging/baseline-identity/review-progress.json
             --output staging/baseline-identity/plan.json
             --identity-version "$IDENTITY_VERSION"
+            --language-coverage-version "$LANGUAGE_COVERAGE_VERSION"
             --query-version "$WIKIDATA_QUERY_VERSION"
           )
           if [ -f staging/baseline-identity/previous-manifest.json ]; then args+=(--previous-manifest staging/baseline-identity/previous-manifest.json); fi
           if [ -f staging/baseline-identity/previous-source-batches.json ]; then args+=(--previous-source-batches staging/baseline-identity/previous-source-batches.json); fi
+          if [ -f staging/baseline-identity/previous-language-coverage.json ]; then args+=(--previous-language-coverage staging/baseline-identity/previous-language-coverage.json); fi
           node scripts/baseline/plan-global-identity-ledger.mjs "${args[@]}"
           node -e "const fs=require('node:fs'); const p=JSON.parse(fs.readFileSync('staging/baseline-identity/plan.json','utf8')); fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_run='+p.shouldRun+'\nreason='+p.reason+'\n');"
 
@@ -118,11 +126,12 @@ jobs:
         if: steps.plan.outputs.should_run == 'true'
         run: npm ci --include=optional
 
-      - name: Validate identity-ledger contract
+      - name: Validate identity and language-coverage contracts
         if: steps.plan.outputs.should_run == 'true'
         run: |
           npm run saints:baseline-identity-test
           npm run saints:baseline-identity-audit
+          node scripts/baseline/test-global-language-coverage.mjs
           npm run dropbox:batch-list-test
 
       - name: List immutable REVIEWED batch streams
@@ -166,14 +175,25 @@ jobs:
             --identity-version "$IDENTITY_VERSION" \
             --output staging/baseline-identity/output
 
-      - name: Verify closed publication and identity invariants
+      - name: Build global language coverage
+        if: steps.plan.outputs.should_run == 'true'
+        run: |
+          node scripts/baseline/build-global-language-coverage.mjs \
+            --identity-ledger staging/baseline-identity/output/identity-ledger.jsonl \
+            --reviewed-root staging/baseline-identity/reviewed \
+            --version "$LANGUAGE_COVERAGE_VERSION" \
+            --output staging/baseline-identity/output/language-coverage-report.json
+
+      - name: Verify closed publication, identity and language invariants
         if: steps.plan.outputs.should_run == 'true'
         run: |
           node scripts/baseline/verify-global-identity-ledger.mjs \
             --manifest staging/baseline-identity/output/identity-manifest.json \
             --report staging/baseline-identity/output/identity-report.json
+          node scripts/baseline/verify-global-language-coverage.mjs \
+            --report staging/baseline-identity/output/language-coverage-report.json
 
-      - name: Archive global identity ledger in Dropbox
+      - name: Archive global identity and language gates in Dropbox
         if: steps.plan.outputs.should_run == 'true'
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -187,7 +207,7 @@ jobs:
             --source staging/baseline-identity/batches.json \
             --source staging/baseline-identity/plan.json
 
-      - name: Upload bounded identity evidence
+      - name: Upload bounded identity and language evidence
         if: steps.plan.outputs.should_run == 'true'
         uses: actions/upload-artifact@v7
         with:
@@ -195,6 +215,7 @@ jobs:
           path: |
             staging/baseline-identity/output/identity-manifest.json
             staging/baseline-identity/output/identity-report.json
+            staging/baseline-identity/output/language-coverage-report.json
             staging/baseline-identity/output/cross-batch-duplicates.jsonl
             staging/baseline-identity/output/identity-conflicts.jsonl
             staging/baseline-identity/output/name-collisions.jsonl
