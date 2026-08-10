@@ -18,6 +18,7 @@ import { tmpdir } from 'node:os';
 import { isAbsolute, join, resolve, sep } from 'node:path';
 import { spawn } from 'node:child_process';
 import { pipeline } from 'node:stream/promises';
+import { refreshDropboxAccessToken } from './dropbox/oauth.mjs';
 
 const DROPBOX_CONTENT_BLOCK_BYTES = 4 * 1024 * 1024;
 const DROPBOX_DIRECT_UPLOAD_BYTES = 140 * 1024 * 1024;
@@ -245,26 +246,6 @@ async function uploadFile(token, localPath, remotePath, expectedDropboxHash) {
   return metadata;
 }
 
-async function refreshAccessToken() {
-  const appKey = process.env.DROPBOX_APP_KEY;
-  const appSecret = process.env.DROPBOX_APP_SECRET;
-  const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
-  if (!appKey || !appSecret || !refreshToken) {
-    throw new Error('DROPBOX_APP_KEY, DROPBOX_APP_SECRET and DROPBOX_REFRESH_TOKEN are required.');
-  }
-  const response = await fetch('https://api.dropboxapi.com/oauth2/token', {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${Buffer.from(`${appKey}:${appSecret}`).toString('base64')}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refreshToken }),
-  });
-  const value = await readJsonResponse(response, 'Dropbox access token refresh');
-  if (!value.access_token) throw new Error('Dropbox token refresh returned no access token.');
-  return value.access_token;
-}
-
 async function main() {
   const root = realpathSync(process.env.GITHUB_WORKSPACE || process.cwd());
   const options = parseArguments(process.argv.slice(2));
@@ -314,7 +295,7 @@ async function main() {
       return;
     }
 
-    const token = await refreshAccessToken();
+    const token = await refreshDropboxAccessToken();
     await uploadFile(token, archiveFile, packagePath, contentHash);
     const receipt = { ...common, verifiedAfterUpload: true };
     writeFileSync(receiptFile, `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
