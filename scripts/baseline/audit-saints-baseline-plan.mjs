@@ -77,6 +77,12 @@ if (!workflow.includes("OSINT_WIKIDATA_PAGE_SIZE: '500'")) errors.push('Baseline
 if (!workflow.includes("OSINT_WIKIDATA_DELAY_MS: '12000'")) errors.push('Baseline workflow must retain a 12s minimum Wikidata inter-page delay.');
 if (!workflow.includes('baseline-progress/saints/v1/wikidata')) errors.push('Baseline workflow is missing its verified Dropbox watermark stream.');
 
+const wikidataAdapter = fs.readFileSync(path.join(root, 'scripts/osint/adapters/wikidata-saints.mjs'), 'utf8');
+if (!wikidataAdapter.includes('?item wdt:P411 ?recognitionStatus.')) errors.push('Wikidata baseline candidate query must accept any explicit P411 recognition status.');
+if (wikidataAdapter.includes('wdt:P411 wd:Q43115')) errors.push('Wikidata baseline candidate query must not treat Q43115 saint as the only P411 status.');
+if (!wikidataAdapter.includes('?recognitionStatusLabel')) errors.push('Wikidata baseline candidate query must preserve the recognition-status label for downstream resolution.');
+if (!wikidataAdapter.includes("String(page).padStart(4, '0')")) errors.push('Wikidata page archive naming must remain compatible with the current normalizer.');
+
 const report = {
   ok: errors.length === 0,
   errors,
