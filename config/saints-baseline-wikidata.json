@@ -6,12 +6,16 @@
   "adapterVersion": "1.2",
   "normalizationVersion": "1.1",
   "languageReviewVersion": "1.1",
+  "d1ImportVersion": "1.0",
+  "d1ImportEntityLimit": 200,
   "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
   "rawStreamPrefix": "baseline/saints/v1/raw/wikidata/recognition-v1",
   "normalizationProgressStream": "baseline-normalized-progress/saints/v1/wikidata/recognition-v1",
   "normalizedStreamPrefix": "baseline/saints/v1/normalized/wikidata/recognition-v1",
   "languageReviewProgressStream": "baseline-reviewed-progress/saints/v1/wikidata/recognition-v1",
   "reviewedStreamPrefix": "baseline/saints/v1/reviewed/wikidata/recognition-v1",
+  "importProgressStream": "baseline-import-progress/saints/v1/wikidata/recognition-v1",
+  "importReceiptStreamPrefix": "baseline-import-receipts/saints/v1/wikidata/recognition-v1",
   "statusStream": "baseline-status/saints/v1/wikidata/recognition-v1",
   "legacyEpochs": [
     {
@@ -30,6 +34,9 @@
     "languageReviewReadsDropboxOnly": true,
     "languageFailuresAreLocaleIsolated": true,
     "sourceOnlyNamesAreNotCanonical": true,
+    "importReadsReviewedDropboxOnly": true,
+    "d1StagingOnly": true,
+    "withheldLocalizedNamesNeverEnterDisplayTable": true,
     "productionPublication": false
   }
 }
