@@ -13,6 +13,8 @@ const progress = {
   cumulativeEntitiesReviewed: 11173,
   lastReviewed: { sourceStartPage: 20, sourceNextPage: 29, sourceRunId: 'run-20' },
 };
+const previousManifest = { identityVersion: '1.0', queryVersion: 'recognition-v1', sourceEntityOccurrences: 11173 };
+const previousSourceBatches = { batches: [{ startPage: 20, nextPage: 29, sourceRunId: 'run-20' }] };
 
 {
   const plan = planGlobalIdentityLedger({ progress, identityVersion: '1.0', queryVersion: 'recognition-v1' });
@@ -20,12 +22,31 @@ const progress = {
 }
 
 {
+  const plan = planGlobalIdentityLedger({ progress, identityVersion: '1.0', queryVersion: 'recognition-v1', previousManifest, previousSourceBatches });
+  assert.deepEqual(plan, { schemaVersion: 1, shouldRun: false, reason: 'identity-ledger-already-current' });
+}
+
+{
   const plan = planGlobalIdentityLedger({
     progress,
     identityVersion: '1.0',
+    languageCoverageVersion: '1.0',
     queryVersion: 'recognition-v1',
-    previousManifest: { identityVersion: '1.0', queryVersion: 'recognition-v1', sourceEntityOccurrences: 11173 },
-    previousSourceBatches: { batches: [{ startPage: 20, nextPage: 29, sourceRunId: 'run-20' }] },
+    previousManifest,
+    previousSourceBatches,
+  });
+  assert.deepEqual(plan, { schemaVersion: 1, shouldRun: true, reason: 'language-coverage-contract-changed' });
+}
+
+{
+  const plan = planGlobalIdentityLedger({
+    progress,
+    identityVersion: '1.0',
+    languageCoverageVersion: '1.0',
+    queryVersion: 'recognition-v1',
+    previousManifest,
+    previousSourceBatches,
+    previousLanguageCoverage: { languageCoverageVersion: '1.0' },
   });
   assert.deepEqual(plan, { schemaVersion: 1, shouldRun: false, reason: 'identity-ledger-already-current' });
 }
