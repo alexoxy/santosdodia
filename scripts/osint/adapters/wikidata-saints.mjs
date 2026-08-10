@@ -15,13 +15,14 @@ const runDir = join(outputRoot, sourceId, runId);
 await mkdir(runDir, { recursive: true });
 
 const summary = {
-  adapterVersion: '1.1',
+  adapterVersion: '1.2',
   runId,
   sourceId,
   endpoint,
   mode: 'archive-only',
   publish: false,
   licence: 'CC0-1.0',
+  candidateSemantics: 'high-recall-religious-recognition-not-canonical-sainthood',
   startedAt,
   finishedAt: startedAt,
   pageSize,
@@ -45,7 +46,7 @@ try {
       method: 'POST',
       redirect: 'follow',
       headers: {
-        'user-agent': 'SantosDiaOSINT/1.1 (+https://www.santosdodia.com/about)',
+        'user-agent': 'SantosDiaOSINT/1.2 (+https://www.santosdodia.com/about)',
         accept: 'application/sparql-results+json, application/json;q=0.9',
         'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
@@ -55,11 +56,11 @@ try {
 
     const bytes = Buffer.from(await response.arrayBuffer());
     const sha256 = createHash('sha256').update(bytes).digest('hex');
-    const archivePath = join(runDir, `${String(page).padStart(6, '0')}-${sha256}.json`);
+    const archivePath = join(runDir, `${String(page).padStart(4, '0')}-${sha256}.json`);
     await writeFile(archivePath, bytes, { flag: 'wx' });
 
     const receipt = {
-      receiptVersion: '1.1',
+      receiptVersion: '1.2',
       runId: `${runId}-page-${page}`,
       sourceId,
       requestedUrl: endpoint,
@@ -96,7 +97,7 @@ try {
     }
 
     receipt.bindingCount = bindingCount;
-    await writeFile(join(runDir, `${String(page).padStart(6, '0')}-receipt.json`), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
+    await writeFile(join(runDir, `${String(page).padStart(4, '0')}-receipt.json`), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
     summary.pages.push({ page, offset, bindingCount, sha256, archivePath, httpStatus: response.status });
     summary.totalBindings += bindingCount;
     summary.nextPage = page + 1;
@@ -124,7 +125,7 @@ try {
 }
 
 function buildQuery(limit, offset) {
-  return `PREFIX bd: <http://www.bigdata.com/rdf#>\nPREFIX schema: <http://schema.org/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wikibase: <http://wikiba.se/ontology#>\nSELECT DISTINCT ?item ?itemLabel ?itemDescription ?birth ?death ?image ?article WHERE {\n  { ?item wdt:P411 wd:Q43115. } UNION { ?item wdt:P31 wd:Q43115. }\n  OPTIONAL { ?item wdt:P569 ?birth. }\n  OPTIONAL { ?item wdt:P570 ?death. }\n  OPTIONAL { ?item wdt:P18 ?image. }\n  OPTIONAL { ?article schema:about ?item; schema:isPartOf <https://pt.wikipedia.org/>. }\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"pt,en,es,it,fr,de,pl,ru,uk,el,la\". }\n}\nORDER BY ?item\nLIMIT ${limit}\nOFFSET ${offset}`;
+  return `PREFIX bd: <http://www.bigdata.com/rdf#>\nPREFIX schema: <http://schema.org/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wikibase: <http://wikiba.se/ontology#>\nSELECT DISTINCT ?item ?itemLabel ?itemDescription ?recognitionStatus ?recognitionStatusLabel ?birth ?death ?image ?article WHERE {\n  { ?item wdt:P411 ?recognitionStatus. } UNION { ?item wdt:P31 wd:Q43115. BIND(wd:Q43115 AS ?recognitionStatus) }\n  OPTIONAL { ?item wdt:P569 ?birth. }\n  OPTIONAL { ?item wdt:P570 ?death. }\n  OPTIONAL { ?item wdt:P18 ?image. }\n  OPTIONAL { ?article schema:about ?item; schema:isPartOf <https://pt.wikipedia.org/>. }\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"pt,en,es,it,fr,de,pl,ru,uk,el,la\". }\n}\nORDER BY ?item ?recognitionStatus\nLIMIT ${limit}\nOFFSET ${offset}`;
 }
 
 function boundedInteger(value, fallback, minimum, maximum) {
