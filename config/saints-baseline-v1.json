@@ -47,7 +47,7 @@
       "family": "catholic",
       "candidateSources": ["wikidata"],
       "confirmationSources": ["holy-see-vatican", "vatican-news-liturgical-holidays-pt", "portugal-national-liturgy-secretariat"],
-      "incrementalWatch": ["holy-see-vatican", "holy-see-press-office"],
+      "incrementalWatch": ["dicastery-causes-saints", "holy-see-vatican", "holy-see-press-office"],
       "recognitionTypes": ["beatified", "canonized", "equipollent-beatification", "equipollent-canonization", "calendar-commemoration-added"]
     },
     {
@@ -80,19 +80,19 @@
       "id": "ethiopian-orthodox",
       "family": "oriental-orthodox",
       "candidateSources": ["wikidata"],
-      "confirmationSources": [],
-      "incrementalWatch": [],
+      "confirmationSources": ["ethiopian-mahibere-kidusan"],
+      "incrementalWatch": ["ethiopian-mahibere-kidusan"],
       "recognitionTypes": ["sainthood-recognized", "martyrdom-recognized", "calendar-commemoration-added"],
-      "processStatus": "official-source-registry-entry-required"
+      "processStatus": "holy-synod-is-decision-authority-source-is-church-department"
     },
     {
       "id": "syriac-orthodox",
       "family": "oriental-orthodox",
       "candidateSources": ["wikidata"],
-      "confirmationSources": [],
+      "confirmationSources": ["syriac-orthodox-western-us"],
       "incrementalWatch": [],
       "recognitionTypes": ["sainthood-recognized", "calendar-commemoration-added"],
-      "processStatus": "official-source-registry-entry-required"
+      "processStatus": "jurisdictional-source-only-patriarchal-recognition-source-still-required"
     },
     {
       "id": "anglican",
