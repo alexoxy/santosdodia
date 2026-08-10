@@ -7,6 +7,7 @@
   "normalizationVersion": "1.1",
   "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
   "rawStreamPrefix": "baseline/saints/v1/raw/wikidata/recognition-v1",
+  "statusStream": "baseline-status/saints/v1/wikidata/recognition-v1",
   "legacyEpochs": [
     {
       "queryVersion": "pre-recognition-v0",
