@@ -1,0 +1,60 @@
+name: One-shot baseline importer throughput contract
+
+on:
+  push:
+    branches:
+      - agent/baseline-importer-v2
+    paths:
+      - scripts/maintenance/baseline-importer-throughput.flag
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-shot-baseline-importer-throughput
+  cancel-in-progress: false
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/baseline-importer-v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Apply throughput patch
+        run: node scripts/maintenance/patch-baseline-importer-throughput.mjs
+
+      - name: Validate importer throughput contract
+        run: |
+          npm run saints:baseline-import-test
+          npm run saints:baseline-importer-audit
+          npm run saints:baseline-d1-guard-test
+          npm run db:d1-budget-test
+          npm run db:reviewed-chunk-test
+          npm run automation:audit
+
+      - name: Commit durable changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/import-saints-baseline-d1.yml .github/workflows/quality.yml config/automation-registry.json package.json
+          if git diff --cached --quiet; then
+            echo 'No throughput changes generated.'
+            exit 1
+          fi
+          git commit -m 'Bound baseline D1 bootstrap throughput'
+          git push origin HEAD:agent/baseline-importer-v2
