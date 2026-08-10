@@ -94,6 +94,9 @@ jobs:
       - name: Test bounded Dropbox archive hygiene
         run: npm run dropbox:archive-test
 
+      - name: Test Dropbox OAuth transient retry
+        run: npm run dropbox:oauth-test
+
       - name: Audit Cloudflare Free operating boundary
         run: npm run cloudflare:guardrails-audit
 
@@ -144,6 +147,9 @@ jobs:
 
       - name: Test Wrangler D1 local compatibility
         run: npm run db:d1-local-test
+
+      - name: Test ephemeral D1 staging config paths
+        run: npm run db:d1-staging-config-test
 
       - name: Test remote D1 staging rollback safeguards
         run: npm run db:d1-remote-safety-test
