@@ -49,6 +49,12 @@ jobs:
       - name: Test Saints Baseline v1 resumable watermark logic
         run: npm run saints:baseline-test
 
+      - name: Test ordered Saints Baseline v1 normalization watermarks
+        run: npm run saints:baseline-normalization-test
+
+      - name: Audit Dropbox-only Saints Baseline normalizer
+        run: npm run saints:baseline-normalizer-audit
+
       - name: Test temporal core and calendar bridge
         run: npm run temporal:test
 
