@@ -1,0 +1,176 @@
+name: Enrich Saints profiles from Wikidata
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/saints-profile-enrichment-v1.json'
+      - 'scripts/enrichment/**'
+      - '.github/workflows/enrich-saints-profile-wikidata.yml'
+      - 'config/automation-registry.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-profile-wikidata-v1
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit safety contracts
+        run: |
+          npm run repo:audit
+          npm run automation:audit
+          node scripts/enrichment/test-wikidata-profile-core.mjs
+          node scripts/enrichment/test-wikidata-profile-pipeline.mjs
+
+      - name: Pull verified global identity ledger
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream baseline/saints/v1/identity/wikidata/recognition-v1
+          --destination staging/profile-enrichment/identity
+
+      - name: Extract identity ledger safely
+        run: >-
+          node scripts/archive/extract-safe-tar.mjs
+          --archive staging/profile-enrichment/identity/package.tar.gz
+          --destination staging/profile-enrichment/identity/extracted
+
+      - name: Pull previous profile watermark if present
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream enrichment-progress/saints/v1/wikidata/profile-v1
+          --destination staging/profile-enrichment/previous
+          --allow-missing
+
+      - name: Extract previous watermark if present
+        shell: bash
+        run: |
+          if [ -f staging/profile-enrichment/previous/package.tar.gz ]; then
+            node scripts/archive/extract-safe-tar.mjs \
+              --archive staging/profile-enrichment/previous/package.tar.gz \
+              --destination staging/profile-enrichment/previous/extracted
+          fi
+
+      - name: Resolve verified identity inputs
+        id: inputs
+        shell: bash
+        run: |
+          manifest="$(find staging/profile-enrichment/identity/extracted -type f -name identity-manifest.json | sort | tail -n 1)"
+          report="$(find staging/profile-enrichment/identity/extracted -type f -name identity-report.json | sort | tail -n 1)"
+          ledger="$(find staging/profile-enrichment/identity/extracted -type f -name identity-ledger.jsonl | sort | tail -n 1)"
+          previous="$(find staging/profile-enrichment/previous/extracted -type f -name profile-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          test -n "$manifest" && test -n "$report" && test -n "$ledger"
+          echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
+          echo "report=$report" >> "$GITHUB_OUTPUT"
+          echo "ledger=$ledger" >> "$GITHUB_OUTPUT"
+          echo "previous=$previous" >> "$GITHUB_OUTPUT"
+
+      - name: Plan next exact-QID chunk
+        id: plan
+        shell: bash
+        env:
+          MANIFEST: ${{ steps.inputs.outputs.manifest }}
+          REPORT: ${{ steps.inputs.outputs.report }}
+          LEDGER: ${{ steps.inputs.outputs.ledger }}
+          PREVIOUS: ${{ steps.inputs.outputs.previous }}
+        run: |
+          args=(
+            --identity-manifest "$MANIFEST"
+            --identity-report "$REPORT"
+            --identity-ledger "$LEDGER"
+            --output staging/profile-enrichment/plan.json
+          )
+          if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
+          node scripts/enrichment/plan-wikidata-profile-run.mjs "${args[@]}"
+          node -e "const fs=require('node:fs');const p=JSON.parse(fs.readFileSync('staging/profile-enrichment/plan.json','utf8'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_run='+p.shouldRun+'\nraw_stream='+p.rawStream+'\nnormalized_stream='+p.normalizedStream+'\nprogress_stream='+p.progressStream+'\n');"
+
+      - name: Fetch one bounded Wikidata profile query
+        if: steps.plan.outputs.should_run == 'true'
+        run: >-
+          node scripts/enrichment/fetch-wikidata-profile-chunk.mjs
+          --plan staging/profile-enrichment/plan.json
+          --raw-output staging/profile-enrichment/output/profile-raw.json
+          --normalized-output staging/profile-enrichment/output/profile-normalized.json
+
+      - name: Archive immutable RAW profile evidence
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.raw_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$STREAM"
+          --source staging/profile-enrichment/output/profile-raw.json
+          --source staging/profile-enrichment/plan.json
+
+      - name: Archive normalized profile assertions
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.normalized_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$STREAM"
+          --source staging/profile-enrichment/output/profile-normalized.json
+          --source staging/profile-enrichment/plan.json
+
+      - name: Advance watermark only after verified archives
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        env:
+          PREVIOUS: ${{ steps.inputs.outputs.previous }}
+        run: |
+          args=(
+            --plan staging/profile-enrichment/plan.json
+            --raw staging/profile-enrichment/output/profile-raw.json
+            --normalized staging/profile-enrichment/output/profile-normalized.json
+            --output staging/profile-enrichment/output/profile-progress.json
+          )
+          if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
+          node scripts/enrichment/finalize-wikidata-profile-run.mjs "${args[@]}"
+
+      - name: Archive verified profile watermark
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          STREAM: ${{ steps.plan.outputs.progress_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$STREAM"
+          --source staging/profile-enrichment/output/profile-progress.json
