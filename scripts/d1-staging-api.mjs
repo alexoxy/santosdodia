@@ -26,7 +26,7 @@ export function validateBatchPackage(value) {
     if (typeof statement !== 'string' || !statement.trim()) throw new Error(`Statement ${index + 1} is empty.`);
     if (FORBIDDEN_SQL.test(statement)) throw new Error(`Statement ${index + 1} contains transaction control.`);
     if (Buffer.byteLength(statement, 'utf8') > 100_000) throw new Error(`Statement ${index + 1} exceeds 100 KB.`);
-    return statement.trim();
+    return statement.trim().replace(/;+$/u, '');
   });
   const expectedHash = sha256(JSON.stringify(statements));
   if (value.statementsSha256 !== expectedHash) throw new Error('D1 statements SHA-256 mismatch.');
@@ -122,12 +122,12 @@ export async function applyBatchWithRollback({ accountId, token, databaseId, bat
       token,
       path: `/d1/database/${databaseId}/query`,
       method: 'POST',
-      body: { batch: statements.map(sql => ({ sql, params: [] })) },
+      body: { sql: `${statements.join(';\n')};` },
       fetchImpl
     });
     const results = Array.isArray(result) ? result : [result];
-    if (results.length !== statements.length || results.some(entry => entry?.success !== true)) {
-      throw new Error('Cloudflare returned an incomplete or failed D1 batch result.');
+    if (results.length === 0 || results.some(entry => entry?.success !== true)) {
+      throw new Error('Cloudflare returned a failed D1 multi-statement result.');
     }
     return { bookmarkBefore: bookmark, statementCount: statements.length, results };
   } catch (error) {
