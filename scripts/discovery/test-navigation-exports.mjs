@@ -38,7 +38,7 @@ const input = {
         }
       ],
       observances: [
-        { id: 'lawrence-08-10', month: 8, day: 10, churchId: 'roman-catholic', validationStatus: 'verified', publicationStatus: 'published' }
+        { id: 'lawrence-08-10', month: 8, day: 10, names: { pt: 'São Lourenço' }, churchId: 'roman-catholic', validationStatus: 'verified', publicationStatus: 'published' }
       ]
     },
     {
@@ -49,7 +49,33 @@ const input = {
       validationStatus: 'provisional',
       publicationStatus: 'withheld',
       places: [{ relationType: 'death', lat: 40, lon: -8 }],
-      observances: [{ id: 'withheld-01-01', month: 1, day: 1, publicationStatus: 'withheld' }]
+      observances: [{ id: 'withheld-01-01', month: 1, day: 1, names: { pt: 'Candidato retido' }, validationStatus: 'provisional', publicationStatus: 'withheld' }]
+    }
+  ],
+  unlinkedObservances: [
+    {
+      id: 'vatican-withheld-08-10',
+      month: 8,
+      day: 10,
+      personEntityId: null,
+      personLinkStatus: 'unresolved',
+      names: { pt: { value: 'S. Blano, bispo', status: 'source' } },
+      churchId: 'roman-catholic',
+      sourceIds: ['vatican-news-saint-of-day-pt'],
+      validationStatus: 'provisional',
+      publicationStatus: 'withheld'
+    },
+    {
+      id: 'vatican-published-08-11',
+      month: 8,
+      day: 11,
+      personEntityId: null,
+      personLinkStatus: 'unresolved',
+      names: { pt: { value: 'Santa de fonte oficial', status: 'source' } },
+      churchId: 'roman-catholic',
+      sourceIds: ['vatican-news-saint-of-day-pt'],
+      validationStatus: 'verified',
+      publicationStatus: 'published'
     }
   ]
 };
@@ -58,7 +84,13 @@ const staging = buildNavigationExports(input, { mode: 'staging', locale: 'pt' })
 assert.equal(staging.manifest.personCount, 2);
 assert.equal(staging.manifest.mapFeatureCount, 2);
 assert.equal(staging.timeline.byCentury['3'].includes('wikidata:Q1'), true);
-assert.equal(staging.calendar.days['08-10'][0].entityId, 'wikidata:Q1');
+assert.equal(staging.calendar.days['08-10'].some((item) => item.entityId === 'wikidata:Q1'), true);
+const unresolved = staging.calendar.days['08-10'].find((item) => item.observanceId === 'vatican-withheld-08-10');
+assert.equal(unresolved.entityId, null);
+assert.equal(unresolved.personLinkStatus, 'unresolved');
+assert.equal(unresolved.name, 'S. Blano, bispo');
+assert.deepEqual(unresolved.sourceIds, ['vatican-news-saint-of-day-pt']);
+assert.equal(staging.manifest.unlinkedCalendarEntryCount, 2);
 assert.equal(staging.manifest.productionMutation, false);
 assert.match(staging.map.features[0].type, /Feature/);
 
@@ -66,6 +98,9 @@ const publicExport = buildNavigationExports(input, { mode: 'public', locale: 'pt
 assert.equal(publicExport.manifest.personCount, 1);
 assert.equal(publicExport.manifest.mapFeatureCount, 1);
 assert.equal(publicExport.calendar.days['01-01'], undefined);
+assert.equal(publicExport.calendar.days['08-10'].some((item) => item.observanceId === 'vatican-withheld-08-10'), false);
+assert.equal(publicExport.calendar.days['08-11'][0].observanceId, 'vatican-published-08-11');
+assert.equal(publicExport.calendar.days['08-11'][0].entityId, null);
 assert.equal(publicExport.saints[0].name, 'São Lourenço');
 assert.equal(publicExport.map.features[0].properties.historicalName, 'Roma, Império Romano');
 assert.equal(publicExport.map.features[0].geometry.coordinates[0], 12.4829);
