@@ -110,7 +110,7 @@ jobs:
         run: |
           node scripts/dropbox/list-archive-chunks.mjs --stream-prefix enrichment/saints/v1/normalized/wikidata/profile-v1 --output staging/navigation/profile-listing.json
           node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/profile-listing.json --progress "$PROGRESS" --chunk-size 40 --output staging/navigation/profile-chunk-audit.json
-          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/profile-listing.json --destination staging/navigation/profile-chunks
+          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/profile-chunk-audit.json --destination staging/navigation/profile-chunks
 
       - name: Discover and validate multilingual label chunks
         if: steps.inputs.outputs.label_progress != ''
@@ -123,7 +123,7 @@ jobs:
         run: |
           node scripts/dropbox/list-archive-chunks.mjs --stream-prefix enrichment/saints/v1/normalized/wikidata/labels-v2 --output staging/navigation/label-listing.json
           node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/label-listing.json --progress "$PROGRESS" --chunk-size 200 --output staging/navigation/label-chunk-audit.json
-          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/label-listing.json --destination staging/navigation/label-chunks
+          node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/label-chunk-audit.json --destination staging/navigation/label-chunks
 
       - name: Extract all verified enrichment chunks
         shell: bash
