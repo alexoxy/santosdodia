@@ -32,8 +32,10 @@ if (wikidataEpoch.schemaVersion !== 1 || wikidataEpoch.baselineId !== 'saints-v1
 }
 if (wikidataEpoch.queryVersion !== 'recognition-v1') errors.push('Active Wikidata baseline queryVersion must be recognition-v1.');
 if (wikidataEpoch.adapterVersion !== '1.2') errors.push('Active Wikidata baseline adapterVersion must remain aligned with query epoch recognition-v1.');
+if (wikidataEpoch.normalizationVersion !== '1.1') errors.push('Active Wikidata baseline normalizationVersion must be 1.1 for recognition-aware neutral person staging.');
 if (wikidataEpoch.progressStream !== 'baseline-progress/saints/v1/wikidata/recognition-v1') errors.push('Active Wikidata baseline progress stream is not query-versioned.');
 if (wikidataEpoch.rawStreamPrefix !== 'baseline/saints/v1/raw/wikidata/recognition-v1') errors.push('Active Wikidata baseline RAW stream is not query-versioned.');
+if (wikidataEpoch.statusStream !== 'baseline-status/saints/v1/wikidata/recognition-v1') errors.push('Active Wikidata baseline status stream is missing or not query-versioned.');
 if (wikidataEpoch.policy?.resumeOnlySameQueryVersion !== true || wikidataEpoch.policy?.startNewVersionAtPageZero !== true || wikidataEpoch.policy?.legacyEpochsRemainAuditOnly !== true || wikidataEpoch.policy?.productionPublication !== false) {
   errors.push('Wikidata query-epoch safety policy is incomplete.');
 }
@@ -102,12 +104,32 @@ const baselineTask = (automationRegistry.tasks ?? []).find((task) => task.id ===
 if (!baselineTask) errors.push('Saints Baseline Wikidata automation task is missing.');
 else if (baselineTask.archiveStream !== wikidataEpoch.rawStreamPrefix) errors.push('Automation registry points Saints Baseline at the wrong query-epoch archive stream.');
 
+const statusTask = (automationRegistry.tasks ?? []).find((task) => task.id === 'saints-baseline-v1-status');
+if (!statusTask) errors.push('Saints Baseline run-status task is missing.');
+else {
+  if (statusTask.mode !== 'event-driven' || statusTask.publicationMode !== 'staging-only') errors.push('Saints Baseline status task must remain event-driven and staging-only.');
+  if (statusTask.archiveStream !== wikidataEpoch.statusStream) errors.push('Automation registry points Saints Baseline status at the wrong query-epoch stream.');
+}
+const statusWorkflowPath = path.join(root, '.github/workflows/saints-baseline-status.yml');
+if (!fs.existsSync(statusWorkflowPath)) errors.push('Saints Baseline run-status workflow is missing.');
+else {
+  const statusWorkflow = fs.readFileSync(statusWorkflowPath, 'utf8');
+  if (!statusWorkflow.includes("workflows: ['Build Saints Baseline v1 candidates']")) errors.push('Baseline status workflow is not bound to acquisition workflow completion.');
+  if (!statusWorkflow.includes(`--stream ${wikidataEpoch.statusStream}`)) errors.push('Baseline status workflow archives to a stream different from epoch configuration.');
+  if (!statusWorkflow.includes('SOURCE_CONCLUSION')) errors.push('Baseline status workflow does not preserve source workflow conclusion.');
+}
+
 const wikidataAdapter = fs.readFileSync(path.join(root, 'scripts/osint/adapters/wikidata-saints.mjs'), 'utf8');
 if (!wikidataAdapter.includes('?item wdt:P411 ?recognitionStatus.')) errors.push('Wikidata baseline candidate query must accept any explicit P411 recognition status.');
 if (wikidataAdapter.includes('wdt:P411 wd:Q43115')) errors.push('Wikidata baseline candidate query must not treat Q43115 saint as the only P411 status.');
 if (!wikidataAdapter.includes('?recognitionStatusLabel')) errors.push('Wikidata baseline candidate query must preserve the recognition-status label for downstream resolution.');
 if (!wikidataAdapter.includes('queryVersion,')) errors.push('Wikidata adapter summary/receipts must preserve the query epoch.');
 if (!wikidataAdapter.includes("String(page).padStart(4, '0')")) errors.push('Wikidata page archive naming must remain compatible with the current normalizer.');
+
+const normalizer = fs.readFileSync(path.join(root, 'scripts/osint/normalize-wikidata-saints.mjs'), 'utf8');
+if (!normalizer.includes(`const NORMALIZATION_VERSION = '${wikidataEpoch.normalizationVersion}';`)) errors.push('Wikidata normalizer version differs from active baseline epoch configuration.');
+if (!normalizer.includes("entityType: 'historical-person'")) errors.push('Wikidata candidate normalizer must stage neutral historical-person entities.');
+if (!normalizer.includes("churchConfirmed: false")) errors.push('Wikidata candidate recognition must remain explicitly unconfirmed by a Church.');
 
 const report = {
   ok: errors.length === 0,
@@ -117,6 +139,8 @@ const report = {
   sourceCount: sourceIds.size,
   baselineCandidateSourceCount: baselineSources.sources?.length ?? 0,
   activeWikidataQueryVersion: wikidataEpoch.queryVersion,
+  activeWikidataNormalizationVersion: wikidataEpoch.normalizationVersion,
+  baselineStatusStream: wikidataEpoch.statusStream,
   legacyWikidataEpochs: legacyEpochs.length,
   generatedAt: new Date().toISOString(),
 };

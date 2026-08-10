@@ -100,7 +100,7 @@ for (const document of documents) {
 for (const entity of entities) {
   const firstDocumentSha = entity.provenance?.sourceDocuments?.[0] ?? documents[0]?.sha256 ?? null;
   const sourceDocumentId = firstDocumentSha ? `${sourceId}:${firstDocumentSha}` : null;
-  statements.push(`INSERT INTO knowledge_entities (id, entity_type, canonical_name, canonical_slug, status, updated_at) VALUES (${sql(entity.id)}, ${sql(entity.entityType)}, ${sql(entity.canonicalName)}, ${sql(entity.canonicalSlug)}, ${sql(entity.status)}, CURRENT_TIMESTAMP) ON CONFLICT(id) DO UPDATE SET canonical_name=excluded.canonical_name, canonical_slug=excluded.canonical_slug, status=excluded.status, updated_at=CURRENT_TIMESTAMP`);
+  statements.push(`INSERT INTO knowledge_entities (id, entity_type, canonical_name, canonical_slug, status, updated_at) VALUES (${sql(entity.id)}, ${sql(entity.entityType)}, ${sql(entity.canonicalName)}, ${sql(entity.canonicalSlug)}, ${sql(entity.status)}, CURRENT_TIMESTAMP) ON CONFLICT(id) DO UPDATE SET entity_type=excluded.entity_type, canonical_name=excluded.canonical_name, canonical_slug=excluded.canonical_slug, status=excluded.status, updated_at=CURRENT_TIMESTAMP`);
 
   if (entity.qid) {
     const externalId = stableId('external-id', 'wikidata', entity.qid);
@@ -120,6 +120,16 @@ for (const entity of entities) {
       statements.push(`INSERT INTO knowledge_localized_names (id, entity_id, locale, language, script, name, normalized_name, name_type, quality_status, confidence, resolution_status, source_count, is_preferred, updated_at) VALUES (${sql(localizedId)}, ${sql(entity.id)}, ${sql(locale)}, ${sql(name.language)}, ${sql(script)}, ${sql(name.name)}, ${sql(name.normalizedName)}, 'source-label', 'source-only', 0.70, 'candidate', 1, 0, CURRENT_TIMESTAMP) ON CONFLICT(entity_id, locale, name, name_type) DO UPDATE SET script=excluded.script, normalized_name=excluded.normalized_name, confidence=MAX(knowledge_localized_names.confidence, excluded.confidence), updated_at=CURRENT_TIMESTAMP`);
       const evidenceId = stableId('name-evidence', localizedId, sourceId, sourceDocumentId ?? 'none');
       statements.push(`INSERT INTO knowledge_name_evidence (id, localized_name_id, source_document_id, source_id, evidence_type, source_authority_score, independence_group, supports, observed_at) VALUES (${sql(evidenceId)}, ${sql(localizedId)}, ${sql(sourceDocumentId)}, ${sql(sourceId)}, 'source-label', ${sql(authority.authorityScore)}, ${sql(independenceGroup)}, 1, ${sql(observedAt)}) ON CONFLICT(id) DO UPDATE SET source_authority_score=excluded.source_authority_score, independence_group=excluded.independence_group, observed_at=excluded.observed_at`);
+    }
+  }
+
+  for (const recognition of entity.recognition?.sourceStatusCandidates ?? []) {
+    if (!recognition?.qid) continue;
+    const assertionId = stableId('assertion', entity.id, 'recognition-status-candidate', recognition.qid, sourceId);
+    statements.push(`INSERT INTO knowledge_assertions (id, subject_entity_id, predicate, object_value, object_type, confidence, resolution_status) VALUES (${sql(assertionId)}, ${sql(entity.id)}, 'recognition-status-candidate', ${sql(recognition.qid)}, 'wikidata-entity-id', 0.45, 'source_candidate') ON CONFLICT(id) DO UPDATE SET object_value=excluded.object_value, confidence=excluded.confidence, resolution_status=excluded.resolution_status`);
+    if (sourceDocumentId) {
+      const evidenceId = stableId('evidence', assertionId, sourceDocumentId);
+      statements.push(`INSERT INTO knowledge_evidence (id, assertion_id, source_document_id, source_authority_score, evidence_locator, extracted_text_hash, supports, observed_at) VALUES (${sql(evidenceId)}, ${sql(assertionId)}, ${sql(sourceDocumentId)}, ${sql(authority.authorityScore)}, ${sql(`normalized:${entity.qid}:recognition-status:${recognition.qid}`)}, NULL, 1, ${sql(observedAt)}) ON CONFLICT(id) DO UPDATE SET source_authority_score=excluded.source_authority_score, observed_at=excluded.observed_at`);
     }
   }
 

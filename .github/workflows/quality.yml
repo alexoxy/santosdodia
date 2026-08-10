@@ -82,6 +82,9 @@ jobs:
       - name: Test Wikidata staging normalization
         run: npm run osint:normalize-test
 
+      - name: Test provisional knowledge D1 batch semantics
+        run: npm run db:knowledge-batch-test
+
       - name: Audit curated data quality
         run: npm run data:audit
 

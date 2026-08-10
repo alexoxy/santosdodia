@@ -11,9 +11,9 @@ try {
   const firstOutput = join(root, 'first');
   const secondOutput = join(root, 'second');
   const bindings = [
-    binding('Q1', { label: ['pt', 'Santo Um'], birth: literalDate('1900-01-01'), image: 'https://commons.example/a.jpg' }),
-    binding('Q1', { label: ['pt', 'Santo Um'], birth: literalDate('1901-01-01'), image: 'https://commons.example/b.jpg' }),
-    binding('Q2', { label: ['en', 'Saint Two'], birth: { type: 'uri', value: 'http://www.wikidata.org/.well-known/genid/uncertain' } }),
+    binding('Q1', { label: ['pt', 'Santo Um'], recognition: ['Q123110154', 'pt', 'santo canonizado'], birth: literalDate('1900-01-01'), image: 'https://commons.example/a.jpg' }),
+    binding('Q1', { label: ['pt', 'Santo Um'], recognition: ['Q123110154', 'pt', 'santo canonizado'], birth: literalDate('1901-01-01'), image: 'https://commons.example/b.jpg' }),
+    binding('Q2', { label: ['en', 'Blessed Two'], recognition: ['Q2369287', 'en', 'blessed'], birth: { type: 'uri', value: 'http://www.wikidata.org/.well-known/genid/uncertain' } }),
     binding('Q3', { label: ['', 'Q3'], death: literalDate('2000-02-03') }),
   ];
   await writeFile(input, `${JSON.stringify({ head: { vars: [] }, results: { bindings } })}\n`, 'utf8');
@@ -30,21 +30,32 @@ try {
   assert.equal(first.qualityReport.metrics.duplicatedQids, 1);
   assert.equal(first.qualityReport.metrics.dateConflicts.birth, 1);
   assert.equal(first.qualityReport.metrics.invalidDateNodes.birth, 1);
+  assert.equal(first.qualityReport.metrics.entitiesMissingRecognitionStatus, 1);
+  assert.equal(first.qualityReport.metrics.recognitionStatusCounts.Q123110154, 1);
+  assert.equal(first.qualityReport.metrics.recognitionStatusCounts.Q2369287, 1);
+  assert.equal(first.qualityReport.sourceFieldCoverage.recognitionStatuses, 'acquired_or_legacy_missing');
   assert.equal(first.qualityReport.sourceFieldCoverage.birthPlaces, 'not_acquired');
   assert.equal(first.reviewQueue.length, 3);
 
   const q1 = first.entities.find((entity) => entity.qid === 'Q1');
   assert.equal(q1.status, 'needs_review');
+  assert.equal(q1.entityType, 'historical-person');
+  assert.equal(q1.recognition.churchConfirmed, false);
+  assert.deepEqual(q1.recognition.sourceStatusCandidates.map((item) => item.qid), ['Q123110154']);
   assert.equal(q1.dates.birth.canonical, null);
   assert.deepEqual(q1.media.images, ['https://commons.example/a.jpg', 'https://commons.example/b.jpg']);
 
   const q2 = first.entities.find((entity) => entity.qid === 'Q2');
   assert.equal(q2.status, 'needs_review');
+  assert.equal(q2.entityType, 'historical-person');
+  assert.deepEqual(q2.recognition.sourceStatusCandidates.map((item) => item.qid), ['Q2369287']);
   assert.equal(q2.dates.birth.invalidNodes.length, 1);
 
   const q3 = first.entities.find((entity) => entity.qid === 'Q3');
   assert.equal(q3.canonicalName, 'Q3');
   assert.ok(q3.quality.warnings.includes('canonical_name_falls_back_to_qid'));
+  assert.ok(q3.quality.warnings.includes('recognition_status_missing_or_legacy_raw'));
+  assert.equal(q3.entityType, 'historical-person');
 
   for (const filename of ['entities.jsonl', 'conflicts.jsonl', 'review-queue.csv', 'quality-report.json', 'staging-manifest.json']) {
     const firstBytes = await readFile(join(firstOutput, filename));
@@ -63,6 +74,10 @@ function binding(qid, options = {}) {
   };
   if (options.label) result.itemLabel = { type: 'literal', 'xml:lang': options.label[0], value: options.label[1] };
   if (options.description) result.itemDescription = { type: 'literal', 'xml:lang': options.description[0], value: options.description[1] };
+  if (options.recognition) {
+    result.recognitionStatus = { type: 'uri', value: `http://www.wikidata.org/entity/${options.recognition[0]}` };
+    result.recognitionStatusLabel = { type: 'literal', 'xml:lang': options.recognition[1], value: options.recognition[2] };
+  }
   if (options.birth) result.birth = options.birth;
   if (options.death) result.death = options.death;
   if (options.image) result.image = { type: 'uri', value: options.image };

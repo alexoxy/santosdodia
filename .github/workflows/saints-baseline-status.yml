@@ -1,0 +1,83 @@
+name: Saints Baseline v1 run status
+run-name: Saints Baseline v1 status · ${{ github.event.workflow_run.id }} · ${{ github.event.workflow_run.conclusion }}
+
+on:
+  workflow_run:
+    workflows: ['Build Saints Baseline v1 candidates']
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-baseline-v1-status-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+jobs:
+  archive-status:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Build immutable run-status receipt
+        env:
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+          SOURCE_RUN_NUMBER: ${{ github.event.workflow_run.run_number }}
+          SOURCE_RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          SOURCE_STATUS: ${{ github.event.workflow_run.status }}
+          SOURCE_EVENT: ${{ github.event.workflow_run.event }}
+          SOURCE_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          SOURCE_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          SOURCE_CREATED_AT: ${{ github.event.workflow_run.created_at }}
+          SOURCE_UPDATED_AT: ${{ github.event.workflow_run.updated_at }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging/baseline-status
+          node <<'NODE'
+          const fs = require('node:fs');
+          const receipt = {
+            schemaVersion: 1,
+            baselineId: 'saints-v1',
+            sourceId: 'wikidata',
+            queryVersion: 'recognition-v1',
+            observedAt: new Date().toISOString(),
+            workflow: 'Build Saints Baseline v1 candidates',
+            run: {
+              id: process.env.SOURCE_RUN_ID,
+              number: Number(process.env.SOURCE_RUN_NUMBER),
+              attempt: Number(process.env.SOURCE_RUN_ATTEMPT || 1),
+              status: process.env.SOURCE_STATUS,
+              conclusion: process.env.SOURCE_CONCLUSION,
+              event: process.env.SOURCE_EVENT,
+              headSha: process.env.SOURCE_HEAD_SHA,
+              headBranch: process.env.SOURCE_HEAD_BRANCH || null,
+              createdAt: process.env.SOURCE_CREATED_AT,
+              updatedAt: process.env.SOURCE_UPDATED_AT,
+            },
+            productionPublication: false,
+          };
+          fs.writeFileSync('staging/baseline-status/status.json', `${JSON.stringify(receipt, null, 2)}\n`, 'utf8');
+          console.log(JSON.stringify(receipt, null, 2));
+          NODE
+
+      - name: Archive run status in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream baseline-status/saints/v1/wikidata/recognition-v1
+          --source staging/baseline-status/status.json
