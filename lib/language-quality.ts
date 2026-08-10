@@ -1,11 +1,12 @@
 import type { Locale } from './i18n';
 
-const CYRILLIC=/[\u0400-\u052f]/u;
-const GREEK=/[\u0370-\u03ff\u1f00-\u1fff]/u;
-const ARMENIAN=/[\u0530-\u058f]/u;
-const ARABIC_SYRIAC=/[\u0600-\u074f]/u;
-const ETHIOPIC=/[\u1200-\u137f\u2c80-\u2cff]/u;
-const LATIN=/[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]/u;
+const CYRILLIC=/\p{Script=Cyrillic}/u;
+const GREEK=/\p{Script=Greek}/u;
+const ARMENIAN=/\p{Script=Armenian}/u;
+const ARABIC=/\p{Script=Arabic}/u;
+const SYRIAC=/\p{Script=Syriac}/u;
+const ETHIOPIC=/\p{Script=Ethiopic}/u;
+const LATIN=/\p{Script=Latin}/u;
 const LETTER=/\p{L}/u;
 
 const FOREIGN_MARKERS:Partial<Record<Locale,RegExp[]>>={
@@ -28,9 +29,13 @@ export function validateNameLanguage(value:string,locale:Locale):LanguageQuality
  if(!text||!LETTER.test(text))reasons.push('empty-or-nonlexical');
  if(/[�]/u.test(text))reasons.push('replacement-character');
  if(locale==='ru'){
-  if(GREEK.test(text)||ARMENIAN.test(text)||ARABIC_SYRIAC.test(text)||ETHIOPIC.test(text))reasons.push('foreign-script');
+  if(!CYRILLIC.test(text))reasons.push('missing-cyrillic-script');
+  if(GREEK.test(text)||ARMENIAN.test(text)||ARABIC.test(text)||SYRIAC.test(text)||ETHIOPIC.test(text))reasons.push('foreign-script');
   if(LATIN.test(text)&&!CYRILLIC.test(text))reasons.push('latin-only-in-russian');
- }else if(CYRILLIC.test(text)||GREEK.test(text)||ARMENIAN.test(text)||ARABIC_SYRIAC.test(text)||ETHIOPIC.test(text))reasons.push('foreign-script');
+ }else{
+  if(!LATIN.test(text))reasons.push('missing-latin-script');
+  if(CYRILLIC.test(text)||GREEK.test(text)||ARMENIAN.test(text)||ARABIC.test(text)||SYRIAC.test(text)||ETHIOPIC.test(text))reasons.push('foreign-script');
+ }
  for(const pattern of FOREIGN_MARKERS[locale]??[])if(pattern.test(text)){reasons.push('foreign-liturgical-vocabulary');break}
  return{ok:reasons.length===0,reasons};
 }

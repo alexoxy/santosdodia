@@ -7,6 +7,7 @@ import {
 
 const databaseId = '123e4567-e89b-42d3-a456-426614174000';
 const bookmark = '00000001-00000002-00004e2f-testbookmark';
+const restoredBookmark = '00000001-00000003-00004e30-restored';
 const statements = ['INSERT INTO example (id) VALUES (1);', 'UPDATE example SET id = 1 WHERE id = 1;'];
 const batchPackage = {
   schemaVersion: 1,
@@ -40,8 +41,10 @@ const successFetch = async (url, options = {}) => {
   if (url.endsWith('/time_travel/bookmark')) return response({ success: true, result: { bookmark } });
   if (url.endsWith('/query')) {
     const body = JSON.parse(options.body);
-    if (!Array.isArray(body.batch) || body.batch.length !== statements.length) throw new Error('Batch payload was malformed.');
-    return response({ success: true, result: statements.map(() => ({ success: true, results: [] })) });
+    if (typeof body.sql !== 'string') throw new Error('Multi-statement SQL payload was malformed.');
+    if (!body.sql.includes('INSERT INTO example') || !body.sql.includes('UPDATE example')) throw new Error('Multi-statement SQL omitted a batch statement.');
+    if ('batch' in body) throw new Error('Deprecated custom batch payload was used.');
+    return response({ success: true, result: [{ success: true, results: [] }, { success: true, results: [] }] });
   }
   throw new Error(`Unexpected success URL ${url}`);
 };
@@ -56,7 +59,7 @@ const failureFetch = async (url, options = {}) => {
   if (url.endsWith('/time_travel/bookmark')) return response({ success: true, result: { bookmark } });
   if (url.endsWith('/query')) return response({ success: false, errors: [{ message: 'simulated batch failure' }] }, 500);
   if (url.includes('/time_travel/restore?bookmark=')) {
-    return response({ success: true, result: { message: 'Database restored successfully', previous_bookmark: bookmark } });
+    return response({ success: true, result: { message: 'Database restored successfully', previous_bookmark: bookmark, bookmark: restoredBookmark } });
   }
   throw new Error(`Unexpected failure URL ${url}`);
 };

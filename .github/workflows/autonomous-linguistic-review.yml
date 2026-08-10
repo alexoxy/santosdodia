@@ -1,0 +1,102 @@
+name: Autonomous linguistic review
+
+on:
+  workflow_run:
+    workflows: ['Autonomous Dropbox normalization']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-language-editor-saints-wikidata
+  cancel-in-progress: false
+
+jobs:
+  review-normalized-partition:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Run repository linguistic gates
+        run: |
+          npm run linguistic:date-test
+          npm run linguistic:audit
+          npm run translations:validate
+
+      - name: Pull latest verified normalized partition from Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: npm run dropbox:pull-stream -- --stream osint-normalized/saints/wikidata --destination staging/dropbox-intake/osint-normalized/saints/wikidata
+
+      - name: Validate and extract immutable normalized package
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive='staging/dropbox-intake/osint-normalized/saints/wikidata/package.tar.gz'
+          destination='staging/dropbox-intake/osint-normalized/saints/wikidata/extracted'
+          mkdir -p "$destination"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const archive = 'staging/dropbox-intake/osint-normalized/saints/wikidata/package.tar.gz';
+          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$archive" -C "$destination" --no-same-owner --no-same-permissions
+
+      - name: Review language without rewriting source text
+        shell: bash
+        run: |
+          set -euo pipefail
+          input='staging/dropbox-intake/osint-normalized/saints/wikidata/extracted/staging/osint-normalized/saints/wikidata'
+          output='staging/osint-reviewed/saints/wikidata'
+          npm run linguistic:review-package -- --input "$input" --output "$output"
+          cp staging/dropbox-intake/osint-normalized/saints/wikidata/consumer-receipt.json \
+            "$output/upstream-normalized-receipt.json"
+
+      - name: Verify reviewed partition remains non-publishable
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const base = 'staging/osint-reviewed/saints/wikidata';
+          const manifest = JSON.parse(fs.readFileSync(`${base}/staging-manifest.json`, 'utf8'));
+          const review = JSON.parse(fs.readFileSync(`${base}/linguistic-review.json`, 'utf8'));
+          const upstream = JSON.parse(fs.readFileSync(`${base}/upstream-normalized-receipt.json`, 'utf8'));
+          if (manifest.stage !== 'linguistically-reviewed' || manifest.publish !== false) throw new Error('Reviewed package changed publication boundary.');
+          if (review.criticalCount !== 0) throw new Error('Reviewed package contains critical linguistic issues.');
+          if (upstream.verified !== true) throw new Error('Language editor did not consume a verified normalized package.');
+          NODE
+
+      - name: Upload reviewed evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: autonomous-osint-reviewed-saints-wikidata-${{ github.run_id }}
+          path: staging/osint-reviewed/saints/wikidata/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Archive reviewed partition in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream osint-reviewed/saints/wikidata --source staging/osint-reviewed/saints/wikidata

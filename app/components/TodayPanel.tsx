@@ -6,6 +6,10 @@ import {
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
+import {
+  formatMonthYear,
+  formatWeekday,
+} from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
@@ -30,7 +34,7 @@ export default function TodayPanel() {
   }, [fallback]);
   useEffect(() => {
     const controller = new AbortController(),
-      params = new URLSearchParams({ date: dateISO, locale });
+      params = new URLSearchParams({ date: dateISO, locale, timezone: timeZone });
     if (church !== "all") params.set("tradition", church);
     if (country) params.set("country", country);
     setLoading(true);
@@ -50,24 +54,14 @@ export default function TodayPanel() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [dateISO, locale, church, country, fallback]);
-  const date = useMemo(() => new Date(`${dateISO}T12:00:00Z`), [dateISO]);
+  }, [dateISO, locale, timeZone, church, country, fallback]);
   const weekday = useMemo(
-    () =>
-      new Intl.DateTimeFormat(locale, {
-        weekday: "long",
-        timeZone: "UTC",
-      }).format(date),
-    [date, locale],
+    () => formatWeekday(dateISO, locale, "standalone"),
+    [dateISO, locale],
   );
   const monthYear = useMemo(
-    () =>
-      new Intl.DateTimeFormat(locale, {
-        month: "long",
-        year: "numeric",
-        timeZone: "UTC",
-      }).format(date),
-    [date, locale],
+    () => formatMonthYear(dateISO, locale, "standalone"),
+    [dateISO, locale],
   );
   return (
     <section className="today-panel">

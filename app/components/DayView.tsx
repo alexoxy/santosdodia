@@ -9,12 +9,16 @@ import {
 } from "../../data/observances";
 import { getObservanceById } from "../../data/discovery";
 import { validationStatusLabel } from "../../lib/claim-evidence";
+import { getFeatureCopy } from "../../lib/feature-copy";
+import {
+  formatFullCivilDate,
+  formatLocalizedDate,
+} from "../../lib/linguistic/date-format";
 import {
   displayCalendarSystem,
   displayObservanceName,
   displayPatronages,
 } from "../../lib/locale-display";
-import { getFeatureCopy } from "../../lib/feature-copy";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
@@ -66,12 +70,14 @@ export default function DayView({ dateISO }: { dateISO: string }) {
         </Link>
       </section>
     );
-  const date = new Date(`${dateISO}T00:00:00Z`),
-    label = new Intl.DateTimeFormat(locale, {
-      dateStyle: "full",
-      timeZone: "UTC",
-    }).format(date),
-    year = date.getUTCFullYear();
+  const label = formatFullCivilDate(dateISO, locale, "heading"),
+    monthShort = formatLocalizedDate(
+      dateISO,
+      locale,
+      { month: "short" },
+      "standalone",
+    ),
+    year = Number(dateISO.slice(0, 4));
   return (
     <div className="page-stack">
       <section className="page-hero day-hero">
@@ -81,13 +87,8 @@ export default function DayView({ dateISO }: { dateISO: string }) {
           <p>{copy.disclaimer}</p>
         </div>
         <div className="date-orb">
-          <strong>{date.getUTCDate()}</strong>
-          <span>
-            {new Intl.DateTimeFormat(locale, {
-              month: "short",
-              timeZone: "UTC",
-            }).format(date)}
-          </span>
+          <strong>{Number(dateISO.slice(8, 10))}</strong>
+          <span>{monthShort}</span>
         </div>
       </section>
       {loading ? (

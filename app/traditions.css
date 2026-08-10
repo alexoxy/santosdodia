@@ -38,12 +38,13 @@
 .church-picker.tradition-armenian_apostolic,.leader-card.tradition-armenian_apostolic{--church-colour:var(--armenian-apostolic)}
 .church-picker.tradition-ethiopian_orthodox,.leader-card.tradition-ethiopian_orthodox{--church-colour:var(--ethiopian-orthodox)}
 .church-picker.tradition-syriac_orthodox,.leader-card.tradition-syriac_orthodox{--church-colour:var(--syriac-orthodox)}
-.today-date-context{display:block;margin-top:2px;color:#6f7883;font-size:.84rem;font-weight:700;text-transform:capitalize}
+.today-date-context{display:block;margin-top:2px;color:#6f7883;font-size:.84rem;font-weight:700}
 .leader-directory{display:grid;gap:22px}
 .leader-filters{display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(3,minmax(150px,1fr));gap:12px}
 .leader-filters label{display:grid;gap:6px;color:#465464;font-size:.78rem;font-weight:800}
 .leader-filters input,.leader-filters select{width:100%;min-height:44px;border:1px solid #d8dee6;border-radius:12px;background:#fff;padding:9px 12px;color:#172638;font:inherit;font-weight:650}
-.leader-filters input:focus,.leader-filters select:focus{outline:3px solid rgba(36,92,138,.16);border-color:#245c8a}
+.leader-filters input:focus{outline:3px solid rgba(36,92,138,.16);border-color:#245c8a}
+.leader-filters select:focus{outline:3px solid rgba(36,92,138,.16);border-color:#245c8a}
 .leader-card{--church-colour:var(--all-churches);border-top:4px solid var(--church-colour)}
 .leader-church{display:inline-flex;align-items:center;gap:7px;color:var(--church-colour);font-size:.78rem;font-weight:800}
 .leader-church::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--church-colour)}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "strategy": "immutable-baseline-plus-incremental-events",
+  "principles": {
+    "historicalCorpusIsBaseline": true,
+    "baselineRecordsAreNotRewrittenWithoutEvidence": true,
+    "newRecognitionIsAnEventNotAFullRebuild": true,
+    "churchesUseDifferentRecognitionMechanisms": true,
+    "recognitionDoesNotImplyUniversalCalendarInclusion": true,
+    "calendarInclusionIsSeparateFromSanctityRecognition": true,
+    "beatificationAndCanonizationAreDistinctCatholicStates": true,
+    "orthodoxGlorificationIsNotMappedToCatholicCanonization": true,
+    "anglicanCalendarCommemorationIsNotCalledCanonization": true,
+    "allChangesRequireSourceSnapshotAndEffectiveDate": true
+  },
+  "baseline": {
+    "versioned": true,
+    "appendPreferred": true,
+    "correctionsRequireEvidence": true,
+    "periodicFullReconciliation": "annual",
+    "routineFullReprocessing": false
+  },
+  "recognitionEventTypes": [
+    "cause-opened",
+    "venerable-declared",
+    "beatified",
+    "canonized",
+    "equipollent-beatification",
+    "equipollent-canonization",
+    "glorified",
+    "sainthood-recognized",
+    "martyrdom-recognized",
+    "calendar-commemoration-added",
+    "calendar-commemoration-changed",
+    "calendar-commemoration-removed",
+    "feast-rank-changed",
+    "feast-date-changed",
+    "scope-changed"
+  ],
+  "churchPolicies": {
+    "roman-catholic": {
+      "recognitionAuthority": "holy-see",
+      "watch": ["dicastery-causes-saints", "holy-see-press-office", "papal-liturgical-calendar"],
+      "states": ["servant-of-god", "venerable", "blessed", "saint"],
+      "calendarInclusionSeparate": true
+    },
+    "eastern-orthodox": {
+      "recognitionAuthority": "holy-synod-of-relevant-autocephalous-church",
+      "watch": ["synodal-proclamations", "official-church-calendars"],
+      "states": ["candidate", "glorified"],
+      "calendarInclusionSeparate": true
+    },
+    "coptic-orthodox": {
+      "recognitionAuthority": "coptic-holy-synod",
+      "watch": ["recognition-of-saints-committee", "holy-synod-decrees", "official-coptic-calendar"],
+      "states": ["candidate", "sainthood-recognized"],
+      "calendarInclusionSeparate": true
+    },
+    "ethiopian-orthodox": {
+      "recognitionAuthority": "ethiopian-holy-synod",
+      "watch": ["holy-synod-statements", "official-calendar-sources"],
+      "states": ["candidate", "martyrdom-recognized", "sainthood-recognized"],
+      "calendarInclusionSeparate": true
+    },
+    "syriac-orthodox": {
+      "recognitionAuthority": "syriac-holy-synod",
+      "watch": ["patriarchal-and-synodal-statements", "official-calendar-sources"],
+      "states": ["candidate", "recognized"],
+      "calendarInclusionSeparate": true,
+      "processConfidence": "partial-needs-more-official-source-mapping"
+    },
+    "armenian-apostolic": {
+      "recognitionAuthority": "mother-see-and-relevant-synodal-authority",
+      "watch": ["mother-see-news", "official-liturgical-calendar"],
+      "states": ["candidate", "recognized"],
+      "calendarInclusionSeparate": true,
+      "processConfidence": "partial-needs-more-official-source-mapping"
+    },
+    "anglican": {
+      "recognitionAuthority": "relevant-province",
+      "watch": ["general-synod-or-provincial-authority", "official-liturgical-calendar"],
+      "states": ["commemorated", "festival", "principal-feast"],
+      "calendarInclusionIsPrimaryEvent": true,
+      "doNotUseTermCanonization": true
+    }
+  },
+  "agentCadence": {
+    "recognitionWatcher": "daily-source-diff",
+    "calendarWatcher": "weekly-plus-event-triggered",
+    "baselineReconciler": "annual",
+    "correctionReconciler": "on-evidence"
+  },
+  "automaticHandling": {
+    "newOfficialRecognition": "create-candidate-event-and-person-link",
+    "newOfficialCalendarEntry": "create-observance-candidate",
+    "conflictingIdentity": "hold-partition",
+    "weakerSourceContradictsBaseline": "retain-last-known-good",
+    "officialCorrection": "versioned-correction"
+  }
+}

@@ -37,6 +37,24 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Test autonomous data-plane policy
+        run: npm run autonomy:test
+
+      - name: Audit partitioned agent lanes
+        run: npm run autonomy:lanes-audit
+
+      - name: Test temporal core and calendar bridge
+        run: npm run temporal:test
+
+      - name: Test multilingual date formatting
+        run: npm run linguistic:date-test
+
+      - name: Audit deterministic linguistic quality
+        run: npm run linguistic:audit
+
+      - name: Validate translation quality
+        run: npm run translations:validate
+
       - name: Audit automation registry
         run: npm run automation:audit
 

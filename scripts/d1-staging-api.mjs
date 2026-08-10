@@ -22,15 +22,15 @@ export function validateBatchPackage(value) {
     throw new Error('The D1 batch contains no statements.');
   }
   if (value.statementCount !== value.statements.length) throw new Error('D1 statement count mismatch.');
-  const statements = value.statements.map((statement, index) => {
+  const hashedStatements = value.statements.map((statement, index) => {
     if (typeof statement !== 'string' || !statement.trim()) throw new Error(`Statement ${index + 1} is empty.`);
     if (FORBIDDEN_SQL.test(statement)) throw new Error(`Statement ${index + 1} contains transaction control.`);
     if (Buffer.byteLength(statement, 'utf8') > 100_000) throw new Error(`Statement ${index + 1} exceeds 100 KB.`);
     return statement.trim();
   });
-  const expectedHash = sha256(JSON.stringify(statements));
+  const expectedHash = sha256(JSON.stringify(hashedStatements));
   if (value.statementsSha256 !== expectedHash) throw new Error('D1 statements SHA-256 mismatch.');
-  return statements;
+  return hashedStatements.map(statement => statement.replace(/;+$/u, ''));
 }
 
 async function apiRequest({ accountId, token, path, method = 'GET', body, fetchImpl = fetch }) {
@@ -85,17 +85,36 @@ export async function queryDatabase({ accountId, token, databaseId, sql, params 
   });
 }
 
-export async function applyBatchWithRollback({ accountId, token, databaseId, batchPackage, fetchImpl = fetch }) {
+export async function getDatabaseBookmark({ accountId, token, databaseId, fetchImpl = fetch }) {
   validateDatabaseId(databaseId);
-  const statements = validateBatchPackage(batchPackage);
-  const bookmarkResult = await apiRequest({
+  const result = await apiRequest({
     accountId,
     token,
     path: `/d1/database/${databaseId}/time_travel/bookmark`,
     fetchImpl
   });
-  const bookmark = bookmarkResult?.bookmark;
-  if (!bookmark) throw new Error('Cloudflare did not return a pre-promotion bookmark.');
+  if (!result?.bookmark) throw new Error('Cloudflare did not return a D1 bookmark.');
+  return result.bookmark;
+}
+
+export async function restoreDatabaseBookmark({ accountId, token, databaseId, bookmark, fetchImpl = fetch }) {
+  validateDatabaseId(databaseId);
+  if (!bookmark || typeof bookmark !== 'string') throw new Error('A D1 bookmark is required for restore.');
+  const result = await apiRequest({
+    accountId,
+    token,
+    path: `/d1/database/${databaseId}/time_travel/restore?bookmark=${encodeURIComponent(bookmark)}`,
+    method: 'POST',
+    fetchImpl
+  });
+  if (!result?.bookmark) throw new Error('Cloudflare restore did not return a post-restore bookmark.');
+  return result;
+}
+
+export async function applyBatchWithRollback({ accountId, token, databaseId, batchPackage, fetchImpl = fetch }) {
+  validateDatabaseId(databaseId);
+  const statements = validateBatchPackage(batchPackage);
+  const bookmark = await getDatabaseBookmark({ accountId, token, databaseId, fetchImpl });
 
   try {
     const result = await apiRequest({
@@ -103,24 +122,18 @@ export async function applyBatchWithRollback({ accountId, token, databaseId, bat
       token,
       path: `/d1/database/${databaseId}/query`,
       method: 'POST',
-      body: { batch: statements.map(sql => ({ sql, params: [] })) },
+      body: { sql: `${statements.join(';\n')};` },
       fetchImpl
     });
     const results = Array.isArray(result) ? result : [result];
-    if (results.length !== statements.length || results.some(entry => entry?.success !== true)) {
-      throw new Error('Cloudflare returned an incomplete or failed D1 batch result.');
+    if (results.length === 0 || results.some(entry => entry?.success !== true)) {
+      throw new Error('Cloudflare returned a failed D1 multi-statement result.');
     }
     return { bookmarkBefore: bookmark, statementCount: statements.length, results };
   } catch (error) {
     let restore;
     try {
-      restore = await apiRequest({
-        accountId,
-        token,
-        path: `/d1/database/${databaseId}/time_travel/restore?bookmark=${encodeURIComponent(bookmark)}`,
-        method: 'POST',
-        fetchImpl
-      });
+      restore = await restoreDatabaseBookmark({ accountId, token, databaseId, bookmark, fetchImpl });
     } catch (restoreError) {
       throw new Error(`D1 batch failed and automatic restore also failed: ${error.message}; restore: ${restoreError.message}`);
     }

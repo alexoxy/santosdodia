@@ -1,0 +1,65 @@
+name: Autonomous OSINT acquisition
+
+on:
+  schedule:
+    - cron: '47 2 * * 3'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-osint-acquisition-saints-wikidata
+  cancel-in-progress: false
+
+jobs:
+  acquire-and-archive:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate autonomous acquisition policy
+        run: |
+          npm run autonomy:test
+          npm run autonomy:lanes-audit
+          npm run osint:registry-audit
+          npm run cloudflare:guardrails-audit
+          npm run repo:audit
+
+      - name: Build autonomous execution plan
+        run: npm run autonomy:plan -- --output staging/autonomy/plan.json
+
+      - name: Acquire approved Wikidata source into immutable raw staging
+        env:
+          OSINT_WIKIDATA_PAGE_SIZE: '500'
+          OSINT_WIKIDATA_MAX_PAGES: '1'
+        run: npm run osint:dump -- data/osint/manifests/p0-initial-dump.json data/osint/runs
+
+      - name: Upload bounded acquisition evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: autonomous-osint-raw-saints-wikidata-${{ github.run_id }}
+          path: |
+            data/osint/runs/wikidata/
+            staging/autonomy/plan.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Archive immutable raw partition in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream osint-raw/saints/wikidata --source data/osint/runs/wikidata --source staging/autonomy/plan.json
