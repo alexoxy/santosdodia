@@ -6,6 +6,7 @@ import { join } from 'node:path';
 const [sourceId = 'wikidata', outputRoot = 'data/osint/runs'] = process.argv.slice(2);
 const endpoint = 'https://query.wikidata.org/sparql';
 const pageSize = boundedInteger(process.env.OSINT_WIKIDATA_PAGE_SIZE, 500, 50, 1000);
+const startPage = boundedInteger(process.env.OSINT_WIKIDATA_START_PAGE, 0, 0, 1000000);
 const maxPages = boundedInteger(process.env.OSINT_WIKIDATA_MAX_PAGES, 1, 1, 200);
 const delayMs = boundedInteger(process.env.OSINT_WIKIDATA_DELAY_MS, 10000, 1000, 60000);
 const startedAt = new Date().toISOString();
@@ -14,7 +15,7 @@ const runDir = join(outputRoot, sourceId, runId);
 await mkdir(runDir, { recursive: true });
 
 const summary = {
-  adapterVersion: '1.0',
+  adapterVersion: '1.1',
   runId,
   sourceId,
   endpoint,
@@ -24,14 +25,18 @@ const summary = {
   startedAt,
   finishedAt: startedAt,
   pageSize,
+  startPage,
   maxPages,
   pages: [],
   totalBindings: 0,
+  exhausted: false,
+  nextPage: startPage,
   status: 'running',
 };
 
 try {
-  for (let page = 0; page < maxPages; page += 1) {
+  for (let localPage = 0; localPage < maxPages; localPage += 1) {
+    const page = startPage + localPage;
     const offset = page * pageSize;
     const query = buildQuery(pageSize, offset);
     const pageStartedAt = new Date().toISOString();
@@ -40,7 +45,7 @@ try {
       method: 'POST',
       redirect: 'follow',
       headers: {
-        'user-agent': 'SantosDiaOSINT/1.0 (+https://www.santosdodia.com/about)',
+        'user-agent': 'SantosDiaOSINT/1.1 (+https://www.santosdodia.com/about)',
         accept: 'application/sparql-results+json, application/json;q=0.9',
         'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
@@ -50,11 +55,11 @@ try {
 
     const bytes = Buffer.from(await response.arrayBuffer());
     const sha256 = createHash('sha256').update(bytes).digest('hex');
-    const archivePath = join(runDir, `${String(page).padStart(4, '0')}-${sha256}.json`);
+    const archivePath = join(runDir, `${String(page).padStart(6, '0')}-${sha256}.json`);
     await writeFile(archivePath, bytes, { flag: 'wx' });
 
     const receipt = {
-      receiptVersion: '1.0',
+      receiptVersion: '1.1',
       runId: `${runId}-page-${page}`,
       sourceId,
       requestedUrl: endpoint,
@@ -91,13 +96,17 @@ try {
     }
 
     receipt.bindingCount = bindingCount;
-    await writeFile(join(runDir, `${String(page).padStart(4, '0')}-receipt.json`), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
+    await writeFile(join(runDir, `${String(page).padStart(6, '0')}-receipt.json`), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
     summary.pages.push({ page, offset, bindingCount, sha256, archivePath, httpStatus: response.status });
     summary.totalBindings += bindingCount;
+    summary.nextPage = page + 1;
 
     if (!response.ok) throw new Error(`Wikidata returned HTTP ${response.status}`);
-    if (bindingCount < pageSize) break;
-    if (page + 1 < maxPages) await sleep(delayMs);
+    if (bindingCount < pageSize) {
+      summary.exhausted = true;
+      break;
+    }
+    if (localPage + 1 < maxPages) await sleep(delayMs);
   }
 
   summary.status = 'fetched';
