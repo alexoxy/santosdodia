@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "canonicalSubject": {
+    "entityType": "person",
+    "stableKey": "mary-mother-of-jesus",
+    "rule": "There is one canonical person entity for Mary; titles, icons, apparitions, shrines and observances never create duplicate person entities."
+  },
+  "principles": {
+    "maryIsOnePerson": true,
+    "titleIsNotPerson": true,
+    "apparitionIsNotPerson": true,
+    "iconIsNotPerson": true,
+    "shrineIsNotPerson": true,
+    "observanceIsNotPerson": true,
+    "sameTitleAcrossLanguagesUsesOneExpressionId": true,
+    "differentDevotionalConceptsMustNotBeMergedBySimilarName": true,
+    "churchSpecificTheologyAndRecognitionMustBePreserved": true,
+    "apparitionRecognitionIsChurchAndAuthoritySpecific": true,
+    "iconCommemorationMustNotBeRecastAsApparition": true,
+    "doctrinalTitleMustNotBeRecastAsApparition": true
+  },
+  "expressionTypes": [
+    "doctrinal-title",
+    "liturgical-title",
+    "devotional-title",
+    "apparition-associated-title",
+    "icon-title",
+    "geographic-invocation",
+    "historical-invocation"
+  ],
+  "eventTypes": [
+    "biblical-event",
+    "traditional-event",
+    "alleged-apparition",
+    "recognized-apparition",
+    "icon-appearance",
+    "icon-translation",
+    "icon-miracle-tradition",
+    "dedication",
+    "calendar-institution"
+  ],
+  "relationTypes": [
+    "refers-to-mary",
+    "associated-with-event",
+    "depicts-mary",
+    "venerated-at-shrine",
+    "observed-by-church",
+    "has-observance",
+    "has-localized-name",
+    "derived-from-title",
+    "associated-with-place"
+  ],
+  "examples": {
+    "our-lady-of-fatima": {
+      "subject": "mary-mother-of-jesus",
+      "expressionType": "apparition-associated-title",
+      "mayLinkTo": ["apparition-event", "fatima-shrine", "13-may-observance"],
+      "mustNotCreateNewPerson": true
+    },
+    "mother-of-god": {
+      "subject": "mary-mother-of-jesus",
+      "expressionType": "doctrinal-title",
+      "mustNotBeClassifiedAsApparition": true
+    },
+    "orthodox-icon-title": {
+      "subject": "mary-mother-of-jesus",
+      "expressionType": "icon-title",
+      "mayHaveOwnCommemoration": true,
+      "mustNotBeClassifiedAsApparition": true
+    }
+  },
+  "localizedDisplay": {
+    "resolveByExpressionId": true,
+    "neverTranslateByStringReplacement": true,
+    "preferEstablishedLocalExonym": true,
+    "preserveOriginalTitleAsAlias": true,
+    "withholdUnvalidatedLocalizedTitle": true
+  },
+  "sourceValidation": {
+    "doctrinalTitles": "official-church-teaching-or-liturgical-source",
+    "liturgicalTitles": "official-calendar-or-liturgical-book",
+    "apparitions": "relevant-church-authority-plus-primary-documentation-where-available",
+    "icons": "official-church-calendar-or-recognized-liturgical-source",
+    "shrines": "official-shrine-or-church-jurisdiction",
+    "popularDevotions": "must-not-be-promoted-to-official-status-without-authority"
+  }
+}
