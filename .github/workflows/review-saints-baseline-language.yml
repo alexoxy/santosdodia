@@ -47,8 +47,8 @@ jobs:
       - name: Validate language-review contract
         run: |
           npm run saints:baseline-audit
-          npm run saints:baseline-language-test
-          npm run saints:baseline-language-audit
+          node scripts/baseline/test-wikidata-baseline-language-review.mjs
+          node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
           npm run linguistic:audit
           npm run linguistic:date-test
           npm run translations:validate
