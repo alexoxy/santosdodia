@@ -43,6 +43,9 @@ jobs:
       - name: Audit partitioned agent lanes
         run: npm run autonomy:lanes-audit
 
+      - name: Audit Saints Baseline v1 freeze and source plan
+        run: npm run saints:baseline-audit
+
       - name: Test temporal core and calendar bridge
         run: npm run temporal:test
 
