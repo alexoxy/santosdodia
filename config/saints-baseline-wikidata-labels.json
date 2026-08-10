@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "saints-v1",
+  "sourceId": "wikidata",
+  "acquisitionVersion": "labels-v1",
+  "adapterVersion": "1.0",
+  "identityResolutionVersion": "1.0",
+  "identityRootSha256": "d52edec492007436e23be7b1a42ce0aa84053a01d1a4d0a152ae99f0ac5527e",
+  "identityStream": "baseline/saints/v1/identity/wikidata/recognition-v1",
+  "progressStream": "baseline-progress/saints/v1/wikidata-labels/labels-v1",
+  "rawStreamPrefix": "baseline/saints/v1/raw/wikidata-labels/labels-v1",
+  "apiEndpoint": "https://www.wikidata.org/w/api.php",
+  "entityLimitPerRun": 1000,
+  "apiBatchSize": 50,
+  "requestDelayMs": 12000,
+  "requestTimeoutMs": 60000,
+  "maxAttempts": 4,
+  "retryBaseMs": 5000,
+  "retryMaximumMs": 60000,
+  "locales": [
+    {"siteLocale":"en","wikidataLanguage":"en","expectedScript":"Latn"},
+    {"siteLocale":"es","wikidataLanguage":"es","expectedScript":"Latn"},
+    {"siteLocale":"pt","wikidataLanguage":"pt","expectedScript":"Latn"},
+    {"siteLocale":"fr","wikidataLanguage":"fr","expectedScript":"Latn"},
+    {"siteLocale":"fil","wikidataLanguage":"tl","expectedScript":"Latn"},
+    {"siteLocale":"ru","wikidataLanguage":"ru","expectedScript":"Cyrl"},
+    {"siteLocale":"sw","wikidataLanguage":"sw","expectedScript":"Latn"},
+    {"siteLocale":"de","wikidataLanguage":"de","expectedScript":"Latn"},
+    {"siteLocale":"it","wikidataLanguage":"it","expectedScript":"Latn"},
+    {"siteLocale":"pl","wikidataLanguage":"pl","expectedScript":"Latn"}
+  ],
+  "policy": {
+    "inputMustMatchPinnedIdentityRoot": true,
+    "resumeOnlySameIdentityRootAndVersion": true,
+    "labelsAndAliasesAreSourceEvidenceOnly": true,
+    "languageFallbacksForbidden": true,
+    "automaticCanonicalNameSelection": false,
+    "automaticPublication": false,
+    "dropboxRawBeforeProgressAdvance": true,
+    "maxRequestsPerMinute": 5,
+    "productionPublication": false
+  }
+}
