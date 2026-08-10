@@ -122,13 +122,13 @@ jobs:
           name: autonomous-d1-input-saints-wikidata-${{ github.run_id }}
           path: staging/d1-import
 
-      - name: Guard daily remote-operation budget
+      - name: Guard shared daily remote-operation budget
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p reports
-          node scripts/cloudflare-free-guardrails.mjs action-budget \
-            --workflow autonomous-d1-importer.yml \
+          node scripts/autonomy/check-d1-daily-budget.mjs \
+            --workflows autonomous-d1-importer.yml,import-saints-baseline-d1.yml \
             --repository "${{ github.repository }}" \
             --current-run-id "${{ github.run_id }}" \
             --token-env GITHUB_TOKEN \

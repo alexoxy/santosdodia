@@ -13,6 +13,16 @@
     "historicalSaintCorpusUsesVersionedBaseline": true,
     "routineUpdatesUseIncrementalRecognitionEvents": true
   },
+  "financialGuardrails": {
+    "authorizedSpendEur": 0,
+    "paidUsageAuthorized": false,
+    "paidOverageAuthorized": false,
+    "automaticPlanUpgradeAuthorized": false,
+    "automaticPurchaseAuthorized": false,
+    "onFreeQuotaExhausted": "wait-for-reset",
+    "onBillingUncertainty": "fail-closed",
+    "scope": "all-platforms"
+  },
   "agents": [
     {
       "id": "scout",

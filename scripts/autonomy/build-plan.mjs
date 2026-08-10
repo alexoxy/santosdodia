@@ -20,6 +20,18 @@ function authorityFor(sourceId, sourceRegistry) {
   } : { authorityClass: null, authorityScore: null, priority: null };
 }
 
+export function assertFinancialGuardrails(autonomyPolicy) {
+  const guardrails = autonomyPolicy?.financialGuardrails ?? {};
+  if (guardrails.authorizedSpendEur !== 0) throw new Error('Autonomous authorized spend must remain exactly 0 EUR.');
+  for (const key of ['paidUsageAuthorized', 'paidOverageAuthorized', 'automaticPlanUpgradeAuthorized', 'automaticPurchaseAuthorized']) {
+    if (guardrails[key] !== false) throw new Error(`${key} must remain false.`);
+  }
+  if (guardrails.onFreeQuotaExhausted !== 'wait-for-reset') throw new Error('Free quota exhaustion must wait for reset.');
+  if (guardrails.onBillingUncertainty !== 'fail-closed') throw new Error('Billing uncertainty must fail closed.');
+  if (guardrails.scope !== 'all-platforms') throw new Error('Financial guardrails must apply to all platforms.');
+  return guardrails;
+}
+
 export function buildAutonomyPlan({
   autonomyPolicy = readJson('config/autonomy-policy.json'),
   manifest = readJson('data/osint/manifests/p0-initial-dump.json'),
@@ -27,6 +39,7 @@ export function buildAutonomyPlan({
   sourceRegistry = readJson('data/source-registry/seed.json'),
 } = {}) {
   if (autonomyPolicy.schemaVersion !== 1) throw new Error('Unsupported autonomy policy schema.');
+  const financialGuardrails = assertFinancialGuardrails(autonomyPolicy);
   if (autonomyPolicy.phase === 'shadow' && autonomyPolicy.promotion?.automaticProductionWrites !== false) {
     throw new Error('Shadow phase cannot enable automatic production writes.');
   }
@@ -76,6 +89,7 @@ export function buildAutonomyPlan({
     generatedAt: new Date().toISOString(),
     targetMode: autonomyPolicy.targetMode,
     phase: autonomyPolicy.phase,
+    financialGuardrails,
     agents: autonomyPolicy.agents,
     acquisition: {
       selected,
