@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 
 const config = JSON.parse(fs.readFileSync('config/saints-baseline-wikidata.json', 'utf8'));
@@ -8,6 +9,7 @@ const resolution = JSON.parse(fs.readFileSync('config/entity-resolution-policy.j
 const workflow = fs.readFileSync('.github/workflows/build-saints-baseline-identity-ledger.yml', 'utf8');
 const builder = fs.readFileSync('scripts/baseline/build-global-identity-ledger.mjs', 'utf8');
 const lister = fs.readFileSync('scripts/dropbox/list-archive-batches.mjs', 'utf8');
+const tarValidator = fs.readFileSync('scripts/archive/validate-tar-entries.mjs', 'utf8');
 
 assert.equal(config.identityResolutionVersion, '1.0');
 assert.equal(config.identityLedgerStream, 'baseline/saints/v1/identity/wikidata/recognition-v1');
@@ -35,6 +37,8 @@ assert.match(workflow, /actions\/upload-artifact@v7/u);
 assert.doesNotMatch(workflow, /CLOUDFLARE_API_TOKEN|CLOUDFLARE_ACCOUNT_ID|wrangler d1|knowledge-import/u);
 assert.match(workflow, /manifest\.publish !== false/u);
 assert.match(workflow, /report\.nameOnlyMergeCount !== 0/u);
+assert.match(workflow, /scripts\/archive\/validate-tar-entries\.mjs/u);
+assert.doesNotMatch(workflow, /node - "\$pull\/package\.tar\.gz" <<'NODE'/u);
 
 assert.match(builder, /entity\.id !== `wikidata:\$\{entity\.qid\}`/u);
 assert.match(builder, /signal: 'exactExternalIdentifier'/u);
@@ -45,5 +49,8 @@ assert.match(builder, /publish: false/u);
 assert.match(builder, /rootSha256/u);
 assert.match(lister, /\/2\/files\/list_folder/u);
 assert.match(lister, /BATCH_PATTERN/u);
+assert.match(tarValidator, /Unsafe absolute archive entry/u);
+assert.match(tarValidator, /Unsafe parent traversal archive entry/u);
+execFileSync(process.execPath, ['scripts/archive/test-validate-tar-entries.mjs'], { stdio: 'inherit' });
 
 console.log('Global candidate identity ledger audit passed.');
