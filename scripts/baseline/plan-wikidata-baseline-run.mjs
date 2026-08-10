@@ -26,16 +26,23 @@ function readProgressFromArchive(archive) {
 
 const intake = path.resolve(argument('--intake', 'staging/baseline-progress-intake'));
 const pagesPerRun = Number.parseInt(argument('--pages-per-run', '10'), 10);
+const queryVersion = argument('--query-version', 'recognition-v1');
+const progressStream = argument('--progress-stream', `baseline-progress/saints/v1/wikidata/${queryVersion}`);
 if (!Number.isInteger(pagesPerRun) || pagesPerRun < 1 || pagesPerRun > 20) throw new Error('--pages-per-run must be 1..20.');
+if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(queryVersion)) throw new Error('--query-version is invalid.');
 
 const receiptPath = path.join(intake, 'consumer-receipt.json');
 if (!fs.existsSync(receiptPath)) throw new Error(`Missing Dropbox consumer receipt: ${receiptPath}`);
 const receipt = JSON.parse(fs.readFileSync(receiptPath, 'utf8'));
+if (receipt.stream && receipt.stream !== progressStream) {
+  throw new Error(`Baseline progress receipt stream mismatch: expected ${progressStream}, got ${receipt.stream}.`);
+}
 
 let progress = {
   schemaVersion: 1,
   baselineId: 'saints-v1',
   sourceId: 'wikidata',
+  queryVersion,
   completed: false,
   nextPage: 0,
   cumulativeBindings: 0,
@@ -49,12 +56,17 @@ if (receipt.missing !== true) {
 if (progress.schemaVersion !== 1 || progress.baselineId !== 'saints-v1' || progress.sourceId !== 'wikidata') {
   throw new Error('Baseline progress has the wrong identity or schema.');
 }
+if (progress.queryVersion !== queryVersion) {
+  throw new Error(`Baseline query version mismatch: expected ${queryVersion}, got ${progress.queryVersion ?? 'missing'}. Start a new query epoch at page 0.`);
+}
 if (!Number.isInteger(progress.nextPage) || progress.nextPage < 0) throw new Error('Baseline progress nextPage is invalid.');
 
 const plan = {
   schemaVersion: 1,
   baselineId: 'saints-v1',
   sourceId: 'wikidata',
+  queryVersion,
+  progressStream,
   generatedAt: new Date().toISOString(),
   shouldRun: progress.completed !== true,
   reason: progress.completed === true ? 'source-exhausted' : receipt.missing === true ? 'first-run' : 'resume',
