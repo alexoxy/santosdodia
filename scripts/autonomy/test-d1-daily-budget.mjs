@@ -37,6 +37,21 @@ await assert.rejects(() => checkSharedD1DailyBudget({
   fetchImpl,
 }), /budget is exhausted/u);
 
+const bootstrapAllowed = await checkSharedD1DailyBudget({
+  repository,
+  workflows,
+  currentRunId: '2',
+  token: 'test',
+  maximum: 20,
+  now: new Date('2026-08-10T03:00:00Z'),
+  fetchImpl,
+});
+assert.equal(bootstrapAllowed.used, 1);
+assert.equal(bootstrapAllowed.maximum, 20);
+assert.equal(bootstrapAllowed.configuredMaximum, 1);
+assert.equal(bootstrapAllowed.effectiveMaximum, 20);
+assert.equal(bootstrapAllowed.policy, 'bounded-workflow-specific-d1-remote-operation-budget');
+
 const previousDayFetch = async (url) => ({
   ok: true,
   status: 200,
@@ -58,5 +73,15 @@ assert.equal(allowed.currentRunId, '2');
 assert.equal(allowed.runsScanned, 2);
 assert.equal(allowed.uniquePriorRunsScanned, 1, 'Only the previous-day prior run remains after current-run exclusion.');
 assert.deepEqual(allowed.workflows, workflows);
+
+await assert.rejects(() => checkSharedD1DailyBudget({
+  repository,
+  workflows,
+  currentRunId: '2',
+  token: 'test',
+  maximum: 101,
+  now: new Date('2026-08-10T03:00:00Z'),
+  fetchImpl,
+}), /between 1 and 100/u);
 
 console.log('Shared autonomous D1 daily-budget tests passed.');
