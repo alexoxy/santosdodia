@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: autonomous-dropbox-normalization
+  group: autonomous-normalizer-saints-wikidata
   cancel-in-progress: false
 
 jobs:
@@ -35,26 +35,28 @@ jobs:
       - name: Validate normalizer and autonomy policy
         run: |
           npm run autonomy:test
+          npm run autonomy:lanes-audit
           npm run osint:normalize-test
+          npm run temporal:test
           npm run cloudflare:guardrails-audit
 
-      - name: Pull latest verified raw dump from Dropbox
+      - name: Pull latest verified raw partition from Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
-        run: npm run dropbox:pull-stream -- --stream osint-raw --destination staging/dropbox-intake/osint-raw
+        run: npm run dropbox:pull-stream -- --stream osint-raw/saints/wikidata --destination staging/dropbox-intake/osint-raw/saints/wikidata
 
       - name: Validate and extract immutable raw package
         shell: bash
         run: |
           set -euo pipefail
-          archive='staging/dropbox-intake/osint-raw/package.tar.gz'
-          destination='staging/dropbox-intake/osint-raw/extracted'
+          archive='staging/dropbox-intake/osint-raw/saints/wikidata/package.tar.gz'
+          destination='staging/dropbox-intake/osint-raw/saints/wikidata/extracted'
           mkdir -p "$destination"
           node <<'NODE'
           const { execFileSync } = require('node:child_process');
-          const archive = 'staging/dropbox-intake/osint-raw/package.tar.gz';
+          const archive = 'staging/dropbox-intake/osint-raw/saints/wikidata/package.tar.gz';
           const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
           for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
             if (entry.startsWith('/') || entry.split('/').includes('..')) {
@@ -64,47 +66,51 @@ jobs:
           NODE
           tar -xzf "$archive" -C "$destination" --no-same-owner --no-same-permissions
 
-      - name: Normalize the archived Wikidata run
+      - name: Normalize archived Wikidata run
         shell: bash
         run: |
           set -euo pipefail
-          raw_root='staging/dropbox-intake/osint-raw/extracted/data/osint/runs/wikidata'
+          raw_root='staging/dropbox-intake/osint-raw/saints/wikidata/extracted/data/osint/runs/wikidata'
           run_dir="$(find "$raw_root" -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
           test -n "$run_dir"
-          npm run osint:normalize -- "$run_dir" staging/osint-normalized/wikidata
+          npm run osint:normalize -- "$run_dir" staging/osint-normalized/saints/wikidata
+          cp staging/dropbox-intake/osint-raw/saints/wikidata/consumer-receipt.json \
+            staging/osint-normalized/saints/wikidata/upstream-raw-receipt.json
 
-      - name: Verify bounded staging and closed publication gate
+      - name: Verify normalized partition and closed production gate
         shell: bash
         run: |
           set -euo pipefail
           node <<'NODE'
           const fs = require('node:fs');
-          const base = 'staging/osint-normalized/wikidata';
+          const base = 'staging/osint-normalized/saints/wikidata';
           const manifest = JSON.parse(fs.readFileSync(`${base}/staging-manifest.json`, 'utf8'));
           const report = JSON.parse(fs.readFileSync(`${base}/quality-report.json`, 'utf8'));
+          const receipt = JSON.parse(fs.readFileSync(`${base}/upstream-raw-receipt.json`, 'utf8'));
           if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Normalizer output must remain staging-only.');
-          if (report.publicationGate?.allowed !== false) throw new Error('Publication gate must remain closed in shadow phase.');
+          if (report.publicationGate?.allowed !== false) throw new Error('Production publication gate must remain closed in shadow phase.');
+          if (receipt.verified !== true) throw new Error('Normalizer did not consume a verified Dropbox package.');
           if (!Number.isInteger(manifest.entityCount) || manifest.entityCount < 1) throw new Error('Normalizer produced no entities.');
-          console.log(JSON.stringify({ entityCount: manifest.entityCount, conflictCount: manifest.conflictCount, metrics: report.metrics }, null, 2));
+          console.log(JSON.stringify({ entityCount: manifest.entityCount, conflictCount: manifest.conflictCount, upstream: receipt.archivePath }, null, 2));
           NODE
 
       - name: Guard normalized batch size
         shell: bash
         run: |
-          count="$(node -e "const fs=require('node:fs'); const m=JSON.parse(fs.readFileSync('staging/osint-normalized/wikidata/staging-manifest.json','utf8')); process.stdout.write(String(m.entityCount));")"
+          count="$(node -e "const fs=require('node:fs'); const m=JSON.parse(fs.readFileSync('staging/osint-normalized/saints/wikidata/staging-manifest.json','utf8')); process.stdout.write(String(m.entityCount));")"
           node scripts/cloudflare-free-guardrails.mjs osint-records --count "$count"
 
       - name: Upload normalized evidence
         uses: actions/upload-artifact@v6
         with:
-          name: autonomous-osint-normalized-${{ github.run_id }}
-          path: staging/osint-normalized/
+          name: autonomous-osint-normalized-saints-wikidata-${{ github.run_id }}
+          path: staging/osint-normalized/saints/wikidata/
           if-no-files-found: error
           retention-days: 7
 
-      - name: Archive normalized dump in Dropbox
+      - name: Archive normalized partition in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
-        run: node scripts/archive-to-dropbox.mjs --stream osint-normalized --source staging/osint-normalized
+        run: node scripts/archive-to-dropbox.mjs --stream osint-normalized/saints/wikidata --source staging/osint-normalized/saints/wikidata
