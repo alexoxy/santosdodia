@@ -1,0 +1,61 @@
+name: Navigation read model quality
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'db/migrations/0011_saints_navigation_read_model.sql'
+      - 'lib/saint-navigation-*.ts'
+      - 'app/api/v1/navigation/**'
+      - 'app/map/**'
+      - 'app/timeline/**'
+      - 'app/places/**'
+      - 'app/components/SaintsWorldMap.tsx'
+      - 'app/components/SaintsTimeline.tsx'
+      - 'app/components/SaintPlaces.tsx'
+      - 'scripts/test-saint-navigation-*.mjs'
+      - '.github/workflows/navigation-read-model-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: navigation-read-model-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit repository hygiene
+        run: npm run repo:audit
+
+      - name: Test navigation projection migration
+        run: node --disable-warning=ExperimentalWarning scripts/test-saint-navigation-migration.mjs
+
+      - name: Test publication-safe navigation reads
+        run: node scripts/test-saint-navigation-d1.mjs
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js application
+        run: npm run build
