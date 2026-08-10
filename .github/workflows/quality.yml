@@ -61,6 +61,15 @@ jobs:
       - name: Audit Saints Baseline language editor
         run: node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
 
+      - name: Test global cross-batch candidate identity ledger
+        run: npm run saints:baseline-identity-test
+
+      - name: Audit global candidate identity ledger
+        run: npm run saints:baseline-identity-audit
+
+      - name: Test Dropbox REVIEWED batch discovery
+        run: npm run dropbox:batch-list-test
+
       - name: Test chunked Saints Baseline D1 import watermarks
         run: npm run saints:baseline-import-test
 

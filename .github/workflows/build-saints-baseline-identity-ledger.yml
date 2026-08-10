@@ -1,0 +1,248 @@
+name: Build Saints Baseline v1 identity ledger
+run-name: Saints Baseline identity · recognition-v1 · ${{ github.event_name }} · run ${{ github.run_number }}
+
+on:
+  workflow_run:
+    workflows: ['Review Saints Baseline v1 language']
+    types: [completed]
+  schedule:
+    - cron: '23 6 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-saints-baseline-identity-ledger.yml'
+      - 'scripts/baseline/build-global-identity-ledger.mjs'
+      - 'scripts/baseline/test-global-identity-ledger.mjs'
+      - 'scripts/baseline/audit-global-identity-ledger.mjs'
+      - 'scripts/dropbox/list-archive-batches.mjs'
+      - 'scripts/dropbox/test-list-archive-batches.mjs'
+      - 'config/entity-resolution-policy.json'
+      - 'config/saints-baseline-wikidata.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-baseline-v1-identity-wikidata-recognition-v1
+  cancel-in-progress: false
+
+env:
+  WIKIDATA_QUERY_VERSION: recognition-v1
+  NORMALIZATION_VERSION: '1.1'
+  LANGUAGE_REVIEW_VERSION: '1.1'
+  IDENTITY_VERSION: '1.0'
+  REVIEW_PROGRESS_STREAM: baseline-reviewed-progress/saints/v1/wikidata/recognition-v1
+  REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
+  IDENTITY_STREAM: baseline/saints/v1/identity/wikidata/recognition-v1
+
+jobs:
+  build-ledger:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Pull verified language-review watermark
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/dropbox/pull-latest-stream.mjs --stream "$REVIEW_PROGRESS_STREAM" --destination staging/baseline-identity/review-progress
+
+      - name: Extract language-review watermark
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-identity/review-progress/package.tar.gz'
+          dst='staging/baseline-identity/review-progress/extracted'
+          mkdir -p "$dst"
+          node - "$src" <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const archive = process.argv[2];
+          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-identity/review-progress.json
+
+      - name: Pull previous identity ledger when it exists
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/dropbox/pull-latest-stream.mjs --stream "$IDENTITY_STREAM" --destination staging/baseline-identity/previous --allow-missing
+
+      - name: Extract previous identity metadata when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt='staging/baseline-identity/previous/consumer-receipt.json'
+          missing="$(node -e "const fs=require('node:fs'); const r=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); process.stdout.write(String(r.missing===true));" "$receipt")"
+          if [ "$missing" = 'true' ]; then exit 0; fi
+          src='staging/baseline-identity/previous/package.tar.gz'
+          dst='staging/baseline-identity/previous/extracted'
+          mkdir -p "$dst"
+          node - "$src" <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const archive = process.argv[2];
+          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          manifest="$(find "$dst" -type f -name identity-manifest.json | sort | tail -n 1)"
+          batches="$(find "$dst" -type f -name source-batches.json | sort | tail -n 1)"
+          test -n "$manifest"
+          test -n "$batches"
+          cp "$manifest" staging/baseline-identity/previous-manifest.json
+          cp "$batches" staging/baseline-identity/previous-source-batches.json
+
+      - name: Plan global identity rebuild
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const progress = JSON.parse(fs.readFileSync('staging/baseline-identity/review-progress.json','utf8'));
+          let shouldRun = progress.sourceCompleted === true && progress.caughtUp === true;
+          let reason = shouldRun ? 'reviewed-baseline-complete' : 'reviewed-baseline-not-complete';
+          if (shouldRun && fs.existsSync('staging/baseline-identity/previous-manifest.json') && fs.existsSync('staging/baseline-identity/previous-source-batches.json')) {
+            const manifest = JSON.parse(fs.readFileSync('staging/baseline-identity/previous-manifest.json','utf8'));
+            const sourceBatches = JSON.parse(fs.readFileSync('staging/baseline-identity/previous-source-batches.json','utf8')).batches ?? [];
+            const last = sourceBatches.at(-1);
+            const latest = progress.lastReviewed;
+            const same = manifest.identityVersion === process.env.IDENTITY_VERSION &&
+              manifest.queryVersion === process.env.WIKIDATA_QUERY_VERSION &&
+              manifest.sourceEntityOccurrences === progress.cumulativeEntitiesReviewed &&
+              last?.startPage === latest?.sourceStartPage && last?.nextPage === latest?.sourceNextPage && last?.sourceRunId === latest?.sourceRunId;
+            if (same) { shouldRun = false; reason = 'identity-ledger-already-current'; }
+          }
+          fs.writeFileSync('staging/baseline-identity/plan.json', `${JSON.stringify({schemaVersion:1,shouldRun,reason},null,2)}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${shouldRun}\nreason=${reason}\n`);
+          console.log(JSON.stringify({shouldRun,reason},null,2));
+          NODE
+
+      - name: Install locked dependencies
+        if: steps.plan.outputs.should_run == 'true'
+        run: npm ci --include=optional
+
+      - name: Validate identity-ledger contract
+        if: steps.plan.outputs.should_run == 'true'
+        run: |
+          npm run saints:baseline-identity-test
+          npm run saints:baseline-identity-audit
+          npm run dropbox:batch-list-test
+
+      - name: List immutable REVIEWED batch streams
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/dropbox/list-archive-batches.mjs --stream-prefix "$REVIEWED_STREAM_PREFIX" --output staging/baseline-identity/batches.json
+
+      - name: Pull and safely extract every REVIEWED batch
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p staging/baseline-identity/reviewed
+          node <<'NODE' > staging/baseline-identity/batch-streams.tsv
+          const fs = require('node:fs');
+          const listing = JSON.parse(fs.readFileSync('staging/baseline-identity/batches.json','utf8'));
+          if (!Array.isArray(listing.batches) || listing.batches.length === 0) throw new Error('No REVIEWED batches were listed.');
+          for (const batch of listing.batches) process.stdout.write(`${batch.name}\t${batch.stream}\n`);
+          NODE
+          while IFS=$'\t' read -r batch stream; do
+            test -n "$batch"
+            test -n "$stream"
+            base="staging/baseline-identity/reviewed/$batch"
+            pull="$base/pulled"
+            extract="$base/extracted"
+            node scripts/dropbox/pull-latest-stream.mjs --stream "$stream" --destination "$pull"
+            mkdir -p "$extract"
+            node - "$pull/package.tar.gz" <<'NODE'
+            const { execFileSync } = require('node:child_process');
+            const archive = process.argv[2];
+            const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+            for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+            NODE
+            tar -xzf "$pull/package.tar.gz" -C "$extract" --no-same-owner --no-same-permissions
+          done < staging/baseline-identity/batch-streams.tsv
+
+      - name: Build deterministic global candidate identity ledger
+        if: steps.plan.outputs.should_run == 'true'
+        run: |
+          node scripts/baseline/build-global-identity-ledger.mjs \
+            --input-root staging/baseline-identity/reviewed \
+            --review-progress staging/baseline-identity/review-progress.json \
+            --query-version "$WIKIDATA_QUERY_VERSION" \
+            --normalization-version "$NORMALIZATION_VERSION" \
+            --review-version "$LANGUAGE_REVIEW_VERSION" \
+            --identity-version "$IDENTITY_VERSION" \
+            --output staging/baseline-identity/output
+
+      - name: Verify closed publication and identity invariants
+        if: steps.plan.outputs.should_run == 'true'
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('staging/baseline-identity/output/identity-manifest.json','utf8'));
+          const report = JSON.parse(fs.readFileSync('staging/baseline-identity/output/identity-report.json','utf8'));
+          if (manifest.stage !== 'global-candidate-identity-ledger' || manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Identity ledger publication boundary is open.');
+          if (manifest.rootSha256 !== report.rootSha256) throw new Error('Identity root hash mismatch.');
+          if (report.nameOnlyMergeCount !== 0) throw new Error('Name-only identity merges are forbidden.');
+          if (report.exactExternalIdentifierResolutionCount !== report.uniqueIdentityCount) throw new Error('Every Wikidata candidate identity must resolve by its exact external identifier.');
+          console.log(JSON.stringify(report,null,2));
+          NODE
+
+      - name: Archive global identity ledger in Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          node scripts/archive-to-dropbox.mjs \
+            --stream "$IDENTITY_STREAM" \
+            --source staging/baseline-identity/output \
+            --source staging/baseline-identity/review-progress.json \
+            --source staging/baseline-identity/batches.json \
+            --source staging/baseline-identity/plan.json
+
+      - name: Upload bounded identity evidence
+        if: steps.plan.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: saints-baseline-identity-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
+          path: |
+            staging/baseline-identity/output/identity-manifest.json
+            staging/baseline-identity/output/identity-report.json
+            staging/baseline-identity/output/cross-batch-duplicates.jsonl
+            staging/baseline-identity/output/identity-conflicts.jsonl
+            staging/baseline-identity/output/name-collisions.jsonl
+            staging/baseline-identity/output/source-batches.json
+            staging/baseline-identity/batches.json
+            staging/baseline-identity/plan.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report no-op
+        if: steps.plan.outputs.should_run != 'true'
+        run: echo "Identity ledger no-op: ${{ steps.plan.outputs.reason }}"
