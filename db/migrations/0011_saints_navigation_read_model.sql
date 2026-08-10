@@ -34,7 +34,13 @@ CREATE TABLE IF NOT EXISTS saint_navigation_people (
   century INTEGER,
   validation_status TEXT NOT NULL,
   PRIMARY KEY(dataset_id, entity_id),
-  CHECK(qid IS NULL OR qid GLOB 'Q[0-9]*')
+  CHECK(
+    qid IS NULL OR (
+      length(qid) > 1 AND
+      substr(qid, 1, 1) = 'Q' AND
+      substr(qid, 2) NOT GLOB '*[^0-9]*'
+    )
+  )
 );
 
 CREATE TABLE IF NOT EXISTS saint_navigation_person_labels (
@@ -80,7 +86,11 @@ CREATE TABLE IF NOT EXISTS saint_navigation_observances (
   source_ids_json TEXT NOT NULL DEFAULT '[]',
   PRIMARY KEY(dataset_id, id),
   FOREIGN KEY(dataset_id, entity_id)
-    REFERENCES saint_navigation_people(dataset_id, entity_id) ON DELETE SET NULL
+    REFERENCES saint_navigation_people(dataset_id, entity_id) ON DELETE CASCADE,
+  CHECK(
+    (person_link_status = 'linked' AND entity_id IS NOT NULL) OR
+    (person_link_status IN ('unresolved','withheld') AND entity_id IS NULL)
+  )
 );
 
 CREATE TABLE IF NOT EXISTS saint_navigation_observance_labels (
