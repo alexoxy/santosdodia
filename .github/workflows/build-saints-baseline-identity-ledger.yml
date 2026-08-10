@@ -12,7 +12,11 @@ on:
       - main
     paths:
       - '.github/workflows/build-saints-baseline-identity-ledger.yml'
+      - 'scripts/archive/validate-tar-entries.mjs'
+      - 'scripts/archive/extract-safe-tar.mjs'
       - 'scripts/baseline/build-global-identity-ledger.mjs'
+      - 'scripts/baseline/plan-global-identity-ledger.mjs'
+      - 'scripts/baseline/verify-global-identity-ledger.mjs'
       - 'scripts/baseline/test-global-identity-ledger.mjs'
       - 'scripts/baseline/audit-global-identity-ledger.mjs'
       - 'scripts/dropbox/list-archive-batches.mjs'
@@ -65,14 +69,7 @@ jobs:
           set -euo pipefail
           src='staging/baseline-identity/review-progress/package.tar.gz'
           dst='staging/baseline-identity/review-progress/extracted'
-          mkdir -p "$dst"
-          node - "$src" <<'NODE'
-          const { execFileSync } = require('node:child_process');
-          const archive = process.argv[2];
-          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
-          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
-          NODE
-          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          node scripts/archive/extract-safe-tar.mjs --archive "$src" --destination "$dst"
           progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
           test -n "$progress"
           cp "$progress" staging/baseline-identity/review-progress.json
@@ -93,14 +90,7 @@ jobs:
           if [ "$missing" = 'true' ]; then exit 0; fi
           src='staging/baseline-identity/previous/package.tar.gz'
           dst='staging/baseline-identity/previous/extracted'
-          mkdir -p "$dst"
-          node - "$src" <<'NODE'
-          const { execFileSync } = require('node:child_process');
-          const archive = process.argv[2];
-          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
-          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
-          NODE
-          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          node scripts/archive/extract-safe-tar.mjs --archive "$src" --destination "$dst"
           manifest="$(find "$dst" -type f -name identity-manifest.json | sort | tail -n 1)"
           batches="$(find "$dst" -type f -name source-batches.json | sort | tail -n 1)"
           test -n "$manifest"
@@ -113,26 +103,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node <<'NODE'
-          const fs = require('node:fs');
-          const progress = JSON.parse(fs.readFileSync('staging/baseline-identity/review-progress.json','utf8'));
-          let shouldRun = progress.sourceCompleted === true && progress.caughtUp === true;
-          let reason = shouldRun ? 'reviewed-baseline-complete' : 'reviewed-baseline-not-complete';
-          if (shouldRun && fs.existsSync('staging/baseline-identity/previous-manifest.json') && fs.existsSync('staging/baseline-identity/previous-source-batches.json')) {
-            const manifest = JSON.parse(fs.readFileSync('staging/baseline-identity/previous-manifest.json','utf8'));
-            const sourceBatches = JSON.parse(fs.readFileSync('staging/baseline-identity/previous-source-batches.json','utf8')).batches ?? [];
-            const last = sourceBatches.at(-1);
-            const latest = progress.lastReviewed;
-            const same = manifest.identityVersion === process.env.IDENTITY_VERSION &&
-              manifest.queryVersion === process.env.WIKIDATA_QUERY_VERSION &&
-              manifest.sourceEntityOccurrences === progress.cumulativeEntitiesReviewed &&
-              last?.startPage === latest?.sourceStartPage && last?.nextPage === latest?.sourceNextPage && last?.sourceRunId === latest?.sourceRunId;
-            if (same) { shouldRun = false; reason = 'identity-ledger-already-current'; }
-          }
-          fs.writeFileSync('staging/baseline-identity/plan.json', `${JSON.stringify({schemaVersion:1,shouldRun,reason},null,2)}\n`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${shouldRun}\nreason=${reason}\n`);
-          console.log(JSON.stringify({shouldRun,reason},null,2));
-          NODE
+          args=(
+            --review-progress staging/baseline-identity/review-progress.json
+            --output staging/baseline-identity/plan.json
+            --identity-version "$IDENTITY_VERSION"
+            --query-version "$WIKIDATA_QUERY_VERSION"
+          )
+          if [ -f staging/baseline-identity/previous-manifest.json ]; then args+=(--previous-manifest staging/baseline-identity/previous-manifest.json); fi
+          if [ -f staging/baseline-identity/previous-source-batches.json ]; then args+=(--previous-source-batches staging/baseline-identity/previous-source-batches.json); fi
+          node scripts/baseline/plan-global-identity-ledger.mjs "${args[@]}"
+          node -e "const fs=require('node:fs'); const p=JSON.parse(fs.readFileSync('staging/baseline-identity/plan.json','utf8')); fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_run='+p.shouldRun+'\nreason='+p.reason+'\n');"
 
       - name: Install locked dependencies
         if: steps.plan.outputs.should_run == 'true'
@@ -163,12 +143,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p staging/baseline-identity/reviewed
-          node <<'NODE' > staging/baseline-identity/batch-streams.tsv
-          const fs = require('node:fs');
-          const listing = JSON.parse(fs.readFileSync('staging/baseline-identity/batches.json','utf8'));
-          if (!Array.isArray(listing.batches) || listing.batches.length === 0) throw new Error('No REVIEWED batches were listed.');
-          for (const batch of listing.batches) process.stdout.write(`${batch.name}\t${batch.stream}\n`);
-          NODE
+          node -e "const fs=require('node:fs'); const l=JSON.parse(fs.readFileSync('staging/baseline-identity/batches.json','utf8')); if(!Array.isArray(l.batches)||l.batches.length===0) throw new Error('No REVIEWED batches were listed.'); process.stdout.write(l.batches.map(b=>b.name+'\t'+b.stream).join('\n')+'\n');" > staging/baseline-identity/batch-streams.tsv
           while IFS=$'\t' read -r batch stream; do
             test -n "$batch"
             test -n "$stream"
@@ -176,14 +151,7 @@ jobs:
             pull="$base/pulled"
             extract="$base/extracted"
             node scripts/dropbox/pull-latest-stream.mjs --stream "$stream" --destination "$pull"
-            mkdir -p "$extract"
-            node - "$pull/package.tar.gz" <<'NODE'
-            const { execFileSync } = require('node:child_process');
-            const archive = process.argv[2];
-            const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
-            for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
-            NODE
-            tar -xzf "$pull/package.tar.gz" -C "$extract" --no-same-owner --no-same-permissions
+            node scripts/archive/extract-safe-tar.mjs --archive "$pull/package.tar.gz" --destination "$extract"
           done < staging/baseline-identity/batch-streams.tsv
 
       - name: Build deterministic global candidate identity ledger
@@ -201,16 +169,9 @@ jobs:
       - name: Verify closed publication and identity invariants
         if: steps.plan.outputs.should_run == 'true'
         run: |
-          node <<'NODE'
-          const fs = require('node:fs');
-          const manifest = JSON.parse(fs.readFileSync('staging/baseline-identity/output/identity-manifest.json','utf8'));
-          const report = JSON.parse(fs.readFileSync('staging/baseline-identity/output/identity-report.json','utf8'));
-          if (manifest.stage !== 'global-candidate-identity-ledger' || manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Identity ledger publication boundary is open.');
-          if (manifest.rootSha256 !== report.rootSha256) throw new Error('Identity root hash mismatch.');
-          if (report.nameOnlyMergeCount !== 0) throw new Error('Name-only identity merges are forbidden.');
-          if (report.exactExternalIdentifierResolutionCount !== report.uniqueIdentityCount) throw new Error('Every Wikidata candidate identity must resolve by its exact external identifier.');
-          console.log(JSON.stringify(report,null,2));
-          NODE
+          node scripts/baseline/verify-global-identity-ledger.mjs \
+            --manifest staging/baseline-identity/output/identity-manifest.json \
+            --report staging/baseline-identity/output/identity-report.json
 
       - name: Archive global identity ledger in Dropbox
         if: steps.plan.outputs.should_run == 'true'
