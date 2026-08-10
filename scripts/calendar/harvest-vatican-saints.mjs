@@ -53,7 +53,7 @@ export function extractSaintsFromCalendarHtml(html, { month, day, pageUrl }) {
 
   for (let index = 0; index < headings.length; index += 1) {
     const heading = headings[index];
-    const name = textFromHtml(heading[1]);
+    const name = textFromHtml(heading[2]);
     if (!name || isGenericHeading(name)) continue;
     const start = (heading.index ?? 0) + heading[0].length;
     const end = index + 1 < headings.length ? headings[index + 1].index : String(html).length;
