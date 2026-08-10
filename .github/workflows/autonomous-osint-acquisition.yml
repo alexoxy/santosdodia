@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: autonomous-osint-acquisition
+  group: autonomous-osint-acquisition-saints-wikidata
   cancel-in-progress: false
 
 jobs:
@@ -33,6 +33,7 @@ jobs:
       - name: Validate autonomous acquisition policy
         run: |
           npm run autonomy:test
+          npm run autonomy:lanes-audit
           npm run osint:registry-audit
           npm run cloudflare:guardrails-audit
           npm run repo:audit
@@ -40,7 +41,7 @@ jobs:
       - name: Build autonomous execution plan
         run: npm run autonomy:plan -- --output staging/autonomy/plan.json
 
-      - name: Acquire approved sources into immutable local raw staging
+      - name: Acquire approved Wikidata source into immutable raw staging
         env:
           OSINT_WIKIDATA_PAGE_SIZE: '500'
           OSINT_WIKIDATA_MAX_PAGES: '1'
@@ -49,16 +50,16 @@ jobs:
       - name: Upload bounded acquisition evidence
         uses: actions/upload-artifact@v6
         with:
-          name: autonomous-osint-raw-${{ github.run_id }}
+          name: autonomous-osint-raw-saints-wikidata-${{ github.run_id }}
           path: |
-            data/osint/runs/
+            data/osint/runs/wikidata/
             staging/autonomy/plan.json
           if-no-files-found: error
           retention-days: 7
 
-      - name: Archive immutable raw dump in Dropbox
+      - name: Archive immutable raw partition in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
-        run: node scripts/archive-to-dropbox.mjs --stream osint-raw --source data/osint/runs --source staging/autonomy/plan.json
+        run: node scripts/archive-to-dropbox.mjs --stream osint-raw/saints/wikidata --source data/osint/runs/wikidata --source staging/autonomy/plan.json
