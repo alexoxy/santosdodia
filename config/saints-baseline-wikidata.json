@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "saints-v1",
+  "sourceId": "wikidata",
+  "queryVersion": "recognition-v1",
+  "adapterVersion": "1.2",
+  "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
+  "rawStreamPrefix": "baseline/saints/v1/raw/wikidata/recognition-v1",
+  "legacyEpochs": [
+    {
+      "queryVersion": "pre-recognition-v0",
+      "progressStream": "baseline-progress/saints/v1/wikidata",
+      "rawStreamPrefix": "baseline/saints/v1/raw/wikidata",
+      "assemblyEligible": false,
+      "reason": "Initial discovery query did not preserve the complete P411 recognition-status candidate universe."
+    }
+  ],
+  "policy": {
+    "resumeOnlySameQueryVersion": true,
+    "startNewVersionAtPageZero": true,
+    "legacyEpochsRemainAuditOnly": true,
+    "productionPublication": false
+  }
+}

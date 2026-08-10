@@ -5,9 +5,11 @@ import path from 'node:path';
 
 const root = process.cwd();
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'config/saints-baseline-v1.json'), 'utf8'));
+const wikidataEpoch = JSON.parse(fs.readFileSync(path.join(root, 'config/saints-baseline-wikidata.json'), 'utf8'));
 const sourceRegistry = JSON.parse(fs.readFileSync(path.join(root, 'data/source-registry/seed.json'), 'utf8'));
 const baselineSources = JSON.parse(fs.readFileSync(path.join(root, 'data/source-registry/saints-baseline-v1-additions.json'), 'utf8'));
 const policyRegistry = JSON.parse(fs.readFileSync(path.join(root, 'data/osint/policies/p0-policy-registry.json'), 'utf8'));
+const automationRegistry = JSON.parse(fs.readFileSync(path.join(root, 'config/automation-registry.json'), 'utf8'));
 const errors = [];
 const warnings = [];
 
@@ -24,6 +26,22 @@ if (baseline.strategy !== 'build-once-freeze-then-incremental-events') errors.pu
 for (const principle of ['personAndObservanceAreSeparate','namesAreNotIdentity','maryIsOnePerson','historicalBaselineIsImmutableAfterFreeze','postFreezeChangesAreEventsOrVersionedCorrections','localizedDisplayRequiresValidatedLocalizedName']) {
   if (baseline.principles?.[principle] !== true) errors.push(`Required baseline principle is disabled: ${principle}.`);
 }
+
+if (wikidataEpoch.schemaVersion !== 1 || wikidataEpoch.baselineId !== 'saints-v1' || wikidataEpoch.sourceId !== 'wikidata') {
+  errors.push('Wikidata baseline query-epoch configuration has the wrong identity/schema.');
+}
+if (wikidataEpoch.queryVersion !== 'recognition-v1') errors.push('Active Wikidata baseline queryVersion must be recognition-v1.');
+if (wikidataEpoch.adapterVersion !== '1.2') errors.push('Active Wikidata baseline adapterVersion must remain aligned with query epoch recognition-v1.');
+if (wikidataEpoch.progressStream !== 'baseline-progress/saints/v1/wikidata/recognition-v1') errors.push('Active Wikidata baseline progress stream is not query-versioned.');
+if (wikidataEpoch.rawStreamPrefix !== 'baseline/saints/v1/raw/wikidata/recognition-v1') errors.push('Active Wikidata baseline RAW stream is not query-versioned.');
+if (wikidataEpoch.policy?.resumeOnlySameQueryVersion !== true || wikidataEpoch.policy?.startNewVersionAtPageZero !== true || wikidataEpoch.policy?.legacyEpochsRemainAuditOnly !== true || wikidataEpoch.policy?.productionPublication !== false) {
+  errors.push('Wikidata query-epoch safety policy is incomplete.');
+}
+const legacyEpochs = Array.isArray(wikidataEpoch.legacyEpochs) ? wikidataEpoch.legacyEpochs : [];
+if (!legacyEpochs.some((epoch) => epoch.queryVersion === 'pre-recognition-v0' && epoch.assemblyEligible === false)) {
+  errors.push('Legacy pre-recognition Wikidata epoch must remain explicitly excluded from baseline assembly.');
+}
+if (legacyEpochs.some((epoch) => epoch.assemblyEligible !== false)) errors.push('Every legacy Wikidata query epoch must remain audit-only.');
 
 const candidateLayer = baseline.layers?.candidateUniverse;
 if (candidateLayer?.mayCreateCanonicalPerson !== false || candidateLayer?.mayPublish !== false) errors.push('Candidate universe must never create or publish a canonical person by itself.');
@@ -75,12 +93,20 @@ if (baseline.postFreeze?.fullRebuildCadence !== 'never-routine' || baseline.post
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/build-saints-baseline-wikidata.yml'), 'utf8');
 if (!workflow.includes("OSINT_WIKIDATA_PAGE_SIZE: '500'")) errors.push('Baseline workflow must retain 500-binding page shards.');
 if (!workflow.includes("OSINT_WIKIDATA_DELAY_MS: '12000'")) errors.push('Baseline workflow must retain a 12s minimum Wikidata inter-page delay.');
-if (!workflow.includes('baseline-progress/saints/v1/wikidata')) errors.push('Baseline workflow is missing its verified Dropbox watermark stream.');
+if (!workflow.includes(`WIKIDATA_QUERY_VERSION: ${wikidataEpoch.queryVersion}`)) errors.push('Baseline workflow query version differs from epoch configuration.');
+if (!workflow.includes(`BASELINE_PROGRESS_STREAM: ${wikidataEpoch.progressStream}`)) errors.push('Baseline workflow progress stream differs from epoch configuration.');
+if (!workflow.includes(`BASELINE_RAW_PREFIX: ${wikidataEpoch.rawStreamPrefix}`)) errors.push('Baseline workflow RAW stream differs from epoch configuration.');
+if (!workflow.includes('--query-version "$WIKIDATA_QUERY_VERSION"')) errors.push('Baseline planner is not explicitly bound to the active query version.');
+
+const baselineTask = (automationRegistry.tasks ?? []).find((task) => task.id === 'saints-baseline-v1-wikidata');
+if (!baselineTask) errors.push('Saints Baseline Wikidata automation task is missing.');
+else if (baselineTask.archiveStream !== wikidataEpoch.rawStreamPrefix) errors.push('Automation registry points Saints Baseline at the wrong query-epoch archive stream.');
 
 const wikidataAdapter = fs.readFileSync(path.join(root, 'scripts/osint/adapters/wikidata-saints.mjs'), 'utf8');
 if (!wikidataAdapter.includes('?item wdt:P411 ?recognitionStatus.')) errors.push('Wikidata baseline candidate query must accept any explicit P411 recognition status.');
 if (wikidataAdapter.includes('wdt:P411 wd:Q43115')) errors.push('Wikidata baseline candidate query must not treat Q43115 saint as the only P411 status.');
 if (!wikidataAdapter.includes('?recognitionStatusLabel')) errors.push('Wikidata baseline candidate query must preserve the recognition-status label for downstream resolution.');
+if (!wikidataAdapter.includes('queryVersion,')) errors.push('Wikidata adapter summary/receipts must preserve the query epoch.');
 if (!wikidataAdapter.includes("String(page).padStart(4, '0')")) errors.push('Wikidata page archive naming must remain compatible with the current normalizer.');
 
 const report = {
@@ -90,6 +116,8 @@ const report = {
   partitions: [...partitionIds],
   sourceCount: sourceIds.size,
   baselineCandidateSourceCount: baselineSources.sources?.length ?? 0,
+  activeWikidataQueryVersion: wikidataEpoch.queryVersion,
+  legacyWikidataEpochs: legacyEpochs.length,
   generatedAt: new Date().toISOString(),
 };
 console.log(JSON.stringify(report, null, 2));

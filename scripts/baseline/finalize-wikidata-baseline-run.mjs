@@ -22,10 +22,13 @@ const runsRoot = path.resolve(argument('--runs-root', 'staging/saints-baseline-v
 const output = path.resolve(argument('--output', 'staging/saints-baseline-v1/progress/progress.json'));
 const plan = JSON.parse(fs.readFileSync(planPath, 'utf8'));
 if (plan.shouldRun !== true) throw new Error('Cannot finalize a baseline plan that did not run.');
+if (!plan.queryVersion) throw new Error('Baseline plan has no queryVersion.');
 
 const runDirectory = newestRun(runsRoot);
 const summary = JSON.parse(fs.readFileSync(path.join(runDirectory, 'summary.json'), 'utf8'));
 if (summary.status !== 'fetched') throw new Error(`Baseline acquisition did not finish successfully: ${summary.status}.`);
+if (summary.queryVersion !== plan.queryVersion) throw new Error(`Acquisition query version ${summary.queryVersion ?? 'missing'} does not match plan ${plan.queryVersion}.`);
+if (plan.previousProgress?.queryVersion !== plan.queryVersion) throw new Error('Previous progress belongs to a different query epoch.');
 if (summary.startPage !== plan.startPage) throw new Error(`Acquisition start page ${summary.startPage} does not match plan ${plan.startPage}.`);
 if (!Number.isInteger(summary.nextPage) || summary.nextPage <= plan.startPage) throw new Error('Acquisition did not advance the page watermark.');
 
@@ -34,6 +37,7 @@ const progress = {
   schemaVersion: 1,
   baselineId: 'saints-v1',
   sourceId: 'wikidata',
+  queryVersion: plan.queryVersion,
   updatedAt: new Date().toISOString(),
   completed: summary.exhausted === true,
   nextPage: summary.nextPage,
@@ -41,6 +45,7 @@ const progress = {
   successfulRuns: Number(previous.successfulRuns ?? 0) + 1,
   lastRun: {
     runId: summary.runId,
+    queryVersion: summary.queryVersion,
     startPage: summary.startPage,
     nextPage: summary.nextPage,
     pageSize: summary.pageSize,

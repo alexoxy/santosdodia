@@ -1,5 +1,5 @@
 name: Build Saints Baseline v1 candidates
-run-name: Saints Baseline v1 · ${{ github.event_name }} · run ${{ github.run_number }}
+run-name: Saints Baseline v1 · recognition-v1 · ${{ github.event_name }} · run ${{ github.run_number }}
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - config/saints-baseline-v1.json
+      - config/saints-baseline-wikidata.json
       - .github/workflows/build-saints-baseline-wikidata.yml
   schedule:
     - cron: '17 1,7,13,19 * * *'
@@ -15,8 +16,13 @@ on:
 permissions:
   contents: read
 
+env:
+  WIKIDATA_QUERY_VERSION: recognition-v1
+  BASELINE_PROGRESS_STREAM: baseline-progress/saints/v1/wikidata/recognition-v1
+  BASELINE_RAW_PREFIX: baseline/saints/v1/raw/wikidata/recognition-v1
+
 concurrency:
-  group: saints-baseline-v1-wikidata
+  group: saints-baseline-v1-wikidata-recognition-v1
   cancel-in-progress: false
 
 jobs:
@@ -44,18 +50,18 @@ jobs:
           npm run osint:registry-audit
           npm run linguistic:audit
 
-      - name: Pull verified baseline watermark when it exists
+      - name: Pull verified query-epoch watermark when it exists
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
         run: >-
           npm run dropbox:pull-stream --
-          --stream baseline-progress/saints/v1/wikidata
+          --stream "$BASELINE_PROGRESS_STREAM"
           --destination staging/baseline-progress-intake
           --allow-missing
 
-      - name: Plan resumable acquisition
+      - name: Plan resumable acquisition within query epoch
         id: plan
         shell: bash
         run: |
@@ -63,6 +69,8 @@ jobs:
           mkdir -p staging/saints-baseline-v1
           node scripts/baseline/plan-wikidata-baseline-run.mjs \
             --intake staging/baseline-progress-intake \
+            --query-version "$WIKIDATA_QUERY_VERSION" \
+            --progress-stream "$BASELINE_PROGRESS_STREAM" \
             --pages-per-run 10 \
             > staging/saints-baseline-v1/wikidata-plan.json
           cat staging/saints-baseline-v1/wikidata-plan.json
@@ -75,13 +83,14 @@ jobs:
       - name: Acquire next bounded Wikidata batch
         if: steps.plan.outputs.should_run == 'true'
         env:
+          OSINT_WIKIDATA_QUERY_VERSION: ${{ env.WIKIDATA_QUERY_VERSION }}
           OSINT_WIKIDATA_PAGE_SIZE: '500'
           OSINT_WIKIDATA_START_PAGE: ${{ steps.plan.outputs.start_page }}
           OSINT_WIKIDATA_MAX_PAGES: ${{ steps.plan.outputs.pages_per_run }}
           OSINT_WIKIDATA_DELAY_MS: '12000'
         run: node scripts/osint/adapters/wikidata-saints.mjs wikidata staging/saints-baseline-v1/raw
 
-      - name: Finalize baseline watermark
+      - name: Finalize query-epoch watermark
         if: steps.plan.outputs.should_run == 'true'
         run: >-
           node scripts/baseline/finalize-wikidata-baseline-run.mjs
@@ -101,11 +110,11 @@ jobs:
           set -euo pipefail
           batch="$(printf '%06d' "$START_PAGE")"
           node scripts/archive-to-dropbox.mjs \
-            --stream "baseline/saints/v1/raw/wikidata/batch-${batch}" \
+            --stream "$BASELINE_RAW_PREFIX/batch-${batch}" \
             --source staging/saints-baseline-v1/raw/wikidata \
             --source staging/saints-baseline-v1/wikidata-plan.json
 
-      - name: Advance verified baseline watermark
+      - name: Advance verified query-epoch watermark
         if: steps.plan.outputs.should_run == 'true'
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -113,14 +122,14 @@ jobs:
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
         run: >-
           node scripts/archive-to-dropbox.mjs
-          --stream baseline-progress/saints/v1/wikidata
+          --stream "$BASELINE_PROGRESS_STREAM"
           --source staging/saints-baseline-v1/progress/progress.json
 
       - name: Upload bounded build evidence
         if: steps.plan.outputs.should_run == 'true'
         uses: actions/upload-artifact@v6
         with:
-          name: saints-baseline-v1-wikidata-${{ github.run_id }}
+          name: saints-baseline-v1-wikidata-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
           path: |
             staging/saints-baseline-v1/wikidata-plan.json
             staging/saints-baseline-v1/progress/progress.json
@@ -130,4 +139,4 @@ jobs:
 
       - name: Report completed source
         if: steps.plan.outputs.should_run != 'true'
-        run: echo 'Wikidata candidate universe is already exhausted; no acquisition performed.'
+        run: echo "Wikidata candidate universe for $WIKIDATA_QUERY_VERSION is exhausted; no acquisition performed."
