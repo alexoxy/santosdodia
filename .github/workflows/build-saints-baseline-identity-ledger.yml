@@ -245,4 +245,5 @@ jobs:
 
       - name: Report no-op
         if: steps.plan.outputs.should_run != 'true'
-        run: echo "Identity ledger no-op: ${{ steps.plan.outputs.reason }}"
+        run: |
+          echo "Identity ledger no-op: ${{ steps.plan.outputs.reason }}"
