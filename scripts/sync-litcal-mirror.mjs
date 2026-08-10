@@ -88,7 +88,12 @@ const fresh=health.filter(item=>item.ok&&!item.stale).length;
 const stale=health.filter(item=>item.ok&&item.stale).length;
 const unavailable=health.filter(item=>!item.ok).length;
 const ratio=health.length?available/health.length:0;
-const criticalLabels=[`general ${currentYear} en_US`];
+const criticalLabels=[
+ `general ${currentYear} en_US`,
+ `general ${currentYear} pt_PT`,
+ `general ${currentYear+1} en_US`,
+ `general ${currentYear+1} pt_PT`
+];
 const unavailableCritical=criticalLabels.filter(label=>!health.some(item=>item.label===label&&item.ok));
 const status=unavailableCritical.length||ratio<MIN_AVAILABLE_RATIO?'blocked':stale||unavailable?'degraded':'healthy';
 const manifest={schemaVersion:2,format:'compact-runtime-fallback',generatedAt:new Date().toISOString(),upstream:BASE,status,years:YEARS,siteLocales:SITE_LOCALES,calendarCounts:{national:national.length,diocesan:diocesan.length},availability:{available,total:health.length,ratio:Number(ratio.toFixed(4)),fresh,stale,unavailable,minimumRatio:MIN_AVAILABLE_RATIO},critical:{required:criticalLabels,unavailable:unavailableCritical},health};
