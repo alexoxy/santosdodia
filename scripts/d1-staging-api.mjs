@@ -22,15 +22,15 @@ export function validateBatchPackage(value) {
     throw new Error('The D1 batch contains no statements.');
   }
   if (value.statementCount !== value.statements.length) throw new Error('D1 statement count mismatch.');
-  const statements = value.statements.map((statement, index) => {
+  const hashedStatements = value.statements.map((statement, index) => {
     if (typeof statement !== 'string' || !statement.trim()) throw new Error(`Statement ${index + 1} is empty.`);
     if (FORBIDDEN_SQL.test(statement)) throw new Error(`Statement ${index + 1} contains transaction control.`);
     if (Buffer.byteLength(statement, 'utf8') > 100_000) throw new Error(`Statement ${index + 1} exceeds 100 KB.`);
-    return statement.trim().replace(/;+$/u, '');
+    return statement.trim();
   });
-  const expectedHash = sha256(JSON.stringify(statements));
+  const expectedHash = sha256(JSON.stringify(hashedStatements));
   if (value.statementsSha256 !== expectedHash) throw new Error('D1 statements SHA-256 mismatch.');
-  return statements;
+  return hashedStatements.map(statement => statement.replace(/;+$/u, ''));
 }
 
 async function apiRequest({ accountId, token, path, method = 'GET', body, fetchImpl = fetch }) {
