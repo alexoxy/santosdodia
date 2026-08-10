@@ -5,10 +5,13 @@
   "queryVersion": "recognition-v1",
   "adapterVersion": "1.2",
   "normalizationVersion": "1.1",
+  "languageReviewVersion": "1.1",
   "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
   "rawStreamPrefix": "baseline/saints/v1/raw/wikidata/recognition-v1",
   "normalizationProgressStream": "baseline-normalized-progress/saints/v1/wikidata/recognition-v1",
   "normalizedStreamPrefix": "baseline/saints/v1/normalized/wikidata/recognition-v1",
+  "languageReviewProgressStream": "baseline-reviewed-progress/saints/v1/wikidata/recognition-v1",
+  "reviewedStreamPrefix": "baseline/saints/v1/reviewed/wikidata/recognition-v1",
   "statusStream": "baseline-status/saints/v1/wikidata/recognition-v1",
   "legacyEpochs": [
     {
@@ -24,6 +27,9 @@
     "startNewVersionAtPageZero": true,
     "legacyEpochsRemainAuditOnly": true,
     "normalizationReadsDropboxOnly": true,
+    "languageReviewReadsDropboxOnly": true,
+    "languageFailuresAreLocaleIsolated": true,
+    "sourceOnlyNamesAreNotCanonical": true,
     "productionPublication": false
   }
 }

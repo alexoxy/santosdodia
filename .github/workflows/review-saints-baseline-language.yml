@@ -1,0 +1,260 @@
+name: Review Saints Baseline v1 language
+run-name: Saints Baseline language · recognition-v1 · ${{ github.event_name }} · run ${{ github.run_number }}
+
+on:
+  workflow_run:
+    workflows: ['Normalize Saints Baseline v1 candidates']
+    types: [completed]
+  schedule:
+    - cron: '53 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  WIKIDATA_QUERY_VERSION: recognition-v1
+  NORMALIZATION_VERSION: '1.1'
+  LANGUAGE_REVIEW_VERSION: '1.1'
+  NORMALIZATION_PROGRESS_STREAM: baseline-normalized-progress/saints/v1/wikidata/recognition-v1
+  NORMALIZED_STREAM_PREFIX: baseline/saints/v1/normalized/wikidata/recognition-v1
+  LANGUAGE_PROGRESS_STREAM: baseline-reviewed-progress/saints/v1/wikidata/recognition-v1
+  REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
+
+concurrency:
+  group: saints-baseline-v1-language-wikidata-recognition-v1
+  cancel-in-progress: false
+
+jobs:
+  review-next-batch:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate language-review contract
+        run: |
+          npm run saints:baseline-audit
+          node scripts/baseline/test-wikidata-baseline-language-review.mjs
+          node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
+          npm run linguistic:audit
+          npm run linguistic:date-test
+          npm run translations:validate
+
+      - name: Pull verified normalization watermark
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$NORMALIZATION_PROGRESS_STREAM"
+          --destination staging/baseline-language/normalized-progress
+
+      - name: Extract normalization watermark
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-language/normalized-progress/package.tar.gz'
+          dst='staging/baseline-language/normalized-progress/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-language/normalized-progress/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-language/normalized-progress.json
+
+      - name: Pull previous language-review watermark when it exists
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$LANGUAGE_PROGRESS_STREAM"
+          --destination staging/baseline-language/reviewed-progress
+          --allow-missing
+
+      - name: Extract previous language-review watermark when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt='staging/baseline-language/reviewed-progress/consumer-receipt.json'
+          missing="$(node -e "const fs=require('node:fs'); const r=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); process.stdout.write(String(r.missing===true));" "$receipt")"
+          if [ "$missing" = 'true' ]; then exit 0; fi
+          src='staging/baseline-language/reviewed-progress/package.tar.gz'
+          dst='staging/baseline-language/reviewed-progress/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-language/reviewed-progress/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-language/reviewed-progress.json
+
+      - name: Plan ordered locale-isolated review
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --normalized-progress staging/baseline-language/normalized-progress.json
+            --query-version "$WIKIDATA_QUERY_VERSION"
+            --normalization-version "$NORMALIZATION_VERSION"
+            --review-version "$LANGUAGE_REVIEW_VERSION"
+            --normalized-prefix "$NORMALIZED_STREAM_PREFIX"
+            --reviewed-prefix "$REVIEWED_STREAM_PREFIX"
+          )
+          if [ -f staging/baseline-language/reviewed-progress.json ]; then args+=(--reviewed-progress staging/baseline-language/reviewed-progress.json); fi
+          node scripts/baseline/plan-wikidata-baseline-language-review.mjs "${args[@]}" > staging/baseline-language/plan.json
+          cat staging/baseline-language/plan.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('staging/baseline-language/plan.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${p.shouldRun}\nnormalized_stream=${p.normalizedStream}\nreviewed_stream=${p.reviewedStream}\nstart_page=${p.targetStartPage}\n`);
+          NODE
+
+      - name: Pull exact immutable NORMALIZED batch from Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          NORMALIZED_STREAM: ${{ steps.plan.outputs.normalized_stream }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$NORMALIZED_STREAM"
+          --destination staging/baseline-language/normalized
+
+      - name: Extract and validate exact NORMALIZED batch
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-language/normalized/package.tar.gz'
+          dst='staging/baseline-language/normalized/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-language/normalized/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          manifest="$(find "$dst" -type f -name staging-manifest.json | sort | tail -n 1)"
+          summary="$(find "$dst" -type f -name raw-summary.json | sort | tail -n 1)"
+          test -n "$manifest"
+          test -n "$summary"
+          normalized_dir="$(dirname "$manifest")"
+          node - "$manifest" "$summary" staging/baseline-language/plan.json <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const summary = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+          const plan = JSON.parse(fs.readFileSync(process.argv[4], 'utf8'));
+          if (manifest.queryVersion !== plan.queryVersion || manifest.stagingVersion !== plan.normalizationVersion) throw new Error('NORMALIZED package epoch/version mismatch.');
+          if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('NORMALIZED package is not staging-only.');
+          if (summary.startPage !== plan.targetStartPage || summary.queryVersion !== plan.queryVersion) throw new Error('NORMALIZED package points to the wrong source shard.');
+          if (plan.expectedSourceRunId && summary.runId !== plan.expectedSourceRunId) throw new Error('Latest NORMALIZED runId mismatch.');
+          NODE
+          printf '%s\n' "$normalized_dir" > staging/baseline-language/normalized-dir.txt
+          cp "$summary" staging/baseline-language/upstream-summary.json
+
+      - name: Review names and text by locale
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          normalized_dir="$(cat staging/baseline-language/normalized-dir.txt)"
+          npm run linguistic:review-package -- --input "$normalized_dir" --output staging/baseline-language/reviewed
+          cp staging/baseline-language/normalized/consumer-receipt.json staging/baseline-language/reviewed/upstream-normalized-receipt.json
+
+      - name: Verify locale isolation and closed publication gate
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const base = 'staging/baseline-language/reviewed';
+          const manifest = JSON.parse(fs.readFileSync(`${base}/staging-manifest.json`, 'utf8'));
+          const review = JSON.parse(fs.readFileSync(`${base}/linguistic-review.json`, 'utf8'));
+          if (manifest.stage !== 'linguistically-reviewed' || manifest.publish !== false) throw new Error('Language Editor output must remain reviewed staging-only.');
+          if (manifest.linguisticReviewVersion !== process.env.LANGUAGE_REVIEW_VERSION) throw new Error('Language Editor version mismatch.');
+          if (review.batchFatalCount !== 0 || review.criticalCount !== 0) throw new Error('Language Editor has batch-fatal issues.');
+          if (review.policy?.localeIsolation !== true || review.policy?.sourceOnlyIsNotCanonical !== true) throw new Error('Locale-isolation policy is missing.');
+          for (const file of ['localized-name-decisions.jsonl','translation-queue.jsonl']) if (!fs.existsSync(`${base}/${file}`)) throw new Error(`Missing ${file}.`);
+          NODE
+
+      - name: Archive immutable REVIEWED batch in Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          REVIEWED_STREAM: ${{ steps.plan.outputs.reviewed_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$REVIEWED_STREAM"
+          --source staging/baseline-language/reviewed
+          --source staging/baseline-language/plan.json
+          --source staging/baseline-language/upstream-summary.json
+
+      - name: Finalize language-review watermark
+        if: steps.plan.outputs.should_run == 'true'
+        run: >-
+          node scripts/baseline/finalize-wikidata-baseline-language-review.mjs
+          --plan staging/baseline-language/plan.json
+          --manifest staging/baseline-language/reviewed/staging-manifest.json
+          --review staging/baseline-language/reviewed/linguistic-review.json
+          --normalized-receipt staging/baseline-language/normalized/consumer-receipt.json
+          --upstream-summary staging/baseline-language/upstream-summary.json
+          --output staging/baseline-language/progress/progress.json
+
+      - name: Advance verified language-review watermark
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$LANGUAGE_PROGRESS_STREAM"
+          --source staging/baseline-language/progress/progress.json
+
+      - name: Upload bounded language-review evidence
+        if: steps.plan.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: saints-baseline-reviewed-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
+          path: |
+            staging/baseline-language/plan.json
+            staging/baseline-language/upstream-summary.json
+            staging/baseline-language/reviewed/staging-manifest.json
+            staging/baseline-language/reviewed/linguistic-review.json
+            staging/baseline-language/reviewed/localized-name-decisions.jsonl
+            staging/baseline-language/reviewed/translation-queue.jsonl
+            staging/baseline-language/progress/progress.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report no-op
+        if: steps.plan.outputs.should_run != 'true'
+        run: echo 'Language-review watermark is caught up with normalization; no work performed.'
