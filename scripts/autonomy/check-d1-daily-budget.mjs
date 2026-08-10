@@ -48,12 +48,17 @@ export function canonicalBudgetRuns(runs, currentRunId) {
   return [...unique.values()];
 }
 
-export async function checkSharedD1DailyBudget({ repository, workflows, currentRunId, token, now = new Date(), fetchImpl = fetch, policy = loadGuardrails() }) {
+export async function checkSharedD1DailyBudget({ repository, workflows, currentRunId, token, maximum = null, now = new Date(), fetchImpl = fetch, policy = loadGuardrails() }) {
+  const configuredMaximum = policy.autonomousLimits.d1RemoteOperationsPerUtcDay;
+  const effectiveMaximum = maximum === null || maximum === undefined ? configuredMaximum : Number(maximum);
+  if (!Number.isSafeInteger(effectiveMaximum) || effectiveMaximum < 1 || effectiveMaximum > 100) {
+    throw new Error('D1 daily-operation maximum must be an integer between 1 and 100.');
+  }
   const runs = await fetchWorkflowRuns({ repository, workflows, token, fetchImpl });
   const budgetRuns = canonicalBudgetRuns(runs, currentRunId);
   const budget = assertDailyActionBudget(budgetRuns, {
     currentRunId: null,
-    maximum: policy.autonomousLimits.d1RemoteOperationsPerUtcDay,
+    maximum: effectiveMaximum,
     now,
   });
   return {
@@ -63,7 +68,11 @@ export async function checkSharedD1DailyBudget({ repository, workflows, currentR
     workflows: [...new Set(workflows)],
     runsScanned: runs.length,
     uniquePriorRunsScanned: budgetRuns.length,
-    policy: 'shared-autonomous-d1-remote-operation-budget',
+    configuredMaximum,
+    effectiveMaximum,
+    policy: effectiveMaximum === configuredMaximum
+      ? 'shared-autonomous-d1-remote-operation-budget'
+      : 'bounded-workflow-specific-d1-remote-operation-budget',
   };
 }
 
@@ -71,8 +80,15 @@ async function main() {
   const repository = argument('--repository');
   const workflows = String(argument('--workflows', '')).split(',').map((value) => value.trim()).filter(Boolean);
   const currentRunId = argument('--current-run-id');
+  const maximumArg = argument('--maximum');
   const tokenName = argument('--token-env', 'GITHUB_TOKEN');
-  const result = await checkSharedD1DailyBudget({ repository, workflows, currentRunId, token: process.env[tokenName] });
+  const result = await checkSharedD1DailyBudget({
+    repository,
+    workflows,
+    currentRunId,
+    maximum: maximumArg === null ? null : Number(maximumArg),
+    token: process.env[tokenName],
+  });
   process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
 }
 
