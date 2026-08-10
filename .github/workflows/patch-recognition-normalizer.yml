@@ -1,0 +1,57 @@
+name: One-shot recognition normalizer patch
+
+on:
+  push:
+    branches:
+      - agent/normalize-recognition-status
+    paths:
+      - scripts/maintenance/patch-recognition-normalizer.flag
+
+permissions:
+  contents: write
+
+concurrency:
+  group: one-shot-recognition-normalizer-patch
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+        with:
+          ref: agent/normalize-recognition-status
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Apply recognition-aware normalization patch
+        run: node scripts/maintenance/patch-recognition-normalizer.mjs
+
+      - name: Validate patched normalization and syntax
+        run: |
+          npm run osint:normalize-test
+          node --check scripts/autonomy/build-knowledge-d1-batch.mjs
+          npm run automation:audit
+
+      - name: Commit generated source changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/osint/normalize-wikidata-saints.mjs scripts/osint/test-normalize-wikidata-saints.mjs scripts/autonomy/build-knowledge-d1-batch.mjs
+          if git diff --cached --quiet; then
+            echo 'No generated source changes.'
+            exit 1
+          fi
+          git commit -m 'Preserve recognition status as provisional evidence'
+          git push origin HEAD:agent/normalize-recognition-status
