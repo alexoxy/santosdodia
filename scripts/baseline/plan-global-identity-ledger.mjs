@@ -14,7 +14,9 @@ export function planGlobalIdentityLedger({
   progress,
   previousManifest = null,
   previousSourceBatches = null,
+  previousLanguageCoverage = null,
   identityVersion = '1.0',
+  languageCoverageVersion = null,
   queryVersion = 'recognition-v1',
 } = {}) {
   if (!progress || progress.schemaVersion !== 1 || progress.baselineId !== 'saints-v1' || progress.sourceId !== 'wikidata') {
@@ -26,13 +28,15 @@ export function planGlobalIdentityLedger({
     const sourceBatches = previousSourceBatches.batches ?? [];
     const last = sourceBatches.at(-1);
     const latest = progress.lastReviewed;
-    const same = previousManifest.identityVersion === identityVersion &&
+    const identityCurrent = previousManifest.identityVersion === identityVersion &&
       previousManifest.queryVersion === queryVersion &&
       previousManifest.sourceEntityOccurrences === progress.cumulativeEntitiesReviewed &&
       last?.startPage === latest?.sourceStartPage &&
       last?.nextPage === latest?.sourceNextPage &&
       last?.sourceRunId === latest?.sourceRunId;
-    if (same) { shouldRun = false; reason = 'identity-ledger-already-current'; }
+    const languageCurrent = languageCoverageVersion === null || previousLanguageCoverage?.languageCoverageVersion === languageCoverageVersion;
+    if (identityCurrent && languageCurrent) { shouldRun = false; reason = 'identity-ledger-already-current'; }
+    else if (identityCurrent && !languageCurrent) reason = 'language-coverage-contract-changed';
   }
   return { schemaVersion: 1, shouldRun, reason };
 }
@@ -43,11 +47,14 @@ function main() {
   if (!progressPath || !output) throw new Error('--review-progress and --output are required.');
   const previousManifestPath = argument('--previous-manifest');
   const previousSourceBatchesPath = argument('--previous-source-batches');
+  const previousLanguageCoveragePath = argument('--previous-language-coverage');
   const plan = planGlobalIdentityLedger({
     progress: readJson(progressPath),
     previousManifest: previousManifestPath && fs.existsSync(previousManifestPath) ? readJson(previousManifestPath) : null,
     previousSourceBatches: previousSourceBatchesPath && fs.existsSync(previousSourceBatchesPath) ? readJson(previousSourceBatchesPath) : null,
+    previousLanguageCoverage: previousLanguageCoveragePath && fs.existsSync(previousLanguageCoveragePath) ? readJson(previousLanguageCoveragePath) : null,
     identityVersion: argument('--identity-version', '1.0'),
+    languageCoverageVersion: argument('--language-coverage-version'),
     queryVersion: argument('--query-version', 'recognition-v1'),
   });
   const resolved = path.resolve(output);
