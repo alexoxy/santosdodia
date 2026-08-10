@@ -46,6 +46,9 @@ jobs:
       - name: Audit Saints Baseline v1 freeze and source plan
         run: npm run saints:baseline-audit
 
+      - name: Test Saints Baseline v1 resumable watermark logic
+        run: npm run saints:baseline-test
+
       - name: Test temporal core and calendar bridge
         run: npm run temporal:test
 
