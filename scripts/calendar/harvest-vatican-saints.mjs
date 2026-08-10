@@ -40,13 +40,17 @@ function textFromHtml(value) {
 function isGenericHeading(value) {
   const normalized = value.toLocaleLowerCase('pt').replace(/[.:]/gu, '').trim();
   return [
-    'santo do dia', 'santos do dia', 'saint of the day', 'pope activities',
-    'atividades do papa', 'últimas notícias', 'ultimas noticias'
+    'santo do dia', 'santos do dia', 'saint of the day',
+    'atividades do papa', 'pope activities',
+    'a nossa fé', 'a nossa fe', 'our faith',
+    'últimas notícias', 'ultimas noticias', 'latest news',
+    'informações úteis', 'informacoes uteis', 'useful information'
   ].includes(normalized);
 }
 
 export function extractSaintsFromCalendarHtml(html, { month, day, pageUrl }) {
-  const headings = [...String(html).matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/giu)];
+  const source = String(html);
+  const headings = [...source.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/giu)];
   const expectedPt = `/pt/santo-do-dia/${pad(month)}/${pad(day)}/`;
   const expectedEn = `/en/saints/${pad(month)}/${pad(day)}/`;
   const records = [];
@@ -54,19 +58,25 @@ export function extractSaintsFromCalendarHtml(html, { month, day, pageUrl }) {
   for (let index = 0; index < headings.length; index += 1) {
     const heading = headings[index];
     const name = textFromHtml(heading[1]);
-    if (!name || isGenericHeading(name)) continue;
+    if (!name) continue;
+    if (isGenericHeading(name)) {
+      if (records.length) break;
+      continue;
+    }
     const start = (heading.index ?? 0) + heading[0].length;
-    const end = index + 1 < headings.length ? headings[index + 1].index : String(html).length;
-    const section = String(html).slice(start, end);
+    const end = index + 1 < headings.length ? headings[index + 1].index : source.length;
+    const section = source.slice(start, end);
     const links = [...section.matchAll(/href=["']([^"']+)["']/giu)].map((match) => match[1]);
     const href = links.find((value) => value.includes(expectedPt) || value.includes(expectedEn));
-    if (!href) continue;
-    const detailUrl = new URL(href, pageUrl).toString();
+    const detailUrl = href ? new URL(href, pageUrl).toString() : null;
     records.push({ name, detailUrl });
   }
 
   const unique = new Map();
-  for (const record of records) unique.set(record.detailUrl, record);
+  for (const record of records) {
+    const key = record.detailUrl ?? record.name.normalize('NFC').toLocaleLowerCase('pt');
+    if (!unique.has(key)) unique.set(key, record);
+  }
   return [...unique.values()];
 }
 
@@ -139,7 +149,7 @@ export async function harvestVaticanSaints({ scope = 'current-month', output = D
         byteSize: Buffer.byteLength(html),
         saints: saints.map((saint) => ({
           ...saint,
-          sourceRecordHash: sha256(`${finalUrl}\n${saint.name}\n${saint.detailUrl}`)
+          sourceRecordHash: sha256(`${finalUrl}\n${saint.name}\n${saint.detailUrl ?? ''}`)
         }))
       });
       if (!saints.length) failures.push({ month, day, sourceUrl: finalUrl, reason: 'no-saints-extracted' });
