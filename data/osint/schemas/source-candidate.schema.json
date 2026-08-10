@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.santosdodia.com/schemas/source-candidate.schema.json",
+  "title": "SantosDia source scout candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["candidateVersion", "url", "host", "discoveredFrom", "discoveredAt", "signals", "status"],
+  "properties": {
+    "candidateVersion": {"const": "1.0"},
+    "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "host": {"type": "string", "minLength": 1},
+    "discoveredFrom": {"type": "string", "format": "uri"},
+    "discoveredAt": {"type": "string", "format": "date-time"},
+    "relation": {"type": "string"},
+    "signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sameHost", "structuredAccess"],
+      "properties": {
+        "sameHost": {"type": "boolean"},
+        "structuredAccess": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["api", "json", "xml", "rss", "atom", "ics", "csv", "pdf", "sitemap", "html"]}
+        },
+        "officialLinkHint": {"type": "boolean"},
+        "linkText": {"type": "string"}
+      }
+    },
+    "status": {"enum": ["candidate", "known-source", "blocked", "review-required"]},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
