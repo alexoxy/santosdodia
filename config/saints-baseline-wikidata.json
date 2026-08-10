@@ -7,7 +7,10 @@
   "normalizationVersion": "1.1",
   "languageReviewVersion": "1.1",
   "d1ImportVersion": "1.0",
-  "d1ImportEntityLimit": 200,
+  "d1ImportEntityLimit": 125,
+  "d1ImportMaxRowsWrittenPerChunk": 2000,
+  "d1ImportMaxOperationsPerUtcDay": 20,
+  "d1ImportMaxRowsWrittenPerUtcDay": 40000,
   "progressStream": "baseline-progress/saints/v1/wikidata/recognition-v1",
   "rawStreamPrefix": "baseline/saints/v1/raw/wikidata/recognition-v1",
   "normalizationProgressStream": "baseline-normalized-progress/saints/v1/wikidata/recognition-v1",
@@ -39,6 +42,7 @@
     "importReadsReviewedDropboxOnly": true,
     "d1StagingOnly": true,
     "withheldLocalizedNamesNeverEnterDisplayTable": true,
+    "baselineBootstrapThroughputOnly": true,
     "productionPublication": false
   }
 }
