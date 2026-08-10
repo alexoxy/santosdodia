@@ -79,6 +79,9 @@ jobs:
       - name: Test multilingual date formatting
         run: npm run linguistic:date-test
 
+      - name: Test display-label whitespace normalization
+        run: npm run linguistic:text-test
+
       - name: Audit deterministic linguistic quality
         run: npm run linguistic:audit
 
