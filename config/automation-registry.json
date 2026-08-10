@@ -28,10 +28,7 @@
       "crons": ["15 4 * * 1"],
       "publicationMode": "staging-only",
       "archiveStream": "observances",
-      "producerScripts": [
-        "scripts/sync-observances.mjs",
-        "scripts/build-runtime-fallback.mjs"
-      ]
+      "producerScripts": ["scripts/sync-observances.mjs", "scripts/build-runtime-fallback.mjs"]
     },
     {
       "id": "litcal-refresh",
@@ -42,11 +39,7 @@
       "crons": ["35 3 * * 2"],
       "publicationMode": "staging-only",
       "archiveStream": "litcal",
-      "producerScripts": [
-        "scripts/mirror-litcal-source.sh",
-        "scripts/sync-litcal-mirror.mjs",
-        "scripts/sync-name-translations.mjs"
-      ]
+      "producerScripts": ["scripts/mirror-litcal-source.sh", "scripts/sync-litcal-mirror.mjs", "scripts/sync-name-translations.mjs"]
     },
     {
       "id": "ecclesiastical-osint",
@@ -71,15 +64,48 @@
       "producerScripts": ["scripts/audit-source-freshness.mjs"]
     },
     {
-      "id": "autonomous-data-plane-shadow",
-      "title": "Autonomous acquisition and normalization shadow cycle",
+      "id": "autonomous-scout-saints-wikidata",
+      "title": "Autonomous Scout acquisition for saints Wikidata partition",
       "owner": "data-operations",
       "mode": "scheduled",
-      "workflow": ".github/workflows/autonomous-data-plane-shadow.yml",
+      "workflow": ".github/workflows/autonomous-osint-acquisition.yml",
       "crons": ["47 2 * * 3"],
       "publicationMode": "staging-only",
-      "archiveStream": "autonomous-data-plane",
-      "producerScripts": ["scripts/autonomy/run-shadow-data-plane.mjs"]
+      "archiveStream": "osint-raw/saints/wikidata",
+      "producerScripts": ["scripts/autonomy/build-plan.mjs", "scripts/osint/run-manifest.mjs"]
+    },
+    {
+      "id": "autonomous-normalizer-saints-wikidata",
+      "title": "Autonomous Dropbox normalizer for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-dropbox-normalization.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "osint-normalized/saints/wikidata",
+      "producerScripts": ["scripts/dropbox/pull-latest-stream.mjs", "scripts/osint/normalize-wikidata-saints.mjs"]
+    },
+    {
+      "id": "autonomous-language-editor-saints-wikidata",
+      "title": "Autonomous linguistic review for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-linguistic-review.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "osint-reviewed/saints/wikidata",
+      "producerScripts": ["scripts/linguistic/review-normalized-package.mjs"]
+    },
+    {
+      "id": "autonomous-importer-saints-wikidata",
+      "title": "Autonomous D1 staging importer for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-d1-importer.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "import-receipts/saints/wikidata",
+      "producerScripts": ["scripts/autonomy/build-knowledge-d1-batch.mjs", "scripts/manage-d1-knowledge-staging.mjs"]
     },
     {
       "id": "quality-gate",
@@ -123,10 +149,7 @@
       "crons": [],
       "publicationMode": "staging-only",
       "archiveStream": "ecclesiastical-directory/{source}",
-      "producerScripts": [
-        "scripts/sync-ecclesiastical-directory.mjs",
-        "scripts/build-ecclesiastical-staging-sql.mjs"
-      ]
+      "producerScripts": ["scripts/sync-ecclesiastical-directory.mjs", "scripts/build-ecclesiastical-staging-sql.mjs"]
     },
     {
       "id": "wikidata-normalization",
