@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
-  "principle": "partitioned-three-stage-pipeline",
-  "stages": ["scout", "normalizer", "importer"],
+  "principle": "partitioned-three-stage-pipeline-with-transversal-gates",
+  "dataStages": ["scout", "normalizer", "importer"],
+  "transversalGates": ["language-editor"],
   "globalRules": {
     "noGlobalQueue": true,
     "noGlobalLock": true,
@@ -17,10 +18,11 @@
   "lanes": [
     {
       "id": "saints",
-      "domains": ["saints", "persons", "names", "identifiers", "dates", "patronages", "places"],
+      "domains": ["saints", "persons", "names", "identifiers", "dates", "patronages", "places", "recognition-events"],
       "partitionKey": "source_id",
       "rawStreamTemplate": "osint-raw/saints/{source_id}",
       "normalizedStreamTemplate": "osint-normalized/saints/{source_id}",
+      "reviewedStreamTemplate": "osint-reviewed/saints/{source_id}",
       "importTarget": "d1:knowledge-graph",
       "maxConcurrentPartitions": 4,
       "priority": "P0"
@@ -31,6 +33,7 @@
       "partitionKey": "church_or_jurisdiction",
       "rawStreamTemplate": "osint-raw/calendars/{partition}",
       "normalizedStreamTemplate": "osint-normalized/calendars/{partition}",
+      "reviewedStreamTemplate": "osint-reviewed/calendars/{partition}",
       "importTarget": "d1:calendar",
       "maxConcurrentPartitions": 6,
       "priority": "P0"
@@ -41,6 +44,7 @@
       "partitionKey": "source_id_or_church",
       "rawStreamTemplate": "osint-raw/hierarchy/{partition}",
       "normalizedStreamTemplate": "osint-normalized/hierarchy/{partition}",
+      "reviewedStreamTemplate": "osint-reviewed/hierarchy/{partition}",
       "importTarget": "d1:knowledge-graph",
       "maxConcurrentPartitions": 6,
       "priority": "P0"
@@ -51,16 +55,18 @@
       "partitionKey": "institution_id",
       "rawStreamTemplate": "osint-raw/media/{partition}",
       "normalizedStreamTemplate": "osint-normalized/media/{partition}",
+      "reviewedStreamTemplate": "osint-reviewed/media/{partition}",
       "importTarget": "d1:knowledge-graph",
       "maxConcurrentPartitions": 8,
       "priority": "P1"
     },
     {
       "id": "documents",
-      "domains": ["documents", "decrees", "liturgical-law", "canonizations"],
+      "domains": ["documents", "decrees", "liturgical-law", "recognition-events"],
       "partitionKey": "publisher_id",
       "rawStreamTemplate": "osint-raw/documents/{partition}",
       "normalizedStreamTemplate": "osint-normalized/documents/{partition}",
+      "reviewedStreamTemplate": "osint-reviewed/documents/{partition}",
       "importTarget": "d1:knowledge-graph",
       "maxConcurrentPartitions": 4,
       "priority": "P1"
@@ -71,9 +77,13 @@
       "store": "dropbox",
       "required": ["verified_index", "raw_package", "source_receipts", "sha256", "source_run_id"]
     },
-    "normalizerToImporter": {
+    "normalizerToLanguageEditor": {
       "store": "dropbox",
       "required": ["verified_index", "normalized_package", "quality_report", "conflict_report", "upstream_lineage", "sha256"]
+    },
+    "languageEditorToImporter": {
+      "store": "dropbox",
+      "required": ["verified_index", "reviewed_package", "linguistic_review", "upstream_lineage", "sha256"]
     },
     "importerToProduction": {
       "store": "cloudflare-d1",
