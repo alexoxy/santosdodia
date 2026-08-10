@@ -1,0 +1,253 @@
+name: Normalize Saints Baseline v1 candidates
+run-name: Saints Baseline normalize · recognition-v1 · ${{ github.event_name }} · run ${{ github.run_number }}
+
+on:
+  workflow_run:
+    workflows: ['Build Saints Baseline v1 candidates']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  WIKIDATA_QUERY_VERSION: recognition-v1
+  NORMALIZATION_VERSION: '1.1'
+  ACQUISITION_PROGRESS_STREAM: baseline-progress/saints/v1/wikidata/recognition-v1
+  RAW_STREAM_PREFIX: baseline/saints/v1/raw/wikidata/recognition-v1
+  NORMALIZATION_PROGRESS_STREAM: baseline-normalized-progress/saints/v1/wikidata/recognition-v1
+  NORMALIZED_STREAM_PREFIX: baseline/saints/v1/normalized/wikidata/recognition-v1
+
+concurrency:
+  group: saints-baseline-v1-normalizer-wikidata-recognition-v1
+  cancel-in-progress: false
+
+jobs:
+  normalize-latest-batch:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate baseline normalization contract
+        run: |
+          npm run saints:baseline-audit
+          npm run saints:baseline-normalization-test
+          npm run osint:normalize-test
+          npm run autonomy:lanes-audit
+          npm run linguistic:audit
+
+      - name: Pull verified acquisition watermark
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$ACQUISITION_PROGRESS_STREAM"
+          --destination staging/baseline-normalizer/source-progress
+
+      - name: Extract verified acquisition watermark package
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-normalizer/source-progress/package.tar.gz'
+          dst='staging/baseline-normalizer/source-progress/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-normalizer/source-progress/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-normalizer/source-progress.json
+
+      - name: Pull previous normalization watermark when it exists
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$NORMALIZATION_PROGRESS_STREAM"
+          --destination staging/baseline-normalizer/normalized-progress
+          --allow-missing
+
+      - name: Extract previous normalization watermark when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt='staging/baseline-normalizer/normalized-progress/consumer-receipt.json'
+          missing="$(node -e "const r=require('./' + process.argv[1]); process.stdout.write(String(r.missing===true))" "$receipt")"
+          if [ "$missing" = 'true' ]; then
+            exit 0
+          fi
+          src='staging/baseline-normalizer/normalized-progress/package.tar.gz'
+          dst='staging/baseline-normalizer/normalized-progress/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-normalizer/normalized-progress/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-normalizer/normalized-progress.json
+
+      - name: Plan idempotent normalization
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --source-progress staging/baseline-normalizer/source-progress.json
+            --query-version "$WIKIDATA_QUERY_VERSION"
+            --normalization-version "$NORMALIZATION_VERSION"
+            --raw-prefix "$RAW_STREAM_PREFIX"
+            --normalized-prefix "$NORMALIZED_STREAM_PREFIX"
+          )
+          if [ -f staging/baseline-normalizer/normalized-progress.json ]; then
+            args+=(--normalized-progress staging/baseline-normalizer/normalized-progress.json)
+          fi
+          node scripts/baseline/plan-wikidata-baseline-normalization.mjs "${args[@]}" > staging/baseline-normalizer/plan.json
+          cat staging/baseline-normalizer/plan.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('staging/baseline-normalizer/plan.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${p.shouldRun}\nraw_stream=${p.rawStream}\nnormalized_stream=${p.normalizedStream}\nstart_page=${p.sourceStartPage}\n`);
+          NODE
+
+      - name: Pull exact immutable RAW batch from Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          RAW_STREAM: ${{ steps.plan.outputs.raw_stream }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream "$RAW_STREAM"
+          --destination staging/baseline-normalizer/raw
+
+      - name: Extract and validate exact RAW batch
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-normalizer/raw/package.tar.gz'
+          dst='staging/baseline-normalizer/raw/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-normalizer/raw/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          summary="$(find "$dst" -type f -name summary.json | sort | tail -n 1)"
+          test -n "$summary"
+          run_dir="$(dirname "$summary")"
+          node - "$summary" staging/baseline-normalizer/plan.json <<'NODE'
+          const fs = require('node:fs');
+          const summary = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const plan = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+          if (summary.queryVersion !== plan.queryVersion) throw new Error('RAW queryVersion mismatch.');
+          if (summary.runId !== plan.sourceRunId) throw new Error('RAW runId does not match acquisition watermark.');
+          if (summary.startPage !== plan.sourceStartPage) throw new Error('RAW startPage does not match acquisition watermark.');
+          NODE
+          printf '%s\n' "$run_dir" > staging/baseline-normalizer/run-dir.txt
+
+      - name: Normalize from Dropbox RAW only
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_dir="$(cat staging/baseline-normalizer/run-dir.txt)"
+          npm run osint:normalize -- "$run_dir" staging/baseline-normalizer/normalized
+          cp staging/baseline-normalizer/raw/consumer-receipt.json staging/baseline-normalizer/normalized/upstream-raw-receipt.json
+
+      - name: Verify closed publication gate and epoch alignment
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('staging/baseline-normalizer/normalized/staging-manifest.json','utf8'));
+          const report = JSON.parse(fs.readFileSync('staging/baseline-normalizer/normalized/quality-report.json','utf8'));
+          if (manifest.stagingVersion !== process.env.NORMALIZATION_VERSION) throw new Error('Normalizer version mismatch.');
+          if (manifest.queryVersion !== process.env.WIKIDATA_QUERY_VERSION) throw new Error('Normalizer query epoch mismatch.');
+          if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Baseline normalizer must remain staging-only.');
+          if (report.publicationGate?.allowed !== false) throw new Error('Production publication gate must remain closed.');
+          if (!Number.isInteger(manifest.entityCount) || manifest.entityCount < 1) throw new Error('Normalizer produced no entities.');
+          NODE
+
+      - name: Archive immutable NORMALIZED batch in Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          NORMALIZED_STREAM: ${{ steps.plan.outputs.normalized_stream }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$NORMALIZED_STREAM"
+          --source staging/baseline-normalizer/normalized
+          --source staging/baseline-normalizer/plan.json
+
+      - name: Finalize normalization watermark
+        if: steps.plan.outputs.should_run == 'true'
+        run: >-
+          node scripts/baseline/finalize-wikidata-baseline-normalization.mjs
+          --plan staging/baseline-normalizer/plan.json
+          --manifest staging/baseline-normalizer/normalized/staging-manifest.json
+          --raw-receipt staging/baseline-normalizer/raw/consumer-receipt.json
+          --output staging/baseline-normalizer/progress/progress.json
+
+      - name: Advance verified normalization watermark
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream "$NORMALIZATION_PROGRESS_STREAM"
+          --source staging/baseline-normalizer/progress/progress.json
+
+      - name: Upload bounded normalization evidence
+        if: steps.plan.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: saints-baseline-normalized-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
+          path: |
+            staging/baseline-normalizer/plan.json
+            staging/baseline-normalizer/normalized/staging-manifest.json
+            staging/baseline-normalizer/normalized/quality-report.json
+            staging/baseline-normalizer/progress/progress.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report no-op
+        if: steps.plan.outputs.should_run != 'true'
+        run: echo 'Latest acquisition batch is already normalized; no work performed.'
