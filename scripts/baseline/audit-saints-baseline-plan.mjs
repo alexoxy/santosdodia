@@ -6,11 +6,15 @@ import path from 'node:path';
 const root = process.cwd();
 const baseline = JSON.parse(fs.readFileSync(path.join(root, 'config/saints-baseline-v1.json'), 'utf8'));
 const sourceRegistry = JSON.parse(fs.readFileSync(path.join(root, 'data/source-registry/seed.json'), 'utf8'));
+const baselineSources = JSON.parse(fs.readFileSync(path.join(root, 'data/source-registry/saints-baseline-v1-additions.json'), 'utf8'));
 const policyRegistry = JSON.parse(fs.readFileSync(path.join(root, 'data/osint/policies/p0-policy-registry.json'), 'utf8'));
 const errors = [];
 const warnings = [];
 
-const sourceIds = new Set((sourceRegistry.sources ?? []).map((source) => source.id));
+if (baselineSources.publicationAllowed !== false) errors.push('Baseline-specific source candidates must remain non-publishable until policy review.');
+const allSources = [...(sourceRegistry.sources ?? []), ...(baselineSources.sources ?? [])];
+const sourceIds = new Set(allSources.map((source) => source.id));
+const sourceById = new Map(allSources.map((source) => [source.id, source]));
 const policies = new Map((policyRegistry.sources ?? []).map((source) => [source.id, source]));
 
 if (baseline.schemaVersion !== 1 || baseline.baselineId !== 'saints-v1' || baseline.domain !== 'saints') {
@@ -39,6 +43,13 @@ for (const partition of baseline.traditionPartitions ?? []) {
   for (const field of ['candidateSources','confirmationSources','incrementalWatch']) {
     for (const sourceId of partition[field] ?? []) {
       if (!sourceIds.has(sourceId)) errors.push(`${partition.id}.${field} references unknown source ${sourceId}.`);
+      const source = sourceById.get(sourceId);
+      if (field !== 'candidateSources' && source && !['A1','A2'].includes(source.authorityClass) && !policies.has(sourceId)) {
+        warnings.push(`${partition.id}.${field} source ${sourceId} is not A1/A2 and has no explicit acquisition policy.`);
+      }
+      if (!policies.has(sourceId) && (baselineSources.sources ?? []).some((item) => item.id === sourceId)) {
+        warnings.push(`${sourceId} is mapped for baseline discovery but remains blocked for automated acquisition pending policy review.`);
+      }
     }
   }
   if ((partition.confirmationSources ?? []).length === 0 && !String(partition.processStatus ?? '').includes('required')) {
@@ -69,9 +80,10 @@ if (!workflow.includes('baseline-progress/saints/v1/wikidata')) errors.push('Bas
 const report = {
   ok: errors.length === 0,
   errors,
-  warnings,
+  warnings: [...new Set(warnings)].sort(),
   partitions: [...partitionIds],
   sourceCount: sourceIds.size,
+  baselineCandidateSourceCount: baselineSources.sources?.length ?? 0,
   generatedAt: new Date().toISOString(),
 };
 console.log(JSON.stringify(report, null, 2));
