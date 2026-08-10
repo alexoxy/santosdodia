@@ -41,7 +41,7 @@ jobs:
       should_run: ${{ steps.plan.outputs.should_run }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Use Node.js
         uses: actions/setup-node@v7
@@ -193,7 +193,7 @@ jobs:
 
       - name: Upload immutable D1 input
         if: steps.plan.outputs.should_run == 'true'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: saints-baseline-d1-input-${{ github.run_id }}
           path: |
@@ -224,7 +224,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Use Node.js
         uses: actions/setup-node@v7
@@ -236,7 +236,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download immutable D1 input
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: saints-baseline-d1-input-${{ github.run_id }}
           path: staging/baseline-import
@@ -306,7 +306,7 @@ jobs:
 
       - name: Upload verified D1 receipt
         if: steps.budget.outputs.allowed == 'true'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: saints-baseline-d1-receipt-${{ github.run_id }}
           path: |
@@ -329,7 +329,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Use Node.js
         uses: actions/setup-node@v7
@@ -337,13 +337,13 @@ jobs:
           node-version-file: .node-version
 
       - name: Download immutable D1 input
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: saints-baseline-d1-input-${{ github.run_id }}
           path: staging/baseline-import
 
       - name: Download verified D1 receipt
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: saints-baseline-d1-receipt-${{ github.run_id }}
           path: staging/baseline-import/receipt

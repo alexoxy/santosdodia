@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Use Node.js
         uses: actions/setup-node@v7
@@ -87,7 +87,7 @@ jobs:
           NODE
 
       - name: Upload reviewed evidence
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: autonomous-osint-reviewed-saints-wikidata-${{ github.run_id }}
           path: staging/osint-reviewed/saints/wikidata/

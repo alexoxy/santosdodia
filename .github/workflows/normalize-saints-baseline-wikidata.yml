@@ -32,7 +32,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Use Node.js
         uses: actions/setup-node@v7
@@ -242,7 +242,7 @@ jobs:
 
       - name: Upload bounded normalization evidence
         if: steps.plan.outputs.should_run == 'true'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: saints-baseline-normalized-${{ env.WIKIDATA_QUERY_VERSION }}-${{ github.run_id }}
           path: |
