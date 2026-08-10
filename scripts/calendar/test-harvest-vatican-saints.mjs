@@ -29,6 +29,21 @@ assert.deepEqual(saints, [
   }
 ]);
 assert.equal(JSON.stringify(saints).includes('Resumo editorial'), false);
+const alternateHeadingLevel = extractSaintsFromCalendarHtml(`
+<h3>S. Eduardo, rei da Inglaterra</h3>
+<p>Resumo.</p>
+<h3>S. João Nepomuceno Neumann, bispo</h3>
+<p>Resumo.</p>
+<h2>Atividades do Papa</h2>`, {
+  month: 1,
+  day: 5,
+  pageUrl: 'https://www.vaticannews.va/pt/santo-do-dia/01/05.html'
+});
+assert.deepEqual(alternateHeadingLevel, [
+  { name: 'S. Eduardo, rei da Inglaterra', detailUrl: null },
+  { name: 'S. João Nepomuceno Neumann, bispo', detailUrl: null }
+]);
+
 assert.equal(monthDays(2).length, 29);
 assert.equal(monthDays(4).length, 30);
 assert.equal(monthDays(12).length, 31);
