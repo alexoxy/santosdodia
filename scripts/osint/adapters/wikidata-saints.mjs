@@ -5,6 +5,8 @@ import { join } from 'node:path';
 
 const [sourceId = 'wikidata', outputRoot = 'data/osint/runs'] = process.argv.slice(2);
 const endpoint = 'https://query.wikidata.org/sparql';
+const queryVersion = process.env.OSINT_WIKIDATA_QUERY_VERSION || 'recognition-v1';
+if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(queryVersion)) throw new Error('Invalid OSINT_WIKIDATA_QUERY_VERSION.');
 const pageSize = boundedInteger(process.env.OSINT_WIKIDATA_PAGE_SIZE, 500, 50, 1000);
 const startPage = boundedInteger(process.env.OSINT_WIKIDATA_START_PAGE, 0, 0, 1000000);
 const maxPages = boundedInteger(process.env.OSINT_WIKIDATA_MAX_PAGES, 1, 1, 200);
@@ -16,6 +18,7 @@ await mkdir(runDir, { recursive: true });
 
 const summary = {
   adapterVersion: '1.2',
+  queryVersion,
   runId,
   sourceId,
   endpoint,
@@ -61,6 +64,7 @@ try {
 
     const receipt = {
       receiptVersion: '1.2',
+      queryVersion,
       runId: `${runId}-page-${page}`,
       sourceId,
       requestedUrl: endpoint,
