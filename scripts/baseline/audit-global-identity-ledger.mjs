@@ -58,5 +58,6 @@ assert.match(tarExtractor, /validateTarArchive/u);
 assert.match(planner, /identity-ledger-already-current/u);
 assert.match(verifier, /Name-only identity merges are forbidden/u);
 execFileSync(process.execPath, ['scripts/archive/test-validate-tar-entries.mjs'], { stdio: 'inherit' });
+execFileSync(process.execPath, ['scripts/baseline/test-global-identity-workflow-helpers.mjs'], { stdio: 'inherit' });
 
 console.log('Global candidate identity ledger audit passed.');
