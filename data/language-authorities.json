@@ -1,12 +1,100 @@
 {
-  "en": {"variant":"en-GB","editorial":"Oxford English Dictionary / Merriam-Webster","automated":"LanguageTool en-GB","reference":"https://www.oed.com/"},
-  "es": {"variant":"es","editorial":"Real Academia Española — Diccionario de la lengua española","automated":"LanguageTool es","reference":"https://dle.rae.es/"},
-  "pt": {"variant":"pt-PT","editorial":"Dicionário Priberam da Língua Portuguesa","automated":"LanguageTool pt-PT and Hunspell pt-PT","reference":"https://dicionario.priberam.org/"},
-  "fr": {"variant":"fr","editorial":"Dictionnaire de l’Académie française","automated":"LanguageTool fr","reference":"https://www.dictionnaire-academie.fr/"},
-  "fil": {"variant":"fil","editorial":"Komisyon sa Wikang Filipino","automated":"script and curated terminology validation","reference":"https://kwf.gov.ph/"},
-  "ru": {"variant":"ru","editorial":"Грамота.ру","automated":"LanguageTool ru","reference":"https://gramota.ru/"},
-  "sw": {"variant":"sw","editorial":"Baraza la Kiswahili la Taifa","automated":"script and curated terminology validation","reference":"https://www.bakita.go.tz/"},
-  "de": {"variant":"de-DE","editorial":"Duden","automated":"LanguageTool de-DE","reference":"https://www.duden.de/"},
-  "it": {"variant":"it","editorial":"Treccani / Accademia della Crusca","automated":"LanguageTool it","reference":"https://www.treccani.it/vocabolario/"},
-  "pl": {"variant":"pl","editorial":"Wielki słownik języka polskiego / PWN","automated":"LanguageTool pl","reference":"https://wsjp.pl/"}
+  "en": {
+    "variant": "en-GB",
+    "editorial": "Oxford English Dictionary + GOV.UK style guidance",
+    "dictionary": "Oxford English Dictionary",
+    "usageAndStyle": "GOV.UK style guide",
+    "automated": "LanguageTool en-GB",
+    "dateFormatting": "Intl/CLDR en-GB",
+    "reference": "https://www.oed.com/",
+    "styleReference": "https://www.gov.uk/guidance/style-guide/a-to-z-of-gov-uk-style"
+  },
+  "es": {
+    "variant": "es-ES",
+    "editorial": "Real Academia Española / ASALE",
+    "dictionary": "Diccionario de la lengua española",
+    "usageAndStyle": "Diccionario panhispánico de dudas",
+    "automated": "LanguageTool es",
+    "dateFormatting": "Intl/CLDR es-ES",
+    "reference": "https://dle.rae.es/",
+    "styleReference": "https://www.rae.es/dpd/"
+  },
+  "pt": {
+    "variant": "pt-PT",
+    "editorial": "Dicionário Priberam da Língua Portuguesa",
+    "dictionary": "Dicionário Priberam da Língua Portuguesa",
+    "usageAndStyle": "Norma europeia do português; regras editoriais SantosDia validadas para pt-PT",
+    "automated": "LanguageTool pt-PT + Hunspell pt-PT",
+    "dateFormatting": "Intl/CLDR pt-PT",
+    "reference": "https://dicionario.priberam.org/"
+  },
+  "fr": {
+    "variant": "fr-FR",
+    "editorial": "Académie française",
+    "dictionary": "Dictionnaire de l’Académie française",
+    "usageAndStyle": "Académie française — questions de langue",
+    "automated": "LanguageTool fr",
+    "dateFormatting": "Intl/CLDR fr-FR",
+    "reference": "https://www.dictionnaire-academie.fr/",
+    "styleReference": "https://www.academie-francaise.fr/questions-de-langue"
+  },
+  "fil": {
+    "variant": "fil-PH",
+    "editorial": "Komisyon sa Wikang Filipino",
+    "dictionary": "KWF dictionaries and terminology resources",
+    "usageAndStyle": "KWF Filipino orthography guidance",
+    "automated": "script validation + curated Filipino terminology",
+    "dateFormatting": "Intl/CLDR fil-PH",
+    "reference": "https://kwf.gov.ph/",
+    "styleReference": "https://library.kwf.gov.ph/"
+  },
+  "ru": {
+    "variant": "ru-RU",
+    "editorial": "Грамота.ру",
+    "dictionary": "Грамота.ру dictionaries",
+    "usageAndStyle": "Грамота.ру orthography and reference service",
+    "automated": "LanguageTool ru",
+    "dateFormatting": "Intl/CLDR ru-RU",
+    "reference": "https://gramota.ru/",
+    "styleReference": "https://gramota.ru/biblioteka/spravochniki/orfografiya"
+  },
+  "sw": {
+    "variant": "sw-TZ",
+    "editorial": "Baraza la Kiswahili la Taifa (BAKITA)",
+    "dictionary": "Kamusi Kuu ya Kiswahili",
+    "usageAndStyle": "BAKITA terminology and lexicography standards",
+    "automated": "script validation + curated Kiswahili terminology",
+    "dateFormatting": "Intl/CLDR sw-TZ",
+    "reference": "https://www.bakita.go.tz/",
+    "styleReference": "https://www.bakita.go.tz/index.php/pages/terminology-and-lexicography-section"
+  },
+  "de": {
+    "variant": "de-DE",
+    "editorial": "Duden + Amtliches Regelwerk der deutschen Rechtschreibung",
+    "dictionary": "Duden",
+    "usageAndStyle": "Duden Rechtschreibregeln / official German spelling rules",
+    "automated": "LanguageTool de-DE",
+    "dateFormatting": "Intl/CLDR de-DE",
+    "reference": "https://www.duden.de/woerterbuch",
+    "styleReference": "https://www.duden.de/sprachwissen/rechtschreibregeln"
+  },
+  "it": {
+    "variant": "it-IT",
+    "editorial": "Treccani + Accademia della Crusca",
+    "dictionary": "Vocabolario Treccani",
+    "usageAndStyle": "Accademia della Crusca — consulenza linguistica",
+    "automated": "LanguageTool it",
+    "dateFormatting": "Intl/CLDR it-IT",
+    "reference": "https://www.treccani.it/vocabolario/",
+    "styleReference": "https://accademiadellacrusca.it/it/consulenza"
+  },
+  "pl": {
+    "variant": "pl-PL",
+    "editorial": "Wielki słownik języka polskiego PAN",
+    "dictionary": "Wielki słownik języka polskiego PAN",
+    "usageAndStyle": "WSJP PAN + curated Polish language rules",
+    "automated": "LanguageTool pl",
+    "dateFormatting": "Intl/CLDR pl-PL",
+    "reference": "https://wsjp.pl/"
+  }
 }
