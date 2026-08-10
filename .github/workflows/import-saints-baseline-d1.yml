@@ -1,0 +1,376 @@
+name: Import Saints Baseline v1 to D1 staging
+run-name: Saints Baseline D1 · recognition-v1 · ${{ github.event_name }} · run ${{ github.run_number }}
+
+on:
+  workflow_run:
+    workflows: ['Review Saints Baseline v1 language']
+    types: [completed]
+  schedule:
+    - cron: '7 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+env:
+  WIKIDATA_QUERY_VERSION: recognition-v1
+  NORMALIZATION_VERSION: '1.1'
+  LANGUAGE_REVIEW_VERSION: '1.1'
+  D1_IMPORT_VERSION: '1.0'
+  D1_ENTITY_LIMIT: '200'
+  REVIEW_PROGRESS_STREAM: baseline-reviewed-progress/saints/v1/wikidata/recognition-v1
+  REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
+  IMPORT_PROGRESS_STREAM: baseline-import-progress/saints/v1/wikidata/recognition-v1
+  IMPORT_RECEIPT_PREFIX: baseline-import-receipts/saints/v1/wikidata/recognition-v1
+  D1_BUDGET_WORKFLOWS: autonomous-d1-importer.yml,import-saints-baseline-d1.yml
+
+concurrency:
+  group: saints-baseline-v1-d1-import-recognition-v1
+  cancel-in-progress: false
+
+jobs:
+  prepare-reviewed-chunk:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      should_run: ${{ steps.plan.outputs.should_run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate importer contract
+        run: |
+          npm run saints:baseline-import-test
+          npm run saints:baseline-importer-audit
+          npm run db:reviewed-chunk-test
+          npm run db:knowledge-batch-test
+          npm run db:d1-remote-safety-test
+          npm run cloudflare:guardrails-test
+
+      - name: Pull verified language-review watermark
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: npm run dropbox:pull-stream -- --stream "$REVIEW_PROGRESS_STREAM" --destination staging/baseline-import/review-progress
+
+      - name: Extract language-review watermark
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-import/review-progress/package.tar.gz'
+          dst='staging/baseline-import/review-progress/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-import/review-progress/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-import/review-progress.json
+
+      - name: Pull previous import watermark when it exists
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: npm run dropbox:pull-stream -- --stream "$IMPORT_PROGRESS_STREAM" --destination staging/baseline-import/import-progress --allow-missing
+
+      - name: Extract previous import watermark when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt='staging/baseline-import/import-progress/consumer-receipt.json'
+          missing="$(node -e "const fs=require('node:fs'); const r=JSON.parse(fs.readFileSync(process.argv[1],'utf8')); process.stdout.write(String(r.missing===true));" "$receipt")"
+          if [ "$missing" = 'true' ]; then exit 0; fi
+          src='staging/baseline-import/import-progress/package.tar.gz'
+          dst='staging/baseline-import/import-progress/extracted'
+          mkdir -p "$dst"
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          progress="$(find "$dst" -type f -name progress.json | sort | tail -n 1)"
+          test -n "$progress"
+          cp "$progress" staging/baseline-import/import-progress.json
+
+      - name: Plan ordered D1 chunk
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --reviewed-progress staging/baseline-import/review-progress.json
+            --query-version "$WIKIDATA_QUERY_VERSION"
+            --normalization-version "$NORMALIZATION_VERSION"
+            --review-version "$LANGUAGE_REVIEW_VERSION"
+            --import-version "$D1_IMPORT_VERSION"
+            --entity-limit "$D1_ENTITY_LIMIT"
+            --reviewed-prefix "$REVIEWED_STREAM_PREFIX"
+            --receipt-prefix "$IMPORT_RECEIPT_PREFIX"
+          )
+          if [ -f staging/baseline-import/import-progress.json ]; then args+=(--import-progress staging/baseline-import/import-progress.json); fi
+          node scripts/baseline/plan-wikidata-baseline-import.mjs "${args[@]}" > staging/baseline-import/plan.json
+          cat staging/baseline-import/plan.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const p = JSON.parse(fs.readFileSync('staging/baseline-import/plan.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${p.shouldRun}\nreviewed_stream=${p.reviewedStream}\nreceipt_stream=${p.receiptStream}\nentity_offset=${p.entityOffset}\nentity_limit=${p.entityLimit}\n`);
+          NODE
+
+      - name: Pull exact immutable REVIEWED batch
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          REVIEWED_STREAM: ${{ steps.plan.outputs.reviewed_stream }}
+        run: npm run dropbox:pull-stream -- --stream "$REVIEWED_STREAM" --destination staging/baseline-import/reviewed
+
+      - name: Extract and validate reviewed batch
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='staging/baseline-import/reviewed/package.tar.gz'
+          dst='staging/baseline-import/reviewed/extracted'
+          mkdir -p "$dst"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const listing = execFileSync('tar', ['-tzf', 'staging/baseline-import/reviewed/package.tar.gz'], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          NODE
+          tar -xzf "$src" -C "$dst" --no-same-owner --no-same-permissions
+          manifest="$(find "$dst" -type f -name staging-manifest.json | sort | tail -n 1)"
+          summary="$(find "$dst" -type f -name upstream-summary.json | sort | tail -n 1)"
+          test -n "$manifest"
+          test -n "$summary"
+          reviewed_dir="$(dirname "$manifest")"
+          cp "$manifest" staging/baseline-import/reviewed-manifest.json
+          cp "$summary" staging/baseline-import/upstream-summary.json
+          cp staging/baseline-import/reviewed/consumer-receipt.json staging/baseline-import/reviewed-receipt.json
+          printf '%s\n' "$reviewed_dir" > staging/baseline-import/reviewed-dir.txt
+          node - staging/baseline-import/reviewed-manifest.json staging/baseline-import/upstream-summary.json staging/baseline-import/plan.json <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          const summary = JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
+          const plan = JSON.parse(fs.readFileSync(process.argv[4],'utf8'));
+          if (manifest.stage !== 'linguistically-reviewed' || manifest.publish !== false) throw new Error('Importer requires reviewed staging-only input.');
+          if (manifest.queryVersion !== plan.queryVersion || manifest.stagingVersion !== plan.normalizationVersion || manifest.linguisticReviewVersion !== plan.languageReviewVersion) throw new Error('Reviewed package pipeline version mismatch.');
+          if (summary.startPage !== plan.targetStartPage || summary.queryVersion !== plan.queryVersion) throw new Error('Reviewed source shard mismatch.');
+          if (plan.expectedSourceRunId && summary.runId !== plan.expectedSourceRunId) throw new Error('Latest reviewed source run mismatch.');
+          NODE
+
+      - name: Build bounded reviewed D1 chunk
+        if: steps.plan.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          reviewed_dir="$(cat staging/baseline-import/reviewed-dir.txt)"
+          npm run db:knowledge-batch -- \
+            --input "$reviewed_dir" \
+            --output staging/baseline-import/d1-batch.json \
+            --entity-offset "${{ steps.plan.outputs.entity_offset }}" \
+            --entity-limit "${{ steps.plan.outputs.entity_limit }}"
+          node scripts/cloudflare-free-guardrails.mjs d1-batch --input staging/baseline-import/d1-batch.json > staging/baseline-import/cloudflare-estimate.json
+
+      - name: Upload immutable D1 input
+        if: steps.plan.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: saints-baseline-d1-input-${{ github.run_id }}
+          path: |
+            staging/baseline-import/plan.json
+            staging/baseline-import/reviewed-manifest.json
+            staging/baseline-import/reviewed-receipt.json
+            staging/baseline-import/upstream-summary.json
+            staging/baseline-import/d1-batch.json
+            staging/baseline-import/cloudflare-estimate.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report caught-up no-op
+        if: steps.plan.outputs.should_run != 'true'
+        run: echo 'D1 import watermark is caught up with reviewed data; no work performed.'
+
+  import-d1-staging:
+    needs: prepare-reviewed-chunk
+    if: needs.prepare-reviewed-chunk.outputs.should_run == 'true'
+    environment: d1-staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      imported: ${{ steps.outcome.outputs.imported }}
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download immutable D1 input
+        uses: actions/download-artifact@v6
+        with:
+          name: saints-baseline-d1-input-${{ github.run_id }}
+          path: staging/baseline-import
+
+      - name: Check shared autonomous D1 daily budget
+        id: budget
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          mkdir -p reports
+          if node scripts/autonomy/check-d1-daily-budget.mjs \
+            --repository "${{ github.repository }}" \
+            --workflows "$D1_BUDGET_WORKFLOWS" \
+            --current-run-id "${{ github.run_id }}" \
+            --token-env GITHUB_TOKEN \
+            > reports/cloudflare-free-daily-budget.json; then
+            echo 'allowed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'allowed=false' >> "$GITHUB_OUTPUT"
+            printf '{"allowed":false,"reason":"shared-d1-daily-budget-exhausted"}\n' > reports/cloudflare-free-daily-budget.json
+          fi
+
+      - name: Provision or reuse EU D1 staging
+        if: steps.budget.outputs.allowed == 'true'
+        id: staging
+        run: |
+          node scripts/manage-d1-staging.mjs provision --output reports/d1-staging-provision.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const value = JSON.parse(fs.readFileSync('reports/d1-staging-provision.json','utf8'));
+          if (!value.database?.uuid) throw new Error('D1 staging UUID is missing.');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `database_id=${value.database.uuid}\n`);
+          NODE
+
+      - name: Generate ephemeral staging binding
+        if: steps.budget.outputs.allowed == 'true'
+        run: node scripts/write-d1-staging-config.mjs --database-id "${{ steps.staging.outputs.database_id }}" --output /tmp/wrangler.d1-staging.json
+
+      - name: Verify D1 staging target
+        if: steps.budget.outputs.allowed == 'true'
+        env:
+          EXPECTED_DATABASE_ID: ${{ steps.staging.outputs.database_id }}
+        run: |
+          npx wrangler d1 info CALENDAR_DB --config /tmp/wrangler.d1-staging.json --json > /tmp/d1-info.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const value = JSON.parse(fs.readFileSync('/tmp/d1-info.json','utf8'));
+          const database = Array.isArray(value) ? value[0] : value;
+          if (database?.name !== 'santosdodia-staging') throw new Error(`Refusing D1 target ${database?.name ?? 'unknown'}.`);
+          if (database?.uuid !== process.env.EXPECTED_DATABASE_ID) throw new Error('D1 UUID mismatch.');
+          NODE
+
+      - name: Apply database migrations
+        if: steps.budget.outputs.allowed == 'true'
+        run: npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.d1-staging.json
+
+      - name: Import chunk with idempotency and rollback verification
+        if: steps.budget.outputs.allowed == 'true'
+        run: |
+          npm run db:knowledge-import -- \
+            --database-id "${{ steps.staging.outputs.database_id }}" \
+            --package staging/baseline-import/d1-batch.json \
+            --output reports/d1-knowledge-import.json
+
+      - name: Upload verified D1 receipt
+        if: steps.budget.outputs.allowed == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: saints-baseline-d1-receipt-${{ github.run_id }}
+          path: |
+            reports/d1-knowledge-import.json
+            reports/d1-staging-provision.json
+            reports/cloudflare-free-daily-budget.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Set import outcome
+        id: outcome
+        run: |
+          if [ "${{ steps.budget.outputs.allowed }}" = 'true' ]; then echo 'imported=true' >> "$GITHUB_OUTPUT"; else echo 'imported=false' >> "$GITHUB_OUTPUT"; fi
+
+  archive-import-receipt:
+    needs: [prepare-reviewed-chunk, import-d1-staging]
+    if: needs.import-d1-staging.outputs.imported == 'true'
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Download immutable D1 input
+        uses: actions/download-artifact@v6
+        with:
+          name: saints-baseline-d1-input-${{ github.run_id }}
+          path: staging/baseline-import
+
+      - name: Download verified D1 receipt
+        uses: actions/download-artifact@v6
+        with:
+          name: saints-baseline-d1-receipt-${{ github.run_id }}
+          path: staging/baseline-import/receipt
+
+      - name: Validate receipt and finalize import watermark
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/baseline/finalize-wikidata-baseline-import.mjs \
+            --plan staging/baseline-import/plan.json \
+            --reviewed-manifest staging/baseline-import/reviewed-manifest.json \
+            --reviewed-receipt staging/baseline-import/reviewed-receipt.json \
+            --upstream-summary staging/baseline-import/upstream-summary.json \
+            --d1-batch staging/baseline-import/d1-batch.json \
+            --d1-receipt staging/baseline-import/receipt/d1-knowledge-import.json \
+            --output staging/baseline-import/progress/progress.json
+
+      - name: Archive exact import receipt in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          stream="$(node -e "const p=require('./staging/baseline-import/plan.json'); process.stdout.write(p.receiptStream)")"
+          node scripts/archive-to-dropbox.mjs \
+            --stream "$stream" \
+            --source staging/baseline-import/receipt \
+            --source staging/baseline-import/d1-batch.json \
+            --source staging/baseline-import/plan.json
+
+      - name: Advance verified import watermark
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream "$IMPORT_PROGRESS_STREAM" --source staging/baseline-import/progress/progress.json

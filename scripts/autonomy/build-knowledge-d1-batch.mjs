@@ -8,15 +8,14 @@ function argument(name, fallback = null) {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] : fallback;
 }
-
-function readJson(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+function integerArgument(name, fallback) {
+  const value = argument(name, String(fallback));
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 0) throw new Error(`${name} must be a non-negative integer.`);
+  return parsed;
 }
-
-function readJsonLines(filePath) {
-  return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).filter(Boolean).map((line) => JSON.parse(line));
-}
-
+function readJson(filePath) { return JSON.parse(fs.readFileSync(filePath, 'utf8')); }
+function readJsonLines(filePath) { return fs.readFileSync(filePath, 'utf8').split(/\r?\n/u).filter(Boolean).map((line) => JSON.parse(line)); }
 function sql(value) {
   if (value === null || value === undefined) return 'NULL';
   if (typeof value === 'number') {
@@ -25,23 +24,18 @@ function sql(value) {
   }
   return `'${String(value).replaceAll("'", "''")}'`;
 }
-
-function stableId(prefix, ...values) {
-  return `${prefix}:${createHash('sha256').update(values.join('\u0000')).digest('hex').slice(0, 32)}`;
-}
-
+function stableId(prefix, ...values) { return `${prefix}:${createHash('sha256').update(values.join('\u0000')).digest('hex').slice(0, 32)}`; }
+function sha256(value) { return createHash('sha256').update(value).digest('hex'); }
 function sourceAuthority(sourceId, sourceRegistry) {
   const source = sourceRegistry.sources.find((item) => item.id === sourceId);
   if (!source) throw new Error(`Source ${sourceId} is missing from the source registry.`);
   return source;
 }
-
 function sourcePolicy(sourceId, policyRegistry) {
   const policy = policyRegistry.sources.find((item) => item.id === sourceId);
   if (!policy || policy.decision !== 'approved') throw new Error(`Source ${sourceId} is not approved for import.`);
   return policy;
 }
-
 function assertionConfidence(status) {
   if (status === 'single_source_value') return 0.62;
   if (status === 'conflict') return 0.25;
@@ -63,22 +57,60 @@ function scriptForName(value) {
   if (/[\u0600-\u06ff]/u.test(value)) return 'Arab';
   return 'Latn';
 }
+function decisionKey(entityId, sourceLanguage, name) { return `${entityId}\u0000${sourceLanguage}\u0000${name}`; }
 
 const input = path.resolve(argument('--input', 'staging/dropbox-intake/osint-reviewed/extracted/staging/osint-reviewed/wikidata'));
 const output = path.resolve(argument('--output', 'staging/d1-import/knowledge-batch.json'));
+const entityOffset = integerArgument('--entity-offset', 0);
+const requestedEntityLimit = integerArgument('--entity-limit', Number.MAX_SAFE_INTEGER);
+if (requestedEntityLimit < 1) throw new Error('--entity-limit must be at least 1.');
+
 const manifest = readJson(path.join(input, 'staging-manifest.json'));
 const quality = readJson(path.join(input, 'quality-report.json'));
-const entities = readJsonLines(path.join(input, 'entities.jsonl'));
+const allEntities = readJsonLines(path.join(input, 'entities.jsonl'));
 const linguisticPath = path.join(input, 'linguistic-review.json');
 const linguistic = fs.existsSync(linguisticPath) ? readJson(linguisticPath) : null;
+const decisionsPath = path.join(input, 'localized-name-decisions.jsonl');
+const nameDecisions = fs.existsSync(decisionsPath) ? readJsonLines(decisionsPath) : null;
 const upstreamReceiptPath = path.join(input, 'upstream-raw-receipt.json');
 const upstreamReceipt = fs.existsSync(upstreamReceiptPath) ? readJson(upstreamReceiptPath) : null;
 const sourceRegistry = readJson(path.resolve('data/source-registry/seed.json'));
 const policyRegistry = readJson(path.resolve('data/osint/policies/p0-policy-registry.json'));
 
 if (manifest.mode !== 'staging' || manifest.publish !== false) throw new Error('Only staging-only normalized packages may be imported.');
-if (manifest.entityCount !== entities.length) throw new Error('Normalized entity count does not match entities.jsonl.');
+if (manifest.entityCount !== allEntities.length) throw new Error('Normalized entity count does not match entities.jsonl.');
+if (entityOffset >= allEntities.length) throw new Error(`Entity offset ${entityOffset} is outside source entity count ${allEntities.length}.`);
+if (linguistic && (linguistic.batchFatalCount ?? 0) !== 0) throw new Error('Package contains a batch-fatal linguistic issue.');
 if (linguistic && linguistic.criticalCount !== 0) throw new Error('Package contains unresolved critical linguistic issues.');
+const isReviewedPackage = manifest.stage === 'linguistically-reviewed';
+if (isReviewedPackage && !linguistic) throw new Error('Reviewed package is missing linguistic-review.json.');
+if (isReviewedPackage && !nameDecisions) throw new Error('Reviewed package is missing localized-name-decisions.jsonl.');
+if (isReviewedPackage && linguistic?.policy?.sourceOnlyIsNotCanonical !== true) throw new Error('Reviewed package does not enforce source-only non-canonical semantics.');
+
+const entities = allEntities.slice(entityOffset, entityOffset + requestedEntityLimit);
+if (entities.length < 1) throw new Error('D1 chunk contains no entities.');
+const nextEntityOffset = entityOffset + entities.length;
+const chunkFingerprint = sha256(JSON.stringify(entities.map((entity) => entity.id)));
+
+const decisionIndex = new Map();
+for (const decision of nameDecisions ?? []) {
+  const key = decisionKey(decision.entityId, decision.sourceLanguage, decision.name);
+  if (decisionIndex.has(key)) throw new Error(`Duplicate localized-name decision for ${decision.entityId}/${decision.sourceLanguage}/${decision.name}.`);
+  decisionIndex.set(key, decision);
+}
+
+function localizedDecision(entity, name, locale) {
+  if (!supportedLocales.has(locale)) return { allowed: false, reason: 'unsupported-locale' };
+  if (!isReviewedPackage) return { allowed: true, qualityStatus: 'source-only', confidence: 0.70 };
+  const decision = decisionIndex.get(decisionKey(entity.id, name.language, name.name));
+  if (!decision) throw new Error(`Reviewed package has no localized-name decision for ${entity.id}/${name.language}/${name.name}.`);
+  if (decision.locale !== locale) throw new Error(`Localized-name decision locale mismatch for ${entity.id}/${name.name}.`);
+  if (decision.publicationEligible !== false || decision.qualityStatus !== 'source-only') throw new Error('Baseline source labels must remain source-only and non-publication-eligible at D1 import.');
+  if (decision.scriptGate === 'withheld') return { allowed: false, reason: 'withheld-by-language-editor' };
+  if (decision.scriptGate !== 'candidate') throw new Error(`Unknown localized-name gate ${decision.scriptGate}.`);
+  return { allowed: true, qualityStatus: decision.qualityStatus, confidence: 0.70 };
+}
+
 const sourceId = manifest.sourceId;
 const authority = sourceAuthority(sourceId, sourceRegistry);
 const policy = sourcePolicy(sourceId, policyRegistry);
@@ -89,6 +121,8 @@ const independenceGroup = new URL(authority.url).hostname;
 const observedAt = upstreamReceipt?.consumedAt ?? new Date().toISOString();
 
 const statements = [];
+let localizedNamesAccepted = 0;
+let localizedNamesWithheld = 0;
 statements.push(`INSERT INTO osint_sources (id, name, canonical_url, authority_score, independence_group, licence_status, robots_policy, active, updated_at) VALUES (${sql(sourceId)}, ${sql(authority.name)}, ${sql(authority.url)}, ${sql(authority.authorityScore)}, ${sql(independenceGroup)}, ${sql(policy.licenceStatus)}, ${sql(policy.robotsPolicy)}, 1, CURRENT_TIMESTAMP) ON CONFLICT(id) DO UPDATE SET name=excluded.name, canonical_url=excluded.canonical_url, authority_score=excluded.authority_score, independence_group=excluded.independence_group, licence_status=excluded.licence_status, robots_policy=excluded.robots_policy, active=1, updated_at=CURRENT_TIMESTAMP`);
 statements.push(`INSERT INTO osint_ingestion_runs (id, source_id, started_at, finished_at, status, receipt_path) VALUES (${sql(ingestionRunId)}, ${sql(sourceId)}, ${sql(upstreamReceipt?.sourceRun?.createdAt ?? quality.generatedAt ?? observedAt)}, ${sql(observedAt)}, 'normalized', ${sql(upstreamReceipt?.sourceIndexPath ?? null)}) ON CONFLICT(id) DO UPDATE SET finished_at=excluded.finished_at, status='normalized', receipt_path=excluded.receipt_path`);
 
@@ -115,12 +149,16 @@ for (const entity of entities) {
     statements.push(`INSERT INTO knowledge_entity_names (id, entity_id, language, script, name, name_type, normalized_name, source_document_id) VALUES (${sql(nameId)}, ${sql(entity.id)}, ${sql(name.language)}, ${sql(script)}, ${sql(name.name)}, ${sql(name.nameType)}, ${sql(name.normalizedName)}, ${sql(sourceDocumentId)}) ON CONFLICT(id) DO UPDATE SET name=excluded.name, script=excluded.script, normalized_name=excluded.normalized_name, source_document_id=excluded.source_document_id`);
 
     const locale = canonicalLocale(name.language);
-    if (supportedLocales.has(locale)) {
-      const localizedId = stableId('localized-name', entity.id, locale, name.name);
-      statements.push(`INSERT INTO knowledge_localized_names (id, entity_id, locale, language, script, name, normalized_name, name_type, quality_status, confidence, resolution_status, source_count, is_preferred, updated_at) VALUES (${sql(localizedId)}, ${sql(entity.id)}, ${sql(locale)}, ${sql(name.language)}, ${sql(script)}, ${sql(name.name)}, ${sql(name.normalizedName)}, 'source-label', 'source-only', 0.70, 'candidate', 1, 0, CURRENT_TIMESTAMP) ON CONFLICT(entity_id, locale, name, name_type) DO UPDATE SET script=excluded.script, normalized_name=excluded.normalized_name, confidence=MAX(knowledge_localized_names.confidence, excluded.confidence), updated_at=CURRENT_TIMESTAMP`);
-      const evidenceId = stableId('name-evidence', localizedId, sourceId, sourceDocumentId ?? 'none');
-      statements.push(`INSERT INTO knowledge_name_evidence (id, localized_name_id, source_document_id, source_id, evidence_type, source_authority_score, independence_group, supports, observed_at) VALUES (${sql(evidenceId)}, ${sql(localizedId)}, ${sql(sourceDocumentId)}, ${sql(sourceId)}, 'source-label', ${sql(authority.authorityScore)}, ${sql(independenceGroup)}, 1, ${sql(observedAt)}) ON CONFLICT(id) DO UPDATE SET source_authority_score=excluded.source_authority_score, independence_group=excluded.independence_group, observed_at=excluded.observed_at`);
+    const decision = localizedDecision(entity, name, locale);
+    if (!decision.allowed) {
+      if (decision.reason === 'withheld-by-language-editor') localizedNamesWithheld += 1;
+      continue;
     }
+    localizedNamesAccepted += 1;
+    const localizedId = stableId('localized-name', entity.id, locale, name.name);
+    statements.push(`INSERT INTO knowledge_localized_names (id, entity_id, locale, language, script, name, normalized_name, name_type, quality_status, confidence, resolution_status, source_count, is_preferred, updated_at) VALUES (${sql(localizedId)}, ${sql(entity.id)}, ${sql(locale)}, ${sql(name.language)}, ${sql(script)}, ${sql(name.name)}, ${sql(name.normalizedName)}, 'source-label', ${sql(decision.qualityStatus)}, ${sql(decision.confidence)}, 'candidate', 1, 0, CURRENT_TIMESTAMP) ON CONFLICT(entity_id, locale, name, name_type) DO UPDATE SET script=excluded.script, normalized_name=excluded.normalized_name, quality_status=excluded.quality_status, confidence=MAX(knowledge_localized_names.confidence, excluded.confidence), is_preferred=0, updated_at=CURRENT_TIMESTAMP`);
+    const evidenceId = stableId('name-evidence', localizedId, sourceId, sourceDocumentId ?? 'none');
+    statements.push(`INSERT INTO knowledge_name_evidence (id, localized_name_id, source_document_id, source_id, evidence_type, source_authority_score, independence_group, supports, observed_at) VALUES (${sql(evidenceId)}, ${sql(localizedId)}, ${sql(sourceDocumentId)}, ${sql(sourceId)}, 'source-label', ${sql(authority.authorityScore)}, ${sql(independenceGroup)}, 1, ${sql(observedAt)}) ON CONFLICT(id) DO UPDATE SET source_authority_score=excluded.source_authority_score, independence_group=excluded.independence_group, observed_at=excluded.observed_at`);
   }
 
   for (const recognition of entity.recognition?.sourceStatusCandidates ?? []) {
@@ -146,7 +184,7 @@ for (const entity of entities) {
   }
 }
 
-const statementSha256 = createHash('sha256').update(JSON.stringify(statements)).digest('hex');
+const statementSha256 = sha256(JSON.stringify(statements));
 const batch = {
   schemaVersion: 1,
   execution: 'D1Database.batch',
@@ -156,13 +194,20 @@ const batch = {
   sourceId,
   sourceRunId: ingestionRunId,
   sourceFingerprint: manifest.sourceFingerprint,
+  sourceEntityCount: allEntities.length,
+  entityOffset,
   entityCount: entities.length,
+  nextEntityOffset,
+  chunkFingerprint,
   conflictCount: manifest.conflictCount,
-  idempotencyKey: `saints:${sourceId}:${manifest.sourceFingerprint}`,
+  languageReviewVersion: manifest.linguisticReviewVersion ?? null,
+  localizedNamesAccepted,
+  localizedNamesWithheld,
+  idempotencyKey: `saints:${sourceId}:${manifest.sourceFingerprint}:${entityOffset}:${chunkFingerprint}`,
   statementsSha256: statementSha256,
   statementCount: statements.length,
   statements,
 };
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, `${JSON.stringify(batch, null, 2)}\n`, 'utf8');
-console.log(JSON.stringify({ output, lane: batch.lane, partition: batch.partition, entityCount: batch.entityCount, statementCount: batch.statementCount, idempotencyKey: batch.idempotencyKey }, null, 2));
+console.log(JSON.stringify({ output, lane: batch.lane, partition: batch.partition, sourceEntityCount: batch.sourceEntityCount, entityOffset: batch.entityOffset, entityCount: batch.entityCount, nextEntityOffset: batch.nextEntityOffset, localizedNamesAccepted, localizedNamesWithheld, statementCount: batch.statementCount, idempotencyKey: batch.idempotencyKey }, null, 2));
