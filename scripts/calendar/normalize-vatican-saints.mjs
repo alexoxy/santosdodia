@@ -24,18 +24,20 @@ export function normalizeVaticanSaints(raw) {
   const dayCoverage = new Map();
   for (const day of raw.days) {
     if (!Number.isInteger(day?.month) || !Number.isInteger(day?.day) || !Array.isArray(day?.saints)) throw new Error('Invalid Vatican saints day record.');
+    if (typeof day?.sourceUrl !== 'string' || !day.sourceUrl.startsWith('https://www.vaticannews.va/pt/santo-do-dia/')) throw new Error('Unexpected Vatican calendar page URL.');
     const dateKey = `${pad(day.month)}-${pad(day.day)}`;
     dayCoverage.set(dateKey, (dayCoverage.get(dateKey) ?? 0) + day.saints.length);
     for (const saint of day.saints) {
       if (typeof saint?.name !== 'string' || !saint.name.trim()) throw new Error(`Missing saint name for ${dateKey}.`);
-      if (typeof saint?.detailUrl !== 'string' || !saint.detailUrl.startsWith('https://www.vaticannews.va/pt/santo-do-dia/')) {
+      if (saint.detailUrl !== null && saint.detailUrl !== undefined && (typeof saint.detailUrl !== 'string' || !saint.detailUrl.startsWith('https://www.vaticannews.va/pt/santo-do-dia/'))) {
         throw new Error(`Unexpected saint detail URL for ${dateKey}.`);
       }
       if (!/^[a-f0-9]{64}$/u.test(saint.sourceRecordHash ?? '')) throw new Error(`Invalid source record hash for ${dateKey}.`);
-      const occurrenceKey = `${dateKey}|${saint.detailUrl}`;
+      const evidenceKey = saint.detailUrl ?? `${day.sourceUrl}#${saint.name.trim().normalize('NFC')}`;
+      const occurrenceKey = `${dateKey}|${evidenceKey}`;
       if (seen.has(occurrenceKey)) continue;
       seen.add(occurrenceKey);
-      const externalHash = sha256(saint.detailUrl);
+      const externalHash = sha256(evidenceKey);
       events.push({
         id: `vatican-news-${dateKey}-${externalHash.slice(0, 20)}`,
         canonicalEventCandidateId: `source:vatican-news:${externalHash.slice(0, 24)}`,
@@ -53,7 +55,7 @@ export function normalizeVaticanSaints(raw) {
         source: {
           sourceId: raw.source.id,
           calendarPageUrl: day.sourceUrl,
-          detailUrl: saint.detailUrl,
+          detailUrl: saint.detailUrl ?? null,
           pageSha256: day.pageSha256,
           sourceRecordHash: saint.sourceRecordHash,
           retrievedAt: day.retrievedAt
