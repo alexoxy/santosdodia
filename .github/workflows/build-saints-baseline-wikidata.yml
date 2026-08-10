@@ -1,0 +1,132 @@
+name: Build Saints Baseline v1 candidates
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - config/saints-baseline-v1.json
+      - .github/workflows/build-saints-baseline-wikidata.yml
+  schedule:
+    - cron: '17 1,7,13,19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saints-baseline-v1-wikidata
+  cancel-in-progress: false
+
+jobs:
+  acquire-candidate-shard:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate baseline and repository policy
+        run: |
+          npm run saints:baseline-audit
+          npm run autonomy:lanes-audit
+          npm run osint:registry-audit
+          npm run linguistic:audit
+
+      - name: Pull verified baseline watermark when it exists
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          npm run dropbox:pull-stream --
+          --stream baseline-progress/saints/v1/wikidata
+          --destination staging/baseline-progress-intake
+          --allow-missing
+
+      - name: Plan resumable acquisition
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging/saints-baseline-v1
+          node scripts/baseline/plan-wikidata-baseline-run.mjs \
+            --intake staging/baseline-progress-intake \
+            --pages-per-run 10 \
+            > staging/saints-baseline-v1/wikidata-plan.json
+          cat staging/saints-baseline-v1/wikidata-plan.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const plan = JSON.parse(fs.readFileSync('staging/saints-baseline-v1/wikidata-plan.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `should_run=${plan.shouldRun}\nstart_page=${plan.startPage}\npages_per_run=${plan.pagesPerRun}\n`);
+          NODE
+
+      - name: Acquire next bounded Wikidata batch
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          OSINT_WIKIDATA_PAGE_SIZE: '500'
+          OSINT_WIKIDATA_START_PAGE: ${{ steps.plan.outputs.start_page }}
+          OSINT_WIKIDATA_MAX_PAGES: ${{ steps.plan.outputs.pages_per_run }}
+          OSINT_WIKIDATA_DELAY_MS: '12000'
+        run: node scripts/osint/adapters/wikidata-saints.mjs wikidata staging/saints-baseline-v1/raw
+
+      - name: Finalize baseline watermark
+        if: steps.plan.outputs.should_run == 'true'
+        run: >-
+          node scripts/baseline/finalize-wikidata-baseline-run.mjs
+          --plan staging/saints-baseline-v1/wikidata-plan.json
+          --runs-root staging/saints-baseline-v1/raw/wikidata
+          --output staging/saints-baseline-v1/progress/progress.json
+
+      - name: Archive immutable RAW batch in Dropbox
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          START_PAGE: ${{ steps.plan.outputs.start_page }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          batch="$(printf '%06d' "$START_PAGE")"
+          node scripts/archive-to-dropbox.mjs \
+            --stream "baseline/saints/v1/raw/wikidata/batch-${batch}" \
+            --source staging/saints-baseline-v1/raw/wikidata \
+            --source staging/saints-baseline-v1/wikidata-plan.json
+
+      - name: Advance verified baseline watermark
+        if: steps.plan.outputs.should_run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream baseline-progress/saints/v1/wikidata
+          --source staging/saints-baseline-v1/progress/progress.json
+
+      - name: Upload bounded build evidence
+        if: steps.plan.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: saints-baseline-v1-wikidata-${{ github.run_id }}
+          path: |
+            staging/saints-baseline-v1/wikidata-plan.json
+            staging/saints-baseline-v1/progress/progress.json
+            staging/saints-baseline-v1/raw/wikidata/*/summary.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Report completed source
+        if: steps.plan.outputs.should_run != 'true'
+        run: echo 'Wikidata candidate universe is already exhausted; no acquisition performed.'

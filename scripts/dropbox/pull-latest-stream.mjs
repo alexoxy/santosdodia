@@ -12,6 +12,7 @@ function argument(name, fallback = null) {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] : fallback;
 }
+function hasFlag(name) { return process.argv.includes(name); }
 
 function validateStream(stream) {
   if (!stream || !/^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?(?:\/[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?)*$/u.test(stream)) {
@@ -53,7 +54,7 @@ async function refreshAccessToken() {
   return value.access_token;
 }
 
-async function downloadBytes(token, remotePath) {
+async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) {
   const response = await fetch('https://content.dropboxapi.com/2/files/download', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -61,7 +62,11 @@ async function downloadBytes(token, remotePath) {
     },
     signal: AbortSignal.timeout(120000),
   });
-  if (!response.ok) throw new Error(`Dropbox download failed for ${remotePath} (HTTP ${response.status}).`);
+  if (!response.ok) {
+    const text = await response.text();
+    if (allowNotFound && response.status === 409 && /(?:path\/not_found|not_found)/u.test(text)) return null;
+    throw new Error(`Dropbox download failed for ${remotePath} (HTTP ${response.status}): ${text.slice(0, 500)}`);
+  }
   return Buffer.from(await response.arrayBuffer());
 }
 
@@ -93,7 +98,7 @@ async function dropboxContentHash(filePath) {
   return aggregate.digest('hex');
 }
 
-export async function pullLatestStream({ stream, destination }) {
+export async function pullLatestStream({ stream, destination, allowMissing = false }) {
   validateStream(stream);
   const output = path.resolve(destination);
   await rm(output, { recursive: true, force: true });
@@ -101,7 +106,19 @@ export async function pullLatestStream({ stream, destination }) {
 
   const token = await refreshAccessToken();
   const indexPath = `/archive/${stream}/index.json`;
-  const indexBytes = await downloadBytes(token, indexPath);
+  const indexBytes = await downloadBytes(token, indexPath, { allowNotFound: allowMissing });
+  if (indexBytes === null) {
+    const receipt = {
+      schemaVersion: 1,
+      stream,
+      consumedAt: new Date().toISOString(),
+      sourceIndexPath: indexPath,
+      verified: false,
+      missing: true,
+    };
+    await writeFile(path.join(output, 'consumer-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
+    return receipt;
+  }
   const index = JSON.parse(indexBytes.toString('utf8'));
   if (index.schemaVersion !== 1 || index.stream !== stream || index.updatedAfterVerifiedUpload !== true) {
     throw new Error(`Dropbox stream index is not a verified SantosDia index: ${indexPath}`);
@@ -129,6 +146,7 @@ export async function pullLatestStream({ stream, destination }) {
     dropboxContentHash: contentHash,
     sourceRun: current.run ?? null,
     verified: true,
+    missing: false,
   };
   await writeFile(path.join(output, 'consumer-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { mode: 0o600 });
   return receipt;
@@ -137,7 +155,7 @@ export async function pullLatestStream({ stream, destination }) {
 async function main() {
   const stream = argument('--stream');
   const destination = argument('--destination', 'staging/dropbox-intake');
-  const receipt = await pullLatestStream({ stream, destination });
+  const receipt = await pullLatestStream({ stream, destination, allowMissing: hasFlag('--allow-missing') });
   process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
 }
 
