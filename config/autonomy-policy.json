@@ -9,30 +9,41 @@
     "everyMutationRequiresProvenance": true,
     "everyProductionPromotionRequiresRollback": true,
     "dropboxIsTheImmutableBoundaryBetweenAgents": true,
-    "noAgentMaySkipAStage": true
+    "noAgentMaySkipAStage": true,
+    "historicalSaintCorpusUsesVersionedBaseline": true,
+    "routineUpdatesUseIncrementalRecognitionEvents": true
   },
   "agents": [
     {
       "id": "scout",
-      "role": "discover sources, assess authority/access/licence, acquire approved evidence and archive immutable raw packages in Dropbox",
-      "reads": ["public-web", "source-registry", "policy-registry"],
-      "writes": ["dropbox:raw", "dropbox:source-candidates", "dropbox:receipts"],
+      "role": "discover sources and source changes, assess authority/access/licence, acquire approved evidence and archive immutable raw packages in Dropbox",
+      "reads": ["public-web", "source-registry", "policy-registry", "baseline-watermarks"],
+      "writes": ["dropbox:raw", "dropbox:source-candidates", "dropbox:receipts", "dropbox:change-candidates"],
       "productionWrite": false
     },
     {
       "id": "normalizer",
-      "role": "consume verified Dropbox raw packages, extract facts, deduplicate, resolve identities, cross-check assertions, preserve conflicts and archive normalized packages",
-      "reads": ["dropbox:raw"],
-      "writes": ["dropbox:normalized", "dropbox:conflicts", "dropbox:validation"],
+      "role": "consume verified Dropbox raw packages, extract facts, resolve multilingual person identities, deduplicate, cross-check assertions, preserve aliases and conflicts, and archive normalized packages",
+      "reads": ["dropbox:raw", "entity-resolution-policy", "sanctity-lifecycle-policy", "marian-ontology-policy"],
+      "writes": ["dropbox:normalized", "dropbox:conflicts", "dropbox:validation", "dropbox:identity-links"],
       "internetAccess": false,
       "productionWrite": false
     },
     {
       "id": "importer",
-      "role": "consume verified normalized packages, apply idempotent D1 staging imports, verify counts and invariants, retain rollback bookmarks and later promote only when gates permit",
-      "reads": ["dropbox:normalized"],
+      "role": "consume verified linguistically reviewed packages, apply idempotent D1 staging imports, verify counts and invariants, retain rollback bookmarks and later promote only when gates permit",
+      "reads": ["dropbox:reviewed"],
       "writes": ["cloudflare-d1:staging", "dropbox:import-receipts"],
       "internetAccess": false,
+      "productionWrite": false
+    }
+  ],
+  "transversalGates": [
+    {
+      "id": "language-editor",
+      "role": "validate locale-specific spelling, grammar, punctuation, dates, scripts, established localized names and translations without changing factual identity",
+      "reads": ["dropbox:normalized", "language-authorities", "linguistic-style-policy"],
+      "writes": ["dropbox:reviewed", "dropbox:linguistic-review"],
       "productionWrite": false
     }
   ],
@@ -48,12 +59,21 @@
     "requireRawSha256Match": true,
     "requireUpstreamRunLineage": true,
     "preserveConflictingAssertions": true,
-    "neverFetchSourceAtNormalizationTime": true
+    "neverFetchSourceAtNormalizationTime": true,
+    "namesAreNotIdentity": true,
+    "stableEntityIdOwnsLocalizedNames": true
+  },
+  "languageReview": {
+    "requireVerifiedDropboxIndex": true,
+    "requireLocaleAuthority": true,
+    "requireDateFormattingValidation": true,
+    "requireScriptValidation": true,
+    "neverPromoteUnverifiedMachineTranslation": true
   },
   "import": {
     "target": "cloudflare-d1-staging",
     "requireVerifiedDropboxIndex": true,
-    "requireNormalizedSha256Match": true,
+    "requireReviewedSha256Match": true,
     "requireIdempotencyKey": true,
     "requirePreImportBookmark": true,
     "requirePostImportVerification": true,
