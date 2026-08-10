@@ -34,6 +34,10 @@ try {
   fs.writeFileSync(path.join(yearRoot, 'en_US.json'), JSON.stringify(payloadFor(2026)), 'utf8');
   fs.writeFileSync(path.join(yearRoot, 'pt_PT.json'), JSON.stringify(payloadFor(2026)), 'utf8');
 
+  const defaultReference = auditLitcalDailyCoverage({ root, years: [2026] });
+  assert.equal(defaultReference.ok, true, defaultReference.errors.join('\n'));
+  assert.deepEqual(defaultReference.referenceLocales, ['en_US']);
+
   const complete = auditLitcalDailyCoverage({ root, years: [2026], locales: ['en_US', 'pt_PT'] });
   assert.equal(complete.ok, true, complete.errors.join('\n'));
   assert.equal(complete.results.every((result) => result.coveredDays === 365), true);
@@ -41,7 +45,7 @@ try {
   fs.unlinkSync(path.join(yearRoot, 'pt_PT.json'));
   const missingLocale = auditLitcalDailyCoverage({ root, years: [2026], locales: ['en_US', 'pt_PT'] });
   assert.equal(missingLocale.ok, false);
-  assert.match(missingLocale.errors.join('\n'), /2026 pt_PT: critical locale calendar is missing/);
+  assert.match(missingLocale.errors.join('\n'), /2026 pt_PT: critical reference calendar is missing/);
 
   fs.writeFileSync(path.join(yearRoot, 'pt_PT.json'), JSON.stringify(payloadFor(2026, { omit: ['2026-08-10'] })), 'utf8');
   const missingDay = auditLitcalDailyCoverage({ root, years: [2026], locales: ['en_US', 'pt_PT'] });
