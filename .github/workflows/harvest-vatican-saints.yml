@@ -1,0 +1,140 @@
+name: Harvest Vatican daily saints
+
+on:
+  schedule:
+    - cron: '11 9 * * *'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: Calendar sweep scope
+        required: true
+        default: current-month
+        type: choice
+        options:
+          - current-month
+          - all
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/calendar/harvest-vatican-saints.mjs'
+      - 'scripts/calendar/normalize-vatican-saints.mjs'
+      - 'scripts/calendar/check-vatican-reference-policy.mjs'
+      - 'scripts/calendar/test-harvest-vatican-saints.mjs'
+      - 'scripts/calendar/test-normalize-vatican-saints.mjs'
+      - 'scripts/calendar/test-vatican-reference-policy.mjs'
+      - '.github/workflows/harvest-vatican-saints.yml'
+      - 'config/automation-registry.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vatican-daily-saints
+  cancel-in-progress: false
+
+jobs:
+  harvest-normalize-archive:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Audit repository and automation policy
+        run: |
+          npm run repo:audit
+          npm run automation:audit
+
+      - name: Test metadata-only source pipeline
+        run: |
+          node scripts/calendar/test-harvest-vatican-saints.mjs
+          node scripts/calendar/test-normalize-vatican-saints.mjs
+          node scripts/calendar/test-vatican-reference-policy.mjs
+
+      - name: Verify live Vatican News reference policy
+        run: node scripts/calendar/check-vatican-reference-policy.mjs
+
+      - name: Select bounded sweep scope
+        id: scope
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          MANUAL_SCOPE: ${{ inputs.scope }}
+        run: |
+          if [ "$EVENT_NAME" = "push" ]; then
+            scope="all"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            scope="${MANUAL_SCOPE:-current-month}"
+          else
+            scope="current-month"
+          fi
+          echo "scope=$scope" >> "$GITHUB_OUTPUT"
+          echo "Vatican saints sweep scope: $scope"
+
+      - name: Harvest official saint-of-the-day metadata
+        id: harvest
+        continue-on-error: true
+        run: >-
+          node scripts/calendar/harvest-vatican-saints.mjs
+          --scope "${{ steps.scope.outputs.scope }}"
+          --rate-per-minute 20
+          --output staging/vatican-saints/raw.json
+
+      - name: Normalize to withheld observance candidates
+        id: normalize
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          test -f staging/vatican-saints/raw.json
+          node scripts/calendar/normalize-vatican-saints.mjs \
+            --input staging/vatican-saints/raw.json \
+            --output staging/vatican-saints/normalized.json
+
+      - name: Archive bounded evidence in Dropbox
+        id: archive
+        if: always()
+        continue-on-error: true
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          args=(--stream calendar/vatican-saints/v1/pt)
+          if [ -f staging/vatican-saints/raw.json ]; then args+=(--source staging/vatican-saints/raw.json); fi
+          if [ -f staging/vatican-saints/normalized.json ]; then args+=(--source staging/vatican-saints/normalized.json); fi
+          test "${#args[@]}" -gt 2
+          node scripts/archive-to-dropbox.mjs "${args[@]}"
+
+      - name: Upload short-lived diagnostic artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: vatican-saints-${{ github.run_id }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: staging/vatican-saints/
+
+      - name: Enforce acquisition, normalization and archive gates
+        if: always()
+        env:
+          HARVEST_OUTCOME: ${{ steps.harvest.outcome }}
+          NORMALIZE_OUTCOME: ${{ steps.normalize.outcome }}
+          ARCHIVE_OUTCOME: ${{ steps.archive.outcome }}
+        shell: bash
+        run: |
+          test "$HARVEST_OUTCOME" = "success" || { echo "Vatican saints harvest failed."; exit 1; }
+          test "$NORMALIZE_OUTCOME" = "success" || { echo "Vatican saints normalization or coverage gate failed."; exit 1; }
+          test "$ARCHIVE_OUTCOME" = "success" || { echo "Vatican saints Dropbox archive failed."; exit 1; }
