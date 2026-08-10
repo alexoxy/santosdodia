@@ -71,6 +71,17 @@
       "producerScripts": ["scripts/audit-source-freshness.mjs"]
     },
     {
+      "id": "autonomous-data-plane-shadow",
+      "title": "Autonomous acquisition and normalization shadow cycle",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/autonomous-data-plane-shadow.yml",
+      "crons": ["47 2 * * 3"],
+      "publicationMode": "staging-only",
+      "archiveStream": "autonomous-data-plane",
+      "producerScripts": ["scripts/autonomy/run-shadow-data-plane.mjs"]
+    },
+    {
       "id": "quality-gate",
       "title": "Repository and Cloudflare quality gate",
       "owner": "platform",
