@@ -10,6 +10,9 @@ const workflow = fs.readFileSync('.github/workflows/build-saints-baseline-identi
 const builder = fs.readFileSync('scripts/baseline/build-global-identity-ledger.mjs', 'utf8');
 const lister = fs.readFileSync('scripts/dropbox/list-archive-batches.mjs', 'utf8');
 const tarValidator = fs.readFileSync('scripts/archive/validate-tar-entries.mjs', 'utf8');
+const tarExtractor = fs.readFileSync('scripts/archive/extract-safe-tar.mjs', 'utf8');
+const planner = fs.readFileSync('scripts/baseline/plan-global-identity-ledger.mjs', 'utf8');
+const verifier = fs.readFileSync('scripts/baseline/verify-global-identity-ledger.mjs', 'utf8');
 
 assert.equal(config.identityResolutionVersion, '1.0');
 assert.equal(config.identityLedgerStream, 'baseline/saints/v1/identity/wikidata/recognition-v1');
@@ -35,10 +38,10 @@ assert.match(workflow, /IDENTITY_STREAM: baseline\/saints\/v1\/identity\/wikidat
 assert.match(workflow, /name: Build Saints Baseline v1 identity ledger/u);
 assert.match(workflow, /actions\/upload-artifact@v7/u);
 assert.doesNotMatch(workflow, /CLOUDFLARE_API_TOKEN|CLOUDFLARE_ACCOUNT_ID|wrangler d1|knowledge-import/u);
-assert.match(workflow, /manifest\.publish !== false/u);
-assert.match(workflow, /report\.nameOnlyMergeCount !== 0/u);
-assert.match(workflow, /scripts\/archive\/validate-tar-entries\.mjs/u);
-assert.doesNotMatch(workflow, /node - "\$pull\/package\.tar\.gz" <<'NODE'/u);
+assert.doesNotMatch(workflow, /<<['"]?NODE/u);
+assert.match(workflow, /scripts\/archive\/extract-safe-tar\.mjs/u);
+assert.match(workflow, /scripts\/baseline\/plan-global-identity-ledger\.mjs/u);
+assert.match(workflow, /scripts\/baseline\/verify-global-identity-ledger\.mjs/u);
 
 assert.match(builder, /entity\.id !== `wikidata:\$\{entity\.qid\}`/u);
 assert.match(builder, /signal: 'exactExternalIdentifier'/u);
@@ -51,6 +54,9 @@ assert.match(lister, /\/2\/files\/list_folder/u);
 assert.match(lister, /BATCH_PATTERN/u);
 assert.match(tarValidator, /Unsafe absolute archive entry/u);
 assert.match(tarValidator, /Unsafe parent traversal archive entry/u);
+assert.match(tarExtractor, /validateTarArchive/u);
+assert.match(planner, /identity-ledger-already-current/u);
+assert.match(verifier, /Name-only identity merges are forbidden/u);
 execFileSync(process.execPath, ['scripts/archive/test-validate-tar-entries.mjs'], { stdio: 'inherit' });
 
 console.log('Global candidate identity ledger audit passed.');
