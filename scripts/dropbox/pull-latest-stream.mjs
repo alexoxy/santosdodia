@@ -5,6 +5,7 @@ import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
+import { refreshDropboxAccessToken } from './oauth.mjs';
 
 const CONTENT_BLOCK_BYTES = 4 * 1024 * 1024;
 
@@ -18,40 +19,6 @@ function validateStream(stream) {
   if (!stream || !/^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?(?:\/[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?)*$/u.test(stream)) {
     throw new Error('Invalid Dropbox archive stream.');
   }
-}
-
-async function readJsonResponse(response, operation) {
-  const text = await response.text();
-  let value = {};
-  if (text) {
-    try { value = JSON.parse(text); }
-    catch { throw new Error(`${operation} returned invalid JSON (HTTP ${response.status}).`); }
-  }
-  if (!response.ok) {
-    const summary = value.error_summary ?? value.error_description ?? value.error?.['.tag'] ?? 'unknown_error';
-    throw new Error(`${operation} failed (HTTP ${response.status}): ${summary}`);
-  }
-  return value;
-}
-
-async function refreshAccessToken() {
-  const appKey = process.env.DROPBOX_APP_KEY;
-  const appSecret = process.env.DROPBOX_APP_SECRET;
-  const refreshToken = process.env.DROPBOX_REFRESH_TOKEN;
-  if (!appKey || !appSecret || !refreshToken) {
-    throw new Error('DROPBOX_APP_KEY, DROPBOX_APP_SECRET and DROPBOX_REFRESH_TOKEN are required.');
-  }
-  const response = await fetch('https://api.dropboxapi.com/oauth2/token', {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${Buffer.from(`${appKey}:${appSecret}`).toString('base64')}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refreshToken }),
-  });
-  const value = await readJsonResponse(response, 'Dropbox access token refresh');
-  if (!value.access_token) throw new Error('Dropbox token refresh returned no access token.');
-  return value.access_token;
 }
 
 async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) {
@@ -104,7 +71,7 @@ export async function pullLatestStream({ stream, destination, allowMissing = fal
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
 
-  const token = await refreshAccessToken();
+  const token = await refreshDropboxAccessToken();
   const indexPath = `/archive/${stream}/index.json`;
   const indexBytes = await downloadBytes(token, indexPath, { allowNotFound: allowMissing });
   if (indexBytes === null) {
