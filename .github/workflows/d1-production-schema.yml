@@ -1,0 +1,130 @@
+name: D1 production schema
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/d1-production-schema.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: d1-production-schema
+  cancel-in-progress: false
+
+jobs:
+  migrate-production-schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      PRODUCTION_DATABASE_ID: e1ad3640-b334-49d1-a6fc-a73f54924803
+    steps:
+      - name: Checkout protected main
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate production schema boundary
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$GITHUB_EVENT_NAME" = "push"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          npm run cloudflare:guardrails-audit
+          npm run db:d1-staging-config-test
+          npm run db:d1-remote-safety-test
+
+      - name: Generate production-only ephemeral Wrangler config
+        run: node scripts/write-d1-production-config.mjs --database-id "$PRODUCTION_DATABASE_ID" --output /tmp/wrangler.d1-production.json
+
+      - name: Verify exact production target
+        run: |
+          npx wrangler d1 info CALENDAR_DB --config /tmp/wrangler.d1-production.json --json > /tmp/d1-production-info.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const value = JSON.parse(fs.readFileSync('/tmp/d1-production-info.json','utf8'));
+          const db = Array.isArray(value) ? value[0] : value;
+          if (db?.name !== 'santosdodia-production') throw new Error(`Refusing D1 target ${db?.name ?? 'unknown'}.`);
+          if (db?.uuid !== process.env.PRODUCTION_DATABASE_ID) throw new Error('Production D1 UUID mismatch.');
+          NODE
+
+      - name: Apply repository migrations only
+        run: npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.d1-production.json
+
+      - name: Verify required schema without content mutation
+        run: node scripts/manage-d1-production.mjs verify-schema --database-id "$PRODUCTION_DATABASE_ID" --output reports/d1-production-schema.json
+
+      - name: Write migration receipt
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const migrations = fs.readdirSync('db/migrations').filter(x => /^\d+.*\.sql$/.test(x)).sort();
+          const verified = JSON.parse(fs.readFileSync('reports/d1-production-schema.json','utf8'));
+          const receipt = {
+            schemaVersion: 1,
+            operation: 'production-schema-migrations',
+            databaseId: process.env.PRODUCTION_DATABASE_ID,
+            migrations,
+            schemaVerified: verified.missingTables?.length === 0,
+            calendarContentInserted: false,
+            editorialContentInserted: false,
+            completedAt: new Date().toISOString()
+          };
+          fs.writeFileSync('reports/d1-production-schema-receipt.json', JSON.stringify(receipt, null, 2) + '\n');
+          NODE
+
+      - name: Upload production schema receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: d1-production-schema-receipt
+          path: |
+            reports/d1-production-schema.json
+            reports/d1-production-schema-receipt.json
+          if-no-files-found: error
+          retention-days: 30
+
+  archive-receipt:
+    needs: migrate-production-schema
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download production schema receipt
+        uses: actions/download-artifact@v7
+        with:
+          name: d1-production-schema-receipt
+          path: reports/d1-production-schema
+
+      - name: Archive immutable schema receipt in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream d1-production-schema --source reports/d1-production-schema
