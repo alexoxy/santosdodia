@@ -11,7 +11,7 @@ const REQUIRED_TABLES = [
   'calendar_occurrences',
   'calendar_occurrence_labels',
   'knowledge_entities',
-  'entity_names'
+  'knowledge_entity_names'
 ];
 
 function requiredEnvironment(name) {
