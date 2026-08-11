@@ -122,6 +122,7 @@ export default function CalendarExplorer() {
   if (category !== "all") feedParams.set("category", category);
   if (region !== "GLOBAL") feedParams.set("country", region);
   const monthTitle = formatMonthYear(iso(year, month, 1), locale, "heading");
+  const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
   return (
     <div className="page-stack">
       <section className="page-hero compact-hero">
@@ -263,6 +264,25 @@ export default function CalendarExplorer() {
               );
             })}
           </div>
+        </div>
+        <div className="calendar-mobile-agenda">
+          {Array.from({ length: daysInMonth }, (_, index) => index + 1).map((day) => {
+            const date = iso(year, month, day);
+            const list = items.filter((item) => item.dateISO === date);
+            const weekday = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
+            return <div className="calendar-mobile-day" key={date}>
+              <a className="calendar-mobile-date" href={`/day/${date}`} aria-label={date}>
+                <strong>{day}</strong>
+                <span>{weekday}</span>
+              </a>
+              <div className="calendar-mobile-items">
+                {list.length ? list.slice(0, 6).map((item) => {
+                  const name = displayObservanceName(item.names, locale, item.name);
+                  return name ? <a className={`calendar-mobile-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{name}</a> : null;
+                }) : <span className="calendar-mobile-empty">—</span>}
+              </div>
+            </div>;
+          })}
         </div>
         {!loading && !items.length ? (
           <div className="empty-state inline">
