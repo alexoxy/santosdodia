@@ -23,9 +23,19 @@ const missingLeapDay = auditCompactCalendar(payloadFor(2028, { omit: ['2028-02-2
 assert.equal(missingLeapDay.ok, false);
 assert.deepEqual(missingLeapDay.missingDates, ['2028-02-29']);
 
+const boundaryVigil = payloadFor(2026);
+boundaryVigil.events.unshift({ id: 'new-year-vigil', name: 'New Year Vigil Mass', dateISO: '2025-12-31' });
+const boundaryAudit = auditCompactCalendar(boundaryVigil, 2026);
+assert.equal(boundaryAudit.ok, true);
+assert.equal(boundaryAudit.invalidDates, 0);
+assert.equal(boundaryAudit.outOfYearDates, 1);
+assert.equal(boundaryAudit.coveredDays, 365);
+
 const invalid = payloadFor(2026);
-invalid.events.push({ id: 'wrong-year', name: 'Wrong year', dateISO: '2027-01-01' });
-assert.equal(auditCompactCalendar(invalid, 2026).invalidDates, 1);
+invalid.events.push({ id: 'invalid-date', name: 'Invalid date', dateISO: '2026-02-30' });
+const invalidAudit = auditCompactCalendar(invalid, 2026);
+assert.equal(invalidAudit.ok, false);
+assert.equal(invalidAudit.invalidDates, 1);
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'santosdia-litcal-coverage-'));
 try {
