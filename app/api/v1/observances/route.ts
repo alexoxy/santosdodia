@@ -5,6 +5,7 @@ import {
   type Locale,
   type LocalizedText,
 } from "../../../../lib/i18n";
+import { localizedSummary } from "../../../../lib/content-locale";
 import {
   displayObservanceName,
   displayPatronages,
@@ -75,9 +76,6 @@ export async function GET(request: NextRequest) {
     : "unbound";
   let d1Records = [] as Awaited<ReturnType<typeof readCalendarOccurrences>>;
 
-  // Product-facing day/month reads can safely augment the repository baseline.
-  // Patronage and unbounded annual reads stay on the curated path until their
-  // dedicated D1 indexes/read models are available.
   if (database && !filters.patronage && (date || month)) {
     const fromDate = date ?? `${year}-${String(month).padStart(2, "0")}-01`;
     const toDate = date ?? monthEnd(year, month as number);
@@ -107,12 +105,12 @@ export async function GET(request: NextRequest) {
   const data = merged.items
     .map((item) => {
       const names = trustworthyNames(item.names, locale);
+      const localizedItem = { ...item, names };
       return {
-        ...item,
-        names,
+        ...localizedItem,
         originalName: item.name,
         name: displayObservanceName(names, locale, item.name),
-        summary: item.summaries?.[locale] ?? item.summary,
+        summary: localizedSummary(localizedItem, locale)?.text,
         patronages: displayPatronages(item.patronages, locale),
       };
     })

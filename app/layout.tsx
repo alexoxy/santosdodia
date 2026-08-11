@@ -9,7 +9,7 @@ import './performance.css';
 import './product-v1.css';
 import LanguageProvider from './components/LanguageProvider';
 import SiteChrome from './components/SiteChrome';
-import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '../lib/i18n';
+import { localeFromAcceptLanguage, normalizePublicLocale, PUBLIC_LOCALES } from '../lib/i18n';
 import { parseTradition, TRADITIONS } from '../data/observances';
 import { SITE_ORIGIN } from '../lib/site';
 import { countryFromHeaders } from '../lib/request-geo';
@@ -79,7 +79,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const saved = cookieStore.get('sdd-locale')?.value;
   const savedChurch = cookieStore.get('sdd-tradition')?.value;
   const savedTimeZone = cookieStore.get('sdd-timezone')?.value;
-  const initialLocale = saved ? normalizeLocale(saved) : localeFromAcceptLanguage(requestHeaders.get('accept-language'));
+  const initialLocale = saved ? normalizePublicLocale(saved) : localeFromAcceptLanguage(requestHeaders.get('accept-language'));
   const initialCountry = countryFromHeaders(requestHeaders);
   const initialChurch = savedChurch === 'all' ? 'all' : parseTradition(savedChurch) ?? 'roman-catholic';
 
@@ -99,7 +99,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         name: 'Santos do Dia',
         url: SITE_ORIGIN,
         publisher: { '@id': `${SITE_ORIGIN}/#organization` },
-        inLanguage: SUPPORTED_LOCALES,
+        inLanguage: PUBLIC_LOCALES,
         description: siteDescription,
         about: TRADITIONS.map(identifier => ({ '@type': 'Thing', identifier })),
         potentialAction: {
@@ -119,7 +119,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         url: SITE_ORIGIN,
         creator: { '@id': `${SITE_ORIGIN}/#organization` },
         isAccessibleForFree: true,
-        inLanguage: SUPPORTED_LOCALES,
+        inLanguage: PUBLIC_LOCALES,
         temporalCoverage: '..',
         distribution: [
           {

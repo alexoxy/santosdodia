@@ -1,11 +1,27 @@
 import type { Locale } from './i18n';
 import type { Observance } from '../data/observances';
 
-const labels: Record<'universal'|'national'|'territorial'|'unspecified',Partial<Record<Locale,string>>> = {
- universal:{en:'Universal in this Church',pt:'Universal nesta Igreja',es:'Universal en esta Iglesia',fr:'Universelle dans cette Église'},
- national:{en:'Celebrated in this country',pt:'Celebrada neste país',es:'Celebrada en este país',fr:'Célébrée dans ce pays'},
- territorial:{en:'Territorial celebration',pt:'Celebração territorial',es:'Celebración territorial',fr:'Célébration territoriale'},
- unspecified:{en:'Scope not yet classified',pt:'Âmbito ainda não classificado',es:'Ámbito aún no clasificado',fr:'Portée pas encore classée'}
+const labels: Record<'universal'|'national'|'territorial'|'unspecified',Record<Locale,string>> = {
+ universal:{
+  en:'Universal in this Church',pt:'Universal nesta Igreja',es:'Universal en esta Iglesia',fr:'Universelle dans cette Église',
+  it:'Universale in questa Chiesa',de:'In dieser Kirche universal',pl:'Powszechne w tym Kościele',ru:'Общецерковное празднование',
+  fil:'Pangkalahatan sa Simbahang ito',sw:'Maadhimisho ya Kanisa hili kwa wote'
+ },
+ national:{
+  en:'Celebrated in this country',pt:'Celebrada neste país',es:'Celebrada en este país',fr:'Célébrée dans ce pays',
+  it:'Celebrata in questo Paese',de:'In diesem Land gefeiert',pl:'Obchodzone w tym kraju',ru:'Отмечается в этой стране',
+  fil:'Ipinagdiriwang sa bansang ito',sw:'Huadhimishwa katika nchi hii'
+ },
+ territorial:{
+  en:'Territorial celebration',pt:'Celebração territorial',es:'Celebración territorial',fr:'Célébration territoriale',
+  it:'Celebrazione territoriale',de:'Territoriale Feier',pl:'Obchód terytorialny',ru:'Территориальное празднование',
+  fil:'Pagdiriwang ayon sa teritoryo',sw:'Maadhimisho ya eneo'
+ },
+ unspecified:{
+  en:'Scope not yet classified',pt:'Âmbito ainda não classificado',es:'Ámbito aún no clasificado',fr:'Portée pas encore classée',
+  it:'Ambito non ancora classificato',de:'Geltungsbereich noch nicht klassifiziert',pl:'Zakres nie został jeszcze sklasyfikowany',ru:'Область празднования ещё не классифицирована',
+  fil:'Hindi pa nauuri ang saklaw',sw:'Wigo bado haujaainishwa'
+ }
 };
 
 export type ObservanceScopeDisplay = {
@@ -15,7 +31,7 @@ export type ObservanceScopeDisplay = {
 };
 
 function translated(kind: ObservanceScopeDisplay['kind'], locale: Locale): string {
-  return labels[kind][locale] ?? labels[kind].en!;
+  return labels[kind][locale];
 }
 
 function countryList(codes: string[], locale: Locale): string {
