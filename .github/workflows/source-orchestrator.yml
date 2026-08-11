@@ -10,6 +10,15 @@ on:
         required: false
         default: false
         type: boolean
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/source-orchestrator.yml'
+      - 'scripts/osint/plan-global-source-cycle.mjs'
+      - 'scripts/osint/probe-source-policy-window.mjs'
+      - 'scripts/osint/test-global-source-cycle.mjs'
+      - 'data/osint/policies/**'
+      - 'data/osint/research/**'
 
 permissions:
   contents: read
