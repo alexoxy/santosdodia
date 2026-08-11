@@ -1,0 +1,267 @@
+name: Product publish staging
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/roman-catholic-**'
+      - 'scripts/build/test-roman-catholic-**'
+      - 'scripts/dropbox/upload-exact-file.mjs'
+      - 'lib/calendar-public-adapter.ts'
+      - '.github/workflows/product-publish-staging.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/roman-catholic-**'
+      - 'scripts/build/test-roman-catholic-**'
+      - 'scripts/dropbox/upload-exact-file.mjs'
+      - 'lib/calendar-public-adapter.ts'
+      - '.github/workflows/product-publish-staging.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-publish-staging-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  YEAR: '2026'
+  STAGING_DATABASE_ID: e212681b-a958-4554-9d44-d48cf85f2978
+
+jobs:
+  build-and-validate-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install repository dependencies
+        run: npm ci --include=optional
+
+      - name: Acquire official Portugal liturgical agenda
+        run: |
+          mkdir -p reports/product-release
+          curl --fail --location --retry 2 --retry-delay 2 \
+            --user-agent 'SantosDia-ProductRelease/1.0 (+https://www.santosdodia.com)' \
+            --output reports/product-release/portugal-2026.ics \
+            https://www.liturgia.pt/agenda/agenda.ics
+
+      - name: Generate pinned Spanish General Roman labels
+        run: |
+          mkdir -p reports/product-release/romcal
+          npm install --prefix reports/product-release/romcal \
+            --no-package-lock --ignore-scripts --no-audit --no-fund \
+            romcal@3.0.0-dev.125 \
+            @romcal/calendar.general-roman@3.0.0-dev.125
+          cd reports/product-release/romcal
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { Romcal } from 'romcal';
+          import { GeneralRoman_Es } from '@romcal/calendar.general-roman';
+          const calendar = await new Romcal({
+            localizedCalendar: GeneralRoman_Es,
+            scope: 'gregorian',
+            epiphanyOnSunday: false,
+            corpusChristiOnSunday: false,
+            ascensionOnSunday: false,
+          }).generateCalendar(2026);
+          const events = [];
+          for (const [dateKey, value] of Object.entries(calendar)) {
+            for (const item of (Array.isArray(value) ? value : [value])) {
+              if (!item) continue;
+              const dateISO = String(item.date ?? dateKey).slice(0, 10);
+              const name = String(item.name ?? '').trim();
+              if (!dateISO.startsWith('2026-') || !name) continue;
+              events.push({ dateISO, id: String(item.id ?? item.key ?? ''), name, rank: item.rank?.name ?? item.rankName ?? item.rank ?? null });
+            }
+          }
+          fs.writeFileSync('../romcal-es-2026.json', JSON.stringify({ source: 'romcal/romcal', packageVersion: '3.0.0-dev.125', pinnedSourceCommit: '878e05a56909e3adf58a85d3b6f0e9ddba3e8c5b', events }, null, 2) + '\n');
+          NODE
+
+      - name: Rebuild the launch-ready product baseline
+        run: |
+          node scripts/build/roman-catholic-baseline-v1.mjs \
+            --year "$YEAR" \
+            --portugal-ics reports/product-release/portugal-2026.ics \
+            --spanish-romcal reports/product-release/romcal-es-2026.json \
+            --output reports/product-release/build.json
+          node scripts/build/test-roman-catholic-product-samples.mjs \
+            --input reports/product-release/build.json
+
+      - name: Create canonical Dropbox manifest bytes
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('reports/product-release/build.json','utf8'));
+          fs.writeFileSync('reports/product-release/manifest.json', JSON.stringify(report), 'utf8');
+          NODE
+
+      - name: Build D1 release package
+        env:
+          DROPBOX_MANIFEST_PATH: /Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/${{ github.sha }}/manifest.json
+        run: |
+          node scripts/build/roman-catholic-d1-release.mjs \
+            --input reports/product-release/build.json \
+            --sql reports/product-release/release.sql \
+            --manifest reports/product-release/release.json \
+            --dropbox-manifest-path "$DROPBOX_MANIFEST_PATH" \
+            --publication-status publishable
+          node scripts/build/test-roman-catholic-d1-release.mjs \
+            --input reports/product-release/build.json
+
+      - name: Write validation receipt
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const build = JSON.parse(fs.readFileSync('reports/product-release/build.json','utf8'));
+          const release = JSON.parse(fs.readFileSync('reports/product-release/release.json','utf8'));
+          const receipt = {
+            schemaVersion: 1,
+            release: release.release,
+            sourceSha: process.env.GITHUB_SHA,
+            validatedAt: new Date().toISOString(),
+            calendarDays: build.calendarCoverage.coveredDays,
+            falseEmptyToday: build.calendarCoverage.falseEmptyCount,
+            locales: build.dailyLocaleCompleteness,
+            portugalOfficialDays: build.portugalOfficial.uniqueDates,
+            expectedOccurrences: release.expectedOccurrences,
+            expectedLabels: release.expectedLabels,
+            expectedCalendarAssertions: release.expectedCalendarAssertions,
+            semanticSamples: ['2026-01-01','2026-08-11'],
+            status: 'validated-for-staging',
+            productionApproved: false,
+          };
+          fs.writeFileSync('reports/product-release/validation.json', JSON.stringify(receipt, null, 2) + '\n');
+          NODE
+
+      - name: Upload validated release artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: roman-catholic-product-release-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            reports/product-release/build.json
+            reports/product-release/manifest.json
+            reports/product-release/release.json
+            reports/product-release/validation.json
+            reports/product-release/release.sql
+
+  publish-to-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-and-validate-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout protected main
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download validated release
+        uses: actions/download-artifact@v7
+        with:
+          name: roman-catholic-product-release-${{ github.sha }}
+          path: reports/product-release
+
+      - name: Verify staging safety boundary
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          npm run db:d1-staging-config-test
+          npm run db:d1-remote-safety-test
+          node scripts/write-d1-staging-config.mjs --database-id "$STAGING_DATABASE_ID" --output /tmp/wrangler.product-staging.json
+          npx wrangler d1 info CALENDAR_DB --config /tmp/wrangler.product-staging.json --json > /tmp/d1-info.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const value = JSON.parse(fs.readFileSync('/tmp/d1-info.json','utf8'));
+          const db = Array.isArray(value) ? value[0] : value;
+          if (db?.name !== 'santosdodia-staging') throw new Error(`Refusing target ${db?.name ?? 'unknown'}.`);
+          if (db?.uuid !== process.env.STAGING_DATABASE_ID) throw new Error('Staging D1 UUID mismatch.');
+          NODE
+
+      - name: Apply migrations and validated release to staging
+        run: |
+          npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.product-staging.json
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.product-staging.json --file reports/product-release/release.sql
+
+      - name: Verify remote staging product counts
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.product-staging.json --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS occurrences, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS labels;" > reports/product-release/staging-counts.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const payload = JSON.parse(fs.readFileSync('reports/product-release/staging-counts.json','utf8'));
+          const row = payload?.[0]?.results?.[0] ?? payload?.[0]?.result?.[0] ?? payload?.results?.[0] ?? payload?.result?.[0];
+          if (!row) throw new Error('Could not parse staging verification query.');
+          if (Number(row.occurrences) !== 365 || Number(row.days) !== 365 || Number(row.labels) !== 1825) {
+            throw new Error(`Unexpected staging counts: ${JSON.stringify(row)}`);
+          }
+          console.log(`Staging verified: ${row.occurrences} occurrences, ${row.days} days, ${row.labels} labels.`);
+          NODE
+
+      - name: Upload staging verification receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: roman-catholic-staging-verification-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: error
+          path: reports/product-release/staging-counts.json
+
+  archive-release-evidence:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [build-and-validate-release, publish-to-staging]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download validated release
+        uses: actions/download-artifact@v7
+        with:
+          name: roman-catholic-product-release-${{ github.sha }}
+          path: reports/product-release
+
+      - name: Archive canonical evidence before production release
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          BASE: /Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/${{ github.sha }}
+        run: |
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/manifest.json --path "$BASE/manifest.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/validation.json --path "$BASE/validation.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/release.json --path "$BASE/release.json"
