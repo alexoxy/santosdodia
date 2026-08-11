@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "litcal-api",
+  "decision": "approved-structured-facts-only",
+  "sourceRole": "reference-calendar-engine",
+  "normativeAuthority": false,
+  "normativeAuthorityRule": "Church and competent liturgical authority sources remain authoritative for promulgation, additions, rank and jurisdictional changes.",
+  "acquisition": {
+    "preferred": "tracked-response-mirror",
+    "liveApiAllowed": true,
+    "rateLimitPerMinute": 2,
+    "requestTimeAcquisition": false
+  },
+  "licence": {
+    "engineRepository": "Apache-2.0",
+    "structuredFactReuse": true,
+    "editorialTextReuse": false
+  },
+  "allowedUses": [
+    "event-identifiers",
+    "civil-dates",
+    "liturgical-rank",
+    "liturgical-colour",
+    "liturgical-season",
+    "source-locale-event-labels",
+    "precedence-and-transfer-results"
+  ],
+  "blockedUses": [
+    "biography-copying",
+    "editorial-paragraph-reuse",
+    "automatic-theological-recognition-inference",
+    "automatic-jurisdiction-extension",
+    "replacement-of-official-church-authority"
+  ],
+  "publication": {
+    "candidateDefault": "withheld",
+    "requiresKnownChurch": true,
+    "requiresSourceLocaleLabel": true,
+    "requiresLanguageGateForRequestedLocale": true,
+    "requiresCalendarValidation": true
+  },
+  "evidence": [
+    "lib/roman-source-stack.ts",
+    "data/calendar-engine-policy.json",
+    "data/litcal-mirror/README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ]
+}
