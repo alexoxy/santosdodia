@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-11T00:55:00+01:00",
+  "status": "research-only",
+  "principles": [
+    "A Christian family is not assumed to have a universal sanctoral.",
+    "Calendar systems, Paschal computation, jurisdiction and church body are stored explicitly.",
+    "The same person may have distinct observance dates, ranks or no liturgical observance in different churches.",
+    "Source authority is evaluated per claim type; official does not imply reusable full text.",
+    "Names are entity-linked across languages, but display labels are localized independently of source language."
+  ],
+  "calendarPolicies": {
+    "sanctoral-normative": "Official calendar includes saints/commemorations with normative dates/ranks.",
+    "commemorative-normative": "Official commemorative calendar exists, but terminology/rank differs from a Catholic/Orthodox sanctoral.",
+    "lectionary-year": "Primary normative structure is church year/lectionary rather than a universal saints calendar.",
+    "emphasis-days": "Official days/weeks/sabbaths of emphasis exist; they are institutional observances, not saints.",
+    "no-universal-sanctoral": "No universal normative saints-of-the-day system should be inferred.",
+    "no-normative-liturgical-calendar": "Tradition explicitly does not prioritize a fixed liturgical/holy-day calendar.",
+    "church-specific": "Policy varies by member church/jurisdiction; resolve locally.",
+    "church-specific-normative": "A normative calendar exists at individual church/jurisdiction level.",
+    "unknown-local": "Discover and verify local practice before publication."
+  },
+  "families": [
+    {"id":"catholic-latin","label":"Catholic — Latin Church","defaultPolicy":"sanctoral-normative","calendarNotes":"General Roman Calendar plus national, diocesan, religious-order and proper calendars; movable feasts calculated separately.","partitionBy":["jurisdiction","calendar_variant","year"]},
+    {"id":"eastern-catholic","label":"Catholic — Eastern Churches sui iuris","defaultPolicy":"church-specific-normative","calendarNotes":"Each sui iuris Church retains its own liturgical tradition, menologion, calendar reforms and Paschal practice. Never inherit the Latin calendar by default.","partitionBy":["church_sui_iuris","jurisdiction","calendar_system","year"]},
+    {"id":"eastern-orthodox","label":"Eastern Orthodox","defaultPolicy":"church-specific-normative","calendarNotes":"Sanctoral and movable cycle vary by autocephalous/autonomous Church and by Julian/Revised Julian/Gregorian fixed-date usage and Paschalion.","partitionBy":["church_body","jurisdiction","fixed_calendar_system","paschalion","year"]},
+    {"id":"oriental-orthodox-coptic","label":"Coptic Orthodox","defaultPolicy":"sanctoral-normative","calendarNotes":"Coptic calendar and Synaxarium; preserve Coptic/Gregorian mapping and local rank/fasting data.","partitionBy":["church_body","calendar_system","year"]},
+    {"id":"oriental-orthodox-ethiopian","label":"Ethiopian Orthodox Tewahedo","defaultPolicy":"sanctoral-normative","calendarNotes":"Ethiopian calendar, Senksar, recurring monthly commemorations and distinct movable-feast computation.","partitionBy":["church_body","ethiopian_year","jurisdiction"]},
+    {"id":"oriental-orthodox-eritrean","label":"Eritrean Orthodox Tewahedo","defaultPolicy":"church-specific-normative","calendarNotes":"Do not assume Ethiopian calendar records are identical; discover Eritrean official sources separately.","partitionBy":["church_body","calendar_system","jurisdiction"]},
+    {"id":"oriental-orthodox-armenian","label":"Armenian Apostolic","defaultPolicy":"sanctoral-normative","calendarNotes":"Official Mother See calendar includes saints, fasts and movable feasts; diaspora jurisdictions may require local variants.","partitionBy":["church_body","jurisdiction","year"]},
+    {"id":"oriental-orthodox-syriac","label":"Syriac Orthodox","defaultPolicy":"church-specific-normative","calendarNotes":"Use patriarchal and jurisdictional sources; preserve Syriac/Arabic/English names and liturgical terminology.","partitionBy":["church_body","jurisdiction","year"]},
+    {"id":"oriental-orthodox-malankara","label":"Malankara Orthodox Syrian","defaultPolicy":"sanctoral-normative","calendarNotes":"Use official Panjangom/calendar and lectionary; preserve Malayalam/local jurisdiction variants.","partitionBy":["church_body","jurisdiction","year"]},
+    {"id":"church-of-the-east","label":"Assyrian Church of the East / East Syriac tradition","defaultPolicy":"church-specific-normative","calendarNotes":"Use official Church calendar and lectionary; model East Syriac seasons and feasts independently.","partitionBy":["church_body","jurisdiction","year"]},
+    {"id":"anglican","label":"Anglican","defaultPolicy":"commemorative-normative","calendarNotes":"Province-specific calendars and authorized commemorations; Church of England and Episcopal Church are not universal proxies for all Anglican provinces.","partitionBy":["province","diocese","calendar_edition","year"]},
+    {"id":"lutheran","label":"Lutheran","defaultPolicy":"church-specific","calendarNotes":"Some churches publish saints/commemorations; others emphasize church year and lectionary. Resolve per member church.","partitionBy":["church_body","territory","calendar_edition","year"]},
+    {"id":"reformed","label":"Reformed / Presbyterian / Congregational / United-Uniting","defaultPolicy":"lectionary-year","calendarNotes":"Do not infer a universal sanctoral. Use RCL/church-year resources and any local commemorations explicitly promulgated.","partitionBy":["church_body","territory","year"]},
+    {"id":"methodist","label":"Methodist / Wesleyan","defaultPolicy":"lectionary-year","calendarNotes":"Church year, RCL and special Sundays are primary; local calendars may differ by denomination.","partitionBy":["church_body","territory","year"]},
+    {"id":"baptist","label":"Baptist","defaultPolicy":"no-universal-sanctoral","calendarNotes":"Use official bodies for church identity, history, prayer/worship resources and special events; never manufacture saints-of-the-day.","partitionBy":["union_or_convention","territory"]},
+    {"id":"pentecostal","label":"Pentecostal / Assemblies traditions","defaultPolicy":"no-universal-sanctoral","calendarNotes":"Official emphasis/event calendars may exist, but they are not sanctorals.","partitionBy":["fellowship_or_church_body","territory"]},
+    {"id":"adventist","label":"Seventh-day Adventist","defaultPolicy":"emphasis-days","calendarNotes":"General Conference Special Days and Sabbaths are institutional observances, not a saints calendar.","partitionBy":["church_body","division","year"]},
+    {"id":"anabaptist","label":"Anabaptist / Mennonite / Brethren in Christ","defaultPolicy":"church-specific","calendarNotes":"Church-year worship resources may exist; no universal saint calendar should be assumed.","partitionBy":["church_body","territory","year"]},
+    {"id":"moravian","label":"Moravian / Unitas Fratrum","defaultPolicy":"lectionary-year","calendarNotes":"Lectionary and Daily Texts are central structured resources.","partitionBy":["province","year"]},
+    {"id":"friends","label":"Religious Society of Friends (Quakers)","defaultPolicy":"no-normative-liturgical-calendar","calendarNotes":"Historical Quaker witness treats all times as holy; represent this explicitly rather than creating a feast calendar.","partitionBy":["yearly_meeting","territory"]},
+    {"id":"salvation-army","label":"The Salvation Army","defaultPolicy":"no-universal-sanctoral","calendarNotes":"Use territorial structures, leadership, history and official observances; no saint calendar should be inferred.","partitionBy":["territory_or_region"]},
+    {"id":"old-catholic","label":"Old Catholic / Union of Utrecht","defaultPolicy":"church-specific-normative","calendarNotes":"Resolve calendars per member church; do not infer a single universal Union calendar without evidence.","partitionBy":["member_church","jurisdiction","year"]},
+    {"id":"african-instituted-independent","label":"African Instituted / Free / Independent Churches","defaultPolicy":"unknown-local","calendarNotes":"Discover practice from the church body's own sources; WCC and national councils are discovery roots only.","partitionBy":["church_body","territory"]}
+  ]
+}
