@@ -39,7 +39,7 @@ export default function PilgrimagesPage() {
         </div>
         <h2>{localize(place.names, locale)}</h2>
         <p className="pilgrimage-locality">{place.locality}</p>
-        {place.calendarRelation ? <p className="pilgrimage-calendar"><strong>{copy.calendar}:</strong> {place.calendarRelation}</p> : null}
+        {place.calendarRelation ? <p className="pilgrimage-calendar"><strong>{copy.calendar}:</strong> {localize(place.calendarRelation, locale)}</p> : null}
         <div className="button-row pilgrimage-actions">
           <a className="btn btn-primary" href={place.sourceUrl} rel="noreferrer" target="_blank">{copy.official}</a>
           {place.liveUrl ? <a className="btn btn-secondary" href={place.liveUrl} rel="noreferrer" target="_blank">{copy.live}</a> : null}
