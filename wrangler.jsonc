@@ -21,6 +21,7 @@
       "binding": "CALENDAR_DB",
       "database_name": "santosdodia-production",
       "database_id": "e1ad3640-b334-49d1-a6fc-a73f54924803",
+      "migrations_dir": "db/migrations",
     },
   ],
   "observability": {
