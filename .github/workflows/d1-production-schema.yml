@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - .github/workflows/d1-production-schema.yml
+      - scripts/manage-d1-production.mjs
+      - scripts/write-d1-production-config.mjs
+      - db/migrations/**
 
 permissions:
   contents: read
