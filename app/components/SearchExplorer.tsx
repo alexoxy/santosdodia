@@ -78,22 +78,17 @@ export default function SearchExplorer() {
   }, [q, church, year, locale, dateIntent, topics]);
 
   useEffect(() => {
-    if (dateIntent) {
-      setRemote([]);
-      return;
-    }
     const controller = new AbortController();
     const timer = window.setTimeout(
       () => {
-        const params = new URLSearchParams({
-          q,
-          year: String(year),
-          locale,
-        });
+        const params = dateIntent
+          ? new URLSearchParams({ date: dateIntent, locale })
+          : new URLSearchParams({ q, year: String(year), locale });
         if (church !== "all") params.set("tradition", church);
         if (country) params.set("country", country);
+        const endpoint = dateIntent ? "/api/v1/observances" : "/api/v1/search";
         setLoading(true);
-        fetch(`/api/v1/search?${params}`, { signal: controller.signal })
+        fetch(`${endpoint}?${params}`, { signal: controller.signal })
           .then((response) =>
             response.ok
               ? response.json()
