@@ -73,9 +73,11 @@ const sources = [
   },
 ];
 
+// D1's SQL file importer maps the file into statements and manages its own
+// execution transaction. Explicit BEGIN/COMMIT statements are intentionally
+// omitted here for remote-import compatibility; every write is idempotent.
 const statements = [
   'PRAGMA foreign_keys = ON;',
-  'BEGIN IMMEDIATE;',
   `INSERT INTO churches (id,family,tradition,canonical_name,canonical_url,active,first_seen_at,last_verified_at) VALUES ('roman-catholic','catholic','roman-catholic','Roman Catholic Church','https://www.vatican.va/',1,${sql(generatedAt)},${sql(generatedAt)}) ON CONFLICT(id) DO UPDATE SET family=excluded.family,tradition=excluded.tradition,canonical_name=excluded.canonical_name,canonical_url=excluded.canonical_url,active=1,last_verified_at=excluded.last_verified_at;`,
   `INSERT INTO jurisdictions (id,church_id,level,canonical_name,country_code,official_url,first_seen_at,last_verified_at) VALUES ('pt','roman-catholic','national-calendar','Portugal','PT','https://www.liturgia.pt/agenda/',${sql(generatedAt)},${sql(generatedAt)}) ON CONFLICT(id) DO UPDATE SET church_id=excluded.church_id,level=excluded.level,canonical_name=excluded.canonical_name,country_code=excluded.country_code,official_url=excluded.official_url,last_verified_at=excluded.last_verified_at;`,
 ];
@@ -118,8 +120,6 @@ for (const day of occurrences) {
   }
 }
 
-statements.push('COMMIT;');
-
 const manifest = {
   schemaVersion: 1,
   release: 'roman-catholic-pt-2026',
@@ -144,6 +144,7 @@ const manifest = {
     generatedFromLaunchReadyBuildOnly: true,
     descriptionsCopied: false,
     validationStatus: 'cross-checked',
+    d1ImportCompatible: true,
   },
 };
 
