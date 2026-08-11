@@ -1,6 +1,8 @@
 /* SantosDia product v1: keep the public product simple and mobile-first. */
 
 .mobile-product-nav{display:none}
+.today-panel-loading{display:block;min-height:180px}
+.today-context-loading,.calendar-context-loading{display:grid;place-items:center;min-height:180px;color:var(--muted);text-align:center}
 
 .product-home{max-width:980px;margin:0 auto}
 .home-search-panel,.product-page-heading{padding:26px;border-radius:22px;background:#fff;border:1px solid rgba(16,42,67,.08)}
