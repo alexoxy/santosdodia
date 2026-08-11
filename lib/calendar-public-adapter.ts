@@ -97,10 +97,12 @@ function normalizedLabels(
     statuses.push(label.translationStatus);
   }
 
-  const preferred = names[requestedLocale] ?? names.en ?? Object.values(names)[0];
-  if (!preferred) return null;
-  if (!names.en) names.en = preferred;
-  const summary = summaries[requestedLocale] ?? summaries.en ?? Object.values(summaries)[0];
+  // Public product rule: a launched locale must never silently fall back to
+  // English (or any other language). If the requested label is absent, the D1
+  // record is withheld and the repository fallback may handle the request.
+  const preferred = names[requestedLocale];
+  if (!preferred || !names.en) return null;
+  const summary = summaries[requestedLocale];
   return {
     names: names as LocalizedText,
     summaries: Object.keys(summaries).length ? summaries : undefined,
