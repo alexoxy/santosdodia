@@ -59,6 +59,27 @@ for(const route of ['app/api/v1/observances/route.ts','app/api/v1/search/route.t
  assert.doesNotMatch(text,/summaries\?\.\[locale\]\s*\?\?\s*item\.summary/,`${route} reintroduced English summary fallback.`);
 }
 
+const runtime=source('lib/public-calendar-runtime.ts');
+assert.match(runtime,/readCalendarOccurrences/,'Canonical public runtime must read the published D1 calendar.');
+assert.match(runtime,/mergePublicCalendarObservances/,'Canonical public runtime must preserve the approved repository fallback.');
+assert.match(runtime,/mode:\s*'public'/,'Canonical public runtime must never read withheld or publishable rows.');
+
+for(const route of ['app/api/v1/search/route.ts','app/api/v1/today/route.ts','app/api/ical/[feed]/route.ts']){
+ const text=source(route);
+ assert.match(text,/mergePublishedCalendarRange/,`${route} must read the same published canonical calendar as Calendar/Today UI.`);
+ assert.doesNotMatch(text,/sourceMode:\s*["']approved-repository["']/,`${route} must not claim repository-only data after D1 publication.`);
+}
+const todayPanel=source('app/components/TodayPanel.tsx');
+const calendarExplorer=source('app/components/CalendarExplorer.tsx');
+const searchExplorer=source('app/components/SearchExplorer.tsx');
+assert.match(todayPanel,/fetch\(`\/api\/v1\/observances\?\$\{params\}`/,'Visible Today must read the canonical observances API.');
+assert.match(calendarExplorer,/fetch\(`\/api\/v1\/observances\?\$\{params\}`/,'Visible Calendar must read the canonical observances API.');
+assert.match(searchExplorer,/dateIntent \? "\/api\/v1\/observances" : "\/api\/v1\/search"/,'Date searches must use the canonical calendar API rather than the repository fallback alone.');
+
+const d1Adapter=source('lib/calendar-public-adapter.ts');
+assert.match(d1Adapter,/if \(!preferred \|\| !names\.en\) return null/,'Published D1 rows must fail closed when the requested locale is absent.');
+assert.doesNotMatch(d1Adapter,/names\[requestedLocale\]\s*\?\?\s*names\.en/,'D1 adapter must never silently fall back to English.');
+
 const chrome=source('app/components/SiteChrome.tsx');
 assert.match(chrome,/PUBLIC_LOCALES\.map/,'The public language selector must show only complete locales.');
 assert.doesNotMatch(chrome,/SUPPORTED_LOCALES\.map/,'Incomplete locales must not be advertised as public-complete.');
@@ -72,4 +93,4 @@ const localeCoverage=source('lib/locale-coverage.ts');
 assert.match(localeCoverage,/"complete" \| "internal-review"/);
 assert.doesNotMatch(localeCoverage,/return "complete";/,'Locale coverage must not mark every internal language complete.');
 
-console.log('Public product locale contract passed: Italian is end-to-end and 11 August has verified Saint Clare fallback.');
+console.log('Public product contract passed: launched locales are fail-closed and Today/Calendar/Search/ICS share the published canonical calendar.');
