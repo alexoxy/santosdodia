@@ -1,0 +1,98 @@
+name: Build Roman calendar baseline v1
+
+on:
+  workflow_run:
+    workflows: ['Prepare LitCal staging package']
+    types: [completed]
+  schedule:
+    - cron: '25 5 * * 2'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-roman-calendar-baseline.yml'
+      - 'scripts/calendar/build-roman-litcal-baseline.mjs'
+      - 'scripts/calendar/test-roman-litcal-baseline.mjs'
+      - 'data/osint/policies/litcal-calendar-facts-policy.json'
+      - 'data/litcal-mirror/calendars/general/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: roman-calendar-baseline-v1
+  cancel-in-progress: true
+
+jobs:
+  build-candidate:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate Roman baseline contract
+        run: |
+          node scripts/calendar/test-roman-litcal-baseline.mjs
+          npm run calendar:reference-test
+          npm run linguistic:date-test
+
+      - name: Build four-year General Roman candidate
+        run: |
+          mkdir -p staging/roman-calendar-baseline
+          node scripts/calendar/build-roman-litcal-baseline.mjs \
+            --years 2025,2026,2027,2028 \
+            --output staging/roman-calendar-baseline/candidate.json \
+            > staging/roman-calendar-baseline/summary.json
+
+      - name: Assert staging-only boundary
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const candidate = JSON.parse(fs.readFileSync('staging/roman-calendar-baseline/candidate.json','utf8'));
+          if (candidate.stage !== 'calendar-baseline-candidate') throw new Error('Unexpected Roman baseline stage.');
+          if (candidate.policy?.productionWrites !== false) throw new Error('Roman baseline candidate crossed production boundary.');
+          if (candidate.occurrences.some(x => x.publicationStatus !== 'withheld' || x.validationStatus !== 'provisional')) {
+            throw new Error('Roman baseline candidate contains publishable occurrence.');
+          }
+          const manifest = {
+            schemaVersion: 1,
+            sourceId: candidate.sourceId,
+            churchId: candidate.churchId,
+            generatedAt: candidate.generatedAt,
+            occurrenceCount: candidate.occurrences.length,
+            localesPresent: candidate.summary.localesPresent,
+            missingProductLocales: candidate.summary.missingProductLocales,
+            status: 'candidate-only',
+            automaticD1Write: false,
+            automaticProductionPublication: false,
+            workerBuildRequired: false
+          };
+          fs.writeFileSync('staging/roman-calendar-baseline/STAGING_MANIFEST.json', JSON.stringify(manifest, null, 2) + '\n');
+          NODE
+
+      - name: Upload Roman baseline candidate
+        uses: actions/upload-artifact@v7
+        with:
+          name: roman-calendar-baseline-v1-${{ github.run_id }}
+          path: staging/roman-calendar-baseline/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Archive immutable candidate in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream baseline/calendar/roman-catholic/v1/candidate --source staging/roman-calendar-baseline
