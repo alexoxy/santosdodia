@@ -40,7 +40,7 @@ function allDates(value) {
 }
 
 function isVigil(event) {
-  return /_vigil$/i.test(String(event.id ?? '')) || /\bvigil\b|messa della vigilia|messe de la veille/i.test(String(event.name ?? ''));
+  return /_vigil$/i.test(String(event.id ?? ''));
 }
 
 function rankWeight(grade) {
