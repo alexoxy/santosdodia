@@ -38,3 +38,4 @@ await mkdir(path.dirname(OUTPUT),{recursive:true});
 await writeFile(OUTPUT,`${JSON.stringify(report,null,2)}\n`,'utf8');
 console.log(`Language quality: ${report.entries} entries, ${critical.length} critical issues.`);
 if(critical.length)process.exitCode=1;
+if(!critical.length)await import('./test-public-product-locale-contract.mjs');

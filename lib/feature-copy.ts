@@ -51,5 +51,17 @@ const fr:FeatureCopy={
  calendarByTradition:'Calendriers par tradition chrétienne',calendarByTraditionIntro:'Abonnez-vous à une tradition complète ou ajoutez un saint individuellement depuis son profil.',subscribe:'S’abonner',
  noMatch:'Aucun saint ou célébration correspondant n’a été trouvé.',dateMatch:'Célébrations pour la date choisie',allResults:'Tous les résultats'
 };
+const it:FeatureCopy={
+ navToday:'Oggi',navFind:'Trova una ricorrenza',navCalendars:'Calendari',navLive:'In diretta',navHolidays:'Festività religiose',navCopyright:'Fonti, diritti e licenze',
+ findEyebrow:'Nome · data · tradizione',findTitle:'Trova santi e ricorrenze cristiane.',findIntro:'Cerca un santo, una festa o una data. I risultati seguono la tradizione cristiana selezionata e mostrano solo contenuti sottoposti a revisione editoriale.',findPlaceholder:'13 giugno, Sant’Antonio, Natale…',findButton:'Cerca',
+ byProfession:'Per professione',byPlace:'Per luogo',byDate:'Per data',bySaint:'Per santo',popular:'Ricerche popolari',topicResults:'Risultati per patronato e luogo',saintResults:'Santi e ricorrenze',
+ openTopic:'Esplora questa associazione',openProfile:'Apri il profilo del santo',openDay:'Apri il giorno della ricorrenza',profileIntro:'Profilo, tradizioni, fonti e opzioni di calendario.',associatedWith:'Patronati e luoghi associati',annualCalendar:'Aggiungi solo questo santo al mio calendario',freeCandle:'Accendere una candela virtuale è gratuito e viene memorizzato solo su questo dispositivo.',relatedSearches:'Ricerche correlate',
+ liveTitle:'Celebrazioni cristiane e media ufficiali',liveIntro:'Pagine ufficiali in diretta e archivi verificati per la tradizione cristiana selezionata. Quando non c’è un evento in diretta, resta disponibile l’archivio o il canale ufficiale.',openLive:'Apri la diretta ufficiale',openArchive:'Apri l’archivio ufficiale',officialSource:'Fonte ufficiale',liveFallback:'In diretta quando previsto; le registrazioni ufficiali restano disponibili.',verifiedOn:'Collegamento verificato',
+ copyrightTitle:'Fonti, diritti e licenze',copyrightIntro:'Informazioni su provenienza, copyright e licenze di dati, immagini, media esterni e contenuti editoriali utilizzati da Santos do Dia.',copyrightContent:'Contenuti originali e software',copyrightData:'Dati su calendari, patronati e festività',copyrightImages:'Immagini e materiale visivo',copyrightEmbeds:'Collegamenti video e dirette',copyrightCorrections:'Richieste di correzione e rimozione',copyrightNoAffiliation:'I nomi istituzionali, i marchi e i contenuti collegati restano di proprietà dei rispettivi titolari. La loro inclusione non implica sponsorizzazione o approvazione istituzionale.',
+ calendarByTradition:'Calendari per tradizione cristiana',calendarByTraditionIntro:'Abbonati a una tradizione completa oppure aggiungi un singolo santo dal suo profilo.',subscribe:'Abbonati',
+ noMatch:'Non è stato trovato alcun santo o ricorrenza corrispondente.',dateMatch:'Ricorrenze per la data selezionata',allResults:'Tutti i risultati'
+};
 
-export function getFeatureCopy(locale:Locale):FeatureCopy{return locale==='pt'?pt:locale==='es'?es:locale==='fr'?fr:en}
+export function getFeatureCopy(locale:Locale):FeatureCopy{
+ return locale==='pt'?pt:locale==='es'?es:locale==='fr'?fr:locale==='it'?it:en;
+}
