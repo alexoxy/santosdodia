@@ -1,20 +1,32 @@
-import {
-  CATEGORIES,
-  parseCategory,
-  parseTradition,
-  type CalendarSystem,
-  type Observance,
-  type ValidationStatus,
+import type {
+  CalendarSystem,
+  Category,
+  Observance,
+  Tradition,
+  ValidationStatus,
 } from '../data/observances';
-import {
-  normalizeLocale,
-  SUPPORTED_LOCALES,
-  type Locale,
-  type LocalizedText,
-} from './i18n';
+import type { Locale, LocalizedText } from './i18n';
 import type { CalendarOccurrenceRecord } from './calendar-d1-read-model';
 
-const CALENDAR_SYSTEMS = new Set<CalendarSystem>([
+const KNOWN_TRADITIONS = new Set<Tradition>([
+  'roman-catholic',
+  'greek-orthodox',
+  'eastern-orthodox',
+  'anglican',
+  'coptic-orthodox',
+  'armenian-apostolic',
+  'ethiopian-orthodox',
+  'syriac-orthodox',
+]);
+const KNOWN_CATEGORIES = new Set<Category>([
+  'saint',
+  'feast',
+  'marian',
+  'apostle',
+  'martyr',
+  'fast',
+]);
+const KNOWN_CALENDAR_SYSTEMS = new Set<CalendarSystem>([
   'gregorian',
   'julian',
   'revised-julian',
@@ -23,10 +35,29 @@ const CALENDAR_SYSTEMS = new Set<CalendarSystem>([
   'armenian',
   'mixed',
 ]);
-const SUPPORTED_LOCALE_BASES = new Set<string>(SUPPORTED_LOCALES);
+const KNOWN_LOCALES = new Set<Locale>([
+  'en',
+  'es',
+  'pt',
+  'fr',
+  'fil',
+  'ru',
+  'sw',
+  'de',
+  'it',
+  'pl',
+]);
+
+function knownTradition(value: string): Tradition | null {
+  return KNOWN_TRADITIONS.has(value as Tradition) ? (value as Tradition) : null;
+}
+
+function knownCategory(value: string | undefined): Category | null {
+  return value && KNOWN_CATEGORIES.has(value as Category) ? (value as Category) : null;
+}
 
 function calendarSystem(value: string | undefined): CalendarSystem {
-  return value && CALENDAR_SYSTEMS.has(value as CalendarSystem)
+  return value && KNOWN_CALENDAR_SYSTEMS.has(value as CalendarSystem)
     ? (value as CalendarSystem)
     : 'mixed';
 }
@@ -38,7 +69,7 @@ function publicValidation(value: string): ValidationStatus | null {
 function supportedLocale(value: string): Locale | null {
   const base = value.trim().toLowerCase().replace('_', '-').split('-')[0];
   const alias = base === 'tl' || base === 'ph' ? 'fil' : base;
-  return SUPPORTED_LOCALE_BASES.has(alias) ? normalizeLocale(alias) : null;
+  return KNOWN_LOCALES.has(alias as Locale) ? (alias as Locale) : null;
 }
 
 function normalizedLabels(
@@ -87,10 +118,10 @@ export function calendarOccurrenceToObservance(
   const validationStatus = publicValidation(record.validationStatus);
   if (!validationStatus) return null;
 
-  const tradition = parseTradition(record.churchId);
+  const tradition = knownTradition(record.churchId);
   if (!tradition) return null;
-  const category = parseCategory(record.category);
-  if (!category || !CATEGORIES.includes(category)) return null;
+  const category = knownCategory(record.category);
+  if (!category) return null;
   const labels = normalizedLabels(record, locale);
   if (!labels) return null;
 
