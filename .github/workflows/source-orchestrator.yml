@@ -1,0 +1,88 @@
+name: Global source orchestrator
+
+on:
+  schedule:
+    - cron: '2 * * * *'
+  workflow_dispatch:
+    inputs:
+      force_policy_window:
+        description: Start the bounded policy-review rotation from the first candidate
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-source-orchestrator
+  cancel-in-progress: true
+
+jobs:
+  policy-window:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate source and automation policy
+        run: |
+          npm run osint:registry-audit
+          npm run automation:audit
+          npm run automation:test
+
+      - name: Build bounded hourly source plan
+        shell: bash
+        run: |
+          args=(--output staging/source-orchestrator/plan.json --max-policy-probes 3)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.force_policy_window }}" = "true" ]; then
+            args+=(--force-policy)
+          fi
+          npm run sources:orchestrator-plan -- "${args[@]}"
+
+      - name: Probe policy evidence only
+        run: npm run sources:orchestrator-probe -- --input staging/source-orchestrator/plan.json --output staging/source-orchestrator/report.json --network
+
+      - name: Write staging-only manifest
+        shell: bash
+        run: |
+          cat > staging/source-orchestrator/STAGING_MANIFEST.json <<MANIFEST
+          {
+            "schemaVersion": 1,
+            "workflowRun": "${GITHUB_RUN_ID}",
+            "sourceCommit": "${GITHUB_SHA}",
+            "generatedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "status": "policy-evidence-and-approved-dispatch-plan",
+            "policyProbeLimit": 3,
+            "automaticSourcePromotion": false,
+            "automaticContentAcquisitionFromPendingSources": false,
+            "automaticProductionPublication": false,
+            "workerBuildRequired": false
+          }
+          MANIFEST
+
+      - name: Upload source orchestrator evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: source-orchestrator-${{ github.run_id }}
+          path: staging/source-orchestrator/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Archive source orchestrator evidence in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream source-orchestrator --source staging/source-orchestrator
