@@ -1,0 +1,83 @@
+name: Product BUILD
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/**'
+      - 'data/litcal-mirror/calendars/general/**'
+      - '.github/workflows/product-build.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/**'
+      - 'data/litcal-mirror/calendars/general/**'
+      - '.github/workflows/product-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  roman-catholic-2026:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Acquire official Portugal liturgical agenda
+        run: |
+          mkdir -p reports/product-build
+          curl --fail --location --retry 2 --retry-delay 2 \
+            --user-agent 'SantosDia-ProductBuild/1.0 (+https://www.santosdodia.com)' \
+            --output reports/product-build/portugal-2026.ics \
+            https://www.liturgia.pt/agenda/agenda.ics
+
+      - name: Build Roman Catholic baseline candidate
+        run: |
+          node scripts/build/roman-catholic-baseline-v1.mjs \
+            --year 2026 \
+            --portugal-ics reports/product-build/portugal-2026.ics \
+            --output reports/product-build/roman-catholic-2026.json
+
+      - name: Enforce calendar coverage gate
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('reports/product-build/roman-catholic-2026.json', 'utf8'));
+          if (report.calendarCoverage.falseEmptyCount !== 0) {
+            throw new Error(`Roman calendar has ${report.calendarCoverage.falseEmptyCount} empty day(s).`);
+          }
+          for (const locale of ['en', 'fr', 'it']) {
+            if (report.localeCompleteness[locale]?.completeness !== 1) {
+              throw new Error(`${locale} mirror is not complete.`);
+            }
+          }
+          if (!report.portugalOfficial.available || report.portugalOfficial.coverageRatio < 0.99) {
+            throw new Error(`Portugal official agenda coverage is ${report.portugalOfficial.coverageRatio}.`);
+          }
+          console.log(`Calendar: ${report.calendarCoverage.coveredDays}/${report.calendarCoverage.expectedDays} days.`);
+          console.log(`Portugal official agenda: ${report.portugalOfficial.uniqueDates}/${report.calendarCoverage.expectedDays} days.`);
+          console.log(`Launch blockers: ${report.productReadiness.blockers.join(' | ') || 'none'}`);
+          NODE
+
+      - name: Upload BUILD evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: roman-catholic-product-build-2026
+          path: |
+            reports/product-build/roman-catholic-2026.json
+            reports/product-build/portugal-2026.ics
+          retention-days: 14
