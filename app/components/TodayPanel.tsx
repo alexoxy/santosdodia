@@ -16,7 +16,7 @@ import { getPublicObservancesForDate } from "../../lib/public-observances";
 import { useLanguage } from "./LanguageProvider";
 
 export default function TodayPanel() {
-  const { locale, copy, country, countryName, timeZone, church } =
+  const { locale, copy, country, countryName, timeZone, contextReady, church } =
       useLanguage(),
     dateISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
   const fallback = useMemo(
@@ -27,12 +27,13 @@ export default function TodayPanel() {
       }),
     [dateISO, locale, church, country],
   );
-  const [items, setItems] = useState<Observance[]>(fallback),
+  const [items, setItems] = useState<Observance[]>([]),
     [loading, setLoading] = useState(false);
   useEffect(() => {
-    setItems(fallback);
-  }, [fallback]);
+    if (contextReady) setItems(fallback);
+  }, [fallback, contextReady]);
   useEffect(() => {
+    if (!contextReady) return;
     const controller = new AbortController(),
       params = new URLSearchParams({ date: dateISO, locale, timezone: timeZone });
     if (church !== "all") params.set("tradition", church);
@@ -54,7 +55,7 @@ export default function TodayPanel() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [dateISO, locale, timeZone, church, country, fallback]);
+  }, [dateISO, locale, timeZone, church, country, fallback, contextReady]);
   const weekday = useMemo(
     () => formatWeekday(dateISO, locale, "standalone"),
     [dateISO, locale],
@@ -63,6 +64,13 @@ export default function TodayPanel() {
     () => formatMonthYear(dateISO, locale, "standalone"),
     [dateISO, locale],
   );
+
+  if (!contextReady) {
+    return <section className="today-panel today-panel-loading" aria-live="polite">
+      <div className="today-context-loading">{copy.loading}</div>
+    </section>;
+  }
+
   return (
     <section className="today-panel">
       <div className="today-date-card">

@@ -37,7 +37,7 @@ function iso(year: number, month: number, day: number) {
 type Country = { countryCode: string; name: string };
 
 export default function CalendarExplorer() {
-  const { locale, copy, country, timeZone, church, setChurch } = useLanguage();
+  const { locale, copy, country, timeZone, contextReady, church, setChurch } = useLanguage();
   const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
   const todayYear = Number(todayISO.slice(0, 4));
   const todayMonth = Number(todayISO.slice(5, 7)) - 1;
@@ -47,6 +47,11 @@ export default function CalendarExplorer() {
     [region, setRegion] = useState(country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
     [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (!contextReady) return;
+    setYear(todayYear);
+    setMonth(todayMonth);
+  }, [contextReady, todayYear, todayMonth]);
   useEffect(() => {
     if (country && region === "GLOBAL") setRegion(country);
   }, [country, region]);
@@ -70,11 +75,12 @@ export default function CalendarExplorer() {
     () => getPublicMonthlyObservances(year, month, locale, filters),
     [year, month, locale, filters],
   );
-  const [items, setItems] = useState<Observance[]>(fallback);
+  const [items, setItems] = useState<Observance[]>([]);
   useEffect(() => {
-    setItems(fallback);
-  }, [fallback]);
+    if (contextReady) setItems(fallback);
+  }, [fallback, contextReady]);
   useEffect(() => {
+    if (!contextReady) return;
     const controller = new AbortController(),
       params = new URLSearchParams({
         year: String(year),
@@ -102,7 +108,7 @@ export default function CalendarExplorer() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [year, month, locale, timeZone, church, category, region, fallback]);
+  }, [year, month, locale, timeZone, church, category, region, fallback, contextReady]);
   const weekdays = useMemo(() => {
     const base = new Date(Date.UTC(2026, 0, 5));
     return Array.from({ length: 7 }, (_, index) =>
@@ -122,6 +128,12 @@ export default function CalendarExplorer() {
   if (category !== "all") feedParams.set("category", category);
   if (region !== "GLOBAL") feedParams.set("country", region);
   const monthTitle = formatMonthYear(iso(year, month, 1), locale, "heading");
+  const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+
+  if (!contextReady) {
+    return <section className="calendar-card calendar-context-loading" aria-live="polite">{copy.loading}</section>;
+  }
+
   return (
     <div className="page-stack">
       <section className="page-hero compact-hero">
@@ -263,6 +275,25 @@ export default function CalendarExplorer() {
               );
             })}
           </div>
+        </div>
+        <div className="calendar-mobile-agenda">
+          {Array.from({ length: daysInMonth }, (_, index) => index + 1).map((day) => {
+            const date = iso(year, month, day);
+            const list = items.filter((item) => item.dateISO === date);
+            const weekday = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
+            return <div className="calendar-mobile-day" key={date}>
+              <a className="calendar-mobile-date" href={`/day/${date}`} aria-label={date}>
+                <strong>{day}</strong>
+                <span>{weekday}</span>
+              </a>
+              <div className="calendar-mobile-items">
+                {list.length ? list.slice(0, 6).map((item) => {
+                  const name = displayObservanceName(item.names, locale, item.name);
+                  return name ? <a className={`calendar-mobile-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{name}</a> : null;
+                }) : <span className="calendar-mobile-empty">—</span>}
+              </div>
+            </div>;
+          })}
         </div>
         {!loading && !items.length ? (
           <div className="empty-state inline">

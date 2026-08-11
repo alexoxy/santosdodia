@@ -6,6 +6,7 @@ import './features.css';
 import './biographies.css';
 import './holidays.css';
 import './performance.css';
+import './product-v1.css';
 import LanguageProvider from './components/LanguageProvider';
 import SiteChrome from './components/SiteChrome';
 import { localeFromAcceptLanguage, normalizeLocale, SUPPORTED_LOCALES } from '../lib/i18n';
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = await cookies();
   const saved = cookieStore.get('sdd-locale')?.value;
   const savedChurch = cookieStore.get('sdd-tradition')?.value;
+  const savedTimeZone = cookieStore.get('sdd-timezone')?.value;
   const initialLocale = saved ? normalizeLocale(saved) : localeFromAcceptLanguage(requestHeaders.get('accept-language'));
   const initialCountry = countryFromHeaders(requestHeaders);
   const initialChurch = savedChurch === 'all' ? 'all' : parseTradition(savedChurch) ?? 'roman-catholic';
@@ -137,7 +139,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return <html lang={initialLocale} suppressHydrationWarning>
     <body>
-      <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialChurch={initialChurch}>
+      <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialChurch={initialChurch} initialTimeZone={savedTimeZone}>
         <SiteChrome>{children}</SiteChrome>
       </LanguageProvider>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />

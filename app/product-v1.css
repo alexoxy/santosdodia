@@ -1,0 +1,102 @@
+/* SantosDia product v1: keep the public product simple and mobile-first. */
+
+.mobile-product-nav{display:none}
+.today-panel-loading{display:block;min-height:180px}
+.today-context-loading,.calendar-context-loading{display:grid;place-items:center;min-height:180px;color:var(--muted);text-align:center}
+
+.product-home{max-width:980px;margin:0 auto}
+.home-search-panel,.product-page-heading{padding:26px;border-radius:22px;background:#fff;border:1px solid rgba(16,42,67,.08)}
+.home-search-panel{display:grid;grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr);gap:24px;align-items:center}
+.home-search-panel h2,.product-page-heading h1{margin:6px 0 0;font-family:var(--serif);font-weight:500;letter-spacing:-.03em}
+.home-search-panel h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+.product-page-heading h1{font-size:clamp(2.1rem,5vw,3.6rem)}
+.product-page-heading p{max-width:720px;margin:10px 0 0;color:var(--muted)}
+
+.product-destination-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.product-destination-card{min-height:132px;padding:20px;display:grid;align-content:space-between;border-radius:18px;background:#fff;border:1px solid rgba(16,42,67,.09);transition:transform .16s,box-shadow .16s}
+.product-destination-card:hover,.product-destination-card:focus-visible{transform:translateY(-2px);box-shadow:0 12px 28px rgba(8,27,44,.09)}
+.product-destination-card>span{font-size:1.35rem;color:#9a7726}
+.product-destination-card strong{font-family:var(--serif);font-size:1.15rem;font-weight:600}
+.product-destination-card small{color:var(--muted);font-size:.75rem}
+
+.pilgrimage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pilgrimage-card{padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(16,42,67,.09)}
+.pilgrimage-card-topline{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.pilgrimage-card h2{margin:22px 0 4px;font-family:var(--serif);font-size:1.55rem;font-weight:600}
+.pilgrimage-locality{margin:0;color:var(--muted)}
+.pilgrimage-calendar{margin:18px 0 0;font-size:.86rem}
+.pilgrimage-actions{margin-top:22px}
+.compact-product-strip{padding:24px}
+
+.calendar-mobile-agenda{display:none}
+.calendar-mobile-day{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.calendar-mobile-day:first-child{border-top:0}
+.calendar-mobile-date{display:grid;place-items:center;align-content:center;min-height:52px;border-radius:14px;background:var(--gold-100);color:var(--navy-900)}
+.calendar-mobile-date strong{font-family:var(--serif);font-size:1.45rem;font-weight:600;line-height:1}
+.calendar-mobile-date span{margin-top:4px;font-size:.65rem;font-weight:800;text-transform:uppercase}
+.calendar-mobile-items{display:grid;gap:7px}
+.calendar-mobile-observance{display:block;padding:10px 12px;border-left:3px solid var(--navy-700);border-radius:9px;background:#f7f8f8;font-size:.82rem;line-height:1.3}
+.calendar-mobile-observance.catholic{border-left-color:var(--catholic)}
+.calendar-mobile-observance.orthodox{border-left-color:var(--orthodox)}
+.calendar-mobile-empty{display:flex;align-items:center;color:var(--muted);font-size:.8rem}
+
+@media (max-width:960px){
+  .main-nav{display:none}
+  .site-main{padding-bottom:112px}
+  .site-footer{padding-bottom:88px}
+  .mobile-product-nav{position:fixed;z-index:80;left:12px;right:12px;bottom:max(10px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:7px;border:1px solid rgba(16,42,67,.12);border-radius:20px;background:rgba(255,255,255,.96);box-shadow:0 14px 42px rgba(8,27,44,.2);backdrop-filter:blur(18px)}
+  .mobile-product-nav a{min-width:0;min-height:48px;display:grid;place-items:center;align-content:center;gap:2px;border-radius:14px;color:var(--navy-800)}
+  .mobile-product-nav a:focus-visible{outline:2px solid var(--gold-500);outline-offset:1px}
+  .mobile-product-nav span{font-size:1rem;line-height:1}
+  .mobile-product-nav small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.62rem;font-weight:750}
+  .product-destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:680px){
+  .site-main{width:min(100% - 20px,1180px);padding-top:18px}
+  .page-stack>*+*{margin-top:18px}
+  .header-inner{width:calc(100% - 20px);min-height:62px;grid-template-columns:1fr auto;gap:10px}
+  .brand-mark{width:32px;height:32px}
+  .brand-word{font-size:.92rem}
+  .preference-pickers{gap:6px}
+  .preference-pickers select{max-width:120px;min-height:40px;padding-top:7px;padding-bottom:7px}
+
+  .today-panel{grid-template-columns:1fr;border-radius:20px}
+  .today-date-card{min-height:auto;padding:20px 20px 16px;border-right:0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;grid-template-areas:'eyebrow region' 'day weekday' 'day month';column-gap:16px;justify-content:initial;align-items:end}
+  .today-date-card .eyebrow{grid-area:eyebrow;align-self:center}
+  .today-day{grid-area:day;font-size:4.2rem}
+  .today-date-label{grid-area:weekday;margin:0;font-size:1rem;font-weight:700}
+  .today-date-context{grid-area:month;color:var(--muted);font-size:.78rem}
+  .region-pill{grid-area:region;justify-self:end;margin:0;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .today-content{padding:20px}
+  .section-heading.compact{align-items:flex-start}
+  .section-heading h2{font-size:1.65rem}
+  .observance-row{padding:13px 0}
+  .observance-row h3{font-size:1.12rem}
+  .today-actions .btn{flex:1}
+
+  .home-search-panel{grid-template-columns:1fr;padding:20px;gap:14px}
+  .product-destination-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .product-destination-card{min-height:112px;padding:15px}
+  .product-destination-card strong{font-size:1rem}
+
+  .page-hero.compact-hero{display:none}
+  .filter-panel{grid-template-columns:1fr 1fr;padding:14px;gap:10px}
+  .filter-panel .filter-group:last-of-type{grid-column:1/-1}
+  .filter-action{grid-column:1/-1}
+  .calendar-card{padding:14px;border-radius:18px}
+  .calendar-toolbar{margin-bottom:10px}
+  .calendar-toolbar h2{font-size:1.55rem}
+  .calendar-scroll{display:none}
+  .calendar-mobile-agenda{display:block}
+  .subscription-strip{display:grid;padding:20px}
+  .subscription-strip .button-row{display:grid;grid-template-columns:1fr}
+  .subscription-strip .btn{width:100%}
+
+  .product-page-heading{padding:20px;border-radius:18px}
+  .pilgrimage-grid{grid-template-columns:1fr}
+  .pilgrimage-card{padding:20px}
+  .pilgrimage-card h2{font-size:1.35rem}
+  .pilgrimage-actions{display:grid;grid-template-columns:1fr}
+  .pilgrimage-actions .btn{width:100%}
+}
