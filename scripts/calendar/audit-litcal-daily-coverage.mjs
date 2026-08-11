@@ -23,8 +23,8 @@ export function civilDatesForYear(year) {
   return dates;
 }
 
-function validDateForYear(value, year) {
-  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !value.startsWith(`${year}-`)) return false;
+function validDate(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const parsed = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
@@ -37,14 +37,19 @@ export function auditCompactCalendar(payload, year) {
 
   const observedDates = new Set();
   let invalidDates = 0;
+  let outOfYearDates = 0;
   for (const event of events) {
-    if (!validDateForYear(event?.dateISO, year)) {
+    if (!validDate(event?.dateISO)) {
       invalidDates += 1;
+      continue;
+    }
+    if (!event.dateISO.startsWith(`${year}-`)) {
+      outOfYearDates += 1;
       continue;
     }
     observedDates.add(event.dateISO);
   }
-  if (invalidDates) errors.push(`${invalidDates} event(s) have invalid or out-of-year dates`);
+  if (invalidDates) errors.push(`${invalidDates} event(s) have invalid dates`);
 
   const expectedDates = civilDatesForYear(year);
   const missingDates = expectedDates.filter((date) => !observedDates.has(date));
@@ -57,6 +62,7 @@ export function auditCompactCalendar(payload, year) {
     coveredDays: observedDates.size,
     eventCount: events.length,
     invalidDates,
+    outOfYearDates,
     missingDates,
     errors
   };
@@ -80,6 +86,7 @@ export function auditLitcalDailyCoverage({ root = DEFAULT_ROOT, years, locales =
           coveredDays: 0,
           eventCount: 0,
           invalidDates: 0,
+          outOfYearDates: 0,
           missingDates: civilDatesForYear(year),
           errors: ['critical reference calendar is missing']
         };
