@@ -14,6 +14,9 @@ import {
   getPublicMonthlyObservances,
   getPublicObservancesForDate,
 } from "../../../../lib/public-observances";
+import { readCalendarOccurrences } from "../../../../lib/calendar-d1-read-model";
+import { mergePublicCalendarObservances } from "../../../../lib/calendar-public-adapter";
+import { getOptionalCalendarDatabase } from "../../../../lib/cloudflare-calendar-db";
 
 function trustworthyNames(names: LocalizedText, locale: Locale): LocalizedText {
   if (locale === "en") return names;
@@ -28,6 +31,11 @@ function trustworthyNames(names: LocalizedText, locale: Locale): LocalizedText {
   const cleaned = { ...names };
   delete cleaned[locale];
   return cleaned;
+}
+
+function monthEnd(year: number, month: number): string {
+  const day = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
 export async function GET(request: NextRequest) {
@@ -52,12 +60,51 @@ export async function GET(request: NextRequest) {
     (!Number.isInteger(month) || month < 1 || month > 12)
   )
     return Response.json({ error: "Invalid month." }, { status: 400 });
+  if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date))
+    return Response.json({ error: "Invalid date." }, { status: 400 });
+
   const curated = date
     ? getPublicObservancesForDate(date, locale, filters)
     : month
       ? getPublicMonthlyObservances(year, month - 1, locale, filters)
       : getPublicAllObservances(year, locale, filters);
-  const data = curated
+
+  const database = await getOptionalCalendarDatabase();
+  let d1Status: "unbound" | "not-requested" | "ok" | "bounded" | "fallback-error" = database
+    ? "not-requested"
+    : "unbound";
+  let d1Records = [] as Awaited<ReturnType<typeof readCalendarOccurrences>>;
+
+  // Product-facing day/month reads can safely augment the repository baseline.
+  // Patronage and unbounded annual reads stay on the curated path until their
+  // dedicated D1 indexes/read models are available.
+  if (database && !filters.patronage && (date || month)) {
+    const fromDate = date ?? `${year}-${String(month).padStart(2, "0")}-01`;
+    const toDate = date ?? monthEnd(year, month as number);
+    try {
+      d1Records = await readCalendarOccurrences(database, {
+        fromDate,
+        toDate,
+        churchId: filters.tradition,
+        countryCode: filters.country,
+        locales: [...new Set([locale, "en"])],
+        mode: "public",
+        limit: 500,
+        offset: 0,
+      });
+      d1Status = d1Records.length === 500 ? "bounded" : "ok";
+    } catch {
+      d1Records = [];
+      d1Status = "fallback-error";
+    }
+  }
+
+  if (filters.category) {
+    d1Records = d1Records.filter((item) => item.category === filters.category);
+  }
+
+  const merged = mergePublicCalendarObservances(curated, d1Records, locale);
+  const data = merged.items
     .map((item) => {
       const names = trustworthyNames(item.names, locale);
       return {
@@ -70,6 +117,11 @@ export async function GET(request: NextRequest) {
       };
     })
     .filter((item) => Boolean(item.name));
+
+  const sourceMode = merged.acceptedD1
+    ? "published-d1+approved-repository"
+    : "approved-repository";
+
   return Response.json(
     {
       data,
@@ -79,11 +131,18 @@ export async function GET(request: NextRequest) {
         date,
         locale,
         count: data.length,
-        withheldForTranslation: curated.length - data.length,
+        withheldForTranslation: merged.items.length - data.length,
         filters,
         live: false,
         requestedLive: p.has("live"),
-        sourceMode: "approved-repository",
+        sourceMode,
+        d1: {
+          bound: Boolean(database),
+          status: d1Status,
+          publishedAccepted: merged.acceptedD1,
+          withheldByAdapter: merged.withheldD1,
+          resultLimit: 500,
+        },
         generatedAt: new Date().toISOString(),
       },
     },
