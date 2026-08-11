@@ -4,6 +4,7 @@ import { localizedSummary } from "../../../../lib/content-locale";
 import { normalizeLocale } from "../../../../lib/i18n";
 import { displayObservanceName, displayPatronages } from "../../../../lib/locale-display";
 import { getPublicObservancesForDate } from "../../../../lib/public-observances";
+import { mergePublishedCalendarRange } from "../../../../lib/public-calendar-runtime";
 import { civilDateAtInstant, isValidIanaTimeZone, normalizeTimeZone } from "../../../../lib/knowledge/temporal-core";
 
 export async function GET(request: NextRequest) {
@@ -15,7 +16,8 @@ export async function GET(request: NextRequest) {
   const date=explicitDate??civilDateAtInstant(new Date(),timeZone);
   const filters={tradition:parseTradition(params.get("tradition")),category:parseCategory(params.get("category")),country:params.get("country")??undefined};
   const curated=getPublicObservancesForDate(date,locale,filters);
-  const data=curated.map(item=>({
+  const runtime=await mergePublishedCalendarRange(curated,{fromDate:date,toDate:date,locale,filters});
+  const data=runtime.items.map(item=>({
     ...item,
     originalName:item.name,
     name:displayObservanceName(item.names,locale,item.name),
@@ -24,6 +26,6 @@ export async function GET(request: NextRequest) {
   })).filter(item=>Boolean(item.name));
   return Response.json({data,meta:{
     date,locale,timeZone,timeZoneSource:explicitDate?"explicit-date":isValidIanaTimeZone(requestedTimeZone)?"request":"utc-fallback",
-    count:data.length,withheldForTranslation:curated.length-data.length,filters,live:false,requestedLive:params.has("live"),sourceMode:"approved-repository",generatedAt:new Date().toISOString()
+    count:data.length,withheldForTranslation:runtime.items.length-data.length,filters,live:false,requestedLive:params.has("live"),sourceMode:runtime.meta.sourceMode,d1:runtime.meta.d1,generatedAt:new Date().toISOString()
   }},{headers:{"Cache-Control":explicitDate?"public, s-maxage=900, stale-while-revalidate=86400":"public, s-maxage=60, stale-while-revalidate=300","Access-Control-Allow-Origin":"*"}});
 }
