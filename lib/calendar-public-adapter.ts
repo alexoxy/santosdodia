@@ -6,7 +6,12 @@ import {
   type Observance,
   type ValidationStatus,
 } from '../data/observances';
-import { normalizeLocale, type Locale, type LocalizedText } from './i18n';
+import {
+  normalizeLocale,
+  SUPPORTED_LOCALES,
+  type Locale,
+  type LocalizedText,
+} from './i18n';
 import type { CalendarOccurrenceRecord } from './calendar-d1-read-model';
 
 const CALENDAR_SYSTEMS = new Set<CalendarSystem>([
@@ -18,6 +23,7 @@ const CALENDAR_SYSTEMS = new Set<CalendarSystem>([
   'armenian',
   'mixed',
 ]);
+const SUPPORTED_LOCALE_BASES = new Set<string>(SUPPORTED_LOCALES);
 
 function calendarSystem(value: string | undefined): CalendarSystem {
   return value && CALENDAR_SYSTEMS.has(value as CalendarSystem)
@@ -27,6 +33,12 @@ function calendarSystem(value: string | undefined): CalendarSystem {
 
 function publicValidation(value: string): ValidationStatus | null {
   return value === 'verified' || value === 'cross-checked' ? value : null;
+}
+
+function supportedLocale(value: string): Locale | null {
+  const base = value.trim().toLowerCase().replace('_', '-').split('-')[0];
+  const alias = base === 'tl' || base === 'ph' ? 'fil' : base;
+  return SUPPORTED_LOCALE_BASES.has(alias) ? normalizeLocale(alias) : null;
 }
 
 function normalizedLabels(
@@ -44,7 +56,8 @@ function normalizedLabels(
   const statuses: string[] = [];
 
   for (const label of Object.values(record.labels)) {
-    const locale = normalizeLocale(label.locale);
+    const locale = supportedLocale(label.locale);
+    if (!locale) continue;
     const name = label.name.normalize('NFC').trim();
     if (!name) continue;
     if (!names[locale]) names[locale] = name;
