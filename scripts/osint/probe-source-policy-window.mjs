@@ -165,9 +165,9 @@ async function probeRobots(rootUrl) {
 }
 
 export function classifyPolicyCandidate(source, availability, robots) {
-  if (!availability?.reachable) return 'source-health-review';
   if (robots?.blocksAll === true) return 'blocked-by-robots-candidate';
   if (robots?.blocksAll === null || robots?.truncated === true) return 'robots-review-required';
+  if (!availability?.reachable) return 'source-health-review';
   const reuse = String(source?.reuseStatus ?? '').toLowerCase();
   const explicitlyOpen = /(?:^|-)cc0(?:-|$)|cc-by|odbl|apache|unicode-license|open-distribution|metadata-cc0/u.test(reuse);
   if (explicitlyOpen && robots?.blocksAll === false) return 'eligible-policy-promotion-review';
@@ -177,8 +177,10 @@ export function classifyPolicyCandidate(source, availability, robots) {
 export async function probePolicySource(source) {
   const startedAt = new Date().toISOString();
   try {
-    const availability = await probeAvailability(source.url);
-    const robots = await probeRobots(availability.finalUrl ?? source.url);
+    const robots = await probeRobots(source.url);
+    const availability = robots.blocksAll === true
+      ? { reachable: null, skipped: 'robots-blocks-all' }
+      : await probeAvailability(source.url);
     return {
       id: source.id,
       name: source.name,
@@ -254,7 +256,7 @@ export async function buildPolicyProbeReport(plan, { network = false } = {}) {
     policy: {
       automaticSourcePromotion: false,
       automaticProductionWrites: false,
-      pendingSourceAcquisition: 'availability-and-robots-only',
+      pendingSourceAcquisition: 'robots-first-then-availability-only',
       contentAcquisition: false,
     },
     checks,
