@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "principle": "separate-bootstrap-maintenance-and-product-intelligence",
+  "productGoal": "A simple mobile-first worldwide Christian saints and liturgical calendar that is complete enough to be useful every day, remains current without daily human intervention, and turns verified data into personalized calendars, discovery, pilgrimages and live experiences.",
+  "modes": [
+    {
+      "id": "BUILD",
+      "name": "Initial exhaustive baseline",
+      "lifecycle": "finite",
+      "purpose": "Create the first globally useful content baseline before judging the product by automation maturity.",
+      "priority": "P0",
+      "successMetrics": [
+        "365-day coverage for each launched calendar",
+        "no empty Today for launched calendars where the Church has observances",
+        "person identity resolved across launched calendars",
+        "complete public locale labels for launched locales",
+        "published D1 baseline available to the public product"
+      ],
+      "work": [
+        "select authoritative calendar sources per Church and jurisdiction",
+        "perform full source acquisition for the baseline horizon",
+        "normalize saints, observances, ranks, date rules and jurisdictions",
+        "resolve duplicate people without merging Church-specific observances",
+        "build multilingual names and locale-safe structured summaries",
+        "validate calendar dates and theology-specific terminology",
+        "publish approved baseline to production D1"
+      ],
+      "stopCondition": "All launched calendar+locale combinations meet product coverage thresholds; BUILD then becomes backfill-only for newly added Churches, jurisdictions or locales.",
+      "mustNot": [
+        "run forever as a full recrawl",
+        "treat Wikidata or Vatican as a universal Christian calendar",
+        "publish a Church before its calendar authority and terminology are understood",
+        "count staging records as product completion"
+      ]
+    },
+    {
+      "id": "LIVE",
+      "name": "Indefinite incremental maintenance",
+      "lifecycle": "continuous",
+      "purpose": "Keep the published baseline correct indefinitely with bounded, source-aware delta checks.",
+      "priority": "P0-after-build",
+      "successMetrics": [
+        "source freshness SLA met",
+        "official calendar changes detected and propagated",
+        "new saints, beatifications, canonizations or Church-specific recognitions added",
+        "no data-only Worker rebuilds",
+        "last-known-good survives source failures"
+      ],
+      "work": [
+        "schedule only due sources",
+        "use ETag, Last-Modified, hashes or source-specific cursors before full fetch",
+        "fetch and normalize only changed records when possible",
+        "re-run identity and language review only for deltas",
+        "auto-promote only sources and claim types explicitly approved for automatic publication",
+        "archive evidence and rollback receipts"
+      ],
+      "mustNot": [
+        "repeat the initial global baseline every hour",
+        "trigger Cloudflare Worker builds for content changes",
+        "allow a source to approve itself",
+        "replace verified content with a failed or ambiguous fetch"
+      ]
+    },
+    {
+      "id": "INTELLIGENCE",
+      "name": "Smart product mechanics",
+      "lifecycle": "request-time-and-precomputed",
+      "purpose": "Turn verified canonical data into the simple user-facing SantosDia product.",
+      "priority": "P0-product",
+      "successMetrics": [
+        "Today is correct for user timezone, Church, jurisdiction and locale",
+        "calendar navigation is useful on mobile",
+        "smart ICS/webcal feeds stay correct without manual regeneration",
+        "search resolves localized names and aliases to the same person",
+        "pilgrimage and live surfaces are filtered by date, place, Church and language",
+        "no unsupported-language content leaks into a selected public locale"
+      ],
+      "mechanics": [
+        "Today resolver",
+        "Church and jurisdiction resolver",
+        "timezone and calendar-system projection",
+        "localized identity/name resolver",
+        "smart calendar feed composer",
+        "search and alias resolution",
+        "nearby pilgrimage and romaria discovery",
+        "official live-stream schedule and health resolution",
+        "ranking by relevance, date, proximity and user-selected Church"
+      ],
+      "mustNot": [
+        "perform external OSINT acquisition during a user request",
+        "translate theology or Church recognition dynamically",
+        "invent observances for Churches without them",
+        "fall back silently to English on a complete public locale"
+      ]
+    }
+  ],
+  "executionOrder": [
+    "Finish BUILD for the first launched calendars and locales",
+    "Expose that approved baseline in the mobile product",
+    "Keep LIVE running only as maintenance of the published baseline",
+    "Expand INTELLIGENCE features only when they consume real published content",
+    "Repeat BUILD only for a newly launched Church, jurisdiction, locale or content domain"
+  ],
+  "productReleaseGate": {
+    "required": [
+      "Today has verified content for the target date/calendar or an explicit theologically valid no-observance state",
+      "selected public locale is end-to-end complete",
+      "calendar pages and search use the same canonical data",
+      "ICS/webcal uses the same canonical data",
+      "production reads published data rather than staging-only datasets"
+    ]
+  }
+}
