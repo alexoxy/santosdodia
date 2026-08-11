@@ -268,7 +268,7 @@ export default function CalendarExplorer() {
                         <a className="calendar-more" href={`/day/${date}`}>
                           +{list.length - 10}
                         </a>
-                      ) : null;
+                      ) : null}
                     </>
                   ) : null}
                 </div>
