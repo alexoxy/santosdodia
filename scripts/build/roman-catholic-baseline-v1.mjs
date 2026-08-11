@@ -203,7 +203,7 @@ const report = {
   },
   calendarCoverage: {
     expectedDays: daysInYear(year),
-    coveredDays: days.length - emptyDates.length,
+    coveredDays: dates.length - emptyDates.length,
     emptyDates,
     falseEmptyCount: emptyDates.length,
     referenceEventCount: reference.length,
