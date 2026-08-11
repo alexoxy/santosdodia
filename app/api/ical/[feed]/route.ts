@@ -5,6 +5,7 @@ import { localizedSummary } from "../../../../lib/content-locale";
 import { normalizeLocale, ui } from "../../../../lib/i18n";
 import { displayObservanceName, displayPatronages } from "../../../../lib/locale-display";
 import { getPublicAllObservances } from "../../../../lib/public-observances";
+import { mergePublishedCalendarRange } from "../../../../lib/public-calendar-runtime";
 import { SITE_ORIGIN } from "../../../../lib/site";
 
 const escapeIcs=(value:string|undefined)=>String(value??"").replaceAll("\\","\\\\").replaceAll("\n","\\n").replaceAll(",","\\,").replaceAll(";","\\;");
@@ -20,10 +21,16 @@ export async function GET(request:NextRequest,context:{params:Promise<{feed:stri
  const query=request.nextUrl.searchParams,locale=normalizeLocale(query.get("locale")??request.headers.get("accept-language")),copy=ui[locale],
   explicitYear=query.has("year")?Number(query.get("year")):undefined,currentYear=new Date().getUTCFullYear(),years=explicitYear?[explicitYear]:[currentYear,currentYear+1],
   tradition=feedSelection??parseTradition(query.get("tradition")),category=parseCategory(query.get("category")),country=query.get("country")??undefined,filters={tradition,category,country};
- const items=years.flatMap(year=>getPublicAllObservances(year,locale,filters));
+ if(years.some(year=>!Number.isInteger(year)||year<1900||year>2200))return new Response("Invalid year.",{status:400});
+ const runtimeYears=await Promise.all(years.map(async year=>{
+  const curated=getPublicAllObservances(year,locale,filters);
+  return mergePublishedCalendarRange(curated,{fromDate:`${year}-01-01`,toDate:`${year}-12-31`,locale,filters});
+ }));
+ const items=runtimeYears.flatMap(result=>result.items);
+ const usesD1=runtimeYears.some(result=>result.meta.d1.publishedAccepted>0);
  const calendarTitle=tradition?`Santos do Dia — ${traditionLabel(copy,tradition)}`:`Santos do Dia — ${copy.calendarTitle}`;
  const stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/, "Z");
- const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//santosdodia.com//Christian Calendar//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",`NAME:${escapeIcs(calendarTitle)}`,`X-WR-CALNAME:${escapeIcs(calendarTitle)}`,"X-PUBLISHED-TTL:PT6H"];
+ const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//santosdodia.com//Christian Calendar//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",`NAME:${escapeIcs(calendarTitle)}`,`X-WR-CALNAME:${escapeIcs(calendarTitle)}`,`X-SANTOSDIA-SOURCE:${usesD1?"published-d1+approved-repository":"approved-repository"}`,"X-PUBLISHED-TTL:PT6H"];
  for(const item of items){
   const name=displayObservanceName(item.names,locale,item.name);if(!name)continue;
   const traditions=item.traditions.map(value=>traditionLabel(copy,value)).join(", "),patronages=displayPatronages(item.patronages,locale),summary=localizedSummary(item,locale)?.text;
