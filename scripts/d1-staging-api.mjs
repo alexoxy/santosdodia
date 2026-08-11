@@ -3,6 +3,8 @@ import { createHash } from 'node:crypto';
 const API_ROOT = 'https://api.cloudflare.com/client/v4';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const FORBIDDEN_SQL = /\b(?:BEGIN|COMMIT|ROLLBACK|SAVEPOINT|PRAGMA\s+foreign_keys)\b/i;
+const STAGING_DATABASE_NAME = 'santosdodia-staging';
+const PRODUCTION_DATABASE_NAME = 'santosdodia-production';
 
 function sha256(value) {
   return createHash('sha256').update(value).digest('hex');
@@ -51,8 +53,10 @@ async function apiRequest({ accountId, token, path, method = 'GET', body, fetchI
   return payload.result;
 }
 
-export async function provisionStagingDatabase({ accountId, token, name = 'santosdodia-staging', fetchImpl = fetch }) {
-  if (name !== 'santosdodia-staging') throw new Error('Only the santosdodia-staging database may be provisioned.');
+async function provisionNamedDatabase({ accountId, token, name, fetchImpl = fetch }) {
+  if (![STAGING_DATABASE_NAME, PRODUCTION_DATABASE_NAME].includes(name)) {
+    throw new Error('Only fixed SantosDia staging or production D1 databases may be provisioned.');
+  }
   const existing = await apiRequest({
     accountId,
     token,
@@ -69,7 +73,18 @@ export async function provisionStagingDatabase({ accountId, token, name = 'santo
     body: { name, jurisdiction: 'eu', primary_location_hint: 'weur' },
     fetchImpl
   });
+  if (!database?.uuid || database.name !== name) throw new Error('Cloudflare returned an unexpected D1 database identity.');
   return { created: true, database };
+}
+
+export async function provisionStagingDatabase({ accountId, token, name = STAGING_DATABASE_NAME, fetchImpl = fetch }) {
+  if (name !== STAGING_DATABASE_NAME) throw new Error('Only the santosdodia-staging database may be provisioned by this function.');
+  return provisionNamedDatabase({ accountId, token, name, fetchImpl });
+}
+
+export async function provisionProductionDatabase({ accountId, token, name = PRODUCTION_DATABASE_NAME, fetchImpl = fetch }) {
+  if (name !== PRODUCTION_DATABASE_NAME) throw new Error('Only the santosdodia-production database may be provisioned by this function.');
+  return provisionNamedDatabase({ accountId, token, name, fetchImpl });
 }
 
 export async function queryDatabase({ accountId, token, databaseId, sql, params = [], fetchImpl = fetch }) {
