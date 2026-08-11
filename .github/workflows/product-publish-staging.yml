@@ -158,9 +158,45 @@ jobs:
             reports/product-release/validation.json
             reports/product-release/release.sql
 
-  publish-to-staging:
+  archive-release-evidence:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-and-validate-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download validated release
+        uses: actions/download-artifact@v7
+        with:
+          name: roman-catholic-product-release-${{ github.sha }}
+          path: reports/product-release
+
+      - name: Archive canonical release evidence
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          BASE: /Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/${{ github.sha }}
+        run: |
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/manifest.json --path "$BASE/manifest.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/validation.json --path "$BASE/validation.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/release.json --path "$BASE/release.json"
+
+  publish-to-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [build-and-validate-release, archive-release-evidence]
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: d1-staging
@@ -229,39 +265,3 @@ jobs:
           retention-days: 30
           if-no-files-found: error
           path: reports/product-release/staging-counts.json
-
-  archive-release-evidence:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [build-and-validate-release, publish-to-staging]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    environment: dropbox-archive
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Use Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Install locked dependencies
-        run: npm ci --include=optional
-
-      - name: Download validated release
-        uses: actions/download-artifact@v7
-        with:
-          name: roman-catholic-product-release-${{ github.sha }}
-          path: reports/product-release
-
-      - name: Archive canonical evidence before production release
-        env:
-          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
-          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
-          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
-          BASE: /Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/${{ github.sha }}
-        run: |
-          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/manifest.json --path "$BASE/manifest.json"
-          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/validation.json --path "$BASE/validation.json"
-          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/release.json --path "$BASE/release.json"
