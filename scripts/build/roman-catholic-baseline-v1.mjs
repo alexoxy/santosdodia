@@ -10,6 +10,7 @@ function argument(name, fallback) {
 const year = Number(argument('--year', String(new Date().getUTCFullYear())));
 const outputPath = path.resolve(argument('--output', `reports/product-build/roman-catholic-${year}.json`));
 const portugalIcsPath = argument('--portugal-ics');
+const spanishRomcalPath = argument('--spanish-romcal');
 const mirrorRoot = path.resolve(argument('--mirror-root', 'data/litcal-mirror/calendars/general'));
 const publicLocales = ['en', 'pt', 'es', 'fr', 'it'];
 const mirrorLocales = { en: 'en_US', fr: 'fr_FR', it: 'it_IT', pt: 'pt_PT', es: 'es_ES' };
@@ -17,7 +18,8 @@ const mirrorLocales = { en: 'en_US', fr: 'fr_FR', it: 'it_IT', pt: 'pt_PT', es: 
 if (!Number.isInteger(year) || year < 1970 || year > 2200) throw new Error(`Invalid year: ${year}`);
 
 function readJsonIfPresent(file) {
-  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return null; }
+  if (!file) return null;
+  try { return JSON.parse(fs.readFileSync(path.resolve(file), 'utf8')); } catch { return null; }
 }
 
 function sha256(value) {
@@ -96,6 +98,24 @@ function unescapeIcs(value) {
     .trim();
 }
 
+function portugueseRank(line) {
+  const match = String(line ?? '').match(/\s+[–-]\s+(SOLENIDADE|FESTA|MO|MF|MEMÓRIA OBRIGATÓRIA|MEMÓRIA FACULTATIVA)\s*$/iu);
+  if (!match) return { label: String(line ?? '').trim(), sourceRank: null, canonicalRank: null };
+  const sourceRank = match[1].toUpperCase();
+  const canonicalRank = sourceRank === 'SOLENIDADE'
+    ? 'solemnity'
+    : sourceRank === 'FESTA'
+      ? 'feast'
+      : sourceRank === 'MO' || sourceRank === 'MEMÓRIA OBRIGATÓRIA'
+        ? 'memorial'
+        : 'optional-memorial';
+  return {
+    label: String(line).slice(0, match.index).trim(),
+    sourceRank,
+    canonicalRank,
+  };
+}
+
 function parsePortugalIcs(file) {
   if (!file) return { available: false, reason: 'not-provided', events: [], uniqueDates: 0, coverageRatio: 0 };
   let text;
@@ -121,7 +141,17 @@ function parsePortugalIcs(file) {
       } else if (key === 'SUMMARY') summary = unescapeIcs(value);
       else if (key === 'DESCRIPTION') description = unescapeIcs(value);
     }
-    if (dateISO?.startsWith(`${year}-`) && summary) events.push({ dateISO, summary, description });
+    if (!dateISO?.startsWith(`${year}-`) || !summary) continue;
+    const firstDescriptionLine = String(description ?? '').split(/\n/u).map((item) => item.trim()).find(Boolean) ?? null;
+    const parsed = portugueseRank(firstDescriptionLine ?? summary);
+    events.push({
+      dateISO,
+      liturgicalDayLabel: summary.trim(),
+      displayLabel: parsed.label || summary.trim(),
+      sourceRank: parsed.sourceRank,
+      canonicalRank: parsed.canonicalRank,
+      description,
+    });
   }
   const uniqueDates = new Set(events.map((event) => event.dateISO)).size;
   return {
@@ -132,6 +162,18 @@ function parsePortugalIcs(file) {
     coverageRatio: Number((uniqueDates / daysInYear(year)).toFixed(4)),
     events,
   };
+}
+
+function normalizeSpanishRomcal(payload) {
+  const events = Array.isArray(payload?.events) ? payload.events : [];
+  return events
+    .map((event) => ({
+      dateISO: String(event.dateISO ?? event.date ?? '').slice(0, 10),
+      id: String(event.id ?? event.key ?? ''),
+      name: String(event.name ?? '').trim(),
+      rank: event.rank == null ? null : String(event.rank),
+    }))
+    .filter((event) => event.dateISO.startsWith(`${year}-`) && event.name);
 }
 
 const localePayloads = {};
@@ -162,25 +204,82 @@ const primaryByDate = dates.map((date) => {
 });
 
 const referenceIds = new Set(reference.map((event) => event.id));
-const labels = {};
+const rawLabelCompleteness = {};
 for (const locale of publicLocales) {
   const byId = new Map(localeEvents[locale].map((event) => [event.id, event.name]));
   let matched = 0;
   for (const id of referenceIds) if (byId.has(id)) matched += 1;
-  labels[locale] = {
+  rawLabelCompleteness[locale] = {
     sourceAvailable: localePayloads[locale].available,
     referenceEvents: referenceIds.size,
     matchedEvents: matched,
     missingEvents: referenceIds.size - matched,
     completeness: referenceIds.size ? Number((matched / referenceIds.size).toFixed(4)) : 0,
+    launchGate: false,
   };
 }
 
 const portugal = parsePortugalIcs(portugalIcsPath);
-const launchReady = emptyDates.length === 0 && publicLocales.every((locale) => labels[locale].completeness === 1) && portugal.available && portugal.uniqueDates === daysInYear(year);
+const portugueseByDate = new Map(portugal.events.map((event) => [event.dateISO, event]));
+const spanishRomcal = normalizeSpanishRomcal(readJsonIfPresent(spanishRomcalPath));
+const spanishByDate = new Map();
+for (const event of spanishRomcal) {
+  const current = spanishByDate.get(event.dateISO) ?? [];
+  current.push(event);
+  spanishByDate.set(event.dateISO, current);
+}
+
+const localizedById = Object.fromEntries(['en', 'fr', 'it'].map((locale) => [locale, new Map(localeEvents[locale].map((event) => [event.id, event]))]));
+const daily = primaryByDate.map(({ dateISO, primary, secondary }) => {
+  const labels = {};
+  if (primary) {
+    for (const locale of ['en', 'fr', 'it']) {
+      const localized = localizedById[locale].get(primary.id);
+      if (localized?.name) labels[locale] = { label: localized.name, source: 'litcal-api', sourceEventId: primary.id };
+    }
+  }
+  const pt = portugueseByDate.get(dateISO);
+  if (pt?.displayLabel) labels.pt = {
+    label: pt.displayLabel,
+    liturgicalDayLabel: pt.liturgicalDayLabel,
+    source: 'portugal-national-liturgy-secretariat',
+    sourceRank: pt.sourceRank,
+    canonicalRank: pt.canonicalRank,
+  };
+  const esCandidates = spanishByDate.get(dateISO) ?? [];
+  if (esCandidates[0]?.name) labels.es = {
+    label: esCandidates[0].name,
+    source: 'romcal-general-roman-es',
+    sourceEventId: esCandidates[0].id,
+    sourceRank: esCandidates[0].rank,
+    authorityScope: 'localization-crosscheck-only',
+  };
+  return {
+    dateISO,
+    primary: primary ? { id: primary.id, canonicalEventId: primary.canonicalEventId, name: primary.name, grade: primary.grade, category: primary.category } : null,
+    secondaryCount: secondary.length,
+    labels,
+  };
+});
+
+const dailyLocaleCompleteness = {};
+for (const locale of publicLocales) {
+  const missingDates = daily.filter((item) => !item.labels[locale]?.label).map((item) => item.dateISO);
+  dailyLocaleCompleteness[locale] = {
+    expectedDays: dates.length,
+    localizedDays: dates.length - missingDates.length,
+    missingDates,
+    completeness: Number(((dates.length - missingDates.length) / dates.length).toFixed(4)),
+  };
+}
+
+const launchReady = emptyDates.length === 0
+  && publicLocales.every((locale) => dailyLocaleCompleteness[locale].completeness === 1)
+  && portugal.available
+  && portugal.uniqueDates === daysInYear(year);
 
 const report = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   build: 'roman-catholic-product-baseline-v1',
   generatedAt: new Date().toISOString(),
   year,
@@ -200,6 +299,14 @@ const report = {
       page: 'https://www.liturgia.pt/agenda/',
       ics: 'https://www.liturgia.pt/agenda/agenda.ics',
     },
+    spanishLocalization: {
+      id: 'romcal-general-roman-es',
+      role: 'B2-localization-crosscheck',
+      repository: 'romcal/romcal',
+      version: '3.0.0-dev.125',
+      pinnedSourceCommit: '878e05a56909e3adf58a85d3b6f0e9ddba3e8c5b',
+      calendarAuthority: false,
+    },
   },
   calendarCoverage: {
     expectedDays: daysInYear(year),
@@ -210,7 +317,8 @@ const report = {
     primaryDays: primaryByDate.filter((item) => item.primary).length,
   },
   localeSources: localePayloads,
-  localeCompleteness: labels,
+  rawLabelCompleteness,
+  dailyLocaleCompleteness,
   portugalOfficial: {
     available: portugal.available,
     reason: portugal.reason ?? null,
@@ -218,20 +326,21 @@ const report = {
     uniqueDates: portugal.uniqueDates ?? 0,
     coverageRatio: portugal.coverageRatio ?? 0,
   },
+  spanishLocalization: {
+    available: spanishRomcal.length > 0,
+    eventCount: spanishRomcal.length,
+    uniqueDates: new Set(spanishRomcal.map((event) => event.dateISO)).size,
+  },
   productReadiness: {
     launchReady,
     blockers: [
       ...(emptyDates.length ? [`${emptyDates.length} calendar day(s) have no reference event`] : []),
-      ...publicLocales.filter((locale) => labels[locale].completeness < 1).map((locale) => `${locale}: ${labels[locale].missingEvents} reference label(s) missing`),
+      ...publicLocales.filter((locale) => dailyLocaleCompleteness[locale].completeness < 1).map((locale) => `${locale}: ${dailyLocaleCompleteness[locale].missingDates.length} public day label(s) missing`),
       ...(!portugal.available ? ['Portugal official ICS was not acquired in this build'] : []),
       ...(portugal.available && portugal.uniqueDates !== daysInYear(year) ? [`Portugal official ICS covers ${portugal.uniqueDates}/${daysInYear(year)} days`] : []),
     ],
   },
-  daily: primaryByDate.map(({ dateISO, primary, secondary }) => ({
-    dateISO,
-    primary: primary ? { id: primary.id, canonicalEventId: primary.canonicalEventId, name: primary.name, grade: primary.grade, category: primary.category } : null,
-    secondaryCount: secondary.length,
-  })),
+  daily,
 };
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
@@ -240,7 +349,8 @@ console.log(JSON.stringify({
   build: report.build,
   year,
   calendarCoverage: report.calendarCoverage,
-  localeCompleteness: report.localeCompleteness,
+  dailyLocaleCompleteness: report.dailyLocaleCompleteness,
   portugalOfficial: report.portugalOfficial,
+  spanishLocalization: report.spanishLocalization,
   productReadiness: report.productReadiness,
 }, null, 2));
