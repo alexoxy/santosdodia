@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'scripts/build/**'
+      - 'scripts/litcal-compact.mjs'
       - 'data/litcal-mirror/calendars/general/**'
       - '.github/workflows/product-build.yml'
   push:
@@ -13,6 +14,7 @@ on:
       - main
     paths:
       - 'scripts/build/**'
+      - 'scripts/litcal-compact.mjs'
       - 'data/litcal-mirror/calendars/general/**'
       - '.github/workflows/product-build.yml'
   workflow_dispatch:
@@ -45,14 +47,36 @@ jobs:
             --output reports/product-build/portugal-2026.ics \
             https://www.liturgia.pt/agenda/agenda.ics
 
+      - name: Assemble five-locale Roman reference set
+        run: |
+          mkdir -p reports/product-build/litcal/2026 reports/product-build/raw
+          cp data/litcal-mirror/calendars/general/2026/en_US.json reports/product-build/litcal/2026/en_US.json
+          cp data/litcal-mirror/calendars/general/2026/fr_FR.json reports/product-build/litcal/2026/fr_FR.json
+          cp data/litcal-mirror/calendars/general/2026/it_IT.json reports/product-build/litcal/2026/it_IT.json
+
+          for locale in pt_PT es_ES; do
+            curl --fail --location --retry 2 --retry-delay 2 \
+              --user-agent 'SantosDia-ProductBuild/1.0 (+https://www.santosdodia.com)' \
+              --output "reports/product-build/raw/${locale}.json" \
+              "https://litcal.johnromanodorazio.com/api/v5/calendar/2026?locale=${locale}&year_type=CIVIL"
+            LOCALE="$locale" node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { compactLitcalJson } from './scripts/litcal-compact.mjs';
+          const locale = process.env.LOCALE;
+          const raw = fs.readFileSync(`reports/product-build/raw/${locale}.json`, 'utf8');
+          fs.writeFileSync(`reports/product-build/litcal/2026/${locale}.json`, compactLitcalJson(raw), 'utf8');
+          NODE
+          done
+
       - name: Build Roman Catholic baseline candidate
         run: |
           node scripts/build/roman-catholic-baseline-v1.mjs \
             --year 2026 \
+            --mirror-root reports/product-build/litcal \
             --portugal-ics reports/product-build/portugal-2026.ics \
             --output reports/product-build/roman-catholic-2026.json
 
-      - name: Enforce calendar coverage gate
+      - name: Enforce product BUILD coverage gate
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -60,15 +84,16 @@ jobs:
           if (report.calendarCoverage.falseEmptyCount !== 0) {
             throw new Error(`Roman calendar has ${report.calendarCoverage.falseEmptyCount} empty day(s).`);
           }
-          for (const locale of ['en', 'fr', 'it']) {
+          for (const locale of ['en', 'pt', 'es', 'fr', 'it']) {
             if (report.localeCompleteness[locale]?.completeness !== 1) {
-              throw new Error(`${locale} mirror is not complete.`);
+              throw new Error(`${locale} calendar labels are not complete: ${report.localeCompleteness[locale]?.matchedEvents}/${report.localeCompleteness[locale]?.referenceEvents}.`);
             }
           }
           if (!report.portugalOfficial.available || report.portugalOfficial.coverageRatio < 0.99) {
             throw new Error(`Portugal official agenda coverage is ${report.portugalOfficial.coverageRatio}.`);
           }
           console.log(`Calendar: ${report.calendarCoverage.coveredDays}/${report.calendarCoverage.expectedDays} days.`);
+          console.log(`Five locales: complete.`);
           console.log(`Portugal official agenda: ${report.portugalOfficial.uniqueDates}/${report.calendarCoverage.expectedDays} days.`);
           console.log(`Launch blockers: ${report.productReadiness.blockers.join(' | ') || 'none'}`);
           NODE
@@ -81,4 +106,5 @@ jobs:
           path: |
             reports/product-build/roman-catholic-2026.json
             reports/product-build/portugal-2026.ics
+            reports/product-build/litcal/2026/*.json
           retention-days: 14
