@@ -3,7 +3,6 @@
 import Link from "next/link";
 import TodayPanel from "./components/TodayPanel";
 import PatronageSearch from "./components/PatronageSearch";
-import ProgressiveVaticanLive from "./components/ProgressiveVaticanLive";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
 import { useLanguage } from "./components/LanguageProvider";
@@ -59,8 +58,6 @@ export default function HomePage() {
           <small>{feature.liveTitle}</small>
         </Link>
       </nav>
-
-      <ProgressiveVaticanLive />
     </div>
   );
 }
