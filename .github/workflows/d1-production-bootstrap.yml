@@ -1,0 +1,106 @@
+name: D1 production bootstrap
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/d1-production-bootstrap.yml
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: d1-production-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  provision-empty-production-d1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Temporary credential carrier only. This job can create/reuse one empty,
+    # fixed-name production D1 database; it cannot migrate or write content.
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout protected main
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Verify protected bootstrap boundary
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$GITHUB_EVENT_NAME" = "push"
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "CLOUDFLARE_ACCOUNT_ID is missing"; exit 1; }
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "CLOUDFLARE_API_TOKEN is missing"; exit 1; }
+          npm run cloudflare:guardrails-audit
+          npm run db:d1-remote-safety-test
+
+      - name: Provision or reuse empty EU production database
+        run: node scripts/manage-d1-production.mjs provision --output reports/d1-production-provision.json
+
+      - name: Assert no content operation occurred
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const receipt = JSON.parse(fs.readFileSync('reports/d1-production-provision.json', 'utf8'));
+          if (receipt.operation !== 'provision-production-empty-database') throw new Error('Unexpected production D1 operation.');
+          if (receipt.dataWritten !== false || receipt.migrationsApplied !== false || receipt.bindingChanged !== false) {
+            throw new Error('Production bootstrap crossed the empty-database boundary.');
+          }
+          if (receipt.database?.name !== 'santosdodia-production' || receipt.database?.jurisdiction !== 'eu') {
+            throw new Error('Unexpected production D1 identity.');
+          }
+          NODE
+
+      - name: Upload production D1 provision receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: d1-production-provision-receipt
+          path: reports/d1-production-provision.json
+          if-no-files-found: error
+          retention-days: 30
+
+  archive-receipt:
+    needs: provision-empty-production-d1
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download production D1 provision receipt
+        uses: actions/download-artifact@v7
+        with:
+          name: d1-production-provision-receipt
+          path: reports/d1-production-bootstrap
+
+      - name: Archive immutable production provision receipt in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream d1-production-bootstrap --source reports/d1-production-bootstrap

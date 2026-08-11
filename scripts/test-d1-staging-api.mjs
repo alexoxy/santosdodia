@@ -1,11 +1,13 @@
 import { createHash } from 'node:crypto';
 import {
   applyBatchWithRollback,
+  provisionProductionDatabase,
   provisionStagingDatabase,
   validateBatchPackage
 } from './d1-staging-api.mjs';
 
 const databaseId = '123e4567-e89b-42d3-a456-426614174000';
+const productionId = '223e4567-e89b-42d3-a456-426614174001';
 const bookmark = '00000001-00000002-00004e2f-testbookmark';
 const restoredBookmark = '00000001-00000003-00004e30-restored';
 const statements = ['INSERT INTO example (id) VALUES (1);', 'UPDATE example SET id = 1 WHERE id = 1;'];
@@ -88,4 +90,44 @@ if (provision.created !== false || provision.database.uuid !== databaseId || pro
   throw new Error('Existing staging database was not reused safely.');
 }
 
-console.log('D1 staging API safeguards passed.');
+const productionReuseCalls = [];
+const productionReuseFetch = async (url, options = {}) => {
+  productionReuseCalls.push({ url, options });
+  return response({
+    success: true,
+    result: [{ uuid: productionId, name: 'santosdodia-production', jurisdiction: 'eu' }]
+  });
+};
+const productionReuse = await provisionProductionDatabase({ accountId: 'account', token: 'token', fetchImpl: productionReuseFetch });
+if (productionReuse.created !== false || productionReuse.database.uuid !== productionId || productionReuseCalls.length !== 1) {
+  throw new Error('Existing production database was not reused safely.');
+}
+
+const productionCreateCalls = [];
+const productionCreateFetch = async (url, options = {}) => {
+  productionCreateCalls.push({ url, options });
+  if (options.method === 'POST') {
+    const body = JSON.parse(options.body);
+    if (body.name !== 'santosdodia-production' || body.jurisdiction !== 'eu' || body.primary_location_hint !== 'weur') {
+      throw new Error('Production creation request was not pinned to the expected EU database identity.');
+    }
+    return response({ success: true, result: { uuid: productionId, name: 'santosdodia-production', jurisdiction: 'eu' } });
+  }
+  return response({ success: true, result: [] });
+};
+const productionCreate = await provisionProductionDatabase({ accountId: 'account', token: 'token', fetchImpl: productionCreateFetch });
+if (productionCreate.created !== true || productionCreate.database.uuid !== productionId || productionCreateCalls.length !== 2) {
+  throw new Error('Production database was not created through the bounded lookup-then-create flow.');
+}
+
+for (const invalid of ['production', 'santosdodia-prod', 'santosdodia-staging']) {
+  let rejected = false;
+  try {
+    await provisionProductionDatabase({ accountId: 'account', token: 'token', name: invalid, fetchImpl: productionReuseFetch });
+  } catch {
+    rejected = true;
+  }
+  if (!rejected) throw new Error(`Unexpected production D1 name was accepted: ${invalid}`);
+}
+
+console.log('D1 staging and production provisioning safeguards passed.');
