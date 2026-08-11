@@ -93,4 +93,5 @@ if (!capturedSql.includes("o.publication_status = 'published'") || capturedParam
   throw new Error('Public read execution did not use the guarded query.');
 }
 
+await import('./test-calendar-public-adapter.mjs');
 console.log('Publication-safe D1 calendar read model tests passed.');
