@@ -22,26 +22,38 @@ const leaderLabels: Partial<Record<Locale,string>> = {
  de:'Christliche Leitung',it:'Leader cristiani',pl:'Liderzy chrześcijańscy',ru:'Христианские лидеры',
  fil:'Mga lider Kristiyano',sw:'Viongozi wa Kikristo'
 };
+const pilgrimageLabels: Record<Locale,string> = {
+ en:'Pilgrimages',pt:'Peregrinar',es:'Peregrinar',fr:'Pèlerinages',de:'Pilgerziele',it:'Pellegrinaggi',pl:'Pielgrzymki',
+ ru:'Паломничества',fil:'Paglalakbay-dalangin',sw:'Hija'
+};
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
  const { locale, setLocale, copy, church, setChurch } = useLanguage();
  const feature=getFeatureCopy(locale);
  const institutional=getInstitutionalCopy(locale);
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
+ const pilgrimage=pilgrimageLabels[locale];
  return <div className="site-shell">
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
   <header className="site-header"><div className="header-inner">
    <Link className="brand" href="/" aria-label="Santos do Dia"><span className="brand-mark" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></Link>
-   <nav className="main-nav" aria-label="Primary navigation"><Link href="/">{feature.navToday}</Link><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/live">{feature.navLive}</Link></nav>
+   <nav className="main-nav" aria-label="Primary navigation"><Link href="/">{feature.navToday}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/explore">{feature.navFind}</Link><Link href="/pilgrimages">{pilgrimage}</Link><Link href="/live">{feature.navLive}</Link></nav>
    <div className="preference-pickers">
     <label className={`church-picker ${churchColourClass}`}><span className="sr-only">{copy.tradition}</span><span className="picker-colour" aria-hidden="true"/><select value={church} onChange={event=>setChurch(event.target.value as ChurchPreference)}><option value="all">{copy.all}</option>{TRADITIONS.map(value=><option key={value} value={value}>{traditionLabel(copy,value)}</option>)}</select></label>
     <label className="language-picker"><span className="sr-only">Language</span><select value={locale} onChange={event => setLocale(event.target.value as Locale)}>{SUPPORTED_LOCALES.map(value => <option key={value} value={value}>{localeOptionLabel(value,localeLabels[value])}</option>)}</select></label>
    </div>
   </div></header>
   <main className="site-main" id="main-content" tabIndex={-1}>{children}</main>
+  <nav className="mobile-product-nav" aria-label="Primary mobile navigation">
+   <Link href="/"><span aria-hidden="true">✦</span><small>{feature.navToday}</small></Link>
+   <Link href="/calendar"><span aria-hidden="true">▦</span><small>{feature.navCalendars}</small></Link>
+   <Link href="/explore"><span aria-hidden="true">⌕</span><small>{feature.navFind}</small></Link>
+   <Link href="/pilgrimages"><span aria-hidden="true">⌖</span><small>{pilgrimage}</small></Link>
+   <Link href="/live"><span aria-hidden="true">●</span><small>{feature.navLive}</small></Link>
+  </nav>
   <footer className="site-footer"><div className="footer-grid">
    <div><div className="brand footer-brand"><span className="brand-mark small" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></div><p>{copy.footer}</p></div>
-   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/leaders">{leaderLabels[locale]??leaderLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
+   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/pilgrimages">{pilgrimage}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/leaders">{leaderLabels[locale]??leaderLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
   </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><Link href="/privacy">{institutional.nav.privacy}</Link><Link href="/terms">{institutional.nav.terms}</Link><Link href="/faq">{institutional.nav.faq}</Link><Link href="/corrections">{institutional.nav.corrections}</Link><span>{copy.disclaimer}</span></div></div></footer>
  </div>
 }
