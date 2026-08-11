@@ -1,0 +1,135 @@
+name: Product BUILD
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/**'
+      - 'data/litcal-mirror/calendars/general/**'
+      - '.github/workflows/product-build.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/**'
+      - 'data/litcal-mirror/calendars/general/**'
+      - '.github/workflows/product-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: product-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  roman-catholic-2026:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Acquire official Portugal liturgical agenda
+        run: |
+          mkdir -p reports/product-build
+          curl --fail --location --retry 2 --retry-delay 2 \
+            --user-agent 'SantosDia-ProductBuild/1.0 (+https://www.santosdodia.com)' \
+            --output reports/product-build/portugal-2026.ics \
+            https://www.liturgia.pt/agenda/agenda.ics
+
+      - name: Generate pinned Spanish General Roman labels
+        run: |
+          mkdir -p reports/product-build/romcal
+          npm install --prefix reports/product-build/romcal \
+            --no-package-lock --ignore-scripts --no-audit --no-fund \
+            romcal@3.0.0-dev.125 \
+            @romcal/calendar.general-roman@3.0.0-dev.125
+          cd reports/product-build/romcal
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { Romcal } from 'romcal';
+          import { GeneralRoman_Es } from '@romcal/calendar.general-roman';
+
+          const calendar = await new Romcal({
+            localizedCalendar: GeneralRoman_Es,
+            scope: 'gregorian',
+            epiphanyOnSunday: false,
+            corpusChristiOnSunday: false,
+            ascensionOnSunday: false,
+          }).generateCalendar(2026);
+
+          const events = [];
+          for (const [dateKey, value] of Object.entries(calendar)) {
+            const values = Array.isArray(value) ? value : [value];
+            for (const item of values) {
+              if (!item) continue;
+              const dateISO = String(item.date ?? dateKey).slice(0, 10);
+              const name = String(item.name ?? '').trim();
+              if (!dateISO.startsWith('2026-') || !name) continue;
+              events.push({
+                dateISO,
+                id: String(item.id ?? item.key ?? ''),
+                name,
+                rank: item.rank?.name ?? item.rankName ?? item.rank ?? null,
+              });
+            }
+          }
+          fs.writeFileSync('../romcal-es-2026.json', `${JSON.stringify({
+            source: 'romcal/romcal',
+            packageVersion: '3.0.0-dev.125',
+            pinnedSourceCommit: '878e05a56909e3adf58a85d3b6f0e9ddba3e8c5b',
+            events,
+          }, null, 2)}\n`);
+          NODE
+
+      - name: Build Roman Catholic baseline candidate
+        run: |
+          node scripts/build/roman-catholic-baseline-v1.mjs \
+            --year 2026 \
+            --portugal-ics reports/product-build/portugal-2026.ics \
+            --spanish-romcal reports/product-build/romcal-es-2026.json \
+            --output reports/product-build/roman-catholic-2026.json
+
+      - name: Enforce product BUILD coverage gate
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('reports/product-build/roman-catholic-2026.json', 'utf8'));
+          if (report.calendarCoverage.falseEmptyCount !== 0) {
+            throw new Error(`Roman calendar has ${report.calendarCoverage.falseEmptyCount} empty day(s).`);
+          }
+          for (const locale of ['en', 'pt', 'es', 'fr', 'it']) {
+            const coverage = report.dailyLocaleCompleteness[locale];
+            if (coverage?.completeness !== 1) {
+              throw new Error(`${locale} public daily coverage is ${coverage?.localizedDays}/${coverage?.expectedDays}.`);
+            }
+          }
+          if (!report.portugalOfficial.available || report.portugalOfficial.coverageRatio !== 1) {
+            throw new Error(`Portugal official agenda coverage is ${report.portugalOfficial.coverageRatio}.`);
+          }
+          if (!report.productReadiness.launchReady) {
+            throw new Error(`Product BUILD is not launch-ready: ${report.productReadiness.blockers.join(' | ')}`);
+          }
+          console.log(`Calendar: ${report.calendarCoverage.coveredDays}/${report.calendarCoverage.expectedDays} days.`);
+          console.log('Public daily locale coverage: EN/PT/ES/FR/IT = 365/365.');
+          console.log(`Portugal official agenda: ${report.portugalOfficial.uniqueDates}/${report.calendarCoverage.expectedDays} days.`);
+          NODE
+
+      - name: Upload BUILD evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: roman-catholic-product-build-2026
+          path: |
+            reports/product-build/roman-catholic-2026.json
+            reports/product-build/portugal-2026.ics
+            reports/product-build/romcal-es-2026.json
+          retention-days: 14
