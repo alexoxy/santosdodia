@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "status": "planning",
+  "productionWrites": false,
+  "productSurfaces": ["today", "calendar", "search", "pilgrimages", "live"],
+  "baselineDomains": [
+    "churches",
+    "jurisdictions",
+    "calendar-systems",
+    "persons",
+    "localized-names",
+    "ecclesial-recognition",
+    "observances",
+    "places",
+    "pilgrimage-events",
+    "official-streams"
+  ],
+  "requiredGates": [
+    "source-policy-approved",
+    "church-authority-resolved",
+    "theology-semantics-resolved",
+    "calendar-semantics-resolved",
+    "identity-confidence",
+    "temporal-validation",
+    "linguistic-validation",
+    "provenance-complete",
+    "rollback-ready"
+  ],
+  "bootstrap": {
+    "mode": "full-baseline",
+    "archive": "dropbox",
+    "staging": "cloudflare-d1",
+    "publication": "explicit-promotion",
+    "partitions": [
+      "catholic-latin",
+      "eastern-catholic",
+      "eastern-orthodox",
+      "oriental-orthodox",
+      "church-of-the-east",
+      "anglican",
+      "lutheran-with-commemorations",
+      "old-catholic",
+      "other-verified-commemorative-churches"
+    ]
+  },
+  "incremental": {
+    "orchestratorCadence": "hourly",
+    "strategy": "due-source-delta-only",
+    "cheapChecks": ["etag", "last-modified", "content-hash", "source-specific-version"],
+    "unchangedAction": "no-op",
+    "changedFlow": [
+      "fetch",
+      "archive-raw",
+      "normalize",
+      "resolve-entities",
+      "validate-theology",
+      "validate-calendar",
+      "validate-language",
+      "validate-time",
+      "import-staging",
+      "publish-if-source-autopromote-and-all-gates-pass"
+    ],
+    "failurePolicy": "last-known-good",
+    "maxRetries": 3
+  },
+  "cadenceClasses": {
+    "live-health": "hourly",
+    "high-change-official-events": "hourly-or-daily",
+    "calendar-and-new-recognitions": "daily",
+    "church-source-discovery": "weekly",
+    "hierarchy-and-directory": "weekly",
+    "deep-source-policy-and-coverage": "monthly"
+  },
+  "cloudflareGuardrails": {
+    "workerBuildOnDataChange": false,
+    "d1DataPromotionIsBuild": false,
+    "reportedMonthlyBuildMinuteLimit": 3000,
+    "reportedBuildMinutesUsedAtReference": 190,
+    "referenceDate": "2026-08-11"
+  },
+  "launchMetrics": [
+    "church-bodies-known",
+    "church-bodies-with-approved-calendar-source",
+    "calendar-partitions-published",
+    "verified-observances",
+    "resolved-person-identities",
+    "localized-name-coverage-by-locale",
+    "pilgrimage-places-published",
+    "official-streams-healthy",
+    "unresolved-conflicts",
+    "data-age-by-source"
+  ]
+}
