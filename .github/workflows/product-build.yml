@@ -123,6 +123,12 @@ jobs:
           console.log(`Portugal official agenda: ${report.portugalOfficial.uniqueDates}/${report.calendarCoverage.expectedDays} days.`);
           NODE
 
+      - name: Test visible semantic samples
+        run: node scripts/build/test-roman-catholic-product-samples.mjs --input reports/product-build/roman-catholic-2026.json
+
+      - name: Test complete D1 release package locally
+        run: node scripts/build/test-roman-catholic-d1-release.mjs --input reports/product-build/roman-catholic-2026.json
+
       - name: Upload BUILD evidence
         if: always()
         uses: actions/upload-artifact@v7
