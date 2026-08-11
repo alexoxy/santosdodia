@@ -89,4 +89,9 @@ assert.throws(() => auditRepository(temporaryRoot, policy), /deployment command 
 fs.rmSync(temporaryRoot, { recursive: true, force: true });
 
 assert.doesNotThrow(() => auditRepository(process.cwd(), policy));
+const productionWrangler = fs.readFileSync(path.resolve('wrangler.jsonc'), 'utf8');
+assert.match(productionWrangler, /"binding"\s*:\s*"CALENDAR_DB"/);
+assert.match(productionWrangler, /"database_name"\s*:\s*"santosdodia-production"/);
+assert.match(productionWrangler, /"database_id"\s*:\s*"e1ad3640-b334-49d1-a6fc-a73f54924803"/);
+assert.doesNotMatch(productionWrangler, /"binding"\s*:\s*"CALENDAR_DB"[\s\S]{0,180}"database_name"\s*:\s*"santosdodia-staging"/);
 console.log('Cloudflare Free guardrails passed.');
