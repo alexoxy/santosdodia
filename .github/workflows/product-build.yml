@@ -55,7 +55,7 @@ jobs:
           cd reports/product-build/romcal
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
-          import Romcal from 'romcal';
+          import { Romcal } from 'romcal';
           import { GeneralRoman_Es } from '@romcal/calendar.general-roman';
 
           const calendar = await new Romcal({
