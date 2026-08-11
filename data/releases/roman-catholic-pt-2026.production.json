@@ -8,6 +8,8 @@
   "releaseArtifactName": "roman-catholic-product-release-6d9fb34bc3f4a85e1c2a4d9f8ec8b7591a2c58c3",
   "releaseArtifactDigest": "sha256:b4b0f3bfaa28210baa05cac6115403e8487e0ec85765ecc84a61539ac026f57e",
   "stagingVerificationArtifactId": 9122499702,
+  "releaseAttempt": 2,
+  "retryReason": "Configure the canonical db/migrations directory for Wrangler; previous attempt stopped before release SQL execution and published no rows.",
   "stagingDatabase": {
     "name": "santosdodia-staging",
     "uuid": "e212681b-a958-4554-9d44-d48cf85f2978"
