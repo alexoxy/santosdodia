@@ -123,18 +123,34 @@ jobs:
           path: staging/d1-import
 
       - name: Guard shared daily remote-operation budget
+        id: daily_budget
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p reports
-          node scripts/autonomy/check-d1-daily-budget.mjs \
+          if node scripts/autonomy/check-d1-daily-budget.mjs \
             --workflows autonomous-d1-importer.yml,import-saints-baseline-d1.yml \
             --repository "${{ github.repository }}" \
             --current-run-id "${{ github.run_id }}" \
             --token-env GITHUB_TOKEN \
-            > reports/cloudflare-free-daily-budget.json
+            > reports/cloudflare-free-daily-budget.json \
+            2> reports/cloudflare-free-daily-budget-error.txt; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+          else
+            node <<'NODE'
+            const fs = require('node:fs');
+            const reason = fs.readFileSync('reports/cloudflare-free-daily-budget-error.txt', 'utf8').trim();
+            fs.writeFileSync(
+              'reports/cloudflare-free-daily-budget.json',
+              `${JSON.stringify({ allowed: false, deferred: true, reason }, null, 2)}\n`
+            );
+            console.log(`::notice::D1 import deferred without remote operations: ${reason}`);
+            NODE
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Provision or reuse EU D1 staging
+        if: steps.daily_budget.outputs.allowed == 'true'
         id: staging
         run: |
           node scripts/manage-d1-staging.mjs provision --output reports/d1-staging-provision.json
@@ -146,9 +162,11 @@ jobs:
           NODE
 
       - name: Generate ephemeral staging binding
+        if: steps.daily_budget.outputs.allowed == 'true'
         run: node scripts/write-d1-staging-config.mjs --database-id "${{ steps.staging.outputs.database_id }}" --output /tmp/wrangler.d1-staging.json
 
       - name: Verify target database
+        if: steps.daily_budget.outputs.allowed == 'true'
         env:
           EXPECTED_DATABASE_ID: ${{ steps.staging.outputs.database_id }}
         run: |
@@ -162,9 +180,11 @@ jobs:
           NODE
 
       - name: Apply database migrations
+        if: steps.daily_budget.outputs.allowed == 'true'
         run: npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.d1-staging.json
 
       - name: Import knowledge package with idempotency and rollback verification
+        if: steps.daily_budget.outputs.allowed == 'true'
         run: |
           npm run db:knowledge-import -- \
             --database-id "${{ steps.staging.outputs.database_id }}" \
@@ -172,6 +192,7 @@ jobs:
             --output reports/d1-knowledge-import.json
 
       - name: Upload import receipt
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: autonomous-d1-receipt-saints-wikidata-${{ github.run_id }}
