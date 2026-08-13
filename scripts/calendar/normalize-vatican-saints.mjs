@@ -11,6 +11,10 @@ function argument(name, fallback = null) {
 }
 function sha256(value) { return createHash('sha256').update(value).digest('hex'); }
 function pad(value) { return String(value).padStart(2, '0'); }
+function isKnownUiNoise(value) {
+  const normalized = String(value).toLocaleLowerCase('pt').replace(/[.:]/gu, '').trim();
+  return ['menu', 'busca'].includes(normalized);
+}
 
 export function normalizeVaticanSaints(raw) {
   if (raw?.schemaVersion !== 1) throw new Error('Unsupported Vatican saints raw schema.');
@@ -29,6 +33,7 @@ export function normalizeVaticanSaints(raw) {
     dayCoverage.set(dateKey, (dayCoverage.get(dateKey) ?? 0) + day.saints.length);
     for (const saint of day.saints) {
       if (typeof saint?.name !== 'string' || !saint.name.trim()) throw new Error(`Missing saint name for ${dateKey}.`);
+      if (isKnownUiNoise(saint.name)) throw new Error(`Vatican saints raw contains UI navigation heading for ${dateKey}: ${saint.name.trim()}`);
       if (saint.detailUrl !== null && saint.detailUrl !== undefined && (typeof saint.detailUrl !== 'string' || !saint.detailUrl.startsWith('https://www.vaticannews.va/pt/santo-do-dia/'))) {
         throw new Error(`Unexpected saint detail URL for ${dateKey}.`);
       }

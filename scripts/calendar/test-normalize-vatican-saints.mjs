@@ -64,4 +64,18 @@ const wrongCalendar = raw();
 wrongCalendar.days[0].sourceUrl = 'https://example.com/08/10.html';
 assert.throws(() => normalizeVaticanSaints(wrongCalendar), /Unexpected Vatican calendar page URL/);
 
+for (const navigationName of ['Menu', 'Busca']) {
+  const contaminated = raw();
+  contaminated.days[0].saints.unshift({
+    name: navigationName,
+    detailUrl: null,
+    sourceRecordHash: 'd'.repeat(64)
+  });
+  assert.throws(
+    () => normalizeVaticanSaints(contaminated),
+    /UI navigation heading/,
+    `${navigationName} must fail closed during normalization`
+  );
+}
+
 console.log('Vatican saints normalization tests passed.');
