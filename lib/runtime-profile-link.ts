@@ -4,7 +4,7 @@ import { getPublicAllObservances } from './public-observances';
 
 const PERSON_CATEGORIES = new Set(['saint', 'apostle', 'martyr']);
 
-function normalizeName(value: string | undefined, locale: Locale): string {
+function normalizeName(value: string | undefined, locale: Locale = 'en'): string {
   return String(value ?? '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/gu, '')
@@ -12,6 +12,39 @@ function normalizeName(value: string | undefined, locale: Locale): string {
     .replace(/[’'`´.·,:;()\[\]{}\-_/\\]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function collectiveName(value: string | undefined): boolean {
+  const name = normalizeName(value);
+  return name.startsWith('santos ') ||
+    name.startsWith('santas ') ||
+    name.startsWith('saints ') ||
+    name.startsWith('ss ') ||
+    name.startsWith('todos os santos') ||
+    name.startsWith('all saints') ||
+    name.includes(' e sao ') ||
+    name.includes(' e santo ') ||
+    name.includes(' e santa ') ||
+    name.includes(' and saint ');
+}
+
+function explicitSingularPersonName(value: string | undefined): boolean {
+  const name = normalizeName(value);
+  return name.startsWith('s ') ||
+    name.startsWith('sao ') ||
+    name.startsWith('santo ') ||
+    name.startsWith('santa ') ||
+    name.startsWith('beato ') ||
+    name.startsWith('beata ') ||
+    name.startsWith('st ') ||
+    name.startsWith('saint ') ||
+    name.startsWith('blessed ');
+}
+
+export function isRuntimePersonProfileEligible(item: Pick<Observance, 'category' | 'name' | 'names'>): boolean {
+  if (!PERSON_CATEGORIES.has(item.category)) return false;
+  if (!explicitSingularPersonName(item.name)) return false;
+  return !collectiveName(item.name);
 }
 
 function names(item: Observance, locale: Locale): Set<string> {
