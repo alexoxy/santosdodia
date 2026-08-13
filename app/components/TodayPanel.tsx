@@ -108,7 +108,7 @@ export default function TodayPanel() {
                 existingProfileId = getExistingProfileId(item, year, locale),
                 profileId = existingProfileId ?? (PERSON_PROFILE_CATEGORIES.has(item.category) ? item.id : null),
                 detailHref = profileId
-                  ? `/saint/${encodeURIComponent(profileId)}`
+                  ? `/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(dateISO)}`
                   : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
               return name ? (
                 <article
