@@ -15,7 +15,8 @@ function isCollectiveHeading(value) {
 function leadingPersonalName(value) {
   if (isCollectiveHeading(value)) return '';
   const [leading] = String(value ?? '').split(',', 1);
-  return withoutSaintTitle(leading);
+  const normalized = withoutSaintTitle(leading);
+  return normalized.split(/\s+/u).filter(Boolean).length >= 2 ? normalized : '';
 }
 function sourceName(event) {
   const value = event?.names?.pt;
@@ -40,6 +41,7 @@ function add(index, key, candidate) {
   index.set(key, bucket);
 }
 function candidates(index, key) { return [...(index.get(key)?.values() ?? [])].sort((a,b)=>a.entityId.localeCompare(b.entityId)); }
+function isReviewed(event) { return String(event?.personLinkStatus ?? '').startsWith('reviewed-'); }
 
 export function proposeLiturgicalPersonLinks(source) {
   if (source?.schemaVersion !== 1 || !Array.isArray(source.people) || !Array.isArray(source.unlinkedObservances)) throw new Error('Navigation source must contain people and unlinkedObservances.');
@@ -56,7 +58,8 @@ export function proposeLiturgicalPersonLinks(source) {
     }
   }
 
-  const proposals = source.unlinkedObservances.map((event) => {
+  const reviewableObservances = source.unlinkedObservances.filter((event) => !event.personEntityId && !isReviewed(event));
+  const proposals = reviewableObservances.map((event) => {
     const name = sourceName(event);
     const exactMatches = candidates(exact, clean(name));
     const strippedMatches = exactMatches.length ? [] : candidates(titleStripped, withoutSaintTitle(name));
@@ -89,11 +92,16 @@ export function proposeLiturgicalPersonLinks(source) {
 
   const stats = {
     people: source.people.length,
+    sourceObservances: source.unlinkedObservances.length,
     observances: proposals.length,
+    reviewableObservances: proposals.length,
     uniqueCandidates: proposals.filter((item) => item.status === 'candidate-review-required').length,
     ambiguous: proposals.filter((item) => item.status === 'ambiguous-review-required').length,
     unmatched: proposals.filter((item) => item.status === 'unmatched').length,
-    alreadyLinked: source.unlinkedObservances.filter((item) => Boolean(item.personEntityId)).length
+    alreadyLinked: source.unlinkedObservances.filter((item) => Boolean(item.personEntityId)).length,
+    reviewedLinked: source.unlinkedObservances.filter((item) => item.personLinkStatus === 'reviewed-linked').length,
+    reviewedCollective: source.unlinkedObservances.filter((item) => item.personLinkStatus === 'reviewed-collective').length,
+    reviewedNonPerson: source.unlinkedObservances.filter((item) => item.personLinkStatus === 'reviewed-non-person').length
   };
   return {
     schemaVersion: 1,

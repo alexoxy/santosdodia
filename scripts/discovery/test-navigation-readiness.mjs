@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { auditNavigationReadiness } from './audit-navigation-readiness.mjs';
+import './test-reviewed-liturgical-person-links.mjs';
+import './test-leading-person-name-discrimination.mjs';
 
 function source(overrides = {}) {
   return {

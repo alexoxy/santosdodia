@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "publicationAllowed": false,
+  "productionMutation": false,
+  "decisions": [
+    {
+      "observanceId": "vatican-news-08-24-1c1396c122a886ff60b4",
+      "decision": "link-single-person",
+      "personEntityId": "wikidata:Q43982",
+      "reviewer": "santosdia-editorial-agent",
+      "reviewedAt": "2026-08-13T14:20:00Z",
+      "evidenceSources": [
+        { "sourceId": "vatican-news-saint-of-day-pt", "sourceFamily": "vatican-news", "reference": "pt-calendar:08-24" },
+        { "sourceId": "usccb-2026-liturgical-calendar", "sourceFamily": "usccb", "reference": "2026-08-24:feast-bartholomew-apostle" },
+        { "sourceId": "wikidata-q43982", "sourceFamily": "wikidata", "reference": "Q43982" }
+      ]
+    },
+    {
+      "observanceId": "vatican-news-08-26-4b1925134f5093eaad7c",
+      "decision": "link-single-person",
+      "personEntityId": "wikidata:Q37278",
+      "reviewer": "santosdia-editorial-agent",
+      "reviewedAt": "2026-08-13T14:20:00Z",
+      "evidenceSources": [
+        { "sourceId": "vatican-news-saint-of-day-pt", "sourceFamily": "vatican-news", "reference": "pt-calendar:08-26" },
+        { "sourceId": "diocese-vittorio-veneto-john-paul-i", "sourceFamily": "diocese-vittorio-veneto", "reference": "memoria-liturgica:26-agosto" },
+        { "sourceId": "wikidata-q37278", "sourceFamily": "wikidata", "reference": "Q37278" }
+      ]
+    }
+  ]
+}
