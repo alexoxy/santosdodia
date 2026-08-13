@@ -5,7 +5,6 @@ import {
   traditionLabel,
   type Observance,
 } from "../../data/observances";
-import { getObservanceById } from "../../data/discovery";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   formatMonthYear,
@@ -14,6 +13,7 @@ import {
 import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
+import { getExistingProfileId } from "../../lib/runtime-profile-link";
 import { useLanguage } from "./LanguageProvider";
 
 export default function TodayPanel() {
@@ -103,9 +103,9 @@ export default function TodayPanel() {
             {items.slice(0, 18).map((item) => {
               const name = displayObservanceName(item.names, locale, item.name),
                 scope = displayObservanceScope(item, locale, country),
-                profile = Boolean(getObservanceById(item.id, year, locale)),
-                detailHref = profile
-                  ? `/saint/${encodeURIComponent(item.id)}`
+                profileId = getExistingProfileId(item, year, locale),
+                detailHref = profileId
+                  ? `/saint/${encodeURIComponent(profileId)}`
                   : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
               return name ? (
                 <article
