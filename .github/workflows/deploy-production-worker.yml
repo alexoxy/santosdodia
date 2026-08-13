@@ -1,0 +1,65 @@
+name: Deploy production Worker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/deploy-production-worker.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      PRODUCTION_ORIGIN: https://santosdodia.alexmmpinto.workers.dev
+    steps:
+      - name: Checkout protected main
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate production boundary
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          npm run cloudflare:guardrails-audit
+
+      - name: Build production Worker
+        run: npm run cloudflare:build
+
+      - name: Deploy exact main build
+        run: npx wrangler deploy
+
+      - name: Verify production runtime and D2 profile
+        shell: bash
+        run: |
+          status_code="$(curl --silent --show-error --output /tmp/status.json --write-out '%{http_code}' "$PRODUCTION_ORIGIN/api/v1/system/status")"
+          test "$status_code" = "200"
+          node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/status.json','utf8')); if(body.status!=='ok') process.exit(1)"
+
+          profile_code="$(curl --silent --show-error --output /tmp/profile.html --write-out '%{http_code}' -H 'Accept-Language: pt-PT,pt;q=0.9,en;q=0.5' "$PRODUCTION_ORIGIN/saint/rc%3AStRayPenyafort?date=2026-01-07")"
+          test "$profile_code" = "200"
+          grep -qi 'Raimundo' /tmp/profile.html
+
+          echo "Production D2 profile verified: rc:StRayPenyafort (2026-01-07)."
