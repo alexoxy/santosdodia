@@ -1,29 +1,48 @@
 import type { Metadata } from "next";
+import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 import SaintProfile from "../../components/SaintProfile";
 import { getObservanceById } from "../../../data/discovery";
+import { localeFromAcceptLanguage, normalizePublicLocale, type Locale } from "../../../lib/i18n";
+import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
 import { getPublicAllObservances } from "../../../lib/public-observances";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
 
 const YEAR = new Date().getUTCFullYear();
 
+async function requestLocale(): Promise<Locale> {
+  const cookieStore = await cookies();
+  const saved = cookieStore.get("sdd-locale")?.value;
+  if (saved) return normalizePublicLocale(saved);
+  const requestHeaders = await headers();
+  return localeFromAcceptLanguage(requestHeaders.get("accept-language"));
+}
+
 export function generateStaticParams() {
   return getPublicAllObservances(YEAR).map((item) => ({ id: item.id }));
 }
 
+async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
+  return getObservanceById(id, YEAR, locale) ??
+    getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
+}
+
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ date?: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const item = getObservanceById(id, YEAR, "en");
+  const { date } = await searchParams;
+  const item = await resolveProfile(id, "en", date);
   if (!item) return { title: "Saint not found" };
   const description =
     item.summary ??
-    `Feast date, Christian traditions, reviewed sources and calendar information for ${item.name}.`;
-  const canonical = `/saint/${id}`;
+    `Feast date, Christian tradition and reviewed calendar information for ${item.name}.`;
+  const canonical = `/saint/${encodeURIComponent(id)}`;
   const keywords = [
     ...new Set([
       item.name,
@@ -51,14 +70,19 @@ export async function generateMetadata({
 
 export default async function SaintPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ date?: string }>;
 }) {
   const { id } = await params;
-  const item = getObservanceById(id, YEAR, "en");
+  const { date } = await searchParams;
+  const locale = await requestLocale();
+  const curated = getObservanceById(id, YEAR, locale);
+  const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
-  const url = `${SITE_ORIGIN}/saint/${id}`;
+  const url = `${SITE_ORIGIN}/saint/${encodeURIComponent(id)}`;
   const alternateNames = [
     ...new Set(
       Object.values(item.names).filter(
@@ -113,12 +137,6 @@ export default async function SaintPage({
           name: property.name,
           value: property.value,
         })),
-        subjectOf: {
-          "@type": "DataDownload",
-          name: `${item.name} calendar feed`,
-          encodingFormat: "text/calendar",
-          contentUrl: `${SITE_ORIGIN}/api/ical/saint/${item.id}`,
-        },
       },
     ],
   };
@@ -129,7 +147,7 @@ export default async function SaintPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }}
       />
-      <SaintProfile id={id} />
+      <SaintProfile id={id} runtimeItem={curated ? undefined : item} />
     </>
   );
 }

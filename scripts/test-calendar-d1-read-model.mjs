@@ -24,6 +24,17 @@ if (publicQuery.params.join('|') !== '2026-04-01|2026-04-30|coptic-orthodox|EG|2
   throw new Error(`Unexpected public parameter order: ${publicQuery.params.join('|')}`);
 }
 
+const canonicalQuery = buildCalendarReadQuery({
+  fromDate: '2026-01-01',
+  toDate: '2026-12-31',
+  canonicalEventId: 'rc:saint-example',
+  locales: ['pt', 'en'],
+  limit: 20
+});
+if (!canonicalQuery.sql.includes('o.canonical_event_id = ?')) throw new Error('Canonical event reads are not parameterized.');
+if (canonicalQuery.params[2] !== 'rc:saint-example') throw new Error('Canonical event ID is not bound in the expected position.');
+if (!canonicalQuery.sql.includes("o.publication_status = 'published'")) throw new Error('Canonical event lookup bypasses public publication gates.');
+
 const stagingQuery = buildCalendarReadQuery({
   fromDate: '2026-01-01',
   toDate: '2026-12-31',
@@ -39,6 +50,7 @@ for (const invalid of [
   { fromDate: '2026-02-30', toDate: '2026-03-01' },
   { fromDate: '2026-05-01', toDate: '2026-04-01' },
   { fromDate: '2026-01-01', toDate: '2026-12-31', countryCode: 'PORTUGAL' },
+  { fromDate: '2026-01-01', toDate: '2026-12-31', canonicalEventId: 'bad id with spaces' },
   { fromDate: '2026-01-01', toDate: '2026-12-31', limit: 0 }
 ]) {
   let rejected = false;

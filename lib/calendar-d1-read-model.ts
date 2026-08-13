@@ -3,6 +3,7 @@ export type CalendarReadMode = 'public' | 'staging';
 export type CalendarReadFilters = {
   fromDate: string;
   toDate: string;
+  canonicalEventId?: string;
   churchId?: string;
   jurisdictionId?: string;
   countryCode?: string;
@@ -120,6 +121,7 @@ export function buildCalendarReadQuery(filters: CalendarReadFilters): { sql: str
   const fromDate = assertDate(filters.fromDate, 'fromDate');
   const toDate = assertDate(filters.toDate, 'toDate');
   if (fromDate > toDate) throw new RangeError('fromDate must not be after toDate.');
+  const canonicalEventId = optionalIdentifier(filters.canonicalEventId, 'canonicalEventId');
   const churchId = optionalIdentifier(filters.churchId, 'churchId');
   const jurisdictionId = optionalIdentifier(filters.jurisdictionId, 'jurisdictionId');
   const countryCode = filters.countryCode?.toUpperCase();
@@ -142,6 +144,7 @@ export function buildCalendarReadQuery(filters: CalendarReadFilters): { sql: str
     where.push("o.publication_status IN ('withheld','publishable','published')");
     where.push("o.validation_status <> 'rejected'");
   }
+  if (canonicalEventId) { where.push('o.canonical_event_id = ?'); params.push(canonicalEventId); }
   if (churchId) { where.push('o.church_id = ?'); params.push(churchId); }
   if (jurisdictionId) { where.push('o.jurisdiction_id = ?'); params.push(jurisdictionId); }
   if (countryCode) { where.push('j.country_code = ?'); params.push(countryCode); }
