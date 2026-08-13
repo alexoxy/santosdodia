@@ -19,12 +19,10 @@ import {
   displayPatronages,
 } from "../../lib/locale-display";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
-import { getExistingProfileId } from "../../lib/runtime-profile-link";
+import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
 import { useLanguage } from "./LanguageProvider";
-
-const PERSON_PROFILE_CATEGORIES = new Set(["saint", "apostle", "martyr"]);
 
 export default function DayView({ dateISO }: { dateISO: string }) {
   const { locale, copy } = useLanguage();
@@ -103,7 +101,7 @@ export default function DayView({ dateISO }: { dateISO: string }) {
           items.map((item) => {
             const patronages = displayPatronages(item.patronages, locale),
               existingProfileId = getExistingProfileId(item, year, locale),
-              profileId = existingProfileId ?? (PERSON_PROFILE_CATEGORIES.has(item.category) ? item.id : null);
+              profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null);
             return (
               <article
                 className="day-observance"
