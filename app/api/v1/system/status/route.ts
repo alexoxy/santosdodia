@@ -6,6 +6,13 @@ import { jurisdictionHierarchyHealthy } from '../../../../../lib/knowledge/juris
 
 export const dynamic = 'force-dynamic';
 
+const RUNTIME_CAPABILITIES = {
+  statusContractVersion: 2,
+  productCalendar: 'published-d1-v1',
+  catholicPt2026Baseline: '365-day-v1',
+  todayNavigation: 'detail-links-v1'
+} as const;
+
 export async function GET() {
   const calendarHealthy = calendarEngineHealthy();
   const parserHealthy = holySeeParserHealthy();
@@ -16,6 +23,7 @@ export async function GET() {
   return Response.json({
     status: healthy ? 'ok' : 'degraded',
     checkedAt: new Date().toISOString(),
+    runtime: RUNTIME_CAPABILITIES,
     services: {
       calendarEngine: { healthy: calendarHealthy },
       officialSourceParsers: { healthy: parserHealthy },
