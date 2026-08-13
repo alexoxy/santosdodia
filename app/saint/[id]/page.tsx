@@ -23,18 +23,21 @@ export function generateStaticParams() {
   return getPublicAllObservances(YEAR).map((item) => ({ id: item.id }));
 }
 
-async function resolveProfile(id: string, locale: Locale) {
+async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
   return getObservanceById(id, YEAR, locale) ??
-    getPublishedPersonObservanceById(id, YEAR, locale);
+    getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
 }
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ date?: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const item = await resolveProfile(id, "en");
+  const { date } = await searchParams;
+  const item = await resolveProfile(id, "en", date);
   if (!item) return { title: "Saint not found" };
   const description =
     item.summary ??
@@ -67,13 +70,16 @@ export async function generateMetadata({
 
 export default async function SaintPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ date?: string }>;
 }) {
   const { id } = await params;
+  const { date } = await searchParams;
   const locale = await requestLocale();
   const curated = getObservanceById(id, YEAR, locale);
-  const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale);
+  const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
   const url = `${SITE_ORIGIN}/saint/${encodeURIComponent(id)}`;
