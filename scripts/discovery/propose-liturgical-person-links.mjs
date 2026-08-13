@@ -15,7 +15,8 @@ function isCollectiveHeading(value) {
 function leadingPersonalName(value) {
   if (isCollectiveHeading(value)) return '';
   const [leading] = String(value ?? '').split(',', 1);
-  return withoutSaintTitle(leading);
+  const normalized = withoutSaintTitle(leading);
+  return normalized.split(/\s+/u).filter(Boolean).length >= 2 ? normalized : '';
 }
 function sourceName(event) {
   const value = event?.names?.pt;
