@@ -9,6 +9,14 @@ function clean(value) { return String(value ?? '').normalize('NFKD').replace(/[\
 function withoutSaintTitle(value) {
   return clean(value).replace(/^(?:s|sao|santo|santa|santos|santas|beato|beata|beatos|beatas|bem aventurado|bem aventurada)\s+/u, '').trim();
 }
+function isCollectiveHeading(value) {
+  return /^(?:ss|santos|santas|beatos|beatas)\s+/u.test(clean(value));
+}
+function leadingPersonalName(value) {
+  if (isCollectiveHeading(value)) return '';
+  const [leading] = String(value ?? '').split(',', 1);
+  return withoutSaintTitle(leading);
+}
 function sourceName(event) {
   const value = event?.names?.pt;
   return typeof value === 'string' ? value : value?.value ?? event?.name ?? '';
@@ -52,8 +60,17 @@ export function proposeLiturgicalPersonLinks(source) {
     const name = sourceName(event);
     const exactMatches = candidates(exact, clean(name));
     const strippedMatches = exactMatches.length ? [] : candidates(titleStripped, withoutSaintTitle(name));
-    const matches = exactMatches.length ? exactMatches : strippedMatches;
-    const method = exactMatches.length ? 'exact-normalized-pt-name' : strippedMatches.length ? 'exact-title-stripped-pt-name' : 'none';
+    const leadingMatches = exactMatches.length || strippedMatches.length
+      ? []
+      : candidates(titleStripped, leadingPersonalName(name));
+    const matches = exactMatches.length ? exactMatches : strippedMatches.length ? strippedMatches : leadingMatches;
+    const method = exactMatches.length
+      ? 'exact-normalized-pt-name'
+      : strippedMatches.length
+        ? 'exact-title-stripped-pt-name'
+        : leadingMatches.length
+          ? 'exact-leading-person-name-pt'
+          : 'none';
     const status = matches.length === 1 ? 'candidate-review-required' : matches.length > 1 ? 'ambiguous-review-required' : 'unmatched';
     return {
       observanceId: event.id,
