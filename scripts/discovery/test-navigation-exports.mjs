@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { buildNavigationExports, centuryForYear } from './build-navigation-exports.mjs';
+import { proposeLiturgicalPersonLinks } from './propose-liturgical-person-links.mjs';
 
 assert.equal(centuryForYear(1), 1);
 assert.equal(centuryForYear(100), 1);
@@ -12,12 +13,15 @@ const input = {
   schemaVersion: 1,
   datasetVersion: 'test-v1',
   sourceSha256: 'a'.repeat(64),
+  publicationAllowed: false,
+  productionMutation: false,
   people: [
     {
       entityId: 'wikidata:Q1',
       qid: 'Q1',
       canonicalName: 'Lawrence',
       names: { pt: 'São Lourenço', en: 'Saint Lawrence' },
+      aliases: { pt: [] },
       birth: { year: 225, precision: 'year' },
       death: { year: 258, precision: 'year' },
       traditions: ['roman-catholic'],
@@ -45,6 +49,7 @@ const input = {
       entityId: 'wikidata:Q2',
       qid: 'Q2',
       names: { pt: 'Candidato retido' },
+      aliases: { pt: [{ value: 'Nome Alternativo', status: 'source', scriptStatus: 'expected' }] },
       death: { year: 900 },
       validationStatus: 'provisional',
       publicationStatus: 'withheld',
@@ -59,7 +64,7 @@ const input = {
       day: 10,
       personEntityId: null,
       personLinkStatus: 'unresolved',
-      names: { pt: { value: 'S. Blano, bispo', status: 'source' } },
+      names: { pt: { value: 'S. Lourenço', status: 'source' } },
       churchId: 'roman-catholic',
       sourceIds: ['vatican-news-saint-of-day-pt'],
       validationStatus: 'provisional',
@@ -71,7 +76,7 @@ const input = {
       day: 11,
       personEntityId: null,
       personLinkStatus: 'unresolved',
-      names: { pt: { value: 'Santa de fonte oficial', status: 'source' } },
+      names: { pt: { value: 'Nome Alternativo', status: 'source' } },
       churchId: 'roman-catholic',
       sourceIds: ['vatican-news-saint-of-day-pt'],
       validationStatus: 'verified',
@@ -88,7 +93,7 @@ assert.equal(staging.calendar.days['08-10'].some((item) => item.entityId === 'wi
 const unresolved = staging.calendar.days['08-10'].find((item) => item.observanceId === 'vatican-withheld-08-10');
 assert.equal(unresolved.entityId, null);
 assert.equal(unresolved.personLinkStatus, 'unresolved');
-assert.equal(unresolved.name, 'S. Blano, bispo');
+assert.equal(unresolved.name, 'S. Lourenço');
 assert.deepEqual(unresolved.sourceIds, ['vatican-news-saint-of-day-pt']);
 assert.equal(staging.manifest.unlinkedCalendarEntryCount, 2);
 assert.equal(staging.manifest.productionMutation, false);
@@ -104,5 +109,15 @@ assert.equal(publicExport.calendar.days['08-11'][0].entityId, null);
 assert.equal(publicExport.saints[0].name, 'São Lourenço');
 assert.equal(publicExport.map.features[0].properties.historicalName, 'Roma, Império Romano');
 assert.equal(publicExport.map.features[0].geometry.coordinates[0], 12.4829);
+
+const proposals = proposeLiturgicalPersonLinks(input);
+assert.equal(proposals.policy.nameOnlyIdentityMergeForbidden, true);
+assert.equal(proposals.policy.publicationAllowed, false);
+assert.equal(proposals.proposals[0].status, 'candidate-review-required');
+assert.deepEqual(proposals.proposals[0].candidatePersonIds, ['wikidata:Q1']);
+assert.equal(proposals.proposals[0].matchMethod, 'exact-title-stripped-pt-name');
+assert.equal(proposals.proposals[1].status, 'candidate-review-required');
+assert.deepEqual(proposals.proposals[1].candidatePersonIds, ['wikidata:Q2']);
+assert.equal(proposals.proposals.every((item) => item.automaticLinkAllowed === false), true);
 
 console.log('Saints navigation export tests passed.');
