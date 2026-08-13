@@ -4,7 +4,7 @@ import { getPublicAllObservances } from './public-observances';
 
 const PERSON_CATEGORIES = new Set(['saint', 'apostle', 'martyr']);
 
-function normalizeName(value: string | undefined, locale: Locale): string {
+function normalizeName(value: string | undefined, locale: Locale = 'en'): string {
   return String(value ?? '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/gu, '')
@@ -12,6 +12,23 @@ function normalizeName(value: string | undefined, locale: Locale): string {
     .replace(/[’'`´.·,:;()\[\]{}\-_/\\]/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
+}
+
+function collectiveName(value: string | undefined): boolean {
+  const name = normalizeName(value);
+  return name.startsWith('santos ') ||
+    name.startsWith('santas ') ||
+    name.startsWith('saints ') ||
+    name.startsWith('ss ') ||
+    name.includes(' e sao ') ||
+    name.includes(' e santo ') ||
+    name.includes(' e santa ') ||
+    name.includes(' and saint ');
+}
+
+export function isRuntimePersonProfileEligible(item: Pick<Observance, 'category' | 'name' | 'names'>): boolean {
+  if (!PERSON_CATEGORIES.has(item.category)) return false;
+  return ![item.name, ...Object.values(item.names ?? {})].some(collectiveName);
 }
 
 function names(item: Observance, locale: Locale): Set<string> {
