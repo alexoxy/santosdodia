@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - cloudflare-preview
+      - agent/d2-minimal-runtime-profiles
   pull_request:
     branches:
       - main
