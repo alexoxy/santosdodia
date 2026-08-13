@@ -5,6 +5,7 @@ import {
   traditionLabel,
   type Observance,
 } from "../../data/observances";
+import { getObservanceById } from "../../data/discovery";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   formatMonthYear,
@@ -64,6 +65,7 @@ export default function TodayPanel() {
     () => formatMonthYear(dateISO, locale, "standalone"),
     [dateISO, locale],
   );
+  const year = Number(dateISO.slice(0, 4));
 
   if (!contextReady) {
     return <section className="today-panel today-panel-loading" aria-live="polite">
@@ -100,7 +102,11 @@ export default function TodayPanel() {
           <div className="observance-list">
             {items.slice(0, 18).map((item) => {
               const name = displayObservanceName(item.names, locale, item.name),
-                scope = displayObservanceScope(item, locale, country);
+                scope = displayObservanceScope(item, locale, country),
+                profile = Boolean(getObservanceById(item.id, year, locale)),
+                detailHref = profile
+                  ? `/saint/${encodeURIComponent(item.id)}`
+                  : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
               return name ? (
                 <article
                   className="observance-row"
@@ -110,7 +116,11 @@ export default function TodayPanel() {
                     className={`tradition-dot ${traditionClass(item.traditions[0])}`}
                   />
                   <div>
-                    <h3>{name}</h3>
+                    <h3>
+                      <a className="observance-title-link" href={detailHref}>
+                        {name}
+                      </a>
+                    </h3>
                     <p>
                       {item.traditions
                         .map((value) => traditionLabel(copy, value))
