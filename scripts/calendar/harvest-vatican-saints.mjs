@@ -40,6 +40,7 @@ function textFromHtml(value) {
 function isGenericHeading(value) {
   const normalized = value.toLocaleLowerCase('pt').replace(/[.:]/gu, '').trim();
   return [
+    'menu', 'busca',
     'santo do dia', 'santos do dia', 'saint of the day',
     'atividades do papa', 'pope activities',
     'a nossa fé', 'a nossa fe', 'our faith',
