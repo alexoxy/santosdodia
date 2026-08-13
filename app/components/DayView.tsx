@@ -102,7 +102,11 @@ export default function DayView({ dateISO }: { dateISO: string }) {
             const patronages = displayPatronages(item.patronages, locale),
               profile = Boolean(getObservanceById(item.id, year, locale));
             return (
-              <article className="day-observance" key={item.id}>
+              <article
+                className="day-observance"
+                id={`observance-${encodeURIComponent(item.id)}`}
+                key={item.id}
+              >
                 <div className="day-observance-main">
                   <div
                     className={`tradition-emblem ${traditionClass(item.traditions[0])}`}
