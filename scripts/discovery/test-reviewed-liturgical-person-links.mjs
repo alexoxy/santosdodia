@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { applyReviewedLiturgicalPersonLinks } from './apply-reviewed-liturgical-person-links.mjs';
+import { proposeLiturgicalPersonLinks } from './propose-liturgical-person-links.mjs';
 
 const base = {
   schemaVersion: 1,
@@ -35,6 +36,13 @@ assert.equal(reviewed.unlinkedObservances[0].personEntityId, 'wikidata:Q1');
 assert.equal(reviewed.unlinkedObservances[0].personLinkStatus, 'reviewed-linked');
 assert.equal(reviewed.unlinkedObservances[0].publicationStatus, 'withheld');
 assert.equal(reviewed.unlinkedObservances[1].personLinkStatus, 'reviewed-collective');
+
+const postReviewQueue = proposeLiturgicalPersonLinks(reviewed);
+assert.equal(postReviewQueue.proposals.length, 0);
+assert.equal(postReviewQueue.stats.sourceObservances, 2);
+assert.equal(postReviewQueue.stats.reviewedLinked, 1);
+assert.equal(postReviewQueue.stats.reviewedCollective, 1);
+assert.equal(postReviewQueue.stats.reviewableObservances, 0);
 
 const weak = ledger([{
   observanceId: 'obs-one', decision: 'link-single-person', personEntityId: 'wikidata:Q1', reviewer: 'test', reviewedAt: '2026-08-13T12:00:00Z',
