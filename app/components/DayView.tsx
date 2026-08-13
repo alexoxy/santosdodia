@@ -24,6 +24,8 @@ import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
 import { useLanguage } from "./LanguageProvider";
 
+const PERSON_PROFILE_CATEGORIES = new Set(["saint", "apostle", "martyr"]);
+
 export default function DayView({ dateISO }: { dateISO: string }) {
   const { locale, copy } = useLanguage();
   const feature = getFeatureCopy(locale);
@@ -100,7 +102,8 @@ export default function DayView({ dateISO }: { dateISO: string }) {
         {items.length ? (
           items.map((item) => {
             const patronages = displayPatronages(item.patronages, locale),
-              profileId = getExistingProfileId(item, year, locale);
+              existingProfileId = getExistingProfileId(item, year, locale),
+              profileId = existingProfileId ?? (PERSON_PROFILE_CATEGORIES.has(item.category) ? item.id : null);
             return (
               <article
                 className="day-observance"
@@ -139,7 +142,7 @@ export default function DayView({ dateISO }: { dateISO: string }) {
                       </div>
                     ) : null}
                     {profileId ? (
-                      <Link className="text-link" href={`/saint/${profileId}`}>
+                      <Link className="text-link" href={`/saint/${encodeURIComponent(profileId)}`}>
                         {feature.openProfile} →
                       </Link>
                     ) : null}
