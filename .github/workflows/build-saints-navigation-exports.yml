@@ -12,6 +12,7 @@ on:
       - 'scripts/dropbox/list-archive-chunks.mjs'
       - 'scripts/dropbox/pull-stream-set.mjs'
       - 'scripts/dropbox/pull-latest-stream.mjs'
+      - 'scripts/dropbox/publish-current-json.mjs'
       - '.github/workflows/build-saints-navigation-exports.yml'
       - 'config/automation-registry.json'
 
@@ -189,3 +190,13 @@ jobs:
           --stream navigation/saints/v1/exports/pt
           --source staging/navigation/output/exports
           --source staging/navigation/output/readiness.json
+
+      - name: Publish readable current readiness in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/publish-current-json.mjs
+          --source staging/navigation/output/readiness.json
+          --destination /current/navigation/saints/v1/readiness.json
