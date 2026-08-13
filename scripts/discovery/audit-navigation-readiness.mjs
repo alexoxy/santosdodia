@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { proposeLiturgicalPersonLinks } from './propose-liturgical-person-links.mjs';
 
 function argument(name, fallback = null) { const i = process.argv.indexOf(name); return i >= 0 ? process.argv[i + 1] : fallback; }
 
@@ -23,6 +24,15 @@ export function auditNavigationReadiness(source, { requireFreeze = false } = {})
   }
   const freezeReady = errors.length === 0 && r.profiles?.complete === true && r.labelEntities?.complete === true && r.dailySaints?.complete === true;
   if (requireFreeze && !freezeReady) errors.push('navigation dataset is not freeze-ready');
+  const liturgicalLinkReview = Array.isArray(source.unlinkedObservances)
+    ? proposeLiturgicalPersonLinks(source)
+    : {
+        schemaVersion: 1,
+        locale: 'pt',
+        policy: { nameOnlyIdentityMergeForbidden: true, proposalsAreEvidenceNotDecisions: true, explicitReviewRequired: true, publicationAllowed: false, productionMutation: false },
+        stats: { people: source.people.length, observances: 0, uniqueCandidates: 0, ambiguous: 0, unmatched: 0, alreadyLinked: 0 },
+        proposals: []
+      };
   return {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -34,7 +44,8 @@ export function auditNavigationReadiness(source, { requireFreeze = false } = {})
     productionMutation: false,
     errors,
     warnings,
-    readiness: r
+    readiness: r,
+    liturgicalLinkReview
   };
 }
 
