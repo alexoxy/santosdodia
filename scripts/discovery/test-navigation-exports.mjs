@@ -120,4 +120,25 @@ assert.equal(proposals.proposals[1].status, 'candidate-review-required');
 assert.deepEqual(proposals.proposals[1].candidatePersonIds, ['wikidata:Q2']);
 assert.equal(proposals.proposals.every((item) => item.automaticLinkAllowed === false), true);
 
+const contextualProposals = proposeLiturgicalPersonLinks({
+  schemaVersion: 1,
+  publicationAllowed: false,
+  productionMutation: false,
+  people: [
+    { entityId: 'wikidata:Q3', qid: 'Q3', names: { pt: 'São João Maria Vianney' }, aliases: { pt: [] } },
+    { entityId: 'wikidata:Q4', qid: 'Q4', names: { pt: 'São Ponciano' }, aliases: { pt: [] } }
+  ],
+  unlinkedObservances: [
+    { id: 'vianney', month: 8, day: 4, names: { pt: { value: 'S. João Maria Vianney, Cura de Ars' } }, sourceIds: ['vatican-news-saint-of-day-pt'] },
+    { id: 'collective', month: 8, day: 13, names: { pt: { value: 'SS. Ponciano, papa e Hipólito, presbítero, mártires' } }, sourceIds: ['vatican-news-saint-of-day-pt'] }
+  ]
+});
+assert.equal(contextualProposals.proposals[0].status, 'candidate-review-required');
+assert.equal(contextualProposals.proposals[0].matchMethod, 'exact-leading-person-name-pt');
+assert.deepEqual(contextualProposals.proposals[0].candidatePersonIds, ['wikidata:Q3']);
+assert.equal(contextualProposals.proposals[0].automaticLinkAllowed, false);
+assert.equal(contextualProposals.proposals[1].status, 'unmatched');
+assert.deepEqual(contextualProposals.proposals[1].candidatePersonIds, []);
+assert.equal(contextualProposals.proposals[1].automaticLinkAllowed, false);
+
 console.log('Saints navigation export tests passed.');
