@@ -3,6 +3,8 @@ import { extractSaintsFromCalendarHtml, monthDays, selectedDays } from './harves
 
 const html = `
 <html><body>
+<h2>Menu</h2>
+<h2>Busca</h2>
 <h1>Santo do dia</h1>
 <h2>S. Lourenço, diácono e mártir</h2>
 <p>Resumo editorial que o indexador não deve guardar.</p>
@@ -29,11 +31,15 @@ assert.deepEqual(saints, [
     detailUrl: null
   }
 ]);
+assert.equal(JSON.stringify(saints).includes('Menu'), false);
+assert.equal(JSON.stringify(saints).includes('Busca'), false);
 assert.equal(JSON.stringify(saints).includes('Resumo editorial'), false);
 assert.equal(JSON.stringify(saints).includes('Atividades do Papa'), false);
 assert.equal(JSON.stringify(saints).includes('A Nossa Fé'), false);
 
 const noDetailOnly = extractSaintsFromCalendarHtml(`
+<h2>Menu</h2>
+<h2>Busca</h2>
 <h2>S. Vicente Maria Strámbi, bispo passionista</h2>
 <p>Resumo.</p>
 <h2>Santa Maria, Mãe de Deus</h2>
@@ -46,6 +52,7 @@ const noDetailOnly = extractSaintsFromCalendarHtml(`
 });
 assert.equal(noDetailOnly.length, 2);
 assert.equal(noDetailOnly.every((item) => item.detailUrl === null), true);
+assert.equal(noDetailOnly.some((item) => ['Menu', 'Busca'].includes(item.name)), false);
 
 assert.equal(monthDays(2).length, 29);
 assert.equal(monthDays(4).length, 30);
