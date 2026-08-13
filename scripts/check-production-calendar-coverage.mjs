@@ -9,8 +9,9 @@ let rows=0;
 let personRows=0;
 
 function normalizeName(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/gu,'').toLowerCase().replace(/[’'`´.·,:;()\[\]{}\-_/\\]/gu,' ').replace(/\s+/gu,' ').trim();}
-function collectiveName(value){const name=normalizeName(value);return name.startsWith('santos ')||name.startsWith('santas ')||name.startsWith('saints ')||name.startsWith('ss ')||name.includes(' e sao ')||name.includes(' e santo ')||name.includes(' e santa ')||name.includes(' and saint ');}
-function profileEligible(item){return personCategories.has(item?.category)&&![item?.name,...Object.values(item?.names??{})].some(collectiveName);}
+function collectiveName(value){const name=normalizeName(value);return name.startsWith('santos ')||name.startsWith('santas ')||name.startsWith('saints ')||name.startsWith('ss ')||name.startsWith('todos os santos')||name.startsWith('all saints')||name.includes(' e sao ')||name.includes(' e santo ')||name.includes(' e santa ')||name.includes(' and saint ');}
+function explicitSingularPersonName(value){const name=normalizeName(value);return name.startsWith('s ')||name.startsWith('sao ')||name.startsWith('santo ')||name.startsWith('santa ')||name.startsWith('beato ')||name.startsWith('beata ')||name.startsWith('st ')||name.startsWith('saint ')||name.startsWith('blessed ');}
+function profileEligible(item){return personCategories.has(item?.category)&&explicitSingularPersonName(item?.name)&&!collectiveName(item?.name);}
 
 for(let month=1;month<=12;month+=1){
   const url=new URL('/api/v1/observances',origin);
@@ -48,7 +49,7 @@ if(!personRows)throw new Error('Published calendar contains no singular person-p
 
 const dayPercent=((personDays.size/expected.length)*100).toFixed(1);
 console.log(`Roman Catholic PT ${year}: ${seen.size}/${expected.length} days covered, ${rows} public rows.`);
-console.log(`Visible profile KPI: ${personRows} singular person rows across ${personDays.size}/${expected.length} days (${dayPercent}%).`);
+console.log(`Visible profile KPI: ${personRows} explicit singular person rows across ${personDays.size}/${expected.length} days (${dayPercent}%).`);
 
 let profileSamplesPassed=0;
 const profileFailures=[];
