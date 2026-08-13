@@ -16,6 +16,8 @@ import { getPublicObservancesForDate } from "../../lib/public-observances";
 import { getExistingProfileId } from "../../lib/runtime-profile-link";
 import { useLanguage } from "./LanguageProvider";
 
+const PERSON_PROFILE_CATEGORIES = new Set(["saint", "apostle", "martyr"]);
+
 export default function TodayPanel() {
   const { locale, copy, country, countryName, timeZone, contextReady, church } =
       useLanguage(),
@@ -103,7 +105,8 @@ export default function TodayPanel() {
             {items.slice(0, 18).map((item) => {
               const name = displayObservanceName(item.names, locale, item.name),
                 scope = displayObservanceScope(item, locale, country),
-                profileId = getExistingProfileId(item, year, locale),
+                existingProfileId = getExistingProfileId(item, year, locale),
+                profileId = existingProfileId ?? (PERSON_PROFILE_CATEGORIES.has(item.category) ? item.id : null),
                 detailHref = profileId
                   ? `/saint/${encodeURIComponent(profileId)}`
                   : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
