@@ -13,6 +13,7 @@ on:
       - 'scripts/dropbox/pull-stream-set.mjs'
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/dropbox/publish-current-json.mjs'
+      - 'data/liturgical-person-links.reviewed.json'
       - '.github/workflows/build-saints-navigation-exports.yml'
       - 'config/automation-registry.json'
 
@@ -155,16 +156,23 @@ jobs:
           if [ -n "$VATICAN" ]; then args+=(--vatican "$VATICAN"); fi
           node scripts/discovery/assemble-navigation-source.mjs "${args[@]}"
 
+      - name: Apply explicit reviewed liturgical person links
+        run: >-
+          node scripts/discovery/apply-reviewed-liturgical-person-links.mjs
+          --input staging/navigation/output/navigation-source.json
+          --decisions data/liturgical-person-links.reviewed.json
+          --output staging/navigation/output/navigation-source-reviewed.json
+
       - name: Audit partial or freeze-ready state
         run: >-
           node scripts/discovery/audit-navigation-readiness.mjs
-          --input staging/navigation/output/navigation-source.json
+          --input staging/navigation/output/navigation-source-reviewed.json
           --output staging/navigation/output/readiness.json
 
       - name: Build deterministic staging exports
         run: >-
           node scripts/discovery/build-navigation-exports.mjs
-          --input staging/navigation/output/navigation-source.json
+          --input staging/navigation/output/navigation-source-reviewed.json
           --output staging/navigation/output/exports
           --mode staging
           --locale pt
@@ -178,6 +186,7 @@ jobs:
           node scripts/archive-to-dropbox.mjs
           --stream navigation/saints/v1/source
           --source staging/navigation/output/navigation-source.json
+          --source staging/navigation/output/navigation-source-reviewed.json
           --source staging/navigation/output/readiness.json
 
       - name: Archive export bundle in Dropbox
