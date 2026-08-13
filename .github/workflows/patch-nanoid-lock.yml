@@ -1,0 +1,41 @@
+name: Patch nanoid lockfile
+
+on:
+  push:
+    branches:
+      - agent/d2-minimal-profiles-ready
+    paths:
+      - .github/workflows/patch-nanoid-lock.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: agent/d2-minimal-profiles-ready
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Regenerate patched lockfile
+        run: |
+          npm pkg set overrides.nanoid=3.3.18
+          npm install --package-lock-only --ignore-scripts
+          npm audit --audit-level=high
+
+      - name: Commit package metadata only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git diff --cached --exit-code && exit 0
+          git commit -m "Patch nanoid to 3.3.18"
+          git push origin HEAD:agent/d2-minimal-profiles-ready
