@@ -20,15 +20,31 @@ function collectiveName(value: string | undefined): boolean {
     name.startsWith('santas ') ||
     name.startsWith('saints ') ||
     name.startsWith('ss ') ||
+    name.startsWith('todos os santos') ||
+    name.startsWith('all saints') ||
     name.includes(' e sao ') ||
     name.includes(' e santo ') ||
     name.includes(' e santa ') ||
     name.includes(' and saint ');
 }
 
+function explicitSingularPersonName(value: string | undefined): boolean {
+  const name = normalizeName(value);
+  return name.startsWith('s ') ||
+    name.startsWith('sao ') ||
+    name.startsWith('santo ') ||
+    name.startsWith('santa ') ||
+    name.startsWith('beato ') ||
+    name.startsWith('beata ') ||
+    name.startsWith('st ') ||
+    name.startsWith('saint ') ||
+    name.startsWith('blessed ');
+}
+
 export function isRuntimePersonProfileEligible(item: Pick<Observance, 'category' | 'name' | 'names'>): boolean {
   if (!PERSON_CATEGORIES.has(item.category)) return false;
-  return ![item.name, ...Object.values(item.names ?? {})].some(collectiveName);
+  if (!explicitSingularPersonName(item.name)) return false;
+  return !collectiveName(item.name);
 }
 
 function names(item: Observance, locale: Locale): Set<string> {
