@@ -1,10 +1,14 @@
-# Probe policy revision: 2026-08-03
+# Probe policy revision: 2026-08-13
 name: Production health
 
 on:
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/production-health.yml'
   push:
     branches: [main]
     paths:
@@ -23,6 +27,8 @@ jobs:
     timeout-minutes: 10
     env:
       HEALTH_USER_AGENT: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36 SantosDiaHealth/1.0
+      APP_ORIGIN: https://santosdodia.alexmmpinto.workers.dev
+      RELEASE_SENTINEL_DATE: '2026-08-13'
     steps:
       - name: Probe homepage
         shell: bash
@@ -38,7 +44,7 @@ jobs:
             https://www.santosdodia.com/)"
           status="${result%% *}"; final_url="${result#* }"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
-            echo '::warning::Homepage probe was blocked by the Cloudflare WAF; DNS, TLS and Cloudflare edge were reachable.'
+            echo '::warning::Homepage probe was blocked by the Cloudflare WAF; DNS, TLS and Cloudflare edge were reachable. Application health is verified separately against the Worker origin.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "Homepage returned HTTP $status"; cat "$headers"; exit 1; }
@@ -68,7 +74,62 @@ jobs:
           [ "$final_url" = 'https://www.santosdodia.com/faq' ] || { echo "Apex redirect lost or corrupted the path: $final_url"; exit 1; }
           case "$final_url" in *':path'*|*'%3Apath'*|*'%3apath'*) echo "Literal route placeholder leaked into URL: $final_url"; exit 1 ;; esac
 
-      - name: Probe status API
+      - name: Verify deployed Worker runtime and published D1 calendar
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          status_body="$(mktemp)"
+          status_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" --header 'Accept: application/json' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$status_body" --write-out '%{http_code}' \
+            "$APP_ORIGIN/api/v1/system/status")"
+          [ "$status_code" = 200 ] || { echo "Worker status API returned HTTP $status_code"; cat "$status_body"; exit 1; }
+          STATUS_FILE="$status_body" node - <<'NODE'
+          const fs=require('node:fs');
+          const value=JSON.parse(fs.readFileSync(process.env.STATUS_FILE,'utf8'));
+          if(value.status!=='ok'){
+            console.error('Worker application status is not ok.', value);
+            process.exit(1);
+          }
+          NODE
+
+          today_body="$(mktemp)"
+          today_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" --header 'Accept: application/json' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$today_body" --write-out '%{http_code}' \
+            "$APP_ORIGIN/api/v1/today?date=$RELEASE_SENTINEL_DATE&locale=pt&timezone=Europe%2FLisbon")"
+          [ "$today_code" = 200 ] || { echo "Worker Today API returned HTTP $today_code"; cat "$today_body"; exit 1; }
+          TODAY_FILE="$today_body" RELEASE_SENTINEL_DATE="$RELEASE_SENTINEL_DATE" node - <<'NODE'
+          const fs=require('node:fs');
+          const value=JSON.parse(fs.readFileSync(process.env.TODAY_FILE,'utf8'));
+          const meta=value.meta??{};
+          const d1=meta.d1??{};
+          if(meta.date!==process.env.RELEASE_SENTINEL_DATE) throw new Error(`Unexpected Today date: ${meta.date}`);
+          if(!Array.isArray(value.data)||value.data.length<1) throw new Error('Published calendar sentinel date is empty.');
+          if(meta.count!==value.data.length) throw new Error(`Today count mismatch: meta=${meta.count} data=${value.data.length}`);
+          if(meta.sourceMode!=='published-d1+approved-repository') throw new Error(`Today is not using published D1: ${meta.sourceMode}`);
+          if(d1.bound!==true) throw new Error('CALENDAR_DB is not bound in the deployed Worker.');
+          if(!['ok','bounded'].includes(d1.status)) throw new Error(`D1 read status is ${d1.status}`);
+          if(!(Number(d1.publishedAccepted)>0)) throw new Error(`No published D1 rows accepted for sentinel date: ${d1.publishedAccepted}`);
+          console.log(`Today ${meta.date}: ${value.data.length} published item(s), D1 accepted=${d1.publishedAccepted}.`);
+          NODE
+
+          ics_body="$(mktemp)"
+          ics_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" --header 'Accept: text/calendar,*/*;q=0.8' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$ics_body" --write-out '%{http_code}' \
+            "$APP_ORIGIN/api/ical/all?year=2026&locale=pt")"
+          [ "$ics_code" = 200 ] || { echo "Worker ICS endpoint returned HTTP $ics_code"; exit 1; }
+          grep -q '^BEGIN:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not begin with BEGIN:VCALENDAR.'; exit 1; }
+          grep -q '^X-SANTOSDIA-SOURCE:published-d1+approved-repository' "$ics_body" || { echo 'Worker ICS is not using the published D1 calendar.'; exit 1; }
+          grep -q 'END:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not contain END:VCALENDAR.'; exit 1; }
+
+      - name: Probe status API on canonical domain
         if: always()
         shell: bash
         run: |
@@ -80,7 +141,7 @@ jobs:
             --dump-header "$headers" --output "$body" --write-out '%{http_code}' \
             https://www.santosdodia.com/api/v1/system/status)"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
-            echo '::warning::Status API probe was blocked by the Cloudflare WAF; no application-health conclusion is possible from this runner.'
+            echo '::warning::Canonical status API probe was blocked by the Cloudflare WAF; Worker-origin application verification has already run.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "Status API returned HTTP $status"; exit 1; }
@@ -90,7 +151,7 @@ jobs:
           if(value.status!=='ok'){console.error(value);process.exit(1)}
           NODE
 
-      - name: Probe OpenAPI
+      - name: Probe OpenAPI on canonical domain
         if: always()
         shell: bash
         run: |
@@ -102,7 +163,7 @@ jobs:
             --dump-header "$headers" --output "$body" --write-out '%{http_code}' \
             https://www.santosdodia.com/openapi.json)"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
-            echo '::warning::OpenAPI probe was blocked by the Cloudflare WAF.'
+            echo '::warning::Canonical OpenAPI probe was blocked by the Cloudflare WAF.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "OpenAPI returned HTTP $status"; exit 1; }
@@ -112,7 +173,7 @@ jobs:
           if(typeof value.openapi!=='string'||!value.paths||typeof value.paths!=='object')process.exit(1)
           NODE
 
-      - name: Probe ICS
+      - name: Probe ICS on canonical domain
         if: always()
         shell: bash
         run: |
@@ -124,7 +185,7 @@ jobs:
             --dump-header "$headers" --output "$body" --write-out '%{http_code}' \
             https://www.santosdodia.com/api/ical/all)"
           if [ "$status" = 403 ] && grep -qi '^cf-ray:' "$headers"; then
-            echo '::warning::ICS probe was blocked by the Cloudflare WAF.'
+            echo '::warning::Canonical ICS probe was blocked by the Cloudflare WAF.'
             exit 0
           fi
           [ "$status" = 200 ] || { echo "ICS endpoint returned HTTP $status"; exit 1; }
@@ -136,7 +197,9 @@ jobs:
         run: |
           {
             echo '## SantosDia production health'
-            echo '- Transport failures, TLS/DNS failures, unexpected HTTP codes and 5xx responses fail the workflow.'
-            echo '- A Cloudflare 403 with cf-ray is recorded as a WAF warning, not as a false application outage.'
-            echo '- Application-level validation runs whenever the WAF permits the GitHub runner request.'
+            echo '- The canonical domain is checked for DNS/TLS/edge reachability and normal application responses when the WAF permits the GitHub runner.'
+            echo '- A canonical-domain WAF 403 is only an edge warning; it can no longer make application health pass by itself.'
+            echo '- The deployed Workers.dev origin must return an application-level healthy status.'
+            echo '- Today on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
+            echo '- The Worker-origin ICS feed must identify the published D1 calendar as its source.'
           } >> "$GITHUB_STEP_SUMMARY"
