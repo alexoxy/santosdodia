@@ -142,7 +142,7 @@ export default function DayView({ dateISO }: { dateISO: string }) {
                       </div>
                     ) : null}
                     {profileId ? (
-                      <Link className="text-link" href={`/saint/${encodeURIComponent(profileId)}`}>
+                      <Link className="text-link" href={`/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(dateISO)}`}>
                         {feature.openProfile} →
                       </Link>
                     ) : null}
