@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { traditionLabel } from '../../data/observances';
+import { traditionLabel, type Observance } from '../../data/observances';
 import { getObservanceById,topicLabel,topicPath,topicsForObservance } from '../../data/discovery';
 import { biographyUi,getSaintBiography } from '../../data/saint-biographies';
 import { claimEvidenceFor,claimEvidenceReviewedAt,claimEvidenceUi,claimTypeLabel,unresolvedPatronages,validationStatusLabel } from '../../lib/claim-evidence';
@@ -13,10 +13,10 @@ import AddToCalendar from './AddToCalendar';
 import CandleButton from './CandleButton';
 import { useLanguage } from './LanguageProvider';
 
-export default function SaintProfile({id}:{id:string}){
- const{locale,copy,timeZone,country}=useLanguage();const feature=getFeatureCopy(locale);const year=yearInTimeZone(timeZone);const item=getObservanceById(id,year,locale);
+export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Observance}){
+ const{locale,copy,timeZone,country}=useLanguage();const feature=getFeatureCopy(locale);const year=yearInTimeZone(timeZone);const curatedItem=getObservanceById(id,year,locale);const item=curatedItem??runtimeItem;
  if(!item)return <section className="message-card"><span className="eyebrow">404</span><h1>{feature.noMatch}</h1><Link className="btn btn-primary" href="/explore">{feature.navFind}</Link></section>;
- const name=displayObservanceName(item.names,locale,item.name),patronages=displayPatronages(item.patronages,locale),topics=topicsForObservance(item.id),biography=getSaintBiography(item.id,locale),historyCopy=biographyUi[locale],summary=localizedSummary(item,locale),scope=displayObservanceScope(item,locale,country),evidence=claimEvidenceFor(item.id),evidenceCopy=claimEvidenceUi[locale];
+ const name=displayObservanceName(item.names,locale,item.name),patronages=displayPatronages(item.patronages,locale),topics=curatedItem?topicsForObservance(item.id):[],biography=curatedItem?getSaintBiography(item.id,locale):undefined,historyCopy=biographyUi[locale],summary=localizedSummary(item,locale),scope=displayObservanceScope(item,locale,country),evidence=curatedItem?claimEvidenceFor(item.id):[],evidenceCopy=claimEvidenceUi[locale];
  const dateLabel=new Intl.DateTimeFormat(locale,{month:'long',day:'numeric',timeZone:'UTC'}).format(new Date(`${item.dateISO}T00:00:00Z`));
  const evidenceDate=new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeZone:'UTC'}).format(new Date(`${claimEvidenceReviewedAt}T00:00:00Z`));
  return <div className="page-stack saint-profile-page">
@@ -32,7 +32,7 @@ export default function SaintProfile({id}:{id:string}){
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
    </article>
    <aside className="saint-profile-actions">
-    <div className="profile-action-card"><h2>{feature.annualCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${item.id}?locale=${locale}`} title={name}/></div>
+    {curatedItem?<div className="profile-action-card"><h2>{feature.annualCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${item.id}?locale=${locale}`} title={name}/></div>:null}
     <div className="profile-action-card candle-profile"><CandleButton observanceId={item.id} dateISO={item.dateISO}/><p>{feature.freeCandle}</p></div>
    </aside>
   </section>
