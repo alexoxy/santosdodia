@@ -7,7 +7,6 @@ import {
   traditionLabel,
   type Observance,
 } from "../../data/observances";
-import { getObservanceById } from "../../data/discovery";
 import { validationStatusLabel } from "../../lib/claim-evidence";
 import { getFeatureCopy } from "../../lib/feature-copy";
 import {
@@ -20,6 +19,7 @@ import {
   displayPatronages,
 } from "../../lib/locale-display";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
+import { getExistingProfileId } from "../../lib/runtime-profile-link";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
 import { useLanguage } from "./LanguageProvider";
@@ -100,7 +100,7 @@ export default function DayView({ dateISO }: { dateISO: string }) {
         {items.length ? (
           items.map((item) => {
             const patronages = displayPatronages(item.patronages, locale),
-              profile = Boolean(getObservanceById(item.id, year, locale));
+              profileId = getExistingProfileId(item, year, locale);
             return (
               <article
                 className="day-observance"
@@ -138,8 +138,8 @@ export default function DayView({ dateISO }: { dateISO: string }) {
                         {patronages.join(" · ")}
                       </div>
                     ) : null}
-                    {profile ? (
-                      <Link className="text-link" href={`/saint/${item.id}`}>
+                    {profileId ? (
+                      <Link className="text-link" href={`/saint/${profileId}`}>
                         {feature.openProfile} →
                       </Link>
                     ) : null}
