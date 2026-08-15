@@ -9,13 +9,15 @@ const labels = {
   de: 'Anzeige', pl: 'Reklama', ru: 'Реклама', fil: 'Anunsyo', sw: 'Tangazo',
 } as const;
 
+type Placement = 'top' | 'sidebar';
+
 declare global {
   interface Window {
     adsbygoogle?: unknown[];
   }
 }
 
-export default function AdSlot({ slot, placement }: { slot: string; placement: 'home' | 'profile' }) {
+export default function AdSlot({ slot, placement }: { slot: string; placement: Placement }) {
   const { locale } = useLanguage();
   const active = ADSENSE_ENABLED && isValidAdSenseSlot(slot);
 
@@ -25,25 +27,22 @@ export default function AdSlot({ slot, placement }: { slot: string; placement: '
       window.adsbygoogle = window.adsbygoogle || [];
       window.adsbygoogle.push({});
     } catch {
-      // Ad blockers and consent state may prevent initialization. Content must remain usable.
+      // Ad blockers, consent or Google policy state may prevent initialization.
+      // The surrounding content must remain fully usable without advertising.
     }
   }, [active]);
 
   if (!active) return null;
   return (
-    <aside
-      className={`ad-slot ad-slot-${placement}`}
-      aria-label={labels[locale]}
-      style={{ marginBlock: '1.5rem', width: '100%', overflow: 'hidden' }}
-    >
-      <small className="ad-label" style={{ display: 'block', marginBottom: '.35rem', textAlign: 'center', opacity: .65 }}>{labels[locale]}</small>
+    <aside className={`ad-slot ad-slot-${placement}`} aria-label={labels[locale]}>
+      <small className="ad-label">{labels[locale]}</small>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
         data-ad-client={ADSENSE_CLIENT}
         data-ad-slot={slot}
         data-ad-format="auto"
-        data-full-width-responsive="true"
+        data-full-width-responsive={placement === 'top' ? 'true' : 'false'}
       />
     </aside>
   );
