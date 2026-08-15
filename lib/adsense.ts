@@ -20,6 +20,10 @@ export function isValidAdSenseSlot(value: string) {
   return SLOT_RE.test(value);
 }
 
+export function isAdUnitActive(value: string) {
+  return ADSENSE_ENABLED && isValidAdSenseSlot(value);
+}
+
 export function adsenseSellerId() {
   if (!CLIENT_RE.test(ADSENSE_CLIENT)) return null;
   return ADSENSE_CLIENT.replace(/^ca-/, '');
