@@ -5,6 +5,7 @@ import { SAINT_BIOGRAPHIES } from "../data/saint-biographies";
 import { CHURCHES } from "../data/knowledge/churches";
 import { ECCLESIASTICAL_PEOPLE } from "../data/knowledge/ecclesiastical-state";
 import { JURISDICTIONS } from "../data/knowledge/jurisdictions";
+import { isSaintBiographyReadyForLaunchedLocales } from "../lib/editorial-profile-quality";
 import { churchPath, jurisdictionPath, personPath } from "../lib/knowledge/routes";
 import { SITE_ORIGIN } from "../lib/site";
 
@@ -47,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: 0.76,
   }));
-  const saints: MetadataRoute.Sitemap = SAINT_BIOGRAPHIES.map(item => ({
+  const saints: MetadataRoute.Sitemap = SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map(item => ({
     url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
     changeFrequency: "monthly",
     priority: 0.82,
