@@ -8,6 +8,7 @@ import type {
 import type { Locale, LocalizedText } from './i18n';
 import type { CalendarOccurrenceRecord } from './calendar-d1-read-model';
 import { normalizeDisplayLabel, normalizeDisplaySentence } from './linguistic/normalize-display-label.mjs';
+import { enrichObservanceEditorial } from './observance-editorial';
 
 const KNOWN_TRADITIONS = new Set<Tradition>([
   'roman-catholic',
@@ -133,7 +134,7 @@ export function calendarOccurrenceToObservance(
   const day = Number(record.dateISO.slice(8, 10));
   if (!Number.isInteger(month) || !Number.isInteger(day)) return null;
 
-  return {
+  return enrichObservanceEditorial({
     id: record.canonicalEventId,
     month,
     day,
@@ -149,7 +150,7 @@ export function calendarOccurrenceToObservance(
     dateISO: record.dateISO,
     name: labels.name,
     summary: labels.summary,
-  };
+  });
 }
 
 function observanceKey(item: Observance): string {
@@ -162,7 +163,7 @@ export function mergePublicCalendarObservances(
   locale: Locale,
 ): { items: Observance[]; acceptedD1: number; withheldD1: number } {
   const merged = new Map<string, Observance>();
-  for (const item of curated) merged.set(observanceKey(item), item);
+  for (const item of curated) merged.set(observanceKey(item), enrichObservanceEditorial(item));
 
   let acceptedD1 = 0;
   let withheldD1 = 0;
@@ -177,7 +178,7 @@ export function mergePublicCalendarObservances(
   }
 
   return {
-    items: [...merged.values()].sort((left, right) =>
+    items: [...merged.values()].map(enrichObservanceEditorial).sort((left, right) =>
       left.dateISO.localeCompare(right.dateISO) || left.name.localeCompare(right.name, locale),
     ),
     acceptedD1,
