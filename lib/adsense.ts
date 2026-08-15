@@ -1,6 +1,8 @@
 const CLIENT_RE = /^ca-pub-\d{16}$/;
 const SLOT_RE = /^\d{10,20}$/;
 
+// Public publisher/site-association values are supplied by Next configuration;
+// these runtime guards deliberately keep ownership code and ad serving separate.
 export const ADSENSE_CLIENT = (process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? '').trim();
 export const ADSENSE_CODE_ENABLED =
   process.env.NEXT_PUBLIC_ADSENSE_CODE_ENABLED === 'true' && CLIENT_RE.test(ADSENSE_CLIENT);
