@@ -1,6 +1,6 @@
 'use client';
 
-import { ADSENSE_ENABLED } from '../../lib/adsense';
+import { ADSENSE_CODE_ENABLED } from '../../lib/adsense';
 import { useLanguage } from './LanguageProvider';
 
 const labels = {
@@ -13,7 +13,7 @@ declare global { interface Window { googlefc?: GoogleFc } }
 
 export default function PrivacyChoicesLink() {
   const { locale } = useLanguage();
-  if (!ADSENSE_ENABLED) return null;
+  if (!ADSENSE_CODE_ENABLED) return null;
   return (
     <button
       className="text-link footer-privacy-button"

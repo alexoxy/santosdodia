@@ -12,22 +12,14 @@ import { serializeStructuredData } from "../../../lib/structured-data";
 const YEAR = new Date().getUTCFullYear();
 
 function decodeRouteId(value: string): string {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
+  try { return decodeURIComponent(value); } catch { return value; }
 }
 
 function fallbackProfileDescription(locale: Locale, name: string) {
-  if (locale === "pt")
-    return `Data da celebração, tradição cristã e informação de calendário revista sobre ${name}.`;
-  if (locale === "es")
-    return `Fecha de celebración, tradición cristiana e información de calendario revisada sobre ${name}.`;
-  if (locale === "fr")
-    return `Date de célébration, tradition chrétienne et informations de calendrier vérifiées sur ${name}.`;
-  if (locale === "it")
-    return `Data della celebrazione, tradizione cristiana e informazioni di calendario verificate su ${name}.`;
+  if (locale === "pt") return `Data da celebração, tradição cristã e informação de calendário revista sobre ${name}.`;
+  if (locale === "es") return `Fecha de celebración, tradición cristiana e información de calendario revisada sobre ${name}.`;
+  if (locale === "fr") return `Date de célébration, tradition chrétienne et informations de calendrier vérifiées sur ${name}.`;
+  if (locale === "it") return `Data della celebrazione, tradizione cristiana e informazioni di calendario verificate su ${name}.`;
   return `Feast date, Christian tradition and reviewed calendar information for ${name}.`;
 }
 
@@ -44,17 +36,10 @@ export function generateStaticParams() {
 }
 
 async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
-  return getObservanceById(id, YEAR, locale) ??
-    getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
+  return getObservanceById(id, YEAR, locale) ?? getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
 }
 
-export async function generateMetadata({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ date?: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ date?: string }>; }): Promise<Metadata> {
   const { id: routeId } = await params;
   const id = decodeRouteId(routeId);
   const { date } = await searchParams;
@@ -64,39 +49,19 @@ export async function generateMetadata({
   const biography = getSaintBiography(id, locale);
   const description = biography?.summary ?? item.summary ?? fallbackProfileDescription(locale, item.name);
   const canonical = `/saint/${encodeURIComponent(id)}`;
-  const keywords = [
-    ...new Set([
-      item.name,
-      ...Object.values(item.names).filter((value): value is string => Boolean(value)),
-      ...(item.patronages ?? []),
-      ...item.traditions,
-    ]),
-  ];
+  const keywords = [...new Set([item.name, ...Object.values(item.names).filter((value): value is string => Boolean(value)), ...(item.patronages ?? []), ...item.traditions])];
   return {
     title: item.name,
     description,
     keywords,
     alternates: { canonical },
-    robots: biography
-      ? { index: true, follow: true }
-      : { index: false, follow: true, googleBot: { index: false, follow: true } },
-    openGraph: {
-      title: item.name,
-      description,
-      url: canonical,
-      type: "profile",
-    },
+    robots: biography ? { index: true, follow: true } : { index: false, follow: true, googleBot: { index: false, follow: true } },
+    openGraph: { title: item.name, description, url: canonical, type: "profile" },
     twitter: { card: "summary", title: item.name, description },
   };
 }
 
-export default async function SaintPage({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ date?: string }>;
-}) {
+export default async function SaintPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ date?: string }>; }) {
   const { id: routeId } = await params;
   const id = decodeRouteId(routeId);
   const { date } = await searchParams;
@@ -105,26 +70,37 @@ export default async function SaintPage({
   const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
+  const biography = getSaintBiography(id, locale);
   const url = `${SITE_ORIGIN}/saint/${encodeURIComponent(id)}`;
-  const alternateNames = [
-    ...new Set(
-      Object.values(item.names).filter(
-        (value): value is string => Boolean(value) && value !== item.name,
-      ),
-    ),
-  ];
+  const alternateNames = [...new Set(Object.values(item.names).filter((value): value is string => Boolean(value) && value !== item.name))];
   const properties = [
     { name: "Feast date", value: item.dateISO },
     { name: "Category", value: item.category },
     { name: "Calendar system", value: item.calendarSystem },
     { name: "Christian traditions", value: item.traditions.join(", ") },
-    ...(item.patronages?.length
-      ? [{ name: "Patronages", value: item.patronages.join(", ") }]
-      : []),
-    ...(item.countries?.length
-      ? [{ name: "Geographic scope", value: item.countries.join(", ") }]
-      : []),
+    ...(item.patronages?.length ? [{ name: "Patronages", value: item.patronages.join(", ") }] : []),
+    ...(item.countries?.length ? [{ name: "Geographic scope", value: item.countries.join(", ") }] : []),
   ];
+  const entityId = biography ? `${url}#person` : `${url}#observance`;
+  const entity = biography ? {
+    "@type": "Person",
+    "@id": entityId,
+    name: item.name,
+    alternateName: alternateNames,
+    description: biography.summary,
+    url,
+    additionalProperty: properties.map(property => ({ "@type": "PropertyValue", name: property.name, value: property.value })),
+  } : {
+    "@type": "DefinedTerm",
+    "@id": entityId,
+    name: item.name,
+    alternateName: alternateNames,
+    description: item.summary,
+    identifier: item.id,
+    termCode: item.id,
+    inDefinedTermSet: { "@type": "DefinedTermSet", name: "Santos do Dia Christian observances", url: `${SITE_ORIGIN}/calendar` },
+    additionalProperty: properties.map(property => ({ "@type": "PropertyValue", name: property.name, value: property.value })),
+  };
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -133,44 +109,24 @@ export default async function SaintPage({
         "@id": url,
         url,
         name: item.name,
-        description: item.summary,
-        mainEntity: { "@id": `${url}#observance` },
-        isPartOf: {
-          "@type": "WebSite",
-          "@id": `${SITE_ORIGIN}/#website`,
-          name: "Santos do Dia",
-          url: SITE_ORIGIN,
-        },
+        description: biography?.summary ?? item.summary,
+        mainEntity: { "@id": entityId },
+        isPartOf: { "@type": "WebSite", "@id": `${SITE_ORIGIN}/#website`, name: "Santos do Dia", url: SITE_ORIGIN },
       },
+      entity,
       {
-        "@type": "DefinedTerm",
-        "@id": `${url}#observance`,
-        name: item.name,
-        alternateName: alternateNames,
-        description: item.summary,
-        identifier: item.id,
-        termCode: item.id,
-        inDefinedTermSet: {
-          "@type": "DefinedTermSet",
-          name: "Santos do Dia Christian observances",
-          url: `${SITE_ORIGIN}/calendar`,
-        },
-        additionalProperty: properties.map((property) => ({
-          "@type": "PropertyValue",
-          name: property.name,
-          value: property.value,
-        })),
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumbs`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Santos do Dia", item: SITE_ORIGIN },
+          { "@type": "ListItem", position: 2, name: item.name, item: url },
+        ],
       },
     ],
   };
 
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }}
-      />
-      <SaintProfile id={id} runtimeItem={curated ? undefined : item} />
-    </>
-  );
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
+    <SaintProfile id={id} runtimeItem={curated ? undefined : item} />
+  </>;
 }

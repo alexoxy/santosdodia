@@ -7,7 +7,6 @@ import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observanc
 import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import { getInstitutionalCopy } from '../../lib/institutional-copy';
-import AdSenseBootstrap from './AdSenseBootstrap';
 import PrivacyChoicesLink from './PrivacyChoicesLink';
 import { useLanguage, type ChurchPreference } from './LanguageProvider';
 
@@ -54,7 +53,6 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
  const pilgrimage=pilgrimageLabels[locale];
  return <div className="site-shell">
-  <AdSenseBootstrap/>
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
   <header className="site-header"><div className="header-inner">
    <Link className="brand" href="/" aria-label="Santos do Dia"><span className="brand-mark" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></Link>
