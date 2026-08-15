@@ -30,3 +30,29 @@ const missing=expected.filter(date=>!seen.has(date));
 if(missing.length)throw new Error(`Missing ${missing.length} published day(s): ${missing.join(', ')}`);
 
 console.log(`Roman Catholic PT ${year}: ${seen.size}/${expected.length} days covered, ${rows} public rows.`);
+
+// Permanent D2/D6 live sentinel: this is a published D1 person profile that does not
+// depend on the legacy curated profile catalogue. It must remain reachable and exportable.
+const runtimeSaintId='rc:StRayPenyafort';
+const runtimeSaintDate='2026-01-07';
+const encodedId=encodeURIComponent(runtimeSaintId);
+
+const profileUrl=new URL(`/saint/${encodedId}`,origin);
+profileUrl.searchParams.set('date',runtimeSaintDate);
+const profileResponse=await fetch(profileUrl,{headers:{'accept-language':'pt-PT,pt;q=0.9'}});
+if(!profileResponse.ok)throw new Error(`Runtime saint profile returned HTTP ${profileResponse.status}.`);
+const profileHtml=await profileResponse.text();
+if(!profileHtml.includes('Raimundo'))throw new Error('Runtime saint profile did not render the expected localized identity.');
+
+const icsUrl=new URL(`/api/ical/saint/${encodedId}`,origin);
+icsUrl.searchParams.set('locale','pt');
+const icsResponse=await fetch(icsUrl,{headers:{accept:'text/calendar'}});
+if(!icsResponse.ok)throw new Error(`Runtime saint calendar returned HTTP ${icsResponse.status}.`);
+const contentType=icsResponse.headers.get('content-type')??'';
+if(!contentType.toLowerCase().includes('text/calendar'))throw new Error(`Runtime saint calendar has unexpected Content-Type: ${contentType}`);
+const ics=await icsResponse.text();
+for(const marker of ['BEGIN:VCALENDAR','BEGIN:VEVENT',`UID:${runtimeSaintId}-${runtimeSaintDate}@santosdodia.com`,'END:VCALENDAR']){
+  if(!ics.includes(marker))throw new Error(`Runtime saint calendar is missing ${marker}.`);
+}
+
+console.log(`Runtime saint live sentinel: profile 200 + calendar 200 (${runtimeSaintId}).`);
