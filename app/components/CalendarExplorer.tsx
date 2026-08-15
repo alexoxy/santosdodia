@@ -11,6 +11,10 @@ import { dateISOInTimeZone } from "../../lib/date-context";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
+import {
+  getExistingProfileId,
+  isRuntimePersonProfileEligible,
+} from "../../lib/runtime-profile-link";
 import { useLanguage, type ChurchPreference } from "./LanguageProvider";
 
 const categories: Category[] = [
@@ -34,13 +38,28 @@ function matrix(year: number, month: number) {
 function iso(year: number, month: number, day: number) {
   return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
+function shiftISO(dateISO: string, amount: number) {
+  const date = new Date(`${dateISO}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + amount);
+  return date.toISOString().slice(0, 10);
+}
 type Country = { countryCode: string; name: string };
 
 export default function CalendarExplorer() {
-  const { locale, copy, country, timeZone, contextReady, church, setChurch } = useLanguage();
+  const { locale, copy, country, timeZone, contextReady, church, setChurch } =
+    useLanguage();
   const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
   const todayYear = Number(todayISO.slice(0, 4));
   const todayMonth = Number(todayISO.slice(5, 7)) - 1;
+  const previousDayISO = useMemo(() => shiftISO(todayISO, -1), [todayISO]);
+  const nextDayISO = useMemo(() => shiftISO(todayISO, 1), [todayISO]);
+  const relativeDay = useMemo(() => {
+    const formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+    return (amount: number) => {
+      const label = formatter.format(amount, "day");
+      return label.charAt(0).toLocaleUpperCase(locale) + label.slice(1);
+    };
+  }, [locale]);
   const [year, setYear] = useState(todayYear),
     [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
@@ -108,7 +127,17 @@ export default function CalendarExplorer() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [year, month, locale, timeZone, church, category, region, fallback, contextReady]);
+  }, [
+    year,
+    month,
+    locale,
+    timeZone,
+    church,
+    category,
+    region,
+    fallback,
+    contextReady,
+  ]);
   const weekdays = useMemo(() => {
     const base = new Date(Date.UTC(2026, 0, 5));
     return Array.from({ length: 7 }, (_, index) =>
@@ -124,14 +153,40 @@ export default function CalendarExplorer() {
     setYear(date.getUTCFullYear());
     setMonth(date.getUTCMonth());
   }
+  function openTodayMonth() {
+    setYear(todayYear);
+    setMonth(todayMonth);
+  }
+  function detailHref(item: Observance, date: string) {
+    const existingProfileId = getExistingProfileId(item, year, locale);
+    const profileId =
+      existingProfileId ??
+      (isRuntimePersonProfileEligible(item) ? item.id : null);
+    return profileId
+      ? `/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(date)}`
+      : `/day/${date}#observance-${encodeURIComponent(item.id)}`;
+  }
   const feedParams = new URLSearchParams({ locale });
   if (category !== "all") feedParams.set("category", category);
   if (region !== "GLOBAL") feedParams.set("country", region);
-  const monthTitle = formatMonthYear(iso(year, month, 1), locale, "heading");
-  const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  const monthTitle = formatMonthYear(
+    iso(year, month, 1),
+    locale,
+    "heading",
+  );
+  const daysInMonth = new Date(
+    Date.UTC(year, month + 1, 0),
+  ).getUTCDate();
 
   if (!contextReady) {
-    return <section className="calendar-card calendar-context-loading" aria-live="polite">{copy.loading}</section>;
+    return (
+      <section
+        className="calendar-card calendar-context-loading"
+        aria-live="polite"
+      >
+        {copy.loading}
+      </section>
+    );
   }
 
   return (
@@ -203,6 +258,21 @@ export default function CalendarExplorer() {
         ) : null}
       </section>
       <section className="calendar-card">
+        <nav
+          className="button-row"
+          aria-label={copy.calendarTitle}
+          style={{ justifyContent: "center", marginBottom: 18 }}
+        >
+          <a className="btn btn-secondary" href={`/day/${previousDayISO}`}>
+            ← {relativeDay(-1)}
+          </a>
+          <a className="btn btn-primary" href={`/day/${todayISO}`}>
+            {relativeDay(0)}
+          </a>
+          <a className="btn btn-secondary" href={`/day/${nextDayISO}`}>
+            {relativeDay(1)} →
+          </a>
+        </nav>
         <div className="calendar-toolbar">
           <button
             className="icon-button"
@@ -220,6 +290,13 @@ export default function CalendarExplorer() {
             →
           </button>
         </div>
+        {(year !== todayYear || month !== todayMonth) ? (
+          <div className="button-row" style={{ justifyContent: "center", marginBottom: 18 }}>
+            <button className="btn btn-tertiary" onClick={openTodayMonth}>
+              {relativeDay(0)}
+            </button>
+          </div>
+        ) : null}
         {loading ? (
           <div className="data-loading" aria-live="polite">
             {copy.loading}
@@ -234,7 +311,9 @@ export default function CalendarExplorer() {
             ))}
             {matrix(year, month).map((day, index) => {
               const date = day ? iso(year, month, day) : "",
-                list = day ? items.filter((item) => item.dateISO === date) : [],
+                list = day
+                  ? items.filter((item) => item.dateISO === date)
+                  : [],
                 today = Boolean(day && date === todayISO);
               return (
                 <div
@@ -256,7 +335,7 @@ export default function CalendarExplorer() {
                           return name ? (
                             <a
                               className={`calendar-observance ${traditionClass(item.traditions[0])}`}
-                              href={`/day/${date}`}
+                              href={detailHref(item, date)}
                               key={item.id}
                             >
                               {name}
@@ -277,22 +356,53 @@ export default function CalendarExplorer() {
           </div>
         </div>
         <div className="calendar-mobile-agenda">
-          {Array.from({ length: daysInMonth }, (_, index) => index + 1).map((day) => {
+          {Array.from(
+            { length: daysInMonth },
+            (_, index) => index + 1,
+          ).map((day) => {
             const date = iso(year, month, day);
             const list = items.filter((item) => item.dateISO === date);
-            const weekday = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
-            return <div className="calendar-mobile-day" key={date}>
-              <a className="calendar-mobile-date" href={`/day/${date}`} aria-label={date}>
-                <strong>{day}</strong>
-                <span>{weekday}</span>
-              </a>
-              <div className="calendar-mobile-items">
-                {list.length ? list.slice(0, 6).map((item) => {
-                  const name = displayObservanceName(item.names, locale, item.name);
-                  return name ? <a className={`calendar-mobile-observance ${traditionClass(item.traditions[0])}`} href={`/day/${date}`} key={item.id}>{name}</a> : null;
-                }) : <span className="calendar-mobile-empty">—</span>}
+            const weekday = new Intl.DateTimeFormat(locale, {
+              weekday: "short",
+              timeZone: "UTC",
+            }).format(new Date(`${date}T12:00:00Z`));
+            return (
+              <div
+                className={`calendar-mobile-day${date === todayISO ? " is-today" : ""}`}
+                key={date}
+              >
+                <a
+                  className="calendar-mobile-date"
+                  href={`/day/${date}`}
+                  aria-label={date}
+                >
+                  <strong>{day}</strong>
+                  <span>{weekday}</span>
+                </a>
+                <div className="calendar-mobile-items">
+                  {list.length ? (
+                    list.slice(0, 6).map((item) => {
+                      const name = displayObservanceName(
+                        item.names,
+                        locale,
+                        item.name,
+                      );
+                      return name ? (
+                        <a
+                          className={`calendar-mobile-observance ${traditionClass(item.traditions[0])}`}
+                          href={detailHref(item, date)}
+                          key={item.id}
+                        >
+                          {name}
+                        </a>
+                      ) : null;
+                    })
+                  ) : (
+                    <span className="calendar-mobile-empty">—</span>
+                  )}
+                </div>
               </div>
-            </div>;
+            );
           })}
         </div>
         {!loading && !items.length ? (
