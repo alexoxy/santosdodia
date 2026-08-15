@@ -16,7 +16,8 @@ export default function PrivacyChoicesLink() {
   if (!ADSENSE_ENABLED) return null;
   return (
     <button
-      className="footer-privacy-button"
+      className="text-link footer-privacy-button"
+      style={{ background: 'none', border: 0, padding: 0, font: 'inherit', cursor: 'pointer' }}
       type="button"
       onClick={() => {
         const fc = window.googlefc;
