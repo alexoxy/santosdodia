@@ -31,6 +31,7 @@ export default function CalendarSyncCenter(){
   const currentYear = new Date().getUTCFullYear();
   const [selectedChurch,setSelectedChurch] = useState<ChurchPreference>(church);
   const [selectedCountry,setSelectedCountry] = useState(country ?? 'GLOBAL');
+  const [regionTouched,setRegionTouched] = useState(false);
   const [category,setCategory] = useState<'all'|Category>('all');
   const [year,setYear] = useState(currentYear);
   const [countries,setCountries] = useState<Country[]>([]);
@@ -42,10 +43,10 @@ export default function CalendarSyncCenter(){
     const requestedCountry = params.get('country');
     const requestedCategory = params.get('category');
     if(validTradition(tradition)) setSelectedChurch(tradition);
-    if(requestedCountry && /^[A-Z]{2}$/i.test(requestedCountry)) setSelectedCountry(requestedCountry.toUpperCase());
+    if(requestedCountry && /^[A-Z]{2}$/i.test(requestedCountry)) { setSelectedCountry(requestedCountry.toUpperCase()); setRegionTouched(true); }
     if(validCategory(requestedCategory)) setCategory(requestedCategory);
   },[]);
-  useEffect(()=>{ if(country && selectedCountry==='GLOBAL') setSelectedCountry(country); },[country,selectedCountry]);
+  useEffect(()=>{ if(!regionTouched && country && selectedCountry==='GLOBAL') setSelectedCountry(country); },[country,regionTouched,selectedCountry]);
   useEffect(()=>{
     fetch('/api/v1/religious-holidays?mode=countries')
       .then(response=>response.ok?response.json():null)
@@ -84,7 +85,7 @@ export default function CalendarSyncCenter(){
 
     <section className="filter-panel" aria-label={text.title}>
       <div className="filter-group"><label>{text.church}</label><select value={selectedChurch} onChange={event=>setSelectedChurch(event.target.value as ChurchPreference)}><option value="all">{text.all}</option>{TRADITIONS.map(value=><option key={value} value={value}>{traditionLabel(copy,value)}</option>)}</select></div>
-      <div className="filter-group"><label>{text.region}</label><select value={selectedCountry} onChange={event=>setSelectedCountry(event.target.value)}><option value="GLOBAL">{text.global}</option>{countries.map(value=><option key={value.countryCode} value={value.countryCode}>{regionNames.of(value.countryCode) ?? value.name}</option>)}</select></div>
+      <div className="filter-group"><label>{text.region}</label><select value={selectedCountry} onChange={event=>{setRegionTouched(true);setSelectedCountry(event.target.value);}}><option value="GLOBAL">{text.global}</option>{countries.map(value=><option key={value.countryCode} value={value.countryCode}>{regionNames.of(value.countryCode) ?? value.name}</option>)}</select></div>
       <div className="filter-group"><label>{text.category}</label><select value={category} onChange={event=>setCategory(event.target.value as 'all'|Category)}><option value="all">{text.all}</option>{CATEGORIES.map(value=><option key={value} value={value}>{copy[value]}</option>)}</select></div>
       <div className="filter-group"><label>{text.year}</label><select value={year} onChange={event=>setYear(Number(event.target.value))}>{Array.from({length:5},(_,index)=>currentYear-1+index).map(value=><option key={value} value={value}>{value}</option>)}</select></div>
     </section>
