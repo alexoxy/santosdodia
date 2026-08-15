@@ -56,6 +56,36 @@
   width: 300px;
 }
 
+/* The homepage and rich saint profiles keep their existing local placement
+   rules: content first, then a separate desktop rail. These remain layout
+   columns/panels, never viewport overlays. */
+.home-monetized-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.home-monetized-layout.has-ad-rail {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
+.home-monetized-main {
+  min-width: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ad-sidebar-rail {
+  position: sticky;
+  top: 6.75rem;
+  min-width: 0;
+}
+
+.saint-profile-actions .ad-sidebar-rail {
+  margin-top: 1rem;
+}
+
 /* Advertising must remain part of the document layout. No ad container here
    uses fixed positioning, transforms over content or negative overlap. */
 @media (max-width: 1360px) {
@@ -68,6 +98,16 @@
   }
 
   .site-ad-sidebar-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .home-monetized-layout.has-ad-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-sidebar-rail {
     display: none;
   }
 }
