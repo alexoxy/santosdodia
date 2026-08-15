@@ -11,6 +11,14 @@ import { serializeStructuredData } from "../../../lib/structured-data";
 
 const YEAR = new Date().getUTCFullYear();
 
+function decodeRouteId(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 async function requestLocale(): Promise<Locale> {
   const cookieStore = await cookies();
   const saved = cookieStore.get("sdd-locale")?.value;
@@ -35,7 +43,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ date?: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { id: routeId } = await params;
+  const id = decodeRouteId(routeId);
   const { date } = await searchParams;
   const item = await resolveProfile(id, "en", date);
   if (!item) return { title: "Saint not found" };
@@ -75,7 +84,8 @@ export default async function SaintPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ date?: string }>;
 }) {
-  const { id } = await params;
+  const { id: routeId } = await params;
+  const id = decodeRouteId(routeId);
   const { date } = await searchParams;
   const locale = await requestLocale();
   const curated = getObservanceById(id, YEAR, locale);
