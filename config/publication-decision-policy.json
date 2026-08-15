@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "mode": "shadow-classification",
+  "productionAutoPromotionEnabled": false,
+  "principle": "Human review is required by exception, not by default, but only claim classes explicitly listed as safe may ever become auto-promotable.",
+  "lanes": {
+    "auto-eligible": {
+      "description": "Deterministic internal enrichment that does not change public editorial meaning or liturgical identity.",
+      "mayWriteProductionNow": false,
+      "eligibleClaimClasses": [
+        "exact-external-identifier",
+        "source-document-evidence",
+        "unchanged-existing-identity-evidence"
+      ],
+      "requirements": [
+        "approved source policy",
+        "verified immutable Dropbox package",
+        "exact external identifier",
+        "no source conflict",
+        "no entity merge or split",
+        "no Church, tradition, calendar-system or observance-date mutation",
+        "no editorial prose mutation"
+      ]
+    },
+    "cross-check-required": {
+      "description": "Potentially useful factual enrichment that may be promoted automatically only after independent corroboration.",
+      "mayWriteProductionNow": false,
+      "claimClasses": [
+        "birth-date",
+        "death-date",
+        "localized-source-label",
+        "geography",
+        "patronage",
+        "feast-or-observance-link"
+      ],
+      "requirementsBeforeFutureAutoPromotion": [
+        "at least two independent approved sources or one explicitly authoritative first-party source for that claim class",
+        "no conflicting value",
+        "canonical entity already exists",
+        "claim-specific confidence threshold met",
+        "language/script gate passed when applicable"
+      ]
+    },
+    "human-review-required": {
+      "description": "Semantic, ecclesial, identity or editorial changes that always require a person before public promotion.",
+      "claimClasses": [
+        "new-canonical-person",
+        "entity-merge",
+        "entity-split",
+        "recognition-or-canonization-status",
+        "Church-or-tradition-membership",
+        "calendar-system-change",
+        "observance-date-change",
+        "liturgical-rank-or-precedence",
+        "Marian-title-resolution",
+        "jurisdiction-membership",
+        "source-conflict",
+        "editorial-biography",
+        "editorial-summary",
+        "interpretive-hagiography"
+      ]
+    }
+  },
+  "promotionSafety": {
+    "minimumShadowRunsBeforeEnablingAnyProductionAutoPromotion": 20,
+    "maximumObservedFalsePositiveRate": 0,
+    "requireAcceptanceVectors": true,
+    "requireRollbackReceipt": true,
+    "requireLastKnownGood": true,
+    "neverDeleteOnSourceFailure": true
+  }
+}
