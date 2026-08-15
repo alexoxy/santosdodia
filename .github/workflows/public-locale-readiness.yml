@@ -8,6 +8,10 @@ on:
       - '.github/workflows/public-locale-readiness.yml'
       - 'scripts/check-public-locale-readiness.mjs'
       - 'lib/i18n.ts'
+      - 'lib/public-locale-policy.ts'
+      - 'app/components/LanguageProvider.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'lib/request-public-locale.ts'
 
 permissions:
   contents: read
@@ -22,7 +26,10 @@ jobs:
         with:
           node-version-file: .node-version
       - name: Measure live calendar coverage for every supported locale
-        run: node scripts/check-public-locale-readiness.mjs | tee public-locale-readiness.json
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-public-locale-readiness.mjs | tee public-locale-readiness.json
       - name: Archive readiness evidence
         uses: actions/upload-artifact@v7
         with:
