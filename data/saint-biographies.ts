@@ -1,11 +1,12 @@
 import { localize, type Locale, type LocalizedText } from '../lib/i18n';
+import { EDITORIAL_SCALE_BATCH_1 } from './saint-biographies-batch-1';
 
 export type BiographySource={name:string;url:string;language:Locale;publisher:string};
 export type SaintBiography={
  id:string;
  title:LocalizedText;
  summary:LocalizedText;
- paragraphs:Record<Locale,string[]>;
+ paragraphs:Partial<Record<Locale,string[]>> & {en:string[]};
  facts:Array<{label:LocalizedText;value:LocalizedText}>;
  sources:BiographySource[];
  verifiedAt:string;
@@ -65,15 +66,18 @@ const anthony:SaintBiography={
  verifiedAt:'2026-07-23'
 };
 
-export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony];
+export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony,...EDITORIAL_SCALE_BATCH_1];
+
+export function getSaintBiographyRecord(id:string){return SAINT_BIOGRAPHIES.find(item=>item.id===id)}
 
 export function getSaintBiography(id:string,locale:Locale){
- const biography=SAINT_BIOGRAPHIES.find(item=>item.id===id);if(!biography)return undefined;
+ const biography=getSaintBiographyRecord(id);if(!biography)return undefined;
+ const localeParagraphs=biography.paragraphs[locale];
  return {
   ...biography,
   title:localize(biography.title,locale),
   summary:localize(biography.summary,locale),
-  paragraphs:biography.paragraphs[locale]??biography.paragraphs.en,
+  paragraphs:localeParagraphs?.length?localeParagraphs:biography.paragraphs.en,
   facts:biography.facts.map(fact=>({label:localize(fact.label,locale),value:localize(fact.value,locale)}))
  };
 }

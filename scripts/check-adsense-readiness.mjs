@@ -83,6 +83,7 @@ if(!failures.length){
   expect(saint.includes('SAINT_BIOGRAPHIES.map'),'Only editorial biographies should be statically generated');
   expect(saint.includes('index: false, follow: true'),'Minimal profiles must be noindex/follow');
   expect(saint.includes('getSaintBiography'),'Profile indexing must depend on reviewed biography content');
+  expect(saint.includes('isSaintBiographyIndexable'),'Profile indexing must pass the substantive editorial quality gate');
   expect(saint.includes('"@type": "Person"'),'Editorial saint profiles should expose Person structured data');
   expect(saint.includes('BreadcrumbList'),'Editorial profiles should expose breadcrumbs');
 
@@ -93,13 +94,14 @@ if(!failures.length){
   expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
 
   const sitemap=text('app/sitemap.ts');
-  expect(sitemap.includes('SAINT_BIOGRAPHIES.map'),'Sitemap must exclude minimal saint profiles');
+  expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'),'Sitemap must include only saint biographies that pass the launched-locale editorial gate');
   expect(sitemap.includes('path: "/about"'),'About page must be in sitemap');
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
   expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose only data-backed evergreen month-day pages');
 
   const profile=text('app/components/SaintProfile.tsx');
-  expect(profile.includes('biography?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need a guarded top banner');
+  expect(profile.includes('editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need an editorial-quality-guarded top banner');
+  expect(profile.includes('isSaintBiographyIndexable'),'Rich profile ad eligibility must use the substantive editorial gate');
   expect(profile.includes('ADSENSE_SIDEBAR_SLOT'),'Rich profiles need a guarded desktop sidebar');
   const home=text('app/page.tsx');
   expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
