@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { localeLabels, type Locale } from '../../lib/i18n';
 import { READY_PUBLIC_LOCALES } from '../../lib/public-locale-policy';
 import { localeOptionLabel } from '../../lib/locale-coverage';
@@ -7,6 +8,8 @@ import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observanc
 import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import { getInstitutionalCopy } from '../../lib/institutional-copy';
+import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive, isManualAdEligiblePath } from '../../lib/adsense';
+import AdSlot from './AdSlot';
 import PrivacyChoicesLink from './PrivacyChoicesLink';
 import { useLanguage, type ChurchPreference } from './LanguageProvider';
 
@@ -47,11 +50,15 @@ const advertisingLabels:Record<Locale,string>={
 };
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
+ const pathname=usePathname();
  const { locale, setLocale, copy, church, setChurch } = useLanguage();
  const feature=getFeatureCopy(locale);
  const institutional=getInstitutionalCopy(locale);
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
  const pilgrimage=pilgrimageLabels[locale];
+ const manualAdsEligible=isManualAdEligiblePath(pathname);
+ const topAdActive=manualAdsEligible&&isAdUnitActive(ADSENSE_TOP_SLOT);
+ const sidebarAdActive=manualAdsEligible&&isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
  return <div className="site-shell">
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
   <header className="site-header"><div className="header-inner">
@@ -62,7 +69,13 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
     <label className="language-picker"><span className="sr-only">{languageLabels[locale]}</span><select value={locale} onChange={event => setLocale(event.target.value as Locale)}>{READY_PUBLIC_LOCALES.map(value => <option key={value} value={value}>{localeOptionLabel(value,localeLabels[value])}</option>)}</select></label>
    </div>
   </div></header>
-  <main className="site-main" id="main-content" tabIndex={-1}>{children}</main>
+  <main className={`site-main${sidebarAdActive?' site-main-with-ad-rail':''}`} id="main-content" tabIndex={-1}>
+   {topAdActive?<div className="site-top-ad"><AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/></div>:null}
+   <div className={`site-monetized-grid${sidebarAdActive?' has-ad-rail':''}`}>
+    <div className="site-content-frame">{children}</div>
+    {sidebarAdActive?<aside className="site-ad-sidebar-rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar"/></aside>:null}
+   </div>
+  </main>
   <nav className="mobile-product-nav" aria-label={mobileNavLabels[locale]}>
    <Link href="/"><span aria-hidden="true">✦</span><small>{feature.navToday}</small></Link>
    <Link href="/calendar"><span aria-hidden="true">▦</span><small>{feature.navCalendars}</small></Link>
