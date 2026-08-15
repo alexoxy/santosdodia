@@ -17,6 +17,7 @@ const RANK_LABELS = new Map([
 ]);
 const COLOUR_LINE = /^(?:Branco|Vermelho|Verde|Roxo|Rosa|Preto)\b/iu;
 const RANK_SUFFIX = /(?:\s+[–—-]\s*|\s+)(SOLENIDADE|FESTA|MO|MF|MEMÓRIA OBRIGATÓRIA|MEMÓRIA FACULTATIVA)\s*$/iu;
+const DASH_RANK_MARKER = /\s+[–—-]\s*(SOLENIDADE|FESTA|MO|MF|MEMÓRIA OBRIGATÓRIA|MEMÓRIA FACULTATIVA)(?=\s|$)/giu;
 
 function argument(name, fallback = null) {
   const index = process.argv.indexOf(name);
@@ -67,8 +68,26 @@ function canonicalRank(value) {
   const key = String(value ?? '').trim().toUpperCase();
   return RANK_LABELS.get(key) ?? null;
 }
+function trimLabel(value) {
+  return String(value ?? '').replace(/^[\s,;–—-]+|[\s,;–—-]+$/gu, '').replace(/\s+/gu, ' ').trim();
+}
+function splitRankedHeading(heading) {
+  const matches = [...heading.matchAll(DASH_RANK_MARKER)];
+  if (!matches.length) return [];
+  const result = [];
+  let cursor = 0;
+  for (const match of matches) {
+    const label = trimLabel(heading.slice(cursor, match.index));
+    const rank = canonicalRank(match[1]);
+    if (!label || !rank) return [];
+    result.push({ label, rank });
+    cursor = (match.index ?? 0) + match[0].length;
+  }
+  if (trimLabel(heading.slice(cursor))) return [];
+  return result;
+}
 
-export function extractPrimarySnlObservance(summary, description) {
+export function extractSnlObservances(summary, description) {
   const dayLabel = String(summary ?? '').normalize('NFC').trim();
   const paragraphs = String(description ?? '').replace(/\r\n/gu, '\n').replace(/\r/gu, '\n').split(/\n\s*\n+/u);
 
@@ -79,18 +98,33 @@ export function extractPrimarySnlObservance(summary, description) {
     const headingLines = colourIndex >= 0 ? lines.slice(0, colourIndex) : lines;
     if (!headingLines.length) continue;
     const heading = headingLines.join(' ').replace(/\s+/gu, ' ').trim();
-    const match = RANK_SUFFIX.exec(heading);
-    if (!match) continue;
-    const rank = canonicalRank(match[1]);
-    const label = heading.slice(0, match.index).replace(/[\s,;–—-]+$/gu, '').trim();
+    const suffix = RANK_SUFFIX.exec(heading);
+    if (!suffix) continue;
+
+    const split = splitRankedHeading(heading);
+    if (split.length) {
+      return split.map((item, index) => ({
+        ...item,
+        rankSource: 'description-heading',
+        dayLabel,
+        evidenceHeading: heading,
+        sourceOrdinal: index,
+        groupedAlternative: split.length > 1,
+      }));
+    }
+
+    const rank = canonicalRank(suffix[1]);
+    const label = trimLabel(heading.slice(0, suffix.index));
     if (!rank || !label) continue;
-    return {
+    return [{
       label,
       rank,
       rankSource: 'description-heading',
       dayLabel,
       evidenceHeading: heading,
-    };
+      sourceOrdinal: 0,
+      groupedAlternative: false,
+    }];
   }
 
   const descriptionLines = compactLines(description).filter(Boolean);
@@ -100,13 +134,19 @@ export function extractPrimarySnlObservance(summary, description) {
   else if (/Ofício da festa/iu.test(firstColourLine)) inferredRank = 'feast';
   else if (/Ofício da memória/iu.test(firstColourLine)) inferredRank = 'memorial';
 
-  return {
+  return [{
     label: dayLabel,
     rank: inferredRank,
     rankSource: inferredRank ? 'office-line' : 'none',
     dayLabel,
     evidenceHeading: firstColourLine || dayLabel,
-  };
+    sourceOrdinal: 0,
+    groupedAlternative: false,
+  }];
+}
+
+export function extractPrimarySnlObservance(summary, description) {
+  return extractSnlObservances(summary, description)[0];
 }
 
 export function parseSnlIcs(ics) {
@@ -144,42 +184,52 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
   if (invalid.length) throw new Error(`SNL ICS contains ${invalid.length} event(s) without a valid date or summary.`);
   if (!parsed.length) throw new Error('SNL ICS contains no events.');
 
-  const seen = new Set();
+  const seenDays = new Set();
   const events = [];
   for (const event of parsed) {
-    const occurrenceKey = `${event.dateISO}|${event.uid ?? event.summary}`;
-    if (seen.has(occurrenceKey)) continue;
-    seen.add(occurrenceKey);
+    const sourceDayKey = `${event.dateISO}|${event.uid ?? event.summary}`;
+    if (seenDays.has(sourceDayKey)) continue;
+    seenDays.add(sourceDayKey);
     const [year, month, day] = event.dateISO.split('-').map(Number);
-    const recordHash = sha256(JSON.stringify(event));
-    const primaryObservance = extractPrimarySnlObservance(event.summary, event.description);
-    events.push({
-      id: `snl-pt-${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}-${slugHash(occurrenceKey)}`,
-      canonicalEventId: `source:snl-pt:${slugHash(event.uid ?? `${event.dateISO}|${event.summary}`)}`,
-      churchId: 'roman-catholic',
-      jurisdictionId: 'PT',
-      dateISO: event.dateISO,
-      rule: { type: 'annual-source-table', month, day },
-      names: { pt: { value: primaryObservance.label, status: 'source', sourceLocale: 'pt' } },
-      sourceId: SOURCE_ID,
-      sourceRecordHash: recordHash,
-      validationStatus: 'provisional',
-      publicationStatus: 'withheld',
-      sourceFacts: {
-        uid: event.uid,
-        dayLabel: event.summary,
-        primaryObservance,
-        description: primaryObservance.evidenceHeading,
-        rawDescription: event.description,
-        location: event.location,
-        url: event.url,
-      },
-    });
+    const sourceObservances = extractSnlObservances(event.summary, event.description);
+    const alternativeGroupId = sourceObservances.length > 1 ? `snl-pt-group-${slugHash(sourceDayKey)}` : null;
+
+    for (const observance of sourceObservances) {
+      const occurrenceKey = `${sourceDayKey}|${observance.sourceOrdinal}|${observance.label}|${observance.rank ?? ''}`;
+      const recordHash = sha256(JSON.stringify({ event, observance }));
+      events.push({
+        id: `snl-pt-${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}-${slugHash(occurrenceKey)}`,
+        canonicalEventId: `source:snl-pt:${slugHash(occurrenceKey)}`,
+        churchId: 'roman-catholic',
+        jurisdictionId: 'PT',
+        dateISO: event.dateISO,
+        rule: { type: 'annual-source-table', month, day },
+        names: { pt: { value: observance.label, status: 'source', sourceLocale: 'pt' } },
+        sourceId: SOURCE_ID,
+        sourceRecordHash: recordHash,
+        validationStatus: 'provisional',
+        publicationStatus: 'withheld',
+        sourceFacts: {
+          uid: event.uid,
+          sourceDayKey,
+          sourceOrdinal: observance.sourceOrdinal,
+          alternativeGroupId,
+          groupedAlternative: sourceObservances.length > 1,
+          dayLabel: event.summary,
+          primaryObservance: observance,
+          description: observance.evidenceHeading,
+          rawDescription: event.description,
+          location: event.location,
+          url: event.url,
+        },
+      });
+    }
   }
 
   const years = [...new Set(events.map((event) => Number(event.dateISO.slice(0, 4))))].sort((a, b) => a - b);
   const civilDays = new Set(events.map((event) => event.dateISO)).size;
   const explicitPrimaryObservances = events.filter((event) => event.sourceFacts.primaryObservance.rankSource === 'description-heading').length;
+  const multiObservanceDays = new Set(events.filter((event) => event.sourceFacts.groupedAlternative).map((event) => event.dateISO)).size;
   return {
     schemaVersion: 1,
     packageId: `portugal-snl-${manifest.sha256.slice(0, 16)}`,
@@ -206,7 +256,7 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
       churchId: 'roman-catholic',
       jurisdictionId: 'PT',
       engineId: 'snl-portugal-agenda-ics',
-      fixedDatePolicy: 'Use the Portuguese national agenda as emitted, preserving national transfers and proper observances without rewriting the General Roman Calendar.',
+      fixedDatePolicy: 'Use the Portuguese national agenda as emitted, preserving national transfers, grouped alternatives and proper observances without rewriting the General Roman Calendar.',
       calendarSystem: 'gregorian',
       sourceId: SOURCE_ID,
       validationStatus: 'provisional',
@@ -214,9 +264,11 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
     events,
     coverage: {
       years,
+      sourceDayCount: seenDays.size,
       eventCount: events.length,
       civilDays,
       explicitPrimaryObservances,
+      multiObservanceDays,
       completeSourceFeed: true,
       publicationStatus: 'withheld',
     },
