@@ -29,9 +29,9 @@ export async function GET() {
     openapi: "3.1.0",
     info: {
       title: "Santos do Dia machine interface",
-      version: "3.6.0",
+      version: "3.7.0",
       description:
-        "Machine-readable saints, Christian Church calendars, ecclesiastical jurisdictions and religious leaders with traceable source tiers.",
+        "Machine-readable saints, Christian Church calendars, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers.",
     },
     servers: [{ url: SITE_ORIGIN }],
     paths: {
@@ -119,6 +119,26 @@ export async function GET() {
             ...filterParameters,
           ],
           responses: { "200": { description: "Localized search results" } },
+        },
+      },
+      "/api/v1/live": {
+        get: {
+          summary: "List verified official Christian live and media endpoints",
+          description:
+            "Returns the active generated registry maintained from reviewed official Church sources. Live URLs may change; canonical IDs, tradition, official source URLs, languages and verification dates are preserved for machine consumers.",
+          parameters: [
+            {
+              name: "tradition",
+              in: "query",
+              schema: { type: "string", enum: TRADITIONS },
+            },
+          ],
+          responses: {
+            "200": {
+              description:
+                "Verified official Christian live/media registry and generation metadata",
+            },
+          },
         },
       },
       "/api/v1/religious-holidays": {

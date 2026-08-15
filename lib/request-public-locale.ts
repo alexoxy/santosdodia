@@ -1,14 +1,18 @@
 import { cookies, headers } from "next/headers";
 import {
   localeFromAcceptLanguage,
-  normalizePublicLocale,
   type Locale,
 } from "./i18n";
+import {
+  isReadyPublicLocale,
+  normalizeReadyPublicLocale,
+} from "./public-locale-policy";
 
 export async function requestPublicLocale(): Promise<Locale> {
   const cookieStore = await cookies();
   const saved = cookieStore.get("sdd-locale")?.value;
-  if (saved) return normalizePublicLocale(saved);
+  if (saved) return normalizeReadyPublicLocale(saved);
   const requestHeaders = await headers();
-  return localeFromAcceptLanguage(requestHeaders.get("accept-language"));
+  const requested = localeFromAcceptLanguage(requestHeaders.get("accept-language"));
+  return isReadyPublicLocale(requested) ? requested : "en";
 }
