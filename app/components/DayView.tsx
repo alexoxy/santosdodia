@@ -47,6 +47,13 @@ const annualDayCopy: Record<Locale, AnnualDayCopy> = {
   sw: { eyebrow: "Maadhimisho katika tarehe hii", body: year => `Watakatifu na maadhimisho ya Kikristo yanayohusishwa na tarehe hii, kwa kalenda ya ${year}. Sikukuu zinazohama zinaweza kuangukia tarehe nyingine katika miaka mingine.`, datedLink: year => `Fungua kalenda ya ${year}`, annualLink: "Tazama tarehe hii kila mwaka" },
 };
 
+function summaryParagraphs(value: string | undefined): string[] {
+  return String(value ?? "")
+    .split(/\n\s*\n/u)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
+
 export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; mode?: DayMode }) {
   const { locale, copy } = useLanguage();
   const feature = getFeatureCopy(locale);
@@ -130,7 +137,8 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
           items.map((item) => {
             const patronages = displayPatronages(item.patronages, locale),
               existingProfileId = getExistingProfileId(item, year, locale),
-              profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null);
+              profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null),
+              paragraphs = summaryParagraphs(item.summaries?.[locale]);
             return (
               <article
                 className="day-observance"
@@ -159,9 +167,9 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
                     <h2>
                       {displayObservanceName(item.names, locale, item.name)}
                     </h2>
-                    {item.summaries?.[locale] ? (
-                      <p>{item.summaries[locale]}</p>
-                    ) : null}
+                    {paragraphs.map((paragraph, index) => (
+                      <p key={`${item.id}-summary-${index}`}>{paragraph}</p>
+                    ))}
                     {patronages.length ? (
                       <div className="patronage-line">
                         <strong>{copy.patronage}:</strong>{" "}
