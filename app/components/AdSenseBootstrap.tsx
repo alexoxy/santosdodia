@@ -4,9 +4,9 @@ import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import { ADSENSE_CLIENT, ADSENSE_ENABLED, adsenseScriptAllowed } from '../../lib/adsense';
 
-export default function AdSenseBootstrap() {
+export default function AdSenseBootstrap({ force = false }: { force?: boolean }) {
   const pathname = usePathname();
-  if (!ADSENSE_ENABLED || !adsenseScriptAllowed(pathname)) return null;
+  if (!ADSENSE_ENABLED || (!force && !adsenseScriptAllowed(pathname))) return null;
 
   return (
     <Script
