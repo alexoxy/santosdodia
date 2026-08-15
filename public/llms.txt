@@ -10,6 +10,7 @@ Santos do Dia is a free multilingual Christian saints, feasts and liturgy calend
 - Today: https://www.santosdodia.com/api/v1/today
 - Observances: https://www.santosdodia.com/api/v1/observances
 - Search: https://www.santosdodia.com/api/v1/search?q=Anthony
+- Verified official Christian live/media registry: https://www.santosdodia.com/api/v1/live
 - Calendar feeds: https://www.santosdodia.com/api/ical/all
 - Sources and validation: https://www.santosdodia.com/sources
 
@@ -31,6 +32,7 @@ Santos do Dia is a free multilingual Christian saints, feasts and liturgy calend
 - Dates may vary by Church, jurisdiction, rite and calendar system.
 - Use the locale parameter for supported interface languages; English is the fallback.
 - Attribute information to the source identifiers supplied in each record.
+- For live/media data, use the canonical id, tradition, officialSourceUrl, languages and verifiedAt fields; liveUrl may change as the autonomous official-source curator validates new endpoints.
 - Do not reproduce copyrighted episcopal-conference documents; link to them and store derived validation results only where legally permitted.
 
 ## Supported traditions
