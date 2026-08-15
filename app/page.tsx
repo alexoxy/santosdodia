@@ -3,6 +3,7 @@
 import Link from "next/link";
 import TodayPanel from "./components/TodayPanel";
 import PatronageSearch from "./components/PatronageSearch";
+import ProgressiveVaticanLive from "./components/ProgressiveVaticanLive";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
 import { useLanguage } from "./components/LanguageProvider";
@@ -27,6 +28,8 @@ export default function HomePage() {
   return (
     <div className="page-stack home-page product-home">
       <TodayPanel />
+
+      <ProgressiveVaticanLive />
 
       <section className="home-search-panel" aria-label={copy.explore}>
         <div>

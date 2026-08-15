@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { getFeatureCopy } from '../../lib/feature-copy';
+import { getVaticanLiveCopy } from '../../lib/vatican-live-copy';
 import { getNetworkConnection, isConstrainedConnection } from '../../lib/network-mode';
 import { useLanguage } from './LanguageProvider';
 
@@ -14,6 +15,7 @@ const VaticanLiveFeature = dynamic(() => import('./VaticanLiveFeature'), {
 export default function ProgressiveVaticanLive() {
   const { locale } = useLanguage();
   const copy = getFeatureCopy(locale);
+  const vatican = getVaticanLiveCopy(locale);
   const containerRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [constrained, setConstrained] = useState(false);
@@ -55,11 +57,14 @@ export default function ProgressiveVaticanLive() {
   return <div ref={containerRef} className="progressive-live-shell">
     {ready ? <VaticanLiveFeature /> : <section className="progressive-live-placeholder" aria-labelledby="progressive-live-title">
       <div>
-        <span className="eyebrow">Vatican Media</span>
-        <h2 id="progressive-live-title">{copy.liveTitle}</h2>
-        <p>{constrained ? copy.liveFallback : copy.liveIntro}</p>
+        <span className="eyebrow">{vatican.eyebrow}</span>
+        <h2 id="progressive-live-title">{vatican.title}</h2>
+        <p>{constrained ? copy.liveFallback : vatican.intro}</p>
       </div>
-      <button className="btn btn-secondary" type="button" onClick={() => setReady(true)}>{copy.openLive}</button>
+      <div className="button-row">
+        <button className="btn btn-secondary" type="button" onClick={() => setReady(true)}>{copy.openLive}</button>
+        <a className="text-link" href="/live">{vatican.otherLives} →</a>
+      </div>
     </section>}
   </div>;
 }
