@@ -31,8 +31,12 @@ export default function AdSlot({ slot, placement }: { slot: string; placement: '
 
   if (!active) return null;
   return (
-    <aside className={`ad-slot ad-slot-${placement}`} aria-label={labels[locale]}>
-      <small className="ad-label">{labels[locale]}</small>
+    <aside
+      className={`ad-slot ad-slot-${placement}`}
+      aria-label={labels[locale]}
+      style={{ marginBlock: '1.5rem', width: '100%', overflow: 'hidden' }}
+    >
+      <small className="ad-label" style={{ display: 'block', marginBottom: '.35rem', textAlign: 'center', opacity: .65 }}>{labels[locale]}</small>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
