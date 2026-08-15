@@ -13,9 +13,9 @@ export function getRelatedSubstantiveProfiles(item:Pick<Observance,'id'>,locale:
 }
 
 export function getSubstantiveProfileLinks(item:Observance,year:number,locale:Locale='en'){
- const direct=getDirectSubstantiveProfileId(item,year,locale);
- if(direct)return[{id:direct,name:item.name,direct:true as const}];
- return getRelatedSubstantiveProfiles(item,locale).map(profile=>({...profile,direct:false as const}));
+ const existing=getExistingProfileId(item,year,locale);
+ if(existing&&DIRECT_SUBSTANTIVE_PROFILE_IDS.has(existing))return[{id:existing,name:item.name,direct:true as const}];
+ return relatedSubstantiveProfiles(existing??item.id,locale).map(profile=>({...profile,direct:false as const}));
 }
 
 export function substantiveDetailHref(item:Observance,year:number,locale:Locale,dateISO=item.dateISO){
