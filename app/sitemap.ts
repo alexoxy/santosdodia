@@ -48,8 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: 0.76,
   }));
-  // Compatibility marker for merge-base readiness audits: SAINT_BIOGRAPHIES.map.
-  // The executable pipeline below remains stricter and excludes profiles that fail the launched-locale gate.
   const saints: MetadataRoute.Sitemap = SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map(item => ({
     url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
     changeFrequency: "monthly",
