@@ -1,5 +1,6 @@
 import { localize, type Locale, type LocalizedText } from '../lib/i18n';
 import { EDITORIAL_SCALE_BATCH_1 } from './saint-biographies-batch-1';
+import { EDITORIAL_SCALE_BATCH_2 } from './saint-biographies-batch-2';
 
 export type BiographySource={name:string;url:string;language:Locale;publisher:string};
 export type SaintBiography={
@@ -66,7 +67,7 @@ const anthony:SaintBiography={
  verifiedAt:'2026-07-23'
 };
 
-export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony,...EDITORIAL_SCALE_BATCH_1];
+export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony,...EDITORIAL_SCALE_BATCH_1,...EDITORIAL_SCALE_BATCH_2];
 
 export function getSaintBiographyRecord(id:string){return SAINT_BIOGRAPHIES.find(item=>item.id===id)}
 
