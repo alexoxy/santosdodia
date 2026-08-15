@@ -13,9 +13,11 @@ on:
       - 'scripts/calendar/normalize-portugal-snl-agenda.mjs'
       - 'scripts/calendar/reconcile-portugal-snl.mjs'
       - 'scripts/calendar/build-portugal-snl-review-bundle.mjs'
+      - 'scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs'
       - 'scripts/calendar/test-portugal-snl-agenda.mjs'
       - 'scripts/calendar/test-portugal-snl-reconciliation.mjs'
       - 'scripts/calendar/test-portugal-snl-review-bundle.mjs'
+      - 'scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs'
       - '.github/workflows/portugal-snl-calendar.yml'
       - 'config/automation-registry.json'
 
@@ -45,11 +47,12 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --include=optional
 
-      - name: Validate Portugal calendar and review boundaries
+      - name: Validate Portugal calendar, review and overlay boundaries
         run: |
           node scripts/calendar/test-portugal-snl-agenda.mjs
           node scripts/calendar/test-portugal-snl-reconciliation.mjs
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
+          node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
           npm run automation:audit
 
       - name: Fetch official SNL subscription feed
@@ -72,6 +75,13 @@ jobs:
           --reconciliation staging/portugal-snl/reconciliation.json
           --output-dir staging/portugal-snl/review
 
+      - name: Plan Portugal as General Roman jurisdiction overlay
+        run: >-
+          node scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs
+          --normalized staging/portugal-snl/normalized-package.json
+          --reconciliation staging/portugal-snl/reconciliation.json
+          --output staging/portugal-snl/overlay-plan.json
+
       - name: Validate canonical calendar staging contract
         shell: bash
         run: |
@@ -87,6 +97,7 @@ jobs:
           const canonical=JSON.parse(fs.readFileSync('staging/portugal-snl/canonical-staging.json','utf8'));
           const reconciliation=JSON.parse(fs.readFileSync('staging/portugal-snl/reconciliation.json','utf8'));
           const review=JSON.parse(fs.readFileSync('staging/portugal-snl/review/review-bundle.json','utf8'));
+          const overlay=JSON.parse(fs.readFileSync('staging/portugal-snl/overlay-plan.json','utf8'));
           if(normalized.run.publicationAllowed!==false||normalized.run.promotionAllowed!==false) throw new Error('Portugal layer escaped staging-only mode.');
           if(normalized.coverage.sourceDayCount<365||normalized.coverage.civilDays<365) throw new Error(`Portugal SNL coverage unexpectedly thin: ${JSON.stringify(normalized.coverage)}`);
           if(canonical.occurrences.some(item=>item.jurisdictionId!=='PT'||item.churchId!=='roman-catholic'||item.publicationStatus!=='withheld')) throw new Error('Portugal canonical staging output crossed jurisdiction/publication boundary.');
@@ -95,6 +106,10 @@ jobs:
           if(reconciliation.items.some(item=>item.reviewRequired!==true||item.automaticLinkAllowed!==false)) throw new Error('Portugal reconciliation produced an unreviewed automatic link.');
           if(review.mode!=='human-review-by-exception'||review.productionWriteAllowed!==false||review.summary.inputOccurrences!==normalized.events.length) throw new Error('Portugal review bundle crossed review-only boundary.');
           if(Object.values(review.queues).flat().some(item=>item.decision!=='pending-human-review'||item.productionWriteAllowed!==false)) throw new Error('Portugal review bundle contains an implicitly approved item.');
+          if(overlay.mode!=='jurisdiction-delta-overlay-plan'||overlay.productionWriteAllowed!==false||overlay.overlayPublicationAllowed!==false) throw new Error('Portugal overlay escaped planning-only mode.');
+          if(overlay.summary.inheritGeneralNoPtRow+overlay.summary.blockingDeltaReview!==normalized.events.length) throw new Error('Portugal overlay does not partition inheritance and blocking deltas.');
+          if(overlay.inheritGeneral.some(item=>item.humanReviewRequired!==false||item.blocksPortugalPublication!==false||item.productionWriteAllowed!==false)) throw new Error('Inherited General Roman events were incorrectly made Portugal mutations.');
+          if(overlay.blockingDeltaReview.some(item=>item.humanReviewRequired!==true||item.blocksPortugalPublication!==true||item.productionWriteAllowed!==false)) throw new Error('Portugal delta review boundary is invalid.');
           NODE
 
       - name: Upload diagnostic artifact
