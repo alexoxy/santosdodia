@@ -1,11 +1,12 @@
 import { localize, type Locale, type LocalizedText } from '../lib/i18n';
+import { EDITORIAL_SCALE_BATCH_1 } from './saint-biographies-batch-1';
 
 export type BiographySource={name:string;url:string;language:Locale;publisher:string};
 export type SaintBiography={
  id:string;
  title:LocalizedText;
  summary:LocalizedText;
- paragraphs:Record<Locale,string[]>;
+ paragraphs:Partial<Record<Locale,string[]>> & {en:string[]};
  facts:Array<{label:LocalizedText;value:LocalizedText}>;
  sources:BiographySource[];
  verifiedAt:string;
@@ -54,7 +55,7 @@ const anthony:SaintBiography={
  facts:[
   {label:{en:'Born',pt:'Nascimento',es:'Nacimiento',fr:'Naissance'},value:{en:'c. 1195 · Lisbon, Portugal',pt:'c. 1195 · Lisboa, Portugal',es:'c. 1195 · Lisboa, Portugal',fr:'v. 1195 · Lisbonne, Portugal'}},
   {label:{en:'Died',pt:'Morte',es:'Fallecimiento',fr:'Mort'},value:{en:'13 June 1231 · Arcella, near Padua',pt:'13 de junho de 1231 · Arcella, perto de Pádua',es:'13 de junio de 1231 · Arcella, cerca de Padua',fr:'13 juin 1231 · Arcella, près de Padoue'}},
-  {label:{en:'Canonised',pt:'Canonização',es:'Canonización',fr:'Canonisation'},value:{en:'30 May 1232 · Pope Gregory IX',pt:'30 de maio de 1232 · Papa Gregório IX',es:'30 de mayo de 1232 · Papa Gregorio IX',fr:'30 mai 1232 · pape Grégoire IX'}},
+  {label:{en:'Canonised',pt:'Canonização',es:'Canonización',fr:'Canonisation'},value:{en:'30 May 1232 · Pope Gregory IX',pt:'30 de maio de 1232 · Papa Gregório IX',es:'30 de mayo de 1231 · Papa Gregorio IX',fr:'30 mai 1232 · pape Grégoire IX'}},
   {label:{en:'Doctor of the Church',pt:'Doutor da Igreja',es:'Doctor de la Iglesia',fr:'Docteur de l’Église'},value:{en:'Proclaimed in 1946 by Pope Pius XII',pt:'Proclamado em 1946 pelo Papa Pio XII',es:'Proclamado en 1946 por el papa Pío XII',fr:'Proclamé en 1946 par le pape Pie XII'}}
  ],
  sources:[
@@ -65,15 +66,18 @@ const anthony:SaintBiography={
  verifiedAt:'2026-07-23'
 };
 
-export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony];
+export const SAINT_BIOGRAPHIES:SaintBiography[]=[anthony,...EDITORIAL_SCALE_BATCH_1];
+
+export function getSaintBiographyRecord(id:string){return SAINT_BIOGRAPHIES.find(item=>item.id===id)}
 
 export function getSaintBiography(id:string,locale:Locale){
- const biography=SAINT_BIOGRAPHIES.find(item=>item.id===id);if(!biography)return undefined;
+ const biography=getSaintBiographyRecord(id);if(!biography)return undefined;
+ const localeParagraphs=biography.paragraphs[locale];
  return {
   ...biography,
   title:localize(biography.title,locale),
   summary:localize(biography.summary,locale),
-  paragraphs:biography.paragraphs[locale]??biography.paragraphs.en,
+  paragraphs:localeParagraphs?.length?localeParagraphs:biography.paragraphs.en,
   facts:biography.facts.map(fact=>({label:localize(fact.label,locale),value:localize(fact.value,locale)}))
  };
 }
