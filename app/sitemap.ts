@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPublicAllObservances } from "../lib/public-observances";
 import { DISCOVERY_TOPICS, topicPath } from "../data/discovery";
+import { EDITORIAL_GUIDES } from "../data/editorial-guides";
 import { SAINT_BIOGRAPHIES } from "../data/saint-biography-registry";
 import { CHURCHES } from "../data/knowledge/churches";
 import { ECCLESIASTICAL_PEOPLE } from "../data/knowledge/ecclesiastical-state";
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", changeFrequency: "daily", priority: 1, lastModified: dailyLastModified },
     { path: "/explore", changeFrequency: "weekly", priority: 0.95 },
     { path: "/calendar", changeFrequency: "weekly", priority: 0.9 },
+    { path: "/guides", changeFrequency: "weekly", priority: 0.88 },
     { path: "/liturgy", changeFrequency: "daily", priority: 0.9, lastModified: dailyLastModified },
     { path: "/churches", changeFrequency: "weekly", priority: 0.9 },
     { path: "/holidays", changeFrequency: "weekly", priority: 0.85 },
@@ -54,10 +56,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.82,
     lastModified: new Date(`${item.verifiedAt}T00:00:00.000Z`),
   }));
+  const guides: MetadataRoute.Sitemap = EDITORIAL_GUIDES.map(guide => ({
+    url: `${SITE_ORIGIN}/guides/${guide.slug}`,
+    changeFrequency: "monthly",
+    priority: 0.84,
+  }));
   const topics: MetadataRoute.Sitemap = DISCOVERY_TOPICS.map(topic => ({ url: `${SITE_ORIGIN}${topicPath(topic)}`, changeFrequency: "monthly", priority: topic.popular ? 0.85 : 0.7 }));
   const churches: MetadataRoute.Sitemap = CHURCHES.map(church => ({ url: `${SITE_ORIGIN}${churchPath(church)}`, changeFrequency: "monthly", priority: 0.75 }));
   const jurisdictions: MetadataRoute.Sitemap = JURISDICTIONS.map(jurisdiction => ({ url: `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}`, changeFrequency: "weekly", priority: jurisdiction.level === "diocese" || jurisdiction.level === "eparchy" ? 0.78 : 0.72 }));
   const leaders: MetadataRoute.Sitemap = ECCLESIASTICAL_PEOPLE.map(person => ({ url: `${SITE_ORIGIN}${personPath(person)}`, changeFrequency: "weekly", priority: 0.76 }));
 
-  return [...new Map([...staticRoutes, ...days, ...annualDays, ...saints, ...topics, ...churches, ...jurisdictions, ...leaders].map(item => [item.url, item])).values()];
+  return [...new Map([...staticRoutes, ...days, ...annualDays, ...saints, ...guides, ...topics, ...churches, ...jurisdictions, ...leaders].map(item => [item.url, item])).values()];
 }
