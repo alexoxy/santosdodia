@@ -25,9 +25,13 @@
 
 .home-monetized-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
+}
+
+.home-monetized-layout.has-ad-rail {
+  grid-template-columns: minmax(0, 1fr) 300px;
 }
 
 .home-monetized-main {
@@ -47,7 +51,7 @@
 }
 
 @media (max-width: 1080px) {
-  .home-monetized-layout {
+  .home-monetized-layout.has-ad-rail {
     grid-template-columns: 1fr;
   }
 
