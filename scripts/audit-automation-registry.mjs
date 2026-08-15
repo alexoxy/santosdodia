@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const moduleDir = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_REGISTRY_PATH = path.resolve(moduleDir, '../config/automation-registry.json');
 const ALLOWED_MODES = new Set(['scheduled', 'event-driven', 'manual']);
-const ALLOWED_PUBLICATION_MODES = new Set(['none', 'read-only', 'staging-only']);
+const ALLOWED_PUBLICATION_MODES = new Set(['none', 'read-only', 'staging-only', 'generated-only']);
 
 function workflowCrons(source) {
   return [...source.matchAll(/-\s+cron:\s*['"]([^'"]+)['"]/g)].map((match) => match[1]).sort();
@@ -47,12 +47,23 @@ export function validateAutomationRegistry(registry, inventory) {
   if (registry?.policy?.editorialTextRequiresHumanApproval !== true) errors.push('Editorial text must require human approval.');
   if (registry?.policy?.sourceFailuresAreReviewCandidatesOnly !== true) errors.push('Source failures must remain review candidates only.');
 
+  const generatedPublicationPaths = Array.isArray(registry?.policy?.automaticGeneratedRegistryWrites)
+    ? registry.policy.automaticGeneratedRegistryWrites
+    : [];
+  for (const item of generatedPublicationPaths) {
+    if (typeof item !== 'string' || !/^data\/generated\/[A-Za-z0-9._/-]+$/u.test(item)) {
+      errors.push(`Invalid automatic generated registry path: ${String(item)}.`);
+    }
+  }
+  for (const duplicate of duplicates(generatedPublicationPaths)) errors.push(`Duplicate automatic generated registry path: ${duplicate}`);
+
   const tasks = Array.isArray(registry?.tasks) ? registry.tasks : [];
   for (const duplicate of duplicates(tasks.map((task) => task.id))) errors.push(`Duplicate task id: ${duplicate}`);
   for (const duplicate of duplicates(tasks.map((task) => task.workflow))) errors.push(`Workflow is registered more than once: ${duplicate}`);
 
   const registeredWorkflows = new Set();
   const registeredProducers = [];
+  const claimedGeneratedPaths = [];
   for (const task of tasks) {
     const prefix = `Task ${task.id ?? '<missing>'}`;
     if (!task.id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(task.id)) errors.push(`${prefix} has an invalid id.`);
@@ -75,6 +86,17 @@ export function validateAutomationRegistry(registry, inventory) {
     if (task.mode === 'scheduled' && task.publicationMode === 'staging-only' && !task.archiveStream) {
       errors.push(`${prefix} stages on a schedule but has no bounded archive stream.`);
     }
+    if (task.publicationMode === 'generated-only') {
+      const paths = Array.isArray(task.generatedPaths) ? task.generatedPaths : [];
+      if (!paths.length) errors.push(`${prefix} is generated-only but declares no generatedPaths.`);
+      if (!task.archiveStream) errors.push(`${prefix} is generated-only but has no evidence archive stream.`);
+      for (const generatedPath of paths) {
+        claimedGeneratedPaths.push(generatedPath);
+        if (!generatedPublicationPaths.includes(generatedPath)) errors.push(`${prefix} generated path is not policy-approved: ${generatedPath}.`);
+      }
+    } else if (Array.isArray(task.generatedPaths) && task.generatedPaths.length) {
+      errors.push(`${prefix} declares generatedPaths without generated-only publicationMode.`);
+    }
     for (const producer of task.producerScripts ?? []) {
       registeredProducers.push(producer);
       if (!fs.existsSync(path.join(inventory.root, producer))) errors.push(`${prefix} references missing producer ${producer}.`);
@@ -87,6 +109,10 @@ export function validateAutomationRegistry(registry, inventory) {
     }
   }
   for (const duplicate of duplicates(registeredProducers)) errors.push(`Producer is assigned to multiple tasks: ${duplicate}`);
+  for (const duplicate of duplicates(claimedGeneratedPaths)) errors.push(`Generated publication path is assigned to multiple tasks: ${duplicate}`);
+  for (const approvedPath of generatedPublicationPaths) {
+    if (!claimedGeneratedPaths.includes(approvedPath)) errors.push(`Policy-approved generated publication path has no registered owner task: ${approvedPath}.`);
+  }
 
   const freshness = tasks.find((task) => task.id === 'source-freshness');
   if (!freshness) errors.push('Weekly source-freshness task is missing.');
@@ -101,7 +127,8 @@ export function validateAutomationRegistry(registry, inventory) {
       tasks: tasks.length,
       scheduledTasks: tasks.filter((task) => task.mode === 'scheduled').length,
       scheduledWorkflows: [...inventory.workflows.values()].filter((item) => item.crons.length > 0).length,
-      producerScripts: registeredProducers.length
+      producerScripts: registeredProducers.length,
+      generatedPublicationPaths: generatedPublicationPaths.length,
     }
   };
 }
