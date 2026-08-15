@@ -11,6 +11,7 @@ import { displayCalendarSystem,displayObservanceName,displayPatronages } from '.
 import { displayObservanceScope } from '../../lib/observance-scope';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import AddToCalendar from './AddToCalendar';
+import AdSenseBootstrap from './AdSenseBootstrap';
 import AdSlot from './AdSlot';
 import CandleButton from './CandleButton';
 import TraditionTag from './TraditionTag';
@@ -23,6 +24,7 @@ export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Ob
  const dateLabel=new Intl.DateTimeFormat(locale,{month:'long',day:'numeric',timeZone:'UTC'}).format(new Date(`${item.dateISO}T00:00:00Z`));
  const evidenceDate=new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeZone:'UTC'}).format(new Date(`${claimEvidenceReviewedAt}T00:00:00Z`));
  return <div className="page-stack saint-profile-page">
+  {biography?<AdSenseBootstrap force/>:null}
   <section className="page-hero saint-profile-hero"><div><span className="eyebrow">{feature.profileIntro}</span><h1>{name}</h1><p>{dateLabel} · {item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')}</p><span className={`scope-label scope-${scope.kind}`}>{scope.label}</span></div><div className="saint-monogram" aria-hidden="true">✦</div></section>
   <section className="saint-profile-layout">
    <article className="saint-profile-main">
