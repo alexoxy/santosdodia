@@ -7,6 +7,8 @@ import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observanc
 import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import { getInstitutionalCopy } from '../../lib/institutional-copy';
+import AdSenseBootstrap from './AdSenseBootstrap';
+import PrivacyChoicesLink from './PrivacyChoicesLink';
 import { useLanguage, type ChurchPreference } from './LanguageProvider';
 
 const skipLabels: Partial<Record<Locale,string>> = {
@@ -32,11 +34,17 @@ const languageLabels:Record<Locale,string>={
 };
 const primaryNavLabels:Record<Locale,string>={
  en:'Primary navigation',pt:'Navegação principal',es:'Navegación principal',fr:'Navigation principale',it:'Navigazione principale',
- de:'Hauptnavigation',pl:'Nawigacja główna',ru:'Основная навигация',fil:'Pangunahing nabigasyon',sw:'Urambazaji mkuu'
+ de:'Hauptnavigation',pl:'Nawigacja główna',ru:'Основная навигация',fil:'Pangunahing nabigasyon',sw:'Urambazaji mkuu wa simu'
 };
 const mobileNavLabels:Record<Locale,string>={
  en:'Primary mobile navigation',pt:'Navegação principal em telemóvel',es:'Navegación principal móvil',fr:'Navigation mobile principale',it:'Navigazione mobile principale',
  de:'Mobile Hauptnavigation',pl:'Główna nawigacja mobilna',ru:'Основная мобильная навигация',fil:'Pangunahing nabigasyon sa mobile',sw:'Urambazaji mkuu wa simu'
+};
+const aboutLabels:Record<Locale,string>={
+ en:'About',pt:'Sobre',es:'Sobre el proyecto',fr:'À propos',it:'Chi siamo',de:'Über uns',pl:'O projekcie',ru:'О проекте',fil:'Tungkol',sw:'Kuhusu'
+};
+const advertisingLabels:Record<Locale,string>={
+ en:'Advertising',pt:'Publicidade',es:'Publicidad',fr:'Publicité',it:'Pubblicità',de:'Werbung',pl:'Reklamy',ru:'Реклама',fil:'Anunsyo',sw:'Matangazo'
 };
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
@@ -46,6 +54,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
  const pilgrimage=pilgrimageLabels[locale];
  return <div className="site-shell">
+  <AdSenseBootstrap/>
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
   <header className="site-header"><div className="header-inner">
    <Link className="brand" href="/" aria-label="Santos do Dia"><span className="brand-mark" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></Link>
@@ -65,7 +74,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   </nav>
   <footer className="site-footer"><div className="footer-grid">
    <div><div className="brand footer-brand"><span className="brand-mark small" aria-hidden="true"><span>✦</span></span><span className="brand-word">santosdodia<span>.com</span></span></div><p>{copy.footer}</p></div>
-   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/pilgrimages">{pilgrimage}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/leaders">{leaderLabels[locale]??leaderLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/developers">API</Link></div>
-  </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><Link href="/privacy">{institutional.nav.privacy}</Link><Link href="/terms">{institutional.nav.terms}</Link><Link href="/faq">{institutional.nav.faq}</Link><Link href="/corrections">{institutional.nav.corrections}</Link><span>{copy.disclaimer}</span></div></div></footer>
+   <div className="footer-links"><Link href="/explore">{feature.navFind}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/pilgrimages">{pilgrimage}</Link><Link href="/liturgy">{liturgyLabel(locale)}</Link><Link href="/churches">{churchLabels[locale]??churchLabels.en}</Link><Link href="/leaders">{leaderLabels[locale]??leaderLabels.en}</Link><Link href="/holidays">{feature.navHolidays}</Link><Link href="/live">{feature.navLive}</Link><Link href="/about">{aboutLabels[locale]}</Link><Link href="/developers">API</Link></div>
+  </div><div className="footer-bottom"><span>© {new Date().getFullYear()} santosdodia.com</span><div className="footer-legal-links"><Link href="/copyright">{feature.navCopyright}</Link><Link href="/privacy">{institutional.nav.privacy}</Link><PrivacyChoicesLink/><Link href="/advertising">{advertisingLabels[locale]}</Link><Link href="/terms">{institutional.nav.terms}</Link><Link href="/faq">{institutional.nav.faq}</Link><Link href="/corrections">{institutional.nav.corrections}</Link><span>{copy.disclaimer}</span></div></div></footer>
  </div>
 }
