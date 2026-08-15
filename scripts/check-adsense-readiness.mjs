@@ -71,6 +71,9 @@ if(!failures.length){
   expect(adCss.includes('grid-template-columns: minmax(0, 1180px) 300px'),'Desktop advertising must reserve a separate layout column');
   expect(adCss.includes('.site-ad-sidebar-rail') && adCss.includes('position: sticky'),'Desktop rail may be sticky only inside its reserved column');
   expect(adCss.includes('@media (max-width: 1360px)'),'Desktop rail must collapse before it can squeeze the content surface');
+  expect(adCss.includes('.home-monetized-layout.has-ad-rail'),'Homepage must retain its content-first local ad rail layout');
+  expect(adCss.includes('.saint-profile-actions .ad-sidebar-rail'),'Rich saint profiles must retain their local guarded ad rail layout');
+  expect(adCss.includes('@media (max-width: 1080px)'),'Homepage and rich-profile local rails must collapse on narrower screens');
 
   const adsTxt=text('app/ads.txt/route.ts');
   expect(adsTxt.includes('status: 404'),'ads.txt must fail closed before a publisher ID exists');
