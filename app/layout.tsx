@@ -7,8 +7,11 @@ import './biographies.css';
 import './holidays.css';
 import './performance.css';
 import './product-v1.css';
+import './ads.css';
+import AdSenseBootstrap from './components/AdSenseBootstrap';
 import LanguageProvider from './components/LanguageProvider';
 import SiteChrome from './components/SiteChrome';
+import { ADSENSE_CLIENT, ADSENSE_CODE_ENABLED, GOOGLE_SITE_VERIFICATION } from '../lib/adsense';
 import { localeFromAcceptLanguage, normalizePublicLocale, PUBLIC_LOCALES, type Locale } from '../lib/i18n';
 import { parseTradition, TRADITIONS } from '../data/observances';
 import { requestPublicLocale } from '../lib/request-public-locale';
@@ -71,6 +74,9 @@ function publicMetadataLocale(locale: Locale): keyof typeof siteMetadataCopy {
 export async function generateMetadata(): Promise<Metadata> {
   const locale = publicMetadataLocale(await requestPublicLocale());
   const copy = siteMetadataCopy[locale];
+  const other: Record<string, string> = { 'llms-txt': `${SITE_ORIGIN}/llms.txt` };
+  if (ADSENSE_CODE_ENABLED) other['google-adsense-account'] = ADSENSE_CLIENT;
+
   return {
     metadataBase: new URL(SITE_ORIGIN),
     title: {
@@ -86,6 +92,7 @@ export async function generateMetadata(): Promise<Metadata> {
     publisher: 'Santos do Dia',
     alternates: { canonical: '/' },
     manifest: '/manifest.webmanifest',
+    verification: GOOGLE_SITE_VERIFICATION ? { google: GOOGLE_SITE_VERIFICATION } : undefined,
     openGraph: {
       type: 'website',
       url: SITE_ORIGIN,
@@ -110,9 +117,7 @@ export async function generateMetadata(): Promise<Metadata> {
         'max-video-preview': -1,
       },
     },
-    other: {
-      'llms-txt': `${SITE_ORIGIN}/llms.txt`,
-    },
+    other,
   };
 }
 
@@ -188,6 +193,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return <html lang={initialLocale} suppressHydrationWarning>
+    <head><AdSenseBootstrap /></head>
     <body>
       <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialChurch={initialChurch} initialTimeZone={savedTimeZone}>
         <SiteChrome>{children}</SiteChrome>
