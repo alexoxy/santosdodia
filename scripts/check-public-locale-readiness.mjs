@@ -3,7 +3,7 @@
 const ORIGIN = process.env.SANTOSDIA_ORIGIN ?? 'https://santosdodia.alexmmpinto.workers.dev';
 const YEAR = Number(process.env.SANTOSDIA_YEAR ?? new Date().getUTCFullYear());
 const LOCALES = ['en','es','pt','fr','fil','ru','sw','de','it','pl'];
-const PUBLIC = new Set(['en','es','pt','fr','it']);
+const PUBLIC = new Set(['en','es','pt','it']);
 const EXPECTED_DAYS = (() => {
   const days=[];
   for(let date=new Date(Date.UTC(YEAR,0,1));date.getUTCFullYear()===YEAR;date.setUTCDate(date.getUTCDate()+1))days.push(date.toISOString().slice(0,10));
