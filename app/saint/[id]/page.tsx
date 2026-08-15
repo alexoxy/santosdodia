@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SaintProfile from "../../components/SaintProfile";
 import { getObservanceById } from "../../../data/discovery";
-import { SAINT_BIOGRAPHIES, getSaintBiography } from "../../../data/saint-biographies";
+import { SAINT_BIOGRAPHIES, getSaintBiography, getSaintBiographyRecord } from "../../../data/saint-biographies";
+import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
 import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
@@ -46,7 +47,9 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   const locale = await requestPublicLocale();
   const item = await resolveProfile(id, locale, date);
   if (!item) return { title: notFoundTitle(locale), robots: { index: false, follow: false } };
+  const biographyRecord = getSaintBiographyRecord(id);
   const biography = getSaintBiography(id, locale);
+  const indexableBiography = Boolean(biographyRecord && isSaintBiographyIndexable(biographyRecord, locale));
   const description = biography?.summary ?? item.summary ?? fallbackProfileDescription(locale, item.name);
   const canonical = `/saint/${encodeURIComponent(id)}`;
   const keywords = [...new Set([item.name, ...Object.values(item.names).filter((value): value is string => Boolean(value)), ...(item.patronages ?? []), ...item.traditions])];
@@ -55,7 +58,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     description,
     keywords,
     alternates: { canonical },
-    robots: biography ? { index: true, follow: true } : { index: false, follow: true, googleBot: { index: false, follow: true } },
+    robots: indexableBiography ? { index: true, follow: true } : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: { title: item.name, description, url: canonical, type: "profile" },
     twitter: { card: "summary", title: item.name, description },
   };
@@ -70,7 +73,9 @@ export default async function SaintPage({ params, searchParams }: { params: Prom
   const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
+  const biographyRecord = getSaintBiographyRecord(id);
   const biography = getSaintBiography(id, locale);
+  const indexableBiography = Boolean(biographyRecord && biography && isSaintBiographyIndexable(biographyRecord, locale));
   const url = `${SITE_ORIGIN}/saint/${encodeURIComponent(id)}`;
   const alternateNames = [...new Set(Object.values(item.names).filter((value): value is string => Boolean(value) && value !== item.name))];
   const properties = [
@@ -81,8 +86,8 @@ export default async function SaintPage({ params, searchParams }: { params: Prom
     ...(item.patronages?.length ? [{ name: "Patronages", value: item.patronages.join(", ") }] : []),
     ...(item.countries?.length ? [{ name: "Geographic scope", value: item.countries.join(", ") }] : []),
   ];
-  const entityId = biography ? `${url}#person` : `${url}#observance`;
-  const entity = biography ? {
+  const entityId = indexableBiography ? `${url}#person` : `${url}#observance`;
+  const entity = indexableBiography && biography ? {
     "@type": "Person",
     "@id": entityId,
     name: item.name,
