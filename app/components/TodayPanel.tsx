@@ -12,7 +12,7 @@ import {
 import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
-import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
+import { substantiveDetailHref } from "../../lib/substantive-profile-link";
 import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
 
@@ -103,11 +103,7 @@ export default function TodayPanel() {
             {items.slice(0, 18).map((item) => {
               const name = displayObservanceName(item.names, locale, item.name),
                 scope = displayObservanceScope(item, locale, country),
-                existingProfileId = getExistingProfileId(item, year, locale),
-                profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null),
-                detailHref = profileId
-                  ? `/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(dateISO)}`
-                  : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
+                detailHref = substantiveDetailHref(item, year, locale, dateISO);
               return name ? (
                 <article
                   className="observance-row"
