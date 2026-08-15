@@ -6,22 +6,14 @@ import PatronageSearch from "./components/PatronageSearch";
 import ProgressiveVaticanLive from "./components/ProgressiveVaticanLive";
 import AdSlot from "./components/AdSlot";
 import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biographies";
-import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT } from "../lib/adsense";
+import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive } from "../lib/adsense";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
 import { useLanguage } from "./components/LanguageProvider";
 
 const pilgrimageLabel: Record<Locale, string> = {
-  en: "Pilgrimages",
-  pt: "Peregrinar",
-  es: "Peregrinar",
-  fr: "Pèlerinages",
-  fil: "Paglalakbay-dalangin",
-  ru: "Паломничества",
-  sw: "Hija",
-  de: "Pilgerziele",
-  it: "Pellegrinaggi",
-  pl: "Pielgrzymki",
+  en: "Pilgrimages", pt: "Peregrinar", es: "Peregrinar", fr: "Pèlerinages", fil: "Paglalakbay-dalangin",
+  ru: "Паломничества", sw: "Hija", de: "Pilgerziele", it: "Pellegrinaggi", pl: "Pielgrzymki",
 };
 
 const trustCopy: Partial<Record<Locale,{title:string;body:string;detail:string;link:string}>> = {
@@ -43,23 +35,20 @@ export default function HomePage() {
   const feature = getFeatureCopy(locale);
   const trust = trustCopy[locale] ?? trustCopy.en!;
   const featured = featuredCopy[locale] ?? featuredCopy.en!;
+  const sidebarActive = isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
   const editorialProfiles = SAINT_BIOGRAPHIES.slice(0, 4).map(item => ({ id:item.id, biography:getSaintBiography(item.id, locale) })).filter(entry => entry.biography);
 
   return (
     <div className="page-stack home-page product-home">
       <TodayPanel />
-
       <AdSlot slot={ADSENSE_TOP_SLOT} placement="top" />
 
-      <div className="home-monetized-layout">
+      <div className={`home-monetized-layout${sidebarActive ? ' has-ad-rail' : ''}`}>
         <div className="home-monetized-main">
           <ProgressiveVaticanLive />
 
           <section className="home-search-panel" aria-label={copy.explore}>
-            <div>
-              <span className="eyebrow">{copy.global} · {feature.navFind}</span>
-              <h2>{copy.searchTitle}</h2>
-            </div>
+            <div><span className="eyebrow">{copy.global} · {feature.navFind}</span><h2>{copy.searchTitle}</h2></div>
             <PatronageSearch compact />
           </section>
 
@@ -72,13 +61,7 @@ export default function HomePage() {
           </section> : null}
 
           <section className="institutional-grid home-trust-grid" aria-labelledby="home-trust-title">
-            <article className="institutional-card">
-              <span className="eyebrow">{copy.approvedData}</span>
-              <h2 id="home-trust-title">{trust.title}</h2>
-              <p>{trust.body}</p>
-              <p>{trust.detail}</p>
-              <Link className="text-link" href="/about">{trust.link} →</Link>
-            </article>
+            <article className="institutional-card"><span className="eyebrow">{copy.approvedData}</span><h2 id="home-trust-title">{trust.title}</h2><p>{trust.body}</p><p>{trust.detail}</p><Link className="text-link" href="/about">{trust.link} →</Link></article>
           </section>
 
           <nav className="product-destination-grid" aria-label="SantosDia">
@@ -89,9 +72,7 @@ export default function HomePage() {
           </nav>
         </div>
 
-        <aside className="ad-sidebar-rail" aria-label="Advertising rail">
-          <AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar" />
-        </aside>
+        {sidebarActive ? <aside className="ad-sidebar-rail" aria-label="Advertising rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar" /></aside> : null}
       </div>
     </div>
   );
