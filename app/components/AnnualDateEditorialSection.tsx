@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import { annualDateEditorialUi } from '../../data/date-editorial';
+import { getAnnualDateEditorial } from '../../data/date-editorial-registry';
 import { SOURCE_CATALOG, type Observance } from '../../data/observances';
-import { annualDateEditorialUi, getAnnualDateEditorial } from '../../data/date-editorial';
 import { getSaintBiographyRecord } from '../../data/saint-biographies';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import type { Locale } from '../../lib/i18n';
