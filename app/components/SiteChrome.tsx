@@ -12,7 +12,7 @@ import { useLanguage, type ChurchPreference } from './LanguageProvider';
 
 const skipLabels: Partial<Record<Locale,string>> = {
  en:'Skip to content',pt:'Saltar para o conteúdo',es:'Saltar al contenido',fr:'Aller au contenu',
- de:'Zum Inhalt springen',it:'Vai al contenuto',pl:'Przejdź do treści',ru:'Перейти к содержimому',
+ de:'Zum Inhalt springen',it:'Vai al contenuto',pl:'Przejdź do treści',ru:'Перейти к содержимому',
  fil:'Lumaktaw sa nilalaman',sw:'Ruka hadi kwenye maudhui'
 };
 const churchLabels: Partial<Record<Locale,string>> = {
