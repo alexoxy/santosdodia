@@ -32,7 +32,7 @@ export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Ob
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
    </article>
    <aside className="saint-profile-actions">
-    {curatedItem?<div className="profile-action-card"><h2>{feature.annualCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${item.id}?locale=${locale}`} title={name}/></div>:null}
+    <div className="profile-action-card"><h2>{curatedItem?feature.annualCalendar:copy.addCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${encodeURIComponent(item.id)}?locale=${locale}`} title={name}/></div>
     <div className="profile-action-card candle-profile"><CandleButton observanceId={item.id} dateISO={item.dateISO}/><p>{feature.freeCandle}</p></div>
    </aside>
   </section>
