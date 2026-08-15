@@ -32,14 +32,23 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --include=optional
 
-      - name: Validate Portugal calendar policy and parser
-        run: node scripts/calendar/test-portugal-snl-agenda.mjs
+      - name: Validate Portugal calendar policy, parser and reconciliation boundary
+        run: |
+          node scripts/calendar/test-portugal-snl-agenda.mjs
+          node scripts/calendar/test-portugal-snl-reconciliation.mjs
 
       - name: Fetch official SNL subscription feed
         run: node scripts/calendar/fetch-portugal-snl-agenda.mjs --output-dir staging/portugal-snl
 
       - name: Normalize Portugal jurisdiction layer
         run: node scripts/calendar/normalize-portugal-snl-agenda.mjs --input-dir staging/portugal-snl --output staging/portugal-snl/normalized-package.json
+
+      - name: Reconcile SNL events against General Roman reference
+        run: >-
+          node scripts/calendar/reconcile-portugal-snl.mjs
+          --snl staging/portugal-snl/normalized-package.json
+          --mirror-root data/litcal-mirror/calendars/general
+          --output staging/portugal-snl/reconciliation.json
 
       - name: Validate canonical calendar staging contract
         shell: bash
@@ -54,9 +63,13 @@ jobs:
           const fs=require('node:fs');
           const normalized=JSON.parse(fs.readFileSync('staging/portugal-snl/normalized-package.json','utf8'));
           const canonical=JSON.parse(fs.readFileSync('staging/portugal-snl/canonical-staging.json','utf8'));
+          const reconciliation=JSON.parse(fs.readFileSync('staging/portugal-snl/reconciliation.json','utf8'));
           if(normalized.run.publicationAllowed!==false||normalized.run.promotionAllowed!==false) throw new Error('Portugal layer escaped staging-only mode.');
           if(normalized.coverage.eventCount<250||normalized.coverage.civilDays<250) throw new Error(`Portugal SNL coverage unexpectedly thin: ${JSON.stringify(normalized.coverage)}`);
           if(canonical.occurrences.some(item=>item.jurisdictionId!=='PT'||item.churchId!=='roman-catholic'||item.publicationStatus!=='withheld')) throw new Error('Portugal canonical staging output crossed jurisdiction/publication boundary.');
+          if(reconciliation.mode!=='proposal-only'||reconciliation.productionWriteAllowed!==false||reconciliation.automaticLinkAllowed!==false) throw new Error('Portugal reconciler crossed proposal-only boundary.');
+          if(reconciliation.summary.inputOccurrences!==normalized.events.length||reconciliation.items.length!==normalized.events.length) throw new Error('Portugal reconciliation does not partition all SNL events.');
+          if(reconciliation.items.some(item=>item.reviewRequired!==true||item.automaticLinkAllowed!==false)) throw new Error('Portugal reconciliation produced an unreviewed automatic link.');
           NODE
 
       - name: Upload diagnostic artifact
