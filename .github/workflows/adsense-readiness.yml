@@ -9,6 +9,8 @@ on:
       - 'app/advertising/**'
       - 'app/privacy/**'
       - 'app/saint/**'
+      - 'app/layout.tsx'
+      - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
       - 'app/components/AdSlot.tsx'
       - 'app/components/AdvertisingPrivacyNotice.tsx'
@@ -29,6 +31,8 @@ on:
       - 'app/advertising/**'
       - 'app/privacy/**'
       - 'app/saint/**'
+      - 'app/layout.tsx'
+      - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
       - 'app/components/AdSlot.tsx'
       - 'app/components/AdvertisingPrivacyNotice.tsx'
@@ -54,5 +58,5 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
-      - name: Audit monetization boundaries
+      - name: Audit monetization and search boundaries
         run: node scripts/check-adsense-readiness.mjs
