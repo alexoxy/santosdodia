@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "mode": "shadow-corroboration",
+  "productionWriteAllowed": false,
+  "principle": "Corroboration may reduce human review only when evidence is claim-specific, independently sourced and value-consistent. Conflicts always escalate.",
+  "matching": {
+    "minimumIndependentSources": 2,
+    "minimumAuthorityScore": 80,
+    "allowSingleFirstPartyAuthority": true,
+    "singleFirstPartyClaimClasses": [
+      "feast-or-observance-link",
+      "localized-source-label",
+      "geography"
+    ],
+    "neverSingleSourceClaimClasses": [
+      "birth-date",
+      "death-date",
+      "patronage"
+    ]
+  },
+  "escalation": {
+    "conflictingVerifiedValue": "human-review-required",
+    "identityMismatch": "human-review-required",
+    "insufficientEvidence": "cross-check-required",
+    "unsupportedClaimClass": "human-review-required"
+  },
+  "evidenceContract": {
+    "requiredFields": [
+      "claimClass",
+      "value",
+      "sourceId",
+      "sourceUrl",
+      "independenceGroup",
+      "authorityScore",
+      "verified"
+    ],
+    "identityKeys": ["entityId", "qid", "observanceId"],
+    "verifiedMustBeTrue": true
+  }
+}

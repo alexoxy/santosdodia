@@ -8,14 +8,16 @@ _Last updated: 2026-08-15_
 
 SantosDia is designed for **continuous autonomous work with human review by exception**.
 
-The autonomous chain already runs as:
+The autonomous saints chain now runs as:
 
 1. approved-source acquisition;
 2. immutable raw archive in Dropbox;
 3. normalization;
 4. linguistic review and script checks;
 5. idempotent D1 staging import;
-6. publication-candidate classification.
+6. publication-candidate classification;
+7. independent-source corroboration of the `cross-check-required` queue;
+8. immutable corroborated, pending and conflict queues in Dropbox.
 
 The publication classifier uses `config/publication-decision-policy.json` and separates claims into:
 
@@ -23,13 +25,16 @@ The publication classifier uses `config/publication-decision-policy.json` and se
 - **cross-check-required** — factual claims such as dates, geography and localized source labels that can eventually become automatic after claim-specific corroboration;
 - **human-review-required** — new canonical identities, merges/splits, recognition/canonization, Church or calendar changes, source conflicts and editorial prose.
 
-This means humans should not repeatedly inspect every successful acquisition or normalization batch. Human attention is reserved for semantic, ecclesial, conflicting or editorial decisions.
+The corroborator uses `config/corroboration-policy.json`. It never resolves a disagreement by majority vote. Two independent approved sources may corroborate an eligible factual claim. A single A1/A2 first-party source may corroborate only explicitly permitted lower-risk claim classes. Birth/death dates and patronage never graduate from a single source. Any verified contradictory value is escalated to the human-review conflict queue.
+
+This means humans should not repeatedly inspect every successful acquisition, normalization or matching batch. Human attention is reserved for semantic, ecclesial, conflicting or editorial decisions.
 
 ## Boundaries
 
 - GitHub Actions may acquire facts and prepare bounded staging packages.
 - Automatic workflows do not currently write to the production database or rewrite editorial content.
-- `productionAutoPromotionEnabled` remains `false` while the publication classifier runs in shadow mode.
+- `productionAutoPromotionEnabled` remains `false` while the publication classifier and corroborator run in shadow mode.
+- `productionWriteAllowed` is also `false` in the corroboration policy and in every corroborated shadow queue.
 - At least 20 clean shadow runs, zero observed false-positive classifications, maintained acceptance vectors and rollback evidence are required before any claim class can be considered for production auto-promotion.
 - Editorial biography and interpretive text always require human approval.
 - Cloudflare serves only approved repository/data-plane content; it does not acquire external data at request time.
@@ -46,7 +51,7 @@ This means humans should not repeatedly inspect every successful acquisition or 
 | LitCal staging | Tuesday 03:35 | Dropbox staging package |
 | Source freshness | Sunday 08:29 | review-only report |
 | Global source orchestrator | hourly at `:02` | bounded source-policy decisions |
-| Saints autonomous acquisition | Wednesday 02:47 | immutable Wikidata raw package; downstream event workflows continue normalization, language review, staging import and publication classification |
+| Saints autonomous acquisition | Wednesday 02:47 | immutable Wikidata raw package; downstream event workflows continue normalization, language review, D1 staging import, publication classification and corroboration |
 
 The freshness audit checks at most 60 HTTPS URLs per run, with four concurrent requests and a 15-second timeout. Unreachable URLs remain review candidates and never trigger automatic deletion.
 
@@ -54,9 +59,11 @@ The freshness audit checks at most 60 HTTPS URLs per run, with four concurrent r
 
 The safe progression is deliberately staged:
 
-`shadow classification` → `measured false-positive rate` → `claim-specific auto-promotion` → `broader automation only after evidence`.
+`shadow classification` → `shadow corroboration` → `measured false-positive rate` → `claim-specific auto-promotion` → `broader automation only after evidence`.
 
 Enabling one safe claim class must never implicitly enable another. Exact external identifiers, dates, localized names, Church membership, liturgical dates and editorial biographies are separate claim classes with separate promotion rules.
+
+The next operational objective is to feed the corroborator with more structured evidence adapters from already approved first-party and independent sources. Missing evidence leaves a claim pending; it never weakens the threshold.
 
 ## Change policy
 

@@ -147,4 +147,6 @@ function fixture(overrides = {}) {
   fs.rmSync(root, { recursive: true, force: true });
 }
 
-console.log('Autonomy policy, zero-spend guardrails and review-by-exception classifier tests passed.');
+execFileSync(process.execPath, ['scripts/autonomy/test-corroboration.mjs'], { cwd: process.cwd(), stdio: 'inherit' });
+
+console.log('Autonomy policy, zero-spend guardrails, review-by-exception classifier and corroboration tests passed.');
