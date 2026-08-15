@@ -34,7 +34,7 @@ const languageLabels:Record<Locale,string>={
 };
 const primaryNavLabels:Record<Locale,string>={
  en:'Primary navigation',pt:'Navegação principal',es:'Navegación principal',fr:'Navigation principale',it:'Navigazione principale',
- de:'Hauptnavigation',pl:'Nawigacja główna',ru:'Основная навигация',fil:'Pangunahing nabigasyon',sw:'Urambazaji mkuu wa simu'
+ de:'Hauptnavigation',pl:'Nawigacja główna',ru:'Основная навигация',fil:'Pangunahing nabigasyon',sw:'Urambazaji mkuu'
 };
 const mobileNavLabels:Record<Locale,string>={
  en:'Primary mobile navigation',pt:'Navegação principal em telemóvel',es:'Navegación principal móvil',fr:'Navigation mobile principale',it:'Navigazione mobile principale',
