@@ -14,6 +14,17 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  env: {
+    // Public AdSense site-association configuration. The publisher ID is
+    // intentionally visible in page source and ads.txt. Actual ad serving
+    // remains disabled until approval and consent configuration are complete.
+    NEXT_PUBLIC_ADSENSE_CLIENT:
+      process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? 'ca-pub-2568362274337344',
+    NEXT_PUBLIC_ADSENSE_CODE_ENABLED:
+      process.env.NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true',
+    NEXT_PUBLIC_ADSENSE_ENABLED:
+      process.env.NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'
+  },
   outputFileTracingIncludes: {
     '/api/v1/liturgy': ['./data/litcal-mirror/**/*'],
     '/api/v1/litcal/calendars': ['./data/litcal-mirror/**/*'],
