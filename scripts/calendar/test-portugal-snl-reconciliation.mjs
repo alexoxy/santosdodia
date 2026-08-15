@@ -18,7 +18,7 @@ function roman(id, dateISO, name, grade = null) {
     canonicalEventId: `rc:${id}`,
     dateISO,
     grade,
-    rank: grade === 'Solemnity' ? 'solemnity' : grade === 'Feast' ? 'feast' : grade === 'Memorial' ? 'memorial' : null,
+    rank: grade === 'Solemnity' ? 'solemnity' : grade === 'Feast' ? 'feast' : grade === 'Memorial' ? 'memorial' : grade === 'Weekday' ? 'weekday' : null,
     names: { en_US: name },
   };
 }
@@ -27,20 +27,20 @@ const snlPackage = {
   run: { publicationAllowed: false, promotionAllowed: false },
   events: [
     snl('peter-paul', '2026-06-29', 'Santos Pedro e Paulo, apóstolos – SOLENIDADE'),
-    snl('joseph', '2026-03-19', 'S. José, esposo da Virgem Santa Maria – SOLENIDADE'),
+    snl('teresa-rank', '2026-10-15', 'S. Teresa de Ávila – SOLENIDADE'),
     snl('immaculate', '2026-12-09', 'Imaculada Conceição da Virgem Santa Maria – SOLENIDADE'),
     snl('portugal-proper', '2026-07-01', 'Beato Exemplo Português – MO'),
-    snl('ambiguous', '2026-09-30', 'S. Jerónimo – MO'),
+    snl('ambiguous', '2026-09-30', 'S. Teresa – MO'),
   ],
 };
 
 const generalRoman = [
   roman('StsPeterPaulApostles', '2026-06-29', 'Saints Peter and Paul, Apostles', 'Solemnity'),
-  roman('StJosephSpouse', '2026-03-19', 'Saint Joseph, Spouse of the Blessed Virgin Mary', 'Feast'),
+  roman('StTeresaAvila', '2026-10-15', 'Saint Teresa of Avila', 'Feast'),
   roman('ImmaculateConception', '2026-12-08', 'Immaculate Conception of the Blessed Virgin Mary', 'Solemnity'),
   roman('OrdinaryWeekdayJul01', '2026-07-01', 'Wednesday of the Thirteenth Week in Ordinary Time', 'Weekday'),
-  roman('StJerome', '2026-09-30', 'Saint Jerome, Priest and Doctor of the Church', 'Memorial'),
-  roman('JeromeEmilianiExample', '2026-09-30', 'Saint Jerome Example', 'Memorial'),
+  roman('StTeresaExampleA', '2026-09-30', 'Saint Teresa Example', 'Memorial'),
+  roman('StTeresaExampleB', '2026-09-30', 'Saint Teresa Another Example', 'Memorial'),
 ];
 
 const result = reconcilePortugalSnl({ snlPackage, generalRoman });
@@ -54,9 +54,9 @@ const peterPaul = result.items.find((item) => item.sourceOccurrenceId === 'peter
 assert.equal(peterPaul.disposition, 'canonical-link-proposal');
 assert.equal(peterPaul.candidate.canonicalEventId, 'rc:StsPeterPaulApostles');
 
-const joseph = result.items.find((item) => item.sourceOccurrenceId === 'joseph');
-assert.equal(joseph.disposition, 'rank-delta-review');
-assert.equal(joseph.candidate.canonicalEventId, 'rc:StJosephSpouse');
+const teresa = result.items.find((item) => item.sourceOccurrenceId === 'teresa-rank');
+assert.equal(teresa.disposition, 'rank-delta-review');
+assert.equal(teresa.candidate.canonicalEventId, 'rc:StTeresaAvila');
 
 const immaculate = result.items.find((item) => item.sourceOccurrenceId === 'immaculate');
 assert.equal(immaculate.disposition, 'transfer-candidate-review');
