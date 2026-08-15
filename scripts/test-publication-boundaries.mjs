@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
@@ -62,11 +63,20 @@ if (/\bliveData\b|Live source data|fuentes en vivo|fontes em tempo real|sources 
   failures.push("public interface copy still claims request-time live source data");
 }
 
+try {
+  execFileSync(process.execPath, ["scripts/discovery/test-reviewed-navigation-promotion.mjs"], {
+    cwd: root,
+    stdio: "inherit",
+  });
+} catch {
+  failures.push("reviewed saint navigation promotion boundary failed");
+}
+
 if (failures.length) {
   console.error(`Publication boundary failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);
 }
 
 console.log(
-  `Publication boundary passed: ${appFiles.length} public modules use approved read models and script-safe JSON-LD.`,
+  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit saint promotion gates.`,
 );
