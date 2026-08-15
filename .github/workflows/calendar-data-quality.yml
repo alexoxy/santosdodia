@@ -15,7 +15,9 @@ on:
       - 'config/saints-profile-enrichment-v1.json'
       - 'config/saints-label-enrichment-v2.json'
       - '.github/workflows/harvest-vatican-saints.yml'
+      - '.github/workflows/portugal-snl-calendar.yml'
       - '.github/workflows/enrich-saints-profile-wikidata.yml'
+      - '.github/workflows/enrich-saints-label-wikidata.yml'
       - '.github/workflows/enrich-saints-labels-wikidata.yml'
       - '.github/workflows/build-saints-navigation-exports.yml'
       - '.github/workflows/update-litcal-mirror.yml'
@@ -59,6 +61,7 @@ jobs:
           node scripts/calendar/test-harvest-vatican-saints.mjs
           node scripts/calendar/test-normalize-vatican-saints.mjs
           node scripts/calendar/test-vatican-reference-policy.mjs
+          node scripts/calendar/test-portugal-snl-agenda.mjs
 
       - name: Test profile and multilingual enrichment safeguards
         run: |

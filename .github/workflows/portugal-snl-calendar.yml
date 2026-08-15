@@ -1,0 +1,75 @@
+name: Portugal SNL calendar staging
+
+on:
+  workflow_run:
+    workflows: ['Prepare LitCal staging package']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portugal-snl-calendar-staging
+  cancel-in-progress: false
+
+jobs:
+  stage:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate Portugal calendar policy and parser
+        run: node scripts/calendar/test-portugal-snl-agenda.mjs
+
+      - name: Fetch official SNL subscription feed
+        run: node scripts/calendar/fetch-portugal-snl-agenda.mjs --output-dir staging/portugal-snl
+
+      - name: Normalize Portugal jurisdiction layer
+        run: node scripts/calendar/normalize-portugal-snl-agenda.mjs --input-dir staging/portugal-snl --output staging/portugal-snl/normalized-package.json
+
+      - name: Validate canonical calendar staging contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          manifest_sha="$(sha256sum staging/portugal-snl/source-manifest.json | awk '{print $1}')"
+          node scripts/normalize-calendar-staging-package.mjs \
+            --input staging/portugal-snl/normalized-package.json \
+            --output staging/portugal-snl/canonical-staging.json \
+            --manifest-sha256 "$manifest_sha"
+          node <<'NODE'
+          const fs=require('node:fs');
+          const normalized=JSON.parse(fs.readFileSync('staging/portugal-snl/normalized-package.json','utf8'));
+          const canonical=JSON.parse(fs.readFileSync('staging/portugal-snl/canonical-staging.json','utf8'));
+          if(normalized.run.publicationAllowed!==false||normalized.run.promotionAllowed!==false) throw new Error('Portugal layer escaped staging-only mode.');
+          if(normalized.coverage.eventCount<250||normalized.coverage.civilDays<250) throw new Error(`Portugal SNL coverage unexpectedly thin: ${JSON.stringify(normalized.coverage)}`);
+          if(canonical.occurrences.some(item=>item.jurisdictionId!=='PT'||item.churchId!=='roman-catholic'||item.publicationStatus!=='withheld')) throw new Error('Portugal canonical staging output crossed jurisdiction/publication boundary.');
+          NODE
+
+      - name: Upload diagnostic artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: portugal-snl-calendar-${{ github.run_id }}
+          path: staging/portugal-snl/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Archive immutable Portugal calendar package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream calendar/portugal-snl/v1 --source staging/portugal-snl
