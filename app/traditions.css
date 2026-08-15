@@ -30,14 +30,18 @@
 .church-picker select{border:0;background:transparent;color:var(--church-colour);font-weight:750}
 .church-picker .picker-colour{width:9px;height:9px;border-radius:999px;background:var(--church-colour);box-shadow:0 0 0 3px color-mix(in srgb,var(--church-colour) 14%,transparent)}
 .church-picker.church-all{--church-colour:var(--all-churches)}
-.church-picker.tradition-roman_catholic,.leader-card.tradition-roman_catholic{--church-colour:var(--roman-catholic)}
-.church-picker.tradition-greek_orthodox,.leader-card.tradition-greek_orthodox{--church-colour:var(--greek-orthodox)}
-.church-picker.tradition-eastern_orthodox,.leader-card.tradition-eastern_orthodox{--church-colour:var(--eastern-orthodox)}
-.church-picker.tradition-anglican,.leader-card.tradition-anglican{--church-colour:var(--anglican)}
-.church-picker.tradition-coptic_orthodox,.leader-card.tradition-coptic_orthodox{--church-colour:var(--coptic-orthodox)}
-.church-picker.tradition-armenian_apostolic,.leader-card.tradition-armenian_apostolic{--church-colour:var(--armenian-apostolic)}
-.church-picker.tradition-ethiopian_orthodox,.leader-card.tradition-ethiopian_orthodox{--church-colour:var(--ethiopian-orthodox)}
-.church-picker.tradition-syriac_orthodox,.leader-card.tradition-syriac_orthodox{--church-colour:var(--syriac-orthodox)}
+.church-picker.tradition-roman_catholic,.leader-card.tradition-roman_catholic,.tradition-tag.tradition-roman_catholic{--church-colour:var(--roman-catholic)}
+.church-picker.tradition-greek_orthodox,.leader-card.tradition-greek_orthodox,.tradition-tag.tradition-greek_orthodox{--church-colour:var(--greek-orthodox)}
+.church-picker.tradition-eastern_orthodox,.leader-card.tradition-eastern_orthodox,.tradition-tag.tradition-eastern_orthodox{--church-colour:var(--eastern-orthodox)}
+.church-picker.tradition-anglican,.leader-card.tradition-anglican,.tradition-tag.tradition-anglican{--church-colour:var(--anglican)}
+.church-picker.tradition-coptic_orthodox,.leader-card.tradition-coptic_orthodox,.tradition-tag.tradition-coptic_orthodox{--church-colour:var(--coptic-orthodox)}
+.church-picker.tradition-armenian_apostolic,.leader-card.tradition-armenian_apostolic,.tradition-tag.tradition-armenian_apostolic{--church-colour:var(--armenian-apostolic)}
+.church-picker.tradition-ethiopian_orthodox,.leader-card.tradition-ethiopian_orthodox,.tradition-tag.tradition-ethiopian_orthodox{--church-colour:var(--ethiopian-orthodox)}
+.church-picker.tradition-syriac_orthodox,.leader-card.tradition-syriac_orthodox,.tradition-tag.tradition-syriac_orthodox{--church-colour:var(--syriac-orthodox)}
+.tradition-tag{--church-colour:var(--all-churches);display:inline-flex;align-items:center;gap:6px;width:fit-content;padding:5px 9px;border:1px solid color-mix(in srgb,var(--church-colour) 34%,#fff);border-radius:999px;background:color-mix(in srgb,var(--church-colour) 9%,#fff);color:var(--church-colour);font-size:.7rem;font-weight:800;line-height:1.15;transition:transform .16s,background .16s,border-color .16s}
+.tradition-tag:hover,.tradition-tag:focus-visible{transform:translateY(-1px);background:color-mix(in srgb,var(--church-colour) 15%,#fff);border-color:color-mix(in srgb,var(--church-colour) 50%,#fff)}
+.tradition-tag.compact{padding:4px 8px;font-size:.66rem}
+.tradition-tag-dot{width:7px;height:7px;flex:0 0 7px;border-radius:999px;background:var(--church-colour)}
 .today-date-context{display:block;margin-top:2px;color:#6f7883;font-size:.84rem;font-weight:700}
 .leader-directory{display:grid;gap:22px}
 .leader-filters{display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(3,minmax(150px,1fr));gap:12px}
