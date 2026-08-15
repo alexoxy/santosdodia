@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { buildVaticanCorroborationEvidence } from './build-vatican-corroboration-evidence.mjs';
 
 const normalized = {
@@ -82,5 +83,26 @@ assert.equal(result.evidence[0].firstParty, true);
 assert.equal(result.review[0].qid, 'Q40662');
 assert.equal(result.review[0].reason, 'reviewed-source-binding-drift');
 assert.deepEqual(result.review[0].observedLabels, ['São João, precursor']);
+
+const actual = JSON.parse(fs.readFileSync('config/corroboration-source-bindings.vatican-news-pt.json', 'utf8'));
+assert.equal(actual.schemaVersion, 1);
+assert.equal(actual.sourceId, 'vatican-news-saint-of-day-pt');
+assert.ok(Array.isArray(actual.bindings) && actual.bindings.length >= 10);
+const bindingIds = new Set();
+const qids = new Set();
+for (const binding of actual.bindings) {
+  assert.match(binding.bindingId, /^[a-z0-9]+(?:-[a-z0-9]+)*$/u);
+  assert.equal(bindingIds.has(binding.bindingId), false, `duplicate bindingId ${binding.bindingId}`);
+  bindingIds.add(binding.bindingId);
+  assert.match(binding.qid, /^Q\d+$/u);
+  assert.equal(qids.has(binding.qid), false, `duplicate qid ${binding.qid}`);
+  qids.add(binding.qid);
+  assert.ok(Number.isInteger(binding.month) && binding.month >= 1 && binding.month <= 12);
+  assert.ok(Number.isInteger(binding.day) && binding.day >= 1 && binding.day <= 31);
+  assert.ok(Array.isArray(binding.acceptedLabels) && binding.acceptedLabels.length >= 1);
+  assert.ok(binding.acceptedLabels.every((label) => typeof label === 'string' && label.trim().length >= 3));
+  assert.deepEqual(binding.allowedClaimClasses, ['localized-source-label']);
+  assert.match(binding.reviewedAt, /^\d{4}-\d{2}-\d{2}$/u);
+}
 
 console.log('Vatican reviewed-binding corroboration evidence tests passed.');
