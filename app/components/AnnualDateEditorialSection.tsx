@@ -6,6 +6,7 @@ import { getFeatureCopy } from '../../lib/feature-copy';
 import type { Locale } from '../../lib/i18n';
 import { isSaintBiographyIndexable } from '../../lib/editorial-profile-quality';
 import { displayObservanceName } from '../../lib/locale-display';
+import styles from './AnnualDateEditorialSection.module.css';
 
 export default function AnnualDateEditorialSection({
   monthDay,
@@ -33,14 +34,14 @@ export default function AnnualDateEditorialSection({
   });
 
   return (
-    <section className="annual-date-editorial" aria-labelledby={`annual-editorial-${monthDay}`}>
-      <div className="annual-date-editorial-main">
+    <section className={styles.section} aria-labelledby={`annual-editorial-${monthDay}`}>
+      <div className={styles.main}>
         <span className="eyebrow">{editorial.eyebrow}</span>
         <h2 id={`annual-editorial-${monthDay}`}>{editorial.title}</h2>
-        <p className="annual-date-editorial-lead">{editorial.lead}</p>
+        <p className={styles.lead}>{editorial.lead}</p>
         <p>{editorial.context}</p>
         {profiles.length ? (
-          <div className="annual-date-profile-links">
+          <div className={styles.profileLinks}>
             {profiles.map(item => (
               <Link className="text-link" key={item.id} href={`/saint/${encodeURIComponent(item.id)}`}>
                 {feature.openProfile}: {displayObservanceName(item.names, locale, item.name)} →
@@ -50,7 +51,7 @@ export default function AnnualDateEditorialSection({
         ) : null}
       </div>
       {sources.length ? (
-        <aside className="annual-date-sources">
+        <aside className={styles.sources}>
           <h3>{ui.sources}</h3>
           <p>{ui.sourceNote}</p>
           <ul>
