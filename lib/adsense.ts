@@ -32,8 +32,34 @@ export function adsenseSellerId() {
   return ADSENSE_CLIENT.replace(/^ca-/, '');
 }
 
-// Manual units are intentionally limited to substantive product/editorial
-// surfaces. Legal, transparency, developer and live-video pages remain ad-free.
+// These content/product routes can inherit the shared top + desktop-rail frame.
+// The homepage keeps its banner after Today, and saint profiles retain their
+// richer-content gate locally so thin/noindex profiles never gain ad inventory.
+export const ADSENSE_SHARED_FRAME_PREFIXES = [
+  '/calendar',
+  '/church',
+  '/churches',
+  '/date',
+  '/day',
+  '/explore',
+  '/holidays',
+  '/jurisdiction',
+  '/leader',
+  '/leaders',
+  '/liturgy',
+  '/patronage',
+  '/pilgrimages',
+  '/place',
+] as const;
+
+export function usesSharedAdFrame(pathname: string) {
+  const path = pathname.split('?')[0]?.split('#')[0] || '/';
+  return ADSENSE_SHARED_FRAME_PREFIXES.some(prefix =>
+    path === prefix || path.startsWith(`${prefix}/`),
+  );
+}
+
+// Legal, transparency, developer and live-video pages stay explicitly ad-free.
 export const ADSENSE_MANUAL_ADS_EXCLUDED_PREFIXES = [
   '/about',
   '/advertising',
@@ -46,14 +72,6 @@ export const ADSENSE_MANUAL_ADS_EXCLUDED_PREFIXES = [
   '/sources',
   '/terms',
 ] as const;
-
-export function isManualAdEligiblePath(pathname: string) {
-  const path = pathname.split('?')[0]?.split('#')[0] || '/';
-  if (path === '/') return true;
-  return !ADSENSE_MANUAL_ADS_EXCLUDED_PREFIXES.some(prefix =>
-    path === prefix || path.startsWith(`${prefix}/`),
-  );
-}
 
 // Auto ads are controlled from the AdSense console. If they are ever used,
 // keep utility, privacy, video/live, developer and low-value surfaces excluded.
