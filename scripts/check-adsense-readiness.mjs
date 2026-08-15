@@ -10,6 +10,7 @@ const required = [
   'app/ads.css',
   'app/components/AdSenseBootstrap.tsx',
   'app/components/AdSlot.tsx',
+  'app/components/SiteChrome.tsx',
   'app/components/AdvertisingPrivacyNotice.tsx',
   'app/components/PrivacyChoicesLink.tsx',
   'app/ads.txt/route.ts',
@@ -17,6 +18,7 @@ const required = [
   'app/advertising/page.tsx',
   'app/privacy/page.tsx',
   'app/saint/[id]/page.tsx',
+  'app/date/[monthDay]/page.tsx',
   'app/sitemap.ts',
   'docs/adsense-activation-checklist.md',
   'docs/monetization-status.md',
@@ -39,6 +41,9 @@ if(!failures.length){
   expect(config.includes('NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION'),'Search Console verification hook is missing');
   expect(config.includes('isAdUnitActive'),'Inactive ads must not reserve empty layout space');
   expect(config.includes('CLIENT_RE.test(ADSENSE_CLIENT)'),'Advertising must reject malformed publisher IDs');
+  expect(config.includes('ADSENSE_SHARED_FRAME_PREFIXES'),'Shared content ad-frame allowlist is missing');
+  expect(config.includes("'/date'"),'Evergreen date pages must be eligible for the shared content ad frame');
+  expect(config.includes('usesSharedAdFrame'),'Shared ad-frame route guard is missing');
 
   const nextConfig=text('next.config.ts');
   expect(nextConfig.includes("'ca-pub-2568362274337344'"),'Santos do Dia must preserve the reviewed AdSense publisher client');
@@ -55,6 +60,18 @@ if(!failures.length){
   expect(layout.includes('GOOGLE_SITE_VERIFICATION'),'Search Console verification must be exposed through metadata');
   expect(layout.includes("import './ads.css'"),'Responsive ad layout CSS must be loaded');
 
+  const chrome=text('app/components/SiteChrome.tsx');
+  expect(chrome.includes('usesSharedAdFrame(pathname)'),'Site chrome must gate shared advertising by public content route');
+  expect(chrome.includes('site-top-ad'),'Shared top ad container is missing');
+  expect(chrome.includes('site-ad-sidebar-rail'),'Shared desktop content rail is missing');
+  expect(chrome.includes('ADSENSE_TOP_SLOT') && chrome.includes('ADSENSE_SIDEBAR_SLOT'),'Shared site chrome must expose both manual units');
+
+  const adCss=text('app/ads.css');
+  expect(!adCss.includes('position: fixed'),'Advertising CSS must not use fixed-position overlays');
+  expect(adCss.includes('grid-template-columns: minmax(0, 1180px) 300px'),'Desktop advertising must reserve a separate layout column');
+  expect(adCss.includes('.site-ad-sidebar-rail') && adCss.includes('position: sticky'),'Desktop rail may be sticky only inside its reserved column');
+  expect(adCss.includes('@media (max-width: 1360px)'),'Desktop rail must collapse before it can squeeze the content surface');
+
   const adsTxt=text('app/ads.txt/route.ts');
   expect(adsTxt.includes('status: 404'),'ads.txt must fail closed before a publisher ID exists');
   expect(adsTxt.includes('f08c47fec0942fa0'),'ads.txt Google seller relationship ID is missing');
@@ -66,10 +83,17 @@ if(!failures.length){
   expect(saint.includes('"@type": "Person"'),'Editorial saint profiles should expose Person structured data');
   expect(saint.includes('BreadcrumbList'),'Editorial profiles should expose breadcrumbs');
 
+  const annualDay=text('app/date/[monthDay]/page.tsx');
+  expect(annualDay.includes('canonical = `/date/${monthDay}`'),'Evergreen date pages need stable month-day canonicals');
+  expect(annualDay.includes('robots: { index: items.length > 0, follow: true }'),'Empty evergreen date pages must remain out of the index');
+  expect(annualDay.includes('<DayView dateISO={dateISO} mode="annual" />'),'Evergreen date pages must use the annual day experience');
+  expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
+
   const sitemap=text('app/sitemap.ts');
   expect(sitemap.includes('SAINT_BIOGRAPHIES.map'),'Sitemap must exclude minimal saint profiles');
   expect(sitemap.includes('path: "/about"'),'About page must be in sitemap');
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
+  expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose only data-backed evergreen month-day pages');
 
   const profile=text('app/components/SaintProfile.tsx');
   expect(profile.includes('biography?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need a guarded top banner');
@@ -89,13 +113,16 @@ if(!failures.length){
   expect(status.includes('`ads.txt` authorization status: **AUTHORIZED**'),'Authorized ads.txt state must remain documented');
   expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled during review');
   expect(status.includes('2026-08-15 17:04 WEST'),'AdSense review-state observation timestamp must remain traceable');
+  expect(status.includes('Auto ads remain off at initial activation'),'Initial monetization must remain manual-only');
 
   const agents=text('AGENTS.md');
   expect(agents.includes('While that file records AdSense as **PREPARING**'),'Development instructions must propagate the AdSense review guardrail');
   expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled during review');
+  expect(agents.includes('no anchor ads') && agents.includes('vignette/interstitial'),'Development instructions must prohibit overlay ad formats');
 
   const checklist=text('docs/adsense-activation-checklist.md');
-  expect(checklist.includes('Auto ads may be enabled'),'Activation checklist must document controlled Auto Ads');
+  expect(checklist.includes('Keep **Auto ads OFF**'),'Activation checklist must keep initial serving manual-only');
+  expect(checklist.includes('no anchor ads') && checklist.includes('no vignette/interstitial ads'),'Activation checklist must prohibit overlay ad formats');
   expect(checklist.includes('certified CMP'),'Activation checklist must require a certified CMP');
   expect(checklist.includes('Google Search Console'),'Activation checklist must include organic search verification');
   expect(checklist.includes('Current operational state — 2026-08-15 17:04 WEST'),'Activation checklist must expose the current AdSense review state');
@@ -106,4 +133,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: PREPARING review state is preserved, site-association code remains active, ad serving remains fail-closed, privacy boundaries and SEO verification are present.');
+console.log('AdSense readiness audit passed: PREPARING review state is preserved, serving remains fail-closed, manual non-overlay placements are constrained, privacy boundaries are intact and evergreen date indexing is data-backed.');
