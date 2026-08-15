@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPublicAllObservances } from "../lib/public-observances";
 import { DISCOVERY_TOPICS, topicPath } from "../data/discovery";
-import { SAINT_BIOGRAPHIES } from "../data/saint-biographies";
+import { SAINT_BIOGRAPHIES } from "../data/saint-biography-registry";
 import { CHURCHES } from "../data/knowledge/churches";
 import { ECCLESIASTICAL_PEOPLE } from "../data/knowledge/ecclesiastical-state";
 import { JURISDICTIONS } from "../data/knowledge/jurisdictions";
