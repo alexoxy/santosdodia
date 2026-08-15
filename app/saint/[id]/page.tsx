@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SaintProfile from "../../components/SaintProfile";
+import { getCanonicalPersonAnchor, getCanonicalPersonProfileObservance } from "../../../data/canonical-person-profiles";
 import { getObservanceById } from "../../../data/discovery";
-import { SAINT_BIOGRAPHIES, getSaintBiography, getSaintBiographyRecord } from "../../../data/saint-biographies";
+import { SAINT_BIOGRAPHIES, getSaintBiography, getSaintBiographyRecord } from "../../../data/saint-biography-registry";
 import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
 import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
@@ -37,7 +38,9 @@ export function generateStaticParams() {
 }
 
 async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
-  return getObservanceById(id, YEAR, locale) ?? getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
+  return getObservanceById(id, YEAR, locale)
+    ?? getCanonicalPersonProfileObservance(id, YEAR, locale)
+    ?? getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
 }
 
 export async function generateMetadata({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ date?: string }>; }): Promise<Metadata> {
@@ -70,7 +73,8 @@ export default async function SaintPage({ params, searchParams }: { params: Prom
   const { date } = await searchParams;
   const locale = await requestPublicLocale();
   const curated = getObservanceById(id, YEAR, locale);
-  const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
+  const canonical = curated ? undefined : getCanonicalPersonProfileObservance(id, YEAR, locale);
+  const item = curated ?? canonical ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
   const biographyRecord = getSaintBiographyRecord(id);
@@ -130,8 +134,9 @@ export default async function SaintPage({ params, searchParams }: { params: Prom
     ],
   };
 
+  const calendarObservanceId = getCanonicalPersonAnchor(id)?.primaryObservanceId;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
-    <SaintProfile id={id} runtimeItem={curated ? undefined : item} />
+    <SaintProfile id={id} runtimeItem={curated ? undefined : item} calendarObservanceId={calendarObservanceId} />
   </>;
 }
