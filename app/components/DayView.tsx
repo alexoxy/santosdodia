@@ -19,7 +19,7 @@ import {
   displayPatronages,
 } from "../../lib/locale-display";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
-import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
+import { getSubstantiveProfileLinks } from "../../lib/substantive-profile-link";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
 import TraditionTag from "./TraditionTag";
@@ -128,9 +128,8 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
       <section className="day-list">
         {items.length ? (
           items.map((item) => {
-            const patronages = displayPatronages(item.patronages, locale),
-              existingProfileId = getExistingProfileId(item, year, locale),
-              profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null);
+            const patronages = displayPatronages(item.patronages, locale);
+            const profileLinks = getSubstantiveProfileLinks(item, year, locale);
             return (
               <article
                 className="day-observance"
@@ -168,10 +167,14 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
                         {patronages.join(" · ")}
                       </div>
                     ) : null}
-                    {profileId ? (
-                      <Link className="text-link" href={`/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(dateISO)}`}>
-                        {feature.openProfile} →
-                      </Link>
+                    {profileLinks.length ? (
+                      <div className="saint-preview-links">
+                        {profileLinks.map((profile) => (
+                          <Link className="text-link" key={profile.id} href={`/saint/${encodeURIComponent(profile.id)}?date=${encodeURIComponent(dateISO)}`}>
+                            {feature.openProfile}{profileLinks.length > 1 || !profile.direct ? `: ${profile.name}` : ''} →
+                          </Link>
+                        ))}
+                      </div>
                     ) : null}
                   </div>
                 </div>
