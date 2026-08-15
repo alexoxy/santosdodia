@@ -14,7 +14,6 @@ export function enrichObservanceEditorial(item: Observance): Observance {
   return {
     ...item,
     summaries,
-    summary: summaries.en ?? item.summary,
     summarySourceIds: sourceIds,
     summaryTranslationStatus: 'editorial',
     lastVerified: editorial.lastVerified,
