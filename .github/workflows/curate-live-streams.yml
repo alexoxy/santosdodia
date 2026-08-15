@@ -1,0 +1,112 @@
+name: Curate official live streams
+
+on:
+  schedule:
+    - cron: '41 7 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-stream-curator
+  cancel-in-progress: false
+
+jobs:
+  curate:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Test live-stream lifecycle safeguards
+        run: node scripts/media/test-live-stream-curator.mjs
+
+      - name: Recover previous health state from Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          node scripts/dropbox/pull-latest-stream.mjs \
+            --stream media/live-streams/v1 \
+            --destination staging/live-stream-curation/previous \
+            --allow-missing
+          mkdir -p staging/live-stream-curation/previous-extracted
+          if [ -f staging/live-stream-curation/previous/package.tar.gz ]; then
+            tar -xzf staging/live-stream-curation/previous/package.tar.gz -C staging/live-stream-curation/previous-extracted
+          fi
+
+      - name: Discover and validate official live feeds
+        shell: bash
+        run: |
+          previous_state=""
+          if [ -f staging/live-stream-curation/previous-extracted/health.json ]; then
+            previous_state="staging/live-stream-curation/previous-extracted/health.json"
+          fi
+          args=(
+            --base data/live-streams.base.json
+            --registry data/generated/live-streams.json
+            --source-registry data/source-registry/seed.json
+            --output staging/live-stream-curation/current
+          )
+          if [ -n "$previous_state" ]; then
+            args+=(--previous-state "$previous_state")
+          fi
+          node scripts/media/curate-live-streams.mjs "${args[@]}"
+
+      - name: Validate generated registry
+        run: |
+          node scripts/media/test-live-stream-curator.mjs
+          npm run typecheck
+          npm run lint
+          node -e "const r=require('./data/generated/live-streams.json'); if(r.schemaVersion!==1||!Array.isArray(r.sources)||!r.sources.some(s=>s.id==='vatican-media')) process.exit(1)"
+
+      - name: Upload curation evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: live-stream-curation-${{ github.run_id }}
+          path: staging/live-stream-curation/current/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Archive health and discovery evidence in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream media/live-streams/v1 --source staging/live-stream-curation/current
+
+      - name: Publish bounded generated registry update
+        shell: bash
+        run: |
+          if git diff --quiet -- data/generated/live-streams.json; then
+            echo "No public live-stream registry change."
+            exit 0
+          fi
+          changed="$(git diff --name-only)"
+          if [ "$changed" != "data/generated/live-streams.json" ]; then
+            echo "Refusing unexpected generated changes:"
+            printf '%s\n' "$changed"
+            exit 1
+          fi
+          git config user.name "santosdodia-live-curator[bot]"
+          git config user.email "santosdodia-live-curator[bot]@users.noreply.github.com"
+          git add data/generated/live-streams.json
+          git commit -m "chore(live): refresh verified official streams"
+          git pull --rebase origin main
+          git push origin HEAD:main
