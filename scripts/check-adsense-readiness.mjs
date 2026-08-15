@@ -3,7 +3,9 @@
 import fs from 'node:fs';
 
 const required = [
+  'AGENTS.md',
   'lib/adsense.ts',
+  'next.config.ts',
   'app/layout.tsx',
   'app/ads.css',
   'app/components/AdSenseBootstrap.tsx',
@@ -17,6 +19,7 @@ const required = [
   'app/saint/[id]/page.tsx',
   'app/sitemap.ts',
   'docs/adsense-activation-checklist.md',
+  'docs/monetization-status.md',
 ];
 
 const failures=[];
@@ -36,6 +39,11 @@ if(!failures.length){
   expect(config.includes('NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION'),'Search Console verification hook is missing');
   expect(config.includes('isAdUnitActive'),'Inactive ads must not reserve empty layout space');
   expect(config.includes('CLIENT_RE.test(ADSENSE_CLIENT)'),'Advertising must reject malformed publisher IDs');
+
+  const nextConfig=text('next.config.ts');
+  expect(nextConfig.includes("'ca-pub-2568362274337344'"),'Santos do Dia must preserve the reviewed AdSense publisher client');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true'"),'AdSense site-association code must stay enabled during review');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'"),'Ad serving must remain fail-closed while AdSense status is PREPARING');
 
   const bootstrap=text('app/components/AdSenseBootstrap.tsx');
   expect(bootstrap.includes('google-adsense-account'),'AdSense ownership meta tag is missing');
@@ -76,10 +84,21 @@ if(!failures.length){
   expect(privacy.includes('Google AdSense'),'Privacy disclosure must identify Google AdSense');
   expect(privacy.includes('tradição cristã escolhida'),'Portuguese disclosure must protect religious preference from targeting');
 
+  const status=text('docs/monetization-status.md');
+  expect(status.includes('AdSense site review status: **PREPARING**'),'Operational monetization state must remain PREPARING until explicit approval is recorded');
+  expect(status.includes('`ads.txt` authorization status: **AUTHORIZED**'),'Authorized ads.txt state must remain documented');
+  expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled during review');
+  expect(status.includes('2026-08-15 17:04 WEST'),'AdSense review-state observation timestamp must remain traceable');
+
+  const agents=text('AGENTS.md');
+  expect(agents.includes('While that file records AdSense as **PREPARING**'),'Development instructions must propagate the AdSense review guardrail');
+  expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled during review');
+
   const checklist=text('docs/adsense-activation-checklist.md');
   expect(checklist.includes('Auto ads may be enabled'),'Activation checklist must document controlled Auto Ads');
   expect(checklist.includes('certified CMP'),'Activation checklist must require a certified CMP');
   expect(checklist.includes('Google Search Console'),'Activation checklist must include organic search verification');
+  expect(checklist.includes('Current operational state — 2026-08-15 17:04 WEST'),'Activation checklist must expose the current AdSense review state');
 }
 
 if(failures.length){
@@ -87,4 +106,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: site review code, controlled ad serving, top/sidebar inventory, privacy boundaries and SEO verification are present.');
+console.log('AdSense readiness audit passed: PREPARING review state is preserved, site-association code remains active, ad serving remains fail-closed, privacy boundaries and SEO verification are present.');
