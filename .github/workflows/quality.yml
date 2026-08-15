@@ -40,6 +40,9 @@ jobs:
       - name: Enforce AdSense review guardrail
         run: node scripts/check-adsense-readiness.mjs
 
+      - name: Test public publication boundaries
+        run: npm run publication:boundary-test
+
       - name: Test autonomous data-plane policy
         run: npm run autonomy:test
 

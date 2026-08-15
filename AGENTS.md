@@ -9,6 +9,9 @@ These rules apply to all repository changes, including automated and agent-autho
 - Do not publish unreviewed saint/calendar data as verified editorial content.
 - Prefer editorial scale, source quality, internal linking and calendar/date coverage over adding unrelated product features.
 - Grow reviewed content progressively: substantive saint profiles first, evergreen day/date coverage second, then evidence-backed thematic/place hubs. Thin generated pages must remain out of the index.
+- A reviewed liturgical-person link does not by itself make every enriched profile fact public. Public saint-navigation promotion requires a separate explicit publication decision in `data/saint-navigation-publication.reviewed.json`.
+- The first public navigation scope is deliberately narrow: source-backed identity/name plus a reviewed liturgical observance. Birth/death dates, places and other profile facts that only have the Wikidata enrichment source remain withheld until independently cross-checked.
+- Never convert a name match into an automatic saint identity merge or publication decision. Ambiguous and unmatched records remain in review/staging.
 
 ## Advertising experience
 
