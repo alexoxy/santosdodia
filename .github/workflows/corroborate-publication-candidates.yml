@@ -35,7 +35,7 @@ jobs:
       - name: Validate corroboration boundary
         run: |
           npm run autonomy:test
-          npm run autonomy:corroboration-test
+          node scripts/autonomy/test-corroboration.mjs
           npm run automation:audit
           node -e "const p=require('./config/corroboration-policy.json'); if(p.productionWriteAllowed!==false||p.mode!=='shadow-corroboration') process.exit(1)"
 
