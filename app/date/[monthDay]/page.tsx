@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import AnnualDateEditorialSection from "../../components/AnnualDateEditorialSection";
 import DayView from "../../components/DayView";
+import { getAnnualDateEditorial } from "../../../data/date-editorial";
+import { getSaintBiographyRecord } from "../../../data/saint-biographies";
+import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
 import { getPublicObservancesForDate } from "../../../lib/public-observances";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
@@ -73,8 +77,9 @@ export async function generateMetadata({ params }: { params: Promise<{ monthDay:
   const label = annualDateLabel(dateISO, locale);
   const items = getPublicObservancesForDate(dateISO, locale);
   const names = items.slice(0, 5).map(item => item.name);
+  const editorial = getAnnualDateEditorial(monthDay, locale);
   const title = annualTitle(locale, label);
-  const description = annualDescription(locale, label, names, items.length);
+  const description = editorial?.lead ?? annualDescription(locale, label, names, items.length);
   const canonical = `/date/${monthDay}`;
   return {
     title,
@@ -93,6 +98,7 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
   const locale = await requestPublicLocale();
   const label = annualDateLabel(dateISO, locale);
   const items = getPublicObservancesForDate(dateISO, locale);
+  const editorial = getAnnualDateEditorial(monthDay, locale);
   const url = `${SITE_ORIGIN}/date/${monthDay}`;
   const title = annualTitle(locale, label);
   const jsonLd = {
@@ -103,6 +109,7 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
         "@id": url,
         url,
         name: title,
+        description: editorial?.lead,
         inLanguage: locale,
         isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
         mainEntity: { "@id": `${url}#observances` },
@@ -112,12 +119,18 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
         "@id": `${url}#observances`,
         name: title,
         numberOfItems: items.length,
-        itemListElement: items.map((item, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: item.name,
-          url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
-        })),
+        itemListElement: items.map((item, index) => {
+          const biography = getSaintBiographyRecord(item.id);
+          const hasIndexableProfile = Boolean(biography && isSaintBiographyIndexable(biography, locale));
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            url: hasIndexableProfile
+              ? `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`
+              : `${url}#observance-${encodeURIComponent(item.id)}`,
+          };
+        }),
       },
       {
         "@type": "BreadcrumbList",
@@ -134,6 +147,7 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
       <DayView dateISO={dateISO} mode="annual" />
+      <AnnualDateEditorialSection monthDay={monthDay} locale={locale} items={items} />
     </>
   );
 }
