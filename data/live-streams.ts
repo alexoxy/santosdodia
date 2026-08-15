@@ -19,3 +19,4 @@ const registry=generated as GeneratedLiveRegistry;
 if(registry.schemaVersion!==1)throw new Error('Unsupported live stream registry schema.');
 
 export const LIVE_STREAM_SOURCES:LiveStreamSource[]=registry.sources;
+export const LIVE_STREAM_REGISTRY_GENERATED_AT=registry.generatedAt;
