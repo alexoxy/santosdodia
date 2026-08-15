@@ -62,6 +62,7 @@ jobs:
           node scripts/calendar/test-normalize-vatican-saints.mjs
           node scripts/calendar/test-vatican-reference-policy.mjs
           node scripts/calendar/test-portugal-snl-agenda.mjs
+          node scripts/calendar/test-portugal-snl-reconciliation.mjs
 
       - name: Test profile and multilingual enrichment safeguards
         run: |
