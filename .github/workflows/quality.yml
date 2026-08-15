@@ -46,6 +46,9 @@ jobs:
       - name: Test autonomous data-plane policy
         run: npm run autonomy:test
 
+      - name: Test autonomous corroboration and reviewed source bindings
+        run: npm run autonomy:corroboration-test
+
       - name: Audit partitioned agent lanes
         run: npm run autonomy:lanes-audit
 

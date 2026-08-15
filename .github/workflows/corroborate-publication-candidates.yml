@@ -35,7 +35,7 @@ jobs:
       - name: Validate corroboration boundary
         run: |
           npm run autonomy:test
-          node scripts/autonomy/test-corroboration.mjs
+          npm run autonomy:corroboration-test
           npm run automation:audit
           node -e "const p=require('./config/corroboration-policy.json'); if(p.productionWriteAllowed!==false||p.mode!=='shadow-corroboration') process.exit(1)"
 
@@ -63,14 +63,46 @@ jobs:
           NODE
           tar -xzf "$archive" -C "$destination" --no-same-owner --no-same-permissions
 
+      - name: Pull latest Vatican first-party corroboration evidence
+        id: vatican_evidence
+        continue-on-error: true
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: npm run dropbox:pull-stream -- --stream corroboration-evidence/vatican-news/pt --destination staging/dropbox-intake/corroboration-evidence/vatican-news/pt
+
+      - name: Extract optional first-party evidence
+        if: ${{ steps.vatican_evidence.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive='staging/dropbox-intake/corroboration-evidence/vatican-news/pt/package.tar.gz'
+          destination='staging/dropbox-intake/corroboration-evidence/vatican-news/pt/extracted'
+          mkdir -p "$destination" staging/corroboration-evidence-external
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const archive = 'staging/dropbox-intake/corroboration-evidence/vatican-news/pt/package.tar.gz';
+          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$archive" -C "$destination" --no-same-owner --no-same-permissions
+          evidence="$(find "$destination" -type f -name evidence.json | head -n 1)"
+          test -n "$evidence"
+          cp "$evidence" staging/corroboration-evidence-external/vatican-news-pt.json
+
       - name: Corroborate cross-check queue
         shell: bash
         run: |
           set -euo pipefail
           input="$(find staging/dropbox-intake/publication-decisions/saints/wikidata/extracted -type f -name cross-check-queue.json -printf '%h\n' | head -n 1)"
           test -n "$input"
+          mkdir -p staging/corroboration-evidence-external
           node scripts/autonomy/corroborate-publication-candidates.mjs \
             --input "$input" \
+            --evidence-dir staging/corroboration-evidence-external \
             --output staging/corroboration/saints/wikidata
           cp staging/dropbox-intake/publication-decisions/saints/wikidata/consumer-receipt.json \
             staging/corroboration/saints/wikidata/upstream-decisions-receipt.json
