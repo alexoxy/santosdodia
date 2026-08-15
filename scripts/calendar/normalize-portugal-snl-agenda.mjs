@@ -7,6 +7,16 @@ import { fileURLToPath } from 'node:url';
 
 const SOURCE_ID = 'portugal-national-liturgy-secretariat';
 const DROPBOX_MANIFEST_PATH = '/Santos do Dia/02_Dados_Eclesiasticos/calendar/portugal-snl/v1/source-manifest.json';
+const RANK_LABELS = new Map([
+  ['SOLENIDADE', 'solemnity'],
+  ['FESTA', 'feast'],
+  ['MO', 'memorial'],
+  ['MEMÓRIA OBRIGATÓRIA', 'memorial'],
+  ['MF', 'optional-memorial'],
+  ['MEMÓRIA FACULTATIVA', 'optional-memorial'],
+]);
+const COLOUR_LINE = /^(?:Branco|Vermelho|Verde|Roxo|Rosa|Preto)\b/iu;
+const RANK_SUFFIX = /(?:\s+[–—-]\s*|\s+)(SOLENIDADE|FESTA|MO|MF|MEMÓRIA OBRIGATÓRIA|MEMÓRIA FACULTATIVA)\s*$/iu;
 
 function argument(name, fallback = null) {
   const index = process.argv.indexOf(name);
@@ -50,6 +60,54 @@ function parseDate(value) {
   return Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== iso ? null : iso;
 }
 function slugHash(value) { return sha256(value).slice(0, 24); }
+function compactLines(value) {
+  return String(value ?? '').replace(/\r\n/gu, '\n').replace(/\r/gu, '\n').split('\n').map((line) => line.trim());
+}
+function canonicalRank(value) {
+  const key = String(value ?? '').trim().toUpperCase();
+  return RANK_LABELS.get(key) ?? null;
+}
+
+export function extractPrimarySnlObservance(summary, description) {
+  const dayLabel = String(summary ?? '').normalize('NFC').trim();
+  const paragraphs = String(description ?? '').replace(/\r\n/gu, '\n').replace(/\r/gu, '\n').split(/\n\s*\n+/u);
+
+  for (const paragraph of paragraphs) {
+    const lines = compactLines(paragraph).filter(Boolean);
+    if (!lines.length || lines[0].startsWith('*')) continue;
+    const colourIndex = lines.findIndex((line) => COLOUR_LINE.test(line));
+    const headingLines = colourIndex >= 0 ? lines.slice(0, colourIndex) : lines;
+    if (!headingLines.length) continue;
+    const heading = headingLines.join(' ').replace(/\s+/gu, ' ').trim();
+    const match = RANK_SUFFIX.exec(heading);
+    if (!match) continue;
+    const rank = canonicalRank(match[1]);
+    const label = heading.slice(0, match.index).replace(/[\s,;–—-]+$/gu, '').trim();
+    if (!rank || !label) continue;
+    return {
+      label,
+      rank,
+      rankSource: 'description-heading',
+      dayLabel,
+      evidenceHeading: heading,
+    };
+  }
+
+  const descriptionLines = compactLines(description).filter(Boolean);
+  const firstColourLine = descriptionLines.find((line) => COLOUR_LINE.test(line)) ?? '';
+  let inferredRank = null;
+  if (/Ofício da solenidade/iu.test(firstColourLine)) inferredRank = 'solemnity';
+  else if (/Ofício da festa/iu.test(firstColourLine)) inferredRank = 'feast';
+  else if (/Ofício da memória/iu.test(firstColourLine)) inferredRank = 'memorial';
+
+  return {
+    label: dayLabel,
+    rank: inferredRank,
+    rankSource: inferredRank ? 'office-line' : 'none',
+    dayLabel,
+    evidenceHeading: firstColourLine || dayLabel,
+  };
+}
 
 export function parseSnlIcs(ics) {
   const lines = unfoldLines(ics);
@@ -94,6 +152,7 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
     seen.add(occurrenceKey);
     const [year, month, day] = event.dateISO.split('-').map(Number);
     const recordHash = sha256(JSON.stringify(event));
+    const primaryObservance = extractPrimarySnlObservance(event.summary, event.description);
     events.push({
       id: `snl-pt-${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}-${slugHash(occurrenceKey)}`,
       canonicalEventId: `source:snl-pt:${slugHash(event.uid ?? `${event.dateISO}|${event.summary}`)}`,
@@ -101,14 +160,17 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
       jurisdictionId: 'PT',
       dateISO: event.dateISO,
       rule: { type: 'annual-source-table', month, day },
-      names: { pt: { value: event.summary, status: 'source', sourceLocale: 'pt' } },
+      names: { pt: { value: primaryObservance.label, status: 'source', sourceLocale: 'pt' } },
       sourceId: SOURCE_ID,
       sourceRecordHash: recordHash,
       validationStatus: 'provisional',
       publicationStatus: 'withheld',
       sourceFacts: {
         uid: event.uid,
-        description: event.description,
+        dayLabel: event.summary,
+        primaryObservance,
+        description: primaryObservance.evidenceHeading,
+        rawDescription: event.description,
         location: event.location,
         url: event.url,
       },
@@ -117,6 +179,7 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
 
   const years = [...new Set(events.map((event) => Number(event.dateISO.slice(0, 4))))].sort((a, b) => a - b);
   const civilDays = new Set(events.map((event) => event.dateISO)).size;
+  const explicitPrimaryObservances = events.filter((event) => event.sourceFacts.primaryObservance.rankSource === 'description-heading').length;
   return {
     schemaVersion: 1,
     packageId: `portugal-snl-${manifest.sha256.slice(0, 16)}`,
@@ -153,6 +216,7 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
       years,
       eventCount: events.length,
       civilDays,
+      explicitPrimaryObservances,
       completeSourceFeed: true,
       publicationStatus: 'withheld',
     },
