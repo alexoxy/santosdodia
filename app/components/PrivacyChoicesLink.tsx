@@ -21,7 +21,10 @@ export default function PrivacyChoicesLink() {
       type="button"
       onClick={() => {
         const fc = window.googlefc;
-        if (!fc?.showRevocationMessage) return;
+        if (!fc?.showRevocationMessage) {
+          window.location.assign('/privacy#advertising-privacy-title');
+          return;
+        }
         fc.callbackQueue = fc.callbackQueue || [];
         fc.callbackQueue.push(fc.showRevocationMessage);
       }}
