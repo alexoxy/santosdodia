@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { canonicalPersonName, getCanonicalPeopleForObservance } from '../../data/canonical-person-profiles';
 import { annualDateEditorialUi } from '../../data/date-editorial';
 import { getAnnualDateEditorial } from '../../data/date-editorial-registry';
 import { SOURCE_CATALOG, type Observance } from '../../data/observances';
-import { getSaintBiographyRecord } from '../../data/saint-biographies';
+import { getSaintBiographyRecord } from '../../data/saint-biography-registry';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import type { Locale } from '../../lib/i18n';
 import { isSaintBiographyIndexable } from '../../lib/editorial-profile-quality';
@@ -29,10 +30,20 @@ export default function AnnualDateEditorialSection({
     .filter((source): source is NonNullable<typeof source> => Boolean(source));
   const feature = getFeatureCopy(locale);
   const ui = annualDateEditorialUi[locale];
-  const profiles = relevantItems.filter(item => {
-    const biography = getSaintBiographyRecord(item.id);
-    return Boolean(biography && isSaintBiographyIndexable(biography, locale));
-  });
+  const profileMap = new Map<string, string>();
+  for (const item of relevantItems) {
+    const directBiography = getSaintBiographyRecord(item.id);
+    if (directBiography && isSaintBiographyIndexable(directBiography, locale)) {
+      profileMap.set(item.id, displayObservanceName(item.names, locale, item.name));
+    }
+    for (const person of getCanonicalPeopleForObservance(item.id)) {
+      const biography = getSaintBiographyRecord(person.id);
+      if (biography && isSaintBiographyIndexable(biography, locale)) {
+        profileMap.set(person.id, canonicalPersonName(person, locale));
+      }
+    }
+  }
+  const profiles = [...profileMap.entries()].map(([id, name]) => ({ id, name }));
 
   return (
     <section className={styles.section} aria-labelledby={`annual-editorial-${monthDay}`}>
@@ -43,9 +54,9 @@ export default function AnnualDateEditorialSection({
         <p>{editorial.context}</p>
         {profiles.length ? (
           <div className={styles.profileLinks}>
-            {profiles.map(item => (
-              <Link className="text-link" key={item.id} href={`/saint/${encodeURIComponent(item.id)}`}>
-                {feature.openProfile}: {displayObservanceName(item.names, locale, item.name)} →
+            {profiles.map(profile => (
+              <Link className="text-link" key={profile.id} href={`/saint/${encodeURIComponent(profile.id)}`}>
+                {feature.openProfile}: {profile.name} →
               </Link>
             ))}
           </div>

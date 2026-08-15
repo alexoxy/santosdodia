@@ -1,7 +1,7 @@
 'use client';
 import { LIVE_STREAM_SOURCES } from '../../data/live-streams';
 import { SOURCE_CATALOG,traditionLabel } from '../../data/observances';
-import { SAINT_BIOGRAPHIES } from '../../data/saint-biographies';
+import { SAINT_BIOGRAPHIES } from '../../data/saint-biography-registry';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import { useLanguage } from './LanguageProvider';
 
