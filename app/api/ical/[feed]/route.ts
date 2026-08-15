@@ -29,8 +29,9 @@ export async function GET(request:NextRequest,context:{params:Promise<{feed:stri
  const items=runtimeYears.flatMap(result=>result.items);
  const usesD1=runtimeYears.some(result=>result.meta.d1.publishedAccepted>0);
  const calendarTitle=tradition?`Santos do Dia — ${traditionLabel(copy,tradition)}`:`Santos do Dia — ${copy.calendarTitle}`;
+ const calendarDescription=tradition?`${traditionLabel(copy,tradition)} · ${copy.calendarIntro}`:copy.calendarIntro;
  const stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/, "Z");
- const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//santosdodia.com//Christian Calendar//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",`NAME:${escapeIcs(calendarTitle)}`,`X-WR-CALNAME:${escapeIcs(calendarTitle)}`,`X-SANTOSDIA-SOURCE:${usesD1?"published-d1+approved-repository":"approved-repository"}`,"X-PUBLISHED-TTL:PT6H"];
+ const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//santosdodia.com//Christian Calendar//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",`NAME:${escapeIcs(calendarTitle)}`,`X-WR-CALNAME:${escapeIcs(calendarTitle)}`,`X-WR-CALDESC:${escapeIcs(calendarDescription)}`,"REFRESH-INTERVAL;VALUE=DURATION:PT6H","X-PUBLISHED-TTL:PT6H",`X-SANTOSDIA-SOURCE:${usesD1?"published-d1+approved-repository":"approved-repository"}`];
  for(const item of items){
   const name=displayObservanceName(item.names,locale,item.name);if(!name)continue;
   const traditions=item.traditions.map(value=>traditionLabel(copy,value)).join(", "),patronages=displayPatronages(item.patronages,locale),summary=localizedSummary(item,locale)?.text;

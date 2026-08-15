@@ -29,9 +29,9 @@ export async function GET() {
     openapi: "3.1.0",
     info: {
       title: "Santos do Dia machine interface",
-      version: "3.7.0",
+      version: "3.8.0",
       description:
-        "Machine-readable saints, Christian Church calendars, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers.",
+        "Machine-readable saints, Christian Church calendars, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers. Liturgical calendar filters are shared by JSON and subscribable ICS interfaces.",
     },
     servers: [{ url: SITE_ORIGIN }],
     paths: {
@@ -322,7 +322,9 @@ export async function GET() {
       },
       "/api/ical/{feed}": {
         get: {
-          summary: "ICS calendar feed by Christian tradition",
+          summary: "Subscribable ICS liturgical calendar feed by Christian tradition",
+          description:
+            "Without year= the endpoint is a persistent subscription serving the current and following year and publishing a six-hour refresh hint. With year= it acts as a fixed annual snapshot. Locale, tradition, category and country filters mirror the JSON calendar API.",
           parameters: [
             {
               name: "feed",
@@ -330,9 +332,15 @@ export async function GET() {
               required: true,
               schema: { type: "string", enum: ["all", ...TRADITIONS] },
             },
+            {
+              name: "year",
+              in: "query",
+              description: "Optional fixed snapshot year. Omit for a rolling subscription.",
+              schema: { type: "integer", minimum: 1900, maximum: 2200 },
+            },
             ...filterParameters,
           ],
-          responses: { "200": { description: "Tradition calendar feed" } },
+          responses: { "200": { description: "Subscribable or annual ICS calendar feed" } },
         },
       },
       "/api/ical/saint/{id}": {
