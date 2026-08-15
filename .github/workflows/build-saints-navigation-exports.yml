@@ -14,6 +14,7 @@ on:
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/dropbox/publish-current-json.mjs'
       - 'data/liturgical-person-links.reviewed.json'
+      - 'data/saint-navigation-publication.reviewed.json'
       - '.github/workflows/build-saints-navigation-exports.yml'
       - 'config/automation-registry.json'
 
@@ -50,6 +51,7 @@ jobs:
           node scripts/discovery/test-assemble-navigation-source.mjs
           node scripts/discovery/test-navigation-readiness.mjs
           node scripts/discovery/test-navigation-exports.mjs
+          node scripts/discovery/test-reviewed-navigation-promotion.mjs
 
       - name: Pull current identity root
         env:
@@ -163,6 +165,13 @@ jobs:
           --decisions data/liturgical-person-links.reviewed.json
           --output staging/navigation/output/navigation-source-reviewed.json
 
+      - name: Apply explicit reviewed public navigation decisions
+        run: >-
+          node scripts/discovery/promote-reviewed-navigation.mjs
+          --input staging/navigation/output/navigation-source-reviewed.json
+          --decisions data/saint-navigation-publication.reviewed.json
+          --output staging/navigation/output/navigation-source-public.json
+
       - name: Audit partial or freeze-ready state
         run: >-
           node scripts/discovery/audit-navigation-readiness.mjs
@@ -177,6 +186,14 @@ jobs:
           --mode staging
           --locale pt
 
+      - name: Build reviewed public exports
+        run: >-
+          node scripts/discovery/build-navigation-exports.mjs
+          --input staging/navigation/output/navigation-source-public.json
+          --output staging/navigation/output/public-exports
+          --mode public
+          --locale pt
+
       - name: Archive canonical navigation source in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -187,9 +204,10 @@ jobs:
           --stream navigation/saints/v1/source
           --source staging/navigation/output/navigation-source.json
           --source staging/navigation/output/navigation-source-reviewed.json
+          --source staging/navigation/output/navigation-source-public.json
           --source staging/navigation/output/readiness.json
 
-      - name: Archive export bundle in Dropbox
+      - name: Archive staging export bundle in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
@@ -200,6 +218,17 @@ jobs:
           --source staging/navigation/output/exports
           --source staging/navigation/output/readiness.json
 
+      - name: Archive reviewed public export bundle in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream navigation/saints/v1/public/pt
+          --source staging/navigation/output/public-exports
+          --source data/saint-navigation-publication.reviewed.json
+
       - name: Publish readable current readiness in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -209,3 +238,13 @@ jobs:
           node scripts/dropbox/publish-current-json.mjs
           --source staging/navigation/output/readiness.json
           --destination /current/navigation/saints/v1/readiness.json
+
+      - name: Publish readable current public manifest in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/publish-current-json.mjs
+          --source staging/navigation/output/public-exports/manifest.json
+          --destination /current/navigation/saints/v1/public-manifest.json
