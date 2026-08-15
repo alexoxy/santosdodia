@@ -27,7 +27,6 @@ export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Ob
  const biographyDate=biography?new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeZone:'UTC'}).format(new Date(`${biography.verifiedAt}T00:00:00Z`)):'';
  return <div className="page-stack saint-profile-page">
   <section className="page-hero saint-profile-hero"><div><span className="eyebrow">{feature.profileIntro}</span><h1>{name}</h1><p>{dateLabel} · {item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')}</p><span className={`scope-label scope-${scope.kind}`}>{scope.label}</span></div><div className="saint-monogram" aria-hidden="true">✦</div></section>
-  {/* Merge-base readiness compatibility marker: biography?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>. */}
   {editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>:null}
   <section className="saint-profile-layout">
    <article className="saint-profile-main">
