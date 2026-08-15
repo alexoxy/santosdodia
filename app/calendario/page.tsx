@@ -1,6 +1,24 @@
-import type { Metadata } from 'next';
-import CalendarExplorer from '../components/CalendarExplorer';
-import TraditionFeeds from '../components/TraditionFeeds';
+import type { Metadata } from "next";
+import CalendarExplorer from "../components/CalendarExplorer";
+import TraditionFeeds from "../components/TraditionFeeds";
+import { ui } from "../../lib/i18n";
+import { requestPublicLocale } from "../../lib/request-public-locale";
 
-export const metadata:Metadata={title:'Christian Saints Calendars',description:'Browse saints and feasts and subscribe to Roman Catholic, Orthodox, Anglican, Coptic, Armenian, Ethiopian and Syriac calendars.'};
-export default function CalendarPage(){return <div className="page-stack"><CalendarExplorer/><TraditionFeeds/></div>}
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await requestPublicLocale();
+  const copy = ui[locale];
+  return {
+    title: copy.calendarTitle,
+    description: copy.calendarIntro,
+    alternates: { canonical: "/calendar" },
+  };
+}
+
+export default function CalendarPage() {
+  return (
+    <div className="page-stack">
+      <CalendarExplorer />
+      <TraditionFeeds />
+    </div>
+  );
+}
