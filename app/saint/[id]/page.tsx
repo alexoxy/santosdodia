@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 import SaintProfile from "../../components/SaintProfile";
 import { getObservanceById } from "../../../data/discovery";
-import { localeFromAcceptLanguage, normalizePublicLocale, type Locale } from "../../../lib/i18n";
+import type { Locale } from "../../../lib/i18n";
 import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
 import { getPublicAllObservances } from "../../../lib/public-observances";
+import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
 
@@ -19,12 +19,24 @@ function decodeRouteId(value: string): string {
   }
 }
 
-async function requestLocale(): Promise<Locale> {
-  const cookieStore = await cookies();
-  const saved = cookieStore.get("sdd-locale")?.value;
-  if (saved) return normalizePublicLocale(saved);
-  const requestHeaders = await headers();
-  return localeFromAcceptLanguage(requestHeaders.get("accept-language"));
+function fallbackProfileDescription(locale: Locale, name: string) {
+  if (locale === "pt")
+    return `Data da celebração, tradição cristã e informação de calendário revista sobre ${name}.`;
+  if (locale === "es")
+    return `Fecha de celebración, tradición cristiana e información de calendario revisada sobre ${name}.`;
+  if (locale === "fr")
+    return `Date de célébration, tradition chrétienne et informations de calendrier vérifiées sur ${name}.`;
+  if (locale === "it")
+    return `Data della celebrazione, tradizione cristiana e informazioni di calendario verificate su ${name}.`;
+  return `Feast date, Christian tradition and reviewed calendar information for ${name}.`;
+}
+
+function notFoundTitle(locale: Locale) {
+  if (locale === "pt") return "Santo não encontrado";
+  if (locale === "es") return "Santo no encontrado";
+  if (locale === "fr") return "Saint introuvable";
+  if (locale === "it") return "Santo non trovato";
+  return "Saint not found";
 }
 
 export function generateStaticParams() {
@@ -46,11 +58,10 @@ export async function generateMetadata({
   const { id: routeId } = await params;
   const id = decodeRouteId(routeId);
   const { date } = await searchParams;
-  const item = await resolveProfile(id, "en", date);
-  if (!item) return { title: "Saint not found" };
-  const description =
-    item.summary ??
-    `Feast date, Christian tradition and reviewed calendar information for ${item.name}.`;
+  const locale = await requestPublicLocale();
+  const item = await resolveProfile(id, locale, date);
+  if (!item) return { title: notFoundTitle(locale) };
+  const description = item.summary ?? fallbackProfileDescription(locale, item.name);
   const canonical = `/saint/${encodeURIComponent(id)}`;
   const keywords = [
     ...new Set([
@@ -87,7 +98,7 @@ export default async function SaintPage({
   const { id: routeId } = await params;
   const id = decodeRouteId(routeId);
   const { date } = await searchParams;
-  const locale = await requestLocale();
+  const locale = await requestPublicLocale();
   const curated = getObservanceById(id, YEAR, locale);
   const item = curated ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();

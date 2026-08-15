@@ -1,1 +1,1 @@
-export { metadata,default } from '../calendario/page';
+export { generateMetadata, default } from "../calendario/page";
