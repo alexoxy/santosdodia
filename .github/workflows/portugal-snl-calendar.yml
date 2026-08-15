@@ -33,7 +33,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Validate Portugal calendar policy and parser
-        run: npm run calendar:portugal-snl-test
+        run: node scripts/calendar/test-portugal-snl-agenda.mjs
 
       - name: Fetch official SNL subscription feed
         run: node scripts/calendar/fetch-portugal-snl-agenda.mjs --output-dir staging/portugal-snl
