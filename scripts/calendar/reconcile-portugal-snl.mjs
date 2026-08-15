@@ -14,7 +14,7 @@ const TOKEN_EQUIVALENTS = new Map(Object.entries({
   pedro:'peter', pietro:'peter', paulo:'paul', marcos:'mark', tiago:'james', lucas:'luke', andre:'andrew',
   estevao:'stephen', clara:'clare', maria:'mary', tome:'thomas', mateus:'matthew', bartolomeu:'bartholomew',
   judas:'jude', filipe:'philip', catarina:'catherine', agostinho:'augustine', bento:'benedict', domingos:'dominic',
-  inaciod:'ignatius', inacio:'ignatius', patricio:'patrick', jeronimo:'jerome', norberto:'norbert', martinho:'martin',
+  inaciod:'ignatius', inacio:'ignatius', patricio:'patrick', jeronimo:'jerome', hilario:'hilary', norberto:'norbert', martinho:'martin',
   hildegarda:'hildegard', jorge:'george', barnabe:'barnabas', anselmo:'anselm', ambrosio:'ambrose', bernardo:'bernard',
   cirilo:'cyril', agueda:'agatha', boaventura:'bonaventure', maximiliano:'maximilian', escolastica:'scholastica',
   pancracio:'pancras', atanasio:'athanasius', justino:'justin', timoteo:'timothy', tito:'titus', marcelino:'marcellinus',
