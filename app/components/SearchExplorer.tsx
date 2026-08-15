@@ -8,7 +8,6 @@ import {
   type Observance,
 } from "../../data/observances";
 import {
-  getObservanceById,
   getObservancesForTopic,
   getPopularTopics,
   parseDiscoveryDate,
@@ -33,6 +32,10 @@ import {
   getPublicObservancesForDate,
   searchPublicObservances,
 } from "../../lib/public-observances";
+import {
+  getExistingProfileId,
+  isRuntimePersonProfileEligible,
+} from "../../lib/runtime-profile-link";
 import { useLanguage, type ChurchPreference } from "./LanguageProvider";
 
 function uniqueObservances(items: Observance[]) {
@@ -204,9 +207,10 @@ export default function SearchExplorer() {
             {items.map((item) => {
               const name = displayObservanceName(item.names, locale, item.name);
               const patronages = displayPatronages(item.patronages, locale);
-              const hasProfile = Boolean(
-                getObservanceById(item.id, year, locale),
-              );
+              const existingProfileId = getExistingProfileId(item, year, locale);
+              const profileId =
+                existingProfileId ??
+                (isRuntimePersonProfileEligible(item) ? item.id : null);
               const summary = localizedSummary(item, locale);
               const scope = displayObservanceScope(item, locale, country);
               return name ? (
@@ -254,10 +258,10 @@ export default function SearchExplorer() {
                     ))}
                   </div>
                   <div className="saint-preview-links">
-                    {hasProfile ? (
+                    {profileId ? (
                       <Link
                         className="btn btn-primary"
-                        href={`/saint/${item.id}`}
+                        href={`/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(item.dateISO)}`}
                       >
                         {feature.openProfile}
                       </Link>
