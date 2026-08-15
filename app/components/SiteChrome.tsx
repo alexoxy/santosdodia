@@ -8,7 +8,7 @@ import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observanc
 import { liturgyLabel } from '../../lib/liturgy-i18n';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import { getInstitutionalCopy } from '../../lib/institutional-copy';
-import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive, isManualAdEligiblePath } from '../../lib/adsense';
+import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive, usesSharedAdFrame } from '../../lib/adsense';
 import AdSlot from './AdSlot';
 import PrivacyChoicesLink from './PrivacyChoicesLink';
 import { useLanguage, type ChurchPreference } from './LanguageProvider';
@@ -56,9 +56,9 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
  const institutional=getInstitutionalCopy(locale);
  const churchColourClass=church==='all'?'church-all':traditionClass(church);
  const pilgrimage=pilgrimageLabels[locale];
- const manualAdsEligible=isManualAdEligiblePath(pathname);
- const topAdActive=manualAdsEligible&&isAdUnitActive(ADSENSE_TOP_SLOT);
- const sidebarAdActive=manualAdsEligible&&isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
+ const sharedAdFrame=usesSharedAdFrame(pathname);
+ const topAdActive=sharedAdFrame&&isAdUnitActive(ADSENSE_TOP_SLOT);
+ const sidebarAdActive=sharedAdFrame&&isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
  return <div className="site-shell">
   <a className="skip-link" href="#main-content">{skipLabels[locale]??skipLabels.en}</a>
   <header className="site-header"><div className="header-inner">
