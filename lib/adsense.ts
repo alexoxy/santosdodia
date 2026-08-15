@@ -16,6 +16,9 @@ export function adsenseSellerId() {
 }
 
 export const ADSENSE_EXCLUDED_PREFIXES = [
+  '/calendar',
+  '/explore',
+  '/day',
   '/privacy',
   '/terms',
   '/faq',
@@ -26,6 +29,9 @@ export const ADSENSE_EXCLUDED_PREFIXES = [
   '/live',
 ] as const;
 
+// Initial monetization is intentionally narrow: the homepage is the only
+// generic route allowed to load AdSense. Editorial saint profiles opt in
+// explicitly from their biography component.
 export function adsenseScriptAllowed(pathname: string) {
-  return !ADSENSE_EXCLUDED_PREFIXES.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return pathname === '/';
 }
