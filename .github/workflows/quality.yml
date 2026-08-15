@@ -37,6 +37,9 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Enforce AdSense review guardrail
+        run: node scripts/check-adsense-readiness.mjs
+
       - name: Test autonomous data-plane policy
         run: npm run autonomy:test
 

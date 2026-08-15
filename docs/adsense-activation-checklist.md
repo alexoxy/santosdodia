@@ -2,35 +2,48 @@
 
 Santos do Dia is prepared for Google AdSense and Search Console while monetization remains **fail-closed**. Site association is separated from ad serving: the AdSense code can be published for ownership/review without enabling manual ad units.
 
+## Current operational state — 2026-08-15 17:04 WEST
+
+- `santosdodia.com`: AdSense **PREPARING** (`Preparando`).
+- `ads.txt`: **AUTHORIZED** (`Autorizado`).
+- Site ownership: verified.
+- Review: requested.
+- Publisher client: `ca-pub-2568362274337344`.
+- Google certified CMP selected for current and future sites with three first-layer choices: **Consent**, **Do not consent**, and **Manage options**.
+- Actual ad serving remains disabled until AdSense reports the site as approved/ready and that transition is explicitly recorded in `docs/monetization-status.md`.
+
+This state is a development constraint, not merely an account note. All future changes must preserve the ownership code, real `ads.txt` record, CMP/privacy integration and fail-closed ad serving while the status remains **PREPARING**.
+
 ## 1. AdSense site association and review
 
-1. Create/activate the Google AdSense account and add `santosdodia.com` under **Sites**.
-2. Copy the publisher client ID in the form `ca-pub-XXXXXXXXXXXXXXXX`.
+1. AdSense account active and `santosdodia.com` added under **Sites**.
+2. Publisher client ID: `ca-pub-2568362274337344`.
 3. Configure Cloudflare/runtime:
-   - `NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-XXXXXXXXXXXXXXXX`
+   - `NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-2568362274337344`
    - `NEXT_PUBLIC_ADSENSE_CODE_ENABLED=true`
    - keep `NEXT_PUBLIC_ADSENSE_ENABLED=false` during ownership verification/review.
 4. Deploy through the normal protected GitHub → Cloudflare path.
 5. Confirm the published HTML `<head>` contains both:
    - the official AdSense script using the configured client ID;
-   - `<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">`.
+   - `<meta name="google-adsense-account" content="ca-pub-2568362274337344">`.
 6. Confirm `https://www.santosdodia.com/ads.txt` returns:
-   `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`
-7. In AdSense, validate ownership and request site review.
-8. In **Privacy & messaging**, configure Google's certified CMP for European regulations and associate `/privacy` as the privacy-policy URL.
+   `google.com, pub-2568362274337344, DIRECT, f08c47fec0942fa0`
+7. Ownership has been validated and site review requested. Current review state is **PREPARING**.
+8. In **Privacy & messaging**, Google's certified CMP is selected for European regulations using the three-choice first layer. Preserve `/privacy` as the privacy-policy URL and keep user privacy choices reopenable.
 
 ## 2. Advertising after approval
 
-1. Keep content as the primary purpose of every monetized page.
-2. Create two responsive display ad units:
+1. Do not enter this section while `docs/monetization-status.md` records **PREPARING**.
+2. Keep content as the primary purpose of every monetized page.
+3. Create two responsive display ad units:
    - top banner;
    - desktop lateral/sidebar unit.
-3. Configure:
+4. Configure:
    - `NEXT_PUBLIC_ADSENSE_TOP_SLOT=<numeric-slot-id>`
    - `NEXT_PUBLIC_ADSENSE_SIDEBAR_SLOT=<numeric-slot-id>`
    - `NEXT_PUBLIC_ADSENSE_ENABLED=true`
-4. The application renders the top banner only after the core Today/profile hero and renders the lateral unit only on wide screens.
-5. Auto ads may be enabled from the AdSense console after approval. Before applying them, configure page exclusions for:
+5. The application renders the top banner only after the core Today/profile hero and renders the lateral unit only on wide screens.
+6. Auto ads may be enabled from the AdSense console after approval. Before applying them, configure page exclusions for:
    - `/calendar`
    - `/explore`
    - `/day/*`
@@ -42,10 +55,10 @@ Santos do Dia is prepared for Google AdSense and Search Console while monetizati
    - `/about`
    - `/advertising`
    - `/developers`
-6. Use the AdSense preview before applying Auto ads. Prefer an experiment first if available.
-7. Do not allow ads to crowd navigation, video controls, download/calendar controls or other interactive elements.
-8. Do not use `sdd-tradition`, virtual-candle state, devotional interactions or similar religious signals for ad personalization or audience construction.
-9. Minimal saint profiles remain useful product pages but are `noindex` and do not receive manual ad units until a substantive reviewed biography exists.
+7. Use the AdSense preview before applying Auto ads. Prefer an experiment first if available.
+8. Do not allow ads to crowd navigation, video controls, download/calendar controls or other interactive elements.
+9. Do not use `sdd-tradition`, virtual-candle state, devotional interactions, saint interests or similar religious signals for ad personalization or audience construction.
+10. Minimal saint profiles remain useful product pages but are `noindex` and do not receive manual ad units until a substantive reviewed biography exists.
 
 ## 3. Search Console and organic discovery
 
@@ -62,10 +75,12 @@ Santos do Dia is prepared for Google AdSense and Search Console while monetizati
 
 - `AdSense readiness` CI is green.
 - General `Quality` CI is green.
+- The general `Quality` workflow runs the AdSense readiness audit on every development change.
 - Cloudflare build for `main` succeeds.
 - `ads.txt` contains only the real publisher ID.
+- While review status is **PREPARING**, the default for `NEXT_PUBLIC_ADSENSE_ENABLED` remains `false`.
 - A minimal saint profile remains `noindex` and ad-free.
-- An editorial saint profile exposes `Person` + `ProfilePage` structured data and can show top/sidebar units only when ad serving is explicitly enabled.
+- An editorial saint profile exposes `Person` + `ProfilePage` structured data and can show top/sidebar units only when ad serving is explicitly enabled after approval.
 - Mobile remains content-first; the desktop rail disappears below the wide-screen breakpoint.
 - Privacy/CMP choices can be reopened from the footer once AdSense is connected.
 
