@@ -1,0 +1,102 @@
+name: Build Vatican corroboration evidence
+
+on:
+  workflow_run:
+    workflows: ['Harvest Vatican daily saints']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-vatican-corroboration-evidence
+  cancel-in-progress: false
+
+jobs:
+  build-evidence:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate binding adapter
+        run: |
+          npm run automation:audit
+          node scripts/autonomy/test-vatican-corroboration-evidence.mjs
+
+      - name: Pull latest verified Vatican evidence package
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: npm run dropbox:pull-stream -- --stream calendar/vatican-saints/v1/pt --destination staging/dropbox-intake/calendar/vatican-saints/v1/pt
+
+      - name: Extract verified package
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive='staging/dropbox-intake/calendar/vatican-saints/v1/pt/package.tar.gz'
+          destination='staging/dropbox-intake/calendar/vatican-saints/v1/pt/extracted'
+          mkdir -p "$destination"
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process');
+          const archive = 'staging/dropbox-intake/calendar/vatican-saints/v1/pt/package.tar.gz';
+          const listing = execFileSync('tar', ['-tzf', archive], { encoding: 'utf8' });
+          for (const entry of listing.split(/\r?\n/).filter(Boolean)) {
+            if (entry.startsWith('/') || entry.split('/').includes('..')) throw new Error(`Unsafe archive entry: ${entry}`);
+          }
+          NODE
+          tar -xzf "$archive" -C "$destination" --no-same-owner --no-same-permissions
+          normalized="$(find "$destination" -type f -name normalized.json | head -n 1)"
+          test -n "$normalized"
+          cp "$normalized" staging/vatican-normalized-for-corroboration.json
+
+      - name: Build first-party corroboration evidence
+        run: |
+          node scripts/autonomy/build-vatican-corroboration-evidence.mjs \
+            --input staging/vatican-normalized-for-corroboration.json \
+            --bindings config/corroboration-source-bindings.vatican-news-pt.json \
+            --output staging/corroboration-evidence/vatican-news/pt
+          cp staging/dropbox-intake/calendar/vatican-saints/v1/pt/consumer-receipt.json \
+            staging/corroboration-evidence/vatican-news/pt/upstream-vatican-receipt.json
+
+      - name: Verify evidence remains shadow-only
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const base='staging/corroboration-evidence/vatican-news/pt';
+          const report=JSON.parse(fs.readFileSync(`${base}/report.json`,'utf8'));
+          const evidence=JSON.parse(fs.readFileSync(`${base}/evidence.json`,'utf8'));
+          const receipt=JSON.parse(fs.readFileSync(`${base}/upstream-vatican-receipt.json`,'utf8'));
+          if(report.mode!=='shadow-evidence'||report.productionWriteAllowed!==false) throw new Error('Vatican evidence adapter escaped shadow mode.');
+          if(receipt.verified!==true) throw new Error('Vatican evidence adapter did not consume a verified Dropbox package.');
+          if(!Array.isArray(evidence.items)) throw new Error('Vatican evidence output is malformed.');
+          NODE
+
+      - name: Upload short-lived evidence artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: vatican-corroboration-evidence-${{ github.run_id }}
+          path: staging/corroboration-evidence/vatican-news/pt/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Archive corroboration evidence in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream corroboration-evidence/vatican-news/pt --source staging/corroboration-evidence/vatican-news/pt
