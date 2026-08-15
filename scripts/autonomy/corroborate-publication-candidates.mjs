@@ -67,9 +67,9 @@ function editorialEvidence(filePath, sourceRegistry) {
       observanceId: record.observanceId,
       claimClass,
       value: record.claimValue,
-      sourceId: source.id,
+      sourceId: record.source.catalogSourceId ?? source.id,
       sourceUrl: record.source.url,
-      independenceGroup: new URL(source.url).hostname.replace(/^www\./u, ''),
+      independenceGroup: new URL(record.source.url).hostname.replace(/^www\./u, ''),
       authorityScore: source.authorityScore,
       verified: true,
       firstParty: authorityIsFirstParty(source),
@@ -98,7 +98,8 @@ function validateEvidence(item, sourceRegistry, policy) {
   }
   return {
     ...item,
-    sourceId: source.id,
+    sourceId: normalizeSpace(item.sourceId) || source.id,
+    authoritySourceId: source.id,
     sourceUrl: item.sourceUrl ?? source.url,
     independenceGroup,
     authorityScore,
@@ -117,10 +118,16 @@ export function corroborateClaims({ queue, decisions, evidence, policy, sourceRe
   const conflicts = [];
 
   for (const claim of queue.items ?? []) {
-    const candidates = validatedEvidence.filter((item) => item.claimClass === claim.claimClass && identityMatches(claim, item) && item.sourceId !== originSourceId);
+    const candidates = validatedEvidence.filter((item) => item.claimClass === claim.claimClass
+      && identityMatches(claim, item)
+      && item.sourceId !== originSourceId
+      && item.authoritySourceId !== originSourceId);
     const expected = normalizeValue(claim.claimClass, claim.value ?? claim.name ?? '');
     const matching = candidates.filter((item) => normalizeValue(claim.claimClass, item.value) === expected);
-    const disagreeing = candidates.filter((item) => normalizeValue(claim.claimClass, item.value) !== expected);
+    const exclusiveValue = (policy.matching.exclusiveValueClaimClasses ?? []).includes(claim.claimClass);
+    const disagreeing = exclusiveValue
+      ? candidates.filter((item) => normalizeValue(claim.claimClass, item.value) !== expected)
+      : [];
 
     if (disagreeing.length) {
       conflicts.push({
@@ -183,6 +190,7 @@ export function corroborateClaims({ queue, decisions, evidence, policy, sourceRe
 function compactEvidence(item) {
   return {
     sourceId: item.sourceId,
+    authoritySourceId: item.authoritySourceId,
     sourceUrl: item.sourceUrl,
     independenceGroup: item.independenceGroup,
     authorityScore: item.authorityScore,
