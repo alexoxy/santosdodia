@@ -24,11 +24,15 @@ function expect(condition,message){if(!condition)failures.push(message)}
 
 if(!failures.length){
   const config=text('lib/adsense.ts');
-  for(const path of ['/privacy','/terms','/faq','/corrections','/about','/advertising','/developers','/live']){
+  for(const path of ['/calendar','/explore','/day','/privacy','/terms','/faq','/corrections','/about','/advertising','/developers','/live']){
     expect(config.includes(`'${path}'`),`AdSense script exclusion missing ${path}`);
   }
   expect(config.includes("NEXT_PUBLIC_ADSENSE_ENABLED === 'true'"),'Advertising must require an explicit enable flag');
   expect(config.includes('CLIENT_RE.test(ADSENSE_CLIENT)'),'Advertising must reject malformed publisher IDs');
+  expect(config.includes("return pathname === '/'"),'Generic AdSense loading must be homepage-only');
+
+  const bootstrap=text('app/components/AdSenseBootstrap.tsx');
+  expect(bootstrap.includes('force = false'),'Editorial pages must opt in explicitly to the AdSense script');
 
   const adsTxt=text('app/ads.txt/route.ts');
   expect(adsTxt.includes('status: 404'),'ads.txt must fail closed before a publisher ID exists');
@@ -45,6 +49,7 @@ if(!failures.length){
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
 
   const profile=text('app/components/SaintProfile.tsx');
+  expect(profile.includes('biography?<AdSenseBootstrap force/>'),'Only editorial biographies may opt into the AdSense script');
   expect(profile.includes('biography?<AdSlot'),'Profile ads must require a substantive biography');
   const home=text('app/page.tsx');
   expect(home.indexOf('home-trust-grid') < home.indexOf('ADSENSE_HOME_SLOT} placement="home"'),'Homepage ad must appear after publisher-created explanatory content');
