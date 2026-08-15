@@ -89,6 +89,7 @@ export function extractPrimarySnlObservance(summary, description) {
       rank,
       rankSource: 'description-heading',
       dayLabel,
+      evidenceHeading: heading,
     };
   }
 
@@ -104,6 +105,7 @@ export function extractPrimarySnlObservance(summary, description) {
     rank: inferredRank,
     rankSource: inferredRank ? 'office-line' : 'none',
     dayLabel,
+    evidenceHeading: firstColourLine || dayLabel,
   };
 }
 
@@ -167,7 +169,8 @@ export function normalizePortugalSnlAgenda(ics, manifest) {
         uid: event.uid,
         dayLabel: event.summary,
         primaryObservance,
-        description: event.description,
+        description: primaryObservance.evidenceHeading,
+        rawDescription: event.description,
         location: event.location,
         url: event.url,
       },
