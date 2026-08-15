@@ -106,6 +106,7 @@ export function promoteReviewedNavigation(source, ledger) {
   const seenObservances = new Set();
   const publishedPeople = [];
   const publishedObservances = [];
+  const reviewedAtValues = [];
 
   for (const decision of ledger.decisions) {
     if (decision?.decision !== 'publish-reviewed-identity-observance') {
@@ -125,6 +126,7 @@ export function promoteReviewedNavigation(source, ledger) {
     }
     seenPeople.add(decision.personEntityId);
     validateReviewMetadata(decision);
+    reviewedAtValues.push(decision.reviewedAt);
 
     const person = people.get(decision.personEntityId);
     if (!person) throw new Error(`Unknown publication person ${decision.personEntityId}.`);
@@ -162,9 +164,15 @@ export function promoteReviewedNavigation(source, ledger) {
     publishedPeople.push(decision.personEntityId);
   }
 
+  // Use review input state, not wall-clock time, so identical reviewed inputs
+  // produce byte-stable public source packages across scheduled runs.
+  const appliedAt = reviewedAtValues.length
+    ? reviewedAtValues.slice().sort((left, right) => Date.parse(left) - Date.parse(right)).at(-1)
+    : null;
+
   cloned.publicPromotion = {
     schemaVersion: 1,
-    appliedAt: new Date().toISOString(),
+    appliedAt,
     decisionCount: ledger.decisions.length,
     publishedPersonCount: publishedPeople.length,
     publishedObservanceCount: publishedObservances.length,
