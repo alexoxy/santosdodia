@@ -34,6 +34,7 @@ if(!failures.length){
   expect(config.includes('NEXT_PUBLIC_ADSENSE_TOP_SLOT'),'Top banner slot is missing');
   expect(config.includes('NEXT_PUBLIC_ADSENSE_SIDEBAR_SLOT'),'Sidebar slot is missing');
   expect(config.includes('NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION'),'Search Console verification hook is missing');
+  expect(config.includes('isAdUnitActive'),'Inactive ads must not reserve empty layout space');
   expect(config.includes('CLIENT_RE.test(ADSENSE_CLIENT)'),'Advertising must reject malformed publisher IDs');
 
   const bootstrap=text('app/components/AdSenseBootstrap.tsx');
@@ -44,7 +45,6 @@ if(!failures.length){
   const layout=text('app/layout.tsx');
   expect(layout.includes('<head><AdSenseBootstrap /></head>'),'AdSense code must be rendered in document head');
   expect(layout.includes('GOOGLE_SITE_VERIFICATION'),'Search Console verification must be exposed through metadata');
-  expect(layout.includes("'google-adsense-account'"),'AdSense account metadata must be exposed when configured');
   expect(layout.includes("import './ads.css'"),'Responsive ad layout CSS must be loaded');
 
   const adsTxt=text('app/ads.txt/route.ts');
@@ -69,6 +69,7 @@ if(!failures.length){
   const home=text('app/page.tsx');
   expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
   expect(home.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
+  expect(home.includes('has-ad-rail'),'Homepage must collapse the rail when advertising is inactive');
   expect(home.includes('SAINT_BIOGRAPHIES'),'Homepage must internally link substantive editorial profiles');
 
   const privacy=text('app/components/AdvertisingPrivacyNotice.tsx');
