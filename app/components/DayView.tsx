@@ -8,6 +8,7 @@ import {
 } from "../../data/observances";
 import { validationStatusLabel } from "../../lib/claim-evidence";
 import { getFeatureCopy } from "../../lib/feature-copy";
+import { type Locale } from "../../lib/i18n";
 import {
   formatFullCivilDate,
   formatLocalizedDate,
@@ -24,7 +25,29 @@ import CandleButton from "./CandleButton";
 import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
 
-export default function DayView({ dateISO }: { dateISO: string }) {
+type DayMode = "dated" | "annual";
+
+type AnnualDayCopy = {
+  eyebrow: string;
+  body: (year: number) => string;
+  datedLink: (year: number) => string;
+  annualLink: string;
+};
+
+const annualDayCopy: Record<Locale, AnnualDayCopy> = {
+  en: { eyebrow: "Celebrations on this date", body: year => `Saints and Christian celebrations associated with this civil date, resolved for ${year}. Movable feasts can fall on another date in other years.`, datedLink: year => `Open the ${year} calendar`, annualLink: "Explore this date every year" },
+  pt: { eyebrow: "Celebrações nesta data", body: year => `Santos e celebrações cristãs associados a esta data civil, apresentados para ${year}. As festas móveis podem ocorrer noutra data noutros anos.`, datedLink: year => `Abrir o calendário de ${year}`, annualLink: "Explorar esta data todos os anos" },
+  es: { eyebrow: "Celebraciones en esta fecha", body: year => `Santos y celebraciones cristianas asociados a esta fecha civil, presentados para ${year}. Las fiestas móviles pueden caer en otra fecha en otros años.`, datedLink: year => `Abrir el calendario de ${year}`, annualLink: "Explorar esta fecha cada año" },
+  fr: { eyebrow: "Célébrations à cette date", body: year => `Saints et célébrations chrétiennes associés à cette date civile, présentés pour ${year}. Les fêtes mobiles peuvent tomber à une autre date selon les années.`, datedLink: year => `Ouvrir le calendrier ${year}`, annualLink: "Explorer cette date chaque année" },
+  it: { eyebrow: "Celebrazioni in questa data", body: year => `Santi e celebrazioni cristiane associati a questa data civile, presentati per il ${year}. Le feste mobili possono cadere in una data diversa negli altri anni.`, datedLink: year => `Apri il calendario ${year}`, annualLink: "Esplora questa data ogni anno" },
+  de: { eyebrow: "Feiern an diesem Datum", body: year => `Heilige und christliche Feiern, die mit diesem bürgerlichen Datum verbunden sind, für ${year} dargestellt. Bewegliche Feste können in anderen Jahren auf ein anderes Datum fallen.`, datedLink: year => `Kalender ${year} öffnen`, annualLink: "Dieses Datum jedes Jahr erkunden" },
+  pl: { eyebrow: "Obchody tego dnia", body: year => `Święci i chrześcijańskie obchody związane z tą datą kalendarzową, przedstawione dla ${year} roku. Święta ruchome mogą w innych latach przypadać w innym dniu.`, datedLink: year => `Otwórz kalendarz na ${year} rok`, annualLink: "Przeglądaj tę datę co roku" },
+  ru: { eyebrow: "Празднования в эту дату", body: year => `Святые и христианские празднования, связанные с этой календарной датой, показаны для ${year} года. Переходящие праздники в другие годы могут приходиться на другую дату.`, datedLink: year => `Открыть календарь на ${year} год`, annualLink: "Смотреть эту дату каждый год" },
+  fil: { eyebrow: "Mga pagdiriwang sa petsang ito", body: year => `Mga santo at pagdiriwang Kristiyano na kaugnay ng petsang ito, ayon sa kalendaryo ng ${year}. Maaaring mapunta sa ibang petsa ang mga gumagalaw na kapistahan sa ibang taon.`, datedLink: year => `Buksan ang kalendaryo ng ${year}`, annualLink: "Tingnan ang petsang ito bawat taon" },
+  sw: { eyebrow: "Maadhimisho katika tarehe hii", body: year => `Watakatifu na maadhimisho ya Kikristo yanayohusishwa na tarehe hii, kwa kalenda ya ${year}. Sikukuu zinazohama zinaweza kuangukia tarehe nyingine katika miaka mingine.`, datedLink: year => `Fungua kalenda ya ${year}`, annualLink: "Tazama tarehe hii kila mwaka" },
+};
+
+export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; mode?: DayMode }) {
   const { locale, copy } = useLanguage();
   const feature = getFeatureCopy(locale);
   const valid = isValidDateISO(dateISO);
@@ -70,21 +93,27 @@ export default function DayView({ dateISO }: { dateISO: string }) {
         </Link>
       </section>
     );
-  const label = formatFullCivilDate(dateISO, locale, "heading"),
-    monthShort = formatLocalizedDate(
+  const year = Number(dateISO.slice(0, 4));
+  const annual = annualDayCopy[locale];
+  const label = mode === "annual"
+    ? formatLocalizedDate(dateISO, locale, { month: "long", day: "numeric" }, "heading")
+    : formatFullCivilDate(dateISO, locale, "heading");
+  const monthShort = formatLocalizedDate(
       dateISO,
       locale,
       { month: "short" },
       "standalone",
-    ),
-    year = Number(dateISO.slice(0, 4));
+    );
+  const contextHref = mode === "annual" ? `/day/${dateISO}` : `/date/${dateISO.slice(5)}`;
+  const contextLabel = mode === "annual" ? annual.datedLink(year) : annual.annualLink;
   return (
     <div className="page-stack">
       <section className="page-hero day-hero">
         <div>
-          <span className="eyebrow">{copy.observancesOn}</span>
+          <span className="eyebrow">{mode === "annual" ? annual.eyebrow : copy.observancesOn}</span>
           <h1>{label}</h1>
-          <p>{copy.disclaimer}</p>
+          <p>{mode === "annual" ? annual.body(year) : copy.disclaimer}</p>
+          <div className="hero-actions"><Link className="btn btn-secondary" href={contextHref}>{contextLabel}</Link></div>
         </div>
         <div className="date-orb">
           <strong>{Number(dateISO.slice(8, 10))}</strong>

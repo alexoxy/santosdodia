@@ -32,6 +32,21 @@ Until the AdSense site status is explicitly updated from **PREPARING** to an app
 7. Preserve mobile-first and content-first layout: monetization must not displace the core daily saint experience, navigation, calendar controls, or accessibility.
 8. Every pull request must continue to pass the AdSense readiness audit, even when the change is unrelated to monetization.
 
+## Approved target layout after review
+
+The product is being prepared for a manual, non-overlay advertising model without activating it during review:
+
+- one responsive top banner on eligible content pages;
+- one application-owned right-hand content rail on wide desktop screens;
+- the rail occupies a real layout column and disappears on narrower screens;
+- the homepage preserves the Today experience before its banner;
+- thin/noindex saint profiles remain ad-free;
+- legal, privacy, transparency, developer and live-video surfaces remain ad-free;
+- Auto ads remain off at initial activation;
+- anchor, vignette/interstitial and Google sticky side-rail overlay formats are not part of the product experience.
+
+No ad slot IDs are to be populated and `NEXT_PUBLIC_ADSENSE_ENABLED` must remain `false` while the state above is **PREPARING**.
+
 ## Transition to approved advertising
 
 Advertising may only be enabled after all of the following are true:
@@ -40,7 +55,8 @@ Advertising may only be enabled after all of the following are true:
 - the approval state is recorded in this file with the observed date/time;
 - the Google CMP is published and verified on production for the relevant regions;
 - the production privacy notice remains accurate;
-- ad inventory and Auto Ads/page exclusions have been reviewed for mobile and desktop;
+- the two manual ad units and responsive layout have been reviewed for mobile and desktop;
+- Auto ads are confirmed off for the initial activation and overlay formats remain disabled by product policy;
 - the AdSense readiness and general Quality workflows are green.
 
 The approval transition must be an explicit repository change. It must not be inferred from elapsed time, an email notification, or an environment-variable change alone.

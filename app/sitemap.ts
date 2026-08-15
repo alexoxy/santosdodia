@@ -42,6 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: item.dateISO === todayISO ? 0.9 : 0.65,
     ...(item.dateISO === todayISO ? { lastModified: dailyLastModified } : {}),
   }));
+  const annualDays: MetadataRoute.Sitemap = [...new Set(observances.map(item => item.dateISO.slice(5)))].map(monthDay => ({
+    url: `${SITE_ORIGIN}/date/${monthDay}`,
+    changeFrequency: "monthly",
+    priority: 0.76,
+  }));
   const saints: MetadataRoute.Sitemap = SAINT_BIOGRAPHIES.map(item => ({
     url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
     changeFrequency: "monthly",
@@ -53,5 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const jurisdictions: MetadataRoute.Sitemap = JURISDICTIONS.map(jurisdiction => ({ url: `${SITE_ORIGIN}${jurisdictionPath(jurisdiction)}`, changeFrequency: "weekly", priority: jurisdiction.level === "diocese" || jurisdiction.level === "eparchy" ? 0.78 : 0.72 }));
   const leaders: MetadataRoute.Sitemap = ECCLESIASTICAL_PEOPLE.map(person => ({ url: `${SITE_ORIGIN}${personPath(person)}`, changeFrequency: "weekly", priority: 0.76 }));
 
-  return [...new Map([...staticRoutes, ...days, ...saints, ...topics, ...churches, ...jurisdictions, ...leaders].map(item => [item.url, item])).values()];
+  return [...new Map([...staticRoutes, ...days, ...annualDays, ...saints, ...topics, ...churches, ...jurisdictions, ...leaders].map(item => [item.url, item])).values()];
 }
