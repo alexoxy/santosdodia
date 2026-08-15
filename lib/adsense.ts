@@ -1,22 +1,9 @@
 const CLIENT_RE = /^ca-pub-\d{16}$/;
 const SLOT_RE = /^\d{10,20}$/;
 
-// The AdSense publisher ID is public by design: Google requires it in the page
-// source and ads.txt. Keep a project default so site association continues to
-// work even when the Cloudflare build does not define the public environment
-// variable. An explicit env value can still override it for another runtime.
-const DEFAULT_ADSENSE_CLIENT = 'ca-pub-2568362274337344';
-
-export const ADSENSE_CLIENT =
-  (process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? DEFAULT_ADSENSE_CLIENT).trim();
-
-// Site-association code is enabled by default for the configured publisher.
-// Set NEXT_PUBLIC_ADSENSE_CODE_ENABLED=false to explicitly suppress it.
+export const ADSENSE_CLIENT = (process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? '').trim();
 export const ADSENSE_CODE_ENABLED =
-  process.env.NEXT_PUBLIC_ADSENSE_CODE_ENABLED !== 'false' && CLIENT_RE.test(ADSENSE_CLIENT);
-
-// Actual ad serving remains fail-closed until it is explicitly enabled after
-// AdSense approval and the required consent configuration is in place.
+  process.env.NEXT_PUBLIC_ADSENSE_CODE_ENABLED === 'true' && CLIENT_RE.test(ADSENSE_CLIENT);
 export const ADSENSE_ENABLED =
   process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' && ADSENSE_CODE_ENABLED;
 
