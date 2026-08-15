@@ -36,6 +36,7 @@ import {
   getExistingProfileId,
   isRuntimePersonProfileEligible,
 } from "../../lib/runtime-profile-link";
+import TraditionTag from "./TraditionTag";
 import { useLanguage, type ChurchPreference } from "./LanguageProvider";
 
 function uniqueObservances(items: Observance[]) {
@@ -53,12 +54,18 @@ export default function SearchExplorer() {
   const year = yearInTimeZone(timeZone);
 
   useEffect(() => {
-    const sync = () =>
-      setQuery(new URLSearchParams(window.location.search).get("q") ?? "");
+    const sync = () => {
+      const params = new URLSearchParams(window.location.search);
+      setQuery(params.get("q") ?? "");
+      const requestedTradition = params.get("tradition");
+      if (requestedTradition && TRADITIONS.includes(requestedTradition as (typeof TRADITIONS)[number])) {
+        setChurch(requestedTradition as ChurchPreference);
+      }
+    };
     sync();
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
-  }, []);
+  }, [setChurch]);
 
   const dateIntent = useMemo(() => parseDiscoveryDate(q, year), [q, year]);
   const topics = useMemo(
@@ -226,10 +233,8 @@ export default function SearchExplorer() {
                         timeZone: "UTC",
                       }).format(new Date(`${item.dateISO}T00:00:00Z`))}
                     </span>
-                    <span>
-                      {item.traditions
-                        .map((value) => traditionLabel(copy, value))
-                        .join(" · ")}
+                    <span className="result-tradition-tags">
+                      {item.traditions.map((value) => <TraditionTag key={value} tradition={value} compact />)}
                     </span>
                   </div>
                   <h2>{name}</h2>

@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import {
   isValidDateISO,
   traditionClass,
-  traditionLabel,
   type Observance,
 } from "../../data/observances";
 import { validationStatusLabel } from "../../lib/claim-evidence";
@@ -22,6 +21,7 @@ import { getPublicObservancesForDate } from "../../lib/public-observances";
 import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
+import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
 
 export default function DayView({ dateISO }: { dateISO: string }) {
@@ -117,7 +117,7 @@ export default function DayView({ dateISO }: { dateISO: string }) {
                   <div>
                     <div className="tag-row">
                       {item.traditions.map((value) => (
-                        <span key={value}>{traditionLabel(copy, value)}</span>
+                        <TraditionTag key={value} tradition={value} />
                       ))}
                       <span>{copy[item.category]}</span>
                       <span>

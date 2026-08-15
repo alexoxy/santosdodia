@@ -7,6 +7,7 @@ import type {
 } from '../data/observances';
 import type { Locale, LocalizedText } from './i18n';
 import type { CalendarOccurrenceRecord } from './calendar-d1-read-model';
+import { normalizeDisplayLabel, normalizeDisplaySentence } from './linguistic/normalize-display-label.mjs';
 
 const KNOWN_TRADITIONS = new Set<Tradition>([
   'roman-catholic',
@@ -89,10 +90,11 @@ function normalizedLabels(
   for (const label of Object.values(record.labels)) {
     const locale = supportedLocale(label.locale);
     if (!locale) continue;
-    const name = label.name.normalize('NFC').trim();
+    const name = normalizeDisplayLabel(label.name.normalize('NFC').trim(), locale) as string;
     if (!name) continue;
     if (!names[locale]) names[locale] = name;
-    const description = label.description?.normalize('NFC').trim();
+    const rawDescription = label.description?.normalize('NFC').trim();
+    const description = rawDescription ? normalizeDisplaySentence(rawDescription, locale) as string : undefined;
     if (description && !summaries[locale]) summaries[locale] = description;
     statuses.push(label.translationStatus);
   }

@@ -11,6 +11,7 @@ import { displayObservanceScope } from '../../lib/observance-scope';
 import { getFeatureCopy } from '../../lib/feature-copy';
 import AddToCalendar from './AddToCalendar';
 import CandleButton from './CandleButton';
+import TraditionTag from './TraditionTag';
 import { useLanguage } from './LanguageProvider';
 
 export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Observance}){
@@ -23,7 +24,7 @@ export default function SaintProfile({id,runtimeItem}:{id:string;runtimeItem?:Ob
   <section className="page-hero saint-profile-hero"><div><span className="eyebrow">{feature.profileIntro}</span><h1>{name}</h1><p>{dateLabel} · {item.traditions.map(value=>traditionLabel(copy,value)).join(' · ')}</p><span className={`scope-label scope-${scope.kind}`}>{scope.label}</span></div><div className="saint-monogram" aria-hidden="true">✦</div></section>
   <section className="saint-profile-layout">
    <article className="saint-profile-main">
-    <div className="tag-row">{item.traditions.map(value=><span key={value}>{traditionLabel(copy,value)}</span>)}<span>{copy[item.category]}</span><span>{displayCalendarSystem(item.calendarSystem,locale)}</span><span>{validationStatusLabel(item.validationStatus,locale)}</span></div>
+    <div className="tag-row">{item.traditions.map(value=><TraditionTag key={value} tradition={value}/>)}<span>{copy[item.category]}</span><span>{displayCalendarSystem(item.calendarSystem,locale)}</span><span>{validationStatusLabel(item.validationStatus,locale)}</span></div>
     <h2>{feature.associatedWith}</h2>
     {patronages.length?<div className="patronage-cloud">{patronages.map(value=><span key={value}>{value}</span>)}</div>:<p>{copy.disclaimer}</p>}
     {evidence.length?<section className="profile-summary"><span className="eyebrow">{evidenceCopy.title}</span><p><strong>{evidenceCopy.reviewed}: {evidenceDate}</strong></p>{evidence.map((entry,index)=>{const unresolved=displayPatronages(unresolvedPatronages(entry),locale);return <div key={`${entry.claimType}-${index}`}><h3>{claimTypeLabel(entry.claimType,locale)}</h3><p>{evidenceCopy.corroborated}</p><p><a className="text-link" href={entry.source.url} target="_blank" rel="noreferrer">{evidenceCopy.officialSource}: {entry.source.name} ↗</a></p>{unresolved.length?<><h3>{evidenceCopy.unresolvedTitle}</h3><p>{evidenceCopy.unresolvedBody}</p><div className="patronage-cloud">{unresolved.map(value=><span key={value}>{value}</span>)}</div></>:null}</div>})}</section>:null}
