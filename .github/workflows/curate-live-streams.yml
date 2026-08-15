@@ -1,8 +1,11 @@
 name: Curate official live streams
 
 on:
-  schedule:
-    - cron: '41 7 * * 0'
+  workflow_run:
+    workflows:
+      - Source freshness audit
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -14,6 +17,7 @@ concurrency:
 
 jobs:
   curate:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 25
