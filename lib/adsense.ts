@@ -42,6 +42,7 @@ export const ADSENSE_SHARED_FRAME_PREFIXES = [
   '/date',
   '/day',
   '/explore',
+  '/guides',
   '/holidays',
   '/jurisdiction',
   '/leader',
