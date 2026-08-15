@@ -1,4 +1,18 @@
-import type { Metadata } from 'next';
-import SearchExplorer from '../components/SearchExplorer';
-export const metadata:Metadata={title:'Find Saints and Observances',description:'Search editorially reviewed saints and Christian observances by name, date and tradition.',alternates:{canonical:'/explore'}};
-export default function ExplorePage(){return <SearchExplorer/>}
+import type { Metadata } from "next";
+import SearchExplorer from "../components/SearchExplorer";
+import { getFeatureCopy } from "../../lib/feature-copy";
+import { requestPublicLocale } from "../../lib/request-public-locale";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await requestPublicLocale();
+  const copy = getFeatureCopy(locale);
+  return {
+    title: copy.findTitle,
+    description: copy.findIntro,
+    alternates: { canonical: "/explore" },
+  };
+}
+
+export default function ExplorePage() {
+  return <SearchExplorer />;
+}
