@@ -1,8 +1,9 @@
 name: Portugal SNL calendar staging
 
 on:
-  schedule:
-    - cron: '23 5 * * 1'
+  workflow_run:
+    workflows: ['Prepare LitCal staging package']
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -14,6 +15,7 @@ concurrency:
 
 jobs:
   stage:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -31,9 +33,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Validate Portugal calendar policy and parser
-        run: |
-          npm run automation:audit
-          npm run calendar:portugal-snl-test
+        run: npm run calendar:portugal-snl-test
 
       - name: Fetch official SNL subscription feed
         run: node scripts/calendar/fetch-portugal-snl-agenda.mjs --output-dir staging/portugal-snl
