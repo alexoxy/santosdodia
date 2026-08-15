@@ -20,6 +20,7 @@ on:
       - 'app/page.tsx'
       - 'app/sitemap.ts'
       - 'lib/adsense.ts'
+      - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
@@ -42,6 +43,7 @@ on:
       - 'app/page.tsx'
       - 'app/sitemap.ts'
       - 'lib/adsense.ts'
+      - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
@@ -60,3 +62,55 @@ jobs:
           node-version-file: .node-version
       - name: Audit monetization and search boundaries
         run: node scripts/check-adsense-readiness.mjs
+
+  production:
+    if: github.event_name == 'push'
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Verify deployed AdSense association
+        shell: bash
+        env:
+          EXPECTED_CLIENT: ca-pub-2568362274337344
+          EXPECTED_SELLER: pub-2568362274337344
+        run: |
+          set -euo pipefail
+          for attempt in {1..36}; do
+            home_url="https://www.santosdodia.com/?adsense-check=${GITHUB_SHA}-${attempt}"
+            ads_url="https://www.santosdodia.com/ads.txt?adsense-check=${GITHUB_SHA}-${attempt}"
+
+            home_ok=false
+            ads_ok=false
+
+            if curl --fail --silent --show-error --location --max-time 20 \
+              -H 'Cache-Control: no-cache' "$home_url" -o /tmp/home.html; then
+              if grep -Fq 'google-adsense-account' /tmp/home.html \
+                && grep -Fq "$EXPECTED_CLIENT" /tmp/home.html \
+                && grep -Fq 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' /tmp/home.html; then
+                home_ok=true
+              fi
+            fi
+
+            if curl --fail --silent --show-error --location --max-time 20 \
+              -H 'Cache-Control: no-cache' "$ads_url" -o /tmp/ads.txt; then
+              if grep -Fxq "google.com, ${EXPECTED_SELLER}, DIRECT, f08c47fec0942fa0" /tmp/ads.txt; then
+                ads_ok=true
+              fi
+            fi
+
+            if [ "$home_ok" = true ] && [ "$ads_ok" = true ]; then
+              echo 'Production exposes the expected AdSense account, script and ads.txt seller record.'
+              exit 0
+            fi
+
+            echo "Attempt ${attempt}: waiting for the production deployment (homepage=${home_ok}, ads.txt=${ads_ok})."
+            sleep 5
+          done
+
+          echo 'Production did not expose the expected AdSense association within the verification window.'
+          echo 'Homepage AdSense matches:'
+          grep -Eo 'google-adsense-account|ca-pub-[0-9]+|pagead2\.googlesyndication\.com/pagead/js/adsbygoogle\.js' /tmp/home.html 2>/dev/null || true
+          echo 'ads.txt response:'
+          cat /tmp/ads.txt 2>/dev/null || true
+          exit 1
