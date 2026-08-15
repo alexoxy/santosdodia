@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { localeLabels, PUBLIC_LOCALES, type Locale } from '../../lib/i18n';
+import { localeLabels, type Locale } from '../../lib/i18n';
+import { READY_PUBLIC_LOCALES } from '../../lib/public-locale-policy';
 import { localeOptionLabel } from '../../lib/locale-coverage';
 import { traditionClass, traditionLabel, TRADITIONS } from '../../data/observances';
 import { liturgyLabel } from '../../lib/liturgy-i18n';
@@ -51,7 +52,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
    <nav className="main-nav" aria-label={primaryNavLabels[locale]}><Link href="/">{feature.navToday}</Link><Link href="/calendar">{feature.navCalendars}</Link><Link href="/explore">{feature.navFind}</Link><Link href="/pilgrimages">{pilgrimage}</Link><Link href="/live">{feature.navLive}</Link></nav>
    <div className="preference-pickers">
     <label className={`church-picker ${churchColourClass}`}><span className="sr-only">{copy.tradition}</span><span className="picker-colour" aria-hidden="true"/><select value={church} onChange={event=>setChurch(event.target.value as ChurchPreference)}><option value="all">{copy.all}</option>{TRADITIONS.map(value=><option key={value} value={value}>{traditionLabel(copy,value)}</option>)}</select></label>
-    <label className="language-picker"><span className="sr-only">{languageLabels[locale]}</span><select value={locale} onChange={event => setLocale(event.target.value as Locale)}>{PUBLIC_LOCALES.map(value => <option key={value} value={value}>{localeOptionLabel(value,localeLabels[value])}</option>)}</select></label>
+    <label className="language-picker"><span className="sr-only">{languageLabels[locale]}</span><select value={locale} onChange={event => setLocale(event.target.value as Locale)}>{READY_PUBLIC_LOCALES.map(value => <option key={value} value={value}>{localeOptionLabel(value,localeLabels[value])}</option>)}</select></label>
    </div>
   </div></header>
   <main className="site-main" id="main-content" tabIndex={-1}>{children}</main>
