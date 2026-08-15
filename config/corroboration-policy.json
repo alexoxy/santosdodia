@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "mode": "shadow-corroboration",
   "productionWriteAllowed": false,
-  "principle": "Corroboration may reduce human review only when evidence is claim-specific, independently sourced and value-consistent. Conflicts always escalate.",
+  "principle": "Corroboration may reduce human review only when evidence is claim-specific, independently sourced and value-consistent. Conflicts escalate only for claim classes whose values are mutually exclusive.",
   "matching": {
     "minimumIndependentSources": 2,
     "minimumAuthorityScore": 80,
@@ -16,6 +16,10 @@
       "birth-date",
       "death-date",
       "patronage"
+    ],
+    "exclusiveValueClaimClasses": [
+      "birth-date",
+      "death-date"
     ]
   },
   "escalation": {
