@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SaintProfile from "../../components/SaintProfile";
 import { getObservanceById } from "../../../data/discovery";
+import { SAINT_BIOGRAPHIES, getSaintBiography } from "../../../data/saint-biographies";
 import type { Locale } from "../../../lib/i18n";
 import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
-import { getPublicAllObservances } from "../../../lib/public-observances";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
@@ -40,7 +40,7 @@ function notFoundTitle(locale: Locale) {
 }
 
 export function generateStaticParams() {
-  return getPublicAllObservances(YEAR).map((item) => ({ id: item.id }));
+  return SAINT_BIOGRAPHIES.map((item) => ({ id: item.id }));
 }
 
 async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
@@ -60,15 +60,14 @@ export async function generateMetadata({
   const { date } = await searchParams;
   const locale = await requestPublicLocale();
   const item = await resolveProfile(id, locale, date);
-  if (!item) return { title: notFoundTitle(locale) };
-  const description = item.summary ?? fallbackProfileDescription(locale, item.name);
+  if (!item) return { title: notFoundTitle(locale), robots: { index: false, follow: false } };
+  const biography = getSaintBiography(id, locale);
+  const description = biography?.summary ?? item.summary ?? fallbackProfileDescription(locale, item.name);
   const canonical = `/saint/${encodeURIComponent(id)}`;
   const keywords = [
     ...new Set([
       item.name,
-      ...Object.values(item.names).filter((value): value is string =>
-        Boolean(value),
-      ),
+      ...Object.values(item.names).filter((value): value is string => Boolean(value)),
       ...(item.patronages ?? []),
       ...item.traditions,
     ]),
@@ -78,6 +77,9 @@ export async function generateMetadata({
     description,
     keywords,
     alternates: { canonical },
+    robots: biography
+      ? { index: true, follow: true }
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title: item.name,
       description,

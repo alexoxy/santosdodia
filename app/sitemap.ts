@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPublicAllObservances } from "../lib/public-observances";
 import { DISCOVERY_TOPICS, topicPath } from "../data/discovery";
+import { SAINT_BIOGRAPHIES } from "../data/saint-biographies";
 import { CHURCHES } from "../data/knowledge/churches";
 import { ECCLESIASTICAL_PEOPLE } from "../data/knowledge/ecclesiastical-state";
 import { JURISDICTIONS } from "../data/knowledge/jurisdictions";
@@ -41,9 +42,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: dailyLastModified,
     },
     { path: "/leaders", changeFrequency: "weekly", priority: 0.78 },
-    { path: "/sources", changeFrequency: "monthly", priority: 0.65 },
+    { path: "/about", changeFrequency: "monthly", priority: 0.75 },
+    { path: "/sources", changeFrequency: "monthly", priority: 0.7 },
     { path: "/copyright", changeFrequency: "monthly", priority: 0.6 },
-    { path: "/privacy", changeFrequency: "yearly", priority: 0.55 },
+    { path: "/privacy", changeFrequency: "monthly", priority: 0.6 },
+    { path: "/advertising", changeFrequency: "monthly", priority: 0.6 },
     { path: "/terms", changeFrequency: "yearly", priority: 0.55 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.65 },
     { path: "/corrections", changeFrequency: "monthly", priority: 0.6 },
@@ -64,10 +67,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: item.dateISO === todayISO ? 0.9 : 0.65,
     ...(item.dateISO === todayISO ? { lastModified: dailyLastModified } : {}),
   }));
-  const saints: MetadataRoute.Sitemap = observances.map((item) => ({
-    url: `${SITE_ORIGIN}/saint/${item.id}`,
+  const saints: MetadataRoute.Sitemap = SAINT_BIOGRAPHIES.map((item) => ({
+    url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
     changeFrequency: "monthly",
-    priority: 0.8,
+    priority: 0.82,
   }));
   const topics: MetadataRoute.Sitemap = DISCOVERY_TOPICS.map((topic) => ({
     url: `${SITE_ORIGIN}${topicPath(topic)}`,

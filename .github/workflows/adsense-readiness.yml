@@ -1,0 +1,58 @@
+name: AdSense readiness
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/ads.txt/**'
+      - 'app/about/**'
+      - 'app/advertising/**'
+      - 'app/privacy/**'
+      - 'app/saint/**'
+      - 'app/components/AdSenseBootstrap.tsx'
+      - 'app/components/AdSlot.tsx'
+      - 'app/components/AdvertisingPrivacyNotice.tsx'
+      - 'app/components/PrivacyChoicesLink.tsx'
+      - 'app/components/SaintProfile.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'app/page.tsx'
+      - 'app/sitemap.ts'
+      - 'lib/adsense.ts'
+      - 'scripts/check-adsense-readiness.mjs'
+      - 'docs/adsense-activation-checklist.md'
+      - '.github/workflows/adsense-readiness.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/ads.txt/**'
+      - 'app/about/**'
+      - 'app/advertising/**'
+      - 'app/privacy/**'
+      - 'app/saint/**'
+      - 'app/components/AdSenseBootstrap.tsx'
+      - 'app/components/AdSlot.tsx'
+      - 'app/components/AdvertisingPrivacyNotice.tsx'
+      - 'app/components/PrivacyChoicesLink.tsx'
+      - 'app/components/SaintProfile.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'app/page.tsx'
+      - 'app/sitemap.ts'
+      - 'lib/adsense.ts'
+      - 'scripts/check-adsense-readiness.mjs'
+      - 'docs/adsense-activation-checklist.md'
+      - '.github/workflows/adsense-readiness.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+      - name: Audit monetization boundaries
+        run: node scripts/check-adsense-readiness.mjs
