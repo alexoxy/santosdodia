@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   traditionClass,
-  traditionLabel,
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
@@ -14,6 +13,7 @@ import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
 import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
+import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
 
 export default function TodayPanel() {
@@ -122,12 +122,10 @@ export default function TodayPanel() {
                         {name}
                       </a>
                     </h3>
-                    <p>
-                      {item.traditions
-                        .map((value) => traditionLabel(copy, value))
-                        .join(" · ")}{" "}
-                      · {copy[item.category]}
-                    </p>
+                    <div className="tag-row">
+                      {item.traditions.map((value) => <TraditionTag key={value} tradition={value} compact />)}
+                      <span>{copy[item.category]}</span>
+                    </div>
                     <span className={`scope-label scope-${scope.kind}`}>
                       {scope.label}
                     </span>

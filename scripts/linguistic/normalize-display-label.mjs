@@ -1,4 +1,1 @@
-export function normalizeDisplayLabel(value) {
-  if (typeof value !== 'string') return value;
-  return value.replace(/\s+/gu, ' ').trim();
-}
+export { normalizeDisplayLabel, normalizeDisplaySentence } from '../../lib/linguistic/normalize-display-label.mjs';
