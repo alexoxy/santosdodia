@@ -39,7 +39,7 @@ export function isAdUnitActive(value: string) {
 
 export function adsenseSellerId() {
   if (!CLIENT_RE.test(ADSENSE_CLIENT)) return null;
-  return ADSENSE_CLIENT.replace(/^ca-/, 'pub-');
+  return ADSENSE_CLIENT.replace(/^ca-/, '');
 }
 
 // Auto ads are controlled from the AdSense console. Keep these URLs in the
