@@ -32,10 +32,7 @@ import {
   getPublicObservancesForDate,
   searchPublicObservances,
 } from "../../lib/public-observances";
-import {
-  getExistingProfileId,
-  isRuntimePersonProfileEligible,
-} from "../../lib/runtime-profile-link";
+import { getSubstantiveProfileLinks } from "../../lib/substantive-profile-link";
 import TraditionTag from "./TraditionTag";
 import { useLanguage, type ChurchPreference } from "./LanguageProvider";
 
@@ -214,10 +211,7 @@ export default function SearchExplorer() {
             {items.map((item) => {
               const name = displayObservanceName(item.names, locale, item.name);
               const patronages = displayPatronages(item.patronages, locale);
-              const existingProfileId = getExistingProfileId(item, year, locale);
-              const profileId =
-                existingProfileId ??
-                (isRuntimePersonProfileEligible(item) ? item.id : null);
+              const profileLinks = getSubstantiveProfileLinks(item, year, locale);
               const summary = localizedSummary(item, locale);
               const scope = displayObservanceScope(item, locale, country);
               return name ? (
@@ -263,14 +257,15 @@ export default function SearchExplorer() {
                     ))}
                   </div>
                   <div className="saint-preview-links">
-                    {profileId ? (
+                    {profileLinks.map((profile) => (
                       <Link
-                        className="btn btn-primary"
-                        href={`/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(item.dateISO)}`}
+                        className={profile.direct ? "btn btn-primary" : "btn btn-secondary"}
+                        key={profile.id}
+                        href={`/saint/${encodeURIComponent(profile.id)}?date=${encodeURIComponent(item.dateISO)}`}
                       >
-                        {feature.openProfile}
+                        {feature.openProfile}{profileLinks.length > 1 || !profile.direct ? `: ${profile.name}` : ''}
                       </Link>
-                    ) : null}
+                    ))}
                     <Link className="text-link" href={`/day/${item.dateISO}`}>
                       {feature.openDay} →
                     </Link>
