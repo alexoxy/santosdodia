@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import AnnualDateEditorialSection from "../../components/AnnualDateEditorialSection";
 import DayView from "../../components/DayView";
-import { getAnnualDateEditorial } from "../../../data/date-editorial";
+import { getAnnualDateEditorial } from "../../../data/date-editorial-registry";
 import { getSaintBiographyRecord } from "../../../data/saint-biographies";
 import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
