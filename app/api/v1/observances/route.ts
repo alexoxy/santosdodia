@@ -15,6 +15,7 @@ import {
   getPublicMonthlyObservances,
   getPublicObservancesForDate,
 } from "../../../../lib/public-observances";
+import { enrichObservancesEditorial } from "../../../../lib/observance-editorial";
 import { readCalendarOccurrences } from "../../../../lib/calendar-d1-read-model";
 import { mergePublicCalendarObservances } from "../../../../lib/calendar-public-adapter";
 import { getOptionalCalendarDatabase } from "../../../../lib/cloudflare-calendar-db";
@@ -102,7 +103,8 @@ export async function GET(request: NextRequest) {
   }
 
   const merged = mergePublicCalendarObservances(curated, d1Records, locale);
-  const data = merged.items
+  const publicItems = enrichObservancesEditorial(merged.items);
+  const data = publicItems
     .map((item) => {
       const names = trustworthyNames(item.names, locale);
       const localizedItem = { ...item, names };
@@ -129,7 +131,7 @@ export async function GET(request: NextRequest) {
         date,
         locale,
         count: data.length,
-        withheldForTranslation: merged.items.length - data.length,
+        withheldForTranslation: publicItems.length - data.length,
         filters,
         live: false,
         requestedLive: p.has("live"),

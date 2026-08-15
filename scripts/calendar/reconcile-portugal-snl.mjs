@@ -3,12 +3,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyGeneralRomanAuthorityCorrections } from './general-roman-authority-corrections.mjs';
 
 const RANKS = { solemnity: 5, feast: 4, memorial: 3, 'optional-memorial': 2, weekday: 1 };
 
-// This lexicon is matching-only. It normalizes well-known spelling/language variants so that
-// the proposal engine does not confuse translation distance with a Portugal-specific calendar delta.
-// It never creates or approves a canonical identity.
+// Matching-only lexicon. These equivalences reduce translation distance; they never create
+// or approve a canonical identity and they never override Church/jurisdiction semantics.
 const TOKEN_EQUIVALENTS = new Map(Object.entries({
   antonio:'anthony', francisco:'francis', jose:'joseph', joao:'john', juan:'john', giovanni:'john',
   pedro:'peter', pietro:'peter', paulo:'paul', marcos:'mark', tiago:'james', lucas:'luke', andre:'andrew',
@@ -35,6 +35,8 @@ const TOKEN_EQUIVALENTS = new Map(Object.entries({
   imaculada:'immaculate', conceicao:'conception', senhor:'lord', jesus:'jesus', cristo:'christ', familia:'family',
   operario:'worker', apostolo:'apostle', apostolos:'apostles', evangelista:'evangelist', martir:'martyr', martires:'martyrs',
   companheiro:'companion', companheiros:'companions', todos:'all',
+  sigmaringa:'sigmaringen', sena:'siena', cassia:'cascia', cantuaria:'canterbury', batista:'baptist',
+  latrao:'lateran', hungria:'hungary', carmelo:'carmel', calcuta:'calcutta', loiola:'loyola',
 }));
 
 const NOISE = new Set([
@@ -94,7 +96,18 @@ function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   if (/santa maria no sabado/u.test(source) && /^SatMemBVM/u.test(candidateId)) return 1;
   if (/antonio de lisboa/u.test(source) && candidateId === 'StAnthonyPadua') return 1;
   if (/fatima/u.test(source) && candidateId === 'OurLadyOfFatima') return 0.98;
+  if (/nascimento.*joao.*batista/u.test(source) && candidateId === 'NativityJohnBaptist') return 1;
+  if (/martirio.*joao.*batista/u.test(source) && candidateId === 'BeheadingJohnBaptist') return 1;
+  if (/luis de franca/u.test(source) && candidateId === 'StLouis') return 0.98;
   return 0;
+}
+function isStructuralDayLabel(value) {
+  const source = ascii(value);
+  return /^(segunda-feira|terca-feira|quarta-feira|quinta-feira|sexta-feira|sabado)\b.*\b(semana|depois das cinzas|dia dentro da oitava do natal)\b/u.test(source);
+}
+function structuralDayScore(snlEvent, candidate) {
+  if (candidate.rank !== 'weekday' || candidate.dateISO !== snlEvent.dateISO) return 0;
+  return isStructuralDayLabel(snlEvent.names?.pt?.value ?? '') ? 1 : 0;
 }
 function dateDistance(left, right) {
   const a = Date.parse(`${left}T00:00:00Z`), b = Date.parse(`${right}T00:00:00Z`);
@@ -134,11 +147,19 @@ export function loadGeneralRomanReference(mirrorRoot, years) {
   for (const year of years) for (const locale of locales) {
     const file = path.join(mirrorRoot, String(year), `${locale}.json`); if (!fs.existsSync(file)) continue;
     const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
-    for (const event of normalizeLitcal(payload, locale)) {
+    const corrected = applyGeneralRomanAuthorityCorrections(normalizeLitcal(payload, locale), { year, locale });
+    for (const event of corrected) {
       const key = `${event.id}|${event.dateISO}`;
-      const current = byId.get(key) ?? { id:event.id, canonicalEventId:event.canonicalEventId, dateISO:event.dateISO, grade:event.grade, rank:canonicalRank(event.grade), names:{} };
-      current.names[locale] = event.name;
-      if (!current.grade && event.grade) { current.grade = event.grade; current.rank = canonicalRank(event.grade); }
+      const current = byId.get(key) ?? {
+        id:event.id, canonicalEventId:event.canonicalEventId ?? `rc:${event.id}`, dateISO:event.dateISO,
+        grade:event.grade, rank:canonicalRank(event.grade), names:{}, authorityCorrection:event.authorityCorrection ?? null,
+      };
+      if (event.name) current.names[locale] = event.name;
+      if (event.grade && (event.authorityCorrection || !current.grade)) {
+        current.grade = event.grade;
+        current.rank = canonicalRank(event.grade);
+      }
+      if (event.authorityCorrection) current.authorityCorrection = event.authorityCorrection;
       byId.set(key, current);
     }
   }
@@ -151,8 +172,10 @@ function candidateScore(snlEvent, candidate) {
     .map((name) => ({ name, lexical: lexicalScore(sourceLabel, name), basis: 'multilingual-token-normalization' }))
     .sort((a,b)=>b.lexical-a.lexical);
   const semanticAlias = reviewedSemanticAliasScore(sourceLabel, candidate.id);
+  const structuralAlias = structuralDayScore(snlEvent, candidate);
   let best = comparisons[0] ?? { name:'', lexical:0, basis:'none' };
   if (semanticAlias > best.lexical) best = { name:candidate.id, lexical:semanticAlias, basis:'reviewed-semantic-alias' };
+  if (structuralAlias > best.lexical) best = { name:candidate.id, lexical:structuralAlias, basis:'same-date-structural-day-inheritance' };
   const distance = dateDistance(snlEvent.dateISO, candidate.dateISO); const sameDate = distance === 0;
   const sourceRank = snlRank(snlEvent); const ranksAgree = Boolean(sourceRank && candidate.rank && sourceRank === candidate.rank);
   const score = Math.min(1, best.lexical * 0.78 + (sameDate ? 0.18 : Math.max(0, 0.12 - distance * 0.015)) + (ranksAgree ? 0.04 : 0));
@@ -161,6 +184,7 @@ function candidateScore(snlEvent, candidate) {
     generalRomanGrade:candidate.grade, generalRomanRank:candidate.rank, names:candidate.names,
     lexicalScore:best.lexical, matchingBasis:best.basis, bestComparedName:best.name,
     dateDistanceDays:distance, sameDate, ranksAgree, score:Number(score.toFixed(4)),
+    authorityCorrection:candidate.authorityCorrection ?? null,
   };
 }
 
@@ -196,10 +220,11 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     generatedAt:new Date().toISOString(), summary:{ inputOccurrences:sourceEvents.length, generalRomanReferenceEvents:generalRoman.length, ...buckets },
     policy:{
       identityRule:'No canonical identity is created or changed from a name match. All outputs are review proposals.',
-      semanticRule:'Multilingual token equivalence, identifier splitting and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
+      semanticRule:'Multilingual token equivalence, identifier splitting, structural-day inheritance and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
+      authorityRule:'Normative General Roman corrections are applied above the operational mirror; they are not Portugal deltas.',
       dateRule:'Same civil date is evidence of calendar alignment, not proof of semantic identity.',
       transferRule:'Strong lexical similarity on a nearby date is a transfer candidate, never an automatic link.',
-      rankRule:'Rank differences remain explicit Portugal deltas and require review.',
+      rankRule:'Rank differences remain explicit Portugal deltas and require review unless the General Roman reference itself is corrected by higher normative authority.',
     }, items:output };
 }
 

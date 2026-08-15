@@ -12,12 +12,19 @@ on:
       - 'scripts/calendar/fetch-portugal-snl-agenda.mjs'
       - 'scripts/calendar/normalize-portugal-snl-agenda.mjs'
       - 'scripts/calendar/reconcile-portugal-snl.mjs'
+      - 'scripts/calendar/general-roman-authority-corrections.mjs'
       - 'scripts/calendar/build-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs'
       - 'scripts/calendar/test-portugal-snl-agenda.mjs'
       - 'scripts/calendar/test-portugal-snl-reconciliation.mjs'
       - 'scripts/calendar/test-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs'
+      - 'scripts/calendar/test-observance-editorial.mjs'
+      - 'data/observance-editorial.ts'
+      - 'lib/observance-editorial.ts'
+      - 'lib/public-observances.ts'
+      - 'lib/calendar-public-adapter.ts'
+      - 'app/components/DayView.tsx'
       - '.github/workflows/portugal-snl-calendar.yml'
       - 'config/automation-registry.json'
 
@@ -47,12 +54,13 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --include=optional
 
-      - name: Validate Portugal calendar, review and overlay boundaries
+      - name: Validate Portugal calendar, review, authority and editorial boundaries
         run: |
           node scripts/calendar/test-portugal-snl-agenda.mjs
           node scripts/calendar/test-portugal-snl-reconciliation.mjs
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
+          node scripts/calendar/test-observance-editorial.mjs
           npm run automation:audit
 
       - name: Fetch official SNL subscription feed

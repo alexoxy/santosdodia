@@ -8,12 +8,17 @@ import {
   type ObservanceFilters
 } from '../data/observances';
 import { getPriorityObservances, getPriorityObservancesForDate } from '../data/priority-observances';
+import { enrichObservancesEditorial } from './observance-editorial';
 import { publicObservances } from './publication-policy';
 
 function unique(items:Observance[]):Observance[]{
  const seen=new Map<string,Observance>();
  for(const item of items)seen.set(`${item.id}|${item.dateISO}`,item);
  return[...seen.values()];
+}
+
+function publish(items: Observance[]): Observance[] {
+ return enrichObservancesEditorial(publicObservances(items));
 }
 
 function matchesQuery(item:Observance,query:string,locale:Locale){
@@ -27,7 +32,7 @@ export function getPublicAllObservances(
   locale: Locale = 'en',
   filters: ObservanceFilters = {}
 ): Observance[] {
-  return publicObservances(unique([
+  return publish(unique([
     ...getAllObservances(year, locale, filters),
     ...getPriorityObservances(year, locale, filters)
   ])).sort((a,b)=>a.dateISO.localeCompare(b.dateISO)||a.name.localeCompare(b.name,locale));
@@ -40,7 +45,7 @@ export function getPublicMonthlyObservances(
   filters: ObservanceFilters = {}
 ): Observance[] {
   const month=monthIndex+1;
-  return publicObservances(unique([
+  return publish(unique([
     ...getMonthlyObservances(year, monthIndex, locale, filters),
     ...getPriorityObservances(year, locale, filters).filter(item=>item.month===month)
   ])).sort((a,b)=>a.dateISO.localeCompare(b.dateISO)||a.name.localeCompare(b.name,locale));
@@ -51,7 +56,7 @@ export function getPublicObservancesForDate(
   locale: Locale = 'en',
   filters: ObservanceFilters = {}
 ): Observance[] {
-  return publicObservances(unique([
+  return publish(unique([
     ...getObservancesForDate(dateISO, locale, filters),
     ...getPriorityObservancesForDate(dateISO, locale, filters)
   ]));
@@ -64,7 +69,7 @@ export function searchPublicObservances(
   filters: ObservanceFilters = {}
 ): Observance[] {
   const priority=getPriorityObservances(year,locale,filters).filter(item=>matchesQuery(item,query,locale));
-  return publicObservances(unique([
+  return publish(unique([
     ...searchObservances(query, year, locale, filters),
     ...priority
   ])).sort((a,b)=>a.dateISO.localeCompare(b.dateISO)||a.name.localeCompare(b.name,locale));
