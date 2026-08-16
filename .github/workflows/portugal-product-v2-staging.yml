@@ -9,6 +9,8 @@ on:
       - 'scripts/build/test-roman-catholic-pt-overlay-v2.mjs'
       - 'scripts/build/roman-catholic-d1-release-v2.mjs'
       - 'scripts/build/test-roman-catholic-d1-release-v2.mjs'
+      - 'scripts/build/finalize-portugal-v2-policy-upsert.mjs'
+      - 'scripts/build/test-finalize-portugal-v2-policy-upsert.mjs'
       - 'scripts/calendar/**portugal**'
       - 'data/releases/roman-catholic-pt-2026.overlay-review.json'
       - 'data/releases/roman-catholic-pt-2026.overlay-approval.json'
@@ -59,6 +61,7 @@ jobs:
         run: |
           node scripts/build/test-roman-catholic-pt-overlay-v2.mjs
           node scripts/build/test-roman-catholic-d1-release-v2.mjs
+          node scripts/build/test-finalize-portugal-v2-policy-upsert.mjs
           node scripts/calendar/test-portugal-overlay-approval.mjs
           node scripts/calendar/test-portugal-effective-calendar-preview.mjs
 
@@ -147,6 +150,9 @@ jobs:
             --manifest reports/portugal-v2/release.json \
             --dropbox-manifest-path "$DROPBOX_MANIFEST_PATH" \
             --publication-status publishable
+          node scripts/build/finalize-portugal-v2-policy-upsert.mjs \
+            --input reports/portugal-v2/release.sql \
+            --output reports/portugal-v2/release.sql
 
       - name: Validate v2 release invariants
         run: |
@@ -154,12 +160,15 @@ jobs:
           import fs from 'node:fs';
           const build=JSON.parse(fs.readFileSync('reports/portugal-v2/build.json','utf8'));
           const release=JSON.parse(fs.readFileSync('reports/portugal-v2/release.json','utf8'));
+          const sql=fs.readFileSync('reports/portugal-v2/release.sql','utf8');
           if(build.build!=='roman-catholic-pt-overlay-v2'||build.productionWriteAllowed!==false) throw new Error('Portugal v2 build crossed production boundary.');
           if(build.calendarCoverage.occurrences!==389||build.calendarCoverage.coveredDays!==365||build.productReadiness.labelCount!==1945) throw new Error('Portugal v2 coverage mismatch.');
           if(build.calendarCoverage.multiObservanceDays!==22||build.calendarCoverage.maxObservancesPerDay!==3) throw new Error(`Portugal multi-observance topology mismatch: ${JSON.stringify(build.calendarCoverage)}`);
           if(!Object.values(build.localeCompleteness).every((item)=>item.completeness===1)) throw new Error('Portugal v2 locale completeness is not 100%.');
           if(release.release!=='roman-catholic-pt-2026-v2'||release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945||release.expectedCalendarAssertions!==389) throw new Error('Portugal v2 D1 manifest mismatch.');
           if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Portugal v2 release escaped staging-only mode.');
+          if(!sql.includes("UPDATE jurisdiction_calendar_policies\nSET engine_id='snl-portugal-reviewed-overlay-v2'")) throw new Error('Portugal v2 SQL is missing scope-safe policy update.');
+          if(!sql.includes("COALESCE(jurisdiction_id,'')='pt'")||!sql.includes("COALESCE(effective_from,'')='2026-01-01'")) throw new Error('Portugal v2 SQL is not aligned with uq_calendar_policy_scope.');
           const byCanonical=new Map(build.occurrences.map((item)=>[item.canonicalEventId,item]));
           const required=[
             ['rc:Epiphany','2026-01-04'],
@@ -182,6 +191,7 @@ jobs:
             multiObservanceDays:22,
             maxObservancesPerDay:3,
             decisionCount:15,
+            policyUpsert:'scope-safe',
             status:'validated-for-d1-staging',
             productionApproved:false,
           },null,2)+'\n');
@@ -273,8 +283,10 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const release=JSON.parse(fs.readFileSync('reports/portugal-v2/release.json','utf8'));
+          const sql=fs.readFileSync('reports/portugal-v2/release.sql','utf8');
           if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Refusing a non-staging Portugal v2 release.');
           if(release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945) throw new Error('Refusing unexpected Portugal v2 release counts.');
+          if(!sql.includes("COALESCE(jurisdiction_id,'')='pt'")||!sql.includes("COALESCE(effective_from,'')='2026-01-01'")) throw new Error('Refusing Portugal v2 SQL without scope-safe policy upsert.');
           NODE
           npm run db:d1-staging-config-test
           npm run db:d1-remote-safety-test
