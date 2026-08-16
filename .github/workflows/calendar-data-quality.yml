@@ -74,6 +74,7 @@ jobs:
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
           node scripts/calendar/test-portugal-overlay-review-plan.mjs
+          node scripts/calendar/test-portugal-effective-calendar-preview.mjs
           node scripts/calendar/test-observance-editorial.mjs
 
       - name: Test profile and multilingual enrichment safeguards
