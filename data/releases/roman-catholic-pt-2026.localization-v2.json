@@ -39,8 +39,7 @@
     "rc:AdventWeekdayDec23": "advent_december_23",
     "rc:AdventWeekdayDec24": "advent_december_24",
     "rc:StColumban": "columban_of_luxeuil_abbot",
-    "rc:StBlase": "blaise_of_sebaste_bishop",
-    "rc:StMartha": "martha_of_bethany_mary_of_bethany_and_lazarus_of_bethany"
+    "rc:StBlase": "blaise_of_sebaste_bishop"
   },
   "safety": {
     "calendarAuthority": false,
