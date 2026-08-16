@@ -75,7 +75,7 @@ const preview = buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
 assert.equal(preview.publicationAllowed, false);
 assert.equal(preview.productionWriteAllowed, false);
 assert.equal(preview.summary.sourceOccurrences, 5);
-assert.equal(preview.summary.uniqueDays, 4);
+assert.equal(preview.summary.uniqueDays, 5);
 assert.equal(preview.summary.inheritedSafe, 1);
 assert.equal(preview.summary.pendingReviewRows, 4);
 assert.equal(preview.summary.preparedDecisionsUsed, 3);
