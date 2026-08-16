@@ -9,37 +9,19 @@ import { applyGeneralRomanAuthorityCorrections, GENERAL_ROMAN_AUTHORITY_CORRECTI
 const PUBLIC_LOCALES = ['en', 'pt', 'es', 'fr', 'it'];
 const MIRROR_LOCALES = { en: 'en_US', fr: 'fr_FR', it: 'it_IT' };
 
-function argument(name, fallback = null) {
-  const index = process.argv.indexOf(name);
-  return index >= 0 ? process.argv[index + 1] : fallback;
-}
+function argument(name, fallback = null) { const index = process.argv.indexOf(name); return index >= 0 ? process.argv[index + 1] : fallback; }
 function readJson(file) { return JSON.parse(fs.readFileSync(path.resolve(file), 'utf8')); }
-function writeJson(file, value) {
-  fs.mkdirSync(path.dirname(path.resolve(file)), { recursive: true });
-  fs.writeFileSync(path.resolve(file), `${JSON.stringify(value, null, 2)}\n`, 'utf8');
-}
+function writeJson(file, value) { fs.mkdirSync(path.dirname(path.resolve(file)), { recursive: true }); fs.writeFileSync(path.resolve(file), `${JSON.stringify(value, null, 2)}\n`, 'utf8'); }
 function text(value) { return String(value ?? '').normalize('NFC').trim(); }
 function sha256(value) { return createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex'); }
-function ascii(value) {
-  return text(value).normalize('NFD').replace(/[\u0300-\u036f]/gu, '').toLowerCase().replace(/[^a-z0-9]+/gu, ' ').trim();
-}
-function identifierWords(value) {
-  return text(value)
-    .replace(/^rc:/u, '')
-    .replace(/([a-z0-9])([A-Z])/gu, '$1 $2')
-    .replace(/([A-Z]+)([A-Z][a-z])/gu, '$1 $2')
-    .replace(/[_:-]+/gu, ' ');
-}
+function ascii(value) { return text(value).normalize('NFD').replace(/[\u0300-\u036f]/gu, '').toLowerCase().replace(/[^a-z0-9]+/gu, ' ').trim(); }
+function identifierWords(value) { return text(value).replace(/^rc:/u, '').replace(/([a-z0-9])([A-Z])/gu, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/gu, '$1 $2').replace(/[_:-]+/gu, ' '); }
 const NAME_STOP = new Set(['saint', 'saints', 'st', 'sts', 'the', 'of', 'and', 'a', 'an', 'blessed', 'blesseds']);
-function tokens(value) {
-  return ascii(value).split(/\s+/u).filter(Boolean).filter((token) => !NAME_STOP.has(token));
-}
+function tokens(value) { return ascii(value).split(/\s+/u).filter(Boolean).filter((token) => !NAME_STOP.has(token)); }
 function dice(left, right) {
-  const a = new Set(tokens(left));
-  const b = new Set(tokens(right));
+  const a = new Set(tokens(left)); const b = new Set(tokens(right));
   if (!a.size || !b.size) return 0;
-  let intersection = 0;
-  for (const value of a) if (b.has(value)) intersection += 1;
+  let intersection = 0; for (const value of a) if (b.has(value)) intersection += 1;
   return (2 * intersection) / (a.size + b.size);
 }
 function rankClass(value) {
@@ -51,26 +33,23 @@ function rankClass(value) {
   if (/weekday|feria|ferial/u.test(source)) return 'weekday';
   return null;
 }
-function category(value) {
-  return ['saint', 'feast', 'marian', 'apostle', 'martyr', 'fast'].includes(value) ? value : 'feast';
-}
+function category(value) { return ['saint', 'feast', 'marian', 'apostle', 'martyr', 'fast'].includes(value) ? value : 'feast'; }
 function normalizeMirrorPayload(payload, locale, year) {
   const events = (Array.isArray(payload?.events) ? payload.events : [])
     .filter((item) => text(item.dateISO).startsWith(`${year}-`))
     .filter((item) => !/_vigil$/iu.test(text(item.id)))
-    .map((item) => ({
-      ...item,
-      id: text(item.id),
-      dateISO: text(item.dateISO).slice(0, 10),
-      name: text(item.name),
-      grade: item.grade == null ? null : text(item.grade),
-      locale,
-    }));
+    .map((item) => ({ ...item, id: text(item.id), dateISO: text(item.dateISO).slice(0, 10), name: text(item.name), grade: item.grade == null ? null : text(item.grade), locale }));
   return applyGeneralRomanAuthorityCorrections(events, { year, locale });
 }
-function correctionName(generalId, locale, year) {
-  const correction = GENERAL_ROMAN_AUTHORITY_CORRECTIONS.find((item) => item.id === generalId && year >= item.effectiveFromYear);
-  return text(correction?.names?.[locale]) || null;
+function authorityCorrection(generalId, year) {
+  return GENERAL_ROMAN_AUTHORITY_CORRECTIONS.find((item) => item.id === generalId && year >= item.effectiveFromYear) ?? null;
+}
+function correctionName(generalId, locale, year) { const correction = authorityCorrection(generalId, year); return text(correction?.names?.[locale]) || null; }
+function authorityLabel(generalId, locale, year) {
+  const correction = authorityCorrection(generalId, year);
+  const label = text(correction?.names?.[locale]);
+  if (!label) return null;
+  return { label, source: 'holy-see-calendar-authority', sourceUrl: correction.source, translationStatus: 'source', sourceLocale: locale.slice(0, 2), sourceEventId: generalId, authorityDecision: correction.decision };
 }
 function properLabels(review) {
   const result = new Map();
@@ -81,59 +60,36 @@ function properLabels(review) {
   return result;
 }
 function validateLocalizationReview(localizationReview) {
-  if (
-    localizationReview?.schemaVersion !== 1
-    || localizationReview?.releaseScope !== 'roman-catholic-pt-2026-overlay-v2'
-    || localizationReview?.reviewed !== true
-    || localizationReview?.productionWriteAllowed !== false
-  ) throw new Error('Portugal v2 localization review is missing, unreviewed or outside the approved release scope.');
+  if (localizationReview?.schemaVersion !== 1 || localizationReview?.releaseScope !== 'roman-catholic-pt-2026-overlay-v2' || localizationReview?.reviewed !== true || localizationReview?.productionWriteAllowed !== false) throw new Error('Portugal v2 localization review is missing, unreviewed or outside the approved release scope.');
   const safety = localizationReview.safety ?? {};
-  if (
-    safety.calendarAuthority !== false
-    || safety.dateAuthority !== false
-    || safety.rankAuthority !== false
-    || safety.jurisdictionAuthority !== false
-    || safety.futureUnmatchedEventsFailClosed !== true
-  ) throw new Error('Portugal v2 localization review crossed the label-only safety boundary.');
+  if (safety.calendarAuthority !== false || safety.dateAuthority !== false || safety.rankAuthority !== false || safety.jurisdictionAuthority !== false || safety.futureUnmatchedEventsFailClosed !== true) throw new Error('Portugal v2 localization review crossed the label-only safety boundary.');
   for (const [canonicalEventId, labels] of Object.entries(localizationReview.canonicalLabels ?? {})) {
     if (!canonicalEventId.startsWith('rc:') && !canonicalEventId.startsWith('rc-pt:')) throw new Error(`Invalid reviewed canonical label key ${canonicalEventId}.`);
-    for (const [locale, label] of Object.entries(labels ?? {})) {
-      if (!PUBLIC_LOCALES.includes(locale) || !text(label)) throw new Error(`Invalid reviewed ${locale} label for ${canonicalEventId}.`);
-    }
+    for (const [locale, label] of Object.entries(labels ?? {})) if (!PUBLIC_LOCALES.includes(locale) || !text(label)) throw new Error(`Invalid reviewed ${locale} label for ${canonicalEventId}.`);
   }
   for (const binding of localizationReview.canonicalLabelPatterns ?? []) {
     if (!text(binding?.canonicalEventIdPattern)) throw new Error('Reviewed localization pattern is missing canonicalEventIdPattern.');
     new RegExp(binding.canonicalEventIdPattern, 'u');
-    for (const [locale, label] of Object.entries(binding.labels ?? {})) {
-      if (!PUBLIC_LOCALES.includes(locale) || !text(label)) throw new Error(`Invalid reviewed pattern ${locale} label.`);
-    }
+    for (const [locale, label] of Object.entries(binding.labels ?? {})) if (!PUBLIC_LOCALES.includes(locale) || !text(label)) throw new Error(`Invalid reviewed pattern ${locale} label.`);
   }
-  for (const [canonicalEventId, romcalId] of Object.entries(localizationReview.romcalBindings ?? {})) {
-    if (!canonicalEventId.startsWith('rc:') || !text(romcalId)) throw new Error(`Invalid reviewed Romcal binding ${canonicalEventId}.`);
-  }
+  for (const [canonicalEventId, romcalId] of Object.entries(localizationReview.romcalBindings ?? {})) if (!canonicalEventId.startsWith('rc:') || !text(romcalId)) throw new Error(`Invalid reviewed Romcal binding ${canonicalEventId}.`);
 }
 function reviewedLabel(localizationReview, canonicalEventId, locale) {
   const exact = text(localizationReview?.canonicalLabels?.[canonicalEventId]?.[locale]);
   if (exact) return exact;
   for (const binding of localizationReview?.canonicalLabelPatterns ?? []) {
     if (!new RegExp(binding.canonicalEventIdPattern, 'u').test(canonicalEventId)) continue;
-    const label = text(binding.labels?.[locale]);
-    if (label) return label;
+    const label = text(binding.labels?.[locale]); if (label) return label;
   }
   return null;
 }
-function reviewedRomcalBinding(localizationReview, canonicalEventId) {
-  return text(localizationReview?.romcalBindings?.[canonicalEventId]) || null;
-}
+function reviewedRomcalBinding(localizationReview, canonicalEventId) { return text(localizationReview?.romcalBindings?.[canonicalEventId]) || null; }
 function normalizeRomcal(payload, key, year) {
   return (Array.isArray(payload?.[key]) ? payload[key] : [])
     .map((item) => ({ id: text(item.id), dateISO: text(item.dateISO ?? item.date).slice(0, 10), name: text(item.name), rank: item.rank == null ? null : text(item.rank) }))
     .filter((item) => item.id && item.name && item.dateISO.startsWith(`${year}-`));
 }
-function pairedSpanish(english, romcalSpanishByKey) {
-  const spanish = romcalSpanishByKey.get(`${english.dateISO}|${english.id}`);
-  return spanish?.name ? spanish : null;
-}
+function pairedSpanish(english, romcalSpanishByKey) { const spanish = romcalSpanishByKey.get(`${english.dateISO}|${english.id}`); return spanish?.name ? spanish : null; }
 function bestSpanishMatch({ generalId, englishName, originalDateISO, generalRank, canonicalEventId, localizationReview, romcalEnglish, romcalSpanishByKey }) {
   const candidates = romcalEnglish.filter((item) => item.dateISO === originalDateISO);
   if (!candidates.length) return { match: null, reason: 'no-romcal-english-candidates' };
@@ -146,17 +102,13 @@ function bestSpanishMatch({ generalId, englishName, originalDateISO, generalRank
     return { match: { ...spanish, englishId: reviewed.id, score: 1, bindingStatus: 'reviewed-exact' }, reason: 'reviewed-exact-binding' };
   }
   const scored = candidates.map((candidate) => {
-    const nameScore = dice(englishName, candidate.name);
-    const idScore = dice(identifierWords(generalId), identifierWords(candidate.id));
-    const expectedRank = rankClass(generalRank);
-    const candidateRank = rankClass(candidate.rank);
+    const nameScore = dice(englishName, candidate.name); const idScore = dice(identifierWords(generalId), identifierWords(candidate.id));
+    const expectedRank = rankClass(generalRank); const candidateRank = rankClass(candidate.rank);
     const rankScore = expectedRank && candidateRank ? (expectedRank === candidateRank ? 1 : 0) : 0.5;
     const score = Number((Math.max(nameScore, idScore * 0.94) * 0.9 + rankScore * 0.1).toFixed(4));
     return { candidate, nameScore, idScore, rankScore, score };
   }).sort((a, b) => b.score - a.score || b.nameScore - a.nameScore || b.idScore - a.idScore || a.candidate.id.localeCompare(b.candidate.id));
-  const first = scored[0];
-  const second = scored[1];
-  const margin = first.score - (second?.score ?? 0);
+  const first = scored[0]; const second = scored[1]; const margin = first.score - (second?.score ?? 0);
   const strong = first.nameScore >= 0.82 || first.idScore >= 0.78 || (first.score >= 0.72 && margin >= 0.1);
   const soleModerate = candidates.length === 1 && first.score >= 0.56 && (first.nameScore >= 0.5 || first.idScore >= 0.5);
   if (!strong && !soleModerate) return { match: null, reason: 'ambiguous-romcal-identity', scored: scored.slice(0, 4) };
@@ -177,24 +129,19 @@ export function buildPortugalOverlayV2({ effective, review, localizationReview, 
 
   const mirrors = {};
   for (const [locale, upstream] of Object.entries(MIRROR_LOCALES)) {
-    const payload = mirrorPayloads?.[locale];
-    if (!payload) throw new Error(`Missing ${locale} General Roman mirror payload.`);
+    const payload = mirrorPayloads?.[locale]; if (!payload) throw new Error(`Missing ${locale} General Roman mirror payload.`);
     mirrors[locale] = normalizeMirrorPayload(payload, upstream, year);
   }
   const mirrorById = Object.fromEntries(Object.entries(mirrors).map(([locale, values]) => [locale, new Map(values.map((item) => [item.id, item]))]));
   const curated = properLabels(review);
-  const romcalEnglish = normalizeRomcal(romcalPayload, 'english', year);
-  const romcalSpanish = normalizeRomcal(romcalPayload, 'spanish', year);
+  const romcalEnglish = normalizeRomcal(romcalPayload, 'english', year); const romcalSpanish = normalizeRomcal(romcalPayload, 'spanish', year);
   if (!romcalEnglish.length || !romcalSpanish.length) throw new Error('Pinned Romcal bilingual localization stream is missing.');
   const romcalSpanishByKey = new Map(romcalSpanish.map((item) => [`${item.dateISO}|${item.id}`, item]));
 
-  const unresolved = [];
-  const occurrences = [];
+  const unresolved = []; const occurrences = [];
   for (const item of sourceItems) {
-    const canonicalEventId = text(item.canonicalEventId);
-    const generalId = canonicalEventId.startsWith('rc:') ? canonicalEventId.slice(3) : null;
-    const curatedLabels = curated.get(canonicalEventId) ?? null;
-    const labels = {};
+    const canonicalEventId = text(item.canonicalEventId); const generalId = canonicalEventId.startsWith('rc:') ? canonicalEventId.slice(3) : null;
+    const curatedLabels = curated.get(canonicalEventId) ?? null; const labels = {};
     const ptLabel = text(item.labels?.pt);
     if (!ptLabel) unresolved.push({ sourceOccurrenceId: item.sourceOccurrenceId, canonicalEventId, locale: 'pt', reason: 'missing-snl-label' });
     else labels.pt = { label: ptLabel, source: 'portugal-national-liturgy-secretariat', translationStatus: 'source', sourceLocale: 'pt' };
@@ -207,22 +154,19 @@ export function buildPortugalOverlayV2({ effective, review, localizationReview, 
       }
     } else if (generalId) {
       for (const locale of ['en', 'fr', 'it']) {
-        const sourceLabel = text(mirrorById[locale].get(generalId)?.name);
-        const reviewed = reviewedLabel(localizationReview, canonicalEventId, locale);
-        if (sourceLabel) labels[locale] = { label: sourceLabel, source: 'litcal-api', translationStatus: 'source', sourceLocale: locale, sourceEventId: generalId };
+        const authority = authorityLabel(generalId, MIRROR_LOCALES[locale], year);
+        const sourceLabel = text(mirrorById[locale].get(generalId)?.name); const reviewed = reviewedLabel(localizationReview, canonicalEventId, locale);
+        if (authority) labels[locale] = authority;
+        else if (sourceLabel) labels[locale] = { label: sourceLabel, source: 'litcal-api', translationStatus: 'source', sourceLocale: locale, sourceEventId: generalId };
         else if (reviewed) labels[locale] = { label: reviewed, source: 'santosdia-reviewed-calendar-localization', translationStatus: 'reviewed', sourceLocale: locale, sourceEventId: generalId };
         else unresolved.push({ sourceOccurrenceId: item.sourceOccurrenceId, canonicalEventId, locale, reason: 'missing-general-roman-id-label', generalId });
       }
-      const reviewedEs = reviewedLabel(localizationReview, canonicalEventId, 'es');
-      const correctionEs = correctionName(generalId, 'es_ES', year);
-      if (reviewedEs) {
-        labels.es = { label: reviewedEs, source: 'santosdia-reviewed-calendar-localization', translationStatus: 'reviewed', sourceLocale: 'es', sourceEventId: generalId };
-      } else if (correctionEs) {
-        labels.es = { label: correctionEs, source: 'santosdia-reviewed-calendar-localization', translationStatus: 'reviewed', sourceLocale: 'es', sourceEventId: generalId };
-      } else {
-        const en = mirrorById.en.get(generalId);
-        const originalDateISO = text(item.generalRomanBinding?.generalRomanDateISO) || text(en?.dateISO);
-        const englishName = text(en?.name) || reviewedLabel(localizationReview, canonicalEventId, 'en');
+      const authorityEs = authorityLabel(generalId, 'es_ES', year); const reviewedEs = reviewedLabel(localizationReview, canonicalEventId, 'es');
+      if (authorityEs) labels.es = authorityEs;
+      else if (reviewedEs) labels.es = { label: reviewedEs, source: 'santosdia-reviewed-calendar-localization', translationStatus: 'reviewed', sourceLocale: 'es', sourceEventId: generalId };
+      else {
+        const en = mirrorById.en.get(generalId); const originalDateISO = text(item.generalRomanBinding?.generalRomanDateISO) || text(en?.dateISO);
+        const englishName = text(en?.name) || correctionName(generalId, 'en_US', year) || reviewedLabel(localizationReview, canonicalEventId, 'en');
         if (!originalDateISO || !englishName) unresolved.push({ sourceOccurrenceId: item.sourceOccurrenceId, canonicalEventId, locale: 'es', reason: 'missing-general-reference-for-romcal' });
         else {
           const result = bestSpanishMatch({ generalId, englishName, originalDateISO, generalRank: en?.grade ?? item.rank, canonicalEventId, localizationReview, romcalEnglish, romcalSpanishByKey });
@@ -240,25 +184,11 @@ export function buildPortugalOverlayV2({ effective, review, localizationReview, 
     const complete = occurrences.filter((item) => text(item.labels?.[locale]?.label)).length;
     localeCompleteness[locale] = { expectedOccurrences: occurrences.length, localizedOccurrences: complete, missingOccurrences: occurrences.length - complete, completeness: Number((complete / occurrences.length).toFixed(4)) };
   }
-  const byDate = new Map();
-  for (const item of occurrences) byDate.set(item.dateISO, (byDate.get(item.dateISO) ?? 0) + 1);
-  const dayCounts = [...byDate.values()];
-  const stagingReady = unresolved.length === 0 && PUBLIC_LOCALES.every((locale) => localeCompleteness[locale].completeness === 1) && byDate.size === 365;
-  if (!stagingReady) {
-    const error = new Error(`Portugal v2 build is not staging-ready: ${unresolved.length} unresolved localization/provenance issue(s).`);
-    error.unresolved = unresolved;
-    throw error;
-  }
+  const byDate = new Map(); for (const item of occurrences) byDate.set(item.dateISO, (byDate.get(item.dateISO) ?? 0) + 1);
+  const dayCounts = [...byDate.values()]; const stagingReady = unresolved.length === 0 && PUBLIC_LOCALES.every((locale) => localeCompleteness[locale].completeness === 1) && byDate.size === 365;
+  if (!stagingReady) { const error = new Error(`Portugal v2 build is not staging-ready: ${unresolved.length} unresolved localization/provenance issue(s).`); error.unresolved = unresolved; throw error; }
   return {
-    schemaVersion: 3,
-    build: 'roman-catholic-pt-overlay-v2',
-    generatedAt: new Date().toISOString(),
-    sourceCommit,
-    year,
-    churchId: 'roman-catholic',
-    targetJurisdiction: 'pt',
-    targetPublicLocales: PUBLIC_LOCALES,
-    productionWriteAllowed: false,
+    schemaVersion: 3, build: 'roman-catholic-pt-overlay-v2', generatedAt: new Date().toISOString(), sourceCommit, year, churchId: 'roman-catholic', targetJurisdiction: 'pt', targetPublicLocales: PUBLIC_LOCALES, productionWriteAllowed: false,
     sourceRelease: { mode: effective.mode, reviewPlanStatus: effective.reviewPlanStatus, sourceOccurrences: effective.summary.sourceOccurrences, approvedDecisions: review.decisions.length, sourceEffectiveDigest: sha256(effective), approvedReviewDigest: sha256(review), reviewedLocalizationDigest: sha256(localizationReview) },
     calendarCoverage: { expectedDays: 365, coveredDays: byDate.size, occurrences: occurrences.length, multiObservanceDays: dayCounts.filter((count) => count > 1).length, maxObservancesPerDay: Math.max(...dayCounts), singleObservanceDays: dayCounts.filter((count) => count === 1).length },
     localeCompleteness,
@@ -268,35 +198,25 @@ export function buildPortugalOverlayV2({ effective, review, localizationReview, 
       es: { id: 'romcal-general-roman-es', role: 'label-only-general-roman', calendarAuthorityForPortugal: false, packageVersion: romcalPayload.packageVersion ?? null, pinnedSourceCommit: romcalPayload.pinnedSourceCommit ?? null },
       fr: { id: 'litcal-api', role: 'label-only-general-roman', calendarAuthorityForPortugal: false },
       it: { id: 'litcal-api', role: 'label-only-general-roman', calendarAuthorityForPortugal: false },
+      holySee: { id: 'holy-see-calendar-authority', role: 'higher-authority-general-roman-correction', calendarAuthorityForPortugal: false },
       reviewedProper: { id: 'santosdia-reviewed-calendar-localization', role: 'reviewed-localization-for-portugal-specific-canonical-events-and-explicit-identity-bridges' },
     },
-    provenancePolicy: { eventIdentityByCanonicalIdOnly: true, firstEventByCivilDateMatchingForbidden: true, portugalOccurrenceAuthority: 'portugal-national-liturgy-secretariat', generalRomanAndRomcalAreLabelOnlyForPortugalDates: true, humanApprovedDeltaDecisionsRequired: true, localizationReviewNeverCreatesCalendarFacts: true },
+    provenancePolicy: { eventIdentityByCanonicalIdOnly: true, firstEventByCivilDateMatchingForbidden: true, portugalOccurrenceAuthority: 'portugal-national-liturgy-secretariat', generalRomanAndRomcalAreLabelOnlyForPortugalDates: true, humanApprovedDeltaDecisionsRequired: true, localizationReviewNeverCreatesCalendarFacts: true, higherAuthorityCorrectionsPreserveNormativeSource: true },
     productReadiness: { stagingReady, productionApproved: false, productionWriteAllowed: false, occurrenceCount: occurrences.length, civilDayCount: byDate.size, labelCount: occurrences.length * PUBLIC_LOCALES.length },
     occurrences,
   };
 }
 
 function main() {
-  const year = Number(argument('--year', '2026'));
-  const effectivePath = argument('--effective');
-  const reviewPath = argument('--review');
-  const localizationReviewPath = argument('--localization-review');
-  const romcalPath = argument('--romcal');
-  const mirrorRoot = path.resolve(argument('--mirror-root', 'data/litcal-mirror/calendars/general'));
-  const outputPath = argument('--output');
+  const year = Number(argument('--year', '2026')); const effectivePath = argument('--effective'); const reviewPath = argument('--review'); const localizationReviewPath = argument('--localization-review'); const romcalPath = argument('--romcal'); const mirrorRoot = path.resolve(argument('--mirror-root', 'data/litcal-mirror/calendars/general')); const outputPath = argument('--output');
   if (!effectivePath || !reviewPath || !localizationReviewPath || !romcalPath || !outputPath) throw new Error('Usage: --effective <json> --review <json> --localization-review <json> --romcal <json> --output <json> [--mirror-root <dir>] [--year 2026]');
   const mirrorPayloads = Object.fromEntries(Object.entries(MIRROR_LOCALES).map(([locale, upstream]) => [locale, readJson(path.join(mirrorRoot, String(year), `${upstream}.json`))]));
   try {
     const result = buildPortugalOverlayV2({ effective: readJson(effectivePath), review: readJson(reviewPath), localizationReview: readJson(localizationReviewPath), mirrorPayloads, romcalPayload: readJson(romcalPath), year, sourceCommit: process.env.GITHUB_SHA ?? null });
     writeJson(outputPath, result);
     console.log(JSON.stringify({ build: result.build, occurrences: result.calendarCoverage.occurrences, days: result.calendarCoverage.coveredDays, multiObservanceDays: result.calendarCoverage.multiObservanceDays, maxObservancesPerDay: result.calendarCoverage.maxObservancesPerDay, labels: result.productReadiness.labelCount, stagingReady: result.productReadiness.stagingReady }, null, 2));
-  } catch (error) {
-    if (Array.isArray(error?.unresolved)) console.error(JSON.stringify({ unresolved: error.unresolved }, null, 2));
-    throw error;
-  }
+  } catch (error) { if (Array.isArray(error?.unresolved)) console.error(JSON.stringify({ unresolved: error.unresolved }, null, 2)); throw error; }
 }
 
 const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : '';
-if (invokedPath === fileURLToPath(import.meta.url)) {
-  try { main(); } catch (error) { console.error(error); process.exit(1); }
-}
+if (invokedPath === fileURLToPath(import.meta.url)) { try { main(); } catch (error) { console.error(error); process.exit(1); } }
