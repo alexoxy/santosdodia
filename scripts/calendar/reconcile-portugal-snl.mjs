@@ -204,29 +204,46 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     const sameDateScores = sameDate.map((candidate)=>candidateScore(event,candidate)).sort((a,b)=>b.score-a.score);
     const nearbyScores = nearby.map((candidate)=>candidateScore(event,candidate)).sort((a,b)=>b.lexicalScore-a.lexicalScore||a.dateDistanceDays-b.dateDistanceDays);
     const best=sameDateScores[0]??null, second=sameDateScores[1]??null;
-    const sourceRank=snlRank(event); const rankDifference=best?rankDelta(sourceRank,best.generalRomanRank):null;
+    const sourceRank=snlRank(event);
+    const structuralSource=isStructuralDayLabel(event.names?.pt?.value ?? '');
     const transfer=nearbyScores.find((item)=>!item.sameDate&&item.lexicalScore>=0.78&&item.dateDistanceDays<=7);
+    const strongSameDate=best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1);
+    const highSameDate=sameDateScores.filter((item)=>isHighPrecedence(item.generalRomanRank));
+    const conflictingHighSameDate=strongSameDate
+      ? highSameDate.find((item)=>item.generalRomanId!==best.generalRomanId && item.lexicalScore<0.56)
+      : highSameDate[0] ?? null;
     let disposition='portugal-proper-or-unmatched', reason='no-safe-general-roman-candidate', candidate=best;
-    if (best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1)) {
+
+    // A strong reviewed semantic match on a nearby date is more informative than an unrelated
+    // same-date Sunday/weekday. It signals a jurisdictional transfer, never an automatic link.
+    if (transfer && (!strongSameDate || transfer.lexicalScore>best.lexicalScore)) {
+      disposition='transfer-candidate-review';
+      reason='strong-label-match-on-nearby-general-roman-date';
+      candidate=transfer;
+    } else if (structuralSource && highSameDate.length) {
+      disposition='precedence-delta-review';
+      reason='general-high-precedence-event-is-absent-from-portugal-date';
+      candidate=highSameDate[0];
+    } else if (strongSameDate && isHighPrecedence(sourceRank) && conflictingHighSameDate) {
+      disposition='precedence-delta-review';
+      reason='official-high-precedence-portugal-observance-conflicts-with-general-high-precedence-same-date-event';
+      candidate=conflictingHighSameDate;
+    } else if (strongSameDate) {
+      const rankDifference=rankDelta(sourceRank,best.generalRomanRank);
       disposition=rankDifference?'rank-delta-review':'canonical-link-proposal';
       reason=rankDifference?'same-date-lexical-match-with-rank-delta':'same-date-lexical-and-structural-match';
     } else if (best && best.lexicalScore>=0.56) {
       disposition='ambiguous-review';
       reason=second && best.score-second.score<0.1?'multiple-same-date-candidates':'same-date-match-below-safe-threshold';
-    } else if (transfer) {
-      disposition='transfer-candidate-review'; reason='strong-label-match-on-nearby-general-roman-date'; candidate=transfer;
+    } else if (isHighPrecedence(sourceRank) || highSameDate.length) {
+      disposition='precedence-delta-review';
+      reason=isHighPrecedence(sourceRank)
+        ? 'official-high-precedence-portugal-observance-differs-from-general-same-date-event'
+        : 'general-high-precedence-event-is-absent-from-portugal-date';
+      candidate=highSameDate[0] ?? best;
     } else if (sameDate.length===1) {
-      const sourceIsHigh = isHighPrecedence(sourceRank);
-      const generalIsHigh = isHighPrecedence(best?.generalRomanRank);
-      const structuralSource = isStructuralDayLabel(event.names?.pt?.value ?? '');
-      if (sourceIsHigh || (generalIsHigh && structuralSource)) {
-        disposition='precedence-delta-review';
-        reason=sourceIsHigh
-          ? 'official-high-precedence-portugal-observance-differs-from-general-same-date-event'
-          : 'general-high-precedence-event-is-absent-from-portugal-date';
-      } else {
-        disposition='structural-review'; reason='single-general-roman-event-on-date-without-semantic-proof';
-      }
+      disposition='structural-review';
+      reason='single-general-roman-event-on-date-without-semantic-proof';
       candidate=sameDateScores[0];
     }
     output.push({ sourceOccurrenceId:event.id, sourceCanonicalEventId:event.canonicalEventId, dateISO:event.dateISO,
