@@ -41,7 +41,8 @@ const report={
   productReadiness:{stagingReady:true,productionApproved:false,productionWriteAllowed:false,labelCount:1945},
   occurrences,
 };
-const result=buildPortugalD1ReleaseV2({report,dropboxManifestPath:'/Santos do Dia/02_Dados_Eclesiasticos/Calendar/releases/roman-catholic-pt-2026-v2/manifest.json',publicationStatus:'publishable',generatedAt:'2026-08-16T23:55:00.000Z'});
+const path='/Santos do Dia/02_Dados_Eclesiasticos/Calendar/releases/roman-catholic-pt-2026-v2/manifest.json';
+const result=buildPortugalD1ReleaseV2({report,dropboxManifestPath:path,publicationStatus:'publishable',generatedAt:'2026-08-16T23:55:00.000Z'});
 assert.equal(result.manifest.release,'roman-catholic-pt-2026-v2');
 assert.equal(result.manifest.expectedOccurrences,389);
 assert.equal(result.manifest.expectedDays,365);
@@ -50,6 +51,7 @@ assert.equal(result.manifest.expectedCalendarAssertions,389);
 assert.equal(result.manifest.expectedLabelAssertions,1945);
 assert.equal(result.manifest.publicationStatus,'publishable');
 assert.equal(result.manifest.safety.productionApproved,false);
+assert.equal(result.manifest.safety.stagingOnly,true);
 assert.equal(result.manifest.provenancePolicy.generalRomanAndRomcalNeverAssertTransferredPortugalDates,true);
 assert.match(result.sql,/DELETE FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt'/u);
 assert.equal((result.sql.match(/INSERT INTO calendar_occurrences \(/gu)??[]).length,389);
@@ -60,8 +62,9 @@ assert.equal((result.sql.match(/calendar_occurrence_assertions[^\n]*romcal-gener
 assert.equal(new Set(occurrences.map((item)=>`${item.dateISO}|${item.canonicalEventId}`)).size,389);
 
 const bad=structuredClone(report); bad.occurrences[0].labels.es=null;
-assert.throws(()=>buildPortugalD1ReleaseV2({report:bad,dropboxManifestPath:'/Santos do Dia/02_Dados_Eclesiasticos/x/manifest.json'}),/missing validated es label provenance/u);
+assert.throws(()=>buildPortugalD1ReleaseV2({report:bad,dropboxManifestPath:path}),/missing validated es label provenance/u);
 const unsafe=structuredClone(report); unsafe.productReadiness.productionApproved=true;
-assert.throws(()=>buildPortugalD1ReleaseV2({report:unsafe,dropboxManifestPath:'/Santos do Dia/02_Dados_Eclesiasticos/x/manifest.json'}),/production still gated/u);
+assert.throws(()=>buildPortugalD1ReleaseV2({report:unsafe,dropboxManifestPath:path}),/production still gated/u);
+assert.throws(()=>buildPortugalD1ReleaseV2({report,dropboxManifestPath:path,publicationStatus:'published'}),/staging-only until a separate production approval gate exists/u);
 
-console.log('Portugal v2 D1 package preserves 389 observances, five labels each, SNL-only Portugal date assertions and a staging-only safety boundary.');
+console.log('Portugal v2 D1 package preserves 389 observances, five labels each, SNL-only Portugal date assertions and cannot generate a published release.');
