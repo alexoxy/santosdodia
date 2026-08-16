@@ -272,8 +272,7 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     const strongSameDate=best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1);
     const explicitTransferredIdentity = Boolean(
       transfer
-      && transfer.matchingBasis === 'reviewed-semantic-alias'
-      && transfer.matchedSourceLabel === text(event.names?.pt?.value)
+      && reviewedSemanticAliasScore(event.names?.pt?.value ?? '', transfer.generalRomanId) >= 0.98
       && isHighPrecedence(sourceRank),
     );
     const highSameDate=sameDateScores.filter((item)=>isHighPrecedence(item.generalRomanRank));
