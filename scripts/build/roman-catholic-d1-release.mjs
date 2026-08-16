@@ -61,11 +61,11 @@ if (occurrences.length !== report.calendarCoverage.expectedDays) throw new Error
 const sources = [
   {
     id: 'litcal-api', name: 'LitCal API', url: 'https://litcal.johnromanodorazio.com/api/v5', host: 'litcal.johnromanodorazio.com',
-    authority: 'reference-engine', adapter: 'product-build-roman-catholic', usage: 'Structured calendar facts and source-provided labels only.', copyright: 'No substantial editorial text copied.'
+    authority: 'reference-engine', adapter: 'product-build-roman-catholic', usage: 'Structured General Roman calendar facts and source-provided labels only.', copyright: 'No substantial editorial text copied.'
   },
   {
     id: 'portugal-national-liturgy-secretariat', name: 'Secretariado Nacional de Liturgia — Agenda Litúrgica', url: 'https://www.liturgia.pt/agenda/', host: 'www.liturgia.pt',
-    authority: 'official-jurisdiction', adapter: 'product-build-roman-catholic', usage: 'Official Portugal calendar dates, ranks and Portuguese labels.', copyright: 'Structured calendar facts and short labels only.'
+    authority: 'official-jurisdiction', adapter: 'product-build-roman-catholic', usage: 'Official Portugal labels and jurisdiction facts. A label alone never asserts canonical event identity; occurrence assertions require an explicit reviewed source binding.', copyright: 'Structured calendar facts and short labels only.'
   },
   {
     id: 'romcal-general-roman-es', name: 'Romcal General Roman Spanish locale', url: 'https://github.com/romcal/romcal', host: 'github.com',
@@ -90,6 +90,7 @@ for (const source of sources) {
 statements.push(`INSERT INTO calendar_import_runs (id,created_at,retrieved_at,dropbox_manifest_path,manifest_sha256,status,validation_report_path) VALUES (${sql(runId)},${sql(generatedAt)},${sql(generatedAt)},${sql(dropboxManifestPath)},${sql(hash(report))},'validated',${sql(validationReportPath)}) ON CONFLICT(id) DO UPDATE SET retrieved_at=excluded.retrieved_at,dropbox_manifest_path=excluded.dropbox_manifest_path,manifest_sha256=excluded.manifest_sha256,status='validated',validation_report_path=excluded.validation_report_path;`);
 statements.push(`INSERT INTO jurisdiction_calendar_policies (id,church_id,jurisdiction_id,engine_id,fixed_date_policy,calendar_system,effective_from,effective_to,source_id,validation_status) VALUES (${sql(`roman-catholic-pt-${year}`)},'roman-catholic','pt','western-gregorian','general-roman-plus-portugal-proper','gregorian',${sql(`${year}-01-01`)},${sql(`${year}-12-31`)},'portugal-national-liturgy-secretariat','cross-checked') ON CONFLICT(id) DO UPDATE SET engine_id=excluded.engine_id,fixed_date_policy=excluded.fixed_date_policy,calendar_system=excluded.calendar_system,effective_from=excluded.effective_from,effective_to=excluded.effective_to,source_id=excluded.source_id,validation_status=excluded.validation_status;`);
 
+let verifiedSnlCalendarAssertions = 0;
 for (const day of occurrences) {
   const dateISO = String(day.dateISO);
   const eventId = String(day.primary?.canonicalEventId ?? '').trim();
@@ -103,8 +104,12 @@ for (const day of occurrences) {
 
   const assertions = [
     ['litcal-api', 'https://litcal.johnromanodorazio.com/api/v5', sourceRecordHash],
-    ['portugal-national-liturgy-secretariat', 'https://www.liturgia.pt/agenda/agenda.ics', hash({ dateISO, label: day.labels?.pt })],
   ];
+  const ptLabel = day.labels?.pt;
+  if (ptLabel?.calendarBindingVerified === true) {
+    verifiedSnlCalendarAssertions += 1;
+    assertions.push(['portugal-national-liturgy-secretariat', 'https://www.liturgia.pt/agenda/agenda.ics', hash({ dateISO, canonicalEventId: eventId, sourceOccurrenceId: ptLabel.sourceOccurrenceId ?? null, label: ptLabel.label })]);
+  }
   for (const [sourceId, sourceUrl, recordHash] of assertions) {
     const assertionId = hash(`${occurrenceId}|${sourceId}|${recordHash}`);
     statements.push(`INSERT INTO calendar_occurrence_assertions (id,occurrence_id,source_id,asserted_date_iso,source_record_url,source_record_hash,observed_at,validation_status) VALUES (${sql(assertionId)},${sql(occurrenceId)},${sql(sourceId)},${sql(dateISO)},${sql(sourceUrl)},${sql(recordHash)},${sql(generatedAt)},'cross-checked') ON CONFLICT(id) DO UPDATE SET observed_at=excluded.observed_at,validation_status='cross-checked';`);
@@ -121,7 +126,7 @@ for (const day of occurrences) {
 }
 
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   release: 'roman-catholic-pt-2026',
   runId,
   generatedAt,
@@ -133,12 +138,19 @@ const manifest = {
   year,
   expectedOccurrences: occurrences.length,
   expectedLabels: occurrences.length * 5,
-  expectedCalendarAssertions: occurrences.length * 2,
+  expectedCalendarAssertions: occurrences.length + verifiedSnlCalendarAssertions,
+  expectedGeneralRomanCalendarAssertions: occurrences.length,
+  expectedSnlCalendarAssertions: verifiedSnlCalendarAssertions,
   expectedLabelAssertions: occurrences.length * 5,
   publicLocales: ['en', 'pt', 'es', 'fr', 'it'],
   dropboxManifestPath,
   validationReportPath,
   sources: sources.map(({ id, name, url, authority, usage }) => ({ id, name, url, authority, usage })),
+  provenancePolicy: {
+    labelSourceIsNotCalendarIdentity: true,
+    snlOccurrenceAssertionRequiresReviewedBinding: true,
+    legacyDateOnlySnlBindingAccepted: false,
+  },
   safety: {
     automaticFutureProductionWrites: false,
     generatedFromLaunchReadyBuildOnly: true,
@@ -152,4 +164,4 @@ fs.mkdirSync(path.dirname(path.resolve(sqlPath)), { recursive: true });
 fs.mkdirSync(path.dirname(path.resolve(manifestPath)), { recursive: true });
 fs.writeFileSync(path.resolve(sqlPath), `${statements.join('\n')}\n`, 'utf8');
 fs.writeFileSync(path.resolve(manifestPath), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
-console.log(JSON.stringify({ runId, publicationStatus, occurrences: manifest.expectedOccurrences, labels: manifest.expectedLabels, dateAssertions: manifest.expectedCalendarAssertions, labelAssertions: manifest.expectedLabelAssertions }, null, 2));
+console.log(JSON.stringify({ runId, publicationStatus, occurrences: manifest.expectedOccurrences, labels: manifest.expectedLabels, dateAssertions: manifest.expectedCalendarAssertions, snlDateAssertions: manifest.expectedSnlCalendarAssertions, labelAssertions: manifest.expectedLabelAssertions }, null, 2));
