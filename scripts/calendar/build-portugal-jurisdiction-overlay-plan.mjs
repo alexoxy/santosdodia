@@ -93,7 +93,7 @@ export function buildPortugalJurisdictionOverlayPlan({ normalized, reconciliatio
       continue;
     }
 
-    if (['ambiguous-review', 'rank-delta-review', 'transfer-candidate-review', 'portugal-proper-or-unmatched'].includes(item.disposition)) {
+    if (['ambiguous-review', 'rank-delta-review', 'transfer-candidate-review', 'precedence-delta-review', 'portugal-proper-or-unmatched'].includes(item.disposition)) {
       blockingDeltaReview.push({
         ...base,
         disposition: item.disposition,
@@ -104,9 +104,11 @@ export function buildPortugalJurisdictionOverlayPlan({ normalized, reconciliatio
           ? 'A Portugal rank difference would change the inherited calendar and requires explicit review.'
           : item.disposition === 'transfer-candidate-review'
             ? 'A Portugal date transfer would change the inherited calendar and requires explicit review.'
-            : item.disposition === 'ambiguous-review'
-              ? 'The source may be an inherited General Roman observance or a Portugal-specific proper; identity must be resolved before overlay publication.'
-              : 'The source appears Portugal-specific or lacks a safe General Roman match and must be classified before overlay publication.',
+            : item.disposition === 'precedence-delta-review'
+              ? 'A Portugal/General Roman precedence or omission difference would change the effective calendar and requires explicit review.'
+              : item.disposition === 'ambiguous-review'
+                ? 'The source may be an inherited General Roman observance or a Portugal-specific proper; identity must be resolved before overlay publication.'
+                : 'The source appears Portugal-specific or lacks a safe General Roman match and must be classified before overlay publication.',
         blocksPortugalPublication: true,
         humanReviewRequired: true,
         productionWriteAllowed: false,
