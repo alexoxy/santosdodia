@@ -47,7 +47,7 @@ const NOISE = new Set([
   'spouse','husband','queen','king','companion','companions','patron','patroness','mission','missions',
   'pretre','eveque','pape','abbe','religieuse','vierge','docteur','eglise','martyrs',
   'sacerdote','vescovo','abate','religiosa','vergine','dottore','chiesa','martire','martiri',
-  'padroeiro','padroeira','missoes','ordem','order','servos','servi',
+  'padroeiro','padroeira','padroeiros','padroeiras','europa','principal','missoes','ordem','order','servos','servi',
 ]);
 
 function argument(name, fallback = null) { const index = process.argv.indexOf(name); return index >= 0 ? process.argv[index + 1] : fallback; }
@@ -91,6 +91,17 @@ function trigramScore(left, right) {
   return (2 * intersection) / (a.size + b.size);
 }
 function lexicalScore(left, right) { return Number((tokenScore(left, right) * 0.7 + trigramScore(left, right) * 0.3).toFixed(4)); }
+function romanNumeralToInt(value) {
+  const chars = { i:1, v:5, x:10, l:50, c:100, d:500, m:1000 };
+  const input = String(value ?? '').toLowerCase();
+  let total = 0; let previous = 0;
+  for (let index = input.length - 1; index >= 0; index -= 1) {
+    const current = chars[input[index]] ?? 0;
+    total += current < previous ? -current : current;
+    previous = current;
+  }
+  return total || null;
+}
 function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   const source = ascii(sourceLabel);
   if (/santa maria no sabado/u.test(source) && /^SatMemBVM/u.test(candidateId)) return 1;
@@ -99,11 +110,57 @@ function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   if (/nascimento.*joao.*batista/u.test(source) && candidateId === 'NativityJohnBaptist') return 1;
   if (/martirio.*joao.*batista/u.test(source) && candidateId === 'BeheadingJohnBaptist') return 1;
   if (/luis de franca/u.test(source) && candidateId === 'StLouis') return 0.98;
-  if (/epifania/u.test(source) && candidateId === 'Epiphany') return 1;
-  if (/ascensao/u.test(source) && candidateId === 'Ascension') return 1;
+  if (/^epifania(?: do senhor)?$/u.test(source) && candidateId === 'Epiphany') return 1;
+  if (/^ascensao(?: do senhor)?$/u.test(source) && candidateId === 'Ascension') return 1;
   if (/imaculado.*coracao/u.test(source) && candidateId === 'ImmaculateHeart') return 1;
   if (/cirilo.*metodio/u.test(source) && candidateId === 'StsCyrilMethodius') return 1;
   if (/fieis.*defuntos/u.test(source) && candidateId === 'AllSouls') return 1;
+  if (/catarina.*sena/u.test(source) && candidateId === 'StCatherineSiena') return 1;
+  if (/\bbento\b/u.test(source) && candidateId === 'StBenedict') return 0.98;
+  if (/brigida/u.test(source) && candidateId === 'StBridget') return 0.98;
+  if (/maria.*mae de deus/u.test(source) && candidateId === 'MaryMotherOfGod') return 1;
+  if (/batismo.*senhor/u.test(source) && candidateId === 'BaptismLord') return 1;
+  if (/pentecostes/u.test(source) && candidateId === 'Pentecost') return 1;
+  if (/santissima trindade/u.test(source) && candidateId === 'Trinity') return 1;
+  if (/sagrado coracao.*jesus/u.test(source) && candidateId === 'SacredHeart') return 1;
+  if (/miguel.*gabriel.*rafael/u.test(source) && candidateId === 'StsArchangels') return 1;
+  if (/cristo.*rei.*universo/u.test(source) && candidateId === 'ChristKing') return 1;
+  if (/imaculada conceicao/u.test(source) && candidateId === 'ImmaculateConception') return 1;
+  if (/natal do senhor/u.test(source) && candidateId === 'Christmas') return 1;
+  if (/estevao.*primeiro.*martir/u.test(source) && candidateId === 'StStephenProtomartyr') return 1;
+  return 0;
+}
+function reviewedCalendarStructureScore(sourceLabel, candidateId) {
+  const source = ascii(sourceLabel);
+  let match = /domingo\s+([ivxlcdm]+)\s+do tempo comum/u.exec(source);
+  if (match && candidateId === `OrdSunday${romanNumeralToInt(match[1])}`) return 1;
+  match = /domingo\s+([ivxlcdm]+)\s+da quaresma/u.exec(source);
+  if (match && candidateId === `Lent${romanNumeralToInt(match[1])}`) return 1;
+  match = /domingo\s+([ivxlcdm]+)\s+da pascoa/u.exec(source);
+  if (match && candidateId === `Easter${romanNumeralToInt(match[1])}`) return 1;
+  match = /domingo\s+([ivxlcdm]+)\s+do advento/u.exec(source);
+  if (match && candidateId === `Advent${romanNumeralToInt(match[1])}`) return 1;
+  if (/domingo de ramos/u.test(source) && candidateId === 'PalmSun') return 1;
+  if (/quarta-feira.*cinzas/u.test(source) && candidateId === 'AshWednesday') return 1;
+  if (/domingo de pascoa.*ressurreicao/u.test(source) && candidateId === 'Easter') return 1;
+  const holyWeek = [
+    [/^segunda-feira.*semana santa/u, 'MonHolyWeek'],
+    [/^terca-feira.*semana santa/u, 'TueHolyWeek'],
+    [/^quarta-feira.*semana santa/u, 'WedHolyWeek'],
+    [/^quinta-feira.*semana santa/u, 'HolyThurs'],
+    [/^sexta-feira.*paixao do senhor/u, 'GoodFri'],
+    [/^sabado santo/u, 'EasterVigil'],
+  ];
+  for (const [pattern, id] of holyWeek) if (pattern.test(source) && candidateId === id) return 1;
+  const octave = [
+    [/^segunda-feira.*oitava da pascoa/u, 'MonOctaveEaster'],
+    [/^terca-feira.*oitava da pascoa/u, 'TueOctaveEaster'],
+    [/^quarta-feira.*oitava da pascoa/u, 'WedOctaveEaster'],
+    [/^quinta-feira.*oitava da pascoa/u, 'ThuOctaveEaster'],
+    [/^sexta-feira.*oitava da pascoa/u, 'FriOctaveEaster'],
+    [/^sabado.*oitava da pascoa/u, 'SatOctaveEaster'],
+  ];
+  for (const [pattern, id] of octave) if (pattern.test(source) && candidateId === id) return 1;
   return 0;
 }
 function isStructuralDayLabel(value) {
@@ -113,6 +170,9 @@ function isStructuralDayLabel(value) {
 function structuralDayScore(snlEvent, candidate) {
   if (candidate.rank !== 'weekday' || candidate.dateISO !== snlEvent.dateISO) return 0;
   return isStructuralDayLabel(snlEvent.names?.pt?.value ?? '') ? 1 : 0;
+}
+function eventSourceLabels(event) {
+  return [...new Set([event.names?.pt?.value, event.sourceFacts?.dayLabel].map(text).filter(Boolean))];
 }
 function dateDistance(left, right) {
   const a = Date.parse(`${left}T00:00:00Z`), b = Date.parse(`${right}T00:00:00Z`);
@@ -173,22 +233,24 @@ export function loadGeneralRomanReference(mirrorRoot, years) {
 }
 
 function candidateScore(snlEvent, candidate) {
-  const sourceLabel = snlEvent.names?.pt?.value ?? '';
-  const comparisons = [candidate.id, candidate.canonicalEventId, ...Object.values(candidate.names ?? {})]
-    .map((name) => ({ name, lexical: lexicalScore(sourceLabel, name), basis: 'multilingual-token-normalization' }))
+  const sourceLabels = eventSourceLabels(snlEvent);
+  const comparisons = sourceLabels.flatMap((sourceLabel) => [candidate.id, candidate.canonicalEventId, ...Object.values(candidate.names ?? {})]
+    .map((name) => ({ sourceLabel, name, lexical: lexicalScore(sourceLabel, name), basis: 'multilingual-token-normalization' })))
     .sort((a,b)=>b.lexical-a.lexical);
-  const semanticAlias = reviewedSemanticAliasScore(sourceLabel, candidate.id);
+  const semanticAlias = Math.max(0, ...sourceLabels.map((sourceLabel)=>reviewedSemanticAliasScore(sourceLabel, candidate.id)));
+  const calendarStructureAlias = Math.max(0, ...sourceLabels.map((sourceLabel)=>reviewedCalendarStructureScore(sourceLabel, candidate.id)));
   const structuralAlias = structuralDayScore(snlEvent, candidate);
-  let best = comparisons[0] ?? { name:'', lexical:0, basis:'none' };
-  if (semanticAlias > best.lexical) best = { name:candidate.id, lexical:semanticAlias, basis:'reviewed-semantic-alias' };
-  if (structuralAlias > best.lexical) best = { name:candidate.id, lexical:structuralAlias, basis:'same-date-structural-day-inheritance' };
+  let best = comparisons[0] ?? { sourceLabel:'', name:'', lexical:0, basis:'none' };
+  if (semanticAlias > best.lexical) best = { sourceLabel:sourceLabels[0] ?? '', name:candidate.id, lexical:semanticAlias, basis:'reviewed-semantic-alias' };
+  if (calendarStructureAlias > best.lexical) best = { sourceLabel:sourceLabels[0] ?? '', name:candidate.id, lexical:calendarStructureAlias, basis:'reviewed-calendar-structure' };
+  if (structuralAlias > best.lexical) best = { sourceLabel:sourceLabels[0] ?? '', name:candidate.id, lexical:structuralAlias, basis:'same-date-structural-day-inheritance' };
   const distance = dateDistance(snlEvent.dateISO, candidate.dateISO); const sameDate = distance === 0;
   const sourceRank = snlRank(snlEvent); const ranksAgree = Boolean(sourceRank && candidate.rank && sourceRank === candidate.rank);
   const score = Math.min(1, best.lexical * 0.78 + (sameDate ? 0.18 : Math.max(0, 0.12 - distance * 0.015)) + (ranksAgree ? 0.04 : 0));
   return {
     canonicalEventId:candidate.canonicalEventId, generalRomanId:candidate.id, generalRomanDateISO:candidate.dateISO,
     generalRomanGrade:candidate.grade, generalRomanRank:candidate.rank, names:candidate.names,
-    lexicalScore:best.lexical, matchingBasis:best.basis, bestComparedName:best.name,
+    lexicalScore:best.lexical, matchingBasis:best.basis, bestComparedName:best.name, matchedSourceLabel:best.sourceLabel,
     dateDistanceDays:distance, sameDate, ranksAgree, score:Number(score.toFixed(4)),
     authorityCorrection:candidate.authorityCorrection ?? null,
   };
@@ -220,7 +282,7 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
       disposition='transfer-candidate-review';
       reason='strong-label-match-on-nearby-general-roman-date';
       candidate=transfer;
-    } else if (structuralSource && highSameDate.length) {
+    } else if (structuralSource && highSameDate.length && !strongSameDate) {
       disposition='precedence-delta-review';
       reason='general-high-precedence-event-is-absent-from-portugal-date';
       candidate=highSameDate[0];
@@ -255,7 +317,7 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     generatedAt:new Date().toISOString(), summary:{ inputOccurrences:sourceEvents.length, generalRomanReferenceEvents:generalRoman.length, ...buckets },
     policy:{
       identityRule:'No canonical identity is created or changed from a name match. All outputs are review proposals.',
-      semanticRule:'Multilingual token equivalence, identifier splitting, structural-day inheritance and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
+      semanticRule:'Multilingual token equivalence, identifier splitting, reviewed calendar-structure keys and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
       authorityRule:'Normative General Roman corrections are applied above the operational mirror; they are not Portugal deltas.',
       dateRule:'Same civil date is evidence of calendar alignment, not proof of semantic identity.',
       transferRule:'Strong lexical or reviewed-semantic similarity on a nearby date is a transfer candidate, never an automatic link.',

@@ -18,6 +18,7 @@ on:
       - 'scripts/calendar/test-portugal-snl-agenda.mjs'
       - 'scripts/calendar/test-portugal-snl-reconciliation.mjs'
       - 'scripts/calendar/test-portugal-snl-precedence-transfers.mjs'
+      - 'scripts/calendar/test-portugal-snl-shared-structure.mjs'
       - 'scripts/calendar/test-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs'
       - 'scripts/calendar/test-observance-editorial.mjs'
@@ -60,6 +61,7 @@ jobs:
           node scripts/calendar/test-portugal-snl-agenda.mjs
           node scripts/calendar/test-portugal-snl-reconciliation.mjs
           node scripts/calendar/test-portugal-snl-precedence-transfers.mjs
+          node scripts/calendar/test-portugal-snl-shared-structure.mjs
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
           node scripts/calendar/test-observance-editorial.mjs

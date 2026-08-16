@@ -89,6 +89,16 @@ function rankedHeadingItems(heading) {
   const label = trimLabel(heading.slice(0, suffix.index));
   return label && rank ? [{ label, rank }] : [];
 }
+function isGenericWeekdayLabel(value) {
+  const label = String(value ?? '').normalize('NFC').trim();
+  return /^(?:Segunda-feira|Terça-feira|Quarta-feira|Quinta-feira|Sexta-feira|Sábado)\b.*\bsemana\b/iu.test(label)
+    && !/(CINZAS|SEMANA SANTA|OITAVA DA PÁSCOA|NATAL DO SENHOR)/iu.test(label);
+}
+function isNamedUnrankedHeading(value) {
+  const heading = trimLabel(value);
+  if (!heading) return false;
+  return !/^(?:Tempo da Quaresma|Tempo Pascal|Para o Ofício|Para a Missa|Rogações|ou Domingo)\b/iu.test(heading);
+}
 
 export function extractSnlObservances(summary, description) {
   const dayLabel = String(summary ?? '').normalize('NFC').trim();
@@ -109,12 +119,15 @@ export function extractSnlObservances(summary, description) {
   if (/Ofício da solenidade/iu.test(officeLine)) inferredRank = 'solemnity';
   else if (/Ofício da festa/iu.test(officeLine)) inferredRank = 'feast';
   else if (/Ofício da memória/iu.test(officeLine)) inferredRank = 'memorial';
+
+  const preserveNamedHeading = !inferredRank && isGenericWeekdayLabel(dayLabel) && isNamedUnrankedHeading(heading);
+  const label = preserveNamedHeading ? trimLabel(heading) : dayLabel;
   return [{
-    label: trimLabel(heading) || dayLabel,
+    label,
     rank: inferredRank,
-    rankSource: inferredRank ? 'leading-office-line' : (heading ? 'unranked-leading-heading' : 'none'),
+    rankSource: inferredRank ? 'leading-office-line' : (preserveNamedHeading ? 'unranked-leading-heading' : 'day-label'),
     dayLabel,
-    evidenceHeading: heading || officeLine || dayLabel,
+    evidenceHeading: preserveNamedHeading ? heading : (officeLine || dayLabel),
     sourceOrdinal: 0,
     groupedAlternative: false,
   }];
