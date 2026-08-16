@@ -110,11 +110,11 @@ export function extractSnlObservances(summary, description) {
   else if (/Ofício da festa/iu.test(officeLine)) inferredRank = 'feast';
   else if (/Ofício da memória/iu.test(officeLine)) inferredRank = 'memorial';
   return [{
-    label: dayLabel,
+    label: trimLabel(heading) || dayLabel,
     rank: inferredRank,
-    rankSource: inferredRank ? 'leading-office-line' : 'none',
+    rankSource: inferredRank ? 'leading-office-line' : (heading ? 'unranked-leading-heading' : 'none'),
     dayLabel,
-    evidenceHeading: officeLine || dayLabel,
+    evidenceHeading: heading || officeLine || dayLabel,
     sourceOrdinal: 0,
     groupedAlternative: false,
   }];

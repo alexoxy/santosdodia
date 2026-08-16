@@ -16,7 +16,7 @@ const TOKEN_EQUIVALENTS = new Map(Object.entries({
   judas:'jude', filipe:'philip', catarina:'catherine', agostinho:'augustine', bento:'benedict', domingos:'dominic',
   inaciod:'ignatius', inacio:'ignatius', patricio:'patrick', jeronimo:'jerome', hilario:'hilary', norberto:'norbert', martinho:'martin',
   hildegarda:'hildegard', jorge:'george', barnabe:'barnabas', anselmo:'anselm', ambrosio:'ambrose', bernardo:'bernard',
-  cirilo:'cyril', agueda:'agatha', boaventura:'bonaventure', maximiliano:'maximilian', escolastica:'scholastica',
+  cirilo:'cyril', metodio:'methodius', agueda:'agatha', boaventura:'bonaventure', maximiliano:'maximilian', escolastica:'scholastica',
   pancracio:'pancras', atanasio:'athanasius', justino:'justin', timoteo:'timothy', tito:'titus', marcelino:'marcellinus',
   sebastiao:'sebastian', venceslau:'wenceslaus', venceslas:'wenceslaus', diogo:'diego', isabel:'elizabeth',
   camilo:'camillus', lelis:'lellis', margarida:'margaret', escocia:'scotland', gertrudes:'gertrude', romualdo:'romuald',
@@ -31,8 +31,8 @@ const TOKEN_EQUIVALENTS = new Map(Object.entries({
   fabiao:'fabian', luis:'louis', simao:'simon', inocentes:'innocents', maddalena:'magdalene', madalena:'magdalene',
   cristovao:'christopher', nome:'name', rainha:'queenship', franca:'france', antioquia:'antioch', roma:'rome', romano:'rome', romana:'rome',
   nascimento:'nativity', natividade:'nativity', apresentacao:'presentation', anunciacao:'annunciation', assuncao:'assumption',
-  epifania:'epiphany', transfiguracao:'transfiguration', conversao:'conversion', exaltacao:'exaltation', cruz:'cross',
-  imaculada:'immaculate', conceicao:'conception', senhor:'lord', jesus:'jesus', cristo:'christ', familia:'family',
+  epifania:'epiphany', ascensao:'ascension', transfiguracao:'transfiguration', conversao:'conversion', exaltacao:'exaltation', cruz:'cross',
+  imaculada:'immaculate', conceicao:'conception', coracao:'heart', fieis:'faithful', defuntos:'departed', senhor:'lord', jesus:'jesus', cristo:'christ', familia:'family',
   operario:'worker', apostolo:'apostle', apostolos:'apostles', evangelista:'evangelist', martir:'martyr', martires:'martyrs',
   companheiro:'companion', companheiros:'companions', todos:'all',
   sigmaringa:'sigmaringen', sena:'siena', cassia:'cascia', cantuaria:'canterbury', batista:'baptist',
@@ -99,11 +99,16 @@ function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   if (/nascimento.*joao.*batista/u.test(source) && candidateId === 'NativityJohnBaptist') return 1;
   if (/martirio.*joao.*batista/u.test(source) && candidateId === 'BeheadingJohnBaptist') return 1;
   if (/luis de franca/u.test(source) && candidateId === 'StLouis') return 0.98;
+  if (/epifania/u.test(source) && candidateId === 'Epiphany') return 1;
+  if (/ascensao/u.test(source) && candidateId === 'Ascension') return 1;
+  if (/imaculado.*coracao/u.test(source) && candidateId === 'ImmaculateHeart') return 1;
+  if (/cirilo.*metodio/u.test(source) && candidateId === 'StsCyrilMethodius') return 1;
+  if (/fieis.*defuntos/u.test(source) && candidateId === 'AllSouls') return 1;
   return 0;
 }
 function isStructuralDayLabel(value) {
   const source = ascii(value);
-  return /^(segunda-feira|terca-feira|quarta-feira|quinta-feira|sexta-feira|sabado)\b.*\b(semana|depois das cinzas|dia dentro da oitava do natal)\b/u.test(source);
+  return /^(segunda-feira|terca-feira|quarta-feira|quinta-feira|sexta-feira|sabado)\b.*\b(semana|depois das cinzas|dia dentro da oitava do natal|depois da epifania)\b/u.test(source);
 }
 function structuralDayScore(snlEvent, candidate) {
   if (candidate.rank !== 'weekday' || candidate.dateISO !== snlEvent.dateISO) return 0;
@@ -134,6 +139,7 @@ function rankDelta(left, right) {
   if (!left || !right || left === right) return null;
   return { snl: left, generalRoman: right, direction: (RANKS[left] ?? 0) > (RANKS[right] ?? 0) ? 'higher-in-portugal' : 'lower-in-portugal' };
 }
+function isHighPrecedence(rank) { return (RANKS[rank] ?? 0) >= RANKS.feast; }
 function normalizeLitcal(payload, locale) {
   const events = Array.isArray(payload?.events) ? payload.events : [];
   return events.map((event) => ({
@@ -198,18 +204,47 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     const sameDateScores = sameDate.map((candidate)=>candidateScore(event,candidate)).sort((a,b)=>b.score-a.score);
     const nearbyScores = nearby.map((candidate)=>candidateScore(event,candidate)).sort((a,b)=>b.lexicalScore-a.lexicalScore||a.dateDistanceDays-b.dateDistanceDays);
     const best=sameDateScores[0]??null, second=sameDateScores[1]??null;
-    const sourceRank=snlRank(event); const rankDifference=best?rankDelta(sourceRank,best.generalRomanRank):null;
+    const sourceRank=snlRank(event);
+    const structuralSource=isStructuralDayLabel(event.names?.pt?.value ?? '');
+    const transfer=nearbyScores.find((item)=>!item.sameDate&&item.lexicalScore>=0.78&&item.dateDistanceDays<=7);
+    const strongSameDate=best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1);
+    const highSameDate=sameDateScores.filter((item)=>isHighPrecedence(item.generalRomanRank));
+    const conflictingHighSameDate=strongSameDate
+      ? highSameDate.find((item)=>item.generalRomanId!==best.generalRomanId && item.lexicalScore<0.56)
+      : highSameDate[0] ?? null;
     let disposition='portugal-proper-or-unmatched', reason='no-safe-general-roman-candidate', candidate=best;
-    if (best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1)) {
+
+    // A strong reviewed semantic match on a nearby date is more informative than an unrelated
+    // same-date Sunday/weekday. It signals a jurisdictional transfer, never an automatic link.
+    if (transfer && (!strongSameDate || transfer.lexicalScore>best.lexicalScore)) {
+      disposition='transfer-candidate-review';
+      reason='strong-label-match-on-nearby-general-roman-date';
+      candidate=transfer;
+    } else if (structuralSource && highSameDate.length) {
+      disposition='precedence-delta-review';
+      reason='general-high-precedence-event-is-absent-from-portugal-date';
+      candidate=highSameDate[0];
+    } else if (strongSameDate && isHighPrecedence(sourceRank) && conflictingHighSameDate) {
+      disposition='precedence-delta-review';
+      reason='official-high-precedence-portugal-observance-conflicts-with-general-high-precedence-same-date-event';
+      candidate=conflictingHighSameDate;
+    } else if (strongSameDate) {
+      const rankDifference=rankDelta(sourceRank,best.generalRomanRank);
       disposition=rankDifference?'rank-delta-review':'canonical-link-proposal';
       reason=rankDifference?'same-date-lexical-match-with-rank-delta':'same-date-lexical-and-structural-match';
     } else if (best && best.lexicalScore>=0.56) {
       disposition='ambiguous-review';
       reason=second && best.score-second.score<0.1?'multiple-same-date-candidates':'same-date-match-below-safe-threshold';
-    } else {
-      const transfer=nearbyScores.find((item)=>!item.sameDate&&item.lexicalScore>=0.78&&item.dateDistanceDays<=7);
-      if (transfer) { disposition='transfer-candidate-review'; reason='strong-label-match-on-nearby-general-roman-date'; candidate=transfer; }
-      else if (sameDate.length===1) { disposition='structural-review'; reason='single-general-roman-event-on-date-without-semantic-proof'; candidate=sameDateScores[0]; }
+    } else if (isHighPrecedence(sourceRank) || highSameDate.length) {
+      disposition='precedence-delta-review';
+      reason=isHighPrecedence(sourceRank)
+        ? 'official-high-precedence-portugal-observance-differs-from-general-same-date-event'
+        : 'general-high-precedence-event-is-absent-from-portugal-date';
+      candidate=highSameDate[0] ?? best;
+    } else if (sameDate.length===1) {
+      disposition='structural-review';
+      reason='single-general-roman-event-on-date-without-semantic-proof';
+      candidate=sameDateScores[0];
     }
     output.push({ sourceOccurrenceId:event.id, sourceCanonicalEventId:event.canonicalEventId, dateISO:event.dateISO,
       sourceLabel:event.names?.pt?.value??null, sourceRank, sourceUid:event.sourceFacts?.uid??null, disposition, reason,
@@ -223,7 +258,8 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
       semanticRule:'Multilingual token equivalence, identifier splitting, structural-day inheritance and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
       authorityRule:'Normative General Roman corrections are applied above the operational mirror; they are not Portugal deltas.',
       dateRule:'Same civil date is evidence of calendar alignment, not proof of semantic identity.',
-      transferRule:'Strong lexical similarity on a nearby date is a transfer candidate, never an automatic link.',
+      transferRule:'Strong lexical or reviewed-semantic similarity on a nearby date is a transfer candidate, never an automatic link.',
+      precedenceRule:'An official Portugal feast/solemnity that differs from the General Roman event, or a General Roman high-precedence event absent from a Portuguese structural day, can never be silently inherited.',
       rankRule:'Rank differences remain explicit Portugal deltas and require review unless the General Roman reference itself is corrected by higher normative authority.',
     }, items:output };
 }

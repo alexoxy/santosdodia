@@ -80,6 +80,7 @@ export function buildPortugalReviewBundle({ normalized, reconciliation }) {
     'semantic-ambiguity': [],
     'rank-delta': [],
     'transfer': [],
+    'precedence-delta': [],
     'portugal-proper-or-unmatched': [],
     'structural-day': [],
   };
@@ -94,6 +95,8 @@ export function buildPortugalReviewBundle({ normalized, reconciliation }) {
       queues['rank-delta'].push(reviewItem(item, normalizedById, 'rank-delta', 'Is the event identity correct and is the different Portugal rank an intentional jurisdictional proper?'));
     } else if (item.disposition === 'transfer-candidate-review') {
       queues.transfer.push(reviewItem(item, normalizedById, 'transfer-candidate', 'Is this an intentional Portugal transfer of the proposed General Roman event?'));
+    } else if (item.disposition === 'precedence-delta-review') {
+      queues['precedence-delta'].push(reviewItem(item, normalizedById, 'precedence-delta', 'Does Portugal intentionally replace, omit or move the conflicting high-precedence General Roman celebration on this civil date?'));
     } else if (item.disposition === 'portugal-proper-or-unmatched') {
       queues['portugal-proper-or-unmatched'].push(reviewItem(item, normalizedById, 'portugal-proper-or-unmatched', 'Is this a Portugal proper observance, a missing General Roman match, or a parsing/matching issue?'));
     } else if (item.disposition === 'structural-review') {
@@ -120,7 +123,7 @@ export function buildPortugalReviewBundle({ normalized, reconciliation }) {
     approvalSemantics: {
       defaultDecision: 'pending-human-review',
       canonicalLinkApproval: 'A reviewer must explicitly approve sourceOccurrenceId -> canonicalEventId. Matching score alone never approves a link.',
-      rankAndTransferApproval: 'Rank changes and transfers require a separate explicit reviewer decision even when event identity is approved.',
+      rankTransferPrecedenceApproval: 'Rank changes, transfers and precedence/omission changes require a separate explicit reviewer decision even when event identity is approved.',
       groupedAlternatives: 'Each extracted alternative is reviewed independently while retaining its common source alternativeGroupId.',
     },
     sourceCoverage: normalized.coverage,

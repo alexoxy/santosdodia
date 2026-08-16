@@ -32,10 +32,11 @@ function candidate(id, dateISO, rank = 'memorial') {
 
 const normalized = {
   run: { publicationAllowed: false, promotionAllowed: false },
-  coverage: { sourceDayCount: 4, civilDays: 4, eventCount: 5 },
+  coverage: { sourceDayCount: 5, civilDays: 5, eventCount: 6 },
   events: [
     normalizedEvent('structural', '2026-01-02', 'Sexta-feira do Tempo do Natal'),
     normalizedEvent('same', '2026-06-29', 'Santos Pedro e Paulo'),
+    normalizedEvent('precedence', '2026-01-06', 'Terça-feira depois da Epifania'),
     normalizedEvent('ambiguous', '2026-07-01', 'S. Exemplo'),
     normalizedEvent('proper-a', '2026-10-16', 'S. Um', 0, 'g1'),
     normalizedEvent('proper-b', '2026-10-16', 'S. Dois', 1, 'g1'),
@@ -48,6 +49,7 @@ const reconciliation = {
   items: [
     { sourceOccurrenceId:'structural', sourceCanonicalEventId:'source:structural', sourceUid:'uid1', dateISO:'2026-01-02', sourceLabel:'Sexta-feira do Tempo do Natal', sourceRank:null, disposition:'structural-review', reason:'single-general-roman-event-on-date-without-semantic-proof', candidate:candidate('ChristmasWeekday','2026-01-02','weekday'), alternatives:[] },
     { sourceOccurrenceId:'same', sourceCanonicalEventId:'source:same', sourceUid:'uid2', dateISO:'2026-06-29', sourceLabel:'Santos Pedro e Paulo', sourceRank:'solemnity', disposition:'canonical-link-proposal', reason:'same-date-lexical-and-structural-match', candidate:candidate('StsPeterPaulAp','2026-06-29','solemnity'), alternatives:[] },
+    { sourceOccurrenceId:'precedence', sourceCanonicalEventId:'source:precedence', sourceUid:'uid5', dateISO:'2026-01-06', sourceLabel:'Terça-feira depois da Epifania', sourceRank:null, disposition:'precedence-delta-review', reason:'general-high-precedence-event-is-absent-from-portugal-date', candidate:candidate('Epiphany','2026-01-06','solemnity'), alternatives:[] },
     { sourceOccurrenceId:'ambiguous', sourceCanonicalEventId:'source:ambiguous', sourceUid:'uid3', dateISO:'2026-07-01', sourceLabel:'S. Exemplo', sourceRank:'optional-memorial', disposition:'ambiguous-review', reason:'same-date-match-below-safe-threshold', candidate:candidate('Example','2026-07-01'), alternatives:[candidate('Example','2026-07-01')] },
     { sourceOccurrenceId:'proper-a', sourceCanonicalEventId:'source:proper-a', sourceUid:'uid4', dateISO:'2026-10-16', sourceLabel:'S. Um', sourceRank:'optional-memorial', disposition:'portugal-proper-or-unmatched', reason:'no-safe-general-roman-candidate', candidate:null, alternatives:[] },
     { sourceOccurrenceId:'proper-b', sourceCanonicalEventId:'source:proper-b', sourceUid:'uid4', dateISO:'2026-10-16', sourceLabel:'S. Dois', sourceRank:'optional-memorial', disposition:'portugal-proper-or-unmatched', reason:'no-safe-general-roman-candidate', candidate:null, alternatives:[] },
@@ -59,19 +61,21 @@ assert.equal(result.mode, 'jurisdiction-delta-overlay-plan');
 assert.equal(result.baseCalendar, 'roman-catholic-general');
 assert.equal(result.productionWriteAllowed, false);
 assert.equal(result.overlayPublicationAllowed, false);
-assert.equal(result.summary.inputOccurrences, 5);
+assert.equal(result.summary.inputOccurrences, 6);
 assert.equal(result.summary.inheritGeneralNoPtRow, 2);
 assert.equal(result.summary.optionalProvenanceBindingReview, 1);
-assert.equal(result.summary.blockingDeltaReview, 3);
-assert.equal(result.summary.humanReviewReductionPercent, 40);
+assert.equal(result.summary.blockingDeltaReview, 4);
+assert.equal(result.summary.humanReviewReductionPercent, 33.3);
 assert.equal(result.inheritGeneral.find((item)=>item.sourceOccurrenceId==='structural').humanReviewRequired, false);
 assert.equal(result.inheritGeneral.find((item)=>item.sourceOccurrenceId==='same').blocksPortugalPublication, false);
 assert.equal(result.provenanceBindingCandidates[0].blocksPortugalPublication, false);
 assert.ok(result.blockingDeltaReview.every((item)=>item.blocksPortugalPublication===true && item.humanReviewRequired===true));
+assert.equal(result.blockingDeltaReview.find((item)=>item.sourceOccurrenceId==='precedence').disposition, 'precedence-delta-review');
+assert.match(result.blockingDeltaReview.find((item)=>item.sourceOccurrenceId==='precedence').reason, /precedence|omission/u);
 assert.equal(result.blockingDeltaReview.filter((item)=>item.alternativeGroupId==='g1').length, 2);
 assert.ok([...result.inheritGeneral, ...result.provenanceBindingCandidates, ...result.blockingDeltaReview].every((item)=>item.productionWriteAllowed===false));
 
 const unsafe = structuredClone(normalized);
 unsafe.run.promotionAllowed = true;
 assert.throws(() => buildPortugalJurisdictionOverlayPlan({ normalized: unsafe, reconciliation }), /withheld/u);
-console.log('Portugal jurisdiction overlay planning tests passed.');
+console.log('Portugal jurisdiction overlay planning and precedence-delta tests passed.');
