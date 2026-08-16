@@ -110,8 +110,8 @@ function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   if (/nascimento.*joao.*batista/u.test(source) && candidateId === 'NativityJohnBaptist') return 1;
   if (/martirio.*joao.*batista/u.test(source) && candidateId === 'BeheadingJohnBaptist') return 1;
   if (/luis de franca/u.test(source) && candidateId === 'StLouis') return 0.98;
-  if (/epifania/u.test(source) && candidateId === 'Epiphany') return 1;
-  if (/ascensao/u.test(source) && candidateId === 'Ascension') return 1;
+  if (/^epifania(?: do senhor)?$/u.test(source) && candidateId === 'Epiphany') return 1;
+  if (/^ascensao(?: do senhor)?$/u.test(source) && candidateId === 'Ascension') return 1;
   if (/imaculado.*coracao/u.test(source) && candidateId === 'ImmaculateHeart') return 1;
   if (/cirilo.*metodio/u.test(source) && candidateId === 'StsCyrilMethodius') return 1;
   if (/fieis.*defuntos/u.test(source) && candidateId === 'AllSouls') return 1;
