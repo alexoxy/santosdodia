@@ -13,6 +13,7 @@ on:
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/sync-litcal-mirror.mjs'
       - 'data/releases/roman-catholic-pt-2026.overlay-review.json'
+      - 'data/releases/roman-catholic-pt-2026.overlay-approval.json'
       - 'data/observance-editorial.ts'
       - 'lib/observance-editorial.ts'
       - 'lib/public-observances.ts'
@@ -74,6 +75,7 @@ jobs:
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
           node scripts/calendar/test-portugal-overlay-review-plan.mjs
+          node scripts/calendar/test-portugal-overlay-approval.mjs
           node scripts/calendar/test-portugal-effective-calendar-preview.mjs
           node scripts/calendar/test-observance-editorial.mjs
 
