@@ -12,6 +12,7 @@ on:
       - 'scripts/calendar/**portugal**'
       - 'data/releases/roman-catholic-pt-2026.overlay-review.json'
       - 'data/releases/roman-catholic-pt-2026.overlay-approval.json'
+      - 'data/releases/roman-catholic-pt-2026.localization-v2.json'
       - '.github/workflows/portugal-product-v2-staging.yml'
   workflow_run:
     workflows:
@@ -71,6 +72,7 @@ jobs:
           node scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs --normalized reports/portugal-v2/normalized-package.json --reconciliation reports/portugal-v2/reconciliation.json --output reports/portugal-v2/overlay-plan.json
           node scripts/calendar/materialize-approved-portugal-overlay-review.mjs --plan data/releases/roman-catholic-pt-2026.overlay-review.json --approval data/releases/roman-catholic-pt-2026.overlay-approval.json --output reports/portugal-v2/approved-overlay-review.json
           node scripts/calendar/build-portugal-effective-calendar-preview.mjs --normalized reports/portugal-v2/normalized-package.json --reconciliation reports/portugal-v2/reconciliation.json --review reports/portugal-v2/approved-overlay-review.json --output reports/portugal-v2/effective-preview.json
+          cp data/releases/roman-catholic-pt-2026.localization-v2.json reports/portugal-v2/localization-review.json
 
       - name: Generate pinned bilingual Romcal identity bridge
         run: |
@@ -128,6 +130,7 @@ jobs:
             --year "$YEAR" \
             --effective reports/portugal-v2/effective-preview.json \
             --review reports/portugal-v2/approved-overlay-review.json \
+            --localization-review reports/portugal-v2/localization-review.json \
             --romcal reports/portugal-v2/romcal-bilingual-2026.json \
             --mirror-root data/litcal-mirror/calendars/general \
             --output reports/portugal-v2/build.json
@@ -156,7 +159,7 @@ jobs:
           if(build.calendarCoverage.multiObservanceDays!==22||build.calendarCoverage.maxObservancesPerDay!==3) throw new Error(`Portugal multi-observance topology mismatch: ${JSON.stringify(build.calendarCoverage)}`);
           if(!Object.values(build.localeCompleteness).every((item)=>item.completeness===1)) throw new Error('Portugal v2 locale completeness is not 100%.');
           if(release.release!=='roman-catholic-pt-2026-v2'||release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945||release.expectedCalendarAssertions!==389) throw new Error('Portugal v2 D1 manifest mismatch.');
-          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false) throw new Error('Portugal v2 release escaped staging-only mode.');
+          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Portugal v2 release escaped staging-only mode.');
           const byCanonical=new Map(build.occurrences.map((item)=>[item.canonicalEventId,item]));
           const required=[
             ['rc:Epiphany','2026-01-04'],
@@ -198,6 +201,7 @@ jobs:
             reports/portugal-v2/validation.json
             reports/portugal-v2/effective-preview.json
             reports/portugal-v2/approved-overlay-review.json
+            reports/portugal-v2/localization-review.json
             reports/portugal-v2/romcal-bilingual-2026.json
 
   archive-v2-evidence:
@@ -234,6 +238,7 @@ jobs:
           node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/manifest.json --path "$BASE/manifest.json"
           node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/validation.json --path "$BASE/validation.json"
           node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/release.json --path "$BASE/release.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/localization-review.json --path "$BASE/localization-review.json"
 
   publish-v2-to-staging:
     if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') }}
@@ -268,7 +273,7 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const release=JSON.parse(fs.readFileSync('reports/portugal-v2/release.json','utf8'));
-          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false) throw new Error('Refusing a non-staging Portugal v2 release.');
+          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Refusing a non-staging Portugal v2 release.');
           if(release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945) throw new Error('Refusing unexpected Portugal v2 release counts.');
           NODE
           npm run db:d1-staging-config-test
