@@ -1,0 +1,283 @@
+name: Portugal product v2 production gate
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'data/releases/roman-catholic-pt-2026-v2.production-request.json'
+      - 'scripts/build/validate-portugal-v2-production-request.mjs'
+      - 'scripts/build/test-validate-portugal-v2-production-request.mjs'
+      - '.github/workflows/portugal-product-v2-production.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/releases/roman-catholic-pt-2026-v2.production-request.json'
+      - 'scripts/build/validate-portugal-v2-production-request.mjs'
+      - 'scripts/build/test-validate-portugal-v2-production-request.mjs'
+      - '.github/workflows/portugal-product-v2-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: portugal-product-v2-production
+  cancel-in-progress: false
+
+env:
+  REQUEST_FILE: data/releases/roman-catholic-pt-2026-v2.production-request.json
+  STAGING_RUN_ID: '31977231879'
+  RELEASE_ARTIFACT: portugal-product-v2-31977231879
+  STAGING_VERIFICATION_ARTIFACT: portugal-v2-staging-verification-31977231879
+  PRODUCTION_DATABASE_ID: e1ad3640-b334-49d1-a6fc-a73f54924803
+
+jobs:
+  validate-production-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      approved: ${{ steps.authorization.outputs.approved }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Test fail-closed approval contract
+        run: node scripts/build/test-validate-portugal-v2-production-request.mjs
+
+      - name: Download exact staging-validated v2 release
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ env.RELEASE_ARTIFACT }}
+          path: reports/portugal-v2-production/release
+          github-token: ${{ github.token }}
+          repository: alexoxy/santosdodia
+          run-id: ${{ env.STAGING_RUN_ID }}
+
+      - name: Download exact remote staging verification receipt
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ env.STAGING_VERIFICATION_ARTIFACT }}
+          path: reports/portugal-v2-production/staging-verification
+          github-token: ${{ github.token }}
+          repository: alexoxy/santosdodia
+          run-id: ${{ env.STAGING_RUN_ID }}
+
+      - name: Validate pinned staging evidence and file hashes
+        run: >-
+          node scripts/build/validate-portugal-v2-production-request.mjs
+          --request "$REQUEST_FILE"
+          --artifact-dir reports/portugal-v2-production/release
+          --verification-dir reports/portugal-v2-production/staging-verification
+          --require-approved false
+
+      - name: Resolve production authorization state
+        id: authorization
+        shell: bash
+        run: |
+          APPROVED="$(node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          process.stdout.write(request.approved === true ? 'true' : 'false');
+          NODE
+          )"
+          echo "approved=$APPROVED" >> "$GITHUB_OUTPUT"
+          if [ "$APPROVED" = "true" ]; then
+            node scripts/build/validate-portugal-v2-production-request.mjs \
+              --request "$REQUEST_FILE" \
+              --artifact-dir reports/portugal-v2-production/release \
+              --verification-dir reports/portugal-v2-production/staging-verification \
+              --require-approved true
+            echo "Exact Portugal v2 production snapshot is explicitly authorized."
+          else
+            echo "Portugal v2 production request is intentionally unapproved; production job will be skipped."
+          fi
+
+  release-production:
+    if: ${{ github.event_name != 'pull_request' && needs.validate-production-gate.outputs.approved == 'true' }}
+    needs: validate-production-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Cloudflare credentials are currently held in this protected environment.
+    # The target is hard-checked below as santosdodia-production by name and UUID.
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout authorized main
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Download exact staging-validated v2 release
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ env.RELEASE_ARTIFACT }}
+          path: reports/portugal-v2-production/release
+          github-token: ${{ github.token }}
+          repository: alexoxy/santosdodia
+          run-id: ${{ env.STAGING_RUN_ID }}
+
+      - name: Download exact remote staging verification receipt
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ env.STAGING_VERIFICATION_ARTIFACT }}
+          path: reports/portugal-v2-production/staging-verification
+          github-token: ${{ github.token }}
+          repository: alexoxy/santosdodia
+          run-id: ${{ env.STAGING_RUN_ID }}
+
+      - name: Revalidate one-shot approval and exact evidence
+        run: >-
+          node scripts/build/validate-portugal-v2-production-request.mjs
+          --request "$REQUEST_FILE"
+          --artifact-dir reports/portugal-v2-production/release
+          --verification-dir reports/portugal-v2-production/staging-verification
+          --require-approved true
+
+      - name: Verify production target and capture pre-release Time Travel bookmark
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          npx wrangler d1 info CALENDAR_DB --config wrangler.jsonc --json > reports/portugal-v2-production/production-info-before.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const value=JSON.parse(fs.readFileSync('reports/portugal-v2-production/production-info-before.json','utf8'));
+          const db=Array.isArray(value)?value[0]:value;
+          if(db?.name!==request.productionDatabase.name) throw new Error(`Refusing D1 target ${db?.name ?? 'unknown'}.`);
+          if(db?.uuid!==request.productionDatabase.uuid||db?.uuid!==process.env.PRODUCTION_DATABASE_ID) throw new Error(`Production D1 UUID mismatch: ${db?.uuid ?? 'unknown'}.`);
+          NODE
+          npx wrangler d1 time-travel info CALENDAR_DB --config wrangler.jsonc --json > reports/portugal-v2-production/bookmark-before.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const value=JSON.parse(fs.readFileSync('reports/portugal-v2-production/bookmark-before.json','utf8'));
+          const bookmark=value?.bookmark ?? value?.result?.bookmark ?? (Array.isArray(value)?value[0]?.bookmark:null);
+          if(!bookmark) throw new Error('Could not capture pre-release D1 Time Travel bookmark.');
+          console.log(`Pre-release production bookmark captured: ${bookmark}`);
+          NODE
+
+      - name: Apply schema and exact v2 release invisibly
+        run: |
+          npx wrangler d1 migrations apply CALENDAR_DB --remote --config wrangler.jsonc
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --file reports/portugal-v2-production/release/release.sql
+
+      - name: Verify invisible production import
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS occurrences, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS labels, (SELECT COUNT(*) FROM calendar_occurrence_assertions a JOIN calendar_occurrences o ON o.id=a.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS calendar_assertions, (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='publishable') AS publishable, (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='published') AS published, (SELECT MAX(c) FROM (SELECT COUNT(*) c FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' GROUP BY date_iso)) AS max_per_day;" > reports/portugal-v2-production/production-counts-invisible.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const payload=JSON.parse(fs.readFileSync('reports/portugal-v2-production/production-counts-invisible.json','utf8'));
+          const row=payload?.[0]?.results?.[0] ?? payload?.[0]?.result?.[0] ?? payload?.results?.[0] ?? payload?.result?.[0];
+          if(!row) throw new Error('Could not parse invisible production count query.');
+          const expected=request.expected;
+          if(Number(row.occurrences)!==expected.occurrences||Number(row.days)!==expected.days||Number(row.labels)!==expected.labels||Number(row.calendar_assertions)!==expected.calendarAssertions||Number(row.publishable)!==expected.publishableBeforeVisibility||Number(row.published)!==expected.publishedBeforeVisibility||Number(row.max_per_day)!==expected.maxObservancesPerDay) throw new Error(`Invisible production verification failed: ${JSON.stringify(row)}`);
+          console.log(`Invisible Portugal v2 import verified: ${row.occurrences} observances / ${row.days} days / ${row.labels} labels.`);
+          NODE
+
+      - name: Verify production semantics and multilingual identity before visibility
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --json --command "SELECT canonical_event_id,date_iso,rank_code FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND canonical_event_id IN ('rc:Epiphany','rc-pt:TuesdayAfterEpiphany','rc:StMatthias','rc:Ascension','rc:ImmaculateHeart','rc-pt:FiveWoundsLord') ORDER BY canonical_event_id;" > reports/portugal-v2-production/production-semantics-invisible.json
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --json --command "SELECT o.canonical_event_id,l.locale,l.name FROM calendar_occurrences o JOIN calendar_occurrence_labels l ON l.occurrence_id=o.id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.canonical_event_id='rc:StMartha' AND l.locale IN ('en','pt','es','fr','it') ORDER BY l.locale;" > reports/portugal-v2-production/production-martha-invisible.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          function rows(file){const payload=JSON.parse(fs.readFileSync(file,'utf8'));return payload?.[0]?.results ?? payload?.[0]?.result ?? payload?.results ?? payload?.result ?? [];}
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const semantics=rows('reports/portugal-v2-production/production-semantics-invisible.json');
+          const byId=new Map(semantics.map((row)=>[row.canonical_event_id,row.date_iso]));
+          for(const [id,date] of Object.entries(request.semanticChecks)) if(byId.get(id)!==date) throw new Error(`Production semantic mismatch for ${id}: ${byId.get(id) ?? 'missing'}.`);
+          const martha=rows('reports/portugal-v2-production/production-martha-invisible.json');
+          if(martha.length!==5) throw new Error(`Expected five Martha/Mary/Lazarus labels, got ${martha.length}.`);
+          const labels=new Map(martha.map((row)=>[row.locale,String(row.name)]));
+          const checks=[['en',/Martha.*Mary.*Lazarus/i],['pt',/Marta.*Maria.*Lázaro/i],['es',/Marta.*María.*Lázaro/i],['fr',/Marthe.*Marie.*Lazare/i],['it',/Marta.*Maria.*Lazzaro/i]];
+          for(const [locale,pattern] of checks) if(!pattern.test(labels.get(locale) ?? '')) throw new Error(`Martha/Mary/Lazarus ${locale} label failed: ${labels.get(locale) ?? 'missing'}.`);
+          console.log('Production semantic and multilingual checks passed while v2 remains invisible.');
+          NODE
+
+      - name: Publish exactly the approved Portugal v2 slice
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --command "UPDATE calendar_occurrences SET publication_status='published', updated_at=CURRENT_TIMESTAMP WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='publishable';"
+
+      - name: Verify published production read model and capture post-release bookmark
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config wrangler.jsonc --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='published' AND validation_status='cross-checked') AS published, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='published') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND o.publication_status='published') AS labels, (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='publishable') AS publishable, (SELECT MAX(c) FROM (SELECT COUNT(*) c FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='published' GROUP BY date_iso)) AS max_per_day;" > reports/portugal-v2-production/production-counts-published.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const payload=JSON.parse(fs.readFileSync('reports/portugal-v2-production/production-counts-published.json','utf8'));
+          const row=payload?.[0]?.results?.[0] ?? payload?.[0]?.result?.[0] ?? payload?.results?.[0] ?? payload?.result?.[0];
+          if(Number(row?.published)!==request.expected.publishedAfterVisibility||Number(row?.days)!==request.expected.days||Number(row?.labels)!==request.expected.labels||Number(row?.publishable)!==0||Number(row?.max_per_day)!==request.expected.maxObservancesPerDay) throw new Error(`Published Portugal v2 verification failed: ${JSON.stringify(row)}`);
+          console.log(`Portugal v2 production published: ${row.published} observances / ${row.days} days / ${row.labels} labels.`);
+          NODE
+          npx wrangler d1 time-travel info CALENDAR_DB --config wrangler.jsonc --json > reports/portugal-v2-production/bookmark-after.json
+
+      - name: Write immutable production verification receipt
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const request=JSON.parse(fs.readFileSync(process.env.REQUEST_FILE,'utf8'));
+          const release=JSON.parse(fs.readFileSync('reports/portugal-v2-production/release/release.json','utf8'));
+          const before=JSON.parse(fs.readFileSync('reports/portugal-v2-production/bookmark-before.json','utf8'));
+          const after=JSON.parse(fs.readFileSync('reports/portugal-v2-production/bookmark-after.json','utf8'));
+          const extract=value=>value?.bookmark ?? value?.result?.bookmark ?? (Array.isArray(value)?value[0]?.bookmark:null);
+          const pre=extract(before), post=extract(after);
+          if(!pre||!post) throw new Error('Production receipt is missing Time Travel bookmarks.');
+          const receipt={
+            schemaVersion:1,
+            releaseId:request.releaseId,
+            releasedAt:new Date().toISOString(),
+            releaseWorkflowCommit:process.env.GITHUB_SHA,
+            sourceMainCommit:request.sourceMainCommit,
+            stagingWorkflowRunId:request.stagingWorkflow.runId,
+            stagingReleaseArtifact:request.artifacts.release,
+            stagingVerificationArtifact:request.artifacts.stagingVerification,
+            productionDatabase:request.productionDatabase,
+            preReleaseBookmark:pre,
+            postReleaseBookmark:post,
+            publishedOccurrences:request.expected.publishedAfterVisibility,
+            publishedDays:request.expected.days,
+            publishedLabels:request.expected.labels,
+            maxObservancesPerDay:request.expected.maxObservancesPerDay,
+            semanticChecks:'passed',
+            multilingualIdentityChecks:'passed',
+            releaseBuildDigest:release.sourceBuildDigest,
+            approvalInstruction:request.approvalInstruction,
+            automaticFutureProductionWrites:false,
+            rollbackCommand:`npx wrangler d1 time-travel restore CALENDAR_DB --config wrangler.jsonc --bookmark=${pre}`,
+          };
+          receipt.receiptSha256=createHash('sha256').update(JSON.stringify(receipt)).digest('hex');
+          fs.writeFileSync('reports/portugal-v2-production/production-receipt.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+
+      - name: Upload production verification receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: portugal-v2-production-receipt-${{ github.run_id }}
+          retention-days: 90
+          if-no-files-found: error
+          path: |
+            reports/portugal-v2-production/production-receipt.json
+            reports/portugal-v2-production/production-info-before.json
+            reports/portugal-v2-production/bookmark-before.json
+            reports/portugal-v2-production/bookmark-after.json
+            reports/portugal-v2-production/production-counts-invisible.json
+            reports/portugal-v2-production/production-semantics-invisible.json
+            reports/portugal-v2-production/production-martha-invisible.json
+            reports/portugal-v2-production/production-counts-published.json

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "roman-catholic-pt-2026-v2",
+  "approved": false,
+  "approvalMode": "explicit-one-shot-product-release-v2",
+  "approvalScope": "exact-staging-validated-snapshot-only",
+  "approvalRecordedAt": null,
+  "approvalInstruction": null,
+  "sourceMainCommit": "13845f8fa930cdee993c405f68f4be341fbda18e",
+  "stagingWorkflow": {
+    "name": "Portugal product v2 staging",
+    "runId": 31977231879,
+    "conclusion": "success",
+    "headSha": "13845f8fa930cdee993c405f68f4be341fbda18e"
+  },
+  "artifacts": {
+    "release": {
+      "id": 9271379725,
+      "name": "portugal-product-v2-31977231879",
+      "digest": "sha256:824e98853835bc0b4160673728304e50b266e31cdafb92de02c5a4eb73138287",
+      "files": {
+        "build.json": "sha256:a08a74b855f3c84ea4940143e6206c275faa893e00c394b5a748a2bbae6d43df",
+        "manifest.json": "sha256:a08a74b855f3c84ea4940143e6206c275faa893e00c394b5a748a2bbae6d43df",
+        "release.json": "sha256:e2ae38954e2179e03e2cb05d0c6c03dc8c5a1638b63c24be58301f97ef34fdc6",
+        "release.sql": "sha256:528844a91699be38aa8e066a80e2c5f8fa0a186e62205d38a68d706b35bb3483",
+        "validation.json": "sha256:2db289d3613cd5290d13fa1e2452f29a78e7873faa35551642eda8786eecf339",
+        "approved-overlay-review.json": "sha256:981746f8f930b781e7da92808db4e74cd3baa46cec3d4652362e3d5391f52507",
+        "localization-review.json": "sha256:54d4bfa512c4efda859998d1ac47b464aa646383b84433e9e4535dcaa7ac72be",
+        "effective-preview.json": "sha256:e8fcf3555af72faba67494e22f5e4d4a906d369048a4055dde602a807ed1a549"
+      }
+    },
+    "stagingVerification": {
+      "id": 9271396058,
+      "name": "portugal-v2-staging-verification-31977231879",
+      "digest": "sha256:49988be5ecac510f24ea1eabde5243e1d0d95e4fbe1e7f7bee3a41f491c8f8de",
+      "files": {
+        "staging-counts.json": "sha256:f8c06f951f9105fb494243f8e26bb52dbbc71695ab8dab265178bb6f65c88bec",
+        "staging-semantics.json": "sha256:6d937ee00d77df75f35af6a42faf63dbc017b61f310e4da3ae93e1c53af58727"
+      }
+    }
+  },
+  "stagingDatabase": {
+    "name": "santosdodia-staging",
+    "uuid": "e212681b-a958-4554-9d44-d48cf85f2978"
+  },
+  "productionDatabase": {
+    "name": "santosdodia-production",
+    "uuid": "e1ad3640-b334-49d1-a6fc-a73f54924803"
+  },
+  "expected": {
+    "occurrences": 389,
+    "days": 365,
+    "labels": 1945,
+    "calendarAssertions": 389,
+    "publishableBeforeVisibility": 389,
+    "publishedBeforeVisibility": 0,
+    "publishedAfterVisibility": 389,
+    "maxObservancesPerDay": 3,
+    "multiObservanceDays": 22,
+    "decisionCount": 15,
+    "publicLocales": ["en", "pt", "es", "fr", "it"]
+  },
+  "semanticChecks": {
+    "rc:Epiphany": "2026-01-04",
+    "rc-pt:TuesdayAfterEpiphany": "2026-01-06",
+    "rc:StMatthias": "2026-05-14",
+    "rc:Ascension": "2026-05-17",
+    "rc:ImmaculateHeart": "2026-06-15",
+    "rc-pt:FiveWoundsLord": "2026-02-07"
+  },
+  "safety": {
+    "automaticFutureProductionWrites": false,
+    "requiresExplicitApprovedTrueChange": true,
+    "importInitiallyInvisible": true,
+    "publishOnlyAfterRemoteVerification": true,
+    "requiresPreReleaseTimeTravelBookmark": true,
+    "requiresPostReleaseVerification": true,
+    "newStagingSnapshotRequiresNewApproval": true,
+    "approvalCannotBeInheritedByFutureSnlRuns": true
+  }
+}
