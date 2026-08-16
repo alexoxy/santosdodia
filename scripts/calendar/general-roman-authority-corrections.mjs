@@ -14,6 +14,22 @@ export const GENERAL_ROMAN_AUTHORITY_CORRECTIONS = Object.freeze([
     decision: 'The celebration of Saint Mary Magdalene is a feast in the General Roman Calendar.',
   }),
   Object.freeze({
+    id: 'StMartha',
+    monthDay: '07-29',
+    effectiveFromYear: 2021,
+    grade: 'memorial',
+    replaceName: true,
+    names: Object.freeze({
+      en_US: 'Saints Martha, Mary and Lazarus',
+      pt_PT: 'Santos Marta, Maria e Lázaro',
+      es_ES: 'Santos Marta, María y Lázaro',
+      fr_FR: 'Saintes Marthe, Marie et saint Lazare',
+      it_IT: 'Santi Marta, Maria e Lazzaro',
+    }),
+    source: 'https://press.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_en.html',
+    decision: 'Since 2021 the General Roman Calendar memorial on 29 July is Saints Martha, Mary and Lazarus, not Martha alone.',
+  }),
+  Object.freeze({
     id: 'StJohnHenryNewman',
     monthDay: '10-09',
     effectiveFromYear: 2026,
@@ -63,7 +79,9 @@ export function applyGeneralRomanAuthorityCorrections(events, { year, locale = '
       decision: correction.decision,
       effectiveFromYear: correction.effectiveFromYear,
     };
-    if (!text(event.name) && correction.names) event.name = correction.names[locale] ?? correction.names.en_US;
+    if (correction.names && (correction.replaceName === true || !text(event.name))) {
+      event.name = correction.names[locale] ?? correction.names.en_US;
+    }
   }
 
   return output.sort((a, b) => text(a.dateISO).localeCompare(text(b.dateISO)) || text(a.id).localeCompare(text(b.id)));

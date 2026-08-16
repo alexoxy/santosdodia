@@ -1,0 +1,320 @@
+name: Portugal product v2 staging
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/build/roman-catholic-pt-overlay-v2.mjs'
+      - 'scripts/build/test-roman-catholic-pt-overlay-v2.mjs'
+      - 'scripts/build/roman-catholic-d1-release-v2.mjs'
+      - 'scripts/build/test-roman-catholic-d1-release-v2.mjs'
+      - 'scripts/calendar/**portugal**'
+      - 'data/releases/roman-catholic-pt-2026.overlay-review.json'
+      - 'data/releases/roman-catholic-pt-2026.overlay-approval.json'
+      - 'data/releases/roman-catholic-pt-2026.localization-v2.json'
+      - '.github/workflows/portugal-product-v2-staging.yml'
+  workflow_run:
+    workflows:
+      - 'Portugal SNL calendar staging'
+      - 'Product publish staging'
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: portugal-product-v2-staging
+  cancel-in-progress: false
+
+env:
+  YEAR: '2026'
+  STAGING_DATABASE_ID: e212681b-a958-4554-9d44-d48cf85f2978
+  ROMCAL_VERSION: 3.0.0-dev.125
+  ROMCAL_SOURCE_COMMIT: 878e05a56909e3adf58a85d3b6f0e9ddba3e8c5b
+
+jobs:
+  build-and-validate-v2:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact source revision
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install repository dependencies
+        run: npm ci --include=optional
+
+      - name: Test Portugal v2 builders
+        run: |
+          node scripts/build/test-roman-catholic-pt-overlay-v2.mjs
+          node scripts/build/test-roman-catholic-d1-release-v2.mjs
+          node scripts/calendar/test-portugal-overlay-approval.mjs
+          node scripts/calendar/test-portugal-effective-calendar-preview.mjs
+
+      - name: Rebuild current approved Portugal effective calendar
+        run: |
+          mkdir -p reports/portugal-v2/source reports/portugal-v2/review
+          node scripts/calendar/fetch-portugal-snl-agenda.mjs --output-dir reports/portugal-v2/source
+          node scripts/calendar/normalize-portugal-snl-agenda.mjs --input-dir reports/portugal-v2/source --output reports/portugal-v2/normalized-package.json
+          node scripts/calendar/reconcile-portugal-snl.mjs --snl reports/portugal-v2/normalized-package.json --mirror-root data/litcal-mirror/calendars/general --output reports/portugal-v2/reconciliation.json
+          node scripts/calendar/build-portugal-snl-review-bundle.mjs --normalized reports/portugal-v2/normalized-package.json --reconciliation reports/portugal-v2/reconciliation.json --output-dir reports/portugal-v2/review
+          node scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs --normalized reports/portugal-v2/normalized-package.json --reconciliation reports/portugal-v2/reconciliation.json --output reports/portugal-v2/overlay-plan.json
+          node scripts/calendar/materialize-approved-portugal-overlay-review.mjs --plan data/releases/roman-catholic-pt-2026.overlay-review.json --approval data/releases/roman-catholic-pt-2026.overlay-approval.json --output reports/portugal-v2/approved-overlay-review.json
+          node scripts/calendar/build-portugal-effective-calendar-preview.mjs --normalized reports/portugal-v2/normalized-package.json --reconciliation reports/portugal-v2/reconciliation.json --review reports/portugal-v2/approved-overlay-review.json --output reports/portugal-v2/effective-preview.json
+          cp data/releases/roman-catholic-pt-2026.localization-v2.json reports/portugal-v2/localization-review.json
+
+      - name: Generate pinned bilingual Romcal identity bridge
+        run: |
+          mkdir -p reports/portugal-v2/romcal
+          npm install --prefix reports/portugal-v2/romcal \
+            --no-package-lock --ignore-scripts --no-audit --no-fund \
+            romcal@${ROMCAL_VERSION} \
+            @romcal/calendar.general-roman@${ROMCAL_VERSION}
+          cd reports/portugal-v2/romcal
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { Romcal } from 'romcal';
+          import * as calendars from '@romcal/calendar.general-roman';
+          const englishCalendar = calendars.GeneralRoman_En ?? calendars.GeneralRoman_EnUs ?? calendars.GeneralRoman;
+          const spanishCalendar = calendars.GeneralRoman_Es;
+          if (!englishCalendar || !spanishCalendar) {
+            throw new Error(`Pinned Romcal package does not expose expected English/Spanish General Roman calendars. Exports: ${Object.keys(calendars).sort().join(', ')}`);
+          }
+          async function generate(localizedCalendar) {
+            const calendar = await new Romcal({
+              localizedCalendar,
+              scope: 'gregorian',
+              epiphanyOnSunday: false,
+              corpusChristiOnSunday: false,
+              ascensionOnSunday: false,
+            }).generateCalendar(2026);
+            const events=[];
+            for (const [dateKey,value] of Object.entries(calendar)) {
+              for (const item of (Array.isArray(value) ? value : [value])) {
+                if (!item) continue;
+                const dateISO=String(item.date ?? dateKey).slice(0,10);
+                const name=String(item.name ?? '').trim();
+                const id=String(item.id ?? item.key ?? '').trim();
+                if (!dateISO.startsWith('2026-') || !name || !id || /vigil/i.test(id)) continue;
+                events.push({dateISO,id,name,rank:item.rank?.name ?? item.rankName ?? item.rank ?? null});
+              }
+            }
+            return events.sort((a,b)=>a.dateISO.localeCompare(b.dateISO)||a.id.localeCompare(b.id));
+          }
+          const english=await generate(englishCalendar);
+          const spanish=await generate(spanishCalendar);
+          fs.writeFileSync('../romcal-bilingual-2026.json', JSON.stringify({
+            source:'romcal/romcal',
+            packageVersion:process.env.ROMCAL_VERSION,
+            pinnedSourceCommit:process.env.ROMCAL_SOURCE_COMMIT,
+            english,
+            spanish,
+          },null,2)+'\n');
+          console.log(JSON.stringify({english:english.length,spanish:spanish.length,exports:Object.keys(calendars).filter((key)=>/GeneralRoman/i.test(key)).sort()},null,2));
+          NODE
+
+      - name: Build event-complete Portugal v2 product
+        run: |
+          node scripts/build/roman-catholic-pt-overlay-v2.mjs \
+            --year "$YEAR" \
+            --effective reports/portugal-v2/effective-preview.json \
+            --review reports/portugal-v2/approved-overlay-review.json \
+            --localization-review reports/portugal-v2/localization-review.json \
+            --romcal reports/portugal-v2/romcal-bilingual-2026.json \
+            --mirror-root data/litcal-mirror/calendars/general \
+            --output reports/portugal-v2/build.json
+
+      - name: Create D1 staging release package
+        env:
+          SOURCE_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          DROPBOX_MANIFEST_PATH="/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/${SOURCE_SHA}/manifest.json"
+          cp reports/portugal-v2/build.json reports/portugal-v2/manifest.json
+          node scripts/build/roman-catholic-d1-release-v2.mjs \
+            --input reports/portugal-v2/build.json \
+            --sql reports/portugal-v2/release.sql \
+            --manifest reports/portugal-v2/release.json \
+            --dropbox-manifest-path "$DROPBOX_MANIFEST_PATH" \
+            --publication-status publishable
+
+      - name: Validate v2 release invariants
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const build=JSON.parse(fs.readFileSync('reports/portugal-v2/build.json','utf8'));
+          const release=JSON.parse(fs.readFileSync('reports/portugal-v2/release.json','utf8'));
+          if(build.build!=='roman-catholic-pt-overlay-v2'||build.productionWriteAllowed!==false) throw new Error('Portugal v2 build crossed production boundary.');
+          if(build.calendarCoverage.occurrences!==389||build.calendarCoverage.coveredDays!==365||build.productReadiness.labelCount!==1945) throw new Error('Portugal v2 coverage mismatch.');
+          if(build.calendarCoverage.multiObservanceDays!==22||build.calendarCoverage.maxObservancesPerDay!==3) throw new Error(`Portugal multi-observance topology mismatch: ${JSON.stringify(build.calendarCoverage)}`);
+          if(!Object.values(build.localeCompleteness).every((item)=>item.completeness===1)) throw new Error('Portugal v2 locale completeness is not 100%.');
+          if(release.release!=='roman-catholic-pt-2026-v2'||release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945||release.expectedCalendarAssertions!==389) throw new Error('Portugal v2 D1 manifest mismatch.');
+          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Portugal v2 release escaped staging-only mode.');
+          const byCanonical=new Map(build.occurrences.map((item)=>[item.canonicalEventId,item]));
+          const required=[
+            ['rc:Epiphany','2026-01-04'],
+            ['rc-pt:TuesdayAfterEpiphany','2026-01-06'],
+            ['rc:StMatthias','2026-05-14'],
+            ['rc:Ascension','2026-05-17'],
+            ['rc:ImmaculateHeart','2026-06-15'],
+            ['rc-pt:FiveWoundsLord','2026-02-07'],
+          ];
+          for(const [id,date] of required){ if(byCanonical.get(id)?.dateISO!==date) throw new Error(`${id} expected ${date}, got ${byCanonical.get(id)?.dateISO ?? 'missing'}.`); }
+          if(build.occurrences.some((item)=>Object.keys(item.labels).length!==5)) throw new Error('A Portugal v2 occurrence is missing one of five public labels.');
+          fs.writeFileSync('reports/portugal-v2/validation.json',JSON.stringify({
+            schemaVersion:1,
+            release:release.release,
+            validatedAt:new Date().toISOString(),
+            sourceSha:process.env.GITHUB_SHA,
+            occurrences:389,
+            days:365,
+            labels:1945,
+            multiObservanceDays:22,
+            maxObservancesPerDay:3,
+            decisionCount:15,
+            status:'validated-for-d1-staging',
+            productionApproved:false,
+          },null,2)+'\n');
+          NODE
+
+      - name: Upload validated v2 artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: portugal-product-v2-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            reports/portugal-v2/build.json
+            reports/portugal-v2/manifest.json
+            reports/portugal-v2/release.json
+            reports/portugal-v2/release.sql
+            reports/portugal-v2/validation.json
+            reports/portugal-v2/effective-preview.json
+            reports/portugal-v2/approved-overlay-review.json
+            reports/portugal-v2/localization-review.json
+            reports/portugal-v2/romcal-bilingual-2026.json
+
+  archive-v2-evidence:
+    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') }}
+    needs: build-and-validate-v2
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --include=optional
+      - name: Download validated v2 artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: portugal-product-v2-${{ github.run_id }}
+          path: reports/portugal-v2
+      - name: Archive canonical v2 evidence
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          SOURCE_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          BASE="/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/${SOURCE_SHA}"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/manifest.json --path "$BASE/manifest.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/validation.json --path "$BASE/validation.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/release.json --path "$BASE/release.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/portugal-v2/localization-review.json --path "$BASE/localization-review.json"
+
+  publish-v2-to-staging:
+    if: ${{ github.event_name != 'pull_request' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') }}
+    needs: [build-and-validate-v2, archive-v2-evidence]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: d1-staging
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout protected source revision
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --include=optional
+      - name: Download validated v2 artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: portugal-product-v2-${{ github.run_id }}
+          path: reports/portugal-v2
+      - name: Verify staging safety boundary
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const release=JSON.parse(fs.readFileSync('reports/portugal-v2/release.json','utf8'));
+          if(release.publicationStatus!=='publishable'||release.safety.productionApproved!==false||release.safety.stagingOnly!==true) throw new Error('Refusing a non-staging Portugal v2 release.');
+          if(release.expectedOccurrences!==389||release.expectedDays!==365||release.expectedLabels!==1945) throw new Error('Refusing unexpected Portugal v2 release counts.');
+          NODE
+          npm run db:d1-staging-config-test
+          npm run db:d1-remote-safety-test
+          node scripts/write-d1-staging-config.mjs --database-id "$STAGING_DATABASE_ID" --output /tmp/wrangler.portugal-v2-staging.json
+          npx wrangler d1 info CALENDAR_DB --config /tmp/wrangler.portugal-v2-staging.json --json > /tmp/d1-info.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const value=JSON.parse(fs.readFileSync('/tmp/d1-info.json','utf8'));
+          const db=Array.isArray(value)?value[0]:value;
+          if(db?.name!=='santosdodia-staging') throw new Error(`Refusing target ${db?.name ?? 'unknown'}.`);
+          if(db?.uuid!==process.env.STAGING_DATABASE_ID) throw new Error('Staging D1 UUID mismatch.');
+          NODE
+      - name: Apply migrations and Portugal v2 release to staging
+        run: |
+          npx wrangler d1 migrations apply CALENDAR_DB --remote --config /tmp/wrangler.portugal-v2-staging.json
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.portugal-v2-staging.json --file reports/portugal-v2/release.sql
+      - name: Verify remote Portugal v2 staging semantics
+        run: |
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.portugal-v2-staging.json --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS occurrences, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS labels, (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='publishable') AS publishable, (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' AND publication_status='published') AS published, (SELECT MAX(c) FROM (SELECT COUNT(*) c FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31' GROUP BY date_iso)) AS max_per_day;" > reports/portugal-v2/staging-counts.json
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.portugal-v2-staging.json --json --command "SELECT canonical_event_id,date_iso,rank_code FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND canonical_event_id IN ('rc:Epiphany','rc-pt:TuesdayAfterEpiphany','rc:StMatthias','rc:Ascension','rc:ImmaculateHeart','rc-pt:FiveWoundsLord') ORDER BY canonical_event_id;" > reports/portugal-v2/staging-semantics.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          function rows(file){ const payload=JSON.parse(fs.readFileSync(file,'utf8')); return payload?.[0]?.results ?? payload?.[0]?.result ?? payload?.results ?? payload?.result ?? []; }
+          const countRow=rows('reports/portugal-v2/staging-counts.json')[0];
+          if(!countRow) throw new Error('Could not parse v2 staging counts.');
+          if(Number(countRow.occurrences)!==389||Number(countRow.days)!==365||Number(countRow.labels)!==1945||Number(countRow.publishable)!==389||Number(countRow.published)!==0||Number(countRow.max_per_day)!==3) throw new Error(`Unexpected v2 staging counts: ${JSON.stringify(countRow)}`);
+          const semanticRows=rows('reports/portugal-v2/staging-semantics.json');
+          const byId=new Map(semanticRows.map((row)=>[row.canonical_event_id,row]));
+          const expected=new Map([
+            ['rc:Epiphany','2026-01-04'],['rc-pt:TuesdayAfterEpiphany','2026-01-06'],['rc:StMatthias','2026-05-14'],['rc:Ascension','2026-05-17'],['rc:ImmaculateHeart','2026-06-15'],['rc-pt:FiveWoundsLord','2026-02-07'],
+          ]);
+          for(const [id,date] of expected){ if(byId.get(id)?.date_iso!==date) throw new Error(`Staging semantic mismatch for ${id}: ${JSON.stringify(byId.get(id))}`); }
+          console.log(`Portugal v2 staging verified: ${countRow.occurrences} observances / ${countRow.days} days / ${countRow.labels} labels; max ${countRow.max_per_day} observances/day.`);
+          NODE
+      - name: Upload staging verification receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: portugal-v2-staging-verification-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            reports/portugal-v2/staging-counts.json
+            reports/portugal-v2/staging-semantics.json

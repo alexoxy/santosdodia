@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "releaseScope": "roman-catholic-pt-2026-overlay-v2",
+  "reviewed": true,
+  "productionWriteAllowed": false,
+  "purpose": "Localization-only bindings. These records never create calendar identity, date, rank or jurisdiction assertions.",
+  "canonicalLabels": {
+    "rc:StMatthias": {
+      "en": "Saint Matthias, Apostle",
+      "es": "San Matías, apóstol",
+      "fr": "Saint Matthias, apôtre",
+      "it": "San Mattia, apostolo"
+    }
+  },
+  "canonicalLabelPatterns": [
+    {
+      "canonicalEventIdPattern": "^rc:SatMemBVM[0-9]+$",
+      "labels": {
+        "es": "Santa María en sábado"
+      },
+      "reason": "The General Roman mirror exposes the optional Saturday memorial of the Blessed Virgin Mary, while the pinned Romcal stream does not materialize that optional observance on these civil dates."
+    }
+  ],
+  "romcalBindings": {
+    "rc:OrdSunday3": "sunday_of_the_word_of_god",
+    "rc:ChristKing": "our_lord_jesus_christ_king_of_the_universe",
+    "rc:CorpusChristi": "most_holy_body_and_blood_of_christ",
+    "rc:GoodFri": "friday_of_the_passion_of_the_lord",
+    "rc:Christmas": "nativity_of_the_lord",
+    "rc:ChristmasWeekdayJan5": "christmas_time_january_5",
+    "rc:ChristmasWeekdayDec29": "christmas_octave_day_5",
+    "rc:ChristmasWeekdayDec30": "christmas_octave_day_6",
+    "rc:ChristmasWeekdayDec31": "christmas_octave_day_7",
+    "rc:AdventWeekdayDec17": "advent_december_17",
+    "rc:AdventWeekdayDec18": "advent_december_18",
+    "rc:AdventWeekdayDec19": "advent_december_19",
+    "rc:AdventWeekdayDec21": "advent_december_21",
+    "rc:AdventWeekdayDec22": "advent_december_22",
+    "rc:AdventWeekdayDec23": "advent_december_23",
+    "rc:AdventWeekdayDec24": "advent_december_24",
+    "rc:StColumban": "columban_of_luxeuil_abbot",
+    "rc:StBlase": "blaise_of_sebaste_bishop"
+  },
+  "safety": {
+    "calendarAuthority": false,
+    "dateAuthority": false,
+    "rankAuthority": false,
+    "jurisdictionAuthority": false,
+    "futureUnmatchedEventsFailClosed": true
+  }
+}
