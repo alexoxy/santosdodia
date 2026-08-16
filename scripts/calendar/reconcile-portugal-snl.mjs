@@ -110,8 +110,8 @@ function reviewedSemanticAliasScore(sourceLabel, candidateId) {
   if (/nascimento.*joao.*batista/u.test(source) && candidateId === 'NativityJohnBaptist') return 1;
   if (/martirio.*joao.*batista/u.test(source) && candidateId === 'BeheadingJohnBaptist') return 1;
   if (/luis de franca/u.test(source) && candidateId === 'StLouis') return 0.98;
-  if (/^epifania(?: do senhor)?$/u.test(source) && candidateId === 'Epiphany') return 1;
-  if (/^ascensao(?: do senhor)?$/u.test(source) && candidateId === 'Ascension') return 1;
+  if (!/\bdepois\b/u.test(source) && /\bepifania do senhor\b/u.test(source) && candidateId === 'Epiphany') return 1;
+  if (!/\bdepois\b/u.test(source) && /\bascensao do senhor\b/u.test(source) && candidateId === 'Ascension') return 1;
   if (/imaculado.*coracao/u.test(source) && candidateId === 'ImmaculateHeart') return 1;
   if (/cirilo.*metodio/u.test(source) && candidateId === 'StsCyrilMethodius') return 1;
   if (/fieis.*defuntos/u.test(source) && candidateId === 'AllSouls') return 1;
@@ -270,17 +270,25 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
     const structuralSource=isStructuralDayLabel(event.names?.pt?.value ?? '');
     const transfer=nearbyScores.find((item)=>!item.sameDate&&item.lexicalScore>=0.78&&item.dateDistanceDays<=7);
     const strongSameDate=best && best.lexicalScore>=0.72 && (!second || best.score-second.score>=0.1);
+    const explicitTransferredIdentity = Boolean(
+      transfer
+      && transfer.matchingBasis === 'reviewed-semantic-alias'
+      && transfer.matchedSourceLabel === text(event.names?.pt?.value)
+      && isHighPrecedence(sourceRank),
+    );
     const highSameDate=sameDateScores.filter((item)=>isHighPrecedence(item.generalRomanRank));
     const conflictingHighSameDate=strongSameDate
       ? highSameDate.find((item)=>item.generalRomanId!==best.generalRomanId && item.lexicalScore<0.56)
       : highSameDate[0] ?? null;
     let disposition='portugal-proper-or-unmatched', reason='no-safe-general-roman-candidate', candidate=best;
 
-    // A strong reviewed semantic match on a nearby date is more informative than an unrelated
-    // same-date Sunday/weekday. It signals a jurisdictional transfer, never an automatic link.
-    if (transfer && (!strongSameDate || transfer.lexicalScore>best.lexicalScore)) {
+    // An explicit named transferred feast/solemnity is stronger evidence than an inherited
+    // structural Sunday label. It remains a review candidate; it is never automatically linked.
+    if (transfer && (explicitTransferredIdentity || !strongSameDate || transfer.lexicalScore>best.lexicalScore)) {
       disposition='transfer-candidate-review';
-      reason='strong-label-match-on-nearby-general-roman-date';
+      reason=explicitTransferredIdentity
+        ? 'explicit-portugal-observance-identity-matches-nearby-general-roman-event'
+        : 'strong-label-match-on-nearby-general-roman-date';
       candidate=transfer;
     } else if (structuralSource && highSameDate.length && !strongSameDate) {
       disposition='precedence-delta-review';
@@ -320,7 +328,7 @@ export function reconcilePortugalSnl({ snlPackage, generalRoman }) {
       semanticRule:'Multilingual token equivalence, identifier splitting, reviewed calendar-structure keys and narrowly reviewed aliases may improve proposal ranking but never approve a link.',
       authorityRule:'Normative General Roman corrections are applied above the operational mirror; they are not Portugal deltas.',
       dateRule:'Same civil date is evidence of calendar alignment, not proof of semantic identity.',
-      transferRule:'Strong lexical or reviewed-semantic similarity on a nearby date is a transfer candidate, never an automatic link.',
+      transferRule:'Strong lexical or reviewed-semantic similarity on a nearby date is a transfer candidate, never an automatic link; explicit named transferred solemnities outrank structural day labels only for review classification.',
       precedenceRule:'An official Portugal feast/solemnity that differs from the General Roman event, or a General Roman high-precedence event absent from a Portuguese structural day, can never be silently inherited.',
       rankRule:'Rank differences remain explicit Portugal deltas and require review unless the General Roman reference itself is corrected by higher normative authority.',
     }, items:output };
