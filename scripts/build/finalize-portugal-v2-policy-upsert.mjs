@@ -32,7 +32,7 @@ export function finalizePortugalV2PolicyUpsert(sql) {
     throw new Error(`Expected exactly one Portugal v2 policy INSERT to finalize, found ${matches.length}.`);
   }
   const output = source.replace(LEGACY_POLICY_INSERT, SCOPE_SAFE_UPSERT);
-  if (/ON CONFLICT\(id\).*roman-catholic-pt-2026-v2/usu.test(output)) {
+  if (/ON CONFLICT\(id\).*roman-catholic-pt-2026-v2/su.test(output)) {
     throw new Error('Portugal v2 policy still relies on primary-key-only conflict handling.');
   }
   if (!output.includes("WHERE church_id='roman-catholic'\n  AND COALESCE(jurisdiction_id,'')='pt'\n  AND COALESCE(effective_from,'')='2026-01-01'")) {
