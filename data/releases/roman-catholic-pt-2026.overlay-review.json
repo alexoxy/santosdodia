@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 2,
+  "releaseScope": "roman-catholic-pt-2026-overlay-v2",
+  "year": 2026,
+  "churchId": "roman-catholic",
+  "jurisdictionId": "pt",
+  "status": "prepared-human-approval-required",
+  "approved": false,
+  "productionWriteAllowed": false,
+  "preparedFrom": {
+    "mainCommit": "ed5b767323eb6835293ca3c54a92a3dd3cc02111",
+    "workflowRunId": 31937313819,
+    "artifactId": 9261021327,
+    "artifactSha256": "84df958813877fc76cc10375a5c5a48e723a82354fc5aa9b16b46dde0de996ed",
+    "normalizedPackageSha256": "e82a6406eafae401501c507f8adc439bce828391d9cd1a70a6be6c8d73b56be0",
+    "reconciliationSha256": "4879997aedd7a5a2278254d620f3fa995aafa2491f62e98ba20ce72dbd71c4c3",
+    "overlayPlanSha256": "59d68b38e549c4c602319405c5863b08e1a90437a2121327cff3c14b56a3147c",
+    "snlIcsSha256": "9f5ff147268e6230fba01a133bda58dca58cefd0f26f60a855ed25fb3bedf4da",
+    "snlRetrievedAt": "2026-08-16T08:47:06.024Z"
+  },
+  "reviewBoundary": {
+    "blockingSourceRows": 17,
+    "liturgicalDecisions": 15,
+    "rule": "A decision may cover more than one blocking source row when those rows are the two civil-date effects of the same reviewed transfer. No decision is approved by this file.",
+    "humanApprovalRequiredFor": [
+      "date-transfer",
+      "rank-override",
+      "portugal-proper-observance",
+      "precedence-or-omission"
+    ]
+  },
+  "decisions": [
+    {
+      "id": "pt-2026-epiphany-transfer",
+      "type": "date-transfer",
+      "canonicalEventId": "rc:Epiphany",
+      "fromDate": "2026-01-06",
+      "toDate": "2026-01-04",
+      "rank": "solemnity",
+      "sourceLabels": ["DOMINGO – EPIFANIA DO SENHOR – SOLENIDADE", "Terça-feira depois da Epifania"],
+      "coversBlockingDates": ["2026-01-04", "2026-01-06"],
+      "replacementAtOrigin": {
+        "canonicalEventId": "rc-pt:TuesdayAfterEpiphany",
+        "category": "feast",
+        "rank": null,
+        "labels": {
+          "pt": "Terça-feira depois da Epifania",
+          "en": "Tuesday after Epiphany",
+          "es": "Martes después de la Epifanía",
+          "fr": "Mardi après l’Épiphanie",
+          "it": "Martedì dopo l’Epifania"
+        }
+      },
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-five-wounds",
+      "type": "portugal-proper-observance",
+      "canonicalEventId": "rc-pt:FiveWoundsLord",
+      "dateISO": "2026-02-07",
+      "rank": "feast",
+      "sourceLabel": "As Cinco Chagas do Senhor",
+      "labels": {
+        "pt": "As Cinco Chagas do Senhor",
+        "en": "The Five Wounds of the Lord",
+        "es": "Las Cinco Llagas del Señor",
+        "fr": "Les Cinq Plaies du Seigneur",
+        "it": "Le Cinque Piaghe del Signore"
+      },
+      "coversBlockingDates": ["2026-02-07"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-cyril-methodius-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StsCyrilMethodius",
+      "dateISO": "2026-02-14",
+      "rank": "feast",
+      "sourceLabel": "Santos Cirilo, monge, e Metódio, bispo, Padroeiros da Europa",
+      "coversBlockingDates": ["2026-02-14"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-catherine-siena-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StCatherineSiena",
+      "dateISO": "2026-04-29",
+      "rank": "feast",
+      "sourceLabel": "S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa",
+      "coversBlockingDates": ["2026-04-29"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-joan-portugal",
+      "type": "portugal-proper-observance",
+      "canonicalEventId": "rc-pt:BlJoanPortugal",
+      "dateISO": "2026-05-12",
+      "rank": "optional-memorial",
+      "sourceLabel": "B. Joana de Portugal, virgem",
+      "labels": {
+        "pt": "Beata Joana de Portugal, virgem",
+        "en": "Blessed Joan of Portugal, Virgin",
+        "es": "Beata Juana de Portugal, virgen",
+        "fr": "Bienheureuse Jeanne de Portugal, vierge",
+        "it": "Beata Giovanna del Portogallo, vergine"
+      },
+      "coversBlockingDates": ["2026-05-12"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-fatima-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:OurLadyOfFatima",
+      "dateISO": "2026-05-13",
+      "rank": "feast",
+      "sourceLabel": "Virgem santa Maria do Rosário de Fátima",
+      "coversBlockingDates": ["2026-05-13"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-ascension-transfer",
+      "type": "date-transfer",
+      "canonicalEventId": "rc:Ascension",
+      "fromDate": "2026-05-14",
+      "toDate": "2026-05-17",
+      "rank": "solemnity",
+      "sourceLabels": ["S. Matias, apóstolo", "ASCENSÃO DO SENHOR"],
+      "coversBlockingDates": ["2026-05-14", "2026-05-17"],
+      "replacementAtOrigin": {
+        "canonicalEventId": "rc:StMatthias",
+        "rank": "feast"
+      },
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-anthony-lisbon-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StAnthonyPadua",
+      "dateISO": "2026-06-13",
+      "rank": "feast",
+      "displayNameRule": "Portuguese display remains Santo António de Lisboa; canonical person/event identity is not renamed.",
+      "sourceLabel": "S. António de Lisboa, presbítero e doutor da Igreja, Padroeiro de Portugal",
+      "coversBlockingDates": ["2026-06-13"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-immaculate-heart-transfer",
+      "type": "date-transfer",
+      "canonicalEventId": "rc:ImmaculateHeart",
+      "fromDate": "2026-06-13",
+      "toDate": "2026-06-15",
+      "rank": "feast",
+      "sourceLabels": ["Imaculado Coração da Virgem santa Maria"],
+      "coversBlockingDates": ["2026-06-15"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-sancha-mafalda-teresa",
+      "type": "portugal-proper-observance",
+      "canonicalEventId": "rc-pt:BlsSanchaMafaldaTeresa",
+      "dateISO": "2026-06-20",
+      "rank": "optional-memorial",
+      "sourceLabel": "Beatas Sancha e Mafalda, virgens, e Teresa, religiosa",
+      "labels": {
+        "pt": "Beatas Sancha e Mafalda, virgens, e Teresa, religiosa",
+        "en": "Blesseds Sancha and Mafalda, Virgins, and Teresa, Religious",
+        "es": "Beatas Sancha y Mafalda, vírgenes, y Teresa, religiosa",
+        "fr": "Bienheureuses Sancha et Mafalda, vierges, et Teresa, religieuse",
+        "it": "Beate Sancha e Mafalda, vergini, e Teresa, religiosa"
+      },
+      "coversBlockingDates": ["2026-06-20"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-elizabeth-portugal-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StElizabethPortugal",
+      "dateISO": "2026-07-04",
+      "rank": "memorial",
+      "sourceLabel": "S. Isabel de Portugal",
+      "coversBlockingDates": ["2026-07-04"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-benedict-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StBenedict",
+      "dateISO": "2026-07-11",
+      "rank": "feast",
+      "sourceLabel": "S. Bento, Abade, Padroeiro da Europa",
+      "coversBlockingDates": ["2026-07-11"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-mount-carmel-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:OurLadyOfMountCarmel",
+      "dateISO": "2026-07-16",
+      "rank": "memorial",
+      "sourceLabel": "Virgem santa Maria do Monte Carmelo",
+      "coversBlockingDates": ["2026-07-16"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-bartholomew-martyrs",
+      "type": "portugal-proper-observance",
+      "canonicalEventId": "rc-pt:StBartholomewMartyrs",
+      "dateISO": "2026-07-18",
+      "rank": "memorial",
+      "sourceLabel": "S. Bartolomeu dos Mártires, bispo",
+      "labels": {
+        "pt": "São Bartolomeu dos Mártires, bispo",
+        "en": "Saint Bartholomew of the Martyrs, Bishop",
+        "es": "San Bartolomé de los Mártires, obispo",
+        "fr": "Saint Barthélemy des Martyrs, évêque",
+        "it": "San Bartolomeo dei Martiri, vescovo"
+      },
+      "coversBlockingDates": ["2026-07-18"],
+      "decision": "pending-human-approval"
+    },
+    {
+      "id": "pt-2026-bridget-rank",
+      "type": "rank-override",
+      "canonicalEventId": "rc:StBridget",
+      "dateISO": "2026-07-23",
+      "rank": "feast",
+      "sourceLabel": "S. Brígida, religiosa, Padroeira da Europa",
+      "coversBlockingDates": ["2026-07-23"],
+      "decision": "pending-human-approval"
+    }
+  ]
+}
