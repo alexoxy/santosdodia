@@ -15,13 +15,17 @@ on:
       - 'scripts/calendar/general-roman-authority-corrections.mjs'
       - 'scripts/calendar/build-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs'
+      - 'scripts/calendar/build-portugal-effective-calendar-preview.mjs'
       - 'scripts/calendar/test-portugal-snl-agenda.mjs'
       - 'scripts/calendar/test-portugal-snl-reconciliation.mjs'
       - 'scripts/calendar/test-portugal-snl-precedence-transfers.mjs'
       - 'scripts/calendar/test-portugal-snl-shared-structure.mjs'
       - 'scripts/calendar/test-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs'
+      - 'scripts/calendar/test-portugal-overlay-review-plan.mjs'
+      - 'scripts/calendar/test-portugal-effective-calendar-preview.mjs'
       - 'scripts/calendar/test-observance-editorial.mjs'
+      - 'data/releases/roman-catholic-pt-2026.overlay-review.json'
       - 'data/observance-editorial.ts'
       - 'lib/observance-editorial.ts'
       - 'lib/public-observances.ts'
@@ -64,6 +68,8 @@ jobs:
           node scripts/calendar/test-portugal-snl-shared-structure.mjs
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
+          node scripts/calendar/test-portugal-overlay-review-plan.mjs
+          node scripts/calendar/test-portugal-effective-calendar-preview.mjs
           node scripts/calendar/test-observance-editorial.mjs
           npm run automation:audit
 
@@ -94,6 +100,14 @@ jobs:
           --reconciliation staging/portugal-snl/reconciliation.json
           --output staging/portugal-snl/overlay-plan.json
 
+      - name: Materialize effective Portugal preview behind approval gate
+        run: >-
+          node scripts/calendar/build-portugal-effective-calendar-preview.mjs
+          --normalized staging/portugal-snl/normalized-package.json
+          --reconciliation staging/portugal-snl/reconciliation.json
+          --review data/releases/roman-catholic-pt-2026.overlay-review.json
+          --output staging/portugal-snl/effective-preview.json
+
       - name: Validate canonical calendar staging contract
         shell: bash
         run: |
@@ -110,6 +124,7 @@ jobs:
           const reconciliation=JSON.parse(fs.readFileSync('staging/portugal-snl/reconciliation.json','utf8'));
           const review=JSON.parse(fs.readFileSync('staging/portugal-snl/review/review-bundle.json','utf8'));
           const overlay=JSON.parse(fs.readFileSync('staging/portugal-snl/overlay-plan.json','utf8'));
+          const effective=JSON.parse(fs.readFileSync('staging/portugal-snl/effective-preview.json','utf8'));
           if(normalized.run.publicationAllowed!==false||normalized.run.promotionAllowed!==false) throw new Error('Portugal layer escaped staging-only mode.');
           if(normalized.coverage.sourceDayCount<365||normalized.coverage.civilDays<365) throw new Error(`Portugal SNL coverage unexpectedly thin: ${JSON.stringify(normalized.coverage)}`);
           if(canonical.occurrences.some(item=>item.jurisdictionId!=='PT'||item.churchId!=='roman-catholic'||item.publicationStatus!=='withheld')) throw new Error('Portugal canonical staging output crossed jurisdiction/publication boundary.');
@@ -123,6 +138,12 @@ jobs:
           if(overlay.inheritGeneral.some(item=>item.humanReviewRequired!==false||item.blocksPortugalPublication!==false||item.productionWriteAllowed!==false)) throw new Error('Inherited General Roman events were incorrectly made Portugal mutations.');
           if(overlay.blockingDeltaReview.some(item=>item.humanReviewRequired!==true||item.blocksPortugalPublication!==true||item.productionWriteAllowed!==false)) throw new Error('Portugal delta review boundary is invalid.');
           if(reconciliation.items.some(item=>item.disposition==='precedence-delta-review') && !overlay.blockingDeltaReview.some(item=>item.disposition==='precedence-delta-review')) throw new Error('Portugal precedence delta escaped blocking overlay review.');
+          if(effective.mode!=='effective-portugal-calendar-preview'||effective.productionWriteAllowed!==false||effective.publicationAllowed!==false) throw new Error('Effective Portugal preview crossed the human approval boundary.');
+          if(effective.summary.sourceOccurrences!==normalized.events.length||effective.summary.uniqueDays!==365) throw new Error('Effective Portugal preview does not preserve the official SNL occurrence/day set.');
+          if(effective.summary.pendingReviewRows!==overlay.summary.blockingDeltaReview) throw new Error('Effective Portugal preview review rows diverge from blocking overlay deltas.');
+          if(effective.summary.preparedDecisionsUsed!==15) throw new Error('Effective Portugal preview does not consume the 15 prepared liturgical decisions.');
+          if(effective.provenancePolicy.firstEventByCivilDateMatchingForbidden!==true) throw new Error('Effective Portugal preview reintroduced date-only identity binding.');
+          if(effective.items.some(item=>item.publicationAllowed!==false)) throw new Error('An effective Portugal preview row became publishable before approval.');
           NODE
 
       - name: Upload diagnostic artifact
