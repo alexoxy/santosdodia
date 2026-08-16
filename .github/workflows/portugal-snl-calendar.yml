@@ -17,6 +17,7 @@ on:
       - 'scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs'
       - 'scripts/calendar/test-portugal-snl-agenda.mjs'
       - 'scripts/calendar/test-portugal-snl-reconciliation.mjs'
+      - 'scripts/calendar/test-portugal-snl-precedence-transfers.mjs'
       - 'scripts/calendar/test-portugal-snl-review-bundle.mjs'
       - 'scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs'
       - 'scripts/calendar/test-observance-editorial.mjs'
@@ -58,6 +59,7 @@ jobs:
         run: |
           node scripts/calendar/test-portugal-snl-agenda.mjs
           node scripts/calendar/test-portugal-snl-reconciliation.mjs
+          node scripts/calendar/test-portugal-snl-precedence-transfers.mjs
           node scripts/calendar/test-portugal-snl-review-bundle.mjs
           node scripts/calendar/test-portugal-jurisdiction-overlay-plan.mjs
           node scripts/calendar/test-observance-editorial.mjs
@@ -118,6 +120,7 @@ jobs:
           if(overlay.summary.inheritGeneralNoPtRow+overlay.summary.blockingDeltaReview!==normalized.events.length) throw new Error('Portugal overlay does not partition inheritance and blocking deltas.');
           if(overlay.inheritGeneral.some(item=>item.humanReviewRequired!==false||item.blocksPortugalPublication!==false||item.productionWriteAllowed!==false)) throw new Error('Inherited General Roman events were incorrectly made Portugal mutations.');
           if(overlay.blockingDeltaReview.some(item=>item.humanReviewRequired!==true||item.blocksPortugalPublication!==true||item.productionWriteAllowed!==false)) throw new Error('Portugal delta review boundary is invalid.');
+          if(reconciliation.items.some(item=>item.disposition==='precedence-delta-review') && !overlay.blockingDeltaReview.some(item=>item.disposition==='precedence-delta-review')) throw new Error('Portugal precedence delta escaped blocking overlay review.');
           NODE
 
       - name: Upload diagnostic artifact
