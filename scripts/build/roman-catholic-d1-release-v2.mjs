@@ -31,7 +31,7 @@ function occurrenceId(item) {
 }
 
 export function buildPortugalD1ReleaseV2({ report, dropboxManifestPath, publicationStatus = 'publishable', generatedAt = new Date().toISOString() }) {
-  if (!['publishable','published'].includes(publicationStatus)) throw new Error('publication status must be publishable or published.');
+  if (publicationStatus !== 'publishable') throw new Error('Portugal v2 D1 package is staging-only until a separate production approval gate exists.');
   if (!text(dropboxManifestPath).startsWith('/Santos do Dia/02_Dados_Eclesiasticos/')) throw new Error('Dropbox manifest path is outside the canonical ecclesiastical root.');
   if (report?.build !== 'roman-catholic-pt-overlay-v2' || report?.productReadiness?.stagingReady !== true || report?.productionWriteAllowed !== false || report?.productReadiness?.productionApproved !== false) {
     throw new Error('Input is not a staging-ready Portugal overlay v2 build with production still gated.');
@@ -158,6 +158,7 @@ export function buildPortugalD1ReleaseV2({ report, dropboxManifestPath, publicat
       descriptionsCopied:false,
       validationStatus:'cross-checked',
       d1ImportCompatible:true,
+      stagingOnly:true,
     },
   };
   return { sql:`${statements.join('\n')}\n`, manifest };
@@ -169,7 +170,7 @@ function main() {
   const manifestPath = argument('--manifest');
   const dropboxManifestPath = argument('--dropbox-manifest-path');
   const publicationStatus = argument('--publication-status','publishable');
-  if (!inputPath || !sqlPath || !manifestPath || !dropboxManifestPath) throw new Error('Usage: --input <build.json> --sql <release.sql> --manifest <manifest.json> --dropbox-manifest-path <path> [--publication-status publishable|published]');
+  if (!inputPath || !sqlPath || !manifestPath || !dropboxManifestPath) throw new Error('Usage: --input <build.json> --sql <release.sql> --manifest <manifest.json> --dropbox-manifest-path <path> [--publication-status publishable]');
   const report = JSON.parse(fs.readFileSync(path.resolve(inputPath),'utf8'));
   const result = buildPortugalD1ReleaseV2({ report, dropboxManifestPath, publicationStatus });
   fs.mkdirSync(path.dirname(path.resolve(sqlPath)), { recursive:true });
