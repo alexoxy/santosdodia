@@ -9,7 +9,8 @@ const branch='automation/live-stream-refresh';
 const generatedPath='data/generated/live-streams.json';
 
 function run(command,args,options={}){
- return execFileSync(command,args,{encoding:'utf8',stdio:options.capture?'pipe':'inherit',...options}).trim();
+ const output=execFileSync(command,args,{encoding:'utf8',stdio:options.capture?'pipe':'inherit',...options});
+ return typeof output==='string'?output.trim():'';
 }
 
 async function api(path,{method='GET',body}={}){
