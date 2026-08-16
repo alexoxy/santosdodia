@@ -51,6 +51,18 @@ assert.equal(christmas.label, 'Sexta-feira – NATAL DO SENHOR');
 assert.equal(christmas.rank, 'solemnity');
 assert.equal(christmas.rankSource, 'leading-office-line');
 
+// Named leading headings without a rank must survive normalization. The official SNL
+// All Souls entry is the canonical regression: SUMMARY is a weekday, DESCRIPTION names
+// the Commemoration of All the Faithful Departed.
+const allSouls = extractPrimarySnlObservance(
+  'Segunda-feira da semana XXXI',
+  'Comemoração de Todos os Fiéis Defuntos\nRoxo – Ofício de defuntos.\nMissa própria.',
+);
+assert.equal(allSouls.label, 'Comemoração de Todos os Fiéis Defuntos');
+assert.equal(allSouls.rank, null);
+assert.equal(allSouls.rankSource, 'unranked-leading-heading');
+assert.doesNotMatch(allSouls.label, /Segunda-feira/u);
+
 const normalized = normalizePortugalSnlAgenda(ics, manifest);
 assert.equal(normalized.run.publicationAllowed, false);
 assert.equal(normalized.run.promotionAllowed, false);
@@ -84,4 +96,4 @@ try {
   fs.rmSync(root, { recursive: true, force: true });
 }
 
-console.log('Portugal SNL leading-day, grouped observance, vigil boundary and staging tests passed.');
+console.log('Portugal SNL leading-day, unranked named observance, grouped observance, vigil boundary and staging tests passed.');
