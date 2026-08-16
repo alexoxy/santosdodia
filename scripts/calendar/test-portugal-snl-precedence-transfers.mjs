@@ -3,13 +3,13 @@
 import assert from 'node:assert/strict';
 import { reconcilePortugalSnl } from './reconcile-portugal-snl.mjs';
 
-function snl(id, dateISO, label, rank = '') {
+function snl(id, dateISO, label, rank = '', dayLabel = label) {
   return {
     id,
     canonicalEventId: `source:snl-pt:${id}`,
     dateISO,
     names: { pt: { value: label, status: 'source', sourceLocale: 'pt' } },
-    sourceFacts: { uid: `${id}@liturgia.pt`, description: rank },
+    sourceFacts: { uid: `${id}@liturgia.pt`, description: rank, dayLabel },
   };
 }
 function canonicalRank(grade) {
@@ -28,10 +28,10 @@ function roman(id, dateISO, name, grade = null) {
 const snlPackage = {
   run: { publicationAllowed: false, promotionAllowed: false },
   events: [
-    snl('epiphany-pt', '2026-01-04', 'EPIFANIA DO SENHOR', 'SOLENIDADE'),
+    snl('epiphany-pt', '2026-01-04', 'DOMINGO – EPIFANIA DO SENHOR – SOLENIDADE', 'SOLENIDADE'),
     snl('jan6-pt', '2026-01-06', 'Terça-feira depois da Epifania'),
     snl('matthias-pt', '2026-05-14', 'S. Matias, apóstolo', 'FESTA'),
-    snl('ascension-pt', '2026-05-17', 'ASCENSÃO DO SENHOR', 'SOLENIDADE'),
+    snl('ascension-pt', '2026-05-17', 'ASCENSÃO DO SENHOR', 'SOLENIDADE', 'DOMINGO VII DA PÁSCOA'),
     snl('immaculate-heart-pt', '2026-06-15', 'Imaculado Coração da Virgem santa Maria', 'FESTA'),
     snl('cyril-methodius-pt', '2026-02-14', 'S. Cirilo, monge, e S. Metódio, bispo, Padroeiros da Europa', 'FESTA'),
     snl('all-souls-pt', '2026-11-02', 'Comemoração de Todos os Fiéis Defuntos'),
@@ -66,6 +66,8 @@ assert.equal(byId('jan6-pt').candidate.generalRomanId, 'Epiphany');
 // Ascension. The presence of the matching saint must not hide the higher-precedence conflict.
 assert.equal(byId('matthias-pt').disposition, 'precedence-delta-review');
 
+// On the transferred Sunday the explicit named solemnity must beat the structural
+// "Seventh Sunday of Easter" day label, otherwise the transfer disappears from review.
 assert.equal(byId('ascension-pt').disposition, 'transfer-candidate-review');
 assert.equal(byId('ascension-pt').candidate.generalRomanId, 'Ascension');
 assert.equal(byId('ascension-pt').candidate.generalRomanDateISO, '2026-05-14');
@@ -82,4 +84,4 @@ assert.equal(byId('all-souls-pt').candidate.generalRomanId, 'AllSouls');
 assert.equal(byId('all-souls-pt').candidate.matchingBasis, 'reviewed-semantic-alias');
 
 assert.ok(result.items.every((item) => item.reviewRequired === true && item.automaticLinkAllowed === false));
-console.log('Portugal transfer and precedence regression vectors passed.');
+console.log('Portugal transfer identity-priority and precedence regression vectors passed.');
