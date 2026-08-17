@@ -26,6 +26,13 @@ function hasFieldValue(source, field, value) {
   return new RegExp(`${field}\\s*:\\s*['\"]${escaped(value)}['\"]`).test(source);
 }
 
+function hasReviewedObservance(value) {
+  const token = escaped(value);
+  // Curated observance publication is evidence-gated through EDITORIAL_REVIEWS.
+  // Keys may be quoted (hyphenated IDs) or bare identifiers (e.g. fatima).
+  return new RegExp(`(?:^|\\n)\\s*(?:['\"]${token}['\"]|${token})\\s*:\\s*\\{summaries:`, 'm').test(observanceCorpus);
+}
+
 if (EDITORIAL_GUIDES.length !== 6) failures.push(`expected 6 editorial guides, found ${EDITORIAL_GUIDES.length}`);
 if (guideSlugs.size !== EDITORIAL_GUIDES.length) failures.push('editorial guide slugs must be unique');
 
@@ -58,7 +65,7 @@ for (const guide of EDITORIAL_GUIDES) {
   }
 
   for (const observanceId of guide.observanceIds) {
-    if (!hasFieldValue(observanceCorpus, 'id', observanceId)) failures.push(`${guide.slug}: observance ${observanceId} is not in the curated public corpus`);
+    if (!hasReviewedObservance(observanceId)) failures.push(`${guide.slug}: observance ${observanceId} has no reviewed editorial evidence`);
   }
 
   for (const relatedSlug of guide.relatedSlugs) {
