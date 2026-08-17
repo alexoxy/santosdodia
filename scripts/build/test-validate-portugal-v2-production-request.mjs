@@ -6,31 +6,38 @@ import { validateRequestShape } from './validate-portugal-v2-production-request.
 
 const request = JSON.parse(fs.readFileSync('data/releases/roman-catholic-pt-2026-v2.production-request.json','utf8'));
 const current = validateRequestShape(request, { requireApproved:false });
-assert.equal(current.approved, false);
+assert.equal(current.approved, request.approved === true);
 assert.equal(current.releaseId, 'roman-catholic-pt-2026-v2');
 assert.equal(current.stagingRunId, 31977231879);
-assert.throws(() => validateRequestShape(request, { requireApproved:true }), /not explicitly approved/u);
 
-const hypotheticalApproval = structuredClone(request);
-hypotheticalApproval.approved = true;
-hypotheticalApproval.approvalRecordedAt = '2026-08-17T00:00:00+02:00';
-hypotheticalApproval.approvalInstruction = 'Explicitly publish the exact Portugal v2 staging snapshot to production.';
-assert.equal(validateRequestShape(hypotheticalApproval, { requireApproved:true }).approved, true);
+// Prove both sides of the one-shot gate independently of the committed approval state.
+const unapproved = structuredClone(request);
+unapproved.approved = false;
+unapproved.approvalRecordedAt = null;
+unapproved.approvalInstruction = null;
+assert.equal(validateRequestShape(unapproved, { requireApproved:false }).approved, false);
+assert.throws(() => validateRequestShape(unapproved, { requireApproved:true }), /not explicitly approved/u);
 
-const futureRun = structuredClone(hypotheticalApproval);
+const approved = structuredClone(request);
+approved.approved = true;
+approved.approvalRecordedAt ||= '2026-08-17T00:00:00+02:00';
+approved.approvalInstruction ||= 'Explicitly publish the exact Portugal v2 staging snapshot to production.';
+assert.equal(validateRequestShape(approved, { requireApproved:true }).approved, true);
+
+const futureRun = structuredClone(approved);
 futureRun.stagingWorkflow.runId += 1;
 assert.throws(() => validateRequestShape(futureRun, { requireApproved:true }), /staging workflow identity mismatch/u);
 
-const futureArtifact = structuredClone(hypotheticalApproval);
+const futureArtifact = structuredClone(approved);
 futureArtifact.artifacts.release.digest = `sha256:${'0'.repeat(64)}`;
 assert.throws(() => validateRequestShape(futureArtifact, { requireApproved:true }), /release artifact digest mismatch/u);
 
-const automatic = structuredClone(hypotheticalApproval);
+const automatic = structuredClone(approved);
 automatic.safety.automaticFutureProductionWrites = true;
 assert.throws(() => validateRequestShape(automatic, { requireApproved:true }), /safety contract mismatch/u);
 
-const unsafeVisibility = structuredClone(hypotheticalApproval);
+const unsafeVisibility = structuredClone(approved);
 unsafeVisibility.expected.publishedBeforeVisibility = 389;
 assert.throws(() => validateRequestShape(unsafeVisibility, { requireApproved:true }), /visibility count mismatch/u);
 
-console.log('Portugal v2 production request is unapproved by default and cannot inherit approval across staging snapshots.');
+console.log('Portugal v2 production request gate validates both explicit approval states and cannot inherit approval across staging snapshots.');
