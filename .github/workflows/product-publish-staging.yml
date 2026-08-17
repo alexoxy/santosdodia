@@ -178,7 +178,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download validated release
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: roman-catholic-product-release-${{ github.sha }}
           path: reports/product-release
@@ -217,7 +217,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download validated release
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: roman-catholic-product-release-${{ github.sha }}
           path: reports/product-release

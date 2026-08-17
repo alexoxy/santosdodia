@@ -93,7 +93,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download production D1 provision receipt
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: d1-production-provision-receipt
           path: reports/d1-production-bootstrap
