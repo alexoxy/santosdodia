@@ -19,9 +19,24 @@ if (!publicQuery.sql.includes("l.translation_status IN ('source','reviewed')")) 
 if (publicQuery.sql.includes("'withheld'")) throw new Error('Public read SQL contains withheld visibility.');
 if (publicQuery.sql.includes("'assisted'")) throw new Error('Public read SQL contains assisted label visibility.');
 if (!publicQuery.sql.includes('LIMIT ? OFFSET ?')) throw new Error('Read pagination is not parameterized.');
+if (publicQuery.sql.includes('o.jurisdiction_id IS NULL')) throw new Error('Country-scoped public read was incorrectly forced to the global calendar.');
 if (publicQuery.params.some(value => typeof value === 'string' && value.includes('SELECT'))) throw new Error('Unexpected SQL fragment in parameters.');
 if (publicQuery.params.join('|') !== '2026-04-01|2026-04-30|coptic-orthodox|EG|25|5|pt|en') {
   throw new Error(`Unexpected public parameter order: ${publicQuery.params.join('|')}`);
+}
+
+const globalPublicQuery = buildCalendarReadQuery({
+  fromDate: '2026-01-01',
+  toDate: '2026-12-31',
+  churchId: 'roman-catholic',
+  locales: ['pt', 'en'],
+  limit: 500
+});
+if (!globalPublicQuery.sql.includes('o.jurisdiction_id IS NULL')) {
+  throw new Error('Unscoped public read can leak jurisdiction-specific overlays into the global calendar.');
+}
+if (globalPublicQuery.params.join('|') !== '2026-01-01|2026-12-31|roman-catholic|500|0|pt|en') {
+  throw new Error(`Unexpected global public parameter order: ${globalPublicQuery.params.join('|')}`);
 }
 
 const canonicalQuery = buildCalendarReadQuery({
@@ -34,6 +49,7 @@ const canonicalQuery = buildCalendarReadQuery({
 if (!canonicalQuery.sql.includes('o.canonical_event_id = ?')) throw new Error('Canonical event reads are not parameterized.');
 if (canonicalQuery.params[2] !== 'rc:saint-example') throw new Error('Canonical event ID is not bound in the expected position.');
 if (!canonicalQuery.sql.includes("o.publication_status = 'published'")) throw new Error('Canonical event lookup bypasses public publication gates.');
+if (!canonicalQuery.sql.includes('o.jurisdiction_id IS NULL')) throw new Error('Unscoped canonical public lookup is not constrained to the global calendar.');
 
 const stagingQuery = buildCalendarReadQuery({
   fromDate: '2026-01-01',
@@ -45,6 +61,15 @@ const stagingQuery = buildCalendarReadQuery({
 if (!stagingQuery.sql.includes("IN ('withheld','publishable','published')")) throw new Error('Staging read does not include withheld rows.');
 if (!stagingQuery.sql.includes("l.translation_status <> 'rejected'")) throw new Error('Staging read does not exclude rejected labels.');
 if (stagingQuery.params[3] !== 'PT-11') throw new Error('Region code was not normalized.');
+
+const unscopedStagingQuery = buildCalendarReadQuery({
+  fromDate: '2026-01-01',
+  toDate: '2026-12-31',
+  mode: 'staging'
+});
+if (unscopedStagingQuery.sql.includes('o.jurisdiction_id IS NULL')) {
+  throw new Error('Unscoped staging reads must retain cross-jurisdiction review visibility.');
+}
 
 for (const invalid of [
   { fromDate: '2026-02-30', toDate: '2026-03-01' },
@@ -101,8 +126,8 @@ if (records[0].labels.en?.name !== 'Feast of the Resurrection' || records[0].lab
 if (records[0].nativeCalendarSystem !== 'coptic' || records[0].publicationStatus !== 'published') {
   throw new Error('Occurrence metadata was not mapped correctly.');
 }
-if (!capturedSql.includes("o.publication_status = 'published'") || capturedParams.at(-1) !== 'pt') {
-  throw new Error('Public read execution did not use the guarded query.');
+if (!capturedSql.includes("o.publication_status = 'published'") || !capturedSql.includes('o.jurisdiction_id IS NULL') || capturedParams.at(-1) !== 'pt') {
+  throw new Error('Public read execution did not use the guarded global query.');
 }
 
 await import('./test-calendar-public-adapter.mjs');

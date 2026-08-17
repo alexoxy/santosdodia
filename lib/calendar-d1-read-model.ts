@@ -149,6 +149,17 @@ export function buildCalendarReadQuery(filters: CalendarReadFilters): { sql: str
   if (jurisdictionId) { where.push('o.jurisdiction_id = ?'); params.push(jurisdictionId); }
   if (countryCode) { where.push('j.country_code = ?'); params.push(countryCode); }
   if (regionCode) { where.push('j.region_code = ?'); params.push(regionCode); }
+
+  // A public request without an explicit territorial scope means the Church's
+  // general/global calendar, not the union of every published jurisdictional
+  // overlay. This became essential once the event-complete Portugal calendar
+  // was promoted: otherwise GLOBAL could silently mix General Roman and PT
+  // rows. Staging remains intentionally unscoped so review tooling can inspect
+  // every jurisdiction when no scope is supplied.
+  if (mode === 'public' && !jurisdictionId && !countryCode && !regionCode) {
+    where.push('o.jurisdiction_id IS NULL');
+  }
+
   params.push(limit, offset);
 
   const localeClause = locales.length
