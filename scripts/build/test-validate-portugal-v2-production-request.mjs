@@ -8,12 +8,12 @@ const request = JSON.parse(fs.readFileSync('data/releases/roman-catholic-pt-2026
 const current = validateRequestShape(request, { requireApproved:false });
 assert.equal(current.approved, false);
 assert.equal(current.releaseId, 'roman-catholic-pt-2026-v2');
-assert.equal(current.stagingRunId, 31977231879);
+assert.equal(current.stagingRunId, 31998552573);
 assert.throws(() => validateRequestShape(request, { requireApproved:true }), /not explicitly approved/u);
 
 const hypotheticalApproval = structuredClone(request);
 hypotheticalApproval.approved = true;
-hypotheticalApproval.approvalRecordedAt = '2026-08-17T00:00:00+02:00';
+hypotheticalApproval.approvalRecordedAt = '2026-08-17T10:45:00+02:00';
 hypotheticalApproval.approvalInstruction = 'Explicitly publish the exact Portugal v2 staging snapshot to production.';
 assert.equal(validateRequestShape(hypotheticalApproval, { requireApproved:true }).approved, true);
 

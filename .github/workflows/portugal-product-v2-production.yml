@@ -29,9 +29,9 @@ concurrency:
 
 env:
   REQUEST_FILE: data/releases/roman-catholic-pt-2026-v2.production-request.json
-  STAGING_RUN_ID: '31977231879'
-  RELEASE_ARTIFACT: portugal-product-v2-31977231879
-  STAGING_VERIFICATION_ARTIFACT: portugal-v2-staging-verification-31977231879
+  STAGING_RUN_ID: '31998552573'
+  RELEASE_ARTIFACT: portugal-product-v2-31998552573
+  STAGING_VERIFICATION_ARTIFACT: portugal-v2-staging-verification-31998552573
   PRODUCTION_DATABASE_ID: e1ad3640-b334-49d1-a6fc-a73f54924803
 
 jobs:
