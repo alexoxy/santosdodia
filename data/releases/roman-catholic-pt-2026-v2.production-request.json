@@ -6,36 +6,36 @@
   "approvalScope": "exact-staging-validated-snapshot-only",
   "approvalRecordedAt": null,
   "approvalInstruction": null,
-  "sourceMainCommit": "13845f8fa930cdee993c405f68f4be341fbda18e",
+  "sourceMainCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c",
   "stagingWorkflow": {
     "name": "Portugal product v2 staging",
-    "runId": 31977231879,
+    "runId": 31998552573,
     "conclusion": "success",
-    "headSha": "13845f8fa930cdee993c405f68f4be341fbda18e"
+    "headSha": "8c0a999a7fe150af04808b43aec524ec35a6004c"
   },
   "artifacts": {
     "release": {
-      "id": 9271379725,
-      "name": "portugal-product-v2-31977231879",
-      "digest": "sha256:824e98853835bc0b4160673728304e50b266e31cdafb92de02c5a4eb73138287",
+      "id": 9277632698,
+      "name": "portugal-product-v2-31998552573",
+      "digest": "sha256:a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
       "files": {
-        "build.json": "sha256:a08a74b855f3c84ea4940143e6206c275faa893e00c394b5a748a2bbae6d43df",
-        "manifest.json": "sha256:a08a74b855f3c84ea4940143e6206c275faa893e00c394b5a748a2bbae6d43df",
-        "release.json": "sha256:e2ae38954e2179e03e2cb05d0c6c03dc8c5a1638b63c24be58301f97ef34fdc6",
-        "release.sql": "sha256:528844a91699be38aa8e066a80e2c5f8fa0a186e62205d38a68d706b35bb3483",
-        "validation.json": "sha256:2db289d3613cd5290d13fa1e2452f29a78e7873faa35551642eda8786eecf339",
+        "build.json": "sha256:159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+        "manifest.json": "sha256:159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+        "release.json": "sha256:0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+        "release.sql": "sha256:a2900805d5b57a7d302bd3abf19f88b2e4a18175e81992c34e1bffb189aeb1ac",
+        "validation.json": "sha256:e943164cef73fb38a8ad2f5e725037fa96439a08ab0c943514d245d4cc8f4a93",
         "approved-overlay-review.json": "sha256:981746f8f930b781e7da92808db4e74cd3baa46cec3d4652362e3d5391f52507",
         "localization-review.json": "sha256:54d4bfa512c4efda859998d1ac47b464aa646383b84433e9e4535dcaa7ac72be",
-        "effective-preview.json": "sha256:e8fcf3555af72faba67494e22f5e4d4a906d369048a4055dde602a807ed1a549"
+        "effective-preview.json": "sha256:e1aceaea161bc25bb8a6da143fb58b3e06ed5b10599921fa54adeb9a3bbf9632"
       }
     },
     "stagingVerification": {
-      "id": 9271396058,
-      "name": "portugal-v2-staging-verification-31977231879",
-      "digest": "sha256:49988be5ecac510f24ea1eabde5243e1d0d95e4fbe1e7f7bee3a41f491c8f8de",
+      "id": 9277653706,
+      "name": "portugal-v2-staging-verification-31998552573",
+      "digest": "sha256:21cc00a613d87085479b3545b9f7bedce8f1ca5cd990f8ebb382de946c3b82fa",
       "files": {
-        "staging-counts.json": "sha256:f8c06f951f9105fb494243f8e26bb52dbbc71695ab8dab265178bb6f65c88bec",
-        "staging-semantics.json": "sha256:6d937ee00d77df75f35af6a42faf63dbc017b61f310e4da3ae93e1c53af58727"
+        "staging-counts.json": "sha256:b1bff5b9cf1f7f9f9aa08d494f3f097304345fe808bf01eccba5555467755e60",
+        "staging-semantics.json": "sha256:525750f9fddaed2fcdb6a7d26e39a347c2218f053d6b3d29a10c871d15f32de8"
       }
     }
   },
