@@ -72,11 +72,20 @@ try {
   failures.push("reviewed saint navigation promotion boundary failed");
 }
 
+try {
+  execFileSync(process.execPath, ["scripts/test-editorial-guides.mjs"], {
+    cwd: root,
+    stdio: "inherit",
+  });
+} catch {
+  failures.push("editorial guide publication boundary failed");
+}
+
 if (failures.length) {
   console.error(`Publication boundary failed:\n- ${failures.join("\n- ")}`);
   process.exit(1);
 }
 
 console.log(
-  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit saint promotion gates.`,
+  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit saint/editorial promotion gates.`,
 );
