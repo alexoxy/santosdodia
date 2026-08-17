@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "releaseId": "roman-catholic-pt-2026-v2",
-  "approved": false,
+  "approved": true,
   "approvalMode": "explicit-one-shot-product-release-v2",
   "approvalScope": "exact-staging-validated-snapshot-only",
-  "approvalRecordedAt": null,
-  "approvalInstruction": null,
+  "approvalRecordedAt": "2026-08-17T08:53:31Z",
+  "approvalInstruction": "Explicit user instruction to advance with the next defined step after remote Portugal v2 staging verification.",
   "sourceMainCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c",
   "stagingWorkflow": {
     "name": "Portugal product v2 staging",
