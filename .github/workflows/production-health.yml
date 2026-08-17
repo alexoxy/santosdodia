@@ -1,4 +1,4 @@
-# Probe policy revision: 2026-08-13
+# Probe policy revision: 2026-08-17
 name: Production health
 
 on:
@@ -101,7 +101,7 @@ jobs:
             --user-agent "$HEALTH_USER_AGENT" --header 'Accept: application/json' \
             --retry 2 --retry-all-errors --max-time 30 \
             --output "$today_body" --write-out '%{http_code}' \
-            "$APP_ORIGIN/api/v1/today?date=$RELEASE_SENTINEL_DATE&locale=pt&timezone=Europe%2FLisbon")"
+            "$APP_ORIGIN/api/v1/today?date=$RELEASE_SENTINEL_DATE&locale=pt&timezone=Europe%2FLisbon&country=PT")"
           [ "$today_code" = 200 ] || { echo "Worker Today API returned HTTP $today_code"; cat "$today_body"; exit 1; }
           TODAY_FILE="$today_body" RELEASE_SENTINEL_DATE="$RELEASE_SENTINEL_DATE" node - <<'NODE'
           const fs=require('node:fs');
@@ -123,7 +123,7 @@ jobs:
             --user-agent "$HEALTH_USER_AGENT" --header 'Accept: text/calendar,*/*;q=0.8' \
             --retry 2 --retry-all-errors --max-time 30 \
             --output "$ics_body" --write-out '%{http_code}' \
-            "$APP_ORIGIN/api/ical/all?year=2026&locale=pt")"
+            "$APP_ORIGIN/api/ical/all?year=2026&locale=pt&country=PT")"
           [ "$ics_code" = 200 ] || { echo "Worker ICS endpoint returned HTTP $ics_code"; exit 1; }
           grep -q '^BEGIN:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not begin with BEGIN:VCALENDAR.'; exit 1; }
           grep -q '^X-SANTOSDIA-SOURCE:published-d1+approved-repository' "$ics_body" || { echo 'Worker ICS is not using the published D1 calendar.'; exit 1; }
@@ -200,6 +200,6 @@ jobs:
             echo '- The canonical domain is checked for DNS/TLS/edge reachability and normal application responses when the WAF permits the GitHub runner.'
             echo '- A canonical-domain WAF 403 is only an edge warning; it can no longer make application health pass by itself.'
             echo '- The deployed Workers.dev origin must return an application-level healthy status.'
-            echo '- Today on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
-            echo '- The Worker-origin ICS feed must identify the published D1 calendar as its source.'
+            echo '- The Portugal-scoped Today response on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
+            echo '- The Portugal-scoped Worker-origin ICS feed must identify the published D1 calendar as its source.'
           } >> "$GITHUB_STEP_SUMMARY"
