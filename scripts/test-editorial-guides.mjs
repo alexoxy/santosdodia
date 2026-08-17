@@ -17,6 +17,7 @@ const biographyFiles = dataFiles.filter(name => /^saint-biograph.*\.ts$/.test(na
 const biographyCorpus = (await Promise.all(biographyFiles.map(name => readFile(path.join(root, 'data', name), 'utf8')))).join('\n');
 const dateCorpus = (await Promise.all(['date-editorial.ts','date-editorial-batch-2.ts','date-editorial-batch-3.ts'].map(name => readFile(path.join(root, 'data', name), 'utf8')))).join('\n');
 const observanceCorpus = await readFile(path.join(root, 'data', 'observances.ts'), 'utf8');
+const priorityObservanceCorpus = await readFile(path.join(root, 'data', 'priority-observances.ts'), 'utf8');
 
 function escaped(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -26,11 +27,24 @@ function hasFieldValue(source, field, value) {
   return new RegExp(`${field}\\s*:\\s*['\"]${escaped(value)}['\"]`).test(source);
 }
 
-function hasReviewedObservance(value) {
+function hasReviewedCoreObservance(value) {
   const token = escaped(value);
-  // Curated observance publication is evidence-gated through EDITORIAL_REVIEWS.
+  // Core curated observances are evidence-gated through EDITORIAL_REVIEWS.
   // Keys may be quoted (hyphenated IDs) or bare identifiers (e.g. fatima).
   return new RegExp(`(?:^|\\n)\\s*(?:['\"]${token}['\"]|${token})\\s*:\\s*\\{summaries:`, 'm').test(observanceCorpus);
+}
+
+function hasVerifiedPriorityObservance(value) {
+  const token = escaped(value);
+  // Priority observances are a deliberately small second curated layer merged
+  // by getPublicAllObservances(). Require the exact ID plus explicit verified
+  // status and a source binding inside the same definition block.
+  const definition = new RegExp(`id\\s*:\\s*['\"]${token}['\"][\\s\\S]{0,2600}?sourceIds\\s*:\\s*\\[[^\\]]+\\][\\s\\S]{0,1000}?validationStatus\\s*:\\s*['\"]verified['\"]`);
+  return definition.test(priorityObservanceCorpus);
+}
+
+function hasPublishedObservanceEvidence(value) {
+  return hasReviewedCoreObservance(value) || hasVerifiedPriorityObservance(value);
 }
 
 if (EDITORIAL_GUIDES.length !== 6) failures.push(`expected 6 editorial guides, found ${EDITORIAL_GUIDES.length}`);
@@ -65,7 +79,7 @@ for (const guide of EDITORIAL_GUIDES) {
   }
 
   for (const observanceId of guide.observanceIds) {
-    if (!hasReviewedObservance(observanceId)) failures.push(`${guide.slug}: observance ${observanceId} has no reviewed editorial evidence`);
+    if (!hasPublishedObservanceEvidence(observanceId)) failures.push(`${guide.slug}: observance ${observanceId} has no reviewed/verified public evidence`);
   }
 
   for (const relatedSlug of guide.relatedSlugs) {
