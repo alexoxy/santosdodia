@@ -79,4 +79,5 @@ if (mixed.items.length !== 1 || mixed.acceptedD1 !== 0 || mixed.withheldD1 !== 1
   throw new Error('Unknown Church should leave the curated fallback intact and be counted as withheld.');
 }
 
+await import('./test-calendar-public-surface-contract.mjs');
 console.log('D1 public calendar adapter safeguards passed.');
