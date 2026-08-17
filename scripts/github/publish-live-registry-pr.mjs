@@ -20,8 +20,20 @@ async function api(path,{method='GET',body}={}){
   body:body?JSON.stringify(body):undefined,
  });
  const text=await response.text();
- if(!response.ok)throw new Error(`GitHub API ${method} ${path} failed (${response.status}): ${text.slice(0,800)}`);
+ if(!response.ok){
+  const error=new Error(`GitHub API ${method} ${path} failed (${response.status}): ${text.slice(0,800)}`);
+  error.status=response.status;
+  error.responseText=text;
+  throw error;
+ }
  return text?JSON.parse(text):null;
+}
+
+function isActionsPrCreationBlocked(error){
+ return error instanceof Error
+  && error.status===403
+  && typeof error.responseText==='string'
+  && error.responseText.includes('GitHub Actions is not permitted to create or approve pull requests');
 }
 
 async function graphql(query,variables){
@@ -52,12 +64,20 @@ async function main(){
  const open=await api(`/repos/${repository}/pulls?state=open&base=main&head=${encodeURIComponent(`${owner}:${branch}`)}`);
  let pr=open[0];
  if(!pr){
-  pr=await api(`/repos/${repository}/pulls`,{method:'POST',body:{
-   title:'chore(live): refresh verified official streams',
-   head:branch,
-   base:'main',
-   body:'Autonomous generated-only refresh of verified official Christian live/media endpoints. Discovery and health evidence are archived in Dropbox; this PR changes only `data/generated/live-streams.json`. It is eligible for auto-merge only after repository-required checks pass.',
-  }});
+  try{
+   pr=await api(`/repos/${repository}/pulls`,{method:'POST',body:{
+    title:'chore(live): refresh verified official streams',
+    head:branch,
+    base:'main',
+    body:'Autonomous generated-only refresh of verified official Christian live/media endpoints. Discovery and health evidence are archived in Dropbox; this PR changes only `data/generated/live-streams.json`. It is eligible for auto-merge only after repository-required checks pass.',
+   }});
+  }catch(error){
+   if(isActionsPrCreationBlocked(error)){
+    console.warn('::warning title=Live registry PR creation blocked::GitHub repository settings currently prohibit Actions from creating pull requests. The verified generated registry was safely pushed to automation/live-stream-refresh and all evidence was archived; the workflow is therefore healthy and leaves publication pending rather than reporting a false data-pipeline failure.');
+    return;
+   }
+   throw error;
+  }
  }else{
   await api(`/repos/${repository}/pulls/${pr.number}`,{method:'PATCH',body:{
    title:'chore(live): refresh verified official streams',
