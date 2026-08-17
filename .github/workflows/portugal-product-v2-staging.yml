@@ -233,7 +233,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
       - name: Download validated v2 artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: portugal-product-v2-${{ github.run_id }}
           path: reports/portugal-v2
@@ -272,7 +272,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --include=optional
       - name: Download validated v2 artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: portugal-product-v2-${{ github.run_id }}
           path: reports/portugal-v2

@@ -53,7 +53,7 @@ jobs:
         run: node scripts/build/test-validate-portugal-v2-production-request.mjs
 
       - name: Download exact staging-validated v2 release
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.RELEASE_ARTIFACT }}
           path: reports/portugal-v2-production/release
@@ -62,7 +62,7 @@ jobs:
           run-id: ${{ env.STAGING_RUN_ID }}
 
       - name: Download exact remote staging verification receipt
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.STAGING_VERIFICATION_ARTIFACT }}
           path: reports/portugal-v2-production/staging-verification
@@ -125,7 +125,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download exact staging-validated v2 release
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.RELEASE_ARTIFACT }}
           path: reports/portugal-v2-production/release
@@ -134,7 +134,7 @@ jobs:
           run-id: ${{ env.STAGING_RUN_ID }}
 
       - name: Download exact remote staging verification receipt
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.STAGING_VERIFICATION_ARTIFACT }}
           path: reports/portugal-v2-production/staging-verification
