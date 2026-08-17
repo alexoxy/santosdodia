@@ -7,12 +7,14 @@ import { fileURLToPath } from 'node:url';
 
 const EXPECTED = Object.freeze({
   releaseId: 'roman-catholic-pt-2026-v2',
-  sourceMainCommit: '13845f8fa930cdee993c405f68f4be341fbda18e',
-  stagingRunId: 31977231879,
-  stagingArtifactId: 9271379725,
-  stagingArtifactName: 'portugal-product-v2-31977231879',
-  verificationArtifactId: 9271396058,
-  verificationArtifactName: 'portugal-v2-staging-verification-31977231879',
+  sourceMainCommit: '8c0a999a7fe150af04808b43aec524ec35a6004c',
+  stagingRunId: 31998552573,
+  stagingArtifactId: 9277632698,
+  stagingArtifactName: 'portugal-product-v2-31998552573',
+  verificationArtifactId: 9277653706,
+  verificationArtifactName: 'portugal-v2-staging-verification-31998552573',
+  stagingArtifactDigest: 'sha256:a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde',
+  verificationArtifactDigest: 'sha256:21cc00a613d87085479b3545b9f7bedce8f1ca5cd990f8ebb382de946c3b82fa',
   stagingDbName: 'santosdodia-staging',
   stagingDbUuid: 'e212681b-a958-4554-9d44-d48cf85f2978',
   productionDbName: 'santosdodia-production',
@@ -56,9 +58,9 @@ export function validateRequestShape(request, { requireApproved = false } = {}) 
   requireValue(request.sourceMainCommit === EXPECTED.sourceMainCommit, 'Production request source commit drifted from the staging-validated snapshot.');
   requireValue(request?.stagingWorkflow?.runId === EXPECTED.stagingRunId && request?.stagingWorkflow?.conclusion === 'success' && request?.stagingWorkflow?.headSha === EXPECTED.sourceMainCommit, 'Production request staging workflow identity mismatch.');
   requireValue(request?.artifacts?.release?.id === EXPECTED.stagingArtifactId && request?.artifacts?.release?.name === EXPECTED.stagingArtifactName, 'Production request release artifact identity mismatch.');
-  requireValue(request?.artifacts?.release?.digest === 'sha256:824e98853835bc0b4160673728304e50b266e31cdafb92de02c5a4eb73138287', 'Production request release artifact digest mismatch.');
+  requireValue(request?.artifacts?.release?.digest === EXPECTED.stagingArtifactDigest, 'Production request release artifact digest mismatch.');
   requireValue(request?.artifacts?.stagingVerification?.id === EXPECTED.verificationArtifactId && request?.artifacts?.stagingVerification?.name === EXPECTED.verificationArtifactName, 'Production request staging verification artifact identity mismatch.');
-  requireValue(request?.artifacts?.stagingVerification?.digest === 'sha256:49988be5ecac510f24ea1eabde5243e1d0d95e4fbe1e7f7bee3a41f491c8f8de', 'Production request staging verification artifact digest mismatch.');
+  requireValue(request?.artifacts?.stagingVerification?.digest === EXPECTED.verificationArtifactDigest, 'Production request staging verification artifact digest mismatch.');
   requireValue(request?.stagingDatabase?.name === EXPECTED.stagingDbName && request?.stagingDatabase?.uuid === EXPECTED.stagingDbUuid, 'Production request staging database mismatch.');
   requireValue(request?.productionDatabase?.name === EXPECTED.productionDbName && request?.productionDatabase?.uuid === EXPECTED.productionDbUuid, 'Production request production database mismatch.');
 
