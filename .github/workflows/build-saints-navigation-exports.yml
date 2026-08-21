@@ -294,6 +294,14 @@ jobs:
             --output staging/navigation/output/portugal-2026-publication-queue.json \
             --summary staging/navigation/output/portugal-2026-publication-queue-summary.json
 
+      - name: Build Portugal P0 identity review pack
+        run: |
+          node scripts/product/build-portugal-p0-review-pack.mjs \
+            --queue staging/navigation/output/portugal-2026-publication-queue.json \
+            --navigation staging/navigation/output/navigation-source-reviewed.json \
+            --output staging/navigation/output/portugal-2026-p0-review-pack.json \
+            --summary staging/navigation/output/portugal-2026-p0-review-pack-summary.json
+
       - name: Archive canonical navigation source in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -318,6 +326,18 @@ jobs:
           --source staging/navigation/output/portugal-2026-publication-queue.json
           --source staging/navigation/output/portugal-2026-publication-queue-summary.json
           --source data/releases/roman-catholic-pt-2026-v2.production-request.json
+
+      - name: Archive Portugal P0 review pack in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream product/portugal/2026/p0-review-pack/v1
+          --source staging/navigation/output/portugal-2026-p0-review-pack.json
+          --source staging/navigation/output/portugal-2026-p0-review-pack-summary.json
+          --source staging/navigation/output/portugal-2026-publication-queue-summary.json
 
       - name: Archive staging export bundle in Dropbox
         env:
@@ -371,12 +391,24 @@ jobs:
           --source staging/navigation/output/portugal-2026-publication-queue-summary.json
           --destination /current/product/portugal/2026/saint-publication-queue-summary.json
 
-      - name: Upload bounded publication queue evidence
+      - name: Publish readable Portugal P0 review summary in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/publish-current-json.mjs
+          --source staging/navigation/output/portugal-2026-p0-review-pack-summary.json
+          --destination /current/product/portugal/2026/p0-review-pack-summary.json
+
+      - name: Upload bounded publication review evidence
         uses: actions/upload-artifact@v7
         with:
-          name: portugal-2026-saint-publication-queue-${{ github.run_id }}
+          name: portugal-2026-publication-review-${{ github.run_id }}
           path: |
             staging/navigation/output/portugal-2026-publication-queue.json
             staging/navigation/output/portugal-2026-publication-queue-summary.json
+            staging/navigation/output/portugal-2026-p0-review-pack.json
+            staging/navigation/output/portugal-2026-p0-review-pack-summary.json
           if-no-files-found: error
           retention-days: 30
