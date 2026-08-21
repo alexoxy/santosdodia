@@ -1,3 +1,4 @@
+import './test-portugal-p0-review-pack.mjs';
 import assert from 'node:assert/strict';
 import { buildPortugalSaintPublicationQueue } from './build-portugal-saint-publication-queue.mjs';
 
