@@ -9,16 +9,19 @@ on:
       - main
     paths:
       - 'scripts/discovery/**'
+      - 'scripts/product/**'
       - 'scripts/dropbox/list-archive-chunks.mjs'
       - 'scripts/dropbox/pull-stream-set.mjs'
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/dropbox/publish-current-json.mjs'
       - 'data/liturgical-person-links.reviewed.json'
       - 'data/saint-navigation-publication.reviewed.json'
+      - 'data/releases/roman-catholic-pt-2026-v2.production-request.json'
       - '.github/workflows/build-saints-navigation-exports.yml'
       - 'config/automation-registry.json'
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -47,6 +50,8 @@ jobs:
         run: |
           npm run repo:audit
           npm run automation:audit
+          node scripts/check-adsense-readiness.mjs
+          node scripts/product/test-portugal-saint-publication-queue.mjs
           node scripts/discovery/test-enrichment-chunk-set.mjs
           node scripts/discovery/test-assemble-navigation-source.mjs
           node scripts/discovery/test-navigation-readiness.mjs
@@ -194,6 +199,101 @@ jobs:
           --mode public
           --locale pt
 
+      - name: Resolve approved Portugal v2 product snapshot
+        id: portugal_snapshot
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const request=JSON.parse(fs.readFileSync('data/releases/roman-catholic-pt-2026-v2.production-request.json','utf8'));
+          if(request.approved!==true||request.approvalScope!=='exact-staging-validated-snapshot-only') throw new Error('Portugal v2 production request is not an exact approved snapshot.');
+          if(request.expected?.occurrences!==389||request.expected?.days!==365||request.expected?.labels!==1945) throw new Error('Portugal v2 approved topology mismatch.');
+          if(request.safety?.automaticFutureProductionWrites!==false||request.safety?.newStagingSnapshotRequiresNewApproval!==true) throw new Error('Portugal v2 approval safety boundary is invalid.');
+          const artifact=request.artifacts?.release;
+          if(artifact?.id!==9277632698||artifact?.name!=='portugal-product-v2-31998552573'||artifact?.digest!=='sha256:a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde') throw new Error('Portugal v2 release artifact identity changed.');
+          if(request.stagingWorkflow?.runId!==31998552573||request.stagingWorkflow?.conclusion!=='success'||request.stagingWorkflow?.headSha!==request.sourceMainCommit) throw new Error('Portugal v2 staging provenance changed.');
+          const buildSha=artifact.files?.['build.json'];
+          if(!/^sha256:[0-9a-f]{64}$/u.test(buildSha??'')) throw new Error('Approved Portugal v2 build digest is missing.');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`run_id=${request.stagingWorkflow.runId}\nartifact_name=${artifact.name}\nbuild_sha256=${buildSha.slice(7)}\nsource_sha=${request.sourceMainCommit}\n`);
+          NODE
+
+      - name: Pull durable approved Portugal v2 snapshot if present
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream product/portugal/2026/approved-snapshot/v2
+          --destination staging/navigation/portugal-v2-cache
+          --allow-missing
+
+      - name: Prepare durable approved Portugal v2 snapshot
+        id: portugal_cache
+        shell: bash
+        run: |
+          missing="$(node -e "const fs=require('node:fs');const r=JSON.parse(fs.readFileSync('staging/navigation/portugal-v2-cache/consumer-receipt.json','utf8'));process.stdout.write(String(r.missing===true));")"
+          mkdir -p staging/navigation/portugal-v2
+          if [ "$missing" = 'false' ]; then
+            node scripts/archive/extract-safe-tar.mjs --archive staging/navigation/portugal-v2-cache/package.tar.gz --destination staging/navigation/portugal-v2-cache/extracted
+            build="$(find staging/navigation/portugal-v2-cache/extracted -type f -name build.json | sort | tail -n 1)"
+            test -n "$build"
+            cp "$build" staging/navigation/portugal-v2/build.json
+            echo 'cached=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'cached=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download exact approved Portugal v2 artifact
+        if: steps.portugal_cache.outputs.cached != 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ steps.portugal_snapshot.outputs.artifact_name }}
+          path: staging/navigation/portugal-v2
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.portugal_snapshot.outputs.run_id }}
+
+      - name: Verify approved Portugal v2 build bytes
+        env:
+          EXPECTED_BUILD_SHA256: ${{ steps.portugal_snapshot.outputs.build_sha256 }}
+          EXPECTED_SOURCE_SHA: ${{ steps.portugal_snapshot.outputs.source_sha }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const crypto=require('node:crypto');
+          const file='staging/navigation/portugal-v2/build.json';
+          const bytes=fs.readFileSync(file);
+          const sha=crypto.createHash('sha256').update(bytes).digest('hex');
+          if(sha!==process.env.EXPECTED_BUILD_SHA256) throw new Error(`Approved Portugal v2 build SHA mismatch: ${sha}`);
+          const build=JSON.parse(bytes.toString('utf8'));
+          if(build.sourceCommit!==process.env.EXPECTED_SOURCE_SHA) throw new Error('Approved Portugal v2 build source commit mismatch.');
+          if(build.build!=='roman-catholic-pt-overlay-v2'||build.productionWriteAllowed!==false) throw new Error('Approved Portugal v2 build crossed its safety boundary.');
+          if(build.calendarCoverage?.occurrences!==389||build.calendarCoverage?.coveredDays!==365||build.productReadiness?.labelCount!==1945) throw new Error('Approved Portugal v2 build topology mismatch.');
+          if(!Object.values(build.localeCompleteness??{}).every((value)=>value?.completeness===1)) throw new Error('Approved Portugal v2 public locale completeness changed.');
+          NODE
+
+      - name: Persist approved Portugal v2 snapshot in Dropbox
+        if: steps.portugal_cache.outputs.cached != 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream product/portugal/2026/approved-snapshot/v2
+          --source staging/navigation/portugal-v2/build.json
+          --source data/releases/roman-catholic-pt-2026-v2.production-request.json
+
+      - name: Build Portugal 2026 saint publication queue
+        run: |
+          node scripts/product/build-portugal-saint-publication-queue.mjs \
+            --calendar staging/navigation/portugal-v2/build.json \
+            --navigation staging/navigation/output/navigation-source-reviewed.json \
+            --public-navigation staging/navigation/output/navigation-source-public.json \
+            --output staging/navigation/output/portugal-2026-publication-queue.json \
+            --summary staging/navigation/output/portugal-2026-publication-queue-summary.json
+
       - name: Archive canonical navigation source in Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -206,6 +306,18 @@ jobs:
           --source staging/navigation/output/navigation-source-reviewed.json
           --source staging/navigation/output/navigation-source-public.json
           --source staging/navigation/output/readiness.json
+
+      - name: Archive Portugal saint publication queue in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream product/portugal/2026/saint-publication-queue/v1
+          --source staging/navigation/output/portugal-2026-publication-queue.json
+          --source staging/navigation/output/portugal-2026-publication-queue-summary.json
+          --source data/releases/roman-catholic-pt-2026-v2.production-request.json
 
       - name: Archive staging export bundle in Dropbox
         env:
@@ -248,3 +360,23 @@ jobs:
           node scripts/dropbox/publish-current-json.mjs
           --source staging/navigation/output/public-exports/manifest.json
           --destination /current/navigation/saints/v1/public-manifest.json
+
+      - name: Publish readable Portugal publication queue summary in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/publish-current-json.mjs
+          --source staging/navigation/output/portugal-2026-publication-queue-summary.json
+          --destination /current/product/portugal/2026/saint-publication-queue-summary.json
+
+      - name: Upload bounded publication queue evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: portugal-2026-saint-publication-queue-${{ github.run_id }}
+          path: |
+            staging/navigation/output/portugal-2026-publication-queue.json
+            staging/navigation/output/portugal-2026-publication-queue-summary.json
+          if-no-files-found: error
+          retention-days: 30
