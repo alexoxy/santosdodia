@@ -33,39 +33,23 @@ async function wait(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchDropboxTemporaryDownload(token, remotePath) {
-  const linkResponse = await fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path: remotePath }),
-    signal: AbortSignal.timeout(120000),
-  });
-  if (!linkResponse.ok) {
-    const text = await linkResponse.text();
-    throw new Error(`Dropbox temporary-link request failed for ${remotePath} (HTTP ${linkResponse.status}): ${text.slice(0, 500)}`);
-  }
-  const payload = await linkResponse.json();
-  if (typeof payload?.link !== 'string' || payload.link.length === 0) {
-    throw new Error(`Dropbox temporary-link response was incomplete for ${remotePath}.`);
-  }
-  return fetch(payload.link, { signal: AbortSignal.timeout(120000) });
-}
-
 async function fetchDropboxDownload(token, remotePath) {
   let lastError = null;
   for (let attempt = 1; attempt <= DROPBOX_DOWNLOAD_ATTEMPTS; attempt += 1) {
     try {
       const response = await fetch('https://content.dropboxapi.com/2/files/download', {
+        method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
         signal: AbortSignal.timeout(120000),
       });
-      if (!isTransientDropboxStatus(response.status)) return response;
+      if (!isTransientDropboxStatus(response.status) || attempt === DROPBOX_DOWNLOAD_ATTEMPTS) return response;
       await response.body?.cancel();
-      if (attempt === DROPBOX_DOWNLOAD_ATTEMPTS) return fetchDropboxTemporaryDownload(token, remotePath);
       await wait(retryDelayMs(response, attempt));
     } catch (error) {
       lastError = error;
-      if (attempt === DROPBOX_DOWNLOAD_ATTEMPTS) return fetchDropboxTemporaryDownload(token, remotePath);
+      if (attempt === DROPBOX_DOWNLOAD_ATTEMPTS) {
+        throw new Error(`Dropbox download request failed for ${remotePath}: ${error instanceof Error ? error.message : String(error)}`);
+      }
       await wait(retryDelayMs(null, attempt));
     }
   }
