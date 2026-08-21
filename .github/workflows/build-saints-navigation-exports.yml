@@ -14,7 +14,6 @@ on:
       - 'scripts/dropbox/pull-stream-set.mjs'
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/dropbox/publish-current-json.mjs'
-      - 'scripts/dropbox/download-exact-file.mjs'
       - 'data/liturgical-person-links.reviewed.json'
       - 'data/saint-navigation-publication.reviewed.json'
       - 'data/releases/roman-catholic-pt-2026-v2.production-request.json'
@@ -22,6 +21,7 @@ on:
       - 'config/automation-registry.json'
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -199,25 +199,51 @@ jobs:
           --mode public
           --locale pt
 
-      - name: Pull approved Portugal v2 product snapshot
-        env:
-          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
-          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
-          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+      - name: Resolve approved Portugal v2 product snapshot
+        id: portugal_snapshot
         shell: bash
         run: |
           node <<'NODE'
           const fs=require('node:fs');
           const request=JSON.parse(fs.readFileSync('data/releases/roman-catholic-pt-2026-v2.production-request.json','utf8'));
-          if(request.approved!==true||request.expected?.occurrences!==389||request.expected?.days!==365||request.expected?.labels!==1945) throw new Error('Portugal v2 production request is not the approved product snapshot.');
-          if(request.safety?.automaticFutureProductionWrites!==false) throw new Error('Portugal v2 product request crossed the automatic production-write boundary.');
-          fs.mkdirSync('staging/navigation/portugal-v2',{recursive:true});
-          fs.writeFileSync('staging/navigation/portugal-v2/source-sha.txt',`${request.sourceMainCommit}\n`);
+          if(request.approved!==true||request.approvalScope!=='exact-staging-validated-snapshot-only') throw new Error('Portugal v2 production request is not an exact approved snapshot.');
+          if(request.expected?.occurrences!==389||request.expected?.days!==365||request.expected?.labels!==1945) throw new Error('Portugal v2 approved topology mismatch.');
+          if(request.safety?.automaticFutureProductionWrites!==false||request.safety?.newStagingSnapshotRequiresNewApproval!==true) throw new Error('Portugal v2 approval safety boundary is invalid.');
+          const artifact=request.artifacts?.release;
+          if(artifact?.id!==9277632698||artifact?.name!=='portugal-product-v2-31998552573'||artifact?.digest!=='sha256:a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde') throw new Error('Portugal v2 release artifact identity changed.');
+          if(request.stagingWorkflow?.runId!==31998552573||request.stagingWorkflow?.conclusion!=='success'||request.stagingWorkflow?.headSha!==request.sourceMainCommit) throw new Error('Portugal v2 staging provenance changed.');
+          const buildSha=artifact.files?.['build.json'];
+          if(!/^sha256:[0-9a-f]{64}$/u.test(buildSha??'')) throw new Error('Approved Portugal v2 build digest is missing.');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`run_id=${request.stagingWorkflow.runId}\nartifact_name=${artifact.name}\nbuild_sha256=${buildSha.slice(7)}\nsource_sha=${request.sourceMainCommit}\n`);
           NODE
-          source_sha="$(cat staging/navigation/portugal-v2/source-sha.txt)"
-          node scripts/dropbox/download-exact-file.mjs \
-            --path "/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/${source_sha}/manifest.json" \
-            --destination staging/navigation/portugal-v2/build.json
+
+      - name: Download exact approved Portugal v2 artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: ${{ steps.portugal_snapshot.outputs.artifact_name }}
+          path: staging/navigation/portugal-v2
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.portugal_snapshot.outputs.run_id }}
+
+      - name: Verify approved Portugal v2 build bytes
+        env:
+          EXPECTED_BUILD_SHA256: ${{ steps.portugal_snapshot.outputs.build_sha256 }}
+          EXPECTED_SOURCE_SHA: ${{ steps.portugal_snapshot.outputs.source_sha }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const crypto=require('node:crypto');
+          const file='staging/navigation/portugal-v2/build.json';
+          const bytes=fs.readFileSync(file);
+          const sha=crypto.createHash('sha256').update(bytes).digest('hex');
+          if(sha!==process.env.EXPECTED_BUILD_SHA256) throw new Error(`Approved Portugal v2 build SHA mismatch: ${sha}`);
+          const build=JSON.parse(bytes.toString('utf8'));
+          if(build.sourceCommit!==process.env.EXPECTED_SOURCE_SHA) throw new Error('Approved Portugal v2 build source commit mismatch.');
+          if(build.build!=='roman-catholic-pt-overlay-v2'||build.productionWriteAllowed!==false) throw new Error('Approved Portugal v2 build crossed its safety boundary.');
+          if(build.calendarCoverage?.occurrences!==389||build.calendarCoverage?.coveredDays!==365||build.productReadiness?.labelCount!==1945) throw new Error('Approved Portugal v2 build topology mismatch.');
+          if(!Object.values(build.localeCompleteness??{}).every((value)=>value?.completeness===1)) throw new Error('Approved Portugal v2 public locale completeness changed.');
+          NODE
 
       - name: Build Portugal 2026 saint publication queue
         run: |
