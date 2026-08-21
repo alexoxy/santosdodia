@@ -40,6 +40,9 @@ jobs:
       - name: Enforce AdSense review guardrail
         run: node scripts/check-adsense-readiness.mjs
 
+      - name: Test Portugal publication queue safety
+        run: node scripts/product/test-portugal-saint-publication-queue.mjs
+
       - name: Test public publication boundaries
         run: npm run publication:boundary-test
 
