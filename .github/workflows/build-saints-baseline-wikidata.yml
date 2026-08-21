@@ -8,6 +8,8 @@ on:
     paths:
       - config/saints-baseline-v1.json
       - config/saints-baseline-wikidata.json
+      - scripts/archive-to-dropbox.mjs
+      - scripts/dropbox/**
       - .github/workflows/build-saints-baseline-wikidata.yml
   schedule:
     - cron: '17 1,7,13,19 * * *'

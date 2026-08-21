@@ -13,6 +13,8 @@ on:
       - 'scripts/enrichment/fetch-wikidata-label-chunk.mjs'
       - 'scripts/enrichment/finalize-wikidata-label-run.mjs'
       - 'scripts/enrichment/test-wikidata-label-pipeline.mjs'
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/**'
       - '.github/workflows/enrich-saints-labels-wikidata.yml'
       - 'config/automation-registry.json'
 

@@ -2,12 +2,12 @@
 
 import { createHash } from 'node:crypto';
 import {
-  createReadStream,
   createWriteStream,
   existsSync,
   mkdtempSync,
   openSync,
   closeSync,
+  readFileSync,
   readSync,
   realpathSync,
   rmSync,
@@ -161,10 +161,11 @@ async function readJsonResponse(response, operation) {
   return value;
 }
 
-function uploadHeaders(token, argument) {
+function uploadHeaders(token, argument, contentLength) {
   return {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/octet-stream',
+    'Content-Length': String(contentLength),
     'Dropbox-API-Arg': JSON.stringify(argument),
   };
 }
@@ -181,26 +182,39 @@ function commitArgument(path) {
 
 function rangedBody(path, start, length) {
   if (length === 0) return Buffer.alloc(0);
-  return createReadStream(path, { start, end: start + length - 1 });
+  const descriptor = openSync(path, 'r');
+  const buffer = Buffer.allocUnsafe(length);
+  let offset = 0;
+  try {
+    while (offset < length) {
+      const bytes = readSync(descriptor, buffer, offset, length - offset, start + offset);
+      if (bytes === 0) break;
+      offset += bytes;
+    }
+  } finally {
+    closeSync(descriptor);
+  }
+  if (offset !== length) throw new Error(`Could not read expected upload range from ${path}.`);
+  return buffer;
 }
 
 async function uploadDirect(token, localPath, remotePath) {
+  const body = readFileSync(localPath);
   const response = await fetch('https://content.dropboxapi.com/2/files/upload', {
     method: 'POST',
-    headers: uploadHeaders(token, commitArgument(remotePath)),
-    body: createReadStream(localPath),
-    duplex: 'half',
+    headers: uploadHeaders(token, commitArgument(remotePath), body.length),
+    body,
   });
   return readJsonResponse(response, `Dropbox upload ${remotePath}`);
 }
 
 async function uploadSession(token, localPath, remotePath, size) {
   const firstLength = Math.min(DROPBOX_SESSION_CHUNK_BYTES, size);
+  let body = rangedBody(localPath, 0, firstLength);
   let response = await fetch('https://content.dropboxapi.com/2/files/upload_session/start', {
     method: 'POST',
-    headers: uploadHeaders(token, { close: false }),
-    body: rangedBody(localPath, 0, firstLength),
-    duplex: 'half',
+    headers: uploadHeaders(token, { close: false }, body.length),
+    body,
   });
   const started = await readJsonResponse(response, 'Dropbox upload session start');
   const sessionId = started.session_id;
@@ -208,28 +222,28 @@ async function uploadSession(token, localPath, remotePath, size) {
 
   let offset = firstLength;
   while (size - offset > DROPBOX_SESSION_CHUNK_BYTES) {
+    body = rangedBody(localPath, offset, DROPBOX_SESSION_CHUNK_BYTES);
     response = await fetch('https://content.dropboxapi.com/2/files/upload_session/append_v2', {
       method: 'POST',
       headers: uploadHeaders(token, {
         close: false,
         cursor: { offset, session_id: sessionId },
-      }),
-      body: rangedBody(localPath, offset, DROPBOX_SESSION_CHUNK_BYTES),
-      duplex: 'half',
+      }, body.length),
+      body,
     });
     await readJsonResponse(response, 'Dropbox upload session append');
     offset += DROPBOX_SESSION_CHUNK_BYTES;
   }
 
   const finalLength = size - offset;
+  body = rangedBody(localPath, offset, finalLength);
   response = await fetch('https://content.dropboxapi.com/2/files/upload_session/finish', {
     method: 'POST',
     headers: uploadHeaders(token, {
       commit: commitArgument(remotePath),
       cursor: { offset, session_id: sessionId },
-    }),
-    body: rangedBody(localPath, offset, finalLength),
-    duplex: 'half',
+    }, body.length),
+    body,
   });
   return readJsonResponse(response, `Dropbox upload session finish ${remotePath}`);
 }

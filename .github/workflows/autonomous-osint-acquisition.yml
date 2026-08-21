@@ -1,6 +1,14 @@
 name: Autonomous OSINT acquisition
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/osint/adapters/wikidata-saints.mjs'
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/**'
+      - '.github/workflows/autonomous-osint-acquisition.yml'
   schedule:
     - cron: '47 2 * * 3'
   workflow_dispatch:
@@ -43,8 +51,10 @@ jobs:
 
       - name: Acquire approved Wikidata source into immutable raw staging
         env:
-          OSINT_WIKIDATA_PAGE_SIZE: '500'
+          OSINT_WIKIDATA_PAGE_SIZE: '100'
           OSINT_WIKIDATA_MAX_PAGES: '1'
+          OSINT_WIKIDATA_RETRY_ATTEMPTS: '6'
+          OSINT_WIKIDATA_REQUEST_TIMEOUT_MS: '120000'
         run: npm run osint:dump -- data/osint/manifests/p0-initial-dump.json data/osint/runs
 
       - name: Upload bounded acquisition evidence

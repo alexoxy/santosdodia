@@ -1,6 +1,13 @@
 name: Global source orchestrator
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/**'
+      - '.github/workflows/source-orchestrator.yml'
   schedule:
     - cron: '2 * * * *'
   workflow_dispatch:

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { createReadStream, existsSync, realpathSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import { isAbsolute, resolve, sep } from 'node:path';
 import { refreshDropboxAccessToken } from './oauth.mjs';
 
@@ -42,11 +42,13 @@ function validateOptions(options, root) {
 }
 
 async function upload(token, source, destination) {
+  const body = readFileSync(source);
   const response = await fetch('https://content.dropboxapi.com/2/files/upload', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/octet-stream',
+      'Content-Length': String(body.length),
       'Dropbox-API-Arg': JSON.stringify({
         autorename: false,
         mode: 'overwrite',
@@ -55,24 +57,23 @@ async function upload(token, source, destination) {
         strict_conflict: false,
       }),
     },
-    body: createReadStream(source),
-    duplex: 'half',
+    body,
   });
 
   const text = await response.text();
-  let body = {};
+  let bodyJson = {};
   if (text) {
     try {
-      body = JSON.parse(text);
+      bodyJson = JSON.parse(text);
     } catch {
       throw new Error(`Dropbox upload returned invalid JSON (HTTP ${response.status}).`);
     }
   }
   if (!response.ok) {
-    const summary = body.error_summary ?? body.error_description ?? body.error?.['.tag'] ?? 'unknown_error';
+    const summary = bodyJson.error_summary ?? bodyJson.error_description ?? bodyJson.error?.['.tag'] ?? 'unknown_error';
     throw new Error(`Dropbox upload failed (HTTP ${response.status}): ${summary}`);
   }
-  return body;
+  return bodyJson;
 }
 
 async function main() {
