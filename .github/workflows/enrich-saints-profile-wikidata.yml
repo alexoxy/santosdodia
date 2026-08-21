@@ -10,6 +10,8 @@ on:
     paths:
       - 'config/saints-profile-enrichment-v1.json'
       - 'scripts/enrichment/**'
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/**'
       - '.github/workflows/enrich-saints-profile-wikidata.yml'
       - 'config/automation-registry.json'
 
