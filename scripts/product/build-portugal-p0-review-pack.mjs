@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildPortugalP0VaticanCorroborationCandidates } from './build-portugal-p0-vatican-corroboration-candidates.mjs';
 
 const RESOLVED_IDENTITY_STATUSES = new Set(['resolved-single-occurrence', 'resolved-duplicate-occurrences']);
 
@@ -32,6 +33,16 @@ function bucketFor({ item, person }) {
   if (!person || !text(person.qid) || person.identityStatus === 'conflict' || !RESOLVED_IDENTITY_STATUSES.has(person.identityStatus)) return 'needs-identity-evidence';
   if (!text(person.names?.pt)) return 'needs-portuguese-name';
   return 'identity-review-ready';
+}
+
+function findNamedFiles(root, target, found = []) {
+  if (!root || !fs.existsSync(root)) return found;
+  for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+    const absolute = path.join(root, entry.name);
+    if (entry.isDirectory()) findNamedFiles(absolute, target, found);
+    else if (entry.isFile() && entry.name === target) found.push(absolute);
+  }
+  return found.sort();
 }
 
 export function buildPortugalP0ReviewPack({ queue, navigation } = {}) {
@@ -156,6 +167,18 @@ function main() {
     queue: JSON.parse(fs.readFileSync(path.resolve(queuePath), 'utf8')),
     navigation: JSON.parse(fs.readFileSync(path.resolve(navigationPath), 'utf8')),
   });
+
+  const bindingsPath = path.resolve('config/corroboration-source-bindings.vatican-news-pt.json');
+  const vaticanFiles = findNamedFiles(path.resolve('staging/navigation/vatican/extracted'), 'normalized.json');
+  if (vaticanFiles.length > 1) throw new Error(`Expected at most one Vatican normalized.json, found ${vaticanFiles.length}.`);
+  const corroboration = buildPortugalP0VaticanCorroborationCandidates({
+    p0Pack: result,
+    vatican: vaticanFiles.length === 1 ? JSON.parse(fs.readFileSync(vaticanFiles[0], 'utf8')) : null,
+    bindings: JSON.parse(fs.readFileSync(bindingsPath, 'utf8')),
+  });
+  result.vaticanCorroboration = corroboration;
+  result.summary.vaticanCorroboration = corroboration.summary;
+
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
   fs.mkdirSync(path.dirname(path.resolve(summaryPath)), { recursive: true });
   fs.writeFileSync(path.resolve(outputPath), `${JSON.stringify(result, null, 2)}\n`, 'utf8');
