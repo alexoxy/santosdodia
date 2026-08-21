@@ -10,6 +10,49 @@ import { refreshDropboxAccessToken } from './oauth.mjs';
 
 const CONTENT_BLOCK_BYTES = 4 * 1024 * 1024;
 
+const DROPBOX_DOWNLOAD_ATTEMPTS = 4;
+const DROPBOX_RETRY_BASE_MS = 1_000;
+const DROPBOX_RETRY_MAX_MS = 15_000;
+
+function isTransientDropboxStatus(status) {
+  return status === 429 || status >= 500;
+}
+
+function retryDelayMs(response, attempt) {
+  const retryAfter = response?.headers.get('retry-after');
+  if (retryAfter) {
+    const seconds = Number(retryAfter);
+    if (Number.isFinite(seconds)) return Math.min(Math.max(seconds * 1_000, 0), DROPBOX_RETRY_MAX_MS);
+    const dateDelay = Date.parse(retryAfter) - Date.now();
+    if (Number.isFinite(dateDelay)) return Math.min(Math.max(dateDelay, 0), DROPBOX_RETRY_MAX_MS);
+  }
+  return Math.min(DROPBOX_RETRY_BASE_MS * (2 ** (attempt - 1)), DROPBOX_RETRY_MAX_MS);
+}
+
+async function wait(ms) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchDropboxDownload(token, remotePath) {
+  let lastError = null;
+  for (let attempt = 1; attempt <= DROPBOX_DOWNLOAD_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch('https://content.dropboxapi.com/2/files/download', {
+        headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
+        signal: AbortSignal.timeout(120000),
+      });
+      if (!isTransientDropboxStatus(response.status) || attempt === DROPBOX_DOWNLOAD_ATTEMPTS) return response;
+      await response.body?.cancel();
+      await wait(retryDelayMs(response, attempt));
+    } catch (error) {
+      lastError = error;
+      if (attempt === DROPBOX_DOWNLOAD_ATTEMPTS) break;
+      await wait(retryDelayMs(null, attempt));
+    }
+  }
+  throw new Error(`Dropbox download request failed for ${remotePath} after ${DROPBOX_DOWNLOAD_ATTEMPTS} attempts: ${lastError instanceof Error ? lastError.message : String(lastError)}`);
+}
+
 function argument(name, fallback = null) {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] : fallback;
@@ -23,10 +66,7 @@ function validateStream(stream) {
 }
 
 async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) {
-  const response = await fetch('https://content.dropboxapi.com/2/files/download', {
-    headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
-    signal: AbortSignal.timeout(120000),
-  });
+  const response = await fetchDropboxDownload(token, remotePath);
   if (!response.ok) {
     const text = await response.text();
     if (allowNotFound && response.status === 409 && /(?:path\/not_found|not_found)/u.test(text)) return null;
@@ -36,10 +76,7 @@ async function downloadBytes(token, remotePath, { allowNotFound = false } = {}) 
 }
 
 async function downloadFile(token, remotePath, destination) {
-  const response = await fetch('https://content.dropboxapi.com/2/files/download', {
-    headers: { Authorization: `Bearer ${token}`, 'Dropbox-API-Arg': JSON.stringify({ path: remotePath }) },
-    signal: AbortSignal.timeout(120000),
-  });
+  const response = await fetchDropboxDownload(token, remotePath);
   if (!response.ok || !response.body) throw new Error(`Dropbox download failed for ${remotePath} (HTTP ${response.status}).`);
   await pipeline(response.body, createWriteStream(destination, { mode: 0o600 }));
 }
