@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { buildPortugalP0ReviewPack } from './build-portugal-p0-review-pack.mjs';
+
+const safety={adsenseReviewState:'PREPARING',adServingMutation:false,autoAdsMutation:false,seoIndexationMutation:false};
+const makeItem=(id,entityId,alreadyPublic=false)=>({priority:'P0',sourceOccurrenceId:id,dateISO:'2026-08-01',canonicalEventId:`rc:${id}`,category:'saint',rank:null,labels:{pt:`PT ${id}`,en:`EN ${id}`},classification:{kind:'single-person-observance'},identityMatch:{status:'unique-exact-candidate',candidates:[{entityId,evidence:[{key:id,evidence:['label:pt']}]}]},alreadyPublic,publicationAllowed:false,productionMutation:false,advertisingEligibleByQueue:false});
+const queue={schemaVersion:1,release:'roman-catholic-pt-2026-v2',publicationAllowed:false,productionMutation:false,summary:{operationalBacklog:{p0:4},safety},items:[makeItem('ready','wikidata:Q1'),makeItem('no-pt','wikidata:Q2'),makeItem('conflict','wikidata:Q3'),makeItem('public','wikidata:Q4',true)]};
+const person=(qid,status,pt,publicationStatus='withheld')=>({entityId:`wikidata:${qid}`,qid,canonicalName:`Person ${qid}`,names:pt?{pt}:{},aliases:{},identityStatus:status,validationStatus:'provisional',publicationStatus,sourceIds:['wikidata'],birth:null,death:null,places:[]});
+const navigation={schemaVersion:1,datasetVersion:'test',publicationAllowed:false,productionMutation:false,people:[person('Q1','resolved-single-occurrence','Pessoa Um'),person('Q2','resolved-duplicate-occurrences',null),person('Q3','conflict','Pessoa Três'),person('Q4','resolved-single-occurrence','Pessoa Quatro','published')]};
+const result=buildPortugalP0ReviewPack({queue,navigation});
+assert.equal(result.items.length,4);
+assert.equal(result.summary.buckets.identityReviewReady,1);
+assert.equal(result.summary.buckets.needsPortugueseName,1);
+assert.equal(result.summary.buckets.needsIdentityEvidence,1);
+assert.equal(result.summary.buckets.alreadyPublicLinkReview,1);
+assert.equal(result.summary.portugueseNameCoverage.withPtName,3);
+assert.equal(result.summary.safety.adsenseReviewState,'PREPARING');
+assert.ok(result.items.every((row)=>row.reviewRequired===true&&row.automaticLinkAllowed===false&&row.publicationAllowed===false&&row.advertisingEligible===false));
+console.log('Portugal P0 review pack tests passed.');
