@@ -1,6 +1,12 @@
 name: Autonomous D1 importer
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/autonomous-d1-importer.yml'
+      - 'scripts/autonomy/check-d1-daily-budget.mjs'
   workflow_run:
     workflows: ['Autonomous linguistic review']
     types: [completed]
@@ -16,7 +22,7 @@ concurrency:
 
 jobs:
   prepare-import:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     environment: dropbox-archive
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -137,15 +143,15 @@ jobs:
             2> reports/cloudflare-free-daily-budget-error.txt; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           else
-            node <<'NODE'
-            const fs = require('node:fs');
-            const reason = fs.readFileSync('reports/cloudflare-free-daily-budget-error.txt', 'utf8').trim();
-            fs.writeFileSync(
-              'reports/cloudflare-free-daily-budget.json',
-              `${JSON.stringify({ allowed: false, deferred: true, reason }, null, 2)}\n`
-            );
-            console.log(`::notice::D1 import deferred without remote operations: ${reason}`);
-            NODE
+            node -e '
+              const fs = require("node:fs");
+              const reason = fs.readFileSync("reports/cloudflare-free-daily-budget-error.txt", "utf8").trim();
+              fs.writeFileSync(
+                "reports/cloudflare-free-daily-budget.json",
+                JSON.stringify({ allowed: false, deferred: true, reason }, null, 2) + "\n"
+              );
+              console.log(`::notice::D1 import deferred without remote operations: ${reason}`);
+            '
             echo "allowed=false" >> "$GITHUB_OUTPUT"
           fi
 
