@@ -93,13 +93,13 @@ function classifyOccurrence(item) {
     || /\b(jesus|cristo|senhor|trindade|corpo de cristo|sagrado coracao|sacred heart|holy trinity|body and blood of christ|holy cross)\b/u.test(labelText);
   if (christological) return { kind: 'christological-or-doctrinal-observance', personModel: 'non-person-observance', reason: 'christological-or-doctrinal-feast' };
 
-  const collective = /^rc(?:pt)?:sts/u.test(id)
+  const collective = /^rc(?:-pt)?:sts/u.test(id)
     || /(andcompanions|companionsmartyrs|martyrs|holyinnocents|sevenfounders|maccabees|firstmartyrs)/u.test(id)
     || /\b(santos|santas|saints|martires|martyrs|martiri|martyrs)\b/u.test(labelText)
     || /\b(?:sao|santo|santa|saint|st)\b[^,;]{1,80}\b(?:e|and|et|y)\b[^,;]{1,80}\b(?:sao|santo|santa|saint|st)\b/u.test(labelText);
   if (collective) return { kind: 'collective-person-observance', personModel: 'collective', reason: 'plural-or-companion-observance' };
 
-  if (PERSON_CATEGORIES.has(category) || /^rc(?:pt)?:st(?!s)/u.test(id) || /^rc(?:pt)?:bl/u.test(id)) {
+  if (PERSON_CATEGORIES.has(category) || /^rc(?:-pt)?:st(?!s)/u.test(id) || /^rc(?:-pt)?:bl/u.test(id)) {
     return { kind: 'single-person-observance', personModel: 'single', reason: 'singular-saint-category-or-canonical-id' };
   }
 
