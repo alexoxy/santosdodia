@@ -217,7 +217,35 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`run_id=${request.stagingWorkflow.runId}\nartifact_name=${artifact.name}\nbuild_sha256=${buildSha.slice(7)}\nsource_sha=${request.sourceMainCommit}\n`);
           NODE
 
+      - name: Pull durable approved Portugal v2 snapshot if present
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/dropbox/pull-latest-stream.mjs
+          --stream product/portugal/2026/approved-snapshot/v2
+          --destination staging/navigation/portugal-v2-cache
+          --allow-missing
+
+      - name: Prepare durable approved Portugal v2 snapshot
+        id: portugal_cache
+        shell: bash
+        run: |
+          missing="$(node -e "const fs=require('node:fs');const r=JSON.parse(fs.readFileSync('staging/navigation/portugal-v2-cache/consumer-receipt.json','utf8'));process.stdout.write(String(r.missing===true));")"
+          mkdir -p staging/navigation/portugal-v2
+          if [ "$missing" = 'false' ]; then
+            node scripts/archive/extract-safe-tar.mjs --archive staging/navigation/portugal-v2-cache/package.tar.gz --destination staging/navigation/portugal-v2-cache/extracted
+            build="$(find staging/navigation/portugal-v2-cache/extracted -type f -name build.json | sort | tail -n 1)"
+            test -n "$build"
+            cp "$build" staging/navigation/portugal-v2/build.json
+            echo 'cached=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'cached=false' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Download exact approved Portugal v2 artifact
+        if: steps.portugal_cache.outputs.cached != 'true'
         uses: actions/download-artifact@v8
         with:
           name: ${{ steps.portugal_snapshot.outputs.artifact_name }}
@@ -244,6 +272,18 @@ jobs:
           if(build.calendarCoverage?.occurrences!==389||build.calendarCoverage?.coveredDays!==365||build.productReadiness?.labelCount!==1945) throw new Error('Approved Portugal v2 build topology mismatch.');
           if(!Object.values(build.localeCompleteness??{}).every((value)=>value?.completeness===1)) throw new Error('Approved Portugal v2 public locale completeness changed.');
           NODE
+
+      - name: Persist approved Portugal v2 snapshot in Dropbox
+        if: steps.portugal_cache.outputs.cached != 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream product/portugal/2026/approved-snapshot/v2
+          --source staging/navigation/portugal-v2/build.json
+          --source data/releases/roman-catholic-pt-2026-v2.production-request.json
 
       - name: Build Portugal 2026 saint publication queue
         run: |
