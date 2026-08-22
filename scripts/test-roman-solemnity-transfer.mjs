@@ -92,6 +92,16 @@ try {
   assert(joseph2008Proposal?.targetDateISO === '2008-03-15', `St Joseph 2008 expected nearest free day 2008-03-15, got ${joseph2008Proposal?.targetDateISO}.`);
   assert(joseph2008Proposal?.method === 'nearest-free-day', 'St Joseph 2008 must use the general nearest-free-day rule.');
 
+  const annunciation2008Id = 'occurrence:2008-03-25:annunciation:test';
+  const annunciation2008Calendar = annual.generateRomanAnnualCalendar(2008, roman.ROMAN_PORTUGAL_POLICY, [
+    candidate(annunciation2008Id, '2008-03-25', 'observance:annunciation:roman-catholic')
+  ]);
+  const annunciation2008 = transfer.scheduleRomanSolemnityTransfers(annunciation2008Calendar, roman.ROMAN_PORTUGAL_POLICY);
+  const annunciation2008Proposal = annunciation2008.proposals.find(item => item.candidateId === annunciation2008Id);
+  assert(annunciation2008Proposal?.status === 'resolved' && annunciation2008Proposal.targetDateISO === '2008-03-31', 'Annunciation impeded by the Easter Octave in 2008 must resolve to 2008-03-31.');
+  assert(annunciation2008Proposal?.method === 'nearest-free-day', 'Easter-Octave Annunciation must resolve through the general nearest-free rule, not overextend the Holy Week special rule.');
+  assert(!annunciation2008Proposal?.sourceIds.includes('snl-portugal-annunciation-transfer'), 'The dedicated Holy Week Annunciation source must not be attached to an Easter-Octave general-rule resolution.');
+
   const equidistantSolemnity = candidate('synthetic:solemnity:equidistant', '2026-06-10');
   const equidistantCalendar = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [
     equidistantSolemnity,
@@ -123,7 +133,7 @@ try {
   assert(joseph2023.publicationAllowed === false && annunciation2024.publicationAllowed === false, 'Transfer scheduling must remain shadow-only.');
   assert(joseph2023Proposal?.sourceIds.includes('snl-portugal-liturgical-year-transfer-rules'), 'General transfer decisions must retain the SNL transfer source.');
 
-  console.log('Roman solemnity transfer scheduler passed: privileged-Sunday Monday, Annunciation special transfer, nearest free day, equidistant fail-closed and target-collision safeguards.');
+  console.log('Roman solemnity transfer scheduler passed: privileged-Sunday Monday, Holy Week Annunciation special rule, Easter-Octave general transfer, nearest free day, equidistant fail-closed and target-collision safeguards.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
