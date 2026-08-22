@@ -68,7 +68,9 @@ try {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
 
-// R1.10: canonical TemporalRule validation is part of the mandatory temporal gate.
+// Canonical TemporalRule validation is part of the mandatory temporal gate.
 await import('./vault/test-canonical-temporal-rule-manifest.mjs');
-// R1.12: parameterized weekday families and precedence outcomes are part of the same gate.
+// Parameterized weekday families and precedence outcomes are part of the same gate.
 await import('./vault/test-temporal-rule-families.mjs');
+// The public Roman calculator must remain annual-file-free and valid across centuries.
+await import('./test-roman-liturgical-year.mjs');
