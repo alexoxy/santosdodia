@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-release-temporal-family-shadow",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "year": 2026,
+  "families": [
+    {
+      "familyId": "temporal-rule-family:lent-weekday:roman-catholic",
+      "presentLegacyIds": [
+        "rc:LentWeekday1Monday", "rc:LentWeekday1Tuesday", "rc:LentWeekday1Wednesday", "rc:LentWeekday1Thursday", "rc:LentWeekday1Friday", "rc:LentWeekday1Saturday",
+        "rc:LentWeekday2Monday", "rc:LentWeekday2Tuesday", "rc:LentWeekday2Wednesday", "rc:LentWeekday2Thursday", "rc:LentWeekday2Friday", "rc:LentWeekday2Saturday",
+        "rc:LentWeekday3Monday", "rc:LentWeekday3Tuesday", "rc:LentWeekday3Wednesday", "rc:LentWeekday3Thursday", "rc:LentWeekday3Friday", "rc:LentWeekday3Saturday",
+        "rc:LentWeekday4Monday", "rc:LentWeekday4Tuesday", "rc:LentWeekday4Wednesday", "rc:LentWeekday4Friday", "rc:LentWeekday4Saturday",
+        "rc:LentWeekday5Monday", "rc:LentWeekday5Tuesday", "rc:LentWeekday5Thursday", "rc:LentWeekday5Friday", "rc:LentWeekday5Saturday"
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:easter-weekday:roman-catholic",
+      "presentLegacyIds": [
+        "rc:EasterWeekday2Tuesday", "rc:EasterWeekday2Wednesday", "rc:EasterWeekday2Thursday", "rc:EasterWeekday2Friday", "rc:EasterWeekday2Saturday",
+        "rc:EasterWeekday3Monday", "rc:EasterWeekday3Wednesday", "rc:EasterWeekday4Monday",
+        "rc:EasterWeekday5Monday", "rc:EasterWeekday5Tuesday", "rc:EasterWeekday5Wednesday", "rc:EasterWeekday5Thursday", "rc:EasterWeekday5Friday", "rc:EasterWeekday5Saturday",
+        "rc:EasterWeekday6Monday", "rc:EasterWeekday6Friday", "rc:EasterWeekday6Saturday", "rc:EasterWeekday7Tuesday", "rc:EasterWeekday7Saturday"
+      ]
+    }
+  ],
+  "suppressedCandidates": [
+    {"familyId":"temporal-rule-family:lent-weekday:roman-catholic","week":4,"weekday":"thursday","candidateDateISO":"2026-03-19","suppressingLegacyObservanceId":"rc:StJoseph","suppressingRank":"solemnity"},
+    {"familyId":"temporal-rule-family:lent-weekday:roman-catholic","week":5,"weekday":"wednesday","candidateDateISO":"2026-03-25","suppressingLegacyObservanceId":"rc:Annunciation","suppressingRank":"solemnity"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":2,"weekday":"monday","candidateDateISO":"2026-04-13","suppressingLegacyObservanceId":"rc:StMartinPope","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":3,"weekday":"tuesday","candidateDateISO":"2026-04-21","suppressingLegacyObservanceId":"rc:StAnselm","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":3,"weekday":"thursday","candidateDateISO":"2026-04-23","suppressingLegacyObservanceId":"rc:StGeorge","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":3,"weekday":"friday","candidateDateISO":"2026-04-24","suppressingLegacyObservanceId":"rc:StFidelisSigmaringen","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":3,"weekday":"saturday","candidateDateISO":"2026-04-25","suppressingLegacyObservanceId":"rc:StMarkEvangelist","suppressingRank":"feast"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":4,"weekday":"tuesday","candidateDateISO":"2026-04-28","suppressingLegacyObservanceId":"rc:StPeterChanel","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":4,"weekday":"wednesday","candidateDateISO":"2026-04-29","suppressingLegacyObservanceId":"rc:StCatherineSiena","suppressingRank":"feast"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":4,"weekday":"thursday","candidateDateISO":"2026-04-30","suppressingLegacyObservanceId":"rc:StPiusV","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":4,"weekday":"friday","candidateDateISO":"2026-05-01","suppressingLegacyObservanceId":"rc:StJosephWorker","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":4,"weekday":"saturday","candidateDateISO":"2026-05-02","suppressingLegacyObservanceId":"rc:StAthanasius","suppressingRank":"memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":6,"weekday":"tuesday","candidateDateISO":"2026-05-12","suppressingLegacyObservanceId":"rc-pt:BlJoanPortugal","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":6,"weekday":"wednesday","candidateDateISO":"2026-05-13","suppressingLegacyObservanceId":"rc:OurLadyOfFatima","suppressingRank":"feast"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":6,"weekday":"thursday","candidateDateISO":"2026-05-14","suppressingLegacyObservanceId":"rc:StMatthias","suppressingRank":"feast"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":7,"weekday":"monday","candidateDateISO":"2026-05-18","suppressingLegacyObservanceId":"rc:StJohnIPope","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":7,"weekday":"wednesday","candidateDateISO":"2026-05-20","suppressingLegacyObservanceId":"rc:StBernardineSiena","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":7,"weekday":"thursday","candidateDateISO":"2026-05-21","suppressingLegacyObservanceId":"rc:StChristopherMagallanes","suppressingRank":"optional-memorial"},
+    {"familyId":"temporal-rule-family:easter-weekday:roman-catholic","week":7,"weekday":"friday","candidateDateISO":"2026-05-22","suppressingLegacyObservanceId":"rc:StRitaCascia","suppressingRank":"optional-memorial"}
+  ],
+  "mutationAllowed": false,
+  "verifiedAt": "2026-08-22"
+}

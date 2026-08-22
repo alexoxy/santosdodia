@@ -28,8 +28,9 @@
   "coverage": {
     "explicitOccurrenceAnchors": 6,
     "temporalRuleShadowOccurrences": 5,
-    "mappedOccurrenceAnchors": 11,
-    "remainingLegacyOccurrences": 378,
+    "temporalRuleFamilyShadowOccurrences": 47,
+    "mappedOccurrenceAnchors": 58,
+    "remainingLegacyOccurrences": 331,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -41,6 +42,8 @@
     "churchAndJurisdictionMustRemainFixed": true,
     "temporalShadowMustResolveThroughCanonicalTemporalRule": true,
     "temporalShadowMustAnchorExactApprovedSourceRow": true,
+    "temporalFamilyCandidatesRequirePrecedenceResolution": true,
+    "suppressedTemporalFamilyCandidatesMustNotCountAsCoverage": true,
     "noAutomaticCanonicalIdentityCreation": true,
     "noD1MutationBeforeFullCoverage": true,
     "noRuntimeSwitchBeforeFullCoverage": true,
