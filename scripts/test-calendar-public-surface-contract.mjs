@@ -28,6 +28,7 @@ const [
   calendarExplorer,
   searchExplorer,
   syncCenter,
+  productionRequestText,
 ] = await Promise.all([
   source('app/api/v1/observances/route.ts'),
   source('app/api/v1/today/route.ts'),
@@ -37,6 +38,7 @@ const [
   source('app/components/CalendarExplorer.tsx'),
   source('app/components/SearchExplorer.tsx'),
   source('app/components/CalendarSyncCenter.tsx'),
+  source('data/releases/roman-catholic-pt-2026-v2.production-request.json'),
 ]);
 
 // API / JSON surfaces must accept the country scope and carry it to the
@@ -82,4 +84,32 @@ assert(
   'Observances API has diverged from the publication-safe D1 adapter.',
 );
 
-console.log('Calendar public-surface territorial contract passed: Today, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent.');
+// Semantic guardrail: the public surfaces above all resolve through the same
+// canonical runtime, so the reviewed Portugal production release is the pinned
+// source of truth for high-value territorial/transfer sentinels. A future
+// refactor must explicitly update reviewed evidence rather than silently move a
+// feast or replace a jurisdictional occurrence with the General calendar date.
+const productionRequest = JSON.parse(productionRequestText);
+const portugalSentinels = {
+  'rc:Epiphany': '2026-01-04',
+  'rc-pt:TuesdayAfterEpiphany': '2026-01-06',
+  'rc-pt:FiveWoundsLord': '2026-02-07',
+  'rc:StMatthias': '2026-05-14',
+  'rc:Ascension': '2026-05-17',
+  'rc:ImmaculateHeart': '2026-06-15',
+};
+assert(productionRequest.releaseId === 'roman-catholic-pt-2026-v2', 'Portugal semantic sentinels are no longer tied to the reviewed v2 release.');
+assert(productionRequest.approved === true, 'Portugal semantic sentinel release is no longer explicitly approved.');
+assert(productionRequest.expected?.occurrences === 389 && productionRequest.expected?.days === 365, 'Portugal semantic sentinel release lost its reviewed 389/365 coverage contract.');
+for (const [canonicalEventId, expectedDateISO] of Object.entries(portugalSentinels)) {
+  assert(
+    productionRequest.semanticChecks?.[canonicalEventId] === expectedDateISO,
+    `Portugal semantic sentinel drift: ${canonicalEventId} must remain ${expectedDateISO}.`,
+  );
+}
+assert(
+  Object.keys(productionRequest.semanticChecks ?? {}).length === Object.keys(portugalSentinels).length,
+  'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
+);
+
+console.log('Calendar public-surface contract passed: Today, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent and preserve reviewed Portugal semantic sentinels.');
