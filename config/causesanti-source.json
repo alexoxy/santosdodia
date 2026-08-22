@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "dicastery-causes-of-saints",
+  "name": "Dicastero delle Cause dei Santi",
+  "baseUrl": "https://www.causesanti.va/it.html",
+  "host": "www.causesanti.va",
+  "authorityClass": "A",
+  "authorityKind": "holy-see-dicastery-primary",
+  "churchFamilies": ["catholic"],
+  "coverage": [
+    "canonizations",
+    "beatifications",
+    "venerabilities",
+    "decrees",
+    "documents",
+    "news",
+    "events",
+    "studium",
+    "publications",
+    "archive",
+    "individual cause/person pages"
+  ],
+  "crawl": {
+    "sameHostOnly": true,
+    "allowedPathPrefixes": ["/it", "/content/dam/causesanti"],
+    "seedUrls": [
+      "https://www.causesanti.va/it.html",
+      "https://www.causesanti.va/it/celebrazioni.html",
+      "https://www.causesanti.va/it/celebrazioni/canonizzazioni.html",
+      "https://www.causesanti.va/it/celebrazioni/beatificazioni.html",
+      "https://www.causesanti.va/it/venerabili.html"
+    ],
+    "defaultDelayMs": 2000,
+    "defaultMaxUrls": 5000,
+    "requestTimeoutMs": 60000,
+    "maxAttempts": 4,
+    "userAgent": "SantosDiaOSINT/1.0 (+https://www.santosdodia.com/about)",
+    "robotsFailClosed": true,
+    "archiveRawBytes": true,
+    "archiveReceipts": true,
+    "hashAlgorithm": "sha256"
+  },
+  "usePolicy": {
+    "canonicalStatusAndCauseIdentity": "primary",
+    "officialProclamationDates": "primary",
+    "hagiographicIdentityEvidence": "primary",
+    "portugalLiturgicalDisplayName": "supporting-primary-after-local-liturgical-authority",
+    "crossLanguageTranslation": "forbidden",
+    "nameOnlyIdentityMerge": "forbidden",
+    "automaticPublication": false,
+    "automaticIndexation": false,
+    "adsenseReviewState": "PREPARING"
+  }
+}
