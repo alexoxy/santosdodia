@@ -59,7 +59,7 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
     <CalendarProductNav />
     <section className="page-hero compact-hero">
       <div>
-        <span className="eyebrow">Perennial rules · API · AI-ready</span>
+        <span className="eyebrow">{copy.eyebrow}</span>
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
       </div>
@@ -71,14 +71,14 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
         <label>{copy.year}<input name="year" type="number" min="1584" max="4099" defaultValue={year} /></label>
         <label>{copy.date}<input name="date" type="date" defaultValue={date} /></label>
         <label>{copy.jurisdiction}<select name="jurisdiction" defaultValue={jurisdiction}><option value="PT">{copy.portugal}</option><option value="GLOBAL">{copy.general}</option></select></label>
-        <label>Language<select name="locale" defaultValue={locale}><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option><option value="it">Italiano</option></select></label>
+        <label>{copy.language}<select name="locale" defaultValue={locale}><option value="pt">Português</option><option value="en">English</option><option value="es">Español</option><option value="it">Italiano</option></select></label>
         <button className="btn btn-primary" type="submit">{copy.calculate}</button>
       </form>
     </section>
 
     <section className="institutional-grid">
       <article className="institutional-card"><span className="eyebrow">{copy.year}</span><h2>{liturgicalYear.liturgicalYear}</h2><p>{formatDate(liturgicalYear.startDate, locale)} — {formatDate(liturgicalYear.endDate, locale)}</p></article>
-      <article className="institutional-card"><span className="eyebrow">{copy.sundayCycle}</span><h2>{liturgicalYear.sundayCycle}</h2><p>{locale === 'pt' ? 'Muda no I Domingo do Advento.' : locale === 'es' ? 'Cambia en el I Domingo de Adviento.' : locale === 'it' ? 'Cambia nella I Domenica di Avvento.' : 'Changes on the First Sunday of Advent.'}</p></article>
+      <article className="institutional-card"><span className="eyebrow">{copy.sundayCycle}</span><h2>{liturgicalYear.sundayCycle}</h2><p>{copy.cycleChangeNote}</p></article>
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.weekdayCycle}</span><h2>{context.weekdayCycle}</h2><p>{context.date}</p></article> : null}
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.season}</span><h2>{localizeRomanSeason(locale, context.season)}</h2><p>{context.seasonWeek === null ? '—' : `${copy.week} ${context.seasonWeek}`}</p></article> : null}
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.principalDay}</span><h2>{context.principalDay ? localizeRomanPrincipalDay(locale, context.principalDay) : '—'}</h2><p>{context.principalDay ? formatDate(context.date, locale) : copy.noPrincipalDay}</p></article> : null}
