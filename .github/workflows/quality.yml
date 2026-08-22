@@ -118,6 +118,9 @@ jobs:
       - name: Test automation registry safeguards
         run: npm run automation:test
 
+      - name: Test canonical Person Vault release
+        run: npm run vault:test
+
       - name: Test bounded Dropbox archive hygiene
         run: npm run dropbox:archive-test
 
