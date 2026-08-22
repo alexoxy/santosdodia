@@ -63,6 +63,31 @@ if (/\bliveData\b|Live source data|fuentes en vivo|fontes em tempo real|sources 
   failures.push("public interface copy still claims request-time live source data");
 }
 
+// Canonical route ownership must match the canonical URL. Historical localized
+// aliases may remain, but they should be cheap redirects rather than a second
+// implementation that can drift or create duplicate-content ambiguity.
+const [calendarPage, legacyCalendarPage] = await Promise.all([
+  readFile(path.join(root, "app/calendar/page.tsx"), "utf8"),
+  readFile(path.join(root, "app/calendario/page.tsx"), "utf8"),
+]);
+for (const required of ["CalendarExplorer", "CalendarProductNav", "TraditionFeeds", 'canonical: "/calendar"']) {
+  if (!calendarPage.includes(required)) {
+    failures.push(`canonical /calendar route lost required implementation contract: ${required}`);
+  }
+}
+if (calendarPage.includes('../calendario/page')) {
+  failures.push("canonical /calendar route must not delegate implementation ownership to /calendario");
+}
+if (!legacyCalendarPage.includes("permanentRedirect") || !legacyCalendarPage.includes('"/calendar"')) {
+  failures.push("legacy /calendario route must remain a permanent compatibility redirect to /calendar");
+}
+if (/CalendarExplorer|CalendarProductNav|TraditionFeeds|generateMetadata/.test(legacyCalendarPage)) {
+  failures.push("legacy /calendario route must not retain a duplicate calendar implementation or metadata surface");
+}
+if (!legacyCalendarPage.includes("URLSearchParams") || !legacyCalendarPage.includes("Object.entries")) {
+  failures.push("legacy /calendario redirect must preserve incoming query parameters");
+}
+
 // A calendar Observance is not automatically a standalone Person page. Both
 // date surfaces must delegate public /saint URL eligibility to one reviewed
 // biography gate, otherwise structured data can manufacture thin/false people.
@@ -113,5 +138,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit Person/editorial promotion gates.`,
+  `Publication boundary passed: ${appFiles.length} public modules use approved canonical routes/read models, script-safe JSON-LD and explicit Person/editorial promotion gates.`,
 );
