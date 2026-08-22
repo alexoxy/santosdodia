@@ -70,20 +70,21 @@ function validatePrimaryEvidence(primaryEvidence, release) {
 function verifiedEvidenceForRow(row, evidenceIndex) {
   const candidates = evidenceIndex.get(evidenceKey(row.qid, row.dateISO)) ?? [];
   const sourceHashes = new Set((row.sourceRecords ?? []).map((record) => record.sourceRecordHash).filter(Boolean));
-  return candidates.map((record) => {
+  return candidates.flatMap((record) => {
     if (record.sourceId === 'vatican-news-saint-of-day-pt') {
-      if (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash)) {
-        throw new Error(`Primary Vatican evidence ${record.evidenceId} does not match the live same-day source records.`);
-      }
+      // The latest Vatican acquisition may be intentionally scoped to one
+      // month. Evidence for dates outside that package is not invalid; it is
+      // simply unverifiable in this run and must remain in open research.
+      if (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash)) return [];
     }
-    return {
+    return [{
       ...record,
       claimClass: 'feast-or-observance-link',
       evidenceStatus: 'source-verified-proposal',
       bindingDecisionStatus: 'pending-editorial-review',
       automaticBindingAllowed: false,
       automaticPublicationAllowed: false,
-    };
+    }];
   });
 }
 
