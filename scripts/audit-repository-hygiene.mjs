@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { statSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 
 const MIB = 1024 * 1024;
 const limits = {
@@ -42,6 +42,14 @@ for (const file of files) {
 
   if (file.startsWith('data/generated/') && forbiddenGeneratedExtensions.test(file)) {
     failures.push(`raw or database artifact must be staged in Dropbox, not Git: ${file}`);
+  }
+
+  if (file.startsWith('config/') && file.endsWith('.json')) {
+    try {
+      JSON.parse(readFileSync(file, 'utf8'));
+    } catch (error) {
+      failures.push(`invalid tracked configuration JSON: ${file} (${error instanceof Error ? error.message : String(error)})`);
+    }
   }
 
   if (size > limits.singleFileBytes) {
