@@ -9,6 +9,7 @@ const assert = (condition, message) => { if (!condition) throw new Error(message
 
 const api = read('app/api/v1/liturgical-calendar/route.ts');
 const page = read('app/tools/liturgical-calendar/page.tsx');
+const localization = read('lib/knowledge/liturgical-calendar-localization.ts');
 const openapi = read('app/openapi.json/route.ts');
 const llms = read('app/llms.txt/route.ts');
 const sourceRegistry = JSON.parse(read('data/liturgical-rule-sources.json'));
@@ -35,4 +36,15 @@ for (const locale of ['pt', 'en', 'es', 'it']) {
   assert(page.includes(`<option value="${locale}">`), `Public calculator is missing locale ${locale}.`);
 }
 
-console.log('Liturgical calculator surface passed: human page + deterministic API + OpenAPI + llms.txt + review-by-exception source policy.');
+assert(page.includes('{copy.eyebrow}') && page.includes('{copy.language}') && page.includes('{copy.cycleChangeNote}'), 'Calculator presentation labels must come from the locale bundle.');
+assert(!page.includes('>Language<select'), 'Calculator must not hardcode an English Language label.');
+assert(!page.includes('>Perennial rules · API · AI-ready<'), 'Calculator must not hardcode its English eyebrow outside localization.');
+for (const required of [
+  "eyebrow: 'Regras perenes · API · preparada para IA'",
+  "language: 'Idioma'",
+  "eyebrow: 'Reglas perennes · API · preparada para IA'",
+  "eyebrow: 'Regole perenni · API · pronta per l’IA'",
+  "language: 'Lingua'"
+]) assert(localization.includes(required), `Calculator localization contract missing: ${required}.`);
+
+console.log('Liturgical calculator surface passed: human page + deterministic API + OpenAPI + llms.txt + locale isolation + review-by-exception source policy.');
