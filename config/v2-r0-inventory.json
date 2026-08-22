@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "status": "r0-audit-baseline",
+  "effectiveDate": "2026-08-22",
+  "normativeContract": "config/product-platform-contract.json",
+  "deletionPolicy": {
+    "defaultDeletionAllowed": false,
+    "requiresEquivalenceEvidence": true,
+    "requiresGreenQuality": true,
+    "requiresProductionSmokeWhenPublicRuntimeAffected": true
+  },
+  "routes": [
+    {
+      "path": "/",
+      "classification": "KEEP",
+      "role": "Today primary product surface",
+      "nextAction": "Refactor composition under R2 without changing canonical URL"
+    },
+    {
+      "path": "/calendar",
+      "classification": "REFACTOR",
+      "role": "Canonical visual calendar route",
+      "finding": "Canonical route currently re-exports implementation from /calendario",
+      "nextAction": "Move implementation to canonical route, then preserve legacy alias as a minimal permanent redirect only after equivalence tests"
+    },
+    {
+      "path": "/calendario",
+      "classification": "RETAIN_AS_COMPATIBILITY_ALIAS_AFTER_REFACTOR",
+      "role": "Legacy Portuguese calendar route",
+      "finding": "Currently owns the implementation while declaring /calendar as canonical",
+      "nextAction": "After /calendar owns implementation, convert to permanent redirect; do not delete historic inbound URL"
+    },
+    {
+      "path": "/day/[date]",
+      "classification": "REFACTOR",
+      "role": "Civil-date daily observance surface",
+      "finding": "ItemList structured data currently emits /saint/{id} for every observance even when no substantive indexable person profile exists",
+      "nextAction": "Align structured-data URL eligibility with /date/[monthDay] and future Person/Observance distinction before entity migration"
+    },
+    {
+      "path": "/date/[monthDay]",
+      "classification": "KEEP",
+      "role": "Evergreen annual-date SEO/editorial surface",
+      "finding": "Already gates /saint links on substantive indexable biography and keeps empty dates noindex",
+      "nextAction": "Use as semantic publication pattern during Knowledge Graph migration"
+    },
+    {
+      "path": "/dia/[date]",
+      "classification": "KEEP_COMPATIBILITY_REDIRECT",
+      "role": "Legacy localized day URL",
+      "finding": "Minimal permanentRedirect to /day/[date]",
+      "nextAction": "Keep unless crawl/index evidence proves removal safer than permanent compatibility"
+    },
+    {
+      "path": "/churches",
+      "classification": "KEEP",
+      "role": "Christian Church/tradition directory",
+      "nextAction": "Reconnect progressively to canonical ChurchOrTradition model and locale readiness gates"
+    },
+    {
+      "path": "/church/[slug]",
+      "classification": "KEEP_REFACTOR_DATA_SOURCE",
+      "role": "Church profile and jurisdiction exploration",
+      "nextAction": "Keep URL/product role; migrate data source to canonical Church/Jurisdiction graph without cross-Church authority leakage"
+    },
+    {
+      "path": "/saint/[id]",
+      "classification": "KEEP_URL_REFACTOR_ENTITY_MODEL",
+      "role": "Existing substantive person profile route",
+      "nextAction": "Preserve published URLs while separating Person, Recognition and Observance internally"
+    },
+    {
+      "path": "/calendar/subscribe",
+      "classification": "KEEP_ELEVATE",
+      "role": "Persistent ICS/webcal retention surface",
+      "nextAction": "Elevate into Today, Calendar and canonical entity CTAs under R3"
+    },
+    {
+      "path": "/calendar/api",
+      "classification": "KEEP",
+      "role": "Developer/machine-readable calendar contract",
+      "nextAction": "Keep semantically aligned with HTML and ICS"
+    },
+    {
+      "path": "/live",
+      "classification": "KEEP_ELEVATE",
+      "role": "Official/verified live Christian worship aggregation",
+      "nextAction": "Promote Vatican and future Church-isolated official live items into Today/Pray under R3"
+    },
+    {
+      "path": "/pray",
+      "classification": "KEEP_REFACTOR_PRODUCT_DEPTH",
+      "role": "Contextual prayer surface",
+      "nextAction": "Evolve from shell to tradition-aware prayer/readings/rights-gated daily experience"
+    },
+    {
+      "path": "/saved",
+      "classification": "KEEP",
+      "role": "Local-first retention library",
+      "nextAction": "Continue storing stable canonical identity rather than localized labels"
+    }
+  ],
+  "dataModels": [
+    {
+      "path": "data/canonical-person-profiles.ts",
+      "classification": "REFACTOR",
+      "finding": "Canonical person identity is already separated from display occurrence but is still structurally anchored to one primaryObservanceId",
+      "target": "Person plus explicit Person<->Recognition<->Observance relationships; primary occurrence becomes a presentation relation, not identity"
+    },
+    {
+      "path": "data/observances.ts",
+      "classification": "REFACTOR",
+      "finding": "One module combines tradition types, source catalogue, observance definitions, editorial summaries and seed data",
+      "target": "Separate typed Observance/Occurrence contracts from source policy, editorial content and canonical release data"
+    },
+    {
+      "path": "lib/public-observances*",
+      "classification": "KEEP_PROTECT",
+      "finding": "Shared publication-safe read model underpins multiple public surfaces",
+      "target": "Preserve one canonical read model while internal entities migrate"
+    },
+    {
+      "path": "lib/language-quality.ts + lib/linguistic/*",
+      "classification": "KEEP_EXTEND",
+      "finding": "Existing locale completeness, leakage and date/label normalization rules are valuable product contracts",
+      "target": "Extend per locale/script; never replace with generic translation-only pipeline"
+    }
+  ],
+  "automationGroups": [
+    {
+      "group": "production-safety",
+      "classification": "KEEP_PROTECT",
+      "members": [
+        "quality-gate",
+        "production-health",
+        "cloudflare-portability",
+        "d1-staging-control"
+      ],
+      "reason": "Protects production, Cloudflare Free and publication boundaries"
+    },
+    {
+      "group": "portugal-calendar-authority",
+      "classification": "KEEP_PROTECT",
+      "members": [
+        "portugal-snl-calendar-staging",
+        "portugal-product-v2-staging",
+        "vatican-daily-saints",
+        "vatican-corroboration-evidence"
+      ],
+      "reason": "Current proven Portugal authority/reconciliation path; must remain stable through R0/R1"
+    },
+    {
+      "group": "primary-source-vault",
+      "classification": "KEEP_EVOLVE_TO_DELTA",
+      "members": [
+        "causesanti-primary-source",
+        "source-freshness",
+        "global-source-orchestrator",
+        "ecclesiastical-osint"
+      ],
+      "reason": "Maps directly to SourceMonitor/EvidenceArchivist roles; broad refreshes should become due-source delta checks after bootstrap"
+    },
+    {
+      "group": "live",
+      "classification": "KEEP_ELEVATE",
+      "members": ["live-stream-curator"],
+      "reason": "Core R3 frequency channel"
+    },
+    {
+      "group": "wikidata-baseline-chain",
+      "classification": "CONSOLIDATION_CANDIDATE",
+      "members": [
+        "saints-baseline-v1-wikidata",
+        "saints-baseline-v1-normalizer",
+        "saints-baseline-v1-language-editor",
+        "saints-baseline-v1-identity-ledger",
+        "saints-baseline-v1-importer",
+        "saints-baseline-v1-status"
+      ],
+      "reason": "Performs acquisition/normalization/language/identity/import roles that overlap conceptually with the autonomous chain; no member may be retired before output and recovery equivalence is proven"
+    },
+    {
+      "group": "autonomous-wikidata-chain",
+      "classification": "CONSOLIDATION_CANDIDATE",
+      "members": [
+        "autonomous-scout-saints-wikidata",
+        "autonomous-normalizer-saints-wikidata",
+        "autonomous-language-editor-saints-wikidata",
+        "autonomous-publication-classifier-saints-wikidata",
+        "autonomous-corroborator-saints-wikidata",
+        "autonomous-importer-saints-wikidata"
+      ],
+      "reason": "Closer to target autonomous role model but cannot replace the baseline chain until completeness, identity, language, receipts and rollback semantics match"
+    },
+    {
+      "group": "wikidata-enrichment-navigation",
+      "classification": "CONSOLIDATION_CANDIDATE",
+      "members": [
+        "saints-profile-v1-wikidata",
+        "saints-labels-v2-wikidata",
+        "saints-navigation-exports-v1"
+      ],
+      "reason": "Useful outputs remain active; labels-v2 is fallback until labels-v3 is complete and navigation exports currently feed Portugal review/product data"
+    }
+  ],
+  "semanticAcceptanceVectorsRequiredBeforeDestructiveRefactor": [
+    {
+      "id": "global-vs-portugal-scope",
+      "surfaces": ["Today", "Calendar", "JSON", "ICS"],
+      "assertion": "Unscoped public read is General/Global only; explicit country=PT uses approved Portugal jurisdiction layer"
+    },
+    {
+      "id": "portugal-2026-reviewed-dates",
+      "surfaces": ["Today", "Calendar", "JSON", "ICS"],
+      "assertion": "Preserve reviewed Portugal semantics including Epiphany 4 Jan, Tuesday after Epiphany 6 Jan, Five Wounds 7 Feb, St Matthias 14 May, Ascension 17 May and Immaculate Heart 15 Jun"
+    },
+    {
+      "id": "person-vs-observance-url",
+      "surfaces": ["day-jsonld", "date-jsonld", "saint-profile"],
+      "assertion": "Only a substantive indexable Person profile receives a /saint URL; feast, collective, Marian-title or thin observance identities remain observance/date entities"
+    },
+    {
+      "id": "pt-pt-date-and-saint-display",
+      "surfaces": ["HTML", "metadata", "JSON", "ICS"],
+      "assertion": "Running dates use forms such as 22 de agosto de 2026; date particles remain lowercase; S. remains a source-aware compact form and is not mechanically expanded"
+    },
+    {
+      "id": "ics-rolling-vs-snapshot",
+      "surfaces": ["ICS"],
+      "assertion": "No year parameter is a persistent rolling subscription; explicit year is a fixed annual snapshot; both preserve canonical context and backlinks"
+    },
+    {
+      "id": "locale-no-silent-fallback",
+      "surfaces": ["Today", "Calendar", "profiles", "metadata"],
+      "assertion": "Launched locales do not silently leak English names, categories, scope labels or summaries"
+    },
+    {
+      "id": "live-authority-and-time",
+      "surfaces": ["Today", "Pray", "Live"],
+      "assertion": "Every promoted live item has verified official source, explicit Church/tradition, timezone-correct start and upcoming/live/ended status"
+    }
+  ],
+  "r0Decision": "No runtime path is approved for deletion by this baseline. The next PRs must first add/strengthen the listed semantic acceptance vectors, then invert canonical implementations or consolidate automation one bounded group at a time."
+}
