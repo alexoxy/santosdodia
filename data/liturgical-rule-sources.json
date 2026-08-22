@@ -30,6 +30,22 @@
       "url": "https://liturgia.pt/documentos/dias_lit.php"
     },
     {
+      "id": "snl-portugal-liturgical-year-transfer-rules",
+      "tier": "A1",
+      "jurisdiction": "PT",
+      "role": ["precedence", "solemnity-transfer", "portugal-roman-calendar"],
+      "url": "https://www.liturgia.pt/documentos/ano_lit.php",
+      "notes": "Portuguese SNL norms for coincidence and transfer: impeded solemnities move to the nearest day free from levels 1-8; solemnities impeded by Sundays of Advent, Lent or Easter move to the following Monday except Palm Sunday and Easter Sunday."
+    },
+    {
+      "id": "snl-portugal-annunciation-transfer",
+      "tier": "A1",
+      "jurisdiction": "PT",
+      "role": ["annunciation-transfer", "solemnity-transfer", "portugal-roman-calendar"],
+      "url": "https://liturgia.pt/santos/santo_v.php?cod_santo=50",
+      "notes": "SNL proper rule: when the Annunciation occurs during Holy Week it is transferred to the Monday after the Second Sunday of Easter."
+    },
+    {
       "id": "snl-portugal-vestment-colours",
       "tier": "A1",
       "jurisdiction": "PT",
