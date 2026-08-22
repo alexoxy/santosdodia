@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "status": "normative-candidate",
+  "productScope": "global-christian",
+  "principle": "Language, Christian tradition, jurisdiction and calendar system are independent dimensions. None may be inferred from another.",
+  "dimensions": {
+    "locale": "UI language and localised editorial presentation",
+    "tradition": "Roman Catholic, Greek Orthodox, Eastern Orthodox, Anglican and other supported Christian traditions",
+    "jurisdiction": "country, bishops conference, patriarchate, local church or other competent ecclesial authority",
+    "calendarSystem": "Gregorian, Julian, Revised Julian or other source-declared system"
+  },
+  "supportedLocalesInternal": ["en","es","pt","fr","fil","ru","sw","de","it","pl"],
+  "publicExposureRule": "A locale becomes public only when UI, calendar coverage, localised names, source provenance and product-critical copy pass readiness checks.",
+  "localePolicy": {
+    "noCanonicalNameFromMachineTranslation": true,
+    "noSaintPrefixCrossLocaleTransformation": true,
+    "uiTranslationAllowed": true,
+    "editorialTextRequiresLocaleQualityGate": true,
+    "fallbackLanguageMustBeExplicit": true,
+    "rightToLeftReadyBeforeRtlLocaleLaunch": true
+  },
+  "jurisdictionPolicy": {
+    "countryDoesNotDefineTradition": true,
+    "localeDoesNotDefineCountry": true,
+    "userMayOverrideDetectedRegion": true,
+    "userMayViewMultipleTraditions": true,
+    "officialLocalLiturgicalAuthorityWinsForLocalCalendar": true,
+    "globalInstitutionalSourceMayCorroborateButNotEraseLocalDifferences": true
+  },
+  "sourcePriorityExamples": [
+    {"scope":"Roman Catholic / Portugal","authority":"Secretariado Nacional de Liturgia","class":"A1"},
+    {"scope":"Roman Catholic / United States","authority":"USCCB","class":"A1"},
+    {"scope":"Roman Catholic / Italy","authority":"CEI","class":"A1"},
+    {"scope":"Roman Catholic / francophone jurisdictions","authority":"AELF","class":"A1"},
+    {"scope":"Roman Catholic / Brazil","authority":"CNBB","class":"A1"},
+    {"scope":"Greek Orthodox / Ecumenical Patriarchate tradition","authority":"GOARCH","class":"A1"},
+    {"scope":"Orthodox Church in America","authority":"OCA","class":"A1"},
+    {"scope":"Anglican / England","authority":"Church of England / Common Worship","class":"A1"},
+    {"scope":"Catholic canonisation status","authority":"Dicastery for the Causes of Saints","class":"A0"},
+    {"scope":"multilingual Vatican hagiography","authority":"Vatican News — Saints","class":"A1"}
+  ],
+  "productBehaviour": {
+    "today": "Resolve local date by user timezone, then filter/label by chosen tradition and jurisdiction.",
+    "calendar": "Never silently merge conflicting observances; expose differences by tradition/jurisdiction.",
+    "saintPage": "One historical identity can have multiple observances, names, ranks and devotional contexts across traditions and jurisdictions.",
+    "readings": "Use the lectionary of the selected jurisdiction; do not substitute another country's wording or numbering.",
+    "prayer": "Prayer metadata is localised and tradition-scoped; full text is shown only when rights allow.",
+    "saved": "Saved identity is language-neutral; display name is re-resolved in the current locale whenever possible.",
+    "chronology": "Historical identity timeline is shared; ecclesial events and observances retain tradition/jurisdiction context.",
+    "marianTitles": "Mary is one person identity; Marian titles are separate title/observance entities localised by tradition and geography."
+  },
+  "globalRollout": [
+    {"stage":1,"goal":"Portugal quality anchor","requirements":["pt-PT official calendar","high-confidence names","golden-set editorial pages","mobile retention shell"]},
+    {"stage":2,"goal":"English, Spanish and Italian parity","requirements":["jurisdiction-aware official sources","full retention UI copy","source-backed labels","no thin-page scale"]},
+    {"stage":3,"goal":"French and German expansion","requirements":["AELF/official francophone coverage","German liturgical authority coverage","locale quality tests"]},
+    {"stage":4,"goal":"Polish, Russian, Filipino and Swahili growth","requirements":["local ecclesial sources","morphology/name rules","complete UI copy","jurisdiction-aware calendars"]}
+  ],
+  "seo": {
+    "hreflangOnlyWhenEquivalentLocalePageExists": true,
+    "canonicalPerLocaleAndEntity": true,
+    "noIndexForIncompleteLocale": true,
+    "noMassGeneratedLocalePagesWithoutEditorialThreshold": true
+  }
+}
