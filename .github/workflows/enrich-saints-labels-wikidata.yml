@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      - 'config/saints-label-enrichment-v2.json'
+      - 'config/saints-label-enrichment-v3.json'
       - 'scripts/enrichment/plan-wikidata-label-run.mjs'
       - 'scripts/enrichment/fetch-wikidata-label-chunk.mjs'
       - 'scripts/enrichment/finalize-wikidata-label-run.mjs'
@@ -22,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: saints-labels-wikidata-v2
+  group: saints-labels-wikidata-v3
   cancel-in-progress: false
 
 jobs:
@@ -60,14 +60,14 @@ jobs:
           node scripts/archive/extract-safe-tar.mjs
           --archive staging/label-enrichment/identity/package.tar.gz
           --destination staging/label-enrichment/identity/extracted
-      - name: Pull previous label watermark if present
+      - name: Pull previous label v3 watermark if present
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
         run: >-
           node scripts/dropbox/pull-latest-stream.mjs
-          --stream enrichment-progress/saints/v1/wikidata/labels-v2
+          --stream enrichment-progress/saints/v1/wikidata/labels-v3
           --destination staging/label-enrichment/previous
           --allow-missing
       - name: Extract previous watermark if present
@@ -98,7 +98,7 @@ jobs:
           LEDGER: ${{ steps.inputs.outputs.ledger }}
           PREVIOUS: ${{ steps.inputs.outputs.previous }}
         run: |
-          args=(--identity-manifest "$MANIFEST" --identity-report "$REPORT" --identity-ledger "$LEDGER" --output staging/label-enrichment/plan.json)
+          args=(--config config/saints-label-enrichment-v3.json --identity-manifest "$MANIFEST" --identity-report "$REPORT" --identity-ledger "$LEDGER" --output staging/label-enrichment/plan.json)
           if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
           node scripts/enrichment/plan-wikidata-label-run.mjs "${args[@]}"
           node -e "const fs=require('node:fs');const p=JSON.parse(fs.readFileSync('staging/label-enrichment/plan.json','utf8'));fs.appendFileSync(process.env.GITHUB_OUTPUT,'should_run='+p.shouldRun+'\nraw_stream='+p.rawStream+'\nnormalized_stream='+p.normalizedStream+'\nprogress_stream='+p.progressStream+'\n');"
@@ -106,6 +106,7 @@ jobs:
         if: steps.plan.outputs.should_run == 'true'
         run: >-
           node scripts/enrichment/fetch-wikidata-label-chunk.mjs
+          --config config/saints-label-enrichment-v3.json
           --plan staging/label-enrichment/plan.json
           --raw-output staging/label-enrichment/output/labels-raw.json
           --normalized-output staging/label-enrichment/output/labels-normalized.json
@@ -137,7 +138,7 @@ jobs:
         env:
           PREVIOUS: ${{ steps.inputs.outputs.previous }}
         run: |
-          args=(--plan staging/label-enrichment/plan.json --raw staging/label-enrichment/output/labels-raw.json --normalized staging/label-enrichment/output/labels-normalized.json --output staging/label-enrichment/output/label-progress.json)
+          args=(--config config/saints-label-enrichment-v3.json --plan staging/label-enrichment/plan.json --raw staging/label-enrichment/output/labels-raw.json --normalized staging/label-enrichment/output/labels-normalized.json --output staging/label-enrichment/output/label-progress.json)
           if [ -n "$PREVIOUS" ]; then args+=(--previous-progress "$PREVIOUS"); fi
           node scripts/enrichment/finalize-wikidata-label-run.mjs "${args[@]}"
       - name: Archive verified label watermark
