@@ -29,9 +29,9 @@ export async function GET() {
     openapi: "3.1.0",
     info: {
       title: "Santos do Dia machine interface",
-      version: "3.8.0",
+      version: "3.9.0",
       description:
-        "Machine-readable saints, Christian Church calendars, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers. Liturgical calendar filters are shared by JSON and subscribable ICS interfaces.",
+        "Machine-readable saints, Christian Church calendars, a deterministic perennial liturgical calculator, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers. Liturgical calendar filters are shared by JSON and subscribable ICS interfaces.",
     },
     servers: [{ url: SITE_ORIGIN }],
     paths: {
@@ -216,6 +216,52 @@ export async function GET() {
           responses: {
             "200": {
               description: "Complete daily liturgy and source metadata",
+            },
+          },
+        },
+      },
+      "/api/v1/liturgical-calendar": {
+        get: {
+          summary: "Calculate Roman liturgical years and future movable dates from perennial rules",
+          description:
+            "Deterministic SantosDia calculation with no request-time external source. Returns the liturgical-year boundary, Sunday A/B/C cycle, weekday I/II cycle for date queries, season/week context and structural movable dates. Jurisdiction policy is applied separately from the core computus.",
+          parameters: [
+            {
+              name: "year",
+              in: "query",
+              description: "Liturgical year to calculate. If date is supplied without year, the liturgical year is derived from the date and First Sunday of Advent.",
+              schema: { type: "integer", minimum: 1584, maximum: 4099 },
+            },
+            {
+              name: "date",
+              in: "query",
+              description: "Optional civil date for season, week, liturgical-year and Lectionary-cycle context.",
+              schema: { type: "string", format: "date" },
+            },
+            {
+              name: "church",
+              in: "query",
+              schema: { type: "string", enum: ["roman-catholic"], default: "roman-catholic" },
+            },
+            {
+              name: "jurisdiction",
+              in: "query",
+              description: "Initial public jurisdiction policies: PT and GLOBAL.",
+              schema: { type: "string", enum: ["PT", "GLOBAL"], default: "PT" },
+            },
+            {
+              name: "locale",
+              in: "query",
+              description: "Localized labels are currently public in English, Portuguese, Spanish and Italian. Stable machine codes are language-neutral.",
+              schema: { type: "string", enum: ["en", "pt", "es", "it"], default: "en" },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Perennial Roman liturgical calculation and source-policy metadata",
+            },
+            "400": {
+              description: "Unsupported jurisdiction, Church, date or year",
             },
           },
         },

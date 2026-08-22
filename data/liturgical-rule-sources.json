@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "status": "rule-source-registry",
+  "runtimeDependency": false,
+  "changeMonitoring": {
+    "enabled": true,
+    "defaultCadence": "monthly",
+    "ruleChangesRequireReview": true,
+    "annualCalendarGenerationRequiresReview": false
+  },
+  "sources": [
+    {
+      "id": "holy-see-sacrosanctum-concilium",
+      "tier": "A0",
+      "role": ["normative-liturgical-year", "authority-boundary"],
+      "url": "https://www.vatican.va/content/dam/wss/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19631204_sacrosanctum-concilium_en.html",
+      "notes": "Normative basis: Sunday, Easter and the annual unfolding of the mystery of Christ; liturgical regulation belongs to competent Church authority."
+    },
+    {
+      "id": "holy-see-mysterii-paschalis",
+      "tier": "A0",
+      "role": ["normative-roman-calendar", "paschal-centrality"],
+      "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html"
+    },
+    {
+      "id": "snl-portugal-precedence-table",
+      "tier": "A1",
+      "jurisdiction": "PT",
+      "role": ["precedence", "portugal-roman-calendar"],
+      "url": "https://liturgia.pt/documentos/dias_lit.php"
+    },
+    {
+      "id": "snl-portugal-daily-liturgy",
+      "tier": "A1",
+      "jurisdiction": "PT",
+      "role": ["annual-validation", "transfers", "cycles", "readings-reference"],
+      "url": "https://www.liturgia.pt/liturgiadiaria/"
+    },
+    {
+      "id": "usccb-lectionary-cycles",
+      "tier": "A1",
+      "jurisdiction": "US",
+      "role": ["lectionary-cycle-explanation", "cross-check"],
+      "url": "https://www.usccb.org/faq/questions-about-lectionary",
+      "notes": "Sunday A/B/C and weekday I/II cycle explanation; not used to set Portugal jurisdiction policy."
+    },
+    {
+      "id": "dehonianos-liturgia",
+      "tier": "B1",
+      "jurisdiction": "PT",
+      "role": ["long-range-cross-check", "week-number-cross-check", "human-example"],
+      "url": "https://www.dehonianos.org/liturgia-embed/",
+      "notes": "Useful future-year and week/cycle validation surface. Never authoritative over SNL."
+    },
+    {
+      "id": "rjtx-computus",
+      "tier": "B1",
+      "role": ["computus-learning", "historical-algorithm-cross-check", "temporale-sanctorale-model"],
+      "url": "https://rjtx.hopto.org/computo/index.htm",
+      "relatedUrls": [
+        "https://rjtx.hopto.org/computo/ecintro.htm",
+        "https://rjtx.hopto.org/computo/juliano.htm",
+        "https://rjtx.hopto.org/computo/sant_medievos.html"
+      ],
+      "notes": "Computational/historical reference only. Current Roman normative rules come from competent Church authorities."
+    },
+    {
+      "id": "diocese-montenegro-liturgical-cycles",
+      "tier": "B1",
+      "jurisdiction": "BR",
+      "role": ["cycle-explanation", "human-learning"],
+      "url": "https://www.diocesemontenegro.org.br/noticias/o-ano-liturgico-e-seus-3-ciclos-como-saber-se-e-a-b-ou-c"
+    },
+    {
+      "id": "cancao-nova-liturgical-seasons",
+      "tier": "B2",
+      "jurisdiction": "BR",
+      "role": ["season-explanation", "human-learning"],
+      "url": "https://formacao.cancaonova.com/liturgia/tempo-liturgico/o-ano-liturgico-da-igreja-e-dividido-em-tempos-liturgicos/"
+    },
+    {
+      "id": "grupo-santo-anselmo-liturgical-calendar",
+      "tier": "B2",
+      "jurisdiction": "BR",
+      "role": ["calendar-explanation", "human-learning"],
+      "url": "https://gruposantoanselmo.com.br/calendario-liturgico/"
+    },
+    {
+      "id": "ghiorzi-perpetual-calendar",
+      "tier": "B2",
+      "role": ["civil-calendar-cross-check"],
+      "url": "http://ghiorzi.org/caleperp.htm",
+      "notes": "Independent perpetual civil-calendar reference; not a liturgical authority."
+    },
+    {
+      "id": "father-alexander-liturgical-year",
+      "tier": "B1",
+      "churchFamily": "eastern-orthodox",
+      "role": ["future-byzantine-kernel-learning"],
+      "url": "https://www.fatheralexander.org/booklets/portuguese/ano_liturgico_1a.htm",
+      "notes": "Kept outside the Roman kernel. Byzantine/Orthodox liturgical logic must be represented by a separate tradition kernel and validated against competent Orthodox authorities."
+    }
+  ]
+}
