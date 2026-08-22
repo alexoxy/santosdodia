@@ -134,8 +134,6 @@ export function localizeRomanVestmentColourResolution(locale: LiturgicalToolLoca
         ? copy.optionalChoice
         : resolution.finalOccurrenceResolutionRequired
           ? copy.pendingOccurrence
-          : resolution.festiveVestmentsMayReplaceDayColour
-            ? copy.festiveVestments
-            : null
+          : null
   };
 }
