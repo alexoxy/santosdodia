@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPortugalP0VaticanCorroborationCandidates } from './build-portugal-p0-vatican-corroboration-candidates.mjs';
+import { buildPortugalP0IndependentResearchQueue } from './build-portugal-p0-independent-research-queue.mjs';
 
 const RESOLVED_IDENTITY_STATUSES = new Set(['resolved-single-occurrence', 'resolved-duplicate-occurrences']);
 
@@ -176,8 +177,11 @@ function main() {
     vatican: vaticanFiles.length === 1 ? JSON.parse(fs.readFileSync(vaticanFiles[0], 'utf8')) : null,
     bindings: JSON.parse(fs.readFileSync(bindingsPath, 'utf8')),
   });
+  const researchQueue = buildPortugalP0IndependentResearchQueue({ p0Pack: result, corroboration });
   result.vaticanCorroboration = corroboration;
+  result.independentResearchQueue = researchQueue;
   result.summary.vaticanCorroboration = corroboration.summary;
+  result.summary.independentResearchQueue = researchQueue.summary;
 
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
   fs.mkdirSync(path.dirname(path.resolve(summaryPath)), { recursive: true });
