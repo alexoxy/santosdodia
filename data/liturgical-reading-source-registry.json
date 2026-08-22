@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "status": "normative-candidate",
+  "purpose": "Source policy for linking saints and observances to lectionary references, readings, liturgical context and Bible resources without conflating metadata rights with text-republication rights.",
+  "principles": {
+    "readingReferenceAndReadingTextAreSeparate": true,
+    "jurisdictionSpecificLectionariesMustRemainDistinct": true,
+    "properAndCommonReadingsMustRemainDistinct": true,
+    "fullTextPublicationRequiresExplicitRightsBasis": true,
+    "sourceAuthorityAndReuseRightsAreIndependent": true,
+    "saintIdentityNeverDependsOnLectionaryTextAlone": true
+  },
+  "productModel": {
+    "links": [
+      "person -> observance",
+      "observance -> liturgical-rank",
+      "observance -> proper-or-common-readings",
+      "reading-reference -> bible-passage",
+      "reading-reference -> licensed-or-linked-text",
+      "observance -> jurisdiction",
+      "observance -> liturgical-cycle"
+    ],
+    "saintPageModules": [
+      "why-this-reading",
+      "proper-readings",
+      "common-of-saints",
+      "gospel-associated-with-saint",
+      "read-in-bible",
+      "other-jurisdictions",
+      "lectio-divina-prompt"
+    ],
+    "todayModules": [
+      "saint-or-observance",
+      "mass-readings-references",
+      "gospel-reference",
+      "liturgical-colour",
+      "rank",
+      "proper-vs-ferial-reading-note",
+      "read-full-text-at-authoritative-source"
+    ]
+  },
+  "sources": [
+    {
+      "id": "pt-snl-liturgia-diaria",
+      "name": "Secretariado Nacional de Liturgia — Liturgia diária",
+      "baseUrl": "https://www.liturgia.pt/liturgiadiaria/",
+      "jurisdictions": ["Portugal"],
+      "locales": ["pt-PT"],
+      "class": "A1",
+      "authority": "official-national-liturgical",
+      "coverage": ["calendar", "particular-calendars", "rank", "colour", "mass-readings", "reading-text", "liturgical-prayers", "commentary"],
+      "defaultUse": "metadata-and-links",
+      "textRights": "copyright-protected; do not republish full text without explicit permission",
+      "priority": "primary for Portugal"
+    },
+    {
+      "id": "usccb-bible-daily-readings",
+      "name": "USCCB — Daily Bible Readings",
+      "baseUrl": "https://bible.usccb.org/",
+      "jurisdictions": ["United States"],
+      "locales": ["en-US", "es-US"],
+      "class": "A1",
+      "authority": "official-bishops-conference",
+      "coverage": ["calendar", "daily-readings", "full-text", "lectionary-number", "audio-video-links", "english-spanish"],
+      "defaultUse": "metadata-and-links",
+      "rss": "official daily-readings RSS available; display conditions must be respected",
+      "textRights": "CCD copyrighted; app/full-text reuse requires permissions analysis",
+      "priority": "primary for United States"
+    },
+    {
+      "id": "aelf",
+      "name": "Association Épiscopale Liturgique pour les pays Francophones",
+      "baseUrl": "https://www.aelf.org/",
+      "jurisdictions": ["France", "Belgium", "Canada", "Luxembourg", "Switzerland", "Monaco", "North Africa"],
+      "locales": ["fr"],
+      "class": "A1",
+      "authority": "official-francophone-liturgical",
+      "coverage": ["regional-calendars", "mass-readings", "full-text", "liturgy-of-hours", "rss", "api"],
+      "defaultUse": "metadata-and-links-until-reuse-permission-confirmed",
+      "textRights": "AELF terms restrict redistribution; API/RSS availability does not remove need to validate reuse terms",
+      "priority": "primary for supported francophone jurisdictions"
+    },
+    {
+      "id": "cei-liturgia-del-giorno",
+      "name": "Conferenza Episcopale Italiana — Liturgia del giorno",
+      "baseUrl": "https://www.chiesacattolica.it/liturgia-del-giorno/",
+      "jurisdictions": ["Italy"],
+      "locales": ["it-IT"],
+      "class": "A1",
+      "authority": "official-bishops-conference",
+      "coverage": ["mass", "liturgy-of-hours", "saint-of-day", "calendar", "colour", "readings", "liturgical-prayers"],
+      "defaultUse": "metadata-and-links-until-reuse-rights-confirmed",
+      "priority": "primary for Italy"
+    },
+    {
+      "id": "cnbb-liturgia-diaria",
+      "name": "CNBB / Edições CNBB — Igreja em Oração / Liturgia Diária",
+      "baseUrl": "https://www.cnbb.org.br/liturgia-diaria/",
+      "jurisdictions": ["Brazil"],
+      "locales": ["pt-BR"],
+      "class": "A1",
+      "authority": "official-bishops-conference",
+      "coverage": ["daily-liturgy", "readings", "colour", "antiphons", "calendar"],
+      "defaultUse": "metadata-and-links-until-reuse-rights-confirmed",
+      "priority": "primary for Brazil; never canonical pt-PT wording"
+    },
+    {
+      "id": "schott-beuron",
+      "name": "SCHOTT Tagesliturgie — Erzabtei Beuron",
+      "baseUrl": "https://schott.erzabtei-beuron.de/",
+      "jurisdictions": ["German-speaking Roman Catholic usage"],
+      "locales": ["de"],
+      "class": "A2",
+      "authority": "institutional-liturgical-reference",
+      "coverage": ["daily-liturgy", "calendar", "proper-of-saints", "lectionary-cycle", "mass-texts"],
+      "defaultUse": "metadata-and-links-until-reuse-rights-confirmed",
+      "notes": "Uses authentic German liturgical texts; source is institutional rather than a bishops-conference portal."
+    },
+    {
+      "id": "cbcew-lectionary",
+      "name": "Catholic Bishops' Conference of England and Wales — Lectionary resources",
+      "baseUrl": "https://www.cbcew.org.uk/",
+      "jurisdictions": ["England", "Wales"],
+      "locales": ["en-GB"],
+      "class": "A1",
+      "authority": "official-bishops-conference",
+      "coverage": ["lectionary-norms", "saints-readings", "new-lectionary-resources"],
+      "defaultUse": "normative-metadata-and-links",
+      "notes": "Useful for rules distinguishing Proper and Common readings even when a daily public API is unavailable."
+    },
+    {
+      "id": "catholic-resources-felix-just",
+      "name": "Catholic Resources / Catholic Lectionary Website — Felix Just, S.J., Ph.D.",
+      "baseUrl": "https://catholic-resources.org/Lectionary/",
+      "jurisdictions": ["comparative", "United States", "Canada", "Roman Catholic"],
+      "locales": ["en"],
+      "class": "B1",
+      "authority": "scholarly-specialist-reference",
+      "coverage": ["proper-of-saints", "common-of-saints", "lectionary-number", "reading-references", "cross-edition-comparison", "calendar-explanation", "liturgical-cycle-analysis"],
+      "allowedUses": ["structure-learning", "candidate-reading-link-generation", "lectionary-number-cross-check", "proper-vs-common-classification", "comparative-analysis"],
+      "forbiddenUses": ["sole-jurisdiction-authority", "verbatim-republication-of-copyrighted-lectionary-text", "canonical-status-authority"],
+      "notes": "High-value scholarly index. Particularly useful for understanding Proper vs Common readings and mapping saint classes to possible readings."
+    }
+  ],
+  "publicationGuards": {
+    "noRightsBasisForFullText": "show reference and authoritative outbound link only",
+    "jurisdictionMismatch": "do not substitute one country's lectionary for another",
+    "properReadingConflict": "prefer target-jurisdiction A1 source",
+    "commonReadingChoice": "present as selectable/recommended rather than fixed unless official source fixes it",
+    "secondaryOnlyReadingAssociation": "candidate-for-corroboration"
+  }
+}
