@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getRetentionCopy } from '../../lib/product-retention-i18n';
 import { SAVED_SAINTS_EVENT, SAVED_SAINTS_STORAGE_KEY, type SavedSaint } from './SaveSaintButton';
 import { useLanguage } from './LanguageProvider';
 
@@ -18,11 +19,7 @@ function readSaved(): SavedSaint[] {
 export default function SavedSaintsList() {
   const { locale } = useLanguage();
   const [items, setItems] = useState<SavedSaint[]>([]);
-  const copy = useMemo(() => locale === 'pt'
-    ? { title: 'Os seus santos guardados', empty: 'Ainda não guardou nenhum santo.', hint: 'Abra um perfil e toque em “Guardar santo”. Os guardados ficam neste dispositivo, sem necessidade de criar conta.', remove: 'Remover', explore: 'Descobrir santos' }
-    : locale === 'es'
-      ? { title: 'Tus santos guardados', empty: 'Todavía no has guardado ningún santo.', hint: 'Abre un perfil y toca “Guardar santo”. Se guardan en este dispositivo sin crear una cuenta.', remove: 'Quitar', explore: 'Descubrir santos' }
-      : { title: 'Your saved saints', empty: 'You have not saved any saints yet.', hint: 'Open a profile and tap “Save saint”. Saves stay on this device without requiring an account.', remove: 'Remove', explore: 'Discover saints' }, [locale]);
+  const copy = getRetentionCopy(locale);
 
   useEffect(() => {
     const sync = () => setItems(readSaved());
@@ -43,7 +40,7 @@ export default function SavedSaintsList() {
   }
 
   return <section className="saved-saints-panel">
-    <div className="section-heading compact"><div><span className="eyebrow">SantosDia</span><h1>{copy.title}</h1></div></div>
+    <div className="section-heading compact"><div><span className="eyebrow">SantosDia</span><h1>{copy.savedTitle}</h1></div></div>
     {items.length ? <div className="saved-saints-list">
       {items.map(item => <article className="saved-saint-card" key={item.id}>
         <div>
@@ -52,6 +49,6 @@ export default function SavedSaintsList() {
         </div>
         <button type="button" className="text-link saved-remove" onClick={() => remove(item.id)}>{copy.remove}</button>
       </article>)}
-    </div> : <div className="empty-state saved-empty"><span>☆</span><p>{copy.empty}</p><small>{copy.hint}</small><Link className="btn btn-primary" href="/explore">{copy.explore}</Link></div>}
+    </div> : <div className="empty-state saved-empty"><span>☆</span><p>{copy.savedEmpty}</p><small>{copy.savedEmptyHint}</small><Link className="btn btn-primary" href="/explore">{copy.discoverSaints}</Link></div>}
   </section>;
 }
