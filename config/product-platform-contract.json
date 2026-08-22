@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "status": "normative",
+  "effectiveDate": "2026-08-22",
+  "northStar": "Open SantosDia and know how to live today as a Christian in the user's own tradition, place and language.",
+  "productContextDimensions": [
+    "locale",
+    "locationOrJurisdiction",
+    "christianTraditionOrChurch",
+    "calendarSystem",
+    "timezone"
+  ],
+  "inferenceGuards": {
+    "inferChurchFromCountry": false,
+    "inferCountryFromLanguage": false,
+    "mergeCalendarSystemsSilently": false,
+    "useOneChurchAsNormativeAuthorityForAnother": false
+  },
+  "launchPolicy": {
+    "qualityAnchor": "Portugal",
+    "initialReferenceExperience": "roman-catholic/Portugal/pt-PT",
+    "architectureScope": "global-Christian",
+    "mobileFirst": true,
+    "desktopPurpose": "exploration-study-comparison-configuration",
+    "publicLocaleRequiresReadinessGate": true,
+    "silentEnglishFallbackAllowed": false
+  },
+  "operationalConstraints": {
+    "adsenseState": "PREPARING",
+    "adServingWhilePreparing": false,
+    "thinPageMassPublication": false,
+    "cloudflareTarget": "free-tier",
+    "requestTimeExternalAcquisition": false,
+    "heavyProcessingRuntime": false,
+    "githubActionsIsBuildFactory": true,
+    "dropboxIsEvidenceAndRecoveryMemory": true,
+    "d1IsServingKnowledgeNotRawArchive": true,
+    "lastKnownGoodOnSourceFailure": true,
+    "routineHumanOperationRequired": false,
+    "humanReviewByException": true
+  },
+  "retentionAndDistribution": {
+    "ics": {
+      "role": "core-retention-channel",
+      "persistentSubscriptionPreferred": true,
+      "annualSnapshotSupported": true,
+      "canonicalBacklinkRequired": true,
+      "mustNotDependOnAds": true
+    },
+    "live": {
+      "role": "core-frequency-channel",
+      "officialOrVerifiedSourcesOnly": true,
+      "traditionAndSourceMustBeExplicit": true,
+      "prominentOnToday": true,
+      "prominentOnPray": true,
+      "dedicatedSurface": true
+    }
+  },
+  "knowledgeModel": {
+    "primaryEntities": [
+      "Person",
+      "Recognition",
+      "Observance",
+      "Occurrence",
+      "ChurchOrTradition",
+      "Jurisdiction",
+      "CalendarSystem",
+      "Place",
+      "ScriptureReference",
+      "PrayerOrDevotion",
+      "InstitutionOrOffice",
+      "Source",
+      "ClaimOrEvidence",
+      "LocalizedName",
+      "LocalizedEditorialContent"
+    ],
+    "identitySeparatedFromObservance": true,
+    "personSeparatedFromRecognition": true,
+    "observanceSeparatedFromOccurrence": true,
+    "languageNeutralIdentity": true,
+    "claimsRequireProvenance": true
+  },
+  "evidenceVault": {
+    "layers": [
+      "raw",
+      "normalized",
+      "canonical",
+      "releases",
+      "changes",
+      "conflicts",
+      "rights",
+      "rollback"
+    ],
+    "immutableRawWhenPermitted": true,
+    "hashRawEvidence": true,
+    "retainSourceUrlAndObservedAt": true,
+    "runtimeMustRemainUsableIfSourceDisappears": true,
+    "copyrightedTextWithoutReuseRights": "metadata-reference-hash-only"
+  },
+  "changeModel": {
+    "stablePersonIdentity": "build-once-monitor-exceptions",
+    "stableHistoricalFacts": "retain-versioned-canonical-record",
+    "mutableClasses": [
+      "new-recognition",
+      "canonization-or-beatification",
+      "calendar-membership",
+      "date-or-transfer",
+      "rank-or-precedence",
+      "jurisdiction",
+      "official-display-name",
+      "source-correction",
+      "live-event",
+      "rights-status"
+    ],
+    "defaultMaintenance": "delta-detection"
+  },
+  "dateContract": {
+    "civilDate": "never-conflate-with-liturgical-occurrence",
+    "timezoneRequiredForToday": true,
+    "calendarSystemRequired": true,
+    "jurisdictionRequiredWhenApplicable": true,
+    "traditionRequired": true,
+    "transferAndPrecedenceAreAuthorityDriven": true,
+    "vigilsMustNotBecomeSameDayOccurrencesAutomatically": true,
+    "exactOfficialAnnualDatesOverrideGenericCalculation": true,
+    "crossCalendarConversionRequiresExplicitPolicy": true,
+    "samePersonMayHaveDifferentOccurrencesByTradition": true
+  },
+  "languageContract": {
+    "canonicalIdentityIsNotTranslated": true,
+    "displayNamesAreLocalizedEvidence": true,
+    "machineTranslationCannotCreateCanonicalName": true,
+    "machineTranslationCannotCreateCanonicalPrayer": true,
+    "sourceLanguageCannotLeakIntoPublicLocaleSilently": true,
+    "unicodeNormalization": "NFC",
+    "ptPT": {
+      "referenceVariant": "pt-PT",
+      "runningDateExample": "22 de agosto de 2026",
+      "monthYearHeadingExample": "Agosto de 2026",
+      "runningDateMonthNamesLowercase": true,
+      "headingInitialMonthMayBeCapitalized": true,
+      "dateParticlesLowercaseAlways": true,
+      "compactSaintPrefix": "S.",
+      "compactSaintPrefixMeaning": "São/Santo/Santa",
+      "officialPortugueseDesignationMayUseCompactPrefix": true,
+      "autoExpandCompactPrefix": false,
+      "saintPrefixExpansion": "source-driven",
+      "qualifierPosition": "after-name",
+      "qualifierExamples": [
+        "S. Gregório I, papa e doutor da Igreja",
+        "S. Mateus, apóstolo e evangelista"
+      ],
+      "romanNumeralRule": "use-only-when-attested-by-official-designation-or-established-tradition",
+      "doNotInventFirstNumeral": true,
+      "traditionalNameMayOverrideNumberedForm": true
+    }
+  },
+  "authorityContract": {
+    "canonicalStatus": "highest-competent-ecclesial-authority",
+    "liturgicalOccurrence": "competent-church-and-jurisdiction-authority",
+    "portugalRomanCatholicDisplay": "Portuguese-liturgical-authority-first",
+    "holySeeRole": "primary-for-Catholic-universal-status-and-competent-universal-claims",
+    "dicasteryCausesSaintsRole": "A0-primary-for-Catholic-recognition-status-cause-identity-and-related-official-evidence",
+    "secondarySourcesCannotOverridePrimary": true,
+    "wikidataRole": "identity-alias-discovery-and-structured-corroboration-not-liturgical-authority",
+    "wikipediaRole": "discovery-context-not-sole-authority"
+  },
+  "publicationContract": {
+    "entityExistenceDoesNotImplyIndexablePage": true,
+    "indexingRequiresSubstantiveValue": true,
+    "seoMustFollowCanonicalKnowledgeRelationships": true,
+    "htmlJsonLdApiIcsMustAgreeSemantically": true,
+    "machineReadableSurfaces": [
+      "HTML",
+      "JSON-LD",
+      "JSON API",
+      "ICS"
+    ],
+    "markdownForAgents": "optional-when-useful",
+    "provenanceVisibleOnSubstantiveContent": true
+  },
+  "autonomyContract": {
+    "roles": [
+      "SourceMonitor",
+      "EvidenceArchivist",
+      "NormalizerResolver",
+      "CalendarEngine",
+      "LanguageEditor",
+      "ContentSeoPublisher",
+      "LiveCurator",
+      "QualityHygieneSentinel"
+    ],
+    "deterministicAutomationPreferredOverAiAgentWhenSufficient": true,
+    "newCanonicalIdentityRequiresHumanApproval": true,
+    "entityMergeOrSplitRequiresHumanApproval": true,
+    "recognitionStatusChangeRequiresHumanApproval": true,
+    "calendarDateRankPrecedenceChangeRequiresHumanApproval": true,
+    "marianTitleResolutionRequiresHumanApproval": true,
+    "sourceConflictRequiresHumanApproval": true,
+    "interpretiveEditorialProseRequiresHumanApproval": true
+  },
+  "hygieneContract": {
+    "newArchitectureMustRetireOrJustifyOldPath": true,
+    "deleteWithoutProofAllowed": false,
+    "removalSequence": [
+      "inventory",
+      "prove-consumers",
+      "implement-replacement",
+      "equivalence-tests",
+      "build-and-smoke-test",
+      "remove-obsolete-path",
+      "rerun-quality-and-production-health"
+    ],
+    "deadCodeDetection": true,
+    "obsoleteWorkflowDetection": true,
+    "unusedRouteDetection": true,
+    "unusedCssAndDependencyDetection": true
+  }
+}
