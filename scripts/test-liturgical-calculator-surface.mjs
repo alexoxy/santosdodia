@@ -35,6 +35,7 @@ assert(page.includes("const annualIcsPath = `${rollingIcsPath}&year=${year}`"), 
 assert(page.includes('{copy.subscribe}') && page.includes('{copy.annualIcs}'), 'Calculator subscription actions must remain localized.');
 assert(page.includes('romanVestmentColourGuide(locale)') && page.includes('romanVestmentColoursForDateContext(context)'), 'Human calculator must display both the six-colour guide and date-specific resolution.');
 assert(openapi.includes('"/api/v1/liturgical-calendar"'), 'Perennial calculator must be represented in OpenAPI.');
+assert(openapi.includes('Y-1 through Y+3'), 'OpenAPI must describe the current rolling ICS window, not the retired two-year contract.');
 assert(llms.includes('/api/v1/liturgical-calendar'), 'Perennial calculator must be discoverable by AI agents through llms.txt.');
 assert(llms.includes('/tools/liturgical-calendar'), 'Human calculator must be discoverable through llms.txt.');
 assert(sourceRegistry.runtimeDependency === false, 'Rule-learning sources must never become runtime dependencies.');
@@ -47,7 +48,8 @@ assert(kernel.includes("ascension: 'easter-plus-39-thursday' | 'easter-plus-42-s
 assert(kernel.includes("corpusChristi: 'easter-plus-60-thursday' | 'easter-plus-63-sunday'"), 'Corpus Christi transfer must remain jurisdiction policy.');
 assert(colourKernel.includes("'white' | 'red' | 'green' | 'violet' | 'black' | 'rose'"), 'Roman colour kernel must keep exactly the six canonical colour codes.');
 assert(colourKernel.includes("permittedAlternativeColours: ['rose']"), 'Rose must remain an optional Gaudete/Laetare colour.');
-assert(colourKernel.includes("permittedAlternativeColours: ['black']"), 'Black must remain an optional customary colour for Masses for the Dead.');
+assert(colourKernel.includes("{ colour: 'black', condition: 'where-customary' }"), 'Black must remain an optional customary colour for Masses for the Dead.');
+assert(colourKernel.includes("{ colour: 'violet', condition: 'permitted' }"), 'Violet must remain a permitted colour for Masses for the Dead without being mislabeled as universally mandatory.');
 assert(colourKernel.includes("specialCase: 'holy-saturday-no-mass-before-easter-vigil'"), 'Holy Saturday must remain a special no-daytime-Mass case.');
 
 for (const locale of ['pt', 'en', 'es', 'it']) {
