@@ -46,7 +46,7 @@ export function assembleNavigationSource({ identityManifest, identityReport, ide
 
   const profiles = new Map();
   for (const pkg of profilePackages) {
-    if (pkg?.enrichmentId !== 'saints-profile-v1' || pkg?.identityRootSha256 !== root || pkg?.publish !== false) throw new Error('Navigation assembly received a mismatched profile package.');
+    if (pkg?.enrichmentId !== 'saints-profile-v1' || pkg?.identityRootSha256 !== root || pkg?.publish !== false) throw new Error('Navigation assembly received a mismatched saints-profile-v1 package.');
     for (const entity of pkg.entities ?? []) { if (profiles.has(entity.qid)) throw new Error(`Duplicate profile ${entity.qid}.`); profiles.set(entity.qid, entity); }
   }
   const labels = new Map();
