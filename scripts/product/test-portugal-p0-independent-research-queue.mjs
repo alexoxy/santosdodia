@@ -8,7 +8,7 @@ const p0Pack={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion
 ]};
 const base=(reviewId,id,qid,dateISO,disposition,sourceRecords=[])=>({reviewId,sourceOccurrenceId:id,canonicalEventId:`rc:${id}`,dateISO,qid,entityId:`wikidata:${qid}`,calendarLabelPt:`S. ${id}`,personNamePt:id,disposition,reason:'test',sourceRecords});
 const liveHash='a'.repeat(64);
-const corroboration={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion:'test',publicationAllowed:false,productionMutation:false,summary:{unresolvedForIndependentResearch:2,safety:{adsenseReviewState:'PREPARING'}},items:[
+const corroboration={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion:'test',publicationAllowed:false,productionMutation:false,summary:{unresolvedForIndependentResearch:2,source:{coverageComplete:false,coveredDateKeys:['01-02']},safety:{adsenseReviewState:'PREPARING'}},items:[
   base('r:1','one','Q1','2026-01-01','candidate-for-reviewed-binding',[{labelPt:'S. one'}]),
   base('r:2','two','Q2','2026-01-02','needs-independent-source-research',[{labelPt:'S. outro',sourceRecordHash:liveHash}]),
   base('r:3','three','Q3','2026-01-03','needs-independent-source-research',[]),
@@ -30,4 +30,18 @@ assert.equal(result.summary.primaryEvidence.remainingOpenResearch,0);
 assert.equal(result.summary.evidencePolicy.singleFirstPartyAuthorityAllowed,true);
 assert.ok(result.items.every((item)=>item.status==='evidence-ready-for-editorial-review'&&item.evidenceStatus==='primary-source-evidence-ready'&&item.primaryEvidenceCandidates.length===1&&item.publicationAllowed===false&&item.automaticLinkAllowed===false&&item.advertisingEligible===false));
 assert.ok(result.items.every((item)=>item.primaryEvidenceCandidates[0].bindingDecisionStatus==='pending-editorial-review'&&item.primaryEvidenceCandidates[0].automaticBindingAllowed===false));
+
+const partialPrimaryEvidence={...primaryEvidence,records:[
+  primaryEvidence.records[0],
+  {evidenceId:'vatican-uncovered-test',qid:'Q3',dateISO:'2026-01-03',sourceId:'vatican-news-saint-of-day-pt',sourcePublisher:'Vatican News',sourceClass:'official-holy-see-calendar',sourceUrl:'https://www.vaticannews.va/uncovered',sourceRecordHash:'b'.repeat(64),observedSourceLabel:'S. three',evidenceKind:'same-day-primary-source-semantic-candidate',firstParty:true},
+]};
+const partialResult=buildPortugalP0IndependentResearchQueue({p0Pack,corroboration,primaryEvidence:partialPrimaryEvidence});
+assert.equal(partialResult.summary.primaryEvidence.evidenceReadyForEditorialReview,1);
+assert.equal(partialResult.summary.primaryEvidence.remainingOpenResearch,1);
+assert.equal(partialResult.items.find((item)=>item.reviewId==='r:3').status,'research-required');
+assert.throws(()=>buildPortugalP0IndependentResearchQueue({
+  p0Pack,
+  corroboration:{...corroboration,summary:{...corroboration.summary,source:{coverageComplete:false,coveredDateKeys:['01-02','01-03']}}},
+  primaryEvidence:partialPrimaryEvidence,
+}),/Primary Vatican evidence vatican-uncovered-test does not match the live same-day source records/u);
 console.log('Portugal P0 independent research queue tests passed.');
