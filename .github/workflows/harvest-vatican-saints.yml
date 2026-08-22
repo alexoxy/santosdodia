@@ -112,7 +112,12 @@ jobs:
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
         shell: bash
         run: |
-          args=(--stream calendar/vatican-saints/v1/pt)
+          scope="${{ steps.scope.outputs.scope }}"
+          stream="calendar/vatican-saints/v1/pt"
+          if [ "$scope" != "all" ]; then
+            stream="calendar/vatican-saints/v1/pt/current-month"
+          fi
+          args=(--stream "$stream")
           if [ -f staging/vatican-saints/raw.json ]; then args+=(--source staging/vatican-saints/raw.json); fi
           if [ -f staging/vatican-saints/normalized.json ]; then args+=(--source staging/vatican-saints/normalized.json); fi
           test "${#args[@]}" -gt 2
