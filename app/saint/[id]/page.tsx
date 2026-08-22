@@ -6,7 +6,7 @@ import { getObservanceById } from "../../../data/discovery";
 import { SAINT_BIOGRAPHIES, getSaintBiography, getSaintBiographyRecord } from "../../../data/saint-biography-registry";
 import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
-import { getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
+import { getPublishedCanonicalPersonProfileById, getPublishedPersonObservanceById } from "../../../lib/public-observance-profile";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
@@ -38,8 +38,11 @@ export function generateStaticParams() {
 }
 
 async function resolveProfile(id: string, locale: Locale, dateISO?: string) {
-  return getObservanceById(id, YEAR, locale)
-    ?? getCanonicalPersonProfileObservance(id, YEAR, locale)
+  const repositoryProfile = getObservanceById(id, YEAR, locale)
+    ?? getCanonicalPersonProfileObservance(id, YEAR, locale);
+  if (repositoryProfile) return repositoryProfile;
+
+  return await getPublishedCanonicalPersonProfileById(id, YEAR, locale, dateISO)
     ?? getPublishedPersonObservanceById(id, YEAR, locale, dateISO);
 }
 
@@ -74,7 +77,13 @@ export default async function SaintPage({ params, searchParams }: { params: Prom
   const locale = await requestPublicLocale();
   const curated = getObservanceById(id, YEAR, locale);
   const canonical = curated ? undefined : getCanonicalPersonProfileObservance(id, YEAR, locale);
-  const item = curated ?? canonical ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
+  const runtimeCanonical = curated || canonical
+    ? undefined
+    : await getPublishedCanonicalPersonProfileById(id, YEAR, locale, date);
+  const item = curated
+    ?? canonical
+    ?? runtimeCanonical
+    ?? await getPublishedPersonObservanceById(id, YEAR, locale, date);
   if (!item) notFound();
 
   const biographyRecord = getSaintBiographyRecord(id);

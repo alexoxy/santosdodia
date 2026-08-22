@@ -1,11 +1,12 @@
 import { localize, type Locale } from '../lib/i18n';
 import { biographyUi, SAINT_BIOGRAPHIES as BASE_SAINT_BIOGRAPHIES, type SaintBiography } from './saint-biographies';
 import { EDITORIAL_SCALE_BATCH_4 } from './saint-biographies-batch-4';
+import { EDITORIAL_SCALE_BATCH_5 } from './saint-biographies-batch-5';
 
 export { biographyUi };
 export type { BiographySource, SaintBiography } from './saint-biographies';
 
-export const SAINT_BIOGRAPHIES: SaintBiography[] = [...BASE_SAINT_BIOGRAPHIES, ...EDITORIAL_SCALE_BATCH_4];
+export const SAINT_BIOGRAPHIES: SaintBiography[] = [...BASE_SAINT_BIOGRAPHIES, ...EDITORIAL_SCALE_BATCH_4, ...EDITORIAL_SCALE_BATCH_5];
 
 export function getSaintBiographyRecord(id: string) {
   return SAINT_BIOGRAPHIES.find(item => item.id === id);

@@ -1,3 +1,4 @@
+import { canonicalPersonName, getCanonicalPersonAnchor } from '../data/canonical-person-profiles';
 import type { Observance } from '../data/observances';
 import type { Locale } from './i18n';
 import { getPublicAllObservances } from './public-observances';
@@ -26,4 +27,36 @@ export async function getPublishedPersonObservanceById(
   });
   const item = runtime.items.find((candidate) => candidate.id === id);
   return item && PERSON_CATEGORIES.has(item.category) ? item : null;
+}
+
+
+export async function getPublishedCanonicalPersonProfileById(
+  id: string,
+  year: number,
+  locale: Locale,
+  dateISO?: string,
+): Promise<Observance | null> {
+  const person = getCanonicalPersonAnchor(id);
+  if (!person) return null;
+
+  const observance = await getPublishedPersonObservanceById(
+    person.primaryObservanceId,
+    year,
+    locale,
+    dateISO,
+  );
+  if (!observance) return null;
+
+  return {
+    ...observance,
+    id: person.id,
+    category: person.category,
+    names: person.names,
+    name: canonicalPersonName(person, locale),
+    summaries: undefined,
+    summary: undefined,
+    summarySourceIds: undefined,
+    summaryTranslationStatus: undefined,
+    translationStatus: 'editorial',
+  };
 }
