@@ -18,6 +18,12 @@ function argument(name) {
   return index >= 0 ? process.argv[index + 1] : null;
 }
 
+function loadDefaultPrimaryEvidence() {
+  const evidencePath = path.resolve('config/corroboration-source-evidence.portugal-p0-primary.json');
+  if (!fs.existsSync(evidencePath)) return null;
+  return JSON.parse(fs.readFileSync(evidencePath, 'utf8'));
+}
+
 function gapKind(row) {
   if (row.disposition === 'source-unavailable') return 'vatican-source-unavailable';
   if (row.disposition === 'ambiguous-vatican-record') return 'vatican-same-day-ambiguous';
@@ -33,7 +39,55 @@ function researchPriority(kind) {
   return 'R2';
 }
 
-export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration } = {}) {
+function evidenceKey(qid, dateISO) {
+  return `${qid}|${dateISO}`;
+}
+
+function validatePrimaryEvidence(primaryEvidence, release) {
+  if (!primaryEvidence) return new Map();
+  if (primaryEvidence.schemaVersion !== 1 || primaryEvidence.release !== release || primaryEvidence.claimClass !== 'feast-or-observance-link' || primaryEvidence.publicationAllowed !== false || primaryEvidence.productionMutation !== false || !Array.isArray(primaryEvidence.records)) {
+    throw new Error('Primary evidence registry is missing its fail-closed feast-or-observance contract.');
+  }
+  if (primaryEvidence?.safety?.proposalOnly !== true || primaryEvidence?.safety?.sourceEvidenceDoesNotEqualBindingApproval !== true || primaryEvidence?.safety?.reviewedBindingRegistryMutationAllowed !== false || primaryEvidence?.safety?.adsenseReviewState !== 'PREPARING') {
+    throw new Error('Primary evidence registry crossed its proposal-only AdSense PREPARING boundary.');
+  }
+  const index = new Map();
+  const ids = new Set();
+  for (const record of primaryEvidence.records) {
+    if (!record?.evidenceId || ids.has(record.evidenceId)) throw new Error(`Invalid or duplicate primary evidence id: ${record?.evidenceId ?? '<missing>'}.`);
+    ids.add(record.evidenceId);
+    if (!/^Q[1-9]\d*$/u.test(record.qid ?? '') || !/^2026-\d{2}-\d{2}$/u.test(record.dateISO ?? '') || record.firstParty !== true || record.evidenceKind === undefined || !String(record.sourceUrl ?? '').startsWith('https://')) {
+      throw new Error(`Invalid primary evidence record ${record.evidenceId}.`);
+    }
+    const key = evidenceKey(record.qid, record.dateISO);
+    const list = index.get(key) ?? [];
+    list.push(record);
+    index.set(key, list);
+  }
+  return index;
+}
+
+function verifiedEvidenceForRow(row, evidenceIndex) {
+  const candidates = evidenceIndex.get(evidenceKey(row.qid, row.dateISO)) ?? [];
+  const sourceHashes = new Set((row.sourceRecords ?? []).map((record) => record.sourceRecordHash).filter(Boolean));
+  return candidates.map((record) => {
+    if (record.sourceId === 'vatican-news-saint-of-day-pt') {
+      if (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash)) {
+        throw new Error(`Primary Vatican evidence ${record.evidenceId} does not match the live same-day source records.`);
+      }
+    }
+    return {
+      ...record,
+      claimClass: 'feast-or-observance-link',
+      evidenceStatus: 'source-verified-proposal',
+      bindingDecisionStatus: 'pending-editorial-review',
+      automaticBindingAllowed: false,
+      automaticPublicationAllowed: false,
+    };
+  });
+}
+
+export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration, primaryEvidence } = {}) {
   if (p0Pack?.schemaVersion !== 1 || p0Pack?.release !== 'roman-catholic-pt-2026-v2' || p0Pack?.publicationAllowed !== false || p0Pack?.productionMutation !== false || !Array.isArray(p0Pack?.items)) {
     throw new Error('Independent research queue requires the fail-closed Portugal P0 review pack.');
   }
@@ -44,11 +98,15 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
     throw new Error('Independent research queue refuses inputs outside the AdSense PREPARING boundary.');
   }
 
+  const resolvedPrimaryEvidence = primaryEvidence === undefined ? loadDefaultPrimaryEvidence() : primaryEvidence;
+  const evidenceIndex = validatePrimaryEvidence(resolvedPrimaryEvidence, p0Pack.release);
   const p0ByReviewId = new Map(p0Pack.items.map((row) => [row.reviewId, row]));
   const items = corroboration.items.filter((row) => UNRESOLVED.has(row.disposition)).map((row) => {
     const p0 = p0ByReviewId.get(row.reviewId);
     if (!p0) throw new Error(`Research row ${row.reviewId} is missing from the P0 pack.`);
     const sourceGapKind = gapKind(row);
+    const primaryEvidenceCandidates = verifiedEvidenceForRow(row, evidenceIndex);
+    const evidenceReady = primaryEvidenceCandidates.length > 0;
     return {
       researchId: `pt-2026-research:${row.sourceOccurrenceId}:${row.qid}`,
       reviewId: row.reviewId,
@@ -64,6 +122,8 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
       priorDisposition: row.disposition,
       priorReason: row.reason,
       vaticanSourceRecords: row.sourceRecords ?? [],
+      primaryEvidenceCandidates,
+      evidenceStatus: evidenceReady ? 'primary-source-evidence-ready' : 'open-research',
       researchTarget: {
         claimClass: 'feast-or-observance-link',
         oneFirstPartyAuthorityMaySufficeForEvidence: true,
@@ -80,7 +140,7 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
         qidAndDateMustRemainStable: true,
         evidenceMaySupportReviewButNeverAutoApprove: true,
       },
-      status: 'research-required',
+      status: evidenceReady ? 'evidence-ready-for-editorial-review' : 'research-required',
       reviewerDecision: null,
       automaticLinkAllowed: false,
       automaticPublicationAllowed: false,
@@ -97,6 +157,8 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
     counts[item.sourceGapKind] = (counts[item.sourceGapKind] ?? 0) + 1;
     priorities[item.researchPriority] = (priorities[item.researchPriority] ?? 0) + 1;
   }
+  const evidenceReadyForEditorialReview = items.filter((item) => item.status === 'evidence-ready-for-editorial-review').length;
+  const remainingOpenResearch = items.filter((item) => item.status === 'research-required').length;
   const summary = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -105,6 +167,11 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
     researchItems: items.length,
     sourceGapKinds: counts,
     priorities,
+    primaryEvidence: {
+      configuredRecords: resolvedPrimaryEvidence?.records?.length ?? 0,
+      evidenceReadyForEditorialReview,
+      remainingOpenResearch,
+    },
     evidencePolicy: {
       claimClass: 'feast-or-observance-link',
       singleFirstPartyAuthorityAllowed: true,
@@ -113,6 +180,7 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
     safety: {
       researchOnly: true,
       evidenceDoesNotEqualApproval: true,
+      primaryEvidenceDoesNotEqualBindingApproval: true,
       nameOnlyMergeForbidden: true,
       automaticLinkAllowed: false,
       automaticPublicationAllowed: false,
@@ -127,6 +195,7 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
   };
 
   if (items.length !== corroboration.summary.unresolvedForIndependentResearch) throw new Error(`Research queue accounting mismatch: corroboration=${corroboration.summary.unresolvedForIndependentResearch}, queue=${items.length}.`);
+  if (evidenceReadyForEditorialReview + remainingOpenResearch !== items.length) throw new Error('Primary evidence accounting mismatch.');
   if (items.some((item) => item.automaticLinkAllowed !== false || item.publicationAllowed !== false || item.advertisingEligible !== false)) throw new Error('Independent research queue crossed its fail-closed boundary.');
 
   return {
@@ -144,12 +213,14 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration 
 function main() {
   const p0Path = argument('--p0');
   const corroborationPath = argument('--corroboration');
+  const primaryEvidencePath = argument('--primary-evidence');
   const outputPath = argument('--output');
   const summaryPath = argument('--summary');
-  if (!p0Path || !corroborationPath || !outputPath || !summaryPath) throw new Error('Usage: --p0 <review-pack.json> --corroboration <candidates.json> --output <research-queue.json> --summary <summary.json>');
+  if (!p0Path || !corroborationPath || !outputPath || !summaryPath) throw new Error('Usage: --p0 <review-pack.json> --corroboration <candidates.json> [--primary-evidence <evidence.json>] --output <research-queue.json> --summary <summary.json>');
   const result = buildPortugalP0IndependentResearchQueue({
     p0Pack: JSON.parse(fs.readFileSync(path.resolve(p0Path), 'utf8')),
     corroboration: JSON.parse(fs.readFileSync(path.resolve(corroborationPath), 'utf8')),
+    primaryEvidence: primaryEvidencePath ? JSON.parse(fs.readFileSync(path.resolve(primaryEvidencePath), 'utf8')) : null,
   });
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
   fs.mkdirSync(path.dirname(path.resolve(summaryPath)), { recursive: true });
