@@ -82,5 +82,6 @@ await import('./vault/test-canonical-temporal-rule-manifest.mjs');
 await import('./vault/test-temporal-rule-families.mjs');
 await import('./test-roman-liturgical-year.mjs');
 await import('./test-roman-precedence.mjs');
+await import('./test-roman-annual-calendar.mjs');
 await import('./test-liturgical-calculator-surface.mjs');
 await import('./test-rolling-ics-surface.mjs');
