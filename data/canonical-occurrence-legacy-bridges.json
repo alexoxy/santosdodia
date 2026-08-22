@@ -16,6 +16,16 @@
       "dateISO": "2026-04-29"
     },
     {
+      "occurrenceId": "occurrence:2026-06-24:john-baptist-nativity:roman-catholic:pt",
+      "legacyObservanceId": "rc:NativityJohnBaptist",
+      "dateISO": "2026-06-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-29:peter-paul:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPeterPaulAp",
+      "dateISO": "2026-06-29"
+    },
+    {
       "occurrenceId": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
       "legacyObservanceId": "rc:StElizabethPortugal",
       "dateISO": "2026-07-04"
