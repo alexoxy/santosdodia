@@ -71,8 +71,11 @@ function verifiedEvidenceForRow(row, evidenceIndex, sourceMetadata = {}) {
   const candidates = evidenceIndex.get(evidenceKey(row.qid, row.dateISO)) ?? [];
   const sourceHashes = new Set((row.sourceRecords ?? []).map((record) => record.sourceRecordHash).filter(Boolean));
   const dateKey = String(row.dateISO ?? '').slice(5);
-  const coveredDateKeys = new Set(sourceMetadata?.coveredDateKeys ?? []);
-  const dateCovered = sourceMetadata?.coverageComplete === true || coveredDateKeys.has(dateKey);
+  const hasCoveredDateKeys = Array.isArray(sourceMetadata?.coveredDateKeys);
+  const coveredDateKeys = new Set(hasCoveredDateKeys ? sourceMetadata.coveredDateKeys : []);
+  const dateCovered = hasCoveredDateKeys
+    ? coveredDateKeys.has(dateKey)
+    : sourceMetadata?.coverageComplete === true;
   const verified = [];
   for (const record of candidates) {
     if (record.sourceId === 'vatican-news-saint-of-day-pt' && (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash))) {
