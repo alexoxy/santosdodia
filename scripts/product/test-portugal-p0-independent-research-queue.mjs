@@ -8,7 +8,7 @@ const p0Pack={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion
 ]};
 const base=(reviewId,id,qid,dateISO,disposition,sourceRecords=[])=>({reviewId,sourceOccurrenceId:id,canonicalEventId:`rc:${id}`,dateISO,qid,entityId:`wikidata:${qid}`,calendarLabelPt:`S. ${id}`,personNamePt:id,disposition,reason:'test',sourceRecords});
 const liveHash='a'.repeat(64);
-const corroboration={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion:'test',publicationAllowed:false,productionMutation:false,summary:{unresolvedForIndependentResearch:2,source:{coverageComplete:false,coveredDateKeys:['01-02']},safety:{adsenseReviewState:'PREPARING'}},items:[
+const corroboration={schemaVersion:1,release:'roman-catholic-pt-2026-v2',datasetVersion:'test',publicationAllowed:false,productionMutation:false,summary:{unresolvedForIndependentResearch:2,source:{coverageComplete:true,coveredDateKeys:['01-02']},safety:{adsenseReviewState:'PREPARING'}},items:[
   base('r:1','one','Q1','2026-01-01','candidate-for-reviewed-binding',[{labelPt:'S. one'}]),
   base('r:2','two','Q2','2026-01-02','needs-independent-source-research',[{labelPt:'S. outro',sourceRecordHash:liveHash}]),
   base('r:3','three','Q3','2026-01-03','needs-independent-source-research',[]),
@@ -41,7 +41,7 @@ assert.equal(partialResult.summary.primaryEvidence.remainingOpenResearch,1);
 assert.equal(partialResult.items.find((item)=>item.reviewId==='r:3').status,'research-required');
 assert.throws(()=>buildPortugalP0IndependentResearchQueue({
   p0Pack,
-  corroboration:{...corroboration,summary:{...corroboration.summary,source:{coverageComplete:false,coveredDateKeys:['01-02','01-03']}}},
+  corroboration:{...corroboration,summary:{...corroboration.summary,source:{coverageComplete:true,coveredDateKeys:['01-02','01-03']}}},
   primaryEvidence:partialPrimaryEvidence,
 }),/Primary Vatican evidence vatican-uncovered-test does not match the live same-day source records/u);
 console.log('Portugal P0 independent research queue tests passed.');
