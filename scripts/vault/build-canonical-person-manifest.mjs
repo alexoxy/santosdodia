@@ -90,6 +90,9 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
   const releaseRoot = `/vault/canonical/people/v1/releases/${rootSha256}`;
   const sourceSha256 = sha256(sourceBytes ?? JSON.stringify(dataset));
 
+  // Everything in manifest.json is content-derived and byte-stable for an
+  // identical canonical release. Run-specific metadata belongs in the build
+  // receipt so the same root can never map to different immutable bytes.
   const manifest = {
     schemaVersion: 1,
     artifactType: 'canonical-person-identities',
@@ -99,8 +102,6 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
     rootSha256,
     sourceDataset: 'data/canonical-person-anchors.json',
     sourceDatasetSha256: sourceSha256,
-    sourceCommit: sourceCommit ?? null,
-    generatedAt: generatedAt ?? null,
     peopleCount: people.length,
     legacyBridgeCount: bridges.length,
     locales,
@@ -119,8 +120,21 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
       legacyObservanceBridges: 'legacy-observance-bridges.json',
     },
   };
+  const buildReceipt = {
+    schemaVersion: 1,
+    artifactType: 'canonical-person-build-receipt',
+    rootSha256,
+    releaseId: manifest.releaseId,
+    sourceDataset: manifest.sourceDataset,
+    sourceDatasetSha256: sourceSha256,
+    sourceCommit: sourceCommit ?? null,
+    generatedAt: generatedAt ?? null,
+    immutableReleaseRoot: releaseRoot,
+    canonicalPayloadChanged: true,
+    publicationChanged: false,
+  };
 
-  return { manifest, people, legacyObservanceBridges: bridges, stablePayload };
+  return { manifest, buildReceipt, people, legacyObservanceBridges: bridges, stablePayload };
 }
 
 async function main() {
@@ -139,8 +153,9 @@ async function main() {
     writeFile(path.join(outputRoot, 'manifest.json'), `${JSON.stringify(built.manifest, null, 2)}\n`, 'utf8'),
     writeFile(path.join(outputRoot, 'people.json'), `${JSON.stringify(built.people, null, 2)}\n`, 'utf8'),
     writeFile(path.join(outputRoot, 'legacy-observance-bridges.json'), `${JSON.stringify(built.legacyObservanceBridges, null, 2)}\n`, 'utf8'),
+    writeFile(path.join(outputRoot, 'build-receipt.json'), `${JSON.stringify(built.buildReceipt, null, 2)}\n`, 'utf8'),
   ]);
-  process.stdout.write(`${JSON.stringify(built.manifest, null, 2)}\n`);
+  process.stdout.write(`${JSON.stringify({ manifest: built.manifest, buildReceipt: built.buildReceipt }, null, 2)}\n`);
 }
 
 if (process.argv[1]?.endsWith('build-canonical-person-manifest.mjs')) {
