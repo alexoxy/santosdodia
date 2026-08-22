@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "status": "editorial-research-plan",
+  "createdAt": "2026-08-22",
+  "release": "roman-catholic-pt-2026-v2",
+  "goal": {
+    "currentReviewedBiographyCount": 25,
+    "targetReviewedBiographyCount": 30,
+    "batch": "golden-set-26-30",
+    "qualityRule": "No route, indexation or advertising eligibility is created by this plan. Each profile requires a separate reviewed editorial implementation."
+  },
+  "selectionBasis": {
+    "p0DatasetVersion": "navigation-v1:caa00fba0a721627",
+    "p0ArchiveRunId": "32558823126",
+    "p0Items": 70,
+    "selectionRule": [
+      "identity resolved to an exact QID in the Portugal P0 review pack",
+      "official Portuguese calendar occurrence available",
+      "high daily-use, discovery or Portugal-anchor value",
+      "at least two institutional sources identified with claim-specific roles",
+      "coverage complements the existing 25 reviewed biographies"
+    ]
+  },
+  "requiredPublicLocales": [
+    "en",
+    "es",
+    "pt",
+    "it"
+  ],
+  "requiredModules": [
+    "identity-and-local-display-name",
+    "why-remembered",
+    "life-original-synthesis",
+    "timeline-with-precision",
+    "symbols-and-iconography",
+    "typed-patronages-and-intentions",
+    "places",
+    "observances-by-tradition-and-jurisdiction",
+    "jurisdiction-specific-reading-metadata",
+    "prayer-and-devotion-metadata-with-rights-status",
+    "other-christian-traditions",
+    "related-saints",
+    "claim-specific-sources"
+  ],
+  "candidates": [
+    {
+      "order": 26,
+      "qid": "Q43600",
+      "canonicalEventId": "rc:StMatthewEvangelist",
+      "dateISO": "2026-09-21",
+      "namePt": "S. Mateus, apóstolo e evangelista",
+      "nameEn": "Saint Matthew, Apostle and Evangelist",
+      "selectionReason": "Explicit flagship example for the new saint-page architecture; apostle and evangelist with strong scripture, iconography and cross-tradition links.",
+      "sources": [
+        {
+          "url": "https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html",
+          "publisher": "Vatican News",
+          "authorityClass": "A1",
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration",
+            "iconography-leads"
+          ]
+        },
+        {
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html",
+          "publisher": "Holy See",
+          "authorityClass": "A1",
+          "role": [
+            "apostolic-identity",
+            "scriptural-context",
+            "historical-tradition-boundaries"
+          ]
+        }
+      ]
+    },
+    {
+      "order": 27,
+      "qid": "Q9438",
+      "canonicalEventId": "rc:StThomasAquinas",
+      "dateISO": "2026-01-28",
+      "namePt": "S. Tomás de Aquino, presbítero e doutor da Igreja",
+      "nameEn": "Saint Thomas Aquinas, Priest and Doctor of the Church",
+      "selectionReason": "High discovery value across education, theology, philosophy and patronage; strong institutional documentation.",
+      "sources": [
+        {
+          "url": "https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html",
+          "publisher": "Vatican News",
+          "authorityClass": "A1",
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
+        },
+        {
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html",
+          "publisher": "Holy See",
+          "authorityClass": "A1",
+          "role": [
+            "biographical-chronology",
+            "intellectual-context",
+            "doctrinal-significance"
+          ]
+        }
+      ]
+    },
+    {
+      "order": 28,
+      "qid": "Q229190",
+      "canonicalEventId": "rc:StCatherineSiena",
+      "dateISO": "2026-04-29",
+      "namePt": "S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa",
+      "nameEn": "Saint Catherine of Siena, Virgin and Doctor of the Church",
+      "selectionReason": "Doctor of the Church and patroness of Europe; supports chronology, geography, vocation and women-in-Christian-history discovery.",
+      "sources": [
+        {
+          "url": "https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html",
+          "publisher": "Vatican News",
+          "authorityClass": "A1",
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
+        },
+        {
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html",
+          "publisher": "Holy See",
+          "authorityClass": "A1",
+          "role": [
+            "biographical-chronology",
+            "doctor-of-the-church-status",
+            "historical-context"
+          ]
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "qid": "Q235857",
+      "canonicalEventId": "rc:StElizabethPortugal",
+      "dateISO": "2026-07-04",
+      "namePt": "S. Isabel de Portugal",
+      "nameEn": "Saint Elizabeth of Portugal",
+      "selectionReason": "Portugal quality-anchor profile with strong local historical, geographic, peace and charity relevance.",
+      "sources": [
+        {
+          "url": "https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html",
+          "publisher": "Vatican News",
+          "authorityClass": "A1",
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
+        },
+        {
+          "url": "https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860",
+          "publisher": "Patriarchate of Lisbon",
+          "authorityClass": "A1",
+          "role": [
+            "Portuguese-ecclesial-context",
+            "local-history",
+            "Portuguese-display-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "qid": "Q989",
+      "canonicalEventId": "rc:StJohnPaulII",
+      "dateISO": "2026-10-22",
+      "namePt": "S. João Paulo II, papa",
+      "nameEn": "Saint John Paul II, Pope",
+      "selectionReason": "Globally recognisable modern saint with exact official chronology, strong multilingual demand and substantial cross-jurisdiction relevance.",
+      "sources": [
+        {
+          "url": "https://www.vaticannews.va/en/saints/10/22/st--john-paul--ii--pope.html",
+          "publisher": "Vatican News",
+          "authorityClass": "A1",
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
+        },
+        {
+          "url": "https://www.vatican.va/content/john-paul-ii/en/biografia/documents/hf_jp-ii_spe_20190722_biografia.html",
+          "publisher": "Holy See",
+          "authorityClass": "A1",
+          "role": [
+            "official-biography",
+            "exact-chronology",
+            "pontificate-history"
+          ]
+        }
+      ],
+      "requiredSourceGaps": [
+        {
+          "authorityClass": "A0",
+          "source": "CauseSanti canonical-recognition record",
+          "status": "required-before-editorial-publication",
+          "reason": "The official biography establishes chronology; the canonical-recognition claim must be tied to the immutable primary CauseSanti archive before publication."
+        }
+      ]
+    }
+  ],
+  "publicationChecklist": {
+    "exactIdentityReviewRequired": true,
+    "calendarOccurrenceReviewRequired": true,
+    "originalEditorialTextRequired": true,
+    "allRequiredPublicLocalesRequired": true,
+    "sourceRolePerClaimRequired": true,
+    "explicitTraditionAndJurisdictionRequired": true,
+    "explicitDatePrecisionRequired": true,
+    "typedPatronageRequired": true,
+    "readingTextAllowedOnlyWithRightsBasis": true,
+    "prayerTextAllowedOnlyWithRightsBasis": true,
+    "automaticPublicationAllowed": false,
+    "automaticIndexationAllowed": false,
+    "advertisingEligibilityGranted": false,
+    "adsenseReviewState": "PREPARING"
+  }
+}
