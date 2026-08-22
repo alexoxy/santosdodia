@@ -30,7 +30,7 @@
       "https://www.causesanti.va/it/celebrazioni/beatificazioni.html",
       "https://www.causesanti.va/it/venerabili.html"
     ],
-    "defaultDelayMs": 2000,
+    "minimumDelayMs": 2000,\n    "defaultDelayMs": 2000,
     "defaultMaxUrls": 5000,
     "requestTimeoutMs": 60000,
     "maxAttempts": 4,
