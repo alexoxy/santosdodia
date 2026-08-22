@@ -121,6 +121,9 @@ jobs:
       - name: Test canonical Person Vault release
         run: npm run vault:test
 
+      - name: Test immutable Dropbox canonical Vault uploader
+        run: node scripts/vault/test-dropbox-canonical-uploader.mjs
+
       - name: Test bounded Dropbox archive hygiene
         run: npm run dropbox:archive-test
 
