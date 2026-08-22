@@ -14,6 +14,12 @@ import {
   normalizeLiturgicalToolLocale,
   type LiturgicalToolLocale
 } from '../../../lib/knowledge/liturgical-calendar-localization';
+import {
+  localizeRomanVestmentColourResolution,
+  romanVestmentColourCopy,
+  romanVestmentColourGuide
+} from '../../../lib/knowledge/roman-vestment-colour-localization';
+import { romanVestmentColoursForDateContext } from '../../../lib/knowledge/roman-vestment-colours';
 
 const localeTags: Record<LiturgicalToolLocale, string> = { en: 'en-GB', pt: 'pt-PT', es: 'es-ES', it: 'it-IT' };
 
@@ -40,6 +46,8 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
   const requestedLocale = Array.isArray(params.locale) ? params.locale[0] : params.locale;
   const locale = normalizeLiturgicalToolLocale(requestedLocale ?? await requestPublicLocale());
   const copy = liturgicalToolCopy(locale);
+  const colourCopy = romanVestmentColourCopy(locale);
+  const colourGuide = romanVestmentColourGuide(locale);
   const jurisdictionValue = Array.isArray(params.jurisdiction) ? params.jurisdiction[0] : params.jurisdiction;
   const jurisdiction = jurisdictionValue === 'GLOBAL' ? 'GLOBAL' : 'PT';
   const policy = romanPolicyForJurisdiction(jurisdiction);
@@ -53,6 +61,8 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
   if (date) {
     try { context = romanDateContext(date, policy); } catch { context = null; }
   }
+  const vestmentResolution = context ? romanVestmentColoursForDateContext(context) : null;
+  const localizedVestmentResolution = vestmentResolution ? localizeRomanVestmentColourResolution(locale, vestmentResolution) : null;
   const apiPath = `/api/v1/liturgical-calendar?year=${year}&jurisdiction=${jurisdiction}&locale=${locale}${date ? `&date=${date}` : ''}`;
   const syncParams = new URLSearchParams({ tradition: 'roman-catholic' });
   const icsParams = new URLSearchParams({ locale });
@@ -91,6 +101,15 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.weekdayCycle}</span><h2>{context.weekdayCycle}</h2><p>{context.date}</p></article> : null}
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.season}</span><h2>{localizeRomanSeason(locale, context.season)}</h2><p>{context.seasonWeek === null ? '—' : `${copy.week} ${context.seasonWeek}`}</p></article> : null}
       {context ? <article className="institutional-card"><span className="eyebrow">{copy.principalDay}</span><h2>{context.principalDay ? localizeRomanPrincipalDay(locale, context.principalDay) : '—'}</h2><p>{context.principalDay ? formatDate(context.date, locale) : copy.noPrincipalDay}</p></article> : null}
+      {localizedVestmentResolution ? <article className="institutional-card"><span className="eyebrow">{colourCopy.title}</span><h2>{localizedVestmentResolution.resolvedColourLabel ?? localizedVestmentResolution.defaultColourLabel ?? '—'}</h2><p>{colourCopy.defaultLabel}: {localizedVestmentResolution.defaultColourLabel ?? '—'}</p>{localizedVestmentResolution.permittedAlternativeColourLabels.length ? <p>{colourCopy.alternativesLabel}: {localizedVestmentResolution.permittedAlternativeColourLabels.join(', ')}</p> : null}{localizedVestmentResolution.note ? <small>{localizedVestmentResolution.note}</small> : null}</article> : null}
+    </section>
+
+    <section className="source-list-section">
+      <div className="section-heading"><div><span className="eyebrow">{colourCopy.title}</span><h2>{colourCopy.title}</h2></div></div>
+      <div className="institutional-grid">
+        {colourGuide.map(entry => <article className="institutional-card" key={entry.code}><span className="eyebrow">{entry.code}</span><h3>{entry.label}</h3><p>{entry.usage}</p></article>)}
+      </div>
+      <p><small>{colourCopy.authorityNote}</small></p>
     </section>
 
     <section className="source-list-section">
