@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "roman-catholic-pt-2026-v2-to-canonical-occurrence-v1",
+  "status": "shadow-equivalence-in-progress",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceApprovalFile": "data/releases/roman-catholic-pt-2026-v2.production-request.json",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "sourcePopulation": {
+    "occurrences": 389,
+    "days": 365,
+    "labels": 1945
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "coverage": {
+    "mappedOccurrenceAnchors": 4,
+    "remainingLegacyOccurrences": 385,
+    "requiredForPromotion": 389,
+    "promotionAllowed": false
+  },
+  "equivalencePolicy": {
+    "exactLegacyObservanceIdBridgeRequired": true,
+    "exactDateRequired": true,
+    "rankCompatibilityRequired": true,
+    "legacyMemorialMayRefineToObligatoryMemorialWhenOfficialSourceCodeIsMO": true,
+    "churchAndJurisdictionMustRemainFixed": true,
+    "noAutomaticCanonicalIdentityCreation": true,
+    "noD1MutationBeforeFullCoverage": true,
+    "noRuntimeSwitchBeforeFullCoverage": true,
+    "noDropboxPromotionImplied": true
+  },
+  "verifiedAt": "2026-08-22"
+}
