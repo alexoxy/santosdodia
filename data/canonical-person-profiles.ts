@@ -29,6 +29,12 @@ export const CANONICAL_PERSON_ANCHORS: CanonicalPersonAnchor[] = [
     names: { en: 'Saint Thomas Aquinas', pt: 'São Tomás de Aquino', es: 'Santo Tomás de Aquino', it: 'San Tommaso d’Aquino' },
   },
   {
+    id: 'catherine-siena',
+    primaryObservanceId: 'rc:StCatherineSiena',
+    category: 'saint',
+    names: { en: 'Saint Catherine of Siena', pt: 'Santa Catarina de Sena', es: 'Santa Catalina de Siena', it: 'Santa Caterina da Siena' },
+  },
+  {
     id: 'peter-apostle',
     primaryObservanceId: 'peter-paul',
     category: 'apostle',

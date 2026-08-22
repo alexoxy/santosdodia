@@ -5,6 +5,8 @@ const HOLY_SEE_MATTHEW = 'https://www.vatican.va/content/benedict-xvi/en/audienc
 const OCA_MATTHEW = 'https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew';
 const VATICAN_THOMAS_AQUINAS = 'https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html';
 const HOLY_SEE_THOMAS_AQUINAS = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html';
+const VATICAN_CATHERINE_SIENA = 'https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html';
+const HOLY_SEE_CATHERINE_SIENA = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html';
 
 const matthew: SaintBiography = {
   id: 'matthew-apostle',
@@ -129,4 +131,65 @@ const thomasAquinas: SaintBiography = {
   verifiedAt: '2026-08-22',
 };
 
-export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas];
+const catherineSiena: SaintBiography = {
+  id: 'catherine-siena',
+  title: {
+    en: 'Saint Catherine of Siena, Virgin and Doctor of the Church',
+    pt: 'S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa',
+    es: 'Santa Catalina de Siena, virgen y doctora de la Iglesia',
+    it: 'Santa Caterina da Siena, vergine e dottore della Chiesa',
+  },
+  summary: {
+    en: 'Catherine of Siena was a Dominican tertiary, spiritual writer and tireless advocate for peace and Church renewal. Her letters and Dialogue reveal a life centred on Christ, prayer and practical charity; she is honoured as a Doctor of the Church and patroness of Europe.',
+    pt: 'Catarina de Sena foi uma terciária dominicana, escritora espiritual e incansável defensora da paz e da renovação da Igreja. As suas cartas e o Diálogo revelam uma vida centrada em Cristo, na oração e na caridade concreta; é doutora da Igreja e padroeira da Europa.',
+    es: 'Catalina de Siena fue terciaria dominica, escritora espiritual e incansable defensora de la paz y de la renovación de la Iglesia. Sus cartas y el Diálogo revelan una vida centrada en Cristo, la oración y la caridad concreta; es doctora de la Iglesia y patrona de Europa.',
+    it: 'Caterina da Siena fu terziaria domenicana, scrittrice spirituale e instancabile sostenitrice della pace e del rinnovamento della Chiesa. Le sue lettere e il Dialogo rivelano una vita centrata su Cristo, sulla preghiera e sulla carità concreta; è dottore della Chiesa e patrona d’Europa.',
+  },
+  paragraphs: {
+    en: [
+      'Catherine was born in Siena in 1347 into a large family. As a young woman she joined the Dominican Third Order known as the Mantellate while continuing to live at home. Prayer and penance were joined to practical service, especially care for people who were sick. Her reputation for holiness grew, and people from very different social backgrounds began to seek her spiritual guidance.',
+      'Her public activity unfolded during a troubled period for both the Church and the Italian states. Catherine travelled, wrote to rulers and church leaders, promoted peace and pressed for reform. She urged Pope Gregory XI, then living at Avignon, to return to Rome. Although she learned to read with difficulty and only later learned to write, her teaching survives in an extensive collection of letters, prayers and the Dialogue of Divine Providence.',
+      'Catherine died in Rome in 1380 and was canonized in 1461. Paul VI declared her a Doctor of the Church in 1970, recognizing the lasting value of her spiritual teaching; she is also honoured as a patroness of Italy and a co-patroness of Europe. Her Roman Catholic memorial is celebrated on 29 April, linking her contemplative love of Christ with courageous service to the Church and society.',
+    ],
+    pt: [
+      'Catarina nasceu em Sena, em 1347, no seio de uma família numerosa. Ainda jovem entrou na Ordem Terceira de São Domingos, no ramo conhecido como Mantellate, continuando a viver em casa. À oração e à penitência juntou o serviço concreto, sobretudo o cuidado de pessoas doentes. A sua fama de santidade cresceu e pessoas de condições sociais muito diferentes começaram a procurar nela orientação espiritual.',
+      'A sua atividade pública decorreu num período conturbado para a Igreja e para os estados italianos. Catarina viajou, escreveu a governantes e responsáveis eclesiais, promoveu a paz e pediu reformas. Exortou o Papa Gregório XI, então residente em Avinhão, a regressar a Roma. Embora tenha aprendido a ler com dificuldade e a escrever apenas em adulta, o seu ensino conserva-se numa extensa coleção de cartas, orações e no Diálogo da Divina Providência.',
+      'Catarina morreu em Roma, em 1380, e foi canonizada em 1461. Paulo VI declarou-a doutora da Igreja em 1970, reconhecendo o valor duradouro do seu ensinamento espiritual; é também honrada como padroeira de Itália e copadroeira da Europa. A sua memória no calendário católico romano celebra-se a 29 de abril, unindo o amor contemplativo por Cristo ao serviço corajoso da Igreja e da sociedade.',
+    ],
+    es: [
+      'Catalina nació en Siena en 1347, dentro de una familia numerosa. Siendo joven ingresó en la Tercera Orden de Santo Domingo, en la rama conocida como las Mantellate, mientras seguía viviendo en casa. Unió la oración y la penitencia al servicio concreto, especialmente al cuidado de personas enfermas. Su fama de santidad creció y personas de condiciones sociales muy diferentes comenzaron a buscar en ella orientación espiritual.',
+      'Su actividad pública se desarrolló en un periodo difícil para la Iglesia y para los estados italianos. Catalina viajó, escribió a gobernantes y responsables eclesiales, promovió la paz y pidió reformas. Exhortó al papa Gregorio XI, que entonces residía en Aviñón, a regresar a Roma. Aunque aprendió a leer con dificultad y a escribir solo en la edad adulta, su enseñanza se conserva en una amplia colección de cartas, oraciones y en el Diálogo de la Divina Providencia.',
+      'Catalina murió en Roma en 1380 y fue canonizada en 1461. Pablo VI la declaró doctora de la Iglesia en 1970, reconociendo el valor duradero de su enseñanza espiritual; también es honrada como patrona de Italia y copatrona de Europa. Su memoria en el calendario católico romano se celebra el 29 de abril, uniendo el amor contemplativo a Cristo con el servicio valiente a la Iglesia y a la sociedad.',
+    ],
+    it: [
+      'Caterina nacque a Siena nel 1347, in una famiglia numerosa. Ancora giovane entrò nel Terz’Ordine domenicano, nel ramo conosciuto come le Mantellate, continuando a vivere in casa. Alla preghiera e alla penitenza unì il servizio concreto, soprattutto la cura delle persone malate. La sua fama di santità crebbe e persone di condizioni sociali molto diverse iniziarono a cercare in lei una guida spirituale.',
+      'La sua attività pubblica si svolse in un periodo travagliato per la Chiesa e per gli stati italiani. Caterina viaggiò, scrisse a governanti e responsabili ecclesiali, promosse la pace e sollecitò riforme. Esortò papa Gregorio XI, che allora risiedeva ad Avignone, a tornare a Roma. Sebbene avesse imparato a leggere con difficoltà e a scrivere solo da adulta, il suo insegnamento è conservato in un’ampia raccolta di lettere, preghiere e nel Dialogo della Divina Provvidenza.',
+      'Caterina morì a Roma nel 1380 e fu canonizzata nel 1461. Paolo VI la dichiarò dottore della Chiesa nel 1970, riconoscendo il valore duraturo del suo insegnamento spirituale; è onorata anche come patrona d’Italia e compatrona d’Europa. La sua memoria nel calendario cattolico romano ricorre il 29 aprile, unendo l’amore contemplativo per Cristo al servizio coraggioso della Chiesa e della società.',
+    ],
+  },
+  facts: [
+    {
+      label: { en: 'Life', pt: 'Vida', es: 'Vida', it: 'Vita' },
+      value: { en: '1347 · Siena — 1380 · Rome', pt: '1347 · Sena — 1380 · Roma', es: '1347 · Siena — 1380 · Roma', it: '1347 · Siena — 1380 · Roma' },
+    },
+    {
+      label: { en: 'Dominican vocation', pt: 'Vocação dominicana', es: 'Vocación dominica', it: 'Vocazione domenicana' },
+      value: { en: 'Third Order of Saint Dominic (Mantellate)', pt: 'Ordem Terceira de São Domingos (Mantellate)', es: 'Tercera Orden de Santo Domingo (Mantellate)', it: 'Terz’Ordine di San Domenico (Mantellate)' },
+    },
+    {
+      label: { en: 'Remembered as', pt: 'Recordada como', es: 'Recordada como', it: 'Ricordata come' },
+      value: { en: 'Virgin, Doctor of the Church and co-patroness of Europe', pt: 'Virgem, doutora da Igreja e copadroeira da Europa', es: 'Virgen, doctora de la Iglesia y copatrona de Europa', it: 'Vergine, dottore della Chiesa e compatrona d’Europa' },
+    },
+    {
+      label: { en: 'Roman Catholic memorial', pt: 'Memória católica romana', es: 'Memoria católica romana', it: 'Memoria cattolica romana' },
+      value: { en: '29 April', pt: '29 de abril', es: '29 de abril', it: '29 aprile' },
+    },
+  ],
+  sources: [
+    { name: 'Saint Catherine of Siena', url: VATICAN_CATHERINE_SIENA, language: 'en', publisher: 'Vatican News' },
+    { name: 'Saint Catherine of Siena', url: HOLY_SEE_CATHERINE_SIENA, language: 'en', publisher: 'Holy See' },
+  ],
+  verifiedAt: '2026-08-22',
+};
+
+export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas, catherineSiena];
