@@ -45,9 +45,9 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 
 assert(first.manifest.artifactType === 'canonical-ecclesial-recognitions', 'Recognition artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Recognition release must target canonical Vault.');
-assert(first.manifest.recognitionCount === 5, 'Bootstrap Recognition count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 4, 'Bootstrap Recognition Person coverage changed unexpectedly.');
-assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Bootstrap Recognition canonical Churches changed unexpectedly.');
+assert(first.manifest.recognitionCount === 10, 'Reviewed Recognition count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 9, 'Reviewed Recognition Person coverage changed unexpectedly.');
+assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Recognition canonical Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Recognition Vault write must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/recognitions/v1/current.json', 'Recognition current pointer path changed unexpectedly.');
 assert(first.manifest.immutableReleaseRoot.endsWith(first.manifest.rootSha256), 'Recognition release root must be content-addressed.');
@@ -66,6 +66,13 @@ assert(new Set(recognitionIds).size === recognitionIds.length, 'Recognition rele
 assert(JSON.stringify(recognitionIds) === JSON.stringify([...recognitionIds].sort()), 'Recognition release must be deterministically sorted.');
 assert(first.recognitions.filter((item) => item.personId === 'matthew-apostle').length === 2, 'Matthew must demonstrate one Person with separate Church-scoped Recognitions.');
 assert(first.recognitions.some((item) => item.recognitionId === 'recognition:matthew-apostle:orthodox-church-america'), 'OCA Matthew Recognition lost its Church-specific identity.');
+for (const required of [
+  'recognition:john-baptist:roman-catholic',
+  'recognition:peter-apostle:roman-catholic',
+  'recognition:paul-apostle:roman-catholic',
+  'recognition:joachim:roman-catholic',
+  'recognition:anne:roman-catholic'
+]) assert(first.recognitions.some((item) => item.recognitionId === required), `Missing reviewed Recognition ${required}.`);
 
 for (const recognition of first.recognitions) {
   assert(recognition.entityType === 'Recognition', `${recognition.recognitionId} is not emitted as Recognition.`);

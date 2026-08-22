@@ -7,116 +7,93 @@
       "id": "observance:matthew-apostle:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceType": "person-commemoration",
-      "subjects": [
-        {
-          "kind": "person",
-          "personId": "matthew-apostle",
-          "recognitionId": "recognition:matthew-apostle:roman-catholic"
-        }
-      ],
+      "subjects": [{"kind":"person","personId":"matthew-apostle","recognitionId":"recognition:matthew-apostle:roman-catholic"}],
       "scope": "church-attested",
       "occurrenceDateImplied": false,
       "calendarSystemImplied": false,
       "jurisdictionImplied": false,
       "rankImplied": false,
       "precedenceImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html",
-          "claimTypes": ["observance-attestation", "liturgical-designation"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
     },
     {
       "id": "observance:matthew-apostle:orthodox-church-america",
       "churchId": "church:orthodox-church-america",
       "observanceType": "person-commemoration",
-      "subjects": [
-        {
-          "kind": "person",
-          "personId": "matthew-apostle",
-          "recognitionId": "recognition:matthew-apostle:orthodox-church-america"
-        }
-      ],
+      "subjects": [{"kind":"person","personId":"matthew-apostle","recognitionId":"recognition:matthew-apostle:orthodox-church-america"}],
       "scope": "church-attested",
       "occurrenceDateImplied": false,
       "calendarSystemImplied": false,
       "jurisdictionImplied": false,
       "rankImplied": false,
       "precedenceImplied": false,
-      "evidence": [
-        {
-          "publisher": "Orthodox Church in America",
-          "url": "https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew",
-          "claimTypes": ["observance-attestation", "liturgical-designation"]
-        }
-      ],
+      "evidence": [{"publisher":"Orthodox Church in America","url":"https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
     },
     {
       "id": "observance:thomas-aquinas:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceType": "person-commemoration",
-      "subjects": [
-        {
-          "kind": "person",
-          "personId": "thomas-aquinas",
-          "recognitionId": "recognition:thomas-aquinas:roman-catholic"
-        }
-      ],
+      "subjects": [{"kind":"person","personId":"thomas-aquinas","recognitionId":"recognition:thomas-aquinas:roman-catholic"}],
       "scope": "church-attested",
       "occurrenceDateImplied": false,
       "calendarSystemImplied": false,
       "jurisdictionImplied": false,
       "rankImplied": false,
       "precedenceImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html",
-          "claimTypes": ["observance-attestation", "liturgical-designation"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
     },
     {
       "id": "observance:catherine-siena:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceType": "person-commemoration",
-      "subjects": [
-        {
-          "kind": "person",
-          "personId": "catherine-siena",
-          "recognitionId": "recognition:catherine-siena:roman-catholic"
-        }
-      ],
+      "subjects": [{"kind":"person","personId":"catherine-siena","recognitionId":"recognition:catherine-siena:roman-catholic"}],
       "scope": "church-attested",
       "occurrenceDateImplied": false,
       "calendarSystemImplied": false,
       "jurisdictionImplied": false,
       "rankImplied": false,
       "precedenceImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html",
-          "claimTypes": ["observance-attestation", "liturgical-designation"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
     },
     {
       "id": "observance:elizabeth-portugal:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"elizabeth-portugal","recognitionId":"recognition:elizabeth-portugal:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:john-baptist-nativity:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceType": "feast",
+      "subjects": [{"kind":"person","personId":"john-baptist","recognitionId":"recognition:john-baptist:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/liturgical-holidays/solemnity-of-the-nativity-of-saint-john-the-baptist.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:peter-paul:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceType": "multi-person-commemoration",
       "subjects": [
-        {
-          "kind": "person",
-          "personId": "elizabeth-portugal",
-          "recognitionId": "recognition:elizabeth-portugal:roman-catholic"
-        }
+        {"kind":"person","personId":"peter-apostle","recognitionId":"recognition:peter-apostle:roman-catholic"},
+        {"kind":"person","personId":"paul-apostle","recognitionId":"recognition:paul-apostle:roman-catholic"}
       ],
       "scope": "church-attested",
       "occurrenceDateImplied": false,
@@ -124,13 +101,24 @@
       "jurisdictionImplied": false,
       "rankImplied": false,
       "precedenceImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html",
-          "claimTypes": ["observance-attestation", "liturgical-designation"]
-        }
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/liturgical-holidays/saints-peter-and-paul.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:joachim-anne:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {"kind":"person","personId":"joachim","recognitionId":"recognition:joachim:roman-catholic"},
+        {"kind":"person","personId":"anne","recognitionId":"recognition:anne:roman-catholic"}
       ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
     }
   ]
