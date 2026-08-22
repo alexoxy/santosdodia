@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "observancePartitionVersion": "1.0",
+  "status": "repository-reviewed-temporal-observance-anchors",
+  "mergeTarget": "canonical-observance-vault",
+  "observances": [
+    {
+      "id": "observance:ash-wednesday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "ash-wednesday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:first-sunday-lent:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "first-sunday-lent",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/leo-xiv/en/angelus/2026/documents/20260222-angelus.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:easter-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "easter-sunday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:pentecost-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "pentecost-sunday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:first-sunday-advent:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "first-sunday-advent",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-22"
+    }
+  ]
+}

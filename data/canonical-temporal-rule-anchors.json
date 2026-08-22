@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "temporalRuleModelVersion": "1.0",
+  "status": "repository-reviewed-temporal-rule-anchors",
+  "rules": [
+    {
+      "id": "temporal-rule:ash-wednesday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:ash-wednesday:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"relative","calendar":"gregorian","anchor":"gregorian-easter","offsetDays":-46},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "temporal-rule:first-sunday-lent:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:first-sunday-lent:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"relative","calendar":"gregorian","anchor":"gregorian-easter","offsetDays":-42},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "temporal-rule:easter-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:easter-sunday:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"relative","calendar":"gregorian","anchor":"gregorian-easter","offsetDays":0},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "temporal-rule:pentecost-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:pentecost-sunday:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"relative","calendar":"gregorian","anchor":"gregorian-easter","offsetDays":49},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "temporal-rule:first-sunday-advent:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:first-sunday-advent:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"relative","calendar":"gregorian","anchor":"advent-start","offsetDays":0},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-08-22"
+    }
+  ]
+}
