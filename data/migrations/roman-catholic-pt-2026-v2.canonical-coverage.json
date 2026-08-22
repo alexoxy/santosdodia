@@ -26,8 +26,8 @@
     "occurrenceModelVersion": "1.0"
   },
   "coverage": {
-    "mappedOccurrenceAnchors": 4,
-    "remainingLegacyOccurrences": 385,
+    "mappedOccurrenceAnchors": 6,
+    "remainingLegacyOccurrences": 383,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
