@@ -78,6 +78,7 @@ export type RomanLiturgicalYear = {
   startDate: string;
   endDate: string;
   sundayCycle: RomanSundayCycle;
+  weekdayCycle: RomanWeekdayCycle;
   keyDates: Record<RomanPrincipalDay, string>;
   policy: Pick<RomanJurisdictionPolicy, 'id' | 'churchId' | 'jurisdictionId' | 'calendarSystem'>;
 };
@@ -88,6 +89,8 @@ export type RomanDateContext = {
   liturgicalYear: number;
   sundayCycle: RomanSundayCycle;
   weekdayCycle: RomanWeekdayCycle;
+  weekdayCycleAppliesToDate: boolean;
+  weekdayLectionaryPattern: 'ordinary-time-two-year' | 'seasonal-annual';
   season: RomanSeason;
   seasonWeek: number | null;
   principalDay: RomanPrincipalDay | null;
@@ -143,8 +146,8 @@ export function romanSundayCycle(liturgicalYear: number): RomanSundayCycle {
   return 'C';
 }
 
-export function romanWeekdayCycle(civilYear: number): RomanWeekdayCycle {
-  return civilYear % 2 === 0 ? 'II' : 'I';
+export function romanWeekdayCycle(liturgicalYear: number): RomanWeekdayCycle {
+  return liturgicalYear % 2 === 0 ? 'II' : 'I';
 }
 
 function transferredEpiphany(year: number): CivilDate {
@@ -208,6 +211,7 @@ export function calculateRomanLiturgicalYear(
     startDate: toISODate(start),
     endDate: toISODate(addDays(nextStart, -1)),
     sundayCycle: romanSundayCycle(liturgicalYear),
+    weekdayCycle: romanWeekdayCycle(liturgicalYear),
     keyDates,
     policy: {
       id: policy.id,
@@ -280,12 +284,15 @@ export function romanDateContext(
     seasonWeek = ordinaryWeek(date, key['baptism-of-the-lord'], key.pentecost, key['christ-the-king']);
   }
 
+  const weekdayCycleAppliesToDate = season === 'ordinary-time';
   return {
     modelVersion: '1.0',
     date: dateISO,
     liturgicalYear,
-    sundayCycle: romanSundayCycle(liturgicalYear),
-    weekdayCycle: romanWeekdayCycle(date.year),
+    sundayCycle: year.sundayCycle,
+    weekdayCycle: year.weekdayCycle,
+    weekdayCycleAppliesToDate,
+    weekdayLectionaryPattern: weekdayCycleAppliesToDate ? 'ordinary-time-two-year' : 'seasonal-annual',
     season,
     seasonWeek,
     principalDay,
