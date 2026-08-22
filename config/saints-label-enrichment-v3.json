@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "enrichmentId": "saints-labels-v3",
+  "sourceId": "wikidata",
+  "identityStream": "baseline/saints/v1/identity/wikidata/recognition-v1",
+  "progressStream": "enrichment-progress/saints/v1/wikidata/labels-v3",
+  "rawStream": "enrichment/saints/v1/raw/wikidata/labels-v3",
+  "normalizedStream": "enrichment/saints/v1/normalized/wikidata/labels-v3",
+  "apiEndpoint": "https://www.wikidata.org/w/api.php",
+  "entityLimitPerRun": 200,
+  "apiBatchSize": 50,
+  "requestDelayMs": 12000,
+  "requestTimeoutMs": 60000,
+  "maxAttempts": 4,
+  "locales": [
+    {"siteLocale":"en","wikidataLanguage":"en","wikipediaSite":"enwiki","expectedScript":"Latn"},
+    {"siteLocale":"es","wikidataLanguage":"es","wikipediaSite":"eswiki","expectedScript":"Latn"},
+    {"siteLocale":"pt","wikidataLanguage":"pt","wikipediaSite":"ptwiki","expectedScript":"Latn"},
+    {"siteLocale":"fr","wikidataLanguage":"fr","wikipediaSite":"frwiki","expectedScript":"Latn"},
+    {"siteLocale":"fil","wikidataLanguage":"tl","wikipediaSite":"tlwiki","expectedScript":"Latn"},
+    {"siteLocale":"ru","wikidataLanguage":"ru","wikipediaSite":"ruwiki","expectedScript":"Cyrl"},
+    {"siteLocale":"sw","wikidataLanguage":"sw","wikipediaSite":"swwiki","expectedScript":"Latn"},
+    {"siteLocale":"de","wikidataLanguage":"de","wikipediaSite":"dewiki","expectedScript":"Latn"},
+    {"siteLocale":"it","wikidataLanguage":"it","wikipediaSite":"itwiki","expectedScript":"Latn"},
+    {"siteLocale":"pl","wikidataLanguage":"pl","wikipediaSite":"plwiki","expectedScript":"Latn"}
+  ],
+  "policy": {
+    "exactQidInputOnly": true,
+    "nameSearchForbidden": true,
+    "languageFallbacksForbidden": true,
+    "translationForbidden": true,
+    "sourceEvidenceOnly": true,
+    "sitelinkTitleEvidenceAllowed": true,
+    "automaticCanonicalNameSelection": false,
+    "automaticPublication": false,
+    "productionPublication": false,
+    "d1ProductionMutation": false,
+    "paidUsageAuthorized": false,
+    "onQuotaExhausted": "wait-for-reset"
+  }
+}

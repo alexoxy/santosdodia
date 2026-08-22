@@ -14,6 +14,7 @@ on:
       - 'scripts/dropbox/pull-stream-set.mjs'
       - 'scripts/dropbox/pull-latest-stream.mjs'
       - 'scripts/dropbox/publish-current-json.mjs'
+      - 'config/saints-label-enrichment-v3.json'
       - 'data/liturgical-person-links.reviewed.json'
       - 'data/saint-navigation-publication.reviewed.json'
       - 'data/releases/roman-catholic-pt-2026-v2.production-request.json'
@@ -53,6 +54,7 @@ jobs:
           node scripts/check-adsense-readiness.mjs
           node scripts/product/test-portugal-saint-publication-queue.mjs
           node scripts/discovery/test-enrichment-chunk-set.mjs
+          node scripts/discovery/test-label-enrichment-version-selection.mjs
           node scripts/discovery/test-assemble-navigation-source.mjs
           node scripts/discovery/test-navigation-readiness.mjs
           node scripts/discovery/test-navigation-exports.mjs
@@ -76,21 +78,22 @@ jobs:
         shell: bash
         run: |
           node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/profile-v1 --destination staging/navigation/profile-progress --allow-missing
-          node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/labels-v2 --destination staging/navigation/label-progress --allow-missing
+          node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/labels-v2 --destination staging/navigation/label-progress-v2 --allow-missing
+          node scripts/dropbox/pull-latest-stream.mjs --stream enrichment-progress/saints/v1/wikidata/labels-v3 --destination staging/navigation/label-progress-v3 --allow-missing
           node scripts/dropbox/pull-latest-stream.mjs --stream calendar/vatican-saints/v1/pt --destination staging/navigation/vatican --allow-missing
 
       - name: Extract verified root and optional inputs
         shell: bash
         run: |
           node scripts/archive/extract-safe-tar.mjs --archive staging/navigation/identity/package.tar.gz --destination staging/navigation/identity/extracted
-          for lane in profile-progress label-progress vatican; do
+          for lane in profile-progress label-progress-v2 label-progress-v3 vatican; do
             if [ -f "staging/navigation/$lane/package.tar.gz" ]; then
               node scripts/archive/extract-safe-tar.mjs --archive "staging/navigation/$lane/package.tar.gz" --destination "staging/navigation/$lane/extracted"
             fi
           done
-          mkdir -p staging/navigation/profile-chunks staging/navigation/label-chunks
+          mkdir -p staging/navigation/profile-chunks staging/navigation/label-chunks staging/navigation/output
 
-      - name: Resolve input paths
+      - name: Resolve input paths and select complete label generation
         id: inputs
         shell: bash
         run: |
@@ -98,14 +101,23 @@ jobs:
           report="$(find staging/navigation/identity/extracted -type f -name identity-report.json | sort | tail -n 1)"
           ledger="$(find staging/navigation/identity/extracted -type f -name identity-ledger.jsonl | sort | tail -n 1)"
           profile_progress="$(find staging/navigation/profile-progress/extracted -type f -name profile-progress.json 2>/dev/null | sort | tail -n 1 || true)"
-          label_progress="$(find staging/navigation/label-progress/extracted -type f -name label-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          label_progress_v2="$(find staging/navigation/label-progress-v2/extracted -type f -name label-progress.json 2>/dev/null | sort | tail -n 1 || true)"
+          label_progress_v3="$(find staging/navigation/label-progress-v3/extracted -type f -name label-progress.json 2>/dev/null | sort | tail -n 1 || true)"
           vatican="$(find staging/navigation/vatican/extracted -type f -name normalized.json 2>/dev/null | sort | tail -n 1 || true)"
-          test -n "$manifest" && test -n "$report" && test -n "$ledger"
+          test -n "$manifest" && test -n "$report" && test -n "$ledger" && test -n "$label_progress_v2"
+          args=(--identity-manifest "$manifest" --v2-progress "$label_progress_v2" --output staging/navigation/label-selection.json)
+          if [ -n "$label_progress_v3" ]; then args+=(--v3-progress "$label_progress_v3"); fi
+          node scripts/discovery/select-label-enrichment-version.mjs "${args[@]}"
+          label_version="$(node -e "const s=require('./staging/navigation/label-selection.json');process.stdout.write(s.selectedVersion)")"
+          label_stream="$(node -e "const s=require('./staging/navigation/label-selection.json');process.stdout.write(s.streamPrefix)")"
+          if [ "$label_version" = 'v3' ]; then label_progress="$label_progress_v3"; else label_progress="$label_progress_v2"; fi
           echo "manifest=$manifest" >> "$GITHUB_OUTPUT"
           echo "report=$report" >> "$GITHUB_OUTPUT"
           echo "ledger=$ledger" >> "$GITHUB_OUTPUT"
           echo "profile_progress=$profile_progress" >> "$GITHUB_OUTPUT"
           echo "label_progress=$label_progress" >> "$GITHUB_OUTPUT"
+          echo "label_stream=$label_stream" >> "$GITHUB_OUTPUT"
+          echo "label_version=$label_version" >> "$GITHUB_OUTPUT"
           echo "vatican=$vatican" >> "$GITHUB_OUTPUT"
 
       - name: Discover and validate profile chunks
@@ -121,16 +133,17 @@ jobs:
           node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/profile-listing.json --progress "$PROGRESS" --chunk-size 40 --output staging/navigation/profile-chunk-audit.json
           node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/profile-chunk-audit.json --destination staging/navigation/profile-chunks
 
-      - name: Discover and validate multilingual label chunks
-        if: steps.inputs.outputs.label_progress != ''
+      - name: Discover and validate selected multilingual label chunks
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
           PROGRESS: ${{ steps.inputs.outputs.label_progress }}
+          STREAM: ${{ steps.inputs.outputs.label_stream }}
         shell: bash
         run: |
-          node scripts/dropbox/list-archive-chunks.mjs --stream-prefix enrichment/saints/v1/normalized/wikidata/labels-v2 --output staging/navigation/label-listing.json
+          test -n "$PROGRESS" && test -n "$STREAM"
+          node scripts/dropbox/list-archive-chunks.mjs --stream-prefix "$STREAM" --output staging/navigation/label-listing.json
           node scripts/discovery/audit-enrichment-chunk-set.mjs --listing staging/navigation/label-listing.json --progress "$PROGRESS" --chunk-size 200 --output staging/navigation/label-chunk-audit.json
           node scripts/dropbox/pull-stream-set.mjs --listing staging/navigation/label-chunk-audit.json --destination staging/navigation/label-chunks
 
@@ -314,6 +327,7 @@ jobs:
           --source staging/navigation/output/navigation-source-reviewed.json
           --source staging/navigation/output/navigation-source-public.json
           --source staging/navigation/output/readiness.json
+          --source staging/navigation/label-selection.json
 
       - name: Archive Portugal saint publication queue in Dropbox
         env:

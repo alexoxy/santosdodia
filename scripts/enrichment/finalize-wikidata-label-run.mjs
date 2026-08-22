@@ -6,26 +6,28 @@ import { fileURLToPath } from 'node:url';
 
 function argument(name, fallback = null) { const i = process.argv.indexOf(name); return i >= 0 ? process.argv[i + 1] : fallback; }
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
+function supportedEnrichmentId(value) { return ['saints-labels-v2','saints-labels-v3'].includes(value); }
 
 export function finalizeWikidataLabelRun({ config, plan, raw, normalized, previousProgress = null, now = new Date() } = {}) {
-  if (config?.schemaVersion !== 1 || config?.enrichmentId !== 'saints-labels-v2') throw new Error('Labels v2 config has the wrong identity/schema.');
-  if (!plan?.shouldRun || plan.completed || plan.enrichmentId !== config.enrichmentId) throw new Error('Cannot finalize a non-running Labels v2 plan.');
-  if (raw?.mode !== 'archive-only' || raw?.publish !== false || raw?.productionMutation !== false || normalized?.publish !== false || normalized?.productionMutation !== false) throw new Error('Labels v2 opened a prohibited publication gate.');
+  if (config?.schemaVersion !== 1 || !supportedEnrichmentId(config?.enrichmentId)) throw new Error('Labels config has the wrong identity/schema.');
+  if (!plan?.shouldRun || plan.completed || plan.enrichmentId !== config.enrichmentId) throw new Error('Cannot finalize a non-running labels plan.');
+  if (raw?.mode !== 'archive-only' || raw?.publish !== false || raw?.productionMutation !== false || normalized?.publish !== false || normalized?.productionMutation !== false) throw new Error('Labels enrichment opened a prohibited publication gate.');
   for (const value of [raw, normalized]) {
-    if (value?.enrichmentId !== config.enrichmentId || value?.sourceId !== config.sourceId || value?.identityRootSha256 !== plan.identityRootSha256) throw new Error('Labels v2 package identity mismatch.');
-    if (value?.startEntityOffset !== plan.startEntityOffset || value?.nextEntityOffset !== plan.nextEntityOffset || value?.entityCount !== plan.entityCount) throw new Error('Labels v2 package cursor mismatch.');
+    if (value?.enrichmentId !== config.enrichmentId || value?.sourceId !== config.sourceId || value?.identityRootSha256 !== plan.identityRootSha256) throw new Error('Labels package identity mismatch.');
+    if (value?.startEntityOffset !== plan.startEntityOffset || value?.nextEntityOffset !== plan.nextEntityOffset || value?.entityCount !== plan.entityCount) throw new Error('Labels package cursor mismatch.');
   }
-  if (raw.requestCount !== plan.expectedRequestCount || !Array.isArray(raw.requests) || raw.requests.length !== plan.expectedRequestCount) throw new Error('Labels v2 request count mismatch.');
-  if (JSON.stringify(raw.selectedQids) !== JSON.stringify(plan.selectedQids)) throw new Error('Labels v2 requested QIDs differ from plan.');
-  if (!Array.isArray(normalized.entities) || normalized.entities.length !== plan.entityCount) throw new Error('Labels v2 normalized entity count mismatch.');
-  if (normalized.languageFallbacksEnabled !== false || normalized.automaticCanonicalNameSelection !== false || normalized.sourceEvidenceOnly !== true) throw new Error('Labels v2 linguistic safeguards were not preserved.');
-  for (const request of raw.requests) if (!request.responseSha256 || !Number.isSafeInteger(request.responseBytes) || request.responseBytes < 1 || request.attempts?.at(-1)?.outcome !== 'success') throw new Error('Labels v2 raw response integrity is incomplete.');
-  for (const entity of normalized.entities) if (entity.entityId !== `wikidata:${entity.qid}` || entity.identityBasis !== 'exact-wikidata-identifier' || entity.publish !== false) throw new Error('Labels v2 normalized identity is unsafe.');
+  if (raw.requestCount !== plan.expectedRequestCount || !Array.isArray(raw.requests) || raw.requests.length !== plan.expectedRequestCount) throw new Error('Labels request count mismatch.');
+  if (JSON.stringify(raw.selectedQids) !== JSON.stringify(plan.selectedQids)) throw new Error('Labels requested QIDs differ from plan.');
+  if (!Array.isArray(normalized.entities) || normalized.entities.length !== plan.entityCount) throw new Error('Labels normalized entity count mismatch.');
+  if (normalized.languageFallbacksEnabled !== false || normalized.translationEnabled === true || normalized.automaticCanonicalNameSelection !== false || normalized.sourceEvidenceOnly !== true) throw new Error('Labels linguistic safeguards were not preserved.');
+  if (config.enrichmentId === 'saints-labels-v3' && normalized.sitelinkTitleEvidenceEnabled !== true) throw new Error('Labels v3 lost sitelink title provenance.');
+  for (const request of raw.requests) if (!request.responseSha256 || !Number.isSafeInteger(request.responseBytes) || request.responseBytes < 1 || request.attempts?.at(-1)?.outcome !== 'success') throw new Error('Labels raw response integrity is incomplete.');
+  for (const entity of normalized.entities) if (entity.entityId !== `wikidata:${entity.qid}` || entity.identityBasis !== 'exact-wikidata-identifier' || entity.publish !== false) throw new Error('Labels normalized identity is unsafe.');
 
   const previousRuns = Number(previousProgress?.successfulRuns ?? 0);
   const previousEntities = Number(previousProgress?.cumulativeEntitiesRequested ?? 0);
-  if (!Number.isSafeInteger(previousRuns) || previousRuns < 0 || !Number.isSafeInteger(previousEntities) || previousEntities < 0) throw new Error('Previous Labels v2 counters are invalid.');
-  if (previousProgress && (previousProgress.identityRootSha256 !== plan.identityRootSha256 || previousProgress.nextEntityOffset !== plan.startEntityOffset)) throw new Error('Previous Labels v2 watermark does not align with the current plan.');
+  if (!Number.isSafeInteger(previousRuns) || previousRuns < 0 || !Number.isSafeInteger(previousEntities) || previousEntities < 0) throw new Error('Previous labels counters are invalid.');
+  if (previousProgress && (previousProgress.identityRootSha256 !== plan.identityRootSha256 || previousProgress.nextEntityOffset !== plan.startEntityOffset || previousProgress.enrichmentId !== config.enrichmentId)) throw new Error('Previous labels watermark does not align with the current plan.');
   return {
     schemaVersion: 1,
     enrichmentId: config.enrichmentId,

@@ -46,6 +46,12 @@ jobs:
       - name: Test Portugal P0 review pack safety
         run: node scripts/product/test-portugal-p0-review-pack.mjs
 
+      - name: Test exact-QID multilingual label and sitelink enrichment
+        run: |
+          node scripts/enrichment/test-wikidata-label-pipeline.mjs
+          node scripts/discovery/test-label-enrichment-version-selection.mjs
+          node scripts/discovery/test-assemble-navigation-source.mjs
+
       - name: Test public publication boundaries
         run: npm run publication:boundary-test
 

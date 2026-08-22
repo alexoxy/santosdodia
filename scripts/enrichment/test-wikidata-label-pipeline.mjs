@@ -3,17 +3,19 @@ import { planWikidataLabelRun } from './plan-wikidata-label-run.mjs';
 import { buildEntityBody, normalizeLabelResponses } from './fetch-wikidata-label-chunk.mjs';
 import { finalizeWikidataLabelRun } from './finalize-wikidata-label-run.mjs';
 
+const baseLocales = [
+  { siteLocale: 'en', wikidataLanguage: 'en', expectedScript: 'Latn' }, { siteLocale: 'es', wikidataLanguage: 'es', expectedScript: 'Latn' },
+  { siteLocale: 'pt', wikidataLanguage: 'pt', expectedScript: 'Latn' }, { siteLocale: 'fr', wikidataLanguage: 'fr', expectedScript: 'Latn' },
+  { siteLocale: 'fil', wikidataLanguage: 'tl', expectedScript: 'Latn' }, { siteLocale: 'ru', wikidataLanguage: 'ru', expectedScript: 'Cyrl' },
+  { siteLocale: 'sw', wikidataLanguage: 'sw', expectedScript: 'Latn' }, { siteLocale: 'de', wikidataLanguage: 'de', expectedScript: 'Latn' },
+  { siteLocale: 'it', wikidataLanguage: 'it', expectedScript: 'Latn' }, { siteLocale: 'pl', wikidataLanguage: 'pl', expectedScript: 'Latn' }
+];
+const sites={en:'enwiki',es:'eswiki',pt:'ptwiki',fr:'frwiki',fil:'tlwiki',ru:'ruwiki',sw:'swwiki',de:'dewiki',it:'itwiki',pl:'plwiki'};
 const config = {
   schemaVersion: 1,
   enrichmentId: 'saints-labels-v2', sourceId: 'wikidata', entityLimitPerRun: 2, apiBatchSize: 1,
   rawStream: 'enrichment/saints/v1/raw/wikidata/labels-v2', normalizedStream: 'enrichment/saints/v1/normalized/wikidata/labels-v2', progressStream: 'enrichment-progress/saints/v1/wikidata/labels-v2',
-  locales: [
-    { siteLocale: 'en', wikidataLanguage: 'en', expectedScript: 'Latn' }, { siteLocale: 'es', wikidataLanguage: 'es', expectedScript: 'Latn' },
-    { siteLocale: 'pt', wikidataLanguage: 'pt', expectedScript: 'Latn' }, { siteLocale: 'fr', wikidataLanguage: 'fr', expectedScript: 'Latn' },
-    { siteLocale: 'fil', wikidataLanguage: 'tl', expectedScript: 'Latn' }, { siteLocale: 'ru', wikidataLanguage: 'ru', expectedScript: 'Cyrl' },
-    { siteLocale: 'sw', wikidataLanguage: 'sw', expectedScript: 'Latn' }, { siteLocale: 'de', wikidataLanguage: 'de', expectedScript: 'Latn' },
-    { siteLocale: 'it', wikidataLanguage: 'it', expectedScript: 'Latn' }, { siteLocale: 'pl', wikidataLanguage: 'pl', expectedScript: 'Latn' }
-  ],
+  locales: baseLocales,
   policy: { exactQidInputOnly: true, languageFallbacksForbidden: true, automaticCanonicalNameSelection: false, productionPublication: false }
 };
 const root = 'a'.repeat(64);
@@ -48,4 +50,36 @@ assert.equal(progress.nextEntityOffset, 2); assert.equal(progress.successfulRuns
 
 const old = { ...progress, identityRootSha256: 'b'.repeat(64) };
 assert.throws(() => planWikidataLabelRun({ config, identityManifest: manifest, identityReport: report, identityLedger: ledger, previousProgress: old }), /Identity root changed/);
+
+const configV3={
+  ...config,
+  enrichmentId:'saints-labels-v3',
+  rawStream:'enrichment/saints/v1/raw/wikidata/labels-v3',
+  normalizedStream:'enrichment/saints/v1/normalized/wikidata/labels-v3',
+  progressStream:'enrichment-progress/saints/v1/wikidata/labels-v3',
+  locales:baseLocales.map((locale)=>({...locale,wikipediaSite:sites[locale.siteLocale]})),
+  policy:{...config.policy,translationForbidden:true,sitelinkTitleEvidenceAllowed:true}
+};
+const planV3=planWikidataLabelRun({config:configV3,identityManifest:manifest,identityReport:report,identityLedger:ledger});
+const bodyV3=buildEntityBody(['Q1'],['en','pt'],['enwiki','ptwiki']);
+assert.equal(bodyV3.get('props'),'labels|aliases|sitelinks');
+assert.equal(bodyV3.get('sitefilter'),'enwiki|ptwiki');
+assert.equal(bodyV3.has('languagefallbacks'),false);
+const requestsV3=[{value:{entities:{
+  Q1:{labels:{en:{value:'Saint One'}},aliases:{},sitelinks:{ptwiki:{title:'Santo Um'},enwiki:{title:'Saint One'}}},
+  Q2:{labels:{en:{value:'Saint Two'}},aliases:{},sitelinks:{ptwiki:{title:'São Dois'},ruwiki:{title:'Святой Два'}}}
+}}}];
+const normalizedV3=normalizeLabelResponses({config:configV3,plan:planV3,requests:requestsV3});
+assert.equal(normalizedV3.entities[0].labels.pt,undefined);
+assert.equal(normalizedV3.entities[0].sitelinks.pt.value,'Santo Um');
+assert.equal(normalizedV3.entities[0].sitelinks.pt.sourceKind,'wikipedia-sitelink-title');
+assert.equal(normalizedV3.entities[1].sitelinks.ru.scriptStatus,'expected');
+assert.equal(normalizedV3.sitelinkTitleEvidenceEnabled,true);
+assert.equal(normalizedV3.translationEnabled,false);
+const rawV3={...raw,enrichmentId:'saints-labels-v3'};
+const normalizedV3ForFinalize={...normalizedV3,identityRootSha256:root,startEntityOffset:0,nextEntityOffset:2,entityCount:2};
+const progressV3=finalizeWikidataLabelRun({config:configV3,plan:planV3,raw:rawV3,normalized:normalizedV3ForFinalize,now:new Date('2026-08-11T00:01:00Z')});
+assert.equal(progressV3.enrichmentId,'saints-labels-v3');
+assert.equal(progressV3.nextEntityOffset,2);
+
 console.log('Dynamic-root multilingual label enrichment tests passed.');
