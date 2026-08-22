@@ -94,8 +94,10 @@ try {
   const firstPointer = JSON.parse(firstPointerBytes.toString('utf8'));
   assert.equal(firstPointer.artifactType, 'canonical-ecclesial-recognitions');
   assert.equal(firstPointer.rootSha256, first.built.manifest.rootSha256);
-  assert.equal(firstPointer.recognitionCount, 5);
-  assert.equal(firstPointer.personCoverageCount, 4);
+  assert.equal(firstPointer.recognitionCount, first.built.manifest.recognitionCount);
+  assert.equal(firstPointer.personCoverageCount, first.built.manifest.personCoverageCount);
+  assert.equal(firstPointer.recognitionCount, 10);
+  assert.equal(firstPointer.personCoverageCount, 9);
   assert.deepEqual(firstPointer.churches, ['church:orthodox-church-america', 'church:roman-catholic']);
   assert.ok(!('peopleCount' in firstPointer), 'Recognition pointer leaked Person-specific count semantics.');
   assert.ok(dropbox.uploads.every((item) => !item.path.includes('/canonical/people/v1/')), 'Recognition uploader touched Person Vault paths.');
