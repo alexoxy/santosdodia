@@ -30,4 +30,18 @@ assert.equal(result.summary.primaryEvidence.remainingOpenResearch,0);
 assert.equal(result.summary.evidencePolicy.singleFirstPartyAuthorityAllowed,true);
 assert.ok(result.items.every((item)=>item.status==='evidence-ready-for-editorial-review'&&item.evidenceStatus==='primary-source-evidence-ready'&&item.primaryEvidenceCandidates.length===1&&item.publicationAllowed===false&&item.automaticLinkAllowed===false&&item.advertisingEligible===false));
 assert.ok(result.items.every((item)=>item.primaryEvidenceCandidates[0].bindingDecisionStatus==='pending-editorial-review'&&item.primaryEvidenceCandidates[0].automaticBindingAllowed===false));
+
+const outOfScopeEvidence={
+  ...primaryEvidence,
+  records:[{
+    ...primaryEvidence.records[0],
+    sourceRecordHash:'b'.repeat(64),
+  }],
+};
+const outOfScopeResult=buildPortugalP0IndependentResearchQueue({p0Pack,corroboration,primaryEvidence:outOfScopeEvidence});
+assert.equal(outOfScopeResult.items.length,2);
+assert.equal(outOfScopeResult.summary.primaryEvidence.evidenceReadyForEditorialReview,0);
+assert.equal(outOfScopeResult.summary.primaryEvidence.remainingOpenResearch,2);
+assert.ok(outOfScopeResult.items.every((item)=>item.status==='research-required'&&item.primaryEvidenceCandidates.length===0));
+assert.ok(outOfScopeResult.items.every((item)=>item.publicationAllowed===false&&item.automaticLinkAllowed===false&&item.advertisingEligible===false));
 console.log('Portugal P0 independent research queue tests passed.');
