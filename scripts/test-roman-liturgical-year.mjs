@@ -100,7 +100,8 @@ try {
   const holySaturdayColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-04-04', roman.ROMAN_PORTUGAL_POLICY));
   assert(holySaturdayColour.defaultColour === null && holySaturdayColour.specialCase === 'holy-saturday-no-mass-before-easter-vigil', 'Holy Saturday must not be assigned a fake daytime Mass colour.');
   const deadColours = colours.romanMassForTheDeadColourOptions();
-  assert(deadColours.defaultColour === 'violet' && deadColours.permittedAlternativeColours[0] === 'black', 'Masses for the Dead must expose violet with black as an optional customary alternative.');
+  assert(deadColours.permittedColours.some(item => item.colour === 'violet' && item.condition === 'permitted'), 'Masses for the Dead must permit violet.');
+  assert(deadColours.permittedColours.some(item => item.colour === 'black' && item.condition === 'where-customary'), 'Masses for the Dead must permit black only where customary.');
   assert(JSON.stringify(colours.ROMAN_VESTMENT_COLOUR_CODES) === JSON.stringify(['white','red','green','violet','black','rose']), 'Canonical Roman vestment colour code set drifted.');
 
   for (let liturgicalYear = 1900; liturgicalYear <= 2200; liturgicalYear += 1) {
