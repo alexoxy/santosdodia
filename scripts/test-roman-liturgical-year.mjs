@@ -36,7 +36,7 @@ try {
   assert(roman.romanSundayCycle(2025) === 'C', '2025 must use Sunday cycle C.');
   assert(roman.romanSundayCycle(2026) === 'A', '2026 must use Sunday cycle A.');
   assert(roman.romanSundayCycle(2027) === 'B', '2027 must use Sunday cycle B.');
-  assert(roman.romanWeekdayCycle(2026) === 'II' && roman.romanWeekdayCycle(2027) === 'I', 'Weekday I/II parity rule regressed.');
+  assert(roman.romanWeekdayCycle(2026) === 'II' && roman.romanWeekdayCycle(2027) === 'I', 'Weekday I/II liturgical-year parity rule regressed.');
 
   const portugal2026 = roman.calculateRomanLiturgicalYear(2026, roman.ROMAN_PORTUGAL_POLICY);
   const expected2026 = {
@@ -54,12 +54,14 @@ try {
     'christ-the-king': '2026-11-22'
   };
   assert(portugal2026.startDate === expected2026.startDate, `Portugal 2026 Advent start drifted: ${portugal2026.startDate}.`);
+  assert(portugal2026.sundayCycle === 'A' && portugal2026.weekdayCycle === 'II', 'Portugal liturgical year 2026 must be A/II.');
   for (const [key, value] of Object.entries(expected2026)) {
     if (key === 'startDate') continue;
     assert(portugal2026.keyDates[key] === value, `Portugal 2026 ${key} expected ${value}, got ${portugal2026.keyDates[key]}.`);
   }
 
   const portugal2027 = roman.calculateRomanLiturgicalYear(2027, roman.ROMAN_PORTUGAL_POLICY);
+  assert(portugal2027.sundayCycle === 'B' && portugal2027.weekdayCycle === 'I', 'Portugal liturgical year 2027 must be B/I.');
   assert(portugal2027.keyDates['easter-sunday'] === '2027-03-28', 'Portugal 2027 Easter regression.');
   assert(portugal2027.keyDates.ascension === '2027-05-09', 'Portugal 2027 Sunday Ascension regression.');
 
@@ -69,6 +71,7 @@ try {
 
   const june1 = roman.romanDateContext('2026-06-01', roman.ROMAN_PORTUGAL_POLICY);
   assert(june1.liturgicalYear === 2026 && june1.sundayCycle === 'A' && june1.weekdayCycle === 'II', 'June 2026 cycle context regressed.');
+  assert(june1.weekdayCycleAppliesToDate === true && june1.weekdayLectionaryPattern === 'ordinary-time-two-year', 'Ordinary Time date must expose the two-year weekday cycle as applicable.');
   assert(june1.season === 'ordinary-time' && june1.seasonWeek === 9, `2026-06-01 must be Ordinary Time week IX, got ${june1.season}/${june1.seasonWeek}.`);
   const june7 = roman.romanDateContext('2026-06-07', roman.ROMAN_PORTUGAL_POLICY);
   assert(june7.season === 'ordinary-time' && june7.seasonWeek === 10, '2026-06-07 must resolve as Ordinary Time week X.');
@@ -76,13 +79,15 @@ try {
   const adventBoundary = roman.romanDateContext('2026-12-01', roman.ROMAN_PORTUGAL_POLICY);
   assert(adventBoundary.liturgicalYear === 2027, 'December 2026 after Advent start must belong to liturgical year 2027.');
   assert(adventBoundary.sundayCycle === 'B', 'December 2026 must already use Sunday cycle B.');
-  assert(adventBoundary.weekdayCycle === 'II', 'December 2026 weekday cycle must still be II because it follows the civil-year parity rule.');
+  assert(adventBoundary.weekdayCycle === 'I', 'December 2026 after Advent start must expose the 2026/2027 liturgical-year weekday cycle I.');
+  assert(adventBoundary.weekdayCycleAppliesToDate === false && adventBoundary.weekdayLectionaryPattern === 'seasonal-annual', 'Advent weekday readings must be identified as the annual seasonal series rather than an I/II Ordinary Time selection.');
   assert(adventBoundary.season === 'advent' && adventBoundary.seasonWeek === 1, '2026-12-01 must be Advent week I.');
 
   for (let liturgicalYear = 1900; liturgicalYear <= 2200; liturgicalYear += 1) {
     const calculated = roman.calculateRomanLiturgicalYear(liturgicalYear, roman.ROMAN_PORTUGAL_POLICY);
     const start = date(calculated.startDate);
     const easter = date(calculated.keyDates['easter-sunday']);
+    assert(calculated.weekdayCycle === (liturgicalYear % 2 === 0 ? 'II' : 'I'), `${liturgicalYear} weekday cycle parity drifted.`);
     assert(start.getUTCDay() === 0, `${liturgicalYear} Advent start is not Sunday.`);
     assert(start.getUTCMonth() === 10 || start.getUTCMonth() === 11, `${liturgicalYear} Advent start month is invalid.`);
     const monthDay = (start.getUTCMonth() + 1) * 100 + start.getUTCDate();
@@ -95,7 +100,7 @@ try {
     assert(days(calculated.keyDates['christ-the-king'], nextAdvent) === 7, `${liturgicalYear} Christ the King must be seven days before the next Advent.`);
   }
 
-  console.log('Roman liturgical-year kernel passed 2024-2027 source vectors, Advent/cycle boundaries, Ordinary Time week logic and 1900-2200 perennial invariants.');
+  console.log('Roman liturgical-year kernel passed 2024-2027 A/B/C + I/II source vectors, Advent boundaries, seasonal weekday applicability, Ordinary Time week logic and 1900-2200 perennial invariants.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
