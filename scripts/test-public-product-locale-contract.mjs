@@ -19,7 +19,9 @@ function objectBlock(text,marker){
 function keys(block){return [...block.matchAll(/(?:^|[,\n]\s*)([A-Za-z][A-Za-z0-9]*):/g)].map(match=>match[1]).sort()}
 
 const i18n=source('lib/i18n.ts');
-assert.match(i18n,/PUBLIC_LOCALES\s*=\s*\['en','es','pt','fr','it'\]/);
+assert.match(i18n,/PUBLIC_LOCALES\s*=\s*\['en','es','pt','it'\]/);
+const publicLocalePolicy=source('lib/public-locale-policy.ts');
+assert.match(publicLocalePolicy,/READY_PUBLIC_LOCALES\s*=\s*PUBLIC_LOCALES/,'Ready public locales must use the canonical public-locale gate.');
 const enUi=objectBlock(i18n,'const en=');
 const itUi=objectBlock(i18n,'const it:UiCopy=');
 assert.deepEqual(keys(itUi),keys(enUi),'Italian UI copy must implement every English UI key explicitly.');
@@ -81,7 +83,7 @@ assert.match(d1Adapter,/if \(!preferred \|\| !names\.en\) return null/,'Publishe
 assert.doesNotMatch(d1Adapter,/names\[requestedLocale\]\s*\?\?\s*names\.en/,'D1 adapter must never silently fall back to English.');
 
 const chrome=source('app/components/SiteChrome.tsx');
-assert.match(chrome,/PUBLIC_LOCALES\.map/,'The public language selector must show only complete locales.');
+assert.match(chrome,/READY_PUBLIC_LOCALES\.map/,'The public language selector must show only ready locales.');
 assert.doesNotMatch(chrome,/SUPPORTED_LOCALES\.map/,'Incomplete locales must not be advertised as public-complete.');
 
 const institutionalPage=source('app/components/InstitutionalPage.tsx');
