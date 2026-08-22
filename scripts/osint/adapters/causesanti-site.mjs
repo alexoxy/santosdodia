@@ -90,7 +90,7 @@ async function fetchWithRetry(url, { fetchImpl, maxAttempts, timeoutMs, userAgen
 }
 
 export async function runCausesantiCrawler({ outputRoot = 'data/osint/runs', env = process.env, fetchImpl = fetch, now = () => Date.now(), uuid = randomUUID } = {}) {
-  const delayMs = boundedInteger(env.CAUSESANTI_DELAY_MS, config.crawl.defaultDelayMs, 1000, 15000);
+  const delayMs = boundedInteger(env.CAUSESANTI_DELAY_MS, config.crawl.defaultDelayMs, config.crawl.defaultDelayMs, 15000);
   const maxUrls = boundedInteger(env.CAUSESANTI_MAX_URLS, config.crawl.defaultMaxUrls, 1, 20000);
   const timeoutMs = boundedInteger(env.CAUSESANTI_REQUEST_TIMEOUT_MS, config.crawl.requestTimeoutMs, 5000, 180000);
   const maxAttempts = boundedInteger(env.CAUSESANTI_MAX_ATTEMPTS, config.crawl.maxAttempts, 1, 6);
