@@ -1,0 +1,69 @@
+name: Archive Causes of Saints primary source
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/causesanti-source.json'
+      - 'scripts/osint/adapters/causesanti-site.mjs'
+      - '.github/workflows/acquire-causesanti-site.yml'
+  schedule:
+    - cron: '17 3 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: causesanti-primary-source-dump
+  cancel-in-progress: false
+
+jobs:
+  crawl-and-archive:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Validate safety boundaries
+        run: |
+          npm run publication:boundary-test
+          npm run autonomy:test
+          npm run cloudflare:guardrails-audit
+          npm run repo:audit
+
+      - name: Crawl Causes of Saints into immutable raw staging
+        env:
+          CAUSESANTI_MAX_URLS: '6000'
+          CAUSESANTI_DELAY_MS: '1500'
+          CAUSESANTI_REQUEST_TIMEOUT_MS: '60000'
+          CAUSESANTI_MAX_ATTEMPTS: '4'
+        run: node scripts/osint/adapters/causesanti-site.mjs
+
+      - name: Upload crawl evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: causesanti-primary-source-${{ github.run_id }}
+          path: data/osint/runs/causesanti/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Archive immutable raw dump in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream sources/causesanti-va/raw --source data/osint/runs/causesanti
