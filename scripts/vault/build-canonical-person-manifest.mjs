@@ -90,9 +90,9 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
   const releaseRoot = `/vault/canonical/people/v1/releases/${rootSha256}`;
   const sourceSha256 = sha256(sourceBytes ?? JSON.stringify(dataset));
 
-  // Everything in manifest.json is content-derived and byte-stable for an
-  // identical canonical release. Run-specific metadata belongs in the build
-  // receipt so the same root can never map to different immutable bytes.
+  // Everything in manifest.json is derived only from canonical semantics. Raw
+  // source-byte provenance belongs in the build receipt so formatting-only
+  // source changes can never map one content root to different immutable bytes.
   const manifest = {
     schemaVersion: 1,
     artifactType: 'canonical-person-identities',
@@ -101,7 +101,6 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
     releaseId: `canonical-people-v1-${rootSha256.slice(0, 16)}`,
     rootSha256,
     sourceDataset: 'data/canonical-person-anchors.json',
-    sourceDatasetSha256: sourceSha256,
     peopleCount: people.length,
     legacyBridgeCount: bridges.length,
     locales,
@@ -130,7 +129,7 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
     sourceCommit: sourceCommit ?? null,
     generatedAt: generatedAt ?? null,
     immutableReleaseRoot: releaseRoot,
-    canonicalPayloadChanged: true,
+    canonicalPayloadProduced: true,
     publicationChanged: false,
   };
 

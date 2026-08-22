@@ -1,0 +1,91 @@
+name: Publish canonical Person Vault
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Canonical Vault operation
+        required: true
+        default: verify-only
+        type: choice
+        options:
+          - verify-only
+          - write-and-promote-current
+      confirmation:
+        description: Type WRITE_CANONICAL_PERSON_V1 to permit Dropbox writes
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canonical-person-vault-write
+  cancel-in-progress: false
+
+jobs:
+  canonical-person-vault:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=optional
+
+      - name: Build deterministic canonical Person release
+        run: |
+          rm -rf .vault/canonical-people
+          node scripts/vault/build-canonical-person-manifest.mjs --output .vault/canonical-people
+
+      - name: Verify canonical Person semantics and determinism
+        run: npm run vault:test
+
+      - name: Verify immutable Dropbox uploader semantics
+        run: node scripts/vault/test-dropbox-canonical-uploader.mjs
+
+      - name: Show local Vault write plan
+        run: |
+          node scripts/vault/upload-canonical-person-release.mjs \
+            --input .vault/canonical-people \
+            --dry-run true \
+            --promote-current ${{ inputs.mode == 'write-and-promote-current' }}
+
+      - name: Require explicit canonical write confirmation
+        if: ${{ inputs.mode == 'write-and-promote-current' }}
+        env:
+          CANONICAL_WRITE_CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          if [ "$CANONICAL_WRITE_CONFIRMATION" != "WRITE_CANONICAL_PERSON_V1" ]; then
+            echo "Refusing Dropbox Vault write: confirmation phrase mismatch."
+            exit 1
+          fi
+
+      - name: Write immutable release and promote current pointer
+        if: ${{ inputs.mode == 'write-and-promote-current' }}
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: |
+          node scripts/vault/upload-canonical-person-release.mjs \
+            --input .vault/canonical-people \
+            --promote-current true | tee .vault/canonical-people/dropbox-write-result.json
+
+      - name: Preserve operational build receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-person-vault-${{ github.run_id }}
+          path: |
+            .vault/canonical-people/manifest.json
+            .vault/canonical-people/build-receipt.json
+            .vault/canonical-people/dropbox-write-result.json
+          if-no-files-found: ignore
+          retention-days: 30

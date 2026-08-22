@@ -24,13 +24,23 @@ const second = buildCanonicalPersonVaultRelease(dataset, {
   sourceCommit: 'commit-b',
   generatedAt: '2026-08-23T00:00:00.000Z',
 });
+const reformattedSourceBytes = `${JSON.stringify(dataset)}\n`;
+const reformatted = buildCanonicalPersonVaultRelease(dataset, {
+  sourceBytes: reformattedSourceBytes,
+  sourceCommit: 'commit-c',
+  generatedAt: '2026-08-24T00:00:00.000Z',
+});
 
 assert(first.manifest.rootSha256 === second.manifest.rootSha256, 'Canonical Person root hash must be content-deterministic across runs/commits.');
+assert(first.manifest.rootSha256 === reformatted.manifest.rootSha256, 'Formatting-only source changes must not alter the canonical root.');
 assert(JSON.stringify(first.manifest) === JSON.stringify(second.manifest), 'Canonical manifest bytes must remain deterministic for the same content root.');
+assert(JSON.stringify(first.manifest) === JSON.stringify(reformatted.manifest), 'Formatting-only source changes must not alter immutable manifest bytes for the same root.');
 assert(first.buildReceipt.sourceCommit !== second.buildReceipt.sourceCommit, 'Run-specific source commit must live in the build receipt.');
 assert(first.buildReceipt.generatedAt !== second.buildReceipt.generatedAt, 'Run-specific generatedAt must live in the build receipt.');
+assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourceDatasetSha256, 'Raw source-byte hash should preserve formatting/provenance changes in the build receipt.');
 assert(!('sourceCommit' in first.manifest), 'Immutable canonical manifest must not contain a run-specific sourceCommit.');
 assert(!('generatedAt' in first.manifest), 'Immutable canonical manifest must not contain a run-specific generatedAt.');
+assert(!('sourceDatasetSha256' in first.manifest), 'Immutable canonical manifest must not contain raw source-byte provenance.');
 assert(first.buildReceipt.rootSha256 === first.manifest.rootSha256, 'Build receipt must point to the immutable canonical root it generated.');
 assert(first.buildReceipt.publicationChanged === false, 'Building a canonical release must not imply runtime publication.');
 assert(first.manifest.peopleCount === dataset.people.length, 'Canonical Person manifest count must match the reviewed anchor dataset.');
