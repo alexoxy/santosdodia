@@ -10,6 +10,14 @@ import {
   localizeRomanSeason,
   normalizeLiturgicalToolLocale
 } from '../../../../lib/knowledge/liturgical-calendar-localization';
+import {
+  localizeRomanVestmentColourResolution,
+  romanVestmentColourGuide
+} from '../../../../lib/knowledge/roman-vestment-colour-localization';
+import {
+  romanMassForTheDeadColourOptions,
+  romanVestmentColoursForDateContext
+} from '../../../../lib/knowledge/roman-vestment-colours';
 
 function validYear(value: string | null): number | null {
   if (!value) return null;
@@ -49,6 +57,7 @@ export async function GET(request: NextRequest) {
   const liturgicalYear = requestedYear ?? (date ? liturgicalYearForDate(date) : new Date().getUTCFullYear());
   const year = calculateRomanLiturgicalYear(liturgicalYear, policy);
   const dateContext = date ? romanDateContext(date, policy) : null;
+  const vestmentColours = dateContext ? romanVestmentColoursForDateContext(dateContext) : null;
 
   const localized = {
     keyDates: Object.fromEntries(Object.entries(year.keyDates).map(([key, value]) => [key, {
@@ -58,8 +67,10 @@ export async function GET(request: NextRequest) {
     date: dateContext ? {
       ...dateContext,
       seasonLabel: localizeRomanSeason(locale, dateContext.season),
-      principalDayLabel: dateContext.principalDay ? localizeRomanPrincipalDay(locale, dateContext.principalDay) : null
-    } : null
+      principalDayLabel: dateContext.principalDay ? localizeRomanPrincipalDay(locale, dateContext.principalDay) : null,
+      vestmentColours: vestmentColours ? localizeRomanVestmentColourResolution(locale, vestmentColours) : null
+    } : null,
+    vestmentColourGuide: romanVestmentColourGuide(locale)
   };
 
   return Response.json({
@@ -69,18 +80,29 @@ export async function GET(request: NextRequest) {
       calendarSystem: policy.calendarSystem,
       liturgicalYear: year,
       dateContext,
+      vestmentColours,
+      massForTheDeadColourOptions: romanMassForTheDeadColourOptions(),
+      vestmentColourGuide: romanVestmentColourGuide(locale),
       localized
     },
     meta: {
       engine: 'santosdia-roman-liturgical-year',
-      engineVersion: '1.0',
+      engineVersion: '1.1',
       locale,
       autonomousAnnualCalculation: true,
       requestTimeExternalDependency: false,
       supportedYearRange: { min: 1584, max: 4099 },
       cycleRules: {
         sunday: 'A/B/C by liturgical year; the new cycle starts on the First Sunday of Advent.',
-        weekday: 'I in odd civil years; II in even civil years.'
+        weekday: 'I/II by liturgical year; the new liturgical year starts on the First Sunday of Advent. The two-year weekday cycle applies to Ordinary Time, while Advent, Christmas, Lent and Easter use their own seasonal annual series.'
+      },
+      vestmentColourRules: {
+        canonicalCodes: ['white', 'red', 'green', 'violet', 'black', 'rose'],
+        finalColourMayBeInferredFromSeasonAlone: false,
+        roseIsOptionalWhereCustomary: true,
+        blackIsOptionalForMassesForTheDeadWhereCustomary: true,
+        festiveVestmentsAreSeparateFromCanonicalColourCodes: true,
+        authoritySourceId: 'snl-portugal-vestment-colours'
       },
       dayBoundary: 'This endpoint calculates civil-date context. Sundays and solemnities may begin liturgically with First Vespers on the preceding evening.',
       authority: policy.authority
