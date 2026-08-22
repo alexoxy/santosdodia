@@ -47,7 +47,7 @@ jobs:
       - name: Crawl Causes of Saints into immutable raw staging
         env:
           CAUSESANTI_MAX_URLS: '6000'
-          CAUSESANTI_DELAY_MS: '1500'
+          CAUSESANTI_DELAY_MS: '2000'
           CAUSESANTI_REQUEST_TIMEOUT_MS: '60000'
           CAUSESANTI_MAX_ATTEMPTS: '4'
         run: node scripts/osint/adapters/causesanti-site.mjs
