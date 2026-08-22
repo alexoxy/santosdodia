@@ -160,7 +160,16 @@ export async function loadCanonicalPersonRelease(inputRoot) {
   return { manifest, people, bridges, fileBytes, buildReceipt, buildReceiptBytes };
 }
 
-function currentPointerFor(release) {
+function transitionPaths(fromRootSha256, toRootSha256) {
+  const from = fromRootSha256 ?? 'none';
+  const base = '/vault/rollback/canonical/people/v1';
+  return {
+    intentPath: `${base}/transition-intents/${from}--${toRootSha256}.json`,
+    commitPath: `${base}/transition-commits/${from}--${toRootSha256}.json`,
+  };
+}
+
+function currentPointerFor(release, { previousRootSha256 = null, rollbackPointerPath = null, transitionIntentPath, transitionCommitPath } = {}) {
   const { manifest, fileBytes } = release;
   return {
     schemaVersion: 1,
@@ -173,23 +182,81 @@ function currentPointerFor(release) {
     manifestSha256: sha256(fileBytes['manifest.json']),
     peopleCount: manifest.peopleCount,
     deletionPolicy: manifest.deletionPolicy,
+    previousRootSha256,
+    rollbackPointerPath,
+    transitionIntentPath,
+    transitionCommitPath,
   };
 }
 
-function transitionFor(previousPointer, nextPointer, rollbackPointerPath) {
-  const previousBytes = previousPointer ? jsonBytes(previousPointer) : null;
-  const nextBytes = jsonBytes(nextPointer);
+function transitionIntentFor(previousBytes, nextPointer) {
   return {
     schemaVersion: 1,
-    receiptType: 'canonical-current-transition',
+    receiptType: 'canonical-current-transition-intent',
     artifactType: nextPointer.artifactType,
-    fromRootSha256: previousPointer?.rootSha256 ?? null,
+    fromRootSha256: nextPointer.previousRootSha256,
     toRootSha256: nextPointer.rootSha256,
     fromPointerSha256: previousBytes ? sha256(previousBytes) : null,
-    toPointerSha256: sha256(nextBytes),
-    rollbackPointerPath: rollbackPointerPath ?? null,
+    toPointerSha256: sha256(jsonBytes(nextPointer)),
+    rollbackPointerPath: nextPointer.rollbackPointerPath,
+    currentPointerPath: '/vault/canonical/people/v1/current.json',
+    committed: false,
     publicationChanged: false,
   };
+}
+
+function transitionCommitFor(nextPointer) {
+  return {
+    schemaVersion: 1,
+    receiptType: 'canonical-current-transition-commit',
+    artifactType: nextPointer.artifactType,
+    fromRootSha256: nextPointer.previousRootSha256,
+    toRootSha256: nextPointer.rootSha256,
+    transitionIntentPath: nextPointer.transitionIntentPath,
+    rollbackPointerPath: nextPointer.rollbackPointerPath,
+    currentPointerPath: '/vault/canonical/people/v1/current.json',
+    currentPointerSha256: sha256(jsonBytes(nextPointer)),
+    committed: true,
+    publicationChanged: false,
+  };
+}
+
+function assertPointerMatchesRelease(pointer, release) {
+  assert(pointer?.pointerType === 'canonical-current' && pointer?.artifactType === release.manifest.artifactType, 'Existing canonical Person current pointer has incompatible semantics.');
+  assert(pointer.identityModelVersion === release.manifest.identityModelVersion, 'Existing current pointer identity model differs from the canonical release.');
+  assert(pointer.releaseId === release.manifest.releaseId, 'Existing current pointer releaseId differs from the canonical release.');
+  assert(pointer.rootSha256 === release.manifest.rootSha256, 'Existing current pointer root differs from the canonical release.');
+  assert(pointer.immutableReleaseRoot === release.manifest.immutableReleaseRoot, 'Existing current pointer immutable root differs from the canonical release.');
+  assert(pointer.manifestSha256 === sha256(release.fileBytes['manifest.json']), 'Existing current pointer manifest hash differs from the canonical release.');
+  assert(pointer.peopleCount === release.manifest.peopleCount, 'Existing current pointer people count differs from the canonical release.');
+  assert(pointer.deletionPolicy === release.manifest.deletionPolicy, 'Existing current pointer deletion policy differs from the canonical release.');
+  assert(typeof pointer.transitionIntentPath === 'string' && typeof pointer.transitionCommitPath === 'string', 'Existing current pointer is missing transition receipt paths.');
+}
+
+async function ensureTransitionReceipts(fetchImpl, token, previousBytes, nextPointer) {
+  const expectedPaths = transitionPaths(nextPointer.previousRootSha256, nextPointer.rootSha256);
+  assert(nextPointer.transitionIntentPath === expectedPaths.intentPath, 'Current pointer transition intent path is not deterministic.');
+  assert(nextPointer.transitionCommitPath === expectedPaths.commitPath, 'Current pointer transition commit path is not deterministic.');
+  const intent = transitionIntentFor(previousBytes, nextPointer);
+  const commit = transitionCommitFor(nextPointer);
+  const intentResult = await ensureImmutableFile(fetchImpl, token, nextPointer.transitionIntentPath, jsonBytes(intent));
+  const commitResult = await ensureImmutableFile(fetchImpl, token, nextPointer.transitionCommitPath, jsonBytes(commit));
+  return { intentResult, commitResult };
+}
+
+async function previousBytesForCurrentPointer(fetchImpl, token, pointer) {
+  if (pointer.previousRootSha256 === null) {
+    assert(pointer.rollbackPointerPath === null, 'Initial current pointer unexpectedly declares rollback history.');
+    return null;
+  }
+  assert(typeof pointer.rollbackPointerPath === 'string' && pointer.rollbackPointerPath.startsWith('/vault/rollback/canonical/people/v1/current-history/'), 'Current pointer with previous root is missing a valid rollback pointer path.');
+  const previousBytes = await downloadBytes(fetchImpl, token, pointer.rollbackPointerPath);
+  assert(previousBytes, 'Current pointer rollback history is missing; refusing to treat transition as complete.');
+  let previousPointer;
+  try { previousPointer = JSON.parse(previousBytes.toString('utf8')); }
+  catch { throw new Error('Rollback pointer history is not valid JSON.'); }
+  assert(previousPointer?.pointerType === 'canonical-current' && previousPointer?.rootSha256 === pointer.previousRootSha256, 'Rollback pointer history does not match current.previousRootSha256.');
+  return previousBytes;
 }
 
 export async function uploadCanonicalPersonRelease({ inputRoot, token, fetchImpl = globalThis.fetch, promoteCurrent = false } = {}) {
@@ -203,8 +270,6 @@ export async function uploadCanonicalPersonRelease({ inputRoot, token, fetchImpl
     immutableResults.push(await ensureImmutableFile(fetchImpl, token, `${release.manifest.immutableReleaseRoot}/${name}`, release.fileBytes[name]));
   }
 
-  // Verify all immutable release files again after writes/skips before any mutable
-  // pointer is allowed to move.
   for (const result of immutableResults) {
     const checked = await metadata(fetchImpl, token, result.path);
     assert(checked?.['.tag'] === 'file' && checked.size === result.bytes && checked.content_hash === result.contentHash, `${result.path} failed post-write immutable verification.`);
@@ -213,36 +278,61 @@ export async function uploadCanonicalPersonRelease({ inputRoot, token, fetchImpl
   const pointerResult = { status: 'not-requested', path: release.manifest.currentPointerPath };
   if (!promoteCurrent) return { releaseId: release.manifest.releaseId, rootSha256: release.manifest.rootSha256, immutableResults, pointer: pointerResult };
 
-  const nextPointer = currentPointerFor(release);
-  const nextPointerBytes = jsonBytes(nextPointer);
-  const previousBytes = await downloadBytes(fetchImpl, token, release.manifest.currentPointerPath);
+  const previousCurrentBytes = await downloadBytes(fetchImpl, token, release.manifest.currentPointerPath);
   let previousPointer = null;
-  if (previousBytes) {
-    try { previousPointer = JSON.parse(previousBytes.toString('utf8')); }
+  if (previousCurrentBytes) {
+    try { previousPointer = JSON.parse(previousCurrentBytes.toString('utf8')); }
     catch { throw new Error('Existing canonical Person current pointer is not valid JSON; refusing to overwrite it.'); }
     assert(previousPointer?.pointerType === 'canonical-current' && previousPointer?.artifactType === release.manifest.artifactType, 'Existing canonical Person current pointer has incompatible semantics.');
-    if (previousPointer.rootSha256 === nextPointer.rootSha256) {
-      assert(previousBytes.equals(nextPointerBytes), 'Existing current pointer targets the same root but has different bytes; refusing silent normalization.');
+
+    if (previousPointer.rootSha256 === release.manifest.rootSha256) {
+      assertPointerMatchesRelease(previousPointer, release);
+      const transitionPreviousBytes = await previousBytesForCurrentPointer(fetchImpl, token, previousPointer);
+      const receipts = await ensureTransitionReceipts(fetchImpl, token, transitionPreviousBytes, previousPointer);
       return {
         releaseId: release.manifest.releaseId,
         rootSha256: release.manifest.rootSha256,
         immutableResults,
-        pointer: { status: 'already-current', path: release.manifest.currentPointerPath, rootSha256: nextPointer.rootSha256 },
+        pointer: {
+          status: 'already-current',
+          path: release.manifest.currentPointerPath,
+          rootSha256: previousPointer.rootSha256,
+          previousRootSha256: previousPointer.previousRootSha256,
+          rollbackPointerPath: previousPointer.rollbackPointerPath,
+          transitionIntentPath: previousPointer.transitionIntentPath,
+          transitionCommitPath: previousPointer.transitionCommitPath,
+          transitionReceipts: receipts,
+        },
       };
     }
   }
 
   let rollbackPointerPath = null;
-  if (previousBytes) {
-    rollbackPointerPath = `/vault/rollback/canonical/people/v1/current-history/${sha256(previousBytes)}.json`;
-    await ensureImmutableFile(fetchImpl, token, rollbackPointerPath, previousBytes);
+  if (previousCurrentBytes) {
+    rollbackPointerPath = `/vault/rollback/canonical/people/v1/current-history/${sha256(previousCurrentBytes)}.json`;
+    await ensureImmutableFile(fetchImpl, token, rollbackPointerPath, previousCurrentBytes);
   }
 
-  const transition = transitionFor(previousPointer, nextPointer, rollbackPointerPath);
-  const from = previousPointer?.rootSha256 ?? 'none';
-  const transitionPath = `/vault/rollback/canonical/people/v1/transitions/${from}--${nextPointer.rootSha256}.json`;
-  await ensureImmutableFile(fetchImpl, token, transitionPath, jsonBytes(transition));
+  const previousRootSha256 = previousPointer?.rootSha256 ?? null;
+  const paths = transitionPaths(previousRootSha256, release.manifest.rootSha256);
+  const nextPointer = currentPointerFor(release, {
+    previousRootSha256,
+    rollbackPointerPath,
+    transitionIntentPath: paths.intentPath,
+    transitionCommitPath: paths.commitPath,
+  });
+  const nextPointerBytes = jsonBytes(nextPointer);
+  const intent = transitionIntentFor(previousCurrentBytes, nextPointer);
+
+  // Intent is explicitly uncommitted. If pointer promotion fails, no receipt can
+  // falsely claim that current moved.
+  await ensureImmutableFile(fetchImpl, token, paths.intentPath, jsonBytes(intent));
   await writeMutablePointer(fetchImpl, token, release.manifest.currentPointerPath, nextPointerBytes);
+
+  // The commit receipt is written only after current.json has been read back and
+  // verified. A rerun can reconstruct a missing commit receipt from current.
+  const commit = transitionCommitFor(nextPointer);
+  await ensureImmutableFile(fetchImpl, token, paths.commitPath, jsonBytes(commit));
 
   return {
     releaseId: release.manifest.releaseId,
@@ -252,9 +342,10 @@ export async function uploadCanonicalPersonRelease({ inputRoot, token, fetchImpl
       status: previousPointer ? 'advanced' : 'initialized',
       path: release.manifest.currentPointerPath,
       rootSha256: nextPointer.rootSha256,
-      previousRootSha256: previousPointer?.rootSha256 ?? null,
+      previousRootSha256,
       rollbackPointerPath,
-      transitionPath,
+      transitionIntentPath: paths.intentPath,
+      transitionCommitPath: paths.commitPath,
     },
   };
 }
