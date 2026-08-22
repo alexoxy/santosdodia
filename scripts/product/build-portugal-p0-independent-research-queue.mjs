@@ -67,24 +67,30 @@ function validatePrimaryEvidence(primaryEvidence, release) {
   return index;
 }
 
-function verifiedEvidenceForRow(row, evidenceIndex) {
+function verifiedEvidenceForRow(row, evidenceIndex, sourceMetadata = {}) {
   const candidates = evidenceIndex.get(evidenceKey(row.qid, row.dateISO)) ?? [];
   const sourceHashes = new Set((row.sourceRecords ?? []).map((record) => record.sourceRecordHash).filter(Boolean));
-  return candidates.map((record) => {
-    if (record.sourceId === 'vatican-news-saint-of-day-pt') {
-      if (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash)) {
+  const dateKey = String(row.dateISO ?? '').slice(5);
+  const coveredDateKeys = new Set(sourceMetadata?.coveredDateKeys ?? []);
+  const dateCovered = sourceMetadata?.coverageComplete === true || coveredDateKeys.has(dateKey);
+  const verified = [];
+  for (const record of candidates) {
+    if (record.sourceId === 'vatican-news-saint-of-day-pt' && (!record.sourceRecordHash || !sourceHashes.has(record.sourceRecordHash))) {
+      if (dateCovered) {
         throw new Error(`Primary Vatican evidence ${record.evidenceId} does not match the live same-day source records.`);
       }
+      continue;
     }
-    return {
+    verified.push({
       ...record,
       claimClass: 'feast-or-observance-link',
       evidenceStatus: 'source-verified-proposal',
       bindingDecisionStatus: 'pending-editorial-review',
       automaticBindingAllowed: false,
       automaticPublicationAllowed: false,
-    };
-  });
+    });
+  }
+  return verified;
 }
 
 export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration, primaryEvidence } = {}) {
@@ -105,7 +111,7 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration,
     const p0 = p0ByReviewId.get(row.reviewId);
     if (!p0) throw new Error(`Research row ${row.reviewId} is missing from the P0 pack.`);
     const sourceGapKind = gapKind(row);
-    const primaryEvidenceCandidates = verifiedEvidenceForRow(row, evidenceIndex);
+    const primaryEvidenceCandidates = verifiedEvidenceForRow(row, evidenceIndex, corroboration.summary.source);
     const evidenceReady = primaryEvidenceCandidates.length > 0;
     return {
       researchId: `pt-2026-research:${row.sourceOccurrenceId}:${row.qid}`,
