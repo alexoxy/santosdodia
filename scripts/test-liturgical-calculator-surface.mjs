@@ -21,6 +21,10 @@ assert(api.includes("requestTimeExternalDependency: false"), 'API must disclose 
 assert(api.includes("engine: 'santosdia-roman-liturgical-year'"), 'API must expose a stable engine identifier.');
 assert(page.includes("alternates: { canonical: '/tools/liturgical-calendar' }"), 'Human calculator must keep a stable canonical URL.');
 assert(page.includes('/api/v1/liturgical-calendar'), 'Human calculator must expose its machine equivalent.');
+assert(page.includes("new URLSearchParams({ tradition: 'roman-catholic' })"), 'Roman calculator must route its retention CTA to the matching Church feed.');
+assert(page.includes("const syncPath = `/calendar/subscribe?${syncParams}`"), 'Calculator must link to the persistent calendar subscription center.');
+assert(page.includes("const annualIcsPath = `${rollingIcsPath}&year=${year}`"), 'Calculator must keep explicit-year ICS as a fixed snapshot.');
+assert(page.includes('{copy.subscribe}') && page.includes('{copy.annualIcs}'), 'Calculator subscription actions must remain localized.');
 assert(openapi.includes('"/api/v1/liturgical-calendar"'), 'Perennial calculator must be represented in OpenAPI.');
 assert(llms.includes('/api/v1/liturgical-calendar'), 'Perennial calculator must be discoverable by AI agents through llms.txt.');
 assert(llms.includes('/tools/liturgical-calendar'), 'Human calculator must be discoverable through llms.txt.');
@@ -42,9 +46,10 @@ assert(!page.includes('>Perennial rules · API · AI-ready<'), 'Calculator must 
 for (const required of [
   "eyebrow: 'Regras perenes · API · preparada para IA'",
   "language: 'Idioma'",
+  "subscribe: 'Manter este calendário sincronizado'",
   "eyebrow: 'Reglas perennes · API · preparada para IA'",
   "eyebrow: 'Regole perenni · API · pronta per l’IA'",
   "language: 'Lingua'"
 ]) assert(localization.includes(required), `Calculator localization contract missing: ${required}.`);
 
-console.log('Liturgical calculator surface passed: human page + deterministic API + OpenAPI + llms.txt + locale isolation + review-by-exception source policy.');
+console.log('Liturgical calculator surface passed: human page + deterministic API + rolling ICS retention CTA + OpenAPI + llms.txt + locale isolation + review-by-exception source policy.');
