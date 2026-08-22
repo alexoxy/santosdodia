@@ -12,6 +12,7 @@ const ecclesialSourcePath = path.join(root, 'data', 'canonical-ecclesial-context
 
 const ID_PATTERN = /^observance:[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)+$/u;
 const CHURCH_ID_PATTERN = /^church:[a-z0-9]+(?:-[a-z0-9]+)*$/u;
+const OBSERVANCE_KEY_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'feast', 'mystery', 'marian-title', 'other']);
 const ALLOWED_SCOPES = new Set(['church-attested', 'jurisdictional', 'local', 'unknown']);
 const FORBIDDEN_OCCURRENCE_KEYS = new Set(['year', 'month', 'day', 'date', 'dateISO', 'feastDate', 'calendarSystem', 'calendarId', 'jurisdictionId', 'rank', 'grade', 'precedence', 'transferRule']);
@@ -46,7 +47,7 @@ function assertNoOccurrenceLeak(record) {
 
 export function buildCanonicalObservanceVaultRelease(dataset, personDataset, recognitionDataset, ecclesialDataset, { sourceBytes = null, sourceCommit = null, generatedAt = null } = {}) {
   assert(dataset?.schemaVersion === 1, 'Canonical observance dataset schemaVersion must be 1.');
-  assert(dataset?.observanceModelVersion === '1.0', 'Canonical observance modelVersion must be 1.0.');
+  assert(dataset?.observanceModelVersion === '1.1', 'Canonical observance modelVersion must be 1.1.');
   assert(dataset?.status === 'repository-reviewed-observance-anchors', 'Canonical observance dataset is not repository-reviewed.');
   assert(Array.isArray(dataset?.observances) && dataset.observances.length > 0, 'Canonical observance dataset is empty.');
   assert(personDataset?.schemaVersion === 1 && Array.isArray(personDataset?.people), 'Canonical Person dataset is required for Observance validation.');
@@ -67,6 +68,7 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
     assert(!ids.has(raw.id), `Duplicate Observance id: ${raw.id}.`);
     ids.add(raw.id);
     assert(CHURCH_ID_PATTERN.test(raw?.churchId ?? '') && churches.has(raw.churchId), `${raw.id} references unknown canonical Church ${String(raw?.churchId)}.`);
+    assert(OBSERVANCE_KEY_PATTERN.test(raw?.observanceKey ?? ''), `${raw.id} has invalid observanceKey ${String(raw?.observanceKey)}.`);
     assert(ALLOWED_TYPES.has(raw?.observanceType), `${raw.id} has unsupported observanceType ${String(raw?.observanceType)}.`);
     assert(ALLOWED_SCOPES.has(raw?.scope), `${raw.id} has unsupported scope ${String(raw?.scope)}.`);
     assert(raw?.occurrenceDateImplied === false, `${raw.id} must not imply an occurrence date.`);
@@ -89,8 +91,10 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       return { kind: 'person', personId: subject.personId, recognitionId: subject.recognitionId };
     }).sort((left, right) => `${left.personId}:${left.recognitionId}`.localeCompare(`${right.personId}:${right.recognitionId}`));
 
-    const canonicalKey = `${raw.churchId}\u0000${raw.observanceType}\u0000${subjects.map((item) => `${item.personId}:${item.recognitionId}`).join('|')}`;
-    assert(!canonicalKeys.has(canonicalKey), `${raw.id} duplicates canonical Observance state.`);
+    // Canonical Observance identity is Church + stable liturgical key + canonical subjects.
+    // observanceType is descriptive taxonomy and may evolve without changing identity.
+    const canonicalKey = `${raw.churchId}\u0000${raw.observanceKey}\u0000${subjects.map((item) => `${item.personId}:${item.recognitionId}`).join('|')}`;
+    assert(!canonicalKeys.has(canonicalKey), `${raw.id} duplicates canonical Observance identity.`);
     canonicalKeys.add(canonicalKey);
 
     const church = churches.get(raw.churchId);
@@ -115,6 +119,7 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       observanceId: raw.id,
       entityType: 'Observance',
       churchId: raw.churchId,
+      observanceKey: raw.observanceKey,
       observanceType: raw.observanceType,
       subjects,
       scope: raw.scope,
@@ -164,6 +169,9 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       observanceSeparateFromPerson: true,
       observanceSeparateFromRecognition: true,
       observanceSeparateFromOccurrence: true,
+      stableObservanceKeyRequired: true,
+      observanceTypeIsNotIdentity: true,
+      multipleObservancesPerSubjectSetSupported: true,
       occurrenceDateImplied: false,
       calendarSystemImplied: false,
       jurisdictionImplied: false,

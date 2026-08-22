@@ -44,6 +44,7 @@ assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourc
 assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1Changed === false, 'Building Observance must not publish or mutate D1.');
 
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
+assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
 assert(first.manifest.observanceCount === 8, 'Reviewed Observance count changed and requires explicit review.');
 assert(first.manifest.personCoverageCount === 9, 'Reviewed Observance Person coverage changed unexpectedly.');
@@ -55,6 +56,9 @@ assert(first.manifest.deletionPolicy === 'tombstone-only', 'Observance deletion 
 assert(first.manifest.semantics.observanceSeparateFromPerson === true, 'Observance must remain separate from Person.');
 assert(first.manifest.semantics.observanceSeparateFromRecognition === true, 'Observance must remain separate from Recognition.');
 assert(first.manifest.semantics.observanceSeparateFromOccurrence === true, 'Observance must remain separate from Occurrence.');
+assert(first.manifest.semantics.stableObservanceKeyRequired === true, 'Stable Observance key must be mandatory.');
+assert(first.manifest.semantics.observanceTypeIsNotIdentity === true, 'Observance type must remain descriptive rather than identity-bearing.');
+assert(first.manifest.semantics.multipleObservancesPerSubjectSetSupported === true, 'One subject set must support multiple distinct Observances.');
 assert(first.manifest.semantics.recognitionMustMatchObservanceChurch === true, 'Observance must remain Church-scoped through Recognition.');
 assert(first.manifest.semantics.evidenceMustMatchChurchAuthorityDomain === true, 'Observance evidence must remain Church-authority isolated.');
 assert(first.manifest.semantics.multiSubjectReady === true, 'Observance must remain multi-subject ready.');
@@ -63,16 +67,18 @@ assert(first.manifest.d1Projection.status === 'deferred', 'Observance identity m
 const ids = first.observances.map((item) => item.observanceId);
 assert(new Set(ids).size === ids.length, 'Observance release contains duplicate IDs.');
 assert(JSON.stringify(ids) === JSON.stringify([...ids].sort()), 'Observance release must be deterministically sorted.');
+assert(first.observances.every((item) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(item.observanceKey)), 'Every canonical Observance must expose a stable observanceKey.');
 assert(first.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'matthew-apostle')).length === 2, 'Matthew must demonstrate one Person with separate Church-scoped Observances.');
 
 const john = first.observances.find((item) => item.observanceId === 'observance:john-baptist-nativity:roman-catholic');
-assert(john?.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a distinct person-subject feast Observance.');
+assert(john?.observanceKey === 'nativity' && john.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a keyed person-subject feast Observance.');
 
 for (const [id, people] of [
   ['observance:peter-paul:roman-catholic', ['paul-apostle', 'peter-apostle']],
   ['observance:joachim-anne:roman-catholic', ['anne', 'joachim']]
 ]) {
   const item = first.observances.find((observance) => observance.observanceId === id);
+  assert(item?.observanceKey === 'principal-commemoration', `${id} stable Observance key changed.`);
   assert(item?.observanceType === 'multi-person-commemoration', `${id} must remain a multi-person Observance.`);
   assert(item.subjects.length === 2, `${id} must have exactly two Person subjects.`);
   assert(JSON.stringify(item.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(people), `${id} Person subjects changed.`);
@@ -93,6 +99,23 @@ for (const observance of first.observances) {
   }
 }
 
+// One Person can have multiple Observances in one Church when their stable liturgical keys differ.
+const secondJohnObservance = structuredClone(observanceDataset);
+const johnSource = secondJohnObservance.observances.find((item) => item.id === 'observance:john-baptist-nativity:roman-catholic');
+assert(johnSource, 'John Baptist Nativity fixture is missing.');
+secondJohnObservance.observances.push({
+  ...structuredClone(johnSource),
+  id: 'observance:john-baptist-martyrdom:roman-catholic',
+  observanceKey: 'martyrdom',
+  observanceType: 'person-commemoration'
+});
+const twoJohnBuild = build(secondJohnObservance);
+assert(twoJohnBuild.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'john-baptist')).length === 2, 'Distinct Observance keys must allow multiple Observances for one Person in one Church.');
+
+const missingKey = structuredClone(observanceDataset);
+delete missingKey.observances[0].observanceKey;
+expectFailure('Missing stable Observance key guard', () => build(missingKey), 'invalid observanceKey');
+
 const dateLeak = structuredClone(observanceDataset);
 dateLeak.observances[0].dateISO = '2026-09-21';
 expectFailure('Observance/Occurrence boundary guard', () => build(dateLeak), 'leaks Occurrence field dateISO');
@@ -109,8 +132,13 @@ const crossChurchEvidence = structuredClone(observanceDataset);
 crossChurchEvidence.observances[0].evidence[0].url = 'https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew';
 expectFailure('Cross-Church evidence guard', () => build(crossChurchEvidence), 'outside canonical Church authority domains');
 
-const duplicate = structuredClone(observanceDataset);
-duplicate.observances.push({ ...structuredClone(duplicate.observances[0]), id: 'observance:matthew-apostle:roman-catholic:duplicate' });
-expectFailure('Duplicate canonical Observance guard', () => build(duplicate), 'duplicates canonical Observance state');
+// Changing taxonomy cannot create a second canonical identity if Church, key and subjects are unchanged.
+const duplicateIdentity = structuredClone(observanceDataset);
+duplicateIdentity.observances.push({
+  ...structuredClone(duplicateIdentity.observances[0]),
+  id: 'observance:matthew-apostle:roman-catholic:duplicate',
+  observanceType: 'feast'
+});
+expectFailure('Duplicate canonical Observance identity guard', () => build(duplicateIdentity), 'duplicates canonical Observance identity');
 
-console.log(`Canonical Observance Vault release test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, including two reviewed multi-person Observances, deterministic root ${first.manifest.rootSha256}.`);
+console.log(`Canonical Observance Vault v1.1 test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, stable keys support multiple Observances per subject set, deterministic root ${first.manifest.rootSha256}.`);

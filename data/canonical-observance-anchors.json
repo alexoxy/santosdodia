@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "observanceModelVersion": "1.0",
+  "observanceModelVersion": "1.1",
   "status": "repository-reviewed-observance-anchors",
   "observances": [
     {
       "id": "observance:matthew-apostle:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "person-commemoration",
       "subjects": [{"kind":"person","personId":"matthew-apostle","recognitionId":"recognition:matthew-apostle:roman-catholic"}],
       "scope": "church-attested",
@@ -20,6 +21,7 @@
     {
       "id": "observance:matthew-apostle:orthodox-church-america",
       "churchId": "church:orthodox-church-america",
+      "observanceKey": "principal-commemoration",
       "observanceType": "person-commemoration",
       "subjects": [{"kind":"person","personId":"matthew-apostle","recognitionId":"recognition:matthew-apostle:orthodox-church-america"}],
       "scope": "church-attested",
@@ -34,6 +36,7 @@
     {
       "id": "observance:thomas-aquinas:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "person-commemoration",
       "subjects": [{"kind":"person","personId":"thomas-aquinas","recognitionId":"recognition:thomas-aquinas:roman-catholic"}],
       "scope": "church-attested",
@@ -48,6 +51,7 @@
     {
       "id": "observance:catherine-siena:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "person-commemoration",
       "subjects": [{"kind":"person","personId":"catherine-siena","recognitionId":"recognition:catherine-siena:roman-catholic"}],
       "scope": "church-attested",
@@ -62,6 +66,7 @@
     {
       "id": "observance:elizabeth-portugal:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "person-commemoration",
       "subjects": [{"kind":"person","personId":"elizabeth-portugal","recognitionId":"recognition:elizabeth-portugal:roman-catholic"}],
       "scope": "church-attested",
@@ -76,6 +81,7 @@
     {
       "id": "observance:john-baptist-nativity:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "nativity",
       "observanceType": "feast",
       "subjects": [{"kind":"person","personId":"john-baptist","recognitionId":"recognition:john-baptist:roman-catholic"}],
       "scope": "church-attested",
@@ -90,6 +96,7 @@
     {
       "id": "observance:peter-paul:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "multi-person-commemoration",
       "subjects": [
         {"kind":"person","personId":"peter-apostle","recognitionId":"recognition:peter-apostle:roman-catholic"},
@@ -107,6 +114,7 @@
     {
       "id": "observance:joachim-anne:roman-catholic",
       "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
       "observanceType": "multi-person-commemoration",
       "subjects": [
         {"kind":"person","personId":"joachim","recognitionId":"recognition:joachim:roman-catholic"},
