@@ -1,0 +1,133 @@
+name: Publish canonical Vault
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact:
+        description: Canonical entity release to verify or publish
+        required: true
+        default: person
+        type: choice
+        options:
+          - person
+          - recognition
+      mode:
+        description: Canonical Vault operation
+        required: true
+        default: verify-only
+        type: choice
+        options:
+          - verify-only
+          - write-and-promote-current
+      confirmation:
+        description: Exact entity-specific confirmation phrase required for writes
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canonical-${{ inputs.artifact }}-vault-write
+  cancel-in-progress: false
+
+jobs:
+  canonical-vault:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=optional
+
+      - name: Resolve canonical entity adapter
+        id: entity
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${{ inputs.artifact }}" in
+            person)
+              echo "label=Person" >> "$GITHUB_OUTPUT"
+              echo "output_dir=.vault/canonical-people" >> "$GITHUB_OUTPUT"
+              echo "builder=scripts/vault/build-canonical-person-manifest.mjs" >> "$GITHUB_OUTPUT"
+              echo "uploader=scripts/vault/upload-canonical-person-release.mjs" >> "$GITHUB_OUTPUT"
+              echo "confirmation=WRITE_CANONICAL_PERSON_V1" >> "$GITHUB_OUTPUT"
+              ;;
+            recognition)
+              echo "label=Recognition" >> "$GITHUB_OUTPUT"
+              echo "output_dir=.vault/canonical-recognitions" >> "$GITHUB_OUTPUT"
+              echo "builder=scripts/vault/build-canonical-recognition-manifest.mjs" >> "$GITHUB_OUTPUT"
+              echo "uploader=scripts/vault/upload-canonical-recognition-release.mjs" >> "$GITHUB_OUTPUT"
+              echo "confirmation=WRITE_CANONICAL_RECOGNITION_V1" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "Unsupported canonical artifact: ${{ inputs.artifact }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Build deterministic canonical release
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "${{ steps.entity.outputs.output_dir }}"
+          node "${{ steps.entity.outputs.builder }}" --output "${{ steps.entity.outputs.output_dir }}"
+
+      - name: Verify canonical semantics and determinism
+        run: npm run vault:test
+
+      - name: Verify shared immutable Dropbox state machine
+        run: node scripts/vault/test-dropbox-canonical-uploader.mjs
+
+      - name: Show local Vault write plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "${{ steps.entity.outputs.uploader }}" \
+            --input "${{ steps.entity.outputs.output_dir }}" \
+            --dry-run true \
+            --promote-current ${{ inputs.mode == 'write-and-promote-current' }}
+
+      - name: Require explicit entity-specific canonical write confirmation
+        if: ${{ inputs.mode == 'write-and-promote-current' }}
+        env:
+          CANONICAL_WRITE_CONFIRMATION: ${{ inputs.confirmation }}
+          EXPECTED_CANONICAL_WRITE_CONFIRMATION: ${{ steps.entity.outputs.confirmation }}
+        run: |
+          set -euo pipefail
+          if [ "$CANONICAL_WRITE_CONFIRMATION" != "$EXPECTED_CANONICAL_WRITE_CONFIRMATION" ]; then
+            echo "Refusing Dropbox Vault write: confirmation phrase mismatch for ${{ inputs.artifact }}."
+            exit 1
+          fi
+
+      - name: Write immutable release and promote current pointer
+        if: ${{ inputs.mode == 'write-and-promote-current' }}
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "${{ steps.entity.outputs.uploader }}" \
+            --input "${{ steps.entity.outputs.output_dir }}" \
+            --promote-current true | tee "${{ steps.entity.outputs.output_dir }}/dropbox-write-result.json"
+
+      - name: Preserve operational build receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-${{ inputs.artifact }}-vault-${{ github.run_id }}
+          path: |
+            ${{ steps.entity.outputs.output_dir }}/manifest.json
+            ${{ steps.entity.outputs.output_dir }}/build-receipt.json
+            ${{ steps.entity.outputs.output_dir }}/dropbox-write-result.json
+          if-no-files-found: ignore
+          retention-days: 30
