@@ -10,18 +10,68 @@ function argument(name) {
 }
 
 function text(value) {
+  if (value && typeof value === 'object' && typeof value.value === 'string') return value.value.normalize('NFC').replace(/\s+/gu, ' ').trim();
   return String(value ?? '').normalize('NFC').replace(/\s+/gu, ' ').trim();
 }
 
 function normalizePortugueseName(value) {
   return text(value)
+    .normalize('NFD')
+    .replace(/\p{M}+/gu, '')
     .toLocaleLowerCase('pt-PT')
     .replace(/[’']/gu, '')
+    .replace(/^\s*s\s*\.\s*/u, '')
     .replace(/[^\p{L}\p{N}\s-]+/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim()
-    .replace(/^(?:são|santo|santa|beato|beata)\s+/u, '')
+    .replace(/^(?:sao|santo|santa|beato|beata)\s+/u, '')
     .trim();
+}
+
+function portugueseNameVariants(value) {
+  const raw = text(value);
+  if (!raw) return [];
+  const variants = [
+    { kind: 'full', value: normalizePortugueseName(raw) },
+    { kind: 'name-head', value: normalizePortugueseName(raw.split(',')[0]) },
+  ].filter((entry) => entry.value);
+  const seen = new Set();
+  return variants.filter((entry) => {
+    if (seen.has(entry.value)) return false;
+    seen.add(entry.value);
+    return true;
+  });
+}
+
+function conservativeMatchEvidence(proposalLabel, sourceLabel) {
+  for (const proposal of portugueseNameVariants(proposalLabel)) {
+    for (const source of portugueseNameVariants(sourceLabel)) {
+      if (proposal.value === source.value) {
+        return {
+          mode: 'normalized-exact',
+          proposalVariant: proposal.kind,
+          sourceVariant: source.kind,
+          normalizedProposal: proposal.value,
+          normalizedSource: source.value,
+        };
+      }
+      const proposalTokens = proposal.value.split(/\s+/u).filter(Boolean);
+      const sourceTokens = source.value.split(/\s+/u).filter(Boolean);
+      const shorter = proposal.value.length <= source.value.length ? proposal : source;
+      const longer = shorter === proposal ? source : proposal;
+      const shorterTokens = shorter === proposal ? proposalTokens : sourceTokens;
+      if (shorter.value.length >= 8 && shorterTokens.length >= 2 && (longer.value.startsWith(`${shorter.value} `) || longer.value.startsWith(`${shorter.value}-`))) {
+        return {
+          mode: 'normalized-name-prefix',
+          proposalVariant: proposal.kind,
+          sourceVariant: source.kind,
+          normalizedProposal: proposal.value,
+          normalizedSource: source.value,
+        };
+      }
+    }
+  }
+  return null;
 }
 
 function dateKeyFromIso(value) {
@@ -58,33 +108,62 @@ function liveSourceRecord(event) {
   };
 }
 
-function existingBindingState(row, binding, dayEvents) {
-  const expectedDate = `${String(binding.month).padStart(2, '0')}-${String(binding.day).padStart(2, '0')}`;
-  const rowDate = dateKeyFromIso(row.dateISO);
-  if (expectedDate !== rowDate) {
-    return {
-      disposition: 'reviewed-binding-date-mismatch',
-      reason: 'existing-reviewed-binding-is-for-a-different-calendar-date',
-      existingBinding: binding,
-      sourceRecords: dayEvents.map(liveSourceRecord),
-    };
+function matchSourceEvents(dayEvents, proposalLabels) {
+  const matches = [];
+  for (const event of dayEvents) {
+    const sourceLabel = event?.names?.pt?.value;
+    let evidence = null;
+    let matchedProposalLabel = null;
+    for (const proposalLabel of proposalLabels) {
+      evidence = conservativeMatchEvidence(proposalLabel, sourceLabel);
+      if (evidence) {
+        matchedProposalLabel = text(proposalLabel);
+        break;
+      }
+    }
+    if (evidence) {
+      matches.push({
+        event,
+        evidence: {
+          ...evidence,
+          proposalLabelPt: matchedProposalLabel,
+          sourceLabelPt: text(sourceLabel),
+        },
+      });
+    }
   }
-  const accepted = new Set((binding.acceptedLabels ?? []).map(normalizePortugueseName).filter(Boolean));
-  const matches = dayEvents.filter((event) => accepted.has(normalizePortugueseName(event?.names?.pt?.value)));
+  return matches;
+}
+
+function existingBindingState(binding, dayEvents) {
+  const acceptedLabels = uniqueNonEmpty(binding.acceptedLabels ?? []);
+  const matches = matchSourceEvents(dayEvents, acceptedLabels);
   if (matches.length === 1) {
     return {
       disposition: 'reviewed-binding-live-match',
       reason: 'existing-reviewed-binding-matches-one-live-vatican-record',
       existingBinding: binding,
-      sourceRecords: matches.map(liveSourceRecord),
+      sourceRecords: matches.map(({ event }) => liveSourceRecord(event)),
+      matchEvidence: matches.map(({ evidence }) => evidence),
     };
   }
   return {
     disposition: matches.length > 1 ? 'reviewed-binding-live-ambiguous' : 'reviewed-binding-live-drift',
     reason: matches.length > 1 ? 'existing-reviewed-binding-matches-multiple-live-vatican-records' : 'existing-reviewed-binding-does-not-match-current-live-vatican-record',
     existingBinding: binding,
-    sourceRecords: dayEvents.map(liveSourceRecord),
+    sourceRecords: (matches.length ? matches.map(({ event }) => event) : dayEvents).map(liveSourceRecord),
+    matchEvidence: matches.map(({ evidence }) => evidence),
   };
+}
+
+function indexBindingsByQid(bindings) {
+  const result = new Map();
+  for (const binding of bindings) {
+    const list = result.get(binding.qid) ?? [];
+    list.push(binding);
+    result.set(binding.qid, list);
+  }
+  return result;
 }
 
 export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican = null, bindings } = {}) {
@@ -114,7 +193,7 @@ export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican 
     list.push(event);
     eventsByDate.set(key, list);
   }
-  const bindingByQid = new Map(bindings.bindings.map((binding) => [binding.qid, binding]));
+  const bindingsByQid = indexBindingsByQid(bindings.bindings);
   const rows = [];
 
   for (const row of p0Pack.items) {
@@ -126,34 +205,49 @@ export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican 
     const key = dateKeyFromIso(row.dateISO);
     if (!key) throw new Error(`P0 row ${row.reviewId} has invalid dateISO.`);
     const dayEvents = eventsByDate.get(key) ?? [];
-    const existingBinding = bindingByQid.get(qid) ?? null;
+    const qidBindings = bindingsByQid.get(qid) ?? [];
+    const sameDateBindings = qidBindings.filter((binding) => `${String(binding.month).padStart(2, '0')}-${String(binding.day).padStart(2, '0')}` === key);
+    const relatedReviewedBindings = qidBindings.filter((binding) => !sameDateBindings.includes(binding));
 
     let result;
     if (!sourceAvailable) {
-      result = { disposition: 'source-unavailable', reason: 'vatican-source-not-available-in-this-run', sourceRecords: [] };
-    } else if (existingBinding) {
-      result = existingBindingState(row, existingBinding, dayEvents);
+      result = { disposition: 'source-unavailable', reason: 'vatican-source-not-available-in-this-run', sourceRecords: [], matchEvidence: [] };
+    } else if (sameDateBindings.length > 1) {
+      result = {
+        disposition: 'reviewed-binding-registry-ambiguous',
+        reason: 'multiple-reviewed-bindings-exist-for-the-same-qid-and-date',
+        existingBindings: sameDateBindings,
+        sourceRecords: dayEvents.map(liveSourceRecord),
+        matchEvidence: [],
+      };
+    } else if (sameDateBindings.length === 1) {
+      result = existingBindingState(sameDateBindings[0], dayEvents);
     } else {
       const proposalLabels = proposedPortugueseLabels(row);
-      const normalizedProposals = new Set(proposalLabels.map(normalizePortugueseName).filter(Boolean));
-      const matches = dayEvents.filter((event) => normalizedProposals.has(normalizePortugueseName(event?.names?.pt?.value)));
+      const matches = matchSourceEvents(dayEvents, proposalLabels);
       if (matches.length === 1) {
         result = {
-          disposition: 'candidate-for-reviewed-binding',
-          reason: 'same-date-unique-conservative-portuguese-label-match',
-          sourceRecords: matches.map(liveSourceRecord),
+          disposition: relatedReviewedBindings.length ? 'candidate-for-reviewed-binding-additional-observance' : 'candidate-for-reviewed-binding',
+          reason: relatedReviewedBindings.length ? 'same-qid-has-reviewed-binding-on-another-date-and-current-observance-has-one-conservative-vatican-match' : 'same-date-unique-conservative-portuguese-label-match',
+          relatedReviewedBindings,
+          sourceRecords: matches.map(({ event }) => liveSourceRecord(event)),
+          matchEvidence: matches.map(({ evidence }) => evidence),
         };
       } else if (matches.length > 1) {
         result = {
           disposition: 'ambiguous-vatican-record',
           reason: 'same-date-portuguese-label-match-is-not-unique',
-          sourceRecords: matches.map(liveSourceRecord),
+          relatedReviewedBindings,
+          sourceRecords: matches.map(({ event }) => liveSourceRecord(event)),
+          matchEvidence: matches.map(({ evidence }) => evidence),
         };
       } else {
         result = {
           disposition: 'needs-independent-source-research',
           reason: dayEvents.length ? 'same-date-vatican-records-do-not-match-conservative-portuguese-labels' : 'no-vatican-record-on-calendar-date',
+          relatedReviewedBindings,
           sourceRecords: dayEvents.map(liveSourceRecord),
+          matchEvidence: [],
         };
       }
     }
@@ -185,6 +279,8 @@ export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican 
 
   const dispositions = {};
   for (const row of rows) dispositions[row.disposition] = (dispositions[row.disposition] ?? 0) + 1;
+  const editorialCandidateDispositions = new Set(['candidate-for-reviewed-binding', 'candidate-for-reviewed-binding-additional-observance']);
+  const unresolvedDispositions = new Set(['needs-independent-source-research', 'ambiguous-vatican-record', 'source-unavailable', 'reviewed-binding-live-drift', 'reviewed-binding-live-ambiguous', 'reviewed-binding-registry-ambiguous']);
   const summary = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -201,9 +297,10 @@ export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican 
       configuredReviewedBindings: bindings.bindings.length,
     },
     dispositions,
-    editorialCandidates: rows.filter((row) => row.disposition === 'candidate-for-reviewed-binding').length,
+    editorialCandidates: rows.filter((row) => editorialCandidateDispositions.has(row.disposition)).length,
+    additionalObservanceCandidates: rows.filter((row) => row.disposition === 'candidate-for-reviewed-binding-additional-observance').length,
     existingReviewedBindingLiveMatches: rows.filter((row) => row.disposition === 'reviewed-binding-live-match').length,
-    unresolvedForIndependentResearch: rows.filter((row) => ['needs-independent-source-research', 'ambiguous-vatican-record', 'source-unavailable', 'reviewed-binding-live-drift', 'reviewed-binding-live-ambiguous', 'reviewed-binding-date-mismatch'].includes(row.disposition)).length,
+    unresolvedForIndependentResearch: rows.filter((row) => unresolvedDispositions.has(row.disposition)).length,
     safety: {
       reviewOnly: true,
       candidateDoesNotEqualApproval: true,
