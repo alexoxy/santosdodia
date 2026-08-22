@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "bridgeVersion": "1.0",
+  "status": "repository-reviewed-read-only-compatibility-bridge",
+  "legacyReleaseId": "roman-catholic-pt-2026-v2",
+  "mutationAllowed": false,
+  "bridges": [
+    {
+      "occurrenceId": "occurrence:2026-01-28:thomas-aquinas:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThomasAquinas",
+      "dateISO": "2026-01-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCatherineSiena",
+      "dateISO": "2026-04-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
+      "legacyObservanceId": "rc:StElizabethPortugal",
+      "dateISO": "2026-07-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMatthewEvangelist",
+      "dateISO": "2026-09-21"
+    }
+  ]
+}
