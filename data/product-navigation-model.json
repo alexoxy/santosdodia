@@ -3,8 +3,8 @@
   "status": "implementation-candidate",
   "mobilePrimary": [
     {"id":"today","pt":"Hoje","route":"/","icon":"calendar-day","job":"daily-answer"},
-    {"id":"calendar","pt":"Calendário","route":"/calendario","icon":"calendar","job":"browse-by-date"},
-    {"id":"discover","pt":"Descobrir","route":"/descobrir","icon":"search","job":"thematic-discovery"},
+    {"id":"calendar","pt":"Calendário","route":"/calendar","icon":"calendar","job":"browse-by-date"},
+    {"id":"discover","pt":"Descobrir","route":"/explore","icon":"search","job":"thematic-discovery"},
     {"id":"pray","pt":"Rezar","route":"/rezar","icon":"prayer","job":"prayer-scripture-novena"},
     {"id":"saved","pt":"Guardados","route":"/guardados","icon":"bookmark","job":"return-and-follow"}
   ],
