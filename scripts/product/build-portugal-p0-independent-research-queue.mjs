@@ -18,6 +18,12 @@ function argument(name) {
   return index >= 0 ? process.argv[index + 1] : null;
 }
 
+function loadDefaultPrimaryEvidence() {
+  const evidencePath = path.resolve('config/corroboration-source-evidence.portugal-p0-primary.json');
+  if (!fs.existsSync(evidencePath)) return null;
+  return JSON.parse(fs.readFileSync(evidencePath, 'utf8'));
+}
+
 function gapKind(row) {
   if (row.disposition === 'source-unavailable') return 'vatican-source-unavailable';
   if (row.disposition === 'ambiguous-vatican-record') return 'vatican-same-day-ambiguous';
@@ -81,7 +87,7 @@ function verifiedEvidenceForRow(row, evidenceIndex) {
   });
 }
 
-export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration, primaryEvidence = null } = {}) {
+export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration, primaryEvidence } = {}) {
   if (p0Pack?.schemaVersion !== 1 || p0Pack?.release !== 'roman-catholic-pt-2026-v2' || p0Pack?.publicationAllowed !== false || p0Pack?.productionMutation !== false || !Array.isArray(p0Pack?.items)) {
     throw new Error('Independent research queue requires the fail-closed Portugal P0 review pack.');
   }
@@ -92,7 +98,8 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration,
     throw new Error('Independent research queue refuses inputs outside the AdSense PREPARING boundary.');
   }
 
-  const evidenceIndex = validatePrimaryEvidence(primaryEvidence, p0Pack.release);
+  const resolvedPrimaryEvidence = primaryEvidence === undefined ? loadDefaultPrimaryEvidence() : primaryEvidence;
+  const evidenceIndex = validatePrimaryEvidence(resolvedPrimaryEvidence, p0Pack.release);
   const p0ByReviewId = new Map(p0Pack.items.map((row) => [row.reviewId, row]));
   const items = corroboration.items.filter((row) => UNRESOLVED.has(row.disposition)).map((row) => {
     const p0 = p0ByReviewId.get(row.reviewId);
@@ -161,7 +168,7 @@ export function buildPortugalP0IndependentResearchQueue({ p0Pack, corroboration,
     sourceGapKinds: counts,
     priorities,
     primaryEvidence: {
-      configuredRecords: primaryEvidence?.records?.length ?? 0,
+      configuredRecords: resolvedPrimaryEvidence?.records?.length ?? 0,
       evidenceReadyForEditorialReview,
       remainingOpenResearch,
     },
