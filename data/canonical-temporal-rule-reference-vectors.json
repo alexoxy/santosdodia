@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "official-temporal-reference-vectors",
+  "vectors": [
+    {
+      "temporalRuleId": "temporal-rule:ash-wednesday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-02-18",
+      "sourceUrl": "https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf",
+      "sourcePublisher": "Office for the Liturgical Celebrations of the Supreme Pontiff"
+    },
+    {
+      "temporalRuleId": "temporal-rule:first-sunday-lent:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-02-22",
+      "sourceUrl": "https://www.vatican.va/content/leo-xiv/en/angelus/2026/documents/20260222-angelus.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:easter-sunday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-04-05",
+      "sourceUrl": "https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf",
+      "sourcePublisher": "Office for the Liturgical Celebrations of the Supreme Pontiff"
+    },
+    {
+      "temporalRuleId": "temporal-rule:pentecost-sunday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-05-24",
+      "sourceUrl": "https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf",
+      "sourcePublisher": "Office for the Liturgical Celebrations of the Supreme Pontiff"
+    },
+    {
+      "temporalRuleId": "temporal-rule:first-sunday-advent:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-11-29",
+      "sourceUrl": "https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf",
+      "sourcePublisher": "Office for the Liturgical Celebrations of the Supreme Pontiff"
+    }
+  ]
+}
