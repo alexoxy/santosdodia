@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "occurrenceModelVersion": "1.0",
+  "status": "repository-reviewed-occurrence-anchors",
+  "occurrences": [
+    {
+      "id": "occurrence:2026-01-28:thomas-aquinas:roman-catholic:pt",
+      "observanceId": "observance:thomas-aquinas:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-28",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-1-28",
+          "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+          "observedDesignation": "S. Tomás de Aquino, presbítero e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
+      "observanceId": "observance:catherine-siena:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-29",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-29",
+          "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+          "observedDesignation": "S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa – FESTA"
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
+      "observanceId": "observance:elizabeth-portugal:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-04",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-07-04",
+          "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+          "observedDesignation": "S. Isabel de Portugal – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
+      "observanceId": "observance:matthew-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-21",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-9-21",
+          "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+          "observedDesignation": "S. Mateus, apóstolo e evangelista – FESTA"
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    }
+  ]
+}
