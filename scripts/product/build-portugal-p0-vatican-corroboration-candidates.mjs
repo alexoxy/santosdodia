@@ -294,6 +294,7 @@ export function buildPortugalP0VaticanCorroborationCandidates({ p0Pack, vatican 
       eventCount: events.length,
       coveredDays: vatican?.coverage?.coveredDays ?? null,
       coverageComplete: vatican?.coverage?.complete ?? false,
+      coveredDateKeys: [...eventsByDate.keys()].sort(),
       configuredReviewedBindings: bindings.bindings.length,
     },
     dispositions,
