@@ -41,7 +41,7 @@ export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:s
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
    </article>
    <aside className="saint-profile-actions">
-    <div className="profile-action-card profile-save-card"><SaveSaintButton id={id} name={name} dateISO={item.dateISO} locale={locale}/><p>{retention.saveHint}</p></div>
+    <div className="profile-action-card profile-save-card"><SaveSaintButton id={id} dateISO={item.dateISO} locale={locale}/><p>{retention.saveHint}</p></div>
     <div className="profile-action-card"><h2>{biography?feature.annualCalendar:copy.addCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${encodeURIComponent(feedId)}?locale=${locale}`} title={name}/></div>
     <div className="profile-action-card candle-profile"><CandleButton observanceId={item.id} dateISO={item.dateISO}/><p>{feature.freeCandle}</p></div>
     {editorialReady?<div className="ad-sidebar-rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar"/></div>:null}
