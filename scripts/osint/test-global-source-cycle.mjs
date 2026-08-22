@@ -88,3 +88,4 @@ assert.equal(
 );
 
 console.log(`Global source cycle safeguards passed: ${plan.duePolicyProbes.length} policy candidates, ${plan.delegatedApprovedSources.length} delegated approved source.`);
+await import('./test-causesanti-archive-policy.mjs');
