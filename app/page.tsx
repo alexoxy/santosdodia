@@ -9,6 +9,7 @@ import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biographies"
 import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive } from "../lib/adsense";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
+import { getRetentionCopy } from "../lib/product-retention-i18n";
 import { useLanguage } from "./components/LanguageProvider";
 
 const trustCopy: Partial<Record<Locale,{title:string;body:string;detail:string;link:string}>> = {
@@ -25,19 +26,12 @@ const featuredCopy: Partial<Record<Locale,{eyebrow:string;title:string;open:stri
   it:{eyebrow:'Profili editoriali',title:'Conosci meglio i santi',open:'Apri profilo'},
 };
 
-const retentionCopy: Partial<Record<Locale,{pray:string;prayHint:string;saved:string;savedHint:string;calendarHint:string;discoverHint:string}>> = {
-  en:{pray:'Pray',prayHint:'Readings, prayers and novenas',saved:'Saved',savedHint:'Return to saints you follow',calendarHint:'Browse days and add calendars',discoverHint:'Find by name, patronage and theme'},
-  pt:{pray:'Rezar',prayHint:'Leituras, orações e novenas',saved:'Guardados',savedHint:'Regresse aos santos que acompanha',calendarHint:'Explore dias e adicione calendários',discoverHint:'Procure por nome, patronato e tema'},
-  es:{pray:'Rezar',prayHint:'Lecturas, oraciones y novenas',saved:'Guardados',savedHint:'Vuelve a los santos que sigues',calendarHint:'Explora días y añade calendarios',discoverHint:'Busca por nombre, patronazgo y tema'},
-  it:{pray:'Pregare',prayHint:'Letture, preghiere e novene',saved:'Salvati',savedHint:'Ritrova i santi che segui',calendarHint:'Esplora i giorni e aggiungi calendari',discoverHint:'Cerca per nome, patronato e tema'},
-};
-
 export default function HomePage() {
   const { locale, copy } = useLanguage();
   const feature = getFeatureCopy(locale);
   const trust = trustCopy[locale] ?? trustCopy.en!;
   const featured = featuredCopy[locale] ?? featuredCopy.en!;
-  const retention = retentionCopy[locale] ?? retentionCopy.en!;
+  const retention = getRetentionCopy(locale);
   const sidebarActive = isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
   const editorialProfiles = SAINT_BIOGRAPHIES.slice(0, 4).map(item => ({ id:item.id, biography:getSaintBiography(item.id, locale) })).filter(entry => entry.biography);
 
