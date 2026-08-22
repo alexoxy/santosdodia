@@ -129,7 +129,7 @@ export function buildCanonicalPersonVaultRelease(dataset, { sourceBytes = null, 
     sourceCommit: sourceCommit ?? null,
     generatedAt: generatedAt ?? null,
     immutableReleaseRoot: releaseRoot,
-    canonicalPayloadChanged: true,
+    canonicalPayloadProduced: true,
     publicationChanged: false,
   };
 
