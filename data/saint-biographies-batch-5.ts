@@ -7,6 +7,8 @@ const VATICAN_THOMAS_AQUINAS = 'https://www.vaticannews.va/en/saints/01/28/st--t
 const HOLY_SEE_THOMAS_AQUINAS = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html';
 const VATICAN_CATHERINE_SIENA = 'https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html';
 const HOLY_SEE_CATHERINE_SIENA = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html';
+const VATICAN_ELIZABETH_PORTUGAL = 'https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html';
+const LISBON_ELIZABETH_PORTUGAL = 'https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860';
 
 const matthew: SaintBiography = {
   id: 'matthew-apostle',
@@ -192,4 +194,65 @@ const catherineSiena: SaintBiography = {
   verifiedAt: '2026-08-22',
 };
 
-export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas, catherineSiena];
+const elizabethPortugal: SaintBiography = {
+  id: 'elizabeth-portugal',
+  title: {
+    en: 'Saint Elizabeth of Portugal',
+    pt: 'S. Isabel de Portugal',
+    es: 'Santa Isabel de Portugal',
+    it: 'Santa Elisabetta del Portogallo',
+  },
+  summary: {
+    en: 'Elizabeth of Portugal was a queen whose political prudence, peacemaking and sustained care for people in need shaped her public life. Remembered in Portugal as the Rainha Santa, she joined royal responsibility to a disciplined Christian commitment to reconciliation and charity.',
+    pt: 'Isabel de Portugal foi uma rainha cuja prudência política, ação pacificadora e atenção constante às pessoas necessitadas marcaram a sua vida pública. Recordada como Rainha Santa, uniu as responsabilidades da coroa a um compromisso cristão exigente com a reconciliação e a caridade.',
+    es: 'Isabel de Portugal fue una reina cuya prudencia política, labor pacificadora y atención constante a las personas necesitadas marcaron su vida pública. Recordada en Portugal como la Rainha Santa, unió las responsabilidades de la corona a un exigente compromiso cristiano con la reconciliación y la caridad.',
+    it: 'Elisabetta del Portogallo fu una regina la cui prudenza politica, opera di pace e costante attenzione alle persone bisognose segnarono la sua vita pubblica. Ricordata in Portogallo come Rainha Santa, unì le responsabilità della corona a un esigente impegno cristiano per la riconciliazione e la carità.',
+  },
+  paragraphs: {
+    en: [
+      'Elizabeth was born around 1270, a daughter of Peter III of Aragon and Constance of Sicily. She married King Dinis of Portugal in 1281 and became an active figure in the life of the kingdom, not simply a ceremonial presence. Her responsibilities included advising and mediating within the royal family, and she earned trust through prudence in a court marked by complicated political and family relationships.',
+      'Her reputation as a peacemaker grew through interventions in disputes involving King Dinis, his brother Afonso and their son, the future Afonso IV. In 1323, at Alvalade, she helped prevent armed conflict between father and son. Elizabeth also used family ties across the Iberian Peninsula to support negotiation. Alongside this political work, she directed resources toward people who were poor or sick and supported works of social assistance; the later tradition of the roses became a popular symbol of that charity.',
+      'After the death of King Dinis, Elizabeth withdrew to Coimbra and lived close to the convent of Santa Clara-a-Velha without making religious profession or abandoning her responsibilities as queen dowager. She died on 4 July 1336 and was canonized in 1625. Her Roman Catholic memorial is celebrated on 4 July, and her Portuguese legacy brings together responsible public service, the patient work of peace and practical care for vulnerable people.',
+    ],
+    pt: [
+      'Isabel nasceu por volta de 1270, filha de Pedro III de Aragão e de Constança da Sicília. Casou com o rei D. Dinis de Portugal em 1281 e tornou-se uma figura ativa na vida do reino, não apenas uma presença cerimonial. As suas responsabilidades incluíram o conselho e a mediação no interior da família real, conquistando confiança pela prudência num ambiente de relações políticas e familiares complexas.',
+      'A sua reputação de pacificadora cresceu através das intervenções em conflitos que envolveram D. Dinis, o irmão Afonso e o filho de ambos, o futuro D. Afonso IV. Em 1323, em Alvalade, ajudou a evitar o confronto armado entre pai e filho. Isabel também usou os laços familiares na Península Ibérica para favorecer negociações. A par desta ação política, destinou recursos a pessoas pobres ou doentes e apoiou obras de assistência; a tradição posterior das rosas tornou-se um símbolo popular dessa caridade.',
+      'Depois da morte de D. Dinis, Isabel retirou-se para Coimbra e viveu junto do convento de Santa Clara-a-Velha, sem professar nem abandonar as responsabilidades de rainha viúva. Morreu a 4 de julho de 1336 e foi canonizada em 1625. A sua memória no calendário católico romano celebra-se a 4 de julho, e o seu legado português reúne serviço público responsável, trabalho paciente pela paz e cuidado concreto das pessoas vulneráveis.',
+    ],
+    es: [
+      'Isabel nació hacia 1270, hija de Pedro III de Aragón y de Constanza de Sicilia. Se casó con el rey Dionisio de Portugal en 1281 y se convirtió en una figura activa en la vida del reino, no solo en una presencia ceremonial. Sus responsabilidades incluyeron el consejo y la mediación dentro de la familia real, y se ganó la confianza por su prudencia en una corte marcada por complejas relaciones políticas y familiares.',
+      'Su fama de pacificadora creció mediante sus intervenciones en conflictos que involucraron al rey Dionisio, a su hermano Alfonso y al hijo de ambos, el futuro Alfonso IV. En 1323, en Alvalade, ayudó a evitar el enfrentamiento armado entre padre e hijo. Isabel también utilizó los vínculos familiares de la península ibérica para favorecer negociaciones. Junto a esta labor política, destinó recursos a personas pobres o enfermas y apoyó obras de asistencia; la tradición posterior de las rosas se convirtió en un símbolo popular de esa caridad.',
+      'Después de la muerte del rey Dionisio, Isabel se retiró a Coimbra y vivió junto al convento de Santa Clara-a-Velha, sin profesar ni abandonar sus responsabilidades como reina viuda. Murió el 4 de julio de 1336 y fue canonizada en 1625. Su memoria en el calendario católico romano se celebra el 4 de julio, y su legado portugués reúne servicio público responsable, trabajo paciente por la paz y cuidado concreto de las personas vulnerables.',
+    ],
+    it: [
+      'Elisabetta nacque intorno al 1270, figlia di Pietro III d’Aragona e Costanza di Sicilia. Sposò il re Dionigi del Portogallo nel 1281 e divenne una figura attiva nella vita del regno, non soltanto una presenza cerimoniale. Le sue responsabilità comprendevano il consiglio e la mediazione all’interno della famiglia reale, e guadagnò fiducia grazie alla prudenza in una corte segnata da complessi rapporti politici e familiari.',
+      'La sua fama di pacificatrice crebbe attraverso gli interventi nei conflitti che coinvolsero re Dionigi, suo fratello Alfonso e il loro figlio, il futuro Alfonso IV. Nel 1323, ad Alvalade, contribuì a evitare lo scontro armato tra padre e figlio. Elisabetta utilizzò anche i legami familiari nella penisola iberica per favorire negoziati. Accanto a questa azione politica, destinò risorse ai poveri e ai malati e sostenne opere assistenziali; la successiva tradizione delle rose divenne un simbolo popolare di tale carità.',
+      'Dopo la morte di re Dionigi, Elisabetta si ritirò a Coimbra e visse presso il convento di Santa Clara-a-Velha, senza emettere la professione religiosa né abbandonare le responsabilità di regina vedova. Morì il 4 luglio 1336 e fu canonizzata nel 1625. La sua memoria nel calendario cattolico romano ricorre il 4 luglio, e la sua eredità portoghese unisce servizio pubblico responsabile, paziente opera di pace e cura concreta delle persone vulnerabili.',
+    ],
+  },
+  facts: [
+    {
+      label: { en: 'Life', pt: 'Vida', es: 'Vida', it: 'Vita' },
+      value: { en: 'c. 1270 — 4 July 1336', pt: 'c. 1270 — 4 de julho de 1336', es: 'c. 1270 — 4 de julio de 1336', it: 'c. 1270 — 4 luglio 1336' },
+    },
+    {
+      label: { en: 'Royal role', pt: 'Função régia', es: 'Función regia', it: 'Ruolo regio' },
+      value: { en: 'Queen of Portugal and queen dowager', pt: 'Rainha de Portugal e rainha viúva', es: 'Reina de Portugal y reina viuda', it: 'Regina del Portogallo e regina vedova' },
+    },
+    {
+      label: { en: 'Remembered for', pt: 'Recordada por', es: 'Recordada por', it: 'Ricordata per' },
+      value: { en: 'Peacemaking, political prudence and charity', pt: 'Pacificação, prudência política e caridade', es: 'Pacificación, prudencia política y caridad', it: 'Pacificazione, prudenza politica e carità' },
+    },
+    {
+      label: { en: 'Roman Catholic memorial', pt: 'Memória católica romana', es: 'Memoria católica romana', it: 'Memoria cattolica romana' },
+      value: { en: '4 July', pt: '4 de julho', es: '4 de julio', it: '4 luglio' },
+    },
+  ],
+  sources: [
+    { name: 'Saint Elizabeth of Portugal', url: VATICAN_ELIZABETH_PORTUGAL, language: 'en', publisher: 'Vatican News' },
+    { name: 'Santa Isabel de Portugal', url: LISBON_ELIZABETH_PORTUGAL, language: 'pt', publisher: 'Patriarchate of Lisbon' },
+  ],
+  verifiedAt: '2026-08-22',
+};
+
+export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas, catherineSiena, elizabethPortugal];

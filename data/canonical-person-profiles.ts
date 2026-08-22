@@ -35,6 +35,12 @@ export const CANONICAL_PERSON_ANCHORS: CanonicalPersonAnchor[] = [
     names: { en: 'Saint Catherine of Siena', pt: 'Santa Catarina de Sena', es: 'Santa Catalina de Siena', it: 'Santa Caterina da Siena' },
   },
   {
+    id: 'elizabeth-portugal',
+    primaryObservanceId: 'rc:StElizabethPortugal',
+    category: 'saint',
+    names: { en: 'Saint Elizabeth of Portugal', pt: 'Santa Isabel de Portugal', es: 'Santa Isabel de Portugal', it: 'Santa Elisabetta del Portogallo' },
+  },
+  {
     id: 'peter-apostle',
     primaryObservanceId: 'peter-paul',
     category: 'apostle',
