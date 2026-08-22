@@ -1,5 +1,5 @@
 export const SUPPORTED_LOCALES = ['en','es','pt','fr','fil','ru','sw','de','it','pl'] as const;
-export const PUBLIC_LOCALES = ['en','es','pt','fr','it'] as const;
+export const PUBLIC_LOCALES = ['en','es','pt','it'] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export type LocalizedText = Partial<Record<Locale,string>> & { en:string };
 

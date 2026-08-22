@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "status": "implementation-candidate",
+  "mobilePrimary": [
+    {"id":"today","pt":"Hoje","route":"/","icon":"calendar-day","job":"daily-answer"},
+    {"id":"calendar","pt":"Calendário","route":"/calendar","icon":"calendar","job":"browse-by-date"},
+    {"id":"discover","pt":"Descobrir","route":"/explore","icon":"search","job":"thematic-discovery"},
+    {"id":"pray","pt":"Rezar","route":"/rezar","icon":"prayer","job":"prayer-scripture-novena"},
+    {"id":"saved","pt":"Guardados","route":"/guardados","icon":"bookmark","job":"return-and-follow"}
+  ],
+  "secondary": [
+    {"id":"chronology","pt":"Cronologia","route":"/cronologia"},
+    {"id":"traditions","pt":"Tradições cristãs","route":"/tradicoes"},
+    {"id":"places","pt":"Lugares","route":"/lugares"},
+    {"id":"names","pt":"Nomes","route":"/nomes"},
+    {"id":"marian","pt":"Nossa Senhora","route":"/nossa-senhora"},
+    {"id":"methodology","pt":"Fontes e metodologia","route":"/fontes"}
+  ],
+  "todaySections": [
+    "primary-observance",
+    "other-observances",
+    "why-today-matters",
+    "reading-references",
+    "validated-prayer-or-devotion",
+    "novena-state",
+    "other-traditions",
+    "tomorrow-preview"
+  ],
+  "retentionActions": [
+    "save-saint",
+    "follow-observance",
+    "add-to-calendar",
+    "start-novena",
+    "continue-novena",
+    "set-optional-reminder",
+    "share-canonical-url"
+  ],
+  "guards": {
+    "guestValueBeforeAccount": true,
+    "guestSavesLocalFirst": true,
+    "notificationsOptIn": true,
+    "noSpiritualAnxietyRetention": true,
+    "noRequestTimeExternalAcquisition": true,
+    "noThinPageScaleBeforeQualityGate": true,
+    "adsensePreparingNoAdBehaviourMutation": true
+  }
+}

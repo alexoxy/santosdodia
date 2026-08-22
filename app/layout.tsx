@@ -7,6 +7,7 @@ import './biographies.css';
 import './holidays.css';
 import './performance.css';
 import './product-v1.css';
+import './product-retention.css';
 import './ads.css';
 import AdSenseBootstrap from './components/AdSenseBootstrap';
 import LanguageProvider from './components/LanguageProvider';

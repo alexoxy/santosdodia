@@ -9,12 +9,8 @@ import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biographies"
 import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive } from "../lib/adsense";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
+import { getRetentionCopy } from "../lib/product-retention-i18n";
 import { useLanguage } from "./components/LanguageProvider";
-
-const pilgrimageLabel: Record<Locale, string> = {
-  en: "Pilgrimages", pt: "Peregrinar", es: "Peregrinar", fr: "Pèlerinages", fil: "Paglalakbay-dalangin",
-  ru: "Паломничества", sw: "Hija", de: "Pilgerziele", it: "Pellegrinaggi", pl: "Pielgrzymki",
-};
 
 const trustCopy: Partial<Record<Locale,{title:string;body:string;detail:string;link:string}>> = {
   en: { title:"One date, many Christian calendars", body:"Santos do Dia does not treat Christianity as one universal calendar. Dates are kept with their Church, rite, jurisdiction and calendar system so differences remain visible instead of being silently merged.", detail:"Official and high-authority sources are prioritised, names are normalised linguistically, and the same reviewed data powers the website, search, API and ICS feeds.", link:"How the project works" },
@@ -35,6 +31,7 @@ export default function HomePage() {
   const feature = getFeatureCopy(locale);
   const trust = trustCopy[locale] ?? trustCopy.en!;
   const featured = featuredCopy[locale] ?? featuredCopy.en!;
+  const retention = getRetentionCopy(locale);
   const sidebarActive = isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
   const editorialProfiles = SAINT_BIOGRAPHIES.slice(0, 4).map(item => ({ id:item.id, biography:getSaintBiography(item.id, locale) })).filter(entry => entry.biography);
 
@@ -60,16 +57,16 @@ export default function HomePage() {
             </article>
           </section> : null}
 
+          <nav className="product-destination-grid" aria-label="SantosDia">
+            <Link href="/calendar" className="product-destination-card"><span aria-hidden="true">▦</span><strong>{feature.navCalendars}</strong><small>{retention.calendarHint}</small></Link>
+            <Link href="/explore" className="product-destination-card"><span aria-hidden="true">⌕</span><strong>{feature.navFind}</strong><small>{retention.discoverHint}</small></Link>
+            <Link href="/rezar" className="product-destination-card"><span aria-hidden="true">◇</span><strong>{retention.pray}</strong><small>{retention.prayHint}</small></Link>
+            <Link href="/guardados" className="product-destination-card"><span aria-hidden="true">☆</span><strong>{retention.saved}</strong><small>{retention.savedHint}</small></Link>
+          </nav>
+
           <section className="institutional-grid home-trust-grid" aria-labelledby="home-trust-title">
             <article className="institutional-card"><span className="eyebrow">{copy.approvedData}</span><h2 id="home-trust-title">{trust.title}</h2><p>{trust.body}</p><p>{trust.detail}</p><Link className="text-link" href="/about">{trust.link} →</Link></article>
           </section>
-
-          <nav className="product-destination-grid" aria-label="SantosDia">
-            <Link href="/calendar" className="product-destination-card"><span aria-hidden="true">▦</span><strong>{feature.navCalendars}</strong><small>{copy.addCalendar}</small></Link>
-            <Link href="/explore" className="product-destination-card"><span aria-hidden="true">⌕</span><strong>{feature.navFind}</strong><small>{copy.searchTitle}</small></Link>
-            <Link href="/pilgrimages" className="product-destination-card"><span aria-hidden="true">⌖</span><strong>{pilgrimageLabel[locale]}</strong><small>{copy.country} · {copy.calendarTitle}</small></Link>
-            <Link href="/live" className="product-destination-card"><span aria-hidden="true">●</span><strong>{feature.navLive}</strong><small>{feature.liveTitle}</small></Link>
-          </nav>
         </div>
 
         {sidebarActive ? <aside className="ad-sidebar-rail" aria-label="Advertising rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar" /></aside> : null}

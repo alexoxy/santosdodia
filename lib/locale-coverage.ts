@@ -11,6 +11,7 @@ export function localeOptionLabel(locale: Locale, label: string) {
 }
 
 const notices:Partial<Record<Locale,string>>={
+ fr:'Le français sera proposé publiquement lorsque toutes les surfaces du produit auront été entièrement vérifiées.',
  de:'Deutsch wird erst wieder öffentlich angeboten, wenn alle Produktoberflächen vollständig geprüft sind.',
  pl:'Język polski zostanie ponownie udostępniony publicznie po pełnej weryfikacji wszystkich powierzchni produktu.',
  ru:'Русский язык снова появится в публичном выборе после полной проверки всех разделов продукта.',
