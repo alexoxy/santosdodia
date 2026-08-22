@@ -17,12 +17,12 @@ The product is organised around five recurring user jobs:
 
 ## Global context model
 
-Every user-facing result is resolved from four independent dimensions:
+Every user-facing result is resolved from five independent dimensions:
 
 - **Locale** — language and local editorial presentation.
 - **Tradition** — Roman Catholic, Orthodox, Anglican or another supported Christian tradition.
 - **Jurisdiction** — country, episcopal conference, patriarchate, local church or competent authority.
-- **Calendar system** — Gregorian, Julian, Revised Julian or source-declared equivalent.
+- **Calendar system** — Gregorian, Julian, Revised Julian or source-declared equivalent.\n- **Timezone** — the civil-day boundary used to resolve Today, tomorrow and date-sensitive reminders.
 
 Rules:
 
