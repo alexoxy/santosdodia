@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildPortugalP0VaticanCorroborationCandidates } from './build-portugal-p0-vatican-corroboration-candidates.mjs';
 import { buildPortugalP0IndependentResearchQueue } from './build-portugal-p0-independent-research-queue.mjs';
+import { buildPortugalP0EditorialDecisionQueue } from './build-portugal-p0-editorial-decision-queue.mjs';
 
 const RESOLVED_IDENTITY_STATUSES = new Set(['resolved-single-occurrence', 'resolved-duplicate-occurrences']);
 
@@ -178,10 +179,17 @@ function main() {
     bindings: JSON.parse(fs.readFileSync(bindingsPath, 'utf8')),
   });
   const researchQueue = buildPortugalP0IndependentResearchQueue({ p0Pack: result, corroboration });
+  const editorialDecisionQueue = buildPortugalP0EditorialDecisionQueue({
+    p0Pack: result,
+    corroboration,
+    researchQueue,
+  });
   result.vaticanCorroboration = corroboration;
   result.independentResearchQueue = researchQueue;
+  result.editorialDecisionQueue = editorialDecisionQueue;
   result.summary.vaticanCorroboration = corroboration.summary;
   result.summary.independentResearchQueue = researchQueue.summary;
+  result.summary.editorialDecisionQueue = editorialDecisionQueue.summary;
 
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
   fs.mkdirSync(path.dirname(path.resolve(summaryPath)), { recursive: true });
