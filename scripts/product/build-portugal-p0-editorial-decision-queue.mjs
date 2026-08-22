@@ -15,8 +15,14 @@ function argument(name) {
   return index >= 0 ? process.argv[index + 1] : null;
 }
 
-function researchByReviewId(researchQueue) {
-  return new Map((researchQueue?.items ?? []).map((item) => [item.reviewId, item]));
+function uniqueReviewIndex(items, label) {
+  const index = new Map();
+  for (const item of items ?? []) {
+    if (!item?.reviewId) throw new Error(`${label} contains an item without reviewId.`);
+    if (index.has(item.reviewId)) throw new Error(`${label} contains duplicate reviewId ${item.reviewId}.`);
+    index.set(item.reviewId, item);
+  }
+  return index;
 }
 
 function decisionClassFor(corroboration, research) {
@@ -60,11 +66,22 @@ export function buildPortugalP0EditorialDecisionQueue({ p0Pack, corroboration, r
     throw new Error('Editorial decision queue refuses inputs outside the AdSense PREPARING boundary.');
   }
 
-  const p0ByReviewId = new Map(p0Pack.items.map((item) => [item.reviewId, item]));
-  const researchIndex = researchByReviewId(researchQueue);
+  const p0ByReviewId = uniqueReviewIndex(p0Pack.items, 'P0 review pack');
+  const corroborationByReviewId = uniqueReviewIndex(corroboration.items, 'Vatican corroboration');
+  const researchIndex = uniqueReviewIndex(researchQueue.items, 'Independent research queue');
+
+  if (corroboration.items.length !== p0Pack.items.length) {
+    throw new Error(`Editorial decision input accounting mismatch: p0=${p0Pack.items.length}, corroboration=${corroboration.items.length}.`);
+  }
+  for (const reviewId of p0ByReviewId.keys()) {
+    if (!corroborationByReviewId.has(reviewId)) throw new Error(`Editorial decision input is missing corroboration for ${reviewId}.`);
+  }
+  for (const reviewId of researchIndex.keys()) {
+    if (!p0ByReviewId.has(reviewId) || !corroborationByReviewId.has(reviewId)) throw new Error(`Independent research row ${reviewId} is outside the P0/corroboration set.`);
+  }
+
   const items = corroboration.items.map((row) => {
     const p0 = p0ByReviewId.get(row.reviewId);
-    if (!p0) throw new Error(`Editorial row ${row.reviewId} is missing from the P0 pack.`);
     const research = researchIndex.get(row.reviewId) ?? null;
     const decisionClass = decisionClassFor(row, research);
     const reviewable = REVIEWABLE_CORROBORATION.has(row.disposition) || research?.status === 'evidence-ready-for-editorial-review';
