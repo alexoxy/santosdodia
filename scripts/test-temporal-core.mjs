@@ -34,6 +34,7 @@ function assert(condition, message) {
 try {
   fs.writeFileSync(path.join(temporaryDirectory, 'package.json'), '{"type":"module"}\n', 'utf8');
   transpile(path.join(root, 'lib/knowledge/calendar-engine.ts'), 'calendar-engine.js');
+  transpile(path.join(root, 'lib/knowledge/rolling-materialization.ts'), 'rolling-materialization.js');
   transpile(
     path.join(root, 'lib/knowledge/temporal-core.ts'),
     'temporal-core.js',
@@ -41,6 +42,7 @@ try {
   );
 
   const temporal = await import(`${pathToFileURL(path.join(temporaryDirectory, 'temporal-core.js')).href}?v=${Date.now()}`);
+  const rolling = await import(`${pathToFileURL(path.join(temporaryDirectory, 'rolling-materialization.js')).href}?v=${Date.now()}`);
 
   assert(temporal.civilDateAtInstant('2026-08-10T00:30:00Z', 'America/New_York') === '2026-08-09', 'New York civil date regression failed.');
   assert(temporal.civilDateAtInstant('2026-08-10T00:30:00Z', 'Europe/Lisbon') === '2026-08-10', 'Lisbon civil date regression failed.');
@@ -48,6 +50,14 @@ try {
   assert(temporal.civilDateAtInstant('2026-01-01T00:30:00Z', 'Pacific/Honolulu') === '2025-12-31', 'UTC-10 year-boundary regression failed.');
   assert(temporal.normalizeTimeZone('Not/AZone', 'UTC') === 'UTC', 'Invalid timezone fallback failed.');
   assert(temporal.isValidIanaTimeZone('Europe/Lisbon') === true, 'Europe/Lisbon must be accepted as an IANA timezone.');
+
+  assert(JSON.stringify(rolling.rollingCivilYearWindow(2026)) === JSON.stringify([2025, 2026, 2027, 2028, 2029]), '2026 rolling window must be 2025-2029.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindow(2027)) === JSON.stringify([2026, 2027, 2028, 2029, 2030]), '2027 rollover must retire 2025 from serving and add 2030.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2026-12-31T23:59:59Z')) === JSON.stringify([2025, 2026, 2027, 2028, 2029]), 'UTC window must remain on 2026 before midnight UTC.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2027-01-01T00:00:00Z')) === JSON.stringify([2026, 2027, 2028, 2029, 2030]), 'UTC rollover must occur automatically at the year boundary.');
+  let invalidRollingRejected = false;
+  try { rolling.rollingCivilYearWindow(2026, -1, 3); } catch { invalidRollingRejected = true; }
+  assert(invalidRollingRejected, 'Negative rolling-window retention must fail closed.');
 
   const julianChristmas = temporal.bridgeDateRule({ type: 'fixed', calendar: 'julian', month: 12, day: 25 }, 2026);
   assert(julianChristmas.status === 'resolved', 'Julian Christmas must resolve inside civil year 2026.');
@@ -63,7 +73,7 @@ try {
     assert(temporal.gregorianDateFromJdn(jdn) === dateISO, `JDN round-trip failed for ${dateISO}.`);
   }
 
-  console.log('Temporal core tests passed: timezone boundaries, Julian bridging and JDN round-trips.');
+  console.log('Temporal core tests passed: timezone boundaries, rolling-year rollover, Julian bridging and JDN round-trips.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
@@ -72,3 +82,4 @@ await import('./vault/test-canonical-temporal-rule-manifest.mjs');
 await import('./vault/test-temporal-rule-families.mjs');
 await import('./test-roman-liturgical-year.mjs');
 await import('./test-liturgical-calculator-surface.mjs');
+await import('./test-rolling-ics-surface.mjs');
