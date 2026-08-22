@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "ecclesialContextModelVersion": "1.0",
+  "status": "repository-reviewed-ecclesial-context-anchors",
+  "contexts": [
+    {
+      "id": "church:roman-catholic",
+      "entityType": "ChurchOrTradition",
+      "kind": "church",
+      "family": "catholic",
+      "traditionKey": "roman-catholic",
+      "canonicalUrl": "https://www.vatican.va/",
+      "authorityDomains": ["causesanti.va", "patriarcado-lisboa.pt", "vatican.va", "vaticannews.va"],
+      "calendarSystems": ["gregorian"],
+      "sourceEvidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/vatican/en.html",
+          "claimTypes": ["church-identity", "universal-catholic-authority"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "church:orthodox-church-america",
+      "entityType": "ChurchOrTradition",
+      "kind": "church",
+      "family": "eastern-orthodox",
+      "traditionKey": "eastern-orthodox",
+      "canonicalUrl": "https://www.oca.org/",
+      "authorityDomains": ["oca.org"],
+      "calendarSystems": ["julian", "revised-julian"],
+      "sourceEvidence": [
+        {
+          "publisher": "Orthodox Church in America",
+          "url": "https://www.oca.org/",
+          "claimTypes": ["church-identity", "oca-authority"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    }
+  ]
+}

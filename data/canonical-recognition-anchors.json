@@ -6,12 +6,12 @@
     {
       "id": "recognition:matthew-apostle:roman-catholic",
       "personId": "matthew-apostle",
-      "churchId": "roman-catholic",
+      "churchId": "church:roman-catholic",
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
       "ecclesialTitles": ["apostle", "evangelist"],
-      "scope": "universal",
+      "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
@@ -29,14 +29,14 @@
       "verifiedAt": "2026-08-22"
     },
     {
-      "id": "recognition:matthew-apostle:eastern-orthodox:oca",
+      "id": "recognition:matthew-apostle:orthodox-church-america",
       "personId": "matthew-apostle",
-      "churchId": "eastern-orthodox",
-      "jurisdictionId": "oca",
+      "churchId": "church:orthodox-church-america",
+      "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
       "ecclesialTitles": ["apostle", "evangelist"],
-      "scope": "jurisdictional-attestation",
+      "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
@@ -51,12 +51,12 @@
     {
       "id": "recognition:thomas-aquinas:roman-catholic",
       "personId": "thomas-aquinas",
-      "churchId": "roman-catholic",
+      "churchId": "church:roman-catholic",
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
       "ecclesialTitles": ["priest", "doctor-of-the-church"],
-      "scope": "universal",
+      "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
@@ -76,12 +76,12 @@
     {
       "id": "recognition:catherine-siena:roman-catholic",
       "personId": "catherine-siena",
-      "churchId": "roman-catholic",
+      "churchId": "church:roman-catholic",
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
       "ecclesialTitles": ["virgin", "doctor-of-the-church"],
-      "scope": "universal",
+      "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
@@ -101,12 +101,12 @@
     {
       "id": "recognition:elizabeth-portugal:roman-catholic",
       "personId": "elizabeth-portugal",
-      "churchId": "roman-catholic",
+      "churchId": "church:roman-catholic",
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
       "ecclesialTitles": [],
-      "scope": "universal",
+      "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
