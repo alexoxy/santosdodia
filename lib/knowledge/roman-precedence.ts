@@ -82,11 +82,34 @@ export function romanPrecedenceLevelForClass(code: RomanPrecedenceClassCode): Ro
   return level;
 }
 
+function validateCandidates(candidates: RomanPrecedenceCandidate[]): void {
+  const ids = new Set<string>();
+  for (const candidate of candidates) {
+    if (!candidate.id || candidate.id.trim() !== candidate.id) {
+      throw new RangeError('Roman precedence candidate IDs must be non-empty and whitespace-normalized.');
+    }
+    if (ids.has(candidate.id)) throw new RangeError(`Duplicate Roman precedence candidate ID: ${candidate.id}.`);
+    ids.add(candidate.id);
+
+    const level = romanPrecedenceLevelForClass(candidate.precedenceClass);
+    if (candidate.isSolemnity && (level < 2 || level > 4)) {
+      throw new RangeError(`Candidate ${candidate.id} cannot be marked as a solemnity at precedence level ${level}.`);
+    }
+  }
+}
+
 export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): RomanPrecedenceResolution {
+  validateCandidates(candidates);
   const normalized = candidates.map(candidate => ({
     ...candidate,
     precedenceLevel: romanPrecedenceLevelForClass(candidate.precedenceClass)
   }));
+
+  const transferRule = {
+    appliesToImpededSolemnities: true as const,
+    destinationMustBeFreeOfLevels: [1, 2, 3, 4, 5, 6, 7, 8] as const,
+    targetDateResolvedByThisFunction: false as const
+  };
 
   if (normalized.length === 0) {
     return {
@@ -95,11 +118,7 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
       winnerId: null,
       winningPrecedenceLevel: null,
       decisions: [],
-      transferRule: {
-        appliesToImpededSolemnities: true,
-        destinationMustBeFreeOfLevels: [1, 2, 3, 4, 5, 6, 7, 8],
-        targetDateResolvedByThisFunction: false
-      },
+      transferRule,
       sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
     };
   }
@@ -121,11 +140,7 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
           ? 'equal-highest-precedence-requires-policy'
           : 'lower-precedence-omitted'
       })),
-      transferRule: {
-        appliesToImpededSolemnities: true,
-        destinationMustBeFreeOfLevels: [1, 2, 3, 4, 5, 6, 7, 8],
-        targetDateResolvedByThisFunction: false
-      },
+      transferRule,
       sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
     };
   }
@@ -160,11 +175,7 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
         reasonCode: 'lower-precedence-omitted' as const
       };
     }),
-    transferRule: {
-      appliesToImpededSolemnities: true,
-      destinationMustBeFreeOfLevels: [1, 2, 3, 4, 5, 6, 7, 8],
-      targetDateResolvedByThisFunction: false
-    },
+    transferRule,
     sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
   };
 }
