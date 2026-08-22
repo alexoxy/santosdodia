@@ -3,6 +3,8 @@ import type { SaintBiography } from './saint-biographies';
 const VATICAN_MATTHEW = 'https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html';
 const HOLY_SEE_MATTHEW = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html';
 const OCA_MATTHEW = 'https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew';
+const VATICAN_THOMAS_AQUINAS = 'https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html';
+const HOLY_SEE_THOMAS_AQUINAS = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html';
 
 const matthew: SaintBiography = {
   id: 'matthew-apostle',
@@ -66,4 +68,65 @@ const matthew: SaintBiography = {
   verifiedAt: '2026-08-22',
 };
 
-export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew];
+const thomasAquinas: SaintBiography = {
+  id: 'thomas-aquinas',
+  title: {
+    en: 'Saint Thomas Aquinas, Priest and Doctor of the Church',
+    pt: 'S. Tomás de Aquino, presbítero e doutor da Igreja',
+    es: 'Santo Tomás de Aquino, presbítero y doctor de la Iglesia',
+    it: 'San Tommaso d’Aquino, presbitero e dottore della Chiesa',
+  },
+  summary: {
+    en: 'Thomas Aquinas was a Dominican priest and theologian whose careful dialogue between Christian faith, Scripture and philosophy shaped centuries of Catholic thought. The Church remembers him as a Doctor of the Church on 28 January.',
+    pt: 'Tomás de Aquino foi um presbítero dominicano e teólogo cujo diálogo rigoroso entre a fé cristã, a Escritura e a filosofia marcou séculos de pensamento católico. A Igreja recorda-o como doutor da Igreja a 28 de janeiro.',
+    es: 'Tomás de Aquino fue un presbítero dominico y teólogo cuyo diálogo riguroso entre la fe cristiana, la Escritura y la filosofía marcó siglos de pensamiento católico. La Iglesia lo recuerda como doctor de la Iglesia el 28 de enero.',
+    it: 'Tommaso d’Aquino fu un presbitero domenicano e teologo il cui rigoroso dialogo tra fede cristiana, Scrittura e filosofia segnò secoli di pensiero cattolico. La Chiesa lo ricorda come dottore della Chiesa il 28 gennaio.',
+  },
+  paragraphs: {
+    en: [
+      'Thomas was born in 1224 or 1225 at Roccasecca, near Aquino. After an early education at Monte Cassino, he studied at Naples and entered the Order of Preachers despite opposition from his family. His formation continued in Paris and Cologne under Albert the Great. He later taught in Paris and several Italian cities, combining academic work with the life and ministry of a Dominican priest.',
+      'His theology drew deeply on Scripture and the Fathers of the Church while engaging seriously with the philosophy of Aristotle. Thomas argued that sound reasoning and revealed faith cannot ultimately contradict one another because both truth and the human capacity to know have their source in God. He wrote biblical commentaries and began the Summa Theologiae, preached to ordinary congregations and contributed to the liturgical tradition associated with the feast of Corpus Christi.',
+      'In December 1273, after an intense spiritual experience, Thomas stopped writing. He died in 1274 at the Cistercian abbey of Fossanova while travelling toward the Council of Lyons. The Catholic Church honours him as a priest and Doctor of the Church, and Catholic education has long looked to him as a patron. His Roman Catholic memorial is kept on 28 January.',
+    ],
+    pt: [
+      'Tomás nasceu em 1224 ou 1225 em Roccasecca, perto de Aquino. Depois de uma primeira educação em Monte Cassino, estudou em Nápoles e entrou na Ordem dos Pregadores, apesar da oposição da família. Prosseguiu a formação em Paris e Colónia com Alberto Magno. Mais tarde ensinou em Paris e em várias cidades italianas, unindo o trabalho académico à vida e ao ministério de presbítero dominicano.',
+      'A sua teologia mergulhou na Escritura e nos Padres da Igreja, ao mesmo tempo que dialogou seriamente com a filosofia de Aristóteles. Tomás defendeu que a razão bem conduzida e a fé revelada não podem, em última análise, contradizer-se, porque tanto a verdade como a capacidade humana de conhecer têm a sua origem em Deus. Escreveu comentários bíblicos, iniciou a Suma Teológica, pregou ao povo e contribuiu para a tradição litúrgica ligada à solenidade do Corpo de Deus.',
+      'Em dezembro de 1273, depois de uma intensa experiência espiritual, Tomás deixou de escrever. Morreu em 1274 na abadia cisterciense de Fossanova, quando seguia para o Concílio de Lião. A Igreja Católica honra-o como presbítero e doutor da Igreja, e a educação católica reconhece-o há muito como padroeiro. A sua memória no calendário católico romano celebra-se a 28 de janeiro.',
+    ],
+    es: [
+      'Tomás nació en 1224 o 1225 en Roccasecca, cerca de Aquino. Tras una primera educación en Montecasino, estudió en Nápoles e ingresó en la Orden de Predicadores pese a la oposición de su familia. Continuó su formación en París y Colonia con Alberto Magno. Más tarde enseñó en París y en varias ciudades italianas, uniendo el trabajo académico con la vida y el ministerio de un presbítero dominico.',
+      'Su teología se nutrió profundamente de la Escritura y de los Padres de la Iglesia, al tiempo que dialogó seriamente con la filosofía de Aristóteles. Tomás sostuvo que la razón bien orientada y la fe revelada no pueden contradecirse en último término, porque tanto la verdad como la capacidad humana de conocer tienen su origen en Dios. Escribió comentarios bíblicos, inició la Suma Teológica, predicó al pueblo y contribuyó a la tradición litúrgica vinculada a la solemnidad del Corpus Christi.',
+      'En diciembre de 1273, después de una intensa experiencia espiritual, Tomás dejó de escribir. Murió en 1274 en la abadía cisterciense de Fossanova, mientras viajaba hacia el Concilio de Lyon. La Iglesia católica lo honra como presbítero y doctor de la Iglesia, y la educación católica lo reconoce desde hace mucho como patrono. Su memoria en el calendario católico romano se celebra el 28 de enero.',
+    ],
+    it: [
+      'Tommaso nacque nel 1224 o 1225 a Roccasecca, vicino ad Aquino. Dopo una prima educazione a Montecassino, studiò a Napoli ed entrò nell’Ordine dei Predicatori nonostante l’opposizione della famiglia. Proseguì la formazione a Parigi e Colonia con Alberto Magno. In seguito insegnò a Parigi e in diverse città italiane, unendo il lavoro accademico alla vita e al ministero di presbitero domenicano.',
+      'La sua teologia attinse profondamente alla Scrittura e ai Padri della Chiesa, confrontandosi con serietà anche con la filosofia di Aristotele. Tommaso sostenne che la retta ragione e la fede rivelata non possono contraddirsi in ultima analisi, perché sia la verità sia la capacità umana di conoscere hanno origine in Dio. Scrisse commenti biblici, iniziò la Summa Theologiae, predicò al popolo e contribuì alla tradizione liturgica legata alla solennità del Corpus Domini.',
+      'Nel dicembre 1273, dopo un’intensa esperienza spirituale, Tommaso smise di scrivere. Morì nel 1274 nell’abbazia cistercense di Fossanova, mentre viaggiava verso il Concilio di Lione. La Chiesa cattolica lo onora come presbitero e dottore della Chiesa, e l’educazione cattolica lo riconosce da lungo tempo come patrono. La sua memoria nel calendario cattolico romano ricorre il 28 gennaio.',
+    ],
+  },
+  facts: [
+    {
+      label: { en: 'Birth', pt: 'Nascimento', es: 'Nacimiento', it: 'Nascita' },
+      value: { en: 'c. 1224–1225 · Roccasecca near Aquino', pt: 'c. 1224–1225 · Roccasecca, perto de Aquino', es: 'c. 1224–1225 · Roccasecca, cerca de Aquino', it: 'c. 1224–1225 · Roccasecca, vicino ad Aquino' },
+    },
+    {
+      label: { en: 'Religious order', pt: 'Ordem religiosa', es: 'Orden religiosa', it: 'Ordine religioso' },
+      value: { en: 'Order of Preachers (Dominicans)', pt: 'Ordem dos Pregadores (Dominicanos)', es: 'Orden de Predicadores (Dominicos)', it: 'Ordine dei Predicatori (Domenicani)' },
+    },
+    {
+      label: { en: 'Remembered as', pt: 'Recordado como', es: 'Recordado como', it: 'Ricordato come' },
+      value: { en: 'Priest, theologian and Doctor of the Church', pt: 'Presbítero, teólogo e doutor da Igreja', es: 'Presbítero, teólogo y doctor de la Iglesia', it: 'Presbitero, teologo e dottore della Chiesa' },
+    },
+    {
+      label: { en: 'Roman Catholic memorial', pt: 'Memória católica romana', es: 'Memoria católica romana', it: 'Memoria cattolica romana' },
+      value: { en: '28 January', pt: '28 de janeiro', es: '28 de enero', it: '28 gennaio' },
+    },
+  ],
+  sources: [
+    { name: 'Saint Thomas Aquinas', url: VATICAN_THOMAS_AQUINAS, language: 'en', publisher: 'Vatican News' },
+    { name: 'Saint Thomas Aquinas', url: HOLY_SEE_THOMAS_AQUINAS, language: 'en', publisher: 'Holy See' },
+  ],
+  verifiedAt: '2026-08-22',
+};
+
+export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas];
