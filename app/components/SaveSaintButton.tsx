@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Locale } from '../../lib/i18n';
+import { getRetentionCopy } from '../../lib/product-retention-i18n';
 
 type SavedSaint = {
   id: string;
@@ -28,17 +30,9 @@ function writeSaved(items: SavedSaint[]) {
   window.dispatchEvent(new CustomEvent(EVENT_NAME));
 }
 
-export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { id: string; name: string; dateISO?: string; locale?: string }) {
+export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { id: string; name: string; dateISO?: string; locale?: Locale }) {
   const [saved, setSaved] = useState(false);
-  const labels = locale === 'pt'
-    ? { save: 'Guardar santo', saved: 'Guardado', remove: 'Remover dos guardados' }
-    : locale === 'es'
-      ? { save: 'Guardar santo', saved: 'Guardado', remove: 'Quitar de guardados' }
-      : locale === 'fr'
-        ? { save: 'Enregistrer', saved: 'Enregistré', remove: 'Retirer des favoris' }
-        : locale === 'it'
-          ? { save: 'Salva santo', saved: 'Salvato', remove: 'Rimuovi dai salvati' }
-          : { save: 'Save saint', saved: 'Saved', remove: 'Remove from saved' };
+  const labels = getRetentionCopy(locale);
 
   useEffect(() => {
     const sync = () => setSaved(readSaved().some(item => item.id === id));
@@ -69,10 +63,10 @@ export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { 
     type="button"
     className={`btn ${saved ? 'btn-primary save-saint-button is-saved' : 'btn-secondary save-saint-button'}`}
     aria-pressed={saved}
-    aria-label={saved ? labels.remove : labels.save}
+    aria-label={saved ? labels.removeSaved : labels.saveSaint}
     onClick={toggle}
   >
-    <span aria-hidden="true">{saved ? '★' : '☆'}</span> {saved ? labels.saved : labels.save}
+    <span aria-hidden="true">{saved ? '★' : '☆'}</span> {saved ? labels.savedSaint : labels.saveSaint}
   </button>;
 }
 
