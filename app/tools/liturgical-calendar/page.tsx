@@ -54,6 +54,15 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
     try { context = romanDateContext(date, policy); } catch { context = null; }
   }
   const apiPath = `/api/v1/liturgical-calendar?year=${year}&jurisdiction=${jurisdiction}&locale=${locale}${date ? `&date=${date}` : ''}`;
+  const syncParams = new URLSearchParams({ tradition: 'roman-catholic' });
+  const icsParams = new URLSearchParams({ locale });
+  if (jurisdiction === 'PT') {
+    syncParams.set('country', 'PT');
+    icsParams.set('country', 'PT');
+  }
+  const syncPath = `/calendar/subscribe?${syncParams}`;
+  const rollingIcsPath = `/api/ical/roman-catholic?${icsParams}`;
+  const annualIcsPath = `${rollingIcsPath}&year=${year}`;
 
   return <div className="page-stack">
     <CalendarProductNav />
@@ -94,6 +103,7 @@ export default async function LiturgicalCalendarToolPage({ searchParams }: PageP
     <section className="source-list-section">
       <div className="institutional-grid">
         <article className="institutional-card"><h2>{copy.method}</h2><p>{copy.methodBody}</p><p><strong>{policy.id}</strong> · {policy.calendarSystem}</p></article>
+        <article className="institutional-card"><h2>{copy.subscribe}</h2><p>{copy.subscribeBody}</p><div className="button-row"><a className="btn btn-primary" href={syncPath}>{copy.subscribe}</a><a className="btn btn-secondary" href={annualIcsPath} download>{copy.annualIcs}</a></div></article>
         <article className="institutional-card"><h2>{copy.machine}</h2><p className="machine-url"><code>{SITE_ORIGIN}{apiPath}</code></p><a className="btn btn-secondary" href={apiPath} target="_blank" rel="noreferrer">JSON</a> <a className="btn btn-secondary" href="/openapi.json" target="_blank" rel="noreferrer">OpenAPI</a></article>
       </div>
     </section>
