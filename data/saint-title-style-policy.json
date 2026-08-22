@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "status": "normative",
+  "purpose": "Define source-driven saint title and qualifier rendering by locale and ecclesial context. Never translate or mechanically transform saint titles across languages.",
+  "principles": {
+    "sourceDrivenCanonicalForm": true,
+    "localeSpecificMorphology": true,
+    "traditionSpecificUsage": true,
+    "contextSpecificPresentation": true,
+    "neverGenerateSaintPrefixFromAnotherLocale": true,
+    "neverInventOrRemovePapalOrdinal": true,
+    "preserveOfficialLiturgicalEpithet": true,
+    "qualifiersFollowLocaleEcclesialStyle": true,
+    "compactLabelsMayUseApprovedLocalAbbreviation": true,
+    "institutionAndPlaceNamesAreSeparateFromPersonLabels": true
+  },
+  "authorityHierarchy": {
+    "canonicalStatusAndCauseIdentity": [
+      "Dicastery for the Causes of Saints (causesanti.va)",
+      "Holy See / Vatican official records"
+    ],
+    "liturgicalDisplayName": [
+      "official local/national liturgical authority for the target locale and tradition",
+      "Holy See official liturgical source in the target language",
+      "Dicastery for the Causes of Saints",
+      "validated language authority"
+    ],
+    "secondaryUsageEvidence": [
+      "reputable national language references",
+      "reputable explanatory press and religious media"
+    ]
+  },
+  "contexts": {
+    "calendarCompact": "Use the abbreviation or compact form explicitly validated for that locale/tradition.",
+    "saintPageTitle": "Use the full official liturgical/hagiographic display form for the target locale.",
+    "runningText": "Follow grammar and capitalization rules of the target language; do not force title-case conventions from headings.",
+    "institutionOrPlaceName": "Treat as a proper name; do not reuse person-name morphology rules blindly."
+  },
+  "locales": {
+    "pt-PT": {
+      "tradition": "Roman Catholic / Portugal",
+      "personPrefixRule": {
+        "masculineBeforeConsonant": "São",
+        "masculineBeforeVowelOrH": "Santo",
+        "feminine": "Santa",
+        "traditionalExceptionsOverrideRule": true,
+        "examples": [
+          "São Pedro",
+          "São Mateus",
+          "Santo António de Lisboa",
+          "Santo Agostinho",
+          "Santo Hilário",
+          "Santa Mónica"
+        ]
+      },
+      "compactCalendar": {
+        "allowedAbbreviation": "S.",
+        "meaning": ["São", "Santo", "Santa"],
+        "useOnlyWhenCompactContextRequiresIt": true
+      },
+      "qualifierStyle": {
+        "afterCommaLowercase": true,
+        "examples": [
+          "São Gregório Magno, papa e doutor da Igreja",
+          "São Mateus, apóstolo e evangelista",
+          "São Pio X, papa",
+          "Santa Maria Goretti, virgem e mártir"
+        ]
+      },
+      "papalAndHistoricalNames": {
+        "ordinalPolicy": "Never infer, add or remove a Roman numeral. Preserve the exact official target-locale liturgical or Holy See form.",
+        "epithetPolicy": "Prefer the official liturgical epithet when that is the established saint display name.",
+        "examples": [
+          "São Gregório Magno",
+          "São Martinho I",
+          "São Silvestre I",
+          "São Pio V",
+          "São João I"
+        ]
+      },
+      "primaryAuthorities": [
+        "Secretariado Nacional de Liturgia - Portugal",
+        "Dicastery for the Causes of Saints",
+        "Holy See Portuguese-language official sources"
+      ],
+      "supportingAuthorities": [
+        "Ciberdúvidas da Língua Portuguesa",
+        "Priberam",
+        "IDe+ explanatory article on São/Santo"
+      ]
+    },
+    "es-ES": {
+      "personPrefixRule": {
+        "defaultMasculine": "san",
+        "traditionalMasculineExceptions": ["santo Tomás", "santo Tomé", "santo Toribio", "santo Domingo"],
+        "feminine": "santa",
+        "capitalization": "In ordinary prose, language authorities normally lowercase san/santo/santa when used as treatments; official liturgical headings may use their own heading capitalization. Preserve source context."
+      },
+      "primaryAuthorities": ["Conferencia Episcopal Española", "Holy See Spanish-language sources"],
+      "languageAuthorities": ["RAE", "FundéuRAE"]
+    },
+    "it-IT": {
+      "personPrefixRule": {
+        "masculineMostConsonants": "San",
+        "masculineSPlusConsonant": "Santo",
+        "beforeVowel": "Sant'",
+        "feminineBeforeConsonant": "Santa",
+        "feminineBeforeVowel": "Sant'",
+        "examples": ["San Pietro", "Santo Stefano", "Sant'Antonio", "Santa Teresa", "Sant'Agnese"]
+      },
+      "primaryAuthorities": ["Conferenza Episcopale Italiana", "Holy See Italian-language sources"],
+      "languageAuthorities": ["Treccani", "Accademia della Crusca"]
+    },
+    "fr-FR": {
+      "personPrefixRule": {
+        "masculine": "saint",
+        "feminine": "sainte",
+        "compactLiturgicalAbbreviation": "S.",
+        "capitalization": "Preserve the official liturgical context. French liturgical calendars may use 'S.' in compact headings and 'saint/sainte' in running text."
+      },
+      "examples": ["S. Grégoire le Grand, pape et docteur de l'Eglise", "saint Grégoire"],
+      "primaryAuthorities": ["AELF", "Holy See French-language sources"],
+      "languageAuthorities": ["Académie française"]
+    },
+    "en-GB": {
+      "personPrefixRule": {
+        "full": "Saint",
+        "compact": "St or St.",
+        "policy": "Do not abbreviate automatically. Use the form selected by the target ecclesial/style authority for the context."
+      },
+      "examples": ["Saint Gregory the Great, Pope and Doctor of the Church", "Saint Matthew, Apostle and Evangelist"],
+      "primaryAuthorities": ["local Catholic bishops' conference / approved liturgical source", "Holy See English-language sources"],
+      "languageAuthorities": ["Oxford English Dictionary"]
+    },
+    "de-DE": {
+      "personPrefixRule": {
+        "policy": "Do not translate Saint/São mechanically. Preserve validated German ecclesial usage such as 'hl.'/'Heiliger' according to source and context; 'St.'/'Sankt' is commonly part of institutions, churches and place names and is not interchangeable with person labels.",
+        "sourceDriven": true
+      },
+      "primaryAuthorities": ["German Catholic liturgical authority / bishops' conference", "Holy See German-language sources"],
+      "languageAuthorities": ["Duden", "Amtliches Regelwerk der deutschen Rechtschreibung"]
+    },
+    "pl-PL": {
+      "personPrefixRule": {
+        "policy": "Preserve official Polish ecclesial form (commonly św. in compact liturgical usage and inflected full forms in running text). Do not generate forms without case-aware source validation.",
+        "sourceDriven": true
+      },
+      "primaryAuthorities": ["Polish Episcopal Conference / approved Polish liturgical source", "Holy See Polish-language sources"],
+      "languageAuthorities": ["WSJP", "PWN"]
+    },
+    "ru-RU": {
+      "personPrefixRule": {
+        "policy": "Preserve official Russian ecclesial form and grammatical case (e.g. святой/святая and inflected forms). Never transliterate when a validated Cyrillic form exists.",
+        "sourceDriven": true
+      },
+      "primaryAuthorities": ["validated Catholic Russian-language ecclesial source", "Holy See Russian-language sources"],
+      "languageAuthorities": ["Грамота.ру"]
+    },
+    "fil-PH": {
+      "personPrefixRule": {
+        "policy": "Preserve the official Filipino Catholic form from an approved local ecclesial source. Do not infer Spanish, English or Portuguese saint prefixes.",
+        "sourceDriven": true
+      },
+      "primaryAuthorities": ["Catholic Bishops' Conference of the Philippines / approved Filipino liturgical source"],
+      "languageAuthorities": ["Komisyon sa Wikang Filipino"]
+    },
+    "sw-TZ": {
+      "personPrefixRule": {
+        "fullSingular": "Mtakatifu",
+        "fullPlural": "Watakatifu",
+        "compact": "Mt. / Wat. only when explicitly validated by the local liturgical source",
+        "sourceDriven": true
+      },
+      "examples": ["Mtakatifu Petro", "Watakatifu Petro na Paulo"],
+      "primaryAuthorities": ["Tanzania Episcopal Conference / diocesan approved liturgical sources"],
+      "languageAuthorities": ["BAKITA"]
+    }
+  },
+  "publicationGuards": {
+    "unvalidatedLocaleForm": "withhold",
+    "conflictingPrimarySources": "human-review",
+    "secondarySourceOnly": "candidate-not-canonical",
+    "machineTranslatedSaintTitle": "withhold",
+    "crossLocalePrefixSubstitution": "forbidden"
+  }
+}
