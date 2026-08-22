@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import DayView from "../../components/DayView";
 import { isValidDateISO } from "../../../data/observances";
 import type { Locale } from "../../../lib/i18n";
+import { publicSaintProfilePath } from "../../../lib/public-entity-links";
 import { getPublicObservancesForDate } from "../../../lib/public-observances";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
@@ -129,12 +130,17 @@ export default async function DayPage({
         "@id": `${url}#observances`,
         name: observanceListName(locale, label),
         numberOfItems: items.length,
-        itemListElement: items.map((item, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: item.name,
-          url: `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`,
-        })),
+        itemListElement: items.map((item, index) => {
+          const profilePath = publicSaintProfilePath(item.id, locale);
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            url: profilePath
+              ? `${SITE_ORIGIN}${profilePath}`
+              : `${url}#observance-${encodeURIComponent(item.id)}`,
+          };
+        }),
       },
     ],
   };

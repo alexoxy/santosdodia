@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 import AnnualDateEditorialSection from "../../components/AnnualDateEditorialSection";
 import DayView from "../../components/DayView";
 import { getAnnualDateEditorial } from "../../../data/date-editorial-registry";
-import { getSaintBiographyRecord } from "../../../data/saint-biographies";
-import { isSaintBiographyIndexable } from "../../../lib/editorial-profile-quality";
 import type { Locale } from "../../../lib/i18n";
+import { publicSaintProfilePath } from "../../../lib/public-entity-links";
 import { getPublicObservancesForDate } from "../../../lib/public-observances";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
@@ -120,14 +119,13 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
         name: title,
         numberOfItems: items.length,
         itemListElement: items.map((item, index) => {
-          const biography = getSaintBiographyRecord(item.id);
-          const hasIndexableProfile = Boolean(biography && isSaintBiographyIndexable(biography, locale));
+          const profilePath = publicSaintProfilePath(item.id, locale);
           return {
             "@type": "ListItem",
             position: index + 1,
             name: item.name,
-            url: hasIndexableProfile
-              ? `${SITE_ORIGIN}/saint/${encodeURIComponent(item.id)}`
+            url: profilePath
+              ? `${SITE_ORIGIN}${profilePath}`
               : `${url}#observance-${encodeURIComponent(item.id)}`,
           };
         }),
