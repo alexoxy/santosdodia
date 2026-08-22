@@ -26,13 +26,14 @@ function dateFact(projection) {
 }
 function percent(count, total) { return total ? Number(((count / total) * 100).toFixed(1)) : 0; }
 
-function loadPackages(root, filename, enrichmentId, identityRootSha256) {
+function loadPackages(root, filename, enrichmentIds, identityRootSha256) {
+  const allowed = new Set(Array.isArray(enrichmentIds) ? enrichmentIds : [enrichmentIds]);
   const packages = filesNamed(root, filename).map(readJson); const entities = new Map();
   for (const pkg of packages) {
-    if (pkg?.enrichmentId !== enrichmentId || pkg?.identityRootSha256 !== identityRootSha256 || pkg?.publish !== false || pkg?.productionMutation !== false) throw new Error(`Unsafe or mismatched ${enrichmentId} package.`);
+    if (!allowed.has(pkg?.enrichmentId) || pkg?.identityRootSha256 !== identityRootSha256 || pkg?.publish !== false || pkg?.productionMutation !== false) throw new Error(`Unsafe or mismatched ${[...allowed].join('/')} package.`);
     for (const entity of pkg.entities ?? []) {
-      if (entities.has(entity.qid)) throw new Error(`Duplicate ${enrichmentId} entity ${entity.qid}.`);
-      entities.set(entity.qid, entity);
+      if (entities.has(entity.qid)) throw new Error(`Duplicate ${pkg.enrichmentId} entity ${entity.qid}.`);
+      entities.set(entity.qid, { ...entity, enrichmentId: pkg.enrichmentId });
     }
   }
   return { packages, entities };
@@ -50,21 +51,34 @@ export function assembleNavigationSource({ identityManifest, identityReport, ide
   }
   const labels = new Map();
   for (const pkg of labelPackages) {
-    if (pkg?.enrichmentId !== 'saints-labels-v2' || pkg?.identityRootSha256 !== root || pkg?.publish !== false || pkg?.languageFallbacksEnabled !== false) throw new Error('Navigation assembly received a mismatched labels package.');
-    for (const entity of pkg.entities ?? []) { if (labels.has(entity.qid)) throw new Error(`Duplicate labels ${entity.qid}.`); labels.set(entity.qid, entity); }
+    if (!['saints-labels-v2','saints-labels-v3'].includes(pkg?.enrichmentId) || pkg?.identityRootSha256 !== root || pkg?.publish !== false || pkg?.languageFallbacksEnabled !== false || pkg?.translationEnabled === true) throw new Error('Navigation assembly received a mismatched labels package.');
+    if (pkg.enrichmentId === 'saints-labels-v3' && pkg.sitelinkTitleEvidenceEnabled !== true) throw new Error('Navigation assembly received labels v3 without sitelink provenance.');
+    for (const entity of pkg.entities ?? []) { if (labels.has(entity.qid)) throw new Error(`Duplicate labels entity ${entity.qid}.`); labels.set(entity.qid, { ...entity, enrichmentId: pkg.enrichmentId }); }
   }
 
   const people = identityLedger.map((identity) => {
     if (identity.entityId !== `wikidata:${identity.qid}` || identity.publish !== false) throw new Error(`Unsafe identity ${identity?.qid ?? '<missing>'}.`);
     const profile = profiles.get(identity.qid); const labelEvidence = labels.get(identity.qid);
-    const names = {};
-    for (const [locale, label] of Object.entries(labelEvidence?.labels ?? {})) if (label?.status === 'source' && label?.scriptStatus === 'expected' && label?.value) names[locale] = label.value;
+    const names = {}; const nameEvidence = {};
+    for (const [locale, label] of Object.entries(labelEvidence?.labels ?? {})) {
+      if (label?.status !== 'source' || label?.scriptStatus !== 'expected' || !label?.value) continue;
+      names[locale] = label.value;
+      nameEvidence[locale] = { sourceId: 'wikidata', sourceKind: label.sourceKind ?? 'wikidata-label', wikidataLanguage: label.wikidataLanguage ?? locale };
+    }
+    if (labelEvidence?.enrichmentId === 'saints-labels-v3') {
+      for (const [locale, sitelink] of Object.entries(labelEvidence?.sitelinks ?? {})) {
+        if (names[locale] || sitelink?.status !== 'source' || sitelink?.scriptStatus !== 'expected' || !sitelink?.value) continue;
+        names[locale] = sitelink.value;
+        nameEvidence[locale] = { sourceId: 'wikidata', sourceKind: 'wikipedia-sitelink-title', wikipediaSite: sitelink.wikipediaSite ?? null };
+      }
+    }
     const places = (profile?.places ?? []).map((place) => ({ ...place, countryCode: place.countryCode ?? null, sourceIds: [...new Set(place.sourceIds ?? ['wikidata'])] }));
     return {
       entityId: identity.entityId,
       qid: identity.qid,
       canonicalName: identity.canonicalNameCandidates?.[0] ?? identity.entityId,
       names,
+      nameEvidence,
       aliases: labelEvidence?.aliases ?? {},
       birth: dateFact(profile?.dates?.birth),
       death: dateFact(profile?.dates?.death),
@@ -90,6 +104,8 @@ export function assembleNavigationSource({ identityManifest, identityReport, ide
     const count = people.filter((person) => Boolean(person.names[locale])).length;
     return [locale, { count, total: people.length, percent: percent(count, people.length) }];
   }));
+  const nameEvidenceByKind = {};
+  for (const person of people) for (const evidence of Object.values(person.nameEvidence ?? {})) nameEvidenceByKind[evidence.sourceKind] = (nameEvidenceByKind[evidence.sourceKind] ?? 0) + 1;
   const withCoordinates = people.filter((person) => person.places.some((place) => Number.isFinite(place.lat) && Number.isFinite(place.lon))).length;
   const withTimeline = people.filter((person) => person.birth?.year || person.death?.year).length;
   const observanceDays = new Set(unlinkedObservances.map((event) => `${String(event.month).padStart(2,'0')}-${String(event.day).padStart(2,'0')}`));
@@ -99,6 +115,8 @@ export function assembleNavigationSource({ identityManifest, identityReport, ide
     profiles: { count: profileCount, percent: percent(profileCount, people.length), complete: profileCount === people.length },
     labelEntities: { count: labelEntityCount, percent: percent(labelEntityCount, people.length), complete: labelEntityCount === people.length },
     labelsByLocale: labelCoverage,
+    nameEvidenceByKind,
+    labelEnrichmentVersion: labelPackages[0]?.enrichmentId ?? null,
     map: { peopleWithCoordinates: withCoordinates, percent: percent(withCoordinates, people.length) },
     timeline: { peopleWithDates: withTimeline, percent: percent(withTimeline, people.length) },
     dailySaints: { dayCount: observanceDays.size, expectedDays: vatican?.sourceScope === 'all' ? 366 : vatican?.coverage?.expectedDays ?? null, complete: vatican?.coverage?.complete === true },
@@ -114,7 +132,7 @@ function main() {
   const manifest = readJson(manifestPath); const root = manifest.rootSha256;
   const profileRoot = argument('--profiles-dir'); const labelsRoot = argument('--labels-dir');
   const profile = loadPackages(profileRoot, 'profile-normalized.json', 'saints-profile-v1', root);
-  const label = loadPackages(labelsRoot, 'labels-normalized.json', 'saints-labels-v2', root);
+  const label = loadPackages(labelsRoot, 'labels-normalized.json', ['saints-labels-v2','saints-labels-v3'], root);
   const vaticanPath = argument('--vatican');
   const result = assembleNavigationSource({ identityManifest: manifest, identityReport: readJson(reportPath), identityLedger: readJsonLines(ledgerPath), profilePackages: profile.packages, labelPackages: label.packages, vatican: vaticanPath && fs.existsSync(vaticanPath) ? readJson(vaticanPath) : null });
   fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true }); fs.writeFileSync(path.resolve(output), `${JSON.stringify(result, null, 2)}\n`, 'utf8'); process.stdout.write(`${JSON.stringify({ datasetVersion: result.datasetVersion, sourceSha256: result.sourceSha256, readiness: result.readiness, publicationAllowed: false }, null, 2)}\n`);
