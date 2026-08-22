@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "status": "normative-candidate",
   "productScope": "global-christian",
-  "principle": "Language, Christian tradition, jurisdiction and calendar system are independent dimensions. None may be inferred from another.",
+  "principle": "Language, location/jurisdiction, Christian tradition, calendar system and timezone are independent dimensions. None may be inferred from another.",
   "dimensions": {
     "locale": "UI language and localised editorial presentation",
     "tradition": "Roman Catholic, Greek Orthodox, Eastern Orthodox, Anglican and other supported Christian traditions",
     "jurisdiction": "country, bishops conference, patriarchate, local church or other competent ecclesial authority",
-    "calendarSystem": "Gregorian, Julian, Revised Julian or other source-declared system"
+    "calendarSystem": "Gregorian, Julian, Revised Julian or other source-declared system",\n    "timezone": "IANA civil timezone used to resolve Today, tomorrow and date-sensitive reminders"
   },
   "supportedLocalesInternal": ["en","es","pt","fr","fil","ru","sw","de","it","pl"],
   "publicExposureRule": "A locale becomes public only when UI, calendar coverage, localised names, source provenance and product-critical copy pass readiness checks.",
