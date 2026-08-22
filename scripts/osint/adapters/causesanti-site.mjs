@@ -168,6 +168,12 @@ export async function runCausesantiCrawler({ outputRoot = 'data/osint/runs', env
     if (queue.length && visited.size < maxUrls) await sleep(delayMs);
   }
 
+  const exhausted = queue.length === 0;
+  const archiveEligible = visited.size > 0 && manifest.length > 0;
+  const promotionEligible = exhausted && failures === 0;
+  const status = failures
+    ? (exhausted ? 'fetched-with-errors' : 'partial-with-errors')
+    : (exhausted ? 'fetched' : 'partial-limit');
   const summary = {
     schemaVersion: 1,
     sourceId,
@@ -175,14 +181,16 @@ export async function runCausesantiCrawler({ outputRoot = 'data/osint/runs', env
     runId,
     startedAt,
     finishedAt: new Date(now()).toISOString(),
-    status: failures ? 'fetched-with-errors' : 'fetched',
+    status,
     visitedUrls: visited.size,
     queuedUrls: queued.size,
     remainingQueue: queue.length,
     failures,
     maxUrls,
     delayMs,
-    exhausted: queue.length === 0,
+    exhausted,
+    archiveEligible,
+    promotionEligible,
     publicationMutation: false,
     indexationMutation: false,
     adsenseReviewState: 'PREPARING',
@@ -196,7 +204,7 @@ async function main() {
   try {
     const { summary } = await runCausesantiCrawler();
     console.log(JSON.stringify(summary, null, 2));
-    if (!summary.exhausted) process.exitCode = 2;
+    if (!summary.promotionEligible) console.warn('CauseSanti crawl is archiveable evidence but is not eligible for downstream promotion.');
   } catch (error) {
     console.error(error instanceof Error ? error.stack ?? error.message : String(error));
     process.exitCode = 1;
