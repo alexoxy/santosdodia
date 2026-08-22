@@ -63,6 +63,32 @@ if (/\bliveData\b|Live source data|fuentes en vivo|fontes em tempo real|sources 
   failures.push("public interface copy still claims request-time live source data");
 }
 
+// A calendar Observance is not automatically a standalone Person page. Both
+// date surfaces must delegate public /saint URL eligibility to one reviewed
+// biography gate, otherwise structured data can manufacture thin/false people.
+const [entityLinks, dayPage, annualDatePage] = await Promise.all([
+  readFile(path.join(root, "lib/public-entity-links.ts"), "utf8"),
+  readFile(path.join(root, "app/day/[date]/page.tsx"), "utf8"),
+  readFile(path.join(root, "app/date/[monthDay]/page.tsx"), "utf8"),
+]);
+if (!entityLinks.includes("getSaintBiographyRecord") || !entityLinks.includes("isSaintBiographyIndexable")) {
+  failures.push("public saint profile link policy no longer requires a substantive indexable biography");
+}
+if (!entityLinks.includes("return null") || !entityLinks.includes("/saint/")) {
+  failures.push("public saint profile link policy no longer fails closed for non-Person/thin observances");
+}
+for (const [label, source] of [["day", dayPage], ["annual date", annualDatePage]]) {
+  if (!source.includes("publicSaintProfilePath(item.id, locale)")) {
+    failures.push(`${label} structured data bypasses the shared Person profile link policy`);
+  }
+  if (/SITE_ORIGIN}\/saint\/\$\{encodeURIComponent\(item\.id\)}/.test(source)) {
+    failures.push(`${label} structured data directly manufactures /saint URLs from observance ids`);
+  }
+  if (!source.includes("#observance-${encodeURIComponent(item.id)}")) {
+    failures.push(`${label} structured data lost its non-Person observance fallback anchor`);
+  }
+}
+
 try {
   execFileSync(process.execPath, ["scripts/discovery/test-reviewed-navigation-promotion.mjs"], {
     cwd: root,
@@ -87,5 +113,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit saint/editorial promotion gates.`,
+  `Publication boundary passed: ${appFiles.length} public modules use approved read models, script-safe JSON-LD and explicit Person/editorial promotion gates.`,
 );
