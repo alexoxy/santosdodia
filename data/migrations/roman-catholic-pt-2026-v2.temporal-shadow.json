@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-release-temporal-shadow-mappings",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "target": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "mappings": [
+    {
+      "temporalRuleId": "temporal-rule:ash-wednesday:roman-catholic",
+      "occurrenceId": "occurrence:2026-02-18:ash-wednesday:roman-catholic:pt",
+      "legacyObservanceId": "rc:AshWednesday",
+      "sourceOccurrenceId": "snl-pt-2026-02-18-e7dbf84fa10a67d7bd318570",
+      "sourceRecordHash": "574d7d7e468f060dfb2ccea6a37b126d2dbe054edeed05c00a60c4f55c8f2cef",
+      "expectedDateISO": "2026-02-18",
+      "legacyRank": "solemnity"
+    },
+    {
+      "temporalRuleId": "temporal-rule:first-sunday-lent:roman-catholic",
+      "occurrenceId": "occurrence:2026-02-22:first-sunday-lent:roman-catholic:pt",
+      "legacyObservanceId": "rc:Lent1",
+      "sourceOccurrenceId": "snl-pt-2026-02-22-1adddcc8154b94de632095fd",
+      "sourceRecordHash": "b1be38be235366556032fbea705418b336b2b7cba294597933ed3bf8023c6b75",
+      "expectedDateISO": "2026-02-22",
+      "legacyRank": "solemnity"
+    },
+    {
+      "temporalRuleId": "temporal-rule:easter-sunday:roman-catholic",
+      "occurrenceId": "occurrence:2026-04-05:easter-sunday:roman-catholic:pt",
+      "legacyObservanceId": "rc:Easter",
+      "sourceOccurrenceId": "snl-pt-2026-04-05-c65b967d89e92f7b09af54c8",
+      "sourceRecordHash": "806fb289a88cd177998176df8bac83b234376a54db9e02f5373e821c3163c81f",
+      "expectedDateISO": "2026-04-05",
+      "legacyRank": "solemnity"
+    },
+    {
+      "temporalRuleId": "temporal-rule:pentecost-sunday:roman-catholic",
+      "occurrenceId": "occurrence:2026-05-24:pentecost-sunday:roman-catholic:pt",
+      "legacyObservanceId": "rc:Pentecost",
+      "sourceOccurrenceId": "snl-pt-2026-05-24-dfae367a3a65bd1c4c71be88",
+      "sourceRecordHash": "cb729437ac4ec95f221e368e56fee6343d1985ff51aa06688915d1f1b55d935e",
+      "expectedDateISO": "2026-05-24",
+      "legacyRank": "solemnity"
+    },
+    {
+      "temporalRuleId": "temporal-rule:first-sunday-advent:roman-catholic",
+      "occurrenceId": "occurrence:2026-11-29:first-sunday-advent:roman-catholic:pt",
+      "legacyObservanceId": "rc:Advent1",
+      "sourceOccurrenceId": "snl-pt-2026-11-29-7a049f1d9f32b1ff06beaedf",
+      "sourceRecordHash": "a11f00b28acf984c327637cdeee42d01509500a5899562c75c57df3576113e22",
+      "expectedDateISO": "2026-11-29",
+      "legacyRank": "solemnity"
+    }
+  ],
+  "mutationAllowed": false,
+  "verifiedAt": "2026-08-22"
+}
