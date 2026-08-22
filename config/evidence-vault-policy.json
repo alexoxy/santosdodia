@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "status": "r1-normative",
+  "effectiveDate": "2026-08-22",
+  "logicalRoots": {
+    "legacyArchive": "/archive",
+    "raw": "/vault/raw",
+    "normalized": "/vault/normalized",
+    "canonical": "/vault/canonical",
+    "releases": "/vault/releases",
+    "changes": "/vault/changes",
+    "conflicts": "/vault/conflicts",
+    "rights": "/vault/rights",
+    "rollback": "/vault/rollback"
+  },
+  "globalRules": {
+    "requestTimeSourceDependencyAllowed": false,
+    "sourceDisappearanceMayBreakProduct": false,
+    "canonicalDataMayExistOnlyInFixedRing": false,
+    "publishedReleaseMayExistOnlyInFixedRing": false,
+    "hashRetainedEvidence": true,
+    "retainObservedAt": true,
+    "retainSourceLocator": true,
+    "retainRightsStatus": true,
+    "canonicalDeletionRequiresTombstone": true,
+    "newSourceSnapshotMayNotDeleteCanonicalHistory": true,
+    "stableHistoricalKnowledgeMaintenance": "delta-detection"
+  },
+  "layers": {
+    "raw": {
+      "purpose": "Source bytes or factual source snapshots before SantosDia normalization.",
+      "durability": "Primary scarce evidence is immutable where rights permit; regenerable bulk bootstrap evidence may be bounded only after durable canonical derivation exists.",
+      "runtimeReadable": false
+    },
+    "normalized": {
+      "purpose": "Source-specific structured assertions without claiming canonical truth.",
+      "durability": "Keep versioned last-known-good packages sufficient to reconstruct canonical decisions.",
+      "runtimeReadable": false
+    },
+    "canonical": {
+      "purpose": "Reviewed stable identities, claims, relationships, names and tombstones owned by SantosDia.",
+      "durability": "Perennial and versioned; fixed-ring overwrite is forbidden.",
+      "runtimeReadable": false
+    },
+    "releases": {
+      "purpose": "Reproducible publication snapshots and manifests derived from canonical knowledge.",
+      "durability": "Perennial for published releases; fixed-ring overwrite is forbidden.",
+      "runtimeReadable": false
+    },
+    "changes": {
+      "purpose": "Delta reports, source freshness, corroboration and live/source-monitor observations.",
+      "durability": "May be bounded when regenerable, except evidence referenced by a canonical claim or review decision.",
+      "runtimeReadable": false
+    },
+    "conflicts": {
+      "purpose": "Unresolved identity, authority, calendar, language or source conflicts requiring review.",
+      "durability": "Retain until resolved and preserve the resolution receipt thereafter.",
+      "runtimeReadable": false
+    },
+    "rights": {
+      "purpose": "Reuse status, restrictions, source terms and content-rights decisions.",
+      "durability": "Perennial and versioned because publication rights can change independently of facts.",
+      "runtimeReadable": false
+    },
+    "rollback": {
+      "purpose": "Import receipts, release bookmarks, staging verification and recovery metadata.",
+      "durability": "Bounded operational receipts are allowed, but every published release keeps a durable recovery bookmark/manifest.",
+      "runtimeReadable": false
+    }
+  },
+  "streamRules": [
+    {
+      "id": "primary-source-raw",
+      "pattern": "^sources/[^/]+/raw(?:/|$)",
+      "layer": "raw",
+      "retentionClass": "perennial-primary-evidence",
+      "targetPolicy": "immutable-when-rights-permit"
+    },
+    {
+      "id": "bulk-raw-bootstrap",
+      "pattern": "^(?:baseline/[^/]+/v[0-9]+/raw|enrichment/.+/raw|osint-raw)(?:/|$)",
+      "layer": "raw",
+      "retentionClass": "bounded-regenerable-bootstrap",
+      "targetPolicy": "bounded-only-after-canonical-derivation"
+    },
+    {
+      "id": "normalized-source-packages",
+      "pattern": "^(?:observances|litcal|calendar/|ecclesiastical-directory/|baseline/[^/]+/v[0-9]+/normalized/|baseline/[^/]+/v[0-9]+/reviewed/|osint-normalized/|osint-reviewed/)",
+      "layer": "normalized",
+      "retentionClass": "versioned-last-known-good",
+      "targetPolicy": "retain-reconstructable-reviewed-state"
+    },
+    {
+      "id": "canonical-identity-candidates",
+      "pattern": "^baseline/[^/]+/v[0-9]+/identity(?:/|$)",
+      "layer": "canonical",
+      "retentionClass": "perennial-versioned",
+      "targetPolicy": "migrate-from-legacy-archive-to-canonical-root"
+    },
+    {
+      "id": "corroboration-and-source-change",
+      "pattern": "^(?:corroboration(?:-evidence)?/|ecclesiastical-osint$|source-freshness$|source-orchestrator$|media/live-streams/)",
+      "layer": "changes",
+      "retentionClass": "bounded-unless-referenced",
+      "targetPolicy": "promote-referenced-evidence-to-durable-claim-record"
+    },
+    {
+      "id": "publication-conflicts-and-decisions",
+      "pattern": "^publication-decisions/",
+      "layer": "conflicts",
+      "retentionClass": "retain-until-resolved-plus-receipt",
+      "targetPolicy": "review-by-exception"
+    },
+    {
+      "id": "navigation-derived-release",
+      "pattern": "^navigation/",
+      "layer": "releases",
+      "retentionClass": "reproducible-derived-release",
+      "targetPolicy": "published-release-manifests-perennial-derived-artifacts-regenerable"
+    },
+    {
+      "id": "import-and-status-receipts",
+      "pattern": "^(?:baseline-import-receipts/|import-receipts/|baseline-status/)",
+      "layer": "rollback",
+      "retentionClass": "bounded-operational-plus-durable-release-bookmark",
+      "targetPolicy": "preserve-bookmark-for-every-published-release"
+    }
+  ],
+  "migration": {
+    "phase": "contract-before-mutation",
+    "moveExistingDropboxObjectsNow": false,
+    "deleteExistingDropboxObjectsNow": false,
+    "firstDurableOutputs": [
+      "canonical-person-identities",
+      "canonical-recognitions",
+      "canonical-observances",
+      "published-calendar-releases",
+      "localized-name-releases",
+      "rights-ledger"
+    ],
+    "rule": "Existing archive streams remain readable until replacement manifests are written, verified and rollback-tested."
+  }
+}
