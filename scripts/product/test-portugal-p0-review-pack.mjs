@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { buildPortugalP0ReviewPack } from './build-portugal-p0-review-pack.mjs';
+import './test-portugal-p0-vatican-corroboration-candidates.mjs';
 
 const safety={adsenseReviewState:'PREPARING',adServingMutation:false,autoAdsMutation:false,seoIndexationMutation:false};
 const makeItem=(id,entityId,alreadyPublic=false)=>({priority:'P0',sourceOccurrenceId:id,dateISO:'2026-08-01',canonicalEventId:`rc:${id}`,category:'saint',rank:null,labels:{pt:`PT ${id}`,en:`EN ${id}`},classification:{kind:'single-person-observance'},identityMatch:{status:'unique-exact-candidate',candidates:[{entityId,evidence:[{key:id,evidence:['label:pt']}]}]},alreadyPublic,publicationAllowed:false,productionMutation:false,advertisingEligibleByQueue:false});
