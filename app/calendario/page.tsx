@@ -1,26 +1,24 @@
-import type { Metadata } from "next";
-import CalendarExplorer from "../components/CalendarExplorer";
-import CalendarProductNav from "../components/CalendarProductNav";
-import TraditionFeeds from "../components/TraditionFeeds";
-import { ui } from "../../lib/i18n";
-import { requestPublicLocale } from "../../lib/request-public-locale";
+import { permanentRedirect } from "next/navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await requestPublicLocale();
-  const copy = ui[locale];
-  return {
-    title: copy.calendarTitle,
-    description: copy.calendarIntro,
-    alternates: { canonical: "/calendar" },
-  };
+type LegacyCalendarSearchParams = Record<string, string | string[] | undefined>;
+
+function canonicalCalendarUrl(values: LegacyCalendarSearchParams) {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(values)) {
+    if (Array.isArray(value)) {
+      for (const item of value) query.append(key, item);
+    } else if (value !== undefined) {
+      query.set(key, value);
+    }
+  }
+  const suffix = query.toString();
+  return suffix ? `/calendar?${suffix}` : "/calendar";
 }
 
-export default function CalendarPage() {
-  return (
-    <div className="page-stack">
-      <CalendarProductNav />
-      <CalendarExplorer />
-      <TraditionFeeds />
-    </div>
-  );
+export default async function LegacyCalendarPage({
+  searchParams,
+}: {
+  searchParams: Promise<LegacyCalendarSearchParams>;
+}) {
+  permanentRedirect(canonicalCalendarUrl(await searchParams));
 }
