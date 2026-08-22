@@ -1,8 +1,11 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "productVersion": "2.1",
   "status": "normative",
   "effectiveDate": "2026-08-22",
-  "northStar": "Open SantosDia and know how to live today as a Christian in the user's own tradition, place and language.",
+  "productDefinition": "Global Christian liturgical intelligence platform with a human daily-faith product and reusable machine/calendar infrastructure.",
+  "northStar": "Open SantosDia and know what Christian day you are living, why it matters, how to pray it, what comes next, and how to stay connected in your own tradition, place and language.",
+  "machinePromise": "Given Church or tradition, jurisdiction, calendar system, civil date or year, timezone when needed, and locale, return authoritative liturgical context and consistent HTML, API, JSON-LD and ICS projections without request-time external acquisition.",
   "productContextDimensions": [
     "locale",
     "locationOrJurisdiction",
@@ -39,13 +42,70 @@
     "routineHumanOperationRequired": false,
     "humanReviewByException": true
   },
+  "liturgicalIntelligence": {
+    "firstClassProduct": true,
+    "architecture": [
+      "EvidenceVault",
+      "CanonicalKnowledgeGraph",
+      "TraditionKernel",
+      "JurisdictionPolicy",
+      "CandidateObservances",
+      "PrecedenceTransferResolver",
+      "Occurrences",
+      "Localization",
+      "Distribution"
+    ],
+    "normalYearRolloverRequiresHumanReview": false,
+    "normativeRuleChangeRequiresHumanReview": true,
+    "annualAuthorityFilesAreRuntimeDependencies": false,
+    "annualAuthorityFilesAreRegressionEvidence": true,
+    "romanKernelInitial": true,
+    "plannedKernelFamilies": [
+      "roman-catholic",
+      "orthodox-oca",
+      "orthodox-goarch",
+      "anglican-church-of-england"
+    ],
+    "finalLiturgicalColourMayBeInferredFromSeasonAlone": false,
+    "precedenceAndTransferMustBeResolvedBeforeFinalOccurrence": true,
+    "civilYearAndLiturgicalYearMustBeExposedSeparately": true
+  },
+  "rollingMaterialization": {
+    "enabled": true,
+    "pastCivilYears": 1,
+    "futureCivilYears": 3,
+    "exampleFor2026": [2025, 2026, 2027, 2028, 2029],
+    "rolloverAutomatic": true,
+    "servingCacheOlderYearsRetiredAutomatically": true,
+    "vaultHistoryDeletedWhenOutsideWindow": false,
+    "canonicalHistoricalOccurrencesDeletedWhenOutsideWindow": false,
+    "atomicServingPointerRequired": true,
+    "alertOn": [
+      "generation-failure",
+      "semantic-drift",
+      "authority-conflict"
+    ]
+  },
   "retentionAndDistribution": {
     "ics": {
       "role": "core-retention-channel",
       "persistentSubscriptionPreferred": true,
+      "rollingSubscriptionHasNoExplicitYear": true,
+      "rollingSubscriptionUsesMaterializationWindow": true,
       "annualSnapshotSupported": true,
+      "annualSnapshotRequiresExplicitYear": true,
       "canonicalBacklinkRequired": true,
+      "stableUidRequired": true,
       "mustNotDependOnAds": true
+    },
+    "calculator": {
+      "role": "public-utility-acquisition-and-machine-infrastructure",
+      "humanSurface": true,
+      "jsonApi": true,
+      "openApi": true,
+      "agentDiscovery": true,
+      "subscriptionCta": true,
+      "requestTimeExternalDependency": false
     },
     "live": {
       "role": "core-frequency-channel",
@@ -62,6 +122,7 @@
       "Recognition",
       "Observance",
       "Occurrence",
+      "TemporalRule",
       "ChurchOrTradition",
       "Jurisdiction",
       "CalendarSystem",
@@ -77,6 +138,7 @@
     "identitySeparatedFromObservance": true,
     "personSeparatedFromRecognition": true,
     "observanceSeparatedFromOccurrence": true,
+    "temporalRuleSeparatedFromOccurrence": true,
     "languageNeutralIdentity": true,
     "claimsRequireProvenance": true
   },
@@ -92,6 +154,8 @@
       "rollback"
     ],
     "immutableRawWhenPermitted": true,
+    "partialRawEvidenceMayBeArchived": true,
+    "partialRawEvidenceMayAutoPromote": false,
     "hashRawEvidence": true,
     "retainSourceUrlAndObservedAt": true,
     "runtimeMustRemainUsableIfSourceDisappears": true,
@@ -110,19 +174,21 @@
       "official-display-name",
       "source-correction",
       "live-event",
-      "rights-status"
+      "rights-status",
+      "normative-liturgical-rule"
     ],
     "defaultMaintenance": "delta-detection"
   },
   "dateContract": {
     "civilDate": "never-conflate-with-liturgical-occurrence",
+    "civilYearSeparatedFromLiturgicalYear": true,
     "timezoneRequiredForToday": true,
     "calendarSystemRequired": true,
     "jurisdictionRequiredWhenApplicable": true,
     "traditionRequired": true,
     "transferAndPrecedenceAreAuthorityDriven": true,
     "vigilsMustNotBecomeSameDayOccurrencesAutomatically": true,
-    "exactOfficialAnnualDatesOverrideGenericCalculation": true,
+    "exactOfficialAnnualDatesOverrideGenericCalculationForValidationAndAuthorityConflict": true,
     "crossCalendarConversionRequiresExplicitPolicy": true,
     "samePersonMayHaveDifferentOccurrencesByTradition": true
   },
@@ -162,6 +228,7 @@
     "holySeeRole": "primary-for-Catholic-universal-status-and-competent-universal-claims",
     "dicasteryCausesSaintsRole": "A0-primary-for-Catholic-recognition-status-cause-identity-and-related-official-evidence",
     "secondarySourcesCannotOverridePrimary": true,
+    "thirdPartyCalculatorsRole": "learning-regression-cross-check-not-silent-authority",
     "wikidataRole": "identity-alias-discovery-and-structured-corroboration-not-liturgical-authority",
     "wikipediaRole": "discovery-context-not-sole-authority"
   },
@@ -174,7 +241,8 @@
       "HTML",
       "JSON-LD",
       "JSON API",
-      "ICS"
+      "ICS",
+      "OpenAPI"
     ],
     "markdownForAgents": "optional-when-useful",
     "provenanceVisibleOnSubstantiveContent": true
@@ -195,6 +263,7 @@
     "entityMergeOrSplitRequiresHumanApproval": true,
     "recognitionStatusChangeRequiresHumanApproval": true,
     "calendarDateRankPrecedenceChangeRequiresHumanApproval": true,
+    "normativeRuleChangeRequiresHumanApproval": true,
     "marianTitleResolutionRequiresHumanApproval": true,
     "sourceConflictRequiresHumanApproval": true,
     "interpretiveEditorialProseRequiresHumanApproval": true
@@ -202,6 +271,8 @@
   "hygieneContract": {
     "newArchitectureMustRetireOrJustifyOldPath": true,
     "deleteWithoutProofAllowed": false,
+    "rollingServingWindow": "current-year-minus-1-through-current-year-plus-3",
+    "retireServingCacheNotCanonicalHistory": true,
     "removalSequence": [
       "inventory",
       "prove-consumers",
@@ -215,5 +286,15 @@
     "obsoleteWorkflowDetection": true,
     "unusedRouteDetection": true,
     "unusedCssAndDependencyDetection": true
-  }
+  },
+  "priorityOrder": [
+    "P0-reliability-and-operational-hygiene",
+    "P1-perennial-liturgical-intelligence-core",
+    "P2-rolling-ics-and-calculator-product",
+    "P3-portugal-reference-daily-product",
+    "P4-prove-multi-tradition-kernels",
+    "P5-global-jurisdictions-and-multilingual-scale",
+    "P6-live-seo-and-ai-scale",
+    "P7-autonomous-maintenance-at-scale"
+  ]
 }
