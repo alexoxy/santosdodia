@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "normative",
+  "status": "normative-candidate",
   "productScope": "global-christian",
   "principle": "Language, location/jurisdiction, Christian tradition, calendar system and timezone are independent dimensions. None may be inferred from another.",
   "dimensions": {
