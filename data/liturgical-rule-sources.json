@@ -30,10 +30,18 @@
       "url": "https://liturgia.pt/documentos/dias_lit.php"
     },
     {
+      "id": "snl-portugal-vestment-colours",
+      "tier": "A1",
+      "jurisdiction": "PT",
+      "role": ["vestment-colours", "roman-missal-general-instruction", "portugal-roman-calendar"],
+      "url": "https://www.liturgia.pt/documentos/vestes.php",
+      "notes": "Portuguese IGMR 345-346: white, red, green, violet/purple, black where customary for Masses for the Dead, and rose where customary on Gaudete/Laetare; festive or more noble vestments are a separate permission, not a seventh canonical colour."
+    },
+    {
       "id": "snl-portugal-daily-liturgy",
       "tier": "A1",
       "jurisdiction": "PT",
-      "role": ["annual-validation", "transfers", "cycles", "readings-reference"],
+      "role": ["annual-validation", "transfers", "cycles", "readings-reference", "vestment-colour-validation"],
       "url": "https://www.liturgia.pt/liturgiadiaria/"
     },
     {

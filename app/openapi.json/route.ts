@@ -29,7 +29,7 @@ export async function GET() {
     openapi: "3.1.0",
     info: {
       title: "Santos do Dia machine interface",
-      version: "3.9.0",
+      version: "3.10.0",
       description:
         "Machine-readable saints, Christian Church calendars, a deterministic perennial liturgical calculator, verified official live media, ecclesiastical jurisdictions and religious leaders with traceable source tiers. Liturgical calendar filters are shared by JSON and subscribable ICS interfaces.",
     },
@@ -222,9 +222,9 @@ export async function GET() {
       },
       "/api/v1/liturgical-calendar": {
         get: {
-          summary: "Calculate Roman liturgical years and future movable dates from perennial rules",
+          summary: "Calculate Roman liturgical years, vestment colours and future movable dates from perennial rules",
           description:
-            "Deterministic SantosDia calculation with no request-time external source. Returns the liturgical-year boundary, Sunday A/B/C cycle, weekday I/II cycle for date queries, season/week context and structural movable dates. Jurisdiction policy is applied separately from the core computus.",
+            "Deterministic SantosDia calculation with no request-time external source. Returns the liturgical-year boundary, Sunday A/B/C cycle, weekday I/II cycle for date queries, season/week context, structural movable dates and Roman vestment-colour guidance. Stable colour codes are white, red, green, violet, black and rose; final colour is not inferred from season alone when the actual winning observance is not yet resolved. Jurisdiction policy is applied separately from the core computus.",
           parameters: [
             {
               name: "year",
@@ -235,7 +235,7 @@ export async function GET() {
             {
               name: "date",
               in: "query",
-              description: "Optional civil date for season, week, liturgical-year and Lectionary-cycle context.",
+              description: "Optional civil date for season, week, liturgical-year, Lectionary-cycle and vestment-colour context.",
               schema: { type: "string", format: "date" },
             },
             {
@@ -258,7 +258,7 @@ export async function GET() {
           ],
           responses: {
             "200": {
-              description: "Perennial Roman liturgical calculation and source-policy metadata",
+              description: "Perennial Roman liturgical calculation, vestment-colour guidance and source-policy metadata",
             },
             "400": {
               description: "Unsupported jurisdiction, Church, date or year",
@@ -340,7 +340,7 @@ export async function GET() {
           responses: {
             "200": {
               description:
-                "Localized, paginated Church, jurisdiction and active-office catalogue with source and geographic metadata.",
+                "Localized, paginated Church, jurisdiction and active-office catalogue with source and geographic metadata",
             },
           },
         },
@@ -370,7 +370,7 @@ export async function GET() {
         get: {
           summary: "Subscribable ICS liturgical calendar feed by Christian tradition",
           description:
-            "Without year= the endpoint is a persistent subscription serving the current and following year and publishing a six-hour refresh hint. With year= it acts as a fixed annual snapshot. Locale, tradition, category and country filters mirror the JSON calendar API.",
+            "Without year= the endpoint is a persistent rolling subscription serving the previous civil year, the current year and the next three years (Y-1 through Y+3), with a six-hour refresh hint. With year= it acts as a fixed annual snapshot. Locale, tradition, category and country filters mirror the JSON calendar API.",
           parameters: [
             {
               name: "feed",
@@ -381,7 +381,7 @@ export async function GET() {
             {
               name: "year",
               in: "query",
-              description: "Optional fixed snapshot year. Omit for a rolling subscription.",
+              description: "Optional fixed snapshot year. Omit for an autonomous Y-1 through Y+3 rolling subscription.",
               schema: { type: "integer", minimum: 1900, maximum: 2200 },
             },
             ...filterParameters,
