@@ -122,6 +122,106 @@
         }
       ],
       "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:john-baptist:roman-catholic",
+      "personId": "john-baptist",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["precursor", "prophet"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/24/birth-of-st--john-the--baptist.html",
+          "claimTypes": ["saint-designation", "identity", "precursor"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:peter-apostle:roman-catholic",
+      "personId": "peter-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/29/saint-peter--apostle-of-the-city-of-rome.html",
+          "claimTypes": ["saint-designation", "identity", "apostle"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:paul-apostle:roman-catholic",
+      "personId": "paul-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/29/saint-paul--apostle-of-the-city-of-rome.html",
+          "claimTypes": ["saint-designation", "identity", "apostle"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:joachim:roman-catholic",
+      "personId": "joachim",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
+          "claimTypes": ["saint-designation", "identity"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:anne:roman-catholic",
+      "personId": "anne",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
+          "claimTypes": ["saint-designation", "identity"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
     }
   ]
 }
