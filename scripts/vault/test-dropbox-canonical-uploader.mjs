@@ -107,13 +107,25 @@ try {
   assert.equal(firstWrite.pointer.status, 'initialized');
   assert.equal(firstWrite.pointer.previousRootSha256, null);
   assert.equal(firstWrite.pointer.rollbackPointerPath, null);
-  assert.ok(firstWrite.pointer.transitionPath.includes('/vault/rollback/canonical/people/v1/transitions/none--'));
+  assert.ok(firstWrite.pointer.transitionIntentPath.includes('/vault/rollback/canonical/people/v1/transition-intents/none--'));
+  assert.ok(firstWrite.pointer.transitionCommitPath.includes('/vault/rollback/canonical/people/v1/transition-commits/none--'));
+
   const currentPath = '/vault/canonical/people/v1/current.json';
   const firstPointerBytes = dropbox.files.get(currentPath);
   assert.ok(firstPointerBytes, 'First canonical write did not initialize current.json.');
   const firstPointer = JSON.parse(firstPointerBytes.toString('utf8'));
   assert.equal(firstPointer.rootSha256, first.built.manifest.rootSha256);
-  assert.ok(!('updatedAt' in firstPointer), 'Current pointer must be deterministic for a canonical root.');
+  assert.equal(firstPointer.previousRootSha256, null);
+  assert.equal(firstPointer.rollbackPointerPath, null);
+  assert.equal(firstPointer.transitionIntentPath, firstWrite.pointer.transitionIntentPath);
+  assert.equal(firstPointer.transitionCommitPath, firstWrite.pointer.transitionCommitPath);
+  assert.ok(!('updatedAt' in firstPointer), 'Current pointer must not require wall-clock metadata.');
+
+  const firstIntent = JSON.parse(dropbox.files.get(firstPointer.transitionIntentPath).toString('utf8'));
+  const firstCommit = JSON.parse(dropbox.files.get(firstPointer.transitionCommitPath).toString('utf8'));
+  assert.equal(firstIntent.committed, false, 'Transition intent must never claim the pointer moved.');
+  assert.equal(firstCommit.committed, true, 'Transition commit must only represent a verified pointer move.');
+  assert.equal(firstCommit.toRootSha256, first.built.manifest.rootSha256);
   assert.ok(dropbox.uploads.filter(item => item.mode === 'add').every(item => !item.path.includes('/archive/')), 'Canonical Vault uploader must not write to the legacy archive.');
 
   const uploadCountAfterFirst = dropbox.uploads.length;
@@ -145,12 +157,39 @@ try {
   assert.equal(advanced.pointer.previousRootSha256, first.built.manifest.rootSha256);
   assert.ok(advanced.pointer.rollbackPointerPath?.startsWith('/vault/rollback/canonical/people/v1/current-history/'));
   assert.ok(dropbox.files.get(advanced.pointer.rollbackPointerPath)?.equals(firstPointerBytes), 'Rollback history does not preserve exact previous pointer bytes.');
-  const secondPointer = JSON.parse(dropbox.files.get(currentPath).toString('utf8'));
+
+  const secondPointerBytes = dropbox.files.get(currentPath);
+  const secondPointer = JSON.parse(secondPointerBytes.toString('utf8'));
   assert.equal(secondPointer.rootSha256, second.built.manifest.rootSha256, 'Current pointer did not advance to the verified second release.');
-  const transition = JSON.parse(dropbox.files.get(advanced.pointer.transitionPath).toString('utf8'));
-  assert.equal(transition.fromRootSha256, first.built.manifest.rootSha256);
-  assert.equal(transition.toRootSha256, second.built.manifest.rootSha256);
-  assert.equal(transition.publicationChanged, false);
+  assert.equal(secondPointer.previousRootSha256, first.built.manifest.rootSha256);
+  assert.equal(secondPointer.rollbackPointerPath, advanced.pointer.rollbackPointerPath);
+
+  const transitionIntent = JSON.parse(dropbox.files.get(advanced.pointer.transitionIntentPath).toString('utf8'));
+  const transitionCommit = JSON.parse(dropbox.files.get(advanced.pointer.transitionCommitPath).toString('utf8'));
+  assert.equal(transitionIntent.fromRootSha256, first.built.manifest.rootSha256);
+  assert.equal(transitionIntent.toRootSha256, second.built.manifest.rootSha256);
+  assert.equal(transitionIntent.committed, false);
+  assert.equal(transitionCommit.fromRootSha256, first.built.manifest.rootSha256);
+  assert.equal(transitionCommit.toRootSha256, second.built.manifest.rootSha256);
+  assert.equal(transitionCommit.committed, true);
+  assert.equal(transitionCommit.publicationChanged, false);
+
+  // Simulate a crash after current.json was successfully promoted but before the
+  // commit receipt was persisted. A rerun must repair the missing commit receipt
+  // without rewriting current.json or immutable release files.
+  dropbox.files.delete(secondPointer.transitionCommitPath);
+  const uploadsBeforeRepair = dropbox.uploads.length;
+  const currentBeforeRepair = Buffer.from(dropbox.files.get(currentPath));
+  const repaired = await uploadCanonicalPersonRelease({
+    inputRoot: second.directory,
+    token: 'test-token',
+    fetchImpl: dropbox.fetchImpl,
+    promoteCurrent: true,
+  });
+  assert.equal(repaired.pointer.status, 'already-current');
+  assert.ok(dropbox.files.has(secondPointer.transitionCommitPath), 'Rerun did not repair a missing transition commit receipt.');
+  assert.equal(dropbox.uploads.length, uploadsBeforeRepair + 1, 'Repair should write exactly the missing commit receipt.');
+  assert.ok(dropbox.files.get(currentPath).equals(currentBeforeRepair), 'Receipt repair rewrote current.json.');
 
   // Immutable conflict: corrupt an already-addressed release file. The uploader
   // must fail closed and must not move current.json.
@@ -182,7 +221,7 @@ try {
     /current pointer is not valid JSON/u,
   );
 
-  console.log(`Immutable Dropbox canonical Vault uploader tests passed: ${first.built.manifest.rootSha256.slice(0, 12)} → ${second.built.manifest.rootSha256.slice(0, 12)} with rollback preservation.`);
+  console.log(`Immutable Dropbox canonical Vault uploader tests passed: ${first.built.manifest.rootSha256.slice(0, 12)} → ${second.built.manifest.rootSha256.slice(0, 12)} with rollback and interrupted-transition recovery.`);
 } finally {
   await Promise.all(temporaryDirectories.map(directory => rm(directory, { recursive: true, force: true })));
 }
