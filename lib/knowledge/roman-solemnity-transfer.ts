@@ -76,8 +76,7 @@ function annunciationSpecialTarget(
   const liturgicalYear = calculateRomanLiturgicalYear(Number(originalDateISO.slice(0, 4)), policy);
   const palmSunday = liturgicalYear.keyDates['palm-sunday'];
   const easterSunday = liturgicalYear.keyDates['easter-sunday'];
-  const easterOctaveEnd = addIsoDays(easterSunday, 7);
-  if (originalDateISO < palmSunday || originalDateISO > easterOctaveEnd) return null;
+  if (originalDateISO < palmSunday || originalDateISO >= easterSunday) return null;
   return addIsoDays(easterSunday, 8);
 }
 
