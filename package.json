@@ -24,7 +24,7 @@
     "autonomy:lanes-audit": "node scripts/autonomy/audit-agent-lanes.mjs",
     "automation:audit": "node scripts/audit-automation-registry.mjs && node scripts/audit-evidence-vault-policy.mjs",
     "automation:test": "node scripts/test-automation-registry.mjs && node scripts/osint/test-global-source-cycle.mjs",
-    "vault:test": "node scripts/vault/test-canonical-person-manifest.mjs",
+    "vault:test": "node scripts/vault/test-canonical-person-manifest.mjs && node scripts/vault/test-canonical-recognition-manifest.mjs",
     "calendar:approval-test": "node scripts/test-calendar-staging-approval.mjs",
     "calendar:audit": "node scripts/audit-calendar-engine-policy.mjs",
     "calendar:normalize": "node scripts/normalize-calendar-staging-package.mjs",
