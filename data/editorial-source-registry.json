@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "status": "normative-candidate",
+  "purpose": "Separate canonical authority from editorial, devotional and product-discovery sources. Secondary sources may propose facts or product modules but never override primary ecclesial evidence.",
+  "classes": {
+    "A0": "primary canonical authority",
+    "A1": "official ecclesial or liturgical authority",
+    "A2": "academic/institutional authority",
+    "B1": "high-quality independent reference",
+    "B2": "specialist devotional/editorial source requiring corroboration",
+    "B3": "editorial inspiration and discovery only",
+    "D": "product inspiration only; never factual authority"
+  },
+  "guards": {
+    "secondaryCannotSetCanonicalStatus": true,
+    "secondaryCannotSetFeastDateWithoutCorroboration": true,
+    "devotionalClaimsMustBeTypedAsTraditionOrDevotion": true,
+    "prayerTextRequiresRightsStatus": true,
+    "unknownRightsMeansLinkOrMetadataOnly": true,
+    "ptBRContentCannotBecomePtPTCanonicalTextWithoutLocalizationReview": true,
+    "machineTranslationCannotCreateCanonicalPrayer": true,
+    "healthOrLifeOutcomeClaimsCannotBePresentedAsPromises": true,
+    "chronologyMustDistinguishExactApproximateTraditionalAndSymbolicDates": true,
+    "chronologyMustNotCollapsePersonEventAndObservanceDates": true
+  },
+  "productFields": [
+    "nameMeaning",
+    "nameVariants",
+    "patronage",
+    "virtues",
+    "lifeThemes",
+    "symbols",
+    "iconography",
+    "places",
+    "quotes",
+    "prayers",
+    "novenas",
+    "devotions",
+    "feastPreparation",
+    "relatedSaints",
+    "suggestedForIntentions",
+    "chronology"
+  ],
+  "sources": [
+    {
+      "id": "lay-cistercians-editorial",
+      "name": "Lay Cistercians",
+      "baseUrl": "https://laycistercians.com/",
+      "class": "B3",
+      "traditions": ["Roman Catholic"],
+      "coverage": ["saint-name significance", "saint biographies", "patronage", "virtues", "quotes", "devotional themes", "prayer discovery"],
+      "allowedUses": ["editorial-pattern-learning", "topic-discovery", "candidate-fact-generation", "related-content-ideas"],
+      "forbiddenUses": ["canonical-status-authority", "sole-feast-date-authority", "verbatim-republication-without-rights"],
+      "notes": "Use as an editorial benchmark for connecting saints to names, virtues and relatable life themes. Revalidate substantive claims against A/B1 sources."
+    },
+    {
+      "id": "intercede-catholic-novenas",
+      "name": "Intercede — Catholic Novenas",
+      "baseUrl": "https://catholicnovenaapp.com/list-of-all-novenas/",
+      "class": "B2",
+      "traditions": ["Roman Catholic devotional"],
+      "localesObserved": ["en", "es", "pt", "de", "it", "pl"],
+      "coverage": ["novena inventory", "novena start dates", "associated feast dates", "intentions", "prayer schedules", "devotional discovery"],
+      "allowedUses": ["novena-discovery", "candidate-saint-novena-link", "candidate-start-date", "product-pattern-learning", "reminder-feature-design"],
+      "forbiddenUses": ["canonical-feast-date-authority", "canonical-saint-name-authority", "verbatim-prayer-republication-without-rights"],
+      "notes": "Strong product benchmark: browse by month, novenas starting today, feast-linked nine-day preparation and reminders. Portuguese content must be localized and independently validated for pt-PT. Individual dates and associations require corroboration because this is devotional, not a liturgical authority."
+    },
+    {
+      "id": "my-catholic-life-chronology",
+      "name": "My Catholic Life — Chronological Listing of Catholic Saints and Feasts",
+      "baseUrl": "https://mycatholic.life/saints/chronological/",
+      "class": "B3",
+      "traditions": ["Roman Catholic"],
+      "coverage": ["chronological navigation", "century groupings", "saint life spans", "historical context by century", "calendar-alphabetical-chronological navigation pattern"],
+      "allowedUses": ["chronology-product-pattern-learning", "candidate-era-generation", "candidate-life-span-generation", "historical-context-topic-discovery"],
+      "forbiddenUses": ["sole-date-authority", "canonical-status-authority", "verbatim-historical-narrative-republication"],
+      "notes": "Use as a strong product benchmark for century-by-century navigation. Their chronology may mix event dates, saint death dates and dates when feasts entered a calendar, and explicitly uses symbolic dating for some early events; SantosDia must keep these date semantics separate and source them independently."
+    }
+  ],
+  "devotionalContentModel": {
+    "prayer": {
+      "required": ["tradition", "locale", "sourceUrl", "prayerType", "rightsStatus"],
+      "prayerTypes": ["official-liturgical", "traditional", "approved-devotional", "contemporary-devotional", "unknown"],
+      "rightsStatuses": ["public-domain", "licensed", "permission-confirmed", "link-only", "unknown"]
+    },
+    "novena": {
+      "required": ["title", "tradition", "sourceUrl", "associatedEntityType", "associatedEntityId", "scheduleBasis", "rightsStatus"],
+      "scheduleBasis": ["fixed-feast-minus-nine-days", "movable-feast-relative", "source-defined", "unscheduled"],
+      "publicationRule": "Association and schedule require authoritative feast/date corroboration before surfacing as a calendar reminder."
+    }
+  },
+  "chronologyContentModel": {
+    "dateTypes": ["birth", "death", "martyrdom", "major-life-event", "canonization", "beatification", "feast-establishment", "observance-date", "traditional-date"],
+    "precision": ["exact-day", "month-year", "year", "year-range", "century", "circa", "traditional", "symbolic", "unknown"],
+    "requiredForTimelineEntry": ["entityId", "eventType", "dateOrRange", "precision", "tradition", "sourceUrl", "sourceClass"],
+    "rules": [
+      "A saint page may contain several independent chronological events.",
+      "Death or martyrdom normally anchors a person's historical position when known, but must not be substituted for the liturgical observance date.",
+      "Feasts and Marian or Christological observances may be timeline events without being person births or deaths.",
+      "Approximate, traditional and symbolic dates must remain visibly qualified.",
+      "Calendar-system conversion must preserve original calendar semantics and source jurisdiction."
+    ]
+  },
+  "productImplications": {
+    "today": ["saints-and-observances", "prayer-or-devotion-when-validated", "novena-starting-today"],
+    "prepare": ["upcoming-feasts", "novenas-starting-soon", "nine-day-progress", "optional-reminders"],
+    "discover": ["saint-by-name", "saint-by-virtue", "saint-by-patronage", "saint-by-life-situation", "saint-by-geography", "saint-by-tradition", "saint-by-century", "saint-by-era"],
+    "chronology": ["interactive-century-timeline", "era-navigation", "historical-context-introductions", "filters-by-tradition", "filters-by-geography", "filters-by-status", "filters-by-vocation", "links-back-to-liturgical-day"],
+    "saintPage": ["identity", "why-remembered", "life", "chronology", "patronage", "symbols", "places", "prayers", "novenas", "related-saints", "other-traditions", "sources"]
+  }
+}

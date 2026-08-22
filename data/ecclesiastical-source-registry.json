@@ -15,6 +15,36 @@
   },
   "sources": [
     {
+      "id": "causesanti-va",
+      "name": "Dicastery for the Causes of Saints",
+      "baseUrl": "https://www.causesanti.va/it.html",
+      "host": "www.causesanti.va",
+      "authority": "official-church-or-jurisdiction",
+      "sourceTier": "A0",
+      "churchFamilies": ["catholic"],
+      "coverage": ["canonizations", "beatifications", "venerables", "servants of God", "decrees", "causes", "official recognition status", "hagiographic identity"],
+      "adapter": "causesanti-crawl",
+      "refreshHours": 168,
+      "requestsPerSecond": 0.25,
+      "active": true,
+      "usagePolicy": "Primary authority for canonical recognition status and cause identity; retain raw immutable snapshots before normalization."
+    },
+    {
+      "id": "vatican-news-saints",
+      "name": "Vatican News — Saint of the Day",
+      "baseUrl": "https://www.vaticannews.va/en/saints.html",
+      "host": "www.vaticannews.va",
+      "authority": "official-church-or-jurisdiction",
+      "sourceTier": "A1",
+      "churchFamilies": ["catholic"],
+      "coverage": ["saints of the day", "feasts", "multilingual saint names", "short hagiographies", "daily observance corroboration"],
+      "adapter": "vatican-news-saints",
+      "refreshHours": 24,
+      "requestsPerSecond": 0.5,
+      "active": true,
+      "usagePolicy": "Preferred institutional multilingual hagiographic source; canonical status remains subordinate to the Dicastery for the Causes of Saints."
+    },
+    {
       "id": "holy-see-bulletin",
       "name": "Holy See Press Office — Resignations and Appointments",
       "baseUrl": "https://press.vatican.va/content/salastampa/en/bollettino.html",
@@ -91,6 +121,22 @@
       "refreshHours": 168,
       "requestsPerSecond": 0.5,
       "active": true
+    },
+    {
+      "id": "goarch-calendar",
+      "name": "Greek Orthodox Archdiocese of America — Online Chapel Calendar",
+      "baseUrl": "https://www.goarch.org/chapel/calendar",
+      "host": "www.goarch.org",
+      "authority": "official-church-or-jurisdiction",
+      "sourceTier": "A1",
+      "churchFamilies": ["eastern-orthodox"],
+      "traditions": ["Greek Orthodox", "Ecumenical Patriarchate of Constantinople"],
+      "coverage": ["saints", "feasts", "daily commemorations", "Scripture readings", "fasting rules", "English names", "Greek names", "ecclesiastical calendar"],
+      "adapter": "goarch-calendar",
+      "refreshHours": 24,
+      "requestsPerSecond": 0.5,
+      "active": true,
+      "usagePolicy": "Primary liturgical source for Greek Orthodox observances represented by GOARCH; preserve jurisdiction and calendar context and never generalize automatically to all Orthodox Churches."
     },
     {
       "id": "goarch-directory",
