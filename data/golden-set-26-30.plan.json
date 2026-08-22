@@ -21,7 +21,12 @@
       "coverage complements the existing 25 reviewed biographies"
     ]
   },
-  "requiredPublicLocales": ["en", "es", "pt", "it"],
+  "requiredPublicLocales": [
+    "en",
+    "es",
+    "pt",
+    "it"
+  ],
   "requiredModules": [
     "identity-and-local-display-name",
     "why-remembered",
@@ -51,13 +56,21 @@
           "url": "https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html",
           "publisher": "Vatican News",
           "authorityClass": "A1",
-          "role": ["institutional-hagiography", "feast-corroboration", "iconography-leads"]
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration",
+            "iconography-leads"
+          ]
         },
         {
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html",
           "publisher": "Holy See",
           "authorityClass": "A1",
-          "role": ["apostolic-identity", "scriptural-context", "historical-tradition-boundaries"]
+          "role": [
+            "apostolic-identity",
+            "scriptural-context",
+            "historical-tradition-boundaries"
+          ]
         }
       ]
     },
@@ -74,13 +87,20 @@
           "url": "https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html",
           "publisher": "Vatican News",
           "authorityClass": "A1",
-          "role": ["institutional-hagiography", "feast-corroboration"]
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
         },
         {
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html",
           "publisher": "Holy See",
           "authorityClass": "A1",
-          "role": ["biographical-chronology", "intellectual-context", "doctrinal-significance"]
+          "role": [
+            "biographical-chronology",
+            "intellectual-context",
+            "doctrinal-significance"
+          ]
         }
       ]
     },
@@ -97,13 +117,20 @@
           "url": "https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html",
           "publisher": "Vatican News",
           "authorityClass": "A1",
-          "role": ["institutional-hagiography", "feast-corroboration"]
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
         },
         {
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html",
           "publisher": "Holy See",
           "authorityClass": "A1",
-          "role": ["biographical-chronology", "doctor-of-the-church-status", "historical-context"]
+          "role": [
+            "biographical-chronology",
+            "doctor-of-the-church-status",
+            "historical-context"
+          ]
         }
       ]
     },
@@ -120,13 +147,20 @@
           "url": "https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html",
           "publisher": "Vatican News",
           "authorityClass": "A1",
-          "role": ["institutional-hagiography", "feast-corroboration"]
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
         },
         {
           "url": "https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860",
           "publisher": "Patriarchate of Lisbon",
           "authorityClass": "A1",
-          "role": ["Portuguese-ecclesial-context", "local-history", "Portuguese-display-evidence"]
+          "role": [
+            "Portuguese-ecclesial-context",
+            "local-history",
+            "Portuguese-display-evidence"
+          ]
         }
       ]
     },
@@ -143,31 +177,46 @@
           "url": "https://www.vaticannews.va/en/saints/10/22/st--john-paul--ii--pope.html",
           "publisher": "Vatican News",
           "authorityClass": "A1",
-          "role": ["institutional-hagiography", "feast-corroboration"]
+          "role": [
+            "institutional-hagiography",
+            "feast-corroboration"
+          ]
         },
         {
           "url": "https://www.vatican.va/content/john-paul-ii/en/biografia/documents/hf_jp-ii_spe_20190722_biografia.html",
           "publisher": "Holy See",
+          "authorityClass": "A1",
+          "role": [
+            "official-biography",
+            "exact-chronology",
+            "pontificate-history"
+          ]
+        }
+      ],
+      "requiredSourceGaps": [
+        {
           "authorityClass": "A0",
-          "role": ["official-biography", "exact-chronology", "pontificate-history"]
+          "source": "CauseSanti canonical-recognition record",
+          "status": "required-before-editorial-publication",
+          "reason": "The official biography establishes chronology; the canonical-recognition claim must be tied to the immutable primary CauseSanti archive before publication."
         }
       ]
     }
   ],
   "publicationChecklist": {
-    "exactIdentityReviewed": true,
-    "calendarOccurrenceReviewed": true,
+    "exactIdentityReviewRequired": true,
+    "calendarOccurrenceReviewRequired": true,
     "originalEditorialTextRequired": true,
     "allRequiredPublicLocalesRequired": true,
-    "sourceRoleRecordedPerClaim": true,
-    "traditionAndJurisdictionExplicit": true,
-    "datePrecisionExplicit": true,
-    "patronageTypedAsTraditionOrDevotion": true,
-    "readingTextRequiresRightsBasis": true,
-    "prayerTextRequiresRightsBasis": true,
-    "noAutomaticPublication": true,
-    "noAutomaticIndexation": true,
-    "noAdvertisingEligibilityFromPlan": true,
+    "sourceRolePerClaimRequired": true,
+    "explicitTraditionAndJurisdictionRequired": true,
+    "explicitDatePrecisionRequired": true,
+    "typedPatronageRequired": true,
+    "readingTextAllowedOnlyWithRightsBasis": true,
+    "prayerTextAllowedOnlyWithRightsBasis": true,
+    "automaticPublicationAllowed": false,
+    "automaticIndexationAllowed": false,
+    "advertisingEligibilityGranted": false,
     "adsenseReviewState": "PREPARING"
   }
 }
