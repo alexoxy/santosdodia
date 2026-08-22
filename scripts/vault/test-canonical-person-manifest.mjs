@@ -26,6 +26,13 @@ const second = buildCanonicalPersonVaultRelease(dataset, {
 });
 
 assert(first.manifest.rootSha256 === second.manifest.rootSha256, 'Canonical Person root hash must be content-deterministic across runs/commits.');
+assert(JSON.stringify(first.manifest) === JSON.stringify(second.manifest), 'Canonical manifest bytes must remain deterministic for the same content root.');
+assert(first.buildReceipt.sourceCommit !== second.buildReceipt.sourceCommit, 'Run-specific source commit must live in the build receipt.');
+assert(first.buildReceipt.generatedAt !== second.buildReceipt.generatedAt, 'Run-specific generatedAt must live in the build receipt.');
+assert(!('sourceCommit' in first.manifest), 'Immutable canonical manifest must not contain a run-specific sourceCommit.');
+assert(!('generatedAt' in first.manifest), 'Immutable canonical manifest must not contain a run-specific generatedAt.');
+assert(first.buildReceipt.rootSha256 === first.manifest.rootSha256, 'Build receipt must point to the immutable canonical root it generated.');
+assert(first.buildReceipt.publicationChanged === false, 'Building a canonical release must not imply runtime publication.');
 assert(first.manifest.peopleCount === dataset.people.length, 'Canonical Person manifest count must match the reviewed anchor dataset.');
 assert(first.manifest.peopleCount === 13, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');
 assert(first.people.length === first.legacyObservanceBridges.length, 'Every migrated Person anchor must retain one explicit legacy observance bridge during compatibility migration.');
@@ -62,4 +69,4 @@ const runtimeSource = await readFile(runtimePath, 'utf8');
 assert(runtimeSource.includes("import personAnchorDataset from './canonical-person-anchors.json'"), 'Runtime canonical Person profiles no longer use the deterministic anchor dataset.');
 assert(!runtimeSource.includes('CANONICAL_PERSON_ANCHORS: CanonicalPersonAnchor[] = ['), 'Canonical Person anchors were duplicated back into TypeScript.');
 
-console.log(`Canonical Person Vault release test passed: ${first.people.length} people, root ${first.manifest.rootSha256}.`);
+console.log(`Canonical Person Vault release test passed: ${first.people.length} people, deterministic manifest root ${first.manifest.rootSha256}.`);
