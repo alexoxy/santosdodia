@@ -14,6 +14,7 @@ import { getFeatureCopy } from '../../lib/feature-copy';
 import AddToCalendar from './AddToCalendar';
 import AdSlot from './AdSlot';
 import CandleButton from './CandleButton';
+import SaveSaintButton from './SaveSaintButton';
 import TraditionTag from './TraditionTag';
 import { useLanguage } from './LanguageProvider';
 
@@ -39,6 +40,7 @@ export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:s
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
    </article>
    <aside className="saint-profile-actions">
+    <div className="profile-action-card profile-save-card"><SaveSaintButton id={id} name={name} dateISO={item.dateISO} locale={locale}/><p>{locale==='pt'?'Guarde para regressar rapidamente a este santo neste dispositivo.':'Save this saint for quick access on this device.'}</p></div>
     <div className="profile-action-card"><h2>{biography?feature.annualCalendar:copy.addCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${encodeURIComponent(feedId)}?locale=${locale}`} title={name}/></div>
     <div className="profile-action-card candle-profile"><CandleButton observanceId={item.id} dateISO={item.dateISO}/><p>{feature.freeCandle}</p></div>
     {editorialReady?<div className="ad-sidebar-rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar"/></div>:null}
