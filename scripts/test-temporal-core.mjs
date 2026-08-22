@@ -67,3 +67,6 @@ try {
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
+
+// R1.10: canonical TemporalRule validation is part of the mandatory temporal gate.
+await import('./vault/test-canonical-temporal-rule-manifest.mjs');
