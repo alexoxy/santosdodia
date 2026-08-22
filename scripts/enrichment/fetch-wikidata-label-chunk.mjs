@@ -10,10 +10,14 @@ function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
 function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 function sha256(value) { return createHash('sha256').update(value).digest('hex'); }
 
-export function buildEntityBody(qids, languages) {
+export function buildEntityBody(qids, languages, wikipediaSites = []) {
   if (!Array.isArray(qids) || qids.length < 1 || qids.length > 50 || qids.some((qid) => !/^Q[1-9]\d*$/u.test(qid))) throw new Error('Label request requires 1-50 exact QIDs.');
   if (!Array.isArray(languages) || !languages.length) throw new Error('Label request requires languages.');
-  const body = new URLSearchParams({ action: 'wbgetentities', format: 'json', formatversion: '2', props: 'labels|aliases', ids: qids.join('|'), languages: languages.join('|'), redirects: 'no' });
+  if (!Array.isArray(wikipediaSites) || wikipediaSites.some((site) => !/^[a-z-]+wiki$/u.test(site))) throw new Error('Wikipedia site filters are invalid.');
+  const props = wikipediaSites.length ? 'labels|aliases|sitelinks' : 'labels|aliases';
+  const values = { action: 'wbgetentities', format: 'json', formatversion: '2', props, ids: qids.join('|'), languages: languages.join('|'), redirects: 'no' };
+  if (wikipediaSites.length) values.sitefilter = wikipediaSites.join('|');
+  const body = new URLSearchParams(values);
   if (body.has('languagefallbacks')) throw new Error('Language fallbacks must remain disabled.');
   return body;
 }
@@ -31,14 +35,15 @@ function scriptStatus(value, expectedScript) {
 async function requestBatch(config, qids) {
   let lastError;
   const languages = config.locales.map((item) => item.wikidataLanguage);
+  const wikipediaSites = config.enrichmentId === 'saints-labels-v3' ? config.locales.map((item) => item.wikipediaSite) : [];
   const attempts = [];
   for (let attempt = 1; attempt <= config.maxAttempts; attempt += 1) {
     const startedAt = new Date().toISOString();
     try {
       const response = await fetch(config.apiEndpoint, {
         method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', 'User-Agent': 'SantosDoDia-LabelsV2/1.0 (+https://www.santosdodia.com)' },
-        body: buildEntityBody(qids, languages),
+        headers: { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8', 'User-Agent': 'SantosDoDia-Labels/3.0 (+https://www.santosdodia.com)' },
+        body: buildEntityBody(qids, languages, wikipediaSites),
         signal: AbortSignal.timeout(config.requestTimeoutMs)
       });
       const text = await response.text();
@@ -63,8 +68,9 @@ async function requestBatch(config, qids) {
 
 export function normalizeLabelResponses({ config, plan, requests }) {
   const localeByLanguage = new Map(config.locales.map((item) => [item.wikidataLanguage, item]));
+  const localeBySite = new Map(config.locales.filter((item) => item.wikipediaSite).map((item) => [item.wikipediaSite, item]));
   const requested = new Set(plan.selectedQids);
-  const byQid = new Map(plan.selectedQids.map((qid) => [qid, { entityId: `wikidata:${qid}`, qid, identityBasis: 'exact-wikidata-identifier', labels: {}, aliases: {}, publish: false }]));
+  const byQid = new Map(plan.selectedQids.map((qid) => [qid, { entityId: `wikidata:${qid}`, qid, identityBasis: 'exact-wikidata-identifier', labels: {}, aliases: {}, sitelinks: {}, publish: false }]));
   const missingQids = new Set();
   for (const request of requests) {
     const entities = request.value?.entities;
@@ -76,11 +82,16 @@ export function normalizeLabelResponses({ config, plan, requests }) {
       for (const [language, label] of Object.entries(entity?.labels ?? {})) {
         const locale = localeByLanguage.get(language); if (!locale) throw new Error(`Unrequested label language ${language}.`);
         const value = String(label?.value ?? '').normalize('NFC').trim(); if (!value) continue;
-        target.labels[locale.siteLocale] = { value, status: 'source', sourceLocale: locale.siteLocale, wikidataLanguage: language, scriptStatus: scriptStatus(value, locale.expectedScript) };
+        target.labels[locale.siteLocale] = { value, status: 'source', sourceKind: 'wikidata-label', sourceLocale: locale.siteLocale, wikidataLanguage: language, scriptStatus: scriptStatus(value, locale.expectedScript) };
       }
       for (const [language, aliases] of Object.entries(entity?.aliases ?? {})) {
         const locale = localeByLanguage.get(language); if (!locale) throw new Error(`Unrequested alias language ${language}.`);
-        target.aliases[locale.siteLocale] = [...new Set((aliases ?? []).map((alias) => String(alias?.value ?? '').normalize('NFC').trim()).filter(Boolean))].map((value) => ({ value, status: 'source', wikidataLanguage: language, scriptStatus: scriptStatus(value, locale.expectedScript) }));
+        target.aliases[locale.siteLocale] = [...new Set((aliases ?? []).map((alias) => String(alias?.value ?? '').normalize('NFC').trim()).filter(Boolean))].map((value) => ({ value, status: 'source', sourceKind: 'wikidata-alias', wikidataLanguage: language, scriptStatus: scriptStatus(value, locale.expectedScript) }));
+      }
+      for (const [site, sitelink] of Object.entries(entity?.sitelinks ?? {})) {
+        const locale = localeBySite.get(site); if (!locale) throw new Error(`Unrequested Wikipedia sitelink ${site}.`);
+        const title = String(sitelink?.title ?? '').normalize('NFC').trim(); if (!title) continue;
+        target.sitelinks[locale.siteLocale] = { value: title, status: 'source', sourceKind: 'wikipedia-sitelink-title', wikipediaSite: site, scriptStatus: scriptStatus(title, locale.expectedScript) };
       }
     }
   }
@@ -94,6 +105,8 @@ export function normalizeLabelResponses({ config, plan, requests }) {
     entityCount: plan.entityCount,
     missingQids: [...missingQids].sort(),
     languageFallbacksEnabled: false,
+    translationEnabled: false,
+    sitelinkTitleEvidenceEnabled: config.enrichmentId === 'saints-labels-v3',
     automaticCanonicalNameSelection: false,
     sourceEvidenceOnly: true,
     publish: false,
@@ -103,7 +116,7 @@ export function normalizeLabelResponses({ config, plan, requests }) {
 }
 
 export async function fetchWikidataLabelChunk({ config, plan, rawOutput, normalizedOutput }) {
-  if (!plan?.shouldRun || plan?.completed || plan?.enrichmentId !== config.enrichmentId || plan?.identityRootSha256?.length !== 64) throw new Error('Labels v2 plan is not runnable.');
+  if (!plan?.shouldRun || plan?.completed || plan?.enrichmentId !== config.enrichmentId || plan?.identityRootSha256?.length !== 64) throw new Error('Labels plan is not runnable.');
   const requests = [];
   for (let offset = 0; offset < plan.selectedQids.length; offset += config.apiBatchSize) {
     const qids = plan.selectedQids.slice(offset, offset + config.apiBatchSize);
@@ -111,7 +124,7 @@ export async function fetchWikidataLabelChunk({ config, plan, rawOutput, normali
     requests.push({ index: requests.length, qids, responseSha256: sha256(result.text), responseBytes: Buffer.byteLength(result.text), attempts: result.attempts, value: result.value });
     if (offset + config.apiBatchSize < plan.selectedQids.length) await sleep(config.requestDelayMs);
   }
-  if (requests.length !== plan.expectedRequestCount) throw new Error('Labels v2 request count differs from plan.');
+  if (requests.length !== plan.expectedRequestCount) throw new Error('Labels request count differs from plan.');
   const normalized = normalizeLabelResponses({ config, plan, requests });
   const raw = { schemaVersion: 1, enrichmentId: config.enrichmentId, sourceId: config.sourceId, identityRootSha256: plan.identityRootSha256, mode: 'archive-only', publish: false, productionMutation: false, startEntityOffset: plan.startEntityOffset, nextEntityOffset: plan.nextEntityOffset, entityCount: plan.entityCount, selectedQids: plan.selectedQids, requestCount: requests.length, requests, finishedAt: new Date().toISOString() };
   fs.mkdirSync(path.dirname(path.resolve(rawOutput)), { recursive: true }); fs.mkdirSync(path.dirname(path.resolve(normalizedOutput)), { recursive: true });
