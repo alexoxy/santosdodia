@@ -11,42 +11,28 @@ const [observanceBytes, personBytes, recognitionBytes, ecclesialBytes] = await P
   readFile(path.join(root, 'data', 'canonical-recognition-anchors.json'), 'utf8'),
   readFile(path.join(root, 'data', 'canonical-ecclesial-context-anchors.json'), 'utf8')
 ]);
-
 const observanceDataset = JSON.parse(observanceBytes);
 const personDataset = JSON.parse(personBytes);
 const recognitionDataset = JSON.parse(recognitionBytes);
 const ecclesialDataset = JSON.parse(ecclesialBytes);
 
-function assert(condition, message) {
-  if (!condition) throw new Error(message);
+function assert(condition, message) { if (!condition) throw new Error(message); }
+function build(dataset = observanceDataset, options = {}) {
+  return buildCanonicalObservanceVaultRelease(dataset, personDataset, recognitionDataset, ecclesialDataset, options);
 }
-
 function expectFailure(label, fn, expectedText) {
   let failed = false;
-  try { fn(); }
-  catch (error) {
+  try { fn(); } catch (error) {
     failed = true;
     assert(String(error?.message ?? error).includes(expectedText), `${label} failed for the wrong reason: ${String(error?.message ?? error)}`);
   }
   assert(failed, `${label} unexpectedly passed.`);
 }
 
-const first = buildCanonicalObservanceVaultRelease(observanceDataset, personDataset, recognitionDataset, ecclesialDataset, {
-  sourceBytes: observanceBytes,
-  sourceCommit: 'commit-a',
-  generatedAt: '2026-08-22T00:00:00.000Z'
-});
-const second = buildCanonicalObservanceVaultRelease(observanceDataset, personDataset, recognitionDataset, ecclesialDataset, {
-  sourceBytes: observanceBytes,
-  sourceCommit: 'commit-b',
-  generatedAt: '2026-08-23T00:00:00.000Z'
-});
+const first = build(observanceDataset, { sourceBytes: observanceBytes, sourceCommit: 'commit-a', generatedAt: '2026-08-22T00:00:00.000Z' });
+const second = build(observanceDataset, { sourceBytes: observanceBytes, sourceCommit: 'commit-b', generatedAt: '2026-08-23T00:00:00.000Z' });
 const reformattedBytes = `${JSON.stringify(observanceDataset)}\n`;
-const reformatted = buildCanonicalObservanceVaultRelease(observanceDataset, personDataset, recognitionDataset, ecclesialDataset, {
-  sourceBytes: reformattedBytes,
-  sourceCommit: 'commit-c',
-  generatedAt: '2026-08-24T00:00:00.000Z'
-});
+const reformatted = build(observanceDataset, { sourceBytes: reformattedBytes, sourceCommit: 'commit-c', generatedAt: '2026-08-24T00:00:00.000Z' });
 
 assert(first.manifest.rootSha256 === second.manifest.rootSha256, 'Observance root must be deterministic across runs.');
 assert(first.manifest.rootSha256 === reformatted.manifest.rootSha256, 'Formatting-only source changes must not alter Observance root.');
@@ -59,9 +45,9 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 5, 'Bootstrap Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 4, 'Bootstrap Observance Person coverage changed unexpectedly.');
-assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Bootstrap Observance Churches changed unexpectedly.');
+assert(first.manifest.observanceCount === 8, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 9, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
 assert(first.manifest.immutableReleaseRoot.endsWith(first.manifest.rootSha256), 'Observance release root must be content-addressed.');
@@ -71,12 +57,27 @@ assert(first.manifest.semantics.observanceSeparateFromRecognition === true, 'Obs
 assert(first.manifest.semantics.observanceSeparateFromOccurrence === true, 'Observance must remain separate from Occurrence.');
 assert(first.manifest.semantics.recognitionMustMatchObservanceChurch === true, 'Observance must remain Church-scoped through Recognition.');
 assert(first.manifest.semantics.evidenceMustMatchChurchAuthorityDomain === true, 'Observance evidence must remain Church-authority isolated.');
+assert(first.manifest.semantics.multiSubjectReady === true, 'Observance must remain multi-subject ready.');
 assert(first.manifest.d1Projection.status === 'deferred', 'Observance identity must not be silently forced into dated occurrence tables.');
 
 const ids = first.observances.map((item) => item.observanceId);
 assert(new Set(ids).size === ids.length, 'Observance release contains duplicate IDs.');
 assert(JSON.stringify(ids) === JSON.stringify([...ids].sort()), 'Observance release must be deterministically sorted.');
 assert(first.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'matthew-apostle')).length === 2, 'Matthew must demonstrate one Person with separate Church-scoped Observances.');
+
+const john = first.observances.find((item) => item.observanceId === 'observance:john-baptist-nativity:roman-catholic');
+assert(john?.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a distinct person-subject feast Observance.');
+
+for (const [id, people] of [
+  ['observance:peter-paul:roman-catholic', ['paul-apostle', 'peter-apostle']],
+  ['observance:joachim-anne:roman-catholic', ['anne', 'joachim']]
+]) {
+  const item = first.observances.find((observance) => observance.observanceId === id);
+  assert(item?.observanceType === 'multi-person-commemoration', `${id} must remain a multi-person Observance.`);
+  assert(item.subjects.length === 2, `${id} must have exactly two Person subjects.`);
+  assert(JSON.stringify(item.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(people), `${id} Person subjects changed.`);
+  assert(new Set(item.subjects.map((subject) => subject.recognitionId)).size === 2, `${id} must bind two distinct Recognitions.`);
+}
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);
@@ -94,22 +95,22 @@ for (const observance of first.observances) {
 
 const dateLeak = structuredClone(observanceDataset);
 dateLeak.observances[0].dateISO = '2026-09-21';
-expectFailure('Observance/Occurrence boundary guard', () => buildCanonicalObservanceVaultRelease(dateLeak, personDataset, recognitionDataset, ecclesialDataset), 'leaks Occurrence field dateISO');
+expectFailure('Observance/Occurrence boundary guard', () => build(dateLeak), 'leaks Occurrence field dateISO');
 
 const unknownRecognition = structuredClone(observanceDataset);
 unknownRecognition.observances[0].subjects[0].recognitionId = 'recognition:unknown:roman-catholic';
-expectFailure('Unknown Recognition guard', () => buildCanonicalObservanceVaultRelease(unknownRecognition, personDataset, recognitionDataset, ecclesialDataset), 'unknown Recognition');
+expectFailure('Unknown Recognition guard', () => build(unknownRecognition), 'unknown Recognition');
 
 const crossChurchRecognition = structuredClone(observanceDataset);
 crossChurchRecognition.observances[0].subjects[0].recognitionId = 'recognition:matthew-apostle:orthodox-church-america';
-expectFailure('Cross-Church Recognition guard', () => buildCanonicalObservanceVaultRelease(crossChurchRecognition, personDataset, recognitionDataset, ecclesialDataset), 'Recognition belongs to a different Church');
+expectFailure('Cross-Church Recognition guard', () => build(crossChurchRecognition), 'Recognition belongs to a different Church');
 
 const crossChurchEvidence = structuredClone(observanceDataset);
 crossChurchEvidence.observances[0].evidence[0].url = 'https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew';
-expectFailure('Cross-Church evidence guard', () => buildCanonicalObservanceVaultRelease(crossChurchEvidence, personDataset, recognitionDataset, ecclesialDataset), 'outside canonical Church authority domains');
+expectFailure('Cross-Church evidence guard', () => build(crossChurchEvidence), 'outside canonical Church authority domains');
 
 const duplicate = structuredClone(observanceDataset);
 duplicate.observances.push({ ...structuredClone(duplicate.observances[0]), id: 'observance:matthew-apostle:roman-catholic:duplicate' });
-expectFailure('Duplicate canonical Observance guard', () => buildCanonicalObservanceVaultRelease(duplicate, personDataset, recognitionDataset, ecclesialDataset), 'duplicates canonical Observance state');
+expectFailure('Duplicate canonical Observance guard', () => build(duplicate), 'duplicates canonical Observance state');
 
-console.log(`Canonical Observance Vault release test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people and ${first.manifest.churches.length} Churches, deterministic root ${first.manifest.rootSha256}.`);
+console.log(`Canonical Observance Vault release test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, including two reviewed multi-person Observances, deterministic root ${first.manifest.rootSha256}.`);
