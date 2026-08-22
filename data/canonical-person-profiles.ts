@@ -17,6 +17,12 @@ export const CANONICAL_PERSON_ANCHORS: CanonicalPersonAnchor[] = [
     names: { en: 'Saint John the Baptist', pt: 'São João Batista', es: 'San Juan Bautista', it: 'San Giovanni Battista' },
   },
   {
+    id: 'matthew-apostle',
+    primaryObservanceId: 'rc:StMatthewEvangelist',
+    category: 'apostle',
+    names: { en: 'Saint Matthew the Apostle', pt: 'São Mateus Apóstolo', es: 'San Mateo Apóstol', it: 'San Matteo Apostolo' },
+  },
+  {
     id: 'peter-apostle',
     primaryObservanceId: 'peter-paul',
     category: 'apostle',
