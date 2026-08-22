@@ -11,6 +11,7 @@ import { isSaintBiographyIndexable } from '../../lib/editorial-profile-quality';
 import { displayCalendarSystem,displayObservanceName,displayPatronages } from '../../lib/locale-display';
 import { displayObservanceScope } from '../../lib/observance-scope';
 import { getFeatureCopy } from '../../lib/feature-copy';
+import { getRetentionCopy } from '../../lib/product-retention-i18n';
 import AddToCalendar from './AddToCalendar';
 import AdSlot from './AdSlot';
 import CandleButton from './CandleButton';
@@ -19,7 +20,7 @@ import TraditionTag from './TraditionTag';
 import { useLanguage } from './LanguageProvider';
 
 export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:string;runtimeItem?:Observance;calendarObservanceId?:string}){
- const{locale,copy,timeZone,country}=useLanguage();const feature=getFeatureCopy(locale);const year=yearInTimeZone(timeZone);const curatedItem=getObservanceById(id,year,locale);const item=curatedItem??runtimeItem;
+ const{locale,copy,timeZone,country}=useLanguage();const feature=getFeatureCopy(locale);const retention=getRetentionCopy(locale);const year=yearInTimeZone(timeZone);const curatedItem=getObservanceById(id,year,locale);const item=curatedItem??runtimeItem;
  if(!item)return <section className="message-card"><span className="eyebrow">404</span><h1>{feature.noMatch}</h1><Link className="btn btn-primary" href="/explore">{feature.navFind}</Link></section>;
  const biographyRecord=getSaintBiographyRecord(id),biography=getSaintBiography(id,locale),editorialReady=Boolean(biographyRecord&&isSaintBiographyIndexable(biographyRecord,locale));
  const evidenceObservanceId=curatedItem?.id??calendarObservanceId,name=displayObservanceName(item.names,locale,item.name),patronages=displayPatronages(item.patronages,locale),topics=evidenceObservanceId?topicsForObservance(evidenceObservanceId):[],historyCopy=biographyUi[locale],summary=localizedSummary(item,locale),scope=displayObservanceScope(item,locale,country),evidence=evidenceObservanceId?claimEvidenceFor(evidenceObservanceId):[],evidenceCopy=claimEvidenceUi[locale];
@@ -40,7 +41,7 @@ export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:s
     {topics.length?<section className="related-topics"><h3>{feature.relatedSearches}</h3><div>{topics.map(topic=><Link href={topicPath(topic)} key={`${topic.kind}-${topic.slug}`}>{topicLabel(topic,locale)}</Link>)}</div></section>:null}
    </article>
    <aside className="saint-profile-actions">
-    <div className="profile-action-card profile-save-card"><SaveSaintButton id={id} name={name} dateISO={item.dateISO} locale={locale}/><p>{locale==='pt'?'Guarde para regressar rapidamente a este santo neste dispositivo.':'Save this saint for quick access on this device.'}</p></div>
+    <div className="profile-action-card profile-save-card"><SaveSaintButton id={id} name={name} dateISO={item.dateISO} locale={locale}/><p>{retention.saveHint}</p></div>
     <div className="profile-action-card"><h2>{biography?feature.annualCalendar:copy.addCalendar}</h2><AddToCalendar feedPath={`/api/ical/saint/${encodeURIComponent(feedId)}?locale=${locale}`} title={name}/></div>
     <div className="profile-action-card candle-profile"><CandleButton observanceId={item.id} dateISO={item.dateISO}/><p>{feature.freeCandle}</p></div>
     {editorialReady?<div className="ad-sidebar-rail"><AdSlot slot={ADSENSE_SIDEBAR_SLOT} placement="sidebar"/></div>:null}
