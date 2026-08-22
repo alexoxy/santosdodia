@@ -44,7 +44,7 @@ jobs:
         run: node scripts/product/test-portugal-saint-publication-queue.mjs
 
       - name: Test Portugal P0 review pack safety
-        run: node scripts/product/test-portugal-p0-review-pack.mjs
+        run: node scripts/product/test-portugal-p0-review-pack.mjs && node scripts/product/test-portugal-profile-golden-set.mjs
 
       - name: Test public publication boundaries
         run: npm run publication:boundary-test

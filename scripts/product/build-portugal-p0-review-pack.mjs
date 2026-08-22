@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { buildPortugalP0VaticanCorroborationCandidates } from './build-portugal-p0-vatican-corroboration-candidates.mjs';
 import { buildPortugalP0IndependentResearchQueue } from './build-portugal-p0-independent-research-queue.mjs';
 import { buildPortugalP0EditorialDecisionQueue } from './build-portugal-p0-editorial-decision-queue.mjs';
+import { buildPortugalProfileGoldenSet } from './build-portugal-profile-golden-set.mjs';
 
 const RESOLVED_IDENTITY_STATUSES = new Set(['resolved-single-occurrence', 'resolved-duplicate-occurrences']);
 
@@ -184,12 +185,18 @@ function main() {
     corroboration,
     researchQueue,
   });
+  const profileGoldenSet = buildPortugalProfileGoldenSet({
+    p0Pack: result,
+    editorialDecisionQueue,
+  });
   result.vaticanCorroboration = corroboration;
   result.independentResearchQueue = researchQueue;
   result.editorialDecisionQueue = editorialDecisionQueue;
+  result.profileGoldenSet = profileGoldenSet;
   result.summary.vaticanCorroboration = corroboration.summary;
   result.summary.independentResearchQueue = researchQueue.summary;
   result.summary.editorialDecisionQueue = editorialDecisionQueue.summary;
+  result.summary.profileGoldenSet = profileGoldenSet.summary;
 
   fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
   fs.mkdirSync(path.dirname(path.resolve(summaryPath)), { recursive: true });
