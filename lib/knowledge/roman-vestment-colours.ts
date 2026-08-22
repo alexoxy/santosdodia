@@ -9,8 +9,15 @@ export type RomanVestmentColourResolution = {
   resolvedColour: RomanVestmentColourCode | null;
   resolutionScope: 'principal-temporale' | 'seasonal-default' | 'optional-colour' | 'holy-saturday';
   finalOccurrenceResolutionRequired: boolean;
-  festiveVestmentsMayReplaceDayColour: boolean;
   specialCase: 'holy-saturday-no-mass-before-easter-vigil' | null;
+  sourceIds: string[];
+};
+
+export type RomanMassForTheDeadColourOptions = {
+  permittedColours: Array<{
+    colour: 'violet' | 'black';
+    condition: 'permitted' | 'where-customary';
+  }>;
   sourceIds: string[];
 };
 
@@ -73,7 +80,6 @@ export function romanVestmentColoursForDateContext(context: RomanDateContext): R
       resolvedColour: null,
       resolutionScope: 'holy-saturday',
       finalOccurrenceResolutionRequired: false,
-      festiveVestmentsMayReplaceDayColour: false,
       specialCase: 'holy-saturday-no-mass-before-easter-vigil',
       sourceIds: [...ROMAN_VESTMENT_COLOUR_SOURCE_IDS]
     };
@@ -88,7 +94,6 @@ export function romanVestmentColoursForDateContext(context: RomanDateContext): R
       resolvedColour: principalColour,
       resolutionScope: 'principal-temporale',
       finalOccurrenceResolutionRequired: false,
-      festiveVestmentsMayReplaceDayColour: true,
       specialCase: null,
       sourceIds: [...ROMAN_VESTMENT_COLOUR_SOURCE_IDS]
     };
@@ -103,7 +108,6 @@ export function romanVestmentColoursForDateContext(context: RomanDateContext): R
       resolvedColour: null,
       resolutionScope: 'optional-colour',
       finalOccurrenceResolutionRequired: false,
-      festiveVestmentsMayReplaceDayColour: false,
       specialCase: null,
       sourceIds: [...ROMAN_VESTMENT_COLOUR_SOURCE_IDS]
     };
@@ -116,20 +120,17 @@ export function romanVestmentColoursForDateContext(context: RomanDateContext): R
     resolvedColour: null,
     resolutionScope: 'seasonal-default',
     finalOccurrenceResolutionRequired: true,
-    festiveVestmentsMayReplaceDayColour: false,
     specialCase: null,
     sourceIds: [...ROMAN_VESTMENT_COLOUR_SOURCE_IDS]
   };
 }
 
-export function romanMassForTheDeadColourOptions(): {
-  defaultColour: 'violet';
-  permittedAlternativeColours: ['black'];
-  sourceIds: string[];
-} {
+export function romanMassForTheDeadColourOptions(): RomanMassForTheDeadColourOptions {
   return {
-    defaultColour: 'violet',
-    permittedAlternativeColours: ['black'],
+    permittedColours: [
+      { colour: 'violet', condition: 'permitted' },
+      { colour: 'black', condition: 'where-customary' }
+    ],
     sourceIds: [...ROMAN_VESTMENT_COLOUR_SOURCE_IDS]
   };
 }
