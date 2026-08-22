@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "status": "normative-candidate",
+  "purpose": "Separate canonical authority from editorial, devotional and product-discovery sources. Secondary sources may propose facts or product modules but never override primary ecclesial evidence.",
+  "classes": {
+    "A0": "primary canonical authority",
+    "A1": "official ecclesial or liturgical authority",
+    "A2": "academic/institutional authority",
+    "B1": "high-quality independent reference",
+    "B2": "specialist devotional/editorial source requiring corroboration",
+    "B3": "editorial inspiration and discovery only",
+    "D": "product inspiration only; never factual authority"
+  },
+  "guards": {
+    "secondaryCannotSetCanonicalStatus": true,
+    "secondaryCannotSetFeastDateWithoutCorroboration": true,
+    "devotionalClaimsMustBeTypedAsTraditionOrDevotion": true,
+    "prayerTextRequiresRightsStatus": true,
+    "unknownRightsMeansLinkOrMetadataOnly": true,
+    "ptBRContentCannotBecomePtPTCanonicalTextWithoutLocalizationReview": true,
+    "machineTranslationCannotCreateCanonicalPrayer": true,
+    "healthOrLifeOutcomeClaimsCannotBePresentedAsPromises": true
+  },
+  "productFields": [
+    "nameMeaning",
+    "nameVariants",
+    "patronage",
+    "virtues",
+    "lifeThemes",
+    "symbols",
+    "iconography",
+    "places",
+    "quotes",
+    "prayers",
+    "novenas",
+    "devotions",
+    "feastPreparation",
+    "relatedSaints",
+    "suggestedForIntentions"
+  ],
+  "sources": [
+    {
+      "id": "lay-cistercians-editorial",
+      "name": "Lay Cistercians",
+      "baseUrl": "https://laycistercians.com/",
+      "class": "B3",
+      "traditions": ["Roman Catholic"],
+      "coverage": ["saint-name significance", "saint biographies", "patronage", "virtues", "quotes", "devotional themes", "prayer discovery"],
+      "allowedUses": ["editorial-pattern-learning", "topic-discovery", "candidate-fact-generation", "related-content-ideas"],
+      "forbiddenUses": ["canonical-status-authority", "sole-feast-date-authority", "verbatim-republication-without-rights"],
+      "notes": "Use as an editorial benchmark for connecting saints to names, virtues and relatable life themes. Revalidate substantive claims against A/B1 sources."
+    },
+    {
+      "id": "intercede-catholic-novenas",
+      "name": "Intercede — Catholic Novenas",
+      "baseUrl": "https://catholicnovenaapp.com/list-of-all-novenas/",
+      "class": "B2",
+      "traditions": ["Roman Catholic devotional"],
+      "localesObserved": ["en", "es", "pt", "de", "it", "pl"],
+      "coverage": ["novena inventory", "novena start dates", "associated feast dates", "intentions", "prayer schedules", "devotional discovery"],
+      "allowedUses": ["novena-discovery", "candidate-saint-novena-link", "candidate-start-date", "product-pattern-learning", "reminder-feature-design"],
+      "forbiddenUses": ["canonical-feast-date-authority", "canonical-saint-name-authority", "verbatim-prayer-republication-without-rights"],
+      "notes": "Strong product benchmark: browse by month, novenas starting today, feast-linked nine-day preparation and reminders. Portuguese content must be localized and independently validated for pt-PT. Individual dates and associations require corroboration because this is devotional, not a liturgical authority."
+    }
+  ],
+  "devotionalContentModel": {
+    "prayer": {
+      "required": ["tradition", "locale", "sourceUrl", "prayerType", "rightsStatus"],
+      "prayerTypes": ["official-liturgical", "traditional", "approved-devotional", "contemporary-devotional", "unknown"],
+      "rightsStatuses": ["public-domain", "licensed", "permission-confirmed", "link-only", "unknown"]
+    },
+    "novena": {
+      "required": ["title", "tradition", "sourceUrl", "associatedEntityType", "associatedEntityId", "scheduleBasis", "rightsStatus"],
+      "scheduleBasis": ["fixed-feast-minus-nine-days", "movable-feast-relative", "source-defined", "unscheduled"],
+      "publicationRule": "Association and schedule require authoritative feast/date corroboration before surfacing as a calendar reminder."
+    }
+  },
+  "productImplications": {
+    "today": ["saints-and-observances", "prayer-or-devotion-when-validated", "novena-starting-today"],
+    "prepare": ["upcoming-feasts", "novenas-starting-soon", "nine-day-progress", "optional-reminders"],
+    "discover": ["saint-by-name", "saint-by-virtue", "saint-by-patronage", "saint-by-life-situation", "saint-by-geography", "saint-by-tradition"],
+    "saintPage": ["identity", "why-remembered", "life", "patronage", "symbols", "places", "prayers", "novenas", "related-saints", "other-traditions", "sources"]
+  }
+}
