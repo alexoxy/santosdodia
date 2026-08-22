@@ -6,36 +6,44 @@ import { getRetentionCopy } from '../../lib/product-retention-i18n';
 
 type SavedSaint = {
   id: string;
-  name: string;
   dateISO?: string;
-  href: string;
   savedAt: string;
 };
 
 const STORAGE_KEY = 'sdd-saved-saints-v1';
 const EVENT_NAME = 'sdd-saved-saints-changed';
 
-function readSaved(): SavedSaint[] {
+function readSavedSaints(): SavedSaint[] {
   if (typeof window === 'undefined') return [];
   try {
-    const parsed = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? '[]');
-    return Array.isArray(parsed) ? parsed.filter(item => item && typeof item.id === 'string' && typeof item.name === 'string') : [];
+    const parsed: unknown = JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? '[]');
+    if (!Array.isArray(parsed)) return [];
+    return parsed.flatMap(item => {
+      if (!item || typeof item !== 'object') return [];
+      const candidate = item as Record<string, unknown>;
+      if (typeof candidate.id !== 'string' || !candidate.id.trim()) return [];
+      return [{
+        id: candidate.id,
+        dateISO: typeof candidate.dateISO === 'string' ? candidate.dateISO : undefined,
+        savedAt: typeof candidate.savedAt === 'string' ? candidate.savedAt : '',
+      }];
+    });
   } catch {
     return [];
   }
 }
 
-function writeSaved(items: SavedSaint[]) {
+function writeSavedSaints(items: SavedSaint[]) {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   window.dispatchEvent(new CustomEvent(EVENT_NAME));
 }
 
-export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { id: string; name: string; dateISO?: string; locale?: Locale }) {
+export default function SaveSaintButton({ id, dateISO, locale = 'en' }: { id: string; dateISO?: string; locale?: Locale }) {
   const [saved, setSaved] = useState(false);
   const labels = getRetentionCopy(locale);
 
   useEffect(() => {
-    const sync = () => setSaved(readSaved().some(item => item.id === id));
+    const sync = () => setSaved(readSavedSaints().some(item => item.id === id));
     sync();
     window.addEventListener(EVENT_NAME, sync);
     window.addEventListener('storage', sync);
@@ -46,14 +54,14 @@ export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { 
   }, [id]);
 
   function toggle() {
-    const current = readSaved();
+    const current = readSavedSaints();
     if (current.some(item => item.id === id)) {
-      writeSaved(current.filter(item => item.id !== id));
+      writeSavedSaints(current.filter(item => item.id !== id));
       setSaved(false);
       return;
     }
-    writeSaved([
-      { id, name, dateISO, href: `/saint/${encodeURIComponent(id)}`, savedAt: new Date().toISOString() },
+    writeSavedSaints([
+      { id, dateISO, savedAt: new Date().toISOString() },
       ...current,
     ].slice(0, 100));
     setSaved(true);
@@ -70,5 +78,10 @@ export default function SaveSaintButton({ id, name, dateISO, locale = 'en' }: { 
   </button>;
 }
 
-export { EVENT_NAME as SAVED_SAINTS_EVENT, STORAGE_KEY as SAVED_SAINTS_STORAGE_KEY };
+export {
+  EVENT_NAME as SAVED_SAINTS_EVENT,
+  STORAGE_KEY as SAVED_SAINTS_STORAGE_KEY,
+  readSavedSaints,
+  writeSavedSaints,
+};
 export type { SavedSaint };
