@@ -30,7 +30,9 @@ try {
   fs.writeFileSync(path.join(temporaryDirectory, 'package.json'), '{"type":"module"}\n', 'utf8');
   transpile(path.join(root, 'lib/knowledge/calendar-engine.ts'), 'calendar-engine.js');
   transpile(path.join(root, 'lib/knowledge/roman-liturgical-year.ts'), 'roman-liturgical-year.js', [["'./calendar-engine'", "'./calendar-engine.js'"]]);
+  transpile(path.join(root, 'lib/knowledge/roman-vestment-colours.ts'), 'roman-vestment-colours.js');
   const roman = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-liturgical-year.js')).href}?v=${Date.now()}`);
+  const colours = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-vestment-colours.js')).href}?v=${Date.now()}`);
 
   assert(roman.romanSundayCycle(2024) === 'B', '2024 must use Sunday cycle B.');
   assert(roman.romanSundayCycle(2025) === 'C', '2025 must use Sunday cycle C.');
@@ -83,6 +85,24 @@ try {
   assert(adventBoundary.weekdayCycleAppliesToDate === false && adventBoundary.weekdayLectionaryPattern === 'seasonal-annual', 'Advent weekday readings must be identified as the annual seasonal series rather than an I/II Ordinary Time selection.');
   assert(adventBoundary.season === 'advent' && adventBoundary.seasonWeek === 1, '2026-12-01 must be Advent week I.');
 
+  const ascensionColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-05-17', roman.ROMAN_PORTUGAL_POLICY));
+  assert(ascensionColour.resolvedColour === 'white', 'Portugal 2026 Ascension must resolve to white vestments.');
+  const pentecostColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-05-24', roman.ROMAN_PORTUGAL_POLICY));
+  assert(pentecostColour.resolvedColour === 'red', 'Portugal 2026 Pentecost must resolve to red vestments.');
+  const palmColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-03-29', roman.ROMAN_PORTUGAL_POLICY));
+  assert(palmColour.resolvedColour === 'red', 'Portugal 2026 Palm Sunday must resolve to red vestments.');
+  const laetareColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-03-15', roman.ROMAN_PORTUGAL_POLICY));
+  assert(laetareColour.defaultColour === 'violet' && laetareColour.permittedAlternativeColours.includes('rose') && laetareColour.resolvedColour === null, 'Laetare must keep violet as default with optional rose.');
+  const gaudeteColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-12-13', roman.ROMAN_PORTUGAL_POLICY));
+  assert(gaudeteColour.defaultColour === 'violet' && gaudeteColour.permittedAlternativeColours.includes('rose') && gaudeteColour.resolvedColour === null, 'Gaudete must keep violet as default with optional rose.');
+  const ordinaryColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-06-01', roman.ROMAN_PORTUGAL_POLICY));
+  assert(ordinaryColour.defaultColour === 'green' && ordinaryColour.resolvedColour === null && ordinaryColour.finalOccurrenceResolutionRequired === true, 'Ordinary Time must expose green as seasonal default without pretending the final sanctoral colour is resolved.');
+  const holySaturdayColour = colours.romanVestmentColoursForDateContext(roman.romanDateContext('2026-04-04', roman.ROMAN_PORTUGAL_POLICY));
+  assert(holySaturdayColour.defaultColour === null && holySaturdayColour.specialCase === 'holy-saturday-no-mass-before-easter-vigil', 'Holy Saturday must not be assigned a fake daytime Mass colour.');
+  const deadColours = colours.romanMassForTheDeadColourOptions();
+  assert(deadColours.defaultColour === 'violet' && deadColours.permittedAlternativeColours[0] === 'black', 'Masses for the Dead must expose violet with black as an optional customary alternative.');
+  assert(JSON.stringify(colours.ROMAN_VESTMENT_COLOUR_CODES) === JSON.stringify(['white','red','green','violet','black','rose']), 'Canonical Roman vestment colour code set drifted.');
+
   for (let liturgicalYear = 1900; liturgicalYear <= 2200; liturgicalYear += 1) {
     const calculated = roman.calculateRomanLiturgicalYear(liturgicalYear, roman.ROMAN_PORTUGAL_POLICY);
     const start = date(calculated.startDate);
@@ -100,7 +120,7 @@ try {
     assert(days(calculated.keyDates['christ-the-king'], nextAdvent) === 7, `${liturgicalYear} Christ the King must be seven days before the next Advent.`);
   }
 
-  console.log('Roman liturgical-year kernel passed 2024-2027 A/B/C + I/II source vectors, Advent boundaries, seasonal weekday applicability, Ordinary Time week logic and 1900-2200 perennial invariants.');
+  console.log('Roman liturgical-year kernel passed cycles, perennial dates and Roman vestment-colour rules including white/red/green/violet/black/rose semantics.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
