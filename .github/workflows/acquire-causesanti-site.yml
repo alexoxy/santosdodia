@@ -74,5 +74,6 @@ jobs:
           if [ -d data/osint/runs/causesanti ] && find data/osint/runs/causesanti -name summary.json -print -quit | grep -q .; then
             node scripts/archive-to-dropbox.mjs --stream "$CAUSESANTI_ARCHIVE_STREAM" --source data/osint/runs/causesanti
           else
-            echo "No CauseSanti crawl evidence to archive"
+            echo "CauseSanti crawl produced no summary.json; refusing a receipt-less success" >&2
+            exit 1
           fi
