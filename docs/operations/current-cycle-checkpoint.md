@@ -73,15 +73,52 @@ Integration gate: merge only after the current PR head passes every required sta
 | Verified Live | Partial | Privacy-enhanced, user-activated exception exists; global Church-specific coverage remains. |
 | Autonomous maintenance | Partial | Deterministic workflows and gates exist; end-to-end exception-only operation is incomplete. |
 
+## Repository hygiene inventory — 2026-08-23
+
+### Pull requests
+
+- Active product PR: #215, with one purpose and a current Quality gate.
+- Active maintenance PRs: #145 (Wrangler update) and #146 (download-artifact update); both were 79 commits behind and have been asked to rebase before any merge.
+- PR #167 was closed as a stale integration surface. Its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate; no obsolete branch code was merged.
+
+### Issues
+
+- #181 is now the single open umbrella issue and points to the normative strategy, machine contract and this checkpoint.
+- Legacy issues #10 and #11 were closed as superseded tracking surfaces. Their detailed technical history remains available; valid work returns through #181 rather than duplicate open backlogs.
+
+### Branches
+
+The complete first-page branch inventory contained 43 branches including `main`.
+
+Sixteen branches have no tree difference from `main` and are deletion candidates with no code loss:
+
+- `agent/d1-runtime-deliverable-proof`;
+- `agent/editorial-scale-6-rescue-copy`, `copy2`, `copy3`, `copy4`, `copy5`, `copy6`, `copy7`, `copy8`, `copy9`, `copy11`;
+- `cloudflare-preview`;
+- `fix/verify-deployed-product-capabilities`;
+- `product/adsense-readiness`;
+- `product/christian-daily-platform-contract-20260822`;
+- `product/v2-r1-migration-inventory-20260822` (unique commit history but no current tree difference).
+
+The connector used for repository management does not expose branch-ref deletion. These candidates must remain marked for deletion rather than being force-moved or otherwise destructively simulated. All other non-active branches contain unique tree changes and remain preserved until their consumers and overlap with `main` are reviewed.
+
+The superseded `docs/strategy-execution-update-20260823` branch becomes a deletion candidate after #215 merges because its strategy changes are a strict subset of the active replacement.
+
+### Hygiene rule applied
+
+No unique branch work was deleted merely because it is old. Zero-difference branches are separated from branches containing potentially reusable product work. Cleanup remains subordinate to current strategy, security and recoverability.
+
 ## Ordered roadmap for the next continuation
 
 1. Verify the CauseSanti push canary workflow and inspect the Dropbox `canary/index.json` plus slot receipt. If successful, confirm repository, commit, run, hash and `verifiedAfterUpload`; only then move the old failure email to Trash.
 2. Wait for the latest PR #215 Quality run. Fix any real failure, rerun, and merge only with the required `check` green on the current base.
-3. Build a source-bound Portugal 2026 reconciliation ledger that classifies every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved, without manually cloning annual dates into perennial rules.
-4. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
-5. Make reconciliation executable across at least 2025–2029; explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
-6. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
-7. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping every local calendar, Church authority and Portuguese locale variant independent.
+3. Validate rebased dependency PRs #145 and #146 independently; merge only if current-base CI is green, otherwise close and replace with a fresh minimal update.
+4. Delete the proven zero-difference branch candidates when branch-ref deletion is available, then repeat the comparison to confirm no code loss.
+5. Build a source-bound Portugal 2026 reconciliation ledger that classifies every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved, without manually cloning annual dates into perennial rules.
+6. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
+7. Make reconciliation executable across at least 2025–2029; explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
+8. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
+9. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping every local calendar, Church authority and Portuguese locale variant independent.
 
 ## Resume stop rules
 
@@ -91,3 +128,5 @@ Integration gate: merge only after the current PR head passes every required sta
 - Do not infer Church from country, country from language or calendar system from either.
 - Do not add first-party media; verified livestream is the sole audiovisual exception.
 - Do not reduce the strategic document to the currently delivered subset.
+- Do not keep a duplicate issue or PR open without a present purpose and next action.
+- Do not delete unique branch work until overlap, consumers and recovery are proven.
