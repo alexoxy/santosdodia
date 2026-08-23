@@ -2,6 +2,7 @@
 
 Status: normative product direction
 Effective: 2026-08-22
+Last strategic alignment: 2026-08-23
 Supersedes the execution priority order in `christian-daily-platform-v2.md` while preserving its authority, language, evidence, hygiene, Cloudflare Free and AdSense constraints.
 
 ## What SantosDia is now
@@ -54,6 +55,30 @@ Every calculation and publication is parameterised by independent dimensions:
 6. `locale` for presentation only.
 
 Language never determines Church. Country never determines Church. Church never silently determines calendar system where multiple systems are legitimate.
+
+## Expansion sequence: Portugal → Lusophone jurisdictions → global
+
+Portugal is the reference-grade proving ground, not a hidden global default. The first complete context remains Roman Catholic / Portugal / Gregorian / Europe-Lisbon / pt-PT because it provides a bounded authority set, an official annual comparison corpus and a demanding language-quality anchor.
+
+The next expansion ring is Portuguese-speaking jurisdictions, including CPLP/PALOP contexts, selected by evidence readiness rather than by market label alone. CPLP and PALOP are useful discovery and localisation groupings; they are not ecclesiastical authorities. Every country or competent local Church therefore receives its own jurisdiction policy, source pack, annual acceptance vectors and localised-name review. A Portugal overlay must never be copied and translated as if it were a Brazilian, Angolan, Mozambican or other local calendar.
+
+The global sequence is:
+
+1. prove Portugal at full semantic equivalence;
+2. reuse the Roman kernel across evidence-ready Lusophone jurisdictions while keeping jurisdiction and locale independent;
+3. prove separate OCA, GOARCH and Church of England kernels with their own authorities;
+4. expand jurisdictions, languages and calendar systems through the same readiness gate;
+5. expose every launched context consistently through Today, Calendar, Calculator, API and ICS.
+
+A jurisdiction/locale pair is public only when it has:
+
+- a competent authority map and versioned source bindings;
+- perennial rule coverage plus official annual regression vectors;
+- precedence/transfer and calendar-system tests;
+- reviewed public names with no silent language fallback;
+- identical HTML, API and ICS semantics;
+- a false-empty-safe Today experience;
+- source-delta monitoring, rollback and last-known-good evidence.
 
 ## Perennial liturgical architecture
 
@@ -236,6 +261,27 @@ Sources have explicit roles:
 - third-party calculators: regression/oracle comparison, never silent authority.
 
 Source monitoring detects normative change. Normal annual generation does not need source re-fetching to function.
+
+## Execution snapshot — 2026-08-23
+
+The last development cycle converted several strategy items from intention into enforced infrastructure:
+
+- the first-party text-only surface is now a CI contract; verified livestream remains the sole audiovisual exception and loads only after activation;
+- rolling materialisation and rolling ICS cover civil year `Y-1 ... Y+3`;
+- the public liturgical calculator, civil/liturgical-year mapping, Roman Temporale generation, precedence, colour and transfer scheduling share one deterministic core;
+- the first source-bound Sanctorale shadow rules now compose General Roman, European and Portugal jurisdiction policy and generate multiple years without annual hand-entry;
+- publication remains fail-closed while the new engine runs in shadow against the Portugal acceptance corpus.
+
+The release gate has not changed: expand the Sanctorale and reconcile the complete Portugal 2026 corpus before replacing the current public read model. P2 foundations exist; the immediate product path is P1 semantic parity, then a compact text-first Today rebuild, while ICS/API hardening continues from the same engine.
+
+Operational alerts follow one atomic closure routine:
+
+1. read the complete alert;
+2. diagnose the actual failing step and preserve useful evidence;
+3. fix through reviewed GitHub changes;
+4. validate a positive workflow execution;
+5. confirm the promised external effect, such as a verified Dropbox archive receipt;
+6. move the resolved alert to Trash only after that proof.
 
 ## Revised priority order
 
