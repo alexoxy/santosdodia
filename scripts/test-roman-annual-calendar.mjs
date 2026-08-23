@@ -41,10 +41,11 @@ try {
   const annual = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-annual-calendar.js')).href}?v=${Date.now()}`);
 
   const calendar2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY);
-  assert(calendar2026.modelVersion === '0.1-shadow' && calendar2026.publicationAllowed === false, 'Annual generator must remain shadow-only.');
+  assert(calendar2026.modelVersion === '0.2-shadow' && calendar2026.publicationAllowed === false, 'Annual generator must remain shadow-only.');
   assert(calendar2026.days.length === 365 && calendar2026.counts.leapYear === false, '2026 must generate exactly 365 civil days.');
   assert(calendar2026.days.every(day => day.candidates.some(candidate => candidate.origin === 'temporale')), 'Every civil day must have a deterministic Temporale candidate.');
   assert(calendar2026.unresolvedDates.length === 0 && calendar2026.transferQueue.length === 0, 'Pure Temporale generation must resolve without artificial conflicts.');
+  assert(calendar2026.counts.datesWithOptions === 0, 'Pure Temporale generation must not create artificial optional-choice dates.');
 
   const byDate = new Map(calendar2026.days.map(day => [day.dateISO, day]));
   assert(byDate.get('2026-04-05')?.precedence.winningPrecedenceLevel === 1, 'Easter Sunday must resolve inside the Paschal Triduum at precedence level 1.');
@@ -84,11 +85,21 @@ try {
   assert(joseph2023Day?.transferRequiredCandidateIds.includes('occurrence:2023-03-19:saint-joseph:test'), 'The impeded St Joseph solemnity must enter the transfer queue.');
   assert(joseph2023.transferQueue.some(item => item.candidateId === 'occurrence:2023-03-19:saint-joseph:test'), 'Annual result must expose impeded solemnities for a later transfer scheduler.');
 
+  const optional2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [
+    { id: 'optional-a', dateISO: '2026-02-03', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'optional-b', dateISO: '2026-02-03', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false }
+  ]);
+  const optionalDay = optional2026.days.find(day => day.dateISO === '2026-02-03');
+  assert(optionalDay?.precedence.status === 'resolved-options' && optionalDay.celebratedCandidateId === null, 'Multiple optional memorials must remain legitimate options rather than a forced winner.');
+  assert(optionalDay?.permittedCandidateIds.includes('optional-a') && optionalDay?.permittedCandidateIds.includes('optional-b'), 'Annual day must expose every optional memorial choice.');
+  assert(optionalDay?.permittedCandidateIds.some(id => id.startsWith('temporale:')), 'Ordinary feria must remain a permitted alternative to optional memorials.');
+  assert(optional2026.counts.datesWithOptions === 1 && !optional2026.unresolvedDates.includes('2026-02-03'), 'Optional choices must be counted separately from unresolved errors.');
+
   const tie2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [
     { id: 'feast-a', dateISO: '2026-09-21', origin: 'sanctorale', precedenceClass: 'general-marian-or-saint-feast', isSolemnity: false },
     { id: 'feast-b', dateISO: '2026-09-21', origin: 'proper', precedenceClass: 'general-marian-or-saint-feast', isSolemnity: false }
   ]);
-  assert(tie2026.unresolvedDates.includes('2026-09-21'), 'Equal highest precedence must keep the annual date unresolved rather than invent a winner.');
+  assert(tie2026.unresolvedDates.includes('2026-09-21'), 'Equal mandatory highest precedence must keep the annual date unresolved rather than invent a winner.');
 
   let outsideYearRejected = false;
   try {
@@ -98,7 +109,7 @@ try {
   } catch { outsideYearRejected = true; }
   assert(outsideYearRejected, 'Supplied candidates outside the requested civil year must fail closed.');
 
-  console.log('Roman annual calendar generator passed: 365/366-day autonomous Temporale, precedence collisions, transfer queue and fail-closed ties.');
+  console.log('Roman annual calendar generator passed: 365/366-day autonomous Temporale, precedence collisions, optional choices, transfer queue and fail-closed mandatory ties.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
