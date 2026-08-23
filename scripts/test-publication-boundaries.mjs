@@ -73,6 +73,24 @@ if (stagingScopeFilters.length < 3) {
   failures.push("staging verification counts are not fully scoped to the exact release import run");
 }
 
+const [productionReleaseWorkflow, productionApproval] = await Promise.all([
+  readFile(path.join(root, ".github/workflows/product-release-production.yml"), "utf8"),
+  readFile(path.join(root, "data/releases/roman-catholic-pt-2026.production.json"), "utf8").then(JSON.parse),
+]);
+if (!productionReleaseWorkflow.includes("PRODUCT_IMPORT_RUN_ID")) {
+  failures.push("production release no longer pins the exact product import run");
+}
+const productionScopeFilters = productionReleaseWorkflow.match(/import_run_id='\$PRODUCT_IMPORT_RUN_ID'/g) ?? [];
+if (productionScopeFilters.length < 11) {
+  failures.push("production verification or visibility update is not fully scoped to the exact release import run");
+}
+if (!productionReleaseWorkflow.includes("approval.productImportRunId !== release.runId")) {
+  failures.push("production release no longer cross-checks approval and artifact import-run identity");
+}
+if (productionApproval.expected?.calendarAssertions !== 365) {
+  failures.push("production approval calendar assertion count differs from the source-bound release");
+}
+
 const interfaceCopy = await readFile(path.join(root, "lib/i18n.ts"), "utf8");
 if (/\bliveData\b|Live source data|fuentes en vivo|fontes em tempo real|sources en direct/.test(interfaceCopy)) {
   failures.push("public interface copy still claims request-time live source data");
