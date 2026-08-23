@@ -59,6 +59,7 @@ const principalClass: Partial<Record<RomanPrincipalDay, { precedenceClass: Roman
   'holy-saturday': { precedenceClass: 'paschal-triduum', isSolemnity: false },
   'easter-sunday': { precedenceClass: 'paschal-triduum', isSolemnity: false },
   christmas: { precedenceClass: 'principal-temporale', isSolemnity: true },
+  'holy-family': { precedenceClass: 'general-lord-feast', isSolemnity: false },
   epiphany: { precedenceClass: 'principal-temporale', isSolemnity: true },
   ascension: { precedenceClass: 'principal-temporale', isSolemnity: true },
   pentecost: { precedenceClass: 'principal-temporale', isSolemnity: true },
