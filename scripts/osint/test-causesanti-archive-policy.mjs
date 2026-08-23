@@ -15,7 +15,10 @@ assert(crawler.includes("promotionEligible"), 'Crawler summary must independentl
 assert(crawler.includes("partial-with-errors") && crawler.includes("partial-limit"), 'Partial crawl states must remain explicit in receipts.');
 assert(workflow.includes('if: always()'), 'Dropbox archive step must run after a partial/failing crawl when evidence exists.');
 assert(workflow.includes('No CauseSanti crawl evidence to archive'), 'Workflow must safely no-op when a fatal crawl produced no evidence directory.');
-assert(workflow.includes('sources/causesanti-va/raw'), 'Raw CauseSanti evidence must remain in the immutable raw stream.');
+assert(workflow.includes("github.event_name == 'push' && '60' || '6000'"), 'Pushes must run a bounded canary while scheduled/manual acquisition retains the full crawl.');
+assert(workflow.includes('sources/causesanti-va/canary'), 'Push canary evidence must use an isolated Dropbox stream.');
+assert(workflow.includes('sources/causesanti-va/raw'), 'Full raw CauseSanti evidence must remain in the authoritative immutable stream.');
+assert(workflow.includes('--stream "$CAUSESANTI_ARCHIVE_STREAM"'), 'Dropbox archival must select the event-specific evidence stream explicitly.');
 assert(!workflow.includes('production') || workflow.includes('publication:boundary-test'), 'CauseSanti acquisition must not gain an implicit production publication path.');
 
-console.log('CauseSanti archive policy passed: partial evidence is preserved, promotion remains independently gated.');
+console.log('CauseSanti archive policy passed: bounded canary evidence is isolated, full acquisition remains scheduled, and promotion stays gated.');
