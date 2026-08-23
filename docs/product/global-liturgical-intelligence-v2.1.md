@@ -5,6 +5,12 @@ Effective: 2026-08-22
 Last strategic alignment: 2026-08-23
 Supersedes the execution priority order in `christian-daily-platform-v2.md` while preserving its authority, language, evidence, hygiene, Cloudflare Free and AdSense constraints.
 
+## Normative continuity
+
+This document is the binding, cumulative vision for SantosDia until its acceptance metrics and strategic scope are implemented in full. A delivered component, execution snapshot, cycle report or tactical priority is evidence of progress against this vision; it cannot narrow, replace or reinterpret the remaining scope.
+
+No section becomes obsolete merely because a later section has started. Work advances by additive completion and verified retirement of superseded implementation paths. This document may be superseded only by a later normative strategy explicitly approved as such by the product owner.
+
 ## What SantosDia is now
 
 SantosDia has two inseparable product layers.
