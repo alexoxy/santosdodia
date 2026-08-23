@@ -78,7 +78,7 @@ Integration gate: merge only after the current PR head passes every required sta
 ### Pull requests
 
 - Active product PR: #215, with one purpose and a current Quality gate.
-- Active maintenance PRs: #145 (Wrangler update) and #146 (download-artifact update); both were 79 commits behind and have been asked to rebase before any merge.
+- Active maintenance PRs: #145 (Wrangler 4.124.0) and #216 (current grouped upload/download-artifact update). Dependabot rebased the maintenance work onto current `main`; stale PR #146 was superseded automatically.
 - PR #167 was closed as a stale integration surface. Its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate; no obsolete branch code was merged.
 
 ### Issues
@@ -112,7 +112,7 @@ No unique branch work was deleted merely because it is old. Zero-difference bran
 
 1. Verify the CauseSanti push canary workflow and inspect the Dropbox `canary/index.json` plus slot receipt. If successful, confirm repository, commit, run, hash and `verifiedAfterUpload`; only then move the old failure email to Trash.
 2. Wait for the latest PR #215 Quality run. Fix any real failure, rerun, and merge only with the required `check` green on the current base.
-3. Validate rebased dependency PRs #145 and #146 independently; merge only if current-base CI is green, otherwise close and replace with a fresh minimal update.
+3. Validate rebased dependency PRs #145 and #216 independently; merge only if current-base CI is green, otherwise close and replace with a fresh minimal update.
 4. Delete the proven zero-difference branch candidates when branch-ref deletion is available, then repeat the comparison to confirm no code loss.
 5. Build a source-bound Portugal 2026 reconciliation ledger that classifies every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved, without manually cloning annual dates into perennial rules.
 6. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
