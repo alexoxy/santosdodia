@@ -1,98 +1,123 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-08-23 00:49 UTC
+Updated: 2026-08-23 01:40 UTC
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
-Status: active development; publication remains fail-closed
+Machine contract: `config/product-platform-contract.json`
+Status: active development; Portugal 2026 baseline release published; perennial Sanctorale cutover remains fail-closed
 
 ## Continuity rule
 
-The strategic document is the binding, cumulative product vision until full implementation. This checkpoint reports coverage against that vision; it does not replace, narrow or reinterpret it. Resume work from the first unresolved roadmap item after independently confirming the current GitHub, Gmail and Dropbox state.
+The strategic document is the binding, cumulative product vision until full implementation. This checkpoint reports coverage against that vision; it does not replace, narrow or reinterpret it. Resume from the first unresolved roadmap item after independently confirming the current GitHub, Gmail and Dropbox state.
+
+## Normative operating boundary
+
+- First-party public experience is text only.
+- A verified, privacy-preserving, user-activated livestream is the sole audiovisual exception.
+- Portugal is the first quality and semantic-equivalence anchor, never the global architecture.
+- Jurisdiction, Church/tradition, calendar system, locale and timezone remain independent dimensions.
+- Cloudflare stays deliberately within the Free architecture.
+- AdSense remains `PREPARING`.
+- Publication, evidence promotion and alert closure remain fail-closed.
+- Repository simplicity, least privilege, recoverability and evidence-preserving deletion are normative.
 
 ## Completed in this cycle
 
-- PR #211 merged: text-only first-party public surface enforced in CI; verified livestream remains the sole audiovisual exception and loads only after explicit activation.
-- PR #212 merged: source-bound perennial Roman Sanctorale seed across General Roman, Europe and Portugal policies, with autonomous multi-year generation and shared precedence/transfer logic.
-- PR #213 merged: bounded 60-URL CauseSanti push canary isolated from the authoritative 6000-URL scheduled/manual raw stream.
-- PR #216 merged: current GitHub artifact actions after workflow-specific and complete Quality gates.
-- PR #145 merged: Wrangler 4.124.0 and locked runtime dependencies after recreation on current `main` and complete Quality.
-- Rolling materialisation, rolling ICS, public calculator, civil/liturgical-year mapping, Roman Temporale, precedence, transfer scheduling and liturgical-colour logic were confirmed as existing shared infrastructure.
-- The 26-page global strategy was reviewed and aligned with the latest work.
-- The failed Sanctorale Quality alert was fixed, rerun through all 63 Quality steps, merged and moved to Gmail Trash.
+- PR #211: CI-enforced text-first public surface.
+- PR #212: six source-bound perennial Roman Sanctorale shadow rules across General Roman, Europe and Portugal; all 63 Quality steps passed.
+- PR #213: bounded 60-URL CauseSanti push canary isolated from the authoritative 6000-URL scheduled/manual stream.
+- PR #216: current GitHub artifact actions.
+- PR #145: Wrangler 4.124.0 and locked runtime dependencies on the current base.
+- PR #217: strategic continuity and safe repository hygiene made normative; the strategy remains binding until fully implemented.
+- PR #218: Roman Catholic D1 release import made idempotent across historical occurrence identifiers.
+- PR #219: staging verification scoped to the exact `import_run_id`; workflow run ID added to the durable validation receipt.
+- PR #220: the staging-proven Portugal 2026 release approved and published to production with all visibility updates scoped to the exact import run.
+- PR #221: CauseSanti canary made receipt-required; a missing `summary.json` can no longer silently succeed.
+- The 26-page global strategy was reviewed in full and aligned with current execution.
+- Rolling materialisation, rolling ICS, public calculator, civil/liturgical-year mapping, Roman Temporale, precedence, transfer scheduling and liturgical-colour logic were confirmed as shared infrastructure.
 
-## Open change
+## Production evidence — Portugal 2026 baseline
 
-PR #217 — Make strategy continuity and safe repository hygiene normative
+Exact evidence chain:
 
-Scope:
+- source commit: `ed1dfc2c07fcd0de254893305c09d1d4c68ab78f`;
+- staging workflow run: `32610328197`;
+- product artifact digest: `sha256:595dafc93cf447e12da9264a2d82f8209df3498f52827a1628555aaadae4bfa5`;
+- staging verification artifact: `9485326570`;
+- product import run: `product-build:roman-catholic:pt:2026:ff7033e3e95e7088`;
+- staging result: 365 occurrences, 365 distinct days and 1825 labels;
+- production release commit: `a27e50710d4d0a8cf71ee7644baa7d4b03094792`;
+- production result: 365 published occurrences, 365 days, 1825 labels and semantic samples passed;
+- automatic future production writes: false;
+- pre- and post-release D1 Time Travel bookmarks are present in the receipt;
+- Dropbox receipt: `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/production/a27e50710d4d0a8cf71ee7644baa7d4b03094792/production-receipt.json`.
 
-- Portugal → evidence-ready Lusophone jurisdictions → separate multi-tradition global expansion;
-- CPLP/PALOP explicitly treated as localisation/discovery groupings, never ecclesiastical authority;
-- public jurisdiction/locale readiness gate;
-- current engine delivery snapshot and alert-closure routine;
-- machine-readable strategy contract;
-- normative continuity until full strategic delivery;
-- this durable cycle checkpoint.
+The 45 additional historical/secondary Portugal occurrences discovered in staging were preserved. Release counts, samples and visibility changes now select only the approved `import_run_id`.
 
-Integration gate: merge only after the current PR head passes every required status check against the current `main`.
+This baseline publication does not authorize public cutover to incomplete perennial Sanctorale shadow output.
 
 ## Operational alerts
 
-### Resolved
+### Resolved and moved to Gmail Trash
 
-- Sanctorale PR Quality failure: synthetic override fixture used a domain outside the Portugal authority policy. Fixture corrected; full positive Quality execution completed; PR #212 merged; alert moved to Trash.
+- Sanctorale Quality failure: fixture authority domain corrected; 63-step Quality passed; PR #212 merged.
+- Product staging and production failures at `bae9520`: historical occurrence-scope conflict fixed by PR #218.
+- Product staging failure at `e7f7f52`, attempt 1: transient Wrangler fetch failure; retry proceeded.
+- Product staging failure at `e7f7f52`, attempt 2: broad year counts included 45 preserved historical occurrences; PR #219 scoped verification to the exact release import.
+- Closure proof: staging run `32610328197` green and production Dropbox receipt verified. Four related alert emails were moved to Trash only after that proof.
 
 ### Pending — do not delete
 
-- CauseSanti primary-source workflow failure at commit `486c875`.
-- Code-level fix is already in `main`: partial raw evidence is archiveable while downstream promotion remains independently false.
-- PR #213 added the isolated push canary to shorten external verification.
-- Required closing proof is still pending at this checkpoint: a post-fix Dropbox canary `index.json`/receipt with verified upload, current repository/run metadata and a successful workflow conclusion.
-- The original Gmail alert must remain in Inbox until that proof exists.
+- Original CauseSanti primary-source failure at commit `486c875`, workflow run `32591119601`.
+- The original full crawl spent 3h37m and exited after a partial-with-errors result before a Dropbox closing proof.
+- Code now archives bounded partial raw evidence while keeping downstream promotion independently false.
+- PR #221 removed the remaining receipt-less success path and its merge commit `5a8e02f07ab534a6a24d1ddbc58b1a3991021b26` triggered a new bounded push canary.
+- Required closing proof remains a post-fix Dropbox `sources/causesanti-va/canary` archive containing `index.json` and its receipt with current repository/run metadata, hashes and verified upload.
+- Until that object and a positive workflow conclusion exist, Gmail message `1a02b87996d6b623` remains in Inbox.
 
-## External evidence
+## External evidence state
 
-- Dropbox currently exposes only the legacy CauseSanti archive folder `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/2026-08-22T121823Z`, modified 2026-08-22 12:18 UTC.
-- That object predates the CauseSanti policy fix and is not acceptable as closure evidence.
-- Expected new proof path: `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/canary/index.json` plus its slot receipt.
-- No new CauseSanti failure email was present at the time of this checkpoint.
+- Latest staging validation receipt:
+  `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/ed1dfc2c07fcd0de254893305c09d1d4c68ab78f/validation.json`.
+- Latest production receipt:
+  `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/production/a27e50710d4d0a8cf71ee7644baa7d4b03094792/production-receipt.json`.
+- CauseSanti currently exposes only the legacy folder
+  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/2026-08-22T121823Z`, modified before the fixes. It is not closure evidence.
+- Expected CauseSanti proof root:
+  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/canary`.
 
 ## Strategic coverage
 
 | Strategic area | Status | Evidence / remaining gate |
 |---|---|---|
-| Binding global strategy | Partial | Normative and machine contract updates are in PR #217; merge still required. |
-| Text-first first-party experience | Realised | CI blocks images, audio, remote fonts and non-live video/iframes. |
-| Canonical context dimensions | Partial | Independent locale, jurisdiction, Church/tradition, calendar and timezone are contractual; public breadth remains incomplete. |
-| Evidence Vault and provenance | Partial | Immutable/hashed/review gates exist; CauseSanti external canary proof remains open. |
-| Roman perennial Temporale | Realised core | Annual deterministic generation and multi-year tests exist. |
-| Roman Sanctorale | Partial | Six source-bound shadow rules prove composition; complete Portugal corpus equivalence remains the release gate. |
-| Precedence, transfer and colours | Partial | Shared deterministic core exists; full official Portugal regression coverage remains. |
-| Rolling materialisation Y-1…Y+3 | Realised core | Automatic annual window and atomic materialisation tests exist. |
+| Binding global strategy | Normative | PR #217 merged; strategy and machine contract stay cumulative until full delivery. |
+| Text-first first-party experience | Realised | CI blocks first-party images, audio, remote fonts and non-live video/iframes. |
+| Canonical context dimensions | Partial | Independent dimensions are contractual; public breadth remains incomplete. |
+| Evidence Vault and provenance | Partial | Immutable/hashed/review gates exist; CauseSanti canary proof remains open. |
+| Roman perennial Temporale | Realised core | Deterministic annual generation and multi-year tests exist. |
+| Roman Sanctorale | Partial | Six source-bound rules prove composition; complete Portugal equivalence remains the cutover gate. |
+| Precedence, transfer and colours | Partial | Shared deterministic core exists; official Portugal regression coverage remains incomplete. |
+| Portugal 2026 baseline publication | Verified | Exact staging/production import run published with rollback receipt. |
+| Rolling materialisation Y-1…Y+3 | Realised core | Automatic window and atomic materialisation tests exist. |
 | Rolling ICS and calculator | Partial | Foundations exist; complete context parity and hardening remain. |
-| Portugal reference Today | Pending | Rebuild only after the new read model reaches semantic equivalence. |
+| Portugal reference Today | Pending | Rebuild only after perennial read-model semantic equivalence. |
 | Lusophone jurisdictions | Pending | Start only after Portugal proof and jurisdiction-specific authority packs. |
 | OCA, GOARCH and Church of England kernels | Pending | Separate authoritative kernels and acceptance vectors required. |
 | Verified Live | Partial | Privacy-enhanced, user-activated exception exists; global Church-specific coverage remains. |
-| Autonomous maintenance | Partial | Deterministic workflows and gates exist; end-to-end exception-only operation is incomplete. |
+| Autonomous maintenance | Partial | Deterministic gates exist; CauseSanti receipt closure and exception-only operation remain incomplete. |
 
-## Repository hygiene inventory — 2026-08-23
+## Repository hygiene inventory
 
-### Pull requests
+### Pull requests and issues
 
-- Active product PR: #217, with one purpose and a current Quality gate.
-- Dependency maintenance PRs #145 and #216 were recreated/rebased onto current `main`, passed their current-base gates and were merged. Stale PR #146 was superseded automatically.
-- PR #167 was closed as a stale integration surface. Its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate; no obsolete branch code was merged.
-
-### Issues
-
-- #181 is now the single open umbrella issue and points to the normative strategy, machine contract and this checkpoint.
-- Legacy issues #10 and #11 were closed as superseded tracking surfaces. Their detailed technical history remains available; valid work returns through #181 rather than duplicate open backlogs.
+- Open pull requests: none at this checkpoint.
+- Open issues: #181 only, the single strategy umbrella.
+- Stale PR #167 was closed; its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate.
+- Legacy issues #10 and #11 were closed as superseded tracking surfaces; their history remains available.
+- Dependency PRs #145 and #216 and delivery PRs #211–#213, #217–#221 are merged.
 
 ### Branches
 
-The complete first-page branch inventory contained 43 branches including `main`.
-
-Sixteen branches have no tree difference from `main` and are deletion candidates with no code loss:
+Sixteen branches previously proved to have no tree difference from `main` remain safe deletion candidates:
 
 - `agent/d1-runtime-deliverable-proof`;
 - `agent/editorial-scale-6-rescue-copy`, `copy2`, `copy3`, `copy4`, `copy5`, `copy6`, `copy7`, `copy8`, `copy9`, `copy11`;
@@ -100,34 +125,40 @@ Sixteen branches have no tree difference from `main` and are deletion candidates
 - `fix/verify-deployed-product-capabilities`;
 - `product/adsense-readiness`;
 - `product/christian-daily-platform-contract-20260822`;
-- `product/v2-r1-migration-inventory-20260822` (unique commit history but no current tree difference).
+- `product/v2-r1-migration-inventory-20260822`.
 
-The connector used for repository management does not expose branch-ref deletion. These candidates must remain marked for deletion rather than being force-moved or otherwise destructively simulated. All other non-active branches contain unique tree changes and remain preserved until their consumers and overlap with `main` are reviewed.
+Merged/superseded strategy and current-cycle branches are additional deletion candidates after final merge-status and unique-tree comparison:
 
-The superseded `docs/strategy-execution-update-20260823` branch becomes a deletion candidate after #217 merges because its strategy changes are a strict subset of the active replacement.
+- `docs/strategy-execution-update-20260823`;
+- `docs/strategy-execution-update-v2-20260823`;
+- `docs/strategy-continuity-hygiene-20260823`;
+- `fix/idempotent-calendar-scope-import`;
+- `fix/scope-staging-verification-to-release`;
+- `release/pt-2026-exact-import-run`;
+- `fix/causesanti-canary-receipt-required`.
 
-### Hygiene rule applied
-
-No unique branch work was deleted merely because it is old. Zero-difference branches are separated from branches containing potentially reusable product work. Cleanup remains subordinate to current strategy, security and recoverability.
+The available GitHub connector does not expose branch-ref deletion. Do not simulate deletion by force-moving refs. Preserve every branch with unreviewed unique work.
 
 ## Ordered roadmap for the next continuation
 
-1. Verify the CauseSanti push canary workflow and inspect the Dropbox `canary/index.json` plus slot receipt. If successful, confirm repository, commit, run, hash and `verifiedAfterUpload`; only then move the old failure email to Trash.
-2. Wait for the latest PR #217 Quality run. Fix any real failure, rerun, and merge only with the required `check` green on the current base.
-3. Delete the proven zero-difference branch candidates when branch-ref deletion is available, then repeat the comparison to confirm no code loss.
-4. Build a source-bound Portugal 2026 reconciliation ledger that classifies every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved, without manually cloning annual dates into perennial rules.
-5. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
-6. Make reconciliation executable across at least 2025–2029; explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
-7. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
-8. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping every local calendar, Church authority and Portuguese locale variant independent.
+1. Observe the CauseSanti canary triggered by commit `5a8e02f`. Inspect Dropbox `canary/index.json` and the slot receipt. Confirm repository, commit, workflow run, hashes and verified upload; only then move Gmail message `1a02b87996d6b623` to Trash.
+2. Reconfirm that GitHub has no open PRs and only umbrella issue #181. Delete proven merged/zero-difference branches when branch-ref deletion becomes available.
+3. Build a source-bound Portugal 2026 reconciliation ledger classifying every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved without cloning annual dates into perennial rules.
+4. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
+5. Execute reconciliation across at least 2025–2029, explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
+6. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
+7. Harden rolling ICS/calculator parity and persistent subscription semantics across independent context dimensions.
+8. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping local calendars, Church authority and Portuguese locale variants independent.
+9. Add OCA, GOARCH and Church of England only as separate authority-isolated kernels.
 
-## Resume stop rules
+## Resume and stop rules
 
 - Do not delete an error email without positive workflow and promised external-effect proof.
 - Do not merge a PR whose required status belongs to an outdated base or head.
-- Do not publish shadow Sanctorale output.
+- Do not publish shadow Sanctorale output or treat the baseline release as perennial equivalence.
 - Do not infer Church from country, country from language or calendar system from either.
 - Do not add first-party media; verified livestream is the sole audiovisual exception.
 - Do not reduce the strategic document to the currently delivered subset.
 - Do not keep a duplicate issue or PR open without a present purpose and next action.
 - Do not delete unique branch work until overlap, consumers and recovery are proven.
+- Before the weekly usage limit, leave `main`, PRs, alerts and this checkpoint in a safe repeatable state, then stop until capacity resets.
