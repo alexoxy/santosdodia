@@ -14,7 +14,8 @@ assert(crawler.includes("archiveEligible"), 'Crawler summary must state whether 
 assert(crawler.includes("promotionEligible"), 'Crawler summary must independently state whether downstream promotion is eligible.');
 assert(crawler.includes("partial-with-errors") && crawler.includes("partial-limit"), 'Partial crawl states must remain explicit in receipts.');
 assert(workflow.includes('if: always()'), 'Dropbox archive step must run after a partial/failing crawl when evidence exists.');
-assert(workflow.includes('No CauseSanti crawl evidence to archive'), 'Workflow must safely no-op when a fatal crawl produced no evidence directory.');
+assert(workflow.includes('refusing a receipt-less success'), 'Workflow must fail closed when a crawl produces no archivable summary.');
+assert(workflow.includes('exit 1'), 'Receipt-less CauseSanti runs must return a failing status instead of silently succeeding.');
 assert(workflow.includes("github.event_name == 'push' && '60' || '6000'"), 'Pushes must run a bounded canary while scheduled/manual acquisition retains the full crawl.');
 assert(workflow.includes('sources/causesanti-va/canary'), 'Push canary evidence must use an isolated Dropbox stream.');
 assert(workflow.includes('sources/causesanti-va/raw'), 'Full raw CauseSanti evidence must remain in the authoritative immutable stream.');
