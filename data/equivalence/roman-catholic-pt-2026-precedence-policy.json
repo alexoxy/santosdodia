@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "status": "migration-equivalence-only",
+  "runtimeDependency": false,
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifactId": 9277632698,
+  "notes": [
+    "This policy classifies the approved 2026 source rows for equivalence testing only. It is not an annual calendar source and must not become a runtime dependency.",
+    "Legacy canonicalEventId values are compatibility identifiers, not semantic authority. Portugal-specific source rows known to be misbound to general ferial IDs are explicitly listed below.",
+    "Rank alone never determines feast precedence: General Calendar feasts of the Lord are level 5, General Calendar Marian/Saint feasts level 7, and proper feasts level 8."
+  ],
+  "defaultNonTemporalRankClassification": {
+    "solemnity": "general-calendar-solemnity",
+    "feast": "general-marian-or-saint-feast",
+    "memorial": "general-obligatory-memorial",
+    "optional-memorial": "optional-memorial"
+  },
+  "generalLordFeasts": [
+    "rc:Presentation",
+    "rc:Transfiguration",
+    "rc:ExaltationCross",
+    "rc:DedicationLateran"
+  ],
+  "properFeasts": [
+    "rc-pt:FiveWoundsLord",
+    "rc:StsCyrilMethodius",
+    "rc:StCatherineSiena",
+    "rc:OurLadyOfFatima",
+    "rc:StAnthonyPadua",
+    "rc:ImmaculateHeart",
+    "rc:StBenedict",
+    "rc:StBridget"
+  ],
+  "properObligatoryMemorials": [
+    "rc:OrdWeekday4Wednesday",
+    "rc:OrdWeekday10Wednesday",
+    "rc:OrdWeekday20Monday",
+    "rc:OrdWeekday31Friday",
+    "rc:AdventWeekday1Saturday",
+    "rc-pt:StBartholomewMartyrs",
+    "rc:StElizabethPortugal",
+    "rc:OurLadyOfMountCarmel"
+  ],
+  "properOptionalMemorials": [
+    "rc:DayAfterEpiphanyJan10",
+    "rc:OrdWeekday15Friday",
+    "rc:OrdWeekday30Tuesday",
+    "rc-pt:BlJoanPortugal",
+    "rc-pt:BlsSanchaMafaldaTeresa"
+  ],
+  "levelThreeNonSolemnity": ["rc:AllSouls"],
+  "knownLegacySemanticMisbindings": {
+    "rc:DayAfterEpiphanyJan10": "Blessed Goncalo of Amarante",
+    "rc:OrdWeekday4Wednesday": "Saint John de Brito",
+    "rc:OrdWeekday10Wednesday": "Guardian Angel of Portugal",
+    "rc:OrdWeekday15Friday": "Blesseds Inacio de Azevedo and companions",
+    "rc:OrdWeekday20Monday": "Saint Beatriz da Silva",
+    "rc:OrdWeekday30Tuesday": "Blessed Goncalo de Lagos",
+    "rc:OrdWeekday31Friday": "Saint Nuno de Santa Maria",
+    "rc:AdventWeekday1Saturday": "Saints Frutuoso, Martin of Dume and Geraldo"
+  },
+  "temporalIdentityFamilies": {
+    "ordinarySunday": "^rc:OrdSunday[0-9]+$",
+    "adventSunday": "^rc:Advent[1-4]$",
+    "lentSunday": "^rc:Lent[1-5]$",
+    "easterSunday": "^rc:Easter[2-6]$",
+    "rankWeekday": true,
+    "specialIds": [
+      "rc:Epiphany",
+      "rc:BaptismLord",
+      "rc:AshWednesday",
+      "rc:PalmSun",
+      "rc:MonHolyWeek",
+      "rc:TueHolyWeek",
+      "rc:WedHolyWeek",
+      "rc:HolyThurs",
+      "rc:GoodFri",
+      "rc:EasterVigil",
+      "rc:Easter",
+      "rc:MonOctaveEaster",
+      "rc:TueOctaveEaster",
+      "rc:WedOctaveEaster",
+      "rc:ThuOctaveEaster",
+      "rc:FriOctaveEaster",
+      "rc:SatOctaveEaster",
+      "rc:Ascension",
+      "rc:Pentecost",
+      "rc:Trinity",
+      "rc:CorpusChristi",
+      "rc:SacredHeart",
+      "rc:ChristKing",
+      "rc:Christmas",
+      "rc:HolyFamily",
+      "rc-pt:TuesdayAfterEpiphany"
+    ]
+  },
+  "knownMissingPerennialRulesAtBaseline": ["rc:HolyFamily"],
+  "publicationAllowed": false
+}
