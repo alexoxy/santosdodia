@@ -11,6 +11,23 @@ This document is the binding, cumulative vision for SantosDia until its acceptan
 
 No section becomes obsolete merely because a later section has started. Work advances by additive completion and verified retirement of superseded implementation paths. This document may be superseded only by a later normative strategy explicitly approved as such by the product owner.
 
+## Repository simplicity, hygiene and security
+
+The repository should contain the smallest complete system that implements this vision safely. Prefer one active implementation, one authoritative workflow and one canonical contract for each responsibility. New code must reuse or deliberately replace existing paths; it must not create permanent parallel architecture without a documented compatibility need and retirement gate.
+
+Repository hygiene is continuous:
+
+- close duplicate, superseded or abandoned pull requests and issues with a recorded reason;
+- keep an open pull request or issue only when it has a current purpose and next action;
+- remove merged, zero-difference or obsolete branches when no unique work remains;
+- remove unused code, CSS, dependencies, routes, scripts, workflows and compatibility layers only after consumer inventory, replacement, semantic-equivalence tests, complete CI and smoke verification;
+- preserve recoverability through Git history and immutable evidence, not through indefinitely active dead paths;
+- never delete Evidence Vault objects, canonical history, receipts, provenance or rollback material as routine repository cleanup;
+- use least-privilege permissions, pinned/trusted automation dependencies, secret-safe logs and fail-closed publication;
+- run dependency, workflow and security hygiene as part of each development cycle rather than allowing a periodic backlog to form.
+
+Simplicity is measured by fewer active paths and lower operational burden, not by deleting required authority, audit or safety boundaries.
+
 ## What SantosDia is now
 
 SantosDia has two inseparable product layers.
