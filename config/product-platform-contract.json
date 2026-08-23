@@ -291,7 +291,21 @@
     "deadCodeDetection": true,
     "obsoleteWorkflowDetection": true,
     "unusedRouteDetection": true,
-    "unusedCssAndDependencyDetection": true
+    "unusedCssAndDependencyDetection": true,
+    "targetRepositoryShape": "smallest-complete-safe-system",
+    "singleActivePathPerResponsibility": true,
+    "parallelArchitectureRequiresCompatibilityNeedAndRetirementGate": true,
+    "openPullRequestRequiresCurrentPurposeAndNextAction": true,
+    "openIssueRequiresCurrentPurposeAndNextAction": true,
+    "closeDuplicateSupersededOrAbandonedWork": true,
+    "deleteZeroDifferenceOrMergedBranches": true,
+    "deleteUniqueUnreviewedWorkAutomatically": false,
+    "preserveRecoverabilityInGitHistory": true,
+    "evidenceVaultAndCanonicalHistoryProtectedFromRoutineCleanup": true,
+    "continuousDependencyWorkflowAndSecurityHygiene": true,
+    "leastPrivilegeAutomation": true,
+    "secretSafeLogsRequired": true,
+    "completeCiAndSmokeRequiredBeforeRemoval": true
   },
   "priorityOrder": [
     "P0-reliability-and-operational-hygiene",
