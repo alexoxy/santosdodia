@@ -71,7 +71,7 @@ const seasonLabels: Record<LiturgicalToolLocale, Record<RomanSeason, string>> = 
 
 const principalLabels: Record<LiturgicalToolLocale, Record<RomanPrincipalDay, string>> = {
   en: {
-    christmas: 'Christmas', epiphany: 'Epiphany of the Lord', 'baptism-of-the-lord': 'Baptism of the Lord',
+    christmas: 'Christmas', 'holy-family': 'Holy Family of Jesus, Mary and Joseph', epiphany: 'Epiphany of the Lord', 'baptism-of-the-lord': 'Baptism of the Lord',
     'ash-wednesday': 'Ash Wednesday', 'first-sunday-of-lent': 'First Sunday of Lent', 'palm-sunday': 'Palm Sunday',
     'holy-thursday': 'Holy Thursday', 'good-friday': 'Good Friday', 'holy-saturday': 'Holy Saturday',
     'easter-sunday': 'Easter Sunday', ascension: 'Ascension of the Lord', pentecost: 'Pentecost Sunday',
@@ -79,7 +79,7 @@ const principalLabels: Record<LiturgicalToolLocale, Record<RomanPrincipalDay, st
     'christ-the-king': 'Christ the King', 'first-sunday-of-advent': 'First Sunday of Advent'
   },
   pt: {
-    christmas: 'Natal do Senhor', epiphany: 'Epifania do Senhor', 'baptism-of-the-lord': 'Batismo do Senhor',
+    christmas: 'Natal do Senhor', 'holy-family': 'Sagrada Família de Jesus, Maria e José', epiphany: 'Epifania do Senhor', 'baptism-of-the-lord': 'Batismo do Senhor',
     'ash-wednesday': 'Quarta-feira de Cinzas', 'first-sunday-of-lent': 'I Domingo da Quaresma', 'palm-sunday': 'Domingo de Ramos',
     'holy-thursday': 'Quinta-feira Santa', 'good-friday': 'Sexta-feira Santa', 'holy-saturday': 'Sábado Santo',
     'easter-sunday': 'Domingo de Páscoa', ascension: 'Ascensão do Senhor', pentecost: 'Domingo de Pentecostes',
@@ -87,7 +87,7 @@ const principalLabels: Record<LiturgicalToolLocale, Record<RomanPrincipalDay, st
     'christ-the-king': 'Nosso Senhor Jesus Cristo, Rei do Universo', 'first-sunday-of-advent': 'I Domingo do Advento'
   },
   es: {
-    christmas: 'Navidad del Señor', epiphany: 'Epifanía del Señor', 'baptism-of-the-lord': 'Bautismo del Señor',
+    christmas: 'Navidad del Señor', 'holy-family': 'Sagrada Familia de Jesús, María y José', epiphany: 'Epifanía del Señor', 'baptism-of-the-lord': 'Bautismo del Señor',
     'ash-wednesday': 'Miércoles de Ceniza', 'first-sunday-of-lent': 'I Domingo de Cuaresma', 'palm-sunday': 'Domingo de Ramos',
     'holy-thursday': 'Jueves Santo', 'good-friday': 'Viernes Santo', 'holy-saturday': 'Sábado Santo',
     'easter-sunday': 'Domingo de Pascua', ascension: 'Ascensión del Señor', pentecost: 'Domingo de Pentecostés',
@@ -95,7 +95,7 @@ const principalLabels: Record<LiturgicalToolLocale, Record<RomanPrincipalDay, st
     'christ-the-king': 'Jesucristo, Rey del Universo', 'first-sunday-of-advent': 'I Domingo de Adviento'
   },
   it: {
-    christmas: 'Natale del Signore', epiphany: 'Epifania del Signore', 'baptism-of-the-lord': 'Battesimo del Signore',
+    christmas: 'Natale del Signore', 'holy-family': 'Santa Famiglia di Gesù, Maria e Giuseppe', epiphany: 'Epifania del Signore', 'baptism-of-the-lord': 'Battesimo del Signore',
     'ash-wednesday': 'Mercoledì delle Ceneri', 'first-sunday-of-lent': 'I Domenica di Quaresima', 'palm-sunday': 'Domenica delle Palme',
     'holy-thursday': 'Giovedì Santo', 'good-friday': 'Venerdì Santo', 'holy-saturday': 'Sabato Santo',
     'easter-sunday': 'Domenica di Pasqua', ascension: 'Ascensione del Signore', pentecost: 'Domenica di Pentecoste',
