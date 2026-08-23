@@ -28,12 +28,13 @@ export type RomanAnnualCalendarDay = {
   candidates: RomanAnnualCalendarCandidate[];
   precedence: RomanPrecedenceResolution;
   celebratedCandidateId: string | null;
+  permittedCandidateIds: string[];
   transferRequiredCandidateIds: string[];
   omittedCandidateIds: string[];
 };
 
 export type RomanAnnualCalendar = {
-  modelVersion: '0.1-shadow';
+  modelVersion: '0.2-shadow';
   civilYear: number;
   churchId: 'church:roman-catholic';
   jurisdictionId: string;
@@ -47,6 +48,7 @@ export type RomanAnnualCalendar = {
     suppliedCandidates: number;
     unresolvedDates: number;
     transferRequired: number;
+    datesWithOptions: number;
   };
   publicationAllowed: false;
 };
@@ -201,6 +203,7 @@ export function generateRomanAnnualCalendar(
       candidates,
       precedence,
       celebratedCandidateId: precedence.winnerId,
+      permittedCandidateIds: precedence.permittedOptionIds,
       transferRequiredCandidateIds: precedence.decisions.filter(item => item.action === 'transfer-required').map(item => item.id),
       omittedCandidateIds: precedence.decisions.filter(item => item.action === 'omit').map(item => item.id)
     } satisfies RomanAnnualCalendarDay;
@@ -209,7 +212,7 @@ export function generateRomanAnnualCalendar(
   const unresolvedDates = days.filter(day => day.precedence.status === 'tie-requires-policy').map(day => day.dateISO);
   const transferQueue = days.flatMap(day => day.transferRequiredCandidateIds.map(candidateId => ({ dateISO: day.dateISO, candidateId })));
   return {
-    modelVersion: '0.1-shadow',
+    modelVersion: '0.2-shadow',
     civilYear,
     churchId: policy.churchId,
     jurisdictionId: policy.jurisdictionId,
@@ -222,7 +225,8 @@ export function generateRomanAnnualCalendar(
       leapYear: days.length === 366,
       suppliedCandidates: suppliedCandidates.length,
       unresolvedDates: unresolvedDates.length,
-      transferRequired: transferQueue.length
+      transferRequired: transferQueue.length,
+      datesWithOptions: days.filter(day => day.precedence.status === 'resolved-options').length
     },
     publicationAllowed: false
   };
