@@ -122,7 +122,7 @@ jobs:
             --promote-current true | tee "${{ steps.entity.outputs.output_dir }}/dropbox-write-result.json"
 
       - name: Preserve operational build receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: canonical-${{ inputs.artifact }}-vault-${{ github.run_id }}
           path: |

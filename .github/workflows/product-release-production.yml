@@ -86,7 +86,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download the exact staging-validated release
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ env.RELEASE_ARTIFACT }}
           path: reports/product-release
@@ -252,7 +252,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download production receipt
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: roman-catholic-production-release-${{ github.sha }}
           path: reports/product-release
