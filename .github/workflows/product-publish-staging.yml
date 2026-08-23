@@ -130,6 +130,7 @@ jobs:
             schemaVersion: 1,
             release: release.release,
             sourceSha: process.env.GITHUB_SHA,
+            stagingWorkflowRunId: Number(process.env.GITHUB_RUN_ID),
             validatedAt: new Date().toISOString(),
             calendarDays: build.calendarCoverage.coveredDays,
             falseEmptyToday: build.calendarCoverage.falseEmptyCount,
@@ -237,6 +238,9 @@ jobs:
           const db = Array.isArray(value) ? value[0] : value;
           if (db?.name !== 'santosdodia-staging') throw new Error(`Refusing target ${db?.name ?? 'unknown'}.`);
           if (db?.uuid !== process.env.STAGING_DATABASE_ID) throw new Error('Staging D1 UUID mismatch.');
+          const release = JSON.parse(fs.readFileSync('reports/product-release/release.json','utf8'));
+          if (!/^product-build:roman-catholic:pt:2026:[0-9a-f]{16}$/.test(release.runId ?? '')) throw new Error('Invalid product import run ID.');
+          fs.appendFileSync(process.env.GITHUB_ENV, `PRODUCT_IMPORT_RUN_ID=${release.runId}\n`);
           NODE
 
       - name: Apply migrations and validated release to staging
@@ -246,7 +250,7 @@ jobs:
 
       - name: Verify remote staging product counts
         run: |
-          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.product-staging.json --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS occurrences, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS labels;" > reports/product-release/staging-counts.json
+          npx wrangler d1 execute CALENDAR_DB --remote --config /tmp/wrangler.product-staging.json --json --command "SELECT (SELECT COUNT(*) FROM calendar_occurrences WHERE import_run_id='$PRODUCT_IMPORT_RUN_ID' AND church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS occurrences, (SELECT COUNT(DISTINCT date_iso) FROM calendar_occurrences WHERE import_run_id='$PRODUCT_IMPORT_RUN_ID' AND church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS days, (SELECT COUNT(*) FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.import_run_id='$PRODUCT_IMPORT_RUN_ID' AND o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31') AS labels;" > reports/product-release/staging-counts.json
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const payload = JSON.parse(fs.readFileSync('reports/product-release/staging-counts.json','utf8'));
