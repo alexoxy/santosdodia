@@ -55,12 +55,21 @@ try {
   ]);
   assert(memorialVsWeekday.winnerId === 'obligatory-memorial', 'An obligatory memorial must outrank an ordinary weekday.');
 
+  const optionalChoices = precedence.resolveRomanPrecedence([
+    { id: 'optional-a', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'optional-b', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'feria', precedenceClass: 'ordinary-weekday', isSolemnity: false }
+  ]);
+  assert(optionalChoices.status === 'resolved-options' && optionalChoices.winnerId === null, 'Optional memorials must be modeled as legitimate choices rather than an unresolved tie.');
+  assert(JSON.stringify(optionalChoices.permittedOptionIds.sort()) === JSON.stringify(['feria','optional-a','optional-b']), 'Optional memorial choices must retain the ordinary feria as an allowed alternative.');
+  assert(optionalChoices.decisions.filter(item => item.action === 'permitted-option').length === 3, 'All optional memorials plus the ordinary feria must be explicitly marked as permitted options.');
+
   const equalFeasts = precedence.resolveRomanPrecedence([
     { id: 'feast-a', precedenceClass: 'general-marian-or-saint-feast', isSolemnity: false },
     { id: 'feast-b', precedenceClass: 'general-marian-or-saint-feast', isSolemnity: false }
   ]);
-  assert(equalFeasts.status === 'tie-requires-policy' && equalFeasts.winnerId === null, 'Equal highest precedence must fail closed rather than invent a winner.');
-  assert(equalFeasts.decisions.filter(item => item.action === 'unresolved-tie').length === 2, 'All equal top candidates must remain explicitly unresolved.');
+  assert(equalFeasts.status === 'tie-requires-policy' && equalFeasts.winnerId === null, 'Equal mandatory highest precedence must fail closed rather than invent a winner.');
+  assert(equalFeasts.decisions.filter(item => item.action === 'unresolved-tie').length === 2, 'All equal mandatory top candidates must remain explicitly unresolved.');
 
   let duplicateRejected = false;
   try {
@@ -83,7 +92,7 @@ try {
   assert(lentSundayVsJoseph.transferRule.targetDateResolvedByThisFunction === false, 'Collision resolution must not silently invent a transfer date before the annual calendar is available.');
   assert(lentSundayVsJoseph.sourceIds.includes('snl-portugal-precedence-table'), 'Precedence decisions must retain their normative source id.');
 
-  console.log('Roman precedence core passed: 13 levels, celebrate/transfer/omit semantics, candidate validation and fail-closed equal-precedence handling.');
+  console.log('Roman precedence core passed: 13 levels, mandatory celebrate/transfer/omit, optional memorial choices, candidate validation and fail-closed mandatory ties.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
