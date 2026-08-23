@@ -85,5 +85,6 @@ await import('./test-roman-precedence.mjs');
 await import('./test-roman-annual-calendar.mjs');
 await import('./test-roman-solemnity-transfer.mjs');
 await import('./test-roman-annual-materialization.mjs');
+await import('./test-roman-sanctorale.mjs');
 await import('./test-liturgical-calculator-surface.mjs');
 await import('./test-rolling-ics-surface.mjs');

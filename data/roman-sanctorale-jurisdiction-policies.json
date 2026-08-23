@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyModelVersion": "1.0",
+  "status": "repository-reviewed-roman-sanctorale-scope-policies",
+  "churchId": "church:roman-catholic",
+  "calendarSystem": "gregorian",
+  "policies": [
+    {
+      "id": "roman-sanctorale-policy:pt",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "inheritedScopeKeys": ["general-roman", "europe", "portugal"],
+      "scopeOrderSemantics": "least-to-most-specific",
+      "overrideKey": "observanceId",
+      "authorityDomains": ["liturgia.pt"],
+      "notes": "Portugal inherits the General Roman Calendar, applicable European proper celebrations, then Portugal-specific proper celebrations. A more-specific rule for the same observance overrides a less-specific inherited rule rather than creating a duplicate candidate."
+    }
+  ]
+}

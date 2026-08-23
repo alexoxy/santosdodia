@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "sanctoraleRuleModelVersion": "1.0",
+  "status": "repository-reviewed-roman-sanctorale-rule-anchors",
+  "churchId": "church:roman-catholic",
+  "calendarSystem": "gregorian",
+  "rules": [
+    {
+      "id": "sanctorale-rule:thomas-aquinas:general-roman",
+      "observanceId": "observance:thomas-aquinas:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":1,"day":28},
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-1-28","claimTypes":["fixed-date","obligatory-memorial","portugal-inherits-general-calendar"]}],
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "id": "sanctorale-rule:catherine-siena:europe",
+      "observanceId": "observance:catherine-siena:roman-catholic",
+      "scopeKey": "europe",
+      "dateRule": {"type":"fixed","month":4,"day":29},
+      "liturgicalRank": "feast",
+      "precedenceClass": "proper-feast",
+      "isSolemnity": false,
+      "evidence": [
+        {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/lh/pdf/000LH_Abrev.pdf","claimTypes":["fixed-date","europe-feast","patron-of-europe"]},
+        {"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-4-29","claimTypes":["portugal-materialization","feast"]}
+      ],
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "id": "sanctorale-rule:john-baptist-nativity:general-roman",
+      "observanceId": "observance:john-baptist-nativity:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":6,"day":24},
+      "liturgicalRank": "solemnity",
+      "precedenceClass": "general-calendar-solemnity",
+      "isSolemnity": true,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-24","claimTypes":["fixed-date","solemnity","general-calendar"]}],
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "id": "sanctorale-rule:peter-paul:general-roman",
+      "observanceId": "observance:peter-paul:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":6,"day":29},
+      "liturgicalRank": "solemnity",
+      "precedenceClass": "general-calendar-solemnity",
+      "isSolemnity": true,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2025-6-29","claimTypes":["fixed-date","solemnity","general-calendar"]}],
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "id": "sanctorale-rule:elizabeth-portugal:portugal",
+      "observanceId": "observance:elizabeth-portugal:roman-catholic",
+      "scopeKey": "portugal",
+      "dateRule": {"type":"fixed","month":7,"day":4},
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "proper-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/lh/pdf/000LH_Abrev.pdf","claimTypes":["fixed-date","portugal-obligatory-memorial"]},
+        {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2024-7-4","claimTypes":["portugal-materialization","jurisdictional-rank-variants"]}
+      ],
+      "verifiedAt": "2026-08-23"
+    },
+    {
+      "id": "sanctorale-rule:matthew-apostle:general-roman",
+      "observanceId": "observance:matthew-apostle:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":9,"day":21},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-9-21","claimTypes":["fixed-date","apostle-feast","general-calendar"]}],
+      "verifiedAt": "2026-08-23"
+    }
+  ]
+}
