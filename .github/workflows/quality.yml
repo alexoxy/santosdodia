@@ -37,6 +37,9 @@ jobs:
       - name: Audit repository hygiene and data economy
         run: npm run repo:audit
 
+      - name: Enforce text-first public surface
+        run: npm run surface:text-first-test
+
       - name: Enforce AdSense review guardrail
         run: node scripts/check-adsense-readiness.mjs
 

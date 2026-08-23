@@ -74,7 +74,13 @@
     "enabled": true,
     "pastCivilYears": 1,
     "futureCivilYears": 3,
-    "exampleFor2026": [2025, 2026, 2027, 2028, 2029],
+    "exampleFor2026": [
+      2025,
+      2026,
+      2027,
+      2028,
+      2029
+    ],
     "rolloverAutomatic": true,
     "servingCacheOlderYearsRetiredAutomatically": true,
     "vaultHistoryDeletedWhenOutsideWindow": false,
@@ -296,5 +302,36 @@
     "P5-global-jurisdictions-and-multilingual-scale",
     "P6-live-seo-and-ai-scale",
     "P7-autonomous-maintenance-at-scale"
-  ]
+  ],
+  "strategicMoat": [
+    "evidence",
+    "perennial-calculation",
+    "authority-isolation",
+    "jurisdiction-policy",
+    "multilingual-identity",
+    "distribution",
+    "provenance",
+    "autonomous-maintenance"
+  ],
+  "humanSurface": {
+    "deliveryModel": "text-first",
+    "firstPartyEditorialContent": "text-only",
+    "allowedComposition": [
+      "semantic-html",
+      "css-without-media-fetch",
+      "text-and-unicode-symbols"
+    ],
+    "firstPartyImagesAllowed": false,
+    "firstPartyAudioAllowed": false,
+    "nonLiveFirstPartyVideoAllowed": false,
+    "liveStreamIsOnlyAudiovisualContent": true,
+    "liveEmbedRequiresExplicitUserActivation": true,
+    "liveEmbedMustUsePrivacyEnhancedOfficialOrVerifiedSource": true,
+    "liveTextFallbackAndOfficialLinkRequired": true,
+    "browserMetadataIconsAreVisibleContentMedia": false,
+    "remoteFontsAllowed": false,
+    "serverRenderedTextPreferred": true,
+    "clientJavaScript": "interaction-only",
+    "advertisingDoesNotRelaxFirstPartyMediaContract": true
+  }
 }

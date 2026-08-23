@@ -13,6 +13,16 @@ These rules apply to all repository changes, including automated and agent-autho
 - The first public navigation scope is deliberately narrow: source-backed identity/name plus a reviewed liturgical observance. Birth/death dates, places and other profile facts that only have the Wikidata enrichment source remain withheld until independently cross-checked.
 - Never convert a name match into an automatic saint identity merge or publication decision. Ambiguous and unmatched records remain in review/staging.
 
+## Text-first surface contract
+
+- Treat SantosDia as an intelligence and reading product, not an image product. First-party editorial and product surfaces are text-only.
+- Build public pages from semantic HTML, typographic hierarchy, simple CSS, accessible controls and text/Unicode symbols. CSS colour, borders and gradients are acceptable when they do not fetch media assets.
+- Do not add saint portraits, photographs, hero images, thumbnails, galleries, illustrations, animated imagery, decorative audio, or non-live video.
+- Verified livestream is the only first-party audiovisual content type. Keep its source and tradition explicit, provide useful text and an official external link before activation, and load the privacy-enhanced embed only after an explicit user action.
+- Favicon and manifest icons are browser metadata, not an exception for visible page imagery. Advertising is governed separately and never relaxes the first-party text-only rule; ad serving remains disabled while AdSense is PREPARING.
+- Prefer server-rendered text and deterministic HTML. Add client JavaScript only for interaction that materially requires it, such as context preferences, search, saved items, calendar actions and user-activated livestream.
+- Do not add remote fonts or media libraries. Preserve the automated `surface:text-first-test` gate whenever presentation code changes.
+
 ## Advertising experience
 
 - The default monetization model is manual, predictable and non-overlay: a responsive top banner plus one desktop right-hand content rail on eligible public content pages.

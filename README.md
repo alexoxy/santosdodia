@@ -6,6 +6,8 @@ Production: https://www.santosdodia.com
 
 Product plan: [docs/product-plan.md](docs/product-plan.md)
 
+Normative product strategy: [docs/product/global-liturgical-intelligence-v2.1.md](docs/product/global-liturgical-intelligence-v2.1.md)
+
 Data quality baseline: [docs/data-quality-baseline.md](docs/data-quality-baseline.md)
 
 Verified-profile standard: [docs/verified-profile-standard.md](docs/verified-profile-standard.md)
@@ -16,6 +18,7 @@ OSINT acquisition runbook: [docs/osint-acquisition-runbook.md](docs/osint-acquis
 
 ## Product scope
 
+- Text-first, media-free first-party experience; verified user-activated livestream is the only audiovisual content
 - Find saints and observances by date, name and Christian tradition
 - Individual saint profiles with dates, traditions, reviewed summaries and traceable sources
 - Free virtual candles stored only on the visitor's device

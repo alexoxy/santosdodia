@@ -14,6 +14,18 @@ SantosDia has two inseparable product layers.
 
 The daily experience remains the consumer North Star: Today, Calendar, Pray, Live, Discover and Saved.
 
+### Text-first delivery contract
+
+SantosDia is an intelligence and reading product, not an image product. The public first-party experience is deliberately textual: semantic HTML, clear typography, simple CSS, accessible controls and text/Unicode symbols. Its sophistication belongs in the evidence, algorithms, source governance, calendar engine, localisation and automation behind the interface.
+
+Do not add editorial photography, saint portraits, hero images, thumbnails, galleries, illustrations, animated imagery, decorative audio or non-live video. CSS colour, borders and gradients may create hierarchy when they add no media request. Favicon and manifest icons are browser metadata, not visible content exceptions.
+
+Verified livestream is the sole first-party audiovisual content type. A live surface must expose useful text, its Church/tradition, verification status and an official external link before any embed loads. The privacy-enhanced player loads only after explicit user activation; no livestream thumbnail or player dependency may burden the initial textual page.
+
+Advertising is a separate third-party delivery boundary and does not relax the first-party text-only contract. While AdSense remains PREPARING, ad serving stays disabled. After approval, any allowed unit remains consent-aware, lazy, manual, non-overlay and subordinate to reading performance.
+
+The delivery architecture follows the same principle: compute and verify heavily outside the request path, then serve compact structured text. Prefer server-rendered output; client JavaScript exists only for interactions that materially require it, including context preferences, search, saved items, calendar actions and user-activated livestream.
+
 ### Liturgical infrastructure product
 
 > Given a Christian tradition/Church, jurisdiction, calendar system, civil date/year, timezone and locale, SantosDia deterministically returns the applicable liturgical context, observances, annual occurrences, cycles, precedence result and machine-readable distribution outputs.
@@ -254,7 +266,7 @@ Source monitoring detects normative change. Normal annual generation does not ne
 
 ### P3 — Portugal reference daily product
 
-- rebuild Today mobile around the new engine;
+- rebuild Today mobile around the new engine as a compact text-first reading surface;
 - complete PT-PT context, observances, prayer/references, next/tomorrow and Live;
 - desktop focuses on research, comparison and configuration;
 - zero false-empty and zero language leakage.
@@ -293,6 +305,8 @@ Until P1/P2 are stable, do not prioritise:
 
 - mass saint biography generation;
 - additional decorative frontend sections;
+- photographs, portraits, thumbnails, galleries, decorative animation/audio or non-live video;
+- remote fonts, media libraries or visual assets that add network weight without liturgical value;
 - broad locale launches without complete data;
 - arbitrary new agents/workflows when deterministic code suffices;
 - paid infrastructure;
@@ -308,6 +322,8 @@ Until P1/P2 are stable, do not prioritise:
 - persistent ICS survives year boundaries without re-subscription;
 - every ICS event has a valid SantosDia backlink;
 - zero false-empty Today states;
+- zero first-party image, audio or non-live video assets on public content surfaces;
+- verified livestream remains text-first until explicit user activation and uses a privacy-enhanced embed;
 - zero silent language leakage;
 - Church, jurisdiction and calendar-system boundaries never leak;
 - normative changes are detected and reviewed; normal year rollover is autonomous;
