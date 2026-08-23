@@ -84,5 +84,6 @@ await import('./test-roman-liturgical-year.mjs');
 await import('./test-roman-precedence.mjs');
 await import('./test-roman-annual-calendar.mjs');
 await import('./test-roman-solemnity-transfer.mjs');
+await import('./equivalence/test-portugal-2026-annual-equivalence.mjs');
 await import('./test-liturgical-calculator-surface.mjs');
 await import('./test-rolling-ics-surface.mjs');
