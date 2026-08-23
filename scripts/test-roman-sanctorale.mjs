@@ -130,7 +130,7 @@ try {
     liturgicalRank: 'optional-memorial',
     precedenceClass: 'optional-memorial',
     isSolemnity: false,
-    evidence: [{ publisher: 'Test authority', url: 'https://www.vatican.va/', claimTypes: ['test-general-rule'] }],
+    evidence: [{ publisher: 'Test SNL authority', url: 'https://www.liturgia.pt/', claimTypes: ['test-general-rule'] }],
     verifiedAt: '2026-08-23'
   });
   const overridePt = sanctorale.materializeRomanSanctoraleCandidates(2026, overrideRules, policies, 'roman-sanctorale-policy:pt');
