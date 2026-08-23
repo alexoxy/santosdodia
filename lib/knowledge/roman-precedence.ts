@@ -54,18 +54,21 @@ export type RomanPrecedenceCandidate = {
 export type RomanPrecedenceDecision = {
   id: string;
   precedenceLevel: RomanPrecedenceLevel;
-  action: 'celebrate' | 'transfer-required' | 'omit' | 'unresolved-tie';
+  action: 'celebrate' | 'permitted-option' | 'transfer-required' | 'omit' | 'unresolved-tie';
   reasonCode:
     | 'highest-precedence'
+    | 'optional-memorial-choice'
+    | 'ferial-alternative-to-optional-memorial'
     | 'solemnity-impeded-by-higher-precedence'
     | 'lower-precedence-omitted'
     | 'equal-highest-precedence-requires-policy';
 };
 
 export type RomanPrecedenceResolution = {
-  modelVersion: '1.0';
-  status: 'empty' | 'resolved' | 'tie-requires-policy';
+  modelVersion: '1.1';
+  status: 'empty' | 'resolved' | 'resolved-options' | 'tie-requires-policy';
   winnerId: string | null;
+  permittedOptionIds: string[];
   winningPrecedenceLevel: RomanPrecedenceLevel | null;
   decisions: RomanPrecedenceDecision[];
   transferRule: {
@@ -113,9 +116,10 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
 
   if (normalized.length === 0) {
     return {
-      modelVersion: '1.0',
+      modelVersion: '1.1',
       status: 'empty',
       winnerId: null,
+      permittedOptionIds: [],
       winningPrecedenceLevel: null,
       decisions: [],
       transferRule,
@@ -126,11 +130,53 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
   const winningPrecedenceLevel = Math.min(...normalized.map(candidate => candidate.precedenceLevel)) as RomanPrecedenceLevel;
   const top = normalized.filter(candidate => candidate.precedenceLevel === winningPrecedenceLevel);
 
+  // Optional memorials are genuine choices rather than a forced winner. On an ordinary
+  // weekday the feria remains a legitimate alternative even when one or more optional
+  // memorials are available. This is represented explicitly instead of manufacturing a tie.
+  if (winningPrecedenceLevel === 12 && top.every(candidate => candidate.precedenceClass === 'optional-memorial')) {
+    const ordinaryFerialAlternatives = normalized.filter(candidate => candidate.precedenceClass === 'ordinary-weekday');
+    const permittedOptionIds = [...top, ...ordinaryFerialAlternatives].map(candidate => candidate.id);
+    return {
+      modelVersion: '1.1',
+      status: 'resolved-options',
+      winnerId: null,
+      permittedOptionIds,
+      winningPrecedenceLevel,
+      decisions: normalized.map(candidate => {
+        if (candidate.precedenceClass === 'optional-memorial' && candidate.precedenceLevel === 12) {
+          return {
+            id: candidate.id,
+            precedenceLevel: candidate.precedenceLevel,
+            action: 'permitted-option' as const,
+            reasonCode: 'optional-memorial-choice' as const
+          };
+        }
+        if (candidate.precedenceClass === 'ordinary-weekday') {
+          return {
+            id: candidate.id,
+            precedenceLevel: candidate.precedenceLevel,
+            action: 'permitted-option' as const,
+            reasonCode: 'ferial-alternative-to-optional-memorial' as const
+          };
+        }
+        return {
+          id: candidate.id,
+          precedenceLevel: candidate.precedenceLevel,
+          action: 'omit' as const,
+          reasonCode: 'lower-precedence-omitted' as const
+        };
+      }),
+      transferRule,
+      sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+    };
+  }
+
   if (top.length !== 1) {
     return {
-      modelVersion: '1.0',
+      modelVersion: '1.1',
       status: 'tie-requires-policy',
       winnerId: null,
+      permittedOptionIds: [],
       winningPrecedenceLevel,
       decisions: normalized.map(candidate => ({
         id: candidate.id,
@@ -147,9 +193,10 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
 
   const winner = top[0];
   return {
-    modelVersion: '1.0',
+    modelVersion: '1.1',
     status: 'resolved',
     winnerId: winner.id,
+    permittedOptionIds: [winner.id],
     winningPrecedenceLevel,
     decisions: normalized.map(candidate => {
       if (candidate.id === winner.id) {
