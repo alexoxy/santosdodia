@@ -120,7 +120,7 @@ jobs:
         run: npm ci --include=optional
 
       - name: Download production schema receipt
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: d1-production-schema-receipt
           path: reports/d1-production-schema
