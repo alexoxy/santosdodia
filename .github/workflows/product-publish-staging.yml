@@ -98,6 +98,9 @@ jobs:
             --output reports/product-release/build.json
           node scripts/build/test-roman-catholic-product-samples.mjs \
             --input reports/product-release/build.json
+          node scripts/build/roman-catholic-reconciliation-ledger.mjs \
+            --input reports/product-release/build.json \
+            --output reports/product-release/reconciliation-ledger.json
 
       - name: Create canonical Dropbox manifest bytes
         run: |
@@ -155,6 +158,7 @@ jobs:
           path: |
             reports/product-release/build.json
             reports/product-release/manifest.json
+            reports/product-release/reconciliation-ledger.json
             reports/product-release/release.json
             reports/product-release/validation.json
             reports/product-release/release.sql
@@ -193,6 +197,7 @@ jobs:
         run: |
           node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/manifest.json --path "$BASE/manifest.json"
           node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/validation.json --path "$BASE/validation.json"
+          node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/reconciliation-ledger.json --path "$BASE/reconciliation-ledger.json"
           node scripts/dropbox/upload-exact-file.mjs --source reports/product-release/release.json --path "$BASE/release.json"
 
   publish-to-staging:
