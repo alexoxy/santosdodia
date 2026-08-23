@@ -170,6 +170,27 @@ The Baptism of the Lord is then resolved from the actual Epiphany policy. When a
 
 This policy model is how additional countries must be added. Do not fork the computus for each country.
 
+## Fixed Sanctorale and scope inheritance
+
+The Sanctorale is not an annual list copied into runtime. A reviewed fixed observance is represented by a perennial rule with:
+
+- a stable canonical `Observance` identity;
+- fixed month/day, without an embedded year;
+- an ecclesial scope such as General Roman, Europe or Portugal;
+- liturgical rank and an explicit precedence class;
+- claim-specific competent-authority evidence;
+- verification date and stable rule ID.
+
+A jurisdiction policy composes scopes from least to most specific. Portugal currently inherits:
+
+```text
+general-roman → europe → portugal
+```
+
+A more specific rule for the same Observance overrides the less specific one; it never creates a duplicate celebration. Evidence URLs must belong to the competent authority domains declared by the policy. Unknown scopes, duplicate jurisdiction policies, duplicate override slots, inconsistent rank/solemnity flags and untrusted evidence fail closed.
+
+The initial shadow set proves six fixed observances across those three scopes. It regenerates 2025 and 2026 through the same annual precedence/transfer engine and remains `publicationAllowed: false`. This is an architectural proof, not a public calendar switch. New rules are added only from canonical Observances and competent evidence, and the old production read model remains authoritative until full 389/389 Portugal 2026 equivalence is demonstrated.
+
 ## Seasons
 
 For a civil-date query the first Roman kernel resolves:
