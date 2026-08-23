@@ -377,5 +377,13 @@
       "confirm-external-effect",
       "trash-resolved-alert"
     ]
+  },
+  "normativeContinuity": {
+    "bindingUntilFullyImplemented": true,
+    "cumulativeScope": true,
+    "partialDeliveryMayNarrowRemainingVision": false,
+    "executionSnapshotMaySupersedeStrategy": false,
+    "cycleReportMustMeasureCoverageAgainstStrategy": true,
+    "supersessionRequiresExplicitProductOwnerApproval": true
   }
 }
