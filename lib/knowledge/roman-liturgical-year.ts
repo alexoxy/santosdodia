@@ -5,6 +5,7 @@ export type RomanWeekdayCycle = 'I' | 'II';
 export type RomanSeason = 'advent' | 'christmas' | 'ordinary-time' | 'lent' | 'easter';
 export type RomanPrincipalDay =
   | 'christmas'
+  | 'holy-family'
   | 'epiphany'
   | 'baptism-of-the-lord'
   | 'ash-wednesday'
@@ -166,6 +167,14 @@ function baptismOfTheLord(year: number, epiphany: CivilDate, policy: RomanJurisd
   return nextSundayAfter(epiphany);
 }
 
+function holyFamily(christmasYear: number): CivilDate {
+  for (let day = 26; day <= 31; day += 1) {
+    const candidate = { year: christmasYear, month: 12, day };
+    if (weekday(candidate) === 0) return candidate;
+  }
+  return { year: christmasYear, month: 12, day: 30 };
+}
+
 export function calculateRomanLiturgicalYear(
   liturgicalYear: number,
   policy: RomanJurisdictionPolicy = ROMAN_GENERAL_POLICY
@@ -177,6 +186,7 @@ export function calculateRomanLiturgicalYear(
   const start = firstSundayOfAdvent(liturgicalYear - 1);
   const nextStart = firstSundayOfAdvent(liturgicalYear);
   const christmas = { year: liturgicalYear - 1, month: 12, day: 25 };
+  const family = holyFamily(christmas.year);
   const epiphany = policy.epiphany === 'january-6'
     ? { year: liturgicalYear, month: 1, day: 6 }
     : transferredEpiphany(liturgicalYear);
@@ -187,6 +197,7 @@ export function calculateRomanLiturgicalYear(
 
   const keyDates: Record<RomanPrincipalDay, string> = {
     'christmas': toISODate(christmas),
+    'holy-family': toISODate(family),
     'epiphany': toISODate(epiphany),
     'baptism-of-the-lord': toISODate(baptism),
     'ash-wednesday': toISODate(addDays(easter, -46)),
