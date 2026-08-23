@@ -36,6 +36,7 @@ export const ROMAN_VESTMENT_COLOUR_SOURCE_IDS = [
 
 const principalColours: Partial<Record<RomanPrincipalDay, RomanVestmentColourCode>> = {
   christmas: 'white',
+  'holy-family': 'white',
   epiphany: 'white',
   'baptism-of-the-lord': 'white',
   'ash-wednesday': 'violet',
