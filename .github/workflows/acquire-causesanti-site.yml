@@ -46,7 +46,8 @@ jobs:
 
       - name: Crawl Causes of Saints into immutable raw staging
         env:
-          CAUSESANTI_MAX_URLS: '6000'
+          # Pushes validate the complete path quickly; scheduled/manual runs retain the full crawl.
+          CAUSESANTI_MAX_URLS: ${{ github.event_name == 'push' && '60' || '6000' }}
           CAUSESANTI_DELAY_MS: '2000'
           CAUSESANTI_REQUEST_TIMEOUT_MS: '60000'
           CAUSESANTI_MAX_ATTEMPTS: '4'
@@ -67,9 +68,11 @@ jobs:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          # Canary evidence cannot replace the authoritative full-crawl index.
+          CAUSESANTI_ARCHIVE_STREAM: ${{ github.event_name == 'push' && 'sources/causesanti-va/canary' || 'sources/causesanti-va/raw' }}
         run: |
           if [ -d data/osint/runs/causesanti ] && find data/osint/runs/causesanti -name summary.json -print -quit | grep -q .; then
-            node scripts/archive-to-dropbox.mjs --stream sources/causesanti-va/raw --source data/osint/runs/causesanti
+            node scripts/archive-to-dropbox.mjs --stream "$CAUSESANTI_ARCHIVE_STREAM" --source data/osint/runs/causesanti
           else
             echo "No CauseSanti crawl evidence to archive"
           fi
