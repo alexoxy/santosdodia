@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-08-23 01:40 UTC
+Updated: 2026-08-23 23:42 UTC
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 Machine contract: `config/product-platform-contract.json`
 Status: active development; Portugal 2026 baseline release published; perennial Sanctorale cutover remains fail-closed
@@ -32,6 +32,7 @@ The strategic document is the binding, cumulative product vision until full impl
 - PR #219: staging verification scoped to the exact `import_run_id`; workflow run ID added to the durable validation receipt.
 - PR #220: the staging-proven Portugal 2026 release approved and published to production with all visibility updates scoped to the exact import run.
 - PR #221: CauseSanti canary made receipt-required; a missing `summary.json` can no longer silently succeed.
+- PR #222: durable cycle checkpoint with the exact Portugal staging/production proof, strategic coverage matrix and hygiene inventory; all 63 Quality steps passed.
 - The 26-page global strategy was reviewed in full and aligned with current execution.
 - Rolling materialisation, rolling ICS, public calculator, civil/liturgical-year mapping, Roman Temporale, precedence, transfer scheduling and liturgical-colour logic were confirmed as shared infrastructure.
 
@@ -64,15 +65,11 @@ This baseline publication does not authorize public cutover to incomplete perenn
 - Product staging failure at `e7f7f52`, attempt 1: transient Wrangler fetch failure; retry proceeded.
 - Product staging failure at `e7f7f52`, attempt 2: broad year counts included 45 preserved historical occurrences; PR #219 scoped verification to the exact release import.
 - Closure proof: staging run `32610328197` green and production Dropbox receipt verified. Four related alert emails were moved to Trash only after that proof.
+- CauseSanti primary-source failure at commit `486c875`, workflow run `32591119601`: corrected by PR #221. Post-fix canary run `32610883793` at commit `5a8e02f07ab534a6a24d1ddbc58b1a3991021b26` completed successfully. Dropbox slot `05` contains a 253320-byte archive, matching SHA-256 and Dropbox content hash, `verifiedAfterUpload: true`, and an index updated only after verified upload. Gmail message `1a02b87996d6b623` was moved to Trash after this proof.
 
-### Pending — do not delete
+### Pending
 
-- Original CauseSanti primary-source failure at commit `486c875`, workflow run `32591119601`.
-- The original full crawl spent 3h37m and exited after a partial-with-errors result before a Dropbox closing proof.
-- Code now archives bounded partial raw evidence while keeping downstream promotion independently false.
-- PR #221 removed the remaining receipt-less success path and its merge commit `5a8e02f07ab534a6a24d1ddbc58b1a3991021b26` triggered a new bounded push canary.
-- Required closing proof remains a post-fix Dropbox `sources/causesanti-va/canary` archive containing `index.json` and its receipt with current repository/run metadata, hashes and verified upload.
-- Until that object and a positive workflow conclusion exist, Gmail message `1a02b87996d6b623` remains in Inbox.
+- None. A fresh Gmail search for SantosDia GitHub run failures outside Trash returned no messages after CauseSanti closure.
 
 ## External evidence state
 
@@ -80,10 +77,11 @@ This baseline publication does not authorize public cutover to incomplete perenn
   `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/ed1dfc2c07fcd0de254893305c09d1d4c68ab78f/validation.json`.
 - Latest production receipt:
   `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/production/a27e50710d4d0a8cf71ee7644baa7d4b03094792/production-receipt.json`.
-- CauseSanti currently exposes only the legacy folder
-  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/2026-08-22T121823Z`, modified before the fixes. It is not closure evidence.
-- Expected CauseSanti proof root:
-  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/canary`.
+- CauseSanti verified canary index:
+  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/canary/index.json`.
+- CauseSanti verified receipt:
+  `/Apps/SantosDia Orchestrator/archive/sources/causesanti-va/canary/slots/05/receipt.json`.
+- The receipt binds workflow run `32610883793`, attempt 1, commit `5a8e02f07ab534a6a24d1ddbc58b1a3991021b26`, archive size 253320 bytes, SHA-256 `4bd1c24d4abd6bbc3fe92a08bb77bbf53a9045db7792d8878ec5e9342fc82cf9` and Dropbox content hash `bdaa2546cb4d269de01b529a980286c13e958039a667b5e6b26ab11d8af737cb`.
 
 ## Strategic coverage
 
@@ -92,7 +90,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 | Binding global strategy | Normative | PR #217 merged; strategy and machine contract stay cumulative until full delivery. |
 | Text-first first-party experience | Realised | CI blocks first-party images, audio, remote fonts and non-live video/iframes. |
 | Canonical context dimensions | Partial | Independent dimensions are contractual; public breadth remains incomplete. |
-| Evidence Vault and provenance | Partial | Immutable/hashed/review gates exist; CauseSanti canary proof remains open. |
+| Evidence Vault and provenance | Partial | Immutable/hashed/review gates and CauseSanti verified canary receipt exist; broader source coverage remains incomplete. |
 | Roman perennial Temporale | Realised core | Deterministic annual generation and multi-year tests exist. |
 | Roman Sanctorale | Partial | Six source-bound rules prove composition; complete Portugal equivalence remains the cutover gate. |
 | Precedence, transfer and colours | Partial | Shared deterministic core exists; official Portugal regression coverage remains incomplete. |
@@ -103,7 +101,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 | Lusophone jurisdictions | Pending | Start only after Portugal proof and jurisdiction-specific authority packs. |
 | OCA, GOARCH and Church of England kernels | Pending | Separate authoritative kernels and acceptance vectors required. |
 | Verified Live | Partial | Privacy-enhanced, user-activated exception exists; global Church-specific coverage remains. |
-| Autonomous maintenance | Partial | Deterministic gates exist; CauseSanti receipt closure and exception-only operation remain incomplete. |
+| Autonomous maintenance | Partial | Deterministic gates and CauseSanti fail-closed receipt proof exist; exception-only operation across all sources remains incomplete. |
 
 ## Repository hygiene inventory
 
@@ -135,21 +133,20 @@ Merged/superseded strategy and current-cycle branches are additional deletion ca
 - `fix/idempotent-calendar-scope-import`;
 - `fix/scope-staging-verification-to-release`;
 - `release/pt-2026-exact-import-run`;
-- `fix/causesanti-canary-receipt-required`.
+- `fix/causesanti-canary-receipt-required`;
+- `docs/checkpoint-20260823-production-proof`.
 
 The available GitHub connector does not expose branch-ref deletion. Do not simulate deletion by force-moving refs. Preserve every branch with unreviewed unique work.
 
 ## Ordered roadmap for the next continuation
 
-1. Observe the CauseSanti canary triggered by commit `5a8e02f`. Inspect Dropbox `canary/index.json` and the slot receipt. Confirm repository, commit, workflow run, hashes and verified upload; only then move Gmail message `1a02b87996d6b623` to Trash.
-2. Reconfirm that GitHub has no open PRs and only umbrella issue #181. Delete proven merged/zero-difference branches when branch-ref deletion becomes available.
-3. Build a source-bound Portugal 2026 reconciliation ledger classifying every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved without cloning annual dates into perennial rules.
-4. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
-5. Execute reconciliation across at least 2025–2029, explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
-6. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
-7. Harden rolling ICS/calculator parity and persistent subscription semantics across independent context dimensions.
-8. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping local calendars, Church authority and Portuguese locale variants independent.
-9. Add OCA, GOARCH and Church of England only as separate authority-isolated kernels.
+1. Build a source-bound Portugal 2026 reconciliation ledger classifying every official occurrence as Temporale, fixed Sanctorale, movable/transfer or unresolved without cloning annual dates into perennial rules.
+2. Expand the Roman Sanctorale rule pack from the six-rule seed through reviewed canonical Observance identities and competent authority bindings.
+3. Execute reconciliation across at least 2025–2029, explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
+4. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
+5. Harden rolling ICS/calculator parity and persistent subscription semantics across independent context dimensions.
+6. Begin Lusophone jurisdiction readiness packs only after the Portugal gate, keeping local calendars, Church authority and Portuguese locale variants independent.
+7. Add OCA, GOARCH and Church of England only as separate authority-isolated kernels.
 
 ## Resume and stop rules
 
