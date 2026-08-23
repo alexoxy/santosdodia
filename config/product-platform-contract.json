@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "productVersion": "2.1",
   "status": "normative",
   "effectiveDate": "2026-08-22",
@@ -291,7 +291,21 @@
     "deadCodeDetection": true,
     "obsoleteWorkflowDetection": true,
     "unusedRouteDetection": true,
-    "unusedCssAndDependencyDetection": true
+    "unusedCssAndDependencyDetection": true,
+    "targetRepositoryShape": "smallest-complete-safe-system",
+    "singleActivePathPerResponsibility": true,
+    "parallelArchitectureRequiresCompatibilityNeedAndRetirementGate": true,
+    "openPullRequestRequiresCurrentPurposeAndNextAction": true,
+    "openIssueRequiresCurrentPurposeAndNextAction": true,
+    "closeDuplicateSupersededOrAbandonedWork": true,
+    "deleteZeroDifferenceOrMergedBranches": true,
+    "deleteUniqueUnreviewedWorkAutomatically": false,
+    "preserveRecoverabilityInGitHistory": true,
+    "evidenceVaultAndCanonicalHistoryProtectedFromRoutineCleanup": true,
+    "continuousDependencyWorkflowAndSecurityHygiene": true,
+    "leastPrivilegeAutomation": true,
+    "secretSafeLogsRequired": true,
+    "completeCiAndSmokeRequiredBeforeRemoval": true
   },
   "priorityOrder": [
     "P0-reliability-and-operational-hygiene",
@@ -333,5 +347,57 @@
     "serverRenderedTextPreferred": true,
     "clientJavaScript": "interaction-only",
     "advertisingDoesNotRelaxFirstPartyMediaContract": true
+  },
+  "strategicAlignmentDate": "2026-08-23",
+  "expansionStrategy": {
+    "qualityAnchorIsGlobalDefault": false,
+    "sequence": [
+      "portugal-reference-equivalence",
+      "evidence-ready-lusophone-jurisdiction-overlays",
+      "separate-oca-goarch-and-church-of-england-kernels",
+      "global-jurisdiction-locale-and-calendar-system-readiness"
+    ],
+    "cplpAndPalopAreEcclesiasticalAuthorityBoundaries": false,
+    "portugalJurisdictionPolicyMayBeClonedAsAnotherCountryCalendar": false,
+    "localeAndJurisdictionRemainIndependent": true,
+    "publicReadinessGate": [
+      "competent-authority-map",
+      "versioned-source-bindings",
+      "perennial-rule-coverage",
+      "official-annual-regression-vectors",
+      "precedence-transfer-and-calendar-system-tests",
+      "reviewed-public-names-without-silent-fallback",
+      "html-api-ics-semantic-parity",
+      "false-empty-safe-today",
+      "source-delta-monitoring-and-last-known-good"
+    ]
+  },
+  "executionSnapshot": {
+    "asOf": "2026-08-23",
+    "delivered": [
+      "ci-enforced-text-only-first-party-surface",
+      "rolling-materialization-y-minus-1-through-y-plus-3",
+      "rolling-ics-and-public-liturgical-calculator",
+      "roman-temporale-precedence-transfer-and-colour-core",
+      "source-bound-general-europe-portugal-sanctorale-shadow-seed"
+    ],
+    "currentReleaseGate": "complete-portugal-2026-semantic-equivalence-before-read-model-cutover",
+    "nextProductMove": "expand-sanctorale-then-rebuild-compact-text-first-today",
+    "operationalAlertClosure": [
+      "read",
+      "diagnose",
+      "fix",
+      "validate-positive-workflow",
+      "confirm-external-effect",
+      "trash-resolved-alert"
+    ]
+  },
+  "normativeContinuity": {
+    "bindingUntilFullyImplemented": true,
+    "cumulativeScope": true,
+    "partialDeliveryMayNarrowRemainingVision": false,
+    "executionSnapshotMaySupersedeStrategy": false,
+    "cycleReportMustMeasureCoverageAgainstStrategy": true,
+    "supersessionRequiresExplicitProductOwnerApproval": true
   }
 }
