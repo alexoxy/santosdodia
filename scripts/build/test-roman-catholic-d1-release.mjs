@@ -32,10 +32,28 @@ const database = new DatabaseSync(':memory:');
 try {
   database.exec(fs.readFileSync('db/migrations/0001_ecclesiastical_directory.sql', 'utf8'));
   database.exec(fs.readFileSync('db/migrations/0002_multichurch_calendar.sql', 'utf8'));
-  database.exec(fs.readFileSync(sqlPath, 'utf8'));
-  database.exec(fs.readFileSync(sqlPath, 'utf8'));
+  const releaseSql = fs.readFileSync(sqlPath, 'utf8');
+  database.exec(releaseSql);
+
+  // Remote databases may already hold the same canonical occurrence under a
+  // historical identifier. Reproduce that state and require a safe replay that
+  // preserves the identifier while refreshing the release-controlled evidence.
+  const conflictDate = '2026-08-11';
+  const originalId = database.prepare("SELECT id FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso=?").get(conflictDate)?.id;
+  if (!originalId) throw new Error(`Could not seed the historical occurrence-id regression for ${conflictDate}.`);
+  const historicalId = `historical:${originalId}`;
+  database.exec('PRAGMA foreign_keys = OFF;');
+  database.prepare('UPDATE calendar_occurrences SET id=? WHERE id=?').run(historicalId, originalId);
+  database.prepare('UPDATE calendar_occurrence_labels SET occurrence_id=? WHERE occurrence_id=?').run(historicalId, originalId);
+  database.prepare('UPDATE calendar_occurrence_assertions SET occurrence_id=? WHERE occurrence_id=?').run(historicalId, originalId);
+  database.prepare("UPDATE source_assertions SET subject_id=? WHERE subject_type='calendar-occurrence' AND subject_id=?").run(historicalId, originalId);
+  database.exec('PRAGMA foreign_keys = ON;');
+
+  database.exec(releaseSql);
 
   const scalar = (query, params = []) => database.prepare(query).get(...params);
+  const reconciledId = scalar("SELECT id FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso=?", [conflictDate])?.id;
+  if (reconciledId !== historicalId) throw new Error(`Historical occurrence identifier was not preserved: ${reconciledId}.`);
   const occurrenceCount = Number(scalar("SELECT COUNT(*) AS n FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31'").n);
   const uniqueDates = Number(scalar("SELECT COUNT(DISTINCT date_iso) AS n FROM calendar_occurrences WHERE church_id='roman-catholic' AND jurisdiction_id='pt' AND date_iso BETWEEN '2026-01-01' AND '2026-12-31'").n);
   const labelCount = Number(scalar("SELECT COUNT(*) AS n FROM calendar_occurrence_labels l JOIN calendar_occurrences o ON o.id=l.occurrence_id WHERE o.church_id='roman-catholic' AND o.jurisdiction_id='pt' AND o.date_iso BETWEEN '2026-01-01' AND '2026-12-31'").n);
