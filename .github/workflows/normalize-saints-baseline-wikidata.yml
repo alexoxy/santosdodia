@@ -5,8 +5,6 @@ on:
   workflow_run:
     workflows: ['Build Saints Baseline v1 candidates']
     types: [completed]
-  schedule:
-    - cron: '43 * * * *'
   workflow_dispatch:
 
 permissions:
