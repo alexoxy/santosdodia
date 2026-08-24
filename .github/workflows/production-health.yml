@@ -1,9 +1,9 @@
-# Probe policy revision: 2026-08-17
+# Probe policy revision: 2026-08-24
 name: Production health
 
 on:
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17 5 * * 1'
   workflow_dispatch:
   pull_request:
     branches: [main]
@@ -202,4 +202,5 @@ jobs:
             echo '- The deployed Workers.dev origin must return an application-level healthy status.'
             echo '- The Portugal-scoped Today response on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
             echo '- The Portugal-scoped Worker-origin ICS feed must identify the published D1 calendar as its source.'
+            echo '- D1-heavy verification is weekly to preserve the Cloudflare Free operating boundary.'
           } >> "$GITHUB_STEP_SUMMARY"
