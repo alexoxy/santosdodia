@@ -5,8 +5,6 @@ on:
   workflow_run:
     workflows: ['Normalize Saints Baseline v1 candidates']
     types: [completed]
-  schedule:
-    - cron: '53 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -207,7 +205,7 @@ jobs:
         if: steps.plan.outputs.should_run == 'true'
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
-          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
           DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
           REVIEWED_STREAM: ${{ steps.plan.outputs.reviewed_stream }}
         run: >-
