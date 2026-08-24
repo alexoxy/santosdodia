@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
-import { canonicalBudgetRuns, checkSharedD1DailyBudget, fetchWorkflowRuns } from './check-d1-daily-budget.mjs';
+import { assertWeeklyD1Window, canonicalBudgetRuns, checkSharedD1DailyBudget, fetchWorkflowRuns } from './check-d1-daily-budget.mjs';
+import { loadGuardrails } from '../cloudflare-free-guardrails.mjs';
 
 const repository = 'alexoxy/santosdodia';
 const workflows = ['autonomous-d1-importer.yml', 'import-saints-baseline-d1.yml'];
+const policy = loadGuardrails();
 const calls = [];
 const fetchImpl = async (url) => {
   calls.push(url);
@@ -14,6 +16,16 @@ const fetchImpl = async (url) => {
     : { workflow_runs: [{ id: 2, event: 'schedule', status: 'in_progress', conclusion: null, created_at: '2026-08-10T02:00:00Z' }] };
   return { ok: true, status: 200, json: async () => payload };
 };
+
+assert.deepEqual(assertWeeklyD1Window(new Date('2026-08-10T03:00:00Z'), policy), {
+  weekday: 1,
+  actual: 1,
+  weeklyWindow: 'open',
+});
+assert.throws(
+  () => assertWeeklyD1Window(new Date('2026-08-11T03:00:00Z'), policy),
+  /weekly D1 window is closed/u,
+);
 
 const runs = await fetchWorkflowRuns({ repository, workflows, token: 'test', fetchImpl });
 assert.equal(runs.length, 2);
@@ -37,7 +49,7 @@ await assert.rejects(() => checkSharedD1DailyBudget({
   fetchImpl,
 }), /budget is exhausted/u);
 
-const bootstrapAllowed = await checkSharedD1DailyBudget({
+await assert.rejects(() => checkSharedD1DailyBudget({
   repository,
   workflows,
   currentRunId: '2',
@@ -45,12 +57,7 @@ const bootstrapAllowed = await checkSharedD1DailyBudget({
   maximum: 20,
   now: new Date('2026-08-10T03:00:00Z'),
   fetchImpl,
-});
-assert.equal(bootstrapAllowed.used, 1);
-assert.equal(bootstrapAllowed.maximum, 20);
-assert.equal(bootstrapAllowed.configuredMaximum, 1);
-assert.equal(bootstrapAllowed.effectiveMaximum, 20);
-assert.equal(bootstrapAllowed.policy, 'bounded-workflow-specific-d1-remote-operation-budget');
+}), /budget is exhausted/u, 'A workflow-local maximum must not raise the global Free-tier cap.');
 
 const previousDayFetch = async (url) => ({
   ok: true,
@@ -64,6 +71,7 @@ const allowed = await checkSharedD1DailyBudget({
   workflows,
   currentRunId: '2',
   token: 'test',
+  maximum: 20,
   now: new Date('2026-08-10T03:00:00Z'),
   fetchImpl: previousDayFetch,
 });
@@ -73,6 +81,20 @@ assert.equal(allowed.currentRunId, '2');
 assert.equal(allowed.runsScanned, 2);
 assert.equal(allowed.uniquePriorRunsScanned, 1, 'Only the previous-day prior run remains after current-run exclusion.');
 assert.deepEqual(allowed.workflows, workflows);
+assert.equal(allowed.configuredMaximum, 1);
+assert.equal(allowed.requestedMaximum, 20);
+assert.equal(allowed.effectiveMaximum, 1);
+assert.equal(allowed.d1RemoteWeekdayUtc, 1);
+assert.equal(allowed.policy, 'weekly-free-tier-d1-remote-operation-budget');
+
+await assert.rejects(() => checkSharedD1DailyBudget({
+  repository,
+  workflows,
+  currentRunId: '2',
+  token: 'test',
+  now: new Date('2026-08-11T03:00:00Z'),
+  fetchImpl: previousDayFetch,
+}), /weekly D1 window is closed/u);
 
 await assert.rejects(() => checkSharedD1DailyBudget({
   repository,
@@ -84,4 +106,4 @@ await assert.rejects(() => checkSharedD1DailyBudget({
   fetchImpl,
 }), /between 1 and 100/u);
 
-console.log('Shared autonomous D1 daily-budget tests passed.');
+console.log('Shared autonomous D1 weekly Free-tier budget tests passed.');

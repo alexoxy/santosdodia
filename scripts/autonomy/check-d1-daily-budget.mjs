@@ -48,12 +48,31 @@ export function canonicalBudgetRuns(runs, currentRunId) {
   return [...unique.values()];
 }
 
+export function assertWeeklyD1Window(now = new Date(), policy = loadGuardrails()) {
+  const weekday = Number(policy.autonomousLimits.d1RemoteWeekdayUtc);
+  if (!Number.isInteger(weekday) || weekday < 0 || weekday > 6) {
+    throw new Error('D1 weekly UTC weekday must be an integer from 0 to 6.');
+  }
+  const actual = now.getUTCDay();
+  if (actual !== weekday) {
+    throw new Error(`Cloudflare Free weekly D1 window is closed: today is UTC weekday ${actual}; allowed weekday is ${weekday}.`);
+  }
+  return { weekday, actual, weeklyWindow: 'open' };
+}
+
 export async function checkSharedD1DailyBudget({ repository, workflows, currentRunId, token, maximum = null, now = new Date(), fetchImpl = fetch, policy = loadGuardrails() }) {
+  assertWeeklyD1Window(now, policy);
+
   const configuredMaximum = policy.autonomousLimits.d1RemoteOperationsPerUtcDay;
-  const effectiveMaximum = maximum === null || maximum === undefined ? configuredMaximum : Number(maximum);
-  if (!Number.isSafeInteger(effectiveMaximum) || effectiveMaximum < 1 || effectiveMaximum > 100) {
+  const requestedMaximum = maximum === null || maximum === undefined ? configuredMaximum : Number(maximum);
+  if (!Number.isSafeInteger(requestedMaximum) || requestedMaximum < 1 || requestedMaximum > 100) {
     throw new Error('D1 daily-operation maximum must be an integer between 1 and 100.');
   }
+
+  // Workflow-specific settings may only tighten the global Free-tier budget.
+  // They may never raise it. This prevents a workflow-local value such as 20
+  // from bypassing the account-wide one-operation safety boundary.
+  const effectiveMaximum = Math.min(configuredMaximum, requestedMaximum);
   const runs = await fetchWorkflowRuns({ repository, workflows, token, fetchImpl });
   const budgetRuns = canonicalBudgetRuns(runs, currentRunId);
   const budget = assertDailyActionBudget(budgetRuns, {
@@ -69,10 +88,10 @@ export async function checkSharedD1DailyBudget({ repository, workflows, currentR
     runsScanned: runs.length,
     uniquePriorRunsScanned: budgetRuns.length,
     configuredMaximum,
+    requestedMaximum,
     effectiveMaximum,
-    policy: effectiveMaximum === configuredMaximum
-      ? 'shared-autonomous-d1-remote-operation-budget'
-      : 'bounded-workflow-specific-d1-remote-operation-budget',
+    d1RemoteWeekdayUtc: policy.autonomousLimits.d1RemoteWeekdayUtc,
+    policy: 'weekly-free-tier-d1-remote-operation-budget',
   };
 }
 

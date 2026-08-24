@@ -16,6 +16,7 @@
   },
   "autonomousLimits": {
     "d1RemoteOperationsPerUtcDay": 1,
+    "d1RemoteWeekdayUtc": 1,
     "d1EstimatedRowsReadPerOperation": 1000000,
     "d1EstimatedRowsWrittenPerOperation": 25000,
     "d1MaxStatementsPerBatch": 10000,
@@ -34,27 +35,27 @@
     {
       "name": "Workers limits",
       "url": "https://developers.cloudflare.com/workers/platform/limits/",
-      "lastVerified": "2026-08-07"
+      "lastVerified": "2026-08-24"
     },
     {
       "name": "Workers Logs",
       "url": "https://developers.cloudflare.com/workers/observability/logs/workers-logs/",
-      "lastVerified": "2026-08-07"
+      "lastVerified": "2026-08-24"
     },
     {
       "name": "D1 pricing",
       "url": "https://developers.cloudflare.com/d1/platform/pricing/",
-      "lastVerified": "2026-08-07"
+      "lastVerified": "2026-08-24"
     },
     {
       "name": "R2 pricing",
       "url": "https://developers.cloudflare.com/r2/pricing/",
-      "lastVerified": "2026-08-07"
+      "lastVerified": "2026-08-24"
     },
     {
       "name": "Workers Builds limits",
       "url": "https://developers.cloudflare.com/workers/ci-cd/builds/limits-and-pricing/",
-      "lastVerified": "2026-08-07"
+      "lastVerified": "2026-08-24"
     }
   ]
 }

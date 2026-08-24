@@ -29,7 +29,6 @@ if (!fs.existsSync(workflowPath)) {
   const workflow = fs.readFileSync(workflowPath, 'utf8');
   for (const needle of [
     "workflows: ['Build Saints Baseline v1 candidates']",
-    "cron: '43 * * * *'",
     `WIKIDATA_QUERY_VERSION: ${config.queryVersion}`,
     `NORMALIZATION_VERSION: '${config.normalizationVersion}'`,
     `ACQUISITION_PROGRESS_STREAM: ${config.progressStream}`,
@@ -43,6 +42,7 @@ if (!fs.existsSync(workflowPath)) {
   ]) {
     if (!workflow.includes(needle)) errors.push(`Baseline normalization workflow is missing required contract: ${needle}`);
   }
+  if (/\bcron:/u.test(workflow)) errors.push('Baseline normalizer must not retain a polling cron; weekly acquisition completion drives normalization.');
   for (const forbidden of ['scripts/osint/adapters/', 'wikidata.org', 'OSINT_WIKIDATA_PAGE_SIZE', 'OSINT_WIKIDATA_MAX_PAGES', 'run-manifest.mjs']) {
     if (workflow.includes(forbidden)) errors.push(`Baseline normalizer contains forbidden acquisition dependency: ${forbidden}`);
   }
@@ -55,8 +55,7 @@ if (!fs.existsSync(workflowPath)) {
 const task = (registry.tasks ?? []).find((item) => item.id === 'saints-baseline-v1-normalizer');
 if (!task) errors.push('Automation registry is missing saints-baseline-v1-normalizer.');
 else {
-  if (task.mode !== 'scheduled') errors.push('Baseline normalizer must retain a scheduled recovery path.');
-  if (JSON.stringify(task.crons) !== JSON.stringify(['43 * * * *'])) errors.push('Baseline normalizer recovery cron must be hourly at minute 43 UTC.');
+  if (task.mode !== 'event-driven' || JSON.stringify(task.crons) !== JSON.stringify([])) errors.push('Baseline normalizer must be event-driven from the weekly acquisition workflow with no independent cron.');
   if (task.publicationMode !== 'staging-only') errors.push('Baseline normalizer must remain staging-only.');
   if (task.archiveStream !== config.normalizedStreamPrefix) errors.push('Baseline normalizer registry archive stream differs from epoch config.');
 }
@@ -68,7 +67,7 @@ const report = {
   normalizationVersion: config.normalizationVersion,
   rawStreamPrefix: config.rawStreamPrefix,
   normalizedStreamPrefix: config.normalizedStreamPrefix,
-  recoveryCron: task?.crons?.[0] ?? null,
+  mode: task?.mode ?? null,
   generatedAt: new Date().toISOString(),
 };
 console.log(JSON.stringify(report, null, 2));
