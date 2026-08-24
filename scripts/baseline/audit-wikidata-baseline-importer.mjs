@@ -17,17 +17,17 @@ const expected = {
   d1ImportVersion: '1.0',
   d1ImportEntityLimit: 125,
   d1ImportMaxRowsWrittenPerChunk: 2000,
-  d1ImportMaxOperationsPerUtcDay: 20,
-  d1ImportMaxRowsWrittenPerUtcDay: 40000,
+  d1ImportMaxOperationsPerUtcDay: 1,
+  d1ImportMaxRowsWrittenPerUtcDay: 2000,
   reviewedStreamPrefix: 'baseline/saints/v1/reviewed/wikidata/recognition-v1',
   importProgressStream: 'baseline-import-progress/saints/v1/wikidata/recognition-v1',
   importReceiptStreamPrefix: 'baseline-import-receipts/saints/v1/wikidata/recognition-v1',
 };
 for (const [key, value] of Object.entries(expected)) if (config[key] !== value) errors.push(`Baseline importer config ${key} must equal ${value}.`);
 if (config.d1ImportMaxRowsWrittenPerChunk * config.d1ImportMaxOperationsPerUtcDay !== config.d1ImportMaxRowsWrittenPerUtcDay) {
-  errors.push('Baseline importer daily row ceiling must equal per-chunk row ceiling × daily operation ceiling.');
+  errors.push('Baseline importer row ceiling must equal per-chunk row ceiling × allowed operation ceiling.');
 }
-if (config.d1ImportMaxRowsWrittenPerUtcDay > 40000) errors.push('Baseline bootstrap D1 daily row ceiling may not exceed 40,000.');
+if (config.d1ImportMaxRowsWrittenPerUtcDay > 2000) errors.push('Baseline autonomous D1 row ceiling may not exceed 2,000 rows in the weekly operating day.');
 for (const flag of ['importReadsReviewedDropboxOnly','d1StagingOnly','withheldLocalizedNamesNeverEnterDisplayTable','baselineBootstrapThroughputOnly','transientSourceFailuresRetryWithoutCursorAdvance','freshRequestTimeoutPerRetryAttempt']) {
   if (config.policy?.[flag] !== true) errors.push(`Baseline importer/upstream policy ${flag} must be true.`);
 }
@@ -40,7 +40,7 @@ if (packageJson.scripts?.['db:knowledge-import'] !== 'node scripts/manage-d1-kno
 if (!fs.existsSync(bootstrapGuardPath)) errors.push('Baseline-specific D1 bootstrap row guard is missing.');
 else {
   const guard = fs.readFileSync(bootstrapGuardPath, 'utf8');
-  for (const needle of ['d1ImportMaxRowsWrittenPerChunk','d1ImportMaxOperationsPerUtcDay','d1ImportMaxRowsWrittenPerUtcDay','40000','statementCount']) {
+  for (const needle of ['d1ImportMaxRowsWrittenPerChunk','d1ImportMaxOperationsPerUtcDay','d1ImportMaxRowsWrittenPerUtcDay','statementCount']) {
     if (!guard.includes(needle)) errors.push(`Baseline D1 bootstrap guard is missing ${needle}.`);
   }
 }
@@ -50,10 +50,9 @@ else {
   const workflow = fs.readFileSync(workflowPath, 'utf8');
   for (const needle of [
     "workflows: ['Review Saints Baseline v1 language']",
-    "cron: '7 * * * *'",
     "D1_ENTITY_LIMIT: '125'",
     "D1_MAX_ROWS_PER_CHUNK: '2000'",
-    "D1_MAX_OPERATIONS_PER_DAY: '20'",
+    "D1_MAX_OPERATIONS_PER_DAY: '1'",
     `REVIEW_PROGRESS_STREAM: ${config.languageReviewProgressStream}`,
     `REVIEWED_STREAM_PREFIX: ${config.reviewedStreamPrefix}`,
     `IMPORT_PROGRESS_STREAM: ${config.importProgressStream}`,
@@ -64,6 +63,7 @@ else {
     'npm run db:knowledge-import',
     'finalize-wikidata-baseline-import.mjs',
   ]) if (!workflow.includes(needle)) errors.push(`Baseline importer workflow is missing required contract: ${needle}`);
+  if (/\bcron:/u.test(workflow)) errors.push('Baseline D1 importer must not poll on an independent cron; the weekly language-review completion drives it.');
 
   const prepareStart = workflow.indexOf('  prepare-reviewed-chunk:');
   const d1Start = workflow.indexOf('  import-d1-staging:');
@@ -92,12 +92,12 @@ for (const needle of ['applyBatchWithRollback','restoreDatabaseBookmark','verifi
 
 const sharedBudget = fs.readFileSync(path.join(root, 'scripts/autonomy/check-d1-daily-budget.mjs'), 'utf8');
 if (sharedBudget.includes('event=workflow_dispatch')) errors.push('Shared D1 budget must count all trigger types, not only workflow_dispatch.');
-for (const needle of ['canonicalBudgetRuns','effectiveMaximum','--maximum']) if (!sharedBudget.includes(needle)) errors.push(`Shared D1 budget is missing ${needle}.`);
+for (const needle of ['canonicalBudgetRuns','effectiveMaximum','assertWeeklyD1Window','--maximum']) if (!sharedBudget.includes(needle)) errors.push(`Shared D1 budget is missing ${needle}.`);
 
 const task = (registry.tasks ?? []).find((item) => item.id === 'saints-baseline-v1-importer');
 if (!task) errors.push('Automation registry is missing saints-baseline-v1-importer.');
 else {
-  if (task.mode !== 'scheduled' || JSON.stringify(task.crons) !== JSON.stringify(['7 * * * *'])) errors.push('Baseline importer must retain hourly recovery at minute 7 UTC during bootstrap.');
+  if (task.mode !== 'event-driven' || JSON.stringify(task.crons) !== JSON.stringify([])) errors.push('Baseline importer must be event-driven from the weekly review workflow and have no recovery polling cron.');
   if (task.publicationMode !== 'staging-only') errors.push('Baseline importer must remain staging-only.');
   if (task.archiveStream !== config.importReceiptStreamPrefix) errors.push('Baseline importer receipt stream differs from config.');
 }
@@ -114,6 +114,7 @@ const report = {
   importProgressStream: config.importProgressStream,
   importReceiptStreamPrefix: config.importReceiptStreamPrefix,
   importCommand: packageJson.scripts?.['db:knowledge-import'] ?? null,
+  mode: task?.mode ?? null,
   generatedAt: new Date().toISOString(),
 };
 console.log(JSON.stringify(report, null, 2));
