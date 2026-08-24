@@ -43,7 +43,6 @@ else {
   const workflow = fs.readFileSync(workflowPath, 'utf8');
   for (const needle of [
     "workflows: ['Normalize Saints Baseline v1 candidates']",
-    "cron: '53 * * * *'",
     `WIKIDATA_QUERY_VERSION: ${config.queryVersion}`,
     `NORMALIZATION_VERSION: '${config.normalizationVersion}'`,
     `LANGUAGE_REVIEW_VERSION: '${config.languageReviewVersion}'`,
@@ -56,6 +55,7 @@ else {
     'Archive immutable REVIEWED batch in Dropbox',
     'Advance verified language-review watermark',
   ]) if (!workflow.includes(needle)) errors.push(`Language-editor workflow is missing required contract: ${needle}`);
+  if (/\bcron:/u.test(workflow)) errors.push('Language Editor must not retain an independent polling cron; weekly normalization completion drives it.');
   for (const forbidden of ['scripts/osint/adapters/', 'wikidata.org', 'OSINT_WIKIDATA_PAGE_SIZE', 'OSINT_WIKIDATA_MAX_PAGES', 'run-manifest.mjs']) {
     if (workflow.includes(forbidden)) errors.push(`Language-editor workflow contains forbidden acquisition dependency: ${forbidden}`);
   }
@@ -79,7 +79,7 @@ if (/process\.exitCode\s*=\s*1/u.test(reviewer)) errors.push('Locale-specific la
 const task = (registry.tasks ?? []).find((item) => item.id === 'saints-baseline-v1-language-editor');
 if (!task) errors.push('Automation registry is missing saints-baseline-v1-language-editor.');
 else {
-  if (task.mode !== 'scheduled' || JSON.stringify(task.crons) !== JSON.stringify(['53 * * * *'])) errors.push('Language Editor must retain hourly recovery at minute 53 UTC.');
+  if (task.mode !== 'event-driven' || JSON.stringify(task.crons) !== JSON.stringify([])) errors.push('Language Editor must be event-driven from weekly normalization with no independent cron.');
   if (task.publicationMode !== 'staging-only') errors.push('Language Editor must remain staging-only.');
   if (task.archiveStream !== config.reviewedStreamPrefix) errors.push('Language Editor registry archive stream differs from epoch config.');
 }
@@ -92,7 +92,7 @@ const report = {
   normalizationVersion: config.normalizationVersion,
   languageReviewVersion: config.languageReviewVersion,
   reviewedStreamPrefix: config.reviewedStreamPrefix,
-  recoveryCron: task?.crons?.[0] ?? null,
+  mode: task?.mode ?? null,
   generatedAt: new Date().toISOString(),
 };
 console.log(JSON.stringify(report, null, 2));
