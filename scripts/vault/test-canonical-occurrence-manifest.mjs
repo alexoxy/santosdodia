@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 8, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 8, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 9, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 9, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -68,6 +68,7 @@ const expected = new Map([
   ['observance:peter-paul:roman-catholic', ['2026-06-29', 'solemnity', 'SOLENIDADE', 'rc:StsPeterPaulAp']],
   ['observance:elizabeth-portugal:roman-catholic', ['2026-07-04', 'obligatory-memorial', 'MO', 'rc:StElizabethPortugal']],
   ['observance:benedict-nursia:roman-catholic', ['2026-07-11', 'feast', 'FESTA', 'rc:StBenedict']],
+  ['observance:bridget-sweden:roman-catholic', ['2026-07-23', 'feast', 'FESTA', 'rc:StBridget']],
   ['observance:matthew-apostle:roman-catholic', ['2026-09-21', 'feast', 'FESTA', 'rc:StMatthewEvangelist']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
@@ -122,4 +123,4 @@ const bridgeDateDrift = structuredClone(bridgeDataset);
 bridgeDateDrift.bridges[0].dateISO = '2026-01-29';
 expectFailure('Legacy bridge date guard', () => build(occurrenceDataset, jurisdictionDataset, bridgeDateDrift), 'date differs from canonical Occurrence');
 
-console.log(`Canonical Occurrence Vault release test passed: ${first.occurrences.length} Portugal 2026 shadow occurrences with reviewed SNL date/rank vectors, Saints Joseph and Benedict source-bound and Joachim/Anne correctly absent from the annual slice, deterministic root ${first.manifest.rootSha256}.`);
+console.log(`Canonical Occurrence Vault release test passed: ${first.occurrences.length} Portugal 2026 shadow occurrences with reviewed SNL date/rank vectors, Saints Joseph, Benedict and Bridget source-bound and Joachim/Anne correctly absent from the annual slice, deterministic root ${first.manifest.rootSha256}.`);

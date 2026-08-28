@@ -184,6 +184,26 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "recognition:bridget-sweden:roman-catholic",
+      "personId": "bridget-sweden",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["religious", "patron-of-europe"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/23/st--bridget--religious--patron-of-europe.html",
+          "claimTypes": ["saint-designation", "identity", "religious", "patron-of-europe"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "recognition:peter-apostle:roman-catholic",
       "personId": "peter-apostle",
       "churchId": "church:roman-catholic",

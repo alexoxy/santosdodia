@@ -38,8 +38,8 @@ const explicitBridges = bridgeDataset?.bridges ?? [];
 assert(occurrenceDataset?.status === 'repository-reviewed-occurrence-anchors', 'Coverage requires reviewed canonical Occurrences.');
 assert(bridgeDataset?.status === 'repository-reviewed-read-only-compatibility-bridge' && bridgeDataset?.mutationAllowed === false, 'Coverage requires read-only legacy bridges.');
 assert(bridgeDataset?.legacyReleaseId === coverage.sourceReleaseId, 'Legacy bridge targets a different source release.');
-assert(explicitOccurrences.length === 8 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly eight.');
-assert(explicitBridges.length === 8 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the eight canonical Occurrences.');
+assert(explicitOccurrences.length === 9 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly nine.');
+assert(explicitBridges.length === 9 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the nine canonical Occurrences.');
 
 assert(temporalShadow?.schemaVersion === 1 && temporalShadow?.status === 'approved-release-temporal-shadow-mappings', 'Temporal shadow mapping dataset is invalid.');
 assert(temporalShadow?.sourceReleaseId === coverage.sourceReleaseId && temporalShadow?.mutationAllowed === false, 'Temporal shadow must target the approved release and remain read-only.');
@@ -112,8 +112,8 @@ for (const familyLegacyId of familyPresentLegacyIds) {
 }
 
 const totalMapped = explicitOccurrences.length + temporalShadow.mappings.length + familyPresentLegacyIds.length;
-assert(totalMapped === 60 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 60/389.');
-assert(coverage.coverage.remainingLegacyOccurrences === 329 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 329.');
+assert(totalMapped === 61 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 61/389.');
+assert(coverage.coverage.remainingLegacyOccurrences === 328 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 328.');
 assert(coverage.coverage.requiredForPromotion === 389 && coverage.coverage.promotionAllowed === false, 'Promotion must remain blocked until 389/389.');
 assert(legacyIds.size === totalMapped, 'Every counted mapping must cover one unique legacy occurrence identity.');
 assert(!legacyIds.has('rc:StsJoachimAnne'), 'Joachim/Anne must not be fabricated in the Portugal 2026 source release.');
@@ -130,5 +130,5 @@ for (const key of [
 ]) assert(policy[key] === true, `Coverage safety policy ${key} must remain true.`);
 
 const coveragePercent = Number(((totalMapped / 389) * 100).toFixed(3));
-assert(coveragePercent === 15.424, `Unexpected canonical coverage percentage ${coveragePercent}.`);
-console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 8 explicit + 5 TemporalRule + 47 precedence-surviving family rows; 329 remaining, promotion blocked.`);
+assert(coveragePercent === 15.681, `Unexpected canonical coverage percentage ${coveragePercent}.`);
+console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 9 explicit + 5 TemporalRule + 47 precedence-surviving family rows; 328 remaining, promotion blocked.`);

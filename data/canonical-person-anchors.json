@@ -22,6 +22,12 @@
       "names": { "en": "Saint Benedict of Nursia", "pt": "São Bento de Núrsia", "es": "San Benito de Nursia", "it": "San Benedetto da Norcia" }
     },
     {
+      "id": "bridget-sweden",
+      "primaryObservanceId": "rc:StBridget",
+      "category": "saint",
+      "names": { "en": "Saint Bridget of Sweden", "pt": "Santa Brígida da Suécia", "es": "Santa Brígida de Suecia", "it": "Santa Brigida di Svezia" }
+    },
+    {
       "id": "matthew-apostle",
       "primaryObservanceId": "rc:StMatthewEvangelist",
       "category": "apostle",

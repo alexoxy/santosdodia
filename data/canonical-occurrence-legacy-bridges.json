@@ -41,6 +41,11 @@
       "dateISO": "2026-07-11"
     },
     {
+      "occurrenceId": "occurrence:2026-07-23:bridget-sweden:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBridget",
+      "dateISO": "2026-07-23"
+    },
+    {
       "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
       "legacyObservanceId": "rc:StMatthewEvangelist",
       "dateISO": "2026-09-21"
