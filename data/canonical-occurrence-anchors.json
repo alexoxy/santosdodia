@@ -82,6 +82,19 @@
       "verifiedAt": "2026-08-22"
     },
     {
+      "id": "occurrence:2026-07-11:benedict-nursia:roman-catholic:pt",
+      "observanceId": "observance:benedict-nursia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-11",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-11","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Bento, Abade, Padroeiro da Europa – FESTA"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
       "observanceId": "observance:matthew-apostle:roman-catholic",
       "churchId": "church:roman-catholic",

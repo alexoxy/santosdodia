@@ -109,6 +109,21 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "observance:benedict-nursia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"benedict-nursia","recognitionId":"recognition:benedict-nursia:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "observance:peter-paul:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceKey": "principal-commemoration",

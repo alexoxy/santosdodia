@@ -16,6 +16,12 @@
       "names": { "en": "Saint Joseph", "pt": "São José", "es": "San José", "it": "San Giuseppe" }
     },
     {
+      "id": "benedict-nursia",
+      "primaryObservanceId": "rc:StBenedict",
+      "category": "saint",
+      "names": { "en": "Saint Benedict of Nursia", "pt": "São Bento de Núrsia", "es": "San Benito de Nursia", "it": "San Benedetto da Norcia" }
+    },
+    {
       "id": "matthew-apostle",
       "primaryObservanceId": "rc:StMatthewEvangelist",
       "category": "apostle",
