@@ -8,12 +8,14 @@
       "churchId": "church:roman-catholic",
       "calendarSystem": "gregorian",
       "observanceFamilyKey": "lent-weekday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}-{weekday}:roman-catholic",
       "anchor": "gregorian-easter",
       "baseOffsetDays": -42,
       "weekRange": {"min": 1, "max": 5},
       "weekStrideDays": 7,
       "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6},
       "candidateRequiresPrecedenceResolution": true,
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -21,12 +23,14 @@
       "churchId": "church:roman-catholic",
       "calendarSystem": "gregorian",
       "observanceFamilyKey": "easter-weekday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}-{weekday}:roman-catholic",
       "anchor": "gregorian-easter",
       "baseOffsetDays": 0,
       "weekRange": {"min": 2, "max": 7},
       "weekStrideDays": 7,
       "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6},
       "candidateRequiresPrecedenceResolution": true,
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
       "verifiedAt": "2026-08-22"
     }
   ]
