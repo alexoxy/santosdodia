@@ -17,6 +17,7 @@ const bridgeDataset = readJson('data/canonical-occurrence-legacy-bridges.json');
 const jurisdictionDataset = readJson('data/canonical-jurisdiction-anchors.json');
 const temporalRuleDataset = readJson('data/canonical-temporal-rule-anchors.json');
 const temporalShadow = readJson('data/migrations/roman-catholic-pt-2026-v2.temporal-shadow.json');
+const temporalFamilyDataset = readJson('data/canonical-temporal-rule-families.json');
 const temporalFamilyShadow = readJson('data/migrations/roman-catholic-pt-2026-v2.temporal-family-shadow.json');
 
 assert(coverage?.schemaVersion === 1 && coverage?.migrationId === 'roman-catholic-pt-2026-v2-to-canonical-occurrence-v1', 'Canonical migration coverage gate identity changed unexpectedly.');
@@ -51,12 +52,15 @@ assert(Array.isArray(temporalShadow.mappings) && temporalShadow.mappings.length 
 
 assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow?.status === 'approved-release-temporal-family-shadow', 'Temporal family shadow is invalid.');
 assert(temporalFamilyShadow?.sourceReleaseId === coverage.sourceReleaseId && temporalFamilyShadow?.mutationAllowed === false, 'Temporal family shadow must target the approved release and remain read-only.');
-assert(temporalFamilyShadow.sourceArtifact.artifactId === approval.artifacts.release.id, 'Temporal family shadow artifact differs from approval.');
+assert(temporalFamilyShadow.sourceArtifact.workflowRunId === approval.stagingWorkflow.runId && temporalFamilyShadow.sourceArtifact.artifactId === approval.artifacts.release.id, 'Temporal family shadow workflow/artifact differs from approval.');
 assert(`sha256:${temporalFamilyShadow.sourceArtifact.buildJsonSha256}` === approval.artifacts.release.files['build.json'], 'Temporal family shadow build hash differs from approval.');
 assert(temporalFamilyShadow.year === 2026, 'Temporal family shadow must remain bound to the reviewed 2026 equivalence snapshot.');
 const familyPresentLegacyIds = (temporalFamilyShadow.families ?? []).flatMap((item) => item.presentLegacyIds ?? []);
+const familyMappings = (temporalFamilyShadow.families ?? []).flatMap((item) => (item.presentMappings ?? []).map((mapping) => ({ ...mapping, familyId: item.familyId })));
 const familyPresentSet = new Set(familyPresentLegacyIds);
 assert(familyPresentLegacyIds.length === 47 && familyPresentSet.size === 47 && familyPresentLegacyIds.length === coverage.coverage.temporalRuleFamilyShadowOccurrences, 'Temporal family coverage must be exactly 47 unique precedence-surviving rows.');
+assert(familyMappings.length === 47 && new Set(familyMappings.map((item) => item.sourceOccurrenceId)).size === 47 && new Set(familyMappings.map((item) => item.sourceRecordHash)).size === 47 && new Set(familyMappings.map((item) => item.occurrenceId)).size === 47, 'Temporal family coverage requires 47 unique exact source and canonical occurrence mappings.');
+assert(familyMappings.every((item) => familyPresentSet.has(item.legacyObservanceId) && item.legacyRank === 'weekday' && item.reviewStatus === 'inherited-safe' && item.resolution === 'inherit-general-canonical-binding'), 'Temporal family exact mappings differ from the approved precedence-surviving identities.');
 assert(Array.isArray(temporalFamilyShadow.suppressedCandidates) && temporalFamilyShadow.suppressedCandidates.length === 19, 'Temporal family snapshot must preserve exactly 19 precedence suppressions.');
 for (const suppression of temporalFamilyShadow.suppressedCandidates) {
   assert(!familyPresentSet.has(suppression.suppressingLegacyObservanceId), 'A suppressing observance must not be counted as the suppressed temporal candidate.');
@@ -92,6 +96,7 @@ try {
   fs.writeFileSync(path.join(temporaryDirectory, 'calendar-engine.js'), compiled.outputText, 'utf8');
   const calendar = await import(`${pathToFileURL(path.join(temporaryDirectory, 'calendar-engine.js')).href}?v=${Date.now()}`);
   const temporalRules = new Map((temporalRuleDataset?.rules ?? []).map((item) => [item.id, item]));
+  const temporalFamilies = new Map((temporalFamilyDataset?.families ?? []).map((item) => [item.id, item]));
 
   for (const mapping of temporalShadow.mappings) {
     assert(!legacyIds.has(mapping.legacyObservanceId), `Duplicate legacy coverage across explicit/temporal mappings: ${mapping.legacyObservanceId}.`);
@@ -101,6 +106,17 @@ try {
     const resolved = calendar.resolveDateRule(rule.dateRule, temporalShadow.target.year);
     assert(resolved.status === 'resolved' && resolved.dateISO === mapping.expectedDateISO, `${mapping.temporalRuleId} does not match approved date ${mapping.expectedDateISO}.`);
     assert(mapping.legacyRank === 'solemnity', `${mapping.occurrenceId} temporal bootstrap rank differs from approved release.`);
+  }
+
+  for (const mapping of familyMappings) {
+    const family = temporalFamilies.get(mapping.familyId);
+    assert(family?.candidateRequiresPrecedenceResolution === true, `${mapping.occurrenceId} references unknown or unsafe TemporalRuleFamily ${mapping.familyId}.`);
+    const weekdayOffset = family.weekdayOffsets?.[mapping.weekday];
+    assert(Number.isInteger(weekdayOffset), `${mapping.occurrenceId} has an invalid weekday family member.`);
+    const offsetDays = family.baseOffsetDays + ((mapping.week - 1) * family.weekStrideDays) + weekdayOffset;
+    const resolved = calendar.resolveDateRule({ type: 'relative', calendar: 'gregorian', anchor: family.anchor, offsetDays }, temporalFamilyShadow.year);
+    assert(resolved.status === 'resolved' && resolved.dateISO === mapping.expectedDateISO, `${mapping.occurrenceId} does not match its canonical TemporalRuleFamily date.`);
+    assert(mapping.sourceOccurrenceId.startsWith(`snl-pt-${mapping.expectedDateISO}-`) && /^[a-f0-9]{64}$/u.test(mapping.sourceRecordHash), `${mapping.occurrenceId} lacks an exact approved source row.`);
   }
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
