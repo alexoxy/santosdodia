@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-08-28 16:09 UTC
+Updated: 2026-08-28 16:17 UTC
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 Machine contract: `config/product-platform-contract.json`
 Status: active development; Portugal 2026 baseline release published and 365-row reconciliation ledger archived; perennial Sanctorale cutover remains fail-closed
@@ -99,7 +99,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 - Its staging archive is present at `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/9f2adfc7feeb77bed919224c9981646fb684f9e0/`; `validation.json` reports 389 occurrences, 365 days, 1945 labels, `validated-for-d1-staging` and `productionApproved: false`.
 - PR #231 head commit `b0250936dd947e2a5c678449b444a656721cb4d3` passed Product BUILD `33183480842`, Product publish staging `33183480896`, Quality `33183480932` and Wikidata retry quality `33183480979`.
 - Its staging archive is present at `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/b0250936dd947e2a5c678449b444a656721cb4d3/`; `validation.json` reports 389 occurrences, 365 days, 1945 labels, `validated-for-d1-staging` and `productionApproved: false`.
-- The updated seven-anchor reconciliation ledger from commit `66d1b2df8a5ef651865a69c7d1922cb4c4f8a4d6` remains archived in Dropbox (149822 bytes, server-modified `2026-08-28T14:05:34Z`); the new eight-anchor repository gate has not been promoted or represented as this archived ledger.
+- The updated seven-anchor reconciliation ledger from commit `66d1b2df8a5ef651865a69c7d1922cb4c4f8a4d6` remains archived in Dropbox (149822 bytes, server-modified `2026-08-28T14:05:34Z`); the current nine-anchor repository gate has not been promoted or represented as this archived ledger.
 - Latest staging validation receipt:
   `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/ed1dfc2c07fcd0de254893305c09d1d4c68ab78f/validation.json`.
 - Latest production receipt:
@@ -138,7 +138,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 - Open issues: #181 only, the single strategy umbrella.
 - Stale PR #167 was closed; its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate.
 - Legacy issues #10 and #11 were closed as superseded tracking surfaces; their history remains available.
-- Dependency PRs #145, #216 and #228 and delivery PRs #211–#213, #217–#225, #229, #231 and #233 are merged.
+- Dependency PRs #145, #216 and #228 and delivery PRs #211–#213, #217–#225, #229, #231, #233 and checkpoint PR #234 are merged.
 
 ### Branches
 
@@ -166,7 +166,8 @@ Merged/superseded strategy and current-cycle branches are additional deletion ca
 - `feature/pt-2026-reconciliation-ledger`.
 - `feature/saint-joseph-sanctorale-anchor-20260828`.
 - `feature/saint-benedict-sanctorale-anchor-20260828`.
-- `feature/saint-bridget-sanctorale-anchor-20260828`.
+- `feature/saint-bridget-sanctorale-anchor-20260828`;
+- `docs/checkpoint-20260828-saint-bridget`.
 
 The available GitHub connector does not expose branch-ref deletion. Do not simulate deletion by force-moving refs. Preserve every branch with unreviewed unique work.
 
