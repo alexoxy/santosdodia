@@ -17,6 +17,17 @@
       "verifiedAt": "2026-08-23"
     },
     {
+      "id": "sanctorale-rule:saint-joseph:general-roman",
+      "observanceId": "observance:saint-joseph:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":3,"day":19},
+      "liturgicalRank": "solemnity",
+      "precedenceClass": "general-calendar-solemnity",
+      "isSolemnity": true,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-3-19","claimTypes":["fixed-date","solemnity","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "sanctorale-rule:catherine-siena:europe",
       "observanceId": "observance:catherine-siena:roman-catholic",
       "scopeKey": "europe",

@@ -17,6 +17,19 @@
       "verifiedAt": "2026-08-22"
     },
     {
+      "id": "occurrence:2026-03-19:saint-joseph:roman-catholic:pt",
+      "observanceId": "observance:saint-joseph:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-03-19",
+      "rank": "solemnity",
+      "sourceRankCode": "SOLENIDADE",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-3-19","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"São JOSÉ, ESPOSO DA VIRGEM SANTA MARIA – SOLENIDADE"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
       "observanceId": "observance:catherine-siena:roman-catholic",
       "churchId": "church:roman-catholic",

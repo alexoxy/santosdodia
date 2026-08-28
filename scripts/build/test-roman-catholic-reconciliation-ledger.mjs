@@ -35,9 +35,10 @@ const report = {
 
 const ledger = buildReconciliationLedger(report, occurrences, rules);
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
-assert(ledger.counts.fixedSanctorale === 6 && ledger.counts.sourceBound === 6, 'Only the six reviewed canonical Sanctorale bindings may be marked source-bound.');
-assert(ledger.counts.unresolved === 359, 'Every unreviewed official occurrence must remain explicit and unresolved.');
+assert(ledger.counts.fixedSanctorale === 7 && ledger.counts.sourceBound === 7, 'Only the seven reviewed canonical Sanctorale bindings may be marked source-bound.');
+assert(ledger.counts.unresolved === 358, 'Every unreviewed official occurrence must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
+assert(ledger.entries.find(item => item.dateISO === '2026-03-19')?.canonicalObservanceId === 'observance:saint-joseph:roman-catholic', 'Saint Joseph canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-04')?.canonicalObservanceId === 'observance:elizabeth-portugal:roman-catholic', 'Portugal proper binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-08-11')?.classification === 'unresolved', 'Text similarity must not create an identity binding.');
 
@@ -59,4 +60,4 @@ let annualRuleRejected = false;
 try { buildReconciliationLedger(report, occurrences, annualizedRule); } catch { annualRuleRejected = true; }
 assert(annualRuleRejected, 'Perennial rules containing cloned annual years must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, six source-bound fixed Sanctorale anchors, 359 explicit unresolved entries and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, seven source-bound fixed Sanctorale anchors, 358 explicit unresolved entries and no label-derived identity.');

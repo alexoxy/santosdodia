@@ -73,11 +73,12 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 6, 'Initial Portugal Sanctorale materialization must remain shadow-only with six reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 7, 'Portugal Sanctorale materialization must remain shadow-only with seven reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
     ['observance:thomas-aquinas:roman-catholic', ['2026-01-28', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:saint-joseph:roman-catholic', ['2026-03-19', 'solemnity', 3, 'general-roman']],
     ['observance:catherine-siena:roman-catholic', ['2026-04-29', 'feast', 8, 'europe']],
     ['observance:john-baptist-nativity:roman-catholic', ['2026-06-24', 'solemnity', 3, 'general-roman']],
     ['observance:peter-paul:roman-catholic', ['2026-06-29', 'solemnity', 3, 'general-roman']],
@@ -96,7 +97,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 6, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 7, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -106,8 +107,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The six reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The six reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The seven reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The seven reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     assert(day?.celebratedCandidateId === candidate.id, `${candidate.observanceId} must win the final 2026 precedence resolution on ${candidate.dateISO}.`);
@@ -120,6 +121,13 @@ try {
   const june29 = annual2025.finalCalendar.days.find(item => item.dateISO === '2025-06-29');
   assert(peterPaul2025 && june29?.celebratedCandidateId === peterPaul2025.id, 'Peter and Paul solemnity must outrank an Ordinary Time Sunday in 2025.');
   assert(june29.precedence.winningPrecedenceLevel === 3, 'Peter and Paul 2025 must resolve at precedence level 3 over the level-6 Sunday.');
+
+  const pt2023 = sanctorale.materializeRomanSanctoraleCandidates(2023, rules, policies, 'roman-sanctorale-policy:pt');
+  const annual2023 = materialize.materializeRomanAnnualCalendarWithTransfers(2023, roman.ROMAN_PORTUGAL_POLICY, pt2023.candidates);
+  const joseph2023 = pt2023.candidates.find(item => item.observanceId === 'observance:saint-joseph:roman-catholic');
+  assert(annual2023.status === 'resolved' && annual2023.finalCalendar, 'The reviewed Sanctorale rules must resolve through the 2023 transfer case.');
+  assert(joseph2023 && annual2023.appliedTransfers.some(item => item.candidateId === joseph2023.id && item.targetDateISO === '2023-03-20'), 'The canonical Saint Joseph rule must transfer from the 2023 Lent Sunday to 20 March.');
+  assert(annual2023.finalCalendar.days.find(item => item.dateISO === '2023-03-20')?.celebratedCandidateId === joseph2023.id, 'The transferred canonical Saint Joseph candidate must win on 20 March 2023.');
 
   const overrideRules = deepClone(rules);
   overrideRules.rules.push({
@@ -168,7 +176,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, six perennial Portugal vectors, 2026 canonical equivalence, 2025 regeneration and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, seven perennial Portugal vectors, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

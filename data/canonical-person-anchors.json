@@ -10,6 +10,12 @@
       "names": { "en": "Saint John the Baptist", "pt": "São João Batista", "es": "San Juan Bautista", "it": "San Giovanni Battista" }
     },
     {
+      "id": "saint-joseph",
+      "primaryObservanceId": "rc:StJoseph",
+      "category": "saint",
+      "names": { "en": "Saint Joseph", "pt": "São José", "es": "San José", "it": "San Giuseppe" }
+    },
+    {
       "id": "matthew-apostle",
       "primaryObservanceId": "rc:StMatthewEvangelist",
       "category": "apostle",
