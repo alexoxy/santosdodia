@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 10, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 11, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 11, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 12, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -76,6 +76,8 @@ const joseph = first.observances.find((item) => item.observanceId === 'observanc
 assert(joseph?.observanceKey === 'principal-commemoration' && joseph.observanceType === 'person-commemoration' && joseph.subjects.length === 1 && joseph.subjects[0].personId === 'saint-joseph', 'Saint Joseph must have one Church-scoped canonical Observance without carrying annual date or rank.');
 const benedict = first.observances.find((item) => item.observanceId === 'observance:benedict-nursia:roman-catholic');
 assert(benedict?.observanceKey === 'principal-commemoration' && benedict.observanceType === 'person-commemoration' && benedict.subjects.length === 1 && benedict.subjects[0].personId === 'benedict-nursia', 'Saint Benedict must have one Church-scoped canonical Observance without carrying annual date or European rank.');
+const bridget = first.observances.find((item) => item.observanceId === 'observance:bridget-sweden:roman-catholic');
+assert(bridget?.observanceKey === 'principal-commemoration' && bridget.observanceType === 'person-commemoration' && bridget.subjects.length === 1 && bridget.subjects[0].personId === 'bridget-sweden', 'Saint Bridget must have one Church-scoped canonical Observance without carrying annual date or European rank.');
 
 for (const [id, people] of [
   ['observance:peter-paul:roman-catholic', ['paul-apostle', 'peter-apostle']],
