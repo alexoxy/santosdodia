@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-08-28 15:11 UTC
+Updated: 2026-08-28 16:09 UTC
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 Machine contract: `config/product-platform-contract.json`
 Status: active development; Portugal 2026 baseline release published and 365-row reconciliation ledger archived; perennial Sanctorale cutover remains fail-closed
@@ -37,6 +37,7 @@ The strategic document is the binding, cumulative product vision until full impl
 - PR #224: fail-closed Portugal 2026 reconciliation ledger covering all 365 official daily rows; only six reviewed fixed Sanctorale bindings are source-bound and the remaining 359 are explicitly unresolved.
 - PR #229: Saint Joseph added as the seventh complete Person → Recognition → Observance → Occurrence → perennial Sanctorale chain; the 2023 transfer to 20 March is regression-tested, all 63 Quality steps passed and publication remains fail-closed.
 - PR #231: Saint Benedict of Nursia added as the eighth complete canonical chain and the first explicit Europe-scoped patronal feast materialised into Portugal; all four head workflows passed and publication remains fail-closed.
+- PR #233: Saint Bridget of Sweden added as the ninth complete canonical chain and a second independently evidenced Europe-scoped patronal feast; all four head workflows passed and publication remains fail-closed.
 - The 26-page global strategy was reviewed in full and aligned with current execution.
 - Rolling materialisation, rolling ICS, public calculator, civil/liturgical-year mapping, Roman Temporale, precedence, transfer scheduling and liturgical-colour logic were confirmed as shared infrastructure.
 
@@ -47,8 +48,8 @@ The strategic document is the binding, cumulative product vision until full impl
 - ledger coverage: 365/365 official daily rows;
 - archived source-bound fixed Sanctorale: 6;
 - archived unresolved rows: 359;
-- current repository reconciliation gate at main commit `e3a24379ade7ad6714418faf1282bdd3a30d8c54`: 8 source-bound fixed Sanctorale anchors and 357 unresolved rows;
-- current canonical migration shadow coverage: 60/389 (8 explicit Occurrences + 5 TemporalRule mappings + 47 precedence-surviving family rows), with 329 legacy occurrences still outside that migration coverage;
+- current repository reconciliation gate at main commit `fc2e70402c36891b34a19b67da2297a352032d2e`: 9 source-bound fixed Sanctorale anchors and 356 unresolved rows;
+- current canonical migration shadow coverage: 61/389 (9 explicit Occurrences + 5 TemporalRule mappings + 47 precedence-surviving family rows), with 328 legacy occurrences still outside that migration coverage;
 - Temporale and movable/transfer classifications remain 0 until reviewed authority bindings exist;
 - full semantic equivalence: false;
 - publication allowed: false;
@@ -94,6 +95,8 @@ This baseline publication does not authorize public cutover to incomplete perenn
 
 ## External evidence state
 
+- PR #233 head commit `9f2adfc7feeb77bed919224c9981646fb684f9e0` passed Product BUILD `33188392299`, Product publish staging `33188392293`, Quality `33188392175` and Wikidata retry quality `33188392227`.
+- Its staging archive is present at `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/9f2adfc7feeb77bed919224c9981646fb684f9e0/`; `validation.json` reports 389 occurrences, 365 days, 1945 labels, `validated-for-d1-staging` and `productionApproved: false`.
 - PR #231 head commit `b0250936dd947e2a5c678449b444a656721cb4d3` passed Product BUILD `33183480842`, Product publish staging `33183480896`, Quality `33183480932` and Wikidata retry quality `33183480979`.
 - Its staging archive is present at `/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/b0250936dd947e2a5c678449b444a656721cb4d3/`; `validation.json` reports 389 occurrences, 365 days, 1945 labels, `validated-for-d1-staging` and `productionApproved: false`.
 - The updated seven-anchor reconciliation ledger from commit `66d1b2df8a5ef651865a69c7d1922cb4c4f8a4d6` remains archived in Dropbox (149822 bytes, server-modified `2026-08-28T14:05:34Z`); the new eight-anchor repository gate has not been promoted or represented as this archived ledger.
@@ -116,7 +119,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 | Canonical context dimensions | Partial | Independent dimensions are contractual; public breadth remains incomplete. |
 | Evidence Vault and provenance | Partial | Immutable/hashed/review gates and CauseSanti verified canary receipt exist; broader source coverage remains incomplete. |
 | Roman perennial Temporale | Realised core | Deterministic annual generation and multi-year tests exist. |
-| Roman Sanctorale | Partial | Eight source-bound rules prove composition, Saint Joseph transfer handling and Europe-scoped Saint Benedict materialisation; the 365-row repository ledger records 357 unresolved official days and keeps cutover closed. |
+| Roman Sanctorale | Partial | Nine source-bound rules prove composition, Saint Joseph transfer handling and independent Europe-scoped Saint Benedict and Saint Bridget materialisation; the 365-row repository ledger records 356 unresolved official days and keeps cutover closed. |
 | Precedence, transfer and colours | Partial | Shared deterministic core exists; official Portugal regression coverage remains incomplete. |
 | Portugal 2026 baseline publication | Verified | Exact staging/production import run published with rollback receipt; reconciliation ledger independently archived from commit `0b6675e`. |
 | Rolling materialisation Y-1…Y+3 | Realised core | Automatic window and atomic materialisation tests exist. |
@@ -135,7 +138,7 @@ This baseline publication does not authorize public cutover to incomplete perenn
 - Open issues: #181 only, the single strategy umbrella.
 - Stale PR #167 was closed; its 14 unique commits remain preserved for selective reimplementation after the Portugal equivalence gate.
 - Legacy issues #10 and #11 were closed as superseded tracking surfaces; their history remains available.
-- Dependency PRs #145, #216 and #228 and delivery PRs #211–#213, #217–#225, #229 and #231 are merged.
+- Dependency PRs #145, #216 and #228 and delivery PRs #211–#213, #217–#225, #229, #231 and #233 are merged.
 
 ### Branches
 
@@ -163,13 +166,14 @@ Merged/superseded strategy and current-cycle branches are additional deletion ca
 - `feature/pt-2026-reconciliation-ledger`.
 - `feature/saint-joseph-sanctorale-anchor-20260828`.
 - `feature/saint-benedict-sanctorale-anchor-20260828`.
+- `feature/saint-bridget-sanctorale-anchor-20260828`.
 
 The available GitHub connector does not expose branch-ref deletion. Do not simulate deletion by force-moving refs. Preserve every branch with unreviewed unique work.
 
 ## Ordered roadmap for the next continuation
 
-1. Expand reviewed official occurrence-to-canonical Observance bindings and the Roman Sanctorale rule pack from the eight-rule seed; keep identity merge/split and Church/calendar authority decisions under permanent human review.
-2. Add source-bound Temporale and movable/transfer vectors to reduce the 357 unresolved ledger rows without using label similarity as identity.
+1. Expand reviewed official occurrence-to-canonical Observance bindings and the Roman Sanctorale rule pack from the nine-rule seed; keep identity merge/split and Church/calendar authority decisions under permanent human review.
+2. Add source-bound Temporale and movable/transfer vectors to reduce the 356 unresolved ledger rows without using label similarity as identity.
 3. Execute reconciliation across at least 2025–2029, explain every difference and keep public cutover disabled until the Portugal acceptance corpus reaches full semantic equivalence.
 4. Cut the public read model to the perennial engine only after equivalence, then rebuild Today as a compact text-first surface.
 5. Harden rolling ICS/calculator parity and persistent subscription semantics across independent context dimensions.
