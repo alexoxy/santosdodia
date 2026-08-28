@@ -36,6 +36,11 @@
       "dateISO": "2026-07-04"
     },
     {
+      "occurrenceId": "occurrence:2026-07-11:benedict-nursia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBenedict",
+      "dateISO": "2026-07-11"
+    },
+    {
       "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
       "legacyObservanceId": "rc:StMatthewEvangelist",
       "dateISO": "2026-09-21"

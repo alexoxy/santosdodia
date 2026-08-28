@@ -78,6 +78,17 @@
       "verifiedAt": "2026-08-23"
     },
     {
+      "id": "sanctorale-rule:benedict-nursia:europe",
+      "observanceId": "observance:benedict-nursia:roman-catholic",
+      "scopeKey": "europe",
+      "dateRule": {"type":"fixed","month":7,"day":11},
+      "liturgicalRank": "feast",
+      "precedenceClass": "proper-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-11","claimTypes":["fixed-date","europe-feast","patron-of-europe","portugal-materialization"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "sanctorale-rule:matthew-apostle:general-roman",
       "observanceId": "observance:matthew-apostle:roman-catholic",
       "scopeKey": "general-roman",

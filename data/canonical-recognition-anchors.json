@@ -164,6 +164,26 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "recognition:benedict-nursia:roman-catholic",
+      "personId": "benedict-nursia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["abbot", "patron-of-europe"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html",
+          "claimTypes": ["saint-designation", "identity", "abbot", "patron-of-europe"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "recognition:peter-apostle:roman-catholic",
       "personId": "peter-apostle",
       "churchId": "church:roman-catholic",
