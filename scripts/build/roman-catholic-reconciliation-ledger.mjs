@@ -4,6 +4,8 @@ import { pathToFileURL } from 'node:url';
 
 const OFFICIAL_SOURCE = 'portugal-national-liturgy-secretariat';
 const OFFICIAL_DOMAIN = 'liturgia.pt';
+const HOLY_SEE_DOMAIN = 'vatican.va';
+const PORTUGAL_RELEASE_ID = 'roman-catholic-pt-2026-v2';
 
 function daysInYear(year) {
   return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 366 : 365;
@@ -15,6 +17,10 @@ function isOfficialUrl(url) {
   const host = normalizedHost(url);
   return host === OFFICIAL_DOMAIN || host.endsWith(`.${OFFICIAL_DOMAIN}`);
 }
+function isHolySeeUrl(url) {
+  const host = normalizedHost(url);
+  return host === HOLY_SEE_DOMAIN || host.endsWith(`.${HOLY_SEE_DOMAIN}`);
+}
 function fixedDateForYear(year, rule) {
   const month = String(rule.dateRule.month).padStart(2, '0');
   const day = String(rule.dateRule.day).padStart(2, '0');
@@ -24,7 +30,46 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset) {
+function gregorianEaster(year) {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+function adventStart(year) {
+  const date = new Date(Date.UTC(year, 10, 27));
+  date.setUTCDate(date.getUTCDate() + ((7 - date.getUTCDay()) % 7));
+  return date;
+}
+
+function temporalDateForYear(year, rule) {
+  const dateRule = rule.dateRule;
+  assert(dateRule?.type === 'relative' && dateRule.calendar === 'gregorian', `Ledger only accepts deterministic Gregorian relative TemporalRules: ${rule.id}.`);
+  assert(Number.isInteger(dateRule.offsetDays), `TemporalRule ${rule.id} has an invalid day offset.`);
+  assert(!dateRule.weekdayAdjustment, `TemporalRule ${rule.id} requires unsupported weekday adjustment.`);
+  const date = dateRule.anchor === 'gregorian-easter'
+    ? gregorianEaster(year)
+    : dateRule.anchor === 'advent-start'
+      ? adventStart(year)
+      : null;
+  assert(date, `TemporalRule ${rule.id} has an unsupported anchor.`);
+  date.setUTCDate(date.getUTCDate() + dateRule.offsetDays);
+  return date.toISOString().slice(0, 10);
+}
+
+export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset, temporalRuleDataset, temporalShadow) {
   const year = Number(report?.year);
   const expectedDays = daysInYear(year);
   assert(Number.isInteger(year) && year >= 1970 && year <= 2200, 'Baseline year is invalid.');
@@ -33,6 +78,15 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(Array.isArray(report.daily) && report.daily.length === expectedDays, `Baseline must contain exactly ${expectedDays} daily rows.`);
   assert(occurrenceDataset?.schemaVersion === 1 && Array.isArray(occurrenceDataset.occurrences), 'Canonical occurrence anchors are invalid.');
   assert(ruleDataset?.schemaVersion === 1 && Array.isArray(ruleDataset.rules), 'Perennial Sanctorale rules are invalid.');
+  assert(temporalRuleDataset?.schemaVersion === 1 && Array.isArray(temporalRuleDataset.rules), 'Canonical TemporalRules are invalid.');
+  assert(temporalShadow?.schemaVersion === 1 && temporalShadow.status === 'approved-release-temporal-shadow-mappings', 'Approved TemporalRule shadow mappings are invalid.');
+  assert(temporalShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalShadow.mutationAllowed === false, 'TemporalRule shadow must remain read-only and bound to the approved Portugal release.');
+  assert(temporalShadow.target?.churchId === 'church:roman-catholic' && temporalShadow.target?.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'TemporalRule shadow Church/Jurisdiction differs from the ledger.');
+  assert(temporalShadow.target?.calendarSystem === 'gregorian' && temporalShadow.target?.year === year, 'TemporalRule shadow calendar/year differs from the ledger.');
+  assert(Number.isInteger(temporalShadow.sourceArtifact?.workflowRunId) && temporalShadow.sourceArtifact.workflowRunId > 0, 'TemporalRule shadow lacks an approved workflow identity.');
+  assert(Number.isInteger(temporalShadow.sourceArtifact?.artifactId) && temporalShadow.sourceArtifact.artifactId > 0, 'TemporalRule shadow lacks an approved artifact identity.');
+  assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
+  assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
 
   const rulesByObservance = new Map();
   for (const rule of ruleDataset.rules) {
@@ -53,6 +107,39 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     anchorsByDate.set(anchor.dateISO, { anchor, rule });
   }
 
+  const temporalRulesById = new Map();
+  for (const rule of temporalRuleDataset.rules) {
+    assert(!Object.hasOwn(rule, 'year'), `Perennial TemporalRule ${rule.id} must not contain an annual year.`);
+    assert(rule.churchId === 'church:roman-catholic' && rule.calendarSystem === 'gregorian', `TemporalRule ${rule.id} is outside the Roman Catholic Gregorian ledger.`);
+    assert(typeof rule.id === 'string' && !temporalRulesById.has(rule.id), `Duplicate or invalid TemporalRule ${String(rule.id)}.`);
+    assert(Array.isArray(rule.evidence) && rule.evidence.length > 0 && rule.evidence.every(item => isHolySeeUrl(item.url)), `TemporalRule ${rule.id} lacks competent Holy See evidence.`);
+    temporalRulesById.set(rule.id, rule);
+  }
+
+  const temporalByDate = new Map();
+  const temporalRuleIds = new Set();
+  const temporalLegacyIds = new Set();
+  const temporalSourceIds = new Set();
+  for (const mapping of temporalShadow.mappings) {
+    const rule = temporalRulesById.get(mapping.temporalRuleId);
+    assert(rule, `${mapping.occurrenceId} references unknown TemporalRule ${mapping.temporalRuleId}.`);
+    assert(!temporalRuleIds.has(rule.id), `TemporalRule ${rule.id} has multiple annual mappings.`);
+    assert(!temporalLegacyIds.has(mapping.legacyObservanceId), `Duplicate temporal legacy identity ${mapping.legacyObservanceId}.`);
+    assert(!temporalSourceIds.has(mapping.sourceOccurrenceId), `Duplicate temporal source occurrence ${mapping.sourceOccurrenceId}.`);
+    assert(/^2026-\d{2}-\d{2}$/u.test(mapping.expectedDateISO ?? '') && mapping.expectedDateISO.startsWith(`${year}-`), `Temporal mapping ${mapping.occurrenceId} has an invalid annual date.`);
+    assert(temporalDateForYear(year, rule) === mapping.expectedDateISO, `TemporalRule ${rule.id} does not resolve to approved date ${mapping.expectedDateISO}.`);
+    assert(typeof mapping.occurrenceId === 'string' && mapping.occurrenceId.startsWith(`occurrence:${mapping.expectedDateISO}:`), `Temporal mapping ${rule.id} has an invalid canonical Occurrence identity.`);
+    assert(typeof mapping.legacyObservanceId === 'string' && mapping.legacyObservanceId.startsWith('rc:'), `Temporal mapping ${rule.id} lacks its exact legacy identity.`);
+    assert(typeof mapping.sourceOccurrenceId === 'string' && mapping.sourceOccurrenceId.startsWith(`snl-pt-${mapping.expectedDateISO}-`), `Temporal mapping ${rule.id} lacks its exact Portugal source occurrence.`);
+    assert(/^[a-f0-9]{64}$/u.test(mapping.sourceRecordHash ?? ''), `Temporal mapping ${rule.id} lacks its exact source record hash.`);
+    assert(typeof mapping.legacyRank === 'string' && mapping.legacyRank.trim(), `Temporal mapping ${rule.id} lacks its approved legacy rank.`);
+    assert(!anchorsByDate.has(mapping.expectedDateISO) && !temporalByDate.has(mapping.expectedDateISO), `Multiple reviewed bindings exist on ${mapping.expectedDateISO}; precedence must be resolved first.`);
+    temporalRuleIds.add(rule.id);
+    temporalLegacyIds.add(mapping.legacyObservanceId);
+    temporalSourceIds.add(mapping.sourceOccurrenceId);
+    temporalByDate.set(mapping.expectedDateISO, { mapping, rule });
+  }
+
   const seenDates = new Set();
   const entries = report.daily.map(day => {
     const dateISO = String(day?.dateISO ?? '');
@@ -61,8 +148,9 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     seenDates.add(dateISO);
     const official = day?.labels?.pt;
     assert(official?.source === OFFICIAL_SOURCE && String(official.label ?? '').trim(), `${dateISO} lacks its official Portugal label.`);
-    const reviewed = anchorsByDate.get(dateISO);
-    if (!reviewed) {
+    const fixed = anchorsByDate.get(dateISO);
+    const temporal = temporalByDate.get(dateISO);
+    if (!fixed && !temporal) {
       return {
         dateISO,
         officialLabel: String(official.label).normalize('NFC').trim(),
@@ -74,6 +162,26 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         reason: 'no-reviewed-official-occurrence-to-perennial-rule-binding'
       };
     }
+    if (temporal) return {
+      dateISO,
+      officialLabel: String(official.label).normalize('NFC').trim(),
+      officialSource: OFFICIAL_SOURCE,
+      baselineReferenceEventId: day?.primary?.canonicalEventId ?? null,
+      classification: 'temporale',
+      sourceBound: true,
+      releaseEquivalent: true,
+      canonicalOccurrenceId: temporal.mapping.occurrenceId,
+      canonicalObservanceId: temporal.rule.observanceId,
+      perennialRuleId: temporal.rule.id,
+      liturgicalRank: temporal.mapping.legacyRank,
+      authorityEvidence: temporal.rule.evidence.map(item => item.url),
+      sourceBinding: {
+        releaseId: temporalShadow.sourceReleaseId,
+        legacyObservanceId: temporal.mapping.legacyObservanceId,
+        sourceOccurrenceId: temporal.mapping.sourceOccurrenceId,
+        sourceRecordHash: temporal.mapping.sourceRecordHash
+      }
+    };
     return {
       dateISO,
       officialLabel: String(official.label).normalize('NFC').trim(),
@@ -82,11 +190,11 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       classification: 'fixed-sanctorale',
       sourceBound: true,
       releaseEquivalent: true,
-      canonicalOccurrenceId: reviewed.anchor.id,
-      canonicalObservanceId: reviewed.anchor.observanceId,
-      perennialRuleId: reviewed.rule.id,
-      liturgicalRank: reviewed.anchor.rank,
-      authorityEvidence: reviewed.anchor.evidence.map(item => item.url)
+      canonicalOccurrenceId: fixed.anchor.id,
+      canonicalObservanceId: fixed.anchor.observanceId,
+      perennialRuleId: fixed.rule.id,
+      liturgicalRank: fixed.anchor.rank,
+      authorityEvidence: fixed.anchor.evidence.map(item => item.url)
     };
   });
 
@@ -131,10 +239,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const input = argument('--input');
   const occurrences = argument('--occurrences') ?? 'data/canonical-occurrence-anchors.json';
   const rules = argument('--rules') ?? 'data/canonical-roman-sanctorale-rule-anchors.json';
+  const temporalRules = argument('--temporal-rules') ?? 'data/canonical-temporal-rule-anchors.json';
+  const temporalShadow = argument('--temporal-shadow') ?? 'data/migrations/roman-catholic-pt-2026-v2.temporal-shadow.json';
   const output = argument('--output');
-  if (!input || !output) throw new Error('Usage: node scripts/build/roman-catholic-reconciliation-ledger.mjs --input <build.json> --output <ledger.json> [--occurrences <json>] [--rules <json>]');
+  if (!input || !output) throw new Error('Usage: node scripts/build/roman-catholic-reconciliation-ledger.mjs --input <build.json> --output <ledger.json> [--occurrences <json>] [--rules <json>] [--temporal-rules <json>] [--temporal-shadow <json>]');
   const read = file => JSON.parse(fs.readFileSync(path.resolve(file), 'utf8'));
-  const ledger = buildReconciliationLedger(read(input), read(occurrences), read(rules));
+  const ledger = buildReconciliationLedger(read(input), read(occurrences), read(rules), read(temporalRules), read(temporalShadow));
   fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true });
   fs.writeFileSync(path.resolve(output), `${JSON.stringify(ledger, null, 2)}\n`, 'utf8');
   console.log(JSON.stringify({ year: ledger.year, counts: ledger.counts, fullSemanticEquivalence: ledger.fullSemanticEquivalence, publicationAllowed: ledger.publicationAllowed }, null, 2));

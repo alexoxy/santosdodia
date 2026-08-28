@@ -191,6 +191,12 @@ A more specific rule for the same Observance overrides the less specific one; it
 
 The current shadow set proves thirteen fixed observances across those three scopes. Saint Joseph follows the complete Person → Recognition → Observance → annual Occurrence → perennial rule chain, including the real 2023 transfer from a Lent Sunday to 20 March. Saints Benedict and Bridget independently prove that Europe-scoped patronal feasts materialise into Portugal without collapsing Church, jurisdiction or locale. Saints Mark, Thomas, Mary Magdalene and James the Greater prove that several independently evidenced General Roman feasts can move through the same canonical pipeline as one reviewed batch without weakening identity, authority or publication gates. The set regenerates 2023, 2025 and 2026 through the same annual precedence/transfer engine and remains `publicationAllowed: false`. This is an architectural proof, not a public calendar switch. New rules are added only from canonical Observances and competent evidence, and the old production read model remains authoritative until full Portugal 2026 semantic equivalence is demonstrated.
 
+## Source-bound Temporale reconciliation
+
+The Portugal 2026 reconciliation ledger also consumes five reviewed TemporalRule shadow mappings: Ash Wednesday, the First Sunday of Lent, Easter Sunday, Pentecost Sunday and the First Sunday of Advent. A row is classified as `temporale` only when the canonical rule has competent Holy See evidence, its Gregorian computation resolves to the exact approved annual date, the read-only mapping remains bound to the approved Portugal release artifact and its legacy and source occurrence identities are unique. Collisions with fixed Sanctorale bindings, unknown rules, mismatched years or dates, duplicate mappings and untrusted authority evidence fail closed.
+
+These five rows were already part of the 65/389 migration-shadow total, so connecting them to the ledger does not increase migration coverage. It improves semantic reconciliation from 13 to 18 source-bound days and reduces the explicit unresolved partition from 352 to 347. `publicationAllowed` remains `false`; neither the migration gate nor the public read path changes.
+
 ## Seasons
 
 For a civil-date query the first Roman kernel resolves:
