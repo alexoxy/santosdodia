@@ -204,6 +204,86 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "recognition:mark-evangelist:roman-catholic",
+      "personId": "mark-evangelist",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["evangelist"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/25/st-mark--evangelist.html",
+          "claimTypes": ["saint-designation", "identity", "evangelist"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "recognition:thomas-apostle:roman-catholic",
+      "personId": "thomas-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/03/st--thomas--apostle.html",
+          "claimTypes": ["saint-designation", "identity", "apostle"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "recognition:mary-magdalene:roman-catholic",
+      "personId": "mary-magdalene",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["disciple-of-the-lord", "apostle-of-the-apostles"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/22/st--mary-magdalene--disciple-of-the-lord-.html",
+          "claimTypes": ["saint-designation", "identity", "disciple-of-the-lord", "apostle-of-the-apostles"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "recognition:james-greater-apostle:roman-catholic",
+      "personId": "james-greater-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/25/st--james-the--greater--apostle.html",
+          "claimTypes": ["saint-designation", "identity", "apostle"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "recognition:peter-apostle:roman-catholic",
       "personId": "peter-apostle",
       "churchId": "church:roman-catholic",

@@ -28,6 +28,17 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "sanctorale-rule:mark-evangelist:general-roman",
+      "observanceId": "observance:mark-evangelist:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":4,"day":25},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-4-25","claimTypes":["fixed-date","evangelist-feast","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "sanctorale-rule:catherine-siena:europe",
       "observanceId": "observance:catherine-siena:roman-catholic",
       "scopeKey": "europe",
@@ -64,6 +75,17 @@
       "verifiedAt": "2026-08-23"
     },
     {
+      "id": "sanctorale-rule:thomas-apostle:general-roman",
+      "observanceId": "observance:thomas-apostle:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":7,"day":3},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-3","claimTypes":["fixed-date","apostle-feast","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "sanctorale-rule:elizabeth-portugal:portugal",
       "observanceId": "observance:elizabeth-portugal:roman-catholic",
       "scopeKey": "portugal",
@@ -89,6 +111,17 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "sanctorale-rule:mary-magdalene:general-roman",
+      "observanceId": "observance:mary-magdalene:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":7,"day":22},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-22","claimTypes":["fixed-date","saint-feast","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "sanctorale-rule:bridget-sweden:europe",
       "observanceId": "observance:bridget-sweden:roman-catholic",
       "scopeKey": "europe",
@@ -100,6 +133,17 @@
         {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/lh/pdf/000LH_Abrev.pdf","claimTypes":["fixed-date","europe-feast","patron-of-europe"]},
         {"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-23","claimTypes":["portugal-materialization","feast"]}
       ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "sanctorale-rule:james-greater-apostle:general-roman",
+      "observanceId": "observance:james-greater-apostle:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":7,"day":25},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-25","claimTypes":["fixed-date","apostle-feast","general-calendar","portugal-materialization"]}],
       "verifiedAt": "2026-08-28"
     },
     {

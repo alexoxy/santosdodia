@@ -35,13 +35,17 @@ const report = {
 
 const ledger = buildReconciliationLedger(report, occurrences, rules);
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
-assert(ledger.counts.fixedSanctorale === 9 && ledger.counts.sourceBound === 9, 'Only the nine reviewed canonical Sanctorale bindings may be marked source-bound.');
-assert(ledger.counts.unresolved === 356, 'Every unreviewed official occurrence must remain explicit and unresolved.');
+assert(ledger.counts.fixedSanctorale === 13 && ledger.counts.sourceBound === 13, 'Only the thirteen reviewed canonical Sanctorale bindings may be marked source-bound.');
+assert(ledger.counts.unresolved === 352, 'Every unreviewed official occurrence must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-03-19')?.canonicalObservanceId === 'observance:saint-joseph:roman-catholic', 'Saint Joseph canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-04-25')?.canonicalObservanceId === 'observance:mark-evangelist:roman-catholic', 'Saint Mark canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-04')?.canonicalObservanceId === 'observance:elizabeth-portugal:roman-catholic', 'Portugal proper binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-07-03')?.canonicalObservanceId === 'observance:thomas-apostle:roman-catholic', 'Saint Thomas canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-11')?.canonicalObservanceId === 'observance:benedict-nursia:roman-catholic', 'Saint Benedict canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-07-22')?.canonicalObservanceId === 'observance:mary-magdalene:roman-catholic', 'Saint Mary Magdalene canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-23')?.canonicalObservanceId === 'observance:bridget-sweden:roman-catholic', 'Saint Bridget canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-07-25')?.canonicalObservanceId === 'observance:james-greater-apostle:roman-catholic', 'Saint James canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-08-11')?.classification === 'unresolved', 'Text similarity must not create an identity binding.');
 
 const duplicateDate = clone(report);
@@ -62,4 +66,4 @@ let annualRuleRejected = false;
 try { buildReconciliationLedger(report, occurrences, annualizedRule); } catch { annualRuleRejected = true; }
 assert(annualRuleRejected, 'Perennial rules containing cloned annual years must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, nine source-bound fixed Sanctorale anchors, 356 explicit unresolved entries and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, thirteen source-bound fixed Sanctorale anchors, 352 explicit unresolved entries and no label-derived identity.');
