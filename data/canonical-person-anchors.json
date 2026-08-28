@@ -28,6 +28,30 @@
       "names": { "en": "Saint Bridget of Sweden", "pt": "Santa Brígida da Suécia", "es": "Santa Brígida de Suecia", "it": "Santa Brigida di Svezia" }
     },
     {
+      "id": "mark-evangelist",
+      "primaryObservanceId": "rc:StMarkEvangelist",
+      "category": "saint",
+      "names": { "en": "Saint Mark the Evangelist", "pt": "São Marcos Evangelista", "es": "San Marcos Evangelista", "it": "San Marco Evangelista" }
+    },
+    {
+      "id": "thomas-apostle",
+      "primaryObservanceId": "rc:StThomasAp",
+      "category": "apostle",
+      "names": { "en": "Saint Thomas the Apostle", "pt": "São Tomé Apóstolo", "es": "Santo Tomás Apóstol", "it": "San Tommaso Apostolo" }
+    },
+    {
+      "id": "mary-magdalene",
+      "primaryObservanceId": "rc:StMaryMagdalene",
+      "category": "saint",
+      "names": { "en": "Saint Mary Magdalene", "pt": "Santa Maria Madalena", "es": "Santa María Magdalena", "it": "Santa Maria Maddalena" }
+    },
+    {
+      "id": "james-greater-apostle",
+      "primaryObservanceId": "rc:StJamesAp",
+      "category": "apostle",
+      "names": { "en": "Saint James the Greater", "pt": "São Tiago Maior", "es": "Santiago el Mayor", "it": "San Giacomo Maggiore" }
+    },
+    {
       "id": "matthew-apostle",
       "primaryObservanceId": "rc:StMatthewEvangelist",
       "category": "apostle",

@@ -16,6 +16,11 @@
       "dateISO": "2026-03-19"
     },
     {
+      "occurrenceId": "occurrence:2026-04-25:mark-evangelist:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMarkEvangelist",
+      "dateISO": "2026-04-25"
+    },
+    {
       "occurrenceId": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
       "legacyObservanceId": "rc:StCatherineSiena",
       "dateISO": "2026-04-29"
@@ -31,6 +36,11 @@
       "dateISO": "2026-06-29"
     },
     {
+      "occurrenceId": "occurrence:2026-07-03:thomas-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThomasAp",
+      "dateISO": "2026-07-03"
+    },
+    {
       "occurrenceId": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
       "legacyObservanceId": "rc:StElizabethPortugal",
       "dateISO": "2026-07-04"
@@ -41,9 +51,19 @@
       "dateISO": "2026-07-11"
     },
     {
+      "occurrenceId": "occurrence:2026-07-22:mary-magdalene:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMaryMagdalene",
+      "dateISO": "2026-07-22"
+    },
+    {
       "occurrenceId": "occurrence:2026-07-23:bridget-sweden:roman-catholic:pt",
       "legacyObservanceId": "rc:StBridget",
       "dateISO": "2026-07-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-25:james-greater-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJamesAp",
+      "dateISO": "2026-07-25"
     },
     {
       "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",

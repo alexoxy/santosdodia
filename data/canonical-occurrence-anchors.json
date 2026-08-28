@@ -30,6 +30,19 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "occurrence:2026-04-25:mark-evangelist:roman-catholic:pt",
+      "observanceId": "observance:mark-evangelist:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-25",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-4-25","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"São Marcos, evangelista – FESTA"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
       "observanceId": "observance:catherine-siena:roman-catholic",
       "churchId": "church:roman-catholic",
@@ -69,6 +82,19 @@
       "verifiedAt": "2026-08-22"
     },
     {
+      "id": "occurrence:2026-07-03:thomas-apostle:roman-catholic:pt",
+      "observanceId": "observance:thomas-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-03",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-3","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Tomé, apóstolo – FESTA"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
       "observanceId": "observance:elizabeth-portugal:roman-catholic",
       "churchId": "church:roman-catholic",
@@ -95,6 +121,19 @@
       "verifiedAt": "2026-08-28"
     },
     {
+      "id": "occurrence:2026-07-22:mary-magdalene:roman-catholic:pt",
+      "observanceId": "observance:mary-magdalene:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-22",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-22","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Maria Madalena – FESTA"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "occurrence:2026-07-23:bridget-sweden:roman-catholic:pt",
       "observanceId": "observance:bridget-sweden:roman-catholic",
       "churchId": "church:roman-catholic",
@@ -105,6 +144,19 @@
       "rank": "feast",
       "sourceRankCode": "FESTA",
       "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-23","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Brígida, religiosa, Padroeira da Europa – FESTA"}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "occurrence:2026-07-25:james-greater-apostle:roman-catholic:pt",
+      "observanceId": "observance:james-greater-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-25",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-25","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Tiago, apóstolo – FESTA"}],
       "verifiedAt": "2026-08-28"
     },
     {
