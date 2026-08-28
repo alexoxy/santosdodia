@@ -11,6 +11,11 @@
       "dateISO": "2026-01-28"
     },
     {
+      "occurrenceId": "occurrence:2026-03-19:saint-joseph:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJoseph",
+      "dateISO": "2026-03-19"
+    },
+    {
       "occurrenceId": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
       "legacyObservanceId": "rc:StCatherineSiena",
       "dateISO": "2026-04-29"

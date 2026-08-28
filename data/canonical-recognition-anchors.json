@@ -144,6 +144,26 @@
       "verifiedAt": "2026-08-22"
     },
     {
+      "id": "recognition:saint-joseph:roman-catholic",
+      "personId": "saint-joseph",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["spouse-of-blessed-virgin-mary", "patron-of-universal-church"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/03/19/st--joseph--groom-of-b--mary--patron-of-the-univeral-church.html",
+          "claimTypes": ["saint-designation", "identity", "spouse-of-blessed-virgin-mary", "patron-of-universal-church"]
+        }
+      ],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "recognition:peter-apostle:roman-catholic",
       "personId": "peter-apostle",
       "churchId": "church:roman-catholic",

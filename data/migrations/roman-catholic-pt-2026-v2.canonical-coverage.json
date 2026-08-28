@@ -26,11 +26,11 @@
     "occurrenceModelVersion": "1.0"
   },
   "coverage": {
-    "explicitOccurrenceAnchors": 6,
+    "explicitOccurrenceAnchors": 7,
     "temporalRuleShadowOccurrences": 5,
     "temporalRuleFamilyShadowOccurrences": 47,
-    "mappedOccurrenceAnchors": 58,
-    "remainingLegacyOccurrences": 331,
+    "mappedOccurrenceAnchors": 59,
+    "remainingLegacyOccurrences": 330,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -49,5 +49,5 @@
     "noRuntimeSwitchBeforeFullCoverage": true,
     "noDropboxPromotionImplied": true
   },
-  "verifiedAt": "2026-08-22"
+  "verifiedAt": "2026-08-28"
 }

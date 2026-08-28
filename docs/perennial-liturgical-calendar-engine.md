@@ -189,7 +189,7 @@ general-roman → europe → portugal
 
 A more specific rule for the same Observance overrides the less specific one; it never creates a duplicate celebration. Evidence URLs must belong to the competent authority domains declared by the policy. Unknown scopes, duplicate jurisdiction policies, duplicate override slots, inconsistent rank/solemnity flags and untrusted evidence fail closed.
 
-The initial shadow set proves six fixed observances across those three scopes. It regenerates 2025 and 2026 through the same annual precedence/transfer engine and remains `publicationAllowed: false`. This is an architectural proof, not a public calendar switch. New rules are added only from canonical Observances and competent evidence, and the old production read model remains authoritative until full 389/389 Portugal 2026 equivalence is demonstrated.
+The current shadow set proves seven fixed observances across those three scopes. Saint Joseph now follows the complete Person → Recognition → Observance → annual Occurrence → perennial rule chain, including the real 2023 transfer from a Lent Sunday to 20 March. The set regenerates 2023, 2025 and 2026 through the same annual precedence/transfer engine and remains `publicationAllowed: false`. This is an architectural proof, not a public calendar switch. New rules are added only from canonical Observances and competent evidence, and the old production read model remains authoritative until full Portugal 2026 semantic equivalence is demonstrated.
 
 ## Seasons
 

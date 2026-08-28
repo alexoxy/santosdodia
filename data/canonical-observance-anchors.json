@@ -94,6 +94,21 @@
       "verifiedAt": "2026-08-22"
     },
     {
+      "id": "observance:saint-joseph:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"saint-joseph","recognitionId":"recognition:saint-joseph:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/liturgical-holidays/solemnity-of-saint-joseph--the-spouse-of-the-blessed-virgin-mary.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-28"
+    },
+    {
       "id": "observance:peter-paul:roman-catholic",
       "churchId": "church:roman-catholic",
       "observanceKey": "principal-commemoration",

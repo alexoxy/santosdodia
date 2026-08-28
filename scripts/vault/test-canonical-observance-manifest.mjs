@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 8, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 9, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 9, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 10, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -72,6 +72,8 @@ assert(first.observances.filter((item) => item.subjects.some((subject) => subjec
 
 const john = first.observances.find((item) => item.observanceId === 'observance:john-baptist-nativity:roman-catholic');
 assert(john?.observanceKey === 'nativity' && john.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a keyed person-subject feast Observance.');
+const joseph = first.observances.find((item) => item.observanceId === 'observance:saint-joseph:roman-catholic');
+assert(joseph?.observanceKey === 'principal-commemoration' && joseph.observanceType === 'person-commemoration' && joseph.subjects.length === 1 && joseph.subjects[0].personId === 'saint-joseph', 'Saint Joseph must have one Church-scoped canonical Observance without carrying annual date or rank.');
 
 for (const [id, people] of [
   ['observance:peter-paul:roman-catholic', ['paul-apostle', 'peter-apostle']],
