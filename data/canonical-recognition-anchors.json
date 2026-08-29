@@ -450,7 +450,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew-apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
       "verifiedAt": "2026-08-29"
     },
     {
