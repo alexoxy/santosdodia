@@ -18,6 +18,7 @@ const required = [
   'app/advertising/page.tsx',
   'app/privacy/page.tsx',
   'app/saint/[id]/page.tsx',
+  'app/day/[date]/page.tsx',
   'app/date/[monthDay]/page.tsx',
   'app/sitemap.ts',
   'docs/editorial-content-policy.md',
@@ -88,9 +89,12 @@ if(!failures.length){
   expect(saint.includes('"@type": "Person"'),'Editorial saint profiles should expose Person structured data');
   expect(saint.includes('BreadcrumbList'),'Editorial profiles should expose breadcrumbs');
 
+  const datedDay=text('app/day/[date]/page.tsx');
+  expect(datedDay.includes('robots: { index: false, follow: true }'),'Dated utility pages must remain noindex/follow until they have a substantive editorial gate');
+
   const annualDay=text('app/date/[monthDay]/page.tsx');
   expect(annualDay.includes('canonical = `/date/${monthDay}`'),'Evergreen date pages need stable month-day canonicals');
-  expect(annualDay.includes('robots: { index: items.length > 0, follow: true }'),'Empty evergreen date pages must remain out of the index');
+  expect(annualDay.includes('robots: { index: Boolean(editorial), follow: true }'),'Evergreen date pages must be indexable only when SantosDia editorial context exists');
   expect(annualDay.includes('<DayView dateISO={dateISO} mode="annual" />'),'Evergreen date pages must use the annual day experience');
   expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
 
@@ -98,7 +102,9 @@ if(!failures.length){
   expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'),'Sitemap must include only saint biographies that pass the launched-locale editorial gate');
   expect(sitemap.includes('path: "/about"'),'About page must be in sitemap');
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
-  expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose only data-backed evergreen month-day pages');
+  expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'),'Sitemap must expose only evergreen dates with first-party editorial context');
+  expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose editorial evergreen month-day pages');
+  expect(!sitemap.includes('url: `${SITE_ORIGIN}/day/${item.dateISO}`'),'Thin dated utility pages must not be emitted in the sitemap');
 
   const profile=text('app/components/SaintProfile.tsx');
   expect(profile.includes('editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need an editorial-quality-guarded top banner');
@@ -153,4 +159,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin-content generation is prohibited, manual non-overlay placements remain constrained and privacy boundaries are intact.');
+console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin dated pages are noindex, the sitemap is editorially gated, manual non-overlay placements remain constrained and privacy boundaries are intact.');
