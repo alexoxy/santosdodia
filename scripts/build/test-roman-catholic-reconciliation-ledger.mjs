@@ -23,6 +23,9 @@ const temporalRules = read('data/canonical-temporal-rule-anchors.json');
 const temporalShadow = read('data/migrations/roman-catholic-pt-2026-v2.temporal-shadow.json');
 const temporalFamilies = read('data/canonical-temporal-rule-families.json');
 const temporalFamilyShadow = read('data/migrations/roman-catholic-pt-2026-v2.temporal-family-shadow.json');
+const movableTransferShadow = read('data/migrations/roman-catholic-pt-2026-v2.movable-transfer-shadow.json');
+const overlayReview = read('data/releases/roman-catholic-pt-2026.overlay-review.json');
+const overlayApproval = read('data/releases/roman-catholic-pt-2026.overlay-approval.json');
 const report = {
   schemaVersion: 2,
   build: 'roman-catholic-product-baseline-v1',
@@ -44,14 +47,17 @@ const buildLedger = ({
   temporalRuleAnchors = temporalRules,
   temporalMappings = temporalShadow,
   temporalFamilyAnchors = temporalFamilies,
-  temporalFamilyMappings = temporalFamilyShadow
-} = {}) => buildReconciliationLedger(baseline, occurrenceAnchors, sanctoraleRules, temporalRuleAnchors, temporalMappings, temporalFamilyAnchors, temporalFamilyMappings);
+  temporalFamilyMappings = temporalFamilyShadow,
+  movableTransferMappings = movableTransferShadow,
+  review = overlayReview,
+  approval = overlayApproval
+} = {}) => buildReconciliationLedger(baseline, occurrenceAnchors, sanctoraleRules, temporalRuleAnchors, temporalMappings, temporalFamilyAnchors, temporalFamilyMappings, movableTransferMappings, review, approval);
 
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 52 && ledger.counts.temporalRules === 5 && ledger.counts.temporalFamilyMembers === 47, 'The ledger must distinguish five TemporalRules from 47 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 13 && ledger.counts.sourceBound === 65, 'Only the 52 reviewed Temporale and thirteen reviewed Sanctorale bindings may be marked source-bound.');
-assert(ledger.counts.unresolved === 300, 'Every unreviewed official occurrence must remain explicit and unresolved.');
+assert(ledger.counts.fixedSanctorale === 13 && ledger.counts.movableOrTransfer === 11 && ledger.counts.sourceBound === 76, 'Only 52 reviewed Temporale, thirteen Sanctorale and eleven movable/transfer bindings may be marked source-bound.');
+assert(ledger.counts.unresolved === 289, 'Every unreviewed official occurrence must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-22')?.classification === 'temporale', 'First Sunday of Lent must remain classified as Temporale.');
@@ -62,6 +68,11 @@ assert(ledger.entries.find(item => item.dateISO === '2026-02-23')?.canonicalObse
 assert(ledger.entries.find(item => item.dateISO === '2026-05-23')?.sourceBinding?.legacyObservanceId === 'rc:EasterWeekday7Saturday', 'Final Easter weekday family binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-03-25')?.classification === 'unresolved', 'Suppressed Annunciation candidate must not count as a TemporalRuleFamily occurrence.');
 assert(ledger.entries.find(item => item.dateISO === '2026-05-13')?.classification === 'unresolved', 'Suppressed Fatima candidate must not count as a TemporalRuleFamily occurrence.');
+assert(ledger.entries.find(item => item.dateISO === '2026-01-04')?.jurisdictionTransfer?.decisionId === 'pt-2026-epiphany-transfer', 'Portugal Epiphany transfer binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-03-29')?.movableBindingType === 'principal-movable-day', 'Palm Sunday movable binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-05-17')?.jurisdictionTransfer?.fromDateISO === '2026-05-14', 'Portugal Ascension transfer binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-06-15')?.jurisdictionTransfer?.decisionId === 'pt-2026-immaculate-heart-transfer', 'Immaculate Heart transfer binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-11-22')?.perennialRuleId === 'temporal-rule:christ-the-king:roman-catholic', 'Christ the King movable binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-03-19')?.canonicalObservanceId === 'observance:saint-joseph:roman-catholic', 'Saint Joseph canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-04-25')?.canonicalObservanceId === 'observance:mark-evangelist:roman-catholic', 'Saint Mark canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-04')?.canonicalObservanceId === 'observance:elizabeth-portugal:roman-catholic', 'Portugal proper binding drifted.');
@@ -162,4 +173,34 @@ let wrongFamilyArtifactRejected = false;
 try { buildLedger({ temporalFamilyMappings: wrongFamilyArtifact }); } catch { wrongFamilyArtifactRejected = true; }
 assert(wrongFamilyArtifactRejected, 'TemporalRuleFamily mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 5 TemporalRules + 47 precedence-resolved TemporalRuleFamily members + 13 fixed Sanctorale anchors = 65 source-bound days, 300 explicit unresolved entries and no label-derived identity.');
+const wrongMovableBase = clone(movableTransferShadow);
+wrongMovableBase.mappings[0].baseDateISO = '2026-01-05';
+let wrongMovableBaseRejected = false;
+try { buildLedger({ movableTransferMappings: wrongMovableBase }); } catch { wrongMovableBaseRejected = true; }
+assert(wrongMovableBaseRejected, 'Movable base dates that differ from their TemporalRule must fail closed.');
+
+const transferWithoutApproval = clone(overlayApproval);
+transferWithoutApproval.decisionIds = transferWithoutApproval.decisionIds.filter(id => id !== 'pt-2026-ascension-transfer');
+let transferWithoutApprovalRejected = false;
+try { buildLedger({ approval: transferWithoutApproval }); } catch { transferWithoutApprovalRejected = true; }
+assert(transferWithoutApprovalRejected, 'Transfers without the exact explicit approval must fail closed.');
+
+const wrongMovableDestination = clone(movableTransferShadow);
+wrongMovableDestination.mappings.find(item => item.temporalRuleId === 'temporal-rule:palm-sunday:roman-catholic').expectedDateISO = '2026-03-30';
+let wrongMovableDestinationRejected = false;
+try { buildLedger({ movableTransferMappings: wrongMovableDestination }); } catch { wrongMovableDestinationRejected = true; }
+assert(wrongMovableDestinationRejected, 'Movable destination changes without a reviewed transfer must fail closed.');
+
+const duplicateMovableSource = clone(movableTransferShadow);
+duplicateMovableSource.mappings[1].sourceOccurrenceId = duplicateMovableSource.mappings[0].sourceOccurrenceId;
+let duplicateMovableSourceRejected = false;
+try { buildLedger({ movableTransferMappings: duplicateMovableSource }); } catch { duplicateMovableSourceRejected = true; }
+assert(duplicateMovableSourceRejected, 'Duplicate movable source rows must fail closed.');
+
+const wrongMovableArtifact = clone(movableTransferShadow);
+wrongMovableArtifact.sourceArtifact.artifactId += 1;
+let wrongMovableArtifactRejected = false;
+try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
+assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
+
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 5 TemporalRules + 47 precedence-resolved TemporalRuleFamily members + 13 fixed Sanctorale anchors + 11 movable/transfer bindings = 76 source-bound days, 289 explicit unresolved entries and no label-derived identity.');

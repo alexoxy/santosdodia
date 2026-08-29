@@ -57,11 +57,19 @@ export function buildCanonicalTemporalRuleVaultRelease(ruleDataset, observanceDa
     assert(raw?.calendarSystem === 'gregorian' && (church.calendarSystems ?? []).includes('gregorian'), `${raw.id} bootstrap requires Gregorian Church calendar support.`);
 
     const dateRule = raw?.dateRule;
-    assert(dateRule?.type === 'relative', `${raw.id} bootstrap requires a relative DateRule.`);
     assert(dateRule?.calendar === raw.calendarSystem, `${raw.id} DateRule calendar differs from TemporalRule calendarSystem.`);
-    assert(ALLOWED_ANCHORS.has(dateRule?.anchor), `${raw.id} uses unsupported anchor ${String(dateRule?.anchor)}.`);
-    assert(Number.isInteger(dateRule?.offsetDays) && Math.abs(dateRule.offsetDays) <= 400, `${raw.id} has invalid offsetDays.`);
-    assert(!('weekdayAdjustment' in dateRule), `${raw.id} bootstrap does not allow hidden weekday adjustments.`);
+    if (dateRule?.type === 'fixed') {
+      assert(Number.isInteger(dateRule.month) && dateRule.month >= 1 && dateRule.month <= 12, `${raw.id} has invalid fixed month.`);
+      assert(Number.isInteger(dateRule.day) && dateRule.day >= 1 && dateRule.day <= 31, `${raw.id} has invalid fixed day.`);
+      assert(!('anchor' in dateRule) && !('offsetDays' in dateRule) && !('weekdayAdjustment' in dateRule), `${raw.id} fixed DateRule contains relative-date fields.`);
+      const probe = new Date(Date.UTC(2000, dateRule.month - 1, dateRule.day));
+      assert(probe.getUTCMonth() + 1 === dateRule.month && probe.getUTCDate() === dateRule.day, `${raw.id} has an impossible fixed date.`);
+    } else {
+      assert(dateRule?.type === 'relative', `${raw.id} requires a fixed or relative DateRule.`);
+      assert(ALLOWED_ANCHORS.has(dateRule?.anchor), `${raw.id} uses unsupported anchor ${String(dateRule?.anchor)}.`);
+      assert(Number.isInteger(dateRule?.offsetDays) && Math.abs(dateRule.offsetDays) <= 400, `${raw.id} has invalid offsetDays.`);
+      assert(!('weekdayAdjustment' in dateRule), `${raw.id} bootstrap does not allow hidden weekday adjustments.`);
+    }
 
     const canonicalKey = `${raw.churchId}\u0000${raw.observanceId}\u0000${JSON.stringify(dateRule)}`;
     assert(!canonicalKeys.has(canonicalKey), `${raw.id} duplicates canonical TemporalRule state.`);

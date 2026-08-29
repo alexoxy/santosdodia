@@ -36,6 +36,83 @@
       "expectedDateISO": "2026-11-29",
       "sourceUrl": "https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf",
       "sourcePublisher": "Office for the Liturgical Celebrations of the Supreme Pontiff"
+    },
+    {
+      "temporalRuleId": "temporal-rule:epiphany:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-01-06",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:palm-sunday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-03-29",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-thursday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-04-02",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:good-friday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-04-03",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-saturday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-04-04",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:ascension:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-05-14",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:trinity-sunday:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-05-31",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:corpus-christi:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-06-04",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:sacred-heart:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-06-12",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:immaculate-heart:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-06-13",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christ-the-king:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-11-22",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
     }
   ]
 }

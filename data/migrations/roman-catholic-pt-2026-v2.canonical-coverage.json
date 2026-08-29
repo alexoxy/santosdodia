@@ -29,8 +29,9 @@
     "explicitOccurrenceAnchors": 13,
     "temporalRuleShadowOccurrences": 5,
     "temporalRuleFamilyShadowOccurrences": 47,
-    "mappedOccurrenceAnchors": 65,
-    "remainingLegacyOccurrences": 324,
+    "movableTransferShadowOccurrences": 11,
+    "mappedOccurrenceAnchors": 76,
+    "remainingLegacyOccurrences": 313,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -44,10 +45,13 @@
     "temporalShadowMustAnchorExactApprovedSourceRow": true,
     "temporalFamilyCandidatesRequirePrecedenceResolution": true,
     "suppressedTemporalFamilyCandidatesMustNotCountAsCoverage": true,
+    "movableTransferShadowMustResolveThroughCanonicalTemporalRule": true,
+    "reviewedJurisdictionTransferRequired": true,
+    "movableTransferShadowMustAnchorExactApprovedSourceRow": true,
     "noAutomaticCanonicalIdentityCreation": true,
     "noD1MutationBeforeFullCoverage": true,
     "noRuntimeSwitchBeforeFullCoverage": true,
     "noDropboxPromotionImplied": true
   },
-  "verifiedAt": "2026-08-28"
+  "verifiedAt": "2026-08-29"
 }
