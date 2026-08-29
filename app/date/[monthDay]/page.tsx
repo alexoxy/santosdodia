@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: { params: Promise<{ monthDay:
     title,
     description,
     alternates: { canonical },
-    robots: { index: items.length > 0, follow: true },
+    robots: { index: Boolean(editorial), follow: true },
     openGraph: { title, description, url: canonical, type: "website" },
     twitter: { card: "summary", title, description },
   };
