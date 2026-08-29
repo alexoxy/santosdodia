@@ -51,7 +51,7 @@ try {
   assert(JSON.stringify(first.manifest) === JSON.stringify(second.manifest), 'TemporalRule manifest must be deterministic.');
   assert(first.buildReceipt.sourceCommit !== second.buildReceipt.sourceCommit, 'Run metadata belongs in build receipt.');
   assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourceDatasetSha256, 'Source-byte provenance must detect formatting changes.');
-  assert(first.manifest.temporalRuleCount === 5, 'Reviewed TemporalRule bootstrap count changed.');
+  assert(first.manifest.temporalRuleCount === 16, 'Reviewed TemporalRule bootstrap count changed.');
   assert(first.manifest.runtimePublicationAllowed === false && first.manifest.productionMutationAllowed === false, 'TemporalRule bootstrap must remain shadow-only.');
   assert(first.manifest.semantics.temporalRuleSeparateFromObservance === true, 'TemporalRule must remain separate from Observance.');
   assert(first.manifest.semantics.temporalRuleSeparateFromOccurrence === true, 'TemporalRule must remain separate from Occurrence.');
@@ -60,7 +60,7 @@ try {
 
   const byId = new Map(first.rules.map((item) => [item.temporalRuleId, item]));
   assert(vectors?.schemaVersion === 1 && vectors?.status === 'official-temporal-reference-vectors' && Array.isArray(vectors?.vectors), 'Official temporal reference vectors are invalid.');
-  assert(vectors.vectors.length === 5, 'Expected five official temporal reference vectors.');
+  assert(vectors.vectors.length === 16, 'Expected sixteen official temporal reference vectors.');
   for (const vector of vectors.vectors) {
     const rule = byId.get(vector.temporalRuleId);
     assert(rule, `Reference vector points to unknown TemporalRule ${vector.temporalRuleId}.`);
@@ -75,6 +75,10 @@ try {
   assert(calendar.resolveDateRule(byId.get('temporal-rule:easter-sunday:roman-catholic').dateRule, 2026).dateISO === '2026-04-05', 'Easter 2026 reference failed.');
   assert(calendar.resolveDateRule(byId.get('temporal-rule:pentecost-sunday:roman-catholic').dateRule, 2026).dateISO === '2026-05-24', 'Pentecost 2026 reference failed.');
   assert(calendar.resolveDateRule(byId.get('temporal-rule:first-sunday-advent:roman-catholic').dateRule, 2026).dateISO === '2026-11-29', 'First Sunday of Advent 2026 reference failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:epiphany:roman-catholic').dateRule, 2026).dateISO === '2026-01-06', 'General Roman Epiphany base date failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:ascension:roman-catholic').dateRule, 2026).dateISO === '2026-05-14', 'General Roman Ascension base date failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:immaculate-heart:roman-catholic').dateRule, 2026).dateISO === '2026-06-13', 'General Roman Immaculate Heart base date failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:christ-the-king:roman-catholic').dateRule, 2026).dateISO === '2026-11-22', 'Christ the King 2026 reference failed.');
 
   for (const rule of first.rules) {
     for (const forbidden of ['year', 'date', 'dateISO', 'rank', 'grade', 'jurisdictionId', 'precedence', 'observedDesignation']) {
@@ -91,6 +95,12 @@ try {
   const wrongCalendar = structuredClone(ruleDataset);
   wrongCalendar.rules[0].dateRule.calendar = 'julian';
   expectFailure('TemporalRule calendar consistency guard', () => build(wrongCalendar), 'DateRule calendar differs');
+  const impossibleFixedDate = structuredClone(ruleDataset);
+  impossibleFixedDate.rules.find((item) => item.id === 'temporal-rule:epiphany:roman-catholic').dateRule.day = 32;
+  expectFailure('Fixed TemporalRule date guard', () => build(impossibleFixedDate), 'invalid fixed day');
+  const mixedFixedDate = structuredClone(ruleDataset);
+  mixedFixedDate.rules.find((item) => item.id === 'temporal-rule:epiphany:roman-catholic').dateRule.offsetDays = 0;
+  expectFailure('Mixed fixed/relative TemporalRule guard', () => build(mixedFixedDate), 'contains relative-date fields');
 
   console.log(`Canonical TemporalRule v1 test passed: ${first.rules.length} rules resolve all official 2026 vectors through the shared calendar engine; deterministic root ${first.manifest.rootSha256}.`);
 } finally {

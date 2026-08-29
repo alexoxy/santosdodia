@@ -53,6 +53,116 @@
       "scope": "church-attested",
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/dam/liturgy/pdf/2026/20260106-libretto-epifania.pdf","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:epiphany:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "epiphany",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:palm-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "palm-sunday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:holy-thursday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "holy-thursday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:good-friday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "good-friday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:holy-saturday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "holy-saturday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:ascension:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "ascension",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:trinity-sunday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "trinity-sunday",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:corpus-christi:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "corpus-christi",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:sacred-heart:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "sacred-heart",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:immaculate-heart:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "immaculate-heart",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:christ-the-king:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "christ-the-king",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }
