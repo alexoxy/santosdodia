@@ -202,6 +202,7 @@ for (const key of [
   'temporalShadowMustResolveThroughCanonicalTemporalRule','temporalShadowMustAnchorExactApprovedSourceRow',
   'temporalFamilyCandidatesRequirePrecedenceResolution','suppressedTemporalFamilyCandidatesMustNotCountAsCoverage',
   'movableTransferShadowMustResolveThroughCanonicalTemporalRule','reviewedJurisdictionTransferRequired','movableTransferShadowMustAnchorExactApprovedSourceRow',
+  'rollingCalculationProjectionMustNotCountAsAnnualCoverage',
   'noAutomaticCanonicalIdentityCreation','noD1MutationBeforeFullCoverage','noRuntimeSwitchBeforeFullCoverage','noDropboxPromotionImplied'
 ]) assert(policy[key] === true, `Coverage safety policy ${key} must remain true.`);
 
