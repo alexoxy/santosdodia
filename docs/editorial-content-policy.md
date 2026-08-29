@@ -131,3 +131,21 @@ This does not mean SantosDia claims authorship of third-party source material. I
 No external prose becomes public SantosDia prose merely because it was ingested, translated, shortened, reordered or lightly edited.
 
 The public corpus must be first-party by composition, first-party by storage and first-party by publication, while remaining evidence-backed and source-transparent.
+
+## 11. Product continuity during AdSense/Search remediation
+
+Editorial quality gates must not be confused with product availability.
+
+SantosDia must preserve its complete chronological and utility product even when particular routes are intentionally excluded from search indexes or monetization. The core chronology of saints and observances, Today, Calendar, Liturgical Calculator, rolling ICS/webcal, annual snapshots, search/discovery, context selection and machine-readable outputs remain strategic product capabilities.
+
+The governing distinction is:
+
+- **product availability**: the route or tool is useful and may remain public;
+- **search indexability**: the page is indexed only when it independently passes the substantive-value gate;
+- **monetization eligibility**: ads are served only after AdSense approval and only where page quality and user experience permit it.
+
+Accordingly, `noindex,follow` is a search-quality control, not a deletion instruction. Daily chronological pages may remain fully navigable and useful while excluded from the sitemap. Calendar and calculator tools may remain available even if their main purpose is utility rather than editorial acquisition.
+
+The AdSense low-value-content remediation must therefore add first-party editorial depth and curate the indexed footprint without reducing liturgical coverage, chronological navigation or the initial SantosDia toolset.
+
+The normative strategic clarification is recorded in `docs/product/global-liturgical-intelligence-v2.1-addendum-2026-08-29.md`.
