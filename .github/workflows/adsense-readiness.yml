@@ -11,6 +11,16 @@ on:
       - 'app/saint/**'
       - 'app/day/**'
       - 'app/date/**'
+      - 'app/calendar/**'
+      - 'app/explore/**'
+      - 'app/liturgy/**'
+      - 'app/churches/**'
+      - 'app/church/**'
+      - 'app/jurisdiction/**'
+      - 'app/holidays/**'
+      - 'app/live/**'
+      - 'app/leaders/**'
+      - 'app/leader/**'
       - 'app/layout.tsx'
       - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
@@ -27,6 +37,7 @@ on:
       - 'lib/adsense.ts'
       - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
+      - 'scripts/check-search-footprint.mjs'
       - 'docs/editorial-content-policy.md'
       - 'docs/content-automation.md'
       - 'docs/adsense-activation-checklist.md'
@@ -41,6 +52,16 @@ on:
       - 'app/saint/**'
       - 'app/day/**'
       - 'app/date/**'
+      - 'app/calendar/**'
+      - 'app/explore/**'
+      - 'app/liturgy/**'
+      - 'app/churches/**'
+      - 'app/church/**'
+      - 'app/jurisdiction/**'
+      - 'app/holidays/**'
+      - 'app/live/**'
+      - 'app/leaders/**'
+      - 'app/leader/**'
       - 'app/layout.tsx'
       - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
@@ -57,6 +78,7 @@ on:
       - 'lib/adsense.ts'
       - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
+      - 'scripts/check-search-footprint.mjs'
       - 'docs/editorial-content-policy.md'
       - 'docs/content-automation.md'
       - 'docs/adsense-activation-checklist.md'
@@ -74,8 +96,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
-      - name: Audit monetization, editorial and search boundaries
+      - name: Audit monetization and editorial boundaries
         run: node scripts/check-adsense-readiness.mjs
+      - name: Audit search publication footprint
+        run: node scripts/check-search-footprint.mjs
 
   production:
     if: github.event_name == 'push'
