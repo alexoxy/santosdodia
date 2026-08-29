@@ -11,6 +11,7 @@ import { isSaintBiographyIndexable } from '../../lib/editorial-profile-quality';
 import { displayCalendarSystem,displayObservanceName,displayPatronages } from '../../lib/locale-display';
 import { displayObservanceScope } from '../../lib/observance-scope';
 import { getFeatureCopy } from '../../lib/feature-copy';
+import { type Locale } from '../../lib/i18n';
 import { getRetentionCopy } from '../../lib/product-retention-i18n';
 import AddToCalendar from './AddToCalendar';
 import AdSlot from './AdSlot';
@@ -18,6 +19,19 @@ import CandleButton from './CandleButton';
 import SaveSaintButton from './SaveSaintButton';
 import TraditionTag from './TraditionTag';
 import { useLanguage } from './LanguageProvider';
+
+const editorialOrigin:Record<Locale,string>={
+ en:'SantosDia editorial content, independently composed from the evidence and institutional sources listed below.',
+ pt:'Conteúdo editorial SantosDia, redigido de forma autónoma a partir da evidência e das fontes institucionais indicadas abaixo.',
+ es:'Contenido editorial de SantosDia, redactado de forma independiente a partir de la evidencia y de las fuentes institucionales indicadas abajo.',
+ fr:'Contenu éditorial SantosDia, rédigé de manière indépendante à partir des éléments de preuve et des sources institutionnelles indiqués ci-dessous.',
+ it:'Contenuto editoriale SantosDia, redatto in modo indipendente sulla base delle evidenze e delle fonti istituzionali indicate qui sotto.',
+ de:'Redaktioneller Inhalt von SantosDia, eigenständig auf Grundlage der unten aufgeführten Belege und institutionellen Quellen verfasst.',
+ pl:'Treść redakcyjna SantosDia, opracowana niezależnie na podstawie dowodów i źródeł instytucjonalnych wskazanych poniżej.',
+ ru:'Редакционный материал SantosDia, самостоятельно подготовленный на основе указанных ниже свидетельств и институциональных источников.',
+ fil:'Editoryal na nilalaman ng SantosDia, malayang binuo mula sa ebidensiya at mga institusyonal na sangguniang nakalista sa ibaba.',
+ sw:'Maudhui ya uhariri ya SantosDia, yaliyoandaliwa kwa kujitegemea kutokana na ushahidi na vyanzo vya taasisi vilivyoorodheshwa hapa chini.'
+};
 
 export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:string;runtimeItem?:Observance;calendarObservanceId?:string}){
  const{locale,copy,timeZone,country}=useLanguage();const feature=getFeatureCopy(locale);const retention=getRetentionCopy(locale);const year=yearInTimeZone(timeZone);const curatedItem=getObservanceById(id,year,locale);const item=curatedItem??runtimeItem;
@@ -34,7 +48,7 @@ export default function SaintProfile({id,runtimeItem,calendarObservanceId}:{id:s
   <section className="saint-profile-layout">
    <article className="saint-profile-main">
     <div className="tag-row">{item.traditions.map(value=><TraditionTag key={value} tradition={value}/>)}<span>{copy[item.category]}</span><span>{displayCalendarSystem(item.calendarSystem,locale)}</span><span>{validationStatusLabel(item.validationStatus,locale)}</span></div>
-    {biography?<section className="saint-biography saint-biography-primary"><span className="eyebrow">{historyCopy.history}</span><h2>{biography.title}</h2><p className="biography-lead">{biography.summary}</p>{biography.facts.length?<div className="biography-facts"><h3>{historyCopy.keyFacts}</h3><dl>{biography.facts.map(fact=><div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl></div>:null}<div className="biography-text">{biography.paragraphs.map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div><div className="biography-provenance"><div><h3>{historyCopy.sources}</h3><p>{historyCopy.editorial}</p><ul className="biography-source-list">{biography.sources.map(source=><li key={source.url}><a className="text-link" href={source.url} target="_blank" rel="noreferrer">{source.name} · {source.publisher} ↗</a></li>)}</ul></div><span>{historyCopy.verified}: {biographyDate}</span></div></section>:summary?<section className="profile-summary profile-summary-primary"><p lang={summary.language}>{summary.text}</p>{summary.isFallback?<small className="translation-fallback">{fallbackLanguageLabel(locale)}</small>:null}</section>:null}
+    {biography?<section className="saint-biography saint-biography-primary"><span className="eyebrow">{historyCopy.history}</span><h2>{biography.title}</h2><p className="biography-lead">{biography.summary}</p>{biography.facts.length?<div className="biography-facts"><h3>{historyCopy.keyFacts}</h3><dl>{biography.facts.map(fact=><div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl></div>:null}<div className="biography-text">{biography.paragraphs.map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div><div className="biography-provenance"><div><h3>{historyCopy.sources}</h3><p className="biography-editorial-origin">{editorialOrigin[locale]}</p><p>{historyCopy.editorial}</p><ul className="biography-source-list">{biography.sources.map(source=><li key={source.url}><a className="text-link" href={source.url} target="_blank" rel="noreferrer">{source.name} · {source.publisher} ↗</a></li>)}</ul></div><span>{historyCopy.verified}: {biographyDate}</span></div></section>:summary?<section className="profile-summary profile-summary-primary"><p lang={summary.language}>{summary.text}</p>{summary.isFallback?<small className="translation-fallback">{fallbackLanguageLabel(locale)}</small>:null}</section>:null}
     {patronages.length?<section className="profile-associations"><h2>{feature.associatedWith}</h2><div className="patronage-cloud">{patronages.map(value=><span key={value}>{value}</span>)}</div></section>:null}
     {evidence.length?<section className="profile-summary profile-evidence"><span className="eyebrow">{evidenceCopy.title}</span><p><strong>{evidenceCopy.reviewed}: {evidenceDate}</strong></p>{evidence.map((entry,index)=>{const unresolved=displayPatronages(unresolvedPatronages(entry),locale);return <div key={`${entry.claimType}-${index}`}><h3>{claimTypeLabel(entry.claimType,locale)}</h3><p>{evidenceCopy.corroborated}</p><p><a className="text-link" href={entry.source.url} target="_blank" rel="noreferrer">{evidenceCopy.officialSource}: {entry.source.name} ↗</a></p>{unresolved.length?<><h3>{evidenceCopy.unresolvedTitle}</h3><p>{evidenceCopy.unresolvedBody}</p><div className="patronage-cloud">{unresolved.map(value=><span key={value}>{value}</span>)}</div></>:null}</div>})}</section>:null}
     <div className="profile-date-link"><strong>{dateLabel}</strong><Link className="text-link" href={`/date/${item.dateISO.slice(5)}`}>{feature.openDay} →</Link></div>
