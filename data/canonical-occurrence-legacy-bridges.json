@@ -104,6 +104,16 @@
       "occurrenceId": "occurrence:2026-11-30:andrew-apostle:roman-catholic:pt",
       "legacyObservanceId": "rc:StAndrewAp",
       "dateISO": "2026-11-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-10:lawrence-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLawrenceDeacon",
+      "dateISO": "2026-08-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-26:stephen-protomartyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StStephenProtomartyr",
+      "dateISO": "2026-12-26"
     }
   ]
 }
