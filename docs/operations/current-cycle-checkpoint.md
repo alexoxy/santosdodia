@@ -192,8 +192,9 @@ Merged/superseded strategy and current-cycle branches are additional deletion ca
 - `feature/general-roman-feasts-batch-20260828`;
 - `feature/temporale-ledger-bindings-20260828`;
 - `feature/temporal-family-ledger-bindings-20260828`;
-- `feature/portugal-2026-movable-transfer-shadow-20260829`;
 - `docs/checkpoint-20260828-saint-bridget`.
+
+The PR #242 and #243 head branches were automatically deleted after merge.
 
 The available GitHub connector does not expose branch-ref deletion. Do not simulate deletion by force-moving refs. Preserve every branch with unreviewed unique work.
 
