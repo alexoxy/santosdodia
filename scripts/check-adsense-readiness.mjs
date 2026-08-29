@@ -18,8 +18,10 @@ const required = [
   'app/advertising/page.tsx',
   'app/privacy/page.tsx',
   'app/saint/[id]/page.tsx',
+  'app/day/[date]/page.tsx',
   'app/date/[monthDay]/page.tsx',
   'app/sitemap.ts',
+  'docs/editorial-content-policy.md',
   'docs/adsense-activation-checklist.md',
   'docs/monetization-status.md',
 ];
@@ -47,8 +49,8 @@ if(!failures.length){
 
   const nextConfig=text('next.config.ts');
   expect(nextConfig.includes("'ca-pub-2568362274337344'"),'Santos do Dia must preserve the reviewed AdSense publisher client');
-  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true'"),'AdSense site-association code must stay enabled during review');
-  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'"),'Ad serving must remain fail-closed while AdSense status is PREPARING');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true'"),'AdSense site-association code must stay enabled while the site is under review/remediation');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'"),'Ad serving must remain fail-closed while AdSense is not approved');
 
   const bootstrap=text('app/components/AdSenseBootstrap.tsx');
   expect(bootstrap.includes('google-adsense-account'),'AdSense ownership meta tag is missing');
@@ -87,9 +89,12 @@ if(!failures.length){
   expect(saint.includes('"@type": "Person"'),'Editorial saint profiles should expose Person structured data');
   expect(saint.includes('BreadcrumbList'),'Editorial profiles should expose breadcrumbs');
 
+  const datedDay=text('app/day/[date]/page.tsx');
+  expect(datedDay.includes('robots: { index: false, follow: true }'),'Dated utility pages must remain noindex/follow until they have a substantive editorial gate');
+
   const annualDay=text('app/date/[monthDay]/page.tsx');
   expect(annualDay.includes('canonical = `/date/${monthDay}`'),'Evergreen date pages need stable month-day canonicals');
-  expect(annualDay.includes('robots: { index: items.length > 0, follow: true }'),'Empty evergreen date pages must remain out of the index');
+  expect(annualDay.includes('robots: { index: Boolean(editorial), follow: true }'),'Evergreen date pages must be indexable only when SantosDia editorial context exists');
   expect(annualDay.includes('<DayView dateISO={dateISO} mode="annual" />'),'Evergreen date pages must use the annual day experience');
   expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
 
@@ -97,12 +102,17 @@ if(!failures.length){
   expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'),'Sitemap must include only saint biographies that pass the launched-locale editorial gate');
   expect(sitemap.includes('path: "/about"'),'About page must be in sitemap');
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
-  expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose only data-backed evergreen month-day pages');
+  expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'),'Sitemap must expose only evergreen dates with first-party editorial context');
+  expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose editorial evergreen month-day pages');
+  expect(!sitemap.includes('url: `${SITE_ORIGIN}/day/${item.dateISO}`'),'Thin dated utility pages must not be emitted in the sitemap');
 
   const profile=text('app/components/SaintProfile.tsx');
   expect(profile.includes('editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need an editorial-quality-guarded top banner');
   expect(profile.includes('isSaintBiographyIndexable'),'Rich profile ad eligibility must use the substantive editorial gate');
   expect(profile.includes('ADSENSE_SIDEBAR_SLOT'),'Rich profiles need a guarded desktop sidebar');
+  expect(profile.includes('Conteúdo editorial SantosDia'),'Rich profiles must visibly identify first-party SantosDia editorial composition');
+  expect(profile.includes('fontes institucionais indicadas abaixo'),'Editorial-origin copy must preserve visible source grounding');
+
   const home=text('app/page.tsx');
   expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
   expect(home.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
@@ -113,24 +123,35 @@ if(!failures.length){
   expect(privacy.includes('Google AdSense'),'Privacy disclosure must identify Google AdSense');
   expect(privacy.includes('tradição cristã escolhida'),'Portuguese disclosure must protect religious preference from targeting');
 
+  const editorialPolicy=text('docs/editorial-content-policy.md');
+  expect(editorialPolicy.includes('approved source → evidence capture → normalized facts → canonical knowledge → SantosDia editorial composition → public page'),'Editorial policy must preserve the source-to-first-party publication chain');
+  expect(editorialPolicy.includes('Editing, translating or rearranging a third-party text alone is not sufficient'),'Editorial policy must prohibit relabelling light source transformations as first-party work');
+  expect(editorialPolicy.includes('No external prose becomes public SantosDia prose merely because it was ingested, translated, shortened, reordered or lightly edited'),'Editorial policy must enforce independent first-party composition');
+  expect(editorialPolicy.includes('Mass generation of indexable pages from thin templates is prohibited'),'Editorial policy must prohibit thin indexable page generation');
+
   const status=text('docs/monetization-status.md');
-  expect(status.includes('AdSense site review status: **PREPARING**'),'Operational monetization state must remain PREPARING until explicit approval is recorded');
+  expect(status.includes('AdSense site review status: **REMEDIATION_REQUIRED**'),'Operational monetization state must record the current remediation requirement');
+  expect(status.includes('Policy finding: **low-value content**'),'Operational monetization state must record the low-value-content finding');
   expect(status.includes('`ads.txt` authorization status: **AUTHORIZED**'),'Authorized ads.txt state must remain documented');
-  expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled during review');
-  expect(status.includes('2026-08-15 17:04 WEST'),'AdSense review-state observation timestamp must remain traceable');
+  expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled while not approved');
+  expect(status.includes('2026-08-15 17:04 WEST'),'Previous PREPARING observation must remain traceable');
   expect(status.includes('Auto ads remain off at initial activation'),'Initial monetization must remain manual-only');
 
   const agents=text('AGENTS.md');
-  expect(agents.includes('While that file records AdSense as **PREPARING**'),'Development instructions must propagate the AdSense review guardrail');
-  expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled during review');
+  expect(agents.includes('While that file records AdSense as **not approved**'),'Development instructions must propagate the not-approved AdSense guardrail');
+  expect(agents.includes('REMEDIATION_REQUIRED'),'Development instructions must recognize the remediation state');
+  expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled while not approved');
   expect(agents.includes('no anchor ads') && agents.includes('vignette/interstitial'),'Development instructions must prohibit overlay ad formats');
+  expect(agents.includes('docs/editorial-content-policy.md'),'Development instructions must enforce the first-party editorial boundary');
 
   const checklist=text('docs/adsense-activation-checklist.md');
   expect(checklist.includes('Keep **Auto ads OFF**'),'Activation checklist must keep initial serving manual-only');
   expect(checklist.includes('no anchor ads') && checklist.includes('no vignette/interstitial ads'),'Activation checklist must prohibit overlay ad formats');
   expect(checklist.includes('certified CMP'),'Activation checklist must require a certified CMP');
   expect(checklist.includes('Google Search Console'),'Activation checklist must include organic search verification');
-  expect(checklist.includes('Current operational state — 2026-08-15 17:04 WEST'),'Activation checklist must expose the current AdSense review state');
+  expect(checklist.includes('Current operational state — 2026-08-29'),'Activation checklist must expose the current AdSense remediation state');
+  expect(checklist.includes('low-value content'),'Activation checklist must record the active AdSense rejection reason');
+  expect(checklist.includes('first-party SantosDia composition'),'Activation checklist must require first-party editorial composition');
 }
 
 if(failures.length){
@@ -138,4 +159,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: PREPARING review state is preserved, serving remains fail-closed, manual non-overlay placements are constrained, privacy boundaries are intact and evergreen date indexing is data-backed.');
+console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin dated pages are noindex, the sitemap is editorially gated, manual non-overlay placements remain constrained and privacy boundaries are intact.');

@@ -9,6 +9,8 @@ on:
       - 'app/advertising/**'
       - 'app/privacy/**'
       - 'app/saint/**'
+      - 'app/day/**'
+      - 'app/date/**'
       - 'app/layout.tsx'
       - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
@@ -19,9 +21,14 @@ on:
       - 'app/components/SiteChrome.tsx'
       - 'app/page.tsx'
       - 'app/sitemap.ts'
+      - 'data/saint-biographies*.ts'
+      - 'data/date-editorial*.ts'
+      - 'data/editorial/**'
       - 'lib/adsense.ts'
       - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
+      - 'docs/editorial-content-policy.md'
+      - 'docs/content-automation.md'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
   push:
@@ -32,6 +39,8 @@ on:
       - 'app/advertising/**'
       - 'app/privacy/**'
       - 'app/saint/**'
+      - 'app/day/**'
+      - 'app/date/**'
       - 'app/layout.tsx'
       - 'app/ads.css'
       - 'app/components/AdSenseBootstrap.tsx'
@@ -42,9 +51,14 @@ on:
       - 'app/components/SiteChrome.tsx'
       - 'app/page.tsx'
       - 'app/sitemap.ts'
+      - 'data/saint-biographies*.ts'
+      - 'data/date-editorial*.ts'
+      - 'data/editorial/**'
       - 'lib/adsense.ts'
       - 'next.config.ts'
       - 'scripts/check-adsense-readiness.mjs'
+      - 'docs/editorial-content-policy.md'
+      - 'docs/content-automation.md'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
 
@@ -60,7 +74,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
-      - name: Audit monetization and search boundaries
+      - name: Audit monetization, editorial and search boundaries
         run: node scripts/check-adsense-readiness.mjs
 
   production:

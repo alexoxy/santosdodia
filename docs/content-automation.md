@@ -1,8 +1,10 @@
 # Content automation
 
-_Last updated: 2026-08-15_
+_Last updated: 2026-08-29_
 
 `config/automation-registry.json` is the reviewed inventory of SantosDia workflows, schedules, owners, publication modes, archive streams and producer entrypoints. The Quality gate validates it on every pull request.
+
+The normative editorial boundary is defined in `docs/editorial-content-policy.md`. External sources are research/evidence inputs; substantive public prose is a first-party SantosDia artifact stored in a SantosDia-controlled repository or approved first-party data store before publication.
 
 ## Operating model
 
@@ -11,14 +13,19 @@ SantosDia is designed for **continuous autonomous work with human review by exce
 The autonomous saints chain now runs as:
 
 1. approved-source acquisition;
-2. immutable raw archive in Dropbox;
-3. normalization;
+2. immutable raw archive in Dropbox where rights permit, otherwise metadata/reference/hash evidence only;
+3. normalization into factual claims and identifiers;
 4. linguistic review and script checks;
-5. idempotent D1 staging import;
+5. idempotent D1 staging import of structured knowledge;
 6. publication-candidate classification;
 7. first-party evidence adapters built from reviewed source bindings;
 8. independent-source corroboration of the `cross-check-required` queue;
-9. immutable corroborated, pending and conflict queues in Dropbox.
+9. immutable corroborated, pending and conflict queues in Dropbox;
+10. repository-first SantosDia editorial composition from approved canonical facts;
+11. duplication, rights, provenance and substantive-value checks;
+12. human approval of interpretive/biographical prose before publication.
+
+The public runtime never acquires or proxies third-party prose. A source can establish evidence, but the public article must be independently composed from verified facts using the SantosDia information architecture. Translation, shortening, reordering or light paraphrase of a source does not by itself qualify as SantosDia first-party editorial content.
 
 The publication classifier uses `config/publication-decision-policy.json` and separates claims into:
 
@@ -40,21 +47,32 @@ Official calendars and Church media normally do not expose SantosDia canonical I
 4. a matching source record emits structured corroboration evidence;
 5. a missing, moved or ambiguous record creates a human-review binding-drift item instead of silently changing identity.
 
-The first adapter uses Vatican News Portuguese saint-of-the-day metadata and `config/corroboration-source-bindings.vatican-news-pt.json`. It starts with reviewed bindings for Anthony of Lisbon/Padua, Francis and Clare of Assisi, Teresa of Ávila, Joseph, Mark, James the Greater, Luke, Andrew, John the Baptist and Stephen. The adapter is evidence-only and cannot publish.
+The first adapter uses Vatican News Portuguese saint-of-the-day metadata and `config/corroboration-source-bindings.vatican-news-pt.json`. It starts with reviewed bindings for Anthony of Lisbon/Padua, Francis and Clare of Assisi, Teresa of Ávila, Joseph, Mark, James the Greater, Luke, Andrew, John the Baptist and Stephen. The adapter is evidence-only and cannot publish source prose.
 
 This pattern is intended to be reused for Portugal's Secretariado Nacional de Liturgia and then for Church-specific official sources such as OCA/GOARCH and Church of England. A source binding is always tradition- and jurisdiction-aware; it cannot validate membership in another Church by implication.
+
+## First-party editorial layer
+
+The public text layer is intentionally separated from source acquisition.
+
+`source evidence → canonical facts → SantosDia editorial candidate → review → repository/data-plane publication`
+
+The editorial layer should add original value by synthesising chronology, Church/tradition context, jurisdiction, calendar logic, related observances, Portugal-specific relevance when applicable, key facts and internal knowledge links. The underlying facts retain provenance even though the public wording is SantosDia's own editorial composition.
+
+A public profile should not become indexable merely because a source has enough text to fill a page. Indexability depends on the SantosDia substantive-value gate, not source length.
 
 ## Boundaries
 
 - GitHub Actions may acquire facts and prepare bounded staging packages.
-- Automatic workflows do not currently write to the production database or rewrite editorial content.
+- Automatic workflows do not currently write to the production database or rewrite approved editorial content.
 - `productionAutoPromotionEnabled` remains `false` while the publication classifier and corroborator run in shadow mode.
 - `productionWriteAllowed` is also `false` in the corroboration policy and in every corroborated shadow queue.
 - At least 20 clean shadow runs, zero observed false-positive classifications, maintained acceptance vectors and rollback evidence are required before any claim class can be considered for production auto-promotion.
 - Editorial biography and interpretive text always require human approval.
-- Cloudflare serves only approved repository/data-plane content; it does not acquire external data at request time.
-- Dropbox is a bounded recovery archive and staging layer, not an operational database.
-- Source failures create review candidates. They do not delete records or change production automatically.
+- Third-party prose without explicit reuse rights is not copied into the public editorial corpus; retain only permitted evidence, factual extraction and rights metadata.
+- Cloudflare serves only approved first-party repository/data-plane content; it does not acquire external data at request time.
+- Dropbox is a bounded recovery archive and staging layer, not an operational database or the public editorial source of truth.
+- Source failures create review candidates. They do not delete records, rewrite editorial copy or change production automatically.
 
 ## Scheduled work
 
@@ -75,11 +93,11 @@ The freshness audit checks at most 60 HTTPS URLs per run, with four concurrent r
 
 The safe progression is deliberately staged:
 
-`shadow classification` → `reviewed first-party evidence` → `shadow corroboration` → `measured false-positive rate` → `claim-specific auto-promotion` → `broader automation only after evidence`.
+`shadow classification` → `reviewed first-party evidence` → `shadow corroboration` → `canonical facts` → `SantosDia editorial candidate` → `editorial review` → `substantive-value gate` → `publication`.
 
 Enabling one safe claim class must never implicitly enable another. Exact external identifiers, dates, localized names, Church membership, liturgical dates and editorial biographies are separate claim classes with separate promotion rules.
 
-The next operational objective is to add further structured evidence adapters from already approved first-party and independent sources. Missing evidence leaves a claim pending; it never weakens the threshold.
+The next content objective is to turn a larger evidence-backed canonical corpus into substantive first-party SantosDia pages without mass-producing thin templates. Missing evidence leaves a claim pending; it never weakens the threshold.
 
 ## Change policy
 
