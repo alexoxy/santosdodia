@@ -48,6 +48,7 @@
     "movableTransferShadowMustResolveThroughCanonicalTemporalRule": true,
     "reviewedJurisdictionTransferRequired": true,
     "movableTransferShadowMustAnchorExactApprovedSourceRow": true,
+    "rollingCalculationProjectionMustNotCountAsAnnualCoverage": true,
     "noAutomaticCanonicalIdentityCreation": true,
     "noD1MutationBeforeFullCoverage": true,
     "noRuntimeSwitchBeforeFullCoverage": true,

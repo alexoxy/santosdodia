@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "status": "rolling-calculation-acceptance-shadow",
+  "modelVersion": "1.0",
+  "anchorCivilYear": 2026,
+  "window": {
+    "pastCivilYears": 1,
+    "futureCivilYears": 3,
+    "years": [2025, 2026, 2027, 2028, 2029]
+  },
+  "target": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "policyId": "roman-portugal"
+  },
+  "authorityEvidence": {
+    "universalCalendar": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+    "portugalTransferRules": "https://www.liturgia.pt/documentos/ano_lit.php"
+  },
+  "annualEquivalenceEvidence": {
+    "sourceBoundYear": 2026,
+    "sourceReleaseId": "roman-catholic-pt-2026-v2",
+    "sourceArtifact": {
+      "workflowRunId": 31998552573,
+      "artifactId": 9277632698,
+      "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+    },
+    "movableTransferShadow": "data/migrations/roman-catholic-pt-2026-v2.movable-transfer-shadow.json"
+  },
+  "safety": {
+    "calculationDoesNotCreateAnnualOccurrence": true,
+    "annualEquivalenceRequiresExactAnnualEvidence": true,
+    "projectionOnlyYearsMustNotCountAsCanonicalCoverage": true,
+    "unprovedAnnualDispositionFailsClosed": true,
+    "publicationAllowed": false,
+    "d1MutationAllowed": false
+  },
+  "rules": [
+    {
+      "temporalRuleId": "temporal-rule:epiphany:roman-catholic",
+      "principalDay": "epiphany",
+      "projectionKind": "portugal-jurisdiction-policy"
+    },
+    {
+      "temporalRuleId": "temporal-rule:palm-sunday:roman-catholic",
+      "principalDay": "palm-sunday",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-thursday:roman-catholic",
+      "principalDay": "holy-thursday",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:good-friday:roman-catholic",
+      "principalDay": "good-friday",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-saturday:roman-catholic",
+      "principalDay": "holy-saturday",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:ascension:roman-catholic",
+      "principalDay": "ascension",
+      "projectionKind": "portugal-jurisdiction-policy"
+    },
+    {
+      "temporalRuleId": "temporal-rule:trinity-sunday:roman-catholic",
+      "principalDay": "trinity-sunday",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:corpus-christi:roman-catholic",
+      "principalDay": "corpus-christi",
+      "projectionKind": "portugal-jurisdiction-policy"
+    },
+    {
+      "temporalRuleId": "temporal-rule:sacred-heart:roman-catholic",
+      "principalDay": "sacred-heart",
+      "projectionKind": "universal-rule"
+    },
+    {
+      "temporalRuleId": "temporal-rule:immaculate-heart:roman-catholic",
+      "principalDay": null,
+      "projectionKind": "annual-precedence-required",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false
+    },
+    {
+      "temporalRuleId": "temporal-rule:christ-the-king:roman-catholic",
+      "principalDay": "christ-the-king",
+      "projectionKind": "universal-rule"
+    }
+  ],
+  "years": [
+    {
+      "year": 2025,
+      "annualEquivalenceStatus": "unproved-projection-only",
+      "calculatedBaseDates": {
+        "temporal-rule:epiphany:roman-catholic": "2025-01-06",
+        "temporal-rule:palm-sunday:roman-catholic": "2025-04-13",
+        "temporal-rule:holy-thursday:roman-catholic": "2025-04-17",
+        "temporal-rule:good-friday:roman-catholic": "2025-04-18",
+        "temporal-rule:holy-saturday:roman-catholic": "2025-04-19",
+        "temporal-rule:ascension:roman-catholic": "2025-05-29",
+        "temporal-rule:trinity-sunday:roman-catholic": "2025-06-15",
+        "temporal-rule:corpus-christi:roman-catholic": "2025-06-19",
+        "temporal-rule:sacred-heart:roman-catholic": "2025-06-27",
+        "temporal-rule:immaculate-heart:roman-catholic": "2025-06-28",
+        "temporal-rule:christ-the-king:roman-catholic": "2025-11-23"
+      },
+      "portugalPolicyDates": {
+        "temporal-rule:epiphany:roman-catholic": "2025-01-05",
+        "temporal-rule:palm-sunday:roman-catholic": "2025-04-13",
+        "temporal-rule:holy-thursday:roman-catholic": "2025-04-17",
+        "temporal-rule:good-friday:roman-catholic": "2025-04-18",
+        "temporal-rule:holy-saturday:roman-catholic": "2025-04-19",
+        "temporal-rule:ascension:roman-catholic": "2025-06-01",
+        "temporal-rule:trinity-sunday:roman-catholic": "2025-06-15",
+        "temporal-rule:corpus-christi:roman-catholic": "2025-06-19",
+        "temporal-rule:sacred-heart:roman-catholic": "2025-06-27",
+        "temporal-rule:christ-the-king:roman-catholic": "2025-11-23"
+      },
+      "immaculateHeart": {
+        "candidateDateISO": "2025-06-28",
+        "annualDispositionStatus": "unproved-annual-corpus-required",
+        "finalOccurrenceDateISO": null
+      }
+    },
+    {
+      "year": 2026,
+      "annualEquivalenceStatus": "source-bound-exact",
+      "calculatedBaseDates": {
+        "temporal-rule:epiphany:roman-catholic": "2026-01-06",
+        "temporal-rule:palm-sunday:roman-catholic": "2026-03-29",
+        "temporal-rule:holy-thursday:roman-catholic": "2026-04-02",
+        "temporal-rule:good-friday:roman-catholic": "2026-04-03",
+        "temporal-rule:holy-saturday:roman-catholic": "2026-04-04",
+        "temporal-rule:ascension:roman-catholic": "2026-05-14",
+        "temporal-rule:trinity-sunday:roman-catholic": "2026-05-31",
+        "temporal-rule:corpus-christi:roman-catholic": "2026-06-04",
+        "temporal-rule:sacred-heart:roman-catholic": "2026-06-12",
+        "temporal-rule:immaculate-heart:roman-catholic": "2026-06-13",
+        "temporal-rule:christ-the-king:roman-catholic": "2026-11-22"
+      },
+      "portugalPolicyDates": {
+        "temporal-rule:epiphany:roman-catholic": "2026-01-04",
+        "temporal-rule:palm-sunday:roman-catholic": "2026-03-29",
+        "temporal-rule:holy-thursday:roman-catholic": "2026-04-02",
+        "temporal-rule:good-friday:roman-catholic": "2026-04-03",
+        "temporal-rule:holy-saturday:roman-catholic": "2026-04-04",
+        "temporal-rule:ascension:roman-catholic": "2026-05-17",
+        "temporal-rule:trinity-sunday:roman-catholic": "2026-05-31",
+        "temporal-rule:corpus-christi:roman-catholic": "2026-06-04",
+        "temporal-rule:sacred-heart:roman-catholic": "2026-06-12",
+        "temporal-rule:christ-the-king:roman-catholic": "2026-11-22"
+      },
+      "immaculateHeart": {
+        "candidateDateISO": "2026-06-13",
+        "annualDispositionStatus": "source-bound-approved-transfer",
+        "finalOccurrenceDateISO": "2026-06-15",
+        "decisionId": "pt-2026-immaculate-heart-transfer"
+      }
+    },
+    {
+      "year": 2027,
+      "annualEquivalenceStatus": "unproved-projection-only",
+      "calculatedBaseDates": {
+        "temporal-rule:epiphany:roman-catholic": "2027-01-06",
+        "temporal-rule:palm-sunday:roman-catholic": "2027-03-21",
+        "temporal-rule:holy-thursday:roman-catholic": "2027-03-25",
+        "temporal-rule:good-friday:roman-catholic": "2027-03-26",
+        "temporal-rule:holy-saturday:roman-catholic": "2027-03-27",
+        "temporal-rule:ascension:roman-catholic": "2027-05-06",
+        "temporal-rule:trinity-sunday:roman-catholic": "2027-05-23",
+        "temporal-rule:corpus-christi:roman-catholic": "2027-05-27",
+        "temporal-rule:sacred-heart:roman-catholic": "2027-06-04",
+        "temporal-rule:immaculate-heart:roman-catholic": "2027-06-05",
+        "temporal-rule:christ-the-king:roman-catholic": "2027-11-21"
+      },
+      "portugalPolicyDates": {
+        "temporal-rule:epiphany:roman-catholic": "2027-01-03",
+        "temporal-rule:palm-sunday:roman-catholic": "2027-03-21",
+        "temporal-rule:holy-thursday:roman-catholic": "2027-03-25",
+        "temporal-rule:good-friday:roman-catholic": "2027-03-26",
+        "temporal-rule:holy-saturday:roman-catholic": "2027-03-27",
+        "temporal-rule:ascension:roman-catholic": "2027-05-09",
+        "temporal-rule:trinity-sunday:roman-catholic": "2027-05-23",
+        "temporal-rule:corpus-christi:roman-catholic": "2027-05-27",
+        "temporal-rule:sacred-heart:roman-catholic": "2027-06-04",
+        "temporal-rule:christ-the-king:roman-catholic": "2027-11-21"
+      },
+      "immaculateHeart": {
+        "candidateDateISO": "2027-06-05",
+        "annualDispositionStatus": "unproved-annual-corpus-required",
+        "finalOccurrenceDateISO": null
+      }
+    },
+    {
+      "year": 2028,
+      "annualEquivalenceStatus": "unproved-projection-only",
+      "calculatedBaseDates": {
+        "temporal-rule:epiphany:roman-catholic": "2028-01-06",
+        "temporal-rule:palm-sunday:roman-catholic": "2028-04-09",
+        "temporal-rule:holy-thursday:roman-catholic": "2028-04-13",
+        "temporal-rule:good-friday:roman-catholic": "2028-04-14",
+        "temporal-rule:holy-saturday:roman-catholic": "2028-04-15",
+        "temporal-rule:ascension:roman-catholic": "2028-05-25",
+        "temporal-rule:trinity-sunday:roman-catholic": "2028-06-11",
+        "temporal-rule:corpus-christi:roman-catholic": "2028-06-15",
+        "temporal-rule:sacred-heart:roman-catholic": "2028-06-23",
+        "temporal-rule:immaculate-heart:roman-catholic": "2028-06-24",
+        "temporal-rule:christ-the-king:roman-catholic": "2028-11-26"
+      },
+      "portugalPolicyDates": {
+        "temporal-rule:epiphany:roman-catholic": "2028-01-02",
+        "temporal-rule:palm-sunday:roman-catholic": "2028-04-09",
+        "temporal-rule:holy-thursday:roman-catholic": "2028-04-13",
+        "temporal-rule:good-friday:roman-catholic": "2028-04-14",
+        "temporal-rule:holy-saturday:roman-catholic": "2028-04-15",
+        "temporal-rule:ascension:roman-catholic": "2028-05-28",
+        "temporal-rule:trinity-sunday:roman-catholic": "2028-06-11",
+        "temporal-rule:corpus-christi:roman-catholic": "2028-06-15",
+        "temporal-rule:sacred-heart:roman-catholic": "2028-06-23",
+        "temporal-rule:christ-the-king:roman-catholic": "2028-11-26"
+      },
+      "immaculateHeart": {
+        "candidateDateISO": "2028-06-24",
+        "annualDispositionStatus": "candidate-impeded-annual-disposition-unproved",
+        "finalOccurrenceDateISO": null,
+        "knownCollision": {
+          "observanceId": "observance:john-baptist-nativity:roman-catholic",
+          "sanctoraleRuleId": "sanctorale-rule:john-baptist-nativity:general-roman",
+          "precedenceClass": "general-calendar-solemnity",
+          "minimumProvedOutcome": "immaculate-heart-candidate-omitted-at-base-date"
+        }
+      }
+    },
+    {
+      "year": 2029,
+      "annualEquivalenceStatus": "unproved-projection-only",
+      "calculatedBaseDates": {
+        "temporal-rule:epiphany:roman-catholic": "2029-01-06",
+        "temporal-rule:palm-sunday:roman-catholic": "2029-03-25",
+        "temporal-rule:holy-thursday:roman-catholic": "2029-03-29",
+        "temporal-rule:good-friday:roman-catholic": "2029-03-30",
+        "temporal-rule:holy-saturday:roman-catholic": "2029-03-31",
+        "temporal-rule:ascension:roman-catholic": "2029-05-10",
+        "temporal-rule:trinity-sunday:roman-catholic": "2029-05-27",
+        "temporal-rule:corpus-christi:roman-catholic": "2029-05-31",
+        "temporal-rule:sacred-heart:roman-catholic": "2029-06-08",
+        "temporal-rule:immaculate-heart:roman-catholic": "2029-06-09",
+        "temporal-rule:christ-the-king:roman-catholic": "2029-11-25"
+      },
+      "portugalPolicyDates": {
+        "temporal-rule:epiphany:roman-catholic": "2029-01-07",
+        "temporal-rule:palm-sunday:roman-catholic": "2029-03-25",
+        "temporal-rule:holy-thursday:roman-catholic": "2029-03-29",
+        "temporal-rule:good-friday:roman-catholic": "2029-03-30",
+        "temporal-rule:holy-saturday:roman-catholic": "2029-03-31",
+        "temporal-rule:ascension:roman-catholic": "2029-05-13",
+        "temporal-rule:trinity-sunday:roman-catholic": "2029-05-27",
+        "temporal-rule:corpus-christi:roman-catholic": "2029-05-31",
+        "temporal-rule:sacred-heart:roman-catholic": "2029-06-08",
+        "temporal-rule:christ-the-king:roman-catholic": "2029-11-25"
+      },
+      "immaculateHeart": {
+        "candidateDateISO": "2029-06-09",
+        "annualDispositionStatus": "unproved-annual-corpus-required",
+        "finalOccurrenceDateISO": null
+      }
+    }
+  ],
+  "verifiedAt": "2026-08-29"
+}

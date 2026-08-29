@@ -81,6 +81,7 @@ try {
 await import('./vault/test-canonical-temporal-rule-manifest.mjs');
 await import('./vault/test-temporal-rule-families.mjs');
 await import('./vault/test-movable-transfer-shadow.mjs');
+await import('./vault/test-roman-portugal-movable-rolling-acceptance.mjs');
 await import('./test-roman-liturgical-year.mjs');
 await import('./test-roman-precedence.mjs');
 await import('./test-roman-annual-calendar.mjs');
