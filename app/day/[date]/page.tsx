@@ -90,6 +90,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    robots: { index: false, follow: true },
     openGraph: { title, description, url: canonical, type: "website" },
     twitter: { card: "summary", title, description },
   };
