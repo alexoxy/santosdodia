@@ -31,26 +31,10 @@ try {
   transpile(path.join(root, 'lib/knowledge/calendar-engine.ts'), 'calendar-engine.js');
   transpile(path.join(root, 'lib/knowledge/roman-liturgical-year.ts'), 'roman-liturgical-year.js', [["'./calendar-engine'", "'./calendar-engine.js'"]]);
   transpile(path.join(root, 'lib/knowledge/roman-precedence.ts'), 'roman-precedence.js');
-  transpile(
-    path.join(root, 'lib/knowledge/roman-annual-calendar.ts'),
-    'roman-annual-calendar.js',
-    [["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]
-  );
-  transpile(
-    path.join(root, 'lib/knowledge/roman-solemnity-transfer.ts'),
-    'roman-solemnity-transfer.js',
-    [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]
-  );
-  transpile(
-    path.join(root, 'lib/knowledge/roman-annual-materialization.ts'),
-    'roman-annual-materialization.js',
-    [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-solemnity-transfer'", "'./roman-solemnity-transfer.js'"]]
-  );
-  transpile(
-    path.join(root, 'lib/knowledge/roman-sanctorale.ts'),
-    'roman-sanctorale.js',
-    [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]
-  );
+  transpile(path.join(root, 'lib/knowledge/roman-annual-calendar.ts'), 'roman-annual-calendar.js', [["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]);
+  transpile(path.join(root, 'lib/knowledge/roman-solemnity-transfer.ts'), 'roman-solemnity-transfer.js', [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]);
+  transpile(path.join(root, 'lib/knowledge/roman-annual-materialization.ts'), 'roman-annual-materialization.js', [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-liturgical-year'", "'./roman-liturgical-year.js'"], ["'./roman-solemnity-transfer'", "'./roman-solemnity-transfer.js'"]]);
+  transpile(path.join(root, 'lib/knowledge/roman-sanctorale.ts'), 'roman-sanctorale.js', [["'./roman-annual-calendar'", "'./roman-annual-calendar.js'"], ["'./roman-precedence'", "'./roman-precedence.js'"]]);
 
   const roman = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-liturgical-year.js')).href}?v=${Date.now()}`);
   const precedence = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-precedence.js')).href}?v=${Date.now()}`);
@@ -73,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 20, 'Portugal Sanctorale materialization must remain shadow-only with twenty reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 22, 'Portugal Sanctorale materialization must remain shadow-only with twenty-two reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -96,7 +80,9 @@ try {
     ['observance:matthias-apostle:roman-catholic', ['2026-05-14', 'feast', 7, 'general-roman']],
     ['observance:bartholomew-apostle:roman-catholic', ['2026-08-24', 'feast', 7, 'general-roman']],
     ['observance:simon-jude-apostles:roman-catholic', ['2026-10-28', 'feast', 7, 'general-roman']],
-    ['observance:andrew-apostle:roman-catholic', ['2026-11-30', 'feast', 7, 'general-roman']]
+    ['observance:andrew-apostle:roman-catholic', ['2026-11-30', 'feast', 7, 'general-roman']],
+    ['observance:lawrence-rome:roman-catholic', ['2026-08-10', 'feast', 7, 'general-roman']],
+    ['observance:stephen-protomartyr:roman-catholic', ['2026-12-26', 'feast', 7, 'general-roman']]
   ]);
 
   for (const candidate of pt2026.candidates) {
@@ -110,7 +96,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 20, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 22, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -120,8 +106,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The twenty reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The twenty reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The twenty-two reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The twenty-two reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     assert(day?.celebratedCandidateId === candidate.id, `${candidate.observanceId} must win the final 2026 precedence resolution on ${candidate.dateISO}.`);
@@ -189,7 +175,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, twenty perennial Portugal vectors including three distinct Marian solemnities and four additional apostolic feasts, 2026 canonical equivalence, Europe-scoped Saints Benedict and Bridget, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, twenty-two perennial Portugal vectors including Lawrence and Stephen, three distinct Marian solemnities and four additional apostolic feasts, 2026 canonical equivalence, Europe-scoped Saints Benedict and Bridget, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
