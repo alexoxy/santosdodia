@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 22, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 22, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 24, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 24, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -89,7 +89,9 @@ for (const [observanceId, personId] of [
   ['observance:james-greater-apostle:roman-catholic', 'james-greater-apostle'],
   ['observance:matthias-apostle:roman-catholic', 'matthias-apostle'],
   ['observance:bartholomew-apostle:roman-catholic', 'bartholomew-apostle'],
-  ['observance:andrew-apostle:roman-catholic', 'andrew-apostle']
+  ['observance:andrew-apostle:roman-catholic', 'andrew-apostle'],
+  ['observance:lawrence-rome:roman-catholic', 'lawrence-rome'],
+  ['observance:stephen-protomartyr:roman-catholic', 'stephen-protomartyr']
 ]) {
   const item = first.observances.find((observance) => observance.observanceId === observanceId);
   assert(item?.observanceKey === 'principal-commemoration' && item.observanceType === 'person-commemoration' && item.subjects.length === 1 && item.subjects[0].personId === personId, `${observanceId} must remain separate from its annual date and feast rank.`);
@@ -122,7 +124,6 @@ for (const observance of first.observances) {
   }
 }
 
-// One Person can have multiple Observances in one Church when their stable liturgical keys differ.
 const secondJohnObservance = structuredClone(observanceDataset);
 const johnSource = secondJohnObservance.observances.find((item) => item.id === 'observance:john-baptist-nativity:roman-catholic');
 assert(johnSource, 'John Baptist Nativity fixture is missing.');
@@ -155,7 +156,6 @@ const crossChurchEvidence = structuredClone(observanceDataset);
 crossChurchEvidence.observances[0].evidence[0].url = 'https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew';
 expectFailure('Cross-Church evidence guard', () => build(crossChurchEvidence), 'outside canonical Church authority domains');
 
-// Changing taxonomy cannot create a second canonical identity if Church, key and subjects are unchanged.
 const duplicateIdentity = structuredClone(observanceDataset);
 duplicateIdentity.observances.push({
   ...structuredClone(duplicateIdentity.observances[0]),

@@ -233,6 +233,28 @@
       "isSolemnity": false,
       "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-30","claimTypes":["fixed-date","apostle-feast","general-calendar","portugal-materialization"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "sanctorale-rule:lawrence-rome:general-roman",
+      "observanceId": "observance:lawrence-rome:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":8,"day":10},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-10","claimTypes":["fixed-date","saint-feast","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "sanctorale-rule:stephen-protomartyr:general-roman",
+      "observanceId": "observance:stephen-protomartyr:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {"type":"fixed","month":12,"day":26},
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-26","claimTypes":["fixed-date","saint-feast","general-calendar","portugal-materialization"]}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

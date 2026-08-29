@@ -262,6 +262,32 @@
       "sourceRankCode": "FESTA",
       "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-30","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. André, apóstolo"}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-08-10:lawrence-rome:roman-catholic:pt",
+      "observanceId": "observance:lawrence-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-10",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-10","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Lourenço, diácono e mártir – FESTA"}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-12-26:stephen-protomartyr:roman-catholic:pt",
+      "observanceId": "observance:stephen-protomartyr:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-12-26",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-26","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Estêvão, Primeiro Mártir – FESTA"}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

@@ -341,6 +341,36 @@
       "precedenceImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:lawrence-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"lawrence-rome","recognitionId":"recognition:lawrence-rome:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/10/st--lawrence-deacon--and-martyr.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:stephen-protomartyr:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"stephen-protomartyr","recognitionId":"recognition:stephen-protomartyr:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/12/26/st--stephen--first-martyr.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

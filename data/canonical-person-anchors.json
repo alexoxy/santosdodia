@@ -152,6 +152,18 @@
       "primaryObservanceId": "rc:StAndrewAp",
       "category": "apostle",
       "names": { "en": "Saint Andrew the Apostle", "pt": "Santo André Apóstolo", "es": "San Andrés Apóstol", "it": "Sant’Andrea Apostolo" }
+    },
+    {
+      "id": "lawrence-rome",
+      "primaryObservanceId": "rc:StLawrenceDeacon",
+      "category": "martyr",
+      "names": { "en": "Saint Lawrence of Rome", "pt": "São Lourenço de Roma", "es": "San Lorenzo de Roma", "it": "San Lorenzo di Roma" }
+    },
+    {
+      "id": "stephen-protomartyr",
+      "primaryObservanceId": "rc:StStephenProtomartyr",
+      "category": "martyr",
+      "names": { "en": "Saint Stephen the First Martyr", "pt": "Santo Estêvão, Primeiro Mártir", "es": "San Esteban, Primer Mártir", "it": "Santo Stefano, protomartire" }
     }
   ]
 }
