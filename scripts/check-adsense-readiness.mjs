@@ -48,8 +48,8 @@ if(!failures.length){
 
   const nextConfig=text('next.config.ts');
   expect(nextConfig.includes("'ca-pub-2568362274337344'"),'Santos do Dia must preserve the reviewed AdSense publisher client');
-  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true'"),'AdSense site-association code must stay enabled during review');
-  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'"),'Ad serving must remain fail-closed while AdSense status is PREPARING');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_CODE_ENABLED ?? 'true'"),'AdSense site-association code must stay enabled while the site is under review/remediation');
+  expect(nextConfig.includes("NEXT_PUBLIC_ADSENSE_ENABLED ?? 'false'"),'Ad serving must remain fail-closed while AdSense is not approved');
 
   const bootstrap=text('app/components/AdSenseBootstrap.tsx');
   expect(bootstrap.includes('google-adsense-account'),'AdSense ownership meta tag is missing');
@@ -104,6 +104,9 @@ if(!failures.length){
   expect(profile.includes('editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need an editorial-quality-guarded top banner');
   expect(profile.includes('isSaintBiographyIndexable'),'Rich profile ad eligibility must use the substantive editorial gate');
   expect(profile.includes('ADSENSE_SIDEBAR_SLOT'),'Rich profiles need a guarded desktop sidebar');
+  expect(profile.includes('Conteúdo editorial SantosDia'),'Rich profiles must visibly identify first-party SantosDia editorial composition');
+  expect(profile.includes('fontes institucionais indicadas abaixo'),'Editorial-origin copy must preserve visible source grounding');
+
   const home=text('app/page.tsx');
   expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
   expect(home.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
@@ -121,16 +124,19 @@ if(!failures.length){
   expect(editorialPolicy.includes('Mass generation of indexable pages from thin templates is prohibited'),'Editorial policy must prohibit thin indexable page generation');
 
   const status=text('docs/monetization-status.md');
-  expect(status.includes('AdSense site review status: **PREPARING**'),'Operational monetization state must remain PREPARING until explicit approval is recorded');
+  expect(status.includes('AdSense site review status: **REMEDIATION_REQUIRED**'),'Operational monetization state must record the current remediation requirement');
+  expect(status.includes('Policy finding: **low-value content**'),'Operational monetization state must record the low-value-content finding');
   expect(status.includes('`ads.txt` authorization status: **AUTHORIZED**'),'Authorized ads.txt state must remain documented');
-  expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled during review');
-  expect(status.includes('2026-08-15 17:04 WEST'),'Previous AdSense review-state observation timestamp must remain traceable');
+  expect(status.includes('Ad serving in the application: **DISABLED**'),'Ad serving must remain documented as disabled while not approved');
+  expect(status.includes('2026-08-15 17:04 WEST'),'Previous PREPARING observation must remain traceable');
   expect(status.includes('Auto ads remain off at initial activation'),'Initial monetization must remain manual-only');
 
   const agents=text('AGENTS.md');
-  expect(agents.includes('While that file records AdSense as **PREPARING**'),'Development instructions must propagate the AdSense review guardrail');
-  expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled during review');
+  expect(agents.includes('While that file records AdSense as **not approved**'),'Development instructions must propagate the not-approved AdSense guardrail');
+  expect(agents.includes('REMEDIATION_REQUIRED'),'Development instructions must recognize the remediation state');
+  expect(agents.includes('NEXT_PUBLIC_ADSENSE_ENABLED=false'),'Development instructions must keep ad serving disabled while not approved');
   expect(agents.includes('no anchor ads') && agents.includes('vignette/interstitial'),'Development instructions must prohibit overlay ad formats');
+  expect(agents.includes('docs/editorial-content-policy.md'),'Development instructions must enforce the first-party editorial boundary');
 
   const checklist=text('docs/adsense-activation-checklist.md');
   expect(checklist.includes('Keep **Auto ads OFF**'),'Activation checklist must keep initial serving manual-only');
