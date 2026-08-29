@@ -84,6 +84,26 @@
       "occurrenceId": "occurrence:2026-12-08:immaculate-conception-mary:roman-catholic:pt",
       "legacyObservanceId": "rc:ImmaculateConception",
       "dateISO": "2026-12-08"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-14:matthias-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMatthias",
+      "dateISO": "2026-05-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-24:bartholomew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBartholomewAp",
+      "dateISO": "2026-08-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-28:simon-jude-apostles:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSimonStJudeAp",
+      "dateISO": "2026-10-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-30:andrew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAndrewAp",
+      "dateISO": "2026-11-30"
     }
   ]
 }

@@ -382,6 +382,76 @@
         }
       ],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:matthias-apostle:roman-catholic",
+      "personId": "matthias-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/05/14/st--matthias--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:bartholomew-apostle:roman-catholic",
+      "personId": "bartholomew-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/24/st-bartolomew--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:simon-zealot-apostle:roman-catholic",
+      "personId": "simon-zealot-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:jude-thaddeus-apostle:roman-catholic",
+      "personId": "jude-thaddeus-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:andrew-apostle:roman-catholic",
+      "personId": "andrew-apostle",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["apostle"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

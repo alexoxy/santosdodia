@@ -44,7 +44,7 @@ assert(!('sourceDatasetSha256' in first.manifest), 'Immutable canonical manifest
 assert(first.buildReceipt.rootSha256 === first.manifest.rootSha256, 'Build receipt must point to the immutable canonical root it generated.');
 assert(first.buildReceipt.publicationChanged === false, 'Building a canonical release must not imply runtime publication.');
 assert(first.manifest.peopleCount === dataset.people.length, 'Canonical Person manifest count must match the reviewed anchor dataset.');
-assert(first.manifest.peopleCount === 20, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');
+assert(first.manifest.peopleCount === 25, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');
 assert(first.people.length === first.legacyObservanceBridges.length, 'Every migrated Person anchor must retain one explicit legacy observance bridge during compatibility migration.');
 assert(first.manifest.vaultLayer === 'canonical', 'Canonical Person manifest must target the canonical Vault layer.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Writing a canonical Vault release must not itself publish runtime content.');
@@ -63,7 +63,11 @@ assert(JSON.stringify(ids) === JSON.stringify([...ids].sort()), 'Canonical Perso
 assert(ids.includes('saint-joseph'), 'Saint Joseph must exist as a canonical Person independently of his Recognition and Observance.');
 assert(ids.includes('benedict-nursia'), 'Saint Benedict must exist as a canonical Person independently of his Recognition and Observance.');
 assert(ids.includes('bridget-sweden'), 'Saint Bridget must exist as a canonical Person independently of her Recognition and Observance.');
-for (const personId of ['mark-evangelist', 'thomas-apostle', 'mary-magdalene', 'james-greater-apostle']) {
+for (const personId of [
+  'mark-evangelist', 'thomas-apostle', 'mary-magdalene', 'james-greater-apostle',
+  'matthias-apostle', 'bartholomew-apostle', 'simon-zealot-apostle',
+  'jude-thaddeus-apostle', 'andrew-apostle'
+]) {
   assert(ids.includes(personId), `${personId} must exist as a canonical Person independently of Recognition and Observance.`);
 }
 for (const person of first.people) {
