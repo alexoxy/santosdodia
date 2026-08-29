@@ -7,6 +7,8 @@ These rules apply to all repository changes, including automated and agent-autho
 - Preserve the product as mobile-first, content-first, multilingual and tradition-aware.
 - Keep GitHub as the code source of truth and Cloudflare Workers as the production runtime.
 - Do not publish unreviewed saint/calendar data as verified editorial content.
+- External sources are evidence/research inputs. Substantive public prose must be independently composed as first-party SantosDia editorial content and stored in a SantosDia-controlled repository or approved first-party data store before publication.
+- Do not relabel copied, translated, shortened, reordered or lightly paraphrased third-party prose as SantosDia editorial content. Follow `docs/editorial-content-policy.md`.
 - Prefer editorial scale, source quality, internal linking and calendar/date coverage over adding unrelated product features.
 - Grow reviewed content progressively: substantive saint profiles first, evergreen day/date coverage second, then evidence-backed thematic/place hubs. Thin generated pages must remain out of the index.
 - A reviewed liturgical-person link does not by itself make every enriched profile fact public. Public saint-navigation promotion requires a separate explicit publication decision in `data/saint-navigation-publication.reviewed.json`.
@@ -19,7 +21,7 @@ These rules apply to all repository changes, including automated and agent-autho
 - Build public pages from semantic HTML, typographic hierarchy, simple CSS, accessible controls and text/Unicode symbols. CSS colour, borders and gradients are acceptable when they do not fetch media assets.
 - Do not add saint portraits, photographs, hero images, thumbnails, galleries, illustrations, animated imagery, decorative audio, or non-live video.
 - Verified livestream is the only first-party audiovisual content type. Keep its source and tradition explicit, provide useful text and an official external link before activation, and load the privacy-enhanced embed only after an explicit user action.
-- Favicon and manifest icons are browser metadata, not an exception for visible page imagery. Advertising is governed separately and never relaxes the first-party text-only rule; ad serving remains disabled while AdSense is PREPARING.
+- Favicon and manifest icons are browser metadata, not an exception for visible page imagery. Advertising is governed separately and never relaxes the first-party text-only rule; ad serving remains disabled while AdSense is not approved.
 - Prefer server-rendered text and deterministic HTML. Add client JavaScript only for interaction that materially requires it, such as context preferences, search, saved items, calendar actions and user-activated livestream.
 - Do not add remote fonts or media libraries. Preserve the automated `surface:text-first-test` gate whenever presentation code changes.
 
@@ -35,9 +37,9 @@ These rules apply to all repository changes, including automated and agent-autho
 
 ## AdSense review guardrail
 
-The current monetization state is recorded in `docs/monetization-status.md` and is part of the product's operational state.
+The current monetization state is recorded in `docs/monetization-status.md` and is part of the product's operational state. The 2026-08-29 AdSense decision requires remediation for **low-value content** before another review request.
 
-While that file records AdSense as **PREPARING**:
+While that file records AdSense as **not approved** (including `PREPARING` or `REMEDIATION_REQUIRED`):
 
 - keep the AdSense ownership/site-association code active;
 - keep actual ad serving disabled by default (`NEXT_PUBLIC_ADSENSE_ENABLED=false`);
@@ -45,6 +47,7 @@ While that file records AdSense as **PREPARING**:
 - preserve Google CMP/privacy integration and user privacy-choice access;
 - do not introduce active ad placements, Auto Ads assumptions, revenue-dependent UX or ad-targeting logic;
 - never use religious preference, Christian tradition, devotional activity, saint interests or virtual-candle state for ad targeting or audience construction;
+- prioritize substantive first-party editorial depth and remove/noindex weak search footprints before asking Google to review again;
 - preserve mobile Core Web Vitals, accessibility and the core daily-saint experience ahead of monetization;
 - run and pass `node scripts/check-adsense-readiness.mjs` for every development change.
 
