@@ -122,6 +122,36 @@
       "primaryObservanceId": "mary-mother-of-god",
       "category": "saint",
       "names": { "en": "Mary of Nazareth", "pt": "Maria de Nazaré", "es": "María de Nazaret", "it": "Maria di Nazaret" }
+    },
+    {
+      "id": "matthias-apostle",
+      "primaryObservanceId": "rc:StMatthias",
+      "category": "apostle",
+      "names": { "en": "Saint Matthias the Apostle", "pt": "São Matias Apóstolo", "es": "San Matías Apóstol", "it": "San Mattia Apostolo" }
+    },
+    {
+      "id": "bartholomew-apostle",
+      "primaryObservanceId": "rc:StBartholomewAp",
+      "category": "apostle",
+      "names": { "en": "Saint Bartholomew the Apostle", "pt": "São Bartolomeu Apóstolo", "es": "San Bartolomé Apóstol", "it": "San Bartolomeo Apostolo" }
+    },
+    {
+      "id": "simon-zealot-apostle",
+      "primaryObservanceId": "rc:StSimonStJudeAp",
+      "category": "apostle",
+      "names": { "en": "Saint Simon the Zealot", "pt": "São Simão Zelote", "es": "San Simón el Zelote", "it": "San Simone lo Zelota" }
+    },
+    {
+      "id": "jude-thaddeus-apostle",
+      "primaryObservanceId": "rc:StSimonStJudeAp",
+      "category": "apostle",
+      "names": { "en": "Saint Jude Thaddeus", "pt": "São Judas Tadeu", "es": "San Judas Tadeo", "it": "San Giuda Taddeo" }
+    },
+    {
+      "id": "andrew-apostle",
+      "primaryObservanceId": "rc:StAndrewAp",
+      "category": "apostle",
+      "names": { "en": "Saint Andrew the Apostle", "pt": "Santo André Apóstolo", "es": "San Andrés Apóstol", "it": "Sant’Andrea Apostolo" }
     }
   ]
 }

@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 18, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 17, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 22, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 22, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -86,7 +86,10 @@ for (const [observanceId, personId] of [
   ['observance:mark-evangelist:roman-catholic', 'mark-evangelist'],
   ['observance:thomas-apostle:roman-catholic', 'thomas-apostle'],
   ['observance:mary-magdalene:roman-catholic', 'mary-magdalene'],
-  ['observance:james-greater-apostle:roman-catholic', 'james-greater-apostle']
+  ['observance:james-greater-apostle:roman-catholic', 'james-greater-apostle'],
+  ['observance:matthias-apostle:roman-catholic', 'matthias-apostle'],
+  ['observance:bartholomew-apostle:roman-catholic', 'bartholomew-apostle'],
+  ['observance:andrew-apostle:roman-catholic', 'andrew-apostle']
 ]) {
   const item = first.observances.find((observance) => observance.observanceId === observanceId);
   assert(item?.observanceKey === 'principal-commemoration' && item.observanceType === 'person-commemoration' && item.subjects.length === 1 && item.subjects[0].personId === personId, `${observanceId} must remain separate from its annual date and feast rank.`);
@@ -94,7 +97,8 @@ for (const [observanceId, personId] of [
 
 for (const [id, people] of [
   ['observance:peter-paul:roman-catholic', ['paul-apostle', 'peter-apostle']],
-  ['observance:joachim-anne:roman-catholic', ['anne', 'joachim']]
+  ['observance:joachim-anne:roman-catholic', ['anne', 'joachim']],
+  ['observance:simon-jude-apostles:roman-catholic', ['jude-thaddeus-apostle', 'simon-zealot-apostle']]
 ]) {
   const item = first.observances.find((observance) => observance.observanceId === id);
   assert(item?.observanceKey === 'principal-commemoration', `${id} stable Observance key changed.`);

@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 16, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 16, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 20, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 20, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -76,7 +76,11 @@ const expected = new Map([
   ['observance:james-greater-apostle:roman-catholic', ['2026-07-25', 'feast', 'FESTA', 'rc:StJamesAp']],
   ['observance:assumption-mary:roman-catholic', ['2026-08-15', 'solemnity', 'SOLENIDADE', 'rc:Assumption']],
   ['observance:matthew-apostle:roman-catholic', ['2026-09-21', 'feast', 'FESTA', 'rc:StMatthewEvangelist']],
-  ['observance:immaculate-conception-mary:roman-catholic', ['2026-12-08', 'solemnity', 'SOLENIDADE', 'rc:ImmaculateConception']]
+  ['observance:immaculate-conception-mary:roman-catholic', ['2026-12-08', 'solemnity', 'SOLENIDADE', 'rc:ImmaculateConception']],
+  ['observance:matthias-apostle:roman-catholic', ['2026-05-14', 'feast', 'FESTA', 'rc:StMatthias']],
+  ['observance:bartholomew-apostle:roman-catholic', ['2026-08-24', 'feast', 'FESTA', 'rc:StBartholomewAp']],
+  ['observance:simon-jude-apostles:roman-catholic', ['2026-10-28', 'feast', 'FESTA', 'rc:StSimonStJudeAp']],
+  ['observance:andrew-apostle:roman-catholic', ['2026-11-30', 'feast', 'FESTA', 'rc:StAndrewAp']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
 

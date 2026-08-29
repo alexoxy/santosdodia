@@ -210,6 +210,58 @@
       "sourceRankCode": "SOLENIDADE",
       "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-8","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"IMACULADA CONCEIÇÃO DA VIRGEM SANTA MARIA, Padroeira principal de Portugal e das Dioceses de Évora, Santarém, Setúbal e Vila Real – SOLENIDADE"}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-05-14:matthias-apostle:roman-catholic:pt",
+      "observanceId": "observance:matthias-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-14",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-14","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Matias, apóstolo"}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-08-24:bartholomew-apostle:roman-catholic:pt",
+      "observanceId": "observance:bartholomew-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-24",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-24","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Bartolomeu, apóstolo"}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-10-28:simon-jude-apostles:roman-catholic:pt",
+      "observanceId": "observance:simon-jude-apostles:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-28",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-28","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"Santos Simão e Judas, apóstolos"}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-11-30:andrew-apostle:roman-catholic:pt",
+      "observanceId": "observance:andrew-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-30",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-30","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. André, apóstolo"}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

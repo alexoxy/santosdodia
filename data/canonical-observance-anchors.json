@@ -278,6 +278,69 @@
       "precedenceImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "observance:matthias-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"matthias-apostle","recognitionId":"recognition:matthias-apostle:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/05/14/st--matthias--apostle.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:bartholomew-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"bartholomew-apostle","recognitionId":"recognition:bartholomew-apostle:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/24/st-bartolomew--apostle.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:simon-jude-apostles:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {"kind":"person","personId":"simon-zealot-apostle","recognitionId":"recognition:simon-zealot-apostle:roman-catholic"},
+        {"kind":"person","personId":"jude-thaddeus-apostle","recognitionId":"recognition:jude-thaddeus-apostle:roman-catholic"}
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:andrew-apostle:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"andrew-apostle","recognitionId":"recognition:andrew-apostle:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }
