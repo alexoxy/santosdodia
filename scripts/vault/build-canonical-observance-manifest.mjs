@@ -13,7 +13,7 @@ const ecclesialSourcePath = path.join(root, 'data', 'canonical-ecclesial-context
 const ID_PATTERN = /^observance:[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)+$/u;
 const CHURCH_ID_PATTERN = /^church:[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const OBSERVANCE_KEY_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
-const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'feast', 'mystery', 'marian-title', 'other']);
+const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'feast', 'mystery', 'marian-title', 'marian-solemnity', 'other']);
 const ALLOWED_SCOPES = new Set(['church-attested', 'jurisdictional', 'local', 'unknown']);
 const FORBIDDEN_OCCURRENCE_KEYS = new Set(['year', 'month', 'day', 'date', 'dateISO', 'feastDate', 'calendarSystem', 'calendarId', 'jurisdictionId', 'rank', 'grade', 'precedence', 'transferRule']);
 

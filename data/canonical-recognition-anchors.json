@@ -362,6 +362,26 @@
         }
       ],
       "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "recognition:mary-of-nazareth:roman-catholic",
+      "personId": "mary-of-nazareth",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["blessed-virgin-mary", "mother-of-god"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/01/most-holy-mary--mother-of-god.html",
+          "claimTypes": ["saint-designation", "identity", "blessed-virgin-mary", "mother-of-god"]
+        }
+      ],
+      "verifiedAt": "2026-08-29"
     }
   ]
 }

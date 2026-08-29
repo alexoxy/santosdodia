@@ -6,6 +6,11 @@
   "mutationAllowed": false,
   "bridges": [
     {
+      "occurrenceId": "occurrence:2026-01-01:mary-mother-of-god:roman-catholic:pt",
+      "legacyObservanceId": "rc:MaryMotherOfGod",
+      "dateISO": "2026-01-01"
+    },
+    {
       "occurrenceId": "occurrence:2026-01-28:thomas-aquinas:roman-catholic:pt",
       "legacyObservanceId": "rc:StThomasAquinas",
       "dateISO": "2026-01-28"
@@ -66,9 +71,19 @@
       "dateISO": "2026-07-25"
     },
     {
+      "occurrenceId": "occurrence:2026-08-15:assumption-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:Assumption",
+      "dateISO": "2026-08-15"
+    },
+    {
       "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
       "legacyObservanceId": "rc:StMatthewEvangelist",
       "dateISO": "2026-09-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-08:immaculate-conception-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:ImmaculateConception",
+      "dateISO": "2026-12-08"
     }
   ]
 }

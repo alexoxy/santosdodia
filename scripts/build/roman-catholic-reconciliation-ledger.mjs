@@ -104,7 +104,7 @@ function familyObservanceId(family, week, weekday) {
     .replace('{weekday}', weekday);
 }
 
-export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset, temporalRuleDataset, temporalShadow, temporalFamilyDataset, temporalFamilyShadow, movableTransferShadow, overlayReview, overlayApproval) {
+export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset, fixedSanctoraleShadow, temporalRuleDataset, temporalShadow, temporalFamilyDataset, temporalFamilyShadow, movableTransferShadow, overlayReview, overlayApproval) {
   const year = Number(report?.year);
   const expectedDays = daysInYear(year);
   assert(Number.isInteger(year) && year >= 1970 && year <= 2200, 'Baseline year is invalid.');
@@ -113,6 +113,12 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(Array.isArray(report.daily) && report.daily.length === expectedDays, `Baseline must contain exactly ${expectedDays} daily rows.`);
   assert(occurrenceDataset?.schemaVersion === 1 && Array.isArray(occurrenceDataset.occurrences), 'Canonical occurrence anchors are invalid.');
   assert(ruleDataset?.schemaVersion === 1 && Array.isArray(ruleDataset.rules), 'Perennial Sanctorale rules are invalid.');
+  assert(fixedSanctoraleShadow?.schemaVersion === 1 && fixedSanctoraleShadow.status === 'approved-release-fixed-sanctorale-shadow', 'Approved fixed Sanctorale shadow is invalid.');
+  assert(fixedSanctoraleShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && fixedSanctoraleShadow.mutationAllowed === false, 'Fixed Sanctorale shadow must remain read-only and bound to the approved Portugal release.');
+  assert(fixedSanctoraleShadow.target?.churchId === 'church:roman-catholic' && fixedSanctoraleShadow.target?.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Fixed Sanctorale shadow Church/Jurisdiction differs from the ledger.');
+  assert(fixedSanctoraleShadow.target?.calendarSystem === 'gregorian' && fixedSanctoraleShadow.target?.year === year, 'Fixed Sanctorale shadow calendar/year differs from the ledger.');
+  assert(Array.isArray(fixedSanctoraleShadow.mappings), 'Fixed Sanctorale shadow mappings are missing.');
+  assert(isOfficialUrl(fixedSanctoraleShadow.authorityEvidence?.portugalAnnualCalendar), 'Fixed Sanctorale shadow lacks competent Portugal authority evidence.');
   assert(temporalRuleDataset?.schemaVersion === 1 && Array.isArray(temporalRuleDataset.rules), 'Canonical TemporalRules are invalid.');
   assert(temporalShadow?.schemaVersion === 1 && temporalShadow.status === 'approved-release-temporal-shadow-mappings', 'Approved TemporalRule shadow mappings are invalid.');
   assert(temporalShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalShadow.mutationAllowed === false, 'TemporalRule shadow must remain read-only and bound to the approved Portugal release.');
@@ -122,6 +128,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(Number.isInteger(temporalShadow.sourceArtifact?.artifactId) && temporalShadow.sourceArtifact.artifactId > 0, 'TemporalRule shadow lacks an approved artifact identity.');
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
+  assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
   assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.0' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
@@ -148,6 +155,18 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     rulesByObservance.set(rule.observanceId, rule);
   }
 
+  const fixedMappingsByOccurrence = new Map();
+  const fixedSourceIds = new Set();
+  const fixedSourceHashes = new Set();
+  for (const mapping of fixedSanctoraleShadow.mappings) {
+    assert(typeof mapping?.occurrenceId === 'string' && !fixedMappingsByOccurrence.has(mapping.occurrenceId), `Duplicate or invalid fixed Sanctorale mapping ${String(mapping?.occurrenceId)}.`);
+    assert(typeof mapping.sourceOccurrenceId === 'string' && !fixedSourceIds.has(mapping.sourceOccurrenceId), `Duplicate fixed Sanctorale source occurrence ${String(mapping.sourceOccurrenceId)}.`);
+    assert(/^[a-f0-9]{64}$/u.test(mapping.sourceRecordHash ?? '') && !fixedSourceHashes.has(mapping.sourceRecordHash), `Duplicate or invalid fixed Sanctorale source hash for ${mapping.occurrenceId}.`);
+    fixedMappingsByOccurrence.set(mapping.occurrenceId, mapping);
+    fixedSourceIds.add(mapping.sourceOccurrenceId);
+    fixedSourceHashes.add(mapping.sourceRecordHash);
+  }
+
   const anchorsByDate = new Map();
   for (const anchor of occurrenceDataset.occurrences.filter(item => item.year === year && item.jurisdictionId === 'jurisdiction:roman-catholic:pt')) {
     assert(!anchorsByDate.has(anchor.dateISO), `Multiple reviewed occurrence anchors exist on ${anchor.dateISO}; precedence must be resolved first.`);
@@ -156,8 +175,18 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     assert(rule, `Occurrence ${anchor.id} has no reviewed perennial rule.`);
     assert(fixedDateForYear(year, rule) === anchor.dateISO, `Perennial date mismatch for ${anchor.observanceId}.`);
     assert(rule.liturgicalRank === anchor.rank, `Perennial rank mismatch for ${anchor.observanceId}.`);
-    anchorsByDate.set(anchor.dateISO, { anchor, rule });
+    const mapping = fixedMappingsByOccurrence.get(anchor.id);
+    assert(mapping, `Occurrence ${anchor.id} lacks an exact fixed Sanctorale source binding.`);
+    assert(mapping.observanceId === anchor.observanceId && mapping.sanctoraleRuleId === rule.id, `Fixed Sanctorale mapping ${anchor.id} differs from its canonical Observance/rule.`);
+    assert(mapping.expectedDateISO === anchor.dateISO && mapping.canonicalRank === anchor.rank && mapping.sourceRankCode === anchor.sourceRankCode, `Fixed Sanctorale mapping ${anchor.id} differs from its canonical annual state.`);
+    const rankExact = mapping.legacyRank === mapping.canonicalRank;
+    const rankRefinement = mapping.legacyRank === 'memorial' && mapping.canonicalRank === 'obligatory-memorial' && mapping.sourceRankCode === 'MO';
+    assert(rankExact || rankRefinement, `Fixed Sanctorale mapping ${anchor.id} has an unreviewed rank refinement.`);
+    assert(mapping.sourceOccurrenceId.startsWith(`snl-pt-${anchor.dateISO}-`), `Fixed Sanctorale mapping ${anchor.id} lacks its exact Portugal source occurrence.`);
+    assert(mapping.reviewStatus === 'source-bound-exact' && mapping.resolution === 'exact-fixed-date-binding', `Fixed Sanctorale mapping ${anchor.id} lacks an exact reviewed outcome.`);
+    anchorsByDate.set(anchor.dateISO, { anchor, rule, mapping });
   }
+  assert(fixedMappingsByOccurrence.size === anchorsByDate.size, 'Fixed Sanctorale shadow must bind every and only reviewed annual anchor.');
 
   const temporalRulesById = new Map();
   for (const rule of temporalRuleDataset.rules) {
@@ -441,7 +470,15 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       canonicalObservanceId: fixed.anchor.observanceId,
       perennialRuleId: fixed.rule.id,
       liturgicalRank: fixed.anchor.rank,
-      authorityEvidence: fixed.anchor.evidence.map(item => item.url)
+      authorityEvidence: fixed.anchor.evidence.map(item => item.url),
+      sourceBinding: {
+        releaseId: fixedSanctoraleShadow.sourceReleaseId,
+        legacyObservanceId: fixed.mapping.legacyObservanceId,
+        sourceOccurrenceId: fixed.mapping.sourceOccurrenceId,
+        sourceRecordHash: fixed.mapping.sourceRecordHash,
+        reviewStatus: fixed.mapping.reviewStatus,
+        resolution: fixed.mapping.resolution
+      }
     };
   });
 
@@ -490,6 +527,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const input = argument('--input');
   const occurrences = argument('--occurrences') ?? 'data/canonical-occurrence-anchors.json';
   const rules = argument('--rules') ?? 'data/canonical-roman-sanctorale-rule-anchors.json';
+  const fixedSanctoraleShadow = argument('--fixed-sanctorale-shadow') ?? 'data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json';
   const temporalRules = argument('--temporal-rules') ?? 'data/canonical-temporal-rule-anchors.json';
   const temporalShadow = argument('--temporal-shadow') ?? 'data/migrations/roman-catholic-pt-2026-v2.temporal-shadow.json';
   const temporalFamilies = argument('--temporal-families') ?? 'data/canonical-temporal-rule-families.json';
@@ -498,9 +536,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const overlayReview = argument('--overlay-review') ?? 'data/releases/roman-catholic-pt-2026.overlay-review.json';
   const overlayApproval = argument('--overlay-approval') ?? 'data/releases/roman-catholic-pt-2026.overlay-approval.json';
   const output = argument('--output');
-  if (!input || !output) throw new Error('Usage: node scripts/build/roman-catholic-reconciliation-ledger.mjs --input <build.json> --output <ledger.json> [--occurrences <json>] [--rules <json>] [--temporal-rules <json>] [--temporal-shadow <json>] [--temporal-families <json>] [--temporal-family-shadow <json>] [--movable-transfer-shadow <json>] [--overlay-review <json>] [--overlay-approval <json>]');
+  if (!input || !output) throw new Error('Usage: node scripts/build/roman-catholic-reconciliation-ledger.mjs --input <build.json> --output <ledger.json> [--occurrences <json>] [--rules <json>] [--fixed-sanctorale-shadow <json>] [--temporal-rules <json>] [--temporal-shadow <json>] [--temporal-families <json>] [--temporal-family-shadow <json>] [--movable-transfer-shadow <json>] [--overlay-review <json>] [--overlay-approval <json>]');
   const read = file => JSON.parse(fs.readFileSync(path.resolve(file), 'utf8'));
-  const ledger = buildReconciliationLedger(read(input), read(occurrences), read(rules), read(temporalRules), read(temporalShadow), read(temporalFamilies), read(temporalFamilyShadow), read(movableTransferShadow), read(overlayReview), read(overlayApproval));
+  const ledger = buildReconciliationLedger(read(input), read(occurrences), read(rules), read(fixedSanctoraleShadow), read(temporalRules), read(temporalShadow), read(temporalFamilies), read(temporalFamilyShadow), read(movableTransferShadow), read(overlayReview), read(overlayApproval));
   fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true });
   fs.writeFileSync(path.resolve(output), `${JSON.stringify(ledger, null, 2)}\n`, 'utf8');
   console.log(JSON.stringify({ year: ledger.year, counts: ledger.counts, fullSemanticEquivalence: ledger.fullSemanticEquivalence, publicationAllowed: ledger.publicationAllowed }, null, 2));

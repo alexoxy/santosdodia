@@ -19,6 +19,7 @@ function allDates(year) {
 
 const occurrences = read('data/canonical-occurrence-anchors.json');
 const rules = read('data/canonical-roman-sanctorale-rule-anchors.json');
+const fixedSanctoraleShadow = read('data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json');
 const temporalRules = read('data/canonical-temporal-rule-anchors.json');
 const temporalShadow = read('data/migrations/roman-catholic-pt-2026-v2.temporal-shadow.json');
 const temporalFamilies = read('data/canonical-temporal-rule-families.json');
@@ -44,6 +45,7 @@ const buildLedger = ({
   baseline = report,
   occurrenceAnchors = occurrences,
   sanctoraleRules = rules,
+  fixedSanctoraleMappings = fixedSanctoraleShadow,
   temporalRuleAnchors = temporalRules,
   temporalMappings = temporalShadow,
   temporalFamilyAnchors = temporalFamilies,
@@ -51,13 +53,13 @@ const buildLedger = ({
   movableTransferMappings = movableTransferShadow,
   review = overlayReview,
   approval = overlayApproval
-} = {}) => buildReconciliationLedger(baseline, occurrenceAnchors, sanctoraleRules, temporalRuleAnchors, temporalMappings, temporalFamilyAnchors, temporalFamilyMappings, movableTransferMappings, review, approval);
+} = {}) => buildReconciliationLedger(baseline, occurrenceAnchors, sanctoraleRules, fixedSanctoraleMappings, temporalRuleAnchors, temporalMappings, temporalFamilyAnchors, temporalFamilyMappings, movableTransferMappings, review, approval);
 
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 52 && ledger.counts.temporalRules === 5 && ledger.counts.temporalFamilyMembers === 47, 'The ledger must distinguish five TemporalRules from 47 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 13 && ledger.counts.movableOrTransfer === 11 && ledger.counts.sourceBound === 76, 'Only 52 reviewed Temporale, thirteen Sanctorale and eleven movable/transfer bindings may be marked source-bound.');
-assert(ledger.counts.unresolved === 289, 'Every unreviewed official occurrence must remain explicit and unresolved.');
+assert(ledger.counts.fixedSanctorale === 16 && ledger.counts.movableOrTransfer === 11 && ledger.counts.sourceBound === 79, 'Only 52 reviewed Temporale, sixteen exact Sanctorale and eleven movable/transfer bindings may be marked source-bound.');
+assert(ledger.counts.unresolved === 286, 'Every unreviewed official occurrence must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-22')?.classification === 'temporale', 'First Sunday of Lent must remain classified as Temporale.');
@@ -74,6 +76,10 @@ assert(ledger.entries.find(item => item.dateISO === '2026-05-17')?.jurisdictionT
 assert(ledger.entries.find(item => item.dateISO === '2026-06-15')?.jurisdictionTransfer?.decisionId === 'pt-2026-immaculate-heart-transfer', 'Immaculate Heart transfer binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-11-22')?.perennialRuleId === 'temporal-rule:christ-the-king:roman-catholic', 'Christ the King movable binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-03-19')?.canonicalObservanceId === 'observance:saint-joseph:roman-catholic', 'Saint Joseph canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-01-01')?.canonicalObservanceId === 'observance:mary-mother-of-god:roman-catholic', 'Mary Mother of God canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-08-15')?.canonicalObservanceId === 'observance:assumption-mary:roman-catholic', 'Assumption canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-12-08')?.canonicalObservanceId === 'observance:immaculate-conception-mary:roman-catholic', 'Immaculate Conception canonical binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-01-01')?.sourceBinding?.sourceRecordHash === 'a459a74c707b8bff3a11803d2c3e72e774e271b4748dda539a27d24987ceff2d', 'Fixed Sanctorale source hash drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-04-25')?.canonicalObservanceId === 'observance:mark-evangelist:roman-catholic', 'Saint Mark canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-04')?.canonicalObservanceId === 'observance:elizabeth-portugal:roman-catholic', 'Portugal proper binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-03')?.canonicalObservanceId === 'observance:thomas-apostle:roman-catholic', 'Saint Thomas canonical binding drifted.');
@@ -100,6 +106,30 @@ annualizedRule.rules[0].year = 2026;
 let annualRuleRejected = false;
 try { buildLedger({ sanctoraleRules: annualizedRule }); } catch { annualRuleRejected = true; }
 assert(annualRuleRejected, 'Perennial rules containing cloned annual years must fail closed.');
+
+const wrongFixedArtifact = clone(fixedSanctoraleShadow);
+wrongFixedArtifact.sourceArtifact.artifactId += 1;
+let wrongFixedArtifactRejected = false;
+try { buildLedger({ fixedSanctoraleMappings: wrongFixedArtifact }); } catch { wrongFixedArtifactRejected = true; }
+assert(wrongFixedArtifactRejected, 'Fixed Sanctorale mappings from another artifact must fail closed.');
+
+const wrongFixedHash = clone(fixedSanctoraleShadow);
+wrongFixedHash.mappings[0].sourceRecordHash = '0'.repeat(63);
+let wrongFixedHashRejected = false;
+try { buildLedger({ fixedSanctoraleMappings: wrongFixedHash }); } catch { wrongFixedHashRejected = true; }
+assert(wrongFixedHashRejected, 'Fixed Sanctorale source hash drift must fail closed.');
+
+const wrongFixedDate = clone(fixedSanctoraleShadow);
+wrongFixedDate.mappings[0].expectedDateISO = '2026-01-02';
+let wrongFixedDateRejected = false;
+try { buildLedger({ fixedSanctoraleMappings: wrongFixedDate }); } catch { wrongFixedDateRejected = true; }
+assert(wrongFixedDateRejected, 'Fixed Sanctorale annual date drift must fail closed.');
+
+const missingFixedMapping = clone(fixedSanctoraleShadow);
+missingFixedMapping.mappings.pop();
+let missingFixedMappingRejected = false;
+try { buildLedger({ fixedSanctoraleMappings: missingFixedMapping }); } catch { missingFixedMappingRejected = true; }
+assert(missingFixedMappingRejected, 'Every fixed canonical Occurrence requires one exact approved source row.');
 
 const unknownTemporalRule = clone(temporalShadow);
 unknownTemporalRule.mappings[0].temporalRuleId = 'temporal-rule:unknown:roman-catholic';
@@ -203,4 +233,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 5 TemporalRules + 47 precedence-resolved TemporalRuleFamily members + 13 fixed Sanctorale anchors + 11 movable/transfer bindings = 76 source-bound days, 289 explicit unresolved entries and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 5 TemporalRules + 47 precedence-resolved TemporalRuleFamily members + 16 exact fixed Sanctorale anchors + 11 movable/transfer bindings = 79 source-bound days, 286 explicit unresolved entries and no label-derived identity.');
