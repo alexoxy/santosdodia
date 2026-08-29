@@ -26,12 +26,12 @@
     "occurrenceModelVersion": "1.0"
   },
   "coverage": {
-    "explicitOccurrenceAnchors": 13,
+    "explicitOccurrenceAnchors": 16,
     "temporalRuleShadowOccurrences": 5,
     "temporalRuleFamilyShadowOccurrences": 47,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 76,
-    "remainingLegacyOccurrences": 313,
+    "mappedOccurrenceAnchors": 79,
+    "remainingLegacyOccurrences": 310,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -41,6 +41,8 @@
     "rankCompatibilityRequired": true,
     "legacyMemorialMayRefineToObligatoryMemorialWhenOfficialSourceCodeIsMO": true,
     "churchAndJurisdictionMustRemainFixed": true,
+    "fixedSanctoraleShadowMustResolveThroughCanonicalRule": true,
+    "fixedSanctoraleShadowMustAnchorExactApprovedSourceRow": true,
     "temporalShadowMustResolveThroughCanonicalTemporalRule": true,
     "temporalShadowMustAnchorExactApprovedSourceRow": true,
     "temporalFamilyCandidatesRequirePrecedenceResolution": true,
