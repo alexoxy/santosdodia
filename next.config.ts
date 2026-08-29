@@ -11,6 +11,26 @@ const securityHeaders = [
   }
 ];
 
+const noIndexFollowHeaders = [
+  { key: 'X-Robots-Tag', value: 'noindex, follow' }
+];
+
+// These routes remain public product surfaces, but they are deliberately kept
+// out of search while SantosDia remediates the AdSense low-value-content finding.
+// Search eligibility is independent from product availability.
+const searchExcludedProductRoutes = [
+  '/explore',
+  '/calendar',
+  '/liturgy',
+  '/churches',
+  '/church/:path*',
+  '/jurisdiction/:path*',
+  '/holidays',
+  '/live',
+  '/leaders',
+  '/leader/:path*'
+] as const;
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -35,7 +55,11 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: securityHeaders
-      }
+      },
+      ...searchExcludedProductRoutes.map(source => ({
+        source,
+        headers: noIndexFollowHeaders
+      }))
     ];
   }
 };
