@@ -11,6 +11,7 @@ const biographyFiles = [
   'data/saint-biographies-batch-4.ts',
   'data/saint-biographies-batch-5.ts',
 ];
+const editorialDepthFile = 'data/saint-biography-editorial-depth-wave-1.ts';
 
 const publicLocales = ['en', 'es', 'pt', 'it'];
 const baseline = { summaryCharacters: 120, paragraphs: 2, bodyWords: 90, sources: 2 };
@@ -52,6 +53,37 @@ function numberOfArrayItems(object, name) {
   return item.initializer.elements.length;
 }
 
+function loadEditorialExtensions() {
+  const source = fs.readFileSync(editorialDepthFile, 'utf8');
+  const ast = ts.createSourceFile(editorialDepthFile, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const extensions = new Map();
+
+  function visit(node) {
+    if (ts.isObjectLiteralExpression(node)) {
+      const idProp = property(node, 'id');
+      const paragraphsProp = property(node, 'paragraphs');
+      if (
+        idProp && paragraphsProp &&
+        ts.isPropertyAssignment(idProp) && ts.isPropertyAssignment(paragraphsProp) &&
+        ts.isObjectLiteralExpression(paragraphsProp.initializer)
+      ) {
+        const id = stringValue(idProp.initializer);
+        if (id) {
+          extensions.set(id, Object.fromEntries(
+            publicLocales.map(locale => [locale, localizedParagraphs(paragraphsProp.initializer, locale)]),
+          ));
+        }
+      }
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(ast);
+  return extensions;
+}
+
+const editorialExtensions = loadEditorialExtensions();
+
 function biographyFromObject(node, file) {
   if (!ts.isObjectLiteralExpression(node)) return undefined;
   const idProp = property(node, 'id');
@@ -72,7 +104,10 @@ function biographyFromObject(node, file) {
 
   for (const locale of publicLocales) {
     const summary = localizedString(summaryProp.initializer, locale);
-    const paragraphs = localizedParagraphs(paragraphsProp.initializer, locale);
+    const paragraphs = [
+      ...localizedParagraphs(paragraphsProp.initializer, locale),
+      ...(editorialExtensions.get(id)?.[locale] ?? []),
+    ];
     const bodyWords = paragraphs.reduce((total, paragraph) => total + words(paragraph), 0);
     const baseReasons = [];
     const deepReasons = [];
@@ -96,6 +131,7 @@ function biographyFromObject(node, file) {
     sourceCount,
     factCount,
     verifiedAt: stringValue(verifiedProp.initializer),
+    extended: editorialExtensions.has(id),
     baselineReady,
     deepReady,
     locales,
@@ -118,6 +154,12 @@ for (const file of biographyFiles) {
   visit(ast);
 }
 
+const unknownExtensionIds = [...editorialExtensions.keys()].filter(id => !seen.has(id));
+if (unknownExtensionIds.length) {
+  console.error(`Editorial corpus audit found depth extensions for unknown biography IDs: ${unknownExtensionIds.join(', ')}`);
+  process.exit(1);
+}
+
 biographies.sort((a, b) => a.id.localeCompare(b.id));
 const baselineReady = biographies.filter(item => item.baselineReady);
 const deepReady = biographies.filter(item => item.deepReady);
@@ -125,6 +167,7 @@ const deepGaps = biographies.filter(item => !item.deepReady).map(item => ({
   id: item.id,
   sources: item.sourceCount,
   facts: item.factCount,
+  extended: item.extended,
   gaps: Object.fromEntries(publicLocales.map(locale => [locale, item.locales[locale].deepReasons])),
 }));
 
@@ -137,7 +180,9 @@ const report = {
     baselineReady: baselineReady.length,
     deepReady: deepReady.length,
     needsDeepening: biographies.length - deepReady.length,
+    depthExtensions: editorialExtensions.size,
   },
+  deepReadyIds: deepReady.map(item => item.id),
   deepGaps,
 };
 
