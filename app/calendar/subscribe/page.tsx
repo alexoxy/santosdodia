@@ -13,7 +13,7 @@ const metadataCopy = {
 export async function generateMetadata():Promise<Metadata>{
   const locale = await requestPublicLocale();
   const copy = metadataCopy[locale as keyof typeof metadataCopy] ?? metadataCopy.en;
-  return {title:copy.title,description:copy.description,alternates:{canonical:'/calendar/subscribe'}};
+  return {title:copy.title,description:copy.description,alternates:{canonical:'/calendar/subscribe'},robots:{index:false,follow:true}};
 }
 
 export default function CalendarSubscribePage(){
