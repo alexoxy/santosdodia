@@ -4,12 +4,8 @@ import {
   traditionClass,
   type Observance,
 } from "../../data/observances";
-import { getAnnualDateEditorial } from "../../data/date-editorial";
-import {
-  getSaintBiography,
-  getSaintBiographyRecord,
-} from "../../data/saint-biography-registry";
 import { dateISOInTimeZone } from "../../lib/date-context";
+import type { Locale } from "../../lib/i18n";
 import {
   formatMonthYear,
   formatWeekday,
@@ -17,16 +13,41 @@ import {
 import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
-import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
-import type { Locale } from "../../lib/i18n";
+import {
+  getExistingProfileId,
+  isRuntimePersonProfileEligible,
+} from "../../lib/runtime-profile-link";
 import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
 
-const editorialUi: Partial<Record<Locale, {
-  profileEyebrow: string;
-  openProfile: string;
-  openDate: string;
-}>> = {
+type TodayEditorial =
+  | {
+      kind: "date";
+      eyebrow: string;
+      title: string;
+      lead: string;
+      context: string;
+      href: string;
+    }
+  | {
+      kind: "profile";
+      id: string;
+      title: string;
+      summary: string;
+      paragraph?: string;
+      href: string;
+    };
+
+const editorialUi: Partial<
+  Record<
+    Locale,
+    {
+      profileEyebrow: string;
+      openProfile: string;
+      openDate: string;
+    }
+  >
+> = {
   en: {
     profileEyebrow: "Understand today",
     openProfile: "Read the full editorial profile",
@@ -61,11 +82,17 @@ export default function TodayPanel() {
       }),
     [dateISO, locale, church, country],
   );
-  const [items, setItems] = useState<Observance[]>([]),
-    [loading, setLoading] = useState(false);
+  const [items, setItems] = useState<Observance[]>([]);
+  const [editorial, setEditorial] = useState<TodayEditorial | null>(null);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    if (contextReady) setItems(fallback);
+    if (contextReady) {
+      setItems(fallback);
+      setEditorial(null);
+    }
   }, [fallback, contextReady]);
+
   useEffect(() => {
     if (!contextReady) return;
     const controller = new AbortController(),
@@ -73,7 +100,7 @@ export default function TodayPanel() {
     if (church !== "all") params.set("tradition", church);
     if (country) params.set("country", country);
     setLoading(true);
-    fetch(`/api/v1/observances?${params}`, { signal: controller.signal })
+    fetch(`/api/v1/today?${params}`, { signal: controller.signal })
       .then((response) =>
         response.ok
           ? response.json()
@@ -81,15 +108,25 @@ export default function TodayPanel() {
       )
       .then((payload) => {
         if (Array.isArray(payload?.data)) setItems(payload.data);
+        const nextEditorial = payload?.editorial;
+        setEditorial(
+          nextEditorial?.kind === "date" || nextEditorial?.kind === "profile"
+            ? nextEditorial
+            : null,
+        );
       })
       .catch((error) => {
-        if (error?.name !== "AbortError") setItems(fallback);
+        if (error?.name !== "AbortError") {
+          setItems(fallback);
+          setEditorial(null);
+        }
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
   }, [dateISO, locale, timeZone, church, country, fallback, contextReady]);
+
   const weekday = useMemo(
     () => formatWeekday(dateISO, locale, "standalone"),
     [dateISO, locale],
@@ -100,30 +137,13 @@ export default function TodayPanel() {
   );
   const year = Number(dateISO.slice(0, 4));
   const editorialCopy = editorialUi[locale] ?? editorialUi.en!;
-  const annualEditorial = useMemo(() => {
-    const editorial = getAnnualDateEditorial(dateISO.slice(5), locale);
-    if (!editorial) return undefined;
-    return editorial.observanceIds.some(id => items.some(item => item.id === id))
-      ? editorial
-      : undefined;
-  }, [dateISO, locale, items]);
-  const profileEditorial = useMemo(() => {
-    if (annualEditorial) return undefined;
-    for (const item of items) {
-      const profileId = getExistingProfileId(item, year, locale);
-      if (!profileId) continue;
-      const record = getSaintBiographyRecord(profileId);
-      if (!record?.summary[locale] || !record.paragraphs[locale]?.length) continue;
-      const biography = getSaintBiography(profileId, locale);
-      if (biography) return { id: profileId, biography };
-    }
-    return undefined;
-  }, [annualEditorial, items, year, locale]);
 
   if (!contextReady) {
-    return <section className="today-panel today-panel-loading" aria-live="polite">
-      <div className="today-context-loading">{copy.loading}</div>
-    </section>;
+    return (
+      <section className="today-panel today-panel-loading" aria-live="polite">
+        <div className="today-context-loading">{copy.loading}</div>
+      </section>
+    );
   }
 
   return (
@@ -157,7 +177,9 @@ export default function TodayPanel() {
               const name = displayObservanceName(item.names, locale, item.name),
                 scope = displayObservanceScope(item, locale, country),
                 existingProfileId = getExistingProfileId(item, year, locale),
-                profileId = existingProfileId ?? (isRuntimePersonProfileEligible(item) ? item.id : null),
+                profileId =
+                  existingProfileId ??
+                  (isRuntimePersonProfileEligible(item) ? item.id : null),
                 detailHref = profileId
                   ? `/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(dateISO)}`
                   : `/day/${dateISO}#observance-${encodeURIComponent(item.id)}`;
@@ -176,7 +198,13 @@ export default function TodayPanel() {
                       </a>
                     </h3>
                     <div className="tag-row">
-                      {item.traditions.map((value) => <TraditionTag key={value} tradition={value} compact />)}
+                      {item.traditions.map((value) => (
+                        <TraditionTag
+                          key={value}
+                          tradition={value}
+                          compact
+                        />
+                      ))}
                       <span>{copy[item.category]}</span>
                     </div>
                     <span className={`scope-label scope-${scope.kind}`}>
@@ -194,23 +222,23 @@ export default function TodayPanel() {
           </div>
         )}
 
-        {annualEditorial ? (
-          <aside className="institutional-card" aria-label={annualEditorial.title}>
-            <span className="eyebrow">{annualEditorial.eyebrow}</span>
-            <h3>{annualEditorial.title}</h3>
-            <p>{annualEditorial.lead}</p>
-            <p>{annualEditorial.context}</p>
-            <a className="text-link" href={`/date/${dateISO.slice(5)}`}>
+        {editorial?.kind === "date" ? (
+          <aside className="institutional-card" aria-label={editorial.title}>
+            <span className="eyebrow">{editorial.eyebrow}</span>
+            <h3>{editorial.title}</h3>
+            <p>{editorial.lead}</p>
+            <p>{editorial.context}</p>
+            <a className="text-link" href={editorial.href}>
               {editorialCopy.openDate} →
             </a>
           </aside>
-        ) : profileEditorial ? (
-          <aside className="institutional-card" aria-label={profileEditorial.biography.title}>
+        ) : editorial?.kind === "profile" ? (
+          <aside className="institutional-card" aria-label={editorial.title}>
             <span className="eyebrow">{editorialCopy.profileEyebrow}</span>
-            <h3>{profileEditorial.biography.title}</h3>
-            <p>{profileEditorial.biography.summary}</p>
-            {profileEditorial.biography.paragraphs[0] ? <p>{profileEditorial.biography.paragraphs[0]}</p> : null}
-            <a className="text-link" href={`/saint/${encodeURIComponent(profileEditorial.id)}?date=${encodeURIComponent(dateISO)}`}>
+            <h3>{editorial.title}</h3>
+            <p>{editorial.summary}</p>
+            {editorial.paragraph ? <p>{editorial.paragraph}</p> : null}
+            <a className="text-link" href={editorial.href}>
               {editorialCopy.openProfile} →
             </a>
           </aside>
