@@ -13,6 +13,7 @@ const required = [
   'app/components/SiteChrome.tsx',
   'app/components/AdvertisingPrivacyNotice.tsx',
   'app/components/PrivacyChoicesLink.tsx',
+  'app/components/TodayPanel.tsx',
   'app/ads.txt/route.ts',
   'app/about/page.tsx',
   'app/advertising/page.tsx',
@@ -113,11 +114,20 @@ if(!failures.length){
   expect(profile.includes('Conteúdo editorial SantosDia'),'Rich profiles must visibly identify first-party SantosDia editorial composition');
   expect(profile.includes('fontes institucionais indicadas abaixo'),'Editorial-origin copy must preserve visible source grounding');
 
+  const today=text('app/components/TodayPanel.tsx');
+  expect(today.includes('getAnnualDateEditorial'),'Today must reuse reviewed annual-date editorial instead of generating date filler');
+  expect(today.includes('getSaintBiographyRecord') && today.includes('getSaintBiography'),'Today must reuse reviewed first-party saint profiles for contextual depth');
+  expect(today.includes('editorial.observanceIds.some'),'Annual-date editorial must be relevant to an observance visible in the active user context');
+  expect(today.includes('record?.summary[locale]') && today.includes('record.paragraphs[locale]'),'Today profile context must require direct reviewed copy in the active locale rather than silently injecting another language');
+  expect(today.includes('annualEditorial ?') && today.includes(': profileEditorial ?'),'Today must prefer date-specific editorial context, fall back to a reviewed profile, and otherwise render no fabricated filler');
+  expect(today.includes('href={`/date/${dateISO.slice(5)}`}'),'Today must link reviewed annual context to its stable evergreen date page');
+
   const home=text('app/page.tsx');
   expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
   expect(home.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
   expect(home.includes('has-ad-rail'),'Homepage must collapse the rail when advertising is inactive');
   expect(home.includes('SAINT_BIOGRAPHIES'),'Homepage must internally link substantive editorial profiles');
+  expect(home.includes('../data/saint-biography-registry'),'Homepage must use the same composed biography registry as saint pages and sitemap');
 
   const privacy=text('app/components/AdvertisingPrivacyNotice.tsx');
   expect(privacy.includes('Google AdSense'),'Privacy disclosure must identify Google AdSense');
@@ -159,4 +169,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin dated pages are noindex, the sitemap is editorially gated, manual non-overlay placements remain constrained and privacy boundaries are intact.');
+console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin dated pages are noindex, the sitemap is editorially gated, Today prefers reviewed date/profile context without fabricated filler, manual non-overlay placements remain constrained and privacy boundaries are intact.');
