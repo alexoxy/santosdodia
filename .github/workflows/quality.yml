@@ -154,6 +154,9 @@ jobs:
       - name: Audit curated data quality
         run: npm run data:audit
 
+      - name: Audit first-party editorial corpus depth
+        run: npm run editorial:corpus-audit
+
       - name: Audit claim-specific editorial evidence
         run: npm run claims:audit
 
