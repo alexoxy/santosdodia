@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRouteDefinitions = [
     { path: "", changeFrequency: "daily", priority: 1, lastModified: dailyLastModified },
     { path: "/guides", changeFrequency: "weekly", priority: 0.88 },
+    { path: "/tools/liturgical-calendar", changeFrequency: "monthly", priority: 0.86 },
     { path: "/about", changeFrequency: "monthly", priority: 0.75 },
     { path: "/sources", changeFrequency: "monthly", priority: 0.7 },
     { path: "/copyright", changeFrequency: "monthly", priority: 0.6 },

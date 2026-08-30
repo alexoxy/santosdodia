@@ -3,7 +3,8 @@ import LiturgyExplorer from '../components/LiturgyExplorer';
 
 export const metadata:Metadata={
  title:'Liturgy of any day',
- description:'Complete Roman Catholic liturgical information for any selected date, language, national calendar or diocesan calendar.'
+ description:'Complete Roman Catholic liturgical information for any selected date, language, national calendar or diocesan calendar.',
+ robots:{index:false,follow:true}
 };
 
 export default function LiturgyPage(){return <LiturgyExplorer/>}
