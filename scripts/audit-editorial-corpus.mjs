@@ -11,7 +11,10 @@ const biographyFiles = [
   'data/saint-biographies-batch-4.ts',
   'data/saint-biographies-batch-5.ts',
 ];
-const editorialDepthFile = 'data/saint-biography-editorial-depth-wave-1.ts';
+const editorialDepthFiles = [
+  'data/saint-biography-editorial-depth-wave-1.ts',
+  'data/saint-biography-editorial-depth-wave-2.ts',
+];
 
 const publicLocales = ['en', 'es', 'pt', 'it'];
 const baseline = { summaryCharacters: 120, paragraphs: 2, bodyWords: 90, sources: 2 };
@@ -54,35 +57,45 @@ function numberOfArrayItems(object, name) {
 }
 
 function loadEditorialExtensions() {
-  const source = fs.readFileSync(editorialDepthFile, 'utf8');
-  const ast = ts.createSourceFile(editorialDepthFile, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const extensions = new Map();
+  const extensionFiles = new Map();
 
-  function visit(node) {
-    if (ts.isObjectLiteralExpression(node)) {
-      const idProp = property(node, 'id');
-      const paragraphsProp = property(node, 'paragraphs');
-      if (
-        idProp && paragraphsProp &&
-        ts.isPropertyAssignment(idProp) && ts.isPropertyAssignment(paragraphsProp) &&
-        ts.isObjectLiteralExpression(paragraphsProp.initializer)
-      ) {
-        const id = stringValue(idProp.initializer);
-        if (id) {
-          extensions.set(id, Object.fromEntries(
-            publicLocales.map(locale => [locale, localizedParagraphs(paragraphsProp.initializer, locale)]),
-          ));
+  for (const editorialDepthFile of editorialDepthFiles) {
+    const source = fs.readFileSync(editorialDepthFile, 'utf8');
+    const ast = ts.createSourceFile(editorialDepthFile, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+
+    function visit(node) {
+      if (ts.isObjectLiteralExpression(node)) {
+        const idProp = property(node, 'id');
+        const paragraphsProp = property(node, 'paragraphs');
+        if (
+          idProp && paragraphsProp &&
+          ts.isPropertyAssignment(idProp) && ts.isPropertyAssignment(paragraphsProp) &&
+          ts.isObjectLiteralExpression(paragraphsProp.initializer)
+        ) {
+          const id = stringValue(idProp.initializer);
+          if (id) {
+            if (extensions.has(id)) {
+              console.error(`Editorial corpus audit found duplicate depth extension ID ${id} in ${extensionFiles.get(id)} and ${editorialDepthFile}.`);
+              process.exit(1);
+            }
+            extensions.set(id, Object.fromEntries(
+              publicLocales.map(locale => [locale, localizedParagraphs(paragraphsProp.initializer, locale)]),
+            ));
+            extensionFiles.set(id, editorialDepthFile);
+          }
         }
       }
+      ts.forEachChild(node, visit);
     }
-    ts.forEachChild(node, visit);
+
+    visit(ast);
   }
 
-  visit(ast);
-  return extensions;
+  return { extensions, extensionFiles };
 }
 
-const editorialExtensions = loadEditorialExtensions();
+const { extensions: editorialExtensions, extensionFiles } = loadEditorialExtensions();
 
 function biographyFromObject(node, file) {
   if (!ts.isObjectLiteralExpression(node)) return undefined;
@@ -132,6 +145,7 @@ function biographyFromObject(node, file) {
     factCount,
     verifiedAt: stringValue(verifiedProp.initializer),
     extended: editorialExtensions.has(id),
+    extensionFile: extensionFiles.get(id) ?? null,
     baselineReady,
     deepReady,
     locales,
@@ -168,12 +182,14 @@ const deepGaps = biographies.filter(item => !item.deepReady).map(item => ({
   sources: item.sourceCount,
   facts: item.factCount,
   extended: item.extended,
+  extensionFile: item.extensionFile,
   gaps: Object.fromEntries(publicLocales.map(locale => [locale, item.locales[locale].deepReasons])),
 }));
 
 const report = {
   generatedAt: new Date().toISOString(),
   publicLocales,
+  editorialDepthFiles,
   thresholds: { baseline, deepTarget },
   totals: {
     biographies: biographies.length,
@@ -181,6 +197,7 @@ const report = {
     deepReady: deepReady.length,
     needsDeepening: biographies.length - deepReady.length,
     depthExtensions: editorialExtensions.size,
+    depthWaves: editorialDepthFiles.length,
   },
   deepReadyIds: deepReady.map(item => item.id),
   deepGaps,
