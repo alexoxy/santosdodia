@@ -5,7 +5,7 @@ import TodayPanel from "./components/TodayPanel";
 import PatronageSearch from "./components/PatronageSearch";
 import ProgressiveVaticanLive from "./components/ProgressiveVaticanLive";
 import AdSlot from "./components/AdSlot";
-import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biographies";
+import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biography-registry";
 import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive } from "../lib/adsense";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
