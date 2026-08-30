@@ -4,6 +4,11 @@ import {
   traditionClass,
   type Observance,
 } from "../../data/observances";
+import { getAnnualDateEditorial } from "../../data/date-editorial";
+import {
+  getSaintBiography,
+  getSaintBiographyRecord,
+} from "../../data/saint-biography-registry";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   formatMonthYear,
@@ -13,8 +18,36 @@ import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
 import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
+import type { Locale } from "../../lib/i18n";
 import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
+
+const editorialUi: Partial<Record<Locale, {
+  profileEyebrow: string;
+  openProfile: string;
+  openDate: string;
+}>> = {
+  en: {
+    profileEyebrow: "Understand today",
+    openProfile: "Read the full editorial profile",
+    openDate: "Explore this date",
+  },
+  pt: {
+    profileEyebrow: "Compreender o dia de hoje",
+    openProfile: "Ler o perfil editorial completo",
+    openDate: "Explorar esta data",
+  },
+  es: {
+    profileEyebrow: "Comprender el día de hoy",
+    openProfile: "Leer el perfil editorial completo",
+    openDate: "Explorar esta fecha",
+  },
+  it: {
+    profileEyebrow: "Comprendere il giorno di oggi",
+    openProfile: "Leggi il profilo editoriale completo",
+    openDate: "Esplora questa data",
+  },
+};
 
 export default function TodayPanel() {
   const { locale, copy, country, countryName, timeZone, contextReady, church } =
@@ -66,6 +99,26 @@ export default function TodayPanel() {
     [dateISO, locale],
   );
   const year = Number(dateISO.slice(0, 4));
+  const editorialCopy = editorialUi[locale] ?? editorialUi.en!;
+  const annualEditorial = useMemo(() => {
+    const editorial = getAnnualDateEditorial(dateISO.slice(5), locale);
+    if (!editorial) return undefined;
+    return editorial.observanceIds.some(id => items.some(item => item.id === id))
+      ? editorial
+      : undefined;
+  }, [dateISO, locale, items]);
+  const profileEditorial = useMemo(() => {
+    if (annualEditorial) return undefined;
+    for (const item of items) {
+      const profileId = getExistingProfileId(item, year, locale);
+      if (!profileId) continue;
+      const record = getSaintBiographyRecord(profileId);
+      if (!record?.summary[locale] || !record.paragraphs[locale]?.length) continue;
+      const biography = getSaintBiography(profileId, locale);
+      if (biography) return { id: profileId, biography };
+    }
+    return undefined;
+  }, [annualEditorial, items, year, locale]);
 
   if (!contextReady) {
     return <section className="today-panel today-panel-loading" aria-live="polite">
@@ -140,6 +193,29 @@ export default function TodayPanel() {
             <p>{loading ? copy.loading : copy.noObservances}</p>
           </div>
         )}
+
+        {annualEditorial ? (
+          <aside className="institutional-card" aria-label={annualEditorial.title}>
+            <span className="eyebrow">{annualEditorial.eyebrow}</span>
+            <h3>{annualEditorial.title}</h3>
+            <p>{annualEditorial.lead}</p>
+            <p>{annualEditorial.context}</p>
+            <a className="text-link" href={`/date/${dateISO.slice(5)}`}>
+              {editorialCopy.openDate} →
+            </a>
+          </aside>
+        ) : profileEditorial ? (
+          <aside className="institutional-card" aria-label={profileEditorial.biography.title}>
+            <span className="eyebrow">{editorialCopy.profileEyebrow}</span>
+            <h3>{profileEditorial.biography.title}</h3>
+            <p>{profileEditorial.biography.summary}</p>
+            {profileEditorial.biography.paragraphs[0] ? <p>{profileEditorial.biography.paragraphs[0]}</p> : null}
+            <a className="text-link" href={`/saint/${encodeURIComponent(profileEditorial.id)}?date=${encodeURIComponent(dateISO)}`}>
+              {editorialCopy.openProfile} →
+            </a>
+          </aside>
+        ) : null}
+
         <div className="today-actions">
           <a className="btn btn-primary" href="/calendar">
             {copy.viewCalendar}
