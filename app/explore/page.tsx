@@ -18,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: copy.findTitle,
     description: copy.findIntro,
     alternates: { canonical: "/explore" },
+    robots: { index: false, follow: true },
   };
 }
 
