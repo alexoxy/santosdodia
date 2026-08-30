@@ -12,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: copy.calendarTitle,
     description: copy.calendarIntro,
     alternates: { canonical: "/calendar" },
+    robots: { index: false, follow: true },
   };
 }
 
