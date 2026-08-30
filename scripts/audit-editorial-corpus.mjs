@@ -14,6 +14,7 @@ const biographyFiles = [
 const editorialDepthFiles = [
   'data/saint-biography-editorial-depth-wave-1.ts',
   'data/saint-biography-editorial-depth-wave-2.ts',
+  'data/saint-biography-editorial-depth-wave-3.ts',
 ];
 
 const publicLocales = ['en', 'es', 'pt', 'it'];
