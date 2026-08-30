@@ -13,7 +13,7 @@ const copyByLocale = {
 export async function generateMetadata():Promise<Metadata>{
   const locale = await requestPublicLocale();
   const copy = copyByLocale[locale as keyof typeof copyByLocale] ?? copyByLocale.en;
-  return {title:copy.title,description:copy.intro,alternates:{canonical:'/calendar/api'}};
+  return {title:copy.title,description:copy.intro,alternates:{canonical:'/calendar/api'},robots:{index:false,follow:true}};
 }
 
 export default async function CalendarApiPage(){
