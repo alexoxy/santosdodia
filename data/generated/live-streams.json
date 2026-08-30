@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-16T09:36:05.296Z",
+  "generatedAt": "2026-08-30T13:54:46.368Z",
   "sources": [
     {
       "id": "vatican-media",
@@ -159,7 +159,7 @@
       "id": "syriac-orthodox-media",
       "tradition": "syriac-orthodox",
       "organization": "Syriac Orthodox Church",
-      "archiveUrl": "https://www.syriacorthodox.church/activities/social-media",
+      "archiveUrl": "https://syriacpatriarchate.org/category/video/",
       "sourceUrl": "https://syriacpatriarchate.org/",
       "descriptions": {
         "en": "Official church social-media directory. Live links vary by event and are therefore not presented as permanent streams.",
@@ -172,7 +172,7 @@
         "ar",
         "en"
       ],
-      "verifiedAt": "2026-07-23"
+      "verifiedAt": "2026-08-30"
     }
   ]
 }
