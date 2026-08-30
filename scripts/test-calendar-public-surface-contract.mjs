@@ -47,8 +47,8 @@ requirePattern(observancesRoute, /country:\s*p\.get\("country"\)\s*\?\?\s*undefi
 requirePattern(observancesRoute, /countryCode:\s*filters\.country/, 'Observances API D1 read');
 requirePattern(observancesRoute, /mode:\s*"public"/, 'Observances API publication mode');
 
-requirePattern(todayRoute, /country:params\.get\("country"\)\?\?undefined/, 'Today API');
-requirePattern(todayRoute, /mergePublishedCalendarRange\(curated,\{fromDate:date,toDate:date,locale,filters\}\)/, 'Today API canonical runtime');
+requirePattern(todayRoute, /country:\s*params\.get\("country"\)\s*\?\?\s*undefined/, 'Today API');
+requirePattern(todayRoute, /mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate:\s*date,[\s\S]*?toDate:\s*date,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today API canonical runtime');
 
 requirePattern(searchRoute, /country:p\.get\("country"\)\?\?undefined/, 'Search API');
 requirePattern(searchRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{year\}-01-01`,toDate:`\$\{year\}-12-31`,locale,filters\}\)/, 'Search API canonical runtime');

@@ -74,7 +74,7 @@ for(const route of ['app/api/v1/search/route.ts','app/api/v1/today/route.ts','ap
 const todayPanel=source('app/components/TodayPanel.tsx');
 const calendarExplorer=source('app/components/CalendarExplorer.tsx');
 const searchExplorer=source('app/components/SearchExplorer.tsx');
-assert.match(todayPanel,/fetch\(`\/api\/v1\/observances\?\$\{params\}`/,'Visible Today must read the canonical observances API.');
+assert.match(todayPanel,/fetch\(`\/api\/v1\/today\?\$\{params\}`/,'Visible Today must read the dedicated Today API backed by the canonical published calendar.');
 assert.match(calendarExplorer,/fetch\(`\/api\/v1\/observances\?\$\{params\}`/,'Visible Calendar must read the canonical observances API.');
 assert.match(searchExplorer,/dateIntent \? "\/api\/v1\/observances" : "\/api\/v1\/search"/,'Date searches must use the canonical calendar API rather than the repository fallback alone.');
 

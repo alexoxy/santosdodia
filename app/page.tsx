@@ -5,7 +5,6 @@ import TodayPanel from "./components/TodayPanel";
 import PatronageSearch from "./components/PatronageSearch";
 import ProgressiveVaticanLive from "./components/ProgressiveVaticanLive";
 import AdSlot from "./components/AdSlot";
-import { SAINT_BIOGRAPHIES, getSaintBiography } from "../data/saint-biography-registry";
 import { ADSENSE_SIDEBAR_SLOT, ADSENSE_TOP_SLOT, isAdUnitActive } from "../lib/adsense";
 import { type Locale } from "../lib/i18n";
 import { getFeatureCopy } from "../lib/feature-copy";
@@ -26,6 +25,49 @@ const featuredCopy: Partial<Record<Locale,{eyebrow:string;title:string;open:stri
   it:{eyebrow:'Profili editoriali',title:'Conosci meglio i santi',open:'Apri profilo'},
 };
 
+// Lightweight curated navigation labels. Full biography content remains server/page scoped.
+const featuredProfiles: Array<{
+  id: string;
+  title: { en: string } & Partial<Record<Locale, string>>;
+}> = [
+  {
+    id: "anthony-lisbon",
+    title: {
+      en: "Saint Anthony of Lisbon and Padua",
+      pt: "Santo António de Lisboa e de Pádua",
+      es: "San Antonio de Lisboa y Padua",
+      it: "Sant’Antonio di Lisbona e Padova",
+    },
+  },
+  {
+    id: "francis-assisi",
+    title: {
+      en: "Saint Francis of Assisi",
+      pt: "São Francisco de Assis",
+      es: "San Francisco de Asís",
+      it: "San Francesco d’Assisi",
+    },
+  },
+  {
+    id: "clare-assisi",
+    title: {
+      en: "Saint Clare of Assisi",
+      pt: "Santa Clara de Assis",
+      es: "Santa Clara de Asís",
+      it: "Santa Chiara d’Assisi",
+    },
+  },
+  {
+    id: "teresa-avila",
+    title: {
+      en: "Saint Teresa of Ávila",
+      pt: "Santa Teresa de Ávila",
+      es: "Santa Teresa de Ávila",
+      it: "Santa Teresa d’Avila",
+    },
+  },
+];
+
 export default function HomePage() {
   const { locale, copy } = useLanguage();
   const feature = getFeatureCopy(locale);
@@ -33,7 +75,10 @@ export default function HomePage() {
   const featured = featuredCopy[locale] ?? featuredCopy.en!;
   const retention = getRetentionCopy(locale);
   const sidebarActive = isAdUnitActive(ADSENSE_SIDEBAR_SLOT);
-  const editorialProfiles = SAINT_BIOGRAPHIES.slice(0, 4).map(item => ({ id:item.id, biography:getSaintBiography(item.id, locale) })).filter(entry => entry.biography);
+  const editorialProfiles = featuredProfiles.map((item) => ({
+    id: item.id,
+    title: item.title[locale] ?? item.title.en,
+  }));
 
   return (
     <div className="page-stack home-page product-home">
@@ -53,7 +98,7 @@ export default function HomePage() {
             <article className="institutional-card">
               <span className="eyebrow">{featured.eyebrow}</span>
               <h2 id="featured-saints-title">{featured.title}</h2>
-              <div className="related-topics"><div>{editorialProfiles.map(({id,biography}) => biography ? <Link href={`/saint/${encodeURIComponent(id)}`} key={id}>{biography.title} · {featured.open}</Link> : null)}</div></div>
+              <div className="related-topics"><div>{editorialProfiles.map(({id,title}) => <Link href={`/saint/${encodeURIComponent(id)}`} key={id}>{title} · {featured.open}</Link>)}</div></div>
             </article>
           </section> : null}
 
