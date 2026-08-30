@@ -22,6 +22,23 @@ const required = [
   'app/saint/[id]/page.tsx',
   'app/day/[date]/page.tsx',
   'app/date/[monthDay]/page.tsx',
+  'app/calendar/page.tsx',
+  'app/calendar/subscribe/page.tsx',
+  'app/calendar/api/page.tsx',
+  'app/explore/page.tsx',
+  'app/rezar/page.tsx',
+  'app/holidays/page.tsx',
+  'app/liturgy/page.tsx',
+  'app/live/page.tsx',
+  'app/pilgrimages/layout.tsx',
+  'app/churches/layout.tsx',
+  'app/church/layout.tsx',
+  'app/jurisdiction/layout.tsx',
+  'app/leaders/layout.tsx',
+  'app/leader/layout.tsx',
+  'app/patronage/layout.tsx',
+  'app/place/layout.tsx',
+  'app/tools/liturgical-calendar/page.tsx',
   'app/sitemap.ts',
   'docs/editorial-content-policy.md',
   'docs/adsense-activation-checklist.md',
@@ -32,6 +49,7 @@ const failures=[];
 for(const path of required){if(!fs.existsSync(path))failures.push(`Missing ${path}`)}
 function text(path){return fs.readFileSync(path,'utf8')}
 function expect(condition,message){if(!condition)failures.push(message)}
+function hasNoindexFollow(path){return /robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/u.test(text(path))}
 
 if(!failures.length){
   const config=text('lib/adsense.ts');
@@ -100,13 +118,44 @@ if(!failures.length){
   expect(annualDay.includes('<DayView dateISO={dateISO} mode="annual" />'),'Evergreen date pages must use the annual day experience');
   expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
 
+  const noindexSurfaces = [
+    'app/calendar/page.tsx',
+    'app/calendar/subscribe/page.tsx',
+    'app/calendar/api/page.tsx',
+    'app/explore/page.tsx',
+    'app/rezar/page.tsx',
+    'app/holidays/page.tsx',
+    'app/liturgy/page.tsx',
+    'app/live/page.tsx',
+    'app/pilgrimages/layout.tsx',
+    'app/churches/layout.tsx',
+    'app/church/layout.tsx',
+    'app/jurisdiction/layout.tsx',
+    'app/leaders/layout.tsx',
+    'app/leader/layout.tsx',
+    'app/patronage/layout.tsx',
+    'app/place/layout.tsx',
+  ];
+  for(const path of noindexSurfaces){
+    expect(hasNoindexFollow(path),`${path} must remain usable but noindex/follow until it receives an explicit search-publication gate`);
+  }
+
   const sitemap=text('app/sitemap.ts');
   expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'),'Sitemap must include only saint biographies that pass the launched-locale editorial gate');
   expect(sitemap.includes('path: "/about"'),'About page must be in sitemap');
   expect(sitemap.includes('path: "/advertising"'),'Advertising transparency page must be in sitemap');
+  expect(sitemap.includes('path: "/tools/liturgical-calendar"'),'The substantive perennial liturgical calculator must remain deliberately promoted in the sitemap');
+  for(const path of ['/calendar','/calendar/subscribe','/calendar/api','/explore','/rezar','/holidays','/liturgy','/live','/pilgrimages','/churches','/leaders']){
+    expect(!sitemap.includes(`{ path: "${path}"`),`${path} must not be promoted in the curated sitemap while it is a noindex utility/directory surface`);
+  }
   expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'),'Sitemap must expose only evergreen dates with first-party editorial context');
   expect(sitemap.includes('url: `${SITE_ORIGIN}/date/${monthDay}`'),'Sitemap must expose editorial evergreen month-day pages');
   expect(!sitemap.includes('url: `${SITE_ORIGIN}/day/${item.dateISO}`'),'Thin dated utility pages must not be emitted in the sitemap');
+
+  const calculator=text('app/tools/liturgical-calendar/page.tsx');
+  expect(!/robots\s*:\s*\{\s*index\s*:\s*false/u.test(calculator),'The substantive liturgical calculator must not be accidentally noindexed');
+  expect(calculator.includes('calculateRomanLiturgicalYear'),'Calculator search promotion must remain attached to the deterministic perennial engine');
+  expect(calculator.includes('romanVestmentColoursForDateContext'),'Calculator search promotion must retain substantive liturgical context rather than a thin form');
 
   const profile=text('app/components/SaintProfile.tsx');
   expect(profile.includes('editorialReady?<AdSlot slot={ADSENSE_TOP_SLOT} placement="top"/>'),'Rich profiles need an editorial-quality-guarded top banner');
@@ -177,4 +226,4 @@ if(failures.length){
   for(const failure of failures)console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, thin dated pages are noindex, the sitemap is editorially gated, Today prefers reviewed date/profile context without fabricated filler, manual non-overlay placements remain constrained and privacy boundaries are intact.');
+console.log('AdSense readiness audit passed: serving remains fail-closed, first-party editorial policy is enforced, utility and directory routes remain usable but noindex until explicitly promoted, the substantive liturgical calculator is deliberately indexed, thin dated pages are noindex, the sitemap is editorially gated, Today prefers reviewed date/profile context without fabricated filler, manual non-overlay placements remain constrained and privacy boundaries are intact.');
