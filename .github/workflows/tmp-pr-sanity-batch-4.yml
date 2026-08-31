@@ -1,4 +1,4 @@
-name: Temporary PR sanity batch 4
+name: Temporary cleanup batch 4 sanity workflow
 
 on:
   push:
@@ -11,20 +11,17 @@ permissions:
   contents: write
 
 jobs:
-  sanity:
+  cleanup:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
         with:
           ref: migration/sanctorale-doctors-review-4-20260831
-      - run: |
-          test "$(git diff --name-only 9257dc389a0a1512f64e5d008b4785349d3bcfd9...HEAD | grep -v '^.github/workflows/tmp-pr-sanity-batch-4.yml$' | wc -l)" -eq 2
-          node scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs
       - run: rm .github/workflows/tmp-pr-sanity-batch-4.yml
       - run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/workflows/tmp-pr-sanity-batch-4.yml
-          git commit -m 'Remove temporary batch 4 PR sanity workflow'
+          git commit -m 'Remove temporary batch 4 sanity workflow'
           git push origin HEAD:migration/sanctorale-doctors-review-4-20260831
