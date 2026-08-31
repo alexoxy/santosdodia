@@ -387,6 +387,78 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-08-28:augustine-hippo:roman-catholic:pt",
+      "observanceId": "observance:augustine-hippo:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-28",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Agostinho, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-09-30:jerome-stridon:roman-catholic:pt",
+      "observanceId": "observance:jerome-stridon:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-30",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-30",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Jerónimo, presbítero e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-10-01:therese-lisieux:roman-catholic:pt",
+      "observanceId": "observance:therese-lisieux:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-01",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-1",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Teresa do Menino Jesus, virgem e doutora da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

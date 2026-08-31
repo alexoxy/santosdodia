@@ -449,6 +449,96 @@
       "precedenceImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/15/st--theresa-of-jesus--virgin--doctor-of-the-church--discalced-ca.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:augustine-hippo:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "augustine-hippo",
+          "recognitionId": "recognition:augustine-hippo:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/28/st---augustine--bishop-of-hyppo-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:jerome-stridon:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "jerome-stridon",
+          "recognitionId": "recognition:jerome-stridon:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/30/st--jerome--priest-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:therese-lisieux:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "therese-lisieux",
+          "recognitionId": "recognition:therese-lisieux:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/01/st--therese-of-the-child-jesus--carmelite---virgin-doctor-of-the.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }
