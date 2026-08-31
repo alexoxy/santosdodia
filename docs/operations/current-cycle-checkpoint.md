@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-08-31 09:28 UTC
+Updated: 2026-08-31 09:43 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
@@ -34,7 +34,8 @@ The strategic document is the binding and cumulative product vision until full i
   - Anthony retains canonical identity `anthony-lisbon` and the Portuguese designation Santo António de Lisboa, with a Portugal-scoped rule;
   - both annual rows are bound to exact source occurrence IDs and SHA-256 record hashes from the approved Portugal v2 artifact;
   - fixed Sanctorale coverage increased from 22 to 24 and total migration coverage from 85/389 to 87/389.
-- The valid contents of PR #260 were incorporated into this checkpoint branch: the machine contract now records the AdSense remediation state and a dedicated remediation checkpoint preserves the editorial/search chronology.
+- PR #263 incorporated the valid contents of the stale PR #260 on the current base: the machine contract now records the AdSense remediation state, the dedicated remediation checkpoint preserves the editorial/search chronology and this cycle checkpoint records the completed canonical unit.
+- PR #261 updated Next.js to 15.5.24, OpenNext to 1.20.4, Wrangler to 4.127.0 and the related types/config only after a Dependabot rebase and green current-base Quality/Wikidata checks.
 
 ## Current Portugal 2026 reconciliation
 
@@ -69,6 +70,13 @@ Identity is never created by label similarity, and an annual date never becomes 
 - Dropbox receipt metadata: 410 bytes, server-modified `2026-08-31T09:23:26Z`.
 - Receipt content: 389 occurrences, 365 days, 1,945 labels, 15 decisions, `validated-for-d1-staging`, `productionApproved: false`.
 
+### Checkpoint and dependency closeout
+
+- PR #263 head `e7e4902c7550369752a86a66c7d1a6943d88b3dd`: Quality `33378317758` and Wikidata retry quality `33378317806` passed; squash-merged as `69788d05e890472963f44c31a7231cc75512de13`.
+- PR #260 was then closed as superseded, with its history preserved and an explicit link to #263.
+- PR #261 was rebased onto `69788d05e890472963f44c31a7231cc75512de13`; rebased head `fd186b72a2dd2d001bc8f4d8558457723580c6e7` passed Quality `33378736715` and Wikidata retry quality `33378736730`, then squash-merged as `0616ad9ee1e64ba11bd09650d41001cf57390c69`.
+- These closeout units made no remote D1 writes and did not change the fail-closed perennial promotion state.
+
 ### Preserved production baseline
 
 - Production release commit: `a27e50710d4d0a8cf71ee7644baa7d4b03094792`.
@@ -80,7 +88,7 @@ Identity is never created by label similarity, and an annual date never becomes 
 
 ## Operational alerts
 
-- Fresh Gmail search at 2026-08-31 09:27 UTC for `[alexoxy/santosdodia] Run failed` after 2026-08-29, excluding Trash: **zero messages**.
+- Fresh Gmail search at 2026-08-31 09:36 UTC for `[alexoxy/santosdodia] Run failed` after 2026-08-29, excluding Trash: **zero messages**.
 - No email was moved or deleted in this cycle.
 - Historical resolved-alert receipts and Trash decisions remain preserved in Git/Gmail history.
 
@@ -110,10 +118,11 @@ Identity is never created by label similarity, and an annual date never becomes 
 ### Pull requests and issues
 
 - PR #262: merged with four green workflows.
-- PR #260: content preserved in the current checkpoint branch; close as superseded after this branch merges.
-- PR #261: valid patch/security dependency group (`next` 15.5.24, OpenNext 1.20.4, Wrangler 4.127.0 and related types/config); its original head passed Quality and Wikidata checks. A Dependabot rebase was requested after `main` advanced; merge only after the rebased head passes current-base CI.
+- PR #263: merged with the two applicable green documentation/contract workflows.
+- PR #260: closed as superseded by #263 after content-equivalence and current-base CI proof.
+- PR #261: rebased, passed current-base Quality and Wikidata checks and merged; its dependency branch was deleted automatically after merge.
 - Open issues: #181 only, the strategic umbrella.
-- No PR may remain open without a current purpose and next action; #260 and #261 both have explicit closure paths above.
+- No PR remains open at this checkpoint.
 
 ### Code and branches
 
@@ -129,17 +138,16 @@ Identity is never created by label similarity, and an annual date never becomes 
 - Canonical coverage is occurrence-based; suppressed candidates and transfer-origin replacements remain evidence, not additional coverage.
 - Saint Anthony appears both as the source-backed 13 June fixed feast and as origin-replacement evidence for the approved Immaculate Heart transfer. This is intentional and must not be double-counted.
 - The runtime/public read model remains the proven production baseline until 389/389 semantic equivalence.
-- Dependency PR #261 contains security fixes and should be prioritised once rebased, but never bypass current-base CI.
+- Dependency security updates were integrated only after current-base CI; future grouped updates retain the same rebase-and-revalidate rule.
 
 ## Ordered roadmap
 
-1. Finish dependency PR #261 after Dependabot rebases it and all current-base workflows pass; close PR #260 as superseded after this checkpoint merges.
-2. Continue Portugal 2026 equivalence in the next small source-coherent Sanctorale batch, prioritising approved proper feasts/memorials with exact source identities rather than one PR per saint.
-3. Reduce the remaining 302 legacy occurrences while keeping all identity merge/split and cross-Church decisions under explicit review.
-4. Reach 389/389, explain every precedence/transfer difference and only then consider perennial read-model cutover.
-5. Harden rolling ICS/calculator parity across independent context dimensions.
-6. Expand first-party editorial/search surfaces selectively during AdSense remediation; never create a thin-page factory.
-7. Begin lusophone jurisdiction packs only after the Portugal gate; add other Churches as separate authority-isolated kernels.
+1. Continue Portugal 2026 equivalence in the next small source-coherent Sanctorale batch, prioritising approved proper feasts/memorials with exact source identities rather than one PR per saint.
+2. Reduce the remaining 302 legacy occurrences while keeping all identity merge/split and cross-Church decisions under explicit review.
+3. Reach 389/389, explain every precedence/transfer difference and only then consider perennial read-model cutover.
+4. Harden rolling ICS/calculator parity across independent context dimensions.
+5. Expand first-party editorial/search surfaces selectively during AdSense remediation; never create a thin-page factory.
+6. Begin lusophone jurisdiction packs only after the Portugal gate; add other Churches as separate authority-isolated kernels.
 
 ## Resume and stop rules
 
