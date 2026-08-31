@@ -26,12 +26,12 @@
     "occurrenceModelVersion": "1.0"
   },
   "coverage": {
-    "explicitOccurrenceAnchors": 30,
+    "explicitOccurrenceAnchors": 33,
     "temporalRuleShadowOccurrences": 5,
     "temporalRuleFamilyShadowOccurrences": 47,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 93,
-    "remainingLegacyOccurrences": 296,
+    "mappedOccurrenceAnchors": 96,
+    "remainingLegacyOccurrences": 293,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },

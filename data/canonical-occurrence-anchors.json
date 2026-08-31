@@ -459,6 +459,78 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-08-08:dominic-guzman:roman-catholic:pt",
+      "observanceId": "observance:dominic-guzman:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-08",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-8",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Domingos, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-07-31:ignatius-loyola:roman-catholic:pt",
+      "observanceId": "observance:ignatius-loyola:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-31",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-31",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Inácio de Loiola, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-12-03:francis-xavier:roman-catholic:pt",
+      "observanceId": "observance:francis-xavier:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-12-03",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Francisco Xavier, presbítero, Padroeiro das Missões – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

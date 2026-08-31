@@ -434,6 +434,84 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:dominic-guzman:general-roman",
+      "observanceId": "observance:dominic-guzman:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 8,
+        "day": 8
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-8",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:ignatius-loyola:general-roman",
+      "observanceId": "observance:ignatius-loyola:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 7,
+        "day": 31
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-31",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:francis-xavier:general-roman",
+      "observanceId": "observance:francis-xavier:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 3
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-3",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

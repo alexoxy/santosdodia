@@ -233,6 +233,39 @@
         "es": "Santa Teresa del Niño Jesús",
         "it": "Santa Teresa di Lisieux"
       }
+    },
+    {
+      "id": "dominic-guzman",
+      "primaryObservanceId": "rc:StDominic",
+      "category": "saint",
+      "names": {
+        "en": "Saint Dominic",
+        "pt": "São Domingos de Gusmão",
+        "es": "Santo Domingo de Guzmán",
+        "it": "San Domenico di Guzmán"
+      }
+    },
+    {
+      "id": "ignatius-loyola",
+      "primaryObservanceId": "rc:StIgnatiusLoyola",
+      "category": "saint",
+      "names": {
+        "en": "Saint Ignatius of Loyola",
+        "pt": "Santo Inácio de Loiola",
+        "es": "San Ignacio de Loyola",
+        "it": "Sant’Ignazio di Loyola"
+      }
+    },
+    {
+      "id": "francis-xavier",
+      "primaryObservanceId": "rc:StFrancisXavier",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis Xavier",
+        "pt": "São Francisco Xavier",
+        "es": "San Francisco Javier",
+        "it": "San Francesco Saverio"
+      }
     }
   ]
 }
