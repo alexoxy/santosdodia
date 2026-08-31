@@ -2,20 +2,9 @@
   "schemaVersion": 1,
   "status": "approved-release-fixed-sanctorale-shadow",
   "sourceReleaseId": "roman-catholic-pt-2026-v2",
-  "sourceArtifact": {
-    "workflowRunId": 31998552573,
-    "artifactId": 9277632698,
-    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
-  },
-  "target": {
-    "churchId": "church:roman-catholic",
-    "jurisdictionId": "jurisdiction:roman-catholic:pt",
-    "calendarSystem": "gregorian",
-    "year": 2026
-  },
-  "authorityEvidence": {
-    "portugalAnnualCalendar": "https://www.liturgia.pt/liturgiadiaria/"
-  },
+  "sourceArtifact": {"workflowRunId":31998552573,"artifactId":9277632698,"buildJsonSha256":"159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"},
+  "target": {"churchId":"church:roman-catholic","jurisdictionId":"jurisdiction:roman-catholic:pt","calendarSystem":"gregorian","year":2026},
+  "authorityEvidence": {"portugalAnnualCalendar":"https://www.liturgia.pt/liturgiadiaria/"},
   "mappings": [
     {"occurrenceId":"occurrence:2026-01-01:mary-mother-of-god:roman-catholic:pt","observanceId":"observance:mary-mother-of-god:roman-catholic","sanctoraleRuleId":"sanctorale-rule:mary-mother-of-god:general-roman","legacyObservanceId":"rc:MaryMotherOfGod","expectedDateISO":"2026-01-01","sourceOccurrenceId":"snl-pt-2026-01-01-75603f1fdca354316fcf63b3","sourceRecordHash":"a459a74c707b8bff3a11803d2c3e72e774e271b4748dda539a27d24987ceff2d","legacyRank":"solemnity","canonicalRank":"solemnity","sourceRankCode":"SOLENIDADE","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
     {"occurrenceId":"occurrence:2026-01-28:thomas-aquinas:roman-catholic:pt","observanceId":"observance:thomas-aquinas:roman-catholic","sanctoraleRuleId":"sanctorale-rule:thomas-aquinas:general-roman","legacyObservanceId":"rc:StThomasAquinas","expectedDateISO":"2026-01-28","sourceOccurrenceId":"snl-pt-2026-01-28-cc6d8620e7ad10e84d478f14","sourceRecordHash":"1d0654647d525c05bdea8e130395aabb8c8b8d4c611f833d86f1cca9ffee8264","legacyRank":"memorial","canonicalRank":"obligatory-memorial","sourceRankCode":"MO","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
@@ -40,8 +29,11 @@
     {"occurrenceId":"occurrence:2026-08-10:lawrence-rome:roman-catholic:pt","observanceId":"observance:lawrence-rome:roman-catholic","sanctoraleRuleId":"sanctorale-rule:lawrence-rome:general-roman","legacyObservanceId":"rc:StLawrenceDeacon","expectedDateISO":"2026-08-10","sourceOccurrenceId":"snl-pt-2026-08-10-8ea111b7bd52b54480ea9b29","sourceRecordHash":"7ec22ad5b6ba751bd16eed90c725634ab282b4703b77bd1af4527b9ce7e93fe6","legacyRank":"feast","canonicalRank":"feast","sourceRankCode":"FESTA","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
     {"occurrenceId":"occurrence:2026-12-26:stephen-protomartyr:roman-catholic:pt","observanceId":"observance:stephen-protomartyr:roman-catholic","sanctoraleRuleId":"sanctorale-rule:stephen-protomartyr:general-roman","legacyObservanceId":"rc:StStephenProtomartyr","expectedDateISO":"2026-12-26","sourceOccurrenceId":"snl-pt-2026-12-26-1fdab414ed1c3a0cf8d7b4d4","sourceRecordHash":"23c6db3ecf98f637005d33dc354cc06c0d724b6c74394c2427fee491e347d118","legacyRank":"feast","canonicalRank":"feast","sourceRankCode":"FESTA","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
     {"occurrenceId":"occurrence:2026-02-14:cyril-methodius:roman-catholic:pt","observanceId":"observance:cyril-methodius:roman-catholic","sanctoraleRuleId":"sanctorale-rule:cyril-methodius:europe","legacyObservanceId":"rc:StsCyrilMethodius","expectedDateISO":"2026-02-14","sourceOccurrenceId":"snl-pt-2026-02-14-32a8e554e9074a5040ebdbc5","sourceRecordHash":"4ced6f2cd9f20c48a47ded0262252881514df291fc4d594a5c71160d61e56ef6","legacyRank":"feast","canonicalRank":"feast","sourceRankCode":"FESTA","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
-    {"occurrenceId":"occurrence:2026-06-13:anthony-lisbon:roman-catholic:pt","observanceId":"observance:anthony-lisbon:roman-catholic","sanctoraleRuleId":"sanctorale-rule:anthony-lisbon:portugal","legacyObservanceId":"rc:StAnthonyPadua","expectedDateISO":"2026-06-13","sourceOccurrenceId":"snl-pt-2026-06-13-4e549d5ad5e1f061eb868645","sourceRecordHash":"2feb90127b367646c3bff7355345facbc9af6ebb29fd083ede4e0c002c361a52","legacyRank":"feast","canonicalRank":"feast","sourceRankCode":"FESTA","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"}
+    {"occurrenceId":"occurrence:2026-06-13:anthony-lisbon:roman-catholic:pt","observanceId":"observance:anthony-lisbon:roman-catholic","sanctoraleRuleId":"sanctorale-rule:anthony-lisbon:portugal","legacyObservanceId":"rc:StAnthonyPadua","expectedDateISO":"2026-06-13","sourceOccurrenceId":"snl-pt-2026-06-13-4e549d5ad5e1f061eb868645","sourceRecordHash":"2feb90127b367646c3bff7355345facbc9af6ebb29fd083ede4e0c002c361a52","legacyRank":"feast","canonicalRank":"feast","sourceRankCode":"FESTA","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
+    {"occurrenceId":"occurrence:2026-01-17:anthony-great:roman-catholic:pt","observanceId":"observance:anthony-great:roman-catholic","sanctoraleRuleId":"sanctorale-rule:anthony-great:general-roman","legacyObservanceId":"rc:StAnthonyEgypt","expectedDateISO":"2026-01-17","sourceOccurrenceId":"snl-pt-2026-01-17-b34a187fa64b9733d52bc11e","sourceRecordHash":"b9b835ebbfdada03db35e676c0663e650b76de8a631ce439b7f2d4a82047dddb","legacyRank":"memorial","canonicalRank":"obligatory-memorial","sourceRankCode":"MO","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
+    {"occurrenceId":"occurrence:2026-08-11:clare-assisi:roman-catholic:pt","observanceId":"observance:clare-assisi:roman-catholic","sanctoraleRuleId":"sanctorale-rule:clare-assisi:general-roman","legacyObservanceId":"rc:StClare","expectedDateISO":"2026-08-11","sourceOccurrenceId":"snl-pt-2026-08-11-5b89fdd37677a3fb4d11d05b","sourceRecordHash":"11348f73e3df9a1d660c56f218f740f9efe0c4d5b3165a5558bd4436702c97b2","legacyRank":"memorial","canonicalRank":"obligatory-memorial","sourceRankCode":"MO","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"},
+    {"occurrenceId":"occurrence:2026-10-15:teresa-avila:roman-catholic:pt","observanceId":"observance:teresa-avila:roman-catholic","sanctoraleRuleId":"sanctorale-rule:teresa-avila:general-roman","legacyObservanceId":"rc:StTeresaJesus","expectedDateISO":"2026-10-15","sourceOccurrenceId":"snl-pt-2026-10-15-54e4764edc949091e1045f56","sourceRecordHash":"b904eb7de3d6b67bd230cc81d198f696815c638175aec235430bad0e345adcf4","legacyRank":"memorial","canonicalRank":"obligatory-memorial","sourceRankCode":"MO","reviewStatus":"source-bound-exact","resolution":"exact-fixed-date-binding"}
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-08-29"
+  "verifiedAt": "2026-08-31"
 }
