@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 24, 'Portugal Sanctorale materialization must remain shadow-only with twenty-four reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 27, 'Portugal Sanctorale materialization must remain shadow-only with twenty-seven reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -84,7 +84,10 @@ try {
     ['observance:lawrence-rome:roman-catholic', ['2026-08-10', 'feast', 7, 'general-roman']],
     ['observance:stephen-protomartyr:roman-catholic', ['2026-12-26', 'feast', 7, 'general-roman']],
     ['observance:cyril-methodius:roman-catholic', ['2026-02-14', 'feast', 8, 'europe']],
-    ['observance:anthony-lisbon:roman-catholic', ['2026-06-13', 'feast', 8, 'portugal']]
+    ['observance:anthony-lisbon:roman-catholic', ['2026-06-13', 'feast', 8, 'portugal']],
+    ['observance:anthony-great:roman-catholic', ['2026-01-17', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:clare-assisi:roman-catholic', ['2026-08-11', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:teresa-avila:roman-catholic', ['2026-10-15', 'obligatory-memorial', 10, 'general-roman']]
   ]);
 
   for (const candidate of pt2026.candidates) {
@@ -98,7 +101,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 24, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 27, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -108,8 +111,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The twenty-four reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The twenty-four reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The twenty-seven reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The twenty-seven reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     assert(day?.celebratedCandidateId === candidate.id, `${candidate.observanceId} must win the final 2026 precedence resolution on ${candidate.dateISO}.`);
@@ -177,7 +180,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, twenty-four perennial Portugal vectors including European patrons Cyril and Methodius and Portugal patron Anthony, three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: authority-isolated scope inheritance, twenty-seven perennial Portugal vectors including European patrons, Portugal patron Anthony, and source-bound memorials Anthony the Great, Clare of Assisi and Teresa of Jesus; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

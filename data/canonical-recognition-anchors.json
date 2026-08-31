@@ -523,5 +523,90 @@
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html","claimTypes":["saint-designation","identity","priest","doctor-of-the-church","born-in-lisbon"]}],
       "verifiedAt": "2026-08-31"
     }
+  ,
+    {
+      "id": "recognition:anthony-great:roman-catholic",
+      "personId": "anthony-great",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "abbot",
+        "father-of-monasticism"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/17/st--antony--abbot.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "abbot"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:clare-assisi:roman-catholic",
+      "personId": "clare-assisi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "foundress"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/11/st--clare-of-assisis--virgin--foundress-of-the-poor-ladies.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "foundress"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:teresa-avila:roman-catholic",
+      "personId": "teresa-avila",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "doctor-of-the-church",
+        "discalced-carmelite"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/15/st--theresa-of-jesus--virgin--doctor-of-the-church--discalced-ca.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    }
   ]
 }
