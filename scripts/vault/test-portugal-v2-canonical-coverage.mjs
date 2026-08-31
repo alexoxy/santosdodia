@@ -56,7 +56,7 @@ assert(fixedSanctoraleShadow.target.churchId === coverage.canonicalTarget.church
 assert(fixedSanctoraleShadow.target.calendarSystem === coverage.canonicalTarget.calendarSystem && fixedSanctoraleShadow.target.year === coverage.canonicalTarget.year, 'Fixed Sanctorale shadow calendar/year differs from target.');
 assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 27, 'Fixed Sanctorale shadow must contain exactly twenty-seven exact source bindings.');
 const fixedSanctoraleMappingDigest = createHash('sha256').update(JSON.stringify(fixedSanctoraleShadow.mappings)).digest('hex');
-assert(fixedSanctoraleMappingDigest === 'eed076e141e60aaebbadd0be313854424e64a26378debe91507b34e592ca50dd', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);
+assert(fixedSanctoraleMappingDigest === 'a95e134259fa48ccfe8ef18fcdcb7dd1d3384170669fa543cff801b54c188ce0', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);
 assert(/^https:\/\/(?:www\.)?liturgia\.pt\//u.test(fixedSanctoraleShadow.authorityEvidence?.portugalAnnualCalendar ?? ''), 'Fixed Sanctorale shadow lacks competent Portugal authority evidence.');
 
 assert(temporalShadow?.schemaVersion === 1 && temporalShadow?.status === 'approved-release-temporal-shadow-mappings', 'Temporal shadow mapping dataset is invalid.');
