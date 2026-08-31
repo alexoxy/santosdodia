@@ -1,0 +1,55 @@
+name: Temporary Sanctorale batch 2 promotion retry
+
+on:
+  push:
+    branches:
+      - migration/sanctorale-doctors-promote-20260831
+    paths:
+      - '.github/workflows/tmp-promote-sanctorale-batch-2-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: migration/sanctorale-doctors-promote-20260831
+
+      - name: Narrow the exact assertion and run the reviewed transformer
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('.github/workflows/tmp-promote-sanctorale-batch-2.yml')
+          text = p.read_text()
+          old = "replaceExact(coverageTest, 'exactly twenty-seven', 'exactly thirty');"
+          new = "replaceExact(coverageTest, 'Explicit canonical Occurrence count must remain exactly twenty-seven.', 'Explicit canonical Occurrence count must remain exactly thirty.');"
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one broad replacement, found {text.count(old)}')
+          p.write_text(text.replace(old, new))
+
+          lines = p.read_text().splitlines()
+          start = next(i for i, line in enumerate(lines) if "node --input-type=module <<'NODE'" in line) + 1
+          end = next(i for i in range(start, len(lines)) if lines[i].strip() == 'NODE')
+          js = '\n'.join(line[10:] if line.startswith('          ') else line for line in lines[start:end]) + '\n'
+          Path('/tmp/promote-sanctorale-batch-2.mjs').write_text(js)
+          PY
+          node /tmp/promote-sanctorale-batch-2.mjs
+
+      - name: Remove temporary promotion workflows
+        run: rm .github/workflows/tmp-promote-sanctorale-batch-2.yml .github/workflows/tmp-promote-sanctorale-batch-2-v2.yml
+
+      - name: Commit deterministic promotion
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data scripts .github/workflows/tmp-promote-sanctorale-batch-2.yml .github/workflows/tmp-promote-sanctorale-batch-2-v2.yml
+          git diff --cached --check
+          git commit -m 'Promote reviewed Sanctorale batch 2 canonically'
+          git push origin HEAD:migration/sanctorale-doctors-promote-20260831
