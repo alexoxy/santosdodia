@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-6.json",
+  "reviewDigestSha256": "f3f89c6a5f9f70ec97b7613f5874bb3703b53ae7ae77017f49f7e287fd001699",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "agnes-rome",
+    "john-bosco",
+    "scholastica-nursia",
+    "charles-borromeo",
+    "martin-tours"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 111,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 278
+  },
+  "fixedSanctoraleMappingDigestSha256": "07ad020e15bc4dea8094a62d5fc95dee51d56be0adccb79b34228cf4c353239a",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
