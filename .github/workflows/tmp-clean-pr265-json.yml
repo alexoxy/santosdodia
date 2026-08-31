@@ -1,0 +1,42 @@
+name: Temporary PR 265 JSON cleanup
+
+on:
+  push:
+    branches:
+      - feature/sanctorale-founders-doctors-20260831
+    paths:
+      - scripts/tmp-clean-pr265-json.mjs
+      - .github/workflows/tmp-clean-pr265-json.yml
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: feature/sanctorale-founders-doctors-20260831
+      - name: Restore main formatting and keep reviewed additions
+        run: node scripts/tmp-clean-pr265-json.mjs
+      - name: Remove temporary cleanup mechanism
+        run: |
+          rm scripts/tmp-clean-pr265-json.mjs
+          rm .github/workflows/tmp-clean-pr265-json.yml
+      - name: Commit deterministic cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/canonical-recognition-anchors.json \
+                  data/canonical-occurrence-anchors.json \
+                  data/canonical-occurrence-legacy-bridges.json \
+                  data/canonical-roman-sanctorale-rule-anchors.json \
+                  data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json \
+                  data/migrations/roman-catholic-pt-2026-v2.canonical-coverage.json \
+                  scripts/tmp-clean-pr265-json.mjs \
+                  .github/workflows/tmp-clean-pr265-json.yml
+          git diff --cached --check
+          git commit -m "Restore canonical JSON formatting for PR 265"
+          git push origin HEAD:feature/sanctorale-founders-doctors-20260831
