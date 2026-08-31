@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "athanasius-alexandria",
+        "primaryObservanceId": "rc:StAthanasius",
+        "category": "saint",
+        "names": {
+          "en": "Saint Athanasius of Alexandria",
+          "pt": "Santo Atanásio de Alexandria",
+          "es": "San Atanasio de Alejandría",
+          "it": "Sant'Atanasio di Alessandria"
+        }
+      },
+      "recognition": {
+        "id": "recognition:athanasius-alexandria:roman-catholic",
+        "ecclesialTitles": ["bishop", "doctor-of-the-church"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/02.html"
+      },
+      "observanceId": "observance:athanasius-alexandria:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:athanasius-alexandria:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAthanasius",
+        "sourceOccurrenceId": "snl-pt-2026-05-02-ae39cf30ccf3e38dbc1e61d2",
+        "sourceRecordHash": "e26ea43a61bdef3f5fa38a1834db693eb49c656285d523bb0e387ec484b73451",
+        "dateISO": "2026-05-02",
+        "sourceLabelPt": "S. Atanásio, bispo e doutor da Igreja",
+        "observedDesignation": "S. Atanásio, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-2"
+      }
+    },
+    {
+      "person": {
+        "id": "bonaventure-bagnoregio",
+        "primaryObservanceId": "rc:StBonaventure",
+        "category": "saint",
+        "names": {
+          "en": "Saint Bonaventure",
+          "pt": "São Boaventura",
+          "es": "San Buenaventura",
+          "it": "San Bonaventura"
+        }
+      },
+      "recognition": {
+        "id": "recognition:bonaventure-bagnoregio:roman-catholic",
+        "ecclesialTitles": ["cardinal", "bishop", "doctor-of-the-church", "franciscan"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/15.html"
+      },
+      "observanceId": "observance:bonaventure-bagnoregio:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:bonaventure-bagnoregio:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBonaventure",
+        "sourceOccurrenceId": "snl-pt-2026-07-15-a86727c2353de27fe202e210",
+        "sourceRecordHash": "29e2f5510782ee233e992e5779a8b21421a9e3f1b938cf7b11fc155ebaa9da8e",
+        "dateISO": "2026-07-15",
+        "sourceLabelPt": "S. Boaventura, bispo e doutor da Igreja",
+        "observedDesignation": "S. Boaventura, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-15"
+      }
+    },
+    {
+      "person": {
+        "id": "bernard-clairvaux",
+        "primaryObservanceId": "rc:StBernardClairvaux",
+        "category": "saint",
+        "names": {
+          "en": "Saint Bernard of Clairvaux",
+          "pt": "São Bernardo de Claraval",
+          "es": "San Bernardo de Claraval",
+          "it": "San Bernardo di Chiaravalle"
+        }
+      },
+      "recognition": {
+        "id": "recognition:bernard-clairvaux:roman-catholic",
+        "ecclesialTitles": ["abbot", "doctor-of-the-church", "cistercian"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/20.html"
+      },
+      "observanceId": "observance:bernard-clairvaux:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:bernard-clairvaux:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBernardClairvaux",
+        "sourceOccurrenceId": "snl-pt-2026-08-20-65a51dfe12e0351c837697a5",
+        "sourceRecordHash": "1ee1395300f40f141a97e632dcf1a277d7d022e60204113ebfd3ff1ca0f188f3",
+        "dateISO": "2026-08-20",
+        "sourceLabelPt": "S. Bernardo, abade e doutor da Igreja",
+        "observedDesignation": "S. Bernardo, abade e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-20"
+      }
+    },
+    {
+      "person": {
+        "id": "leo-great",
+        "primaryObservanceId": "rc:StLeoGreat",
+        "category": "saint",
+        "names": {
+          "en": "Saint Leo the Great",
+          "pt": "São Leão Magno",
+          "es": "San León Magno",
+          "it": "San Leone Magno"
+        }
+      },
+      "recognition": {
+        "id": "recognition:leo-great:roman-catholic",
+        "ecclesialTitles": ["pope", "doctor-of-the-church"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/10.html"
+      },
+      "observanceId": "observance:leo-great:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:leo-great:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StLeoGreat",
+        "sourceOccurrenceId": "snl-pt-2026-11-10-975ad7e167ad33d0a7f10e9f",
+        "sourceRecordHash": "1e8417ca4440c35d7e2ecdfb3515928e5fb9345ed1f2a93c1c88cd2258d20243",
+        "dateISO": "2026-11-10",
+        "sourceLabelPt": "S. Leão Magno, papa e doutor da Igreja",
+        "observedDesignation": "S. Leão Magno, papa e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-10"
+      }
+    },
+    {
+      "person": {
+        "id": "ignatius-antioch",
+        "primaryObservanceId": "rc:StIgnatiusAntioch",
+        "category": "saint",
+        "names": {
+          "en": "Saint Ignatius of Antioch",
+          "pt": "Santo Inácio de Antioquia",
+          "es": "San Ignacio de Antioquía",
+          "it": "Sant'Ignazio di Antiochia"
+        }
+      },
+      "recognition": {
+        "id": "recognition:ignatius-antioch:roman-catholic",
+        "ecclesialTitles": ["bishop", "martyr"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/10/17.html"
+      },
+      "observanceId": "observance:ignatius-antioch:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:ignatius-antioch:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StIgnatiusAntioch",
+        "sourceOccurrenceId": "snl-pt-2026-10-17-62eb66902a726fbbf0ab86e7",
+        "sourceRecordHash": "92fe75f5af5c60cfc978bdf29c013137936d6f63aab0e8709fc1881828aba7ca",
+        "dateISO": "2026-10-17",
+        "sourceLabelPt": "S. Inácio de Antioquia, bispo e mártir",
+        "observedDesignation": "S. Inácio de Antioquia, bispo e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-17"
+      }
+    }
+  ],
+  "reviewDigestSha256": "34a036067ec2311ea1a2aa842f65da557ab0d8fb9d5ce71e0cbc15c733177a26",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
