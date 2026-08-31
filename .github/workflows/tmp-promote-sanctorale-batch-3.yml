@@ -1,0 +1,346 @@
+name: Temporary Sanctorale batch 3 promotion
+
+on:
+  push:
+    branches:
+      - migration/sanctorale-founders-missionary-promote-20260831
+    paths:
+      - '.github/workflows/tmp-promote-sanctorale-batch-3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: migration/sanctorale-founders-missionary-promote-20260831
+
+      - name: Apply reviewed batch 3 promotion deterministically
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+
+          const read = (p) => fs.readFileSync(p, 'utf8');
+          const write = (p, s) => fs.writeFileSync(p, s, 'utf8');
+          const json = (p) => JSON.parse(read(p));
+          const assert = (c, m) => { if (!c) throw new Error(m); };
+          const replaceExact = (p, from, to) => {
+            const text = read(p);
+            const count = text.split(from).length - 1;
+            assert(count === 1, `${p}: expected exactly one replacement, found ${count}: ${from}`);
+            write(p, text.replace(from, to));
+          };
+          const insertBefore = (p, marker, block, uniqueNeedle) => {
+            const text = read(p);
+            assert(!text.includes(uniqueNeedle), `${p}: candidate appears to be already present: ${uniqueNeedle}`);
+            const idx = text.lastIndexOf(marker);
+            assert(idx >= 0, `${p}: insertion marker not found`);
+            write(p, `${text.slice(0, idx)},\n${block}${text.slice(idx)}`);
+          };
+          const fmt = (value, indent = 4) => JSON.stringify(value, null, 2).split('\n').map((line) => ' '.repeat(indent) + line).join('\n');
+          const appendArrayRecordsAtEnd = (p, records, uniqueNeedle) => {
+            const block = records.map((r) => fmt(r, 4)).join(',\n');
+            insertBefore(p, '\n  ]\n}', block, uniqueNeedle);
+          };
+
+          const packPath = 'data/migrations/roman-catholic-pt-2026-v2.sanctorale-review-batch-3.json';
+          const pack = json(packPath);
+          assert(pack.reviewDigestSha256 === '3a125eb283da6ca7be7b699109257887361f516f060e44ee5f8f98b97e90e9dc', 'Unexpected review pack digest.');
+          assert(crypto.createHash('sha256').update(JSON.stringify(pack.candidates)).digest('hex') === pack.reviewDigestSha256, 'Review pack payload digest mismatch.');
+          assert(pack.candidates.length === 3 && pack.mutationAllowed === false && pack.promotionAllowed === false, 'Review pack is not the approved bounded non-mutating batch.');
+
+          const currentCoverage = json('data/migrations/roman-catholic-pt-2026-v2.canonical-coverage.json');
+          const currentFixed = json('data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json');
+          assert(currentCoverage.coverage.explicitOccurrenceAnchors === 30 && currentCoverage.coverage.mappedOccurrenceAnchors === 93 && currentCoverage.coverage.remainingLegacyOccurrences === 296 && currentCoverage.coverage.promotionAllowed === false, 'Canonical coverage baseline drifted before batch 3 promotion.');
+          assert(currentFixed.mappings.length === 30 && currentFixed.mutationAllowed === false, 'Fixed Sanctorale baseline drifted before batch 3 promotion.');
+          assert(crypto.createHash('sha256').update(JSON.stringify(currentFixed.mappings)).digest('hex') === '18480fc697990be7f1cdfa4b4fc165b32e4496b162d20f78640a1b09c31a2b4e', 'Fixed Sanctorale baseline digest drifted before batch 3 promotion.');
+
+          const personRecords = [];
+          const recognitionRecords = [];
+          const observanceRecords = [];
+          const ruleRecords = [];
+          const occurrenceRecords = [];
+          const bridgeRecords = [];
+          const fixedMappings = [];
+
+          for (const c of pack.candidates) {
+            const s = c.source;
+            personRecords.push(c.person);
+            recognitionRecords.push({
+              id: c.recognition.id,
+              personId: c.person.id,
+              churchId: 'church:roman-catholic',
+              jurisdictionId: 'global',
+              recognizedAs: 'saint',
+              recognitionBasis: 'official-church-attestation',
+              ecclesialTitles: c.recognition.ecclesialTitles,
+              scope: 'church-wide',
+              calendarMembershipImplied: false,
+              observanceDateImplied: false,
+              evidence: [{
+                publisher: 'Vatican News',
+                url: c.recognition.evidenceUrl,
+                claimTypes: ['saint-designation', 'identity', ...c.recognition.ecclesialTitles]
+              }],
+              verifiedAt: pack.verifiedAt
+            });
+            observanceRecords.push({
+              id: c.observanceId,
+              churchId: 'church:roman-catholic',
+              observanceKey: 'principal-commemoration',
+              observanceType: 'person-commemoration',
+              subjects: [{ kind: 'person', personId: c.person.id, recognitionId: c.recognition.id }],
+              scope: 'church-attested',
+              occurrenceDateImplied: false,
+              calendarSystemImplied: false,
+              jurisdictionImplied: false,
+              rankImplied: false,
+              precedenceImplied: false,
+              evidence: [{ publisher: 'Vatican News', url: c.recognition.evidenceUrl, claimTypes: ['observance-attestation', 'liturgical-designation'] }],
+              verifiedAt: pack.verifiedAt
+            });
+            const [, month, day] = s.dateISO.split('-').map(Number);
+            ruleRecords.push({
+              id: c.sanctoraleRuleId,
+              observanceId: c.observanceId,
+              scopeKey: 'general-roman',
+              dateRule: { type: 'fixed', month, day },
+              liturgicalRank: 'obligatory-memorial',
+              precedenceClass: 'general-obligatory-memorial',
+              isSolemnity: false,
+              evidence: [{ publisher: 'Secretariado Nacional de Liturgia', url: s.snlUrl, claimTypes: ['fixed-date', 'obligatory-memorial', 'general-calendar', 'portugal-materialization'] }],
+              verifiedAt: pack.verifiedAt
+            });
+            const occurrenceId = `occurrence:${s.dateISO}:${c.person.id}:roman-catholic:pt`;
+            occurrenceRecords.push({
+              id: occurrenceId,
+              observanceId: c.observanceId,
+              churchId: 'church:roman-catholic',
+              jurisdictionId: 'jurisdiction:roman-catholic:pt',
+              calendarSystem: 'gregorian',
+              year: 2026,
+              dateISO: s.dateISO,
+              rank: 'obligatory-memorial',
+              sourceRankCode: 'MO',
+              evidence: [{ publisher: 'Secretariado Nacional de Liturgia', url: s.snlUrl, claimTypes: ['annual-date', 'jurisdictional-observance', 'liturgical-rank'], observedDesignation: s.observedDesignation }],
+              verifiedAt: pack.verifiedAt
+            });
+            bridgeRecords.push({ occurrenceId, legacyObservanceId: s.canonicalEventId, dateISO: s.dateISO });
+            fixedMappings.push({
+              occurrenceId,
+              observanceId: c.observanceId,
+              sanctoraleRuleId: c.sanctoraleRuleId,
+              legacyObservanceId: s.canonicalEventId,
+              expectedDateISO: s.dateISO,
+              sourceOccurrenceId: s.sourceOccurrenceId,
+              sourceRecordHash: s.sourceRecordHash,
+              legacyRank: s.legacyRank,
+              canonicalRank: s.canonicalRank,
+              sourceRankCode: s.sourceRankCode,
+              reviewStatus: 'source-bound-exact',
+              resolution: 'exact-fixed-date-binding'
+            });
+          }
+
+          appendArrayRecordsAtEnd('data/canonical-person-anchors.json', personRecords, '"id": "dominic-guzman"');
+          appendArrayRecordsAtEnd('data/canonical-recognition-anchors.json', recognitionRecords, '"id": "recognition:dominic-guzman:roman-catholic"');
+          appendArrayRecordsAtEnd('data/canonical-observance-anchors.json', observanceRecords, '"id": "observance:dominic-guzman:roman-catholic"');
+          appendArrayRecordsAtEnd('data/canonical-roman-sanctorale-rule-anchors.json', ruleRecords, '"id": "sanctorale-rule:dominic-guzman:general-roman"');
+          appendArrayRecordsAtEnd('data/canonical-occurrence-anchors.json', occurrenceRecords, '"id": "occurrence:2026-08-08:dominic-guzman:roman-catholic:pt"');
+          appendArrayRecordsAtEnd('data/canonical-occurrence-legacy-bridges.json', bridgeRecords, '"legacyObservanceId": "rc:StDominic"');
+
+          {
+            const p = 'data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json';
+            const block = fixedMappings.map((r) => '    ' + JSON.stringify(r)).join(',\n');
+            insertBefore(p, '\n  ],\n  "mutationAllowed": false', block, '"legacyObservanceId":"rc:StDominic"');
+          }
+
+          const updatedFixed = json('data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json');
+          assert(updatedFixed.mappings.length === 33, `Expected 33 fixed mappings, got ${updatedFixed.mappings.length}`);
+          const fixedDigest = crypto.createHash('sha256').update(JSON.stringify(updatedFixed.mappings)).digest('hex');
+
+          const coveragePath = 'data/migrations/roman-catholic-pt-2026-v2.canonical-coverage.json';
+          replaceExact(coveragePath, '"explicitOccurrenceAnchors": 30', '"explicitOccurrenceAnchors": 33');
+          replaceExact(coveragePath, '"mappedOccurrenceAnchors": 93', '"mappedOccurrenceAnchors": 96');
+          replaceExact(coveragePath, '"remainingLegacyOccurrences": 296', '"remainingLegacyOccurrences": 293');
+
+          const sanctoraleTest = 'scripts/test-roman-sanctorale.mjs';
+          replaceExact(sanctoraleTest,
+            "assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 30, 'Portugal Sanctorale materialization must remain shadow-only with thirty reviewed rules.');",
+            "assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 33, 'Portugal Sanctorale materialization must remain shadow-only with thirty-three reviewed rules.');"
+          );
+          replaceExact(sanctoraleTest,
+            "    ['observance:therese-lisieux:roman-catholic', ['2026-10-01', 'obligatory-memorial', 10, 'general-roman']]\n  ]);",
+            "    ['observance:therese-lisieux:roman-catholic', ['2026-10-01', 'obligatory-memorial', 10, 'general-roman']],\n    ['observance:dominic-guzman:roman-catholic', ['2026-08-08', 'obligatory-memorial', 10, 'general-roman']],\n    ['observance:ignatius-loyola:roman-catholic', ['2026-07-31', 'obligatory-memorial', 10, 'general-roman']],\n    ['observance:francis-xavier:roman-catholic', ['2026-12-03', 'obligatory-memorial', 10, 'general-roman']]\n  ]);"
+          );
+          replaceExact(sanctoraleTest,
+            "assert(occurrences.occurrences.length === 30, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');",
+            "assert(occurrences.occurrences.length === 33, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');"
+          );
+          replaceExact(sanctoraleTest,
+            "assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The thirty reviewed 2026 Sanctorale rules must resolve through the full annual engine.');",
+            "assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The thirty-three reviewed 2026 Sanctorale rules must resolve through the full annual engine.');"
+          );
+          replaceExact(sanctoraleTest,
+            "assert(annual2026.appliedTransfers.length === 0, 'The thirty reviewed 2026 Sanctorale vectors must not require a transfer.');",
+            "assert(annual2026.appliedTransfers.length === 0, 'The thirty-three reviewed 2026 Sanctorale vectors must not require a transfer.');"
+          );
+          replaceExact(sanctoraleTest,
+            "thirty perennial Portugal vectors including European patrons, Portugal patron Anthony, and source-bound memorials Anthony the Great, Clare of Assisi, Teresa of Jesus, Augustine of Hippo, Jerome and Thérèse of Lisieux",
+            "thirty-three perennial Portugal vectors including European patrons, Portugal patron Anthony, and source-bound memorials Anthony the Great, Clare of Assisi, Teresa of Jesus, Augustine of Hippo, Jerome, Thérèse of Lisieux, Dominic, Ignatius of Loyola and Francis Xavier"
+          );
+
+          const personTest = 'scripts/vault/test-canonical-person-manifest.mjs';
+          replaceExact(personTest,
+            "assert(first.manifest.peopleCount === 36, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');",
+            "assert(first.manifest.peopleCount === 39, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');"
+          );
+          replaceExact(personTest,
+            "  'augustine-hippo', 'jerome-stridon', 'therese-lisieux'\n]) {",
+            "  'augustine-hippo', 'jerome-stridon', 'therese-lisieux',\n  'dominic-guzman', 'ignatius-loyola', 'francis-xavier'\n]) {"
+          );
+
+          const recognitionTest = 'scripts/vault/test-canonical-recognition-manifest.mjs';
+          replaceExact(recognitionTest,
+            "assert(first.manifest.recognitionCount === 34, 'Reviewed Recognition count changed and requires explicit review.');",
+            "assert(first.manifest.recognitionCount === 37, 'Reviewed Recognition count changed and requires explicit review.');"
+          );
+          replaceExact(recognitionTest,
+            "assert(first.manifest.personCoverageCount === 33, 'Reviewed Recognition Person coverage changed unexpectedly.');",
+            "assert(first.manifest.personCoverageCount === 36, 'Reviewed Recognition Person coverage changed unexpectedly.');"
+          );
+          replaceExact(recognitionTest,
+            "  'recognition:therese-lisieux:roman-catholic'\n]) assert",
+            "  'recognition:therese-lisieux:roman-catholic',\n  'recognition:dominic-guzman:roman-catholic',\n  'recognition:ignatius-loyola:roman-catholic',\n  'recognition:francis-xavier:roman-catholic'\n]) assert"
+          );
+
+          const observanceTest = 'scripts/vault/test-canonical-observance-manifest.mjs';
+          replaceExact(observanceTest,
+            "assert(first.manifest.observanceCount === 32, 'Reviewed Observance count changed and requires explicit review.');",
+            "assert(first.manifest.observanceCount === 35, 'Reviewed Observance count changed and requires explicit review.');"
+          );
+          replaceExact(observanceTest,
+            "assert(first.manifest.personCoverageCount === 33, 'Reviewed Observance Person coverage changed unexpectedly.');",
+            "assert(first.manifest.personCoverageCount === 36, 'Reviewed Observance Person coverage changed unexpectedly.');"
+          );
+          replaceExact(observanceTest,
+            "  ['observance:therese-lisieux:roman-catholic', 'therese-lisieux']\n]) {",
+            "  ['observance:therese-lisieux:roman-catholic', 'therese-lisieux'],\n  ['observance:dominic-guzman:roman-catholic', 'dominic-guzman'],\n  ['observance:ignatius-loyola:roman-catholic', 'ignatius-loyola'],\n  ['observance:francis-xavier:roman-catholic', 'francis-xavier']\n]) {"
+          );
+
+          const occurrenceTest = 'scripts/vault/test-canonical-occurrence-manifest.mjs';
+          replaceExact(occurrenceTest,
+            "assert(first.manifest.occurrenceCount === 30, 'Reviewed Occurrence count changed and requires explicit review.');",
+            "assert(first.manifest.occurrenceCount === 33, 'Reviewed Occurrence count changed and requires explicit review.');"
+          );
+          replaceExact(occurrenceTest,
+            "assert(first.manifest.legacyBridgeCount === 30, 'Reviewed legacy bridge count changed and requires explicit review.');",
+            "assert(first.manifest.legacyBridgeCount === 33, 'Reviewed legacy bridge count changed and requires explicit review.');"
+          );
+          replaceExact(occurrenceTest,
+            "  ['observance:therese-lisieux:roman-catholic', ['2026-10-01', 'obligatory-memorial', 'MO', 'rc:StThereseChildJesus']]\n]);",
+            "  ['observance:therese-lisieux:roman-catholic', ['2026-10-01', 'obligatory-memorial', 'MO', 'rc:StThereseChildJesus']],\n  ['observance:dominic-guzman:roman-catholic', ['2026-08-08', 'obligatory-memorial', 'MO', 'rc:StDominic']],\n  ['observance:ignatius-loyola:roman-catholic', ['2026-07-31', 'obligatory-memorial', 'MO', 'rc:StIgnatiusLoyola']],\n  ['observance:francis-xavier:roman-catholic', ['2026-12-03', 'obligatory-memorial', 'MO', 'rc:StFrancisXavier']]\n]);"
+          );
+
+          const uploaderTest = 'scripts/vault/test-dropbox-canonical-recognition-uploader.mjs';
+          replaceExact(uploaderTest, '  assert.equal(firstPointer.recognitionCount, 34);', '  assert.equal(firstPointer.recognitionCount, 37);');
+          replaceExact(uploaderTest, '  assert.equal(firstPointer.personCoverageCount, 33);', '  assert.equal(firstPointer.personCoverageCount, 36);');
+
+          const coverageTest = 'scripts/vault/test-portugal-v2-canonical-coverage.mjs';
+          replaceExact(coverageTest,
+            "assert(explicitOccurrences.length === 30 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly thirty.');",
+            "assert(explicitOccurrences.length === 33 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly thirty-three.');"
+          );
+          replaceExact(coverageTest,
+            "assert(explicitBridges.length === 30 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the thirty canonical Occurrences.');",
+            "assert(explicitBridges.length === 33 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the thirty-three canonical Occurrences.');"
+          );
+          replaceExact(coverageTest,
+            "assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 30, 'Fixed Sanctorale shadow must contain exactly thirty exact source bindings.');",
+            "assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 33, 'Fixed Sanctorale shadow must contain exactly thirty-three exact source bindings.');"
+          );
+          replaceExact(coverageTest,
+            "assert(fixedSanctoraleMappingDigest === '18480fc697990be7f1cdfa4b4fc165b32e4496b162d20f78640a1b09c31a2b4e', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);",
+            `assert(fixedSanctoraleMappingDigest === '${fixedDigest}', \`Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: \${fixedSanctoraleMappingDigest}.\`);`
+          );
+          replaceExact(coverageTest,
+            "assert(explicitOccurrenceById.size === 30 && explicitBridgeByOccurrence.size === 30 && fixedMappingByOccurrence.size === 30, 'Fixed Sanctorale canonical/source identities must be unique.');",
+            "assert(explicitOccurrenceById.size === 33 && explicitBridgeByOccurrence.size === 33 && fixedMappingByOccurrence.size === 33, 'Fixed Sanctorale canonical/source identities must be unique.');"
+          );
+          replaceExact(coverageTest,
+            "assert(coveredSourceIds.size === 82 && coveredSourceHashes.size === 82 && coveredOccurrenceIds.size === 82, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');",
+            "assert(coveredSourceIds.size === 85 && coveredSourceHashes.size === 85 && coveredOccurrenceIds.size === 85, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');"
+          );
+          replaceExact(coverageTest,
+            "assert(totalMapped === 93 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 93/389.');",
+            "assert(totalMapped === 96 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 96/389.');"
+          );
+          replaceExact(coverageTest,
+            "assert(coverage.coverage.remainingLegacyOccurrences === 296 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 296.');",
+            "assert(coverage.coverage.remainingLegacyOccurrences === 293 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 293.');"
+          );
+          replaceExact(coverageTest,
+            "assert(coveragePercent === 23.907, `Unexpected canonical coverage percentage ${coveragePercent}.`);",
+            "assert(coveragePercent === 24.679, `Unexpected canonical coverage percentage ${coveragePercent}.`);"
+          );
+          replaceExact(coverageTest,
+            "console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 30 exact fixed Sanctorale + 5 TemporalRule + 47 precedence-surviving family rows + 11 movable/transfer rows; 296 remaining, promotion blocked.`);",
+            "console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 33 exact fixed Sanctorale + 5 TemporalRule + 47 precedence-surviving family rows + 11 movable/transfer rows; 293 remaining, promotion blocked.`);"
+          );
+
+          const receipt = {
+            schemaVersion: 1,
+            status: 'canonical-sanctorale-promotion-completed',
+            reviewPack: 'roman-catholic-pt-2026-v2.sanctorale-review-batch-3.json',
+            reviewDigestSha256: pack.reviewDigestSha256,
+            sourceReleaseId: pack.sourceReleaseId,
+            promotedPersonIds: pack.candidates.map((c) => c.person.id),
+            canonicalCoverageAfterPromotion: { mappedOccurrenceAnchors: 96, requiredForPromotion: 389, remainingLegacyOccurrences: 293 },
+            fixedSanctoraleMappingDigestSha256: fixedDigest,
+            runtimePublicationAllowed: false,
+            productionWriteAllowed: false,
+            promotionAllowed: false,
+            verifiedAt: '2026-08-31'
+          };
+          write('data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-3.json', JSON.stringify(receipt, null, 2) + '\n');
+
+          for (const p of [
+            'data/canonical-person-anchors.json',
+            'data/canonical-recognition-anchors.json',
+            'data/canonical-observance-anchors.json',
+            'data/canonical-roman-sanctorale-rule-anchors.json',
+            'data/canonical-occurrence-anchors.json',
+            'data/canonical-occurrence-legacy-bridges.json',
+            'data/migrations/roman-catholic-pt-2026-v2.fixed-sanctorale-shadow.json',
+            coveragePath,
+            'data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-3.json'
+          ]) JSON.parse(read(p));
+
+          const finalCoverage = json(coveragePath);
+          assert(finalCoverage.coverage.explicitOccurrenceAnchors === 33 && finalCoverage.coverage.mappedOccurrenceAnchors === 96 && finalCoverage.coverage.remainingLegacyOccurrences === 293 && finalCoverage.coverage.promotionAllowed === false, 'Final canonical coverage invariants failed.');
+          console.log(JSON.stringify({ promoted: receipt.promotedPersonIds, fixedDigest, coverage: '96/389', coveragePercent: 24.679, remaining: 293 }, null, 2));
+          NODE
+
+      - name: Validate promotion receipt and review bindings
+        run: |
+          node scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs
+          git diff --check
+
+      - name: Remove temporary workflow
+        run: rm .github/workflows/tmp-promote-sanctorale-batch-3.yml
+
+      - name: Commit deterministic promotion
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data scripts .github/workflows/tmp-promote-sanctorale-batch-3.yml
+          git commit -m 'Promote reviewed Sanctorale batch 3 canonically'
+          git push origin HEAD:migration/sanctorale-founders-missionary-promote-20260831
