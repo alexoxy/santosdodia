@@ -651,6 +651,126 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-05-02:athanasius-alexandria:roman-catholic:pt",
+      "observanceId": "observance:athanasius-alexandria:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-02",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-2",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Atanásio, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-07-15:bonaventure-bagnoregio:roman-catholic:pt",
+      "observanceId": "observance:bonaventure-bagnoregio:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-15",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-15",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Boaventura, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-08-20:bernard-clairvaux:roman-catholic:pt",
+      "observanceId": "observance:bernard-clairvaux:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-20",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-20",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bernardo, abade e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-11-10:leo-great:roman-catholic:pt",
+      "observanceId": "observance:leo-great:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-10",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-10",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Leão Magno, papa e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-10-17:ignatius-antioch:roman-catholic:pt",
+      "observanceId": "observance:ignatius-antioch:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-17",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-17",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Inácio de Antioquia, bispo e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

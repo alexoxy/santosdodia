@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-5.json",
+  "reviewDigestSha256": "34a036067ec2311ea1a2aa842f65da557ab0d8fb9d5ce71e0cbc15c733177a26",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "athanasius-alexandria",
+    "bonaventure-bagnoregio",
+    "bernard-clairvaux",
+    "leo-great",
+    "ignatius-antioch"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 106,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 283
+  },
+  "fixedSanctoraleMappingDigestSha256": "a52cb33b15d756be22892de3333921fe8c0614e5bd221bba1f60d13be15c5a0f",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
