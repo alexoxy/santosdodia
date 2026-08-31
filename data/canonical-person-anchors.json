@@ -182,6 +182,24 @@
       "primaryObservanceId": "rc:StAnthonyPadua",
       "category": "saint",
       "names": { "en": "Saint Anthony of Padua", "pt": "Santo António de Lisboa", "es": "San Antonio de Padua", "it": "Sant’Antonio di Padova" }
+    },
+    {
+      "id": "anthony-great",
+      "primaryObservanceId": "rc:StAnthonyEgypt",
+      "category": "saint",
+      "names": { "en": "Saint Anthony the Great", "pt": "Santo Antão", "es": "San Antonio Abad", "it": "Sant’Antonio Abate" }
+    },
+    {
+      "id": "clare-assisi",
+      "primaryObservanceId": "rc:StClare",
+      "category": "saint",
+      "names": { "en": "Saint Clare of Assisi", "pt": "Santa Clara de Assis", "es": "Santa Clara de Asís", "it": "Santa Chiara d’Assisi" }
+    },
+    {
+      "id": "teresa-avila",
+      "primaryObservanceId": "rc:StTeresaJesus",
+      "category": "saint",
+      "names": { "en": "Saint Teresa of Jesus", "pt": "Santa Teresa de Jesus", "es": "Santa Teresa de Jesús", "it": "Santa Teresa di Gesù" }
     }
   ]
 }
