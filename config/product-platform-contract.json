@@ -3,6 +3,7 @@
   "productVersion": "2.1",
   "status": "normative",
   "effectiveDate": "2026-08-22",
+  "lastClarifiedDate": "2026-08-30",
   "productDefinition": "Global Christian liturgical intelligence platform with a human daily-faith product and reusable machine/calendar infrastructure.",
   "northStar": "Open SantosDia and know what Christian day you are living, why it matters, how to pray it, what comes next, and how to stay connected in your own tradition, place and language.",
   "machinePromise": "Given Church or tradition, jurisdiction, calendar system, civil date or year, timezone when needed, and locale, return authoritative liturgical context and consistent HTML, API, JSON-LD and ICS projections without request-time external acquisition.",
@@ -29,8 +30,11 @@
     "silentEnglishFallbackAllowed": false
   },
   "operationalConstraints": {
-    "adsenseState": "PREPARING",
+    "adsenseState": "REMEDIATION_REQUIRED",
+    "adsenseFinding": "low-value-content",
+    "adServingWhileNotApproved": false,
     "adServingWhilePreparing": false,
+    "adsenseReviewResubmissionAllowed": false,
     "thinPageMassPublication": false,
     "cloudflareTarget": "free-tier",
     "requestTimeExternalAcquisition": false,
@@ -241,6 +245,12 @@
   "publicationContract": {
     "entityExistenceDoesNotImplyIndexablePage": true,
     "indexingRequiresSubstantiveValue": true,
+    "productAvailabilityIndependentFromIndexability": true,
+    "monetizationEligibilityIndependentFromIndexability": true,
+    "noindexIsSearchControlNotProductDeletion": true,
+    "functionalRoutesMayRemainNoindexFollow": true,
+    "searchPublicationSurface": "curated-sitemap-and-quality-gates",
+    "calculatorIsDeliberateAcquisitionSurface": true,
     "seoMustFollowCanonicalKnowledgeRelationships": true,
     "htmlJsonLdApiIcsMustAgreeSemantically": true,
     "machineReadableSurfaces": [
@@ -348,7 +358,7 @@
     "clientJavaScript": "interaction-only",
     "advertisingDoesNotRelaxFirstPartyMediaContract": true
   },
-  "strategicAlignmentDate": "2026-08-23",
+  "strategicAlignmentDate": "2026-08-30",
   "expansionStrategy": {
     "qualityAnchorIsGlobalDefault": false,
     "sequence": [
@@ -373,16 +383,20 @@
     ]
   },
   "executionSnapshot": {
-    "asOf": "2026-08-23",
+    "asOf": "2026-08-30",
     "delivered": [
       "ci-enforced-text-only-first-party-surface",
       "rolling-materialization-y-minus-1-through-y-plus-3",
       "rolling-ics-and-public-liturgical-calculator",
       "roman-temporale-precedence-transfer-and-colour-core",
-      "source-bound-general-europe-portugal-sanctorale-shadow-seed"
+      "source-bound-general-europe-portugal-sanctorale-shadow-seed",
+      "first-party-editorial-remediation-and-search-quality-gates",
+      "twenty-nine-deep-ready-saint-biographies",
+      "server-side-reviewed-today-editorial-context",
+      "curated-search-footprint-with-indexed-liturgical-calculator"
     ],
     "currentReleaseGate": "complete-portugal-2026-semantic-equivalence-before-read-model-cutover",
-    "nextProductMove": "expand-sanctorale-then-rebuild-compact-text-first-today",
+    "nextProductMove": "continue-portugal-sanctorale-equivalence-and-selective-editorial-search-expansion",
     "operationalAlertClosure": [
       "read",
       "diagnose",
