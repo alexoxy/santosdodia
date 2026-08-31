@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 24, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 24, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 27, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 27, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -84,7 +84,10 @@ const expected = new Map([
   ['observance:lawrence-rome:roman-catholic', ['2026-08-10', 'feast', 'FESTA', 'rc:StLawrenceDeacon']],
   ['observance:stephen-protomartyr:roman-catholic', ['2026-12-26', 'feast', 'FESTA', 'rc:StStephenProtomartyr']],
   ['observance:cyril-methodius:roman-catholic', ['2026-02-14', 'feast', 'FESTA', 'rc:StsCyrilMethodius']],
-  ['observance:anthony-lisbon:roman-catholic', ['2026-06-13', 'feast', 'FESTA', 'rc:StAnthonyPadua']]
+  ['observance:anthony-lisbon:roman-catholic', ['2026-06-13', 'feast', 'FESTA', 'rc:StAnthonyPadua']],
+  ['observance:anthony-great:roman-catholic', ['2026-01-17', 'obligatory-memorial', 'MO', 'rc:StAnthonyEgypt']],
+  ['observance:clare-assisi:roman-catholic', ['2026-08-11', 'obligatory-memorial', 'MO', 'rc:StClare']],
+  ['observance:teresa-avila:roman-catholic', ['2026-10-15', 'obligatory-memorial', 'MO', 'rc:StTeresaJesus']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
 
