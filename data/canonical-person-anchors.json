@@ -376,6 +376,61 @@
         "es": "San Ignacio de Antioquía",
         "it": "Sant'Ignazio di Antiochia"
       }
+    },
+    {
+      "id": "agnes-rome",
+      "primaryObservanceId": "rc:StAgnes",
+      "category": "saint",
+      "names": {
+        "en": "Saint Agnes of Rome",
+        "pt": "Santa Inês",
+        "es": "Santa Inés de Roma",
+        "it": "Sant'Agnese di Roma"
+      }
+    },
+    {
+      "id": "john-bosco",
+      "primaryObservanceId": "rc:StJohnBosco",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Bosco",
+        "pt": "São João Bosco",
+        "es": "San Juan Bosco",
+        "it": "San Giovanni Bosco"
+      }
+    },
+    {
+      "id": "scholastica-nursia",
+      "primaryObservanceId": "rc:StScholastica",
+      "category": "saint",
+      "names": {
+        "en": "Saint Scholastica",
+        "pt": "Santa Escolástica",
+        "es": "Santa Escolástica",
+        "it": "Santa Scolastica"
+      }
+    },
+    {
+      "id": "charles-borromeo",
+      "primaryObservanceId": "rc:StCharlesBorromeo",
+      "category": "saint",
+      "names": {
+        "en": "Saint Charles Borromeo",
+        "pt": "São Carlos Borromeu",
+        "es": "San Carlos Borromeo",
+        "it": "San Carlo Borromeo"
+      }
+    },
+    {
+      "id": "martin-tours",
+      "primaryObservanceId": "rc:StMartinTours",
+      "category": "saint",
+      "names": {
+        "en": "Saint Martin of Tours",
+        "pt": "São Martinho de Tours",
+        "es": "San Martín de Tours",
+        "it": "San Martino di Tours"
+      }
     }
   ]
 }

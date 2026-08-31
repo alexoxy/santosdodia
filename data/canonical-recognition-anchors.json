@@ -1073,6 +1073,146 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:agnes-rome:roman-catholic",
+      "personId": "agnes-rome",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/21.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:john-bosco:roman-catholic",
+      "personId": "john-bosco",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder-of-salesians"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/31.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder-of-salesians"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:scholastica-nursia:roman-catholic",
+      "personId": "scholastica-nursia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "benedictine-nun"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/10/st--scolastica--virgin--sister-di-s--benedetto.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "benedictine-nun"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:charles-borromeo:roman-catholic",
+      "personId": "charles-borromeo",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "cardinal"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/04/st--charles-borromeo--archbishop-of-milan-and-cardinal.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "cardinal"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:martin-tours:roman-catholic",
+      "personId": "martin-tours",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "monk"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/11/st--martin--bishop-of-tours-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "monk"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

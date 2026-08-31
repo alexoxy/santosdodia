@@ -771,6 +771,126 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-01-21:agnes-rome:roman-catholic:pt",
+      "observanceId": "observance:agnes-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-21",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-21",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Inês, virgem e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-01-31:john-bosco:roman-catholic:pt",
+      "observanceId": "observance:john-bosco:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-31",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-31",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. João Bosco, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-02-10:scholastica-nursia:roman-catholic:pt",
+      "observanceId": "observance:scholastica-nursia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-02-10",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-10",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Escolástica, virgem – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-11-04:charles-borromeo:roman-catholic:pt",
+      "observanceId": "observance:charles-borromeo:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-04",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-4",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Carlos Borromeu, bispo – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-11-11:martin-tours:roman-catholic:pt",
+      "observanceId": "observance:martin-tours:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-11",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-11",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Martinho de Tours, bispo – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

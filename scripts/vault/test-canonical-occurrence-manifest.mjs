@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 43, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 43, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 48, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 48, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -103,7 +103,12 @@ const expected = new Map([
   ['observance:bonaventure-bagnoregio:roman-catholic', ['2026-07-15', 'obligatory-memorial', 'MO', 'rc:StBonaventure']],
   ['observance:bernard-clairvaux:roman-catholic', ['2026-08-20', 'obligatory-memorial', 'MO', 'rc:StBernardClairvaux']],
   ['observance:leo-great:roman-catholic', ['2026-11-10', 'obligatory-memorial', 'MO', 'rc:StLeoGreat']],
-  ['observance:ignatius-antioch:roman-catholic', ['2026-10-17', 'obligatory-memorial', 'MO', 'rc:StIgnatiusAntioch']]
+  ['observance:ignatius-antioch:roman-catholic', ['2026-10-17', 'obligatory-memorial', 'MO', 'rc:StIgnatiusAntioch']],
+  ['observance:agnes-rome:roman-catholic', ['2026-01-21', 'obligatory-memorial', 'MO', 'rc:StAgnes']],
+  ['observance:john-bosco:roman-catholic', ['2026-01-31', 'obligatory-memorial', 'MO', 'rc:StJohnBosco']],
+  ['observance:scholastica-nursia:roman-catholic', ['2026-02-10', 'obligatory-memorial', 'MO', 'rc:StScholastica']],
+  ['observance:charles-borromeo:roman-catholic', ['2026-11-04', 'obligatory-memorial', 'MO', 'rc:StCharlesBorromeo']],
+  ['observance:martin-tours:roman-catholic', ['2026-11-11', 'obligatory-memorial', 'MO', 'rc:StMartinTours']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
 

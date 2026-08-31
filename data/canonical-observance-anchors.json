@@ -929,6 +929,156 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:agnes-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "agnes-rome",
+          "recognitionId": "recognition:agnes-rome:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/21.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:john-bosco:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "john-bosco",
+          "recognitionId": "recognition:john-bosco:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/31.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:scholastica-nursia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "scholastica-nursia",
+          "recognitionId": "recognition:scholastica-nursia:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/10/st--scolastica--virgin--sister-di-s--benedetto.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:charles-borromeo:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "charles-borromeo",
+          "recognitionId": "recognition:charles-borromeo:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/04/st--charles-borromeo--archbishop-of-milan-and-cardinal.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:martin-tours:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "martin-tours",
+          "recognitionId": "recognition:martin-tours:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/11/st--martin--bishop-of-tours-.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

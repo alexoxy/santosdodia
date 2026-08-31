@@ -220,6 +220,31 @@
       "occurrenceId": "occurrence:2026-10-17:ignatius-antioch:roman-catholic:pt",
       "legacyObservanceId": "rc:StIgnatiusAntioch",
       "dateISO": "2026-10-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-21:agnes-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAgnes",
+      "dateISO": "2026-01-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-31:john-bosco:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnBosco",
+      "dateISO": "2026-01-31"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-10:scholastica-nursia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StScholastica",
+      "dateISO": "2026-02-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-04:charles-borromeo:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCharlesBorromeo",
+      "dateISO": "2026-11-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-11:martin-tours:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartinTours",
+      "dateISO": "2026-11-11"
     }
   ]
 }
