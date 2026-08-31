@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "dominic-guzman",
+        "primaryObservanceId": "rc:StDominic",
+        "category": "saint",
+        "names": {
+          "en": "Saint Dominic",
+          "pt": "São Domingos de Gusmão",
+          "es": "Santo Domingo de Guzmán",
+          "it": "San Domenico di Guzmán"
+        }
+      },
+      "recognition": {
+        "id": "recognition:dominic-guzman:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "founder-of-order-of-preachers"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/08/st--dominic-of-guzman--priest-founder-of-the-order-of-the-preach.html"
+      },
+      "observanceId": "observance:dominic-guzman:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:dominic-guzman:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StDominic",
+        "sourceOccurrenceId": "snl-pt-2026-08-08-97537bdbf6a0bf95ca99176c",
+        "sourceRecordHash": "07dfee0d5cd1ba64a8137795469b2d2b40e37f5c2afa3a8df473b453e8965000",
+        "dateISO": "2026-08-08",
+        "sourceLabelPt": "S. Domingos, presbítero",
+        "observedDesignation": "S. Domingos, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-8"
+      }
+    },
+    {
+      "person": {
+        "id": "ignatius-loyola",
+        "primaryObservanceId": "rc:StIgnatiusLoyola",
+        "category": "saint",
+        "names": {
+          "en": "Saint Ignatius of Loyola",
+          "pt": "Santo Inácio de Loiola",
+          "es": "San Ignacio de Loyola",
+          "it": "Sant’Ignazio di Loyola"
+        }
+      },
+      "recognition": {
+        "id": "recognition:ignatius-loyola:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "founder-of-society-of-jesus"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/31/st--ignatius-of-loyola--priest--founder-of-the-jesuits.html"
+      },
+      "observanceId": "observance:ignatius-loyola:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:ignatius-loyola:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StIgnatiusLoyola",
+        "sourceOccurrenceId": "snl-pt-2026-07-31-1a5a1eb5bd898e47bd3879ed",
+        "sourceRecordHash": "3c8caa29e43588a936884219403e8fe743ef3ed7e7d52c6e23e749c9c599fd60",
+        "dateISO": "2026-07-31",
+        "sourceLabelPt": "S. Inácio de Loiola, presbítero",
+        "observedDesignation": "S. Inácio de Loiola, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-31"
+      }
+    },
+    {
+      "person": {
+        "id": "francis-xavier",
+        "primaryObservanceId": "rc:StFrancisXavier",
+        "category": "saint",
+        "names": {
+          "en": "Saint Francis Xavier",
+          "pt": "São Francisco Xavier",
+          "es": "San Francisco Javier",
+          "it": "San Francesco Saverio"
+        }
+      },
+      "recognition": {
+        "id": "recognition:francis-xavier:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "jesuit",
+          "patron-of-missions"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/12/03/st--francis--saverio--jesuit---apostle-of-the-indies--patron-of-.html"
+      },
+      "observanceId": "observance:francis-xavier:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:francis-xavier:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StFrancisXavier",
+        "sourceOccurrenceId": "snl-pt-2026-12-03-c5f3f0d099466b4c38300670",
+        "sourceRecordHash": "7f62a007339732dff819d789d4c49b05485dad3c846e2fec1f0184e147ca5bde",
+        "dateISO": "2026-12-03",
+        "sourceLabelPt": "S. Francisco Xavier, presbítero, Padroeiro das Missões",
+        "observedDesignation": "S. Francisco Xavier, presbítero, Padroeiro das Missões – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-3"
+      }
+    }
+  ],
+  "reviewDigestSha256": "3a125eb283da6ca7be7b699109257887361f516f060e44ee5f8f98b97e90e9dc",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
