@@ -531,6 +531,126 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-12-14:john-cross:roman-catholic:pt",
+      "observanceId": "observance:john-cross:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-12-14",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-14",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. João da Cruz, presbítero e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-12-07:ambrose-milan:roman-catholic:pt",
+      "observanceId": "observance:ambrose-milan:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-12-07",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-7",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Ambrósio, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-09-03:gregory-great:roman-catholic:pt",
+      "observanceId": "observance:gregory-great:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-03",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Gregório Magno, papa e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-01-24:francis-de-sales:roman-catholic:pt",
+      "observanceId": "observance:francis-de-sales:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-24",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-24",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Francisco de Sales, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-08-01:alphonsus-liguori:roman-catholic:pt",
+      "observanceId": "observance:alphonsus-liguori:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-01",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-1",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Afonso Maria de Ligório, bispo e doutor da Igreja – MO"
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

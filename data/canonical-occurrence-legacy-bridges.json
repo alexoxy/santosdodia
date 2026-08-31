@@ -170,6 +170,31 @@
       "occurrenceId": "occurrence:2026-12-03:francis-xavier:roman-catholic:pt",
       "legacyObservanceId": "rc:StFrancisXavier",
       "dateISO": "2026-12-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-14:john-cross:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnCross",
+      "dateISO": "2026-12-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-07:ambrose-milan:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAmbrose",
+      "dateISO": "2026-12-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-03:gregory-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StGregoryGreat",
+      "dateISO": "2026-09-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-24:francis-de-sales:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFrancisDeSales",
+      "dateISO": "2026-01-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-01:alphonsus-liguori:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAlphonsusMariaDeLiguori",
+      "dateISO": "2026-08-01"
     }
   ]
 }

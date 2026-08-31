@@ -629,6 +629,156 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:john-cross:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "john-cross",
+          "recognitionId": "recognition:john-cross:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/14.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:ambrose-milan:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "ambrose-milan",
+          "recognitionId": "recognition:ambrose-milan:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/07.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:gregory-great:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "gregory-great",
+          "recognitionId": "recognition:gregory-great:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/03.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:francis-de-sales:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "francis-de-sales",
+          "recognitionId": "recognition:francis-de-sales:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/24.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:alphonsus-liguori:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "alphonsus-liguori",
+          "recognitionId": "recognition:alphonsus-liguori:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/01.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

@@ -512,6 +512,136 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:john-cross:general-roman",
+      "observanceId": "observance:john-cross:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 14
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-14",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:ambrose-milan:general-roman",
+      "observanceId": "observance:ambrose-milan:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 12,
+        "day": 7
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-7",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:gregory-great:general-roman",
+      "observanceId": "observance:gregory-great:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 3
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-3",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:francis-de-sales:general-roman",
+      "observanceId": "observance:francis-de-sales:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 1,
+        "day": 24
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-24",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "sanctorale-rule:alphonsus-liguori:general-roman",
+      "observanceId": "observance:alphonsus-liguori:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 8,
+        "day": 1
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-1",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }
