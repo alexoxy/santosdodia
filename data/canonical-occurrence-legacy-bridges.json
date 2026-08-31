@@ -140,6 +140,21 @@
       "occurrenceId": "occurrence:2026-10-15:teresa-avila:roman-catholic:pt",
       "legacyObservanceId": "rc:StTeresaJesus",
       "dateISO": "2026-10-15"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-28:augustine-hippo:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineHippo",
+      "dateISO": "2026-08-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-30:jerome-stridon:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJerome",
+      "dateISO": "2026-09-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-01:therese-lisieux:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThereseChildJesus",
+      "dateISO": "2026-10-01"
     }
   ]
 }

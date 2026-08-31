@@ -607,6 +607,94 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:augustine-hippo:roman-catholic",
+      "personId": "augustine-hippo",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/28/st---augustine--bishop-of-hyppo-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:jerome-stridon:roman-catholic",
+      "personId": "jerome-stridon",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/30/st--jerome--priest-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:therese-lisieux:roman-catholic",
+      "personId": "therese-lisieux",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "doctor-of-the-church",
+        "carmelite",
+        "patron-of-missions"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/01/st--therese-of-the-child-jesus--carmelite---virgin-doctor-of-the.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "doctor-of-the-church",
+            "carmelite",
+            "patron-of-missions"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

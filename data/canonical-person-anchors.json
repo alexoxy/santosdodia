@@ -200,6 +200,39 @@
       "primaryObservanceId": "rc:StTeresaJesus",
       "category": "saint",
       "names": { "en": "Saint Teresa of Jesus", "pt": "Santa Teresa de Jesus", "es": "Santa Teresa de Jesús", "it": "Santa Teresa di Gesù" }
+    },
+    {
+      "id": "augustine-hippo",
+      "primaryObservanceId": "rc:StAugustineHippo",
+      "category": "saint",
+      "names": {
+        "en": "Saint Augustine of Hippo",
+        "pt": "Santo Agostinho de Hipona",
+        "es": "San Agustín de Hipona",
+        "it": "Sant’Agostino d’Ippona"
+      }
+    },
+    {
+      "id": "jerome-stridon",
+      "primaryObservanceId": "rc:StJerome",
+      "category": "saint",
+      "names": {
+        "en": "Saint Jerome",
+        "pt": "São Jerónimo",
+        "es": "San Jerónimo",
+        "it": "San Girolamo"
+      }
+    },
+    {
+      "id": "therese-lisieux",
+      "primaryObservanceId": "rc:StThereseChildJesus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Thérèse of Lisieux",
+        "pt": "Santa Teresa do Menino Jesus",
+        "es": "Santa Teresa del Niño Jesús",
+        "it": "Santa Teresa di Lisieux"
+      }
     }
   ]
 }
