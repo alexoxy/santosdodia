@@ -164,6 +164,24 @@
       "primaryObservanceId": "rc:StStephenProtomartyr",
       "category": "martyr",
       "names": { "en": "Saint Stephen the First Martyr", "pt": "Santo Estêvão, Primeiro Mártir", "es": "San Esteban, Primer Mártir", "it": "Santo Stefano, protomartire" }
+    },
+    {
+      "id": "cyril-monk",
+      "primaryObservanceId": "rc:StsCyrilMethodius",
+      "category": "saint",
+      "names": { "en": "Saint Cyril, Monk", "pt": "São Cirilo, monge", "es": "San Cirilo, monje", "it": "San Cirillo, monaco" }
+    },
+    {
+      "id": "methodius-bishop",
+      "primaryObservanceId": "rc:StsCyrilMethodius",
+      "category": "saint",
+      "names": { "en": "Saint Methodius, Bishop", "pt": "São Metódio, bispo", "es": "San Metodio, obispo", "it": "San Metodio, vescovo" }
+    },
+    {
+      "id": "anthony-lisbon",
+      "primaryObservanceId": "rc:StAnthonyPadua",
+      "category": "saint",
+      "names": { "en": "Saint Anthony of Padua", "pt": "Santo António de Lisboa", "es": "San Antonio de Padua", "it": "Sant’Antonio di Padova" }
     }
   ]
 }
