@@ -695,6 +695,92 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:dominic-guzman:roman-catholic",
+      "personId": "dominic-guzman",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder-of-order-of-preachers"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/08/st--dominic-of-guzman--priest-founder-of-the-order-of-the-preach.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder-of-order-of-preachers"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:ignatius-loyola:roman-catholic",
+      "personId": "ignatius-loyola",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder-of-society-of-jesus"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/31/st--ignatius-of-loyola--priest--founder-of-the-jesuits.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder-of-society-of-jesus"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:francis-xavier:roman-catholic",
+      "personId": "francis-xavier",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "jesuit",
+        "patron-of-missions"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/03/st--francis--saverio--jesuit---apostle-of-the-indies--patron-of-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "jesuit",
+            "patron-of-missions"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

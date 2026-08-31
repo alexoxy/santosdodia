@@ -155,6 +155,21 @@
       "occurrenceId": "occurrence:2026-10-01:therese-lisieux:roman-catholic:pt",
       "legacyObservanceId": "rc:StThereseChildJesus",
       "dateISO": "2026-10-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-08:dominic-guzman:roman-catholic:pt",
+      "legacyObservanceId": "rc:StDominic",
+      "dateISO": "2026-08-08"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-31:ignatius-loyola:roman-catholic:pt",
+      "legacyObservanceId": "rc:StIgnatiusLoyola",
+      "dateISO": "2026-07-31"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-03:francis-xavier:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFrancisXavier",
+      "dateISO": "2026-12-03"
     }
   ]
 }
