@@ -15,16 +15,8 @@
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
-        {
-          "publisher": "Holy See",
-          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html",
-          "claimTypes": ["identity", "apostle", "evangelist"]
-        },
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html",
-          "claimTypes": ["saint-designation", "apostle", "evangelist"]
-        }
+        {"publisher":"Holy See","url":"https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html","claimTypes":["identity","apostle","evangelist"]},
+        {"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html","claimTypes":["saint-designation","apostle","evangelist"]}
       ],
       "verifiedAt": "2026-08-22"
     },
@@ -39,13 +31,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Orthodox Church in America",
-          "url": "https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew",
-          "claimTypes": ["saint-designation", "apostle", "evangelist"]
-        }
-      ],
+      "evidence": [{"publisher":"Orthodox Church in America","url":"https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew","claimTypes":["saint-designation","apostle","evangelist"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -60,16 +46,8 @@
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
-        {
-          "publisher": "Holy See",
-          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html",
-          "claimTypes": ["saint-designation", "priest", "doctor-of-the-church"]
-        },
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html",
-          "claimTypes": ["saint-designation", "priest", "doctor-of-the-church"]
-        }
+        {"publisher":"Holy See","url":"https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html","claimTypes":["saint-designation","priest","doctor-of-the-church"]},
+        {"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html","claimTypes":["saint-designation","priest","doctor-of-the-church"]}
       ],
       "verifiedAt": "2026-08-22"
     },
@@ -85,16 +63,8 @@
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
-        {
-          "publisher": "Holy See",
-          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html",
-          "claimTypes": ["saint-designation", "doctor-of-the-church"]
-        },
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html",
-          "claimTypes": ["saint-designation", "virgin", "doctor-of-the-church"]
-        }
+        {"publisher":"Holy See","url":"https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html","claimTypes":["saint-designation","doctor-of-the-church"]},
+        {"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html","claimTypes":["saint-designation","virgin","doctor-of-the-church"]}
       ],
       "verifiedAt": "2026-08-22"
     },
@@ -110,16 +80,8 @@
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html",
-          "claimTypes": ["saint-designation", "identity"]
-        },
-        {
-          "publisher": "Patriarchate of Lisbon",
-          "url": "https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860",
-          "claimTypes": ["saint-designation", "portuguese-ecclesial-attestation"]
-        }
+        {"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html","claimTypes":["saint-designation","identity"]},
+        {"publisher":"Patriarchate of Lisbon","url":"https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860","claimTypes":["saint-designation","portuguese-ecclesial-attestation"]}
       ],
       "verifiedAt": "2026-08-22"
     },
@@ -134,13 +96,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/06/24/birth-of-st--john-the--baptist.html",
-          "claimTypes": ["saint-designation", "identity", "precursor"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/24/birth-of-st--john-the--baptist.html","claimTypes":["saint-designation","identity","precursor"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -154,13 +110,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/03/19/st--joseph--groom-of-b--mary--patron-of-the-univeral-church.html",
-          "claimTypes": ["saint-designation", "identity", "spouse-of-blessed-virgin-mary", "patron-of-universal-church"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/03/19/st--joseph--groom-of-b--mary--patron-of-the-univeral-church.html","claimTypes":["saint-designation","identity","spouse-of-blessed-virgin-mary","patron-of-universal-church"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -174,13 +124,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html",
-          "claimTypes": ["saint-designation", "identity", "abbot", "patron-of-europe"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html","claimTypes":["saint-designation","identity","abbot","patron-of-europe"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -194,13 +138,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/23/st--bridget--religious--patron-of-europe.html",
-          "claimTypes": ["saint-designation", "identity", "religious", "patron-of-europe"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/23/st--bridget--religious--patron-of-europe.html","claimTypes":["saint-designation","identity","religious","patron-of-europe"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -214,13 +152,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/04/25/st-mark--evangelist.html",
-          "claimTypes": ["saint-designation", "identity", "evangelist"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/04/25/st-mark--evangelist.html","claimTypes":["saint-designation","identity","evangelist"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -234,13 +166,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/03/st--thomas--apostle.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/03/st--thomas--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -254,13 +180,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/22/st--mary-magdalene--disciple-of-the-lord-.html",
-          "claimTypes": ["saint-designation", "identity", "disciple-of-the-lord", "apostle-of-the-apostles"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/22/st--mary-magdalene--disciple-of-the-lord-.html","claimTypes":["saint-designation","identity","disciple-of-the-lord","apostle-of-the-apostles"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -274,13 +194,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/25/st--james-the--greater--apostle.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/25/st--james-the--greater--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -294,13 +208,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/06/29/saint-peter--apostle-of-the-city-of-rome.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/29/saint-peter--apostle-of-the-city-of-rome.html","claimTypes":["saint-designation","identity","apostle"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -314,13 +222,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/06/29/saint-paul--apostle-of-the-city-of-rome.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/29/saint-paul--apostle-of-the-city-of-rome.html","claimTypes":["saint-designation","identity","apostle"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -334,13 +236,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
-          "claimTypes": ["saint-designation", "identity"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html","claimTypes":["saint-designation","identity"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -354,13 +250,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
-          "claimTypes": ["saint-designation", "identity"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html","claimTypes":["saint-designation","identity"]}],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -374,13 +264,7 @@
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [
-        {
-          "publisher": "Vatican News",
-          "url": "https://www.vaticannews.va/en/saints/01/01/most-holy-mary--mother-of-god.html",
-          "claimTypes": ["saint-designation", "identity", "blessed-virgin-mary", "mother-of-god"]
-        }
-      ],
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/01/01/most-holy-mary--mother-of-god.html","claimTypes":["saint-designation","identity","blessed-virgin-mary","mother-of-god"]}],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -521,6 +405,48 @@
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html","claimTypes":["saint-designation","identity","priest","doctor-of-the-church","born-in-lisbon"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:anthony-great:roman-catholic",
+      "personId": "anthony-great",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["abbot", "father-of-monasticism"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/01/17/st--antony--abbot.html","claimTypes":["saint-designation","identity","abbot"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:clare-assisi:roman-catholic",
+      "personId": "clare-assisi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["virgin", "foundress"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/11/st--clare-of-assisis--virgin--foundress-of-the-poor-ladies.html","claimTypes":["saint-designation","identity","virgin","foundress"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:teresa-avila:roman-catholic",
+      "personId": "teresa-avila",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["virgin", "doctor-of-the-church", "discalced-carmelite"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/15/st--theresa-of-jesus--virgin--doctor-of-the-church--discalced-ca.html","claimTypes":["saint-designation","identity","virgin","doctor-of-the-church"]}],
       "verifiedAt": "2026-08-31"
     }
   ]
