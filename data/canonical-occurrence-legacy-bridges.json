@@ -245,6 +245,31 @@
       "occurrenceId": "occurrence:2026-11-11:martin-tours:roman-catholic:pt",
       "legacyObservanceId": "rc:StMartinTours",
       "dateISO": "2026-11-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-01:justin-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJustinMartyr",
+      "dateISO": "2026-06-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-05:boniface-mainz:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBoniface",
+      "dateISO": "2026-06-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-26:philip-neri:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPhilipNeri",
+      "dateISO": "2026-05-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-04:john-mary-vianney:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJeanVianney",
+      "dateISO": "2026-08-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-12:josaphat-kuntsevych:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosaphat",
+      "dateISO": "2026-11-12"
     }
   ]
 }

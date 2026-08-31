@@ -431,6 +431,61 @@
         "es": "San Martín de Tours",
         "it": "San Martino di Tours"
       }
+    },
+    {
+      "id": "justin-martyr",
+      "primaryObservanceId": "rc:StJustinMartyr",
+      "category": "saint",
+      "names": {
+        "en": "Saint Justin Martyr",
+        "pt": "São Justino",
+        "es": "San Justino Mártir",
+        "it": "San Giustino Martire"
+      }
+    },
+    {
+      "id": "boniface-mainz",
+      "primaryObservanceId": "rc:StBoniface",
+      "category": "saint",
+      "names": {
+        "en": "Saint Boniface",
+        "pt": "São Bonifácio",
+        "es": "San Bonifacio",
+        "it": "San Bonifacio"
+      }
+    },
+    {
+      "id": "philip-neri",
+      "primaryObservanceId": "rc:StPhilipNeri",
+      "category": "saint",
+      "names": {
+        "en": "Saint Philip Neri",
+        "pt": "São Filipe Néri",
+        "es": "San Felipe Neri",
+        "it": "San Filippo Neri"
+      }
+    },
+    {
+      "id": "john-mary-vianney",
+      "primaryObservanceId": "rc:StJeanVianney",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Mary Vianney",
+        "pt": "São João Maria Vianney",
+        "es": "San Juan María Vianney",
+        "it": "San Giovanni Maria Vianney"
+      }
+    },
+    {
+      "id": "josaphat-kuntsevych",
+      "primaryObservanceId": "rc:StJosaphat",
+      "category": "saint",
+      "names": {
+        "en": "Saint Josaphat Kuntsevych",
+        "pt": "São Josafat",
+        "es": "San Josafat Kuncewicz",
+        "it": "San Giosafat Kuncewicz"
+      }
     }
   ]
 }
