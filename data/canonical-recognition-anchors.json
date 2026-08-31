@@ -927,6 +927,152 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:athanasius-alexandria:roman-catholic",
+      "personId": "athanasius-alexandria",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/02.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:bonaventure-bagnoregio:roman-catholic",
+      "personId": "bonaventure-bagnoregio",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "cardinal",
+        "bishop",
+        "doctor-of-the-church",
+        "franciscan"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/15.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "cardinal",
+            "bishop",
+            "doctor-of-the-church",
+            "franciscan"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:bernard-clairvaux:roman-catholic",
+      "personId": "bernard-clairvaux",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "abbot",
+        "doctor-of-the-church",
+        "cistercian"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/20.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "abbot",
+            "doctor-of-the-church",
+            "cistercian"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:leo-great:roman-catholic",
+      "personId": "leo-great",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/10.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:ignatius-antioch:roman-catholic",
+      "personId": "ignatius-antioch",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/17.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

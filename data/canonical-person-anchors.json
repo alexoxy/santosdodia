@@ -321,6 +321,61 @@
         "es": "San Alfonso María de Ligorio",
         "it": "Sant’Alfonso Maria de’ Liguori"
       }
+    },
+    {
+      "id": "athanasius-alexandria",
+      "primaryObservanceId": "rc:StAthanasius",
+      "category": "saint",
+      "names": {
+        "en": "Saint Athanasius of Alexandria",
+        "pt": "Santo Atanásio de Alexandria",
+        "es": "San Atanasio de Alejandría",
+        "it": "Sant'Atanasio di Alessandria"
+      }
+    },
+    {
+      "id": "bonaventure-bagnoregio",
+      "primaryObservanceId": "rc:StBonaventure",
+      "category": "saint",
+      "names": {
+        "en": "Saint Bonaventure",
+        "pt": "São Boaventura",
+        "es": "San Buenaventura",
+        "it": "San Bonaventura"
+      }
+    },
+    {
+      "id": "bernard-clairvaux",
+      "primaryObservanceId": "rc:StBernardClairvaux",
+      "category": "saint",
+      "names": {
+        "en": "Saint Bernard of Clairvaux",
+        "pt": "São Bernardo de Claraval",
+        "es": "San Bernardo de Claraval",
+        "it": "San Bernardo di Chiaravalle"
+      }
+    },
+    {
+      "id": "leo-great",
+      "primaryObservanceId": "rc:StLeoGreat",
+      "category": "saint",
+      "names": {
+        "en": "Saint Leo the Great",
+        "pt": "São Leão Magno",
+        "es": "San León Magno",
+        "it": "San Leone Magno"
+      }
+    },
+    {
+      "id": "ignatius-antioch",
+      "primaryObservanceId": "rc:StIgnatiusAntioch",
+      "category": "saint",
+      "names": {
+        "en": "Saint Ignatius of Antioch",
+        "pt": "Santo Inácio de Antioquia",
+        "es": "San Ignacio de Antioquía",
+        "it": "Sant'Ignazio di Antiochia"
+      }
     }
   ]
 }

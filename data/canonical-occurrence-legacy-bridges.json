@@ -195,6 +195,31 @@
       "occurrenceId": "occurrence:2026-08-01:alphonsus-liguori:roman-catholic:pt",
       "legacyObservanceId": "rc:StAlphonsusMariaDeLiguori",
       "dateISO": "2026-08-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-02:athanasius-alexandria:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAthanasius",
+      "dateISO": "2026-05-02"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-15:bonaventure-bagnoregio:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBonaventure",
+      "dateISO": "2026-07-15"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-20:bernard-clairvaux:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBernardClairvaux",
+      "dateISO": "2026-08-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-10:leo-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLeoGreat",
+      "dateISO": "2026-11-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-17:ignatius-antioch:roman-catholic:pt",
+      "legacyObservanceId": "rc:StIgnatiusAntioch",
+      "dateISO": "2026-10-17"
     }
   ]
 }
