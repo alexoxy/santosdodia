@@ -480,6 +480,48 @@
       "observanceDateImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/12/26/st--stephen--first-martyr.html","claimTypes":["saint-designation","identity","deacon","protomartyr"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "recognition:cyril-monk:roman-catholic",
+      "personId": "cyril-monk",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["monk", "patron-of-europe"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html","claimTypes":["saint-designation","identity","monk","patron-of-europe"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:methodius-bishop:roman-catholic",
+      "personId": "methodius-bishop",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["bishop", "patron-of-europe"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html","claimTypes":["saint-designation","identity","bishop","patron-of-europe"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:anthony-lisbon:roman-catholic",
+      "personId": "anthony-lisbon",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["priest", "doctor-of-the-church"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html","claimTypes":["saint-designation","identity","priest","doctor-of-the-church","born-in-lisbon"]}],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

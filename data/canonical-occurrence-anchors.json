@@ -288,6 +288,32 @@
       "sourceRankCode": "FESTA",
       "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-26","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Estêvão, Primeiro Mártir – FESTA"}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "occurrence:2026-02-14:cyril-methodius:roman-catholic:pt",
+      "observanceId": "observance:cyril-methodius:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-02-14",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-14","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank","patrons-of-europe"],"observedDesignation":"Santos Cirilo, monge, e Metódio, bispo, Padroeiros da Europa – FESTA"}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-06-13:anthony-lisbon:roman-catholic:pt",
+      "observanceId": "observance:anthony-lisbon:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-13",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-13","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank","patron-of-portugal"],"observedDesignation":"S. António de Lisboa, presbítero e doutor da Igreja, Padroeiro de Portugal – FESTA"}],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

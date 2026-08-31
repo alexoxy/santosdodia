@@ -371,6 +371,39 @@
       "precedenceImplied": false,
       "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/12/26/st--stephen--first-martyr.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:cyril-methodius:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {"kind":"person","personId":"cyril-monk","recognitionId":"recognition:cyril-monk:roman-catholic"},
+        {"kind":"person","personId":"methodius-bishop","recognitionId":"recognition:methodius-bishop:roman-catholic"}
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html","claimTypes":["observance-attestation","liturgical-designation","patrons-of-europe"]}],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "observance:anthony-lisbon:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [{"kind":"person","personId":"anthony-lisbon","recognitionId":"recognition:anthony-lisbon:roman-catholic"}],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }
