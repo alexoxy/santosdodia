@@ -1,0 +1,53 @@
+name: Temporary fix Sanctorale batch 6 review
+
+on:
+  push:
+    branches:
+      - migration/sanctorale-pastors-virgins-review-6-20260831
+    paths:
+      - '.github/workflows/tmp-fix-sanctorale-batch-6.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: migration/sanctorale-pastors-virgins-review-6-20260831
+      - name: Correct Martin titles and allowlist revised digest
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const packPath='data/migrations/roman-catholic-pt-2026-v2.sanctorale-review-batch-6.json';
+          const pack=JSON.parse(fs.readFileSync(packPath,'utf8'));
+          const martin=pack.candidates.find(c=>c.person.id==='martin-tours');
+          if (!martin) throw new Error('Martin candidate missing.');
+          martin.recognition.ecclesialTitles=['bishop','monk'];
+          const digest=crypto.createHash('sha256').update(JSON.stringify(pack.candidates)).digest('hex');
+          if (digest!=='f3f89c6a5f9f70ec97b7613f5874bb3703b53ae7ae77017f49f7e287fd001699') throw new Error(`Unexpected revised digest ${digest}`);
+          pack.reviewDigestSha256=digest;
+          fs.writeFileSync(packPath,JSON.stringify(pack,null,2)+'\n','utf8');
+
+          const gate='scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs';
+          const text=fs.readFileSync(gate,'utf8');
+          const from="  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-5.json', '34a036067ec2311ea1a2aa842f65da557ab0d8fb9d5ce71e0cbc15c733177a26']\n]);";
+          const to="  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-5.json', '34a036067ec2311ea1a2aa842f65da557ab0d8fb9d5ce71e0cbc15c733177a26'],\n  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-6.json', 'f3f89c6a5f9f70ec97b7613f5874bb3703b53ae7ae77017f49f7e287fd001699']\n]);";
+          if ((text.split(from).length-1)!==1) throw new Error('Digest allowlist anchor changed unexpectedly.');
+          fs.writeFileSync(gate,text.replace(from,to),'utf8');
+          NODE
+          node scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs
+          git diff --check
+      - name: Remove temporary workflows
+        run: rm .github/workflows/tmp-add-sanctorale-batch-6-digest.yml .github/workflows/tmp-fix-sanctorale-batch-6.yml
+      - name: Commit corrected review pack
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/migrations/roman-catholic-pt-2026-v2.sanctorale-review-batch-6.json scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs .github/workflows/tmp-add-sanctorale-batch-6-digest.yml .github/workflows/tmp-fix-sanctorale-batch-6.yml
+          git commit -m 'Correct and validate reviewed Sanctorale batch 6'
+          git push origin HEAD:migration/sanctorale-pastors-virgins-review-6-20260831
