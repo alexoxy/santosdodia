@@ -781,6 +781,152 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:john-cross:roman-catholic",
+      "personId": "john-cross",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "doctor-of-the-church",
+        "discalced-carmelite"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/14.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "doctor-of-the-church",
+            "discalced-carmelite"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:ambrose-milan:roman-catholic",
+      "personId": "ambrose-milan",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/07.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:gregory-great:roman-catholic",
+      "personId": "gregory-great",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/03.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:francis-de-sales:roman-catholic",
+      "personId": "francis-de-sales",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church",
+        "patron-of-catholic-press"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/24.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church",
+            "patron-of-catholic-press"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:alphonsus-liguori:roman-catholic",
+      "personId": "alphonsus-liguori",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church",
+        "founder-of-congregation-most-holy-redeemer"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/01.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church",
+            "founder-of-congregation-most-holy-redeemer"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-08-31"
     }
   ]
 }

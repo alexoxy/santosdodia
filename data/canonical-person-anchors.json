@@ -266,6 +266,61 @@
         "es": "San Francisco Javier",
         "it": "San Francesco Saverio"
       }
+    },
+    {
+      "id": "john-cross",
+      "primaryObservanceId": "rc:StJohnCross",
+      "category": "saint",
+      "names": {
+        "en": "Saint John of the Cross",
+        "pt": "São João da Cruz",
+        "es": "San Juan de la Cruz",
+        "it": "San Giovanni della Croce"
+      }
+    },
+    {
+      "id": "ambrose-milan",
+      "primaryObservanceId": "rc:StAmbrose",
+      "category": "saint",
+      "names": {
+        "en": "Saint Ambrose of Milan",
+        "pt": "Santo Ambrósio de Milão",
+        "es": "San Ambrosio de Milán",
+        "it": "Sant’Ambrogio di Milano"
+      }
+    },
+    {
+      "id": "gregory-great",
+      "primaryObservanceId": "rc:StGregoryGreat",
+      "category": "saint",
+      "names": {
+        "en": "Saint Gregory the Great",
+        "pt": "São Gregório Magno",
+        "es": "San Gregorio Magno",
+        "it": "San Gregorio Magno"
+      }
+    },
+    {
+      "id": "francis-de-sales",
+      "primaryObservanceId": "rc:StFrancisDeSales",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis de Sales",
+        "pt": "São Francisco de Sales",
+        "es": "San Francisco de Sales",
+        "it": "San Francesco di Sales"
+      }
+    },
+    {
+      "id": "alphonsus-liguori",
+      "primaryObservanceId": "rc:StAlphonsusMariaDeLiguori",
+      "category": "saint",
+      "names": {
+        "en": "Saint Alphonsus Maria de Liguori",
+        "pt": "Santo Afonso Maria de Ligório",
+        "es": "San Alfonso María de Ligorio",
+        "it": "Sant’Alfonso Maria de’ Liguori"
+      }
     }
   ]
 }
