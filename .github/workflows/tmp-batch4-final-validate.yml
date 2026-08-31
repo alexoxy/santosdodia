@@ -1,0 +1,28 @@
+name: Temporary final batch 4 validation
+
+on:
+  push:
+    branches:
+      - migration/sanctorale-doctors-review-4-20260831
+    paths:
+      - '.github/workflows/tmp-batch4-final-validate.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: migration/sanctorale-doctors-review-4-20260831
+      - run: node scripts/vault/test-portugal-v2-sanctorale-review-packs.mjs
+      - run: rm .github/workflows/tmp-batch4-final-validate.yml
+      - run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/tmp-batch4-final-validate.yml
+          git commit -m 'Remove temporary final batch 4 validation workflow'
+          git push origin HEAD:migration/sanctorale-doctors-review-4-20260831
