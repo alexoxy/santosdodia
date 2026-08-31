@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "justin-martyr",
+        "primaryObservanceId": "rc:StJustinMartyr",
+        "category": "saint",
+        "names": {
+          "en": "Saint Justin Martyr",
+          "pt": "São Justino",
+          "es": "San Justino Mártir",
+          "it": "San Giustino Martire"
+        }
+      },
+      "recognition": {
+        "id": "recognition:justin-martyr:roman-catholic",
+        "ecclesialTitles": [
+          "philosopher",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/01/st--justin--philosopher-and-martyr.html"
+      },
+      "observanceId": "observance:justin-martyr:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:justin-martyr:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJustinMartyr",
+        "sourceOccurrenceId": "snl-pt-2026-06-01-2b5f9b9c4c38a0dee513238c",
+        "sourceRecordHash": "c7f662cbb4b45943ad5f1de8eeaf99af8461bc394674c30dcbf7b07d5ca83c0b",
+        "dateISO": "2026-06-01",
+        "sourceLabelPt": "S. Justino, mártir",
+        "observedDesignation": "S. Justino, mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-1"
+      }
+    },
+    {
+      "person": {
+        "id": "boniface-mainz",
+        "primaryObservanceId": "rc:StBoniface",
+        "category": "saint",
+        "names": {
+          "en": "Saint Boniface",
+          "pt": "São Bonifácio",
+          "es": "San Bonifacio",
+          "it": "San Bonifacio"
+        }
+      },
+      "recognition": {
+        "id": "recognition:boniface-mainz:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/05/st--saint-boniface--bishop-and-martyr--apostle-of--germany.html"
+      },
+      "observanceId": "observance:boniface-mainz:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:boniface-mainz:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBoniface",
+        "sourceOccurrenceId": "snl-pt-2026-06-05-36d193cfb95ccbdfa3195385",
+        "sourceRecordHash": "c198c9f4654023dc46cd0c3419c0b8d734f48b8e5fe472a4398aa2d304613537",
+        "dateISO": "2026-06-05",
+        "sourceLabelPt": "S. Bonifácio, bispo e mártir",
+        "observedDesignation": "S. Bonifácio, bispo e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-5"
+      }
+    },
+    {
+      "person": {
+        "id": "philip-neri",
+        "primaryObservanceId": "rc:StPhilipNeri",
+        "category": "saint",
+        "names": {
+          "en": "Saint Philip Neri",
+          "pt": "São Filipe Néri",
+          "es": "San Felipe Neri",
+          "it": "San Filippo Neri"
+        }
+      },
+      "recognition": {
+        "id": "recognition:philip-neri:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "founder-of-oratory"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/26/st--philip-neri--priest--founder-of-the--congregation-of-the-ora.html"
+      },
+      "observanceId": "observance:philip-neri:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:philip-neri:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPhilipNeri",
+        "sourceOccurrenceId": "snl-pt-2026-05-26-373f9f4fd3ad1900cef2a676",
+        "sourceRecordHash": "73588f3f003705f7f839b6dc78b9c25259de21e112b5d60adfec929ee2c1e06f",
+        "dateISO": "2026-05-26",
+        "sourceLabelPt": "S. Filipe Néri, presbítero",
+        "observedDesignation": "S. Filipe Néri, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-26"
+      }
+    },
+    {
+      "person": {
+        "id": "john-mary-vianney",
+        "primaryObservanceId": "rc:StJeanVianney",
+        "category": "saint",
+        "names": {
+          "en": "Saint John Mary Vianney",
+          "pt": "São João Maria Vianney",
+          "es": "San Juan María Vianney",
+          "it": "San Giovanni Maria Vianney"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-mary-vianney:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "patron-of-parish-priests"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/04/st--john--m--vianney-the-cur-of-ars--patron-of--parish-priests.html"
+      },
+      "observanceId": "observance:john-mary-vianney:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-mary-vianney:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJeanVianney",
+        "sourceOccurrenceId": "snl-pt-2026-08-04-6e03aca150f44852db370199",
+        "sourceRecordHash": "2c073092d2591599fdf870aa31a03c1e57e77e381b9584a9f24694d9922bc4f2",
+        "dateISO": "2026-08-04",
+        "sourceLabelPt": "S. João Maria Vianney, presbítero",
+        "observedDesignation": "S. João Maria Vianney, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-4"
+      }
+    },
+    {
+      "person": {
+        "id": "josaphat-kuntsevych",
+        "primaryObservanceId": "rc:StJosaphat",
+        "category": "saint",
+        "names": {
+          "en": "Saint Josaphat Kuntsevych",
+          "pt": "São Josafat",
+          "es": "San Josafat Kuncewicz",
+          "it": "San Giosafat Kuncewicz"
+        }
+      },
+      "recognition": {
+        "id": "recognition:josaphat-kuntsevych:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/12/st--josaphat-kuncewicz--bishop-and--martyr-.html"
+      },
+      "observanceId": "observance:josaphat-kuntsevych:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:josaphat-kuntsevych:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJosaphat",
+        "sourceOccurrenceId": "snl-pt-2026-11-12-3b967ad782465147f4c6f01a",
+        "sourceRecordHash": "56600d094b1db31d1ad0421fa281940c4b5cedb95fff6bb2f93d2190fdf243b4",
+        "dateISO": "2026-11-12",
+        "sourceLabelPt": "S. Josafat, bispo e mártir",
+        "observedDesignation": "S. Josafat, bispo e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-12"
+      }
+    }
+  ],
+  "reviewDigestSha256": "d202a84a23baaaf98f81a4e600cbb7880d146b26dc7a234886543115cb33d2fa",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
