@@ -17,42 +17,182 @@
   },
   "candidates": [
     {
-      "person": {"id":"agnes-rome","primaryObservanceId":"rc:StAgnes","category":"saint","names":{"en":"Saint Agnes of Rome","pt":"Santa Inês","es":"Santa Inés de Roma","it":"Sant'Agnese di Roma"}},
-      "recognition": {"id":"recognition:agnes-rome:roman-catholic","ecclesialTitles":["virgin","martyr"],"evidenceUrl":"https://www.vaticannews.va/en/saints/01/21.html"},
+      "person": {
+        "id": "agnes-rome",
+        "primaryObservanceId": "rc:StAgnes",
+        "category": "saint",
+        "names": {
+          "en": "Saint Agnes of Rome",
+          "pt": "Santa Inês",
+          "es": "Santa Inés de Roma",
+          "it": "Sant'Agnese di Roma"
+        }
+      },
+      "recognition": {
+        "id": "recognition:agnes-rome:roman-catholic",
+        "ecclesialTitles": [
+          "virgin",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/21.html"
+      },
       "observanceId": "observance:agnes-rome:roman-catholic",
       "sanctoraleRuleId": "sanctorale-rule:agnes-rome:general-roman",
-      "source": {"canonicalEventId":"rc:StAgnes","sourceOccurrenceId":"snl-pt-2026-01-21-a80d4b8873fe1f3c3e8c640f","sourceRecordHash":"01aafc671d0df3fa46f86e5b0f8ba16e9d786569908fb76d490cd80afa5a2076","dateISO":"2026-01-21","sourceLabelPt":"S. Inês, virgem e mártir","observedDesignation":"S. Inês, virgem e mártir – MO","legacyRank":"memorial","sourceRankCode":"MO","canonicalRank":"obligatory-memorial","snlUrl":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-21"}
+      "source": {
+        "canonicalEventId": "rc:StAgnes",
+        "sourceOccurrenceId": "snl-pt-2026-01-21-a80d4b8873fe1f3c3e8c640f",
+        "sourceRecordHash": "01aafc671d0df3fa46f86e5b0f8ba16e9d786569908fb76d490cd80afa5a2076",
+        "dateISO": "2026-01-21",
+        "sourceLabelPt": "S. Inês, virgem e mártir",
+        "observedDesignation": "S. Inês, virgem e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-21"
+      }
     },
     {
-      "person": {"id":"john-bosco","primaryObservanceId":"rc:StJohnBosco","category":"saint","names":{"en":"Saint John Bosco","pt":"São João Bosco","es":"San Juan Bosco","it":"San Giovanni Bosco"}},
-      "recognition": {"id":"recognition:john-bosco:roman-catholic","ecclesialTitles":["priest","founder-of-salesians"],"evidenceUrl":"https://www.vaticannews.va/en/saints/01/31.html"},
+      "person": {
+        "id": "john-bosco",
+        "primaryObservanceId": "rc:StJohnBosco",
+        "category": "saint",
+        "names": {
+          "en": "Saint John Bosco",
+          "pt": "São João Bosco",
+          "es": "San Juan Bosco",
+          "it": "San Giovanni Bosco"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-bosco:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "founder-of-salesians"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/31.html"
+      },
       "observanceId": "observance:john-bosco:roman-catholic",
       "sanctoraleRuleId": "sanctorale-rule:john-bosco:general-roman",
-      "source": {"canonicalEventId":"rc:StJohnBosco","sourceOccurrenceId":"snl-pt-2026-01-31-7a72aa4d3badc233550f3716","sourceRecordHash":"034a57493724065f118f93bfd2bb5a4322d99667b38171ce148aba403b46e1f5","dateISO":"2026-01-31","sourceLabelPt":"S. João Bosco, presbítero","observedDesignation":"S. João Bosco, presbítero – MO","legacyRank":"memorial","sourceRankCode":"MO","canonicalRank":"obligatory-memorial","snlUrl":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-31"}
+      "source": {
+        "canonicalEventId": "rc:StJohnBosco",
+        "sourceOccurrenceId": "snl-pt-2026-01-31-7a72aa4d3badc233550f3716",
+        "sourceRecordHash": "034a57493724065f118f93bfd2bb5a4322d99667b38171ce148aba403b46e1f5",
+        "dateISO": "2026-01-31",
+        "sourceLabelPt": "S. João Bosco, presbítero",
+        "observedDesignation": "S. João Bosco, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-31"
+      }
     },
     {
-      "person": {"id":"scholastica-nursia","primaryObservanceId":"rc:StScholastica","category":"saint","names":{"en":"Saint Scholastica","pt":"Santa Escolástica","es":"Santa Escolástica","it":"Santa Scolastica"}},
-      "recognition": {"id":"recognition:scholastica-nursia:roman-catholic","ecclesialTitles":["virgin","benedictine-nun"],"evidenceUrl":"https://www.vaticannews.va/en/saints/02/10/st--scolastica--virgin--sister-di-s--benedetto.html"},
+      "person": {
+        "id": "scholastica-nursia",
+        "primaryObservanceId": "rc:StScholastica",
+        "category": "saint",
+        "names": {
+          "en": "Saint Scholastica",
+          "pt": "Santa Escolástica",
+          "es": "Santa Escolástica",
+          "it": "Santa Scolastica"
+        }
+      },
+      "recognition": {
+        "id": "recognition:scholastica-nursia:roman-catholic",
+        "ecclesialTitles": [
+          "virgin",
+          "benedictine-nun"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/02/10/st--scolastica--virgin--sister-di-s--benedetto.html"
+      },
       "observanceId": "observance:scholastica-nursia:roman-catholic",
       "sanctoraleRuleId": "sanctorale-rule:scholastica-nursia:general-roman",
-      "source": {"canonicalEventId":"rc:StScholastica","sourceOccurrenceId":"snl-pt-2026-02-10-498bbf4bae87851bf2cc63c6","sourceRecordHash":"d1b0fe240e90d9ae694b2c8a7ca8fc78e947b2ee780b126daca0da32c1f9e60f","dateISO":"2026-02-10","sourceLabelPt":"S. Escolástica, virgem","observedDesignation":"S. Escolástica, virgem – MO","legacyRank":"memorial","sourceRankCode":"MO","canonicalRank":"obligatory-memorial","snlUrl":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-10"}
+      "source": {
+        "canonicalEventId": "rc:StScholastica",
+        "sourceOccurrenceId": "snl-pt-2026-02-10-498bbf4bae87851bf2cc63c6",
+        "sourceRecordHash": "d1b0fe240e90d9ae694b2c8a7ca8fc78e947b2ee780b126daca0da32c1f9e60f",
+        "dateISO": "2026-02-10",
+        "sourceLabelPt": "S. Escolástica, virgem",
+        "observedDesignation": "S. Escolástica, virgem – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-10"
+      }
     },
     {
-      "person": {"id":"charles-borromeo","primaryObservanceId":"rc:StCharlesBorromeo","category":"saint","names":{"en":"Saint Charles Borromeo","pt":"São Carlos Borromeu","es":"San Carlos Borromeo","it":"San Carlo Borromeo"}},
-      "recognition": {"id":"recognition:charles-borromeo:roman-catholic","ecclesialTitles":["bishop","cardinal"],"evidenceUrl":"https://www.vaticannews.va/en/saints/11/04/st--charles-borromeo--archbishop-of-milan-and-cardinal.html"},
+      "person": {
+        "id": "charles-borromeo",
+        "primaryObservanceId": "rc:StCharlesBorromeo",
+        "category": "saint",
+        "names": {
+          "en": "Saint Charles Borromeo",
+          "pt": "São Carlos Borromeu",
+          "es": "San Carlos Borromeo",
+          "it": "San Carlo Borromeo"
+        }
+      },
+      "recognition": {
+        "id": "recognition:charles-borromeo:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "cardinal"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/04/st--charles-borromeo--archbishop-of-milan-and-cardinal.html"
+      },
       "observanceId": "observance:charles-borromeo:roman-catholic",
       "sanctoraleRuleId": "sanctorale-rule:charles-borromeo:general-roman",
-      "source": {"canonicalEventId":"rc:StCharlesBorromeo","sourceOccurrenceId":"snl-pt-2026-11-04-e2a8962474d4351d30b16cd1","sourceRecordHash":"31ddbc66cdc55bb88cb4162f92d9045e620fbefd51534505f1a07c9dd3248d94","dateISO":"2026-11-04","sourceLabelPt":"S. Carlos Borromeu, bispo","observedDesignation":"S. Carlos Borromeu, bispo – MO","legacyRank":"memorial","sourceRankCode":"MO","canonicalRank":"obligatory-memorial","snlUrl":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-4"}
+      "source": {
+        "canonicalEventId": "rc:StCharlesBorromeo",
+        "sourceOccurrenceId": "snl-pt-2026-11-04-e2a8962474d4351d30b16cd1",
+        "sourceRecordHash": "31ddbc66cdc55bb88cb4162f92d9045e620fbefd51534505f1a07c9dd3248d94",
+        "dateISO": "2026-11-04",
+        "sourceLabelPt": "S. Carlos Borromeu, bispo",
+        "observedDesignation": "S. Carlos Borromeu, bispo – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-4"
+      }
     },
     {
-      "person": {"id":"martin-tours","primaryObservanceId":"rc:StMartinTours","category":"saint","names":{"en":"Saint Martin of Tours","pt":"São Martinho de Tours","es":"San Martín de Tours","it":"San Martino di Tours"}},
-      "recognition": {"id":"recognition:martin-tours:roman-catholic","ecclesialTitles":["bishop"],"evidenceUrl":"https://www.vaticannews.va/en/saints/11/11/st--martin--bishop-of-tours-.html"},
+      "person": {
+        "id": "martin-tours",
+        "primaryObservanceId": "rc:StMartinTours",
+        "category": "saint",
+        "names": {
+          "en": "Saint Martin of Tours",
+          "pt": "São Martinho de Tours",
+          "es": "San Martín de Tours",
+          "it": "San Martino di Tours"
+        }
+      },
+      "recognition": {
+        "id": "recognition:martin-tours:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "monk"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/11/st--martin--bishop-of-tours-.html"
+      },
       "observanceId": "observance:martin-tours:roman-catholic",
       "sanctoraleRuleId": "sanctorale-rule:martin-tours:general-roman",
-      "source": {"canonicalEventId":"rc:StMartinTours","sourceOccurrenceId":"snl-pt-2026-11-11-957d766e6816ed78571e0771","sourceRecordHash":"cd248c2e0ca964b024d40586e3d789dd3ac3ee066f68f93af5c482f4aa80d1fb","dateISO":"2026-11-11","sourceLabelPt":"S. Martinho de Tours, bispo","observedDesignation":"S. Martinho de Tours, bispo – MO","legacyRank":"memorial","sourceRankCode":"MO","canonicalRank":"obligatory-memorial","snlUrl":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-11"}
+      "source": {
+        "canonicalEventId": "rc:StMartinTours",
+        "sourceOccurrenceId": "snl-pt-2026-11-11-957d766e6816ed78571e0771",
+        "sourceRecordHash": "cd248c2e0ca964b024d40586e3d789dd3ac3ee066f68f93af5c482f4aa80d1fb",
+        "dateISO": "2026-11-11",
+        "sourceLabelPt": "S. Martinho de Tours, bispo",
+        "observedDesignation": "S. Martinho de Tours, bispo – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-11"
+      }
     }
   ],
-  "reviewDigestSha256": "d3063d35657bcaf57a8575d67b406466f6c207105e2cd9346af020e5c25320c8",
+  "reviewDigestSha256": "f3f89c6a5f9f70ec97b7613f5874bb3703b53ae7ae77017f49f7e287fd001699",
   "mutationAllowed": false,
   "promotionAllowed": false,
   "verifiedAt": "2026-08-31"
