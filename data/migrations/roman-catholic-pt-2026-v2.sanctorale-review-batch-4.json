@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "john-cross",
+        "primaryObservanceId": "rc:StJohnCross",
+        "category": "saint",
+        "names": {"en":"Saint John of the Cross","pt":"São João da Cruz","es":"San Juan de la Cruz","it":"San Giovanni della Croce"}
+      },
+      "recognition": {
+        "id": "recognition:john-cross:roman-catholic",
+        "ecclesialTitles": ["priest","doctor-of-the-church","discalced-carmelite"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/12/14.html"
+      },
+      "observanceId": "observance:john-cross:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-cross:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJohnCross",
+        "sourceOccurrenceId": "snl-pt-2026-12-14-1b6574baa3e6338a9769d8cf",
+        "sourceRecordHash": "6cebe927be476892b26fa01978ab3d05b0ae30f865d39e0fbfe518e573a5b3e7",
+        "dateISO": "2026-12-14",
+        "sourceLabelPt": "S. João da Cruz, presbítero e doutor da Igreja",
+        "observedDesignation": "S. João da Cruz, presbítero e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-14"
+      }
+    },
+    {
+      "person": {
+        "id": "ambrose-milan",
+        "primaryObservanceId": "rc:StAmbrose",
+        "category": "saint",
+        "names": {"en":"Saint Ambrose of Milan","pt":"Santo Ambrósio de Milão","es":"San Ambrosio de Milán","it":"Sant’Ambrogio di Milano"}
+      },
+      "recognition": {
+        "id": "recognition:ambrose-milan:roman-catholic",
+        "ecclesialTitles": ["bishop","doctor-of-the-church"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/12/07.html"
+      },
+      "observanceId": "observance:ambrose-milan:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:ambrose-milan:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAmbrose",
+        "sourceOccurrenceId": "snl-pt-2026-12-07-a4995f859b49845c5a381c1e",
+        "sourceRecordHash": "1d87802aeb10f103f8567471c9546578629aeb4a8654ee1442f8854dd34e8759",
+        "dateISO": "2026-12-07",
+        "sourceLabelPt": "S. Ambrósio, bispo e doutor da Igreja",
+        "observedDesignation": "S. Ambrósio, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-7"
+      }
+    },
+    {
+      "person": {
+        "id": "gregory-great",
+        "primaryObservanceId": "rc:StGregoryGreat",
+        "category": "saint",
+        "names": {"en":"Saint Gregory the Great","pt":"São Gregório Magno","es":"San Gregorio Magno","it":"San Gregorio Magno"}
+      },
+      "recognition": {
+        "id": "recognition:gregory-great:roman-catholic",
+        "ecclesialTitles": ["pope","doctor-of-the-church"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/09/03.html"
+      },
+      "observanceId": "observance:gregory-great:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:gregory-great:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StGregoryGreat",
+        "sourceOccurrenceId": "snl-pt-2026-09-03-165a644338ee3907aa7c2e0e",
+        "sourceRecordHash": "4f389509e3e1930d25d6d4fbb4e079ad379e75db3427be4cb73eb9d0bc04d0ad",
+        "dateISO": "2026-09-03",
+        "sourceLabelPt": "S. Gregório Magno, papa e doutor da Igreja",
+        "observedDesignation": "S. Gregório Magno, papa e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-3"
+      }
+    },
+    {
+      "person": {
+        "id": "francis-de-sales",
+        "primaryObservanceId": "rc:StFrancisDeSales",
+        "category": "saint",
+        "names": {"en":"Saint Francis de Sales","pt":"São Francisco de Sales","es":"San Francisco de Sales","it":"San Francesco di Sales"}
+      },
+      "recognition": {
+        "id": "recognition:francis-de-sales:roman-catholic",
+        "ecclesialTitles": ["bishop","doctor-of-the-church","patron-of-catholic-press"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/24.html"
+      },
+      "observanceId": "observance:francis-de-sales:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:francis-de-sales:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StFrancisDeSales",
+        "sourceOccurrenceId": "snl-pt-2026-01-24-8689f6976ca58844ba17a6c6",
+        "sourceRecordHash": "57bfab9681e1aa9000f998e27db643dc312c3dcef6a950b1da64e53d013a1797",
+        "dateISO": "2026-01-24",
+        "sourceLabelPt": "S. Francisco de Sales, bispo e doutor da Igreja",
+        "observedDesignation": "S. Francisco de Sales, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-24"
+      }
+    },
+    {
+      "person": {
+        "id": "alphonsus-liguori",
+        "primaryObservanceId": "rc:StAlphonsusMariaDeLiguori",
+        "category": "saint",
+        "names": {"en":"Saint Alphonsus Maria de Liguori","pt":"Santo Afonso Maria de Ligório","es":"San Alfonso María de Ligorio","it":"Sant’Alfonso Maria de’ Liguori"}
+      },
+      "recognition": {
+        "id": "recognition:alphonsus-liguori:roman-catholic",
+        "ecclesialTitles": ["bishop","doctor-of-the-church","founder-of-congregation-most-holy-redeemer"],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/01.html"
+      },
+      "observanceId": "observance:alphonsus-liguori:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:alphonsus-liguori:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAlphonsusMariaDeLiguori",
+        "sourceOccurrenceId": "snl-pt-2026-08-01-e561bdcbd6273ad08300591f",
+        "sourceRecordHash": "949ae8bc0714f0f9863660e2ef078c0407815b70d0167a2a09498ec8c5f3da90",
+        "dateISO": "2026-08-01",
+        "sourceLabelPt": "S. Afonso Maria de Ligório, bispo e doutor da Igreja",
+        "observedDesignation": "S. Afonso Maria de Ligório, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-1"
+      }
+    }
+  ],
+  "reviewDigestSha256": "cccb4c22979975a05fad2457f0d16ed82ef77765e6bdb92bcfc8c80b488817b9",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}
