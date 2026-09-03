@@ -10,6 +10,9 @@ const required = [
   'app/ads.css',
   'app/components/AdSenseBootstrap.tsx',
   'app/components/AdSlot.tsx',
+  'app/components/CalendarSyncCenter.tsx',
+  'app/components/TraditionFeeds.tsx',
+  'lib/calendar-publication-readiness.ts',
   'app/components/SiteChrome.tsx',
   'app/components/AdvertisingPrivacyNotice.tsx',
   'app/components/PrivacyChoicesLink.tsx',
@@ -185,6 +188,16 @@ if(!failures.length){
   expect(home.includes('href={`/saint/${encodeURIComponent(id)}`}'),'Homepage editorial navigation must point to saint profile routes');
   expect(!home.includes('SAINT_BIOGRAPHIES'),'Homepage client code must not ship the full biography corpus merely to render four links');
   expect(!home.includes('../data/saint-biography-registry'),'Homepage client code must keep full biography data server/page scoped');
+
+  const calendarReadiness=text('lib/calendar-publication-readiness.ts');
+  const calendarSync=text('app/components/CalendarSyncCenter.tsx');
+  const traditionFeeds=text('app/components/TraditionFeeds.tsx');
+  expect(calendarReadiness.includes("{ tradition: 'roman-catholic', country: 'PT' }"),'Only the verified Portugal Roman Catholic calendar context may be advertised as ready');
+  expect(calendarReadiness.includes("'coptic'") && calendarReadiness.includes("'eastern-orthodox'"),'Planned Christian traditions must remain explicit without being presented as ready');
+  expect(calendarSync.includes('const subscriptionReady = isPublicCalendarSubscriptionReady'),'Calendar sync actions must use the public-readiness gate');
+  expect(calendarSync.includes('subscriptionReady ? <section'),'ICS/API actions must be hidden for incomplete calendar contexts');
+  expect(traditionFeeds.includes('PUBLIC_CALENDAR_CONTEXTS.map'),'Ready-made subscription cards must come only from the verified public context registry');
+  expect(traditionFeeds.includes('PLANNED_CALENDAR_TRADITIONS.map'),'Planned traditions must remain visible as in-preparation contexts');
 
   const privacy=text('app/components/AdvertisingPrivacyNotice.tsx');
   expect(privacy.includes('Google AdSense'),'Privacy disclosure must identify Google AdSense');
