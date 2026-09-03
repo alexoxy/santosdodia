@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-09-03 19:35 UTC
+Updated: 2026-09-03 20:01 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
@@ -16,7 +16,7 @@ The strategic document is the binding and cumulative product vision until full i
 - First-party public experience is text only; verified, privacy-preserving, user-activated livestream is the sole audiovisual exception.
 - Portugal is the first quality and semantic-equivalence anchor, never the global architecture.
 - Church/tradition, jurisdiction, calendar system, locale and timezone remain independent dimensions.
-- The approved annual source corpus is predominantly static. Routine acquisition, enrichment, monitoring and D1-aware work run at most weekly; exceptional manual runs remain explicit and fail-closed.
+- The approved annual source corpus is predominantly static. Heavy acquisition/enrichment runs monthly on distributed dates; only lightweight production health and source freshness/verified Live remain weekly; exceptional runs remain explicit and fail-closed.
 - Cloudflare remains within the Free architecture; remote D1 writes are restricted to the Monday UTC window and are skipped outside it.
 - AdSense is `REMEDIATION_REQUIRED` for `low-value-content`; serving and review resubmission remain disabled.
 - Evidence promotion, perennial publication, alert closure and destructive hygiene remain fail-closed.
@@ -41,6 +41,14 @@ The strategic document is the binding and cumulative product vision until full i
 - Each batch 7 chain includes Person, Roman Catholic Recognition, Observance, perennial fixed SanctoraleRule, Portugal 2026 Occurrence, exact legacy bridge and approved-source shadow binding.
 - SNL evidence binds the annual Portugal date and `MO` rank; Vatican News evidence binds identity and ecclesial designation. No identity was inferred from label similarity.
 - Batch 7 fixed mapping digest: `e9d0bc6446ab7822260563f663941b3bb527376a245f5b1d54c61832fee6d984`.
+- PR #280 aligned the implementation with the corpus-first vision:
+  - bounded bootstrap/backfill captures the maximum useful permitted authority evidence into Dropbox releases;
+  - after completeness, full sweeps stop and normal maintenance becomes monthly delta-only;
+  - 12 heavy/static roots now run once monthly on days 1–22; only production health and source freshness remain weekly;
+  - Roman Catholic Portugal is the sole advertised ready subscription; the seven other modeled traditions are reviewed previews/in preparation;
+  - Coptic Orthodox is now an explicit planned authority-isolated kernel;
+  - the AdSense re-review gate now requires honest production value and recrawl, not merely counts or green CI.
+- Durable OSINT and market evidence is recorded in `docs/research/adsense-market-and-source-osint-2026-09-03.md`.
 
 ## Current Portugal 2026 reconciliation
 
@@ -84,6 +92,17 @@ Identity is never created by label similarity, and an annual date never becomes 
   `data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-7.json`.
 - The immutable approved source release did not change, so no new production receipt, D1 write or public release was created.
 
+### Durable corpus and calendar-readiness alignment — PR #280
+
+- Head: `84cea7433c54b96e755c85d984f83bd919635228`.
+- Squash merge on `main`: `ae8548e76f42b179e8e34366f790194a18880bad`.
+- AdSense readiness `33799269108`: success.
+- Calendar/Discovery `33799269062`: success after canonical tradition-ID correction.
+- Wikidata retry quality `33799269273`: success.
+- Quality `33799269143`: success, including automation policy, typecheck, lint, Next.js build, Cloudflare Worker build and production smoke.
+- No production or D1 mutation was authorized or performed by this PR.
+- Dropbox still exposes the last validated Portugal v2 staging receipt at the `ad1cd925...` path below: 389 occurrences, 365 days, 1,945 labels and `productionApproved: false`.
+
 ### Preserved production baseline
 
 - Production release commit: `a27e50710d4d0a8cf71ee7644baa7d4b03094792`.
@@ -119,13 +138,14 @@ Identity is never created by label similarity, and an annual date never becomes 
 | Rolling materialisation Y-1…Y+3 | Realised core | Automatic window and atomic materialisation tests exist. |
 | Portugal reference Today | Partial | Reviewed context is live; perennial read-model cutover awaits 389/389 equivalence. |
 | Lusophone jurisdictions | Pending | Requires jurisdiction-specific authority packs after Portugal proof. |
-| Other Churches | Pending | OCA, GOARCH and Church of England require separate authority-isolated kernels and acceptance vectors. |
-| Autonomous maintenance | Partial | Weekly cadence, static-corpus audits, fail-closed alerts and D1 budgets are encoded; exception-only operation remains incomplete. |
+| Other Churches | Pending | OCA, GOARCH, Church of England and Coptic Orthodox require separate authority-isolated kernels and acceptance vectors; other modeled traditions remain previews/planned. |
+| Autonomous maintenance | Partial | Monthly distributed heavy acquisition, two lightweight weekly exceptions, static-corpus audits, fail-closed alerts and D1 budgets are encoded; source-level completeness receipts remain incomplete. |
 
 ## Repository hygiene inventory
 
 - PR #277: merged after five green workflows.
 - PR #278: merged after three green workflows.
+- PR #280: merged after four green workflows; one canonical-ID typecheck failure was corrected and revalidated before merge.
 - No pull request remains open at this checkpoint.
 - Open issues: #181 only, the strategic umbrella.
 - No branch was force-moved or deleted to simulate cleanup.
@@ -134,19 +154,19 @@ Identity is never created by label similarity, and an annual date never becomes 
 ## Risks and decisions
 
 - AdSense remains `REMEDIATION_REQUIRED`; do not resubmit merely because repository checks are green.
-- Scheduled frequency is a resource policy, not a substitute for evidence freshness. Exceptional reruns are manual, documented and fail-closed.
+- Monthly scheduled frequency is a resource policy, not a substitute for evidence freshness. Authority-specific urgent changes use bounded, documented, fail-closed event runs.
 - Canonical coverage is occurrence-based; suppressed candidates and transfer-origin replacements remain evidence, not additional coverage.
 - The runtime/public read model remains the proven production baseline until 389/389 semantic equivalence.
 - A green canonical PR does not authorize D1 mutation or Dropbox production promotion.
 
 ## Ordered roadmap
 
-1. Continue Portugal 2026 equivalence with the next small source-coherent Sanctorale batch, using exact competent-authority identities and approved-source rows.
+1. Continue Portugal 2026 equivalence with the next bounded source-coherent Sanctorale batch, using exact competent-authority identities and approved-source rows; write completeness receipts as each source/context bootstrap finishes.
 2. In parallel, extend only source-proved Temporale/transfer vectors where they reduce unresolved coverage without double-counting suppressed or replacement evidence.
 3. Reduce the remaining 273 legacy occurrences while keeping all identity merge/split and cross-Church decisions under explicit review.
 4. Reach 389/389, explain every precedence/transfer difference and only then consider perennial read-model cutover.
 5. Harden rolling ICS/calculator parity across independent context dimensions.
-6. Expand first-party editorial/search surfaces selectively during AdSense remediation; never create a thin-page factory.
+6. Expand first-party editorial/search surfaces selectively during AdSense remediation; verify authorship, method, source visibility and honest capability claims; never create a thin-page factory.
 7. Begin lusophone jurisdiction packs only after the Portugal gate; add other Churches as separate authority-isolated kernels.
 
 ## Resume and stop rules
@@ -156,5 +176,5 @@ Identity is never created by label similarity, and an annual date never becomes 
 - Do not merge a PR whose required checks belong to an outdated base or head.
 - Do not publish shadow output, infer identity from text, or conflate Church, country, locale, calendar and timezone.
 - Do not add first-party media; verified Live remains the sole audiovisual exception.
-- Do not schedule static-corpus routine work more frequently than weekly.
+- Do not schedule heavy/static corpus work more frequently than monthly; weekly exceptions are limited to lightweight production health and source freshness/verified Live.
 - Before any platform limit or stop, leave `main`, alerts, PR purpose/next action and this checkpoint in a safe repeatable state.
