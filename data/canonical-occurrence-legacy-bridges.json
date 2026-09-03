@@ -269,6 +269,31 @@
       "occurrenceId": "occurrence:2026-11-12:josaphat-kuntsevych:roman-catholic:pt",
       "legacyObservanceId": "rc:StJosaphat",
       "dateISO": "2026-11-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-05:agatha-sicily:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAgatha",
+      "dateISO": "2026-02-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-14:maximilian-kolbe:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMaximilianKolbe",
+      "dateISO": "2026-08-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-27:monica-thagaste:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMonica",
+      "dateISO": "2026-08-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-23:pius-pietrelcina:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPioPietrelcina",
+      "dateISO": "2026-09-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-17:elizabeth-hungary:roman-catholic:pt",
+      "legacyObservanceId": "rc:StElizabethHungary",
+      "dateISO": "2026-11-17"
     }
   ]
 }
