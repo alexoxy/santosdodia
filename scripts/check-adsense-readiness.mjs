@@ -193,7 +193,7 @@ if(!failures.length){
   const calendarSync=text('app/components/CalendarSyncCenter.tsx');
   const traditionFeeds=text('app/components/TraditionFeeds.tsx');
   expect(calendarReadiness.includes("{ tradition: 'roman-catholic', country: 'PT' }"),'Only the verified Portugal Roman Catholic calendar context may be advertised as ready');
-  expect(calendarReadiness.includes("'coptic'") && calendarReadiness.includes("'eastern-orthodox'"),'Planned Christian traditions must remain explicit without being presented as ready');
+  expect(calendarReadiness.includes("'coptic-orthodox'") && calendarReadiness.includes("'eastern-orthodox'"),'Planned Christian traditions must remain explicit without being presented as ready');
   expect(calendarSync.includes('const subscriptionReady = isPublicCalendarSubscriptionReady'),'Calendar sync actions must use the public-readiness gate');
   expect(calendarSync.includes('subscriptionReady ? <section'),'ICS/API actions must be hidden for incomplete calendar contexts');
   expect(traditionFeeds.includes('PUBLIC_CALENDAR_CONTEXTS.map'),'Ready-made subscription cards must come only from the verified public context registry');
