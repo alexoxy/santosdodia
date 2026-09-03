@@ -1,6 +1,6 @@
 # SantosDia — Current Cycle Checkpoint
 
-Updated: 2026-09-03 20:47 UTC
+Updated: 2026-09-03 21:10 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
@@ -53,6 +53,12 @@ The strategic document is the binding and cumulative product vision until full i
 - PR #283 promoted those five exact source-bound chains into the canonical shadow. Fixed Sanctorale coverage advanced from 53 to 58 and total canonical coverage from 116/389 to 121/389.
 - Batch 8 review digest: `529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7`; fixed mapping digest: `314a725e54c4ce18a406500aab40acd9c3cd0efa961ac6d7fd9e72a57ab73d38`.
 - The promotion remains shadow-only: no public read-model change, D1 production write, Dropbox production promotion, AdSense serving or review resubmission.
+- PR #285 preserved Sanctorale review batch 9 as immutable, non-mutating evidence for Saint Hilary of Poitiers, Saint Anselm of Canterbury, Saint Ephrem the Syrian, Saint Peter Chrysologus and Saint John Damascene.
+- The review contract now accepts only explicit, exact `MO` and `MF` rank profiles; label similarity still cannot create identity.
+- PR #286 promoted those five optional memorials as complete canonical chains and exercised precedence level 12 through the annual engine.
+- Fixed Sanctorale coverage advanced from 58 to 63 and total canonical coverage from 121/389 to 126/389.
+- Batch 9 review digest: `7af9e680eee683ef89129c227da0a2f0dfd98a5491eabda51601c1ec95f5bb52`; fixed mapping digest: `3a9014989be93ca43f6df83940f72c5b80a95f94e0dc0288880c5076964229cf`.
+- The batch remains shadow-only: no public read-model change, D1 production write, Dropbox production promotion, AdSense serving or review resubmission.
 
 ## Current Portugal 2026 reconciliation
 
@@ -60,11 +66,11 @@ The strategic document is the binding and cumulative product vision until full i
 - Direct TemporalRule bindings: 5.
 - Precedence-surviving TemporalRuleFamily bindings: 47; 19 suppressed candidates remain evidence and do not count as coverage.
 - Movable/transfer bindings: 11, including three explicitly approved Portugal transfers.
-- Exact fixed Sanctorale bindings: 58.
-- Total canonical migration coverage: **121/389 (31.105%)**.
-- Legacy occurrences still outside the canonical shadow: **268**.
-- Source-bound civil days: **121/365**.
-- Civil days without a source-bound canonical occurrence: **244**.
+- Exact fixed Sanctorale bindings: 63.
+- Total canonical migration coverage: **126/389 (32.391%)**.
+- Legacy occurrences still outside the canonical shadow: **263**.
+- Source-bound civil days: **126/365**.
+- Civil days without a source-bound canonical occurrence: **239**.
 - Full semantic equivalence: `false`.
 - Migration promotion and perennial publication: `false`.
 - Production/D1 mutation from the Sanctorale work: none.
@@ -107,6 +113,17 @@ Identity is never created by label similarity, and an annual date never becomes 
   `data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-8.json`.
 - The approved Portugal source artifact remains immutable; no D1 production write or public release was created.
 
+### Sanctorale batch 9 — PRs #285 and #286
+
+- Review head `95f3493b2628d299870a0ae43c447b5064b3095a`; review squash merge `d656ab7739f2bcfcdff9111ea2e66f91688add27`.
+- Review workflows: Sanctorale review quality `33805457530`, Quality `33805457518` and Wikidata retry quality `33805457554`: success.
+- Promotion head `2b28970402af3d85bff3c9d3b02edad1db22dd32`; promotion squash merge `3b5457e76b2797ea6b251c4b83935b223d488df3`.
+- Promotion workflows: Sanctorale review quality `33806174891`, Quality `33806174811` and Wikidata retry quality `33806174846`: success.
+- Two intermediate Quality runs failed on intentionally strict stale baselines (Occurrence semantic vectors, then combined identity count). Both contracts were corrected and the complete replacement run passed all 64 steps, including Worker build and production smoke.
+- Canonical promotion receipt:
+  `data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-9.json`.
+- The approved Portugal source artifact remains immutable; no D1 production write or public release was created.
+
 ### Durable corpus and calendar-readiness alignment — PR #280
 
 - Head: `84cea7433c54b96e755c85d984f83bd919635228`.
@@ -135,6 +152,7 @@ Identity is never created by label similarity, and an annual date never becomes 
 - The remote D1 steps correctly skipped because the Thursday run was outside the Monday UTC write window.
 - After this positive workflow and external-effect proof, Gmail message `1a06103e98e32d21` was moved to Trash.
 - Batch 8 review initially produced Gmail failure notification `1a068fc7fda6423b`; after the exact-label fix and green replacement workflows, that notification was moved to Trash.
+- Batch 9 promotion produced notifications `1a06917729f08b2a7` and `1a06918ad109bd6f` for the two strict-baseline failures. After the corrected head passed Sanctorale review quality, full Quality and Wikidata retry quality, both notifications were moved to Trash.
 - A fresh project-error search returned zero inbox matches. No other message was deleted.
 - The unread AdSense remediation message remains preserved and actionable.
 - Fresh post-work searches must continue to exclude Trash and distinguish unresolved failures from corrected historical notifications.
@@ -149,7 +167,7 @@ Identity is never created by label similarity, and an annual date never becomes 
 | Canonical context dimensions | Partial | Separation is contractual and tested; global public breadth remains incomplete. |
 | Evidence Vault and provenance | Partial | Immutable hashes, review packs, promotion receipts and rollback exist; authoritative coverage remains incomplete. |
 | Roman perennial Temporale | Realised core | 16 canonical TemporalRules, 5 direct bindings, 47 precedence-surviving family rows and movable/transfer vectors are proved. |
-| Roman Sanctorale | Partial | 58 exact fixed bindings across General Roman, Europe and Portugal; 268/389 legacy occurrences remain outside the migration shadow. |
+| Roman Sanctorale | Partial | 63 exact fixed bindings across General Roman, Europe and Portugal; 263/389 legacy occurrences remain outside the migration shadow. |
 | Precedence, transfer and colours | Partial | Deterministic core and three approved Portugal transfers exist; complete annual equivalence remains open. |
 | Portugal 2026 baseline publication | Verified | Exact production receipt and rollback evidence exist; future writes are disabled. |
 | Rolling materialisation Y-1…Y+3 | Realised core | Automatic window and atomic materialisation tests exist. |
@@ -165,7 +183,9 @@ Identity is never created by label similarity, and an annual date never becomes 
 - PR #280: merged after four green workflows; one canonical-ID typecheck failure was corrected and revalidated before merge.
 - PR #282: review pack merged after three green replacement workflows; the obsolete short-label assertion was corrected without weakening exact designation validation.
 - PR #283: canonical promotion merged after three green workflows.
-- Current `main`: `1a5dcf04444a467f0d357530468ce2afcf020901`.
+- PR #285: optional-memorial review pack merged after three green workflows.
+- PR #286: canonical promotion merged after the corrected head passed three green workflows; two superseded failing heads remain historical evidence.
+- Current `main`: `3b5457e76b2797ea6b251c4b83935b223d488df3`.
 - No pull request remains open at this checkpoint.
 - Open issues: #181 only, the strategic umbrella.
 - No branch was force-moved or deleted to simulate cleanup.
@@ -183,7 +203,7 @@ Identity is never created by label similarity, and an annual date never becomes 
 
 1. Continue Portugal 2026 equivalence with the next bounded source-coherent Sanctorale batch, using exact competent-authority identities and approved-source rows; write completeness receipts as each source/context bootstrap finishes.
 2. In parallel, extend only source-proved Temporale/transfer vectors where they reduce unresolved coverage without double-counting suppressed or replacement evidence.
-3. Reduce the remaining 268 legacy occurrences while keeping all identity merge/split and cross-Church decisions under explicit review.
+3. Reduce the remaining 263 legacy occurrences while keeping all identity merge/split and cross-Church decisions under explicit review.
 4. Reach 389/389, explain every precedence/transfer difference and only then consider perennial read-model cutover.
 5. Harden rolling ICS/calculator parity across independent context dimensions.
 6. Expand first-party editorial/search surfaces selectively during AdSense remediation; verify authorship, method, source visibility and honest capability claims; never create a thin-page factory.
