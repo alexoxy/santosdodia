@@ -13,10 +13,10 @@ export const PLANNED_CALENDAR_TRADITIONS = [
   'greek-orthodox',
   'eastern-orthodox',
   'anglican',
-  'coptic',
-  'armenian',
-  'ethiopian',
-  'syriac',
+  'coptic-orthodox',
+  'armenian-apostolic',
+  'ethiopian-orthodox',
+  'syriac-orthodox',
 ] as const satisfies readonly Tradition[];
 
 export function isPublicCalendarSubscriptionReady(tradition: string, country: string): boolean {
