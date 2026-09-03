@@ -1,9 +1,9 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "productVersion": "2.1",
   "status": "normative",
   "effectiveDate": "2026-08-22",
-  "lastClarifiedDate": "2026-08-30",
+  "lastClarifiedDate": "2026-09-03",
   "productDefinition": "Global Christian liturgical intelligence platform with a human daily-faith product and reusable machine/calendar infrastructure.",
   "northStar": "Open SantosDia and know what Christian day you are living, why it matters, how to pray it, what comes next, and how to stay connected in your own tradition, place and language.",
   "machinePromise": "Given Church or tradition, jurisdiction, calendar system, civil date or year, timezone when needed, and locale, return authoritative liturgical context and consistent HTML, API, JSON-LD and ICS projections without request-time external acquisition.",
@@ -44,7 +44,15 @@
     "d1IsServingKnowledgeNotRawArchive": true,
     "lastKnownGoodOnSourceFailure": true,
     "routineHumanOperationRequired": false,
-    "humanReviewByException": true
+    "humanReviewByException": true,
+    "bootstrapAcquisition": "bounded-resumable-maximal-authority-dump",
+    "staticCorpusMaintenanceCadence": "monthly-distributed",
+    "repeatedFullRefetchAfterBootstrap": false,
+    "lightweightWeeklyExceptions": [
+      "production-health",
+      "source-freshness-and-live"
+    ],
+    "publicCapabilityClaimsRequireVerifiedReadiness": true
   },
   "liturgicalIntelligence": {
     "firstClassProduct": true,
@@ -68,7 +76,8 @@
       "roman-catholic",
       "orthodox-oca",
       "orthodox-goarch",
-      "anglican-church-of-england"
+      "anglican-church-of-england",
+      "coptic-orthodox"
     ],
     "finalLiturgicalColourMayBeInferredFromSeasonAlone": false,
     "precedenceAndTransferMustBeResolvedBeforeFinalOccurrence": true,
@@ -413,5 +422,40 @@
     "executionSnapshotMaySupersedeStrategy": false,
     "cycleReportMustMeasureCoverageAgainstStrategy": true,
     "supersessionRequiresExplicitProductOwnerApproval": true
+  },
+  "acquisitionLifecycle": {
+    "phase": "bootstrap-backfill",
+    "bootstrapGoal": "Capture the maximum useful, permitted authoritative evidence in bounded resumable Dropbox releases, then derive durable canonical knowledge and first-party public content.",
+    "rawArchive": "Dropbox immutable evidence and recovery streams where rights permit; otherwise metadata, references, hashes and extracted facts only.",
+    "publicRuntimeExternalDependency": false,
+    "afterBootstrap": "Monthly source deltas distributed across the month; no repeated full-corpus sweep without a documented repair or authority migration.",
+    "urgentChangePath": "Event-driven reviewed run for a specific competent-source change.",
+    "productionPromotion": "Explicit, fail-closed and evidence-gated."
+  },
+  "calendarCoordinateContract": {
+    "nativeEcclesialCalendar": "preserved",
+    "canonicalRuleRepresentation": "versioned-and-tradition-specific",
+    "civilProjection": "explicit-and-reversible",
+    "silentGregorianization": false,
+    "civilYearAndLiturgicalYearSeparate": true
+  },
+  "adsenseRecoveryGate": {
+    "status": "blocked",
+    "nextReviewRequires": [
+      "representative production entry pages with substantial first-party value",
+      "honest capability and calendar-readiness claims",
+      "clear navigation, authorship, method and sources",
+      "no placeholder, false-empty or thin mass-indexed surfaces",
+      "production verification and search-engine recrawl",
+      "explicit human re-review decision"
+    ],
+    "adsRemainDisabled": true,
+    "massTranslationDoesNotCreateValue": true
+  },
+  "publicationReadiness": {
+    "referenceCalendarContext": "roman-catholic/Portugal",
+    "incompleteTraditionsMayBeExploredAsReviewedPreviews": true,
+    "incompleteTraditionsMayBeAdvertisedAsReadySubscriptions": false,
+    "localesAndCalendarContextsLaunchIndependently": true
   }
 }
