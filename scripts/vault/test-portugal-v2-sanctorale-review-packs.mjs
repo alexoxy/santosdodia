@@ -18,7 +18,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-5.json', '34a036067ec2311ea1a2aa842f65da557ab0d8fb9d5ce71e0cbc15c733177a26'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-6.json', 'f3f89c6a5f9f70ec97b7613f5874bb3703b53ae7ae77017f49f7e287fd001699'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-7.json', 'd202a84a23baaaf98f81a4e600cbb7880d146b26dc7a234886543115cb33d2fa'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-8.json', '529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-8.json', '529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-9.json', '7af9e680eee683ef89129c227da0a2f0dfd98a5491eabda51601c1ec95f5bb52']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -52,6 +53,11 @@ const globalPackRuleIds = new Set();
 const globalPackLegacyIds = new Set();
 const globalPackSourceIds = new Set();
 const globalPackSourceHashes = new Set();
+
+const rankProfiles = {
+  MO: { legacyRank: 'memorial', canonicalRank: 'obligatory-memorial' },
+  MF: { legacyRank: 'optional-memorial', canonicalRank: 'optional-memorial' }
+};
 
 let candidateCount = 0;
 let promotedPackCount = 0;
@@ -105,6 +111,7 @@ for (const fileName of packFiles) {
   for (const candidate of pack.candidates) {
     candidateCount += 1;
     const source = candidate.source;
+    const rankProfile = rankProfiles[source.sourceRankCode];
     const proposedOccurrenceId = `occurrence:${source.dateISO}:${candidate.person.id}:roman-catholic:pt`;
 
     assert(candidate.person.primaryObservanceId === source.canonicalEventId && candidate.person.category === 'saint', `${candidate.person.id} must remain explicitly bridged to its approved legacy event.`);
@@ -114,12 +121,12 @@ for (const fileName of packFiles) {
     assert(/^https:\/\/www\.vaticannews\.va\/en\/saints\//u.test(candidate.recognition.evidenceUrl), `${candidate.person.id} Recognition lacks Vatican News evidence.`);
     assert(candidate.observanceId === `observance:${candidate.person.id}:roman-catholic`, `${candidate.person.id} Observance identity is invalid.`);
     assert(candidate.sanctoraleRuleId === `sanctorale-rule:${candidate.person.id}:general-roman`, `${candidate.person.id} Sanctorale rule identity is invalid.`);
-    assert(source.legacyRank === 'memorial' && source.sourceRankCode === 'MO' && source.canonicalRank === 'obligatory-memorial', `${candidate.person.id} reviewed rank refinement changed unexpectedly.`);
+    assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${candidate.person.id} reviewed rank refinement changed unexpectedly.`);
     assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${candidate.person.id} lacks an exact 2026 date.`);
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${candidate.person.id} source occurrence is not bound to its exact SNL date.`);
     assert(/^[a-f0-9]{64}$/u.test(source.sourceRecordHash), `${candidate.person.id} source row hash is invalid.`);
     assert(/^https:\/\/(?:www\.)?liturgia\.pt\/liturgiadiaria\/dia\.php\?data=2026-/u.test(source.snlUrl), `${candidate.person.id} lacks Secretariado Nacional de Liturgia evidence.`);
-    assert(source.sourceLabelPt.trim().length >= 5 && source.observedDesignation === `${source.sourceLabelPt} – MO`, `${candidate.person.id} Portugal designation/rank evidence is incomplete.`);
+    assert(source.sourceLabelPt.trim().length >= 5 && source.observedDesignation === `${source.sourceLabelPt} – ${source.sourceRankCode}`, `${candidate.person.id} Portugal designation/rank evidence is incomplete.`);
 
     assert(!seenPersonIds.has(candidate.person.id) && !seenRecognitionIds.has(candidate.recognition.id) && !seenObservanceIds.has(candidate.observanceId) && !seenRuleIds.has(candidate.sanctoraleRuleId), `${candidate.person.id} duplicates an identity inside ${fileName}.`);
     assert(!seenLegacyIds.has(source.canonicalEventId) && !seenSourceIds.has(source.sourceOccurrenceId) && !seenSourceHashes.has(source.sourceRecordHash), `${candidate.person.id} duplicates a legacy/source identity inside ${fileName}.`);
