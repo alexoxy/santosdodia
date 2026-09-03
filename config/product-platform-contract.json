@@ -367,7 +367,7 @@
     "clientJavaScript": "interaction-only",
     "advertisingDoesNotRelaxFirstPartyMediaContract": true
   },
-  "strategicAlignmentDate": "2026-08-30",
+  "strategicAlignmentDate": "2026-09-03",
   "expansionStrategy": {
     "qualityAnchorIsGlobalDefault": false,
     "sequence": [
@@ -392,7 +392,7 @@
     ]
   },
   "executionSnapshot": {
-    "asOf": "2026-08-30",
+    "asOf": "2026-09-03",
     "delivered": [
       "ci-enforced-text-only-first-party-surface",
       "rolling-materialization-y-minus-1-through-y-plus-3",
@@ -402,10 +402,12 @@
       "first-party-editorial-remediation-and-search-quality-gates",
       "twenty-nine-deep-ready-saint-biographies",
       "server-side-reviewed-today-editorial-context",
-      "curated-search-footprint-with-indexed-liturgical-calculator"
+      "curated-search-footprint-with-indexed-liturgical-calculator",
+      "durable-corpus-bootstrap-and-monthly-delta-contract",
+      "honest-public-calendar-readiness-gate"
     ],
     "currentReleaseGate": "complete-portugal-2026-semantic-equivalence-before-read-model-cutover",
-    "nextProductMove": "continue-portugal-sanctorale-equivalence-and-selective-editorial-search-expansion",
+    "nextProductMove": "continue-portugal-sanctorale-equivalence-through-bounded-bootstrap-and-selective-first-party-editorial-expansion",
     "operationalAlertClosure": [
       "read",
       "diagnose",
