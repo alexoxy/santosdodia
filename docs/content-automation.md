@@ -1,6 +1,6 @@
 # Content automation
 
-_Last updated: 2026-08-29_
+_Last updated: 2026-09-03_
 
 `config/automation-registry.json` is the reviewed inventory of SantosDia workflows, schedules, owners, publication modes, archive streams and producer entrypoints. The Quality gate validates it on every pull request.
 
@@ -76,19 +76,26 @@ A public profile should not become indexable merely because a source has enough 
 
 ## Scheduled work
 
+Every recurring root task is limited to one weekly or monthly run. Event-driven stages may continue a successful weekly root cycle, but they do not add independent polling. Pull-request CI remains event-driven and is not an acquisition or D1 schedule.
+
 | Task | UTC schedule | Output |
 |---|---:|---|
-| Production health | hourly at `:17` | read-only probes |
-| Vatican saint metadata | daily 09:11 | immutable Vatican raw/normalized package; successful runs trigger reviewed-binding evidence generation |
-| Observance staging | Monday 04:15 | Dropbox staging package |
-| Ecclesiastical OSINT | Monday 05:17 | Dropbox candidate package |
-| LitCal staging | Tuesday 03:35 | Dropbox staging package |
 | Source freshness | Sunday 08:29 | review-only report |
-| Global source orchestrator | hourly at `:02` | bounded source-policy decisions |
-| Saints autonomous acquisition | Wednesday 02:47 | immutable Wikidata raw package; downstream event workflows continue normalization, language review, D1 staging import, publication classification and corroboration |
+| Global source orchestrator | Monday 00:02 | bounded source-policy decisions |
+| Saints Baseline acquisition | Monday 01:17 | immutable recognition-v1 candidate batch and downstream reviewed D1 staging chain |
+| Saints profile enrichment | Monday 03:07 | bounded exact-QID profile/geography evidence |
+| Saints multilingual labels | Monday 04:13 | bounded multilingual label evidence |
+| Observance staging | Monday 05:15 | Dropbox staging package |
+| Ecclesiastical OSINT | Monday 06:17 | Dropbox candidate package |
+| Saints identity ledger | Monday 07:23 | cross-batch identity evidence |
+| Saints navigation exports | Monday 08:31 | maps, timelines, calendar exports and Portugal review queues |
+| Production health | Monday 09:17 | read-only probes |
+| LitCal staging | Tuesday 03:35 | Dropbox staging package |
+| Saints autonomous acquisition | Wednesday 02:47 | immutable Wikidata raw package; downstream event workflows continue normalization, language review, fail-closed D1 staging, publication classification and corroboration |
+| Vatican saint metadata | Thursday 09:11 | immutable Vatican raw/normalized package; successful runs trigger reviewed-binding evidence generation |
+| Causes of Saints metadata | day 1 monthly, 03:17 | immutable primary-source metadata staging |
 
 The freshness audit checks at most 60 HTTPS URLs per run, with four concurrent requests and a 15-second timeout. Unreachable URLs remain review candidates and never trigger automatic deletion.
-
 ## Publication progression
 
 The safe progression is deliberately staged:
