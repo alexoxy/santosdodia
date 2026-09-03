@@ -651,6 +651,61 @@
         "es": "San Josafat Kuncewicz",
         "it": "San Giosafat Kuncewicz"
       }
+    },
+    {
+      "id": "agatha-sicily",
+      "primaryObservanceId": "rc:StAgatha",
+      "category": "saint",
+      "names": {
+        "en": "Saint Agatha",
+        "pt": "Santa Águeda",
+        "es": "Santa Águeda",
+        "it": "Sant'Agata"
+      }
+    },
+    {
+      "id": "maximilian-kolbe",
+      "primaryObservanceId": "rc:StMaximilianKolbe",
+      "category": "saint",
+      "names": {
+        "en": "Saint Maximilian Maria Kolbe",
+        "pt": "São Maximiliano Maria Kolbe",
+        "es": "San Maximiliano María Kolbe",
+        "it": "San Massimiliano Maria Kolbe"
+      }
+    },
+    {
+      "id": "monica-thagaste",
+      "primaryObservanceId": "rc:StMonica",
+      "category": "saint",
+      "names": {
+        "en": "Saint Monica",
+        "pt": "Santa Mónica",
+        "es": "Santa Mónica",
+        "it": "Santa Monica"
+      }
+    },
+    {
+      "id": "pius-pietrelcina",
+      "primaryObservanceId": "rc:StPioPietrelcina",
+      "category": "saint",
+      "names": {
+        "en": "Saint Pius of Pietrelcina",
+        "pt": "São Pio de Pietrelcina",
+        "es": "San Pío de Pietrelcina",
+        "it": "San Pio da Pietrelcina"
+      }
+    },
+    {
+      "id": "elizabeth-hungary",
+      "primaryObservanceId": "rc:StElizabethHungary",
+      "category": "saint",
+      "names": {
+        "en": "Saint Elizabeth of Hungary",
+        "pt": "Santa Isabel da Hungria",
+        "es": "Santa Isabel de Hungría",
+        "it": "Santa Elisabetta d'Ungheria"
+      }
     }
   ]
 }

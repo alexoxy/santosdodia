@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-8.json",
+  "reviewDigestSha256": "529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "agatha-sicily",
+    "maximilian-kolbe",
+    "monica-thagaste",
+    "pius-pietrelcina",
+    "elizabeth-hungary"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 121,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 268
+  },
+  "fixedSanctoraleMappingDigestSha256": "314a725e54c4ce18a406500aab40acd9c3cd0efa961ac6d7fd9e72a57ab73d38",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-03"
+}

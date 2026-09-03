@@ -201,7 +201,7 @@ Those eleven rules are also exercised as 55 calculation vectors across the opera
 
 Every fixed Sanctorale anchor is now also bound to the exact approved `build.json` row through `sourceOccurrenceId` and `sourceRecordHash` in the read-only fixed Sanctorale shadow. The ledger rejects missing mappings, artifact drift, date/rank disagreement, duplicate source identities and unreviewed memorial refinements. This closes the provenance gap between official annual evidence, canonical Occurrence, perennial rule and the immutable source artifact.
 
-The current reconciliation therefore contains 52 `temporale` rows, 11 `movable-or-transfer` rows and 24 exact fixed Sanctorale rows: 87 source-bound days and 278 explicit unresolved days. Canonical migration coverage is likewise 87/389, leaving 302 legacy occurrences outside the canonical shadow. The 19 suppressed weekday candidates and the three replacement rows at transfer origins are evidence, not additional coverage. `publicationAllowed` and migration promotion both remain `false`; neither the public read path nor D1 production changes before complete semantic equivalence.
+The current reconciliation therefore contains 52 `temporale` rows, 11 `movable-or-transfer` rows and 58 exact fixed Sanctorale rows: 121 source-bound days and 244 explicit unresolved days. Canonical migration coverage is likewise 121/389, leaving 268 legacy occurrences outside the canonical shadow. The 19 suppressed weekday candidates and the three replacement rows at transfer origins are evidence, not additional coverage. `publicationAllowed` and migration promotion both remain `false`; neither the public read path nor D1 production changes before complete semantic equivalence.
 
 ## Seasons
 

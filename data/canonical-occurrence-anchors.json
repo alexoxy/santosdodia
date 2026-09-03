@@ -1276,6 +1276,126 @@
         }
       ],
       "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-02-05:agatha-sicily:roman-catholic:pt",
+      "observanceId": "observance:agatha-sicily:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-02-05",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-5",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Águeda, virgem e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-08-14:maximilian-kolbe:roman-catholic:pt",
+      "observanceId": "observance:maximilian-kolbe:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-14",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-14",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Maximiliano Maria Kolbe, presbítero e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-08-27:monica-thagaste:roman-catholic:pt",
+      "observanceId": "observance:monica-thagaste:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-27",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-27",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Mónica – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-09-23:pius-pietrelcina:roman-catholic:pt",
+      "observanceId": "observance:pius-pietrelcina:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-23",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-23",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pio de Pietrelcina, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-11-17:elizabeth-hungary:roman-catholic:pt",
+      "observanceId": "observance:elizabeth-hungary:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-17",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-17",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Isabel da Hungria, religiosa – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }
