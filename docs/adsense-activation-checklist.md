@@ -47,6 +47,14 @@ Do not request another AdSense review merely because technical checks are green.
 9. Validate that the public site still works if external sources disappear temporarily; runtime scraping/proxying is prohibited.
 10. Only after representative homepage, saint profile, day/date, guide and calendar surfaces are content-rich should a new AdSense review be requested.
 
+## 2A. Honest product-readiness gate
+
+1. Public claims must match verified functionality. A planned Church/tradition may be visible as “in preparation”, but it must not be presented as a ready-made calendar subscription.
+2. Before exposing a context-specific subscribe/API call to action, verify competent-source coverage, native-calendar semantics, jurisdiction rules, localization quality and HTML/API/ICS parity.
+3. Portugal Roman Catholic is the current public reference subscription. Other traditions remain reviewed previews or planned contexts until their independent acceptance vectors pass.
+4. Do not use mass translation, source dumps or large page counts as a substitute for first-party value.
+5. Re-review requires inspection of representative production entry pages after deployment and recrawl, not only repository tests.
+
 ## 3. Advertising after approval
 
 1. Do not enter this section until AdSense explicitly approves the site.
