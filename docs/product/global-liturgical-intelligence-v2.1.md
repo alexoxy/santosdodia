@@ -2,7 +2,7 @@
 
 Status: normative product direction
 Effective: 2026-08-22
-Last strategic alignment: 2026-08-23
+Last strategic alignment: 2026-09-03
 Supersedes the execution priority order in `christian-daily-platform-v2.md` while preserving its authority, language, evidence, hygiene, Cloudflare Free and AdSense constraints.
 
 ## Normative continuity
@@ -284,6 +284,28 @@ Sources have explicit roles:
 - third-party calculators: regression/oracle comparison, never silent authority.
 
 Source monitoring detects normative change. Normal annual generation does not need source re-fetching to function.
+
+## Strategic clarification — 2026-09-03: durable corpus, honest readiness and AdSense recovery
+
+The current phase is a **bootstrap/backfill phase**, not a permanent synchronization race. SantosDia should capture the maximum useful authoritative evidence permitted by source rights in bounded, resumable releases; archive raw evidence or metadata/reference/hash substitutes in Dropbox; normalize and reconcile it into SantosDia canonical knowledge; and generate durable first-party calendar, biography and contextual products from that owned data plane. Public requests never fetch ecclesial sources.
+
+After a source/context reaches a completeness receipt, recurring full sweeps stop. Normal maintenance becomes source-delta work **once per month, distributed across separate weeks/days**, with only two lightweight weekly exceptions: production health and source freshness/verified Live. A specific official normative change may trigger one bounded event-driven review. Source failure preserves last-known-good.
+
+The public product must distinguish three states:
+
+- **ready** — a context has verified authority coverage, calendar semantics, locale quality and HTML/API/ICS parity;
+- **reviewed preview** — useful evidence-backed records can be explored, but a complete calendar subscription is not promised;
+- **planned** — the Church, jurisdiction or locale is in the architecture but not yet public.
+
+Portugal Roman Catholic is the current ready reference context. Other Christian traditions must not be advertised as ready-made subscriptions until their own authority-isolated kernel and acceptance vectors pass. Coptic Orthodox is an explicit planned kernel alongside OCA, GOARCH and Church of England; Armenian, Ethiopian and Syriac contexts remain valid future families, never Roman adaptations.
+
+Calendar computation preserves three separate coordinates: the source Church's native ecclesial calendar, SantosDia's versioned canonical rule representation, and the explicit civil-date projection used by devices and ICS. Gregorian display must never silently overwrite Julian, Revised Julian, Alexandrian/Coptic or other native semantics.
+
+“Maximum languages” is a data-model and pipeline goal, not permission to publish thin machine-translated pages. Each locale and each Church/jurisdiction/calendar context passes an independent readiness gate. Deterministic bots perform acquisition, normalization, identity, computus, precedence, transfer, export and drift detection; original interpretive or biographical prose remains reviewed first-party SantosDia work.
+
+The market gap is not another generic list of saints or a proxy for existing calendar providers. SantosDia's defensible product is authority-isolated cross-tradition interoperability: one provenance-aware canonical graph, transparent calendar calculations, local jurisdiction overlays, original contextual pages, verified Live, and semantically identical human, API, JSON-LD and ICS outputs.
+
+AdSense recovery is therefore a product-quality gate. A new review is blocked until representative production entry pages demonstrate substantial first-party value, navigation and method/source transparency; public capability claims are honest; placeholders, false-empty states and thin mass-indexed pages are absent; production has been reverified and recrawled; and a human explicitly decides to resubmit. Internal CI or record count alone is insufficient.
 
 ## Execution snapshot — 2026-08-23
 
