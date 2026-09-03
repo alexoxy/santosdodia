@@ -118,7 +118,12 @@ const expected = new Map([
   ['observance:maximilian-kolbe:roman-catholic', ['2026-08-14', 'obligatory-memorial', 'MO', 'rc:StMaximilianKolbe']],
   ['observance:monica-thagaste:roman-catholic', ['2026-08-27', 'obligatory-memorial', 'MO', 'rc:StMonica']],
   ['observance:pius-pietrelcina:roman-catholic', ['2026-09-23', 'obligatory-memorial', 'MO', 'rc:StPioPietrelcina']],
-  ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 'MO', 'rc:StElizabethHungary']]
+  ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 'MO', 'rc:StElizabethHungary']],
+  ['observance:hilary-poitiers:roman-catholic', ['2026-01-13', 'optional-memorial', 'MF', 'rc:StHilaryPoitiers']],
+  ['observance:anselm-canterbury:roman-catholic', ['2026-04-21', 'optional-memorial', 'MF', 'rc:StAnselm']],
+  ['observance:ephrem-syrian:roman-catholic', ['2026-06-09', 'optional-memorial', 'MF', 'rc:StEphrem']],
+  ['observance:peter-chrysologus:roman-catholic', ['2026-07-30', 'optional-memorial', 'MF', 'rc:StPeterChrysologus']],
+  ['observance:john-damascene:roman-catholic', ['2026-12-04', 'optional-memorial', 'MF', 'rc:StJohnDamascene']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
 
