@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {
   discoverAutomationInventory,
+  isAtMostMonthlyCron,
   isAtMostWeeklyCron,
   validateAutomationRegistry
 } from './audit-automation-registry.mjs';
@@ -15,6 +16,10 @@ assert.equal(isAtMostWeeklyCron('17 3 1 * *'), true);
 assert.equal(isAtMostWeeklyCron('2 * * * *'), false);
 assert.equal(isAtMostWeeklyCron('13,28,43,58 * * * *'), false);
 assert.equal(isAtMostWeeklyCron('11 9 * * *'), false);
+assert.equal(isAtMostMonthlyCron('17 3 1 * *'), true);
+assert.equal(isAtMostMonthlyCron('17 5 * * 1'), false);
+assert.equal(isAtMostMonthlyCron('17 3 1 * 1'), false);
+assert.equal(isAtMostMonthlyCron('17 3 * * *'), false);
 
 const withUnregisteredSchedule = structuredClone(inventory);
 withUnregisteredSchedule.workflows.set('.github/workflows/unregistered.yml', { crons: ['7 7 * * *'] });
@@ -30,6 +35,17 @@ const frequentTask = tooFrequent.tasks.find((task) => task.id === 'observance-re
 frequentTask.crons = ['0 * * * *'];
 tooFrequentInventory.workflows.set(frequentTask.workflow, { crons: ['0 * * * *'] });
 assert.match(validateAutomationRegistry(tooFrequent, tooFrequentInventory).errors.join('\n'), /exceeds the at-most-weekly cadence/);
+
+const monthlyExceeded = structuredClone(registry);
+const monthlyExceededInventory = structuredClone(inventory);
+const monthlyTask = monthlyExceeded.tasks.find((task) => task.id === 'observance-refresh');
+monthlyTask.crons = ['15 5 * * 1'];
+monthlyExceededInventory.workflows.set(monthlyTask.workflow, { crons: ['15 5 * * 1'] });
+assert.match(validateAutomationRegistry(monthlyExceeded, monthlyExceededInventory).errors.join('\n'), /exceeds the monthly static-acquisition cadence/);
+
+const rogueWeeklyException = structuredClone(registry);
+rogueWeeklyException.policy.weeklyExceptionTaskIds.push('observance-refresh');
+assert.match(validateAutomationRegistry(rogueWeeklyException, inventory).errors.join('\n'), /Unapproved weekly cadence exception/);
 
 const cadencePolicyDisabled = structuredClone(registry);
 cadencePolicyDisabled.policy.scheduledTasksAtMostWeekly = false;
