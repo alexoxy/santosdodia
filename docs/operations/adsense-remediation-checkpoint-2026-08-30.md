@@ -1,6 +1,6 @@
 # SantosDia — AdSense remediation checkpoint
 
-Updated: 2026-08-30
+Updated: 2026-09-03
 Status: **REMEDIATION_REQUIRED**
 Finding: **low-value content**
 
@@ -144,6 +144,12 @@ Do not re-submit merely because internal checks are green. Before a new AdSense 
 5. review real production navigation and page-value density, especially entry pages reachable from organic search;
 6. rerun the complete technical, editorial, privacy and monetisation readiness audits;
 7. make an explicit re-review decision only when the production site, not merely the repository, demonstrates the intended publication quality.
+
+## 2026-09-03 readiness correction
+
+The public calendar surface must not imply that every modeled tradition already has a complete, authority-verified subscription. The only ready reference subscription is Roman Catholic Portugal. Other modeled traditions remain reviewed previews/in preparation until their own competent-source corpus, native-calendar kernel, jurisdiction semantics, locale review and HTML/API/ICS parity pass.
+
+This correction improves trust and product accuracy; it does not remove the global architecture. It also prevents raw source volume, machine translation or endpoint existence from being mistaken for the substantive first-party value required before AdSense re-review.
 
 ## Next product work
 
