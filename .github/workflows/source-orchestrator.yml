@@ -9,7 +9,7 @@ on:
       - 'scripts/dropbox/**'
       - '.github/workflows/source-orchestrator.yml'
   schedule:
-    - cron: '2 0 * * 1'
+    - cron: '2 0 2 * *'
   workflow_dispatch:
     inputs:
       force_policy_window:
