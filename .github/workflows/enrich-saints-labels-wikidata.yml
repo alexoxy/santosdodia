@@ -2,7 +2,7 @@ name: Enrich Saints multilingual labels from Wikidata
 
 on:
   schedule:
-    - cron: '13 4 * * 1'
+    - cron: '13 4 8 * *'
   workflow_dispatch:
   push:
     branches:
