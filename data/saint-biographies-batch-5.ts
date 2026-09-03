@@ -9,6 +9,10 @@ const VATICAN_CATHERINE_SIENA = 'https://www.vaticannews.va/en/saints/04/29/st--
 const HOLY_SEE_CATHERINE_SIENA = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html';
 const VATICAN_ELIZABETH_PORTUGAL = 'https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html';
 const LISBON_ELIZABETH_PORTUGAL = 'https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860';
+const VATICAN_GREGORY = 'https://www.vaticannews.va/en/saints/09/03/st--gregory-the-great--pope-and-doctor-of-the-church.html';
+const VATICAN_GREGORY_PT = 'https://www.vaticannews.va/pt/santo-do-dia/09/03/s--gregorio-magno--papa-e-doutor-da-igreja.html';
+const HOLY_SEE_GREGORY = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2008/documents/hf_ben-xvi_aud_20080528.html';
+const HOLY_SEE_GREGORY_TEACHING = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2008/documents/hf_ben-xvi_aud_20080604.html';
 
 const matthew: SaintBiography = {
   id: 'matthew-apostle',
@@ -255,4 +259,67 @@ const elizabethPortugal: SaintBiography = {
   verifiedAt: '2026-08-22',
 };
 
-export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas, catherineSiena, elizabethPortugal];
+const gregoryGreat: SaintBiography = {
+  id: 'gregory-great',
+  title: {
+    en: 'Saint Gregory the Great, Pope and Doctor of the Church',
+    pt: 'S. Gregório Magno, papa e doutor da Igreja',
+    es: 'San Gregorio Magno, papa y doctor de la Iglesia',
+    it: 'San Gregorio Magno, papa e dottore della Chiesa',
+  },
+  summary: {
+    en: 'Gregory the Great moved from the highest civil office in Rome to monastic life and then to the papacy. His care for people facing plague, hunger and war joined practical government, missionary vision and a lasting theology of pastoral service.',
+    pt: 'Gregório Magno passou do mais alto cargo civil de Roma para a vida monástica e, depois, para o papado. O cuidado das pessoas atingidas pela peste, fome e guerra uniu governo concreto, visão missionária e uma duradoura teologia do serviço pastoral.',
+    es: 'Gregorio Magno pasó del cargo civil más alto de Roma a la vida monástica y después al papado. Su atención a las personas afectadas por la peste, el hambre y la guerra unió gobierno práctico, visión misionera y una duradera teología del servicio pastoral.',
+    it: 'Gregorio Magno passò dalla più alta carica civile di Roma alla vita monastica e poi al papato. La cura delle persone colpite da peste, fame e guerra unì governo concreto, visione missionaria e una duratura teologia del servizio pastorale.',
+  },
+  paragraphs: {
+    en: [
+      'Gregory was born in Rome around 540 into a Christian patrician family and received the education needed for public administration. He became prefect of Rome while the city was living through political instability, invasions and recurring disease. He later left civil office, gave substantial resources to the poor and transformed his family home on the Caelian Hill into a monastery dedicated to Saint Andrew. This passage from government to monastic life did not erase his administrative experience; it reshaped it around prayer, Scripture and service.',
+      'After serving as a deacon and papal representative in Constantinople, Gregory returned to Rome. He was elected Bishop of Rome in 590 after the death of Pelagius II during a plague. His pontificate faced famine, displaced populations and Lombard pressure. Gregory reorganised the administration of Church property, insisted that its revenues serve people in need, supported prisoners and refugees and negotiated for peace. He also sent Augustine and a group of monks to evangelise the Anglo-Saxons, linking Roman pastoral responsibility with a missionary horizon.',
+      'Gregory joined action to sustained teaching. The Pastoral Rule described episcopal ministry as demanding self-knowledge, discernment and humble care for different people; his Moralia on Job, homilies, letters and Dialogues shaped medieval Christian spirituality. He used the title “servant of the servants of God”, expressing authority as service. The liturgical tradition later associated with his name should not be reduced to the claim that he personally composed the entire Gregorian chant repertory. Gregory died in 604; the Roman Catholic Church celebrates his memorial on 3 September, the date of his episcopal consecration.',
+    ],
+    pt: [
+      'Gregório nasceu em Roma por volta de 540, numa família patrícia cristã, e recebeu a formação necessária à administração pública. Tornou-se prefeito de Roma quando a cidade atravessava instabilidade política, invasões e doenças recorrentes. Mais tarde deixou o cargo civil, destinou parte substancial dos seus bens aos pobres e transformou a casa familiar no monte Célio num mosteiro dedicado a Santo André. A passagem do governo para a vida monástica não apagou a experiência administrativa; reorganizou-a em torno da oração, da Escritura e do serviço.',
+      'Depois de servir como diácono e representante pontifício em Constantinopla, Gregório regressou a Roma. Foi eleito bispo de Roma em 590, após a morte de Pelágio II durante uma epidemia de peste. O seu pontificado enfrentou fome, populações deslocadas e a pressão dos Lombardos. Gregório reorganizou a administração dos bens da Igreja, insistiu que os seus rendimentos servissem as pessoas necessitadas, apoiou prisioneiros e refugiados e negociou a paz. Enviou também Agostinho e um grupo de monges para evangelizar os anglo-saxões, ligando a responsabilidade pastoral de Roma a um horizonte missionário.',
+      'Gregório uniu a ação a um ensino continuado. A Regra Pastoral apresentou o ministério episcopal como exigência de autoconhecimento, discernimento e cuidado humilde de pessoas diferentes; os Moralia sobre Job, as homilias, cartas e Diálogos marcaram a espiritualidade cristã medieval. Usou o título “servo dos servos de Deus”, exprimindo a autoridade como serviço. A tradição litúrgica posteriormente associada ao seu nome não deve ser reduzida à ideia de que compôs pessoalmente todo o repertório gregoriano. Gregório morreu em 604; a Igreja Católica Romana celebra a sua memória a 3 de setembro, data da sua consagração episcopal.',
+    ],
+    es: [
+      'Gregorio nació en Roma hacia el año 540, en una familia patricia cristiana, y recibió la formación necesaria para la administración pública. Llegó a ser prefecto de Roma cuando la ciudad sufría inestabilidad política, invasiones y enfermedades recurrentes. Más tarde dejó el cargo civil, destinó una parte considerable de sus bienes a los pobres y convirtió la casa familiar del monte Celio en un monasterio dedicado a san Andrés. El paso del gobierno a la vida monástica no borró su experiencia administrativa; la reorganizó en torno a la oración, la Escritura y el servicio.',
+      'Después de servir como diácono y representante pontificio en Constantinopla, Gregorio regresó a Roma. Fue elegido obispo de Roma en 590, tras la muerte de Pelagio II durante una epidemia de peste. Su pontificado afrontó hambre, poblaciones desplazadas y la presión de los lombardos. Gregorio reorganizó la administración de los bienes de la Iglesia, insistió en que sus ingresos sirvieran a las personas necesitadas, ayudó a prisioneros y refugiados y negoció la paz. También envió a Agustín y a un grupo de monjes para evangelizar a los anglosajones, uniendo la responsabilidad pastoral romana con un horizonte misionero.',
+      'Gregorio unió la acción a una enseñanza constante. La Regla pastoral presentó el ministerio episcopal como una exigencia de autoconocimiento, discernimiento y cuidado humilde de personas diferentes; los Moralia sobre Job, las homilías, cartas y Diálogos marcaron la espiritualidad cristiana medieval. Utilizó el título “siervo de los siervos de Dios”, expresando la autoridad como servicio. La tradición litúrgica asociada posteriormente a su nombre no debe reducirse a afirmar que compuso personalmente todo el repertorio gregoriano. Gregorio murió en 604; la Iglesia católica romana celebra su memoria el 3 de septiembre, fecha de su consagración episcopal.',
+    ],
+    it: [
+      'Gregorio nacque a Roma intorno al 540, in una famiglia patrizia cristiana, e ricevette la formazione necessaria per l’amministrazione pubblica. Divenne prefetto di Roma mentre la città attraversava instabilità politica, invasioni e malattie ricorrenti. In seguito lasciò l’incarico civile, destinò una parte sostanziale dei suoi beni ai poveri e trasformò la casa di famiglia sul Celio in un monastero dedicato a sant’Andrea. Il passaggio dal governo alla vita monastica non cancellò la sua esperienza amministrativa; la riorientò intorno alla preghiera, alla Scrittura e al servizio.',
+      'Dopo aver servito come diacono e rappresentante pontificio a Costantinopoli, Gregorio tornò a Roma. Fu eletto vescovo di Roma nel 590, dopo la morte di Pelagio II durante un’epidemia di peste. Il suo pontificato affrontò fame, popolazioni sfollate e la pressione dei Longobardi. Gregorio riorganizzò l’amministrazione dei beni della Chiesa, insistette perché le entrate servissero le persone bisognose, sostenne prigionieri e rifugiati e negoziò la pace. Inviò inoltre Agostino e un gruppo di monaci a evangelizzare gli anglosassoni, collegando la responsabilità pastorale romana a un orizzonte missionario.',
+      'Gregorio unì l’azione a un insegnamento costante. La Regola pastorale descrisse il ministero episcopale come esigenza di conoscenza di sé, discernimento e cura umile di persone diverse; i Moralia in Iob, le omelie, le lettere e i Dialoghi segnarono la spiritualità cristiana medievale. Usò il titolo “servo dei servi di Dio”, esprimendo l’autorità come servizio. La tradizione liturgica poi associata al suo nome non va ridotta all’affermazione che abbia composto personalmente l’intero repertorio gregoriano. Gregorio morì nel 604; la Chiesa cattolica romana ne celebra la memoria il 3 settembre, data della sua consacrazione episcopale.',
+    ],
+  },
+  facts: [
+    {
+      label: { en: 'Life', pt: 'Vida', es: 'Vida', it: 'Vita' },
+      value: { en: 'c. 540 — 12 March 604', pt: 'c. 540 — 12 de março de 604', es: 'c. 540 — 12 de marzo de 604', it: 'c. 540 — 12 marzo 604' },
+    },
+    {
+      label: { en: 'Public and ecclesial service', pt: 'Serviço civil e eclesial', es: 'Servicio civil y eclesial', it: 'Servizio civile ed ecclesiale' },
+      value: { en: 'Prefect of Rome, monk, deacon and pope', pt: 'Prefeito de Roma, monge, diácono e papa', es: 'Prefecto de Roma, monje, diácono y papa', it: 'Prefetto di Roma, monaco, diacono e papa' },
+    },
+    {
+      label: { en: 'Pontificate', pt: 'Pontificado', es: 'Pontificado', it: 'Pontificato' },
+      value: { en: '590–604', pt: '590–604', es: '590–604', it: '590–604' },
+    },
+    {
+      label: { en: 'Roman Catholic memorial', pt: 'Memória católica romana', es: 'Memoria católica romana', it: 'Memoria cattolica romana' },
+      value: { en: '3 September', pt: '3 de setembro', es: '3 de septiembre', it: '3 settembre' },
+    },
+  ],
+  sources: [
+    { name: 'St. Gregory the Great, pope and Doctor of the Church', url: VATICAN_GREGORY, language: 'en', publisher: 'Vatican News' },
+    { name: 'S. Gregório Magno, papa e doutor da Igreja', url: VATICAN_GREGORY_PT, language: 'pt', publisher: 'Vatican News' },
+    { name: 'Saint Gregory the Great', url: HOLY_SEE_GREGORY, language: 'en', publisher: 'Holy See' },
+    { name: 'Saint Gregory the Great — teaching and legacy', url: HOLY_SEE_GREGORY_TEACHING, language: 'en', publisher: 'Holy See' },
+  ],
+  verifiedAt: '2026-09-03',
+};
+
+export const EDITORIAL_SCALE_BATCH_5: SaintBiography[] = [matthew, thomasAquinas, catherineSiena, elizabethPortugal, gregoryGreat];
