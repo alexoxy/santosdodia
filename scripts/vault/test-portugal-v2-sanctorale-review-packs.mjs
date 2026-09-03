@@ -119,7 +119,7 @@ for (const fileName of packFiles) {
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${candidate.person.id} source occurrence is not bound to its exact SNL date.`);
     assert(/^[a-f0-9]{64}$/u.test(source.sourceRecordHash), `${candidate.person.id} source row hash is invalid.`);
     assert(/^https:\/\/(?:www\.)?liturgia\.pt\/liturgiadiaria\/dia\.php\?data=2026-/u.test(source.snlUrl), `${candidate.person.id} lacks Secretariado Nacional de Liturgia evidence.`);
-    assert(source.sourceLabelPt.length > 10 && source.observedDesignation.endsWith(' – MO'), `${candidate.person.id} Portugal designation/rank evidence is incomplete.`);
+    assert(source.sourceLabelPt.trim().length >= 5 && source.observedDesignation === `${source.sourceLabelPt} – MO`, `${candidate.person.id} Portugal designation/rank evidence is incomplete.`);
 
     assert(!seenPersonIds.has(candidate.person.id) && !seenRecognitionIds.has(candidate.recognition.id) && !seenObservanceIds.has(candidate.observanceId) && !seenRuleIds.has(candidate.sanctoraleRuleId), `${candidate.person.id} duplicates an identity inside ${fileName}.`);
     assert(!seenLegacyIds.has(source.canonicalEventId) && !seenSourceIds.has(source.sourceOccurrenceId) && !seenSourceHashes.has(source.sourceRecordHash), `${candidate.person.id} duplicates a legacy/source identity inside ${fileName}.`);
