@@ -13,7 +13,18 @@
       "dateISO": "2026-01-01",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-1","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"SANTA MARIA, MÃE DE DEUS – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-1",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "SANTA MARIA, MÃE DE DEUS – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -26,7 +37,18 @@
       "dateISO": "2026-01-28",
       "rank": "obligatory-memorial",
       "sourceRankCode": "MO",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-1-28","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Tomás de Aquino, presbítero e doutor da Igreja – MO"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-1-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Tomás de Aquino, presbítero e doutor da Igreja – MO"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -39,7 +61,18 @@
       "dateISO": "2026-03-19",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-3-19","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"São JOSÉ, ESPOSO DA VIRGEM SANTA MARIA – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-3-19",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "São JOSÉ, ESPOSO DA VIRGEM SANTA MARIA – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -52,7 +85,18 @@
       "dateISO": "2026-04-25",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-4-25","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"São Marcos, evangelista – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-4-25",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "São Marcos, evangelista – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -65,7 +109,18 @@
       "dateISO": "2026-04-29",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-29","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-29",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Catarina de Sena, virgem e doutora da Igreja, Padroeira da Europa – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -78,7 +133,18 @@
       "dateISO": "2026-06-24",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-24","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"NASCIMENTO DE SÃO JOÃO BatiSTA – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-24",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "NASCIMENTO DE SÃO JOÃO BatiSTA – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -91,7 +157,18 @@
       "dateISO": "2026-06-29",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-29","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"SANTOS PEDRO E PAULO, apóstolos – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-29",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "SANTOS PEDRO E PAULO, apóstolos – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -104,7 +181,18 @@
       "dateISO": "2026-07-03",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-3","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Tomé, apóstolo – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Tomé, apóstolo – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -117,7 +205,18 @@
       "dateISO": "2026-07-04",
       "rank": "obligatory-memorial",
       "sourceRankCode": "MO",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-07-04","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Isabel de Portugal – MO"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-07-04",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Isabel de Portugal – MO"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -130,7 +229,18 @@
       "dateISO": "2026-07-11",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-11","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Bento, Abade, Padroeiro da Europa – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-11",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bento, Abade, Padroeiro da Europa – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -143,7 +253,18 @@
       "dateISO": "2026-07-22",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-22","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Maria Madalena – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-22",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Maria Madalena – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -156,7 +277,18 @@
       "dateISO": "2026-07-23",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-23","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Brígida, religiosa, Padroeira da Europa – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-23",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Brígida, religiosa, Padroeira da Europa – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -169,7 +301,18 @@
       "dateISO": "2026-07-25",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-25","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Tiago, apóstolo – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-25",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Tiago, apóstolo – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-28"
     },
     {
@@ -182,7 +325,18 @@
       "dateISO": "2026-08-15",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-15","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"ASSUNÇÃO DA VIRGEM SANTA MARIA – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-15",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "ASSUNÇÃO DA VIRGEM SANTA MARIA – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -195,7 +349,18 @@
       "dateISO": "2026-09-21",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://liturgia.pt/liturgiadiaria/dia.php?data=2026-9-21","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Mateus, apóstolo e evangelista – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-9-21",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Mateus, apóstolo e evangelista – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -208,7 +373,18 @@
       "dateISO": "2026-12-08",
       "rank": "solemnity",
       "sourceRankCode": "SOLENIDADE",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-8","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"IMACULADA CONCEIÇÃO DA VIRGEM SANTA MARIA, Padroeira principal de Portugal e das Dioceses de Évora, Santarém, Setúbal e Vila Real – SOLENIDADE"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-8",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "IMACULADA CONCEIÇÃO DA VIRGEM SANTA MARIA, Padroeira principal de Portugal e das Dioceses de Évora, Santarém, Setúbal e Vila Real – SOLENIDADE"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -221,7 +397,18 @@
       "dateISO": "2026-05-14",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-14","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Matias, apóstolo"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-14",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Matias, apóstolo"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -234,7 +421,18 @@
       "dateISO": "2026-08-24",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-24","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Bartolomeu, apóstolo"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-24",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bartolomeu, apóstolo"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -247,7 +445,18 @@
       "dateISO": "2026-10-28",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-28","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"Santos Simão e Judas, apóstolos"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Simão e Judas, apóstolos"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -260,7 +469,18 @@
       "dateISO": "2026-11-30",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-30","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. André, apóstolo"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-30",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. André, apóstolo"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -273,7 +493,18 @@
       "dateISO": "2026-08-10",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-10","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Lourenço, diácono e mártir – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-10",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Lourenço, diácono e mártir – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -286,7 +517,18 @@
       "dateISO": "2026-12-26",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-26","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank"],"observedDesignation":"S. Estêvão, Primeiro Mártir – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-26",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Estêvão, Primeiro Mártir – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -299,7 +541,19 @@
       "dateISO": "2026-02-14",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-14","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank","patrons-of-europe"],"observedDesignation":"Santos Cirilo, monge, e Metódio, bispo, Padroeiros da Europa – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-14",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "patrons-of-europe"
+          ],
+          "observedDesignation": "Santos Cirilo, monge, e Metódio, bispo, Padroeiros da Europa – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-31"
     },
     {
@@ -312,10 +566,21 @@
       "dateISO": "2026-06-13",
       "rank": "feast",
       "sourceRankCode": "FESTA",
-      "evidence": [{"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-13","claimTypes":["annual-date","jurisdictional-observance","liturgical-rank","patron-of-portugal"],"observedDesignation":"S. António de Lisboa, presbítero e doutor da Igreja, Padroeiro de Portugal – FESTA"}],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-13",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "patron-of-portugal"
+          ],
+          "observedDesignation": "S. António de Lisboa, presbítero e doutor da Igreja, Padroeiro de Portugal – FESTA"
+        }
+      ],
       "verifiedAt": "2026-08-31"
-    }
-  ,
+    },
     {
       "id": "occurrence:2026-01-17:anthony-great:roman-catholic:pt",
       "observanceId": "observance:anthony-great:roman-catholic",
@@ -891,6 +1156,126 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "occurrence:2026-06-01:justin-martyr:roman-catholic:pt",
+      "observanceId": "observance:justin-martyr:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-01",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-1",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Justino, mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-06-05:boniface-mainz:roman-catholic:pt",
+      "observanceId": "observance:boniface-mainz:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-05",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-5",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bonifácio, bispo e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-05-26:philip-neri:roman-catholic:pt",
+      "observanceId": "observance:philip-neri:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-26",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-26",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Filipe Néri, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-08-04:john-mary-vianney:roman-catholic:pt",
+      "observanceId": "observance:john-mary-vianney:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-04",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-4",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. João Maria Vianney, presbítero – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-11-12:josaphat-kuntsevych:roman-catholic:pt",
+      "observanceId": "observance:josaphat-kuntsevych:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-12",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-12",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Josafat, bispo e mártir – MO"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }

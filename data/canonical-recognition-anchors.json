@@ -10,7 +10,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle", "evangelist"],
+      "ecclesialTitles": [
+        "apostle",
+        "evangelist"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -18,12 +21,20 @@
         {
           "publisher": "Holy See",
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html",
-          "claimTypes": ["identity", "apostle", "evangelist"]
+          "claimTypes": [
+            "identity",
+            "apostle",
+            "evangelist"
+          ]
         },
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/09/21/st---mattew--apostle-and-evangelist.html",
-          "claimTypes": ["saint-designation", "apostle", "evangelist"]
+          "claimTypes": [
+            "saint-designation",
+            "apostle",
+            "evangelist"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -35,7 +46,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle", "evangelist"],
+      "ecclesialTitles": [
+        "apostle",
+        "evangelist"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -43,7 +57,11 @@
         {
           "publisher": "Orthodox Church in America",
           "url": "https://www.oca.org/saints/lives/2007/11/16/103313-apostle-and-evangelist-matthew",
-          "claimTypes": ["saint-designation", "apostle", "evangelist"]
+          "claimTypes": [
+            "saint-designation",
+            "apostle",
+            "evangelist"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -55,7 +73,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["priest", "doctor-of-the-church"],
+      "ecclesialTitles": [
+        "priest",
+        "doctor-of-the-church"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -63,12 +84,20 @@
         {
           "publisher": "Holy See",
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20100602.html",
-          "claimTypes": ["saint-designation", "priest", "doctor-of-the-church"]
+          "claimTypes": [
+            "saint-designation",
+            "priest",
+            "doctor-of-the-church"
+          ]
         },
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/01/28/st--thomas-aquinas.html",
-          "claimTypes": ["saint-designation", "priest", "doctor-of-the-church"]
+          "claimTypes": [
+            "saint-designation",
+            "priest",
+            "doctor-of-the-church"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -80,7 +109,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["virgin", "doctor-of-the-church"],
+      "ecclesialTitles": [
+        "virgin",
+        "doctor-of-the-church"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -88,12 +120,19 @@
         {
           "publisher": "Holy See",
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2010/documents/hf_ben-xvi_aud_20101124.html",
-          "claimTypes": ["saint-designation", "doctor-of-the-church"]
+          "claimTypes": [
+            "saint-designation",
+            "doctor-of-the-church"
+          ]
         },
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/04/29/st--cahterine-of-siena--virgin--doctor-of-the-church--patron-of-.html",
-          "claimTypes": ["saint-designation", "virgin", "doctor-of-the-church"]
+          "claimTypes": [
+            "saint-designation",
+            "virgin",
+            "doctor-of-the-church"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -113,12 +152,18 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/04/st--elisabeth--isabel--of-portugal.html",
-          "claimTypes": ["saint-designation", "identity"]
+          "claimTypes": [
+            "saint-designation",
+            "identity"
+          ]
         },
         {
           "publisher": "Patriarchate of Lisbon",
           "url": "https://www.patriarcado-lisboa.pt/site/index.php?cont_=40&id=13273&tem=860",
-          "claimTypes": ["saint-designation", "portuguese-ecclesial-attestation"]
+          "claimTypes": [
+            "saint-designation",
+            "portuguese-ecclesial-attestation"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -130,7 +175,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["precursor", "prophet"],
+      "ecclesialTitles": [
+        "precursor",
+        "prophet"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -138,7 +186,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/06/24/birth-of-st--john-the--baptist.html",
-          "claimTypes": ["saint-designation", "identity", "precursor"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "precursor"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -150,7 +202,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["spouse-of-blessed-virgin-mary", "patron-of-universal-church"],
+      "ecclesialTitles": [
+        "spouse-of-blessed-virgin-mary",
+        "patron-of-universal-church"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -158,7 +213,12 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/03/19/st--joseph--groom-of-b--mary--patron-of-the-univeral-church.html",
-          "claimTypes": ["saint-designation", "identity", "spouse-of-blessed-virgin-mary", "patron-of-universal-church"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "spouse-of-blessed-virgin-mary",
+            "patron-of-universal-church"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -170,7 +230,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["abbot", "patron-of-europe"],
+      "ecclesialTitles": [
+        "abbot",
+        "patron-of-europe"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -178,7 +241,12 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/11/st--benedict--abbot--patron-of-europe.html",
-          "claimTypes": ["saint-designation", "identity", "abbot", "patron-of-europe"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "abbot",
+            "patron-of-europe"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -190,7 +258,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["religious", "patron-of-europe"],
+      "ecclesialTitles": [
+        "religious",
+        "patron-of-europe"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -198,7 +269,12 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/23/st--bridget--religious--patron-of-europe.html",
-          "claimTypes": ["saint-designation", "identity", "religious", "patron-of-europe"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "patron-of-europe"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -210,7 +286,9 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["evangelist"],
+      "ecclesialTitles": [
+        "evangelist"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -218,7 +296,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/04/25/st-mark--evangelist.html",
-          "claimTypes": ["saint-designation", "identity", "evangelist"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "evangelist"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -230,7 +312,9 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -238,7 +322,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/03/st--thomas--apostle.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -250,7 +338,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["disciple-of-the-lord", "apostle-of-the-apostles"],
+      "ecclesialTitles": [
+        "disciple-of-the-lord",
+        "apostle-of-the-apostles"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -258,7 +349,12 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/22/st--mary-magdalene--disciple-of-the-lord-.html",
-          "claimTypes": ["saint-designation", "identity", "disciple-of-the-lord", "apostle-of-the-apostles"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "disciple-of-the-lord",
+            "apostle-of-the-apostles"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -270,7 +366,9 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -278,7 +376,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/25/st--james-the--greater--apostle.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
         }
       ],
       "verifiedAt": "2026-08-28"
@@ -290,7 +392,9 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -298,7 +402,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/06/29/saint-peter--apostle-of-the-city-of-rome.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -310,7 +418,9 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -318,7 +428,11 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/06/29/saint-paul--apostle-of-the-city-of-rome.html",
-          "claimTypes": ["saint-designation", "identity", "apostle"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -338,7 +452,10 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
-          "claimTypes": ["saint-designation", "identity"]
+          "claimTypes": [
+            "saint-designation",
+            "identity"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -358,7 +475,10 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/07/26/sts--joachim-and-anne--parents-of-b--v---mary.html",
-          "claimTypes": ["saint-designation", "identity"]
+          "claimTypes": [
+            "saint-designation",
+            "identity"
+          ]
         }
       ],
       "verifiedAt": "2026-08-22"
@@ -370,7 +490,10 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["blessed-virgin-mary", "mother-of-god"],
+      "ecclesialTitles": [
+        "blessed-virgin-mary",
+        "mother-of-god"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
@@ -378,7 +501,12 @@
         {
           "publisher": "Vatican News",
           "url": "https://www.vaticannews.va/en/saints/01/01/most-holy-mary--mother-of-god.html",
-          "claimTypes": ["saint-designation", "identity", "blessed-virgin-mary", "mother-of-god"]
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "blessed-virgin-mary",
+            "mother-of-god"
+          ]
         }
       ],
       "verifiedAt": "2026-08-29"
@@ -390,11 +518,23 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/05/14/st--matthias--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/14/st--matthias--apostle.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -404,11 +544,23 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/24/st-bartolomew--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/24/st-bartolomew--apostle.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -418,11 +570,23 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -432,11 +596,23 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/28/sts--simon-and-jude--taddeo---apostles.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -446,11 +622,23 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["apostle"],
+      "ecclesialTitles": [
+        "apostle"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html","claimTypes":["saint-designation","identity","apostle"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/30/st--andrew--apostle.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "apostle"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -460,11 +648,25 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["deacon", "martyr"],
+      "ecclesialTitles": [
+        "deacon",
+        "martyr"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/08/10/st--lawrence-deacon--and-martyr.html","claimTypes":["saint-designation","identity","deacon","martyr"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/10/st--lawrence-deacon--and-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "deacon",
+            "martyr"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -474,11 +676,25 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["deacon", "protomartyr"],
+      "ecclesialTitles": [
+        "deacon",
+        "protomartyr"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/12/26/st--stephen--first-martyr.html","claimTypes":["saint-designation","identity","deacon","protomartyr"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/26/st--stephen--first-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "deacon",
+            "protomartyr"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-29"
     },
     {
@@ -488,11 +704,25 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["monk", "patron-of-europe"],
+      "ecclesialTitles": [
+        "monk",
+        "patron-of-europe"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html","claimTypes":["saint-designation","identity","monk","patron-of-europe"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "monk",
+            "patron-of-europe"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-31"
     },
     {
@@ -502,11 +732,25 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["bishop", "patron-of-europe"],
+      "ecclesialTitles": [
+        "bishop",
+        "patron-of-europe"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html","claimTypes":["saint-designation","identity","bishop","patron-of-europe"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/14/sts--cyril--monk-and-methodius--bishop-patrons-of-europe.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "patron-of-europe"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-31"
     },
     {
@@ -516,14 +760,28 @@
       "jurisdictionId": "global",
       "recognizedAs": "saint",
       "recognitionBasis": "official-church-attestation",
-      "ecclesialTitles": ["priest", "doctor-of-the-church"],
+      "ecclesialTitles": [
+        "priest",
+        "doctor-of-the-church"
+      ],
       "scope": "church-wide",
       "calendarMembershipImplied": false,
       "observanceDateImplied": false,
-      "evidence": [{"publisher":"Vatican News","url":"https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html","claimTypes":["saint-designation","identity","priest","doctor-of-the-church","born-in-lisbon"]}],
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/13/saint-anthony-of-padua.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "doctor-of-the-church",
+            "born-in-lisbon"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-31"
-    }
-  ,
+    },
     {
       "id": "recognition:anthony-great:roman-catholic",
       "personId": "anthony-great",
@@ -1213,6 +1471,146 @@
         }
       ],
       "verifiedAt": "2026-08-31"
+    },
+    {
+      "id": "recognition:justin-martyr:roman-catholic",
+      "personId": "justin-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "philosopher",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/01/st--justin--philosopher-and-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "philosopher",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:boniface-mainz:roman-catholic",
+      "personId": "boniface-mainz",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/05/st--saint-boniface--bishop-and-martyr--apostle-of--germany.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:philip-neri:roman-catholic",
+      "personId": "philip-neri",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder-of-oratory"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/26/st--philip-neri--priest--founder-of-the--congregation-of-the-ora.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder-of-oratory"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:john-mary-vianney:roman-catholic",
+      "personId": "john-mary-vianney",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "patron-of-parish-priests"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/04/st--john--m--vianney-the-cur-of-ars--patron-of--parish-priests.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "patron-of-parish-priests"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:josaphat-kuntsevych:roman-catholic",
+      "personId": "josaphat-kuntsevych",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/12/st--josaphat-kuncewicz--bishop-and--martyr-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }

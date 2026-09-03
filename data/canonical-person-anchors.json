@@ -7,199 +7,364 @@
       "id": "john-baptist",
       "primaryObservanceId": "nativity-john-baptist",
       "category": "saint",
-      "names": { "en": "Saint John the Baptist", "pt": "São João Batista", "es": "San Juan Bautista", "it": "San Giovanni Battista" }
+      "names": {
+        "en": "Saint John the Baptist",
+        "pt": "São João Batista",
+        "es": "San Juan Bautista",
+        "it": "San Giovanni Battista"
+      }
     },
     {
       "id": "saint-joseph",
       "primaryObservanceId": "rc:StJoseph",
       "category": "saint",
-      "names": { "en": "Saint Joseph", "pt": "São José", "es": "San José", "it": "San Giuseppe" }
+      "names": {
+        "en": "Saint Joseph",
+        "pt": "São José",
+        "es": "San José",
+        "it": "San Giuseppe"
+      }
     },
     {
       "id": "benedict-nursia",
       "primaryObservanceId": "rc:StBenedict",
       "category": "saint",
-      "names": { "en": "Saint Benedict of Nursia", "pt": "São Bento de Núrsia", "es": "San Benito de Nursia", "it": "San Benedetto da Norcia" }
+      "names": {
+        "en": "Saint Benedict of Nursia",
+        "pt": "São Bento de Núrsia",
+        "es": "San Benito de Nursia",
+        "it": "San Benedetto da Norcia"
+      }
     },
     {
       "id": "bridget-sweden",
       "primaryObservanceId": "rc:StBridget",
       "category": "saint",
-      "names": { "en": "Saint Bridget of Sweden", "pt": "Santa Brígida da Suécia", "es": "Santa Brígida de Suecia", "it": "Santa Brigida di Svezia" }
+      "names": {
+        "en": "Saint Bridget of Sweden",
+        "pt": "Santa Brígida da Suécia",
+        "es": "Santa Brígida de Suecia",
+        "it": "Santa Brigida di Svezia"
+      }
     },
     {
       "id": "mark-evangelist",
       "primaryObservanceId": "rc:StMarkEvangelist",
       "category": "saint",
-      "names": { "en": "Saint Mark the Evangelist", "pt": "São Marcos Evangelista", "es": "San Marcos Evangelista", "it": "San Marco Evangelista" }
+      "names": {
+        "en": "Saint Mark the Evangelist",
+        "pt": "São Marcos Evangelista",
+        "es": "San Marcos Evangelista",
+        "it": "San Marco Evangelista"
+      }
     },
     {
       "id": "thomas-apostle",
       "primaryObservanceId": "rc:StThomasAp",
       "category": "apostle",
-      "names": { "en": "Saint Thomas the Apostle", "pt": "São Tomé Apóstolo", "es": "Santo Tomás Apóstol", "it": "San Tommaso Apostolo" }
+      "names": {
+        "en": "Saint Thomas the Apostle",
+        "pt": "São Tomé Apóstolo",
+        "es": "Santo Tomás Apóstol",
+        "it": "San Tommaso Apostolo"
+      }
     },
     {
       "id": "mary-magdalene",
       "primaryObservanceId": "rc:StMaryMagdalene",
       "category": "saint",
-      "names": { "en": "Saint Mary Magdalene", "pt": "Santa Maria Madalena", "es": "Santa María Magdalena", "it": "Santa Maria Maddalena" }
+      "names": {
+        "en": "Saint Mary Magdalene",
+        "pt": "Santa Maria Madalena",
+        "es": "Santa María Magdalena",
+        "it": "Santa Maria Maddalena"
+      }
     },
     {
       "id": "james-greater-apostle",
       "primaryObservanceId": "rc:StJamesAp",
       "category": "apostle",
-      "names": { "en": "Saint James the Greater", "pt": "São Tiago Maior", "es": "Santiago el Mayor", "it": "San Giacomo Maggiore" }
+      "names": {
+        "en": "Saint James the Greater",
+        "pt": "São Tiago Maior",
+        "es": "Santiago el Mayor",
+        "it": "San Giacomo Maggiore"
+      }
     },
     {
       "id": "matthew-apostle",
       "primaryObservanceId": "rc:StMatthewEvangelist",
       "category": "apostle",
-      "names": { "en": "Saint Matthew the Apostle", "pt": "São Mateus Apóstolo", "es": "San Mateo Apóstol", "it": "San Matteo Apostolo" }
+      "names": {
+        "en": "Saint Matthew the Apostle",
+        "pt": "São Mateus Apóstolo",
+        "es": "San Mateo Apóstol",
+        "it": "San Matteo Apostolo"
+      }
     },
     {
       "id": "thomas-aquinas",
       "primaryObservanceId": "rc:StThomasAquinas",
       "category": "saint",
-      "names": { "en": "Saint Thomas Aquinas", "pt": "São Tomás de Aquino", "es": "Santo Tomás de Aquino", "it": "San Tommaso d’Aquino" }
+      "names": {
+        "en": "Saint Thomas Aquinas",
+        "pt": "São Tomás de Aquino",
+        "es": "Santo Tomás de Aquino",
+        "it": "San Tommaso d’Aquino"
+      }
     },
     {
       "id": "catherine-siena",
       "primaryObservanceId": "rc:StCatherineSiena",
       "category": "saint",
-      "names": { "en": "Saint Catherine of Siena", "pt": "Santa Catarina de Sena", "es": "Santa Catalina de Siena", "it": "Santa Caterina da Siena" }
+      "names": {
+        "en": "Saint Catherine of Siena",
+        "pt": "Santa Catarina de Sena",
+        "es": "Santa Catalina de Siena",
+        "it": "Santa Caterina da Siena"
+      }
     },
     {
       "id": "elizabeth-portugal",
       "primaryObservanceId": "rc:StElizabethPortugal",
       "category": "saint",
-      "names": { "en": "Saint Elizabeth of Portugal", "pt": "Santa Isabel de Portugal", "es": "Santa Isabel de Portugal", "it": "Santa Elisabetta del Portogallo" }
+      "names": {
+        "en": "Saint Elizabeth of Portugal",
+        "pt": "Santa Isabel de Portugal",
+        "es": "Santa Isabel de Portugal",
+        "it": "Santa Elisabetta del Portogallo"
+      }
     },
     {
       "id": "peter-apostle",
       "primaryObservanceId": "peter-paul",
       "category": "apostle",
-      "names": { "en": "Saint Peter the Apostle", "pt": "São Pedro Apóstolo", "es": "San Pedro Apóstol", "it": "San Pietro Apostolo" }
+      "names": {
+        "en": "Saint Peter the Apostle",
+        "pt": "São Pedro Apóstolo",
+        "es": "San Pedro Apóstol",
+        "it": "San Pietro Apostolo"
+      }
     },
     {
       "id": "paul-apostle",
       "primaryObservanceId": "peter-paul",
       "category": "apostle",
-      "names": { "en": "Saint Paul the Apostle", "pt": "São Paulo Apóstolo", "es": "San Pablo Apóstol", "it": "San Paolo Apostolo" }
+      "names": {
+        "en": "Saint Paul the Apostle",
+        "pt": "São Paulo Apóstolo",
+        "es": "San Pablo Apóstol",
+        "it": "San Paolo Apostolo"
+      }
     },
     {
       "id": "anne",
       "primaryObservanceId": "anne-joachim",
       "category": "saint",
-      "names": { "en": "Saint Anne", "pt": "Santa Ana", "es": "Santa Ana", "it": "Sant’Anna" }
+      "names": {
+        "en": "Saint Anne",
+        "pt": "Santa Ana",
+        "es": "Santa Ana",
+        "it": "Sant’Anna"
+      }
     },
     {
       "id": "joachim",
       "primaryObservanceId": "anne-joachim",
       "category": "saint",
-      "names": { "en": "Saint Joachim", "pt": "São Joaquim", "es": "San Joaquín", "it": "San Gioacchino" }
+      "names": {
+        "en": "Saint Joachim",
+        "pt": "São Joaquim",
+        "es": "San Joaquín",
+        "it": "San Gioacchino"
+      }
     },
     {
       "id": "constantine-great",
       "primaryObservanceId": "constantine-helena",
       "category": "saint",
-      "names": { "en": "Saint Constantine the Great", "pt": "São Constantino Magno", "es": "San Constantino el Grande", "it": "San Costantino il Grande" }
+      "names": {
+        "en": "Saint Constantine the Great",
+        "pt": "São Constantino Magno",
+        "es": "San Constantino el Grande",
+        "it": "San Costantino il Grande"
+      }
     },
     {
       "id": "helena",
       "primaryObservanceId": "constantine-helena",
       "category": "saint",
-      "names": { "en": "Saint Helena", "pt": "Santa Helena", "es": "Santa Elena", "it": "Sant’Elena" }
+      "names": {
+        "en": "Saint Helena",
+        "pt": "Santa Helena",
+        "es": "Santa Elena",
+        "it": "Sant’Elena"
+      }
     },
     {
       "id": "mina",
       "primaryObservanceId": "mina-coptic",
       "category": "martyr",
-      "names": { "en": "Saint Mina the Martyr", "pt": "São Mina, mártir", "es": "San Mina, mártir", "it": "San Mina, martire" }
+      "names": {
+        "en": "Saint Mina the Martyr",
+        "pt": "São Mina, mártir",
+        "es": "San Mina, mártir",
+        "it": "San Mina, martire"
+      }
     },
     {
       "id": "mary-of-nazareth",
       "primaryObservanceId": "mary-mother-of-god",
       "category": "saint",
-      "names": { "en": "Mary of Nazareth", "pt": "Maria de Nazaré", "es": "María de Nazaret", "it": "Maria di Nazaret" }
+      "names": {
+        "en": "Mary of Nazareth",
+        "pt": "Maria de Nazaré",
+        "es": "María de Nazaret",
+        "it": "Maria di Nazaret"
+      }
     },
     {
       "id": "matthias-apostle",
       "primaryObservanceId": "rc:StMatthias",
       "category": "apostle",
-      "names": { "en": "Saint Matthias the Apostle", "pt": "São Matias Apóstolo", "es": "San Matías Apóstol", "it": "San Mattia Apostolo" }
+      "names": {
+        "en": "Saint Matthias the Apostle",
+        "pt": "São Matias Apóstolo",
+        "es": "San Matías Apóstol",
+        "it": "San Mattia Apostolo"
+      }
     },
     {
       "id": "bartholomew-apostle",
       "primaryObservanceId": "rc:StBartholomewAp",
       "category": "apostle",
-      "names": { "en": "Saint Bartholomew the Apostle", "pt": "São Bartolomeu Apóstolo", "es": "San Bartolomé Apóstol", "it": "San Bartolomeo Apostolo" }
+      "names": {
+        "en": "Saint Bartholomew the Apostle",
+        "pt": "São Bartolomeu Apóstolo",
+        "es": "San Bartolomé Apóstol",
+        "it": "San Bartolomeo Apostolo"
+      }
     },
     {
       "id": "simon-zealot-apostle",
       "primaryObservanceId": "rc:StSimonStJudeAp",
       "category": "apostle",
-      "names": { "en": "Saint Simon the Zealot", "pt": "São Simão Zelote", "es": "San Simón el Zelote", "it": "San Simone lo Zelota" }
+      "names": {
+        "en": "Saint Simon the Zealot",
+        "pt": "São Simão Zelote",
+        "es": "San Simón el Zelote",
+        "it": "San Simone lo Zelota"
+      }
     },
     {
       "id": "jude-thaddeus-apostle",
       "primaryObservanceId": "rc:StSimonStJudeAp",
       "category": "apostle",
-      "names": { "en": "Saint Jude Thaddeus", "pt": "São Judas Tadeu", "es": "San Judas Tadeo", "it": "San Giuda Taddeo" }
+      "names": {
+        "en": "Saint Jude Thaddeus",
+        "pt": "São Judas Tadeu",
+        "es": "San Judas Tadeo",
+        "it": "San Giuda Taddeo"
+      }
     },
     {
       "id": "andrew-apostle",
       "primaryObservanceId": "rc:StAndrewAp",
       "category": "apostle",
-      "names": { "en": "Saint Andrew the Apostle", "pt": "Santo André Apóstolo", "es": "San Andrés Apóstol", "it": "Sant’Andrea Apostolo" }
+      "names": {
+        "en": "Saint Andrew the Apostle",
+        "pt": "Santo André Apóstolo",
+        "es": "San Andrés Apóstol",
+        "it": "Sant’Andrea Apostolo"
+      }
     },
     {
       "id": "lawrence-rome",
       "primaryObservanceId": "rc:StLawrenceDeacon",
       "category": "martyr",
-      "names": { "en": "Saint Lawrence of Rome", "pt": "São Lourenço de Roma", "es": "San Lorenzo de Roma", "it": "San Lorenzo di Roma" }
+      "names": {
+        "en": "Saint Lawrence of Rome",
+        "pt": "São Lourenço de Roma",
+        "es": "San Lorenzo de Roma",
+        "it": "San Lorenzo di Roma"
+      }
     },
     {
       "id": "stephen-protomartyr",
       "primaryObservanceId": "rc:StStephenProtomartyr",
       "category": "martyr",
-      "names": { "en": "Saint Stephen the First Martyr", "pt": "Santo Estêvão, Primeiro Mártir", "es": "San Esteban, Primer Mártir", "it": "Santo Stefano, protomartire" }
+      "names": {
+        "en": "Saint Stephen the First Martyr",
+        "pt": "Santo Estêvão, Primeiro Mártir",
+        "es": "San Esteban, Primer Mártir",
+        "it": "Santo Stefano, protomartire"
+      }
     },
     {
       "id": "cyril-monk",
       "primaryObservanceId": "rc:StsCyrilMethodius",
       "category": "saint",
-      "names": { "en": "Saint Cyril, Monk", "pt": "São Cirilo, monge", "es": "San Cirilo, monje", "it": "San Cirillo, monaco" }
+      "names": {
+        "en": "Saint Cyril, Monk",
+        "pt": "São Cirilo, monge",
+        "es": "San Cirilo, monje",
+        "it": "San Cirillo, monaco"
+      }
     },
     {
       "id": "methodius-bishop",
       "primaryObservanceId": "rc:StsCyrilMethodius",
       "category": "saint",
-      "names": { "en": "Saint Methodius, Bishop", "pt": "São Metódio, bispo", "es": "San Metodio, obispo", "it": "San Metodio, vescovo" }
+      "names": {
+        "en": "Saint Methodius, Bishop",
+        "pt": "São Metódio, bispo",
+        "es": "San Metodio, obispo",
+        "it": "San Metodio, vescovo"
+      }
     },
     {
       "id": "anthony-lisbon",
       "primaryObservanceId": "rc:StAnthonyPadua",
       "category": "saint",
-      "names": { "en": "Saint Anthony of Padua", "pt": "Santo António de Lisboa", "es": "San Antonio de Padua", "it": "Sant’Antonio di Padova" }
+      "names": {
+        "en": "Saint Anthony of Padua",
+        "pt": "Santo António de Lisboa",
+        "es": "San Antonio de Padua",
+        "it": "Sant’Antonio di Padova"
+      }
     },
     {
       "id": "anthony-great",
       "primaryObservanceId": "rc:StAnthonyEgypt",
       "category": "saint",
-      "names": { "en": "Saint Anthony the Great", "pt": "Santo Antão", "es": "San Antonio Abad", "it": "Sant’Antonio Abate" }
+      "names": {
+        "en": "Saint Anthony the Great",
+        "pt": "Santo Antão",
+        "es": "San Antonio Abad",
+        "it": "Sant’Antonio Abate"
+      }
     },
     {
       "id": "clare-assisi",
       "primaryObservanceId": "rc:StClare",
       "category": "saint",
-      "names": { "en": "Saint Clare of Assisi", "pt": "Santa Clara de Assis", "es": "Santa Clara de Asís", "it": "Santa Chiara d’Assisi" }
+      "names": {
+        "en": "Saint Clare of Assisi",
+        "pt": "Santa Clara de Assis",
+        "es": "Santa Clara de Asís",
+        "it": "Santa Chiara d’Assisi"
+      }
     },
     {
       "id": "teresa-avila",
       "primaryObservanceId": "rc:StTeresaJesus",
       "category": "saint",
-      "names": { "en": "Saint Teresa of Jesus", "pt": "Santa Teresa de Jesus", "es": "Santa Teresa de Jesús", "it": "Santa Teresa di Gesù" }
+      "names": {
+        "en": "Saint Teresa of Jesus",
+        "pt": "Santa Teresa de Jesus",
+        "es": "Santa Teresa de Jesús",
+        "it": "Santa Teresa di Gesù"
+      }
     },
     {
       "id": "augustine-hippo",
@@ -430,6 +595,61 @@
         "pt": "São Martinho de Tours",
         "es": "San Martín de Tours",
         "it": "San Martino di Tours"
+      }
+    },
+    {
+      "id": "justin-martyr",
+      "primaryObservanceId": "rc:StJustinMartyr",
+      "category": "saint",
+      "names": {
+        "en": "Saint Justin Martyr",
+        "pt": "São Justino",
+        "es": "San Justino Mártir",
+        "it": "San Giustino Martire"
+      }
+    },
+    {
+      "id": "boniface-mainz",
+      "primaryObservanceId": "rc:StBoniface",
+      "category": "saint",
+      "names": {
+        "en": "Saint Boniface",
+        "pt": "São Bonifácio",
+        "es": "San Bonifacio",
+        "it": "San Bonifacio"
+      }
+    },
+    {
+      "id": "philip-neri",
+      "primaryObservanceId": "rc:StPhilipNeri",
+      "category": "saint",
+      "names": {
+        "en": "Saint Philip Neri",
+        "pt": "São Filipe Néri",
+        "es": "San Felipe Neri",
+        "it": "San Filippo Neri"
+      }
+    },
+    {
+      "id": "john-mary-vianney",
+      "primaryObservanceId": "rc:StJeanVianney",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Mary Vianney",
+        "pt": "São João Maria Vianney",
+        "es": "San Juan María Vianney",
+        "it": "San Giovanni Maria Vianney"
+      }
+    },
+    {
+      "id": "josaphat-kuntsevych",
+      "primaryObservanceId": "rc:StJosaphat",
+      "category": "saint",
+      "names": {
+        "en": "Saint Josaphat Kuntsevych",
+        "pt": "São Josafat",
+        "es": "San Josafat Kuncewicz",
+        "it": "San Giosafat Kuncewicz"
       }
     }
   ]
