@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "agatha-sicily",
+        "primaryObservanceId": "rc:StAgatha",
+        "category": "saint",
+        "names": {
+          "en": "Saint Agatha",
+          "pt": "Santa Águeda",
+          "es": "Santa Águeda",
+          "it": "Sant'Agata"
+        }
+      },
+      "recognition": {
+        "id": "recognition:agatha-sicily:roman-catholic",
+        "ecclesialTitles": [
+          "virgin",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/02/05/st--agata--virgin-and-martyr.html"
+      },
+      "observanceId": "observance:agatha-sicily:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:agatha-sicily:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAgatha",
+        "sourceOccurrenceId": "snl-pt-2026-02-05-bcc561c93bba534b99ebc224",
+        "sourceRecordHash": "462f8d399147aced46b12db36b54de7c209761adaa93ad6823aac421ea5dc9db",
+        "dateISO": "2026-02-05",
+        "sourceLabelPt": "S. Águeda, virgem e mártir",
+        "observedDesignation": "S. Águeda, virgem e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-5"
+      }
+    },
+    {
+      "person": {
+        "id": "maximilian-kolbe",
+        "primaryObservanceId": "rc:StMaximilianKolbe",
+        "category": "saint",
+        "names": {
+          "en": "Saint Maximilian Maria Kolbe",
+          "pt": "São Maximiliano Maria Kolbe",
+          "es": "San Maximiliano María Kolbe",
+          "it": "San Massimiliano Maria Kolbe"
+        }
+      },
+      "recognition": {
+        "id": "recognition:maximilian-kolbe:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/14/st--maximilian-m--kolbe---priest-of-the-order--of-the-friars-min.html"
+      },
+      "observanceId": "observance:maximilian-kolbe:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:maximilian-kolbe:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StMaximilianKolbe",
+        "sourceOccurrenceId": "snl-pt-2026-08-14-9424c00422e02bf8f54b5d2d",
+        "sourceRecordHash": "f39530e973b3281e4e6a39b6b2bb8aec834840b1f89f0fd0364c595fb51bfdc3",
+        "dateISO": "2026-08-14",
+        "sourceLabelPt": "S. Maximiliano Maria Kolbe, presbítero e mártir",
+        "observedDesignation": "S. Maximiliano Maria Kolbe, presbítero e mártir – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-14"
+      }
+    },
+    {
+      "person": {
+        "id": "monica-thagaste",
+        "primaryObservanceId": "rc:StMonica",
+        "category": "saint",
+        "names": {
+          "en": "Saint Monica",
+          "pt": "Santa Mónica",
+          "es": "Santa Mónica",
+          "it": "Santa Monica"
+        }
+      },
+      "recognition": {
+        "id": "recognition:monica-thagaste:roman-catholic",
+        "ecclesialTitles": [
+          "mother-of-augustine",
+          "widow"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/27/st--monica--mother-of--st--augustine--bishop.html"
+      },
+      "observanceId": "observance:monica-thagaste:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:monica-thagaste:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StMonica",
+        "sourceOccurrenceId": "snl-pt-2026-08-27-701a5b90db66dd03f6ac2cb3",
+        "sourceRecordHash": "c8949db0cfc83d385bac448e8377f9107a13cf3cd2a0a5243ec5b2bd8f67aeaf",
+        "dateISO": "2026-08-27",
+        "sourceLabelPt": "S. Mónica",
+        "observedDesignation": "S. Mónica – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-27"
+      }
+    },
+    {
+      "person": {
+        "id": "pius-pietrelcina",
+        "primaryObservanceId": "rc:StPioPietrelcina",
+        "category": "saint",
+        "names": {
+          "en": "Saint Pius of Pietrelcina",
+          "pt": "São Pio de Pietrelcina",
+          "es": "San Pío de Pietrelcina",
+          "it": "San Pio da Pietrelcina"
+        }
+      },
+      "recognition": {
+        "id": "recognition:pius-pietrelcina:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "capuchin-friar"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/09/23/st--pius-of-pietrelcina--priest-.html"
+      },
+      "observanceId": "observance:pius-pietrelcina:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pius-pietrelcina:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPioPietrelcina",
+        "sourceOccurrenceId": "snl-pt-2026-09-23-53457742425983a5ec6edf67",
+        "sourceRecordHash": "a4a378b3eb39222ffd59b7068adf4812784046c9f26070402fe8d53715af76a2",
+        "dateISO": "2026-09-23",
+        "sourceLabelPt": "S. Pio de Pietrelcina, presbítero",
+        "observedDesignation": "S. Pio de Pietrelcina, presbítero – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-23"
+      }
+    },
+    {
+      "person": {
+        "id": "elizabeth-hungary",
+        "primaryObservanceId": "rc:StElizabethHungary",
+        "category": "saint",
+        "names": {
+          "en": "Saint Elizabeth of Hungary",
+          "pt": "Santa Isabel da Hungria",
+          "es": "Santa Isabel de Hungría",
+          "it": "Santa Elisabetta d'Ungheria"
+        }
+      },
+      "recognition": {
+        "id": "recognition:elizabeth-hungary:roman-catholic",
+        "ecclesialTitles": [
+          "religious",
+          "franciscan-tertiary"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/17.html"
+      },
+      "observanceId": "observance:elizabeth-hungary:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:elizabeth-hungary:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StElizabethHungary",
+        "sourceOccurrenceId": "snl-pt-2026-11-17-0e0fa01699eecbdd9421584a",
+        "sourceRecordHash": "f912212be6673db268235cebe915b15002856bbeb123f938010171810ab4cca2",
+        "dateISO": "2026-11-17",
+        "sourceLabelPt": "S. Isabel da Hungria, religiosa",
+        "observedDesignation": "S. Isabel da Hungria, religiosa – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-17"
+      }
+    }
+  ],
+  "reviewDigestSha256": "529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-03"
+}
