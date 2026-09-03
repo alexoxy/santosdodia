@@ -1,45 +1,478 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "timezone": "UTC",
   "policy": {
     "automaticProductionWrites": false,
-    "automaticGeneratedRegistryWrites": ["data/generated/live-streams.json"],
+    "automaticGeneratedRegistryWrites": [
+      "data/generated/live-streams.json"
+    ],
     "requestTimeExternalAcquisition": false,
     "editorialTextRequiresHumanApproval": true,
     "sourceFailuresAreReviewCandidatesOnly": true,
-    "scheduledTasksAtMostWeekly": true
+    "scheduledTasksAtMostWeekly": true,
+    "staticAcquisitionAtMostMonthly": true,
+    "weeklyExceptionTaskIds": [
+      "production-health",
+      "source-freshness"
+    ]
   },
   "tasks": [
-    {"id":"production-health","title":"Weekly Cloudflare production health","owner":"platform","mode":"scheduled","workflow":".github/workflows/production-health.yml","crons":["17 9 * * 1"],"publicationMode":"read-only","archiveStream":null,"producerScripts":[]},
-    {"id":"observance-refresh","title":"Weekly observance staging","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/update-observances.yml","crons":["15 5 * * 1"],"publicationMode":"staging-only","archiveStream":"observances","producerScripts":["scripts/sync-observances.mjs","scripts/build-runtime-fallback.mjs"]},
-    {"id":"litcal-refresh","title":"Weekly LitCal staging","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/update-litcal-mirror.yml","crons":["35 3 * * 2"],"publicationMode":"staging-only","archiveStream":"litcal","producerScripts":["scripts/mirror-litcal-source.sh","scripts/sync-litcal-mirror.mjs","scripts/sync-name-translations.mjs"]},
-    {"id":"vatican-daily-saints","title":"Weekly Vatican saint-of-the-day metadata staging","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/harvest-vatican-saints.yml","crons":["11 9 * * 4"],"publicationMode":"staging-only","archiveStream":"calendar/vatican-saints/v1/pt","producerScripts":["scripts/calendar/check-vatican-reference-policy.mjs","scripts/calendar/harvest-vatican-saints.mjs","scripts/calendar/normalize-vatican-saints.mjs"]},
-    {"id":"causesanti-primary-source","title":"Monthly Causes of Saints primary-source metadata staging","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/acquire-causesanti-site.yml","crons":["17 3 1 * *"],"publicationMode":"staging-only","archiveStream":"sources/causesanti-va/raw","producerScripts":["scripts/osint/adapters/causesanti-site.mjs"]},
-    {"id":"vatican-corroboration-evidence","title":"Reviewed-binding Vatican News corroboration evidence","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/build-vatican-corroboration-evidence.yml","crons":[],"publicationMode":"staging-only","archiveStream":"corroboration-evidence/vatican-news/pt","producerScripts":["scripts/autonomy/build-vatican-corroboration-evidence.mjs"]},
-    {"id":"portugal-snl-calendar-staging","title":"Official Portugal SNL calendar staging and reconciliation","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/portugal-snl-calendar.yml","crons":[],"publicationMode":"staging-only","archiveStream":"calendar/portugal-snl/v1","producerScripts":["scripts/calendar/fetch-portugal-snl-agenda.mjs","scripts/calendar/normalize-portugal-snl-agenda.mjs","scripts/calendar/reconcile-portugal-snl.mjs","scripts/calendar/build-portugal-snl-review-bundle.mjs","scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs"]},
-    {"id":"portugal-product-v2-staging","title":"Event-complete Portugal Roman Catholic v2 D1 staging","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/portugal-product-v2-staging.yml","crons":[],"publicationMode":"staging-only","archiveStream":null,"producerScripts":["scripts/build/roman-catholic-pt-overlay-v2.mjs","scripts/build/roman-catholic-d1-release-v2.mjs","scripts/build/finalize-portugal-v2-policy-upsert.mjs"]},
-    {"id":"saints-profile-v1-wikidata","title":"Weekly resumable exact-QID saints profile and geography enrichment","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/enrich-saints-profile-wikidata.yml","crons":["7 3 * * 1"],"publicationMode":"staging-only","archiveStream":"enrichment/saints/v1/raw/wikidata/profile-v1","producerScripts":["scripts/enrichment/plan-wikidata-profile-run.mjs","scripts/enrichment/fetch-wikidata-profile-chunk.mjs","scripts/enrichment/finalize-wikidata-profile-run.mjs"]},
-    {"id":"saints-labels-v2-wikidata","title":"Weekly dynamic-root multilingual saint label evidence enrichment","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/enrich-saints-labels-wikidata.yml","crons":["13 4 * * 1"],"publicationMode":"staging-only","archiveStream":"enrichment/saints/v1/raw/wikidata/labels-v2","producerScripts":["scripts/enrichment/plan-wikidata-label-run.mjs","scripts/enrichment/fetch-wikidata-label-chunk.mjs","scripts/enrichment/finalize-wikidata-label-run.mjs"]},
-    {"id":"saints-navigation-exports-v1","title":"Weekly Saints map timeline calendar export plus Portugal queue and P0 review-pack builder","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/build-saints-navigation-exports.yml","crons":["31 8 * * 1"],"publicationMode":"staging-only","archiveStream":"navigation/saints/v1/exports/pt","producerScripts":["scripts/discovery/assemble-navigation-source.mjs","scripts/discovery/audit-navigation-readiness.mjs","scripts/discovery/build-navigation-exports.mjs","scripts/product/build-portugal-saint-publication-queue.mjs","scripts/product/build-portugal-p0-review-pack.mjs"]},
-    {"id":"ecclesiastical-osint","title":"Weekly official ecclesiastical change monitor","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/osint-monitor.yml","crons":["17 6 * * 1"],"publicationMode":"staging-only","archiveStream":"ecclesiastical-osint","producerScripts":["scripts/monitor-ecclesiastical-osint.mjs"]},
-    {"id":"source-freshness","title":"Weekly source freshness report","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/source-freshness.yml","crons":["29 8 * * 0"],"publicationMode":"staging-only","archiveStream":"source-freshness","producerScripts":["scripts/audit-source-freshness.mjs"]},
-    {"id":"live-stream-curator","title":"Weekly official live-stream curation after source freshness","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/curate-live-streams.yml","crons":[],"publicationMode":"generated-only","archiveStream":"media/live-streams/v1","generatedPaths":["data/generated/live-streams.json"],"producerScripts":["scripts/media/curate-live-streams.mjs","scripts/github/publish-live-registry-pr.mjs"]},
-    {"id":"global-source-orchestrator","title":"Weekly global source policy scheduler","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/source-orchestrator.yml","crons":["2 0 * * 1"],"publicationMode":"staging-only","archiveStream":"source-orchestrator","producerScripts":["scripts/osint/plan-global-source-cycle.mjs","scripts/osint/probe-source-policy-window.mjs"]},
-    {"id":"saints-baseline-v1-wikidata","title":"Weekly resumable Saints Baseline v1 Wikidata recognition-v1 candidate acquisition","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/build-saints-baseline-wikidata.yml","crons":["17 1 * * 1"],"publicationMode":"staging-only","archiveStream":"baseline/saints/v1/raw/wikidata/recognition-v1","producerScripts":["scripts/baseline/plan-wikidata-baseline-run.mjs","scripts/baseline/finalize-wikidata-baseline-run.mjs","scripts/osint/adapters/wikidata-saints.mjs"]},
-    {"id":"saints-baseline-v1-normalizer","title":"Dropbox-only Saints Baseline v1 normalizer after weekly acquisition","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/normalize-saints-baseline-wikidata.yml","crons":[],"publicationMode":"staging-only","archiveStream":"baseline/saints/v1/normalized/wikidata/recognition-v1","producerScripts":["scripts/baseline/plan-wikidata-baseline-normalization.mjs","scripts/baseline/finalize-wikidata-baseline-normalization.mjs"]},
-    {"id":"saints-baseline-v1-language-editor","title":"Locale-isolated Saints Baseline v1 language editor after weekly normalization","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/review-saints-baseline-language.yml","crons":[],"publicationMode":"staging-only","archiveStream":"baseline/saints/v1/reviewed/wikidata/recognition-v1","producerScripts":["scripts/baseline/plan-wikidata-baseline-language-review.mjs","scripts/baseline/finalize-wikidata-baseline-language-review.mjs"]},
-    {"id":"saints-baseline-v1-identity-ledger","title":"Weekly global cross-batch Saints Baseline v1 candidate identity ledger","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/build-saints-baseline-identity-ledger.yml","crons":["23 7 * * 1"],"publicationMode":"staging-only","archiveStream":"baseline/saints/v1/identity/wikidata/recognition-v1","producerScripts":["scripts/dropbox/list-archive-batches.mjs","scripts/baseline/build-global-identity-ledger.mjs"]},
-    {"id":"saints-baseline-v1-importer","title":"Weekly-chain rollback-safe Saints Baseline v1 D1 staging importer","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/import-saints-baseline-d1.yml","crons":[],"publicationMode":"staging-only","archiveStream":"baseline-import-receipts/saints/v1/wikidata/recognition-v1","producerScripts":["scripts/baseline/plan-wikidata-baseline-import.mjs","scripts/baseline/finalize-wikidata-baseline-import.mjs"]},
-    {"id":"saints-baseline-v1-status","title":"Saints Baseline v1 run outcome archive","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/saints-baseline-status.yml","crons":[],"publicationMode":"staging-only","archiveStream":"baseline-status/saints/v1/wikidata/recognition-v1","producerScripts":[]},
-    {"id":"autonomous-scout-saints-wikidata","title":"Autonomous Scout acquisition for saints Wikidata partition","owner":"data-operations","mode":"scheduled","workflow":".github/workflows/autonomous-osint-acquisition.yml","crons":["47 2 * * 3"],"publicationMode":"staging-only","archiveStream":"osint-raw/saints/wikidata","producerScripts":["scripts/autonomy/build-plan.mjs","scripts/osint/run-manifest.mjs"]},
-    {"id":"autonomous-normalizer-saints-wikidata","title":"Autonomous Dropbox normalizer for saints Wikidata partition","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/autonomous-dropbox-normalization.yml","crons":[],"publicationMode":"staging-only","archiveStream":"osint-normalized/saints/wikidata","producerScripts":["scripts/dropbox/pull-latest-stream.mjs","scripts/osint/normalize-wikidata-saints.mjs"]},
-    {"id":"autonomous-language-editor-saints-wikidata","title":"Autonomous linguistic review for saints Wikidata partition","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/autonomous-linguistic-review.yml","crons":[],"publicationMode":"staging-only","archiveStream":"osint-reviewed/saints/wikidata","producerScripts":["scripts/linguistic/review-normalized-package.mjs"]},
-    {"id":"autonomous-publication-classifier-saints-wikidata","title":"Review-by-exception publication classifier for saints Wikidata partition","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/classify-publication-candidates.yml","crons":[],"publicationMode":"staging-only","archiveStream":"publication-decisions/saints/wikidata","producerScripts":["scripts/autonomy/classify-publication-candidates.mjs"]},
-    {"id":"autonomous-corroborator-saints-wikidata","title":"Independent-source corroboration for saints publication candidates","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/corroborate-publication-candidates.yml","crons":[],"publicationMode":"staging-only","archiveStream":"corroboration/saints/wikidata","producerScripts":["scripts/autonomy/corroborate-publication-candidates.mjs"]},
-    {"id":"autonomous-importer-saints-wikidata","title":"Autonomous D1 staging importer for saints Wikidata partition","owner":"data-operations","mode":"event-driven","workflow":".github/workflows/autonomous-d1-importer.yml","crons":[],"publicationMode":"staging-only","archiveStream":"import-receipts/saints/wikidata","producerScripts":["scripts/autonomy/build-knowledge-d1-batch.mjs","scripts/manage-d1-knowledge-staging.mjs"]},
-    {"id":"quality-gate","title":"Repository and Cloudflare quality gate","owner":"platform","mode":"event-driven","workflow":".github/workflows/quality.yml","crons":[],"publicationMode":"none","archiveStream":null,"producerScripts":[]},
-    {"id":"cloudflare-portability","title":"Cloudflare portability build","owner":"platform","mode":"event-driven","workflow":".github/workflows/cloudflare-portability.yml","crons":[],"publicationMode":"none","archiveStream":null,"producerScripts":[]},
-    {"id":"d1-staging-control","title":"Approved D1 staging operations","owner":"data-operations","mode":"manual","workflow":".github/workflows/d1-staging.yml","crons":[],"publicationMode":"staging-only","archiveStream":null,"producerScripts":["scripts/manage-d1-staging.mjs"]},
-    {"id":"ecclesiastical-directory-staging","title":"Bounded ecclesiastical directory staging","owner":"data-operations","mode":"manual","workflow":".github/workflows/sync-ecclesiastical-directory.yml","crons":[],"publicationMode":"staging-only","archiveStream":"ecclesiastical-directory/{source}","producerScripts":["scripts/sync-ecclesiastical-directory.mjs","scripts/build-ecclesiastical-staging-sql.mjs"]}
+    {
+      "id": "production-health",
+      "title": "Weekly Cloudflare production health",
+      "owner": "platform",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/production-health.yml",
+      "crons": [
+        "17 9 * * 1"
+      ],
+      "publicationMode": "read-only",
+      "archiveStream": null,
+      "producerScripts": []
+    },
+    {
+      "id": "observance-refresh",
+      "title": "Monthly observance staging",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/update-observances.yml",
+      "crons": [
+        "15 5 10 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "observances",
+      "producerScripts": [
+        "scripts/sync-observances.mjs",
+        "scripts/build-runtime-fallback.mjs"
+      ]
+    },
+    {
+      "id": "litcal-refresh",
+      "title": "Monthly LitCal staging",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/update-litcal-mirror.yml",
+      "crons": [
+        "35 3 18 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "litcal",
+      "producerScripts": [
+        "scripts/mirror-litcal-source.sh",
+        "scripts/sync-litcal-mirror.mjs",
+        "scripts/sync-name-translations.mjs"
+      ]
+    },
+    {
+      "id": "vatican-daily-saints",
+      "title": "Monthly Vatican saint-of-the-day metadata staging",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/harvest-vatican-saints.yml",
+      "crons": [
+        "11 9 22 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "calendar/vatican-saints/v1/pt",
+      "producerScripts": [
+        "scripts/calendar/check-vatican-reference-policy.mjs",
+        "scripts/calendar/harvest-vatican-saints.mjs",
+        "scripts/calendar/normalize-vatican-saints.mjs"
+      ]
+    },
+    {
+      "id": "causesanti-primary-source",
+      "title": "Monthly Causes of Saints primary-source metadata staging",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/acquire-causesanti-site.yml",
+      "crons": [
+        "17 3 1 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "sources/causesanti-va/raw",
+      "producerScripts": [
+        "scripts/osint/adapters/causesanti-site.mjs"
+      ]
+    },
+    {
+      "id": "vatican-corroboration-evidence",
+      "title": "Reviewed-binding Vatican News corroboration evidence",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/build-vatican-corroboration-evidence.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "corroboration-evidence/vatican-news/pt",
+      "producerScripts": [
+        "scripts/autonomy/build-vatican-corroboration-evidence.mjs"
+      ]
+    },
+    {
+      "id": "portugal-snl-calendar-staging",
+      "title": "Official Portugal SNL calendar staging and reconciliation",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/portugal-snl-calendar.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "calendar/portugal-snl/v1",
+      "producerScripts": [
+        "scripts/calendar/fetch-portugal-snl-agenda.mjs",
+        "scripts/calendar/normalize-portugal-snl-agenda.mjs",
+        "scripts/calendar/reconcile-portugal-snl.mjs",
+        "scripts/calendar/build-portugal-snl-review-bundle.mjs",
+        "scripts/calendar/build-portugal-jurisdiction-overlay-plan.mjs"
+      ]
+    },
+    {
+      "id": "portugal-product-v2-staging",
+      "title": "Event-complete Portugal Roman Catholic v2 D1 staging",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/portugal-product-v2-staging.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": null,
+      "producerScripts": [
+        "scripts/build/roman-catholic-pt-overlay-v2.mjs",
+        "scripts/build/roman-catholic-d1-release-v2.mjs",
+        "scripts/build/finalize-portugal-v2-policy-upsert.mjs"
+      ]
+    },
+    {
+      "id": "saints-profile-v1-wikidata",
+      "title": "Monthly resumable exact-QID saints profile and geography enrichment",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/enrich-saints-profile-wikidata.yml",
+      "crons": [
+        "7 3 6 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "enrichment/saints/v1/raw/wikidata/profile-v1",
+      "producerScripts": [
+        "scripts/enrichment/plan-wikidata-profile-run.mjs",
+        "scripts/enrichment/fetch-wikidata-profile-chunk.mjs",
+        "scripts/enrichment/finalize-wikidata-profile-run.mjs"
+      ]
+    },
+    {
+      "id": "saints-labels-v2-wikidata",
+      "title": "Monthly dynamic-root multilingual saint label evidence enrichment",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/enrich-saints-labels-wikidata.yml",
+      "crons": [
+        "13 4 8 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "enrichment/saints/v1/raw/wikidata/labels-v2",
+      "producerScripts": [
+        "scripts/enrichment/plan-wikidata-label-run.mjs",
+        "scripts/enrichment/fetch-wikidata-label-chunk.mjs",
+        "scripts/enrichment/finalize-wikidata-label-run.mjs"
+      ]
+    },
+    {
+      "id": "saints-navigation-exports-v1",
+      "title": "Monthly Saints map timeline calendar export plus Portugal queue and P0 review-pack builder",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/build-saints-navigation-exports.yml",
+      "crons": [
+        "31 8 16 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "navigation/saints/v1/exports/pt",
+      "producerScripts": [
+        "scripts/discovery/assemble-navigation-source.mjs",
+        "scripts/discovery/audit-navigation-readiness.mjs",
+        "scripts/discovery/build-navigation-exports.mjs",
+        "scripts/product/build-portugal-saint-publication-queue.mjs",
+        "scripts/product/build-portugal-p0-review-pack.mjs"
+      ]
+    },
+    {
+      "id": "ecclesiastical-osint",
+      "title": "Monthly official ecclesiastical change monitor",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/osint-monitor.yml",
+      "crons": [
+        "17 6 12 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "ecclesiastical-osint",
+      "producerScripts": [
+        "scripts/monitor-ecclesiastical-osint.mjs"
+      ]
+    },
+    {
+      "id": "source-freshness",
+      "title": "Weekly source freshness report",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/source-freshness.yml",
+      "crons": [
+        "29 8 * * 0"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "source-freshness",
+      "producerScripts": [
+        "scripts/audit-source-freshness.mjs"
+      ]
+    },
+    {
+      "id": "live-stream-curator",
+      "title": "Official live-stream curation after source freshness",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/curate-live-streams.yml",
+      "crons": [],
+      "publicationMode": "generated-only",
+      "archiveStream": "media/live-streams/v1",
+      "generatedPaths": [
+        "data/generated/live-streams.json"
+      ],
+      "producerScripts": [
+        "scripts/media/curate-live-streams.mjs",
+        "scripts/github/publish-live-registry-pr.mjs"
+      ]
+    },
+    {
+      "id": "global-source-orchestrator",
+      "title": "Monthly global source policy scheduler",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/source-orchestrator.yml",
+      "crons": [
+        "2 0 2 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "source-orchestrator",
+      "producerScripts": [
+        "scripts/osint/plan-global-source-cycle.mjs",
+        "scripts/osint/probe-source-policy-window.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-wikidata",
+      "title": "Monthly resumable Saints Baseline v1 Wikidata recognition-v1 candidate acquisition",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/build-saints-baseline-wikidata.yml",
+      "crons": [
+        "17 1 4 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline/saints/v1/raw/wikidata/recognition-v1",
+      "producerScripts": [
+        "scripts/baseline/plan-wikidata-baseline-run.mjs",
+        "scripts/baseline/finalize-wikidata-baseline-run.mjs",
+        "scripts/osint/adapters/wikidata-saints.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-normalizer",
+      "title": "Dropbox-only Saints Baseline v1 normalizer after monthly acquisition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/normalize-saints-baseline-wikidata.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline/saints/v1/normalized/wikidata/recognition-v1",
+      "producerScripts": [
+        "scripts/baseline/plan-wikidata-baseline-normalization.mjs",
+        "scripts/baseline/finalize-wikidata-baseline-normalization.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-language-editor",
+      "title": "Locale-isolated Saints Baseline v1 language editor after monthly normalization",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/review-saints-baseline-language.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline/saints/v1/reviewed/wikidata/recognition-v1",
+      "producerScripts": [
+        "scripts/baseline/plan-wikidata-baseline-language-review.mjs",
+        "scripts/baseline/finalize-wikidata-baseline-language-review.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-identity-ledger",
+      "title": "Monthly global cross-batch Saints Baseline v1 candidate identity ledger",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/build-saints-baseline-identity-ledger.yml",
+      "crons": [
+        "23 7 14 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline/saints/v1/identity/wikidata/recognition-v1",
+      "producerScripts": [
+        "scripts/dropbox/list-archive-batches.mjs",
+        "scripts/baseline/build-global-identity-ledger.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-importer",
+      "title": "Monthly-chain rollback-safe Saints Baseline v1 D1 staging importer",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/import-saints-baseline-d1.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline-import-receipts/saints/v1/wikidata/recognition-v1",
+      "producerScripts": [
+        "scripts/baseline/plan-wikidata-baseline-import.mjs",
+        "scripts/baseline/finalize-wikidata-baseline-import.mjs"
+      ]
+    },
+    {
+      "id": "saints-baseline-v1-status",
+      "title": "Saints Baseline v1 run outcome archive",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/saints-baseline-status.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "baseline-status/saints/v1/wikidata/recognition-v1",
+      "producerScripts": []
+    },
+    {
+      "id": "autonomous-scout-saints-wikidata",
+      "title": "Monthly Autonomous Scout acquisition for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "scheduled",
+      "workflow": ".github/workflows/autonomous-osint-acquisition.yml",
+      "crons": [
+        "47 2 20 * *"
+      ],
+      "publicationMode": "staging-only",
+      "archiveStream": "osint-raw/saints/wikidata",
+      "producerScripts": [
+        "scripts/autonomy/build-plan.mjs",
+        "scripts/osint/run-manifest.mjs"
+      ]
+    },
+    {
+      "id": "autonomous-normalizer-saints-wikidata",
+      "title": "Autonomous Dropbox normalizer for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-dropbox-normalization.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "osint-normalized/saints/wikidata",
+      "producerScripts": [
+        "scripts/dropbox/pull-latest-stream.mjs",
+        "scripts/osint/normalize-wikidata-saints.mjs"
+      ]
+    },
+    {
+      "id": "autonomous-language-editor-saints-wikidata",
+      "title": "Autonomous linguistic review for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-linguistic-review.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "osint-reviewed/saints/wikidata",
+      "producerScripts": [
+        "scripts/linguistic/review-normalized-package.mjs"
+      ]
+    },
+    {
+      "id": "autonomous-publication-classifier-saints-wikidata",
+      "title": "Review-by-exception publication classifier for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/classify-publication-candidates.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "publication-decisions/saints/wikidata",
+      "producerScripts": [
+        "scripts/autonomy/classify-publication-candidates.mjs"
+      ]
+    },
+    {
+      "id": "autonomous-corroborator-saints-wikidata",
+      "title": "Independent-source corroboration for saints publication candidates",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/corroborate-publication-candidates.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "corroboration/saints/wikidata",
+      "producerScripts": [
+        "scripts/autonomy/corroborate-publication-candidates.mjs"
+      ]
+    },
+    {
+      "id": "autonomous-importer-saints-wikidata",
+      "title": "Autonomous D1 staging importer for saints Wikidata partition",
+      "owner": "data-operations",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/autonomous-d1-importer.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "import-receipts/saints/wikidata",
+      "producerScripts": [
+        "scripts/autonomy/build-knowledge-d1-batch.mjs",
+        "scripts/manage-d1-knowledge-staging.mjs"
+      ]
+    },
+    {
+      "id": "quality-gate",
+      "title": "Repository and Cloudflare quality gate",
+      "owner": "platform",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/quality.yml",
+      "crons": [],
+      "publicationMode": "none",
+      "archiveStream": null,
+      "producerScripts": []
+    },
+    {
+      "id": "cloudflare-portability",
+      "title": "Cloudflare portability build",
+      "owner": "platform",
+      "mode": "event-driven",
+      "workflow": ".github/workflows/cloudflare-portability.yml",
+      "crons": [],
+      "publicationMode": "none",
+      "archiveStream": null,
+      "producerScripts": []
+    },
+    {
+      "id": "d1-staging-control",
+      "title": "Approved D1 staging operations",
+      "owner": "data-operations",
+      "mode": "manual",
+      "workflow": ".github/workflows/d1-staging.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": null,
+      "producerScripts": [
+        "scripts/manage-d1-staging.mjs"
+      ]
+    },
+    {
+      "id": "ecclesiastical-directory-staging",
+      "title": "Bounded ecclesiastical directory staging",
+      "owner": "data-operations",
+      "mode": "manual",
+      "workflow": ".github/workflows/sync-ecclesiastical-directory.yml",
+      "crons": [],
+      "publicationMode": "staging-only",
+      "archiveStream": "ecclesiastical-directory/{source}",
+      "producerScripts": [
+        "scripts/sync-ecclesiastical-directory.mjs",
+        "scripts/build-ecclesiastical-staging-sql.mjs"
+      ]
+    }
   ]
 }
