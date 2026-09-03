@@ -10,7 +10,7 @@ on:
       - 'scripts/dropbox/**'
       - '.github/workflows/autonomous-osint-acquisition.yml'
   schedule:
-    - cron: '47 2 * * 3'
+    - cron: '47 2 20 * *'
   workflow_dispatch:
 
 permissions:
