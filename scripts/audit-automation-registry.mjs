@@ -13,6 +13,19 @@ function workflowCrons(source) {
   return [...source.matchAll(/-\s+cron:\s*['"]([^'"]+)['"]/g)].map((match) => match[1]).sort();
 }
 
+export function isAtMostWeeklyCron(expression) {
+  const fields = String(expression ?? '').trim().split(/\s+/u);
+  if (fields.length !== 5) return false;
+  const [minute, hour, dayOfMonth, month, dayOfWeek] = fields;
+  const number = (value, minimum, maximum) =>
+    /^\d+$/u.test(value) && Number(value) >= minimum && Number(value) <= maximum;
+  if (!number(minute, 0, 59) || !number(hour, 0, 23)) return false;
+  if (month !== '*' && !number(month, 1, 12)) return false;
+  const monthlyOrLess = number(dayOfMonth, 1, 31) && dayOfWeek === '*';
+  const weeklyOrLess = dayOfMonth === '*' && number(dayOfWeek, 0, 7);
+  return monthlyOrLess || weeklyOrLess;
+}
+
 export function discoverAutomationInventory(root = process.cwd()) {
   const workflowRoot = path.join(root, '.github', 'workflows');
   const workflows = new Map();
@@ -46,6 +59,7 @@ export function validateAutomationRegistry(registry, inventory) {
   if (registry?.policy?.requestTimeExternalAcquisition !== false) errors.push('Request-time external acquisition must remain disabled.');
   if (registry?.policy?.editorialTextRequiresHumanApproval !== true) errors.push('Editorial text must require human approval.');
   if (registry?.policy?.sourceFailuresAreReviewCandidatesOnly !== true) errors.push('Source failures must remain review candidates only.');
+  if (registry?.policy?.scheduledTasksAtMostWeekly !== true) errors.push('Recurring scheduled tasks must remain at most weekly.');
 
   const generatedPublicationPaths = Array.isArray(registry?.policy?.automaticGeneratedRegistryWrites)
     ? registry.policy.automaticGeneratedRegistryWrites
@@ -81,6 +95,12 @@ export function validateAutomationRegistry(registry, inventory) {
       }
       if (task.mode === 'scheduled' && workflow.crons.length === 0) errors.push(`${prefix} is scheduled but has no cron.`);
       if (task.mode !== 'scheduled' && workflow.crons.length > 0) errors.push(`${prefix} is not scheduled but declares a cron.`);
+      if (task.mode === 'scheduled' && registry.policy.scheduledTasksAtMostWeekly === true) {
+        if (declaredCrons.length !== 1) errors.push(`${prefix} must have exactly one at-most-weekly cron.`);
+        for (const cron of declaredCrons) {
+          if (!isAtMostWeeklyCron(cron)) errors.push(`${prefix} exceeds the at-most-weekly cadence: ${cron}.`);
+        }
+      }
     }
 
     if (task.mode === 'scheduled' && task.publicationMode === 'staging-only' && !task.archiveStream) {

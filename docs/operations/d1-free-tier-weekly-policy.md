@@ -60,10 +60,17 @@ The Cloudflare notice received on 2026-08-24 reported that the account regularly
 
 The account-wide D1 guard must take precedence over workflow-local values. In particular, a workflow-local `D1_MAX_OPERATIONS_PER_DAY=20` must never be able to override the global one-operation Free-tier safety boundary.
 
+## Implemented cadence controls
+
+- every recurring root task in the reviewed automation registry is limited to one weekly or monthly cron;
+- previously hourly, quarter-hourly, six-hourly and daily static-source jobs now run once per week;
+- successful weekly roots may still drive bounded event-based stages, without independent polling;
+- the automation audit rejects any future recurring schedule that exceeds the at-most-weekly boundary;
+- production writes remain explicit and fail-closed.
+
 ## Next implementation items
 
-- remove redundant hourly schedules from the baseline acquisition/normalisation/review/import chain and let one weekly trigger drive downstream `workflow_run` stages;
-- reduce D1-heavy production health verification to weekly or replace it with static/edge verification;
+- consolidate overlapping Wikidata lanes when consumer and evidence-equivalence proofs permit deletion;
 - measure actual `rows_read` and `rows_written` from remote D1 receipts where available, rather than relying only on estimates;
 - migrate stable public calendar reads toward an approved static read model once semantic-equivalence tests prove no product regression;
 - keep production writes explicit and fail-closed.

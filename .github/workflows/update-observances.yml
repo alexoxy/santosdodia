@@ -2,7 +2,7 @@ name: Prepare observance staging package
 
 on:
   schedule:
-    - cron: '15 4 * * 1'
+    - cron: '15 5 * * 1'
   workflow_dispatch:
 
 permissions:
