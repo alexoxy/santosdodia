@@ -2,7 +2,7 @@ name: Build Saints navigation exports
 
 on:
   schedule:
-    - cron: '31 8 * * 1'
+    - cron: '31 8 16 * *'
   workflow_dispatch:
   push:
     branches:

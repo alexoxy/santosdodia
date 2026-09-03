@@ -26,6 +26,19 @@ export function isAtMostWeeklyCron(expression) {
   return monthlyOrLess || weeklyOrLess;
 }
 
+export function isAtMostMonthlyCron(expression) {
+  const fields = String(expression ?? '').trim().split(/\s+/u);
+  if (fields.length !== 5) return false;
+  const [minute, hour, dayOfMonth, month, dayOfWeek] = fields;
+  const number = (value, minimum, maximum) =>
+    /^\d+$/u.test(value) && Number(value) >= minimum && Number(value) <= maximum;
+  return number(minute, 0, 59)
+    && number(hour, 0, 23)
+    && number(dayOfMonth, 1, 31)
+    && (month === '*' || number(month, 1, 12))
+    && dayOfWeek === '*';
+}
+
 export function discoverAutomationInventory(root = process.cwd()) {
   const workflowRoot = path.join(root, '.github', 'workflows');
   const workflows = new Map();
@@ -53,13 +66,26 @@ function sameValues(left, right) {
 
 export function validateAutomationRegistry(registry, inventory) {
   const errors = [];
-  if (registry?.schemaVersion !== 1) errors.push('Registry schemaVersion must be 1.');
+  if (registry?.schemaVersion !== 2) errors.push('Registry schemaVersion must be 2.');
   if (registry?.timezone !== 'UTC') errors.push('Automation registry timezone must remain UTC.');
   if (registry?.policy?.automaticProductionWrites !== false) errors.push('Automatic production writes must remain disabled.');
   if (registry?.policy?.requestTimeExternalAcquisition !== false) errors.push('Request-time external acquisition must remain disabled.');
   if (registry?.policy?.editorialTextRequiresHumanApproval !== true) errors.push('Editorial text must require human approval.');
   if (registry?.policy?.sourceFailuresAreReviewCandidatesOnly !== true) errors.push('Source failures must remain review candidates only.');
   if (registry?.policy?.scheduledTasksAtMostWeekly !== true) errors.push('Recurring scheduled tasks must remain at most weekly.');
+  if (registry?.policy?.staticAcquisitionAtMostMonthly !== true) errors.push('Static acquisition tasks must remain at most monthly.');
+
+  const weeklyExceptionTaskIds = Array.isArray(registry?.policy?.weeklyExceptionTaskIds)
+    ? registry.policy.weeklyExceptionTaskIds
+    : [];
+  const allowedWeeklyExceptions = new Set(['production-health', 'source-freshness']);
+  for (const id of weeklyExceptionTaskIds) {
+    if (!allowedWeeklyExceptions.has(id)) errors.push(`Unapproved weekly cadence exception: ${String(id)}.`);
+  }
+  for (const duplicate of duplicates(weeklyExceptionTaskIds)) errors.push(`Duplicate weekly cadence exception: ${duplicate}.`);
+  if (!sameValues(weeklyExceptionTaskIds, [...allowedWeeklyExceptions])) {
+    errors.push('Weekly cadence exceptions must remain exactly production-health and source-freshness.');
+  }
 
   const generatedPublicationPaths = Array.isArray(registry?.policy?.automaticGeneratedRegistryWrites)
     ? registry.policy.automaticGeneratedRegistryWrites
@@ -101,6 +127,16 @@ export function validateAutomationRegistry(registry, inventory) {
           if (!isAtMostWeeklyCron(cron)) errors.push(`${prefix} exceeds the at-most-weekly cadence: ${cron}.`);
         }
       }
+      if (
+        task.mode === 'scheduled'
+        && registry.policy.staticAcquisitionAtMostMonthly === true
+        && !weeklyExceptionTaskIds.includes(task.id)
+      ) {
+        if (declaredCrons.length !== 1) errors.push(`${prefix} must have exactly one monthly cron.`);
+        for (const cron of declaredCrons) {
+          if (!isAtMostMonthlyCron(cron)) errors.push(`${prefix} exceeds the monthly static-acquisition cadence: ${cron}.`);
+        }
+      }
     }
 
     if (task.mode === 'scheduled' && task.publicationMode === 'staging-only' && !task.archiveStream) {
@@ -135,7 +171,7 @@ export function validateAutomationRegistry(registry, inventory) {
   }
 
   const freshness = tasks.find((task) => task.id === 'source-freshness');
-  if (!freshness) errors.push('Weekly source-freshness task is missing.');
+  if (!freshness) errors.push('Source-freshness task is missing.');
   else if (freshness.publicationMode !== 'staging-only' || freshness.archiveStream !== 'source-freshness') {
     errors.push('Source freshness must remain a staging-only review report.');
   }

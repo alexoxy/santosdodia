@@ -1,6 +1,6 @@
 # SantosDia — first-party editorial content policy
 
-_Last updated: 2026-08-29_
+_Last updated: 2026-09-03_
 
 ## Purpose
 
@@ -147,5 +147,11 @@ The governing distinction is:
 Accordingly, `noindex,follow` is a search-quality control, not a deletion instruction. Daily chronological pages may remain fully navigable and useful while excluded from the sitemap. Calendar and calculator tools may remain available even if their main purpose is utility rather than editorial acquisition.
 
 The AdSense low-value-content remediation must therefore add first-party editorial depth and curate the indexed footprint without reducing liturgical coverage, chronological navigation or the initial SantosDia toolset.
+
+## 12. Honest capability and localization readiness
+
+A complete architecture, a preview dataset or an available endpoint does not by itself justify a public claim that a calendar, Church, jurisdiction or locale is ready. Public subscription calls to action require verified authority coverage, tradition-specific semantics, reviewed localization and parity across visible HTML, JSON and ICS.
+
+Incomplete contexts may remain useful reviewed previews, clearly labelled as such and kept out of the indexed acquisition footprint. Mass translation of a thin page does not create original value. Locale expansion must preserve independent editorial review and must not silently fall back to another language.
 
 The normative strategic clarification is recorded in `docs/product/global-liturgical-intelligence-v2.1-addendum-2026-08-29.md`.

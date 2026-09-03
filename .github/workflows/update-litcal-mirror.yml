@@ -4,7 +4,7 @@ name: Prepare LitCal staging package
 # validated artifact for Dropbox staging, editorial review and later DB promotion.
 on:
   schedule:
-    - cron: '35 3 * * 2'
+    - cron: '35 3 18 * *'
   workflow_dispatch:
   push:
     branches: [main]

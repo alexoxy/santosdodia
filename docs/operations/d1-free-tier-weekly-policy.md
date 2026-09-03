@@ -1,6 +1,6 @@
 # SantosDia — D1 Free-tier Weekly Operating Policy
 
-Effective: 2026-08-24
+Effective: 2026-09-03
 
 ## Binding rule
 
@@ -18,6 +18,12 @@ Internal operating targets must remain materially below those ceilings.
 The public liturgical and saints corpus is predominantly static. A new saint, feast, decree, calendar correction or reviewed editorial change is an exception, not a daily event. The system therefore does not need hourly or daily D1 ingestion merely because the civil date changes.
 
 The civil date selects already-approved content. It does not create new content.
+
+## Acquisition cadence versus D1 ceiling
+
+Static corpus acquisition and regeneration normally run **once per month, distributed across the month**. The weekly D1 window below is a hard safety ceiling for the few autonomous staging chains that may be triggered by reviewed/event-driven work; it is not the target cadence and does not authorize a weekly full-corpus refresh.
+
+After bootstrap completeness is recorded for a source/context, repeated full sweeps are prohibited unless a repair, authority migration or policy change is documented. Routine maintenance is delta-only.
 
 ## Weekly D1 cycle
 
@@ -38,7 +44,7 @@ A future static read-model cutover must preserve semantic equivalence with the c
 
 ## Verification cadence
 
-Routine checks of static calendar content should be weekly. Hourly polling is inappropriate unless a specific source is genuinely time-sensitive and has an explicit exception documented with a cost/risk justification.
+Heavy checks of static calendar content should be monthly and distributed. Lightweight source freshness and production-health checks may remain weekly. Hourly polling is inappropriate unless a specific source is genuinely time-sensitive and has an explicit exception documented with a cost/risk justification.
 
 Health checks may remain lightweight and frequent only when they do not consume meaningful D1 rows. Any D1-heavy health probe, full-year feed verification or staging import must follow the weekly policy.
 
@@ -62,10 +68,11 @@ The account-wide D1 guard must take precedence over workflow-local values. In pa
 
 ## Implemented cadence controls
 
-- every recurring root task in the reviewed automation registry is limited to one weekly or monthly cron;
-- previously hourly, quarter-hourly, six-hourly and daily static-source jobs now run once per week;
-- successful weekly roots may still drive bounded event-based stages, without independent polling;
-- the automation audit rejects any future recurring schedule that exceeds the at-most-weekly boundary;
+- every static/heavy acquisition root in the reviewed automation registry is limited to one monthly cron;
+- monthly roots are spread across separate dates instead of forming a single request spike;
+- only lightweight production health and source freshness/verified Live remain weekly;
+- successful monthly roots may still drive bounded event-based stages, without independent polling;
+- the automation audit rejects static acquisition above monthly cadence and rejects any recurring schedule above the weekly ceiling;
 - production writes remain explicit and fail-closed.
 
 ## Next implementation items

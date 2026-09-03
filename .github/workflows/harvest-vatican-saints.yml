@@ -2,7 +2,7 @@ name: Harvest Vatican daily saints
 
 on:
   schedule:
-    - cron: '11 9 * * 4'
+    - cron: '11 9 22 * *'
   workflow_dispatch:
     inputs:
       scope:

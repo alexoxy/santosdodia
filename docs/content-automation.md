@@ -2,7 +2,7 @@
 
 _Last updated: 2026-09-03_
 
-`config/automation-registry.json` is the reviewed inventory of SantosDia workflows, schedules, owners, publication modes, archive streams and producer entrypoints. The Quality gate validates it on every pull request.
+`config/automation-registry.json` is the reviewed inventory of SantosDia workflows, schedules, owners, publication modes, archive streams and producer entrypoints. The Quality gate validates it on every pull request. The active data phase is bounded bootstrap/backfill; once completeness is proven for a source/context, its maintenance path becomes monthly delta-only.
 
 The normative editorial boundary is defined in `docs/editorial-content-policy.md`. External sources are research/evidence inputs; substantive public prose is a first-party SantosDia artifact stored in a SantosDia-controlled repository or approved first-party data store before publication.
 
@@ -74,28 +74,40 @@ A public profile should not become indexable merely because a source has enough 
 - Dropbox is a bounded recovery archive and staging layer, not an operational database or the public editorial source of truth.
 - Source failures create review candidates. They do not delete records, rewrite editorial copy or change production automatically.
 
+## Acquisition lifecycle
+
+1. **Bootstrap/backfill:** consume the approved source backlog in bounded resumable chunks and preserve a completeness receipt per authority/context/locale.
+2. **Evidence memory:** keep immutable permitted raw releases in Dropbox; where reuse rights do not permit raw retention, store metadata, reference, hash, retrieval receipt and normalized factual claims.
+3. **Canonicalization:** reconcile identities, Church competence, jurisdiction, native calendar semantics and provenance before materialization.
+4. **Durable publication:** generate first-party calendar, API, ICS and editorial candidates from SantosDia-controlled knowledge. Public requests never call the source.
+5. **Maintenance:** after a completeness receipt, stop full-corpus sweeps and run monthly distributed delta checks. A specific official change may trigger one bounded reviewed event.
+6. **Failure:** retain last-known-good and create review work; never delete or rewrite production from a failed fetch.
+
+“Maximum data” means maximum useful, lawful and attributable evidence, not indiscriminate prose copying. Bots are named pipeline roles backed by deterministic scripts where possible; adding overlapping workflows is not scale.
+
 ## Scheduled work
 
-Every recurring root task is limited to one weekly or monthly run. Event-driven stages may continue a successful weekly root cycle, but they do not add independent polling. Pull-request CI remains event-driven and is not an acquisition or D1 schedule.
+Heavy/static acquisition roots run once per month and are intentionally distributed across the month. Only lightweight production health and source freshness/verified Live remain weekly. Event-driven stages may continue a successful root cycle, but do not add independent polling. Pull-request CI remains event-driven and is not an acquisition or D1 schedule.
 
 | Task | UTC schedule | Output |
 |---|---:|---|
-| Source freshness | Sunday 08:29 | review-only report |
-| Global source orchestrator | Monday 00:02 | bounded source-policy decisions |
-| Saints Baseline acquisition | Monday 01:17 | immutable recognition-v1 candidate batch and downstream reviewed D1 staging chain |
-| Saints profile enrichment | Monday 03:07 | bounded exact-QID profile/geography evidence |
-| Saints multilingual labels | Monday 04:13 | bounded multilingual label evidence |
-| Observance staging | Monday 05:15 | Dropbox staging package |
-| Ecclesiastical OSINT | Monday 06:17 | Dropbox candidate package |
-| Saints identity ledger | Monday 07:23 | cross-batch identity evidence |
-| Saints navigation exports | Monday 08:31 | maps, timelines, calendar exports and Portugal review queues |
-| Production health | Monday 09:17 | read-only probes |
-| LitCal staging | Tuesday 03:35 | Dropbox staging package |
-| Saints autonomous acquisition | Wednesday 02:47 | immutable Wikidata raw package; downstream event workflows continue normalization, language review, fail-closed D1 staging, publication classification and corroboration |
-| Vatican saint metadata | Thursday 09:11 | immutable Vatican raw/normalized package; successful runs trigger reviewed-binding evidence generation |
-| Causes of Saints metadata | day 1 monthly, 03:17 | immutable primary-source metadata staging |
+| Causes of Saints metadata | day 1, 03:17 | immutable primary-source metadata staging |
+| Global source orchestrator | day 2, 00:02 | bounded source-policy decisions |
+| Saints Baseline acquisition | day 4, 01:17 | immutable recognition-v1 candidate batch and downstream reviewed D1 staging chain |
+| Saints profile enrichment | day 6, 03:07 | bounded exact-QID profile/geography evidence |
+| Saints multilingual labels | day 8, 04:13 | bounded multilingual label evidence |
+| Observance staging | day 10, 05:15 | Dropbox staging package |
+| Ecclesiastical OSINT | day 12, 06:17 | Dropbox candidate package |
+| Saints identity ledger | day 14, 07:23 | cross-batch identity evidence |
+| Saints navigation exports | day 16, 08:31 | maps, timelines, calendar exports and Portugal review queues |
+| LitCal staging | day 18, 03:35 | Dropbox staging package |
+| Saints autonomous acquisition | day 20, 02:47 | immutable Wikidata raw package and bounded downstream chain |
+| Vatican saint metadata | day 22, 09:11 | immutable Vatican evidence and reviewed-binding chain |
+| Source freshness | Sunday 08:29 | lightweight review-only report and verified Live trigger |
+| Production health | Monday 09:17 | lightweight read-only probes |
 
 The freshness audit checks at most 60 HTTPS URLs per run, with four concurrent requests and a 15-second timeout. Unreachable URLs remain review candidates and never trigger automatic deletion.
+
 ## Publication progression
 
 The safe progression is deliberately staged:
