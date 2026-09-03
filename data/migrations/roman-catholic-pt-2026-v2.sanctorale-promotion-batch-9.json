@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-9.json",
+  "reviewDigestSha256": "7af9e680eee683ef89129c227da0a2f0dfd98a5491eabda51601c1ec95f5bb52",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "hilary-poitiers",
+    "anselm-canterbury",
+    "ephrem-syrian",
+    "peter-chrysologus",
+    "john-damascene"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 126,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 263
+  },
+  "fixedSanctoraleMappingDigestSha256": "3a9014989be93ca43f6df83940f72c5b80a95f94e0dc0288880c5076964229cf",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-03"
+}

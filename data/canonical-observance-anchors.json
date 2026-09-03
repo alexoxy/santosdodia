@@ -1826,6 +1826,156 @@
         }
       ],
       "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "observance:hilary-poitiers:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "hilary-poitiers",
+          "recognitionId": "recognition:hilary-poitiers:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/13/st--hilary-of-poitiers--bishop-and-doctor-.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "observance:anselm-canterbury:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "anselm-canterbury",
+          "recognitionId": "recognition:anselm-canterbury:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/21/st-anselm--archbishop-of--canterbury-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "observance:ephrem-syrian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "ephrem-syrian",
+          "recognitionId": "recognition:ephrem-syrian:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/09/st--ephrem--deacon-and-doctor--of-the-church.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "observance:peter-chrysologus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "peter-chrysologus",
+          "recognitionId": "recognition:peter-chrysologus:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/30/st--peter-chrysologus--bishop-of--ravenna-and-doctor-of-the-chur.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "observance:john-damascene:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "john-damascene",
+          "recognitionId": "recognition:john-damascene:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/04/st--john--damasceno--priest-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }

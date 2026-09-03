@@ -26,12 +26,12 @@
     "occurrenceModelVersion": "1.0"
   },
   "coverage": {
-    "explicitOccurrenceAnchors": 58,
+    "explicitOccurrenceAnchors": 63,
     "temporalRuleShadowOccurrences": 5,
     "temporalRuleFamilyShadowOccurrences": 47,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 121,
-    "remainingLegacyOccurrences": 268,
+    "mappedOccurrenceAnchors": 126,
+    "remainingLegacyOccurrences": 263,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -54,7 +54,8 @@
     "noAutomaticCanonicalIdentityCreation": true,
     "noD1MutationBeforeFullCoverage": true,
     "noRuntimeSwitchBeforeFullCoverage": true,
-    "noDropboxPromotionImplied": true
+    "noDropboxPromotionImplied": true,
+    "legacyOptionalMemorialRequiresOfficialSourceCodeMF": true
   },
   "verifiedAt": "2026-09-03"
 }

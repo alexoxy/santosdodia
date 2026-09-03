@@ -1396,6 +1396,126 @@
         }
       ],
       "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-01-13:hilary-poitiers:roman-catholic:pt",
+      "observanceId": "observance:hilary-poitiers:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-13",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-13",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Hilário, bispo e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-04-21:anselm-canterbury:roman-catholic:pt",
+      "observanceId": "observance:anselm-canterbury:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-21",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-21",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Anselmo, bispo e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-06-09:ephrem-syrian:roman-catholic:pt",
+      "observanceId": "observance:ephrem-syrian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-09",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-9",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Efrém, diácono e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-07-30:peter-chrysologus:roman-catholic:pt",
+      "observanceId": "observance:peter-chrysologus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-30",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-30",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pedro Crisólogo, bispo e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-12-04:john-damascene:roman-catholic:pt",
+      "observanceId": "observance:john-damascene:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-12-04",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-4",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. João Damasceno, presbítero e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }
