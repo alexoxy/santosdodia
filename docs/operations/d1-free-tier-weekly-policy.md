@@ -72,7 +72,7 @@ The account-wide D1 guard must take precedence over workflow-local values. In pa
 - monthly roots are spread across separate dates instead of forming a single request spike;
 - only lightweight production health and source freshness/verified Live remain weekly;
 - successful monthly roots may still drive bounded event-based stages, without independent polling;
-- the automation audit rejects any future recurring schedule that exceeds the at-most-weekly boundary;
+- the automation audit rejects static acquisition above monthly cadence and rejects any recurring schedule above the weekly ceiling;
 - production writes remain explicit and fail-closed.
 
 ## Next implementation items
