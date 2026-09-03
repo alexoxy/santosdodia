@@ -12,6 +12,7 @@ const LISBON_ELIZABETH_PORTUGAL = 'https://www.patriarcado-lisboa.pt/site/index.
 const VATICAN_GREGORY = 'https://www.vaticannews.va/en/saints/09/03/st--gregory-the-great--pope-and-doctor-of-the-church.html';
 const VATICAN_GREGORY_PT = 'https://www.vaticannews.va/pt/santo-do-dia/09/03/s--gregorio-magno--papa-e-doutor-da-igreja.html';
 const HOLY_SEE_GREGORY = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2008/documents/hf_ben-xvi_aud_20080528.html';
+const HOLY_SEE_GREGORY_TEACHING = 'https://www.vatican.va/content/benedict-xvi/en/audiences/2008/documents/hf_ben-xvi_aud_20080604.html';
 
 const matthew: SaintBiography = {
   id: 'matthew-apostle',
@@ -316,6 +317,7 @@ const gregoryGreat: SaintBiography = {
     { name: 'St. Gregory the Great, pope and Doctor of the Church', url: VATICAN_GREGORY, language: 'en', publisher: 'Vatican News' },
     { name: 'S. Gregório Magno, papa e doutor da Igreja', url: VATICAN_GREGORY_PT, language: 'pt', publisher: 'Vatican News' },
     { name: 'Saint Gregory the Great', url: HOLY_SEE_GREGORY, language: 'en', publisher: 'Holy See' },
+    { name: 'Saint Gregory the Great — teaching and legacy', url: HOLY_SEE_GREGORY_TEACHING, language: 'en', publisher: 'Holy See' },
   ],
   verifiedAt: '2026-09-03',
 };
