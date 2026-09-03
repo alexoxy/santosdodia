@@ -96,8 +96,8 @@ try {
   assert.equal(firstPointer.rootSha256, first.built.manifest.rootSha256);
   assert.equal(firstPointer.recognitionCount, first.built.manifest.recognitionCount);
   assert.equal(firstPointer.personCoverageCount, first.built.manifest.personCoverageCount);
-  assert.equal(firstPointer.recognitionCount, 62);
-  assert.equal(firstPointer.personCoverageCount, 61);
+  assert.equal(firstPointer.recognitionCount, 67);
+  assert.equal(firstPointer.personCoverageCount, 66);
   assert.deepEqual(firstPointer.churches, ['church:orthodox-church-america', 'church:roman-catholic']);
   assert.ok(!('peopleCount' in firstPointer), 'Recognition pointer leaked Person-specific count semantics.');
   assert.ok(dropbox.uploads.every((item) => !item.path.includes('/canonical/people/v1/')), 'Recognition uploader touched Person Vault paths.');

@@ -706,6 +706,61 @@
         "es": "Santa Isabel de Hungría",
         "it": "Santa Elisabetta d'Ungheria"
       }
+    },
+    {
+      "category": "saint",
+      "id": "hilary-poitiers",
+      "names": {
+        "en": "Saint Hilary of Poitiers",
+        "es": "San Hilario de Poitiers",
+        "it": "Sant'Ilario di Poitiers",
+        "pt": "São Hilário de Poitiers"
+      },
+      "primaryObservanceId": "rc:StHilaryPoitiers"
+    },
+    {
+      "category": "saint",
+      "id": "anselm-canterbury",
+      "names": {
+        "en": "Saint Anselm of Canterbury",
+        "es": "San Anselmo de Canterbury",
+        "it": "Sant'Anselmo di Canterbury",
+        "pt": "Santo Anselmo de Cantuária"
+      },
+      "primaryObservanceId": "rc:StAnselm"
+    },
+    {
+      "category": "saint",
+      "id": "ephrem-syrian",
+      "names": {
+        "en": "Saint Ephrem the Syrian",
+        "es": "San Efrén de Siria",
+        "it": "Sant'Efrem il Siro",
+        "pt": "Santo Efrém"
+      },
+      "primaryObservanceId": "rc:StEphrem"
+    },
+    {
+      "category": "saint",
+      "id": "peter-chrysologus",
+      "names": {
+        "en": "Saint Peter Chrysologus",
+        "es": "San Pedro Crisólogo",
+        "it": "San Pietro Crisologo",
+        "pt": "São Pedro Crisólogo"
+      },
+      "primaryObservanceId": "rc:StPeterChrysologus"
+    },
+    {
+      "category": "saint",
+      "id": "john-damascene",
+      "names": {
+        "en": "Saint John Damascene",
+        "es": "San Juan Damasceno",
+        "it": "San Giovanni Damasceno",
+        "pt": "São João Damasceno"
+      },
+      "primaryObservanceId": "rc:StJohnDamascene"
     }
   ]
 }

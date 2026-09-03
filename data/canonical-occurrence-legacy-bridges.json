@@ -294,6 +294,31 @@
       "occurrenceId": "occurrence:2026-11-17:elizabeth-hungary:roman-catholic:pt",
       "legacyObservanceId": "rc:StElizabethHungary",
       "dateISO": "2026-11-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-13:hilary-poitiers:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHilaryPoitiers",
+      "dateISO": "2026-01-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-21:anselm-canterbury:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnselm",
+      "dateISO": "2026-04-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-09:ephrem-syrian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StEphrem",
+      "dateISO": "2026-06-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-30:peter-chrysologus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterChrysologus",
+      "dateISO": "2026-07-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-04:john-damascene:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnDamascene",
+      "dateISO": "2026-12-04"
     }
   ]
 }

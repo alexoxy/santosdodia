@@ -1751,6 +1751,146 @@
         }
       ],
       "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:hilary-poitiers:roman-catholic",
+      "personId": "hilary-poitiers",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/13/st--hilary-of-poitiers--bishop-and-doctor-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:anselm-canterbury:roman-catholic",
+      "personId": "anselm-canterbury",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "archbishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/21/st-anselm--archbishop-of--canterbury-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "archbishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:ephrem-syrian:roman-catholic",
+      "personId": "ephrem-syrian",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "deacon",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/09/st--ephrem--deacon-and-doctor--of-the-church.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "deacon",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:peter-chrysologus:roman-catholic",
+      "personId": "peter-chrysologus",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/30/st--peter-chrysologus--bishop-of--ravenna-and-doctor-of-the-chur.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "recognition:john-damascene:roman-catholic",
+      "personId": "john-damascene",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "doctor-of-the-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/12/04/st--john--damasceno--priest-and-doctor-of-the-church.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "doctor-of-the-church"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-03"
     }
   ]
 }
