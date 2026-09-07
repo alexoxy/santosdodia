@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "fabian-pope",
+        "primaryObservanceId": "rc:StFabianPope",
+        "category": "saint",
+        "names": {
+          "en": "Saint Fabian",
+          "pt": "São Fabião",
+          "es": "San Fabián",
+          "it": "San Fabiano"
+        }
+      },
+      "recognition": {
+        "id": "recognition:fabian-pope:roman-catholic",
+        "ecclesialTitles": [
+          "pope",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/20/pope-st-fabian--martyr-.html"
+      },
+      "observanceId": "observance:fabian-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:fabian-pope:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StFabianPope",
+        "sourceOccurrenceId": "snl-pt-2026-01-20-9f4215d36a51eb2d232186ee",
+        "sourceRecordHash": "240f07d10bf257b1bf33d2d557cfcaf6b2d3dcfbe3c113cf942d50caf900dcb3",
+        "dateISO": "2026-01-20",
+        "sourceLabelPt": "S. Fabião, papa e mártir",
+        "observedDesignation": "S. Fabião, papa e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-20"
+      }
+    },
+    {
+      "person": {
+        "id": "sebastian-martyr",
+        "primaryObservanceId": "rc:StSebastian",
+        "category": "saint",
+        "names": {
+          "en": "Saint Sebastian",
+          "pt": "São Sebastião",
+          "es": "San Sebastián",
+          "it": "San Sebastiano"
+        }
+      },
+      "recognition": {
+        "id": "recognition:sebastian-martyr:roman-catholic",
+        "ecclesialTitles": [
+          "soldier",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/20/st--sebastian--martyr.html"
+      },
+      "observanceId": "observance:sebastian-martyr:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:sebastian-martyr:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StSebastian",
+        "sourceOccurrenceId": "snl-pt-2026-01-20-178bbe7e79ca7099ce374eb2",
+        "sourceRecordHash": "bfa0b4cf618364931216e79beda4f7ff06a55e8965d4f56529526488ca5e2cbc",
+        "dateISO": "2026-01-20",
+        "sourceLabelPt": "S. Sebastião, mártir",
+        "observedDesignation": "S. Sebastião, mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-20"
+      }
+    },
+    {
+      "person": {
+        "id": "martin-i-pope",
+        "primaryObservanceId": "rc:StMartinPope",
+        "category": "saint",
+        "names": {
+          "en": "Saint Martin I",
+          "pt": "São Martinho I",
+          "es": "San Martín I",
+          "it": "San Martino I"
+        }
+      },
+      "recognition": {
+        "id": "recognition:martin-i-pope:roman-catholic",
+        "ecclesialTitles": [
+          "pope",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/13/st--martin-i--pope-and-martyr.html"
+      },
+      "observanceId": "observance:martin-i-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:martin-i-pope:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StMartinPope",
+        "sourceOccurrenceId": "snl-pt-2026-04-13-9c0af32eaf060b2c762b8a2e",
+        "sourceRecordHash": "5d058585e6f69043200f00a3dc4a2ef9d6855875f01aedc136c201db47e3faa9",
+        "dateISO": "2026-04-13",
+        "sourceLabelPt": "S. Martinho I, papa e mártir",
+        "observedDesignation": "S. Martinho I, papa e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-13"
+      }
+    },
+    {
+      "person": {
+        "id": "george-martyr",
+        "primaryObservanceId": "rc:StGeorge",
+        "category": "saint",
+        "names": {
+          "en": "Saint George",
+          "pt": "São Jorge",
+          "es": "San Jorge",
+          "it": "San Giorgio"
+        }
+      },
+      "recognition": {
+        "id": "recognition:george-martyr:roman-catholic",
+        "ecclesialTitles": [
+          "soldier",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/23/st--george--martyr.html"
+      },
+      "observanceId": "observance:george-martyr:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:george-martyr:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StGeorge",
+        "sourceOccurrenceId": "snl-pt-2026-04-23-a42b34e4b693cbca2d6db009",
+        "sourceRecordHash": "11fbe25bae62d58f86d16d24110d17b1a4777458bb17d9c1dafcaeeefc9cbca6",
+        "dateISO": "2026-04-23",
+        "sourceLabelPt": "S. Jorge, mártir",
+        "observedDesignation": "S. Jorge, mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-23"
+      }
+    },
+    {
+      "person": {
+        "id": "adalbert-prague",
+        "primaryObservanceId": "rc:StAdalbert",
+        "category": "saint",
+        "names": {
+          "en": "Saint Adalbert of Prague",
+          "pt": "Santo Adalberto de Praga",
+          "es": "San Adalberto de Praga",
+          "it": "Sant'Adalberto di Praga"
+        }
+      },
+      "recognition": {
+        "id": "recognition:adalbert-prague:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "missionary",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/23/st---adalbert--bishop-of-prague-and-martyr.html"
+      },
+      "observanceId": "observance:adalbert-prague:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:adalbert-prague:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAdalbert",
+        "sourceOccurrenceId": "snl-pt-2026-04-23-818be5e3d6e5deb51f10f9e7",
+        "sourceRecordHash": "4039ff43a4f10e335811c85db9eced06a539910f4b244454b7ee5cb946756384",
+        "dateISO": "2026-04-23",
+        "sourceLabelPt": "S. Adalberto, bispo e mártir",
+        "observedDesignation": "S. Adalberto, bispo e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-23"
+      }
+    }
+  ],
+  "reviewDigestSha256": "07f0008b0a8b273d2a287b608bbf89f6f7fac0a8db9c096e23896bdb8d985a90",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-07"
+}
