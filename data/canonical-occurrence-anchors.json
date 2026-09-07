@@ -1516,6 +1516,126 @@
         }
       ],
       "verifiedAt": "2026-09-03"
+    },
+    {
+      "id": "occurrence:2026-01-20:fabian-pope:roman-catholic:pt",
+      "observanceId": "observance:fabian-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-20",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-20",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Fabião, papa e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "occurrence:2026-01-20:sebastian-martyr:roman-catholic:pt",
+      "observanceId": "observance:sebastian-martyr:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-20",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-20",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Sebastião, mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "occurrence:2026-04-13:martin-i-pope:roman-catholic:pt",
+      "observanceId": "observance:martin-i-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-13",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-13",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Martinho I, papa e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "occurrence:2026-04-23:george-martyr:roman-catholic:pt",
+      "observanceId": "observance:george-martyr:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-23",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-23",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Jorge, mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "occurrence:2026-04-23:adalbert-prague:roman-catholic:pt",
+      "observanceId": "observance:adalbert-prague:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-23",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-23",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Adalberto, bispo e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-07"
     }
   ]
 }
