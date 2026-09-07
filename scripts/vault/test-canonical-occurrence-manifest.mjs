@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 63, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 63, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 68, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 68, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -61,6 +61,11 @@ assert(first.manifest.semantics.legacyBridgeIsNonCanonicalAndReadOnly === true, 
 assert(first.manifest.d1Projection.status === 'equivalence-shadow-only' && first.manifest.d1Projection.mutationAllowed === false, 'Occurrence D1 projection must remain shadow-only.');
 
 const expected = new Map([
+  ['observance:fabian-pope:roman-catholic', ['2026-01-20', 'optional-memorial', 'MF', 'rc:StFabianPope']],
+  ['observance:sebastian-martyr:roman-catholic', ['2026-01-20', 'optional-memorial', 'MF', 'rc:StSebastian']],
+  ['observance:martin-i-pope:roman-catholic', ['2026-04-13', 'optional-memorial', 'MF', 'rc:StMartinPope']],
+  ['observance:george-martyr:roman-catholic', ['2026-04-23', 'optional-memorial', 'MF', 'rc:StGeorge']],
+  ['observance:adalbert-prague:roman-catholic', ['2026-04-23', 'optional-memorial', 'MF', 'rc:StAdalbert']],
   ['observance:mary-mother-of-god:roman-catholic', ['2026-01-01', 'solemnity', 'SOLENIDADE', 'rc:MaryMotherOfGod']],
   ['observance:thomas-aquinas:roman-catholic', ['2026-01-28', 'obligatory-memorial', 'MO', 'rc:StThomasAquinas']],
   ['observance:saint-joseph:roman-catholic', ['2026-03-19', 'solemnity', 'SOLENIDADE', 'rc:StJoseph']],

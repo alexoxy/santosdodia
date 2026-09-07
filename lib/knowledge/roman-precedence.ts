@@ -54,9 +54,10 @@ export type RomanPrecedenceCandidate = {
 export type RomanPrecedenceDecision = {
   id: string;
   precedenceLevel: RomanPrecedenceLevel;
-  action: 'celebrate' | 'transfer-required' | 'omit' | 'unresolved-tie';
+  action: 'celebrate' | 'offer-as-option' | 'transfer-required' | 'omit' | 'unresolved-tie';
   reasonCode:
     | 'highest-precedence'
+    | 'optional-memorial-choice'
     | 'solemnity-impeded-by-higher-precedence'
     | 'lower-precedence-omitted'
     | 'equal-highest-precedence-requires-policy';
@@ -64,7 +65,7 @@ export type RomanPrecedenceDecision = {
 
 export type RomanPrecedenceResolution = {
   modelVersion: '1.0';
-  status: 'empty' | 'resolved' | 'tie-requires-policy';
+  status: 'empty' | 'resolved' | 'optional-choice' | 'tie-requires-policy';
   winnerId: string | null;
   winningPrecedenceLevel: RomanPrecedenceLevel | null;
   decisions: RomanPrecedenceDecision[];
@@ -125,6 +126,25 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
 
   const winningPrecedenceLevel = Math.min(...normalized.map(candidate => candidate.precedenceLevel)) as RomanPrecedenceLevel;
   const top = normalized.filter(candidate => candidate.precedenceLevel === winningPrecedenceLevel);
+
+  if (top.length > 1 && top.every(candidate => candidate.precedenceClass === 'optional-memorial')) {
+    return {
+      modelVersion: '1.0',
+      status: 'optional-choice',
+      winnerId: null,
+      winningPrecedenceLevel,
+      decisions: normalized.map(candidate => ({
+        id: candidate.id,
+        precedenceLevel: candidate.precedenceLevel,
+        action: candidate.precedenceLevel === winningPrecedenceLevel ? 'offer-as-option' : 'omit',
+        reasonCode: candidate.precedenceLevel === winningPrecedenceLevel
+          ? 'optional-memorial-choice'
+          : 'lower-precedence-omitted'
+      })),
+      transferRule,
+      sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+    };
+  }
 
   if (top.length !== 1) {
     return {

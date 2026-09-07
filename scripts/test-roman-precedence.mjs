@@ -62,6 +62,14 @@ try {
   assert(equalFeasts.status === 'tie-requires-policy' && equalFeasts.winnerId === null, 'Equal highest precedence must fail closed rather than invent a winner.');
   assert(equalFeasts.decisions.filter(item => item.action === 'unresolved-tie').length === 2, 'All equal top candidates must remain explicitly unresolved.');
 
+  const optionalMemorials = precedence.resolveRomanPrecedence([
+    { id: 'optional-a', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'optional-b', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'weekday', precedenceClass: 'ordinary-weekday', isSolemnity: false }
+  ]);
+  assert(optionalMemorials.status === 'optional-choice' && optionalMemorials.winnerId === null, 'Multiple optional memorials must remain an explicit choice without an invented winner.');
+  assert(optionalMemorials.decisions.filter(item => item.action === 'offer-as-option').length === 2, 'Every equal optional memorial must remain available as a distinct option.');
+
   let duplicateRejected = false;
   try {
     precedence.resolveRomanPrecedence([

@@ -898,8 +898,78 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:fabian-pope:roman-catholic:pt",
+      "observanceId": "observance:fabian-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:fabian-pope:general-roman",
+      "legacyObservanceId": "rc:StFabianPope",
+      "expectedDateISO": "2026-01-20",
+      "sourceOccurrenceId": "snl-pt-2026-01-20-9f4215d36a51eb2d232186ee",
+      "sourceRecordHash": "240f07d10bf257b1bf33d2d557cfcaf6b2d3dcfbe3c113cf942d50caf900dcb3",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:sebastian-martyr:roman-catholic:pt",
+      "observanceId": "observance:sebastian-martyr:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:sebastian-martyr:general-roman",
+      "legacyObservanceId": "rc:StSebastian",
+      "expectedDateISO": "2026-01-20",
+      "sourceOccurrenceId": "snl-pt-2026-01-20-178bbe7e79ca7099ce374eb2",
+      "sourceRecordHash": "bfa0b4cf618364931216e79beda4f7ff06a55e8965d4f56529526488ca5e2cbc",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-13:martin-i-pope:roman-catholic:pt",
+      "observanceId": "observance:martin-i-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:martin-i-pope:general-roman",
+      "legacyObservanceId": "rc:StMartinPope",
+      "expectedDateISO": "2026-04-13",
+      "sourceOccurrenceId": "snl-pt-2026-04-13-9c0af32eaf060b2c762b8a2e",
+      "sourceRecordHash": "5d058585e6f69043200f00a3dc4a2ef9d6855875f01aedc136c201db47e3faa9",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:george-martyr:roman-catholic:pt",
+      "observanceId": "observance:george-martyr:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:george-martyr:general-roman",
+      "legacyObservanceId": "rc:StGeorge",
+      "expectedDateISO": "2026-04-23",
+      "sourceOccurrenceId": "snl-pt-2026-04-23-a42b34e4b693cbca2d6db009",
+      "sourceRecordHash": "11fbe25bae62d58f86d16d24110d17b1a4777458bb17d9c1dafcaeeefc9cbca6",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:adalbert-prague:roman-catholic:pt",
+      "observanceId": "observance:adalbert-prague:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:adalbert-prague:general-roman",
+      "legacyObservanceId": "rc:StAdalbert",
+      "expectedDateISO": "2026-04-23",
+      "sourceOccurrenceId": "snl-pt-2026-04-23-818be5e3d6e5deb51f10f9e7",
+      "sourceRecordHash": "4039ff43a4f10e335811c85db9eced06a539910f4b244454b7ee5cb946756384",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-09-03"
+  "verifiedAt": "2026-09-07"
 }

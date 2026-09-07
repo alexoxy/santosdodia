@@ -90,6 +90,15 @@ try {
   ]);
   assert(tie2026.unresolvedDates.includes('2026-09-21'), 'Equal highest precedence must keep the annual date unresolved rather than invent a winner.');
 
+  const optionalChoice2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [
+    { id: 'optional-a', dateISO: '2026-01-20', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'optional-b', dateISO: '2026-01-20', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false }
+  ]);
+  const optionalChoiceDay = optionalChoice2026.days.find(day => day.dateISO === '2026-01-20');
+  assert(!optionalChoice2026.unresolvedDates.includes('2026-01-20'), 'A valid optional-memorial choice must not block annual materialization.');
+  assert(optionalChoiceDay?.celebratedCandidateId === null, 'An optional-memorial choice must not invent a celebrated candidate.');
+  assert(JSON.stringify(optionalChoiceDay?.optionalCandidateIds) === JSON.stringify(['optional-a', 'optional-b']), 'Distinct optional memorials must remain visible as ordered choices.');
+
   let outsideYearRejected = false;
   try {
     annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [

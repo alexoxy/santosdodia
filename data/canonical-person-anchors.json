@@ -761,6 +761,61 @@
         "pt": "São João Damasceno"
       },
       "primaryObservanceId": "rc:StJohnDamascene"
+    },
+    {
+      "id": "fabian-pope",
+      "primaryObservanceId": "rc:StFabianPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint Fabian",
+        "pt": "São Fabião",
+        "es": "San Fabián",
+        "it": "San Fabiano"
+      }
+    },
+    {
+      "id": "sebastian-martyr",
+      "primaryObservanceId": "rc:StSebastian",
+      "category": "saint",
+      "names": {
+        "en": "Saint Sebastian",
+        "pt": "São Sebastião",
+        "es": "San Sebastián",
+        "it": "San Sebastiano"
+      }
+    },
+    {
+      "id": "martin-i-pope",
+      "primaryObservanceId": "rc:StMartinPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint Martin I",
+        "pt": "São Martinho I",
+        "es": "San Martín I",
+        "it": "San Martino I"
+      }
+    },
+    {
+      "id": "george-martyr",
+      "primaryObservanceId": "rc:StGeorge",
+      "category": "saint",
+      "names": {
+        "en": "Saint George",
+        "pt": "São Jorge",
+        "es": "San Jorge",
+        "it": "San Giorgio"
+      }
+    },
+    {
+      "id": "adalbert-prague",
+      "primaryObservanceId": "rc:StAdalbert",
+      "category": "saint",
+      "names": {
+        "en": "Saint Adalbert of Prague",
+        "pt": "Santo Adalberto de Praga",
+        "es": "San Adalberto de Praga",
+        "it": "Sant'Adalberto di Praga"
+      }
     }
   ]
 }

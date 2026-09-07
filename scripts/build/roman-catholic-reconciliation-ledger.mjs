@@ -169,7 +169,6 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
 
   const anchorsByDate = new Map();
   for (const anchor of occurrenceDataset.occurrences.filter(item => item.year === year && item.jurisdictionId === 'jurisdiction:roman-catholic:pt')) {
-    assert(!anchorsByDate.has(anchor.dateISO), `Multiple reviewed occurrence anchors exist on ${anchor.dateISO}; precedence must be resolved first.`);
     assert(Array.isArray(anchor.evidence) && anchor.evidence.length > 0 && anchor.evidence.every(item => isOfficialUrl(item.url)), `Occurrence ${anchor.id} lacks competent Portugal authority evidence.`);
     const rule = rulesByObservance.get(anchor.observanceId);
     assert(rule, `Occurrence ${anchor.id} has no reviewed perennial rule.`);
@@ -184,9 +183,12 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     assert(rankExact || rankRefinement, `Fixed Sanctorale mapping ${anchor.id} has an unreviewed rank refinement.`);
     assert(mapping.sourceOccurrenceId.startsWith(`snl-pt-${anchor.dateISO}-`), `Fixed Sanctorale mapping ${anchor.id} lacks its exact Portugal source occurrence.`);
     assert(mapping.reviewStatus === 'source-bound-exact' && mapping.resolution === 'exact-fixed-date-binding', `Fixed Sanctorale mapping ${anchor.id} lacks an exact reviewed outcome.`);
-    anchorsByDate.set(anchor.dateISO, { anchor, rule, mapping });
+    const sameDate = anchorsByDate.get(anchor.dateISO) ?? [];
+    sameDate.push({ anchor, rule, mapping });
+    anchorsByDate.set(anchor.dateISO, sameDate);
   }
-  assert(fixedMappingsByOccurrence.size === anchorsByDate.size, 'Fixed Sanctorale shadow must bind every and only reviewed annual anchor.');
+  const anchoredOccurrenceCount = [...anchorsByDate.values()].reduce((total, bindings) => total + bindings.length, 0);
+  assert(fixedMappingsByOccurrence.size === anchoredOccurrenceCount, 'Fixed Sanctorale shadow must bind every and only reviewed annual anchor.');
 
   const temporalRulesById = new Map();
   for (const rule of temporalRuleDataset.rules) {
@@ -458,6 +460,22 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       },
       ...(movable.transfer ? { jurisdictionTransfer: movable.transfer } : {})
     };
+    const fixedOptions = fixed.map(item => ({
+      canonicalOccurrenceId: item.anchor.id,
+      canonicalObservanceId: item.anchor.observanceId,
+      perennialRuleId: item.rule.id,
+      liturgicalRank: item.anchor.rank,
+      authorityEvidence: item.anchor.evidence.map(evidence => evidence.url),
+      sourceBinding: {
+        releaseId: fixedSanctoraleShadow.sourceReleaseId,
+        legacyObservanceId: item.mapping.legacyObservanceId,
+        sourceOccurrenceId: item.mapping.sourceOccurrenceId,
+        sourceRecordHash: item.mapping.sourceRecordHash,
+        reviewStatus: item.mapping.reviewStatus,
+        resolution: item.mapping.resolution
+      }
+    }));
+    const singleFixed = fixedOptions.length === 1 ? fixedOptions[0] : null;
     return {
       dateISO,
       officialLabel: String(official.label).normalize('NFC').trim(),
@@ -466,19 +484,8 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       classification: 'fixed-sanctorale',
       sourceBound: true,
       releaseEquivalent: true,
-      canonicalOccurrenceId: fixed.anchor.id,
-      canonicalObservanceId: fixed.anchor.observanceId,
-      perennialRuleId: fixed.rule.id,
-      liturgicalRank: fixed.anchor.rank,
-      authorityEvidence: fixed.anchor.evidence.map(item => item.url),
-      sourceBinding: {
-        releaseId: fixedSanctoraleShadow.sourceReleaseId,
-        legacyObservanceId: fixed.mapping.legacyObservanceId,
-        sourceOccurrenceId: fixed.mapping.sourceOccurrenceId,
-        sourceRecordHash: fixed.mapping.sourceRecordHash,
-        reviewStatus: fixed.mapping.reviewStatus,
-        resolution: fixed.mapping.resolution
-      }
+      fixedOptions,
+      ...(singleFixed ?? {})
     };
   });
 
@@ -487,15 +494,17 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     temporale: entries.filter(item => item.classification === 'temporale').length,
     temporalRules: entries.filter(item => item.classification === 'temporale' && item.temporalBindingType !== 'rule-family-member').length,
     temporalFamilyMembers: entries.filter(item => item.temporalBindingType === 'rule-family-member').length,
-    fixedSanctorale: entries.filter(item => item.classification === 'fixed-sanctorale').length,
+    fixedSanctorale: entries.reduce((total, item) => total + (item.fixedOptions?.length ?? 0), 0),
+    fixedSanctoraleDays: entries.filter(item => item.classification === 'fixed-sanctorale').length,
     movableOrTransfer: entries.filter(item => item.classification === 'movable-or-transfer').length,
     unresolved: entries.filter(item => item.classification === 'unresolved').length,
-    sourceBound: entries.filter(item => item.sourceBound).length
+    sourceBound: entries.filter(item => item.sourceBound).length,
+    sourceBoundOccurrences: entries.reduce((total, item) => total + (item.sourceBound ? (item.fixedOptions?.length ?? 1) : 0), 0)
   };
   assert(counts.officialOccurrences === expectedDays, 'Ledger does not cover every official daily occurrence.');
   return {
     schemaVersion: 1,
-    ledgerModelVersion: '1.0',
+    ledgerModelVersion: '1.1',
     churchId: 'church:roman-catholic',
     jurisdictionId: 'jurisdiction:roman-catholic:pt',
     calendarSystem: 'gregorian',
@@ -509,6 +518,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       sourceBoundCanonicalOccurrenceRequired: true,
       temporalFamilyCandidateRequiresPrecedenceResolution: true,
       approvedTransferDecisionRequired: true,
+      sameDateOptionalMemorialsRemainDistinct: true,
       unresolvedRemainsFailClosed: true
     },
     counts,

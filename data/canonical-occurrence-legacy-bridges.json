@@ -319,6 +319,31 @@
       "occurrenceId": "occurrence:2026-12-04:john-damascene:roman-catholic:pt",
       "legacyObservanceId": "rc:StJohnDamascene",
       "dateISO": "2026-12-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:fabian-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFabianPope",
+      "dateISO": "2026-01-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:sebastian-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSebastian",
+      "dateISO": "2026-01-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-13:martin-i-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartinPope",
+      "dateISO": "2026-04-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:george-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StGeorge",
+      "dateISO": "2026-04-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:adalbert-prague:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAdalbert",
+      "dateISO": "2026-04-23"
     }
   ]
 }

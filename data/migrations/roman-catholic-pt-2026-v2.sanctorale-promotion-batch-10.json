@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-10.json",
+  "reviewDigestSha256": "07f0008b0a8b273d2a287b608bbf89f6f7fac0a8db9c096e23896bdb8d985a90",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "fabian-pope",
+    "sebastian-martyr",
+    "martin-i-pope",
+    "george-martyr",
+    "adalbert-prague"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 131,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 258
+  },
+  "fixedSanctoraleMappingDigestSha256": "3a8ba225c783eb4cd076632f2526fb831e770a3ce9eb1213344d05095f276c55",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-07"
+}
