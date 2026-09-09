@@ -1789,6 +1789,318 @@
         }
       ],
       "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "sanctorale-rule:raymond-penyafort:general-roman",
+      "observanceId": "observance:raymond-penyafort:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 1,
+        "day": 7
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-7",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:vincent-saragossa:general-roman",
+      "observanceId": "observance:vincent-saragossa:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 1,
+        "day": 22
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-22",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:angela-merici:general-roman",
+      "observanceId": "observance:angela-merici:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 1,
+        "day": 27
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-27",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:blaise-sebaste:general-roman",
+      "observanceId": "observance:blaise-sebaste:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 2,
+        "day": 3
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:ansgar-hamburg:general-roman",
+      "observanceId": "observance:ansgar-hamburg:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 2,
+        "day": 3
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:fidelis-sigmaringen:general-roman",
+      "observanceId": "observance:fidelis-sigmaringen:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 24
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-24",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:peter-chanel:general-roman",
+      "observanceId": "observance:peter-chanel:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 28
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:louis-marie-montfort:general-roman",
+      "observanceId": "observance:louis-marie-montfort:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 28
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:pius-v-pope:general-roman",
+      "observanceId": "observance:pius-v-pope:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 4,
+        "day": 30
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-30",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:john-i-pope:general-roman",
+      "observanceId": "observance:john-i-pope:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 18
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-18",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:bernardine-siena:general-roman",
+      "observanceId": "observance:bernardine-siena:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 20
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-20",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "sanctorale-rule:rita-cascia:general-roman",
+      "observanceId": "observance:rita-cascia:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 5,
+        "day": 22
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-22",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
     }
   ]
 }

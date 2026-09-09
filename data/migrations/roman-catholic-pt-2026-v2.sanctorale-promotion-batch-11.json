@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-11.json",
+  "reviewDigestSha256": "48081e95d5d1e6c728741688d44889c7a29d39eeedfb4b51db5d4aace4df6d04",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "raymond-penyafort",
+    "vincent-saragossa",
+    "angela-merici",
+    "blaise-sebaste",
+    "ansgar-hamburg"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 136,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 253
+  },
+  "fixedSanctoraleMappingDigestSha256": "9b4e1beae0852be788b8515930de000131938c1726b95774528fef5423b38a5f",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

@@ -344,6 +344,66 @@
       "occurrenceId": "occurrence:2026-04-23:adalbert-prague:roman-catholic:pt",
       "legacyObservanceId": "rc:StAdalbert",
       "dateISO": "2026-04-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-07:raymond-penyafort:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRayPenyafort",
+      "dateISO": "2026-01-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-22:vincent-saragossa:roman-catholic:pt",
+      "legacyObservanceId": "rc:StVincentDeacon",
+      "dateISO": "2026-01-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-27:angela-merici:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAngelaMerici",
+      "dateISO": "2026-01-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-03:blaise-sebaste:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBlase",
+      "dateISO": "2026-02-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-03:ansgar-hamburg:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnsgar",
+      "dateISO": "2026-02-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-24:fidelis-sigmaringen:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFidelisSigmaringen",
+      "dateISO": "2026-04-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-28:peter-chanel:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterChanel",
+      "dateISO": "2026-04-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-28:louis-marie-montfort:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLouisGrignionMontfort",
+      "dateISO": "2026-04-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-30:pius-v-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPiusV",
+      "dateISO": "2026-04-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-18:john-i-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnIPope",
+      "dateISO": "2026-05-18"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-20:bernardine-siena:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBernardineSiena",
+      "dateISO": "2026-05-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-22:rita-cascia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRitaCascia",
+      "dateISO": "2026-05-22"
     }
   ]
 }

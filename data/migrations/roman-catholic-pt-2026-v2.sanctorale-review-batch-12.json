@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "fidelis-sigmaringen",
+        "primaryObservanceId": "rc:StFidelisSigmaringen",
+        "category": "saint",
+        "names": {
+          "en": "Saint Fidelis of Sigmaringen",
+          "pt": "São Fiel de Sigmaringa",
+          "es": "San Fidel de Sigmaringa",
+          "it": "San Fedele da Sigmaringa"
+        }
+      },
+      "recognition": {
+        "id": "recognition:fidelis-sigmaringen:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/24/st--fedele-da-sigmaringen--priest--martyr.html"
+      },
+      "observanceId": "observance:fidelis-sigmaringen:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:fidelis-sigmaringen:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StFidelisSigmaringen",
+        "dateISO": "2026-04-24",
+        "sourceOccurrenceId": "snl-pt-2026-04-24-2771336bd5e5d5704126a9e5",
+        "sourceRecordHash": "a0f0bbd586838ce11e9a2475d9d8d47ead47057e7c1def2106e661de57c16b98",
+        "sourceLabelPt": "S. Fiel de Sigmaringa, presbítero e mártir",
+        "observedDesignation": "S. Fiel de Sigmaringa, presbítero e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-24"
+      }
+    },
+    {
+      "person": {
+        "id": "peter-chanel",
+        "primaryObservanceId": "rc:StPeterChanel",
+        "category": "saint",
+        "names": {
+          "en": "Saint Peter Chanel",
+          "pt": "São Pedro Chanel",
+          "es": "San Pedro Chanel",
+          "it": "San Pietro Chanel"
+        }
+      },
+      "recognition": {
+        "id": "recognition:peter-chanel:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/28/st--peter-chanel--priest-and-martyr-of-oceania.html"
+      },
+      "observanceId": "observance:peter-chanel:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:peter-chanel:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPeterChanel",
+        "dateISO": "2026-04-28",
+        "sourceOccurrenceId": "snl-pt-2026-04-28-809f3c2e189829191af817aa",
+        "sourceRecordHash": "1b98363e0ff14d1dccdcb2246a225bb841ab8a5fcddd63787b8f63b2165de6db",
+        "sourceLabelPt": "S. Pedro Chanel, presbítero e mártir",
+        "observedDesignation": "S. Pedro Chanel, presbítero e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28"
+      }
+    },
+    {
+      "person": {
+        "id": "louis-marie-montfort",
+        "primaryObservanceId": "rc:StLouisGrignionMontfort",
+        "category": "saint",
+        "names": {
+          "en": "Saint Louis-Marie Grignion de Montfort",
+          "pt": "São Luís Maria Grignion de Montfort",
+          "es": "San Luis María Grignion de Montfort",
+          "it": "San Luigi Maria Grignion de Montfort"
+        }
+      },
+      "recognition": {
+        "id": "recognition:louis-marie-montfort:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/28.html"
+      },
+      "observanceId": "observance:louis-marie-montfort:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:louis-marie-montfort:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StLouisGrignionMontfort",
+        "dateISO": "2026-04-28",
+        "sourceOccurrenceId": "snl-pt-2026-04-28-51362afd0eedf80365e08512",
+        "sourceRecordHash": "01f3a7a0432c8560b0c722ad0bea0b9db1636cd4ba6f30476f779084efdd8e57",
+        "sourceLabelPt": "S. Luís Maria Grignion de Montfort, presbítero",
+        "observedDesignation": "S. Luís Maria Grignion de Montfort, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28"
+      }
+    },
+    {
+      "person": {
+        "id": "pius-v-pope",
+        "primaryObservanceId": "rc:StPiusV",
+        "category": "saint",
+        "names": {
+          "en": "Saint Pius V",
+          "pt": "São Pio V",
+          "es": "San Pío V",
+          "it": "San Pio V"
+        }
+      },
+      "recognition": {
+        "id": "recognition:pius-v-pope:roman-catholic",
+        "ecclesialTitles": [
+          "pope",
+          "reformer"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/30/st--pius-v--pope.html"
+      },
+      "observanceId": "observance:pius-v-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pius-v-pope:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPiusV",
+        "dateISO": "2026-04-30",
+        "sourceOccurrenceId": "snl-pt-2026-04-30-e1e60d16bb33c9ffbdb0d1cb",
+        "sourceRecordHash": "abe3068a4a9c99c88c69d3ba1944fdb2e7cd80f98a728e08fb22d1457de159f8",
+        "sourceLabelPt": "S. Pio V, papa",
+        "observedDesignation": "S. Pio V, papa – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-30"
+      }
+    },
+    {
+      "person": {
+        "id": "john-i-pope",
+        "primaryObservanceId": "rc:StJohnIPope",
+        "category": "saint",
+        "names": {
+          "en": "Saint John I",
+          "pt": "São João I",
+          "es": "San Juan I",
+          "it": "San Giovanni I"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-i-pope:roman-catholic",
+        "ecclesialTitles": [
+          "pope",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/18/st-john--i--pope-and-martyr-.html"
+      },
+      "observanceId": "observance:john-i-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-i-pope:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJohnIPope",
+        "dateISO": "2026-05-18",
+        "sourceOccurrenceId": "snl-pt-2026-05-18-105f71077db4554d55fb5ccb",
+        "sourceRecordHash": "09167b2d2218cf95c5b9de90e6bbecd0eb83137a5fe1ed76e3d1f1d9275c21e6",
+        "sourceLabelPt": "S. João I, papa e mártir",
+        "observedDesignation": "S. João I, papa e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-18"
+      }
+    }
+  ],
+  "reviewDigestSha256": "744cdc97923d7ff5a5a6efe2121610639f8f49eec6ee33b07b0059f12a9a3e6d",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

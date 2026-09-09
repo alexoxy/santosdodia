@@ -816,6 +816,138 @@
         "es": "San Adalberto de Praga",
         "it": "Sant'Adalberto di Praga"
       }
+    },
+    {
+      "id": "raymond-penyafort",
+      "primaryObservanceId": "rc:StRayPenyafort",
+      "category": "saint",
+      "names": {
+        "en": "Saint Raymond of Penyafort",
+        "pt": "São Raimundo de Penaforte",
+        "es": "San Raimundo de Peñafort",
+        "it": "San Raimondo di Peñafort"
+      }
+    },
+    {
+      "id": "vincent-saragossa",
+      "primaryObservanceId": "rc:StVincentDeacon",
+      "category": "saint",
+      "names": {
+        "en": "Saint Vincent of Saragossa",
+        "pt": "São Vicente de Saragoça",
+        "es": "San Vicente de Zaragoza",
+        "it": "San Vincenzo di Saragozza"
+      }
+    },
+    {
+      "id": "angela-merici",
+      "primaryObservanceId": "rc:StAngelaMerici",
+      "category": "saint",
+      "names": {
+        "en": "Saint Angela Merici",
+        "pt": "Santa Ângela Mérici",
+        "es": "Santa Ángela de Mérici",
+        "it": "Sant’Angela Merici"
+      }
+    },
+    {
+      "id": "blaise-sebaste",
+      "primaryObservanceId": "rc:StBlase",
+      "category": "saint",
+      "names": {
+        "en": "Saint Blaise of Sebaste",
+        "pt": "São Brás de Sebaste",
+        "es": "San Blas de Sebaste",
+        "it": "San Biagio di Sebaste"
+      }
+    },
+    {
+      "id": "ansgar-hamburg",
+      "primaryObservanceId": "rc:StAnsgar",
+      "category": "saint",
+      "names": {
+        "en": "Saint Ansgar",
+        "pt": "São Óscar",
+        "es": "San Óscar",
+        "it": "Sant’Ansgario"
+      }
+    },
+    {
+      "id": "fidelis-sigmaringen",
+      "primaryObservanceId": "rc:StFidelisSigmaringen",
+      "category": "saint",
+      "names": {
+        "en": "Saint Fidelis of Sigmaringen",
+        "pt": "São Fiel de Sigmaringa",
+        "es": "San Fidel de Sigmaringa",
+        "it": "San Fedele da Sigmaringa"
+      }
+    },
+    {
+      "id": "peter-chanel",
+      "primaryObservanceId": "rc:StPeterChanel",
+      "category": "saint",
+      "names": {
+        "en": "Saint Peter Chanel",
+        "pt": "São Pedro Chanel",
+        "es": "San Pedro Chanel",
+        "it": "San Pietro Chanel"
+      }
+    },
+    {
+      "id": "louis-marie-montfort",
+      "primaryObservanceId": "rc:StLouisGrignionMontfort",
+      "category": "saint",
+      "names": {
+        "en": "Saint Louis-Marie Grignion de Montfort",
+        "pt": "São Luís Maria Grignion de Montfort",
+        "es": "San Luis María Grignion de Montfort",
+        "it": "San Luigi Maria Grignion de Montfort"
+      }
+    },
+    {
+      "id": "pius-v-pope",
+      "primaryObservanceId": "rc:StPiusV",
+      "category": "saint",
+      "names": {
+        "en": "Saint Pius V",
+        "pt": "São Pio V",
+        "es": "San Pío V",
+        "it": "San Pio V"
+      }
+    },
+    {
+      "id": "john-i-pope",
+      "primaryObservanceId": "rc:StJohnIPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint John I",
+        "pt": "São João I",
+        "es": "San Juan I",
+        "it": "San Giovanni I"
+      }
+    },
+    {
+      "id": "bernardine-siena",
+      "primaryObservanceId": "rc:StBernardineSiena",
+      "category": "saint",
+      "names": {
+        "en": "Saint Bernardine of Siena",
+        "pt": "São Bernardino de Sena",
+        "es": "San Bernardino de Siena",
+        "it": "San Bernardino da Siena"
+      }
+    },
+    {
+      "id": "rita-cascia",
+      "primaryObservanceId": "rc:StRitaCascia",
+      "category": "saint",
+      "names": {
+        "en": "Saint Rita of Cascia",
+        "pt": "Santa Rita de Cássia",
+        "es": "Santa Rita de Casia",
+        "it": "Santa Rita da Cascia"
+      }
     }
   ]
 }

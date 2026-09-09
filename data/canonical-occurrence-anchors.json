@@ -1636,6 +1636,294 @@
         }
       ],
       "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "occurrence:2026-01-07:raymond-penyafort:roman-catholic:pt",
+      "observanceId": "observance:raymond-penyafort:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-07",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-7",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Raimundo de Penaforte, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-01-22:vincent-saragossa:roman-catholic:pt",
+      "observanceId": "observance:vincent-saragossa:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-22",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-22",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Vicente, diácono e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-01-27:angela-merici:roman-catholic:pt",
+      "observanceId": "observance:angela-merici:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-27",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-27",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Ângela Mérici, virgem – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-02-03:blaise-sebaste:roman-catholic:pt",
+      "observanceId": "observance:blaise-sebaste:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-02-03",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Brás, bispo e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-02-03:ansgar-hamburg:roman-catholic:pt",
+      "observanceId": "observance:ansgar-hamburg:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-02-03",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Óscar, bispo – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-04-24:fidelis-sigmaringen:roman-catholic:pt",
+      "observanceId": "observance:fidelis-sigmaringen:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-24",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-24",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Fiel de Sigmaringa, presbítero e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-04-28:peter-chanel:roman-catholic:pt",
+      "observanceId": "observance:peter-chanel:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-28",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pedro Chanel, presbítero e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-04-28:louis-marie-montfort:roman-catholic:pt",
+      "observanceId": "observance:louis-marie-montfort:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-28",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Luís Maria Grignion de Montfort, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-04-30:pius-v-pope:roman-catholic:pt",
+      "observanceId": "observance:pius-v-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-04-30",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-30",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pio V, papa – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-05-18:john-i-pope:roman-catholic:pt",
+      "observanceId": "observance:john-i-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-18",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-18",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. João I, papa e mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-05-20:bernardine-siena:roman-catholic:pt",
+      "observanceId": "observance:bernardine-siena:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-20",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-20",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bernardino de Sena, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-05-22:rita-cascia:roman-catholic:pt",
+      "observanceId": "observance:rita-cascia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-22",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-22",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Rita de Cássia, religiosa – MF"
+        }
+      ],
+      "verifiedAt": "2026-09-09"
     }
   ]
 }
