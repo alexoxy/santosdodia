@@ -45,8 +45,8 @@ const explicitBridges = bridgeDataset?.bridges ?? [];
 assert(occurrenceDataset?.status === 'repository-reviewed-occurrence-anchors', 'Coverage requires reviewed canonical Occurrences.');
 assert(bridgeDataset?.status === 'repository-reviewed-read-only-compatibility-bridge' && bridgeDataset?.mutationAllowed === false, 'Coverage requires read-only legacy bridges.');
 assert(bridgeDataset?.legacyReleaseId === coverage.sourceReleaseId, 'Legacy bridge targets a different source release.');
-assert(explicitOccurrences.length === 68 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly sixty-eight.');
-assert(explicitBridges.length === 68 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the sixty-eight canonical Occurrences.');
+assert(explicitOccurrences.length === 80 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly eighty.');
+assert(explicitBridges.length === 80 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the eighty canonical Occurrences.');
 
 assert(fixedSanctoraleShadow?.schemaVersion === 1 && fixedSanctoraleShadow?.status === 'approved-release-fixed-sanctorale-shadow', 'Fixed Sanctorale shadow is invalid.');
 assert(fixedSanctoraleShadow.sourceReleaseId === coverage.sourceReleaseId && fixedSanctoraleShadow.mutationAllowed === false, 'Fixed Sanctorale shadow must target the approved release and remain read-only.');
@@ -54,9 +54,9 @@ assert(fixedSanctoraleShadow.sourceArtifact.workflowRunId === approval.stagingWo
 assert(`sha256:${fixedSanctoraleShadow.sourceArtifact.buildJsonSha256}` === approval.artifacts.release.files['build.json'], 'Fixed Sanctorale shadow build hash differs from approval.');
 assert(fixedSanctoraleShadow.target.churchId === coverage.canonicalTarget.churchId && fixedSanctoraleShadow.target.jurisdictionId === coverage.canonicalTarget.jurisdictionId, 'Fixed Sanctorale shadow Church/Jurisdiction differs from target.');
 assert(fixedSanctoraleShadow.target.calendarSystem === coverage.canonicalTarget.calendarSystem && fixedSanctoraleShadow.target.year === coverage.canonicalTarget.year, 'Fixed Sanctorale shadow calendar/year differs from target.');
-assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 68, 'Fixed Sanctorale shadow must contain exactly sixty-eight exact source bindings.');
+assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 80, 'Fixed Sanctorale shadow must contain exactly eighty exact source bindings.');
 const fixedSanctoraleMappingDigest = createHash('sha256').update(JSON.stringify(fixedSanctoraleShadow.mappings)).digest('hex');
-assert(fixedSanctoraleMappingDigest === '3a8ba225c783eb4cd076632f2526fb831e770a3ce9eb1213344d05095f276c55', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);
+assert(fixedSanctoraleMappingDigest === 'fcefa8b3d7c131945bf31c54212387ef1592dd2046f7fcf6fa3d3440c5aea4d0', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);
 assert(/^https:\/\/(?:www\.)?liturgia\.pt\//u.test(fixedSanctoraleShadow.authorityEvidence?.portugalAnnualCalendar ?? ''), 'Fixed Sanctorale shadow lacks competent Portugal authority evidence.');
 
 assert(temporalShadow?.schemaVersion === 1 && temporalShadow?.status === 'approved-release-temporal-shadow-mappings', 'Temporal shadow mapping dataset is invalid.');
@@ -105,7 +105,7 @@ const explicitOccurrenceById = new Map(explicitOccurrences.map((item) => [item.i
 const explicitBridgeByOccurrence = new Map(explicitBridges.map((item) => [item.occurrenceId, item]));
 const sanctoraleRulesById = new Map((sanctoraleRuleDataset?.rules ?? []).map((item) => [item.id, item]));
 const fixedMappingByOccurrence = new Map(fixedSanctoraleShadow.mappings.map((item) => [item.occurrenceId, item]));
-assert(explicitOccurrenceById.size === 68 && explicitBridgeByOccurrence.size === 68 && fixedMappingByOccurrence.size === 68, 'Fixed Sanctorale canonical/source identities must be unique.');
+assert(explicitOccurrenceById.size === 80 && explicitBridgeByOccurrence.size === 80 && fixedMappingByOccurrence.size === 80, 'Fixed Sanctorale canonical/source identities must be unique.');
 const fixedSourceIds = new Set();
 const fixedSourceHashes = new Set();
 const legacyIds = new Set();
@@ -164,7 +164,7 @@ try {
     ...temporalShadow.mappings.map(item => item.occurrenceId),
     ...familyMappings.map(item => item.occurrenceId)
   ]);
-  assert(coveredSourceIds.size === 120 && coveredSourceHashes.size === 120 && coveredOccurrenceIds.size === 120, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
+  assert(coveredSourceIds.size === 132 && coveredSourceHashes.size === 132 && coveredOccurrenceIds.size === 132, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
 
   for (const mapping of temporalShadow.mappings) {
     assert(!legacyIds.has(mapping.legacyObservanceId), `Duplicate legacy coverage across explicit/temporal mappings: ${mapping.legacyObservanceId}.`);
@@ -226,8 +226,8 @@ for (const familyLegacyId of familyPresentLegacyIds) {
 }
 
 const totalMapped = explicitOccurrences.length + temporalShadow.mappings.length + familyPresentLegacyIds.length + movableTransferShadow.mappings.length;
-assert(totalMapped === 131 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 131/389.');
-assert(coverage.coverage.remainingLegacyOccurrences === 258 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 258.');
+assert(totalMapped === 143 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 143/389.');
+assert(coverage.coverage.remainingLegacyOccurrences === 246 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 246.');
 assert(coverage.coverage.requiredForPromotion === 389 && coverage.coverage.promotionAllowed === false, 'Promotion must remain blocked until 389/389.');
 assert(legacyIds.size === totalMapped, 'Every counted mapping must cover one unique legacy occurrence identity.');
 assert(!legacyIds.has('rc:StsJoachimAnne'), 'Joachim/Anne must not be fabricated in the Portugal 2026 source release.');
@@ -247,5 +247,5 @@ for (const key of [
 ]) assert(policy[key] === true, `Coverage safety policy ${key} must remain true.`);
 
 const coveragePercent = Number(((totalMapped / 389) * 100).toFixed(3));
-assert(coveragePercent === 33.676, `Unexpected canonical coverage percentage ${coveragePercent}.`);
-console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 68 exact fixed Sanctorale + 5 TemporalRule + 47 precedence-surviving family rows + 11 movable/transfer rows; 258 remaining, promotion blocked.`);
+assert(coveragePercent === 36.761, `Unexpected canonical coverage percentage ${coveragePercent}.`);
+console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 80 exact fixed Sanctorale + 5 TemporalRule + 47 precedence-surviving family rows + 11 movable/transfer rows; 246 remaining, promotion blocked.`);

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "bernardine-siena",
+        "primaryObservanceId": "rc:StBernardineSiena",
+        "category": "saint",
+        "names": {
+          "en": "Saint Bernardine of Siena",
+          "pt": "São Bernardino de Sena",
+          "es": "San Bernardino de Siena",
+          "it": "San Bernardino da Siena"
+        }
+      },
+      "recognition": {
+        "id": "recognition:bernardine-siena:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "preacher"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/20.html"
+      },
+      "observanceId": "observance:bernardine-siena:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:bernardine-siena:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBernardineSiena",
+        "dateISO": "2026-05-20",
+        "sourceOccurrenceId": "snl-pt-2026-05-20-41d1175c0e18eaf1a7cb18f5",
+        "sourceRecordHash": "2ade96262c3e674407b2bc0d1d04360957c82271266084e71625baf519bb2ef1",
+        "sourceLabelPt": "S. Bernardino de Sena, presbítero",
+        "observedDesignation": "S. Bernardino de Sena, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-20"
+      }
+    },
+    {
+      "person": {
+        "id": "rita-cascia",
+        "primaryObservanceId": "rc:StRitaCascia",
+        "category": "saint",
+        "names": {
+          "en": "Saint Rita of Cascia",
+          "pt": "Santa Rita de Cássia",
+          "es": "Santa Rita de Casia",
+          "it": "Santa Rita da Cascia"
+        }
+      },
+      "recognition": {
+        "id": "recognition:rita-cascia:roman-catholic",
+        "ecclesialTitles": [
+          "religious",
+          "augustinian"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/22/st--rita-of-cascia--agostinian.html"
+      },
+      "observanceId": "observance:rita-cascia:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:rita-cascia:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StRitaCascia",
+        "dateISO": "2026-05-22",
+        "sourceOccurrenceId": "snl-pt-2026-05-22-2d20bd253bd957ac31cfd3bc",
+        "sourceRecordHash": "6ed96bb6ac9769475bbc8a62b414b322a0559b0f033c7264738d231ffeb9d595",
+        "sourceLabelPt": "S. Rita de Cássia, religiosa",
+        "observedDesignation": "S. Rita de Cássia, religiosa – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-22"
+      }
+    }
+  ],
+  "reviewDigestSha256": "83f0dac3ab362ba6a75997c9c0705ebca2bf281cf8eda0e1c83c0ef22a636d93",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

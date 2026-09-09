@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 68, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 68, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 80, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 80, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -66,6 +66,18 @@ const expected = new Map([
   ['observance:martin-i-pope:roman-catholic', ['2026-04-13', 'optional-memorial', 'MF', 'rc:StMartinPope']],
   ['observance:george-martyr:roman-catholic', ['2026-04-23', 'optional-memorial', 'MF', 'rc:StGeorge']],
   ['observance:adalbert-prague:roman-catholic', ['2026-04-23', 'optional-memorial', 'MF', 'rc:StAdalbert']],
+  ['observance:raymond-penyafort:roman-catholic', ['2026-01-07', 'optional-memorial', 'MF', 'rc:StRayPenyafort']],
+  ['observance:vincent-saragossa:roman-catholic', ['2026-01-22', 'optional-memorial', 'MF', 'rc:StVincentDeacon']],
+  ['observance:angela-merici:roman-catholic', ['2026-01-27', 'optional-memorial', 'MF', 'rc:StAngelaMerici']],
+  ['observance:blaise-sebaste:roman-catholic', ['2026-02-03', 'optional-memorial', 'MF', 'rc:StBlase']],
+  ['observance:ansgar-hamburg:roman-catholic', ['2026-02-03', 'optional-memorial', 'MF', 'rc:StAnsgar']],
+  ['observance:fidelis-sigmaringen:roman-catholic', ['2026-04-24', 'optional-memorial', 'MF', 'rc:StFidelisSigmaringen']],
+  ['observance:peter-chanel:roman-catholic', ['2026-04-28', 'optional-memorial', 'MF', 'rc:StPeterChanel']],
+  ['observance:louis-marie-montfort:roman-catholic', ['2026-04-28', 'optional-memorial', 'MF', 'rc:StLouisGrignionMontfort']],
+  ['observance:pius-v-pope:roman-catholic', ['2026-04-30', 'optional-memorial', 'MF', 'rc:StPiusV']],
+  ['observance:john-i-pope:roman-catholic', ['2026-05-18', 'optional-memorial', 'MF', 'rc:StJohnIPope']],
+  ['observance:bernardine-siena:roman-catholic', ['2026-05-20', 'optional-memorial', 'MF', 'rc:StBernardineSiena']],
+  ['observance:rita-cascia:roman-catholic', ['2026-05-22', 'optional-memorial', 'MF', 'rc:StRitaCascia']],
   ['observance:mary-mother-of-god:roman-catholic', ['2026-01-01', 'solemnity', 'SOLENIDADE', 'rc:MaryMotherOfGod']],
   ['observance:thomas-aquinas:roman-catholic', ['2026-01-28', 'obligatory-memorial', 'MO', 'rc:StThomasAquinas']],
   ['observance:saint-joseph:roman-catholic', ['2026-03-19', 'solemnity', 'SOLENIDADE', 'rc:StJoseph']],

@@ -2033,6 +2033,342 @@
         }
       ],
       "verifiedAt": "2026-09-07"
+    },
+    {
+      "id": "recognition:raymond-penyafort:roman-catholic",
+      "personId": "raymond-penyafort",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "canon-lawyer"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/07/st--raymond-of--penyafort--dominican--co-founder-of-the-mercedar.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "canon-lawyer"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:vincent-saragossa:roman-catholic",
+      "personId": "vincent-saragossa",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "deacon",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/22/saint-vincent--spanish-deacon-and-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "deacon",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:angela-merici:roman-catholic",
+      "personId": "angela-merici",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/27.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "founder"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:blaise-sebaste:roman-catholic",
+      "personId": "blaise-sebaste",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/03/st--blaise--bishop-of--sebaste-and-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:ansgar-hamburg:roman-catholic",
+      "personId": "ansgar-hamburg",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "missionary"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/02/03/st---ansgario--oskar---bishop-of--hamburg-and-bremen--apostle-of.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "missionary"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:fidelis-sigmaringen:roman-catholic",
+      "personId": "fidelis-sigmaringen",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/24/st--fedele-da-sigmaringen--priest--martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:peter-chanel:roman-catholic",
+      "personId": "peter-chanel",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/28/st--peter-chanel--priest-and-martyr-of-oceania.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:louis-marie-montfort:roman-catholic",
+      "personId": "louis-marie-montfort",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/28.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:pius-v-pope:roman-catholic",
+      "personId": "pius-v-pope",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "reformer"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/04/30/st--pius-v--pope.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "reformer"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:john-i-pope:roman-catholic",
+      "personId": "john-i-pope",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/18/st-john--i--pope-and-martyr-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:bernardine-siena:roman-catholic",
+      "personId": "bernardine-siena",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "preacher"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/20.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "preacher"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:rita-cascia:roman-catholic",
+      "personId": "rita-cascia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "augustinian"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/22/st--rita-of-cascia--agostinian.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "augustinian"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-09-09"
     }
   ]
 }

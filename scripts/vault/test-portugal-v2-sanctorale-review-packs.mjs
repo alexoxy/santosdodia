@@ -20,7 +20,10 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-7.json', 'd202a84a23baaaf98f81a4e600cbb7880d146b26dc7a234886543115cb33d2fa'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-8.json', '529efbf1d0c84bf6d43ea5b7e4a2aee354e1614e396a70becdfdb8a024f6b9d7'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-9.json', '7af9e680eee683ef89129c227da0a2f0dfd98a5491eabda51601c1ec95f5bb52'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-10.json', '07f0008b0a8b273d2a287b608bbf89f6f7fac0a8db9c096e23896bdb8d985a90']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-10.json', '07f0008b0a8b273d2a287b608bbf89f6f7fac0a8db9c096e23896bdb8d985a90'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-11.json', '48081e95d5d1e6c728741688d44889c7a29d39eeedfb4b51db5d4aace4df6d04'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-12.json', '744cdc97923d7ff5a5a6efe2121610639f8f49eec6ee33b07b0059f12a9a3e6d'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-13.json', '83f0dac3ab362ba6a75997c9c0705ebca2bf281cf8eda0e1c83c0ef22a636d93']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');

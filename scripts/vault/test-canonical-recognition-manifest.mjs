@@ -45,8 +45,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 
 assert(first.manifest.artifactType === 'canonical-ecclesial-recognitions', 'Recognition artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Recognition release must target canonical Vault.');
-assert(first.manifest.recognitionCount === 72, 'Reviewed Recognition count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 71, 'Reviewed Recognition Person coverage changed unexpectedly.');
+assert(first.manifest.recognitionCount === 84, 'Reviewed Recognition count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 83, 'Reviewed Recognition Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Recognition canonical Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Recognition Vault write must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/recognitions/v1/current.json', 'Recognition current pointer path changed unexpectedly.');
@@ -98,7 +98,19 @@ for (const required of [
   'recognition:therese-lisieux:roman-catholic',
   'recognition:dominic-guzman:roman-catholic',
   'recognition:ignatius-loyola:roman-catholic',
-  'recognition:francis-xavier:roman-catholic'
+  'recognition:francis-xavier:roman-catholic',
+  'recognition:raymond-penyafort:roman-catholic',
+  'recognition:vincent-saragossa:roman-catholic',
+  'recognition:angela-merici:roman-catholic',
+  'recognition:blaise-sebaste:roman-catholic',
+  'recognition:ansgar-hamburg:roman-catholic',
+  'recognition:fidelis-sigmaringen:roman-catholic',
+  'recognition:peter-chanel:roman-catholic',
+  'recognition:louis-marie-montfort:roman-catholic',
+  'recognition:pius-v-pope:roman-catholic',
+  'recognition:john-i-pope:roman-catholic',
+  'recognition:bernardine-siena:roman-catholic',
+  'recognition:rita-cascia:roman-catholic'
 ]) assert(first.recognitions.some((item) => item.recognitionId === required), `Missing reviewed Recognition ${required}.`);
 
 for (const recognition of first.recognitions) {
