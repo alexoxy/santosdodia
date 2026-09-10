@@ -47,7 +47,7 @@ try {
     { id: 'general-memorial', precedenceClass: 'general-obligatory-memorial', isSolemnity: false }
   ]);
   assert(privilegedWeekdayVsMemorial.winnerId === 'lent-weekday', 'A privileged Lenten weekday must outrank an obligatory memorial.');
-  assert(privilegedWeekdayVsMemorial.decisions.find(item => item.id === 'general-memorial')?.action === 'omit', 'An impeded memorial must not be transferred as if it were a solemnity.');
+  assert(privilegedWeekdayVsMemorial.decisions.find(item => item.id === 'general-memorial')?.action === 'offer-as-commemoration', 'A memorial on a privileged weekday must remain available as the limited commemoration permitted by GIRM 355(a).');
 
   const memorialVsWeekday = precedence.resolveRomanPrecedence([
     { id: 'obligatory-memorial', precedenceClass: 'general-obligatory-memorial', isSolemnity: false },
@@ -68,7 +68,16 @@ try {
     { id: 'weekday', precedenceClass: 'ordinary-weekday', isSolemnity: false }
   ]);
   assert(optionalMemorials.status === 'optional-choice' && optionalMemorials.winnerId === null, 'Multiple optional memorials must remain an explicit choice without an invented winner.');
+  assert(optionalMemorials.defaultId === 'weekday', 'The ordinary weekday must remain the explicit default when optional memorials are available.');
+  assert(optionalMemorials.decisions.find(item => item.id === 'weekday')?.action === 'retain-as-default', 'An optional memorial must not silently suppress the ferial default.');
   assert(optionalMemorials.decisions.filter(item => item.action === 'offer-as-option').length === 2, 'Every equal optional memorial must remain available as a distinct option.');
+
+  const singleOptionalMemorial = precedence.resolveRomanPrecedence([
+    { id: 'single-optional', precedenceClass: 'optional-memorial', isSolemnity: false },
+    { id: 'weekday', precedenceClass: 'ordinary-weekday', isSolemnity: false }
+  ]);
+  assert(singleOptionalMemorial.status === 'optional-choice' && singleOptionalMemorial.winnerId === null, 'One optional memorial must remain a choice rather than becoming an automatic winner.');
+  assert(singleOptionalMemorial.defaultId === 'weekday', 'A single optional memorial must preserve the ordinary weekday as the default.');
 
   let duplicateRejected = false;
   try {
@@ -90,8 +99,9 @@ try {
   assert(JSON.stringify(lentSundayVsJoseph.transferRule.destinationMustBeFreeOfLevels) === JSON.stringify([1,2,3,4,5,6,7,8]), 'Transferred solemnities must target a day free from precedence levels 1-8.');
   assert(lentSundayVsJoseph.transferRule.targetDateResolvedByThisFunction === false, 'Collision resolution must not silently invent a transfer date before the annual calendar is available.');
   assert(lentSundayVsJoseph.sourceIds.includes('snl-portugal-precedence-table'), 'Precedence decisions must retain their normative source id.');
+  assert(lentSundayVsJoseph.sourceIds.includes('holy-see-girm-choice-of-mass-355'), 'Ferial and memorial dispositions must retain the GIRM 355 source id.');
 
-  console.log('Roman precedence core passed: 13 levels, celebrate/transfer/omit semantics, candidate validation and fail-closed equal-precedence handling.');
+  console.log('Roman precedence core passed: 13 levels, ferial default/option/commemoration dispositions, celebrate/transfer/omit semantics and fail-closed ties.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

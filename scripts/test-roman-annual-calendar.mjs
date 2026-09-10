@@ -41,7 +41,7 @@ try {
   const annual = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-annual-calendar.js')).href}?v=${Date.now()}`);
 
   const calendar2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY);
-  assert(calendar2026.modelVersion === '0.1-shadow' && calendar2026.publicationAllowed === false, 'Annual generator must remain shadow-only.');
+  assert(calendar2026.modelVersion === '0.2-shadow' && calendar2026.publicationAllowed === false, 'Annual generator must remain shadow-only.');
   assert(calendar2026.days.length === 365 && calendar2026.counts.leapYear === false, '2026 must generate exactly 365 civil days.');
   assert(calendar2026.days.every(day => day.candidates.some(candidate => candidate.origin === 'temporale')), 'Every civil day must have a deterministic Temporale candidate.');
   assert(calendar2026.unresolvedDates.length === 0 && calendar2026.transferQueue.length === 0, 'Pure Temporale generation must resolve without artificial conflicts.');
@@ -97,7 +97,24 @@ try {
   const optionalChoiceDay = optionalChoice2026.days.find(day => day.dateISO === '2026-01-20');
   assert(!optionalChoice2026.unresolvedDates.includes('2026-01-20'), 'A valid optional-memorial choice must not block annual materialization.');
   assert(optionalChoiceDay?.celebratedCandidateId === null, 'An optional-memorial choice must not invent a celebrated candidate.');
+  assert(optionalChoiceDay?.defaultCandidateId?.startsWith('temporale:'), 'An optional-memorial choice must retain the generated feria as its explicit default.');
   assert(JSON.stringify(optionalChoiceDay?.optionalCandidateIds) === JSON.stringify(['optional-a', 'optional-b']), 'Distinct optional memorials must remain visible as ordered choices.');
+
+  const singleOptional2026 = annual.generateRomanAnnualCalendar(2026, roman.ROMAN_PORTUGAL_POLICY, [
+    { id: 'john-damascene', dateISO: '2026-12-04', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false }
+  ]);
+  const singleOptionalDay = singleOptional2026.days.find(day => day.dateISO === '2026-12-04');
+  assert(singleOptionalDay?.celebratedCandidateId === null, 'An Advent optional memorial before 17 December must not be selected automatically.');
+  assert(singleOptionalDay?.defaultCandidateId?.startsWith('temporale:'), 'The Advent feria before 17 December must remain the default.');
+  assert(singleOptionalDay?.optionalCandidateIds.includes('john-damascene'), 'The Advent optional memorial must remain available as a full optional celebration.');
+
+  const privilegedCommemoration2027 = annual.generateRomanAnnualCalendar(2027, roman.ROMAN_PORTUGAL_POLICY, [
+    { id: 'peter-canisius', dateISO: '2027-12-21', origin: 'sanctorale', precedenceClass: 'optional-memorial', isSolemnity: false }
+  ]);
+  const privilegedCommemorationDay = privilegedCommemoration2027.days.find(day => day.dateISO === '2027-12-21');
+  assert(privilegedCommemorationDay?.celebratedCandidateId?.startsWith('temporale:'), 'The privileged Advent feria from 17-24 December must remain celebrated.');
+  assert(privilegedCommemorationDay?.commemorationCandidateIds.includes('peter-canisius'), 'A coincident Saint memorial must remain explicitly available as a limited commemoration.');
+  assert(!privilegedCommemorationDay?.omittedCandidateIds.includes('peter-canisius'), 'An eligible privileged-day commemoration must not be discarded as an omission.');
 
   let outsideYearRejected = false;
   try {
@@ -107,7 +124,7 @@ try {
   } catch { outsideYearRejected = true; }
   assert(outsideYearRejected, 'Supplied candidates outside the requested civil year must fail closed.');
 
-  console.log('Roman annual calendar generator passed: 365/366-day autonomous Temporale, precedence collisions, transfer queue and fail-closed ties.');
+  console.log('Roman annual calendar generator passed: 365/366-day autonomous Temporale, flexible ferial Saint dispositions, transfer queue and fail-closed ties.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

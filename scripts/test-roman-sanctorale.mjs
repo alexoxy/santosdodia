@@ -168,8 +168,10 @@ try {
   assert(annual2026.appliedTransfers.length === 0, 'The eighty reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
-    const represented = day?.celebratedCandidateId === candidate.id || day?.optionalCandidateIds.includes(candidate.id);
-    assert(represented, `${candidate.observanceId} must be celebrated or preserved as an explicit optional choice on ${candidate.dateISO}.`);
+    const represented = day?.celebratedCandidateId === candidate.id
+      || day?.optionalCandidateIds.includes(candidate.id)
+      || day?.commemorationCandidateIds.includes(candidate.id);
+    assert(represented, `${candidate.observanceId} must be celebrated or preserved as an explicit option or commemoration on ${candidate.dateISO}.`);
   }
 
   const pt2025 = sanctorale.materializeRomanSanctoraleCandidates(2025, rules, policies, 'roman-sanctorale-policy:pt');
