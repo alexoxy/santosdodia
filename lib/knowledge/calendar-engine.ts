@@ -165,6 +165,13 @@ function adventStart(year: number): CivilDate {
   return fromDate(start);
 }
 
+function ordinaryTimeSecondSunday(year: number): CivilDate {
+  const january14 = new Date(Date.UTC(year, 0, 14));
+  const daysUntilSunday = (7 - january14.getUTCDay()) % 7;
+  january14.setUTCDate(january14.getUTCDate() + daysUntilSunday);
+  return fromDate(january14);
+}
+
 function applyWeekdayAdjustment(value: CivilDate, rule: RelativeDateRule): CivilDate {
   if (!rule.weekdayAdjustment) return value;
   const current = new Date(Date.UTC(value.year, value.month - 1, value.day));
@@ -263,6 +270,12 @@ function resolveRelative(rule: RelativeDateRule, year: number): DateResolution {
       break;
     case 'advent-start':
       anchor = adventStart(year);
+      break;
+    case 'ordinary-time-second-sunday':
+      if (rule.calendar !== 'gregorian') {
+        return { status: 'unsupported', reason: 'The Ordinary Time Sunday anchor is only defined for the Gregorian Roman calendar.' };
+      }
+      anchor = ordinaryTimeSecondSunday(year);
       break;
     case 'christmas':
       anchor = { year, month: 12, day: 25 };

@@ -56,6 +56,12 @@ function adventStart(year) {
   return date;
 }
 
+function ordinaryTimeSecondSunday(year) {
+  const date = new Date(Date.UTC(year, 0, 14));
+  date.setUTCDate(date.getUTCDate() + ((7 - date.getUTCDay()) % 7));
+  return date;
+}
+
 function temporalDateForYear(year, rule) {
   const dateRule = rule.dateRule;
   assert(dateRule?.calendar === 'gregorian', `Ledger only accepts deterministic Gregorian TemporalRules: ${rule.id}.`);
@@ -94,6 +100,8 @@ function familyDateForYear(year, family, week, weekday) {
     ? gregorianEaster(year)
     : family.anchor === 'advent-start'
       ? adventStart(year)
+      : family.anchor === 'ordinary-time-second-sunday'
+        ? ordinaryTimeSecondSunday(year)
       : null;
   assert(date, `TemporalRuleFamily ${family.id} has an unsupported anchor.`);
   date.setUTCDate(date.getUTCDate() + family.baseOffsetDays + ((week - 1) * family.weekStrideDays) + weekdayOffset);
@@ -135,7 +143,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
   assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
-  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.1' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
+  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.2' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
   assert(temporalFamilyShadow.year === year, 'TemporalRuleFamily shadow year differs from the ledger.');
@@ -235,7 +243,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   const familiesById = new Map();
   for (const family of temporalFamilyDataset.families) {
     assert(typeof family.id === 'string' && !familiesById.has(family.id), `Duplicate or invalid TemporalRuleFamily ${String(family.id)}.`);
-    assert(family.churchId === 'church:roman-catholic' && family.calendarSystem === 'gregorian' && ['gregorian-easter', 'advent-start'].includes(family.anchor), `TemporalRuleFamily ${family.id} is outside the Roman Catholic Gregorian ledger.`);
+    assert(family.churchId === 'church:roman-catholic' && family.calendarSystem === 'gregorian' && ['gregorian-easter', 'advent-start', 'ordinary-time-second-sunday'].includes(family.anchor), `TemporalRuleFamily ${family.id} is outside the Roman Catholic Gregorian ledger.`);
     assert(Number.isInteger(family.baseOffsetDays) && Number.isInteger(family.weekStrideDays) && family.weekStrideDays === 7, `TemporalRuleFamily ${family.id} has invalid date arithmetic.`);
     assert(Number.isInteger(family.weekRange?.min) && Number.isInteger(family.weekRange?.max) && family.weekRange.min <= family.weekRange.max, `TemporalRuleFamily ${family.id} has an invalid week range.`);
     const familyWeekdays = Object.keys(family.weekdayOffsets ?? {}).sort();

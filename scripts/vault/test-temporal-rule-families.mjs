@@ -13,8 +13,8 @@ const expectedWeekdays = ['friday', 'monday', 'saturday', 'thursday', 'tuesday',
 const expectedSunday = ['sunday'];
 function assert(condition, message) { if (!condition) throw new Error(message); }
 
-assert(familyDataset?.schemaVersion === 1 && familyDataset?.temporalRuleFamilyModelVersion === '1.1' && familyDataset?.status === 'repository-reviewed-temporal-rule-family-anchors', 'TemporalRuleFamily dataset is invalid.');
-assert(Array.isArray(familyDataset?.families) && familyDataset.families.length === 5, 'TemporalRuleFamily bootstrap must contain weekday and seasonal-Sunday families.');
+assert(familyDataset?.schemaVersion === 1 && familyDataset?.temporalRuleFamilyModelVersion === '1.2' && familyDataset?.status === 'repository-reviewed-temporal-rule-family-anchors', 'TemporalRuleFamily dataset is invalid.');
+assert(Array.isArray(familyDataset?.families) && familyDataset.families.length === 7, 'TemporalRuleFamily bootstrap must contain weekday, seasonal-Sunday and two-segment Ordinary Time Sunday families.');
 assert(shadow?.schemaVersion === 1 && shadow?.status === 'approved-release-temporal-family-shadow' && shadow?.sourceReleaseId === 'roman-catholic-pt-2026-v2', 'TemporalRuleFamily shadow snapshot is invalid.');
 assert(shadow?.sourceArtifact?.workflowRunId === 31998552573 && shadow?.sourceArtifact?.artifactId === 9277632698 && shadow?.sourceArtifact?.buildJsonSha256 === '159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06', 'TemporalRuleFamily shadow is not pinned to the approved Portugal artifact.');
 assert(shadow?.year === 2026 && shadow?.mutationAllowed === false, 'TemporalRuleFamily shadow must remain 2026/read-only.');
@@ -45,7 +45,7 @@ try {
 
   for (const family of familyDataset.families) {
     assert(family?.churchId === 'church:roman-catholic' && family?.calendarSystem === 'gregorian', `${family?.id} must remain Roman Catholic/Gregorian.`);
-    assert(['gregorian-easter', 'advent-start'].includes(family?.anchor), `${family.id} has an unsupported canonical anchor.`);
+    assert(['gregorian-easter', 'advent-start', 'ordinary-time-second-sunday'].includes(family?.anchor), `${family.id} has an unsupported canonical anchor.`);
     assert(family?.weekStrideDays === 7 && family?.candidateRequiresPrecedenceResolution === true, `${family.id} must require explicit precedence resolution.`);
     assert(typeof family?.observanceIdPattern === 'string' && family.observanceIdPattern.startsWith('observance:') && family.observanceIdPattern.endsWith(':roman-catholic'), `${family.id} has an invalid canonical Observance pattern.`);
     const expectedMembers = family.legacyRank === 'weekday' ? expectedWeekdays : family.legacyRank === 'solemnity' ? expectedSunday : null;
@@ -109,18 +109,28 @@ try {
     }
   }
 
-  assert(candidateCount === 78, `Expected 78 temporal family candidates, got ${candidateCount}.`);
-  assert(presentCount === 59 && seenPresentLegacyIds.size === 59, `Expected 59 approved family occurrences, got ${presentCount}.`);
-  assert(seenSourceOccurrenceIds.size === 59 && seenSourceRecordHashes.size === 59 && seenCanonicalOccurrenceIds.size === 59, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
-  assert(suppressedCount === 19 && suppressions.size === 19, `Expected 19 precedence suppressions, got ${suppressedCount}.`);
+  assert(candidateCount === 111, `Expected 111 temporal family candidates, got ${candidateCount}.`);
+  assert(presentCount === 87 && seenPresentLegacyIds.size === 87, `Expected 87 approved family occurrences, got ${presentCount}.`);
+  assert(seenSourceOccurrenceIds.size === 87 && seenSourceRecordHashes.size === 87 && seenCanonicalOccurrenceIds.size === 87, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
+  assert(suppressedCount === 24 && suppressions.size === 24, `Expected 24 precedence or season-boundary suppressions, got ${suppressedCount}.`);
   assert(presentCount + suppressedCount === candidateCount, 'Every temporal family candidate must have an explicit precedence outcome.');
   assert(seenPresentLegacyIds.has('rc:LentWeekday1Monday'), 'Lent family lost its first weekday anchor.');
   assert(seenPresentLegacyIds.has('rc:EasterWeekday7Saturday'), 'Easter family lost its final weekday anchor.');
   assert(seenPresentLegacyIds.has('rc:Lent2') && seenPresentLegacyIds.has('rc:Lent5'), 'Lent Sunday family boundaries drifted.');
   assert(seenPresentLegacyIds.has('rc:Easter2') && seenPresentLegacyIds.has('rc:Easter6'), 'Easter Sunday family boundaries drifted.');
   assert(seenPresentLegacyIds.has('rc:Advent2') && seenPresentLegacyIds.has('rc:Advent4'), 'Advent Sunday family boundaries drifted.');
+  assert(seenPresentLegacyIds.has('rc:OrdSunday2') && seenPresentLegacyIds.has('rc:OrdSunday6'), 'Early Ordinary Time Sunday family boundaries drifted.');
+  assert(seenPresentLegacyIds.has('rc:OrdSunday10') && seenPresentLegacyIds.has('rc:OrdSunday33'), 'Late Ordinary Time Sunday family boundaries drifted.');
+  assert(!seenPresentLegacyIds.has('rc:OrdSunday7') && !seenPresentLegacyIds.has('rc:OrdSunday9'), 'Lent season-boundary suppressions were lost.');
+  assert(!seenPresentLegacyIds.has('rc:OrdSunday31') && !seenPresentLegacyIds.has('rc:OrdSunday34'), 'All Saints or Christ the King suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:LentWeekday4Thursday'), 'St Joseph precedence suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:EasterWeekday6Wednesday'), 'Fatima precedence suppression was lost.');
+
+  for (let year = 2020; year <= 2030; year += 1) {
+    const resolution = calendar.resolveDateRule({ type: 'relative', calendar: 'gregorian', anchor: 'ordinary-time-second-sunday', offsetDays: 0 }, year);
+    const date = new Date(`${resolution.dateISO}T00:00:00Z`);
+    assert(resolution.status === 'resolved' && date.getUTCDay() === 0 && date.getUTCMonth() === 0 && date.getUTCDate() >= 14 && date.getUTCDate() <= 20, `Ordinary Time second Sunday anchor failed for ${year}.`);
+  }
 
   console.log(`TemporalRuleFamily test passed: ${candidateCount} candidates = ${presentCount} exact source-bound weekday/Sunday occurrences + ${suppressedCount} precedence suppressions; no suppressed candidate counts as coverage.`);
 } finally {
