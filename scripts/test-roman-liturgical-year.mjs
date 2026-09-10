@@ -31,6 +31,7 @@ try {
   transpile(path.join(root, 'lib/knowledge/calendar-engine.ts'), 'calendar-engine.js');
   transpile(path.join(root, 'lib/knowledge/roman-liturgical-year.ts'), 'roman-liturgical-year.js', [["'./calendar-engine'", "'./calendar-engine.js'"]]);
   transpile(path.join(root, 'lib/knowledge/roman-vestment-colours.ts'), 'roman-vestment-colours.js');
+  const calendar = await import(`${pathToFileURL(path.join(temporaryDirectory, 'calendar-engine.js')).href}?v=${Date.now()}`);
   const roman = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-liturgical-year.js')).href}?v=${Date.now()}`);
   const colours = await import(`${pathToFileURL(path.join(temporaryDirectory, 'roman-vestment-colours.js')).href}?v=${Date.now()}`);
 
@@ -119,6 +120,12 @@ try {
     assert(days(calculated.keyDates['christ-the-king'], date(calculated.endDate).toISOString().slice(0, 10)) >= 0, `${liturgicalYear} Christ the King is outside the liturgical year.`);
     const nextAdvent = new Date(date(calculated.endDate).getTime() + 86_400_000).toISOString().slice(0, 10);
     assert(days(calculated.keyDates['christ-the-king'], nextAdvent) === 7, `${liturgicalYear} Christ the King must be seven days before the next Advent.`);
+    const ordinarySecondSunday = calendar.resolveDateRule({ type: 'relative', calendar: 'gregorian', anchor: 'ordinary-time-second-sunday', offsetDays: 0 }, liturgicalYear);
+    assert(ordinarySecondSunday.status === 'resolved', `${liturgicalYear} Ordinary Time second Sunday did not resolve.`);
+    for (const policy of [roman.ROMAN_GENERAL_POLICY, roman.ROMAN_PORTUGAL_POLICY]) {
+      const context = roman.romanDateContext(ordinarySecondSunday.dateISO, policy);
+      assert(context.season === 'ordinary-time' && context.seasonWeek === 2 && date(context.date).getUTCDay() === 0, `${liturgicalYear} Ordinary Time anchor differs from ${policy.id}.`);
+    }
   }
 
   console.log('Roman liturgical-year kernel passed cycles, perennial dates and Roman vestment-colour rules including white/red/green/violet/black/rose semantics.');

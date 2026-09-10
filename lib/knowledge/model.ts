@@ -100,6 +100,7 @@ export type RelativeDateAnchor =
   | 'syriac-easter'
   | 'pentecost'
   | 'advent-start'
+  | 'ordinary-time-second-sunday'
   | 'christmas';
 
 export type RelativeDateRule = {
