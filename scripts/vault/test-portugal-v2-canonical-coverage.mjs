@@ -75,9 +75,9 @@ assert(temporalFamilyShadow.year === 2026, 'Temporal family shadow must remain b
 const familyPresentLegacyIds = (temporalFamilyShadow.families ?? []).flatMap((item) => item.presentLegacyIds ?? []);
 const familyMappings = (temporalFamilyShadow.families ?? []).flatMap((item) => (item.presentMappings ?? []).map((mapping) => ({ ...mapping, familyId: item.familyId })));
 const familyPresentSet = new Set(familyPresentLegacyIds);
-assert(familyPresentLegacyIds.length === 87 && familyPresentSet.size === 87 && familyPresentLegacyIds.length === coverage.coverage.temporalRuleFamilyShadowOccurrences, 'Temporal family coverage must be exactly 87 unique precedence-surviving rows.');
-assert(familyMappings.length === 87 && new Set(familyMappings.map((item) => item.sourceOccurrenceId)).size === 87 && new Set(familyMappings.map((item) => item.sourceRecordHash)).size === 87 && new Set(familyMappings.map((item) => item.occurrenceId)).size === 87, 'Temporal family coverage requires 87 unique exact source and canonical occurrence mappings.');
-assert(familyMappings.every((item) => familyPresentSet.has(item.legacyObservanceId) && ['weekday', 'solemnity'].includes(item.legacyRank) && item.reviewStatus === 'inherited-safe' && item.resolution === 'inherit-general-canonical-binding'), 'Temporal family exact mappings differ from the approved precedence-surviving identities.');
+assert(familyPresentLegacyIds.length === 96 && familyPresentSet.size === 96 && familyPresentLegacyIds.length === coverage.coverage.temporalRuleFamilyShadowOccurrences, 'Temporal family coverage must be exactly 96 unique precedence-surviving rows.');
+assert(familyMappings.length === 96 && new Set(familyMappings.map((item) => item.sourceOccurrenceId)).size === 96 && new Set(familyMappings.map((item) => item.sourceRecordHash)).size === 96 && new Set(familyMappings.map((item) => item.occurrenceId)).size === 96, 'Temporal family coverage requires 96 unique exact source and canonical occurrence mappings.');
+assert(familyMappings.every((item) => familyPresentSet.has(item.legacyObservanceId) && ['weekday', 'solemnity', 'celebration with precedence over solemnities'].includes(item.legacyRank) && item.reviewStatus === 'inherited-safe' && item.resolution === 'inherit-general-canonical-binding'), 'Temporal family exact mappings differ from the approved precedence-surviving identities.');
 assert(Array.isArray(temporalFamilyShadow.suppressedCandidates) && temporalFamilyShadow.suppressedCandidates.length === 24, 'Temporal family snapshot must preserve exactly 24 precedence or season-boundary suppressions.');
 for (const suppression of temporalFamilyShadow.suppressedCandidates) {
   assert(/^2026-\d{2}-\d{2}$/u.test(suppression.candidateDateISO), 'Temporal family suppression requires an exact 2026 candidate date.');
@@ -163,7 +163,7 @@ try {
     ...temporalShadow.mappings.map(item => item.occurrenceId),
     ...familyMappings.map(item => item.occurrenceId)
   ]);
-  assert(coveredSourceIds.size === 172 && coveredSourceHashes.size === 172 && coveredOccurrenceIds.size === 172, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
+  assert(coveredSourceIds.size === 181 && coveredSourceHashes.size === 181 && coveredOccurrenceIds.size === 181, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
 
   for (const mapping of temporalShadow.mappings) {
     assert(!legacyIds.has(mapping.legacyObservanceId), `Duplicate legacy coverage across explicit/temporal mappings: ${mapping.legacyObservanceId}.`);
@@ -225,13 +225,15 @@ for (const familyLegacyId of familyPresentLegacyIds) {
 }
 
 const totalMapped = explicitOccurrences.length + temporalShadow.mappings.length + familyPresentLegacyIds.length + movableTransferShadow.mappings.length;
-assert(totalMapped === 183 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 183/389.');
-assert(coverage.coverage.remainingLegacyOccurrences === 206 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 206.');
+assert(totalMapped === 192 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 192/389.');
+assert(coverage.coverage.remainingLegacyOccurrences === 197 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 197.');
 assert(coverage.coverage.requiredForPromotion === 389 && coverage.coverage.promotionAllowed === false, 'Promotion must remain blocked until 389/389.');
 assert(legacyIds.size === totalMapped, 'Every counted mapping must cover one unique legacy occurrence identity.');
 assert(!legacyIds.has('rc:StsJoachimAnne'), 'Joachim/Anne must not be fabricated in the Portugal 2026 source release.');
 assert(!familyPresentSet.has('rc:LentWeekday4Thursday'), 'Suppressed St Joseph Lent weekday must not count as family coverage.');
 assert(!familyPresentSet.has('rc:EasterWeekday6Wednesday'), 'Suppressed Fatima Easter weekday must not count as family coverage.');
+assert(familyPresentSet.has('rc:MonHolyWeek') && familyPresentSet.has('rc:WedHolyWeek'), 'Holy Week source bindings are incomplete.');
+assert(familyPresentSet.has('rc:MonOctaveEaster') && familyPresentSet.has('rc:SatOctaveEaster'), 'Easter Octave source bindings are incomplete.');
 
 const policy = coverage.equivalencePolicy ?? {};
 for (const key of [
@@ -246,5 +248,5 @@ for (const key of [
 ]) assert(policy[key] === true, `Coverage safety policy ${key} must remain true.`);
 
 const coveragePercent = Number(((totalMapped / 389) * 100).toFixed(3));
-assert(coveragePercent === 47.044, `Unexpected canonical coverage percentage ${coveragePercent}.`);
-console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 80 exact fixed Sanctorale + 5 TemporalRule + 87 precedence-surviving family rows + 11 movable/transfer rows; 206 remaining, promotion blocked.`);
+assert(coveragePercent === 49.357, `Unexpected canonical coverage percentage ${coveragePercent}.`);
+console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 80 exact fixed Sanctorale + 5 TemporalRule + 96 precedence-surviving family rows + 11 movable/transfer rows; 197 remaining, promotion blocked.`);
