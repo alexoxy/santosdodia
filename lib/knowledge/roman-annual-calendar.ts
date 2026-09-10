@@ -28,13 +28,15 @@ export type RomanAnnualCalendarDay = {
   candidates: RomanAnnualCalendarCandidate[];
   precedence: RomanPrecedenceResolution;
   celebratedCandidateId: string | null;
+  defaultCandidateId: string | null;
   optionalCandidateIds: string[];
+  commemorationCandidateIds: string[];
   transferRequiredCandidateIds: string[];
   omittedCandidateIds: string[];
 };
 
 export type RomanAnnualCalendar = {
-  modelVersion: '0.1-shadow';
+  modelVersion: '0.2-shadow';
   civilYear: number;
   churchId: 'church:roman-catholic';
   jurisdictionId: string;
@@ -202,7 +204,9 @@ export function generateRomanAnnualCalendar(
       candidates,
       precedence,
       celebratedCandidateId: precedence.winnerId,
+      defaultCandidateId: precedence.defaultId,
       optionalCandidateIds: precedence.decisions.filter(item => item.action === 'offer-as-option').map(item => item.id),
+      commemorationCandidateIds: precedence.decisions.filter(item => item.action === 'offer-as-commemoration').map(item => item.id),
       transferRequiredCandidateIds: precedence.decisions.filter(item => item.action === 'transfer-required').map(item => item.id),
       omittedCandidateIds: precedence.decisions.filter(item => item.action === 'omit').map(item => item.id)
     } satisfies RomanAnnualCalendarDay;
@@ -211,7 +215,7 @@ export function generateRomanAnnualCalendar(
   const unresolvedDates = days.filter(day => day.precedence.status === 'tie-requires-policy').map(day => day.dateISO);
   const transferQueue = days.flatMap(day => day.transferRequiredCandidateIds.map(candidateId => ({ dateISO: day.dateISO, candidateId })));
   return {
-    modelVersion: '0.1-shadow',
+    modelVersion: '0.2-shadow',
     civilYear,
     churchId: policy.churchId,
     jurisdictionId: policy.jurisdictionId,

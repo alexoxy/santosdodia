@@ -24,6 +24,7 @@ export type RomanPrecedenceTableEntry = {
 };
 
 export const ROMAN_PRECEDENCE_SOURCE_ID = 'snl-portugal-precedence-table' as const;
+export const ROMAN_MISSAL_OPTION_SOURCE_ID = 'holy-see-girm-choice-of-mass-355' as const;
 
 export const ROMAN_PRECEDENCE_TABLE: RomanPrecedenceTableEntry[] = [
   { level: 1, section: 'I', code: 'paschal-triduum', description: 'Paschal Triduum of the Passion and Resurrection of the Lord.' },
@@ -54,19 +55,29 @@ export type RomanPrecedenceCandidate = {
 export type RomanPrecedenceDecision = {
   id: string;
   precedenceLevel: RomanPrecedenceLevel;
-  action: 'celebrate' | 'offer-as-option' | 'transfer-required' | 'omit' | 'unresolved-tie';
+  action:
+    | 'celebrate'
+    | 'retain-as-default'
+    | 'offer-as-option'
+    | 'offer-as-commemoration'
+    | 'transfer-required'
+    | 'omit'
+    | 'unresolved-tie';
   reasonCode:
     | 'highest-precedence'
     | 'optional-memorial-choice'
+    | 'weekday-retained-with-optional-memorial'
+    | 'memorial-available-as-commemoration'
     | 'solemnity-impeded-by-higher-precedence'
     | 'lower-precedence-omitted'
     | 'equal-highest-precedence-requires-policy';
 };
 
 export type RomanPrecedenceResolution = {
-  modelVersion: '1.0';
+  modelVersion: '1.1';
   status: 'empty' | 'resolved' | 'optional-choice' | 'tie-requires-policy';
   winnerId: string | null;
+  defaultId: string | null;
   winningPrecedenceLevel: RomanPrecedenceLevel | null;
   decisions: RomanPrecedenceDecision[];
   transferRule: {
@@ -111,46 +122,61 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
     destinationMustBeFreeOfLevels: [1, 2, 3, 4, 5, 6, 7, 8] as const,
     targetDateResolvedByThisFunction: false as const
   };
+  const sourceIds = [ROMAN_PRECEDENCE_SOURCE_ID, ROMAN_MISSAL_OPTION_SOURCE_ID];
 
   if (normalized.length === 0) {
     return {
-      modelVersion: '1.0',
+      modelVersion: '1.1',
       status: 'empty',
       winnerId: null,
+      defaultId: null,
       winningPrecedenceLevel: null,
       decisions: [],
       transferRule,
-      sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+      sourceIds
     };
   }
 
   const winningPrecedenceLevel = Math.min(...normalized.map(candidate => candidate.precedenceLevel)) as RomanPrecedenceLevel;
   const top = normalized.filter(candidate => candidate.precedenceLevel === winningPrecedenceLevel);
 
-  if (top.length > 1 && top.every(candidate => candidate.precedenceClass === 'optional-memorial')) {
+  if (top.every(candidate => candidate.precedenceClass === 'optional-memorial')) {
+    const ordinaryWeekdays = normalized.filter(candidate => candidate.precedenceClass === 'ordinary-weekday');
+    if (ordinaryWeekdays.length > 1) {
+      throw new RangeError('An optional memorial choice cannot have more than one default ordinary weekday.');
+    }
+    const defaultId = ordinaryWeekdays[0]?.id ?? null;
     return {
-      modelVersion: '1.0',
+      modelVersion: '1.1',
       status: 'optional-choice',
       winnerId: null,
+      defaultId,
       winningPrecedenceLevel,
       decisions: normalized.map(candidate => ({
         id: candidate.id,
         precedenceLevel: candidate.precedenceLevel,
-        action: candidate.precedenceLevel === winningPrecedenceLevel ? 'offer-as-option' : 'omit',
+        action: candidate.precedenceLevel === winningPrecedenceLevel
+          ? 'offer-as-option'
+          : candidate.id === defaultId
+            ? 'retain-as-default'
+            : 'omit',
         reasonCode: candidate.precedenceLevel === winningPrecedenceLevel
           ? 'optional-memorial-choice'
-          : 'lower-precedence-omitted'
+          : candidate.id === defaultId
+            ? 'weekday-retained-with-optional-memorial'
+            : 'lower-precedence-omitted'
       })),
       transferRule,
-      sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+      sourceIds
     };
   }
 
   if (top.length !== 1) {
     return {
-      modelVersion: '1.0',
+      modelVersion: '1.1',
       status: 'tie-requires-policy',
       winnerId: null,
+      defaultId: null,
       winningPrecedenceLevel,
       decisions: normalized.map(candidate => ({
         id: candidate.id,
@@ -161,15 +187,16 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
           : 'lower-precedence-omitted'
       })),
       transferRule,
-      sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+      sourceIds
     };
   }
 
   const winner = top[0];
   return {
-    modelVersion: '1.0',
+    modelVersion: '1.1',
     status: 'resolved',
     winnerId: winner.id,
+    defaultId: null,
     winningPrecedenceLevel,
     decisions: normalized.map(candidate => {
       if (candidate.id === winner.id) {
@@ -188,6 +215,21 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
           reasonCode: 'solemnity-impeded-by-higher-precedence' as const
         };
       }
+      if (
+        winner.precedenceClass === 'privileged-weekday'
+        && (
+          candidate.precedenceClass === 'general-obligatory-memorial'
+          || candidate.precedenceClass === 'proper-obligatory-memorial'
+          || candidate.precedenceClass === 'optional-memorial'
+        )
+      ) {
+        return {
+          id: candidate.id,
+          precedenceLevel: candidate.precedenceLevel,
+          action: 'offer-as-commemoration' as const,
+          reasonCode: 'memorial-available-as-commemoration' as const
+        };
+      }
       return {
         id: candidate.id,
         precedenceLevel: candidate.precedenceLevel,
@@ -196,6 +238,6 @@ export function resolveRomanPrecedence(candidates: RomanPrecedenceCandidate[]): 
       };
     }),
     transferRule,
-    sourceIds: [ROMAN_PRECEDENCE_SOURCE_ID]
+    sourceIds
   };
 }

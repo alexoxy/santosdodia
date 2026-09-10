@@ -23,6 +23,13 @@
       "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html"
     },
     {
+      "id": "holy-see-girm-choice-of-mass-355",
+      "tier": "A0",
+      "role": ["ferial-disposition", "optional-memorial", "saint-commemoration"],
+      "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+      "notes": "GIRM 355: the seasonal feria remains mandatory with a limited Saint commemoration on privileged weekdays; before 17 December, from 2 January, in Easter Time and in Ordinary Time, a permitted memorial remains a choice rather than an automatic replacement of the feria. Jurisdictional adaptations remain separate policy."
+    },
+    {
       "id": "snl-portugal-precedence-table",
       "tier": "A1",
       "jurisdiction": "PT",
