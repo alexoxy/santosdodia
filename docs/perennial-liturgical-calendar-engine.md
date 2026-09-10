@@ -193,7 +193,7 @@ The current shadow set proves twenty-four fixed observances across those three s
 
 ## Source-bound Temporale and movable/transfer reconciliation
 
-The Portugal 2026 reconciliation ledger consumes five reviewed TemporalRule shadow mappings: Ash Wednesday, the First Sunday of Lent, Easter Sunday, Pentecost Sunday and the First Sunday of Advent. It also consumes 87 precedence-surviving members from reviewed TemporalRuleFamilies: 47 Lent/Easter weekdays, 12 seasonal Sundays in Lent, Easter and Advent, and 28 Ordinary Time Sundays. Ordinary Time is deliberately modelled as two segments: the early segment is anchored to the first Sunday on or after 14 January (the Second Sunday in Ordinary Time), while the late segment counts backwards from Advent. A row is classified as `temporale` only when the canonical rule or family has competent Holy See evidence, its Gregorian computation resolves to the exact approved annual date, the read-only mapping remains bound to the approved Portugal release artifact and its legacy, canonical and source occurrence identities are unique. Every one of the 111 family candidates must have exactly one outcome: an exact source-bound occurrence or an explicit precedence or season-boundary suppression. Collisions with fixed Sanctorale bindings, unknown rules, mismatched years or dates, duplicate mappings, incomplete suppression partitions and untrusted authority evidence fail closed.
+The Portugal 2026 reconciliation ledger consumes five reviewed TemporalRule shadow mappings: Ash Wednesday, the First Sunday of Lent, Easter Sunday, Pentecost Sunday and the First Sunday of Advent. It also consumes 96 precedence-surviving members from reviewed TemporalRuleFamilies: 47 Lent/Easter weekdays, three Holy Week weekdays, six Easter Octave weekdays, 12 seasonal Sundays in Lent, Easter and Advent, and 28 Ordinary Time Sundays. Holy Week and the Easter Octave are anchored directly to Gregorian Easter and carry their source rank of `celebration with precedence over solemnities`; no 2026 date is embedded in either perennial family. Ordinary Time is deliberately modelled as two segments: the early segment is anchored to the first Sunday on or after 14 January (the Second Sunday in Ordinary Time), while the late segment counts backwards from Advent. A row is classified as `temporale` only when the canonical rule or family has competent Holy See evidence, its Gregorian computation resolves to the exact approved annual date, the read-only mapping remains bound to the approved Portugal release artifact and its legacy, canonical and source occurrence identities are unique. Every one of the 120 family candidates must have exactly one outcome: an exact source-bound occurrence or an explicit precedence or season-boundary suppression. Collisions with fixed Sanctorale bindings, unknown rules, mismatched years or dates, duplicate mappings, incomplete suppression partitions and untrusted authority evidence fail closed.
 
 Eleven additional principal movable or transferred celebrations are kept in a separate annual shadow bound to the same immutable Portugal 2026 artifact. Palm Sunday, Holy Thursday, Good Friday, Holy Saturday, Trinity Sunday, Corpus Christi, the Sacred Heart and Christ the King must resolve directly from their universal TemporalRules. Epiphany, Ascension and the Immaculate Heart must first resolve to their universal base dates and then reproduce the exact Portugal destination through a reviewed `date-transfer` decision present in the explicit non-production overlay approval. The destination and the replacement at origin are both tied to their exact SNL source rows. A transfer cannot be inferred from labels, annual dates or proximity.
 
@@ -201,7 +201,7 @@ Those eleven rules are also exercised as 55 calculation vectors across the opera
 
 Every fixed Sanctorale anchor is now also bound to the exact approved `build.json` row through `sourceOccurrenceId` and `sourceRecordHash` in the read-only fixed Sanctorale shadow. The ledger rejects missing mappings, artifact drift, date/rank disagreement, duplicate source identities and unreviewed memorial refinements. This closes the provenance gap between official annual evidence, canonical Occurrence, perennial rule and the immutable source artifact.
 
-The current reconciliation therefore contains 92 `temporale` rows, 11 `movable-or-transfer` rows and 80 exact fixed Sanctorale rows: 179 source-bound days and 186 explicit unresolved days. Canonical migration coverage is 183/389 because 20 January, 3 February, 23 April and 28 April each contain two separately reviewed fixed occurrences; 206 legacy occurrences remain outside the canonical shadow. The 24 suppressed family candidates and the three replacement rows at transfer origins are evidence, not additional coverage. `publicationAllowed` and migration promotion both remain `false`; neither the public read path nor D1 production changes before complete semantic equivalence.
+The current reconciliation therefore contains 101 `temporale` rows, 11 `movable-or-transfer` rows and 80 exact fixed Sanctorale rows: 188 source-bound days and 177 explicit unresolved days. Canonical migration coverage is 192/389 because 20 January, 3 February, 23 April and 28 April each contain two separately reviewed fixed occurrences; 197 legacy occurrences remain outside the canonical shadow. The 24 suppressed family candidates and the three replacement rows at transfer origins are evidence, not additional coverage. `publicationAllowed` and migration promotion both remain `false`; neither the public read path nor D1 production changes before complete semantic equivalence.
 
 ## Seasons
 
@@ -255,11 +255,11 @@ precedence resolver
 St Joseph wins
 ```
 
-The current Portugal 2026 shadow migration proves this with Lent/Easter weekday families and Lent/Easter/Advent/Ordinary Time Sunday families:
+The current Portugal 2026 shadow migration proves this with Lent/Easter weekday families, Holy Week and Easter Octave families, and Lent/Easter/Advent/Ordinary Time Sunday families:
 
 ```text
-111 mathematical candidates
-87 survive as temporal occurrences
+120 mathematical candidates
+96 survive as temporal occurrences
 24 are suppressed by selected/higher-precedence celebrations or another liturgical season
 ```
 

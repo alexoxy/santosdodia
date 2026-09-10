@@ -635,6 +635,137 @@
       ]
     },
     {
+      "familyId": "temporal-rule-family:holy-week-weekday:roman-catholic",
+      "presentLegacyIds": [
+        "rc:MonHolyWeek",
+        "rc:TueHolyWeek",
+        "rc:WedHolyWeek"
+      ],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:MonHolyWeek",
+          "week": 1,
+          "weekday": "monday",
+          "expectedDateISO": "2026-03-30",
+          "occurrenceId": "occurrence:2026-03-30:holy-week-weekday-monday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-30-4b4b7e8af65ce67ea6253f8d",
+          "sourceRecordHash": "24c56c4cc935ae2eddf91e3065578192455526bd68a7e2a1d500c59b137ed5f7",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:TueHolyWeek",
+          "week": 1,
+          "weekday": "tuesday",
+          "expectedDateISO": "2026-03-31",
+          "occurrenceId": "occurrence:2026-03-31:holy-week-weekday-tuesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-31-83ff946f801c6448f208f4bd",
+          "sourceRecordHash": "7bb34140ffad45a4c13224531280e109ad0bb02a5a195066196cd3b7b97add32",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:WedHolyWeek",
+          "week": 1,
+          "weekday": "wednesday",
+          "expectedDateISO": "2026-04-01",
+          "occurrenceId": "occurrence:2026-04-01:holy-week-weekday-wednesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-01-1ee8a02adef176aa1a06baf2",
+          "sourceRecordHash": "7232156a2d88f55d71771b51143f5451a56c2df363c73120080aa16e7eb55d46",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:easter-octave-weekday:roman-catholic",
+      "presentLegacyIds": [
+        "rc:MonOctaveEaster",
+        "rc:TueOctaveEaster",
+        "rc:WedOctaveEaster",
+        "rc:ThuOctaveEaster",
+        "rc:FriOctaveEaster",
+        "rc:SatOctaveEaster"
+      ],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:MonOctaveEaster",
+          "week": 1,
+          "weekday": "monday",
+          "expectedDateISO": "2026-04-06",
+          "occurrenceId": "occurrence:2026-04-06:easter-octave-weekday-monday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-06-221e9b7b6f2799ef26eebe4e",
+          "sourceRecordHash": "0b2397b86876d3990bfbf5dbc2b66dc81a52739e680aeb2312fe675ad27fc499",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:TueOctaveEaster",
+          "week": 1,
+          "weekday": "tuesday",
+          "expectedDateISO": "2026-04-07",
+          "occurrenceId": "occurrence:2026-04-07:easter-octave-weekday-tuesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-07-1ecabc40a921894b817776ee",
+          "sourceRecordHash": "bc35dd1ca58df287bdb32feffa7ffbde56fa4495f9284f7273dc3cfa153aab1f",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:WedOctaveEaster",
+          "week": 1,
+          "weekday": "wednesday",
+          "expectedDateISO": "2026-04-08",
+          "occurrenceId": "occurrence:2026-04-08:easter-octave-weekday-wednesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-08-b66898659b3fd75b0295ce08",
+          "sourceRecordHash": "239ac8d31f07b45a14a9680da0960683a7ce7d763dd6afd3837f72e2540bbed4",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:ThuOctaveEaster",
+          "week": 1,
+          "weekday": "thursday",
+          "expectedDateISO": "2026-04-09",
+          "occurrenceId": "occurrence:2026-04-09:easter-octave-weekday-thursday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-09-0e09e8449dfe1ed34efd4f18",
+          "sourceRecordHash": "903032850f2e18cb71c5b90cc89c3bb59bee07cdb96f2623edb6ff69307141dc",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:FriOctaveEaster",
+          "week": 1,
+          "weekday": "friday",
+          "expectedDateISO": "2026-04-10",
+          "occurrenceId": "occurrence:2026-04-10:easter-octave-weekday-friday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-10-89d72301368fb093ea516871",
+          "sourceRecordHash": "19ad5f68bddc9551fe7ec00e4d73cfd58ce4e95a03fd274a40da70dd58260ed5",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:SatOctaveEaster",
+          "week": 1,
+          "weekday": "saturday",
+          "expectedDateISO": "2026-04-11",
+          "occurrenceId": "occurrence:2026-04-11:easter-octave-weekday-saturday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-11-b989e7bb155038b92aa6bf9b",
+          "sourceRecordHash": "1fa5d4ad7b6c5ffc8f0f022a52ca9f1c944e75fffb66af1013c2d20ada33f88e",
+          "legacyRank": "celebration with precedence over solemnities",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
+    },
+    {
       "familyId": "temporal-rule-family:lent-sunday:roman-catholic",
       "presentLegacyIds": [
         "rc:Lent2",

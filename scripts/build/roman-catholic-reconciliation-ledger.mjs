@@ -6,8 +6,12 @@ const OFFICIAL_SOURCE = 'portugal-national-liturgy-secretariat';
 const OFFICIAL_DOMAIN = 'liturgia.pt';
 const HOLY_SEE_DOMAIN = 'vatican.va';
 const PORTUGAL_RELEASE_ID = 'roman-catholic-pt-2026-v2';
-const TEMPORAL_FAMILY_WEEKDAYS = ['friday', 'monday', 'saturday', 'thursday', 'tuesday', 'wednesday'];
-const TEMPORAL_FAMILY_SUNDAY = ['sunday'];
+const TEMPORAL_FAMILY_MEMBER_PROFILES = {
+  'sunday': ['sunday'],
+  'weekday-monday-saturday': ['friday', 'monday', 'saturday', 'thursday', 'tuesday', 'wednesday'],
+  'weekday-monday-wednesday': ['monday', 'tuesday', 'wednesday']
+};
+const TEMPORAL_FAMILY_RANKS = ['weekday', 'solemnity', 'celebration with precedence over solemnities'];
 
 function daysInYear(year) {
   return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 366 : 365;
@@ -90,6 +94,7 @@ function familyLegacyId(family, week, weekday) {
   return family.legacyObservanceIdPattern
     .replace('{week}', String(week))
     .replace('{weekday}', weekday)
+    .replace('{weekdayShort}', `${weekday.charAt(0).toUpperCase()}${weekday.slice(1, 3)}`)
     .replace('{weekdayTitle}', `${weekday.charAt(0).toUpperCase()}${weekday.slice(1)}`);
 }
 
@@ -143,7 +148,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
   assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
-  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.2' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
+  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.3' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
   assert(temporalFamilyShadow.year === year, 'TemporalRuleFamily shadow year differs from the ledger.');
@@ -247,8 +252,9 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     assert(Number.isInteger(family.baseOffsetDays) && Number.isInteger(family.weekStrideDays) && family.weekStrideDays === 7, `TemporalRuleFamily ${family.id} has invalid date arithmetic.`);
     assert(Number.isInteger(family.weekRange?.min) && Number.isInteger(family.weekRange?.max) && family.weekRange.min <= family.weekRange.max, `TemporalRuleFamily ${family.id} has an invalid week range.`);
     const familyWeekdays = Object.keys(family.weekdayOffsets ?? {}).sort();
-    const expectedMembers = family.legacyRank === 'weekday' ? TEMPORAL_FAMILY_WEEKDAYS : family.legacyRank === 'solemnity' ? TEMPORAL_FAMILY_SUNDAY : null;
+    const expectedMembers = TEMPORAL_FAMILY_MEMBER_PROFILES[family.memberProfile];
     assert(expectedMembers && JSON.stringify(familyWeekdays) === JSON.stringify(expectedMembers), `TemporalRuleFamily ${family.id} has an invalid member/rank profile.`);
+    assert(TEMPORAL_FAMILY_RANKS.includes(family.legacyRank), `TemporalRuleFamily ${family.id} has an unsupported source rank.`);
     assert(family.candidateRequiresPrecedenceResolution === true, `TemporalRuleFamily ${family.id} must require explicit precedence resolution.`);
     familyObservanceId(family, family.weekRange.min, familyWeekdays[0]);
     assert(Array.isArray(family.evidence) && family.evidence.length > 0 && family.evidence.every(item => isHolySeeUrl(item.url)), `TemporalRuleFamily ${family.id} lacks competent Holy See evidence.`);
