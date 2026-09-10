@@ -65,12 +65,23 @@ const stagingPublishWorkflow = await readFile(
 if (!stagingPublishWorkflow.includes("stagingWorkflowRunId: Number(process.env.GITHUB_RUN_ID)")) {
   failures.push("staging validation receipt no longer records its exact workflow run");
 }
-if (!stagingPublishWorkflow.includes("PRODUCT_IMPORT_RUN_ID")) {
-  failures.push("staging publication no longer derives the exact product import run");
-}
-const stagingScopeFilters = stagingPublishWorkflow.match(/import_run_id='\$PRODUCT_IMPORT_RUN_ID'/g) ?? [];
-if (stagingScopeFilters.length < 3) {
-  failures.push("staging verification counts are not fully scoped to the exact release import run");
+const portugalV2StagingWorkflow = await readFile(
+  path.join(root, ".github/workflows/portugal-product-v2-staging.yml"),
+  "utf8",
+);
+for (const [label, workflow] of [
+  ["product release", stagingPublishWorkflow],
+  ["Portugal v2", portugalV2StagingWorkflow],
+]) {
+  if (/wrangler\s+d1|CLOUDFLARE_(?:ACCOUNT_ID|API_TOKEN)|environment:\s*d1-staging/.test(workflow)) {
+    failures.push(`${label} validation must not access remote D1 or its credentials`);
+  }
+  if (/\bpublish(?:-v2)?-to-staging:/.test(workflow)) {
+    failures.push(`${label} validation retained an automatic remote staging publication job`);
+  }
+  if (!workflow.includes("dropbox/upload-exact-file.mjs")) {
+    failures.push(`${label} validation lost its durable Dropbox evidence archive`);
+  }
 }
 
 const [productionReleaseWorkflow, productionApproval] = await Promise.all([

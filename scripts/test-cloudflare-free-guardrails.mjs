@@ -86,9 +86,21 @@ fs.writeFileSync(path.join(temporaryRoot, 'wrangler.jsonc'), JSON.stringify({
 }, null, 2));
 fs.writeFileSync(path.join(temporaryRoot, '.github/workflows/deploy.yml'), 'run: npm run cloudflare:deploy\n');
 assert.throws(() => auditRepository(temporaryRoot, policy), /deployment command is forbidden/);
+fs.rmSync(path.join(temporaryRoot, '.github/workflows/deploy.yml'));
+fs.writeFileSync(
+  path.join(temporaryRoot, '.github/workflows/product-publish-staging.yml'),
+  'name: Unsafe product validation\non: pull_request\njobs:\n  publish:\n    environment: d1-staging\n    steps:\n      - run: npx wrangler d1 execute CALENDAR_DB --remote --command "SELECT 1"\n'
+);
+assert.throws(() => auditRepository(temporaryRoot, policy), /must not access remote D1/);
+fs.writeFileSync(
+  path.join(temporaryRoot, '.github/workflows/product-publish-staging.yml'),
+  'name: Local product validation\non: pull_request\njobs:\n  validate:\n    steps:\n      - run: node scripts/validate.mjs\n'
+);
+assert.equal(auditRepository(temporaryRoot, policy).localOnlyProductWorkflowsChecked, 1);
 fs.rmSync(temporaryRoot, { recursive: true, force: true });
 
-assert.doesNotThrow(() => auditRepository(process.cwd(), policy));
+const repositoryAudit = auditRepository(process.cwd(), policy);
+assert.equal(repositoryAudit.localOnlyProductWorkflowsChecked, 2);
 const productionWrangler = fs.readFileSync(path.resolve('wrangler.jsonc'), 'utf8');
 assert.match(productionWrangler, /"binding"\s*:\s*"CALENDAR_DB"/);
 assert.match(productionWrangler, /"database_name"\s*:\s*"santosdodia-production"/);

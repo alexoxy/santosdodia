@@ -5,7 +5,12 @@ import { fileURLToPath } from 'node:url';
 const moduleDir = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_POLICY_PATH = path.resolve(moduleDir, '../config/cloudflare-free-guardrails.json');
 const REMOTE_DEPLOY_PATTERN = /\b(?:npx\s+)?(?:wrangler|opennextjs-cloudflare)\s+(?:deploy|versions\s+upload|r2\b)|npm\s+run\s+cloudflare:(?:deploy|upload)/i;
+const REMOTE_D1_PATTERN = /\b(?:npx\s+)?wrangler\s+d1\s+(?:execute|migrations\s+apply)\b[^\n]*\s--remote\b/i;
 const DNS_WRITE_PATTERN = /\/zones\/[^/\s]+\/dns_records|dns_records\/|wrangler\s+dns/i;
+const LOCAL_ONLY_PRODUCT_WORKFLOWS = new Set([
+  'product-publish-staging.yml',
+  'portugal-product-v2-staging.yml'
+]);
 
 function argument(name, argv = process.argv.slice(2)) {
   const index = argv.indexOf(name);
@@ -207,14 +212,23 @@ export function auditRepository(root = process.cwd(), policy = loadGuardrails())
     throw new Error('R2 bindings are forbidden while autonomous R2 writes are disabled.');
   }
   const files = workflowFiles(root);
+  let localOnlyProductWorkflowsChecked = 0;
   for (const filePath of files) {
     const source = fs.readFileSync(filePath, 'utf8');
+    const relativePath = path.relative(root, filePath);
     if (REMOTE_DEPLOY_PATTERN.test(source)) throw new Error(`Remote Cloudflare deployment command is forbidden in ${path.relative(root, filePath)}.`);
     if (DNS_WRITE_PATTERN.test(source)) throw new Error(`Cloudflare DNS write is forbidden in ${path.relative(root, filePath)}.`);
+    if (LOCAL_ONLY_PRODUCT_WORKFLOWS.has(path.basename(filePath))) {
+      localOnlyProductWorkflowsChecked += 1;
+      if (REMOTE_D1_PATTERN.test(source) || /\bCLOUDFLARE_(?:ACCOUNT_ID|API_TOKEN)\b|environment:\s*d1-staging\b/i.test(source)) {
+        throw new Error(`Product validation workflow ${relativePath} must not access remote D1.`);
+      }
+    }
   }
   return {
     policy: policy.plan,
     workflowFilesChecked: files.length,
+    localOnlyProductWorkflowsChecked,
     productionWritesEnabled: policy.autonomousLimits.productionWritesEnabled,
     r2WritesEnabled: policy.autonomousLimits.r2WritesEnabled
   };
