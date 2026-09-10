@@ -633,6 +633,168 @@
           "resolution": "inherit-general-canonical-binding"
         }
       ]
+    },
+    {
+      "familyId": "temporal-rule-family:lent-sunday:roman-catholic",
+      "presentLegacyIds": ["rc:Lent2", "rc:Lent3", "rc:Lent4", "rc:Lent5"],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:Lent2",
+          "week": 2,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-03-01",
+          "occurrenceId": "occurrence:2026-03-01:lent-sunday-2:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-01-05a835e9bbfc8a8ee73ac1db",
+          "sourceRecordHash": "0c543a5b85541bce4b1dc8e42a2ba48fc0a3c49fe03c06165332e24230f250b8",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Lent3",
+          "week": 3,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-03-08",
+          "occurrenceId": "occurrence:2026-03-08:lent-sunday-3:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-08-26f496e3e174a4b98b15ee17",
+          "sourceRecordHash": "9635f4ad42e65fa80e90387626c44ba4816e5faef33215f63bcfa32ea8696df6",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Lent4",
+          "week": 4,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-03-15",
+          "occurrenceId": "occurrence:2026-03-15:lent-sunday-4:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-15-138f0fa317f4da5291a28be0",
+          "sourceRecordHash": "f24e793548f4c93d551f89ea728fff2dff8e7f17b488a7c020cabb66759de577",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Lent5",
+          "week": 5,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-03-22",
+          "occurrenceId": "occurrence:2026-03-22:lent-sunday-5:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-03-22-534e8a1291bbef29296e2123",
+          "sourceRecordHash": "fa5950a9b2bde4fad9a790be9409f9602f3c9dce2ab237689a2749a187a6435e",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:easter-sunday:roman-catholic",
+      "presentLegacyIds": ["rc:Easter2", "rc:Easter3", "rc:Easter4", "rc:Easter5", "rc:Easter6"],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:Easter2",
+          "week": 2,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-04-12",
+          "occurrenceId": "occurrence:2026-04-12:easter-sunday-2:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-12-378a2c8239340e4b772c3fa4",
+          "sourceRecordHash": "a408ad4edf93114877e8d95ed92cdf765ca67f53f3f9b4287f707d0e5ac445a2",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Easter3",
+          "week": 3,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-04-19",
+          "occurrenceId": "occurrence:2026-04-19:easter-sunday-3:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-19-238f642c2ccc396a41aa96cd",
+          "sourceRecordHash": "65251aa94e4cc64cfc61ecbdabcf4be037e486e10090ae9c8afc85bcdeddc878",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Easter4",
+          "week": 4,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-04-26",
+          "occurrenceId": "occurrence:2026-04-26:easter-sunday-4:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-04-26-2f3f178918df93c52a435f6d",
+          "sourceRecordHash": "242fb7c32ba8dfd369f22f30102ecdf3f9a152ba5eaf53e6182d3b96db04d691",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Easter5",
+          "week": 5,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-05-03",
+          "occurrenceId": "occurrence:2026-05-03:easter-sunday-5:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-05-03-8d527092690a6edb3116c7d6",
+          "sourceRecordHash": "acafead4d0a57740cf7307e5282c8408e9968669b0f63564bfe22607ac6f6d70",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Easter6",
+          "week": 6,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-05-10",
+          "occurrenceId": "occurrence:2026-05-10:easter-sunday-6:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-05-10-e259bd1604e9ba11211368c0",
+          "sourceRecordHash": "4aaf79fc9283174b14d00d95ed39c9d692635eb717a4ad87068188037994f2da",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:advent-sunday:roman-catholic",
+      "presentLegacyIds": ["rc:Advent2", "rc:Advent3", "rc:Advent4"],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:Advent2",
+          "week": 2,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-12-06",
+          "occurrenceId": "occurrence:2026-12-06:advent-sunday-2:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-12-06-a872ac66065ab31dd440813e",
+          "sourceRecordHash": "7baba7b6211d91be1673d27d2f98e5d4670da8ce378455de25f8d0067740ea91",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Advent3",
+          "week": 3,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-12-13",
+          "occurrenceId": "occurrence:2026-12-13:advent-sunday-3:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-12-13-6bb0680339b78bed8a81a5e0",
+          "sourceRecordHash": "77149049bc16d0a46d59d74b4ec3bbb1c9268754642c7693c7594c589e943f3d",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:Advent4",
+          "week": 4,
+          "weekday": "sunday",
+          "expectedDateISO": "2026-12-20",
+          "occurrenceId": "occurrence:2026-12-20:advent-sunday-4:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-12-20-ef9adb00e392eef244f4d157",
+          "sourceRecordHash": "7c4553a518ca4619ff931a09d1b341567bdb942d7774085c0a55669e79c00e66",
+          "legacyRank": "solemnity",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
     }
   ],
   "suppressedCandidates": [
@@ -790,5 +952,5 @@
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-08-22"
+  "verifiedAt": "2026-09-10"
 }

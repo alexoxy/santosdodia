@@ -1,0 +1,1702 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-release-unresolved-semantic-inventory",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "dropboxManifestId": "id:oANWCGUyYBwAAAAAAAAWmQ",
+    "validatedManifestPath": "/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/4e154c0ebb30ee648d065617acb3634fd1b8365d/manifest.json",
+    "serverModified": "2026-09-09T12:40:27Z"
+  },
+  "target": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "classificationPolicy": {
+    "deterministicInputs": [
+      "canonicalEventId",
+      "resolution"
+    ],
+    "labelsCreateIdentity": false,
+    "annualDateCreatesPerennialRule": false,
+    "coveredSourceIdentityUnion": [
+      "fixedSanctorale.mappings",
+      "temporalRule.mappings",
+      "temporalRuleFamily.presentMappings",
+      "movableTransfer.mappings"
+    ],
+    "suppressedCandidatesCountAsCoverage": false,
+    "transferOriginsCountAsCoverage": false
+  },
+  "coverageAtInventory": {
+    "approvedSourceOccurrences": 389,
+    "sourceBoundOccurrences": 155,
+    "remainingOccurrences": 234,
+    "promotionAllowed": false
+  },
+  "familyCounts": {
+    "fixed-collective": 12,
+    "fixed-marian-title": 8,
+    "fixed-or-major-observance": 16,
+    "fixed-person": 52,
+    "jurisdiction-rank-override": 2,
+    "jurisdiction-structural-overlay": 14,
+    "portugal-proper": 5,
+    "saturday-marian-family": 14,
+    "temporal-sunday-family": 28,
+    "temporal-weekday-family": 83
+  },
+  "humanReviewBoundary": {
+    "occurrenceCount": 21,
+    "families": [
+      "jurisdiction-rank-override",
+      "jurisdiction-structural-overlay",
+      "portugal-proper"
+    ],
+    "rule": "Jurisdiction-specific structure, rank or Portugal proper identity requires explicit competent-authority review."
+  },
+  "remaining": [
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-02-f7e48d6fedf64ed6e304639f",
+      "sourceRecordHash": "e3ba518630d655e2c53f71230b1a1d1bc714bac7b41bc4da208601154c9d8a2a",
+      "dateISO": "2026-01-02",
+      "canonicalEventId": "rc:StsBasilGreg",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-03-92b798fd04a9d3948b8f9bcc",
+      "sourceRecordHash": "8778eecaee954454cbdeeb96d2da10ce21a7fe4e5858030792a2cd1de33e1645",
+      "dateISO": "2026-01-03",
+      "canonicalEventId": "rc:NameJesus",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-05-6b518156d4feae2ef222dc94",
+      "sourceRecordHash": "8b75db2aa7b3a84dfcd34df112f909b66966273957640f552296b11adf8b9df6",
+      "dateISO": "2026-01-05",
+      "canonicalEventId": "rc:ChristmasWeekdayJan5",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-06-f745cb764c9415c74b832e35",
+      "sourceRecordHash": "0c81a5e464a6cfb98ae4e692a4b957df6f252a171918956c8cb9efd017a0205e",
+      "dateISO": "2026-01-06",
+      "canonicalEventId": "rc-pt:TuesdayAfterEpiphany",
+      "semanticFamily": "portugal-proper"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-08-fc47b2946d29fa21d55037e2",
+      "sourceRecordHash": "3de2c3292bf2f212610e5edd961adee1f524b412a79bdde8f302f50238621b65",
+      "dateISO": "2026-01-08",
+      "canonicalEventId": "rc:DayAfterEpiphanyJan8",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-09-db23378c81ba4d5d158833d0",
+      "sourceRecordHash": "af261e303bcd72aae905b4c3035dc7de16675af530072a21ffa7a2f414d75ae6",
+      "dateISO": "2026-01-09",
+      "canonicalEventId": "rc:DayAfterEpiphanyJan9",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-10-e63eaa901525edd1fec58393",
+      "sourceRecordHash": "e8bbdffdb2ed001af38de7792a57e4eedd331cf64e4abc8e158c1edff1d620ed",
+      "dateISO": "2026-01-10",
+      "canonicalEventId": "rc:DayAfterEpiphanyJan10",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-11-60132f0bc8b9c324f0eed5bb",
+      "sourceRecordHash": "71c3fe1a119a1cc937533a2e9d32f462543822cf2aabff15f03d6c559ae56588",
+      "dateISO": "2026-01-11",
+      "canonicalEventId": "rc:BaptismLord",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-12-05453cbdcaee01c9d33e345d",
+      "sourceRecordHash": "fc34048f4b8f85ef1a02644d835219d5f3f6f906bdee84dd352d93c762cb313e",
+      "dateISO": "2026-01-12",
+      "canonicalEventId": "rc:OrdWeekday1Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-14-bfeb91031c4f68a5056d2db1",
+      "sourceRecordHash": "ad1c7ccdf12ae3de9f380d9e7396dc54d45d864c3423119d128e75de40742d6c",
+      "dateISO": "2026-01-14",
+      "canonicalEventId": "rc:OrdWeekday1Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-15-b2e7099b5faffc2d412089be",
+      "sourceRecordHash": "e43fec6157cc81f595bff4cc204a75af692f0d9b006aa9659ef57d64aea5c0d0",
+      "dateISO": "2026-01-15",
+      "canonicalEventId": "rc:OrdWeekday1Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-16-8d30c692710a06168ddfa6aa",
+      "sourceRecordHash": "45295171999f77c93951eedcaea1182716c536973c689fa1a074271768a64783",
+      "dateISO": "2026-01-16",
+      "canonicalEventId": "rc:OrdWeekday1Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-18-3b05d171429ebe35f6afe75f",
+      "sourceRecordHash": "574e2ebfc82fb4461aadc4a6be8608623fda24fe22d75919a6d30e3d050f64dc",
+      "dateISO": "2026-01-18",
+      "canonicalEventId": "rc:OrdSunday2",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-19-8f5671cce69f976c35b8b354",
+      "sourceRecordHash": "be5f03b1a82845b415a2b638c9bed0746c64a9f62a402283fcb104ee8c3984ad",
+      "dateISO": "2026-01-19",
+      "canonicalEventId": "rc:OrdWeekday2Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-23-5f1340dc8cb1c59c2a85eb40",
+      "sourceRecordHash": "1ae04f0e7d4e33a3fc011a55318b34746369a05fb315e6247c515a07527adc00",
+      "dateISO": "2026-01-23",
+      "canonicalEventId": "rc:OrdWeekday2Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-25-7b9ba81a63ab58bf65164daf",
+      "sourceRecordHash": "9f460e6b7227caff8e6ce3bfc6a2e3a8ad9696e7f09023669d5b5fa1113810f1",
+      "dateISO": "2026-01-25",
+      "canonicalEventId": "rc:OrdSunday3",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-26-6b214544d1ff24d4e425c0c9",
+      "sourceRecordHash": "215c73d8bedd59c4d68df1e937c47d3b13208f6400efa4c9d3a4640a8ac77240",
+      "dateISO": "2026-01-26",
+      "canonicalEventId": "rc:StsTimothyTitus",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-29-fa2cf3cbccec9554457655e2",
+      "sourceRecordHash": "ef306cf2a36bc9485315b1458e9778c9044fc71094f218798272d524e8040739",
+      "dateISO": "2026-01-29",
+      "canonicalEventId": "rc:OrdWeekday3Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-01-30-63c8fc439bccda563da8e298",
+      "sourceRecordHash": "8746e8d0943a81cfa930b52957b667e4223ac11ef6eed28514544f5a8e4914bf",
+      "dateISO": "2026-01-30",
+      "canonicalEventId": "rc:OrdWeekday3Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-01-c4c959b735b0dc81e9dd8fde",
+      "sourceRecordHash": "ba22cce95267a971d2b0f400411fd4c8249fb93b5a95df3205c901a5bc1c0a3a",
+      "dateISO": "2026-02-01",
+      "canonicalEventId": "rc:OrdSunday4",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-02-a343789c470d6abc938bd6ab",
+      "sourceRecordHash": "cfb5baf7698eff2a4053709ba808e72e8917684c6babeef86edf5c699289c1eb",
+      "dateISO": "2026-02-02",
+      "canonicalEventId": "rc:Presentation",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-04-e285ab8cd2b91ecf40f5428a",
+      "sourceRecordHash": "5da94eb490c40e9de25eef218fee8458ea65bf4ad632fb9e19fe6860f09d204b",
+      "dateISO": "2026-02-04",
+      "canonicalEventId": "rc:OrdWeekday4Wednesday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-06-41faa5246971dcf6eac5b67e",
+      "sourceRecordHash": "58f88f8b5c178b0e517619c87611a910c29b6dcb03aa4b124bf8572c4d291664",
+      "dateISO": "2026-02-06",
+      "canonicalEventId": "rc:StsPaulMiki",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-07-2a9293a5d084c74416c63b3d",
+      "sourceRecordHash": "8826d3fd33d5dfc3fbaa795a612615a07616508913085486b4ffdc5814fe70f6",
+      "dateISO": "2026-02-07",
+      "canonicalEventId": "rc-pt:FiveWoundsLord",
+      "semanticFamily": "portugal-proper"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-08-9abafaa8db56cf078c014675",
+      "sourceRecordHash": "10b86ae51c8025fdc1eb3c574abfbef98e0d57a60edd9915cc55059532faa975",
+      "dateISO": "2026-02-08",
+      "canonicalEventId": "rc:OrdSunday5",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-09-5f80b519d3e2d3f6152f831d",
+      "sourceRecordHash": "5c4f94386c63344b0019e7f1cfd7905b2782bdf09e476d1cccb6e5cb5b5e08c6",
+      "dateISO": "2026-02-09",
+      "canonicalEventId": "rc:OrdWeekday5Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-11-7014b451076890cc74de5579",
+      "sourceRecordHash": "bcd1bb39975930801a00fa49d61581bbef9bf585bfabc8aec7d86c0d548084e4",
+      "dateISO": "2026-02-11",
+      "canonicalEventId": "rc:OurLadyOfLourdes",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-12-0cb2605213f6d5bdd231949e",
+      "sourceRecordHash": "a6e4fdb77d3e2376a8a781eb1c06b9ed8d30f6e0706f6eb07886b44ad60be51e",
+      "dateISO": "2026-02-12",
+      "canonicalEventId": "rc:OrdWeekday5Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-13-37a025777fbab8d33255ce81",
+      "sourceRecordHash": "b155c83fc5e9efe1cd8eae6cc0986c1860edf9471aa903697214de98184c3e52",
+      "dateISO": "2026-02-13",
+      "canonicalEventId": "rc:OrdWeekday5Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-15-abfb114429defe96ac003fac",
+      "sourceRecordHash": "f370c746b1f5ec7d61d499b75c9386f9c114eea4627548a16949248c7226f37f",
+      "dateISO": "2026-02-15",
+      "canonicalEventId": "rc:OrdSunday6",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-16-888d7935642618e4ceceafdd",
+      "sourceRecordHash": "0b10de2d4bd2e877687b1aba02097cc89e74f8d598dacf042f4b7abf37c8dd8c",
+      "dateISO": "2026-02-16",
+      "canonicalEventId": "rc:OrdWeekday6Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-17-9627449325bd5719c5cbe3e8",
+      "sourceRecordHash": "55bfd16edd25cea4fb75fc1c602527afc098f4664c4e63aa2c95ca52afd3e1d6",
+      "dateISO": "2026-02-17",
+      "canonicalEventId": "rc:SevenHolyFounders",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-19-1065969b6a06ffe444f70849",
+      "sourceRecordHash": "e54573becc202316fd09fdbca7e5ef0a7ee59569e8b32da1a65bc0367ca2a7d4",
+      "dateISO": "2026-02-19",
+      "canonicalEventId": "rc:ThursdayAfterAshWednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-20-ffdccc925bfb5380cc1e417c",
+      "sourceRecordHash": "c262ec0f4e21bd55e2f67be7e15e7b743694d09c3534aea9efb3d476fca4aaef",
+      "dateISO": "2026-02-20",
+      "canonicalEventId": "rc:FridayAfterAshWednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-02-21-b5e6f79a26c393c9ccd5f6c9",
+      "sourceRecordHash": "628ff7ec5a3004a6a7f304e56a7f265dc00cee5c3fce03fadb079adfecc73923",
+      "dateISO": "2026-02-21",
+      "canonicalEventId": "rc:SaturdayAfterAshWednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-03-25-89d9bb9656dc5f442b1d6619",
+      "sourceRecordHash": "7b188de10bec392003891dc12e4e98bafb1a7bf2ee743069cabe83db152a1033",
+      "dateISO": "2026-03-25",
+      "canonicalEventId": "rc:Annunciation",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-03-30-4b4b7e8af65ce67ea6253f8d",
+      "sourceRecordHash": "24c56c4cc935ae2eddf91e3065578192455526bd68a7e2a1d500c59b137ed5f7",
+      "dateISO": "2026-03-30",
+      "canonicalEventId": "rc:MonHolyWeek",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-03-31-83ff946f801c6448f208f4bd",
+      "sourceRecordHash": "7bb34140ffad45a4c13224531280e109ad0bb02a5a195066196cd3b7b97add32",
+      "dateISO": "2026-03-31",
+      "canonicalEventId": "rc:TueHolyWeek",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-01-1ee8a02adef176aa1a06baf2",
+      "sourceRecordHash": "7232156a2d88f55d71771b51143f5451a56c2df363c73120080aa16e7eb55d46",
+      "dateISO": "2026-04-01",
+      "canonicalEventId": "rc:WedHolyWeek",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-06-221e9b7b6f2799ef26eebe4e",
+      "sourceRecordHash": "0b2397b86876d3990bfbf5dbc2b66dc81a52739e680aeb2312fe675ad27fc499",
+      "dateISO": "2026-04-06",
+      "canonicalEventId": "rc:MonOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-07-1ecabc40a921894b817776ee",
+      "sourceRecordHash": "bc35dd1ca58df287bdb32feffa7ffbde56fa4495f9284f7273dc3cfa153aab1f",
+      "dateISO": "2026-04-07",
+      "canonicalEventId": "rc:TueOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-08-b66898659b3fd75b0295ce08",
+      "sourceRecordHash": "239ac8d31f07b45a14a9680da0960683a7ce7d763dd6afd3837f72e2540bbed4",
+      "dateISO": "2026-04-08",
+      "canonicalEventId": "rc:WedOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-09-0e09e8449dfe1ed34efd4f18",
+      "sourceRecordHash": "903032850f2e18cb71c5b90cc89c3bb59bee07cdb96f2623edb6ff69307141dc",
+      "dateISO": "2026-04-09",
+      "canonicalEventId": "rc:ThuOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-10-89d72301368fb093ea516871",
+      "sourceRecordHash": "19ad5f68bddc9551fe7ec00e4d73cfd58ce4e95a03fd274a40da70dd58260ed5",
+      "dateISO": "2026-04-10",
+      "canonicalEventId": "rc:FriOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-04-11-b989e7bb155038b92aa6bf9b",
+      "sourceRecordHash": "1fa5d4ad7b6c5ffc8f0f022a52ca9f1c944e75fffb66af1013c2d20ada33f88e",
+      "dateISO": "2026-04-11",
+      "canonicalEventId": "rc:SatOctaveEaster",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-01-e450b1fa86cdbfd5db500b7f",
+      "sourceRecordHash": "4b912b26b113b93003dd291cfab548842219fa947a91236b554b49f322009b0c",
+      "dateISO": "2026-05-01",
+      "canonicalEventId": "rc:StJosephWorker",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-12-29ff44a3cc7560fd514874fb",
+      "sourceRecordHash": "f36665b0273bc293a893d738d6173d79b13a9da16574c197ca7b95e5d33a255a",
+      "dateISO": "2026-05-12",
+      "canonicalEventId": "rc-pt:BlJoanPortugal",
+      "semanticFamily": "portugal-proper"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-12-55d07e2dc301ee6dea4aeafd",
+      "sourceRecordHash": "b28712f3accf37b6c691042da87c3bc9e6e1d95c6836f400dc582f33577ee747",
+      "dateISO": "2026-05-12",
+      "canonicalEventId": "rc:StPancras",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-12-4d22759a8d28bacfb07b2134",
+      "sourceRecordHash": "c660b534e608ef81cbec857289530abdc1a9fbc5c3210a6cb2e6fdbca46e48a1",
+      "dateISO": "2026-05-12",
+      "canonicalEventId": "rc:StsNereusAchilleus",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-13-e2cf0ccd296063f585975a48",
+      "sourceRecordHash": "cbff45fa28834e65bd19f4a252771765f66e7ef303b7559251f87857d32057c0",
+      "dateISO": "2026-05-13",
+      "canonicalEventId": "rc:OurLadyOfFatima",
+      "semanticFamily": "jurisdiction-rank-override"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-21-356077445664af03f7738147",
+      "sourceRecordHash": "3aa1be82d7b01aac04d62e6e755380b128d27aa03fe605b771bcd278c87e3907",
+      "dateISO": "2026-05-21",
+      "canonicalEventId": "rc:StChristopherMagallanes",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-25-76a3dcda6875837a38fab842",
+      "sourceRecordHash": "49b0e6ff0c8805c2ed36b5b9196b251a977b55a263fa53a3c28922dccd6b1814",
+      "dateISO": "2026-05-25",
+      "canonicalEventId": "rc:MaryMotherChurch",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-27-a841e38d59756875460bb178",
+      "sourceRecordHash": "afff5a92dbc13a620cbf92f6e1c5735917e15e515a1187f552af8f4dc00fe638",
+      "dateISO": "2026-05-27",
+      "canonicalEventId": "rc:StAugustineCanterbury",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-28-6c07a6223d02663f4e312b02",
+      "sourceRecordHash": "6e6d2dc0ee379752076ab0887be6a8b940ab65716c062a4bb8bc25d3709a0767",
+      "dateISO": "2026-05-28",
+      "canonicalEventId": "rc:OrdWeekday8Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-29-e652faff241dcbb42c218e9b",
+      "sourceRecordHash": "2fa2f86a10be0ff9a15c8415ed33eef28690dc803a46850d88bd6b8618980238",
+      "dateISO": "2026-05-29",
+      "canonicalEventId": "rc:StPaulVI",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-05-30-8f94214040de2b144cbae6c8",
+      "sourceRecordHash": "11b065bd843f7ede55c6de50bb7398e66ed1c128cc818a3b7d4a57259e54739f",
+      "dateISO": "2026-05-30",
+      "canonicalEventId": "rc:SatMemBVM2",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-02-73c05462e9883c54bf402090",
+      "sourceRecordHash": "d6a451b19a77f39b5f7eeb7f42e79cf68794ab682f1fc8458c925c2eabd77896",
+      "dateISO": "2026-06-02",
+      "canonicalEventId": "rc:StsMarcellinusPeter",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-03-7b32e4efae7a9f52e5c2e488",
+      "sourceRecordHash": "71f58e61ff4158d873b83e960964c524a64aa969cdeefbc367dd1cb0e2da58d7",
+      "dateISO": "2026-06-03",
+      "canonicalEventId": "rc:StsCharlesLwanga",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-06-7ec3efc3033313985a9c8a8a",
+      "sourceRecordHash": "0b1755be05fd321cb40738fb831c7236799dd9b10942d2f48fe0334188910740",
+      "dateISO": "2026-06-06",
+      "canonicalEventId": "rc:SatMemBVM3",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-06-f69e7c4527cc7521b56c808a",
+      "sourceRecordHash": "23dc7b28aed1fddf1f1c6a76831b5394b181bff8a56fbcaa67e3739b41266dc1",
+      "dateISO": "2026-06-06",
+      "canonicalEventId": "rc:StNorbert",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-07-9a2027bc471c5012cc26400f",
+      "sourceRecordHash": "923ed0b7631c33c90358bc674d04c27fe68c8b563f4bec5694328f0bcf1084fc",
+      "dateISO": "2026-06-07",
+      "canonicalEventId": "rc:OrdSunday10",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-08-864f2e498f0f40469d634943",
+      "sourceRecordHash": "ad286a317b58587bf5cb4916a15faf74ee5eff776f46546184b776b19ce34443",
+      "dateISO": "2026-06-08",
+      "canonicalEventId": "rc:OrdWeekday10Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-10-7275f56bb30fd1856b07d296",
+      "sourceRecordHash": "ee7b9dc5b8814f2c652981270851235773e5739ebf89fae94f38fe17e60ff0eb",
+      "dateISO": "2026-06-10",
+      "canonicalEventId": "rc:OrdWeekday10Wednesday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-11-2546b0da6c54fafa4470076e",
+      "sourceRecordHash": "3e513336f52393f13ec1675e3bb3ecd72cff35e9e99e2f7ae877ff1762aef80d",
+      "dateISO": "2026-06-11",
+      "canonicalEventId": "rc:StBarnabasAp",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-14-28170c09e638a1af799f63f1",
+      "sourceRecordHash": "245f4fde9857484d9294dfe09d34961a90edbf24549b5516f5f155cc42d25650",
+      "dateISO": "2026-06-14",
+      "canonicalEventId": "rc:OrdSunday11",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-16-24f5eaca4f711d98f468be36",
+      "sourceRecordHash": "685adf3813016e7dbfeb905ddf8e0341c5cdcf4d91061e2e0f4a48e53937753c",
+      "dateISO": "2026-06-16",
+      "canonicalEventId": "rc:OrdWeekday11Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-17-cb4738881243416c4eb30365",
+      "sourceRecordHash": "0f7bf8754acb295049395501b6aebe579d315b9bde6a2ef394b1b60e2c812c24",
+      "dateISO": "2026-06-17",
+      "canonicalEventId": "rc:OrdWeekday11Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-18-a2098e8c834c8c7472c2e9b8",
+      "sourceRecordHash": "0ee78c7d5824ab289b56e9ab78b0eae457ac5b88449fb4e84a0ecd95f97553fd",
+      "dateISO": "2026-06-18",
+      "canonicalEventId": "rc:OrdWeekday11Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-19-1f321a1581d134c16af3c7d9",
+      "sourceRecordHash": "246ec2d8ba7251341149092c2872569742422259311f6f0508697562ae664d09",
+      "dateISO": "2026-06-19",
+      "canonicalEventId": "rc:StRomuald",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-20-3a79989be9379d0e1fad1317",
+      "sourceRecordHash": "f8860912be2529980eb8bf3f2108406905cf03ab1596aa157b35288803be0ecc",
+      "dateISO": "2026-06-20",
+      "canonicalEventId": "rc-pt:BlsSanchaMafaldaTeresa",
+      "semanticFamily": "portugal-proper"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-20-f92fc4950eb058647fe49397",
+      "sourceRecordHash": "0d9d3a71ee991696d20175ec6988b1dd742906e651360623c4b6535a36b03e88",
+      "dateISO": "2026-06-20",
+      "canonicalEventId": "rc:SatMemBVM4",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-21-dcc38c474bd41e1a65db3cd2",
+      "sourceRecordHash": "a72dfedbdaf51bcab49edc5d9ab0fe6c79edefbcbb16a17f373f8bfe6cc74088",
+      "dateISO": "2026-06-21",
+      "canonicalEventId": "rc:OrdSunday12",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-22-3df5137023fa79cd3c0a09f5",
+      "sourceRecordHash": "f98858d69a1d55998bb9f6b5316f6640726e96f8b4e90cb294c0d63ac0381c4b",
+      "dateISO": "2026-06-22",
+      "canonicalEventId": "rc:StPaulinusNola",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-22-2569a6ad0e5914d6a7dcd150",
+      "sourceRecordHash": "9695021235fcec2512c34bebfd1540c93ef13589d2d0b589655a09cb6f7160a5",
+      "dateISO": "2026-06-22",
+      "canonicalEventId": "rc:StsJohnFisherThomasMore",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-23-7973c14097fa33937bd37787",
+      "sourceRecordHash": "67ed3f7bd492b7c54f738ec2a0b4050a5aa3bfdb859614203b77ec92ea633985",
+      "dateISO": "2026-06-23",
+      "canonicalEventId": "rc:OrdWeekday12Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-25-2dc18430936a3ba0eee67080",
+      "sourceRecordHash": "f5ad2ccf80034f71a50b2b85d0abd4c4458b5c205a4d894d2a453b063982950b",
+      "dateISO": "2026-06-25",
+      "canonicalEventId": "rc:OrdWeekday12Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-26-7f765e0850b939c99bc4e9ef",
+      "sourceRecordHash": "b87ac5d0f43f20959b49e91984af133034b1e8ebba281a7f22f1fc9ab1b724ea",
+      "dateISO": "2026-06-26",
+      "canonicalEventId": "rc:OrdWeekday12Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-27-5aa10ddd9e44844f4ba124bb",
+      "sourceRecordHash": "2eb0d5e21b59347d7d9cc4e035d9ee30cbad8df870065a4a2fd2019c95b40dac",
+      "dateISO": "2026-06-27",
+      "canonicalEventId": "rc:SatMemBVM5",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-27-f7ae2f059bb8cb69a60cae04",
+      "sourceRecordHash": "5ec91602771a5e261811bb157d0a5c09d231231dc5314cf6b7e9f9d14f9cce55",
+      "dateISO": "2026-06-27",
+      "canonicalEventId": "rc:StCyrilAlexandria",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-28-b33c22b19e1c43d3b4e01229",
+      "sourceRecordHash": "e8d4034b8b408b6dbb0758ee5aede55d9599882fc89e163dc6d2a72f41017c9e",
+      "dateISO": "2026-06-28",
+      "canonicalEventId": "rc:OrdSunday13",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-06-30-6acf4ba42100f123b530f5e3",
+      "sourceRecordHash": "e40f99ac3eadfc02e1089b0025db3b6df4a34c7c4c97d8bfc166cb6def688027",
+      "dateISO": "2026-06-30",
+      "canonicalEventId": "rc:FirstMartyrsRome",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-01-406cf45cf3607fd796ea346c",
+      "sourceRecordHash": "4740b65f596eb45338f193745e8673c2d05c49df4f886829aac21d514fcb95ae",
+      "dateISO": "2026-07-01",
+      "canonicalEventId": "rc:OrdWeekday13Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-02-2215bb8cf81d36cf3fad58dd",
+      "sourceRecordHash": "12d88624dceca823a3430c760eba981235e988b0fb43f175ab10d34b40013c81",
+      "dateISO": "2026-07-02",
+      "canonicalEventId": "rc:OrdWeekday13Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-05-ea23070eb37003db984afed0",
+      "sourceRecordHash": "41285b6208aa1b2b22697a8f1f321f802cb62eb51d2460f3778dc06fe1114432",
+      "dateISO": "2026-07-05",
+      "canonicalEventId": "rc:OrdSunday14",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-06-9cf5bc757be978b6d3aaffb6",
+      "sourceRecordHash": "53ed0e313c273b9f46ae942dcda5d865d75be810055ba90b7f58385da2d77c1b",
+      "dateISO": "2026-07-06",
+      "canonicalEventId": "rc:StMariaGoretti",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-07-cdd782409fd8e7e14c8706d2",
+      "sourceRecordHash": "769eb9fba2b0abe2bc86ba0fe64ce6d10b3917b0ca92e26b7bcb2e56be6df47b",
+      "dateISO": "2026-07-07",
+      "canonicalEventId": "rc:OrdWeekday14Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-08-d095ceeb59c44407b3b40856",
+      "sourceRecordHash": "5afb6af867cad95e468319d2b891decae9c446365208d1905f8b74eae99d02c1",
+      "dateISO": "2026-07-08",
+      "canonicalEventId": "rc:OrdWeekday14Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-09-91a0f3829e7d7f22d6a26f94",
+      "sourceRecordHash": "5087d54c88a245a59672afd486f6eb51bd6d53e723016876979b5512b03edb30",
+      "dateISO": "2026-07-09",
+      "canonicalEventId": "rc:StAugustineZhaoRong",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-10-6af17adf0c4336b48ef1c804",
+      "sourceRecordHash": "9a35256a4b79a6999f0cdb3b48627c3da81253558b4261f9c8eaade0927fe3f4",
+      "dateISO": "2026-07-10",
+      "canonicalEventId": "rc:OrdWeekday14Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-12-a85c9ea23c06d550eba662d6",
+      "sourceRecordHash": "3366cfd7a884f17e7f7f55b6157c7ecebcb718597f31e0b34e9a9ecd67e6f7a2",
+      "dateISO": "2026-07-12",
+      "canonicalEventId": "rc:OrdSunday15",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-13-a7a1f66014b9c87a975cec08",
+      "sourceRecordHash": "a45ff9cd285dd1f436c45c81e28fca6f02e71beffcfcb9901e918b0d45714734",
+      "dateISO": "2026-07-13",
+      "canonicalEventId": "rc:StHenry",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-14-9cb327de646650d8bb957049",
+      "sourceRecordHash": "f231e2f4a68837eae0f15b93aa079b393d942af38d9b318254c1dbc46eca03c9",
+      "dateISO": "2026-07-14",
+      "canonicalEventId": "rc:StCamillusDeLellis",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-16-8a6070cdc5f0be76ff23c5b2",
+      "sourceRecordHash": "e3c0266f450fc953456637a6a716fe1d10b2bebdb0cd6c2b8f3498c93b1e85c1",
+      "dateISO": "2026-07-16",
+      "canonicalEventId": "rc:OurLadyOfMountCarmel",
+      "semanticFamily": "jurisdiction-rank-override"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-17-dee64b0d5534c51db7fe4a34",
+      "sourceRecordHash": "177abc84a45c8e73c6d46ff181ceec2c7f4d8186c638799383170576e6b8c79d",
+      "dateISO": "2026-07-17",
+      "canonicalEventId": "rc:OrdWeekday15Friday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-18-ccacba590c9ed3518afb6ae0",
+      "sourceRecordHash": "b923dfdd33921435eacc244f3e5b8bc1e54e5b53bbb81a6d0dd47b88656e4382",
+      "dateISO": "2026-07-18",
+      "canonicalEventId": "rc-pt:StBartholomewMartyrs",
+      "semanticFamily": "portugal-proper"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-19-98832b1c324648fd30af8f0e",
+      "sourceRecordHash": "458d87a27cb991783245a98c8eaf6b834a0bd44b79bd725b3cdfdde0eed16c9c",
+      "dateISO": "2026-07-19",
+      "canonicalEventId": "rc:OrdSunday16",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-20-35c90527ac22f88fd2d24374",
+      "sourceRecordHash": "45825faa566839034fa5c9f1c327e7b5c3bd5cd003d9f108054890dcfc5d1970",
+      "dateISO": "2026-07-20",
+      "canonicalEventId": "rc:StApollinaris",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-21-49ad6ff65b80b984bdbf6d5e",
+      "sourceRecordHash": "af67029cb9b8cd6dc86fc01449cb302d8a894c705d79b781c69ba2273769df53",
+      "dateISO": "2026-07-21",
+      "canonicalEventId": "rc:StLawrenceBrindisi",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-24-90e95e25cc72c1e14334b861",
+      "sourceRecordHash": "4b6ba897758f91b5c916dc3e468f4565b4a44e6fd8b01948f4e8fdc3fa57a6cd",
+      "dateISO": "2026-07-24",
+      "canonicalEventId": "rc:StSharbelMakhluf",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-26-3b9688ca2781849951c45160",
+      "sourceRecordHash": "de363a7b73d4f63b960b17013ac0d66108e8117c3ae29b63b2abcac47c2ba707",
+      "dateISO": "2026-07-26",
+      "canonicalEventId": "rc:OrdSunday17",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-27-2ee3236e73771bdf8a2ac642",
+      "sourceRecordHash": "e8a92cb57b6d1c15601f9609127768f6d25a0c74bc78ba652d081af8540e8a03",
+      "dateISO": "2026-07-27",
+      "canonicalEventId": "rc:OrdWeekday17Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-28-485c42629684b6cb4c40d24d",
+      "sourceRecordHash": "418cf886563e49471df68afd7eee1a3e8cc5929daa0b38cea4f086a05e842583",
+      "dateISO": "2026-07-28",
+      "canonicalEventId": "rc:OrdWeekday17Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-07-29-663501f96e2b680651933937",
+      "sourceRecordHash": "2b7c8e2a56dd9715ecbe4df71f500b51109fc4830827146ffa699d0dd9f9f1fa",
+      "dateISO": "2026-07-29",
+      "canonicalEventId": "rc:StMartha",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-02-688877dced7087d80e4e540d",
+      "sourceRecordHash": "d39e1be902f1600cdb65c0ff06ee546f6983c12eb99deedadf691a60be58feaf",
+      "dateISO": "2026-08-02",
+      "canonicalEventId": "rc:OrdSunday18",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-03-132f309698cdca6a8faaec0a",
+      "sourceRecordHash": "04757d9e5cf438cbf16889a5fecea1479c1c8578f20e3dbfa4349c30daa7227e",
+      "dateISO": "2026-08-03",
+      "canonicalEventId": "rc:OrdWeekday18Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-05-82c2ac45f8b76a00446d8635",
+      "sourceRecordHash": "47a68fea873de33a4af0d459f4502ac2477837ec564e0c2d0b18da0e3aeb7239",
+      "dateISO": "2026-08-05",
+      "canonicalEventId": "rc:DedicationStMaryMajor",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-06-f69291d5807e65e270ff2a27",
+      "sourceRecordHash": "7c652d61dba9c84cc98559920f3dbbb45bc3d71ca4b78afe56e97398bae0d31c",
+      "dateISO": "2026-08-06",
+      "canonicalEventId": "rc:Transfiguration",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-07-d0874f76fa398cad5eaa118d",
+      "sourceRecordHash": "728206ca4617219aa169d38586e9ab483674d8d62ba759ecfe74b98195be2bd2",
+      "dateISO": "2026-08-07",
+      "canonicalEventId": "rc:StCajetan",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-07-1591b9e5ac59503721f18323",
+      "sourceRecordHash": "16702648976762fa5af87139a12491bd2139ba134e895e188edddb0fd2aaa1f9",
+      "dateISO": "2026-08-07",
+      "canonicalEventId": "rc:StSixtusIIPope",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-09-3f72dd9a558cf860f55f8bc1",
+      "sourceRecordHash": "765caf0eba1d6a271e255436340eed8bf4a228f08a8f5ddbc086ff464426fabd",
+      "dateISO": "2026-08-09",
+      "canonicalEventId": "rc:OrdSunday19",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-12-0b713d89030b77dc95d9e16c",
+      "sourceRecordHash": "d7197ab1608e717013c7db53716ec4ab74ff9e2274352649e638c4a3e9bb1f6e",
+      "dateISO": "2026-08-12",
+      "canonicalEventId": "rc:StJaneFrancesDeChantal",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-13-db2220ac48c894eb504eb23e",
+      "sourceRecordHash": "05451cf69cd7d3d97a0fcd6e9e5fcbf905242cac2cc90aba9743ef1cd627d2f0",
+      "dateISO": "2026-08-13",
+      "canonicalEventId": "rc:StsPontianHippolytus",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-16-3c53f79bfb2df23f89bb39c2",
+      "sourceRecordHash": "6c927ac9de2576fdba0d9191bcafdea47242746ca93f2e9bd80f848c04c27962",
+      "dateISO": "2026-08-16",
+      "canonicalEventId": "rc:OrdSunday20",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-17-0241bff7957f1b47c3c0b147",
+      "sourceRecordHash": "03a0734ab570eea21b7ec7400fc9fe4566223997b0b9ee847c9bb59ca5fa03bc",
+      "dateISO": "2026-08-17",
+      "canonicalEventId": "rc:OrdWeekday20Monday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-18-18019d38b364cb8eceee5b2c",
+      "sourceRecordHash": "b3aaa38fd43896d01cbee56ba033435035c5b7c681849adb92094305f66c94ba",
+      "dateISO": "2026-08-18",
+      "canonicalEventId": "rc:OrdWeekday20Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-19-7592021925eb8d366b8c28e5",
+      "sourceRecordHash": "bd9d2de4b6530f81bf420c7d9209a6e90e40deeea8bc2ac51235a00edd70fedd",
+      "dateISO": "2026-08-19",
+      "canonicalEventId": "rc:StJohnEudes",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-21-3bb0d8183f01222a96745226",
+      "sourceRecordHash": "23b573b25487406fabf4b4faa837c712cb838e526f96c98c1c265527bf72e33f",
+      "dateISO": "2026-08-21",
+      "canonicalEventId": "rc:StPiusX",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-22-5682a2fac70e8dae5466d6d2",
+      "sourceRecordHash": "4d4afd410b114610f1bab9169dc1e408fc25f62cb15fa9577257d1bcda5a4a51",
+      "dateISO": "2026-08-22",
+      "canonicalEventId": "rc:QueenshipMary",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-23-3630c9b6b1ce0e3becf8b807",
+      "sourceRecordHash": "eb9871f762719251d4f4d90ccc5f34a9d4ca0c4f345d2f2375747c806d661c51",
+      "dateISO": "2026-08-23",
+      "canonicalEventId": "rc:OrdSunday21",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-25-9d39b2030aab128ff54e1165",
+      "sourceRecordHash": "ec4b0d1075e7d9d8067a481244712dc862599b66e50fc10f231a0b789e745c53",
+      "dateISO": "2026-08-25",
+      "canonicalEventId": "rc:StJosephCalasanz",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-25-b6788316a8c4e9cb5762a749",
+      "sourceRecordHash": "e7ba2c942945225495483ee23ce36a01ca4656ad20eb42c4db5e851c49537da1",
+      "dateISO": "2026-08-25",
+      "canonicalEventId": "rc:StLouis",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-26-ada834085c5fdc12ca8dbc0e",
+      "sourceRecordHash": "d362e0954973b10c28ba9d8130d121e7ca3f9b947c37ac35249e7cb9f17a3312",
+      "dateISO": "2026-08-26",
+      "canonicalEventId": "rc:OrdWeekday21Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-29-2d826fedfb9c76412bd23c06",
+      "sourceRecordHash": "0d25b3b7dcd0d8861964f860b757c194343bc75d7bc914373786f4d46f3476b6",
+      "dateISO": "2026-08-29",
+      "canonicalEventId": "rc:BeheadingJohnBaptist",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-30-375dec4532d3ccb1568261a1",
+      "sourceRecordHash": "845fb1001ed71dc982150bd4f5fd661cb97f5ec735a46a7571fcd4772781f9f1",
+      "dateISO": "2026-08-30",
+      "canonicalEventId": "rc:OrdSunday22",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-08-31-0c06443842105356f60581c9",
+      "sourceRecordHash": "4a9552a49b919f71cebba25aa99761ee39c8d88c12a14f20814c775e2e73936f",
+      "dateISO": "2026-08-31",
+      "canonicalEventId": "rc:OrdWeekday22Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-01-c8d0c30af2b70dfc9c451ef4",
+      "sourceRecordHash": "955fdd5b94a3087b6511df363b5334e6bc0e64aebc2696b162065000b8615985",
+      "dateISO": "2026-09-01",
+      "canonicalEventId": "rc:OrdWeekday22Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-02-1dfdabcfa46006a1391ac533",
+      "sourceRecordHash": "9d94b83f8cdc1790554fbb4af5d75a7318b644313b694be4d333a62e34c2ba6b",
+      "dateISO": "2026-09-02",
+      "canonicalEventId": "rc:OrdWeekday22Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-04-88531bb7cf4cc8cfb9884cb4",
+      "sourceRecordHash": "5c068e27e5738594dc7fcae5d5a4b8d0c7a6d031ac5dac0eea73018276278b67",
+      "dateISO": "2026-09-04",
+      "canonicalEventId": "rc:OrdWeekday22Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-05-d772503ec771dffc3ca8520c",
+      "sourceRecordHash": "7674d02b13bf24601107ca1797e45429ec39a8b4e0179ed777b121b2b7330531",
+      "dateISO": "2026-09-05",
+      "canonicalEventId": "rc:SatMemBVM8",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-05-27f372db03e5c9841ce06c2a",
+      "sourceRecordHash": "09cc29463193bbaa50f2eabfbc06275cd4a998948b3e1aba9656c4c950771b2f",
+      "dateISO": "2026-09-05",
+      "canonicalEventId": "rc:StMotherTeresa",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-06-2fd306ff2e8da300da9a2744",
+      "sourceRecordHash": "9b8a5eaeb7a1be69530f36fbfead98c44a4313551d1fc4e39284022dfbb92d5a",
+      "dateISO": "2026-09-06",
+      "canonicalEventId": "rc:OrdSunday23",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-07-47e098162f9891d6ac553cfd",
+      "sourceRecordHash": "2b18483996ee42f8e5510c6ade3303c652e0ad1983deff6f65bfe3dae0559947",
+      "dateISO": "2026-09-07",
+      "canonicalEventId": "rc:OrdWeekday23Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-08-9d6e63c998f08ef419aef6a1",
+      "sourceRecordHash": "433d08ceac2d244e6025d7a4bd65d3ff0223fa32c6c0793234e2f36ee1744293",
+      "dateISO": "2026-09-08",
+      "canonicalEventId": "rc:NativityVirginMary",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-09-753b3544942002565550ff79",
+      "sourceRecordHash": "7035b9b51aea111c9fa63aa0e576c1f9c83d5760dc14213fcfe4d789b87a8fbb",
+      "dateISO": "2026-09-09",
+      "canonicalEventId": "rc:StPeterClaver",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-10-52634b8a169ebb26aa2920f5",
+      "sourceRecordHash": "733af288d6c2ad00af4f71e1fb39bf078d08c4a6d024bd0148cba489626bb9ec",
+      "dateISO": "2026-09-10",
+      "canonicalEventId": "rc:OrdWeekday23Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-11-892c2820d106bfe04153acc5",
+      "sourceRecordHash": "3d3ab513d7fb9d553e11b4a363194464c464fb696366c158aec941446c64c712",
+      "dateISO": "2026-09-11",
+      "canonicalEventId": "rc:OrdWeekday23Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-12-9161583ebe64bf91b4e6b788",
+      "sourceRecordHash": "cd98c52bc146252e4401c283224d5e53521eba9421acb07df50b08aa9b8c909e",
+      "dateISO": "2026-09-12",
+      "canonicalEventId": "rc:HolyNameMary",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-13-894fe2a163636bfa7d409d71",
+      "sourceRecordHash": "c8b36cecddc8685f43b0721f0ddd75c46a8b41a99f8497c6ea9b2c5d8ff8bb0a",
+      "dateISO": "2026-09-13",
+      "canonicalEventId": "rc:OrdSunday24",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-14-99dbaa767e0548fa4bc2df9f",
+      "sourceRecordHash": "aae259c2bb078b933a5962aca6fcfd46d8b5be4e99dc1dd65cac1172c09bfe2a",
+      "dateISO": "2026-09-14",
+      "canonicalEventId": "rc:ExaltationCross",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-15-5bee606cf07c57d5ab767a3d",
+      "sourceRecordHash": "d17582be763b4773e8ac65667531036289e06d577e07c96be792c312dda1a9d2",
+      "dateISO": "2026-09-15",
+      "canonicalEventId": "rc:OurLadyOfSorrows",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-16-9365a27eaaca929058dcfa90",
+      "sourceRecordHash": "593c31447eab736c50ffc299ffc8000663c3046a9c9b4bcecd8cb4b96a2d439d",
+      "dateISO": "2026-09-16",
+      "canonicalEventId": "rc:StsCorneliusCyprian",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-17-5b3cd876d3c030e024f7172c",
+      "sourceRecordHash": "ae18d1a83eb8528954390808fdbace0d0d2bd0d9bcfdba9930de169a78b1f2e2",
+      "dateISO": "2026-09-17",
+      "canonicalEventId": "rc:StHildegardBingen",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-17-bc740e34d1b995e1c90c8455",
+      "sourceRecordHash": "82c0267e6ee5ed403a192a1c9c8f767e408262fb1c85f55adc401d8d9e59a827",
+      "dateISO": "2026-09-17",
+      "canonicalEventId": "rc:StRobertBellarmine",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-18-9ae5af446f1f9f6ea0a6255f",
+      "sourceRecordHash": "08a02f274e455b4c49e0c9b62b174e875531c7bb95a44ab7ab78ca6e3d14e1bd",
+      "dateISO": "2026-09-18",
+      "canonicalEventId": "rc:OrdWeekday24Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-19-c0abc2a9b29e77329cd62557",
+      "sourceRecordHash": "42962c22d539fd8523e5ec7cd1cb463ceddb44142b76b328d004a4856a36ddaf",
+      "dateISO": "2026-09-19",
+      "canonicalEventId": "rc:SatMemBVM10",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-19-2ceac0782836862e97af2eba",
+      "sourceRecordHash": "116df1cbb60e094c1b5891fa2582da12a2aba2ddd7b0e0c0796c6028cd5b528f",
+      "dateISO": "2026-09-19",
+      "canonicalEventId": "rc:StJanuarius",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-20-458fe27803485c4dfdf932f2",
+      "sourceRecordHash": "98869069bfa634dc06e4ea8ac0edd790f635c95f2d982b46a40279e42cc2cfa3",
+      "dateISO": "2026-09-20",
+      "canonicalEventId": "rc:OrdSunday25",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-22-b3c5284f421a58cd69cbb192",
+      "sourceRecordHash": "d4323ccde7b94fb28199638d901fcd6b97e1b0c6126e2af3b20e707cb1f9729f",
+      "dateISO": "2026-09-22",
+      "canonicalEventId": "rc:OrdWeekday25Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-24-dc6e1b65bdd1d0cd0ec74a27",
+      "sourceRecordHash": "456baf829937ee428ffb71023a664685d6a3871dd23ddf7efe1f70a398c527ac",
+      "dateISO": "2026-09-24",
+      "canonicalEventId": "rc:OrdWeekday25Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-25-e1cb1b8b5d9a7c24976a34ed",
+      "sourceRecordHash": "113135aebbca9dc2732efcfa685be47c3c26c6478b418e5d4344484ba76b753a",
+      "dateISO": "2026-09-25",
+      "canonicalEventId": "rc:OrdWeekday25Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-26-ce6b1b8a10c22a769588a027",
+      "sourceRecordHash": "e69459658915905e4640f643b1c87e021291f56972b12caccaa9ae4584701b85",
+      "dateISO": "2026-09-26",
+      "canonicalEventId": "rc:SatMemBVM11",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-26-d4563d23c6a1f8db3a58a1b4",
+      "sourceRecordHash": "5ba692b36e1128a0975cc41fb38506adfc85dc20ead9366fd941f7167ddc53d7",
+      "dateISO": "2026-09-26",
+      "canonicalEventId": "rc:StsCosmasDamian",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-27-9d8a36c4a1ce8202e73661a8",
+      "sourceRecordHash": "12050120fc2ab6c9eb8c34079641c58d06793be69e47dff982bdca6bb3618a64",
+      "dateISO": "2026-09-27",
+      "canonicalEventId": "rc:OrdSunday26",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-28-1e5eb5aa09e29ef8997145f1",
+      "sourceRecordHash": "e4728cf6e36424c778236dac5c881cc62b87cba9afdf2379149198b845dd3937",
+      "dateISO": "2026-09-28",
+      "canonicalEventId": "rc:StsLawrenceRuiz",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-28-5d81cc270a1ea95295a9d9b5",
+      "sourceRecordHash": "58ed6857828dee73d3c623aa4e574da2714a2cd66bcde45c29e2949d07d81998",
+      "dateISO": "2026-09-28",
+      "canonicalEventId": "rc:StWenceslaus",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-09-29-eeedb73a306378199c4af52f",
+      "sourceRecordHash": "1aadec918fdd300b76451ce18ed62a6472a51c5c4f51eeb6bb87f696a2767d11",
+      "dateISO": "2026-09-29",
+      "canonicalEventId": "rc:StsArchangels",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-02-9911184dbbe8b47f45a81e0c",
+      "sourceRecordHash": "d759badb065c0ebafd735e602bf24539bfc921b88124af67b34c3f0fe1e6373f",
+      "dateISO": "2026-10-02",
+      "canonicalEventId": "rc:GuardianAngels",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-03-1399484adf95f993e169a69e",
+      "sourceRecordHash": "d23dd337036da91f0ed9d300bf7e64c2d78239a687ff15c196ffeaf7afd68922",
+      "dateISO": "2026-10-03",
+      "canonicalEventId": "rc:SatMemBVM12",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-04-f3998ffc4a0038ef20128e25",
+      "sourceRecordHash": "b2b1c59bc9f9ca90f9e521a9aa614f1cf3e7f1aa22ac6ec14efd373e32bef468",
+      "dateISO": "2026-10-04",
+      "canonicalEventId": "rc:OrdSunday27",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-05-77b84533920b536c8cdc8328",
+      "sourceRecordHash": "e77f8fcb38121bec900be25118efdd5d0b33a8019aa500058529ed704a4e4977",
+      "dateISO": "2026-10-05",
+      "canonicalEventId": "rc:StFaustinaKowalska",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-06-08e0a06f050cd03a37142399",
+      "sourceRecordHash": "f708b9b92c8780bb90325abcca8d0a2aea297eef28bbd7839c1d5a0a9dde8812",
+      "dateISO": "2026-10-06",
+      "canonicalEventId": "rc:StBruno",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-07-35e0a202b3a671399f360542",
+      "sourceRecordHash": "46ad33492d64f6b2c4d712b8be36315896446a2c7c1c293d85280cf4b95ddc6a",
+      "dateISO": "2026-10-07",
+      "canonicalEventId": "rc:OurLadyOfTheRosary",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-08-524b101de4c77d4e7a5d992d",
+      "sourceRecordHash": "d7efbf7e69ed1b54d14a2442d2c4cabfc9e0aa13cfb2f1394e916f8d0d0a6705",
+      "dateISO": "2026-10-08",
+      "canonicalEventId": "rc:OrdWeekday27Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-09-d03038c144ea382cc2f91bf2",
+      "sourceRecordHash": "49fef918da166c474008ecd467b603727e7c89ac93c1a5dddbfbada1371d9598",
+      "dateISO": "2026-10-09",
+      "canonicalEventId": "rc:StDenis",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-09-a9328f9111964c8c13843287",
+      "sourceRecordHash": "a1131e89db2f1fd50fe1fc68fd03a05b39e3cad7d54aeb42188200905b9cd9f9",
+      "dateISO": "2026-10-09",
+      "canonicalEventId": "rc:StJohnHenryNewman",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-09-7a799b9a9d12efe130706928",
+      "sourceRecordHash": "a19898b6af7aabf28772d3173602d27f500b5f7fccbc0e3334645e42908b5c27",
+      "dateISO": "2026-10-09",
+      "canonicalEventId": "rc:StJohnLeonardi",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-10-f6627763a34b7bfa06000e16",
+      "sourceRecordHash": "41e27e4bb1b244857bdc6014b773bebe5e1f0ac90850c95e14fa9b882fd1b137",
+      "dateISO": "2026-10-10",
+      "canonicalEventId": "rc:SatMemBVM13",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-11-e1f489da4a03706e751724d9",
+      "sourceRecordHash": "8773afef9dd45748c20935c3742903a34c210878ccf70c06c435b4f165a429f2",
+      "dateISO": "2026-10-11",
+      "canonicalEventId": "rc:OrdSunday28",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-12-fea76a1692628c5865f2a327",
+      "sourceRecordHash": "a119fa271c913c397be10bfd1142a32f16c5b8ff4356899ee2f0249fc55a3cb0",
+      "dateISO": "2026-10-12",
+      "canonicalEventId": "rc:OrdWeekday28Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-13-2cee1a0d8abc8bb14bbc4808",
+      "sourceRecordHash": "0e00e94303347a9b7ea26e8d0a99b3e7633b8f78477476b20de5a87172bb6373",
+      "dateISO": "2026-10-13",
+      "canonicalEventId": "rc:OrdWeekday28Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
+      "sourceRecordHash": "7bd8eafc229644b2aae4cba805fbc899c9974b5c05b459e4c6b439d802554317",
+      "dateISO": "2026-10-14",
+      "canonicalEventId": "rc:StCallistusIPope",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-16-c36e435717feba3a961d68e3",
+      "sourceRecordHash": "f16071b86d7a10bbba78345c8994404eb13ea80cb4c320593a11764a1c250a21",
+      "dateISO": "2026-10-16",
+      "canonicalEventId": "rc:StHedwig",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-16-42ba6c794a4dce057d6fab69",
+      "sourceRecordHash": "46d0cbbeb30541ab3295a9a1b3528d062f1e272b80a2929c87eac9070523fb0a",
+      "dateISO": "2026-10-16",
+      "canonicalEventId": "rc:StMargaretAlacoque",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-18-f132bb4b924b6280b3c7726c",
+      "sourceRecordHash": "9903a80dbc2d590c241e35523ad08ec50024b665fe081b24243c746c1b061f48",
+      "dateISO": "2026-10-18",
+      "canonicalEventId": "rc:OrdSunday29",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-19-5a3c4acfe1b261e78486f1c1",
+      "sourceRecordHash": "9ce09b023afc7dd24e87e536672fc916bb0392e5c3837505ea8d19bc5ee93cf4",
+      "dateISO": "2026-10-19",
+      "canonicalEventId": "rc:StPaulCross",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-19-bba7079fd1eeb48e28085291",
+      "sourceRecordHash": "e36ee6efbd56ee59e2d995e81e94c35e6777b33bbd7ede1ae661148007c71055",
+      "dateISO": "2026-10-19",
+      "canonicalEventId": "rc:StsJeanBrebeuf",
+      "semanticFamily": "fixed-collective"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-20-b2d0e193dcbe8e3c639acea5",
+      "sourceRecordHash": "bef1d47dd45e0969dbd89bc746fb82aa892eca779709d9ad147d60985759c602",
+      "dateISO": "2026-10-20",
+      "canonicalEventId": "rc:OrdWeekday29Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-21-df2ad630e299565f968e95e7",
+      "sourceRecordHash": "da8e86c2c33bad8a79a9146e0a7462497819c9ef878ecbfd98da1eebedde3514",
+      "dateISO": "2026-10-21",
+      "canonicalEventId": "rc:OrdWeekday29Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-22-2d9d67aa059f219de9dc687b",
+      "sourceRecordHash": "ed7b4df4a7b84002de33627f1cda53340cea8af0a830ac02686d4c0b3536a48d",
+      "dateISO": "2026-10-22",
+      "canonicalEventId": "rc:StJohnPaulII",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-23-a2ade784a299fb0b8c30f8d3",
+      "sourceRecordHash": "7e067e45de894b07edb980ea8b9704a8e4024c6b72021e5e6ba17d806aff1c35",
+      "dateISO": "2026-10-23",
+      "canonicalEventId": "rc:StJohnCapistrano",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-24-d26352bf44b0cd37cea9ece2",
+      "sourceRecordHash": "691565429810709dcf382356a77ee8d30ed146d644e0dc9cf250627caa469775",
+      "dateISO": "2026-10-24",
+      "canonicalEventId": "rc:SatMemBVM14",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-24-0d12f5faa2b67b6ded439033",
+      "sourceRecordHash": "ca0dea63d820389b70bc77ae1eff321ecaa9638c28a316eefd83dbf5ec7ed400",
+      "dateISO": "2026-10-24",
+      "canonicalEventId": "rc:StAnthonyMaryClaret",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-25-c508b7e520e3776bf7cbf478",
+      "sourceRecordHash": "c7b77c816a7bae165c79df41d2520901ae0fe11d4eea87d648e8ce2665d9ecb7",
+      "dateISO": "2026-10-25",
+      "canonicalEventId": "rc:OrdSunday30",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-26-d272ec1595a05b5f81fee54d",
+      "sourceRecordHash": "339ba5c1b18f30dd02df70f84db59609103e6b79d86db368f666894f4c7d11a5",
+      "dateISO": "2026-10-26",
+      "canonicalEventId": "rc:OrdWeekday30Monday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-27-1d075d348cea0a826785314b",
+      "sourceRecordHash": "f14b970b9c08f6354a360a8b6511063550b60585673c53fe6961be6bec5cf659",
+      "dateISO": "2026-10-27",
+      "canonicalEventId": "rc:OrdWeekday30Tuesday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-29-935ddb750df84ed72b832265",
+      "sourceRecordHash": "e4ed338ee6851ed34b8db6ea57957cee40b28d9616fe235f4a7a6706317b1f08",
+      "dateISO": "2026-10-29",
+      "canonicalEventId": "rc:OrdWeekday30Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-30-d1201f93d0654a1db65f2465",
+      "sourceRecordHash": "1de84410858a2d5ec8c4c6d08538ad5c9d209aca944fd52b4d4035e372caec17",
+      "dateISO": "2026-10-30",
+      "canonicalEventId": "rc:OrdWeekday30Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-10-31-f99d598c0f9ce584c1271893",
+      "sourceRecordHash": "4cf8d7eaaf6c55072b3ecc19cc0b91a12c1c5a1227a41474964c6d2db16ae9dd",
+      "dateISO": "2026-10-31",
+      "canonicalEventId": "rc:SatMemBVM15",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-01-dacdede7d7ea3b167c3d6f45",
+      "sourceRecordHash": "8c8dcc7dd2124b84746455233554acf9181cc9b28d3c54722b470b1b31d06b94",
+      "dateISO": "2026-11-01",
+      "canonicalEventId": "rc:AllSaints",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-02-e36a884275eb2e4decaa2f89",
+      "sourceRecordHash": "64206ec6e7d48f28b407726214264d372bb2f491eeb72aee916efdc109b2c0ca",
+      "dateISO": "2026-11-02",
+      "canonicalEventId": "rc:AllSouls",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-03-0b7154e0895de737831b7baf",
+      "sourceRecordHash": "b96c07c2ba9885553d86654c429a004a347ce29faeac9e4f6b935a53c1c01345",
+      "dateISO": "2026-11-03",
+      "canonicalEventId": "rc:StMartinPorres",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-05-8aad8869ef08300f8f64d624",
+      "sourceRecordHash": "8933975d9a231edb2415695dd1ed2694e2c1397e48f2a2bfc4b3e43d8252dec3",
+      "dateISO": "2026-11-05",
+      "canonicalEventId": "rc:OrdWeekday31Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-06-0b6ca82418e6dc1911faebc5",
+      "sourceRecordHash": "95ef856eaa7f488f1f44cc490bc938980b6e5000b3a17cc43054d280a019424d",
+      "dateISO": "2026-11-06",
+      "canonicalEventId": "rc:OrdWeekday31Friday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-07-de641ea82595f37cf31bc628",
+      "sourceRecordHash": "d8d450345359f6d74cdacd37fa32c105ab70701536291bf266849b3215beec72",
+      "dateISO": "2026-11-07",
+      "canonicalEventId": "rc:SatMemBVM16",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-08-da51594daa443f0fda23a42d",
+      "sourceRecordHash": "591e4796772b9c16ccfef2f17421505c7316cf40978f8acd7676ee1e6c862f38",
+      "dateISO": "2026-11-08",
+      "canonicalEventId": "rc:OrdSunday32",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-09-49302e7cc82f997cdb7478ef",
+      "sourceRecordHash": "a0ef74537771f69422ef23e9192bc4ccc6bb47f36d5a074042ff16230deccd5c",
+      "dateISO": "2026-11-09",
+      "canonicalEventId": "rc:DedicationLateran",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-13-009a418746af6ba86eb3560a",
+      "sourceRecordHash": "de64337600e1fa10987d3d780091da9c25606b43a6dc35c7083fa80f318bd960",
+      "dateISO": "2026-11-13",
+      "canonicalEventId": "rc:OrdWeekday32Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-14-010cc36b2427d339274b7ab2",
+      "sourceRecordHash": "e98286e94c791c9e470d4a3dda369cd9c2de3048dfee8ac29edea8057cfecb6b",
+      "dateISO": "2026-11-14",
+      "canonicalEventId": "rc:SatMemBVM17",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-15-f0ee1ddb0b83d0e80309db35",
+      "sourceRecordHash": "af8907fa6250f271e5c4338b1e44bb621f8308b4c7283e53b062697bf368085b",
+      "dateISO": "2026-11-15",
+      "canonicalEventId": "rc:OrdSunday33",
+      "semanticFamily": "temporal-sunday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-16-f0eb14fec23ed50e8ad4e64d",
+      "sourceRecordHash": "08fab6337dc7342e438ce8e19591d783cc0dc350e2e29595740b85c49684d224",
+      "dateISO": "2026-11-16",
+      "canonicalEventId": "rc:StGertrudeGreat",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-16-bfa726f8b26659de5d5bb9f6",
+      "sourceRecordHash": "35fbe8b6a29820610a61d18e6661651b754d7fe8aa86f4d4ddd5813127c3492a",
+      "dateISO": "2026-11-16",
+      "canonicalEventId": "rc:StMargaretScotland",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-18-32fa7fd861ed08ec5c33565a",
+      "sourceRecordHash": "fea145bd99a02f19c6042ac8871776d1a0037af9e22a57af3df43551234caf3b",
+      "dateISO": "2026-11-18",
+      "canonicalEventId": "rc:DedicationStsPeterPaul",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-19-20b1ae29eee0bf20644b225a",
+      "sourceRecordHash": "3c1e6f6fc775ea70f8f933e5f3bf358c4ec3c967f162261e5ecc81a5b0f8299b",
+      "dateISO": "2026-11-19",
+      "canonicalEventId": "rc:OrdWeekday33Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-20-638e07b93948dc403d8d7317",
+      "sourceRecordHash": "f4b4d56746f92b81cb881776b16301d49aed7bd6ea7494491e2181e49fb52b99",
+      "dateISO": "2026-11-20",
+      "canonicalEventId": "rc:OrdWeekday33Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-21-45556cd9a5526f90afe44095",
+      "sourceRecordHash": "ff3fb6c25020a15e02a51734b5ad9cbcdbe0164f167fa2f4b2c276a5483a4a24",
+      "dateISO": "2026-11-21",
+      "canonicalEventId": "rc:PresentationMary",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-23-66e04829ecf01ea414a20950",
+      "sourceRecordHash": "eb391e8384a4ae0ec039c15ad641e9df23b83a1d736ea523cb16261c4dde8118",
+      "dateISO": "2026-11-23",
+      "canonicalEventId": "rc:StClementIPope",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-23-6a3830f808141259fc4d93f5",
+      "sourceRecordHash": "d51e10e60ba18cc7b4ab640b4d53d2d582ea43f619ca4ba65c666325582a9a5d",
+      "dateISO": "2026-11-23",
+      "canonicalEventId": "rc:StColumban",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-24-0d92880655ca29c9708bf28d",
+      "sourceRecordHash": "2553a653abd3a004d3666df76af79dbfa70913d13981c605e89483e5f8f429b5",
+      "dateISO": "2026-11-24",
+      "canonicalEventId": "rc:StAndrewDungLac",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-25-1ac6f5e76e77386a765b5284",
+      "sourceRecordHash": "8c8f50639a4a677193f0865f434386a2e8cb637f15f877a0524fb98354dbc020",
+      "dateISO": "2026-11-25",
+      "canonicalEventId": "rc:StCatherineAlexandria",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-26-0d3eb9204d39858f1d9f9680",
+      "sourceRecordHash": "c0d7e02e8f48792cbba405a3f2f74aeabec8c6194334c929c5a8b094c94e05b2",
+      "dateISO": "2026-11-26",
+      "canonicalEventId": "rc:OrdWeekday34Thursday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-27-26c689538c7579fd94ce744a",
+      "sourceRecordHash": "5ed6ba4a29a9bf2a5ef5b1fb91a1c8de3a61795c287233efbe8903e8a6fb4543",
+      "dateISO": "2026-11-27",
+      "canonicalEventId": "rc:OrdWeekday34Friday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-11-28-fdc2f09bdd23bb8d7bf075cb",
+      "sourceRecordHash": "1655cfef2f15a89db36b4aef10f88b9423c99484184322fabd5a2241a5984aed",
+      "dateISO": "2026-11-28",
+      "canonicalEventId": "rc:SatMemBVM18",
+      "semanticFamily": "saturday-marian-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-01-02da9e618122b0617bd575b2",
+      "sourceRecordHash": "8855f901913b9955dc6c44fb1a64918e742a5ea9de34f6baccd8d762529d3add",
+      "dateISO": "2026-12-01",
+      "canonicalEventId": "rc:AdventWeekday1Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-02-d7a8baf1d68b07a3b0a4d059",
+      "sourceRecordHash": "7023711c0c9ed2d680d0577332964a1d7fbd5e55c3354ee68b24d8c3e134073e",
+      "dateISO": "2026-12-02",
+      "canonicalEventId": "rc:AdventWeekday1Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-05-8f48ceca3194e29bef8f7248",
+      "sourceRecordHash": "d6d8e9b6530b5e1d4341041e513253b780338c56097df5a30c4d313874ee7fd9",
+      "dateISO": "2026-12-05",
+      "canonicalEventId": "rc:AdventWeekday1Saturday",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-09-faeec407f430a64dd9bc86cd",
+      "sourceRecordHash": "6edf53c5069d314deb5201d3eab586033cae8073768a896318d95911319b51ba",
+      "dateISO": "2026-12-09",
+      "canonicalEventId": "rc:JuanDiego",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-10-57e242ccf72c1a8245720286",
+      "sourceRecordHash": "78e4de050ff36c136c2f1b3bca0457b72a90c75685de917fe0fba623656bf6fa",
+      "dateISO": "2026-12-10",
+      "canonicalEventId": "rc:OurLadyOfLoreto",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-11-b6032ae65788daf7f64760b6",
+      "sourceRecordHash": "cfe4a96b561bb69bcd550b6af71e9d6c1a96e5cd299150a86a3be2d15c3c7dc4",
+      "dateISO": "2026-12-11",
+      "canonicalEventId": "rc:StDamasusIPope",
+      "semanticFamily": "fixed-person"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-12-109b9318aabe1955c064ea02",
+      "sourceRecordHash": "a9da03f225c316d374356cfce5f08e4ce53c43a407800e8e295ed39ed4425426",
+      "dateISO": "2026-12-12",
+      "canonicalEventId": "rc:OurLadyOfGuadalupe",
+      "semanticFamily": "fixed-marian-title"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-15-ca17d07e08779c8210206324",
+      "sourceRecordHash": "fe3a013f5269085f5d97afd440f8794c7aae37117326089f81d4c3a3528623a6",
+      "dateISO": "2026-12-15",
+      "canonicalEventId": "rc:AdventWeekday3Tuesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-16-1b471825e462dc7c4dc4ba72",
+      "sourceRecordHash": "1d6878e2c7f67de08a6076b8794d4380cf6690559f10d91ebc55293e327a7e66",
+      "dateISO": "2026-12-16",
+      "canonicalEventId": "rc:AdventWeekday3Wednesday",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-17-451a6775cbf7763cf1394ec3",
+      "sourceRecordHash": "742179dfb0ab6ee6a6b3a988e53f5c61552ba16030fe62abfbc358901ef2cabb",
+      "dateISO": "2026-12-17",
+      "canonicalEventId": "rc:AdventWeekdayDec17",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-18-c3f13529ae1a1e11ed85b1be",
+      "sourceRecordHash": "fa10c587b74a2d267263ab367f3281edf71c02d17cd17ee7f378ee1461a9bead",
+      "dateISO": "2026-12-18",
+      "canonicalEventId": "rc:AdventWeekdayDec18",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-19-cb846367737b38f275d19518",
+      "sourceRecordHash": "b8247486798131712f1d3e270ad34e57efb2c30d7b261cf27e23a797750544b4",
+      "dateISO": "2026-12-19",
+      "canonicalEventId": "rc:AdventWeekdayDec19",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-21-f9ca80bd6fa0450c8338b90d",
+      "sourceRecordHash": "69cdcecb311d2e0e269ae98c6d8be6791d4fb2f684e82720e7d49af4d7765f0a",
+      "dateISO": "2026-12-21",
+      "canonicalEventId": "rc:AdventWeekdayDec21",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-22-ab462475b558da20fc355f29",
+      "sourceRecordHash": "a827477579f8f5d783a3578e7ea0df4a326147008b845546fd6040da081b80a9",
+      "dateISO": "2026-12-22",
+      "canonicalEventId": "rc:AdventWeekdayDec22",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-23-12aa17704f625f5f60ceafb2",
+      "sourceRecordHash": "ba9753198b5e351d34681191c4d6646c733fb45ca0a3ab3fba93103ce15d4cb9",
+      "dateISO": "2026-12-23",
+      "canonicalEventId": "rc:AdventWeekdayDec23",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4",
+      "sourceRecordHash": "718b7f1eae705269e7768e4f60fe689c9d205b08f635801e32e0667acc92ab65",
+      "dateISO": "2026-12-24",
+      "canonicalEventId": "rc:AdventWeekdayDec24",
+      "semanticFamily": "jurisdiction-structural-overlay"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-25-f729b6e468c2c890cb82640b",
+      "sourceRecordHash": "aeda27d941bd9c3237b985dae4608a74943100a9205d084b71bc53bf24439806",
+      "dateISO": "2026-12-25",
+      "canonicalEventId": "rc:Christmas",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-27-e566a8d7f23a352b89bc4a62",
+      "sourceRecordHash": "91eba65cd735dc130fc7465fb273b93111429b44bf833d26f167f1a8d538a4c2",
+      "dateISO": "2026-12-27",
+      "canonicalEventId": "rc:HolyFamily",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-28-cc8c9c88008713c79ab09557",
+      "sourceRecordHash": "4e01033e771adeeb2d36c69279bcdf88d7f0d94edd7f1e79b5fd53721035d4fc",
+      "dateISO": "2026-12-28",
+      "canonicalEventId": "rc:HolyInnocents",
+      "semanticFamily": "fixed-or-major-observance"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-29-d08216b8411703ef050f6d66",
+      "sourceRecordHash": "650c87bf4cff7990d6b2961e3cdd313d8e802a91106de1909f8fcd9ef9b0f093",
+      "dateISO": "2026-12-29",
+      "canonicalEventId": "rc:ChristmasWeekdayDec29",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-30-a8b266eedadf42cb7731e0c6",
+      "sourceRecordHash": "8b78c527e0da989555ee942dd2d61458f6561681d8cfc9fc099fd5fa36e56656",
+      "dateISO": "2026-12-30",
+      "canonicalEventId": "rc:ChristmasWeekdayDec30",
+      "semanticFamily": "temporal-weekday-family"
+    },
+    {
+      "sourceOccurrenceId": "snl-pt-2026-12-31-76c38e6dac723f95eb81e3c7",
+      "sourceRecordHash": "ce28e08204892f332bd85ee40f208241f3fdc4e402a8f65ae14fadcedf9a652a",
+      "dateISO": "2026-12-31",
+      "canonicalEventId": "rc:ChristmasWeekdayDec31",
+      "semanticFamily": "temporal-weekday-family"
+    }
+  ]
+}

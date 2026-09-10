@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "status": "seasonal-sunday-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "families": [
+    "temporal-rule-family:lent-sunday:roman-catholic",
+    "temporal-rule-family:easter-sunday:roman-catholic",
+    "temporal-rule-family:advent-sunday:roman-catholic"
+  ],
+  "promotedSourceOccurrences": 12,
+  "promotedMappingDigestSha256": "4825eded926c086a837fc1b88aa0cbf4fb66177dd9b05fda11d8152992b4ea95",
+  "temporalFamilyMappingDigestSha256": "40d8744bdbf0e1a0bb8f6d84b5306be68ee16a97660faac16f423d47eb7de5d5",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 143,
+    "remainingLegacyOccurrences": 246
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 155,
+    "remainingLegacyOccurrences": 234,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "competent Holy See temporal-cycle authority",
+    "deterministic Gregorian Easter or Advent anchor",
+    "exact approved Portugal 2026 source occurrence and record hash",
+    "inherited-safe General Roman binding"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-10"
+}
