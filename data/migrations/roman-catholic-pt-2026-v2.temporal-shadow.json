@@ -58,8 +58,62 @@
       "sourceRecordHash": "a11f00b28acf984c327637cdeee42d01509500a5899562c75c57df3576113e22",
       "expectedDateISO": "2026-11-29",
       "legacyRank": "solemnity"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-17:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-17:advent-weekday-december-17:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec17",
+      "sourceOccurrenceId": "snl-pt-2026-12-17-451a6775cbf7763cf1394ec3",
+      "sourceRecordHash": "742179dfb0ab6ee6a6b3a988e53f5c61552ba16030fe62abfbc358901ef2cabb",
+      "expectedDateISO": "2026-12-17",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-18:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-18:advent-weekday-december-18:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec18",
+      "sourceOccurrenceId": "snl-pt-2026-12-18-c3f13529ae1a1e11ed85b1be",
+      "sourceRecordHash": "fa10c587b74a2d267263ab367f3281edf71c02d17cd17ee7f378ee1461a9bead",
+      "expectedDateISO": "2026-12-18",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-19:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-19:advent-weekday-december-19:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec19",
+      "sourceOccurrenceId": "snl-pt-2026-12-19-cb846367737b38f275d19518",
+      "sourceRecordHash": "b8247486798131712f1d3e270ad34e57efb2c30d7b261cf27e23a797750544b4",
+      "expectedDateISO": "2026-12-19",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-21:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-21:advent-weekday-december-21:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec21",
+      "sourceOccurrenceId": "snl-pt-2026-12-21-f9ca80bd6fa0450c8338b90d",
+      "sourceRecordHash": "69cdcecb311d2e0e269ae98c6d8be6791d4fb2f684e82720e7d49af4d7765f0a",
+      "expectedDateISO": "2026-12-21",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-22:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-22:advent-weekday-december-22:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec22",
+      "sourceOccurrenceId": "snl-pt-2026-12-22-ab462475b558da20fc355f29",
+      "sourceRecordHash": "a827477579f8f5d783a3578e7ea0df4a326147008b845546fd6040da081b80a9",
+      "expectedDateISO": "2026-12-22",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-23:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-23:advent-weekday-december-23:roman-catholic:pt",
+      "legacyObservanceId": "rc:AdventWeekdayDec23",
+      "sourceOccurrenceId": "snl-pt-2026-12-23-12aa17704f625f5f60ceafb2",
+      "sourceRecordHash": "ba9753198b5e351d34681191c4d6646c733fb45ca0a3ab3fba93103ce15d4cb9",
+      "expectedDateISO": "2026-12-23",
+      "legacyRank": "weekday"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-08-22"
+  "verifiedAt": "2026-09-13"
 }

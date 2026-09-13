@@ -163,6 +163,86 @@
       "scope": "church-attested",
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "observance:advent-weekday-december-17:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-17",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-18:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-18",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-19:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-19",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-20:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-20",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-21:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-21",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-22:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-22",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-23:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-23",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:advent-weekday-december-24:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "advent-weekday-december-24",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
     }
   ]
 }
