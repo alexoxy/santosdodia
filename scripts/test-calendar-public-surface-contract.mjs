@@ -31,6 +31,7 @@ const [
   calendarExplorer,
   searchExplorer,
   syncCenter,
+  calendarReadiness,
   productionRequestText,
 ] = await Promise.all([
   source('app/api/v1/observances/route.ts'),
@@ -44,6 +45,7 @@ const [
   source('app/components/CalendarExplorer.tsx'),
   source('app/components/SearchExplorer.tsx'),
   source('app/components/CalendarSyncCenter.tsx'),
+  source('lib/calendar-publication-readiness.ts'),
   source('data/releases/roman-catholic-pt-2026-v2.production-request.json'),
 ]);
 
@@ -67,6 +69,8 @@ requirePattern(icalRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{
 // those endpoints. GLOBAL intentionally omits country so the D1 read-model
 // guard resolves only the General/Global calendar.
 requirePattern(todayPanel, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Today panel');
+requirePattern(todayPanel, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Today edge-cache version');
+requirePattern(calendarReadiness, /!tradition\s*\|\|\s*tradition\s*===\s*'all'\s*\|\|\s*tradition\s*===\s*'roman-catholic'/, 'Ready aggregate calendar');
 requirePattern(searchExplorer, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Search explorer');
 requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Day view');
 requirePattern(dayPage, /loadPublicDay\(date, locale, tradition, country\)/, 'Day page server projection');
