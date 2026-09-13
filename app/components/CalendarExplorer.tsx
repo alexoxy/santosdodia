@@ -8,6 +8,7 @@ import {
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
+import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
@@ -63,7 +64,7 @@ export default function CalendarExplorer() {
   const [year, setYear] = useState(todayYear),
     [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
-    [region, setRegion] = useState(country ?? "GLOBAL"),
+    [region, setRegion] = useState(defaultReadyCalendarCountry(church) ?? country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
     [loading, setLoading] = useState(false);
   useEffect(() => {

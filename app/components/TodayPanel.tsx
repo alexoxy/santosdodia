@@ -5,6 +5,7 @@ import {
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
+import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import type { Locale } from "../../lib/i18n";
 import {
   formatMonthYear,
@@ -28,6 +29,8 @@ const editorialUi: Partial<
       profileEyebrow: string;
       openProfile: string;
       openDate: string;
+      calendarReference: string;
+      calendarData: string;
     }
   >
 > = {
@@ -35,35 +38,52 @@ const editorialUi: Partial<
     profileEyebrow: "Understand today",
     openProfile: "Read the full editorial profile",
     openDate: "Explore this date",
+    calendarReference: "Liturgical calendar reference",
+    calendarData: "Reviewed and calculated calendar",
   },
   pt: {
     profileEyebrow: "Compreender o dia de hoje",
     openProfile: "Ler o perfil editorial completo",
     openDate: "Explorar esta data",
+    calendarReference: "Referência do calendário litúrgico",
+    calendarData: "Calendário revisto e calculado",
   },
   es: {
     profileEyebrow: "Comprender el día de hoy",
     openProfile: "Leer el perfil editorial completo",
     openDate: "Explorar esta fecha",
+    calendarReference: "Referencia del calendario litúrgico",
+    calendarData: "Calendario revisado y calculado",
   },
   it: {
     profileEyebrow: "Comprendere il giorno di oggi",
     openProfile: "Leggi il profilo editoriale completo",
     openDate: "Esplora questa data",
+    calendarReference: "Riferimento del calendario liturgico",
+    calendarData: "Calendario revisionato e calcolato",
   },
 };
 
 export default function TodayPanel({ initialToday }: { initialToday: PublicTodayPayload }) {
-  const { locale, copy, country, countryName, timeZone, contextReady, church } =
+  const { locale, copy, countryName, timeZone, contextReady, church } =
       useLanguage(),
-    dateISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
+    dateISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]),
+    calendarCountry = defaultReadyCalendarCountry(church),
+    calendarCountryName = useMemo(() => {
+      if (!calendarCountry) return undefined;
+      try {
+        return new Intl.DisplayNames([locale], { type: "region" }).of(calendarCountry) ?? calendarCountry;
+      } catch {
+        return calendarCountry;
+      }
+    }, [calendarCountry, locale]);
   const fallback = useMemo(
     () =>
       getPublicObservancesForDate(dateISO, locale, {
         tradition: church === "all" ? undefined : church,
-        country,
+        country: calendarCountry,
       }),
-    [dateISO, locale, church, country],
+    [dateISO, locale, church, calendarCountry],
   );
   const [items, setItems] = useState<Observance[]>(initialToday.data);
   const [editorial, setEditorial] = useState<TodayEditorial | null>(initialToday.editorial);
@@ -77,8 +97,8 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
     const controller = new AbortController(),
       params = new URLSearchParams({ date: dateISO, locale, timezone: timeZone });
     if (church !== "all") params.set("tradition", church);
-    if (country) params.set("country", country);
-    const requestContextKey = `${dateISO}|${locale}|${timeZone}|${church}|${country ?? ""}`;
+    if (calendarCountry) params.set("country", calendarCountry);
+    const requestContextKey = `${dateISO}|${locale}|${timeZone}|${church}|${calendarCountry ?? ""}`;
     if (requestContextKey !== activeContextKey) {
       setItems(fallback);
       setEditorial(null);
@@ -110,7 +130,7 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [dateISO, locale, timeZone, church, country, fallback, contextReady, activeContextKey]);
+  }, [dateISO, locale, timeZone, church, calendarCountry, fallback, contextReady, activeContextKey]);
 
   const weekday = useMemo(
     () => formatWeekday(dateISO, locale, "standalone"),
@@ -143,12 +163,17 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
             {copy.suggestedRegion}: {countryName}
           </span>
         ) : null}
+        {calendarCountryName ? (
+          <span className="region-pill">
+            {editorialCopy.calendarReference}: {calendarCountryName}
+          </span>
+        ) : null}
       </div>
       <div className="today-content">
         <div className="section-heading compact">
           <div>
             <span className="eyebrow">
-              {loading ? copy.loading : copy.approvedData}
+              {loading ? copy.loading : editorialCopy.calendarData}
             </span>
             <h2>{copy.saintsToday}</h2>
           </div>
@@ -160,7 +185,7 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
           <div className="observance-list">
             {items.slice(0, 18).map((item) => {
               const name = displayObservanceName(item.names, locale, item.name),
-                scope = displayObservanceScope(item, locale, country),
+                scope = displayObservanceScope(item, locale, calendarCountry),
                 existingProfileId = getExistingProfileId(item, year, locale),
                 profileId =
                   existingProfileId ??
@@ -235,7 +260,7 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
           </a>
           <a
             className="btn btn-secondary"
-            href={`/api/ical/${church === "all" ? "all" : church}?locale=${locale}${country ? `&country=${country}` : ""}`}
+            href={`/api/ical/${church === "all" ? "all" : church}?locale=${locale}${calendarCountry ? `&country=${calendarCountry}` : ""}`}
           >
             {copy.downloadIcs}
           </a>

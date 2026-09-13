@@ -16,9 +16,7 @@ import {
   getPublicObservancesForDate,
 } from "../../../../lib/public-observances";
 import { enrichObservancesEditorial } from "../../../../lib/observance-editorial";
-import { readCalendarOccurrences } from "../../../../lib/calendar-d1-read-model";
-import { mergePublicCalendarObservances } from "../../../../lib/calendar-public-adapter";
-import { getOptionalCalendarDatabase } from "../../../../lib/cloudflare-calendar-db";
+import { mergePublishedCalendarRange } from "../../../../lib/public-calendar-runtime";
 
 function trustworthyNames(names: LocalizedText, locale: Locale): LocalizedText {
   if (locale === "en") return names;
@@ -70,40 +68,15 @@ export async function GET(request: NextRequest) {
     : month
       ? getPublicMonthlyObservances(year, month - 1, locale, filters)
       : getPublicAllObservances(year, locale, filters);
-
-  const database = await getOptionalCalendarDatabase();
-  let d1Status: "unbound" | "not-requested" | "ok" | "bounded" | "fallback-error" = database
-    ? "not-requested"
-    : "unbound";
-  let d1Records = [] as Awaited<ReturnType<typeof readCalendarOccurrences>>;
-
-  if (database && !filters.patronage && (date || month)) {
-    const fromDate = date ?? `${year}-${String(month).padStart(2, "0")}-01`;
-    const toDate = date ?? monthEnd(year, month as number);
-    try {
-      d1Records = await readCalendarOccurrences(database, {
-        fromDate,
-        toDate,
-        churchId: filters.tradition,
-        countryCode: filters.country,
-        locales: [...new Set([locale, "en"])],
-        mode: "public",
-        limit: 500,
-        offset: 0,
-      });
-      d1Status = d1Records.length === 500 ? "bounded" : "ok";
-    } catch {
-      d1Records = [];
-      d1Status = "fallback-error";
-    }
-  }
-
-  if (filters.category) {
-    d1Records = d1Records.filter((item) => item.category === filters.category);
-  }
-
-  const merged = mergePublicCalendarObservances(curated, d1Records, locale);
-  const publicItems = enrichObservancesEditorial(merged.items);
+  const fromDate = date ?? (month ? `${year}-${String(month).padStart(2, "0")}-01` : `${year}-01-01`);
+  const toDate = date ?? (month ? monthEnd(year, month) : `${year}-12-31`);
+  const runtime = await mergePublishedCalendarRange(curated, {
+    fromDate,
+    toDate,
+    locale,
+    filters,
+  });
+  const publicItems = enrichObservancesEditorial(runtime.items);
   const data = publicItems
     .map((item) => {
       const names = trustworthyNames(item.names, locale);
@@ -118,10 +91,6 @@ export async function GET(request: NextRequest) {
     })
     .filter((item) => Boolean(item.name));
 
-  const sourceMode = merged.acceptedD1
-    ? "published-d1+approved-repository"
-    : "approved-repository";
-
   return Response.json(
     {
       data,
@@ -135,14 +104,9 @@ export async function GET(request: NextRequest) {
         filters,
         live: false,
         requestedLive: p.has("live"),
-        sourceMode,
-        d1: {
-          bound: Boolean(database),
-          status: d1Status,
-          publishedAccepted: merged.acceptedD1,
-          withheldByAdapter: merged.withheldD1,
-          resultLimit: 500,
-        },
+        sourceMode: runtime.meta.sourceMode,
+        calculatedTemporale: runtime.meta.calculatedTemporale,
+        d1: runtime.meta.d1,
         generatedAt: new Date().toISOString(),
       },
     },

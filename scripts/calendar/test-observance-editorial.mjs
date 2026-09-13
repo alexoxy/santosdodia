@@ -16,7 +16,7 @@ assert.match(editorial, /basilicasantamariamaggiore\.va/u);
 assert.match(editorial, /vatican\.va/u);
 assert.match(editorial, /status:\s*'reviewed'/u);
 assert.match(publicLayer, /enrichObservancesEditorial/u);
-assert.match(apiRoute, /const publicItems = enrichObservancesEditorial\(merged\.items\)/u);
+assert.match(apiRoute, /const publicItems = enrichObservancesEditorial\(runtime\.items\)/u);
 assert.match(dayView, /split\(\/\\n\\s\*\\n\/u\)/u);
 assert.match(dayView, /paragraphs\.map/u);
 

@@ -7,6 +7,7 @@ import {
   type Observance,
 } from "../../data/observances";
 import { validationStatusLabel } from "../../lib/claim-evidence";
+import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import { getFeatureCopy } from "../../lib/feature-copy";
 import { type Locale } from "../../lib/i18n";
 import {
@@ -23,7 +24,7 @@ import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
 import TraditionTag from "./TraditionTag";
-import { useLanguage } from "./LanguageProvider";
+import { useLanguage, type ChurchPreference } from "./LanguageProvider";
 
 type DayMode = "dated" | "annual";
 
@@ -54,24 +55,50 @@ function summaryParagraphs(value: string | undefined): string[] {
     .filter(Boolean);
 }
 
-export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; mode?: DayMode }) {
-  const { locale, copy } = useLanguage();
+export default function DayView({
+  dateISO,
+  mode = "dated",
+  initialItems,
+  initialLocale,
+  initialTradition,
+  initialCountry,
+}: {
+  dateISO: string;
+  mode?: DayMode;
+  initialItems?: Observance[];
+  initialLocale?: Locale;
+  initialTradition?: ChurchPreference;
+  initialCountry?: string;
+}) {
+  const { locale, copy, church } = useLanguage();
   const feature = getFeatureCopy(locale);
   const valid = isValidDateISO(dateISO);
+  const tradition = church === "all" ? undefined : church;
+  const calendarCountry = defaultReadyCalendarCountry(church);
   const fallback = useMemo(
-    () => (valid ? getPublicObservancesForDate(dateISO, locale) : []),
-    [valid, dateISO, locale],
+    () => (valid ? getPublicObservancesForDate(dateISO, locale, {
+      tradition,
+      country: calendarCountry,
+    }) : []),
+    [valid, dateISO, locale, tradition, calendarCountry],
   );
-  const [items, setItems] = useState<Observance[]>(fallback);
+  const initialContextKey = `${dateISO}|${initialLocale ?? locale}|${initialTradition ?? church}|${initialCountry ?? calendarCountry ?? ""}`;
+  const [items, setItems] = useState<Observance[]>(initialItems ?? fallback);
+  const [activeContextKey, setActiveContextKey] = useState(initialContextKey);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setItems(fallback);
-  }, [fallback]);
   useEffect(() => {
     if (!valid) return;
     const controller = new AbortController();
+    const params = new URLSearchParams({ date: dateISO, locale });
+    if (tradition) params.set("tradition", tradition);
+    if (calendarCountry) params.set("country", calendarCountry);
+    const requestContextKey = `${dateISO}|${locale}|${church}|${calendarCountry ?? ""}`;
+    if (requestContextKey !== activeContextKey) {
+      setItems(fallback);
+      setActiveContextKey(requestContextKey);
+    }
     setLoading(true);
-    fetch(`/api/v1/observances?date=${dateISO}&locale=${locale}`, {
+    fetch(`/api/v1/observances?${params}`, {
       signal: controller.signal,
     })
       .then((response) =>
@@ -89,7 +116,7 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [valid, dateISO, locale, fallback]);
+  }, [valid, dateISO, locale, church, tradition, calendarCountry, fallback, activeContextKey]);
   if (!valid)
     return (
       <section className="message-card">
@@ -200,7 +227,7 @@ export default function DayView({ dateISO, mode = "dated" }: { dateISO: string; 
           <h2>{copy.addCalendar}</h2>
         </div>
         <AddToCalendar
-          feedPath={`/api/ical/all?locale=${locale}`}
+          feedPath={`/api/ical/${church === "all" ? "all" : church}?locale=${locale}${calendarCountry ? `&country=${calendarCountry}` : ""}`}
           title={`${copy.observancesOn} ${label}`}
           dateISO={dateISO}
         />

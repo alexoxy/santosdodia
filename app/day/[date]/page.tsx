@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import DayView from "../../components/DayView";
-import { isValidDateISO } from "../../../data/observances";
+import { isValidDateISO, parseTradition, type Tradition } from "../../../data/observances";
+import { defaultReadyCalendarCountry } from "../../../lib/calendar-publication-readiness";
 import type { Locale } from "../../../lib/i18n";
 import { publicSaintProfilePath } from "../../../lib/public-entity-links";
-import { getPublicObservancesForDate } from "../../../lib/public-observances";
+import { buildPublicToday } from "../../../lib/public-today";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
@@ -68,20 +71,51 @@ function observanceListName(locale: Locale, label: string) {
   return `Christian observances on ${label}`;
 }
 
+async function requestDaySelection(): Promise<{
+  locale: Locale;
+  tradition: Tradition | undefined;
+  country: string | undefined;
+}> {
+  const locale = await requestPublicLocale();
+  const cookieStore = await cookies();
+  const savedChurch = cookieStore.get("sdd-tradition")?.value;
+  const tradition = savedChurch === "all"
+    ? undefined
+    : parseTradition(savedChurch) ?? "roman-catholic";
+  return {
+    locale,
+    tradition,
+    country: defaultReadyCalendarCountry(tradition),
+  };
+}
+
+const loadPublicDay = cache((
+  date: string,
+  locale: Locale,
+  tradition: Tradition | undefined,
+  country: string | undefined,
+) => buildPublicToday({
+  date,
+  locale,
+  timeZone: "UTC",
+  timeZoneSource: "explicit-date",
+  filters: { tradition, country },
+}));
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ date: string }>;
 }): Promise<Metadata> {
   const { date } = await params;
-  const locale = await requestPublicLocale();
+  const { locale, tradition, country } = await requestDaySelection();
   if (!isValidDateISO(date))
     return {
       title: invalidDateTitle(locale),
       robots: { index: false, follow: false },
     };
   const label = dateLabel(date, locale);
-  const items = getPublicObservancesForDate(date, locale);
+  const { data: items } = await loadPublicDay(date, locale, tradition, country);
   const names = items.slice(0, 5).map((item) => item.name);
   const description = dayDescription(locale, label, names, items.length);
   const title = dayTitle(locale, label);
@@ -103,9 +137,9 @@ export default async function DayPage({
 }) {
   const { date } = await params;
   if (!isValidDateISO(date)) notFound();
-  const locale = await requestPublicLocale();
+  const { locale, tradition, country } = await requestDaySelection();
   const label = dateLabel(date, locale);
-  const items = getPublicObservancesForDate(date, locale);
+  const { data: items } = await loadPublicDay(date, locale, tradition, country);
   const url = `${SITE_ORIGIN}/day/${date}`;
   const title = dayTitle(locale, label);
   const jsonLd = {
@@ -152,7 +186,13 @@ export default async function DayPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }}
       />
-      <DayView dateISO={date} />
+      <DayView
+        dateISO={date}
+        initialItems={items}
+        initialLocale={locale}
+        initialTradition={tradition ?? "all"}
+        initialCountry={country}
+      />
     </>
   );
 }

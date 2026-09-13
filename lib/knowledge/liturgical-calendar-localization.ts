@@ -1,4 +1,4 @@
-import type { RomanPrincipalDay, RomanSeason } from './roman-liturgical-year';
+import type { RomanDateContext, RomanPrincipalDay, RomanSeason } from './roman-liturgical-year';
 
 export type LiturgicalToolLocale = 'en' | 'pt' | 'es' | 'it';
 
@@ -107,3 +107,180 @@ const principalLabels: Record<LiturgicalToolLocale, Record<RomanPrincipalDay, st
 export function liturgicalToolCopy(locale: LiturgicalToolLocale) { return labels[locale]; }
 export function localizeRomanSeason(locale: LiturgicalToolLocale, season: RomanSeason) { return seasonLabels[locale][season]; }
 export function localizeRomanPrincipalDay(locale: LiturgicalToolLocale, day: RomanPrincipalDay) { return principalLabels[locale][day]; }
+
+const weekdayLabels: Record<LiturgicalToolLocale, readonly string[]> = {
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  pt: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+  es: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+  it: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato']
+};
+
+function romanNumeral(value: number): string {
+  const numerals: Array<[number, string]> = [
+    [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']
+  ];
+  let remaining = value;
+  let result = '';
+  for (const [amount, numeral] of numerals) {
+    while (remaining >= amount) {
+      result += numeral;
+      remaining -= amount;
+    }
+  }
+  return result;
+}
+
+function englishOrdinal(value: number): string {
+  const remainder100 = value % 100;
+  if (remainder100 >= 11 && remainder100 <= 13) return `${value}th`;
+  if (value % 10 === 1) return `${value}st`;
+  if (value % 10 === 2) return `${value}nd`;
+  if (value % 10 === 3) return `${value}rd`;
+  return `${value}th`;
+}
+
+function weekday(dateISO: string): number {
+  return new Date(`${dateISO}T00:00:00Z`).getUTCDay();
+}
+
+function monthDay(dateISO: string): number {
+  return Number(dateISO.slice(5, 7)) * 100 + Number(dateISO.slice(8, 10));
+}
+
+function sundayLabel(locale: LiturgicalToolLocale, context: RomanDateContext): string {
+  const week = context.seasonWeek;
+  if (!week) {
+    return {
+      en: 'Sunday of Christmas Time',
+      pt: 'Domingo do Tempo do Natal',
+      es: 'Domingo del Tiempo de Navidad',
+      it: 'Domenica del Tempo di Natale'
+    }[locale];
+  }
+  const roman = romanNumeral(week);
+  if (locale === 'en') {
+    const preposition = context.season === 'ordinary-time' ? 'in' : 'of';
+    const season = context.season === 'easter' ? 'Easter' : localizeRomanSeason(locale, context.season);
+    return `${englishOrdinal(week)} Sunday ${preposition} ${season}`;
+  }
+  if (locale === 'pt') {
+    const season = context.season === 'lent'
+      ? 'da Quaresma'
+      : context.season === 'easter'
+        ? 'da Páscoa'
+        : `do ${localizeRomanSeason(locale, context.season)}`;
+    return `${roman} Domingo ${season}`;
+  }
+  if (locale === 'es') {
+    const season = context.season === 'lent'
+      ? 'de Cuaresma'
+      : context.season === 'easter'
+        ? 'de Pascua'
+        : `del ${localizeRomanSeason(locale, context.season)}`;
+    return `${roman} Domingo ${season}`;
+  }
+  const season = context.season === 'lent'
+    ? 'di Quaresima'
+    : context.season === 'easter'
+      ? 'di Pasqua'
+      : context.season === 'advent'
+        ? 'di Avvento'
+        : `del ${localizeRomanSeason(locale, context.season)}`;
+  return `${roman} Domenica ${season}`;
+}
+
+function specialWeekdayLabel(
+  locale: LiturgicalToolLocale,
+  dateISO: string,
+  context: RomanDateContext,
+  dayName: string
+): string | null {
+  const day = weekday(dateISO);
+  if (context.season === 'lent' && context.seasonWeek === 0) {
+    return {
+      en: `${dayName} after Ash Wednesday`,
+      pt: `${dayName} depois das Cinzas`,
+      es: `${dayName} después de Ceniza`,
+      it: `${dayName} dopo le Ceneri`
+    }[locale];
+  }
+  if (context.season === 'lent' && context.seasonWeek === 6 && day >= 1 && day <= 3) {
+    return {
+      en: `${dayName} of Holy Week`,
+      pt: `${dayName} da Semana Santa`,
+      es: `${dayName} de la Semana Santa`,
+      it: `${dayName} della Settimana Santa`
+    }[locale];
+  }
+  if (context.season === 'easter' && context.seasonWeek === 1) {
+    return {
+      en: `${dayName} within the Octave of Easter`,
+      pt: `${dayName} da Oitava da Páscoa`,
+      es: `${dayName} de la Octava de Pascua`,
+      it: `${dayName} dell'Ottava di Pasqua`
+    }[locale];
+  }
+  if (context.season === 'christmas' && (monthDay(dateISO) >= 1226 || monthDay(dateISO) <= 101)) {
+    return {
+      en: `${dayName} within the Octave of Christmas`,
+      pt: `${dayName} da Oitava do Natal`,
+      es: `${dayName} de la Octava de Navidad`,
+      it: `${dayName} dell'Ottava di Natale`
+    }[locale];
+  }
+  return null;
+}
+
+function weekdayLabel(locale: LiturgicalToolLocale, dateISO: string, context: RomanDateContext): string {
+  const dayName = weekdayLabels[locale][weekday(dateISO)] ?? weekdayLabels[locale][0];
+  const special = specialWeekdayLabel(locale, dateISO, context, dayName);
+  if (special) return special;
+  if (!context.seasonWeek) {
+    return {
+      en: `${dayName} of Christmas Time`,
+      pt: `${dayName} do Tempo do Natal`,
+      es: `${dayName} del Tiempo de Navidad`,
+      it: `${dayName} del Tempo di Natale`
+    }[locale];
+  }
+  const roman = romanNumeral(context.seasonWeek);
+  if (locale === 'en') {
+    const preposition = context.season === 'ordinary-time' ? 'in' : 'of';
+    return `${dayName} of the ${englishOrdinal(context.seasonWeek)} Week ${preposition} ${localizeRomanSeason(locale, context.season)}`;
+  }
+  if (locale === 'pt') {
+    const season = context.season === 'lent' ? 'da Quaresma' : `do ${localizeRomanSeason(locale, context.season)}`;
+    return `${dayName} da ${roman} semana ${season}`;
+  }
+  if (locale === 'es') {
+    const season = context.season === 'lent' ? 'de la Cuaresma' : `del ${localizeRomanSeason(locale, context.season)}`;
+    return `${dayName} de la ${roman} semana ${season}`;
+  }
+  const season = context.season === 'lent'
+    ? 'di Quaresima'
+    : context.season === 'advent'
+      ? 'di Avvento'
+      : `del ${localizeRomanSeason(locale, context.season)}`;
+  return `${dayName} della ${roman} settimana ${season}`;
+}
+
+export function localizeRomanTemporaleDay(
+  locale: LiturgicalToolLocale,
+  dateISO: string,
+  context: RomanDateContext
+): string {
+  if (context.principalDay) return localizeRomanPrincipalDay(locale, context.principalDay);
+  return weekday(dateISO) === 0 ? sundayLabel(locale, context) : weekdayLabel(locale, dateISO, context);
+}
+
+export function localizeRomanTemporaleSummary(
+  locale: LiturgicalToolLocale,
+  context: RomanDateContext
+): string {
+  const season = localizeRomanSeason(locale, context.season);
+  const week = context.seasonWeek ? ` ${context.seasonWeek}` : '';
+  if (locale === 'pt') return `Calculado localmente a partir das regras perenes do calendário romano para Portugal. ${season}${week ? `, semana${week}` : ''}; ciclo dominical ${context.sundayCycle} e ciclo ferial ${context.weekdayCycle}.`;
+  if (locale === 'es') return `Calculado localmente a partir de las reglas perennes del calendario romano para Portugal. ${season}${week ? `, semana${week}` : ''}; ciclo dominical ${context.sundayCycle} y ciclo ferial ${context.weekdayCycle}.`;
+  if (locale === 'it') return `Calcolato localmente dalle regole perenni del calendario romano per il Portogallo. ${season}${week ? `, settimana${week}` : ''}; ciclo domenicale ${context.sundayCycle} e ciclo feriale ${context.weekdayCycle}.`;
+  return `Calculated locally from the perennial rules of the Roman calendar for Portugal. ${season}${week ? `, week${week}` : ''}; Sunday cycle ${context.sundayCycle} and weekday cycle ${context.weekdayCycle}.`;
+}

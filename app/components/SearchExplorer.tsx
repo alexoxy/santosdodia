@@ -22,6 +22,7 @@ import {
   fallbackLanguageLabel,
 } from "../../lib/content-locale";
 import { yearInTimeZone } from "../../lib/date-context";
+import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import {
   displayObservanceName,
   displayPatronages,
@@ -48,6 +49,7 @@ function uniqueObservances(items: Observance[]) {
 export default function SearchExplorer() {
   const { locale, copy, church, setChurch, country, timeZone } = useLanguage();
   const feature = getFeatureCopy(locale);
+  const calendarCountry = defaultReadyCalendarCountry(church);
   const [q, setQuery] = useState("");
   const [remote, setRemote] = useState<Observance[]>([]);
   const [loading, setLoading] = useState(false);
@@ -95,7 +97,7 @@ export default function SearchExplorer() {
           ? new URLSearchParams({ date: dateIntent, locale })
           : new URLSearchParams({ q, year: String(year), locale });
         if (church !== "all") params.set("tradition", church);
-        if (country) params.set("country", country);
+        if (calendarCountry) params.set("country", calendarCountry);
         const endpoint = dateIntent ? "/api/v1/observances" : "/api/v1/search";
         setLoading(true);
         fetch(`${endpoint}?${params}`, { signal: controller.signal })
@@ -120,7 +122,7 @@ export default function SearchExplorer() {
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [q, year, locale, church, country, dateIntent]);
+  }, [q, year, locale, church, calendarCountry, dateIntent]);
 
   const items = useMemo(
     () => uniqueObservances([...localItems, ...remote]).slice(0, 300),
@@ -219,7 +221,7 @@ export default function SearchExplorer() {
                 existingProfileId ??
                 (isRuntimePersonProfileEligible(item) ? item.id : null);
               const summary = localizedSummary(item, locale);
-              const scope = displayObservanceScope(item, locale, country);
+              const scope = displayObservanceScope(item, locale, calendarCountry ?? country);
               return name ? (
                 <article
                   className="result-card"

@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
   if(!Number.isInteger(year)||year<1900||year>2200)return Response.json({error:"Invalid year."},{status:400});
   const filters={tradition:parseTradition(p.get("tradition")),category:parseCategory(p.get("category")),country:p.get("country")??undefined,patronage:p.get("patronage")??undefined};
   const curated=getPublicAllObservances(year,locale,filters);
-  const runtime=await mergePublishedCalendarRange(curated,{fromDate:`${year}-01-01`,toDate:`${year}-12-31`,locale,filters});
+  const runtime=await mergePublishedCalendarRange(curated,{fromDate:`${year}-01-01`,toDate:`${year}-12-31`,locale,filters,includeCalculatedTemporale:Boolean(q.trim())});
   const localized=runtime.items.map(item=>({
     ...item,
     originalName:item.name,
@@ -63,6 +63,6 @@ export async function GET(request: NextRequest) {
     ...item.traditions.map(value=>traditionLabel(ui[locale],value)),ui[locale][item.category],
     "editorialSearchText" in item?item.editorialSearchText:"",
   ].join(" ").toLocaleLowerCase(locale).includes(needle)).slice(0,300);
-  return Response.json({data,meta:{query:q,locale,year,count:data.length,withheldForTranslation:runtime.items.length-localized.length,filters,live:false,requestedLive:p.has("live"),sourceMode:runtime.meta.sourceMode,d1:runtime.meta.d1}},
+  return Response.json({data,meta:{query:q,locale,year,count:data.length,withheldForTranslation:runtime.items.length-localized.length,filters,live:false,requestedLive:p.has("live"),sourceMode:runtime.meta.sourceMode,calculatedTemporale:runtime.meta.calculatedTemporale,d1:runtime.meta.d1}},
     {headers:{"Cache-Control":"public, s-maxage=600, stale-while-revalidate=3600","Access-Control-Allow-Origin":"*"}});
 }
