@@ -34,8 +34,8 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 202,
-    "remainingOccurrences": 187,
+    "sourceBoundOccurrences": 205,
+    "remainingOccurrences": 184,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -47,7 +47,7 @@
     "jurisdiction-structural-overlay": 14,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 64
+    "temporal-weekday-family": 61
   },
   "humanReviewBoundary": {
     "occurrenceCount": 21,
@@ -1346,27 +1346,6 @@
       "dateISO": "2026-12-28",
       "canonicalEventId": "rc:HolyInnocents",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-29-d08216b8411703ef050f6d66",
-      "sourceRecordHash": "650c87bf4cff7990d6b2961e3cdd313d8e802a91106de1909f8fcd9ef9b0f093",
-      "dateISO": "2026-12-29",
-      "canonicalEventId": "rc:ChristmasWeekdayDec29",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-30-a8b266eedadf42cb7731e0c6",
-      "sourceRecordHash": "8b78c527e0da989555ee942dd2d61458f6561681d8cfc9fc099fd5fa36e56656",
-      "dateISO": "2026-12-30",
-      "canonicalEventId": "rc:ChristmasWeekdayDec30",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-31-76c38e6dac723f95eb81e3c7",
-      "sourceRecordHash": "ce28e08204892f332bd85ee40f208241f3fdc4e402a8f65ae14fadcedf9a652a",
-      "dateISO": "2026-12-31",
-      "canonicalEventId": "rc:ChristmasWeekdayDec31",
-      "semanticFamily": "temporal-weekday-family"
     }
   ]
 }

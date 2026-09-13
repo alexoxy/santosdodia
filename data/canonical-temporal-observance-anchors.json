@@ -243,6 +243,36 @@
       "scope": "church-attested",
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["observance-attestation","liturgical-designation"]}],
       "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:christmas-octave-day-5:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "christmas-octave-day-5",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:christmas-octave-day-6:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "christmas-octave-day-6",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "observance:christmas-octave-day-7:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "christmas-octave-day-7",
+      "observanceType": "temporal-celebration",
+      "subjects": [],
+      "scope": "church-attested",
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["observance-attestation","liturgical-designation"]}],
+      "verifiedAt": "2026-09-13"
     }
   ]
 }
