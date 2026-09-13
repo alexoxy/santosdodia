@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-09-13 19:45 UTC
+Updated: 2026-09-13 21:00 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
 Machine contract: `config/product-platform-contract.json`
 
-Status: active implementation; the reviewed Tuesday/Wednesday Advent weekday family is now part of the shadow perennial engine; automatic product validation remains remote-D1-free; Portugal 2026 remains the published last-known-good baseline; perennial cutover remains fail-closed
+Status: active implementation; the Roman 17–24 December sequence is now stored as eight perennial fixed-date rules and six exact Portugal 2026 rows are source-bound; automatic product validation remains remote-D1-free; Portugal 2026 remains the published last-known-good baseline; perennial cutover remains fail-closed
 
 ## Continuity rule
 
@@ -23,6 +23,21 @@ The strategic document is the binding and cumulative product vision until full i
 - Evidence Vault, canonical history, receipts, provenance and rollback are never deleted as repository hygiene.
 
 ## Completed in this cycle
+
+PR [#311](https://github.com/alexoxy/santosdodia/pull/311) completed the perennial late-Advent fixed-date sequence:
+
+- added eight subjectless Roman TemporalRules and official reference vectors for 17–24 December, with no annual year in their canonical identity;
+- promoted the exact approved Portugal 2026 rows for 17, 18, 19, 21, 22 and 23 December;
+- recorded the 20 December candidate as precedence-suppressed by the fourth Sunday of Advent;
+- kept the Portugal 24 December morning form outside canonical coverage under explicit jurisdiction review;
+- raised canonical migration coverage from 196 to 202 occurrences and reduced the exact backlog from 193 to 187;
+- preserved `publicationAllowed: false`, remote-D1-free validation, AdSense fail-closed serving and immutable source evidence.
+
+Development head: `1db3280d15ad62cf20d8403b26ddb8b73f05e4e6`.
+
+Squash merge on `main`: `1375f91b95df4c349cb30a5cc302d7ac8282fc5c`.
+
+PR [#310](https://github.com/alexoxy/santosdodia/pull/310) removed five orphan modules and routed the public Easter calculation through the canonical calendar engine, reducing the repository by 368 net lines without adding a second product path.
 
 PR [#308](https://github.com/alexoxy/santosdodia/pull/308) completed the next reviewed Advent weekday family:
 
@@ -42,14 +57,14 @@ No public read-model switch, remote D1 write, Dropbox production promotion, AdSe
 ## Portugal 2026 semantic-equivalence ledger
 
 - Approved source population: **389 occurrences**, **365 civil days**, **1,945 labels**.
-- Direct TemporalRule bindings: **5**.
+- Direct TemporalRule bindings: **11**.
 - Precedence-surviving TemporalRuleFamily bindings: **100**; 26 suppressed candidates remain evidence and do not count as coverage.
 - Movable/transfer bindings: **11**, including three explicitly approved Portugal transfers.
 - Exact fixed Sanctorale bindings: **80** across 76 civil days.
-- Total canonical migration coverage: **196/389 (50.386%)**.
-- Approved-source occurrences outside the canonical shadow: **193**.
-- Source-bound civil days: **192/365**.
-- Civil days without a source-bound canonical occurrence: **173**.
+- Total canonical migration coverage: **202/389 (51.928%)**.
+- Approved-source occurrences outside the canonical shadow: **187**.
+- Source-bound civil days: **198/365**.
+- Civil days without a source-bound canonical occurrence: **167**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
@@ -57,7 +72,7 @@ The unresolved inventory is exact and exhaustive:
 
 | Semantic family | Remaining |
 |---|---:|
-| Temporal weekday families | 70 |
+| Temporal weekday families | 64 |
 | Fixed individual persons | 52 |
 | Fixed/major non-person observances | 16 |
 | Portugal structural overlays | 14 |
@@ -66,42 +81,37 @@ The unresolved inventory is exact and exhaustive:
 | Fixed Marian titles | 8 |
 | Portugal proper identities | 5 |
 | Portugal rank overrides | 2 |
-| **Total** | **193** |
+| **Total** | **187** |
 
 The 21 structural/proper/rank rows specific to Portugal remain behind explicit competent-authority human review. Coverage is occurrence-based; suppressions and transfer origins remain evidence, not extra coverage.
 
 ## CI and external proof
 
-Final development head: `daea653c70c9d144c84fdab08af6f08fbf44ba5c`.
+Final development head: `1db3280d15ad62cf20d8403b26ddb8b73f05e4e6`.
 
-PR #308 workflows succeeded:
+PR #311 workflows succeeded:
 
-- Product publish staging `34778231427` — success;
-- Product BUILD `34778231499` — success;
-- Wikidata retry quality `34778231537` — success;
-- Quality `34778231465` — success, including canonical coverage, semantic inventory, TemporalRuleFamily vectors, reconciliation, AdSense readiness, TypeScript, lint and the 79-page Next.js build.
+- Product publish staging `34782282670` — success, with immutable artefact `10325354008` (`sha256:5eaff237c3c455f2edfed270bbc1b93a07b9e0029cce6535158e572cbe8150c8`);
+- Product BUILD `34782282679` — success;
+- Wikidata retry quality `34782282662` — success;
+- Quality `34782282671` — success, including canonical coverage, semantic inventory, TemporalRule vectors, reconciliation, the AdSense review guardrail, TypeScript, lint, the 79-page Next.js build, the Cloudflare Worker bundle and production smoke test.
 
-Post-merge proof on `63626b119fe01d4e18def1823454fb1ca1efaed3` also succeeded:
+The merge commit is `1375f91b95df4c349cb30a5cc302d7ac8282fc5c`; its tree is the exact green PR head tree. No independent post-merge run had been exposed by the GitHub connector at checkpoint time, and the non-Trash Gmail failure search returned zero messages.
 
-- Product BUILD `34778433234` — success;
-- Product publish staging `34778433299` — success;
-- Portugal product v2 staging `34778483496` — success;
-- Quality `34778433216` — success.
-
-Local proof passed the complete `npm run check`; the only lint output remains the two pre-existing non-blocking unused-import warnings in the Live curator.
+Local proof passed the complete `npm run check` and `node scripts/check-adsense-readiness.mjs` without errors.
 
 The staging workflow revalidated the approved 389-occurrence/365-day Portugal source and its fail-closed product artefacts. No Dropbox production promotion was attempted; the approved annual source release, staging receipts and all earlier D1 receipts remain immutable.
 
 ## Operational alerts
 
-Two GitHub failure notifications for intermediate commit `6f13fb4` were read and traced to a corrected descendant, green PR #306 workflows and a successful merge/staging chain before being moved to Trash. The exact Calendar/data-quality alert for that commit was already in Trash. The post-merge non-Trash GitHub failure search returned zero messages. The resolved Cloudflare quota alert remains in Trash. No write-based D1 probe occurred. The unread AdSense remediation message remains preserved and actionable.
+Two GitHub failure notifications for intermediate commit `6f13fb4` were read and traced to a corrected descendant, green PR #306 workflows and a successful merge/staging chain before being moved to Trash. The exact Calendar/data-quality alert for that commit was already in Trash. The latest three-day non-Trash search returned zero GitHub failure messages after PR #311. The resolved Cloudflare quota alert remains in Trash. No write-based D1 probe occurred. The unread AdSense remediation message remains preserved and actionable. A daily 09:00 Europe/Lisbon task now watches Gmail for new or unresolved GitHub failures without deleting messages automatically.
 
 ## Strategic coverage matrix
 
 | Product layer | Status | Current proof | Remaining acceptance gate |
 |---|---|---|---|
 | P0 reliability, security and hygiene | Realised core / continuous | Green CI, corrected D1 incident, automatic product validation remote-D1-free, fail-closed publication and proven alert routine | Confirm the reset without a write probe; keep remote promotion explicit and budgeted; continue source-level completeness |
-| P1 Roman perennial engine | Partial | Temporale, liturgical year, flexible ferial/Saint disposition, precedence, transfers, colours, rolling materialisation, 80 fixed rules and ten TemporalRuleFamilies | Bind the remaining 193 occurrences; reach 389/389; explain all annual differences and prove multiple years |
+| P1 Roman perennial engine | Partial | Temporale, liturgical year, flexible ferial/Saint disposition, precedence, transfers, colours, rolling materialisation, 80 fixed Sanctorale rules, 24 direct TemporalRules and ten TemporalRuleFamilies | Bind the remaining 187 occurrences; reach 389/389; explain all annual differences and prove multiple years |
 | P2 calculator, API and rolling ICS | Realised core / awaiting equivalence | Shared engine, OpenAPI, rolling Y-1…Y+3 feed and annual snapshots | Prove 100% semantic parity and stable backlinks after Portugal cutover |
 | P3 Portugal Today product | Partial | Published last-known-good Today and reviewed text-first context | Cut over only after 389/389; then prove zero false-empty, prayer/reference, Live and next/tomorrow on representative dates |
 | Editorial, SEO and AdSense recovery | Partial / externally blocked | 30 deep-ready biographies, curated sitemap, thin pages noindex, visible source method | Strengthen representative production pages, verify recrawl and require explicit human approval before resubmission |
@@ -113,7 +123,7 @@ Two GitHub failure notifications for intermediate commit `6f13fb4` were read and
 
 ## Repository hygiene inventory
 
-- PR #308 merged only after all four head workflows completed successfully; all four post-merge workflows also completed successfully.
+- PR #311 merged only after all four head workflows completed successfully; PR #310 had already completed the orphan-code cleanup with green checks.
 - No pull request remains open.
 - The squash commit and Git history preserve recovery; no history rewrite was used.
 - Open issues: #181 only, the owned strategic umbrella with the next step below.
@@ -125,7 +135,7 @@ Two GitHub failure notifications for intermediate commit `6f13fb4` were read and
 
 - The 10 September D1 limit was an automation-boundary failure, not a reason to upgrade Cloudflare or weaken validation. Cloudflare Free remains normative.
 - D1 stays blocked by the provider until the stated reset; development may continue locally and through Dropbox, but no remote write or write-based health probe may run before or after reset without an explicit promotion decision.
-- The 193-row inventory is a work ledger, not publication authority. It cannot create Person, Observance or perennial rules from labels or dates.
+- The 187-row inventory is a work ledger, not publication authority. It cannot create Person, Observance or perennial rules from labels or dates.
 - A fixed Sanctorale date is an annual candidate generator, not a guarantee that the Saint is celebrated on that civil date in every year; the annual outcome comes from Temporale, precedence and jurisdiction policy.
 - `optional-choice` records canonical permission, not an observed local pastoral selection. The engine therefore keeps the feria default separate from full optional celebrations and limited commemorations.
 - GIRM 355 is universal normative evidence for these dispositions; any territorial adaptation must enter through the jurisdiction-policy layer and competent authority evidence.
@@ -136,7 +146,7 @@ Two GitHub failure notifications for intermediate commit `6f13fb4` were read and
 
 ## Ordered roadmap
 
-1. Continue the reviewed Advent/Christmas/Epiphany weekday families through the ferial-disposition semantics; every generated member must have an exact present, replaced, optional, commemorated or suppressed result against the approved Portugal 2026 source, with the 5 December Portugal overlay held for authority review.
+1. Continue the reviewed Christmas/Epiphany weekday families and the remaining early-Advent ferias through the ferial-disposition semantics; every generated member must have an exact present, replaced, optional, commemorated or suppressed result against the approved Portugal 2026 source, with the 5 and 24 December Portugal overlays held for authority review.
 2. Implement the two-segment Ordinary Time weekday families without annual dates, again preserving exact source and suppression partitions.
 3. Model the 14 optional Saturday Marian rows as a precedence-sensitive family, not 14 fixed duplicates.
 4. Continue source-coherent fixed Sanctorale/collective/Marian-title batches using competent authority identities and bounded review packs.
