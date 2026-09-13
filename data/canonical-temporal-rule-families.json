@@ -130,6 +130,24 @@
       "verifiedAt": "2026-09-10"
     },
     {
+      "id": "temporal-rule-family:advent-weekday-tuesday-wednesday:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "advent-weekday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}-{weekday}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:AdventWeekday{week}{weekdayTitle}",
+      "legacyRank": "weekday",
+      "memberProfile": "weekday-tuesday-wednesday",
+      "anchor": "advent-start",
+      "baseOffsetDays": 0,
+      "weekRange": {"min": 1, "max": 3},
+      "weekStrideDays": 7,
+      "weekdayOffsets": {"tuesday": 2, "wednesday": 3},
+      "candidateRequiresPrecedenceResolution": true,
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
       "id": "temporal-rule-family:ordinary-time-sunday-early:roman-catholic",
       "churchId": "church:roman-catholic",
       "calendarSystem": "gregorian",

@@ -34,8 +34,8 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 192,
-    "remainingOccurrences": 197,
+    "sourceBoundOccurrences": 196,
+    "remainingOccurrences": 193,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -47,7 +47,7 @@
     "jurisdiction-structural-overlay": 14,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 74
+    "temporal-weekday-family": 70
   },
   "humanReviewBoundary": {
     "occurrenceCount": 21,
@@ -1285,20 +1285,6 @@
       "semanticFamily": "saturday-marian-family"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-12-01-02da9e618122b0617bd575b2",
-      "sourceRecordHash": "8855f901913b9955dc6c44fb1a64918e742a5ea9de34f6baccd8d762529d3add",
-      "dateISO": "2026-12-01",
-      "canonicalEventId": "rc:AdventWeekday1Tuesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-02-d7a8baf1d68b07a3b0a4d059",
-      "sourceRecordHash": "7023711c0c9ed2d680d0577332964a1d7fbd5e55c3354ee68b24d8c3e134073e",
-      "dateISO": "2026-12-02",
-      "canonicalEventId": "rc:AdventWeekday1Wednesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-12-05-8f48ceca3194e29bef8f7248",
       "sourceRecordHash": "d6d8e9b6530b5e1d4341041e513253b780338c56097df5a30c4d313874ee7fd9",
       "dateISO": "2026-12-05",
@@ -1332,20 +1318,6 @@
       "dateISO": "2026-12-12",
       "canonicalEventId": "rc:OurLadyOfGuadalupe",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-15-ca17d07e08779c8210206324",
-      "sourceRecordHash": "fe3a013f5269085f5d97afd440f8794c7aae37117326089f81d4c3a3528623a6",
-      "dateISO": "2026-12-15",
-      "canonicalEventId": "rc:AdventWeekday3Tuesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-16-1b471825e462dc7c4dc4ba72",
-      "sourceRecordHash": "1d6878e2c7f67de08a6076b8794d4380cf6690559f10d91ebc55293e327a7e66",
-      "dateISO": "2026-12-16",
-      "canonicalEventId": "rc:AdventWeekday3Wednesday",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-12-17-451a6775cbf7763cf1394ec3",
