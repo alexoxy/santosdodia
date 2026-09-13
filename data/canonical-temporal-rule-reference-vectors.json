@@ -113,6 +113,62 @@
       "expectedDateISO": "2026-11-22",
       "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
       "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-17:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-17",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-18:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-18",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-19:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-19",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-20:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-20",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-21:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-21",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-22:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-22",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-23:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-23",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-24:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-24",
+      "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+      "sourcePublisher": "Holy See"
     }
   ]
 }

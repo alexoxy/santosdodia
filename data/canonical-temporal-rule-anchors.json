@@ -146,6 +146,78 @@
       "dateRule": {"type":"relative","calendar":"gregorian","anchor":"advent-start","offsetDays":-7},
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
       "verifiedAt": "2026-08-29"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-17:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-17:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":17},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-18:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-18:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":18},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-19:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-19:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":19},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-20:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-20:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":20},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-21:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-21:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":21},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-22:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-22:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":22},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-23:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-23:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":23},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:advent-weekday-december-24:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:advent-weekday-december-24:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":24},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
     }
   ]
 }

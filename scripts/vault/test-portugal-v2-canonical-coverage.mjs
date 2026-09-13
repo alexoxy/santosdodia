@@ -65,7 +65,7 @@ assert(temporalShadow.sourceArtifact.workflowRunId === approval.stagingWorkflow.
 assert(`sha256:${temporalShadow.sourceArtifact.buildJsonSha256}` === approval.artifacts.release.files['build.json'], 'Temporal shadow build hash differs from approval.');
 assert(temporalShadow.target.churchId === coverage.canonicalTarget.churchId && temporalShadow.target.jurisdictionId === coverage.canonicalTarget.jurisdictionId, 'Temporal shadow Church/Jurisdiction differs from target.');
 assert(temporalShadow.target.calendarSystem === coverage.canonicalTarget.calendarSystem && temporalShadow.target.year === coverage.canonicalTarget.year, 'Temporal shadow calendar/year differs from target.');
-assert(Array.isArray(temporalShadow.mappings) && temporalShadow.mappings.length === 5 && temporalShadow.mappings.length === coverage.coverage.temporalRuleShadowOccurrences, 'Temporal shadow mapping count must be exactly five.');
+assert(Array.isArray(temporalShadow.mappings) && temporalShadow.mappings.length === 11 && temporalShadow.mappings.length === coverage.coverage.temporalRuleShadowOccurrences, 'Temporal shadow mapping count must be exactly eleven.');
 
 assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow?.status === 'approved-release-temporal-family-shadow', 'Temporal family shadow is invalid.');
 assert(temporalFamilyShadow?.sourceReleaseId === coverage.sourceReleaseId && temporalFamilyShadow?.mutationAllowed === false, 'Temporal family shadow must target the approved release and remain read-only.');
@@ -163,7 +163,16 @@ try {
     ...temporalShadow.mappings.map(item => item.occurrenceId),
     ...familyMappings.map(item => item.occurrenceId)
   ]);
-  assert(coveredSourceIds.size === 185 && coveredSourceHashes.size === 185 && coveredOccurrenceIds.size === 185, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
+  assert(coveredSourceIds.size === 191 && coveredSourceHashes.size === 191 && coveredOccurrenceIds.size === 191, 'Fixed, TemporalRule and TemporalRuleFamily source/canonical identities must not overlap.');
+
+  const lateAdventDirectIds = new Set([
+    'rc:AdventWeekdayDec17',
+    'rc:AdventWeekdayDec18',
+    'rc:AdventWeekdayDec19',
+    'rc:AdventWeekdayDec21',
+    'rc:AdventWeekdayDec22',
+    'rc:AdventWeekdayDec23'
+  ]);
 
   for (const mapping of temporalShadow.mappings) {
     assert(!legacyIds.has(mapping.legacyObservanceId), `Duplicate legacy coverage across explicit/temporal mappings: ${mapping.legacyObservanceId}.`);
@@ -172,8 +181,13 @@ try {
     assert(rule, `${mapping.occurrenceId} references unknown TemporalRule ${mapping.temporalRuleId}.`);
     const resolved = calendar.resolveDateRule(rule.dateRule, temporalShadow.target.year);
     assert(resolved.status === 'resolved' && resolved.dateISO === mapping.expectedDateISO, `${mapping.temporalRuleId} does not match approved date ${mapping.expectedDateISO}.`);
-    assert(mapping.legacyRank === 'solemnity', `${mapping.occurrenceId} temporal bootstrap rank differs from approved release.`);
+    const expectedRank = lateAdventDirectIds.has(mapping.legacyObservanceId) ? 'weekday' : 'solemnity';
+    assert(mapping.legacyRank === expectedRank, `${mapping.occurrenceId} temporal rank differs from its reviewed source class.`);
+    assert(mapping.sourceOccurrenceId.startsWith(`snl-pt-${mapping.expectedDateISO}-`) && /^[a-f0-9]{64}$/u.test(mapping.sourceRecordHash), `${mapping.occurrenceId} lacks an exact approved source row.`);
   }
+  assert([...lateAdventDirectIds].every((legacyId) => temporalShadow.mappings.some((mapping) => mapping.legacyObservanceId === legacyId)), 'Late Advent direct promotion must preserve all six reviewed source identities.');
+  assert(!temporalShadow.mappings.some((mapping) => mapping.legacyObservanceId === 'rc:AdventWeekdayDec20') && familyPresentSet.has('rc:Advent4'), 'December 20 late-Advent weekday must yield to the reviewed fourth Sunday of Advent.');
+  assert(!temporalShadow.mappings.some((mapping) => mapping.legacyObservanceId === 'rc:AdventWeekdayDec24'), 'Portugal December 24 morning form must remain outside direct canonical coverage pending jurisdiction review.');
 
   for (const mapping of familyMappings) {
     const family = temporalFamilies.get(mapping.familyId);
@@ -225,8 +239,8 @@ for (const familyLegacyId of familyPresentLegacyIds) {
 }
 
 const totalMapped = explicitOccurrences.length + temporalShadow.mappings.length + familyPresentLegacyIds.length + movableTransferShadow.mappings.length;
-assert(totalMapped === 196 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 196/389.');
-assert(coverage.coverage.remainingLegacyOccurrences === 193 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 193.');
+assert(totalMapped === 202 && totalMapped === coverage.coverage.mappedOccurrenceAnchors, 'Combined canonical shadow coverage must be exactly 202/389.');
+assert(coverage.coverage.remainingLegacyOccurrences === 187 && coverage.coverage.remainingLegacyOccurrences === 389 - totalMapped, 'Remaining legacy count must be exactly 187.');
 assert(coverage.coverage.requiredForPromotion === 389 && coverage.coverage.promotionAllowed === false, 'Promotion must remain blocked until 389/389.');
 assert(legacyIds.size === totalMapped, 'Every counted mapping must cover one unique legacy occurrence identity.');
 assert(!legacyIds.has('rc:StsJoachimAnne'), 'Joachim/Anne must not be fabricated in the Portugal 2026 source release.');
@@ -248,5 +262,5 @@ for (const key of [
 ]) assert(policy[key] === true, `Coverage safety policy ${key} must remain true.`);
 
 const coveragePercent = Number(((totalMapped / 389) * 100).toFixed(3));
-assert(coveragePercent === 50.386, `Unexpected canonical coverage percentage ${coveragePercent}.`);
-console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 80 exact fixed Sanctorale + 5 TemporalRule + 100 precedence-surviving family rows + 11 movable/transfer rows; 193 remaining, promotion blocked.`);
+assert(coveragePercent === 51.928, `Unexpected canonical coverage percentage ${coveragePercent}.`);
+console.log(`Portugal v2 canonical migration gate passed: ${totalMapped}/389 (${coveragePercent}%) = 80 exact fixed Sanctorale + 11 TemporalRule + 100 precedence-surviving family rows + 11 movable/transfer rows; 187 remaining, promotion blocked.`);
