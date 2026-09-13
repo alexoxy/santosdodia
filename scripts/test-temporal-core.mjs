@@ -85,6 +85,7 @@ await import('./vault/test-roman-portugal-movable-rolling-acceptance.mjs');
 await import('./test-roman-liturgical-year.mjs');
 await import('./test-roman-precedence.mjs');
 await import('./test-roman-annual-calendar.mjs');
+await import('./test-roman-temporale-observance.mjs');
 await import('./test-roman-solemnity-transfer.mjs');
 await import('./test-roman-annual-materialization.mjs');
 await import('./test-roman-sanctorale.mjs');

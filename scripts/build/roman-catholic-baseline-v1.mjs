@@ -239,8 +239,8 @@ const daily = primaryByDate.map(({ dateISO, primary, secondary }) => {
     }
   }
   const pt = portugueseByDate.get(dateISO);
-  if (pt?.displayLabel) labels.pt = {
-    label: pt.displayLabel,
+  if (pt?.liturgicalDayLabel) labels.pt = {
+    label: pt.liturgicalDayLabel,
     liturgicalDayLabel: pt.liturgicalDayLabel,
     source: 'portugal-national-liturgy-secretariat',
     sourceRank: pt.sourceRank,

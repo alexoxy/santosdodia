@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CATEGORIES, TRADITIONS, traditionLabel, type Category, type Tradition } from '../../data/observances';
 import type { Locale } from '../../lib/i18n';
-import { isPublicCalendarSubscriptionReady } from '../../lib/calendar-publication-readiness';
+import { defaultReadyCalendarCountry, isPublicCalendarSubscriptionReady } from '../../lib/calendar-publication-readiness';
 import { rollingCivilYearWindow } from '../../lib/knowledge/rolling-materialization';
 import { SITE_ORIGIN } from '../../lib/site';
 import AddToCalendar from './AddToCalendar';
@@ -33,7 +33,7 @@ export default function CalendarSyncCenter(){
   const currentYear = new Date().getUTCFullYear();
   const rollingYears = useMemo(()=>rollingCivilYearWindow(currentYear),[currentYear]);
   const [selectedChurch,setSelectedChurch] = useState<ChurchPreference>(church);
-  const [selectedCountry,setSelectedCountry] = useState(country ?? 'GLOBAL');
+  const [selectedCountry,setSelectedCountry] = useState(defaultReadyCalendarCountry(church) ?? country ?? 'GLOBAL');
   const [regionTouched,setRegionTouched] = useState(false);
   const [category,setCategory] = useState<'all'|Category>('all');
   const [year,setYear] = useState(currentYear);
@@ -49,7 +49,12 @@ export default function CalendarSyncCenter(){
     if(requestedCountry && /^[A-Z]{2}$/i.test(requestedCountry)) { setSelectedCountry(requestedCountry.toUpperCase()); setRegionTouched(true); }
     if(validCategory(requestedCategory)) setCategory(requestedCategory);
   },[]);
-  useEffect(()=>{ if(!regionTouched && country && selectedCountry==='GLOBAL') setSelectedCountry(country); },[country,regionTouched,selectedCountry]);
+  useEffect(()=>{
+    if(regionTouched)return;
+    const productCountry=defaultReadyCalendarCountry(selectedChurch);
+    if(productCountry)setSelectedCountry(productCountry);
+    else if(country&&selectedCountry==='GLOBAL')setSelectedCountry(country);
+  },[country,regionTouched,selectedChurch,selectedCountry]);
   useEffect(()=>{
     fetch('/api/v1/religious-holidays?mode=countries')
       .then(response=>response.ok?response.json():null)

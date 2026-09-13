@@ -24,3 +24,9 @@ export function isPublicCalendarSubscriptionReady(tradition: string, country: st
     (context) => context.tradition === tradition && context.country === country.toUpperCase(),
   );
 }
+
+export function defaultReadyCalendarCountry(
+  tradition: Tradition | 'all' | undefined
+): string | undefined {
+  return tradition === 'roman-catholic' ? 'PT' : undefined;
+}

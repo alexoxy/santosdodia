@@ -3,9 +3,15 @@ import type { Locale } from './i18n';
 import { readCalendarOccurrences } from './calendar-d1-read-model';
 import { mergePublicCalendarObservances } from './calendar-public-adapter';
 import { getOptionalCalendarDatabase } from './cloudflare-calendar-db';
+import { addCalculatedRomanTemporaleFallback } from './knowledge/roman-temporale-observance';
 
 export type PublicCalendarRuntimeMeta = {
-  sourceMode: 'approved-repository' | 'published-d1+approved-repository';
+  sourceMode:
+    | 'approved-repository'
+    | 'published-d1+approved-repository'
+    | 'calculated-roman-temporale+approved-repository'
+    | 'published-d1+calculated-roman-temporale+approved-repository';
+  calculatedTemporale: number;
   d1: {
     bound: boolean;
     status: 'unbound' | 'not-requested' | 'ok' | 'bounded' | 'fallback-error';
@@ -22,6 +28,7 @@ export async function mergePublishedCalendarRange(
     toDate: string;
     locale: Locale;
     filters?: ObservanceFilters;
+    includeCalculatedTemporale?: boolean;
   },
 ): Promise<{ items: Observance[]; meta: PublicCalendarRuntimeMeta }> {
   const filters = options.filters ?? {};
@@ -56,10 +63,26 @@ export async function mergePublishedCalendarRange(
   }
 
   const merged = mergePublicCalendarObservances(curated, d1Records, options.locale);
+  const withCalculated = options.includeCalculatedTemporale === false
+    ? { items: merged.items, calculated: 0 }
+    : addCalculatedRomanTemporaleFallback(merged.items, {
+        fromDate: options.fromDate,
+        toDate: options.toDate,
+        locale: options.locale,
+        filters,
+      });
+  const sourceMode = merged.acceptedD1
+    ? withCalculated.calculated
+      ? 'published-d1+calculated-roman-temporale+approved-repository'
+      : 'published-d1+approved-repository'
+    : withCalculated.calculated
+      ? 'calculated-roman-temporale+approved-repository'
+      : 'approved-repository';
   return {
-    items: merged.items,
+    items: withCalculated.items,
     meta: {
-      sourceMode: merged.acceptedD1 ? 'published-d1+approved-repository' : 'approved-repository',
+      sourceMode,
+      calculatedTemporale: withCalculated.calculated,
       d1: {
         bound: Boolean(database),
         status,

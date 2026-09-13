@@ -43,6 +43,7 @@ export type PublicTodayPayload = {
     live: false;
     requestedLive: boolean;
     sourceMode: PublicCalendarRuntimeMeta['sourceMode'];
+    calculatedTemporale: number;
     d1: PublicCalendarRuntimeMeta['d1'];
     generatedAt: string;
   };
@@ -123,6 +124,7 @@ export async function buildPublicToday(options: {
       live: false,
       requestedLive: Boolean(options.requestedLive),
       sourceMode: runtime.meta.sourceMode,
+      calculatedTemporale: runtime.meta.calculatedTemporale,
       d1: runtime.meta.d1,
       generatedAt: new Date().toISOString(),
     },
