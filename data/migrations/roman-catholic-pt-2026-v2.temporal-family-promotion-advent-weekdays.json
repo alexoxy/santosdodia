@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "advent-weekday-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "families": [
+    "temporal-rule-family:advent-weekday-tuesday-wednesday:roman-catholic"
+  ],
+  "candidateOutcomes": {
+    "candidates": 6,
+    "presentSourceOccurrences": 4,
+    "suppressedCandidates": 2
+  },
+  "promotedSourceOccurrences": 4,
+  "promotedMappingDigestSha256": "8e67a15f4b62cadf40f11d513ef39b00738d807c27fa52c11c34d8e11f511236",
+  "promotedSuppressionDigestSha256": "38ac472e376acb31c45731a0b0a07c524145d5c42b55294c69df8ee512452499",
+  "temporalFamilyMappingDigestSha256": "5cc32ff421f60496698df0189f9a81a53e506d0e47935f8dec1f261ba877feb4",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 192,
+    "remainingLegacyOccurrences": 197
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 196,
+    "remainingLegacyOccurrences": 193,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "competent Holy See temporal-cycle authority",
+    "deterministic Advent anchor without annual dates in the perennial family",
+    "exact approved Portugal 2026 source occurrence and record hash",
+    "explicit annual precedence outcomes for Immaculate Conception and Saint Juan Diego"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-13"
+}

@@ -9,7 +9,8 @@ const PORTUGAL_RELEASE_ID = 'roman-catholic-pt-2026-v2';
 const TEMPORAL_FAMILY_MEMBER_PROFILES = {
   'sunday': ['sunday'],
   'weekday-monday-saturday': ['friday', 'monday', 'saturday', 'thursday', 'tuesday', 'wednesday'],
-  'weekday-monday-wednesday': ['monday', 'tuesday', 'wednesday']
+  'weekday-monday-wednesday': ['monday', 'tuesday', 'wednesday'],
+  'weekday-tuesday-wednesday': ['tuesday', 'wednesday']
 };
 const TEMPORAL_FAMILY_RANKS = ['weekday', 'solemnity', 'celebration with precedence over solemnities'];
 
