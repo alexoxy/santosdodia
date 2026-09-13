@@ -1,4 +1,5 @@
 import type { Observance } from '../data/observances';
+import canonicalPeople from '../data/canonical-person-anchors.json' with { type: 'json' };
 import type { Locale } from './i18n';
 import { getPublicAllObservances } from './public-observances';
 
@@ -68,6 +69,9 @@ export function getExistingProfileId(
   const curated = getPublicAllObservances(year, locale);
   const direct = curated.find((candidate) => candidate.id === item.id);
   if (direct) return direct.id;
+
+  const canonicalPerson = canonicalPeople.people.find((person) => person.primaryObservanceId === item.id);
+  if (canonicalPerson) return canonicalPerson.id;
 
   const incomingNames = names(item, locale);
   const matches = curated.filter((candidate) => {

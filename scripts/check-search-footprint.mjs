@@ -8,6 +8,11 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 
 const nextConfig = text('next.config.ts');
 const sitemap = text('app/sitemap.ts');
+const searchRoute = text('app/api/v1/search/route.ts');
+const profileProjection = text('data/canonical-person-profiles.ts');
+const people = JSON.parse(text('data/canonical-person-anchors.json')).people;
+const observances = JSON.parse(text('data/canonical-observance-anchors.json')).observances;
+const sanctoraleRules = JSON.parse(text('data/canonical-roman-sanctorale-rule-anchors.json')).rules;
 
 const excludedProductRoutes = [
   '/explore',
@@ -48,7 +53,17 @@ expect(!sitemap.includes('DISCOVERY_TOPICS.map'), 'Discovery topics must stay ou
 expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'), 'Substantive saint profiles must remain editorially gated in the sitemap');
 expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'), 'Annual date pages must remain editorially gated in the sitemap');
 expect(sitemap.includes('EDITORIAL_GUIDES.map'), 'Reviewed editorial guides must remain represented in the sitemap');
-expect(sitemap.includes('path: "/about"') && sitemap.includes('path: "/sources"') && sitemap.includes('path: "/corrections"'), 'Transparency and provenance pages must remain discoverable');
+expect(sitemap.includes('path: "/about"') && sitemap.includes('path: "/copyright"') && sitemap.includes('path: "/corrections"'), 'Transparency and canonical provenance pages must remain discoverable');
+expect(!sitemap.includes('path: "/sources"') && !sitemap.includes('path: "/developers"'), 'Redirect aliases must not consume sitemap entries');
+expect(searchRoute.includes('SAINT_BIOGRAPHIES') && searchRoute.includes('getCanonicalPersonProfileObservance'), 'Search must include the reviewed editorial profile corpus, not only calendar rows');
+expect(profileProjection.includes("rule.dateRule.type === 'fixed'"), 'Canonical profile fallback must stay limited to reviewed fixed Sanctorale rules');
+
+for (const id of ['matthew-apostle', 'thomas-aquinas', 'catherine-siena', 'elizabeth-portugal', 'gregory-great']) {
+  const person = people.find(item => item.id === id);
+  const observance = observances.find(item => item.churchId === 'church:roman-catholic' && item.subjects?.some(subject => subject.kind === 'person' && subject.personId === id));
+  const rule = sanctoraleRules.find(item => item.observanceId === observance?.id && item.dateRule?.type === 'fixed' && item.evidence?.length);
+  expect(Boolean(person && observance && rule), `Indexed editorial profile ${id} lacks a reviewed canonical fixed-date chain`);
+}
 
 if (failures.length) {
   console.error(`Search footprint audit failed with ${failures.length} issue(s):`);

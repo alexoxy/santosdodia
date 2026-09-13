@@ -22,6 +22,7 @@ function occurrenceCount(text, pattern) {
 const [
   observancesRoute,
   todayRoute,
+  todayModel,
   searchRoute,
   icalRoute,
   todayPanel,
@@ -32,6 +33,7 @@ const [
 ] = await Promise.all([
   source('app/api/v1/observances/route.ts'),
   source('app/api/v1/today/route.ts'),
+  source('lib/public-today.ts'),
   source('app/api/v1/search/route.ts'),
   source('app/api/ical/[feed]/route.ts'),
   source('app/components/TodayPanel.tsx'),
@@ -48,7 +50,8 @@ requirePattern(observancesRoute, /countryCode:\s*filters\.country/, 'Observances
 requirePattern(observancesRoute, /mode:\s*"public"/, 'Observances API publication mode');
 
 requirePattern(todayRoute, /country:\s*params\.get\("country"\)\s*\?\?\s*undefined/, 'Today API');
-requirePattern(todayRoute, /mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate:\s*date,[\s\S]*?toDate:\s*date,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today API canonical runtime');
+requirePattern(todayRoute, /buildPublicToday\(\{[\s\S]*?date,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today API shared public projection');
+requirePattern(todayModel, /mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate:\s*options\.date,[\s\S]*?toDate:\s*options\.date,[\s\S]*?locale:\s*options\.locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today canonical runtime');
 
 requirePattern(searchRoute, /country:p\.get\("country"\)\?\?undefined/, 'Search API');
 requirePattern(searchRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{year\}-01-01`,toDate:`\$\{year\}-12-31`,locale,filters\}\)/, 'Search API canonical runtime');
@@ -76,7 +79,7 @@ assert(
 // canonical publication runtime/read model. This prevents a future feature from
 // quietly reintroducing a separate Portugal dataset for one surface.
 assert(
-  [todayRoute, searchRoute, icalRoute].every(text => text.includes('mergePublishedCalendarRange')),
+  [todayModel, searchRoute, icalRoute].every(text => text.includes('mergePublishedCalendarRange')),
   'A calendar machine surface has diverged from the canonical runtime.',
 );
 assert(

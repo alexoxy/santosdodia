@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
+import { getCanonicalPersonProfileObservance } from "../../../../data/canonical-person-profiles";
 import { parseCategory, parseTradition, traditionLabel } from "../../../../data/observances";
+import { getSaintBiography, SAINT_BIOGRAPHIES } from "../../../../data/saint-biography-registry";
 import { localizedSummary } from "../../../../lib/content-locale";
+import { isSaintBiographyReadyForLaunchedLocales } from "../../../../lib/editorial-profile-quality";
 import { normalizeLocale, ui } from "../../../../lib/i18n";
 import { displayObservanceName, displayPatronages } from "../../../../lib/locale-display";
 import { getPublicAllObservances } from "../../../../lib/public-observances";
@@ -22,10 +25,43 @@ export async function GET(request: NextRequest) {
     summary:localizedSummary(item,locale)?.text,
     patronages:displayPatronages(item.patronages,locale),
   })).filter(item=>Boolean(item.name));
+  const biographyProfiles=SAINT_BIOGRAPHIES
+    .filter(isSaintBiographyReadyForLaunchedLocales)
+    .map(record=>{
+      const item=getCanonicalPersonProfileObservance(record.id,year,locale);
+      const biography=getSaintBiography(record.id,locale);
+      if(!item||!biography)return null;
+      if(filters.tradition&&!item.traditions.includes(filters.tradition))return null;
+      if(filters.category&&item.category!==filters.category)return null;
+      if(filters.country&&item.countries?.length&&!item.countries.includes(filters.country.toUpperCase()))return null;
+      if(filters.patronage&&!item.patronages?.some(value=>value.toLocaleLowerCase(locale).includes(filters.patronage!.toLocaleLowerCase(locale))))return null;
+      return{
+        ...item,
+        originalName:item.name,
+        name:displayObservanceName(item.names,locale,item.name),
+        summary:biography.summary,
+        patronages:displayPatronages(item.patronages,locale),
+        profileId:record.id,
+        editorialSearchText:[
+          biography.title,
+          biography.summary,
+          ...biography.paragraphs,
+          ...biography.facts.flatMap(fact=>[fact.label,fact.value]),
+        ].join(" "),
+      };
+    })
+    .filter((item):item is NonNullable<typeof item>=>Boolean(item));
+  const publicItems=[...new Map(
+    [...localized,...biographyProfiles].map(item=>[
+      `${item.dateISO}|${item.traditions.join(",")}|${"profileId" in item?item.profileId:item.id}`,
+      item,
+    ]),
+  ).values()];
   const needle=q.trim().toLocaleLowerCase(locale);
-  const data=localized.filter(item=>!needle||[
+  const data=publicItems.filter(item=>!needle||[
     item.name,item.originalName,...Object.values(item.names),item.summary??"",...(item.patronages??[]),...(item.countries??[]),
-    ...item.traditions.map(value=>traditionLabel(ui[locale],value)),ui[locale][item.category]
+    ...item.traditions.map(value=>traditionLabel(ui[locale],value)),ui[locale][item.category],
+    "editorialSearchText" in item?item.editorialSearchText:"",
   ].join(" ").toLocaleLowerCase(locale).includes(needle)).slice(0,300);
   return Response.json({data,meta:{query:q,locale,year,count:data.length,withheldForTranslation:runtime.items.length-localized.length,filters,live:false,requestedLive:p.has("live"),sourceMode:runtime.meta.sourceMode,d1:runtime.meta.d1}},
     {headers:{"Cache-Control":"public, s-maxage=600, stale-while-revalidate=3600","Access-Control-Allow-Origin":"*"}});
