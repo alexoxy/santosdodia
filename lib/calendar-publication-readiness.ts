@@ -19,6 +19,10 @@ export const PLANNED_CALENDAR_TRADITIONS = [
   'syriac-orthodox',
 ] as const satisfies readonly Tradition[];
 
+// Increment when the public calendar projection changes. Client requests include
+// this value so a deployment cannot remain pinned to an older edge-cached payload.
+export const PUBLIC_CALENDAR_RUNTIME_VERSION = 'roman-portugal-v1';
+
 export function isPublicCalendarSubscriptionReady(tradition: string, country: string): boolean {
   return PUBLIC_CALENDAR_CONTEXTS.some(
     (context) => context.tradition === tradition && context.country === country.toUpperCase(),
@@ -28,5 +32,7 @@ export function isPublicCalendarSubscriptionReady(tradition: string, country: st
 export function defaultReadyCalendarCountry(
   tradition: Tradition | 'all' | undefined
 ): string | undefined {
-  return tradition === 'roman-catholic' ? 'PT' : undefined;
+  return !tradition || tradition === 'all' || tradition === 'roman-catholic'
+    ? 'PT'
+    : undefined;
 }
