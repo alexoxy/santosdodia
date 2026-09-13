@@ -112,6 +112,33 @@
       "sourceRecordHash": "ba9753198b5e351d34681191c4d6646c733fb45ca0a3ab3fba93103ce15d4cb9",
       "expectedDateISO": "2026-12-23",
       "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-5:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-29:christmas-octave-day-5:roman-catholic:pt",
+      "legacyObservanceId": "rc:ChristmasWeekdayDec29",
+      "sourceOccurrenceId": "snl-pt-2026-12-29-d08216b8411703ef050f6d66",
+      "sourceRecordHash": "650c87bf4cff7990d6b2961e3cdd313d8e802a91106de1909f8fcd9ef9b0f093",
+      "expectedDateISO": "2026-12-29",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-6:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-30:christmas-octave-day-6:roman-catholic:pt",
+      "legacyObservanceId": "rc:ChristmasWeekdayDec30",
+      "sourceOccurrenceId": "snl-pt-2026-12-30-a8b266eedadf42cb7731e0c6",
+      "sourceRecordHash": "8b78c527e0da989555ee942dd2d61458f6561681d8cfc9fc099fd5fa36e56656",
+      "expectedDateISO": "2026-12-30",
+      "legacyRank": "weekday"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-7:roman-catholic",
+      "occurrenceId": "occurrence:2026-12-31:christmas-octave-day-7:roman-catholic:pt",
+      "legacyObservanceId": "rc:ChristmasWeekdayDec31",
+      "sourceOccurrenceId": "snl-pt-2026-12-31-76c38e6dac723f95eb81e3c7",
+      "sourceRecordHash": "ce28e08204892f332bd85ee40f208241f3fdc4e402a8f65ae14fadcedf9a652a",
+      "expectedDateISO": "2026-12-31",
+      "legacyRank": "weekday"
     }
   ],
   "mutationAllowed": false,

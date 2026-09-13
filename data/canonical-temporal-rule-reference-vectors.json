@@ -169,6 +169,27 @@
       "expectedDateISO": "2026-12-24",
       "sourceUrl": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
       "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-5:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-29",
+      "sourceUrl": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-6:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-30",
+      "sourceUrl": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+      "sourcePublisher": "Holy See"
+    },
+    {
+      "temporalRuleId": "temporal-rule:christmas-octave-day-7:roman-catholic",
+      "year": 2026,
+      "expectedDateISO": "2026-12-31",
+      "sourceUrl": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+      "sourcePublisher": "Holy See"
     }
   ]
 }

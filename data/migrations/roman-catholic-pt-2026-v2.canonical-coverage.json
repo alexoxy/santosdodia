@@ -27,11 +27,11 @@
   },
   "coverage": {
     "explicitOccurrenceAnchors": 80,
-    "temporalRuleShadowOccurrences": 11,
+    "temporalRuleShadowOccurrences": 14,
     "temporalRuleFamilyShadowOccurrences": 100,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 202,
-    "remainingLegacyOccurrences": 187,
+    "mappedOccurrenceAnchors": 205,
+    "remainingLegacyOccurrences": 184,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },

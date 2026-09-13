@@ -51,7 +51,7 @@ try {
   assert(JSON.stringify(first.manifest) === JSON.stringify(second.manifest), 'TemporalRule manifest must be deterministic.');
   assert(first.buildReceipt.sourceCommit !== second.buildReceipt.sourceCommit, 'Run metadata belongs in build receipt.');
   assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourceDatasetSha256, 'Source-byte provenance must detect formatting changes.');
-  assert(first.manifest.temporalRuleCount === 24, 'Reviewed TemporalRule bootstrap count changed.');
+  assert(first.manifest.temporalRuleCount === 27, 'Reviewed TemporalRule bootstrap count changed.');
   assert(first.manifest.runtimePublicationAllowed === false && first.manifest.productionMutationAllowed === false, 'TemporalRule bootstrap must remain shadow-only.');
   assert(first.manifest.semantics.temporalRuleSeparateFromObservance === true, 'TemporalRule must remain separate from Observance.');
   assert(first.manifest.semantics.temporalRuleSeparateFromOccurrence === true, 'TemporalRule must remain separate from Occurrence.');
@@ -60,7 +60,7 @@ try {
 
   const byId = new Map(first.rules.map((item) => [item.temporalRuleId, item]));
   assert(vectors?.schemaVersion === 1 && vectors?.status === 'official-temporal-reference-vectors' && Array.isArray(vectors?.vectors), 'Official temporal reference vectors are invalid.');
-  assert(vectors.vectors.length === 24, 'Expected twenty-four official temporal reference vectors.');
+  assert(vectors.vectors.length === 27, 'Expected twenty-seven official temporal reference vectors.');
   for (const vector of vectors.vectors) {
     const rule = byId.get(vector.temporalRuleId);
     assert(rule, `Reference vector points to unknown TemporalRule ${vector.temporalRuleId}.`);
@@ -81,6 +81,8 @@ try {
   assert(calendar.resolveDateRule(byId.get('temporal-rule:christ-the-king:roman-catholic').dateRule, 2026).dateISO === '2026-11-22', 'Christ the King 2026 reference failed.');
   assert(calendar.resolveDateRule(byId.get('temporal-rule:advent-weekday-december-17:roman-catholic').dateRule, 2026).dateISO === '2026-12-17', 'Late Advent December 17 fixed rule failed.');
   assert(calendar.resolveDateRule(byId.get('temporal-rule:advent-weekday-december-24:roman-catholic').dateRule, 2026).dateISO === '2026-12-24', 'Late Advent December 24 fixed rule failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:christmas-octave-day-5:roman-catholic').dateRule, 2026).dateISO === '2026-12-29', 'Christmas Octave fifth-day fixed rule failed.');
+  assert(calendar.resolveDateRule(byId.get('temporal-rule:christmas-octave-day-7:roman-catholic').dateRule, 2026).dateISO === '2026-12-31', 'Christmas Octave seventh-day fixed rule failed.');
 
   for (const rule of first.rules) {
     for (const forbidden of ['year', 'date', 'dateISO', 'rank', 'grade', 'jurisdictionId', 'precedence', 'observedDesignation']) {

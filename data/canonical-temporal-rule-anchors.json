@@ -218,6 +218,33 @@
       "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":24},
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
       "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:christmas-octave-day-5:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:christmas-octave-day-5:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":29},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:christmas-octave-day-6:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:christmas-octave-day-6:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":30},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
+    },
+    {
+      "id": "temporal-rule:christmas-octave-day-7:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceId": "observance:christmas-octave-day-7:roman-catholic",
+      "calendarSystem": "gregorian",
+      "dateRule": {"type":"fixed","calendar":"gregorian","month":12,"day":31},
+      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html","claimTypes":["temporal-cycle-authority"]}],
+      "verifiedAt": "2026-09-13"
     }
   ]
 }
