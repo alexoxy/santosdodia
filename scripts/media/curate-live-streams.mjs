@@ -4,9 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
   buildSupplementalSeeds,
-  candidateScore,
   chooseCandidate,
-  classifyMediaUrl,
   extractMediaCandidates,
   isHardFailure,
   isReachableProbe,

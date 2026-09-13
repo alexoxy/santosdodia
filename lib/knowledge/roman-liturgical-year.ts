@@ -158,7 +158,7 @@ function transferredEpiphany(year: number): CivilDate {
   throw new Error(`Could not resolve transferred Epiphany for ${year}.`);
 }
 
-function baptismOfTheLord(year: number, epiphany: CivilDate, policy: RomanJurisdictionPolicy): CivilDate {
+function baptismOfTheLord(epiphany: CivilDate, policy: RomanJurisdictionPolicy): CivilDate {
   if (policy.epiphany === 'sunday-january-2-to-8') {
     if (epiphany.day === 7 || epiphany.day === 8) return addDays(epiphany, 1);
     return addDays(epiphany, 7);
@@ -180,7 +180,7 @@ export function calculateRomanLiturgicalYear(
   const epiphany = policy.epiphany === 'january-6'
     ? { year: liturgicalYear, month: 1, day: 6 }
     : transferredEpiphany(liturgicalYear);
-  const baptism = baptismOfTheLord(liturgicalYear, epiphany, policy);
+  const baptism = baptismOfTheLord(epiphany, policy);
   const easter = gregorianEaster(liturgicalYear);
   const ascension = addDays(easter, policy.ascension === 'easter-plus-42-sunday' ? 42 : 39);
   const corpusChristi = addDays(easter, policy.corpusChristi === 'easter-plus-63-sunday' ? 63 : 60);

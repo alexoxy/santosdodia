@@ -1,6 +1,13 @@
 import enginePolicyJson from '../data/calendar-engine-policy.json';
 import { localize,type Locale,type LocalizedText } from './i18n';
 import type { Tradition } from '../data/observances';
+import {
+ addDays,
+ gregorianEaster,
+ orthodoxEaster,
+ toISODate,
+ type CivilDate,
+} from './knowledge/calendar-engine';
 
 export type HolidayKind='fixed'|'movable';
 export type ReligiousHoliday={id:string;date:string;name:string;kind:HolidayKind;publicHoliday:boolean;tradition?:Tradition;localName?:string;source:string};
@@ -37,13 +44,9 @@ const LABELS:Record<string,LocalizedText>={
  reformation:{en:'Reformation Day',pt:'Dia da Reforma',es:'Día de la Reforma',fr:'Fête de la Réformation',de:'Reformationstag',it:'Festa della Riforma',pl:'Święto Reformacji',ru:'День Реформации',fil:'Araw ng Repormasyon',sw:'Siku ya Matengenezo'}
 };
 
-function addDays(date:Date,days:number){const next=new Date(date);next.setUTCDate(next.getUTCDate()+days);return next}
-function iso(date:Date){return date.toISOString().slice(0,10)}
-export function gregorianEaster(year:number){const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m+114)/31),day=(h+l-7*m+114)%31+1;return new Date(Date.UTC(year,month-1,day))}
-export function orthodoxEaster(year:number){const a=year%4,b=year%7,c=year%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7,month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1,julian=new Date(Date.UTC(year,month-1,day)),shift=Math.floor(year/100)-Math.floor(year/400)-2;return addDays(julian,shift)}
-function fixed(year:number,month:number,day:number){return new Date(Date.UTC(year,month-1,day))}
+function fixed(year:number,month:number,day:number):CivilDate{return{year,month,day}}
 function label(key:string,locale:Locale){return localize(LABELS[key]??{en:key},locale)}
-function entry(key:string,date:Date,locale:Locale,kind:HolidayKind,tradition:Tradition,source='calculated-liturgical-calendar'):ReligiousHoliday{return{id:`${tradition}-${key}-${iso(date)}`,date:iso(date),name:label(key,locale),kind,publicHoliday:false,tradition,source}}
+function entry(key:string,date:CivilDate,locale:Locale,kind:HolidayKind,tradition:Tradition,source='calculated-liturgical-calendar'):ReligiousHoliday{const dateISO=toISODate(date);return{id:`${tradition}-${key}-${dateISO}`,date:dateISO,name:label(key,locale),kind,publicHoliday:false,tradition,source}}
 
 function westernDates(year:number,locale:Locale,tradition:Tradition){const easter=gregorianEaster(year);return[
  entry('epiphany',fixed(year,1,6),locale,'fixed',tradition),entry('joseph',fixed(year,3,19),locale,'fixed',tradition),entry('annunciation',fixed(year,3,25),locale,'fixed',tradition),entry('ashWednesday',addDays(easter,-46),locale,'movable',tradition),entry('palmSunday',addDays(easter,-7),locale,'movable',tradition),entry('maundyThursday',addDays(easter,-3),locale,'movable',tradition),entry('goodFriday',addDays(easter,-2),locale,'movable',tradition),entry('holySaturday',addDays(easter,-1),locale,'movable',tradition),entry('easter',easter,locale,'movable',tradition),entry('easterMonday',addDays(easter,1),locale,'movable',tradition),entry('ascension',addDays(easter,39),locale,'movable',tradition),entry('pentecost',addDays(easter,49),locale,'movable',tradition),entry('corpusChristi',addDays(easter,60),locale,'movable',tradition),entry('peterPaul',fixed(year,6,29),locale,'fixed',tradition),entry('assumption',fixed(year,8,15),locale,'fixed',tradition),entry('cross',fixed(year,9,14),locale,'fixed',tradition),entry('allSaints',fixed(year,11,1),locale,'fixed',tradition),entry('allSouls',fixed(year,11,2),locale,'fixed',tradition),entry('immaculate',fixed(year,12,8),locale,'fixed',tradition),entry('christmas',fixed(year,12,25),locale,'fixed',tradition)
