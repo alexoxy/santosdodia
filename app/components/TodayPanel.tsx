@@ -5,7 +5,10 @@ import {
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
-import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
+import {
+  defaultReadyCalendarCountry,
+  PUBLIC_CALENDAR_RUNTIME_VERSION,
+} from "../../lib/calendar-publication-readiness";
 import type { Locale } from "../../lib/i18n";
 import {
   formatMonthYear,
@@ -95,7 +98,12 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
   useEffect(() => {
     if (!contextReady) return;
     const controller = new AbortController(),
-      params = new URLSearchParams({ date: dateISO, locale, timezone: timeZone });
+      params = new URLSearchParams({
+        date: dateISO,
+        locale,
+        timezone: timeZone,
+        calendarVersion: PUBLIC_CALENDAR_RUNTIME_VERSION,
+      });
     if (church !== "all") params.set("tradition", church);
     if (calendarCountry) params.set("country", calendarCountry);
     const requestContextKey = `${dateISO}|${locale}|${timeZone}|${church}|${calendarCountry ?? ""}`;
