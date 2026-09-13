@@ -17,7 +17,9 @@ const required = [
   'app/components/AdvertisingPrivacyNotice.tsx',
   'app/components/PrivacyChoicesLink.tsx',
   'app/components/TodayPanel.tsx',
+  'app/components/HomeExperience.tsx',
   'app/api/v1/today/route.ts',
+  'lib/public-today.ts',
   'app/ads.txt/route.ts',
   'app/about/page.tsx',
   'app/advertising/page.tsx',
@@ -169,25 +171,29 @@ if(!failures.length){
 
   const today=text('app/components/TodayPanel.tsx');
   const todayRoute=text('app/api/v1/today/route.ts');
+  const todayModel=text('lib/public-today.ts');
   expect(today.includes('fetch(`/api/v1/today?${params}`'),'Today must use the dedicated context-aware Today read model');
   expect(!today.includes('saint-biography-registry'),'Today client code must not ship the full biography registry');
   expect(!today.includes('getAnnualDateEditorial'),'Today client code must not ship the annual editorial corpus merely to select one block');
   expect(today.includes('editorial?.kind === "date"') && today.includes('editorial?.kind === "profile"'),'Today must render date context, fall back to reviewed profile context, and otherwise render no fabricated filler');
-  expect(todayRoute.includes('getAnnualDateEditorial'),'Today server route must reuse reviewed annual-date editorial instead of generating date filler');
-  expect(todayRoute.includes('getSaintBiographyRecord') && todayRoute.includes('getSaintBiography'),'Today server route must reuse reviewed first-party saint profiles for contextual depth');
-  expect(todayRoute.includes('annual.observanceIds.some'),'Annual-date editorial must be relevant to an observance visible in the active user context');
-  expect(todayRoute.includes('record?.summary[locale]') && todayRoute.includes('record.paragraphs[locale]'),'Today profile context must require direct reviewed copy in the active locale rather than silently injecting another language');
-  expect(todayRoute.includes('kind: "date"') && todayRoute.includes('kind: "profile"'),'Today server route must preserve the date-first, profile-second editorial cascade');
-  expect(todayRoute.includes('href: `/date/${date.slice(5)}`'),'Today must link reviewed annual context to its stable evergreen date page');
+  expect(todayRoute.includes('buildPublicToday'),'Today API must use the shared public truth projection');
+  expect(todayModel.includes('getAnnualDateEditorial'),'Today server model must reuse reviewed annual-date editorial instead of generating date filler');
+  expect(todayModel.includes('getSaintBiographyRecord') && todayModel.includes('getSaintBiography'),'Today server model must reuse reviewed first-party saint profiles for contextual depth');
+  expect(todayModel.includes('annual.observanceIds.some'),'Annual-date editorial must be relevant to an observance visible in the active user context');
+  expect(todayModel.includes('record?.summary[options.locale]') && todayModel.includes('record.paragraphs[options.locale]'),'Today profile context must require direct reviewed copy in the active locale rather than silently injecting another language');
+  expect(todayModel.includes("kind: 'date'") && todayModel.includes("kind: 'profile'"),'Today server model must preserve the date-first, profile-second editorial cascade');
+  expect(todayModel.includes('href: `/date/${options.date.slice(5)}`'),'Today must link reviewed annual context to its stable evergreen date page');
 
   const home=text('app/page.tsx');
-  expect(home.indexOf('<TodayPanel />') < home.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
-  expect(home.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
-  expect(home.includes('has-ad-rail'),'Homepage must collapse the rail when advertising is inactive');
-  expect(home.includes('featuredProfiles'),'Homepage must retain curated internal links to substantive editorial profiles');
-  expect(home.includes('href={`/saint/${encodeURIComponent(id)}`}'),'Homepage editorial navigation must point to saint profile routes');
-  expect(!home.includes('SAINT_BIOGRAPHIES'),'Homepage client code must not ship the full biography corpus merely to render four links');
-  expect(!home.includes('../data/saint-biography-registry'),'Homepage client code must keep full biography data server/page scoped');
+  const homeExperience=text('app/components/HomeExperience.tsx');
+  expect(home.includes('buildPublicToday') && home.includes('<HomeExperience initialToday={initialToday} />'),'Homepage must server-render the shared Today projection before hydration');
+  expect(homeExperience.indexOf('<TodayPanel initialToday={initialToday} />') < homeExperience.indexOf('ADSENSE_TOP_SLOT} placement="top"'),'Homepage banner must follow the core Today experience');
+  expect(homeExperience.includes('home-monetized-layout'),'Homepage must reserve a separate content/ad rail layout');
+  expect(homeExperience.includes('has-ad-rail'),'Homepage must collapse the rail when advertising is inactive');
+  expect(homeExperience.includes('featuredProfiles'),'Homepage must retain curated internal links to substantive editorial profiles');
+  expect(homeExperience.includes('href={`/saint/${encodeURIComponent(id)}`}'),'Homepage editorial navigation must point to saint profile routes');
+  expect(!homeExperience.includes('SAINT_BIOGRAPHIES'),'Homepage client code must not ship the full biography corpus merely to render four links');
+  expect(!homeExperience.includes('../../data/saint-biography-registry'),'Homepage client code must keep full biography data server/page scoped');
 
   const calendarReadiness=text('lib/calendar-publication-readiness.ts');
   const calendarSync=text('app/components/CalendarSyncCenter.tsx');

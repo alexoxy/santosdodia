@@ -13,30 +13,13 @@ import {
 import { displayObservanceName } from "../../lib/locale-display";
 import { displayObservanceScope } from "../../lib/observance-scope";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
+import type { PublicTodayPayload, TodayEditorial } from "../../lib/public-today";
 import {
   getExistingProfileId,
   isRuntimePersonProfileEligible,
 } from "../../lib/runtime-profile-link";
 import TraditionTag from "./TraditionTag";
 import { useLanguage } from "./LanguageProvider";
-
-type TodayEditorial =
-  | {
-      kind: "date";
-      eyebrow: string;
-      title: string;
-      lead: string;
-      context: string;
-      href: string;
-    }
-  | {
-      kind: "profile";
-      id: string;
-      title: string;
-      summary: string;
-      paragraph?: string;
-      href: string;
-    };
 
 const editorialUi: Partial<
   Record<
@@ -70,7 +53,7 @@ const editorialUi: Partial<
   },
 };
 
-export default function TodayPanel() {
+export default function TodayPanel({ initialToday }: { initialToday: PublicTodayPayload }) {
   const { locale, copy, country, countryName, timeZone, contextReady, church } =
       useLanguage(),
     dateISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
@@ -82,16 +65,12 @@ export default function TodayPanel() {
       }),
     [dateISO, locale, church, country],
   );
-  const [items, setItems] = useState<Observance[]>([]);
-  const [editorial, setEditorial] = useState<TodayEditorial | null>(null);
+  const [items, setItems] = useState<Observance[]>(initialToday.data);
+  const [editorial, setEditorial] = useState<TodayEditorial | null>(initialToday.editorial);
+  const [activeContextKey, setActiveContextKey] = useState(
+    `${initialToday.meta.date}|${initialToday.meta.locale}|${initialToday.meta.timeZone}|${initialToday.meta.filters.tradition ?? "all"}|${initialToday.meta.filters.country ?? ""}`,
+  );
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (contextReady) {
-      setItems(fallback);
-      setEditorial(null);
-    }
-  }, [fallback, contextReady]);
 
   useEffect(() => {
     if (!contextReady) return;
@@ -99,6 +78,12 @@ export default function TodayPanel() {
       params = new URLSearchParams({ date: dateISO, locale, timezone: timeZone });
     if (church !== "all") params.set("tradition", church);
     if (country) params.set("country", country);
+    const requestContextKey = `${dateISO}|${locale}|${timeZone}|${church}|${country ?? ""}`;
+    if (requestContextKey !== activeContextKey) {
+      setItems(fallback);
+      setEditorial(null);
+      setActiveContextKey(requestContextKey);
+    }
     setLoading(true);
     fetch(`/api/v1/today?${params}`, { signal: controller.signal })
       .then((response) =>
@@ -125,7 +110,7 @@ export default function TodayPanel() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [dateISO, locale, timeZone, church, country, fallback, contextReady]);
+  }, [dateISO, locale, timeZone, church, country, fallback, contextReady, activeContextKey]);
 
   const weekday = useMemo(
     () => formatWeekday(dateISO, locale, "standalone"),

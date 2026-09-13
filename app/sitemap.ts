@@ -20,14 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/guides", changeFrequency: "weekly", priority: 0.88 },
     { path: "/tools/liturgical-calendar", changeFrequency: "monthly", priority: 0.86 },
     { path: "/about", changeFrequency: "monthly", priority: 0.75 },
-    { path: "/sources", changeFrequency: "monthly", priority: 0.7 },
     { path: "/copyright", changeFrequency: "monthly", priority: 0.6 },
     { path: "/privacy", changeFrequency: "monthly", priority: 0.6 },
     { path: "/advertising", changeFrequency: "monthly", priority: 0.6 },
     { path: "/terms", changeFrequency: "yearly", priority: 0.55 },
     { path: "/faq", changeFrequency: "monthly", priority: 0.65 },
     { path: "/corrections", changeFrequency: "monthly", priority: 0.6 },
-    { path: "/developers", changeFrequency: "monthly", priority: 0.6 },
   ] as const;
 
   const staticRoutes: MetadataRoute.Sitemap = staticRouteDefinitions.map(route => ({ ...route, url: `${SITE_ORIGIN}${route.path}` }));

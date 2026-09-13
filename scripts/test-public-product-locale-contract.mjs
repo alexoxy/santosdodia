@@ -56,7 +56,7 @@ const publicObservances=source('lib/public-observances.ts');
 assert.match(publicObservances,/getPriorityObservancesForDate/,'Today fallback must include priority verified observances.');
 assert.match(publicObservances,/getPriorityObservances\(year, locale, filters\)/,'Calendar/search fallback must include priority verified observances.');
 
-for(const route of ['app/api/v1/observances/route.ts','app/api/v1/search/route.ts','app/api/v1/today/route.ts','app/api/ical/[feed]/route.ts']){
+for(const route of ['app/api/v1/observances/route.ts','app/api/v1/search/route.ts','lib/public-today.ts','app/api/ical/[feed]/route.ts']){
  const text=source(route);assert.match(text,/localizedSummary/ ,`${route} must use the locale-safe summary contract.`);
  assert.doesNotMatch(text,/summaries\?\.\[locale\]\s*\?\?\s*item\.summary/,`${route} reintroduced English summary fallback.`);
 }
@@ -66,7 +66,7 @@ assert.match(runtime,/readCalendarOccurrences/,'Canonical public runtime must re
 assert.match(runtime,/mergePublicCalendarObservances/,'Canonical public runtime must preserve the approved repository fallback.');
 assert.match(runtime,/mode:\s*'public'/,'Canonical public runtime must never read withheld or publishable rows.');
 
-for(const route of ['app/api/v1/search/route.ts','app/api/v1/today/route.ts','app/api/ical/[feed]/route.ts']){
+for(const route of ['app/api/v1/search/route.ts','lib/public-today.ts','app/api/ical/[feed]/route.ts']){
  const text=source(route);
  assert.match(text,/mergePublishedCalendarRange/,`${route} must read the same published canonical calendar as Calendar/Today UI.`);
  assert.doesNotMatch(text,/sourceMode:\s*["']approved-repository["']/,`${route} must not claim repository-only data after D1 publication.`);
@@ -79,7 +79,8 @@ assert.match(calendarExplorer,/fetch\(`\/api\/v1\/observances\?\$\{params\}`/,'V
 assert.match(searchExplorer,/dateIntent \? "\/api\/v1\/observances" : "\/api\/v1\/search"/,'Date searches must use the canonical calendar API rather than the repository fallback alone.');
 
 const d1Adapter=source('lib/calendar-public-adapter.ts');
-assert.match(d1Adapter,/if \(!preferred \|\| !names\.en\) return null/,'Published D1 rows must fail closed when the requested locale is absent.');
+assert.match(d1Adapter,/hasKnownLabelIdentityConflict\(record, requestedLocale, preferred\)/,'Published D1 rows must fail closed when a known label conflicts with canonical identity.');
+assert.match(d1Adapter,/isRubricalPublicLabel\(preferred, requestedLocale\)/,'Published D1 rows must fail closed when a title is a rubrical instruction.');
 assert.doesNotMatch(d1Adapter,/names\[requestedLocale\]\s*\?\?\s*names\.en/,'D1 adapter must never silently fall back to English.');
 
 const chrome=source('app/components/SiteChrome.tsx');

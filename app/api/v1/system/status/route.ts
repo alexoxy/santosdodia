@@ -7,10 +7,12 @@ import { jurisdictionHierarchyHealthy } from '../../../../../lib/knowledge/juris
 export const dynamic = 'force-dynamic';
 
 const RUNTIME_CAPABILITIES = {
-  statusContractVersion: 2,
+  statusContractVersion: 3,
   productCalendar: 'published-d1-v1',
   catholicPt2026Baseline: '365-day-v1',
-  todayNavigation: 'detail-links-v1'
+  publicProjection: 'identity-deduplicated-locale-guarded-v1',
+  todayNavigation: 'server-rendered-detail-links-v2',
+  editorialSearch: 'calendar-and-profile-corpus-v1'
 } as const;
 
 export async function GET() {
