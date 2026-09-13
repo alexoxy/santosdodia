@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const policy = JSON.parse(fs.readFileSync(path.join(root, 'data/calendar-engine-policy.json'), 'utf8'));
+const publicHolidayRuntime = fs.readFileSync(path.join(root, 'lib', 'religious-holidays.ts'), 'utf8');
 const expected = {
   'roman-catholic': {
     engine: 'western-gregorian',
@@ -63,6 +64,15 @@ for (const tradition of oriental) {
   const engine = policy[tradition]?.engine ?? '';
   if (/byzantine-paschalion|western-gregorian/.test(engine)) {
     errors.push(`${tradition} must not inherit a generic Byzantine or Western engine`);
+  }
+}
+
+if (!/from '\.\/knowledge\/calendar-engine';/u.test(publicHolidayRuntime)) {
+  errors.push('Public religious-holiday calculation must use the canonical calendar engine.');
+}
+for (const duplicate of ['gregorianEaster', 'orthodoxEaster']) {
+  if (new RegExp(`(?:function|const)\\s+${duplicate}\\b`, 'u').test(publicHolidayRuntime)) {
+    errors.push(`Public religious-holiday runtime duplicates canonical ${duplicate}.`);
   }
 }
 
