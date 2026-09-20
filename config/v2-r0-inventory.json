@@ -162,9 +162,7 @@
     {
       "group": "live",
       "classification": "KEEP_ELEVATE",
-      "members": [
-        "live-stream-curator"
-      ],
+      "members": ["live-stream-curator"],
       "reason": "Core R3 frequency channel"
     },
     {
@@ -207,67 +205,37 @@
   "semanticAcceptanceVectorsRequiredBeforeDestructiveRefactor": [
     {
       "id": "global-vs-portugal-scope",
-      "surfaces": [
-        "Today",
-        "Calendar",
-        "JSON",
-        "ICS"
-      ],
+      "surfaces": ["Today", "Calendar", "JSON", "ICS"],
       "assertion": "Unscoped public read is General/Global only; explicit country=PT uses approved Portugal jurisdiction layer"
     },
     {
       "id": "portugal-2026-reviewed-dates",
-      "surfaces": [
-        "Today",
-        "Calendar",
-        "JSON",
-        "ICS"
-      ],
+      "surfaces": ["Today", "Calendar", "JSON", "ICS"],
       "assertion": "Preserve reviewed Portugal semantics including Epiphany 4 Jan, Tuesday after Epiphany 6 Jan, Five Wounds 7 Feb, St Matthias 14 May, Ascension 17 May and Immaculate Heart 15 Jun"
     },
     {
       "id": "person-vs-observance-url",
-      "surfaces": [
-        "day-jsonld",
-        "date-jsonld",
-        "saint-profile"
-      ],
+      "surfaces": ["day-jsonld", "date-jsonld", "saint-profile"],
       "assertion": "Only a substantive indexable Person profile receives a /saint URL; feast, collective, Marian-title or thin observance identities remain observance/date entities"
     },
     {
       "id": "pt-pt-date-and-saint-display",
-      "surfaces": [
-        "HTML",
-        "metadata",
-        "JSON",
-        "ICS"
-      ],
+      "surfaces": ["HTML", "metadata", "JSON", "ICS"],
       "assertion": "Running dates use forms such as 22 de agosto de 2026; date particles remain lowercase; S. remains a source-aware compact form and is not mechanically expanded"
     },
     {
       "id": "ics-rolling-vs-snapshot",
-      "surfaces": [
-        "ICS"
-      ],
+      "surfaces": ["ICS"],
       "assertion": "No year parameter is a persistent rolling subscription; explicit year is a fixed annual snapshot; both preserve canonical context and backlinks"
     },
     {
       "id": "locale-no-silent-fallback",
-      "surfaces": [
-        "Today",
-        "Calendar",
-        "profiles",
-        "metadata"
-      ],
+      "surfaces": ["Today", "Calendar", "profiles", "metadata"],
       "assertion": "Launched locales do not silently leak English names, categories, scope labels or summaries"
     },
     {
       "id": "live-authority-and-time",
-      "surfaces": [
-        "Today",
-        "Pray",
-        "Live"
-      ],
+      "surfaces": ["Today", "Pray", "Live"],
       "assertion": "Every promoted live item has verified official source, explicit Church/tradition, timezone-correct start and upcoming/live/ended status"
     }
   ],
