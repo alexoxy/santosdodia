@@ -1,4 +1,4 @@
-# Probe policy revision: 2026-08-24
+# Probe policy revision: 2026-09-20
 name: Production health
 
 on:
@@ -131,6 +131,56 @@ jobs:
           [[ "$ics_source" == published-d1+*approved-repository ]] || { echo "Worker ICS is not using published D1 with the approved repository: $ics_source"; exit 1; }
           grep -q 'END:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not contain END:VCALENDAR.'; exit 1; }
 
+      - name: Verify calendar SSR on deployed Worker
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          calendar_body="$(mktemp)"
+          calendar_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: text/html,application/xhtml+xml' \
+            --header 'Accept-Language: en-US,en;q=0.9' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$calendar_body" --write-out '%{http_code}' \
+            "$APP_ORIGIN/calendar")"
+          [ "$calendar_code" = 200 ] || { echo "Worker calendar SSR returned HTTP $calendar_code"; exit 1; }
+          grep -q 'calendar-mobile-observance' "$calendar_body" || { echo 'Worker calendar SSR contains no observance markup.'; exit 1; }
+          grep -q 'tradition-feeds' "$calendar_body" || { echo 'Worker calendar SSR is missing the readiness-gated subscription surface.'; exit 1; }
+          if grep -q 'subscription-strip' "$calendar_body"; then
+            echo 'Worker calendar SSR still exposes the obsolete raw subscription strip.'
+            exit 1
+          fi
+          if grep -q 'No matching observances' "$calendar_body"; then
+            echo 'Worker calendar SSR still exposes the false-empty month state.'
+            exit 1
+          fi
+
+          canonical_headers="$(mktemp)"; canonical_body="$(mktemp)"
+          canonical_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" \
+            --header 'Accept: text/html,application/xhtml+xml' \
+            --header 'Accept-Language: en-US,en;q=0.9' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --dump-header "$canonical_headers" --output "$canonical_body" --write-out '%{http_code}' \
+            https://www.santosdodia.com/calendar)"
+          if [ "$canonical_code" = 403 ] && grep -qi '^cf-ray:' "$canonical_headers"; then
+            echo '::warning::Canonical calendar SSR probe was blocked by the Cloudflare WAF; Worker-origin SSR verification passed.'
+            exit 0
+          fi
+          [ "$canonical_code" = 200 ] || { echo "Canonical calendar SSR returned HTTP $canonical_code"; exit 1; }
+          grep -q 'calendar-mobile-observance' "$canonical_body" || { echo 'Canonical calendar SSR contains no observance markup.'; exit 1; }
+          grep -q 'tradition-feeds' "$canonical_body" || { echo 'Canonical calendar SSR is missing the readiness-gated subscription surface.'; exit 1; }
+          if grep -q 'subscription-strip' "$canonical_body"; then
+            echo 'Canonical calendar SSR still exposes the obsolete raw subscription strip.'
+            exit 1
+          fi
+          if grep -q 'No matching observances' "$canonical_body"; then
+            echo 'Canonical calendar SSR still exposes the false-empty month state.'
+            exit 1
+          fi
+
       - name: Verify published saint profile and individual ICS
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         shell: bash
@@ -231,6 +281,8 @@ jobs:
             echo '- The deployed Workers.dev origin must return an application-level healthy status.'
             echo '- The Portugal-scoped Today response on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
             echo '- The Portugal-scoped Worker-origin ICS feed must identify the published D1 calendar as its source.'
+            echo '- The raw calendar SSR must contain observance markup, expose only the readiness-gated subscription surface and never regress to the false-empty month state.'
+            echo '- The canonical calendar SSR is checked too when the Cloudflare WAF permits the GitHub runner.'
             echo '- Weekly/manual probes require a published D1 saint profile and its stable individual ICS feed.'
             echo '- D1-heavy verification is weekly to preserve the Cloudflare Free operating boundary.'
           } >> "$GITHUB_STEP_SUMMARY"
