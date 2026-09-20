@@ -326,20 +326,6 @@
       "producerScripts": []
     },
     {
-      "id": "autonomous-importer-saints-wikidata",
-      "title": "Legacy-compatible D1 staging importer retained temporarily for shared budget migration",
-      "owner": "data-operations",
-      "mode": "event-driven",
-      "workflow": ".github/workflows/autonomous-d1-importer.yml",
-      "crons": [],
-      "publicationMode": "staging-only",
-      "archiveStream": "import-receipts/saints/wikidata",
-      "producerScripts": [
-        "scripts/autonomy/build-knowledge-d1-batch.mjs",
-        "scripts/manage-d1-knowledge-staging.mjs"
-      ]
-    },
-    {
       "id": "quality-gate",
       "title": "Repository and Cloudflare quality gate",
       "owner": "platform",
