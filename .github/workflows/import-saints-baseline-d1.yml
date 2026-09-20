@@ -23,7 +23,7 @@ env:
   REVIEWED_STREAM_PREFIX: baseline/saints/v1/reviewed/wikidata/recognition-v1
   IMPORT_PROGRESS_STREAM: baseline-import-progress/saints/v1/wikidata/recognition-v1
   IMPORT_RECEIPT_PREFIX: baseline-import-receipts/saints/v1/wikidata/recognition-v1
-  D1_BUDGET_WORKFLOWS: autonomous-d1-importer.yml,import-saints-baseline-d1.yml
+  D1_BUDGET_WORKFLOWS: import-saints-baseline-d1.yml
 
 concurrency:
   group: saints-baseline-v1-d1-import-recognition-v1
