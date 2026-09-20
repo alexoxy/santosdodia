@@ -9,6 +9,8 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 const nextConfig = text('next.config.ts');
 const sitemap = text('app/sitemap.ts');
 const searchRoute = text('app/api/v1/search/route.ts');
+const sourcesAlias = text('app/sources/page.tsx');
+const developersAlias = text('app/developers/page.tsx');
 const profileProjection = text('data/canonical-person-profiles.ts');
 const people = JSON.parse(text('data/canonical-person-anchors.json')).people;
 const observances = JSON.parse(text('data/canonical-observance-anchors.json')).observances;
@@ -55,6 +57,9 @@ expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "e
 expect(sitemap.includes('EDITORIAL_GUIDES.map'), 'Reviewed editorial guides must remain represented in the sitemap');
 expect(sitemap.includes('path: "/about"') && sitemap.includes('path: "/copyright"') && sitemap.includes('path: "/corrections"'), 'Transparency and canonical provenance pages must remain discoverable');
 expect(!sitemap.includes('path: "/sources"') && !sitemap.includes('path: "/developers"'), 'Redirect aliases must not consume sitemap entries');
+expect(sourcesAlias.includes("permanentRedirect('/copyright')"), 'Legacy /sources alias must permanently consolidate on /copyright');
+expect(developersAlias.includes("permanentRedirect('/copyright')"), 'Legacy /developers alias must permanently consolidate directly on /copyright');
+expect(!sourcesAlias.includes("redirect('/copyright')") && !developersAlias.includes("redirect('/sources')"), 'Legacy provenance aliases must not use temporary or chained redirects');
 expect(searchRoute.includes('SAINT_BIOGRAPHIES') && searchRoute.includes('getCanonicalPersonProfileObservance'), 'Search must include the reviewed editorial profile corpus, not only calendar rows');
 expect(profileProjection.includes("rule.dateRule.type === 'fixed'"), 'Canonical profile fallback must stay limited to reviewed fixed Sanctorale rules');
 
