@@ -64,23 +64,6 @@
       ]
     },
     {
-      "id": "vatican-daily-saints",
-      "title": "Monthly Vatican saint-of-the-day metadata staging",
-      "owner": "data-operations",
-      "mode": "scheduled",
-      "workflow": ".github/workflows/harvest-vatican-saints.yml",
-      "crons": [
-        "11 9 22 * *"
-      ],
-      "publicationMode": "staging-only",
-      "archiveStream": "calendar/vatican-saints/v1/pt",
-      "producerScripts": [
-        "scripts/calendar/check-vatican-reference-policy.mjs",
-        "scripts/calendar/harvest-vatican-saints.mjs",
-        "scripts/calendar/normalize-vatican-saints.mjs"
-      ]
-    },
-    {
       "id": "causesanti-primary-source",
       "title": "Monthly Causes of Saints primary-source metadata staging",
       "owner": "data-operations",

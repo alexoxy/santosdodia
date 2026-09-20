@@ -144,10 +144,9 @@
       "members": [
         "portugal-snl-calendar-staging",
         "portugal-product-v2-staging",
-        "vatican-daily-saints",
         "vatican-corroboration-evidence"
       ],
-      "reason": "Current proven Portugal authority/reconciliation path; must remain stable through R0/R1"
+      "reason": "Portugal authority path retained through SNL staging and reviewed Vatican claim-level corroboration. The policy-incompatible Vatican daily metadata harvester was retired on 2026-09-20; future Vatican acquisition must use an explicitly permitted, bounded source contract."
     },
     {
       "group": "primary-source-vault",
