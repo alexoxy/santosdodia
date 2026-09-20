@@ -344,13 +344,11 @@
     },
     {
       "id": "autonomous-scout-saints-wikidata",
-      "title": "Monthly Autonomous Scout acquisition for saints Wikidata partition",
+      "title": "Manual recovery-only legacy Wikidata scout",
       "owner": "data-operations",
-      "mode": "scheduled",
+      "mode": "manual",
       "workflow": ".github/workflows/autonomous-osint-acquisition.yml",
-      "crons": [
-        "47 2 20 * *"
-      ],
+      "crons": [],
       "publicationMode": "staging-only",
       "archiveStream": "osint-raw/saints/wikidata",
       "producerScripts": [

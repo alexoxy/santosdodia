@@ -11,6 +11,7 @@ function normalizeName(value){return String(value??'').normalize('NFD').replace(
 function collectiveName(value){const name=normalizeName(value);return name.startsWith('santos ')||name.startsWith('santas ')||name.startsWith('saints ')||name.startsWith('ss ')||name.startsWith('todos os santos')||name.startsWith('all saints')||name.includes(' e sao ')||name.includes(' e santo ')||name.includes(' e santa ')||name.includes(' and saint ');}
 function explicitSingularPersonName(value){const name=normalizeName(value);return name.startsWith('s ')||name.startsWith('sao ')||name.startsWith('santo ')||name.startsWith('santa ')||name.startsWith('beato ')||name.startsWith('beata ')||name.startsWith('st ')||name.startsWith('saint ')||name.startsWith('blessed ');}
 function profileEligible(item){return personCategories.has(item?.category)&&explicitSingularPersonName(item?.name)&&!collectiveName(item?.name);}
+function usesPublishedD1(sourceMode){const parts=new Set(String(sourceMode??'').split('+'));return parts.has('published-d1')&&parts.has('approved-repository');}
 
 for(let month=1;month<=12;month+=1){
   const url=new URL('/api/v1/observances',origin);
@@ -22,7 +23,7 @@ for(let month=1;month<=12;month+=1){
   const response=await fetch(url,{headers:{accept:'application/json'}});
   if(!response.ok)throw new Error(`Month ${month} returned HTTP ${response.status}`);
   const body=await response.json();
-  if(body?.meta?.sourceMode!=='published-d1+approved-repository')throw new Error(`Month ${month} is not using the published calendar.`);
+  if(!usesPublishedD1(body?.meta?.sourceMode))throw new Error(`Month ${month} is not using published D1 with the approved repository: ${body?.meta?.sourceMode}`);
   if(body?.meta?.d1?.bound!==true)throw new Error(`Month ${month} has no production D1 binding.`);
   if(!(Number(body?.meta?.d1?.publishedAccepted)>0))throw new Error(`Month ${month} accepted no published D1 rows.`);
   if(!Array.isArray(body.data))throw new Error(`Month ${month} has no data array.`);

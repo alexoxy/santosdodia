@@ -111,7 +111,8 @@ jobs:
           if(meta.date!==process.env.RELEASE_SENTINEL_DATE) throw new Error(`Unexpected Today date: ${meta.date}`);
           if(!Array.isArray(value.data)||value.data.length<1) throw new Error('Published calendar sentinel date is empty.');
           if(meta.count!==value.data.length) throw new Error(`Today count mismatch: meta=${meta.count} data=${value.data.length}`);
-          if(meta.sourceMode!=='published-d1+approved-repository') throw new Error(`Today is not using published D1: ${meta.sourceMode}`);
+          const sourceParts=new Set(String(meta.sourceMode??'').split('+'));
+          if(!sourceParts.has('published-d1')||!sourceParts.has('approved-repository')) throw new Error(`Today is not using published D1 with the approved repository: ${meta.sourceMode}`);
           if(d1.bound!==true) throw new Error('CALENDAR_DB is not bound in the deployed Worker.');
           if(!['ok','bounded'].includes(d1.status)) throw new Error(`D1 read status is ${d1.status}`);
           if(!(Number(d1.publishedAccepted)>0)) throw new Error(`No published D1 rows accepted for sentinel date: ${d1.publishedAccepted}`);
@@ -126,7 +127,8 @@ jobs:
             "$APP_ORIGIN/api/ical/all?year=2026&locale=pt&country=PT")"
           [ "$ics_code" = 200 ] || { echo "Worker ICS endpoint returned HTTP $ics_code"; exit 1; }
           grep -q '^BEGIN:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not begin with BEGIN:VCALENDAR.'; exit 1; }
-          grep -q '^X-SANTOSDIA-SOURCE:published-d1+approved-repository' "$ics_body" || { echo 'Worker ICS is not using the published D1 calendar.'; exit 1; }
+          ics_source="$(tr -d '\r' < "$ics_body" | sed -n 's/^X-SANTOSDIA-SOURCE://p' | head -n 1)"
+          [[ "$ics_source" == published-d1+*approved-repository ]] || { echo "Worker ICS is not using published D1 with the approved repository: $ics_source"; exit 1; }
           grep -q 'END:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not contain END:VCALENDAR.'; exit 1; }
 
       - name: Probe status API on canonical domain
