@@ -12,6 +12,7 @@ import {
   defaultReadyCalendarCountry,
   PUBLIC_CALENDAR_RUNTIME_VERSION,
 } from "../../lib/calendar-publication-readiness";
+import { addCalculatedRomanTemporaleFallback } from "../../lib/knowledge/roman-temporale-observance";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
@@ -94,11 +95,17 @@ export default function CalendarExplorer() {
     }),
     [church, category, region],
   );
-  const fallback = useMemo(
-    () => getPublicMonthlyObservances(year, month, locale, filters),
-    [year, month, locale, filters],
-  );
-  const [items, setItems] = useState<Observance[]>([]);
+  const fallback = useMemo(() => {
+    const curated = getPublicMonthlyObservances(year, month, locale, filters);
+    const lastDay = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    return addCalculatedRomanTemporaleFallback(curated, {
+      fromDate: iso(year, month, 1),
+      toDate: iso(year, month, lastDay),
+      locale,
+      filters,
+    }).items;
+  }, [year, month, locale, filters]);
+  const [items, setItems] = useState<Observance[]>(fallback);
   useEffect(() => {
     if (contextReady) setItems(fallback);
   }, [fallback, contextReady]);
@@ -123,7 +130,8 @@ export default function CalendarExplorer() {
           : Promise.reject(new Error("Calendar request failed")),
       )
       .then((payload) => {
-        if (Array.isArray(payload?.data)) setItems(payload.data);
+        if (!Array.isArray(payload?.data)) return;
+        setItems(payload.data.length || fallback.length === 0 ? payload.data : fallback);
       })
       .catch((error) => {
         if (error?.name !== "AbortError") setItems(fallback);

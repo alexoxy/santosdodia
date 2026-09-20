@@ -72,6 +72,8 @@ requirePattern(icalRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{
 requirePattern(todayPanel, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Today panel');
 requirePattern(todayPanel, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Today edge-cache version');
 requirePattern(calendarExplorer, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Calendar explorer edge-cache version');
+requirePattern(calendarExplorer, /addCalculatedRomanTemporaleFallback\(curated,\s*\{[\s\S]*?fromDate:[\s\S]*?toDate:[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)\.items/, 'Calendar local Roman fallback');
+requirePattern(calendarExplorer, /payload\.data\.length\s*\|\|\s*fallback\.length\s*===\s*0\s*\?\s*payload\.data\s*:\s*fallback/, 'Calendar empty-runtime protection');
 requirePattern(calendarReadiness, /!tradition\s*\|\|\s*tradition\s*===\s*'all'\s*\|\|\s*tradition\s*===\s*'roman-catholic'/, 'Ready aggregate calendar');
 requirePattern(searchExplorer, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Search explorer');
 requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Day view');
@@ -131,4 +133,4 @@ assert(
   'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
 );
 
-console.log('Calendar public-surface contract passed: Today, dated pages, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent, share reviewed editorial where available and preserve Portugal semantic sentinels.');
+console.log('Calendar public-surface contract passed: Today, dated pages, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent, keep a local Roman fallback, share reviewed editorial where available and preserve Portugal semantic sentinels.');
