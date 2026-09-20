@@ -181,7 +181,7 @@
     },
     {
       "group": "autonomous-wikidata-chain",
-      "classification": "CONSOLIDATION_CANDIDATE",
+      "classification": "MANUAL_FALLBACK_PENDING_IMPORT_EQUIVALENCE",
       "members": [
         "autonomous-scout-saints-wikidata",
         "autonomous-normalizer-saints-wikidata",
@@ -190,7 +190,7 @@
         "autonomous-corroborator-saints-wikidata",
         "autonomous-importer-saints-wikidata"
       ],
-      "reason": "Closer to target autonomous role model but cannot replace the baseline chain until completeness, identity, language, receipts and rollback semantics match"
+      "reason": "Automatic execution retired after the 2026-09-20 duplicate scout failed on a transient Wikidata HTTP 500. The resumable Saints Baseline v1 chain has proven acquisition, normalization, language and identity stages; retain this legacy chain only for manual recovery until the replacement D1 import and rollback receipt complete successfully."
     },
     {
       "group": "wikidata-enrichment-navigation",

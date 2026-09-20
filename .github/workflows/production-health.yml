@@ -111,7 +111,8 @@ jobs:
           if(meta.date!==process.env.RELEASE_SENTINEL_DATE) throw new Error(`Unexpected Today date: ${meta.date}`);
           if(!Array.isArray(value.data)||value.data.length<1) throw new Error('Published calendar sentinel date is empty.');
           if(meta.count!==value.data.length) throw new Error(`Today count mismatch: meta=${meta.count} data=${value.data.length}`);
-          if(meta.sourceMode!=='published-d1+approved-repository') throw new Error(`Today is not using published D1: ${meta.sourceMode}`);
+          const sourceParts=new Set(String(meta.sourceMode??'').split('+'));
+          if(!sourceParts.has('published-d1')||!sourceParts.has('approved-repository')) throw new Error(`Today is not using published D1 with the approved repository: ${meta.sourceMode}`);
           if(d1.bound!==true) throw new Error('CALENDAR_DB is not bound in the deployed Worker.');
           if(!['ok','bounded'].includes(d1.status)) throw new Error(`D1 read status is ${d1.status}`);
           if(!(Number(d1.publishedAccepted)>0)) throw new Error(`No published D1 rows accepted for sentinel date: ${d1.publishedAccepted}`);
@@ -126,8 +127,36 @@ jobs:
             "$APP_ORIGIN/api/ical/all?year=2026&locale=pt&country=PT")"
           [ "$ics_code" = 200 ] || { echo "Worker ICS endpoint returned HTTP $ics_code"; exit 1; }
           grep -q '^BEGIN:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not begin with BEGIN:VCALENDAR.'; exit 1; }
-          grep -q '^X-SANTOSDIA-SOURCE:published-d1+approved-repository' "$ics_body" || { echo 'Worker ICS is not using the published D1 calendar.'; exit 1; }
+          ics_source="$(tr -d '\r' < "$ics_body" | sed -n 's/^X-SANTOSDIA-SOURCE://p' | head -n 1)"
+          [[ "$ics_source" == published-d1+*approved-repository ]] || { echo "Worker ICS is not using published D1 with the approved repository: $ics_source"; exit 1; }
           grep -q 'END:VCALENDAR' "$ics_body" || { echo 'Worker ICS does not contain END:VCALENDAR.'; exit 1; }
+
+      - name: Verify published saint profile and individual ICS
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          set -euo pipefail
+          saint_path='rc%3AStRayPenyafort'
+          saint_date='2026-01-07'
+
+          profile_body="$(mktemp)"
+          profile_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" --header 'Accept-Language: pt-PT,pt;q=0.9' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$profile_body" --write-out '%{http_code}' \
+            "$APP_ORIGIN/saint/$saint_path?date=$saint_date")"
+          [ "$profile_code" = 200 ] || { echo "Published saint profile returned HTTP $profile_code"; exit 1; }
+          grep -q 'Raimundo' "$profile_body" || { echo 'Published saint profile did not render its localized identity.'; exit 1; }
+
+          saint_ics="$(mktemp)"
+          saint_ics_code="$(curl --silent --show-error --location --compressed --http1.1 \
+            --user-agent "$HEALTH_USER_AGENT" --header 'Accept: text/calendar' \
+            --retry 2 --retry-all-errors --max-time 30 \
+            --output "$saint_ics" --write-out '%{http_code}' \
+            "$APP_ORIGIN/api/ical/saint/$saint_path?locale=pt")"
+          [ "$saint_ics_code" = 200 ] || { echo "Individual saint ICS returned HTTP $saint_ics_code"; exit 1; }
+          grep -q '^BEGIN:VCALENDAR' "$saint_ics" || { echo 'Individual saint ICS is invalid.'; exit 1; }
+          grep -q 'UID:rc:StRayPenyafort-2026-01-07@santosdodia.com' "$saint_ics" || { echo 'Individual saint ICS is missing the stable event UID.'; exit 1; }
 
       - name: Probe status API on canonical domain
         if: always()
@@ -202,5 +231,6 @@ jobs:
             echo '- The deployed Workers.dev origin must return an application-level healthy status.'
             echo '- The Portugal-scoped Today response on the 2026-08-13 release sentinel must be non-empty, use the bound production D1 calendar and accept published rows.'
             echo '- The Portugal-scoped Worker-origin ICS feed must identify the published D1 calendar as its source.'
+            echo '- Weekly/manual probes require a published D1 saint profile and its stable individual ICS feed.'
             echo '- D1-heavy verification is weekly to preserve the Cloudflare Free operating boundary.'
           } >> "$GITHUB_STEP_SUMMARY"

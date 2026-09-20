@@ -1,16 +1,6 @@
-name: Autonomous OSINT acquisition
+name: Legacy OSINT recovery (manual)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/osint/adapters/wikidata-saints.mjs'
-      - 'scripts/archive-to-dropbox.mjs'
-      - 'scripts/dropbox/**'
-      - '.github/workflows/autonomous-osint-acquisition.yml'
-  schedule:
-    - cron: '47 2 20 * *'
   workflow_dispatch:
 
 permissions:
