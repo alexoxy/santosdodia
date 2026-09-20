@@ -1,4 +1,4 @@
-import { getSaintBiographyRecord } from "../data/saint-biographies";
+import { getSaintBiographyRecord } from "../data/saint-biography-registry";
 import { isSaintBiographyIndexable } from "./editorial-profile-quality";
 import type { Locale } from "./i18n";
 

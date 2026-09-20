@@ -143,6 +143,9 @@ const [entityLinks, dayPage, annualDatePage] = await Promise.all([
 if (!entityLinks.includes("getSaintBiographyRecord") || !entityLinks.includes("isSaintBiographyIndexable")) {
   failures.push("public saint profile link policy no longer requires a substantive indexable biography");
 }
+if (!entityLinks.includes('from "../data/saint-biography-registry"')) {
+  failures.push("public saint profile links bypass the consolidated biography registry and can hide later reviewed editorial batches");
+}
 if (!entityLinks.includes("return null") || !entityLinks.includes("/saint/")) {
   failures.push("public saint profile link policy no longer fails closed for non-Person/thin observances");
 }

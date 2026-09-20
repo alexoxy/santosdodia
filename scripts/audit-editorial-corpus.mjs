@@ -10,6 +10,7 @@ const biographyFiles = [
   'data/saint-biographies-batch-3.ts',
   'data/saint-biographies-batch-4.ts',
   'data/saint-biographies-batch-5.ts',
+  'data/saint-biographies-batch-6.ts',
 ];
 const editorialDepthFiles = [
   'data/saint-biography-editorial-depth-wave-1.ts',
