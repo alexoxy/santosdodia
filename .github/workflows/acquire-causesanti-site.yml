@@ -25,19 +25,35 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     steps:
+      - name: Gate stable source acquisition
+        id: cadence
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ] || [ "$(date -u +%m)" = "01" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Full Causes of Saints acquisition enabled."
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Stable source: monthly trigger retained for registry compatibility; external acquisition runs annually in January."
+          fi
+
       - name: Checkout
+        if: steps.cadence.outputs.run == 'true'
         uses: actions/checkout@v7
 
       - name: Use Node.js
+        if: steps.cadence.outputs.run == 'true'
         uses: actions/setup-node@v7
         with:
           node-version-file: .node-version
           cache: npm
 
       - name: Install locked dependencies
+        if: steps.cadence.outputs.run == 'true'
         run: npm ci --include=optional
 
       - name: Validate safety boundaries
+        if: steps.cadence.outputs.run == 'true'
         run: |
           npm run publication:boundary-test
           npm run autonomy:test
@@ -45,6 +61,7 @@ jobs:
           npm run repo:audit
 
       - name: Crawl Causes of Saints into immutable raw staging
+        if: steps.cadence.outputs.run == 'true'
         env:
           # Pushes validate the complete path quickly; scheduled/manual runs retain the full crawl.
           CAUSESANTI_MAX_URLS: ${{ github.event_name == 'push' && '60' || '6000' }}
@@ -54,7 +71,7 @@ jobs:
         run: node scripts/osint/adapters/causesanti-site.mjs
 
       - name: Upload crawl evidence
-        if: always()
+        if: always() && steps.cadence.outputs.run == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: causesanti-primary-source-${{ github.run_id }}
@@ -63,7 +80,7 @@ jobs:
           retention-days: 14
 
       - name: Archive immutable raw dump in Dropbox
-        if: always()
+        if: always() && steps.cadence.outputs.run == 'true'
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
           DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
