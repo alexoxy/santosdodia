@@ -1,4 +1,4 @@
-import { getAnnualDateEditorial } from '../data/date-editorial';
+import { getAnnualDateEditorial } from '../data/date-editorial-registry';
 import type { Observance, ObservanceFilters } from '../data/observances';
 import {
   getSaintBiography,
