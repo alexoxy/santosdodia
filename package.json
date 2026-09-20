@@ -93,17 +93,17 @@
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.6",
     "next": "15.5.25",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@types/node": "20.19.43",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "eslint": "^9.11.1",
     "eslint-config-next": "15.5.25",
     "typescript": "^5.6.3",
-    "wrangler": "4.129.0"
+    "wrangler": "4.131.0"
   },
   "overrides": {
     "js-yaml": "4.3.2",
