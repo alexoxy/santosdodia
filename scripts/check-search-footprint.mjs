@@ -11,6 +11,7 @@ const sitemap = text('app/sitemap.ts');
 const searchRoute = text('app/api/v1/search/route.ts');
 const sourcesAlias = text('app/sources/page.tsx');
 const developersAlias = text('app/developers/page.tsx');
+const privacyNotice = text('app/components/AdvertisingPrivacyNotice.tsx');
 const profileProjection = text('data/canonical-person-profiles.ts');
 const people = JSON.parse(text('data/canonical-person-anchors.json')).people;
 const observances = JSON.parse(text('data/canonical-observance-anchors.json')).observances;
@@ -60,6 +61,8 @@ expect(!sitemap.includes('path: "/sources"') && !sitemap.includes('path: "/devel
 expect(sourcesAlias.includes("permanentRedirect('/copyright')"), 'Legacy /sources alias must permanently consolidate on /copyright');
 expect(developersAlias.includes("permanentRedirect('/copyright')"), 'Legacy /developers alias must permanently consolidate directly on /copyright');
 expect(!sourcesAlias.includes("redirect('/copyright')") && !developersAlias.includes("redirect('/sources')"), 'Legacy provenance aliases must not use temporary or chained redirects');
+expect(privacyNotice.includes('sdd-timezone'), 'Privacy disclosure must identify the browser-local timezone preference');
+expect(privacyNotice.includes('sdd-saved-saints-v1'), 'Privacy disclosure must identify the browser-local saved-saints list');
 expect(searchRoute.includes('SAINT_BIOGRAPHIES') && searchRoute.includes('getCanonicalPersonProfileObservance'), 'Search must include the reviewed editorial profile corpus, not only calendar rows');
 expect(profileProjection.includes("rule.dateRule.type === 'fixed'"), 'Canonical profile fallback must stay limited to reviewed fixed Sanctorale rules');
 
