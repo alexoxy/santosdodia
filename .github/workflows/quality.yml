@@ -211,7 +211,7 @@ jobs:
       - name: Build Cloudflare Worker
         run: npm run cloudflare:build
 
-      - name: Production smoke test
+      - name: Local production-build smoke test
         shell: bash
         run: |
           npm run start -- --hostname 127.0.0.1 > /tmp/santosdodia-next.log 2>&1 &
@@ -231,6 +231,17 @@ jobs:
             echo
 
             if [ "$http_code" = "200" ] && node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/santosdodia-status.json','utf8')); if(body.status!=='ok') process.exit(1)"; then
+              calendar_code="$(curl --silent --show-error --output /tmp/santosdodia-calendar.json --write-out '%{http_code}' 'http://127.0.0.1:3000/api/v1/observances?year=2026&month=9&locale=en&tradition=roman-catholic&country=PT&calendarVersion=roman-portugal-v1' || true)"
+              echo "Calendar endpoint returned HTTP ${calendar_code}:"
+              cat /tmp/santosdodia-calendar.json || true
+              echo
+
+              if [ "$calendar_code" != "200" ]; then
+                echo "Calendar semantic smoke check did not return HTTP 200."
+                exit 1
+              fi
+
+              node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/santosdodia-calendar.json','utf8')); const items=Array.isArray(body.data)?body.data:[]; const match=items.some(item=>item.dateISO==='2026-09-20' && Array.isArray(item.traditions) && item.traditions.includes('roman-catholic')); if(!match){console.error('Expected Roman Catholic observance for 2026-09-20 was not returned.'); process.exit(1)}"
               exit 0
             fi
 
