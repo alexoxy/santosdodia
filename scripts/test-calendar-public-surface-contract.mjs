@@ -29,6 +29,7 @@ const [
   dayPage,
   dayView,
   calendarPage,
+  calendarProgressive,
   calendarExplorer,
   searchExplorer,
   syncCenter,
@@ -44,6 +45,7 @@ const [
   source('app/day/[date]/page.tsx'),
   source('app/components/DayView.tsx'),
   source('app/calendar/page.tsx'),
+  source('app/components/CalendarExplorerProgressive.tsx'),
   source('app/components/CalendarExplorer.tsx'),
   source('app/components/SearchExplorer.tsx'),
   source('app/components/CalendarSyncCenter.tsx'),
@@ -71,6 +73,8 @@ requirePattern(icalRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{
 // The server-rendered calendar must use the same canonical runtime as dated
 // pages and machine surfaces rather than rebuilding a separate month view.
 requirePattern(calendarPage, /await\s+mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate,[\s\S]*?toDate,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Calendar SSR canonical runtime');
+requirePattern(calendarPage, /<CalendarExplorerProgressive[\s\S]*?initialItems=\{items\}[\s\S]*?initialYear=\{year\}[\s\S]*?initialMonth=\{month\}[\s\S]*?initialLocale=\{locale\}/, 'Calendar SSR hydration seed');
+requirePattern(calendarProgressive, /<CalendarExplorer[\s\S]*?initialItems=\{initialItems\}[\s\S]*?initialYear=\{initialYear\}[\s\S]*?initialMonth=\{initialMonth\}/, 'Calendar progressive hydration handoff');
 
 // User-facing surfaces must preserve the territorial selection when they call
 // those endpoints. GLOBAL intentionally omits country so the D1 read-model
@@ -79,7 +83,8 @@ requirePattern(todayPanel, /if \(calendarCountry\) params\.set\("country", calen
 requirePattern(todayPanel, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Today edge-cache version');
 requirePattern(calendarExplorer, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Calendar explorer edge-cache version');
 requirePattern(calendarExplorer, /addCalculatedRomanTemporaleFallback\(curated,\s*\{[\s\S]*?fromDate:[\s\S]*?toDate:[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)\.items/, 'Calendar local Roman fallback');
-requirePattern(calendarExplorer, /payload\.data\.length\s*\|\|\s*fallback\.length\s*===\s*0\s*\?\s*payload\.data\s*:\s*fallback/, 'Calendar empty-runtime protection');
+requirePattern(calendarExplorer, /initialContextMatches[\s\S]*?initialItems\.length\s*\?\s*initialItems\s*:\s*fallback/, 'Calendar canonical hydration baseline');
+requirePattern(calendarExplorer, /payload\.data\.length\s*\|\|\s*baseline\.length\s*===\s*0\s*\?\s*payload\.data\s*:\s*baseline/, 'Calendar empty-runtime protection');
 requirePattern(calendarReadiness, /!tradition\s*\|\|\s*tradition\s*===\s*'all'\s*\|\|\s*tradition\s*===\s*'roman-catholic'/, 'Ready aggregate calendar');
 requirePattern(searchExplorer, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Search explorer');
 requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Day view');
@@ -139,4 +144,4 @@ assert(
   'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
 );
 
-console.log('Calendar public-surface contract passed: Today, dated pages, Calendar SSR, Search, Sync/API and ICS share the canonical runtime; the interactive calendar keeps a local Roman fallback and Portugal semantic sentinels remain pinned.');
+console.log('Calendar public-surface contract passed: Today, dated pages, Calendar SSR, Search, Sync/API and ICS share the canonical runtime; canonical month items survive progressive hydration and Portugal semantic sentinels remain pinned.');
