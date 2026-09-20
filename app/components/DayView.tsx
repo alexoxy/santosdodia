@@ -7,7 +7,10 @@ import {
   type Observance,
 } from "../../data/observances";
 import { validationStatusLabel } from "../../lib/claim-evidence";
-import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
+import {
+  defaultReadyCalendarCountry,
+  PUBLIC_CALENDAR_RUNTIME_VERSION,
+} from "../../lib/calendar-publication-readiness";
 import { getFeatureCopy } from "../../lib/feature-copy";
 import { type Locale } from "../../lib/i18n";
 import {
@@ -20,6 +23,7 @@ import {
   displayPatronages,
 } from "../../lib/locale-display";
 import { getPublicObservancesForDate } from "../../lib/public-observances";
+import type { TodayEditorial } from "../../lib/public-today";
 import { getExistingProfileId, isRuntimePersonProfileEligible } from "../../lib/runtime-profile-link";
 import AddToCalendar from "./AddToCalendar";
 import CandleButton from "./CandleButton";
@@ -37,7 +41,7 @@ type AnnualDayCopy = {
 
 const annualDayCopy: Record<Locale, AnnualDayCopy> = {
   en: { eyebrow: "Celebrations on this date", body: year => `Saints and Christian celebrations associated with this civil date, resolved for ${year}. Movable feasts can fall on another date in other years.`, datedLink: year => `Open the ${year} calendar`, annualLink: "Explore this date every year" },
-  pt: { eyebrow: "Celebrações nesta data", body: year => `Santos e celebrações cristãs associados a esta data civil, apresentados para ${year}. As festas móveis podem ocorrer noutra data noutros anos.`, datedLink: year => `Abrir o calendário de ${year}`, annualLink: "Explorar esta data todos os anos" },
+  pt: { eyebrow: "Celebrações nesta data", body: year => `Santos e celebrações cristãos associados a esta data civil, apresentados para ${year}. As festas móveis podem ocorrer noutra data noutros anos.`, datedLink: year => `Abrir o calendário de ${year}`, annualLink: "Explorar esta data todos os anos" },
   es: { eyebrow: "Celebraciones en esta fecha", body: year => `Santos y celebraciones cristianas asociados a esta fecha civil, presentados para ${year}. Las fiestas móviles pueden caer en otra fecha en otros años.`, datedLink: year => `Abrir el calendario de ${year}`, annualLink: "Explorar esta fecha cada año" },
   fr: { eyebrow: "Célébrations à cette date", body: year => `Saints et célébrations chrétiennes associés à cette date civile, présentés pour ${year}. Les fêtes mobiles peuvent tomber à une autre date selon les années.`, datedLink: year => `Ouvrir le calendrier ${year}`, annualLink: "Explorer cette date chaque année" },
   it: { eyebrow: "Celebrazioni in questa data", body: year => `Santi e celebrazioni cristiane associati a questa data civile, presentati per il ${year}. Le feste mobili possono cadere in una data diversa negli altri anni.`, datedLink: year => `Apri il calendario ${year}`, annualLink: "Esplora questa data ogni anno" },
@@ -59,6 +63,7 @@ export default function DayView({
   dateISO,
   mode = "dated",
   initialItems,
+  initialEditorial,
   initialLocale,
   initialTradition,
   initialCountry,
@@ -66,6 +71,7 @@ export default function DayView({
   dateISO: string;
   mode?: DayMode;
   initialItems?: Observance[];
+  initialEditorial?: TodayEditorial | null;
   initialLocale?: Locale;
   initialTradition?: ChurchPreference;
   initialCountry?: string;
@@ -84,21 +90,28 @@ export default function DayView({
   );
   const initialContextKey = `${dateISO}|${initialLocale ?? locale}|${initialTradition ?? church}|${initialCountry ?? calendarCountry ?? ""}`;
   const [items, setItems] = useState<Observance[]>(initialItems ?? fallback);
+  const [editorial, setEditorial] = useState<TodayEditorial | null>(initialEditorial ?? null);
   const [activeContextKey, setActiveContextKey] = useState(initialContextKey);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!valid) return;
     const controller = new AbortController();
-    const params = new URLSearchParams({ date: dateISO, locale });
+    const params = new URLSearchParams({
+      date: dateISO,
+      locale,
+      timezone: "UTC",
+      calendarVersion: PUBLIC_CALENDAR_RUNTIME_VERSION,
+    });
     if (tradition) params.set("tradition", tradition);
     if (calendarCountry) params.set("country", calendarCountry);
     const requestContextKey = `${dateISO}|${locale}|${church}|${calendarCountry ?? ""}`;
     if (requestContextKey !== activeContextKey) {
       setItems(fallback);
+      setEditorial(null);
       setActiveContextKey(requestContextKey);
     }
     setLoading(true);
-    fetch(`/api/v1/observances?${params}`, {
+    fetch(`/api/v1/today?${params}`, {
       signal: controller.signal,
     })
       .then((response) =>
@@ -108,9 +121,18 @@ export default function DayView({
       )
       .then((payload) => {
         if (Array.isArray(payload?.data)) setItems(payload.data);
+        const nextEditorial = payload?.editorial;
+        setEditorial(
+          nextEditorial?.kind === "date" || nextEditorial?.kind === "profile"
+            ? nextEditorial
+            : null,
+        );
       })
       .catch((error) => {
-        if (error?.name !== "AbortError") setItems(fallback);
+        if (error?.name !== "AbortError") {
+          setItems(fallback);
+          setEditorial(null);
+        }
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
@@ -221,6 +243,26 @@ export default function DayView({
           </div>
         )}
       </section>
+      {mode === "dated" && editorial?.kind === "date" ? (
+        <aside className="institutional-card" aria-label={editorial.title}>
+          <span className="eyebrow">{editorial.eyebrow}</span>
+          <h2>{editorial.title}</h2>
+          <p>{editorial.lead}</p>
+          <p>{editorial.context}</p>
+          <Link className="text-link" href={editorial.href}>
+            {annual.annualLink} →
+          </Link>
+        </aside>
+      ) : mode === "dated" && editorial?.kind === "profile" ? (
+        <aside className="institutional-card" aria-label={editorial.title}>
+          <h2>{editorial.title}</h2>
+          <p>{editorial.summary}</p>
+          {editorial.paragraph ? <p>{editorial.paragraph}</p> : null}
+          <Link className="text-link" href={editorial.href}>
+            {feature.openProfile} →
+          </Link>
+        </aside>
+      ) : null}
       <section className="subscription-strip">
         <div>
           <span className="eyebrow">ICS · Google · Apple · Outlook</span>
