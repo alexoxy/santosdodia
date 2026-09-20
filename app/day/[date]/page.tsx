@@ -139,7 +139,7 @@ export default async function DayPage({
   if (!isValidDateISO(date)) notFound();
   const { locale, tradition, country } = await requestDaySelection();
   const label = dateLabel(date, locale);
-  const { data: items } = await loadPublicDay(date, locale, tradition, country);
+  const { data: items, editorial } = await loadPublicDay(date, locale, tradition, country);
   const url = `${SITE_ORIGIN}/day/${date}`;
   const title = dayTitle(locale, label);
   const jsonLd = {
@@ -189,6 +189,7 @@ export default async function DayPage({
       <DayView
         dateISO={date}
         initialItems={items}
+        initialEditorial={editorial}
         initialLocale={locale}
         initialTradition={tradition ?? "all"}
         initialCountry={country}
