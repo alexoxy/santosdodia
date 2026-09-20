@@ -12,6 +12,7 @@ import {
   defaultReadyCalendarCountry,
   PUBLIC_CALENDAR_RUNTIME_VERSION,
 } from "../../lib/calendar-publication-readiness";
+import type { Locale } from "../../lib/i18n";
 import { addCalculatedRomanTemporaleFallback } from "../../lib/knowledge/roman-temporale-observance";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
@@ -49,8 +50,23 @@ function shiftISO(dateISO: string, amount: number) {
   return date.toISOString().slice(0, 10);
 }
 type Country = { countryCode: string; name: string };
+type CalendarExplorerProps = {
+  initialItems?: Observance[];
+  initialYear?: number;
+  initialMonth?: number;
+  initialLocale?: Locale;
+  initialChurch?: ChurchPreference;
+  initialRegion?: string;
+};
 
-export default function CalendarExplorer() {
+export default function CalendarExplorer({
+  initialItems = [],
+  initialYear,
+  initialMonth,
+  initialLocale,
+  initialChurch,
+  initialRegion,
+}: CalendarExplorerProps = {}) {
   const { locale, copy, country, timeZone, contextReady, church, setChurch } =
     useLanguage();
   const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
@@ -105,10 +121,18 @@ export default function CalendarExplorer() {
       filters,
     }).items;
   }, [year, month, locale, filters]);
-  const [items, setItems] = useState<Observance[]>(fallback);
+  const initialContextMatches =
+    category === "all" &&
+    year === initialYear &&
+    month === initialMonth &&
+    locale === initialLocale &&
+    church === initialChurch &&
+    region === initialRegion;
+  const baseline = initialContextMatches && initialItems.length ? initialItems : fallback;
+  const [items, setItems] = useState<Observance[]>(baseline);
   useEffect(() => {
-    if (contextReady) setItems(fallback);
-  }, [fallback, contextReady]);
+    if (contextReady) setItems(baseline);
+  }, [baseline, contextReady]);
   useEffect(() => {
     if (!contextReady) return;
     const controller = new AbortController(),
@@ -131,10 +155,10 @@ export default function CalendarExplorer() {
       )
       .then((payload) => {
         if (!Array.isArray(payload?.data)) return;
-        setItems(payload.data.length || fallback.length === 0 ? payload.data : fallback);
+        setItems(payload.data.length || baseline.length === 0 ? payload.data : baseline);
       })
       .catch((error) => {
-        if (error?.name !== "AbortError") setItems(fallback);
+        if (error?.name !== "AbortError") setItems(baseline);
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
@@ -148,7 +172,7 @@ export default function CalendarExplorer() {
     church,
     category,
     region,
-    fallback,
+    baseline,
     contextReady,
   ]);
   const weekdays = useMemo(() => {

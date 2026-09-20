@@ -69,7 +69,14 @@ export default async function CalendarPage() {
   return (
     <div className="page-stack">
       <CalendarProductNav />
-      <CalendarExplorerProgressive>
+      <CalendarExplorerProgressive
+        initialItems={items}
+        initialYear={year}
+        initialMonth={month}
+        initialLocale={locale}
+        initialChurch={tradition ?? "all"}
+        initialRegion={country ?? "GLOBAL"}
+      >
         <>
           <section className="page-hero compact-hero">
             <div>
