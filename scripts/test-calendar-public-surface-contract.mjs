@@ -57,6 +57,7 @@ requirePattern(observancesRoute, /mergePublishedCalendarRange\(curated,\s*\{[\s\
 requirePattern(todayRoute, /country:\s*params\.get\("country"\)\s*\?\?\s*undefined/, 'Today API');
 requirePattern(todayRoute, /buildPublicToday\(\{[\s\S]*?date,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today API shared public projection');
 requirePattern(todayModel, /mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate:\s*options\.date,[\s\S]*?toDate:\s*options\.date,[\s\S]*?locale:\s*options\.locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Today canonical runtime');
+requirePattern(todayModel, /from ['"]\.\.\/data\/date-editorial-registry['"]/, 'Today complete editorial registry');
 
 requirePattern(searchRoute, /country:p\.get\("country"\)\?\?undefined/, 'Search API');
 requirePattern(searchRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{year\}-01-01`,toDate:`\$\{year\}-12-31`,locale,filters,includeCalculatedTemporale:Boolean\(q\.trim\(\)\)\}\)/, 'Search API canonical runtime');
@@ -74,6 +75,7 @@ requirePattern(calendarExplorer, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VER
 requirePattern(calendarReadiness, /!tradition\s*\|\|\s*tradition\s*===\s*'all'\s*\|\|\s*tradition\s*===\s*'roman-catholic'/, 'Ready aggregate calendar');
 requirePattern(searchExplorer, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Search explorer');
 requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Day view');
+requirePattern(dayView, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Day edge-cache version');
 requirePattern(dayPage, /loadPublicDay\(date, locale, tradition, country\)/, 'Day page server projection');
 assert(
   occurrenceCount(calendarExplorer, /params\.set\("country", region\)/g) >= 1 &&
@@ -92,7 +94,14 @@ assert(
   [observancesRoute, todayModel, searchRoute, icalRoute].every(text => text.includes('mergePublishedCalendarRange')),
   'A calendar machine surface has diverged from the canonical runtime.',
 );
-assert(dayPage.includes('buildPublicToday') && dayView.includes('/api/v1/observances'), 'The dated page must keep SSR, JSON-LD and client refresh on the canonical runtime.');
+assert(
+  dayPage.includes('buildPublicToday') && dayView.includes('/api/v1/today'),
+  'The dated page must keep SSR, JSON-LD and client refresh on the shared Today projection.',
+);
+assert(
+  dayPage.includes('initialEditorial={editorial}') && dayView.includes('setEditorial'),
+  'The dated page must keep reviewed Today editorial attached to the same daily projection.',
+);
 
 // Semantic guardrail: the public surfaces above all resolve through the same
 // canonical runtime, so the reviewed Portugal production release is the pinned
@@ -122,4 +131,4 @@ assert(
   'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
 );
 
-console.log('Calendar public-surface contract passed: Today, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent and preserve reviewed Portugal semantic sentinels.');
+console.log('Calendar public-surface contract passed: Today, dated pages, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent, share reviewed editorial where available and preserve Portugal semantic sentinels.');
