@@ -77,15 +77,20 @@ if(!profileResponse.ok){
 const icsUrl=new URL(`/api/ical/saint/${encodedId}`,origin);
 icsUrl.searchParams.set('locale','pt');
 const icsResponse=await fetch(icsUrl,{headers:{accept:'text/calendar'}});
-if(!icsResponse.ok)throw new Error(`Runtime saint calendar returned HTTP ${icsResponse.status}.`);
-const contentType=icsResponse.headers.get('content-type')??'';
-if(!contentType.toLowerCase().includes('text/calendar'))throw new Error(`Runtime saint calendar has unexpected Content-Type: ${contentType}`);
-const ics=await icsResponse.text();
-for(const marker of ['BEGIN:VCALENDAR','BEGIN:VEVENT',`UID:${runtimeSaintId}-${runtimeSaintDate}@santosdodia.com`,'END:VCALENDAR']){
-  if(!ics.includes(marker))throw new Error(`Runtime saint calendar is missing ${marker}.`);
+if(!icsResponse.ok){
+  const message=`Runtime saint calendar returned HTTP ${icsResponse.status}.`;
+  if(strictLiveProfile)throw new Error(message);
+  console.warn(`${message} This change-validation run is diagnostic; scheduled and manual runs remain strict.`);
+}else{
+  const contentType=icsResponse.headers.get('content-type')??'';
+  if(!contentType.toLowerCase().includes('text/calendar'))throw new Error(`Runtime saint calendar has unexpected Content-Type: ${contentType}`);
+  const ics=await icsResponse.text();
+  for(const marker of ['BEGIN:VCALENDAR','BEGIN:VEVENT',`UID:${runtimeSaintId}-${runtimeSaintDate}@santosdodia.com`,'END:VCALENDAR']){
+    if(!ics.includes(marker))throw new Error(`Runtime saint calendar is missing ${marker}.`);
+  }
 }
 
-console.log(`Runtime saint live sentinel: profile ${profileResponse.status} + calendar 200 (${runtimeSaintId}); strict=${strictLiveProfile}.`);
+console.log(`Runtime saint live sentinel: profile ${profileResponse.status} + calendar ${icsResponse.status} (${runtimeSaintId}); strict=${strictLiveProfile}.`);
 
 // Monthly profile probes are a visibility KPI rather than a hard production gate:
 // the permanent D2/D6 sentinel above remains the fail-closed profile route gate.
