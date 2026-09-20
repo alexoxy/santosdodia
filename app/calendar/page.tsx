@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { parseTradition } from "../../data/observances";
 import CalendarProductNav from "../components/CalendarProductNav";
-import CalendarProgressiveExplorer from "../components/CalendarProgressiveExplorer";
+import CalendarExplorerProgressive from "../components/CalendarExplorerProgressive";
 import TraditionFeeds from "../components/TraditionFeeds";
 import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import { dateISOInTimeZone, normalizeTimeZone } from "../../lib/date-context";
@@ -69,7 +69,7 @@ export default async function CalendarPage() {
   return (
     <div className="page-stack">
       <CalendarProductNav />
-      <CalendarProgressiveExplorer>
+      <CalendarExplorerProgressive>
         <>
           <section className="page-hero compact-hero">
             <div>
@@ -134,7 +134,7 @@ export default async function CalendarPage() {
             </div>
           </section>
         </>
-      </CalendarProgressiveExplorer>
+      </CalendarExplorerProgressive>
       <TraditionFeeds />
     </div>
   );
