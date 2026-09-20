@@ -1,2 +1,5 @@
-import { redirect } from 'next/navigation';
-export default function SourcesRedirect(){redirect('/copyright')}
+import { permanentRedirect } from 'next/navigation';
+
+export default function SourcesRedirect() {
+  permanentRedirect('/copyright');
+}
