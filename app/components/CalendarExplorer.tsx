@@ -8,7 +8,10 @@ import {
   type Observance,
 } from "../../data/observances";
 import { dateISOInTimeZone } from "../../lib/date-context";
-import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
+import {
+  defaultReadyCalendarCountry,
+  PUBLIC_CALENDAR_RUNTIME_VERSION,
+} from "../../lib/calendar-publication-readiness";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
@@ -107,6 +110,7 @@ export default function CalendarExplorer() {
         month: String(month + 1),
         locale,
         timezone: timeZone,
+        calendarVersion: PUBLIC_CALENDAR_RUNTIME_VERSION,
       });
     if (church !== "all") params.set("tradition", church);
     if (category !== "all") params.set("category", category);
