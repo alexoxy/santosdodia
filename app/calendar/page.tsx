@@ -7,9 +7,9 @@ import TraditionFeeds from "../components/TraditionFeeds";
 import { defaultReadyCalendarCountry } from "../../lib/calendar-publication-readiness";
 import { dateISOInTimeZone, normalizeTimeZone } from "../../lib/date-context";
 import { ui } from "../../lib/i18n";
-import { addCalculatedRomanTemporaleFallback } from "../../lib/knowledge/roman-temporale-observance";
 import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
+import { mergePublishedCalendarRange } from "../../lib/public-calendar-runtime";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
 import { requestPublicLocale } from "../../lib/request-public-locale";
 
@@ -58,7 +58,7 @@ export default async function CalendarPage() {
   const toDate = iso(year, month, daysInMonth);
   const filters = { tradition, country };
   const curated = getPublicMonthlyObservances(year, month, locale, filters);
-  const { items } = addCalculatedRomanTemporaleFallback(curated, {
+  const { items } = await mergePublishedCalendarRange(curated, {
     fromDate,
     toDate,
     locale,
