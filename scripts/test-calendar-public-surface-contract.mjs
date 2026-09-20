@@ -28,6 +28,7 @@ const [
   todayPanel,
   dayPage,
   dayView,
+  calendarPage,
   calendarExplorer,
   searchExplorer,
   syncCenter,
@@ -42,6 +43,7 @@ const [
   source('app/components/TodayPanel.tsx'),
   source('app/day/[date]/page.tsx'),
   source('app/components/DayView.tsx'),
+  source('app/calendar/page.tsx'),
   source('app/components/CalendarExplorer.tsx'),
   source('app/components/SearchExplorer.tsx'),
   source('app/components/CalendarSyncCenter.tsx'),
@@ -66,6 +68,10 @@ requirePattern(searchRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$
 requirePattern(icalRoute, /country=query\.get\("country"\)\?\?undefined/, 'ICS feed');
 requirePattern(icalRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{year\}-01-01`,toDate:`\$\{year\}-12-31`,locale,filters\}\)/, 'ICS canonical runtime');
 
+// The server-rendered calendar must use the same canonical runtime as dated
+// pages and machine surfaces rather than rebuilding a separate month view.
+requirePattern(calendarPage, /await\s+mergePublishedCalendarRange\(curated,\s*\{[\s\S]*?fromDate,[\s\S]*?toDate,[\s\S]*?locale,[\s\S]*?filters,[\s\S]*?\}\)/, 'Calendar SSR canonical runtime');
+
 // User-facing surfaces must preserve the territorial selection when they call
 // those endpoints. GLOBAL intentionally omits country so the D1 read-model
 // guard resolves only the General/Global calendar.
@@ -89,12 +95,12 @@ assert(
   'Calendar Sync no longer keeps the same territorial scope in subscription and JSON URLs.',
 );
 
-// Structural guardrail: each machine surface remains connected to the shared
-// canonical publication runtime/read model. This prevents a future feature from
+// Structural guardrail: each canonical public surface remains connected to the
+// shared publication runtime/read model. This prevents a future feature from
 // quietly reintroducing a separate Portugal dataset for one surface.
 assert(
-  [observancesRoute, todayModel, searchRoute, icalRoute].every(text => text.includes('mergePublishedCalendarRange')),
-  'A calendar machine surface has diverged from the canonical runtime.',
+  [observancesRoute, todayModel, searchRoute, icalRoute, calendarPage].every(text => text.includes('mergePublishedCalendarRange')),
+  'A canonical calendar surface has diverged from the shared runtime.',
 );
 assert(
   dayPage.includes('buildPublicToday') && dayView.includes('/api/v1/today'),
@@ -133,4 +139,4 @@ assert(
   'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
 );
 
-console.log('Calendar public-surface contract passed: Today, dated pages, Calendar, Search, Sync/API and ICS remain jurisdiction-consistent, keep a local Roman fallback, share reviewed editorial where available and preserve Portugal semantic sentinels.');
+console.log('Calendar public-surface contract passed: Today, dated pages, Calendar SSR, Search, Sync/API and ICS share the canonical runtime; the interactive calendar keeps a local Roman fallback and Portugal semantic sentinels remain pinned.');
