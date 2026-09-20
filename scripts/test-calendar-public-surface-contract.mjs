@@ -70,6 +70,7 @@ requirePattern(icalRoute, /mergePublishedCalendarRange\(curated,\{fromDate:`\$\{
 // guard resolves only the General/Global calendar.
 requirePattern(todayPanel, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Today panel');
 requirePattern(todayPanel, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Today edge-cache version');
+requirePattern(calendarExplorer, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Calendar explorer edge-cache version');
 requirePattern(calendarReadiness, /!tradition\s*\|\|\s*tradition\s*===\s*'all'\s*\|\|\s*tradition\s*===\s*'roman-catholic'/, 'Ready aggregate calendar');
 requirePattern(searchExplorer, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Search explorer');
 requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendarCountry\);/, 'Day view');
