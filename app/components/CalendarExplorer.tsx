@@ -203,9 +203,6 @@ export default function CalendarExplorer({
       ? `/saint/${encodeURIComponent(profileId)}?date=${encodeURIComponent(date)}`
       : `/day/${date}#observance-${encodeURIComponent(item.id)}`;
   }
-  const feedParams = new URLSearchParams({ locale });
-  if (category !== "all") feedParams.set("category", category);
-  if (region !== "GLOBAL") feedParams.set("country", region);
   const monthTitle = formatMonthYear(
     iso(year, month, 1),
     locale,
@@ -327,7 +324,7 @@ export default function CalendarExplorer({
             →
           </button>
         </div>
-        {(year !== todayYear || month !== todayMonth) ? (
+        {year !== todayYear || month !== todayMonth ? (
           <div className="button-row" style={{ justifyContent: "center", marginBottom: 18 }}>
             <button className="btn btn-tertiary" onClick={openTodayMonth}>
               {relativeDay(0)}
@@ -448,32 +445,6 @@ export default function CalendarExplorer({
             <p>{copy.noResults}</p>
           </div>
         ) : null}
-      </section>
-      <section className="subscription-strip">
-        <div>
-          <span className="eyebrow">ICS · Google · Apple · Outlook</span>
-          <h2>{copy.addCalendar}</h2>
-        </div>
-        <div className="button-row">
-          <a
-            className="btn btn-primary"
-            href={`/api/ical/${church === "all" ? "all" : church}?${feedParams}`}
-          >
-            {copy.feedAll}
-          </a>
-          <a
-            className="btn btn-secondary"
-            href={`/api/ical/roman-catholic?locale=${locale}${region !== "GLOBAL" ? `&country=${region}` : ""}`}
-          >
-            {copy.feedCatholic}
-          </a>
-          <a
-            className="btn btn-secondary"
-            href={`/api/ical/eastern-orthodox?locale=${locale}`}
-          >
-            {copy.feedOrthodox}
-          </a>
-        </div>
       </section>
     </div>
   );

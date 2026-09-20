@@ -33,6 +33,7 @@ const [
   calendarExplorer,
   searchExplorer,
   syncCenter,
+  traditionFeeds,
   calendarReadiness,
   productionRequestText,
 ] = await Promise.all([
@@ -49,6 +50,7 @@ const [
   source('app/components/CalendarExplorer.tsx'),
   source('app/components/SearchExplorer.tsx'),
   source('app/components/CalendarSyncCenter.tsx'),
+  source('app/components/TraditionFeeds.tsx'),
   source('lib/calendar-publication-readiness.ts'),
   source('data/releases/roman-catholic-pt-2026-v2.production-request.json'),
 ]);
@@ -91,9 +93,20 @@ requirePattern(dayView, /if \(calendarCountry\) params\.set\("country", calendar
 requirePattern(dayView, /calendarVersion:\s*PUBLIC_CALENDAR_RUNTIME_VERSION/, 'Day edge-cache version');
 requirePattern(dayPage, /loadPublicDay\(date, locale, tradition, country\)/, 'Day page server projection');
 assert(
-  occurrenceCount(calendarExplorer, /params\.set\("country", region\)/g) >= 1 &&
-    occurrenceCount(calendarExplorer, /feedParams\.set\("country", region\)/g) >= 1,
-  'Calendar explorer no longer keeps the same territorial scope in JSON and ICS.',
+  occurrenceCount(calendarExplorer, /params\.set\("country", region\)/g) >= 1,
+  'Calendar explorer no longer keeps its territorial scope in JSON requests.',
+);
+assert(
+  !calendarExplorer.includes('/api/ical/') &&
+    !calendarExplorer.includes('feedAll') &&
+    !calendarExplorer.includes('feedOrthodox'),
+  'Calendar explorer must defer subscription links to the readiness-gated subscription surface.',
+);
+assert(
+  traditionFeeds.includes('PUBLIC_CALENDAR_CONTEXTS.map') &&
+    traditionFeeds.includes('/calendar/subscribe?tradition=') &&
+    !traditionFeeds.includes('/api/ical/eastern-orthodox'),
+  'Calendar subscriptions must be advertised only through readiness-approved contexts.',
 );
 assert(
   occurrenceCount(syncCenter, /params\.set\('country',selectedCountry\)/g) >= 2,
@@ -144,4 +157,4 @@ assert(
   'Portugal semantic sentinel set changed without an explicit reviewed contract update.',
 );
 
-console.log('Calendar public-surface contract passed: Today, dated pages, Calendar SSR, Search, Sync/API and ICS share the canonical runtime; canonical month items survive progressive hydration and Portugal semantic sentinels remain pinned.');
+console.log('Calendar public-surface contract passed: Today, dated pages, Calendar SSR, Search, readiness-gated Sync/API and ICS share the canonical runtime; canonical month items survive progressive hydration and Portugal semantic sentinels remain pinned.');
