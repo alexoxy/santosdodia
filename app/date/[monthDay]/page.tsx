@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import AnnualDateEditorialSection from "../../components/AnnualDateEditorialSection";
 import DayView from "../../components/DayView";
 import { getAnnualDateEditorial } from "../../../data/date-editorial-registry";
 import type { Locale } from "../../../lib/i18n";
 import { publicSaintProfilePath } from "../../../lib/public-entity-links";
-import { getPublicObservancesForDate } from "../../../lib/public-observances";
+import { buildPublicToday } from "../../../lib/public-today";
 import { requestPublicLocale } from "../../../lib/request-public-locale";
 import { SITE_ORIGIN } from "../../../lib/site";
 import { serializeStructuredData } from "../../../lib/structured-data";
@@ -68,13 +69,21 @@ function annualDescription(locale: Locale, label: string, names: string[], total
     : `Explore saints and Christian celebrations associated with ${label}, organized by tradition and calendar system.`;
 }
 
+const loadAnnualDate = cache((dateISO: string, locale: Locale) => buildPublicToday({
+  date: dateISO,
+  locale,
+  timeZone: "UTC",
+  timeZoneSource: "explicit-date",
+  filters: {},
+}));
+
 export async function generateMetadata({ params }: { params: Promise<{ monthDay: string }> }): Promise<Metadata> {
   const { monthDay } = await params;
   const dateISO = resolveAnnualDate(monthDay);
   const locale = await requestPublicLocale();
   if (!dateISO) return { title: "Invalid date", robots: { index: false, follow: false } };
   const label = annualDateLabel(dateISO, locale);
-  const items = getPublicObservancesForDate(dateISO, locale);
+  const { data: items } = await loadAnnualDate(dateISO, locale);
   const names = items.slice(0, 5).map(item => item.name);
   const editorial = getAnnualDateEditorial(monthDay, locale);
   const title = annualTitle(locale, label);
@@ -100,7 +109,7 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
   if (!dateISO) notFound();
   const locale = await requestPublicLocale();
   const label = annualDateLabel(dateISO, locale);
-  const items = getPublicObservancesForDate(dateISO, locale);
+  const { data: items } = await loadAnnualDate(dateISO, locale);
   const editorial = getAnnualDateEditorial(monthDay, locale);
   const url = `${SITE_ORIGIN}/date/${monthDay}`;
   const title = annualTitle(locale, label);
@@ -148,7 +157,13 @@ export default async function AnnualDayPage({ params }: { params: Promise<{ mont
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
-      <DayView dateISO={dateISO} mode="annual" />
+      <DayView
+        dateISO={dateISO}
+        mode="annual"
+        initialItems={items}
+        initialLocale={locale}
+        initialTradition="all"
+      />
       <AnnualDateEditorialSection monthDay={monthDay} locale={locale} items={items} />
     </>
   );
