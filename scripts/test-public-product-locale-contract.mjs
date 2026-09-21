@@ -39,6 +39,8 @@ assert.match(itFeature,/navFind:'Trova una ricorrenza'/);
 const scope=source('lib/observance-scope.ts');
 assert.match(scope,/it:'Universale in questa Chiesa'/);
 assert.match(scope,/it:'Celebrata in questo Paese'/);
+assert.doesNotMatch(scope,/Scope not yet classified|Âmbito ainda não classificado/,'Internal scope-review state must not become public-facing copy.');
+assert.match(scope,/kind: 'unspecified', label: '', countryCodes: \[\]/,'Unclassified scope must stay structurally explicit while remaining silent in public copy.');
 
 const content=source('lib/content-locale.ts');
 assert.match(content,/it:\(name,date\)=>`Celebrazione cristiana di \$\{name\}, commemorata il \$\{date\}\.`/);
