@@ -14,7 +14,7 @@ const labels: Record<'universal'|'national'|'territorial',Record<Locale,string>>
  },
  territorial:{
   en:'Territorial celebration',pt:'Celebração territorial',es:'Celebración territorial',fr:'Célébration territoriale',
-  it:'Celebrazione territoriale',de:'Territoriale Feier',pl:'Obchód terytorialny',ru:'Отмечается в этом регионе',
+  it:'Celebrazione territoriale',de:'Territoriale Feier',pl:'Obchód terytorialny',ru:'Территориальное празднование',
   fil:'Pagdiriwang ayon sa teritoryo',sw:'Maadhimisho ya eneo'
  }
 };
