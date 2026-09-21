@@ -5,6 +5,7 @@ import {
   getSaintBiographyRecord,
 } from '../data/saint-biography-registry';
 import { localizedSummary } from './content-locale';
+import { getEditorialProfileFallbackObservancesForDate } from './editorial-profile-observances';
 import type { Locale } from './i18n';
 import { displayObservanceName, displayPatronages } from './locale-display';
 import { getPublicObservancesForDate } from './public-observances';
@@ -58,7 +59,16 @@ export async function buildPublicToday(options: {
   requestedLive?: boolean;
 }): Promise<PublicTodayPayload> {
   const filters = options.filters ?? {};
-  const curated = getPublicObservancesForDate(options.date, options.locale, filters);
+  const repositoryCurated = getPublicObservancesForDate(options.date, options.locale, filters);
+  const curated = [
+    ...repositoryCurated,
+    ...getEditorialProfileFallbackObservancesForDate(
+      options.date,
+      options.locale,
+      filters,
+      repositoryCurated,
+    ),
+  ];
   const runtime = await mergePublishedCalendarRange(curated, {
     fromDate: options.date,
     toDate: options.date,
