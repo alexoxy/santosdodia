@@ -8,8 +8,10 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 
 const nextConfig = text('next.config.ts');
 const sitemap = text('app/sitemap.ts');
+const rootLayout = text('app/layout.tsx');
 const annualDatePage = text('app/date/[monthDay]/page.tsx');
 const searchRoute = text('app/api/v1/search/route.ts');
+const rollingIcsRoute = text('app/api/ical/[feed]/route.ts');
 const sourcesAlias = text('app/sources/page.tsx');
 const developersAlias = text('app/developers/page.tsx');
 const privacyNotice = text('app/components/AdvertisingPrivacyNotice.tsx');
@@ -69,6 +71,9 @@ expect(annualDatePage.includes('const { data: items } = await loadAnnualDate(dat
 expect(annualDatePage.includes('initialItems={items}') && annualDatePage.includes('initialTradition="all"'), 'Evergreen date hydration must start from the canonical global SSR baseline');
 expect(annualDatePage.includes('if (!items.length) return { ...metadata, robots: { index: false, follow: true } };'), 'Evergreen date pages with no public observances must fail closed to noindex/follow');
 expect(annualDatePage.includes('robots: { index: Boolean(editorial), follow: true }'), 'Evergreen date pages with public observances must still require SantosDia editorial context before indexing');
+expect(rootLayout.includes("encodingFormat: 'text/calendar', contentUrl: `${SITE_ORIGIN}/api/ical/all`"), 'Dataset structured data must advertise the actual ICS feed as its text/calendar distribution');
+expect(!rootLayout.includes("encodingFormat: 'text/calendar', contentUrl: `${SITE_ORIGIN}/calendar`"), 'Dataset structured data must not mislabel the HTML calendar page as a text/calendar download');
+expect(rollingIcsRoute.includes('"Content-Type":"text/calendar; charset=utf-8"'), 'The structured-data ICS distribution target must continue to emit text/calendar');
 expect(sitemap.includes('EDITORIAL_GUIDES.map'), 'Reviewed editorial guides must remain represented in the sitemap');
 expect(sitemap.includes('path: "/about"') && sitemap.includes('path: "/copyright"') && sitemap.includes('path: "/corrections"'), 'Transparency and canonical provenance pages must remain discoverable');
 expect(!sitemap.includes('path: "/sources"') && !sitemap.includes('path: "/developers"'), 'Redirect aliases must not consume sitemap entries');
