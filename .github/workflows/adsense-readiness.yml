@@ -44,6 +44,7 @@ on:
       - 'scripts/check-adsense-readiness.mjs'
       - 'scripts/check-search-footprint.mjs'
       - 'scripts/audit-editorial-corpus.mjs'
+      - 'scripts/audit-annual-date-editorial.mjs'
       - 'docs/editorial-content-policy.md'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
@@ -90,6 +91,7 @@ on:
       - 'scripts/check-adsense-readiness.mjs'
       - 'scripts/check-search-footprint.mjs'
       - 'scripts/audit-editorial-corpus.mjs'
+      - 'scripts/audit-annual-date-editorial.mjs'
       - 'docs/editorial-content-policy.md'
       - 'docs/adsense-activation-checklist.md'
       - '.github/workflows/adsense-readiness.yml'
@@ -110,6 +112,8 @@ jobs:
         run: node scripts/check-adsense-readiness.mjs
       - name: Audit search publication footprint
         run: node scripts/check-search-footprint.mjs
+      - name: Audit indexed annual-date editorial depth
+        run: node scripts/audit-annual-date-editorial.mjs
 
   production:
     if: github.event_name == 'push'
