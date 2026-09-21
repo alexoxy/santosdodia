@@ -11,9 +11,9 @@ const publicLocales = ['en', 'es', 'pt', 'it'];
 const thresholds = {
   eyebrowCharacters: 8,
   titleCharacters: 18,
-  leadCharacters: 140,
-  contextCharacters: 180,
-  editorialWords: 60,
+  leadCharacters: 180,
+  contextCharacters: 200,
+  editorialWords: 65,
   observanceIds: 1,
 };
 
