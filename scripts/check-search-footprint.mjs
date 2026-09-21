@@ -56,6 +56,10 @@ expect(!sitemap.includes('ECCLESIASTICAL_PEOPLE.map'), 'Leader directory entitie
 expect(!sitemap.includes('DISCOVERY_TOPICS.map'), 'Discovery topics must stay out of the sitemap until an editorial gate exists');
 expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'), 'Substantive saint profiles must remain editorially gated in the sitemap');
 expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'), 'Annual date pages must remain editorially gated in the sitemap');
+expect(annualDatePage.includes('buildPublicToday'), 'Evergreen date SSR must use the canonical published Today/calendar runtime rather than repository-only observances');
+expect(annualDatePage.includes('const loadAnnualDate = cache('), 'Evergreen date metadata and page rendering must share one cached canonical loader');
+expect(annualDatePage.includes('const { data: items } = await loadAnnualDate(dateISO, locale);'), 'Evergreen date metadata and visible content must resolve canonical public items');
+expect(annualDatePage.includes('initialItems={items}') && annualDatePage.includes('initialTradition="all"'), 'Evergreen date hydration must start from the canonical global SSR baseline');
 expect(annualDatePage.includes('if (!items.length) return { ...metadata, robots: { index: false, follow: true } };'), 'Evergreen date pages with no public observances must fail closed to noindex/follow');
 expect(annualDatePage.includes('robots: { index: Boolean(editorial), follow: true }'), 'Evergreen date pages with public observances must still require SantosDia editorial context before indexing');
 expect(sitemap.includes('EDITORIAL_GUIDES.map'), 'Reviewed editorial guides must remain represented in the sitemap');
