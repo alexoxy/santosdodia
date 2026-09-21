@@ -3,6 +3,7 @@ import { getPublicAllObservances } from "../lib/public-observances";
 import { hasAnnualDateEditorial } from "../data/date-editorial-registry";
 import { EDITORIAL_GUIDES } from "../data/editorial-guides";
 import { SAINT_BIOGRAPHIES } from "../data/saint-biography-registry";
+import { getIndexedEditorialProfileObservances } from "../lib/editorial-profile-observances";
 import { isSaintBiographyReadyForLaunchedLocales } from "../lib/editorial-profile-quality";
 import { SITE_ORIGIN } from "../lib/site";
 
@@ -30,7 +31,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = staticRouteDefinitions.map(route => ({ ...route, url: `${SITE_ORIGIN}${route.path}` }));
   const observances = getPublicAllObservances(year);
-  const annualDays: MetadataRoute.Sitemap = [...new Set(observances.map(item => item.dateISO.slice(5)))]
+  const editorialProfileObservances = getIndexedEditorialProfileObservances(year, "en");
+  const annualDays: MetadataRoute.Sitemap = [...new Set([
+    ...observances.map(item => item.dateISO.slice(5)),
+    ...editorialProfileObservances.map(item => item.dateISO.slice(5)),
+  ])]
     .filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))
     .map(monthDay => ({
       url: `${SITE_ORIGIN}/date/${monthDay}`,
