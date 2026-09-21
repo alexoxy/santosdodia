@@ -8,6 +8,7 @@ const editorialFiles = [
   'data/date-editorial-batch-3.ts',
   'data/date-editorial-batch-4.ts',
   'data/date-editorial-batch-5.ts',
+  'data/date-editorial-batch-6.ts',
 ];
 const publicLocales = ['en', 'es', 'pt', 'it'];
 const thresholds = {
