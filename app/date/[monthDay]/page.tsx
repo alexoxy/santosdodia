@@ -80,13 +80,17 @@ export async function generateMetadata({ params }: { params: Promise<{ monthDay:
   const title = annualTitle(locale, label);
   const description = editorial?.lead ?? annualDescription(locale, label, names, items.length);
   const canonical = `/date/${monthDay}`;
-  return {
+  const metadata = {
     title,
     description,
     alternates: { canonical },
+    openGraph: { title, description, url: canonical, type: "website" as const },
+    twitter: { card: "summary" as const, title, description },
+  };
+  if (!items.length) return { ...metadata, robots: { index: false, follow: true } };
+  return {
+    ...metadata,
     robots: { index: Boolean(editorial), follow: true },
-    openGraph: { title, description, url: canonical, type: "website" },
-    twitter: { card: "summary", title, description },
   };
 }
 

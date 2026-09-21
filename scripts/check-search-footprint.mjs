@@ -8,6 +8,7 @@ const expect = (condition, message) => { if (!condition) failures.push(message);
 
 const nextConfig = text('next.config.ts');
 const sitemap = text('app/sitemap.ts');
+const annualDatePage = text('app/date/[monthDay]/page.tsx');
 const searchRoute = text('app/api/v1/search/route.ts');
 const sourcesAlias = text('app/sources/page.tsx');
 const developersAlias = text('app/developers/page.tsx');
@@ -55,6 +56,8 @@ expect(!sitemap.includes('ECCLESIASTICAL_PEOPLE.map'), 'Leader directory entitie
 expect(!sitemap.includes('DISCOVERY_TOPICS.map'), 'Discovery topics must stay out of the sitemap until an editorial gate exists');
 expect(sitemap.includes('SAINT_BIOGRAPHIES.filter(isSaintBiographyReadyForLaunchedLocales).map'), 'Substantive saint profiles must remain editorially gated in the sitemap');
 expect(sitemap.includes('.filter(monthDay => hasAnnualDateEditorial(monthDay, "en"))'), 'Annual date pages must remain editorially gated in the sitemap');
+expect(annualDatePage.includes('if (!items.length) return { ...metadata, robots: { index: false, follow: true } };'), 'Evergreen date pages with no public observances must fail closed to noindex/follow');
+expect(annualDatePage.includes('robots: { index: Boolean(editorial), follow: true }'), 'Evergreen date pages with public observances must still require SantosDia editorial context before indexing');
 expect(sitemap.includes('EDITORIAL_GUIDES.map'), 'Reviewed editorial guides must remain represented in the sitemap');
 expect(sitemap.includes('path: "/about"') && sitemap.includes('path: "/copyright"') && sitemap.includes('path: "/corrections"'), 'Transparency and canonical provenance pages must remain discoverable');
 expect(!sitemap.includes('path: "/sources"') && !sitemap.includes('path: "/developers"'), 'Redirect aliases must not consume sitemap entries');
