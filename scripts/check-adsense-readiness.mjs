@@ -120,7 +120,8 @@ if(!failures.length){
   const annualDay=text('app/date/[monthDay]/page.tsx');
   expect(annualDay.includes('canonical = `/date/${monthDay}`'),'Evergreen date pages need stable month-day canonicals');
   expect(annualDay.includes('robots: { index: Boolean(editorial), follow: true }'),'Evergreen date pages must be indexable only when SantosDia editorial context exists');
-  expect(annualDay.includes('<DayView dateISO={dateISO} mode="annual" />'),'Evergreen date pages must use the annual day experience');
+  expect(/<DayView[\s\S]*?mode="annual"[\s\S]*?\/>/u.test(annualDay),'Evergreen date pages must use the annual day experience');
+  expect(annualDay.includes('initialItems={items}') && annualDay.includes('initialLocale={locale}'),'Evergreen date pages must preserve the canonical SSR baseline through hydration');
   expect(annualDay.includes('BreadcrumbList'),'Evergreen date pages should expose breadcrumbs');
 
   const noindexSurfaces = [
