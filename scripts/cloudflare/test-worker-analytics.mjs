@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict';
-import { fetchWorkerAnalytics, summarizeWorkerAnalytics } from './worker-analytics.mjs';
+import { buildAnalyticsFailureReport, fetchWorkerAnalytics, summarizeWorkerAnalytics } from './worker-analytics.mjs';
 
 const summary = summarizeWorkerAnalytics({
   workerName: 'santosdodia',
@@ -19,6 +19,15 @@ assert.equal(summary.maxCpuTimeP50, 10);
 assert.equal(summary.maxCpuTimeP99, 13);
 assert.equal(summary.cloudflareDeployment, false);
 assert.equal(summary.d1Write, false);
+
+const failure = buildAnalyticsFailureReport({
+  error: new Error('authorization denied for secret-test-token'),
+  secret: 'secret-test-token',
+});
+assert.equal(failure.analyticsAvailable, false);
+assert.equal(failure.metricsIncomplete, true);
+assert.equal(failure.errorMessage.includes('secret-test-token'), false);
+assert.equal(failure.d1Write, false);
 
 let request;
 const now = new Date('2026-10-18T10:00:00.000Z');
