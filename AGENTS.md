@@ -1,5 +1,9 @@
 # Santos do Dia development instructions
 
+## Global calendar context — mandatory
+
+Follow [the global calendar context contract](docs/global-calendar-context-contract.md) for every saint/blessed, calendar source, editorial decision and product surface. Language, country, Church/rite, jurisdiction, religious institute, calendar system and timezone are independent. Country does not uniquely identify a Church or calendar. Changing language must not change observance membership. Store rank and scope on contextual observances, never globally on a person. Use approved calendars/decrees for the selected jurisdiction and year; do not infer national scope from local devotion or worldwide scope from popularity. Joana of Portugal on 12 May 2026 is the reference case: national optional memorial; Aveiro city solemnity; other diocesan churches feast; Dominican obligatory memorial. Apply Catholic rules only within their supported ecclesial scope. Future changes must satisfy the contract's acceptance examples. Documentation propagation is not proof of runtime compliance.
+
 These rules apply to all repository changes, including automated and agent-authored changes.
 
 ## Product priorities
