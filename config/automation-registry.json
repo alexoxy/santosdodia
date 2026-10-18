@@ -19,7 +19,7 @@
   "tasks": [
     {
       "id": "production-health",
-      "title": "Weekly Cloudflare production health",
+      "title": "Weekly Cloudflare production health and Worker CPU metrics",
       "owner": "platform",
       "mode": "scheduled",
       "workflow": ".github/workflows/production-health.yml",
@@ -27,8 +27,11 @@
         "17 9 * * 1"
       ],
       "publicationMode": "read-only",
-      "archiveStream": null,
-      "producerScripts": []
+      "archiveStream": "ops/cloudflare/worker-cpu-usage/v1",
+      "producerScripts": [
+        "scripts/cloudflare/worker-analytics.mjs",
+        "scripts/archive-to-dropbox.mjs"
+      ]
     },
     {
       "id": "observance-refresh",

@@ -99,7 +99,7 @@
     },
     {
       "id": "corroboration-and-source-change",
-      "pattern": "^(?:corroboration(?:-evidence)?/|ecclesiastical-osint$|source-freshness$|source-orchestrator$|media/live-streams/)",
+      "pattern": "^(?:corroboration(?:-evidence)?/|ecclesiastical-osint$|source-freshness$|source-orchestrator$|media/live-streams/|ops/cloudflare/worker-cpu-usage/)",
       "layer": "changes",
       "retentionClass": "bounded-unless-referenced",
       "targetPolicy": "promote-referenced-evidence-to-durable-claim-record"

@@ -137,6 +137,9 @@ jobs:
           const overlay=JSON.parse(fs.readFileSync('staging/portugal-snl/overlay-plan.json','utf8'));
           const approved=JSON.parse(fs.readFileSync('staging/portugal-snl/approved-overlay-review.json','utf8'));
           const effective=JSON.parse(fs.readFileSync('staging/portugal-snl/effective-preview.json','utf8'));
+          const approvedYearPrefix=`${approved.year}-`;
+          const approvedYearOccurrences=normalized.events.filter(item=>String(item.dateISO).startsWith(approvedYearPrefix)).length;
+          const approvedYearBlockingDeltas=overlay.blockingDeltaReview.filter(item=>String(item.dateISO).startsWith(approvedYearPrefix)).length;
           if(normalized.run.publicationAllowed!==false||normalized.run.promotionAllowed!==false) throw new Error('Portugal layer escaped staging-only mode.');
           if(normalized.coverage.sourceDayCount<365||normalized.coverage.civilDays<365) throw new Error(`Portugal SNL coverage unexpectedly thin: ${JSON.stringify(normalized.coverage)}`);
           if(canonical.occurrences.some(item=>item.jurisdictionId!=='PT'||item.churchId!=='roman-catholic'||item.publicationStatus!=='withheld')) throw new Error('Portugal canonical staging output crossed jurisdiction/publication boundary.');
@@ -154,12 +157,12 @@ jobs:
           if(approved.decisions.length!==15||approved.decisions.some(item=>item.decision!=='approved')) throw new Error('Portugal liturgical approval does not cover the exact 15 decisions.');
           if(effective.mode!=='effective-portugal-calendar-preview'||effective.productionWriteAllowed!==false||effective.publicationAllowed!==true) throw new Error('Effective Portugal preview did not enter release-build-eligible state after exact approval.');
           if(effective.reviewPlanStatus!=='approved-liturgical-decisions') throw new Error('Effective Portugal preview is not tied to the approved decision set.');
-          if(effective.summary.sourceOccurrences!==normalized.events.length||effective.summary.uniqueDays!==365) throw new Error('Effective Portugal preview does not preserve the official SNL occurrence/day set.');
-          if(effective.summary.pendingReviewRows!==overlay.summary.blockingDeltaReview) throw new Error('Effective Portugal preview historical review-row count diverges from blocking overlay deltas.');
+          if(effective.year!==approved.year||effective.summary.sourceOccurrences!==approvedYearOccurrences||effective.summary.sourcePackageOccurrences!==normalized.events.length||effective.summary.sourceOccurrencesOutsidePreviewYear!==normalized.events.length-approvedYearOccurrences||effective.summary.uniqueDays!==365) throw new Error('Effective Portugal preview does not preserve the complete approved-year SNL occurrence/day set while retaining the full source package.');
+          if(effective.summary.pendingReviewRows!==approvedYearBlockingDeltas) throw new Error('Effective Portugal preview review-row count diverges from approved-year blocking overlay deltas.');
           if(effective.summary.preparedDecisionsUsed!==15) throw new Error('Effective Portugal preview does not consume the 15 approved liturgical decisions.');
           if(effective.provenancePolicy.firstEventByCivilDateMatchingForbidden!==true) throw new Error('Effective Portugal preview reintroduced date-only identity binding.');
           const decisionRows=effective.items.filter(item=>item.decisionId!==null);
-          if(decisionRows.length!==overlay.summary.blockingDeltaReview||decisionRows.some(item=>item.reviewStatus!=='approved')) throw new Error('A decision-backed Portugal source row is not explicitly approved.');
+          if(decisionRows.length!==approvedYearBlockingDeltas||decisionRows.some(item=>item.reviewStatus!=='approved')) throw new Error('A decision-backed Portugal source row is not explicitly approved.');
           if(effective.items.some(item=>item.publicationAllowed!==false)) throw new Error('An effective Portugal preview row crossed the separate D1 production gate.');
           NODE
 
