@@ -20,9 +20,9 @@ The public product answers five questions:
 
 Complex theology, calendar conversion, provenance and multilingual identity resolution belong in the data platform. The user interface must remain simple.
 
-## Mobile primary navigation
+## Original v1 navigation reference
 
-Exactly five primary destinations:
+The following five destinations describe the original v1 proposal, not a current fixed navigation count. The cumulative product surface scope in [the normative v2.1 vision](product/global-liturgical-intelligence-v2.1.md#product-surfaces-and-their-jobs) also includes Pray, Saved, Calculator and API. Preserve all required capabilities; validate their mobile grouping under E22 rather than deleting scope to match this historical list:
 
 - **Today** — current date, selected Church, jurisdiction and verified observances.
 - **Calendar** — day-first browsing, then month view, with smart ICS/webcal subscription.
@@ -87,7 +87,7 @@ Coverage is global by architecture and by major Church families; it does not req
 
 ## Incremental operation after baseline
 
-One hourly orchestrator determines which sources are due. It does **not** re-fetch the whole world every hour.
+The source orchestrator runs on the monthly distributed acquisition schedule and determines which sources are due. The separate hourly development task advances the delivery backlog; it does not increase source-acquisition frequency.
 
 `DUE SOURCE → CHEAP CHANGE CHECK → NO_CHANGE | FETCH → RAW → NORMALIZE → RESOLVE → LANGUAGE/TEMPORAL GATES → D1 STAGING → AUTO-PROMOTION WHEN SAFE`
 
@@ -116,3 +116,7 @@ No social network, comments, gamification, long devotional corpus, AI chat surfa
 ## Final-product acceptance clarification — 2026-10-18
 
 Follow [the final-product acceptance criteria](product/final-product-acceptance-2026-10-18.md) for global coverage, calendar equivalence, demographic language selection, archived algorithms, evidence-first biographies, patronage search, official live streams and monthly maintenance. Documentation is not proof of runtime delivery.
+
+## Reconciled policy references
+
+Use [the policy reconciliation matrix](product/policy-reconciliation-2026-10-18.md) to resolve historical references to media, serving windows, navigation, cadence and monetization.
