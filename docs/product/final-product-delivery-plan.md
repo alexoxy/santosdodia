@@ -74,7 +74,7 @@ O produto está pronto para cada contexto publicado quando todos os critérios a
 - GitHub é a fonte de verdade do código; Dropbox guarda fontes permitidas, snapshots, provas, conflitos e recuperação; Cloudflare serve a projeção pública.
 - Tarefas normais de build, CI, reconciliação e validação não escrevem em D1 remoto. Promoção de produção é uma operação separada, autorizada, idempotente, com preflight, recibo e rollback.
 - Processos mensais/delta mantêm fontes e perfis; checks semanais limitam-se a saúde, frescura e mudanças relevantes. Não repetir recolhas integrais sem necessidade.
-- A verificação semanal lê uma janela móvel de 7 dias de CPU/erros Workers via GitHub Actions, guarda o resumo em Dropbox e falha com uma indicação explícita se houver limite CPU excedido ou dados incompletos. Só usa as credenciais já guardadas nos secrets do GitHub; não faz deploy nem escreve em D1.
+- A verificação semanal lê uma janela móvel de 7 dias de CPU/erros Workers via GitHub Actions, guarda o resumo em Dropbox e falha com uma indicação explícita se houver limite CPU excedido ou dados incompletos. Usa o secret `CLOUDFLARE_ANALYTICS_API_TOKEN` do ambiente `d1-staging` com permissão apenas `Account Analytics:Read`; mantém `CLOUDFLARE_API_TOKEN` como fallback. Não faz deploy nem escreve em D1.
 - Consumir abaixo do menor entre os limites Free do fornecedor e os limites internos do projeto. Limites internos atuais: um deploy Cloudflare por dia, no máximo uma operação remota de staging D1 por dia útil UTC, até 1M leituras, 25k escritas e 10k statements por lote; produção, DNS, secrets, pagamentos e R2 continuam fechados salvo decisão e budget gate específicos.
 
 ## 4. Caminho crítico e entregas

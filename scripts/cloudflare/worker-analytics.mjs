@@ -70,6 +70,26 @@ export function summarizeWorkerAnalytics({ workerName, observedAt, interval, rec
   };
 }
 
+export function buildAnalyticsFailureReport({ workerName = 'santosdodia', observedAt = new Date().toISOString(), error, secret }) {
+  let errorMessage = String(error?.message ?? error ?? 'Unknown Cloudflare analytics failure').replace(/[\r\n\t]+/gu, ' ').slice(0, 500);
+  if (secret) errorMessage = errorMessage.split(secret).join('[redacted]');
+  return {
+    schemaVersion: 1,
+    workerName,
+    observedAt,
+    analyticsAvailable: false,
+    errorClass: String(error?.name ?? 'Error').slice(0, 80),
+    errorMessage,
+    requestCount: null,
+    errorCount: null,
+    cpuLimitErrorCount: null,
+    metricsIncomplete: true,
+    publicationMutation: false,
+    cloudflareDeployment: false,
+    d1Write: false,
+  };
+}
+
 export async function fetchWorkerAnalytics({ accountId, apiToken, workerName = 'santosdodia', now = new Date(), fetchImpl = fetch }) {
   if (!accountId || !apiToken) throw new Error('Cloudflare account ID and API token are required.');
   const end = new Date(now.getTime() - INGESTION_LAG_MS);
@@ -149,5 +169,19 @@ async function main() {
 
 const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : '';
 if (invokedPath === fileURLToPath(import.meta.url)) {
-  try { await main(); } catch (error) { console.error(error.message); process.exitCode = 1; }
+  try {
+    await main();
+  } catch (error) {
+    const output = path.resolve(process.argv[2] ?? 'reports/cloudflare/worker-cpu-7d.json');
+    const report = buildAnalyticsFailureReport({
+      workerName: 'santosdodia',
+      error,
+      secret: process.env.CLOUDFLARE_API_TOKEN,
+    });
+    fs.mkdirSync(path.dirname(output), { recursive: true });
+    fs.writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+    writeOutput('cpu_limit_exceeded', 'unknown');
+    writeOutput('metrics_incomplete', 'true');
+    console.error(`Cloudflare Worker analytics unavailable; safe diagnostic report written to ${output}.`);
+  }
 }
