@@ -302,6 +302,10 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    environment: d1-staging
+    outputs:
+      cpu_limit_exceeded: ${{ steps.metrics.outputs.cpu_limit_exceeded }}
+      metrics_incomplete: ${{ steps.metrics.outputs.metrics_incomplete }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -318,6 +322,31 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node scripts/cloudflare/worker-analytics.mjs reports/cloudflare/worker-cpu-7d.json
 
+      - name: Upload metrics report for the Dropbox archive job
+        uses: actions/upload-artifact@v7
+        with:
+          name: cloudflare-worker-cpu-metrics
+          path: reports/cloudflare/worker-cpu-7d.json
+          if-no-files-found: error
+          retention-days: 2
+
+  archive-worker-analytics:
+    name: Archive Cloudflare Worker CPU metrics
+    if: github.event_name != 'pull_request'
+    needs: worker-analytics
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: dropbox-archive
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download metrics report
+        uses: actions/download-artifact@v8
+        with:
+          name: cloudflare-worker-cpu-metrics
+          path: reports/cloudflare
+
       - name: Archive metrics report to Dropbox
         env:
           DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
@@ -330,11 +359,11 @@ jobs:
           --run-number ${{ github.run_number }}
 
       - name: Flag CPU limit errors or incomplete metrics
-        if: steps.metrics.outputs.cpu_limit_exceeded == 'true' || steps.metrics.outputs.metrics_incomplete == 'true'
+        if: needs.worker-analytics.outputs.cpu_limit_exceeded == 'true' || needs.worker-analytics.outputs.metrics_incomplete == 'true'
         run: |
           echo '::error::Cloudflare Worker CPU limit errors are present or the analytics result may be incomplete. See the archived Dropbox report.'
           exit 1
 
       - name: Confirm no CPU limit errors
-        if: steps.metrics.outputs.cpu_limit_exceeded == 'false' && steps.metrics.outputs.metrics_incomplete == 'false'
+        if: needs.worker-analytics.outputs.cpu_limit_exceeded == 'false' && needs.worker-analytics.outputs.metrics_incomplete == 'false'
         run: echo 'No CPU-limit invocation errors in the sampled 7-day interval.'

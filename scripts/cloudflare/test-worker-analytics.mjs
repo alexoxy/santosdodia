@@ -40,6 +40,8 @@ assert.equal(request.url, 'https://api.cloudflare.com/client/v4/graphql');
 assert.equal(request.options.method, 'POST');
 assert.equal(request.options.headers.Authorization, 'Bearer token-test');
 assert.equal(request.options.body.includes('santosdodia'), true);
+assert.match(request.options.body, /dimensions\s*\{\s*scriptName\s+status\s*\}/u);
+assert.doesNotMatch(request.options.body, /dimensions\s*\{[^}]*datetime/u);
 assert.equal(live.requestCount, 10);
 assert.equal(live.cpuLimitErrorCount, 0);
 assert.equal(live.interval.end, '2026-10-18T09:55:00.000Z');
