@@ -91,7 +91,7 @@ One hourly orchestrator determines which sources are due. It does **not** re-fet
 
 `DUE SOURCE → CHEAP CHANGE CHECK → NO_CHANGE | FETCH → RAW → NORMALIZE → RESOLVE → LANGUAGE/TEMPORAL GATES → D1 STAGING → AUTO-PROMOTION WHEN SAFE`
 
-Cadence is source-specific. Live health may be hourly; calendars daily/weekly; discovery and deep source audits weekly/monthly.
+After bootstrap, calendar, biography and patronage acquisition uses monthly distributed delta checks. Lightweight operational/live health checks may run more frequently. Hourly development orchestration does not imply hourly source acquisition.
 
 On failure the platform retains last-known-good production data. New data never causes a Cloudflare Worker build unless application code/schema actually requires deployment.
 
@@ -112,3 +112,7 @@ Product v1 is usable when a mobile visitor can:
 ## Non-goals before v1
 
 No social network, comments, gamification, long devotional corpus, AI chat surface, broad encyclopedia expansion or additional agent lanes unless they directly improve Today, Calendar, Search, Pilgrimages, Live or the Global Baseline.
+
+## Final-product acceptance clarification — 2026-10-18
+
+Follow [the final-product acceptance criteria](product/final-product-acceptance-2026-10-18.md) for global coverage, calendar equivalence, demographic language selection, archived algorithms, evidence-first biographies, patronage search, official live streams and monthly maintenance. Documentation is not proof of runtime delivery.
