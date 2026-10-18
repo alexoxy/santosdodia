@@ -15,7 +15,7 @@
     "cloudflare:deploy": "opennextjs-cloudflare deploy",
     "cloudflare:upload": "opennextjs-cloudflare upload",
     "cloudflare:guardrails-audit": "node scripts/cloudflare-free-guardrails.mjs audit",
-    "cloudflare:guardrails-test": "node scripts/test-cloudflare-free-guardrails.mjs",
+    "cloudflare:guardrails-test": "node scripts/test-cloudflare-free-guardrails.mjs && node scripts/cloudflare/test-worker-analytics.mjs",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "api:validate": "node scripts/validate-api-contracts.mjs",
     "autonomy:plan": "node scripts/autonomy/build-plan.mjs",

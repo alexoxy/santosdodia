@@ -9,10 +9,20 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/production-health.yml'
+      - 'scripts/cloudflare/worker-analytics.mjs'
+      - 'scripts/cloudflare/test-worker-analytics.mjs'
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/oauth.mjs'
+      - 'config/automation-registry.json'
   push:
     branches: [main]
     paths:
       - '.github/workflows/production-health.yml'
+      - 'scripts/cloudflare/worker-analytics.mjs'
+      - 'scripts/cloudflare/test-worker-analytics.mjs'
+      - 'scripts/archive-to-dropbox.mjs'
+      - 'scripts/dropbox/oauth.mjs'
+      - 'config/automation-registry.json'
 
 permissions:
   contents: read
@@ -286,3 +296,45 @@ jobs:
             echo '- Weekly/manual probes require a published D1 saint profile and its stable individual ICS feed.'
             echo '- D1-heavy verification is weekly to preserve the Cloudflare Free operating boundary.'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  worker-analytics:
+    name: Record Cloudflare Worker CPU metrics
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+
+      - name: Query the last 7 days of Worker analytics
+        id: metrics
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/cloudflare/worker-analytics.mjs reports/cloudflare/worker-cpu-7d.json
+
+      - name: Archive metrics report to Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: >-
+          node scripts/archive-to-dropbox.mjs
+          --stream ops/cloudflare/worker-cpu-usage/v1
+          --source reports/cloudflare/worker-cpu-7d.json
+          --run-number ${{ github.run_number }}
+
+      - name: Flag CPU limit errors or incomplete metrics
+        if: steps.metrics.outputs.cpu_limit_exceeded == 'true' || steps.metrics.outputs.metrics_incomplete == 'true'
+        run: |
+          echo '::error::Cloudflare Worker CPU limit errors are present or the analytics result may be incomplete. See the archived Dropbox report.'
+          exit 1
+
+      - name: Confirm no CPU limit errors
+        if: steps.metrics.outputs.cpu_limit_exceeded == 'false' && steps.metrics.outputs.metrics_incomplete == 'false'
+        run: echo 'No CPU-limit invocation errors in the sampled 7-day interval.'

@@ -25,7 +25,7 @@ Snapshot de produto Dropbox de 18/10/2026 e fontes de projeto disponíveis nesta
 - Idiomas registados no modelo: en, es, pt, fr, fil, ru, sw, de, it e pl. Superfícies públicas registadas: en, es, pt e it. A cobertura deve ser medida por campo e página; não pode haver fallback silencioso.
 - O registo de monetização do repositório (29/08) indica `REMEDIATION_REQUIRED` por conteúdo de baixo valor; o snapshot Dropbox de 18/10 indica `PREPARING`. Estado atual não confirmado: consultar o painel do AdSense antes de qualquer nova submissão. Nenhum destes dois estados equivale a aprovação.
 - PR #346 esteve bloqueado pelo `npm audit` em `braces` (CVE-2026-93687) e em dependências transitivas do toolchain. Em 18/10, a auditoria ficou sem vulnerabilidades após atualização de Next.js/Wrangler e dependências corrigidas, mais um backport local documentado de `braces` 3.0.3 com limite de profundidade; o upstream ainda não publicou uma versão corrigida. O backport tem teste de regressão e deve ser substituído quando houver release upstream. PRs #347 e #348 mantêm os seus próprios gates.
-- Cloudflare Workers é o runtime; Vercel já não faz parte da arquitetura ativa do projeto. A instalação GitHub Vercel é um acesso de conta separado, não uma dependência do SantosDia.
+- Cloudflare Workers é o runtime; Vercel já não faz parte da arquitetura ativa do projeto. Um aviso de 08/10/2026 reportou mais de 100 invocações acima do limite CPU Free em 24 horas. O alerta não tem amostra posterior confirmada; a saúde atual fica por verificar até a leitura de métricas Workers no GitHub Actions.
 
 Estes valores são uma linha de base, não metas editoriais arbitrárias. Cada mudança de fonte exige novo snapshot, hash e proveniência.
 
@@ -74,6 +74,7 @@ O produto está pronto para cada contexto publicado quando todos os critérios a
 - GitHub é a fonte de verdade do código; Dropbox guarda fontes permitidas, snapshots, provas, conflitos e recuperação; Cloudflare serve a projeção pública.
 - Tarefas normais de build, CI, reconciliação e validação não escrevem em D1 remoto. Promoção de produção é uma operação separada, autorizada, idempotente, com preflight, recibo e rollback.
 - Processos mensais/delta mantêm fontes e perfis; checks semanais limitam-se a saúde, frescura e mudanças relevantes. Não repetir recolhas integrais sem necessidade.
+- A verificação semanal lê uma janela móvel de 7 dias de CPU/erros Workers via GitHub Actions, guarda o resumo em Dropbox e falha com uma indicação explícita se houver limite CPU excedido ou dados incompletos. Só usa as credenciais já guardadas nos secrets do GitHub; não faz deploy nem escreve em D1.
 - Consumir abaixo do menor entre os limites Free do fornecedor e os limites internos do projeto. Limites internos atuais: um deploy Cloudflare por dia, no máximo uma operação remota de staging D1 por dia útil UTC, até 1M leituras, 25k escritas e 10k statements por lote; produção, DNS, secrets, pagamentos e R2 continuam fechados salvo decisão e budget gate específicos.
 
 ## 4. Caminho crítico e entregas
