@@ -50,6 +50,6 @@
     "nameOnlyIdentityMerge": "forbidden",
     "automaticPublication": false,
     "automaticIndexation": false,
-    "adsenseReviewState": "PREPARING"
+    "adsenseReviewState": "REMEDIATION_REQUIRED"
   }
 }
