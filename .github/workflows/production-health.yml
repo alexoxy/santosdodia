@@ -299,7 +299,7 @@ jobs:
 
   worker-analytics:
     name: Record Cloudflare Worker CPU metrics
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     environment: d1-staging
@@ -332,7 +332,7 @@ jobs:
 
   archive-worker-analytics:
     name: Archive Cloudflare Worker CPU metrics
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     needs: worker-analytics
     runs-on: ubuntu-latest
     timeout-minutes: 5
