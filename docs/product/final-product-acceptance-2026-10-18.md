@@ -6,7 +6,7 @@ Decisão do utilizador: 18/10/2026. Complemento normativo à visão v2.1 e ao co
 
 O objetivo final abrange santos católicos, ortodoxos e pessoas comemoradas pelas restantes Igrejas com calendários próprios. Preservar a designação e o estatuto usados por cada Igreja. Não confundir um catálogo de pessoas reconhecidas com presença obrigatória no calendário de cada dia. Medir por autoridade: universo conhecido, adquirido, identificado, revisto e publicado; lacunas e universos ainda desconhecidos ficam explícitos. Portugal é uma primeira validação, não o limite do produto.
 
-País, idioma, Igreja/rito, jurisdição, instituto religioso, sistema de calendário e fuso são escolhas independentes. Localização pode sugerir contexto, nunca substituir uma escolha explícita. Distinguir veneração local, nacional e universal de inscrição num calendário aprovado. Aplicar o caso Joana de Portugal e as regras de `../global-calendar-context-contract.md` em todas as superfícies.
+País, idioma, Igreja/rito, jurisdição, instituto religioso, sistema de calendário e fuso são escolhas independentes. A sugestão inicial segue: localização disponível do visitante → região explícita do idioma do browser (pt-PT/pt-BR) → região provável do idioma segundo Intl.Locale/CLDR. A região inferida é sugestão, não residência comprovada. Não solicitar geolocalização precisa para este efeito. Localização nunca substitui uma escolha explícita. Distinguir veneração local, nacional e universal de inscrição num calendário aprovado. Aplicar o caso Joana de Portugal e as regras de `../global-calendar-context-contract.md` em todas as superfícies.
 
 ## Equivalência e geração autónoma
 

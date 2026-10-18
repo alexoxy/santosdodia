@@ -84,7 +84,7 @@
     "publication:boundary-test": "node scripts/test-publication-boundaries.mjs",
     "litcal:sync": "node scripts/sync-litcal-mirror.mjs",
     "litcal:source": "bash scripts/mirror-litcal-source.sh",
-    "temporal:test": "node scripts/test-temporal-core.mjs",
+    "temporal:test": "node scripts/test-temporal-core.mjs && node scripts/test-calendar-preferences.mjs",
     "translations:sync": "node scripts/with-runtime-snapshot.mjs scripts/sync-name-translations.mjs",
     "translations:validate": "node scripts/validate-language-quality.mjs",
     "translations:grammar": "node scripts/audit-languagetool.mjs",

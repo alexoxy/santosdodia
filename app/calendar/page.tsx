@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { CALENDAR_REGION_COOKIE, countryFromLanguages, parseCalendarRegion } from "../../lib/calendar-preferences";
+import { cookies, headers } from "next/headers";
 import { parseTradition } from "../../data/observances";
 import CalendarProductNav from "../components/CalendarProductNav";
 import CalendarExplorerProgressive from "../components/CalendarExplorerProgressive";
@@ -11,6 +12,7 @@ import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { mergePublishedCalendarRange } from "../../lib/public-calendar-runtime";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
+import { countryFromHeaders } from "../../lib/request-geo";
 import { requestPublicLocale } from "../../lib/request-public-locale";
 
 function decodeCookie(value?: string): string | undefined {
@@ -46,7 +48,14 @@ export default async function CalendarPage() {
     savedChurch === "all"
       ? undefined
       : parseTradition(savedChurch) ?? "roman-catholic";
-  const country = defaultReadyCalendarCountry(tradition);
+  const requestHeaders = await headers();
+  const languageTags = (requestHeaders.get("accept-language") ?? "")
+    .split(",").filter((part) => !/;\s*q=0(?:\.0*)?\s*$/.test(part))
+    .map((part) => part.split(";")[0].trim());
+  const suggestedCountry = countryFromHeaders(requestHeaders) ?? countryFromLanguages(languageTags);
+  const region = parseCalendarRegion(cookieStore.get(CALENDAR_REGION_COOKIE)?.value)
+    ?? suggestedCountry ?? defaultReadyCalendarCountry(tradition) ?? "GLOBAL";
+  const country = region === "GLOBAL" ? undefined : region;
   const timeZone = normalizeTimeZone(
     decodeCookie(cookieStore.get("sdd-timezone")?.value),
   );
@@ -75,7 +84,7 @@ export default async function CalendarPage() {
         initialMonth={month}
         initialLocale={locale}
         initialChurch={tradition ?? "all"}
-        initialRegion={country ?? "GLOBAL"}
+        initialRegion={region}
       >
         <>
           <section className="page-hero compact-hero">

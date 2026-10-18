@@ -7,6 +7,7 @@ import {
   type Category,
   type Observance,
 } from "../../data/observances";
+import { CALENDAR_REGION_COOKIE, parseCalendarRegion } from "../../lib/calendar-preferences";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   defaultReadyCalendarCountry,
@@ -84,7 +85,7 @@ export default function CalendarExplorer({
   const [year, setYear] = useState(todayYear),
     [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
-    [region, setRegion] = useState(defaultReadyCalendarCountry(church) ?? country ?? "GLOBAL"),
+    [region, setRegion] = useState(parseCalendarRegion(initialRegion) ?? defaultReadyCalendarCountry(church) ?? country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
     [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -93,8 +94,18 @@ export default function CalendarExplorer({
     setMonth(todayMonth);
   }, [contextReady, todayYear, todayMonth]);
   useEffect(() => {
-    if (country && region === "GLOBAL") setRegion(country);
-  }, [country, region]);
+    const saved = document.cookie.split(';').map((part) => part.trim())
+      .find((part) => part.startsWith(`${CALENDAR_REGION_COOKIE}=`))?.split('=')[1];
+    const explicit = parseCalendarRegion(saved);
+    if (explicit) setRegion(explicit);
+    else if (country) setRegion(country);
+  }, [country]);
+  function chooseRegion(value: string) {
+    const next = parseCalendarRegion(value);
+    if (!next) return;
+    setRegion(next);
+    document.cookie = `${CALENDAR_REGION_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
+  }
   useEffect(() => {
     fetch("/api/v1/religious-holidays?mode=countries")
       .then((response) => (response.ok ? response.json() : null))
@@ -272,7 +283,7 @@ export default function CalendarExplorer({
           <label>{copy.country}</label>
           <select
             value={region}
-            onChange={(event) => setRegion(event.target.value)}
+            onChange={(event) => chooseRegion(event.target.value)}
           >
             <option value="GLOBAL">{copy.global}</option>
             {countries.map((value) => (
@@ -285,7 +296,7 @@ export default function CalendarExplorer({
         {country ? (
           <button
             className="btn btn-tertiary filter-action"
-            onClick={() => setRegion(country)}
+            onClick={() => chooseRegion(country)}
           >
             {copy.localSuggestion}
           </button>
