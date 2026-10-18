@@ -1,0 +1,728 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Ownership traceability, not a second execution plan or proof of completion. Current state is maintained in Dropbox master plan and issue355. Nested clauses inherit section ownership.",
+  "masterIssue": "https://github.com/alexoxy/santosdodia/issues/355",
+  "jsonSources": {
+    "config/product-platform-contract.json": {
+      "sections": {
+        "productDefinition": [
+          "E01.01"
+        ],
+        "northStar": [
+          "E14.01"
+        ],
+        "machinePromise": [
+          "E20.01"
+        ],
+        "productContextDimensions": [
+          "E05.01",
+          "E05.06"
+        ],
+        "inferenceGuards": [
+          "E06.01",
+          "E11.03"
+        ],
+        "launchPolicy": [
+          "E25.01"
+        ],
+        "operationalConstraints": [
+          "E02.01",
+          "E24.01"
+        ],
+        "liturgicalIntelligence": [
+          "E08.01",
+          "E27.01",
+          "E28.01",
+          "E29.01",
+          "E30.01"
+        ],
+        "rollingMaterialization": [
+          "E09.01"
+        ],
+        "retentionAndDistribution": [
+          "E09.08",
+          "E21.01"
+        ],
+        "knowledgeModel": [
+          "E06.01"
+        ],
+        "evidenceVault": [
+          "E04.01"
+        ],
+        "changeModel": [
+          "E31.03"
+        ],
+        "dateContract": [
+          "E08.07"
+        ],
+        "languageContract": [
+          "E13.02",
+          "E13.04"
+        ],
+        "authorityContract": [
+          "E03.01",
+          "E03.02"
+        ],
+        "publicationContract": [
+          "E10.01",
+          "E12.07"
+        ],
+        "autonomyContract": [
+          "E31.01",
+          "E31.08"
+        ],
+        "hygieneContract": [
+          "E32.01"
+        ],
+        "priorityOrder": [
+          "E01.05"
+        ],
+        "strategicMoat": [
+          "E01.01"
+        ],
+        "humanSurface": [
+          "E22.01",
+          "E19.04"
+        ],
+        "expansionStrategy": [
+          "E26.01",
+          "E27.01",
+          "E28.01",
+          "E29.01",
+          "E30.01"
+        ],
+        "normativeContinuity": [
+          "E01.01",
+          "E32.07"
+        ],
+        "acquisitionLifecycle": [
+          "E03.04",
+          "E31.02"
+        ],
+        "calendarCoordinateContract": [
+          "E05.01",
+          "E08.07"
+        ],
+        "adsenseRecoveryGate": [
+          "E24.01",
+          "E25.01"
+        ],
+        "publicationReadiness": [
+          "E25.01",
+          "E32.07"
+        ]
+      },
+      "nonRequirementSections": {
+        "schemaVersion": "format metadata",
+        "productVersion": "version metadata",
+        "status": "document status",
+        "effectiveDate": "date metadata",
+        "lastClarifiedDate": "date metadata",
+        "strategicAlignmentDate": "date metadata",
+        "executionSnapshot": "historical implementation snapshot, not normative requirement"
+      }
+    },
+    "config/product-execution-model.json": {
+      "sections": {
+        "principle": [
+          "E01.01"
+        ],
+        "productGoal": [
+          "E01.01"
+        ],
+        "modes": [
+          "E01.05",
+          "E31.08"
+        ],
+        "executionOrder": [
+          "E01.05"
+        ],
+        "productReleaseGate": [
+          "E25.01",
+          "E32.07"
+        ]
+      },
+      "nonRequirementSections": {
+        "schemaVersion": "format metadata"
+      }
+    },
+    "config/evidence-vault-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E04.01",
+          "E04.06"
+        ],
+        "status": [
+          "E04.01",
+          "E04.06"
+        ],
+        "effectiveDate": [
+          "E04.01",
+          "E04.06"
+        ],
+        "logicalRoots": [
+          "E04.01",
+          "E04.06"
+        ],
+        "globalRules": [
+          "E04.01",
+          "E04.06"
+        ],
+        "layers": [
+          "E04.01",
+          "E04.06"
+        ],
+        "streamRules": [
+          "E04.01",
+          "E04.06"
+        ],
+        "migration": [
+          "E04.01",
+          "E04.06"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/autonomy-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E31.01",
+          "E31.08"
+        ],
+        "targetMode": [
+          "E31.01",
+          "E31.08"
+        ],
+        "phase": [
+          "E31.01",
+          "E31.08"
+        ],
+        "principles": [
+          "E31.01",
+          "E31.08"
+        ],
+        "financialGuardrails": [
+          "E31.01",
+          "E31.08"
+        ],
+        "agents": [
+          "E31.01",
+          "E31.08"
+        ],
+        "transversalGates": [
+          "E31.01",
+          "E31.08"
+        ],
+        "acquisition": [
+          "E31.01",
+          "E31.08"
+        ],
+        "normalization": [
+          "E31.01",
+          "E31.08"
+        ],
+        "languageReview": [
+          "E31.01",
+          "E31.08"
+        ],
+        "import": [
+          "E31.01",
+          "E31.08"
+        ],
+        "promotion": [
+          "E31.01",
+          "E31.08"
+        ],
+        "sourcePipelines": [
+          "E31.01",
+          "E31.08"
+        ],
+        "runtime": [
+          "E31.01",
+          "E31.08"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/cloudflare-free-guardrails.json": {
+      "sections": {
+        "schemaVersion": [
+          "E02.01",
+          "E31.07"
+        ],
+        "plan": [
+          "E02.01",
+          "E31.07"
+        ],
+        "resetTimezone": [
+          "E02.01",
+          "E31.07"
+        ],
+        "officialLimits": [
+          "E02.01",
+          "E31.07"
+        ],
+        "autonomousLimits": [
+          "E02.01",
+          "E31.07"
+        ],
+        "sources": [
+          "E02.01",
+          "E31.07"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/entity-resolution-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E11.03"
+        ],
+        "mode": [
+          "E11.03"
+        ],
+        "principles": [
+          "E11.03"
+        ],
+        "identifierSchemes": [
+          "E11.03"
+        ],
+        "matching": [
+          "E11.03"
+        ],
+        "localizedNames": [
+          "E11.03"
+        ],
+        "counterValidation": [
+          "E11.03"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/marian-ontology-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E06.01"
+        ],
+        "canonicalSubject": [
+          "E06.01"
+        ],
+        "principles": [
+          "E06.01"
+        ],
+        "expressionTypes": [
+          "E06.01"
+        ],
+        "eventTypes": [
+          "E06.01"
+        ],
+        "relationTypes": [
+          "E06.01"
+        ],
+        "examples": [
+          "E06.01"
+        ],
+        "localizedDisplay": [
+          "E06.01"
+        ],
+        "sourceValidation": [
+          "E06.01"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/sanctity-lifecycle-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E06.01"
+        ],
+        "strategy": [
+          "E06.01"
+        ],
+        "principles": [
+          "E06.01"
+        ],
+        "baseline": [
+          "E06.01"
+        ],
+        "recognitionEventTypes": [
+          "E06.01"
+        ],
+        "churchPolicies": [
+          "E06.01"
+        ],
+        "agentCadence": [
+          "E06.01"
+        ],
+        "automaticHandling": [
+          "E06.01"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "data/linguistic-style-policy.json": {
+      "sections": {
+        "schemaVersion": [
+          "E13.02",
+          "E13.04"
+        ],
+        "status": [
+          "E13.02",
+          "E13.04"
+        ],
+        "principles": [
+          "E13.02",
+          "E13.04"
+        ],
+        "locales": [
+          "E13.02",
+          "E13.04"
+        ],
+        "translationGate": [
+          "E13.02",
+          "E13.04"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "data/language-authorities.json": {
+      "sections": {
+        "en": [
+          "E13.02"
+        ],
+        "es": [
+          "E13.02"
+        ],
+        "pt": [
+          "E13.02"
+        ],
+        "fr": [
+          "E13.02"
+        ],
+        "fil": [
+          "E13.02"
+        ],
+        "ru": [
+          "E13.02"
+        ],
+        "sw": [
+          "E13.02"
+        ],
+        "de": [
+          "E13.02"
+        ],
+        "it": [
+          "E13.02"
+        ],
+        "pl": [
+          "E13.02"
+        ]
+      },
+      "nonRequirementSections": {}
+    },
+    "config/automation-registry.json": {
+      "sections": {
+        "schemaVersion": [
+          "E31.01",
+          "E31.02"
+        ],
+        "timezone": [
+          "E31.01",
+          "E31.02"
+        ],
+        "policy": [
+          "E31.01",
+          "E31.02"
+        ],
+        "tasks": [
+          "E31.01",
+          "E31.02"
+        ]
+      },
+      "nonRequirementSections": {}
+    }
+  },
+  "documentSources": {
+    "docs/product/final-product-acceptance-2026-10-18.md": {
+      "sections": {
+        "Cobertura e contexto": [
+          "E03.07",
+          "E05.01"
+        ],
+        "Equivalência e geração autónoma": [
+          "E04.07",
+          "E08.07",
+          "E09.01"
+        ],
+        "Dez idiomas": [
+          "E13.07"
+        ],
+        "OSINT, arquivo e biografias": [
+          "E12.08",
+          "E13.04"
+        ],
+        "Pesquisa e celebrações em direto": [
+          "E16.03",
+          "E19.07"
+        ],
+        "ICS e manutenção": [
+          "E21.01",
+          "E21.02",
+          "E31.08"
+        ],
+        "Aceitação e execução": [
+          "E01.05",
+          "E32.07"
+        ]
+      }
+    },
+    "docs/global-calendar-context-contract.md": {
+      "sections": {
+        "Independent dimensions": [
+          "E05.01"
+        ],
+        "Selection behavior": [
+          "E05.03"
+        ],
+        "Person and observance model": [
+          "E06.01"
+        ],
+        "Source and authority policy": [
+          "E03.01"
+        ],
+        "Reference case: Joana of Portugal, 12 May 2026": [
+          "E05.07"
+        ],
+        "Required propagation": [
+          "E05.06"
+        ],
+        "Acceptance examples for all future changes": [
+          "E05.07"
+        ],
+        "Implementation audit and remaining work": [
+          "E05.03",
+          "E05.06"
+        ],
+        "Normative and official references": [
+          "E03.01"
+        ]
+      }
+    },
+    "AGENTS.md": {
+      "sections": {
+        "Global calendar context — mandatory": [
+          "E05.01",
+          "E05.07"
+        ],
+        "Product priorities": [
+          "E01.01",
+          "E12.07"
+        ],
+        "Text-first surface contract": [
+          "E22.01",
+          "E19.04"
+        ],
+        "Advertising experience": [
+          "E24.01"
+        ],
+        "AdSense review guardrail": [
+          "E24.01",
+          "E25.01"
+        ]
+      }
+    },
+    "docs/editorial-content-policy.md": {
+      "sections": {
+        "Contextual recognition and celebration — 2026-10-18": [
+          "E06.01"
+        ],
+        "Purpose": [
+          "E12.03"
+        ],
+        "1. Repository-first publication": [
+          "E12.07"
+        ],
+        "2. What becomes SantosDia editorial content": [
+          "E12.04"
+        ],
+        "3. Provenance remains mandatory": [
+          "E04.04"
+        ],
+        "4. Copyright and rights boundary": [
+          "E03.03"
+        ],
+        "5. No runtime source dependency": [
+          "E31.02"
+        ],
+        "6. AdSense and search-quality gate": [
+          "E23.01",
+          "E24.01"
+        ],
+        "7. Acquisition pipeline": [
+          "E12.08"
+        ],
+        "8. Editorial duplication guard": [
+          "E12.05"
+        ],
+        "9. Presentation rule": [
+          "E22.01"
+        ],
+        "10. Non-negotiable publication rule": [
+          "E12.07"
+        ],
+        "11. Product continuity during AdSense/Search remediation": [
+          "E25.01"
+        ],
+        "12. Honest capability and localization readiness": [
+          "E13.06",
+          "E25.01"
+        ]
+      }
+    },
+    "docs/product/global-liturgical-intelligence-v2.1.md": {
+      "sections": {
+        "Normative continuity": [
+          "E01.01"
+        ],
+        "Repository simplicity, hygiene and security": [
+          "E32.01"
+        ],
+        "What SantosDia is now": [
+          "E01.01"
+        ],
+        "Strategic moat": [
+          "E01.01"
+        ],
+        "Canonical context": [
+          "E05.01"
+        ],
+        "Expansion sequence: Portugal → Lusophone jurisdictions → global": [
+          "E26.01",
+          "E27.01",
+          "E28.01",
+          "E29.01",
+          "E30.01"
+        ],
+        "Perennial liturgical architecture": [
+          "E08.01"
+        ],
+        "Civil year versus liturgical year": [
+          "E08.02"
+        ],
+        "Perennial annual generation": [
+          "E08.05"
+        ],
+        "Calendar subscription as retention infrastructure": [
+          "E21.01"
+        ],
+        "Public Liturgical Calculator": [
+          "E15.01"
+        ],
+        "Product surfaces and their jobs": [
+          "E14.01",
+          "E15.01",
+          "E16.01",
+          "E17.01",
+          "E18.01",
+          "E19.01",
+          "E20.01"
+        ],
+        "Distribution flywheel": [
+          "E20.01",
+          "E21.01",
+          "E23.01"
+        ],
+        "Source governance": [
+          "E03.01"
+        ],
+        "Strategic clarification — 2026-09-03: durable corpus, honest readiness and AdSense recovery": [
+          "E03.04",
+          "E13.06",
+          "E24.01"
+        ],
+        "Execution snapshot — 2026-08-23": [
+          "E01.05"
+        ],
+        "Revised priority order": [
+          "E01.05"
+        ],
+        "What is explicitly not the priority": [
+          "E01.01"
+        ],
+        "Product acceptance metrics": [
+          "E32.07"
+        ],
+        "Final-product acceptance clarification — 2026-10-18": [
+          "E01.04"
+        ]
+      }
+    }
+  },
+  "coveragePolicy": "All sections of the listed normative product, execution, context, editorial and specialist contracts have stable task ownership. This is a source-bounded requirement inventory, not a claim that all potential requirements are known. Add newly adopted normative sources here. Execution snapshots map to tracking, not new product requirements.",
+  "taskIdsVerifiedAgainstMaster": "2026-10-18-v9",
+  "referencedTaskIds": [
+    "E01.01",
+    "E01.04",
+    "E01.05",
+    "E02.01",
+    "E03.01",
+    "E03.02",
+    "E03.03",
+    "E03.04",
+    "E03.07",
+    "E04.01",
+    "E04.04",
+    "E04.06",
+    "E04.07",
+    "E05.01",
+    "E05.03",
+    "E05.06",
+    "E05.07",
+    "E06.01",
+    "E08.01",
+    "E08.02",
+    "E08.05",
+    "E08.07",
+    "E09.01",
+    "E09.08",
+    "E10.01",
+    "E11.03",
+    "E12.03",
+    "E12.04",
+    "E12.05",
+    "E12.07",
+    "E12.08",
+    "E13.02",
+    "E13.04",
+    "E13.06",
+    "E13.07",
+    "E14.01",
+    "E15.01",
+    "E16.01",
+    "E16.03",
+    "E17.01",
+    "E18.01",
+    "E19.01",
+    "E19.04",
+    "E19.07",
+    "E20.01",
+    "E21.01",
+    "E21.02",
+    "E22.01",
+    "E23.01",
+    "E24.01",
+    "E25.01",
+    "E26.01",
+    "E27.01",
+    "E28.01",
+    "E29.01",
+    "E30.01",
+    "E31.01",
+    "E31.02",
+    "E31.03",
+    "E31.07",
+    "E31.08",
+    "E32.01",
+    "E32.07"
+  ]
+}
