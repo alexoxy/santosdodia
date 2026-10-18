@@ -67,7 +67,7 @@ Above the fold:
 - local date using the user's timezone
 - selected tradition and jurisdiction context
 - primary saint/observance card
-- portrait/icon only when rights and source are valid
+- text-only identity heading; no portrait, icon or other editorial image
 - 2–3 sentence original SantosDia summary
 - celebration rank / tradition / jurisdiction
 - primary CTA: **Know / Learn more**
@@ -213,7 +213,7 @@ Saint → how another tradition remembers the same identity → different date/t
 - Sticky date/tradition/jurisdiction context on day pages.
 - Search accepts localised names and aliases but identity resolution remains QID/source based.
 - Typography optimised for reading; no dense dashboard UI.
-- Images support identity and devotion but never block content loading.
+- First-party editorial surfaces remain text-only; verified, user-activated livestream is the sole audiovisual exception.
 - Fast first render; core Today content must not depend on request-time external acquisition.
 - The interface is translated separately from canonical saint naming: UI localisation may be translated; saint names remain source-backed.
 

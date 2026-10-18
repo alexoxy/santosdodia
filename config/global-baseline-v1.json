@@ -44,7 +44,7 @@
     ]
   },
   "incremental": {
-    "orchestratorCadence": "hourly",
+    "orchestratorCadence": "hourly-due-check-only",
     "strategy": "due-source-delta-only",
     "cheapChecks": ["etag", "last-modified", "content-hash", "source-specific-version"],
     "unchangedAction": "no-op",
@@ -64,12 +64,12 @@
     "maxRetries": 3
   },
   "cadenceClasses": {
-    "live-health": "hourly",
-    "high-change-official-events": "hourly-or-daily",
-    "calendar-and-new-recognitions": "daily",
-    "church-source-discovery": "weekly",
-    "hierarchy-and-directory": "weekly",
-    "deep-source-policy-and-coverage": "monthly"
+    "live-health": "lightweight-hourly-when-justified",
+    "high-change-official-events": "event-driven-reviewed",
+    "calendar-and-new-recognitions": "monthly-distributed-plus-event-driven",
+    "church-source-discovery": "monthly-distributed",
+    "hierarchy-and-directory": "monthly-distributed",
+    "deep-source-policy-and-coverage": "monthly-distributed"
   },
   "cloudflareGuardrails": {
     "workerBuildOnDataChange": false,

@@ -193,7 +193,7 @@ export async function runCausesantiCrawler({ outputRoot = 'data/osint/runs', env
     promotionEligible,
     publicationMutation: false,
     indexationMutation: false,
-    adsenseReviewState: 'PREPARING',
+    adsenseReviewState: config.usePolicy.adsenseReviewState,
   };
   await writeFile(join(runDir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' });
   await writeFile(join(runDir, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`, { flag: 'wx' });
