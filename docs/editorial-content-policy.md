@@ -1,5 +1,9 @@
 # SantosDia — first-party editorial content policy
 
+## Contextual recognition and celebration — 2026-10-18
+
+For all future profiles and editorial reviews, apply [the global calendar context contract](global-calendar-context-contract.md). Review ecclesial recognition, devotional aliases, territorial/institutional applicability, date and celebration rank as distinct assertions with competent sources and validity. Do not exclude a person because their observance is local or absent from a general calendar. Do not extend a local solemnity to a country or assign the same rank to every observance of the person. Joana of Portugal provides the documented reference case. Changing editorial language never changes the applicable Church/calendar. Catholic saint/blessed terminology and rules are not automatically transferable to other traditions.
+
 _Last updated: 2026-09-03_
 
 ## Purpose

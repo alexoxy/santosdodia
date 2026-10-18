@@ -35,7 +35,7 @@ assert(page.includes("const annualIcsPath = `${rollingIcsPath}&year=${year}`"), 
 assert(page.includes('{copy.subscribe}') && page.includes('{copy.annualIcs}'), 'Calculator subscription actions must remain localized.');
 assert(page.includes('romanVestmentColourGuide(locale)') && page.includes('romanVestmentColoursForDateContext(context)'), 'Human calculator must display both the six-colour guide and date-specific resolution.');
 assert(openapi.includes('"/api/v1/liturgical-calendar"'), 'Perennial calculator must be represented in OpenAPI.');
-assert(openapi.includes('Y-1 through Y+3'), 'OpenAPI must describe the current rolling ICS window, not the retired two-year contract.');
+assert(openapi.includes('Y through Y+1'), 'OpenAPI must describe the current rolling ICS window, not the retired five-year contract.');
 assert(llms.includes('/api/v1/liturgical-calendar'), 'Perennial calculator must be discoverable by AI agents through llms.txt.');
 assert(llms.includes('/tools/liturgical-calendar'), 'Human calculator must be discoverable through llms.txt.');
 assert(sourceRegistry.runtimeDependency === false, 'Rule-learning sources must never become runtime dependencies.');

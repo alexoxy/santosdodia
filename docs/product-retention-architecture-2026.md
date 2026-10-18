@@ -1,5 +1,9 @@
 # SantosDia — Product and Retention Architecture
 
+## Binding context clarification — 2026-10-18
+
+Follow [the global calendar context contract](global-calendar-context-contract.md). Country is a geographic selection, distinct from ecclesial authority and calendar membership. Church body, rite, religious institute and approved calendar require explicit resolution; a country is not necessarily one calendar. Preserve language on country changes and calendar membership on language changes. The Joana example is an acceptance requirement across Today, profiles, subscriptions and discovery.
+
 Status: implementation plan / product architecture
 Date: 2026-08-22
 
@@ -17,12 +21,15 @@ The product is organised around five recurring user jobs:
 
 ## Global context model
 
-Every user-facing result is resolved from five independent dimensions:
+Every user-facing result is resolved from independent dimensions, refined by the global context contract:
 
 - **Locale** — language and local editorial presentation.
 - **Tradition** — Roman Catholic, Orthodox, Anglican or another supported Christian tradition.
-- **Jurisdiction** — country, episcopal conference, patriarchate, local church or competent authority.
-- **Calendar system** — Gregorian, Julian, Revised Julian or source-declared equivalent.\n- **Timezone** — the civil-day boundary used to resolve Today, tomorrow and date-sensitive reminders.
+- **Country** — geographic selection, independent of Church and language.
+- **Jurisdiction** — episcopal conference, patriarchate, diocese, local church or competent calendar authority.
+- **Rite and religious institute** — independently evidenced ecclesial and institutional refinements.
+- **Calendar system** — Gregorian, Julian, Revised Julian or source-declared equivalent.
+- **Timezone** — the civil-day boundary used to resolve Today, tomorrow and date-sensitive reminders.
 
 Rules:
 

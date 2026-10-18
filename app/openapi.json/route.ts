@@ -370,7 +370,7 @@ export async function GET() {
         get: {
           summary: "Subscribable ICS liturgical calendar feed by Christian tradition",
           description:
-            "Without year= the endpoint is a persistent rolling subscription serving the previous civil year, the current year and the next three years (Y-1 through Y+3), with a six-hour refresh hint. With year= it acts as a fixed annual snapshot. Locale, tradition, category and country filters mirror the JSON calendar API.",
+            "Without year= the endpoint is a persistent rolling subscription serving the current civil year and the next year (Y through Y+1), with a six-hour refresh hint. With year= it acts as a fixed annual snapshot. Locale, tradition, category and country filters mirror the JSON calendar API.",
           parameters: [
             {
               name: "feed",
@@ -381,7 +381,7 @@ export async function GET() {
             {
               name: "year",
               in: "query",
-              description: "Optional fixed snapshot year. Omit for an autonomous Y-1 through Y+3 rolling subscription.",
+              description: "Optional fixed snapshot year. Omit for an autonomous Y through Y+1 rolling subscription.",
               schema: { type: "integer", minimum: 1900, maximum: 2200 },
             },
             ...filterParameters,
