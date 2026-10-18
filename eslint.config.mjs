@@ -20,6 +20,8 @@ const eslintConfig = [
       "data/generated/**",
       "data/litcal-mirror/**",
       "reports/**",
+      // Third-party CommonJS dependency maintained as a documented security backport.
+      "vendor/braces/**",
     ],
   },
 ];

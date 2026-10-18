@@ -35,6 +35,7 @@ const normalized = {
     source('epiphany-origin', '2026-01-06', 'Terça-feira depois da Epifania'),
     source('proper', '2026-02-07', 'As Cinco Chagas do Senhor'),
     source('rank', '2026-07-11', 'S. Bento, Abade, Padroeiro da Europa'),
+    source('future-unreviewed', '2027-05-12', 'B. Joana de Portugal, virgem'),
   ],
 };
 const reconciliation = {
@@ -46,6 +47,7 @@ const reconciliation = {
     rec('epiphany-origin', '2026-01-06', 'Terça-feira depois da Epifania', 'precedence-delta-review', candidate('Epiphany','2026-01-06','solemnity')),
     rec('proper', '2026-02-07', 'As Cinco Chagas do Senhor', 'precedence-delta-review', candidate('OrdWeekday4Saturday','2026-02-07','weekday'), 'feast'),
     rec('rank', '2026-07-11', 'S. Bento, Abade, Padroeiro da Europa', 'rank-delta-review', candidate('StBenedict','2026-07-11','memorial'), 'feast'),
+    rec('future-unreviewed', '2027-05-12', 'B. Joana de Portugal, virgem', 'precedence-delta-review', candidate('StJoannaPortugal','2027-05-12','memorial'), 'memorial'),
   ],
 };
 const pendingPlan = {
@@ -76,6 +78,8 @@ assert.equal(preview.publicationAllowed, false);
 assert.equal(preview.productionWriteAllowed, false);
 assert.equal(preview.summary.sourceOccurrences, 5);
 assert.equal(preview.summary.uniqueDays, 5);
+assert.equal(preview.summary.sourcePackageOccurrences, 6);
+assert.equal(preview.summary.sourceOccurrencesOutsidePreviewYear, 1);
 assert.equal(preview.summary.inheritedSafe, 1);
 assert.equal(preview.summary.pendingReviewRows, 4);
 assert.equal(preview.summary.preparedDecisionsUsed, 3);
@@ -83,6 +87,7 @@ assert.equal(preview.items.find((item)=>item.sourceOccurrenceId==='epiphany-dest
 assert.equal(preview.items.find((item)=>item.sourceOccurrenceId==='epiphany-origin').canonicalEventId, 'rc-pt:TuesdayAfterEpiphany');
 assert.equal(preview.items.find((item)=>item.sourceOccurrenceId==='proper').canonicalEventId, 'rc-pt:FiveWoundsLord');
 assert.equal(preview.items.find((item)=>item.sourceOccurrenceId==='rank').rank, 'feast');
+assert.equal(preview.items.some((item)=>item.sourceOccurrenceId==='future-unreviewed'), false);
 assert.ok(preview.items.filter((item)=>item.reviewStatus==='pending-human-approval').every((item)=>item.publicationAllowed===false));
 assert.equal(preview.provenancePolicy.firstEventByCivilDateMatchingForbidden, true);
 

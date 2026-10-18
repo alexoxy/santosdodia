@@ -1,6 +1,8 @@
 # Santos do Dia product plan
 
-_Last updated: 2026-08-02_
+_Last updated: 2026-10-18_
+
+> The binding global direction remains [`docs/product/global-liturgical-intelligence-v2.1.md`](product/global-liturgical-intelligence-v2.1.md). Its current ordered execution and final-state acceptance criteria are maintained in [`docs/product/final-product-delivery-plan.md`](product/final-product-delivery-plan.md). This overview is not a competing strategy or release checklist.
 
 ## Product promise
 
@@ -25,6 +27,8 @@ The product must help a visitor answer five questions reliably:
 - **Operationally simple:** GitHub is the code source of truth and Cloudflare Workers is the production runtime.
 
 ## Current baseline
+
+**Observed 2026-10-18:** Portugal Roman Catholic 2026 has 389 approved occurrences; 205 are source-bound to the canonical model and 184 remain unresolved. Publication and perennial cutover remain fail-closed. The identity queue contains 70 P0 candidates; the editorial checkpoint lists 29 deep-ready biographies. AdSense is not approved; the recorded state differs between the latest Dropbox snapshot and repository status, so the live account must be checked. See the [final-product delivery plan](product/final-product-delivery-plan.md) for gates and next actions.
 
 The repository already contains the principal product foundations:
 
@@ -200,13 +204,5 @@ The following are not part of the present delivery scope:
 
 ## Immediate execution order
 
-1. Complete P0 production and documentation alignment.
-2. Produce the baseline data-quality and coverage report.
-3. Define and enforce the minimum verified-profile standard.
-4. Improve the highest-value discovery paths using verified data.
-5. Validate ICS and API contracts before expanding language or media coverage.
-6. Add editorial trust and institutional pages before broad public promotion.
+Follow [`docs/product/final-product-delivery-plan.md`](product/final-product-delivery-plan.md), which sequences the current critical path, documents live baseline gaps and defines measurable exit criteria. The global strategy remains normative; a context is launched only after it independently passes source, calendar, localization and HTML/API/ICS readiness gates.
 
-## Decision rule
-
-New features enter the roadmap only when they improve one of the five core user questions, can be supported by traceable data and do not weaken privacy, editorial reliability or operational simplicity.
