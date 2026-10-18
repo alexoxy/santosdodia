@@ -424,3 +424,7 @@ Until P1/P2 are stable, do not prioritise:
 - Cloudflare remains deliberately free-tier compatible;
 - source failure preserves last-known-good;
 - complexity per new year approaches zero and complexity per new jurisdiction decreases as shared kernels mature.
+
+## Final-product acceptance clarification — 2026-10-18
+
+Follow [the final-product acceptance criteria](final-product-acceptance-2026-10-18.md) for global coverage, calendar equivalence, demographic language selection, archived algorithms, evidence-first biographies, patronage search, official live streams and monthly maintenance. Documentation is not proof of runtime delivery.
