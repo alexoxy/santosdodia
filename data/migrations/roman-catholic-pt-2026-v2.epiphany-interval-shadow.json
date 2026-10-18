@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-portugal-epiphany-interval-shadow",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "year": 2026,
+  "jurisdictionId": "jurisdiction:roman-catholic:pt",
+  "transferDecisionId": "pt-2026-epiphany-transfer",
+  "sourceArtifact": {
+    "workflowRunId": 39115694657,
+    "artifactId": 12132202141,
+    "icsSha256": "19d9f850f554d5bbdd1924be970877cb15bdc8dd35b61be9bf6abbedeff5be90",
+    "artifactSha256": "0989e98543f13d25cb534756ac5606a2429711adfb6bdac73d07a2973b1b52ed"
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "rows": [
+    {"dateISO":"2026-01-04","sourceOccurrenceId":"snl-pt-2026-01-04-1225bff32e5ee2c8827ee794","sourceRecordHash":"00d06256e9ce8669f021f3d068eb2053d4298df8d13c12de6bde63b4714def23","legacyObservanceId":"rc:Epiphany","sourceRank":"solemnity","outcome":"approved-epiphany-destination"},
+    {"dateISO":"2026-01-05","sourceOccurrenceId":"snl-pt-2026-01-05-6b518156d4feae2ef222dc94","sourceRecordHash":"8b75db2aa7b3a84dfcd34df112f909b66966273957640f552296b11adf8b9df6","legacyObservanceId":"rc:ChristmasWeekdayJan5","sourceRank":"weekday","outcome":"weekday-candidate"},
+    {"dateISO":"2026-01-06","sourceOccurrenceId":"snl-pt-2026-01-06-f745cb764c9415c74b832e35","sourceRecordHash":"0c81a5e464a6cfb98ae4e692a4b957df6f252a171918956c8cb9efd017a0205e","legacyObservanceId":"rc-pt:TuesdayAfterEpiphany","sourceRank":null,"outcome":"approved-transfer-origin"},
+    {"dateISO":"2026-01-07","sourceOccurrenceId":"snl-pt-2026-01-07-aa0e0be0ee494f93f9744adf","sourceRecordHash":"b24bbcefabeaec256d3f26619b223f859a08853b55bc9c51c9a7dbc9016f2078","legacyObservanceId":"rc:StRayPenyafort","sourceRank":"optional memorial","outcome":"saint-precedence-review"},
+    {"dateISO":"2026-01-08","sourceOccurrenceId":"snl-pt-2026-01-08-fc47b2946d29fa21d55037e2","sourceRecordHash":"3de2c3292bf2f212610e5edd961adee1f524b412a79bdde8f302f50238621b65","legacyObservanceId":"rc:DayAfterEpiphanyJan8","sourceRank":"weekday","outcome":"weekday-candidate"},
+    {"dateISO":"2026-01-09","sourceOccurrenceId":"snl-pt-2026-01-09-db23378c81ba4d5d158833d0","sourceRecordHash":"af261e303bcd72aae905b4c3035dc7de16675af530072a21ffa7a2f414d75ae6","legacyObservanceId":"rc:DayAfterEpiphanyJan9","sourceRank":"weekday","outcome":"weekday-candidate"},
+    {"dateISO":"2026-01-10","sourceOccurrenceId":"snl-pt-2026-01-10-e63eaa901525edd1fec58393","sourceRecordHash":"e8bbdffdb2ed001af38de7792a57e4eedd331cf64e4abc8e158c1edff1d620ed","legacyObservanceId":"rc:DayAfterEpiphanyJan10","sourceRank":"optional memorial","outcome":"saint-precedence-review"},
+    {"dateISO":"2026-01-11","sourceOccurrenceId":"snl-pt-2026-01-11-60132f0bc8b9c324f0eed5bb","sourceRecordHash":"71c3fe1a119a1cc937533a2e9d32f462543822cf2aabff15f03d6c559ae56588","legacyObservanceId":"rc:BaptismLord","sourceRank":"feast","outcome":"baptism-boundary"}
+  ]
+}
