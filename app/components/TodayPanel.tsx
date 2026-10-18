@@ -68,10 +68,11 @@ const editorialUi: Partial<
 };
 
 export default function TodayPanel({ initialToday }: { initialToday: PublicTodayPayload }) {
-  const { locale, copy, countryName, timeZone, contextReady, church } =
+  const { locale, copy, countryName, timeZone, contextReady, church, country, calendarRegion } =
       useLanguage(),
     dateISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]),
-    calendarCountry = defaultReadyCalendarCountry(church),
+    region = calendarRegion ?? country ?? defaultReadyCalendarCountry(church) ?? "GLOBAL",
+    calendarCountry = region === "GLOBAL" ? undefined : region,
     calendarCountryName = useMemo(() => {
       if (!calendarCountry) return undefined;
       try {

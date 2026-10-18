@@ -1,3 +1,4 @@
+import { countryFromLanguages, languagesFromHeader } from './calendar-preferences';
 export function countryFromHeaders(headers: Headers): string | undefined {
   const country = headers.get('cf-ipcountry') ?? headers.get('x-country-code');
   if (!country || country === 'XX') return undefined;
@@ -6,4 +7,8 @@ export function countryFromHeaders(headers: Headers): string | undefined {
 
 export function regionFromHeaders(headers: Headers): string | undefined {
   return headers.get('cf-region-code') ?? headers.get('x-region-code') ?? undefined;
+}
+
+export function suggestedCountryFromHeaders(headers: Headers): string | undefined {
+  return countryFromHeaders(headers) ?? countryFromLanguages(languagesFromHeader(headers.get('accept-language')));
 }

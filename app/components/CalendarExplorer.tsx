@@ -7,6 +7,7 @@ import {
   type Category,
   type Observance,
 } from "../../data/observances";
+import { parseCalendarRegion } from "../../lib/calendar-preferences";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   defaultReadyCalendarCountry,
@@ -67,7 +68,7 @@ export default function CalendarExplorer({
   initialChurch,
   initialRegion,
 }: CalendarExplorerProps = {}) {
-  const { locale, copy, country, timeZone, contextReady, church, setChurch } =
+  const { locale, copy, country, timeZone, contextReady, church, setChurch, calendarRegion, setCalendarRegion } =
     useLanguage();
   const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
   const todayYear = Number(todayISO.slice(0, 4));
@@ -84,7 +85,6 @@ export default function CalendarExplorer({
   const [year, setYear] = useState(todayYear),
     [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
-    [region, setRegion] = useState(defaultReadyCalendarCountry(church) ?? country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
     [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -92,9 +92,10 @@ export default function CalendarExplorer({
     setYear(todayYear);
     setMonth(todayMonth);
   }, [contextReady, todayYear, todayMonth]);
-  useEffect(() => {
-    if (country && region === "GLOBAL") setRegion(country);
-  }, [country, region]);
+  const region = calendarRegion ?? country ?? parseCalendarRegion(initialRegion) ?? defaultReadyCalendarCountry(church) ?? "GLOBAL";
+  function chooseRegion(value: string) {
+    setCalendarRegion(value);
+  }
   useEffect(() => {
     fetch("/api/v1/religious-holidays?mode=countries")
       .then((response) => (response.ok ? response.json() : null))
@@ -272,7 +273,7 @@ export default function CalendarExplorer({
           <label>{copy.country}</label>
           <select
             value={region}
-            onChange={(event) => setRegion(event.target.value)}
+            onChange={(event) => chooseRegion(event.target.value)}
           >
             <option value="GLOBAL">{copy.global}</option>
             {countries.map((value) => (
@@ -285,7 +286,7 @@ export default function CalendarExplorer({
         {country ? (
           <button
             className="btn btn-tertiary filter-action"
-            onClick={() => setRegion(country)}
+            onClick={() => chooseRegion(country)}
           >
             {copy.localSuggestion}
           </button>
