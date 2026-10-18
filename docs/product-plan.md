@@ -1,6 +1,6 @@
 # Santos do Dia product plan
 
-_Last updated: 2026-08-02_
+_Last updated: 2026-10-18_\n\n> The binding global direction remains [`docs/product/global-liturgical-intelligence-v2.1.md`](product/global-liturgical-intelligence-v2.1.md). Its current ordered execution and final-state acceptance criteria are maintained in [`docs/product/final-product-delivery-plan.md`](product/final-product-delivery-plan.md). This overview is not a competing strategy or release checklist.
 
 ## Product promise
 
@@ -198,15 +198,4 @@ The following are not part of the present delivery scope:
 - mass ingestion of unsourced or unverified scraped content;
 - user accounts, public candle counts or social-network features.
 
-## Immediate execution order
-
-1. Complete P0 production and documentation alignment.
-2. Produce the baseline data-quality and coverage report.
-3. Define and enforce the minimum verified-profile standard.
-4. Improve the highest-value discovery paths using verified data.
-5. Validate ICS and API contracts before expanding language or media coverage.
-6. Add editorial trust and institutional pages before broad public promotion.
-
-## Decision rule
-
-New features enter the roadmap only when they improve one of the five core user questions, can be supported by traceable data and do not weaken privacy, editorial reliability or operational simplicity.
+## Immediate execution order\n\nFollow [`docs/product/final-product-delivery-plan.md`](product/final-product-delivery-plan.md), which sequences the current critical path, documents live baseline gaps and defines measurable exit criteria. The global strategy remains normative; a context is launched only after it independently passes source, calendar, localization and HTML/API/ICS readiness gates.\n\n
