@@ -24,7 +24,7 @@ Snapshot de produto Dropbox de 18/10/2026 e fontes de projeto disponíveis nesta
 - O checkpoint editorial identifica 29 biografias profundas prontas; a cobertura continua insuficiente para a remediação AdSense.
 - Idiomas registados no modelo: en, es, pt, fr, fil, ru, sw, de, it e pl. Superfícies públicas registadas: en, es, pt e it. A cobertura deve ser medida por campo e página; não pode haver fallback silencioso.
 - O registo de monetização do repositório (29/08) indica `REMEDIATION_REQUIRED` por conteúdo de baixo valor; o snapshot Dropbox de 18/10 indica `PREPARING`. Estado atual não confirmado: consultar o painel do AdSense antes de qualquer nova submissão. Nenhum destes dois estados equivale a aprovação.
-- PR #346 está bloqueado pelo `npm audit` numa dependência transitiva sem versão corrigida identificada; PRs #347 e #348 são propostas existentes e devem passar os seus próprios gates.
+- PR #346 esteve bloqueado pelo `npm audit` em `braces` (CVE-2026-93687) e em dependências transitivas do toolchain. Em 18/10, a auditoria ficou sem vulnerabilidades após atualização de Next.js/Wrangler e dependências corrigidas, mais um backport local documentado de `braces` 3.0.3 com limite de profundidade; o upstream ainda não publicou uma versão corrigida. O backport tem teste de regressão e deve ser substituído quando houver release upstream. PRs #347 e #348 mantêm os seus próprios gates.
 - Cloudflare Workers é o runtime; Vercel já não faz parte da arquitetura ativa do projeto. A instalação GitHub Vercel é um acesso de conta separado, não uma dependência do SantosDia.
 
 Estes valores são uma linha de base, não metas editoriais arbitrárias. Cada mudança de fonte exige novo snapshot, hash e proveniência.
@@ -84,7 +84,7 @@ A ordem abaixo fecha dependências antes de alargar a superfície pública. Uma 
 
 **Trabalho:** manter uma lista única de tarefas; validar cabeças e checks dos PRs existentes; remover duplicados apenas quando não há trabalho único; corrigir falhas de CI sem reduzir gates; atualizar snapshots e estados contraditórios.
 
-**Saída:** cada PR aberto tem propósito, dono operacional, checks atuais e próxima ação; `npm audit` fica verde com atualização corrigida upstream; o estado de AdSense e os limites cloud usados como base têm observação datada.
+**Saída:** cada PR aberto tem propósito, dono operacional, checks atuais e próxima ação; `npm audit` fica verde após atualização segura ou backport local documentado, com teste de regressão e plano de substituição por release upstream; o estado de AdSense e os limites cloud usados como base têm observação datada.
 
 ### Fase 1 — Portugal 2026 canónico e perpétuo
 
@@ -134,8 +134,8 @@ A ordem abaixo fecha dependências antes de alargar a superfície pública. Uma 
 
 ## 5. Ordem operacional imediata
 
-1. Resolver o bloqueio de segurança `braces` por uma versão corrigida ou correção upstream verificável; manter o `npm audit` ativo.
-2. Validar checks atuais de #347 e #348 e avançar os que estiverem verdes e alinhados com `main`; não integrar #346 enquanto a auditoria falhar.
+1. Manter `npm audit` ativo; acompanhar o backport de `braces` até existir release upstream corrigida e substituí-lo com instalação limpa e testes aprovados.
+2. Validar checks atuais de #346, #347 e #348; atualizar/rebasear as propostas após a correção de dependências chegar a `main` e só integrar com todos os seus gates aprovados.
 3. Retomar a fila Portugal pela família temporal Christmas/Epiphany que o checkpoint identifica como próxima; criar apenas o próximo lote completo de regras, suppressions, vetores e provas.
 4. Acrescentar a fonte/pack e os estados dessa entrega ao Dropbox antes de continuar para a família seguinte.
 5. Rever identidade de candidatos e biografias aprovadas em lotes pequenos, com texto original e idioma explicitamente revisto.
@@ -146,7 +146,7 @@ Cada iteração deve deixar: PR pequeno, testes direcionados e Quality completos
 
 ## 6. Gates que impedem avanço indevido
 
-- Falha de `npm audit` impede merge; não usar downgrade ou override sem patch verificável.
+- Falha de `npm audit` impede merge; um backport local só é aceite com proveniência, licença preservada, teste de regressão e estratégia de substituição documentados. Não usar downgrade nem desativar o gate.
 - Uma ocorrência anual, rótulo ou nome não cria uma identidade nem regra perpétua.
 - Semântica de Portugal exige fonte portuguesa competente onde a decisão seja local; Holy See não substitui autoridade local.
 - Dados de fonte sem direitos não são republicados; ficam como referências, metadados e hashes.
