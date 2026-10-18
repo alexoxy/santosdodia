@@ -85,8 +85,8 @@
     }
   },
   "agentCadence": {
-    "recognitionWatcher": "daily-source-diff",
-    "calendarWatcher": "weekly-plus-event-triggered",
+    "recognitionWatcher": "monthly-distributed-plus-event-triggered",
+    "calendarWatcher": "monthly-distributed-plus-event-triggered",
     "baselineReconciler": "annual",
     "correctionReconciler": "on-evidence"
   },

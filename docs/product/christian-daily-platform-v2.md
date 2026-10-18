@@ -229,7 +229,7 @@ Data-only changes must not trigger unnecessary Cloudflare Worker builds.
 
 ## AdSense contract
 
-AdSense remains `PREPARING` during validation.
+AdSense remains not approved during validation. The current recorded state is `REMEDIATION_REQUIRED`; `PREPARING` is a historical review snapshot only.
 
 While it remains in validation:
 

@@ -40,4 +40,4 @@ A reviewed identity link and a publication decision are separate gates. Future a
 
 ## Monetization boundary
 
-Editorial expansion must preserve the AdSense review state and the non-overlay product policy defined in `AGENTS.md` and `docs/monetization-status.md`. While AdSense remains **PREPARING**, serving stays disabled even though eligible page layouts are prepared for manual top + desktop content-rail units after approval.
+Editorial expansion must preserve the AdSense review state and the non-overlay product policy defined in `AGENTS.md` and `docs/monetization-status.md`. While AdSense is not approved (currently **REMEDIATION_REQUIRED**), serving stays disabled even though eligible page layouts are prepared for manual top + desktop content-rail units after approval.
