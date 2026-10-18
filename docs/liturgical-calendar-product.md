@@ -1,5 +1,9 @@
 # Liturgical calendar product
 
+## Country, language and Church selection — 2026-10-18
+
+The [global calendar context contract](global-calendar-context-contract.md) is the required behavior for all delivery surfaces. Country selects applicable supported calendar options within the chosen Church/rite; language only selects presentation. Keep religious-institute and local-jurisdiction refinements explicit. Equivalent effective contexts must yield matching observance membership in Today, Calendar, JSON and ICS. A general-calendar fallback must be labelled and must never impersonate verified national coverage. Existing diocese/institute support still requires implementation verification; this document does not claim that rollout is complete.
+
 The liturgical calendar is a core Santos do Dia product, not only a browsing page.
 
 ## One canonical calendar, three delivery surfaces
