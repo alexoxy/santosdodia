@@ -65,6 +65,18 @@ export function buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
   if (normalized?.run?.publicationAllowed !== false || normalized?.run?.promotionAllowed !== false) throw new Error('Effective Portugal preview requires withheld normalized SNL data.');
   if (reconciliation?.mode !== 'proposal-only' || reconciliation?.productionWriteAllowed !== false) throw new Error('Effective Portugal preview requires proposal-only reconciliation.');
   if (reviewPlan?.productionWriteAllowed !== false) throw new Error('Portugal review plan must remain production-write disabled.');
+  const year = Number(reviewPlan?.year);
+  if (!Number.isInteger(year) || year < 1900 || year > 9999) throw new Error('Portugal review plan must declare a valid calendar year.');
+  if ((normalized.events ?? []).length !== (reconciliation.items ?? []).length) throw new Error('Portugal reconciliation does not partition the normalized source package.');
+
+  // The approval receipt is deliberately year-scoped. A fresh SNL feed can
+  // include later years whose deltas have not received their own review. Keep
+  // those occurrences in the source package and archive, but do not let them
+  // invalidate or leak into this year's explicitly approved release preview.
+  const yearPrefix = `${year}-`;
+  const yearItems = (reconciliation.items ?? []).filter((item) => String(item.dateISO ?? '').startsWith(yearPrefix));
+  const yearEvents = (normalized.events ?? []).filter((event) => String(event.dateISO ?? '').startsWith(yearPrefix));
+  if (!yearEvents.length || yearEvents.length !== yearItems.length) throw new Error(`Normalized source package does not contain a complete ${year} Portugal year.`);
 
   const normalizedById = new Map((normalized.events ?? []).map((event) => [event.id, event]));
   const items = [];
@@ -72,7 +84,7 @@ export function buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
   let inheritedSafe = 0;
   let pendingReviewRows = 0;
 
-  for (const item of reconciliation.items ?? []) {
+  for (const item of yearItems) {
     const source = normalizedById.get(item.sourceOccurrenceId);
     if (!source) throw new Error(`Missing normalized SNL occurrence ${item.sourceOccurrenceId}.`);
     let canonicalEventId;
@@ -128,7 +140,7 @@ export function buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
     });
   }
 
-  if (items.length !== (normalized.events ?? []).length || items.length !== (reconciliation.items ?? []).length) throw new Error('Effective preview does not partition all SNL observances.');
+  if (items.length !== yearEvents.length || items.length !== yearItems.length) throw new Error(`Effective preview does not partition all ${year} SNL observances.`);
   const duplicateSourceIds = items.length - new Set(items.map((item) => item.sourceOccurrenceId)).size;
   if (duplicateSourceIds) throw new Error(`Effective preview contains ${duplicateSourceIds} duplicate source occurrence IDs.`);
   const expectedDecisionIds = new Set((reviewPlan.decisions ?? []).map((decision) => decision.id));
@@ -143,7 +155,7 @@ export function buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
     mode: 'effective-portugal-calendar-preview',
     churchId: 'roman-catholic',
     jurisdictionId: 'pt',
-    year: reviewPlan.year,
+    year,
     generatedAt: new Date().toISOString(),
     publicationAllowed: allApproved,
     productionWriteAllowed: false,
@@ -152,6 +164,8 @@ export function buildPortugalEffectiveCalendarPreview({ normalized, reconciliati
     summary: {
       sourceOccurrences: items.length,
       uniqueDays,
+      sourcePackageOccurrences: normalized.events.length,
+      sourceOccurrencesOutsidePreviewYear: normalized.events.length - yearEvents.length,
       inheritedSafe,
       pendingReviewRows,
       preparedDecisionsUsed: decisionsUsed.size,
