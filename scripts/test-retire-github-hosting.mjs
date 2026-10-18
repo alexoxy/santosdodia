@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
   assertCloudflareProduction,
   isMergedBranch,
@@ -137,4 +138,16 @@ assert.match(permissionBlocked.pages.detail, /Resource not accessible by integra
 assert.deepEqual(permissionBlocked.environmentsDeleted, []);
 assert.deepEqual(permissionBlocked.environmentsPermissionBlocked, ["Production", "Preview", "github-pages"]);
 
-console.log("Retired deployment and merged-branch selectors passed.");
+
+const hostingWorkflow = readFileSync(
+  new URL("../.github/workflows/retire-github-hosting.yml", import.meta.url),
+  "utf8",
+);
+assert.match(hostingWorkflow, /^on:\n  workflow_dispatch:\n    inputs:/m);
+assert.doesNotMatch(hostingWorkflow, /^  push:/m);
+assert.match(hostingWorkflow, /confirm:\n[ \t]+description: Type RETIRE_STALE_GITHUB_HOSTING/);
+assert.match(hostingWorkflow, /required: true/);
+assert.match(hostingWorkflow, /inputs\.confirm == 'RETIRE_STALE_GITHUB_HOSTING'/);
+assert.doesNotMatch(hostingWorkflow, /^  actions: write$/m);
+
+console.log("Retired hosting selectors and manual workflow gate passed.");
