@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import ts from 'typescript';
 const source = fs.readFileSync('lib/calendar-preferences.ts', 'utf8');
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { parseCalendarRegion, preferredTimeZone, countryFromLanguages } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+const { parseCalendarRegion, preferredTimeZone, countryFromLanguages, languagesFromHeader } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 assert.equal(parseCalendarRegion('GLOBAL'), 'GLOBAL');
 assert.equal(parseCalendarRegion('pt'), 'PT');
 assert.equal(parseCalendarRegion('PT; path=/'), undefined);
@@ -22,3 +22,7 @@ assert.equal(countryFromLanguages(['pt']), 'BR'); // CLDR likely region, not res
 assert.equal(countryFromLanguages(['not_a_locale', 'fr-FR']), 'FR');
 assert.equal(countryFromLanguages([]), undefined);
 console.log('Browser language regional and default-country fallbacks passed.');
+
+assert.deepEqual(languagesFromHeader('pt-BR;q=0.5,en-GB;q=1,fr;q=0'), ['en-GB', 'pt-BR']);
+assert.equal(countryFromLanguages(languagesFromHeader('pt-BR;q=0.5,en-GB;q=1')), 'GB');
+assert.deepEqual(languagesFromHeader('fr;q=invalid,de;q=2'), []);

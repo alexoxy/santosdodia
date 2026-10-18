@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CALENDAR_REGION_COOKIE, countryFromLanguages, parseCalendarRegion } from "../../lib/calendar-preferences";
+import { CALENDAR_REGION_COOKIE, parseCalendarRegion } from "../../lib/calendar-preferences";
 import { cookies, headers } from "next/headers";
 import { parseTradition } from "../../data/observances";
 import CalendarProductNav from "../components/CalendarProductNav";
@@ -12,7 +12,7 @@ import { formatMonthYear } from "../../lib/linguistic/date-format";
 import { displayObservanceName } from "../../lib/locale-display";
 import { mergePublishedCalendarRange } from "../../lib/public-calendar-runtime";
 import { getPublicMonthlyObservances } from "../../lib/public-observances";
-import { countryFromHeaders } from "../../lib/request-geo";
+import { suggestedCountryFromHeaders } from "../../lib/request-geo";
 import { requestPublicLocale } from "../../lib/request-public-locale";
 
 function decodeCookie(value?: string): string | undefined {
@@ -49,10 +49,7 @@ export default async function CalendarPage() {
       ? undefined
       : parseTradition(savedChurch) ?? "roman-catholic";
   const requestHeaders = await headers();
-  const languageTags = (requestHeaders.get("accept-language") ?? "")
-    .split(",").filter((part) => !/;\s*q=0(?:\.0*)?\s*$/.test(part))
-    .map((part) => part.split(";")[0].trim());
-  const suggestedCountry = countryFromHeaders(requestHeaders) ?? countryFromLanguages(languageTags);
+  const suggestedCountry = suggestedCountryFromHeaders(requestHeaders);
   const region = parseCalendarRegion(cookieStore.get(CALENDAR_REGION_COOKIE)?.value)
     ?? suggestedCountry ?? defaultReadyCalendarCountry(tradition) ?? "GLOBAL";
   const country = region === "GLOBAL" ? undefined : region;

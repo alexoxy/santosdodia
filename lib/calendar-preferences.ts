@@ -30,3 +30,12 @@ export function countryFromLanguages(languages: readonly string[]): string | und
   }
   return undefined;
 }
+
+export function languagesFromHeader(value: string | null): string[] {
+  return (value ?? '').split(',').map((part, index) => {
+    const [tag, ...params] = part.trim().split(';');
+    const q = params.find((param) => param.trim().startsWith('q='));
+    return { tag, quality: q ? Number(q.trim().slice(2)) : 1, index };
+  }).filter(({ tag, quality }) => tag && quality > 0 && quality <= 1)
+    .sort((a, b) => b.quality - a.quality || a.index - b.index).map(({ tag }) => tag);
+}

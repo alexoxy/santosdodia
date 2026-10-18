@@ -7,7 +7,7 @@ import {
   type Category,
   type Observance,
 } from "../../data/observances";
-import { CALENDAR_REGION_COOKIE, parseCalendarRegion } from "../../lib/calendar-preferences";
+import { parseCalendarRegion } from "../../lib/calendar-preferences";
 import { dateISOInTimeZone } from "../../lib/date-context";
 import {
   defaultReadyCalendarCountry,
@@ -68,7 +68,7 @@ export default function CalendarExplorer({
   initialChurch,
   initialRegion,
 }: CalendarExplorerProps = {}) {
-  const { locale, copy, country, timeZone, contextReady, church, setChurch } =
+  const { locale, copy, country, timeZone, contextReady, church, setChurch, calendarRegion, setCalendarRegion } =
     useLanguage();
   const todayISO = useMemo(() => dateISOInTimeZone(timeZone), [timeZone]);
   const todayYear = Number(todayISO.slice(0, 4));
@@ -85,7 +85,6 @@ export default function CalendarExplorer({
   const [year, setYear] = useState(todayYear),
     [month, setMonth] = useState(todayMonth),
     [category, setCategory] = useState<"all" | Category>("all"),
-    [region, setRegion] = useState(parseCalendarRegion(initialRegion) ?? defaultReadyCalendarCountry(church) ?? country ?? "GLOBAL"),
     [countries, setCountries] = useState<Country[]>([]),
     [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -93,18 +92,9 @@ export default function CalendarExplorer({
     setYear(todayYear);
     setMonth(todayMonth);
   }, [contextReady, todayYear, todayMonth]);
-  useEffect(() => {
-    const saved = document.cookie.split(';').map((part) => part.trim())
-      .find((part) => part.startsWith(`${CALENDAR_REGION_COOKIE}=`))?.split('=')[1];
-    const explicit = parseCalendarRegion(saved);
-    if (explicit) setRegion(explicit);
-    else if (country) setRegion(country);
-  }, [country]);
+  const region = calendarRegion ?? country ?? parseCalendarRegion(initialRegion) ?? defaultReadyCalendarCountry(church) ?? "GLOBAL";
   function chooseRegion(value: string) {
-    const next = parseCalendarRegion(value);
-    if (!next) return;
-    setRegion(next);
-    document.cookie = `${CALENDAR_REGION_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
+    setCalendarRegion(value);
   }
   useEffect(() => {
     fetch("/api/v1/religious-holidays?mode=countries")

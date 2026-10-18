@@ -1,3 +1,4 @@
+import { CALENDAR_REGION_COOKIE } from '../lib/calendar-preferences';
 import type { Metadata, Viewport } from 'next';
 import { cookies, headers } from 'next/headers';
 import './globals.css';
@@ -17,7 +18,7 @@ import { localeFromAcceptLanguage, normalizePublicLocale, PUBLIC_LOCALES, type L
 import { parseTradition, TRADITIONS } from '../data/observances';
 import { requestPublicLocale } from '../lib/request-public-locale';
 import { SITE_ORIGIN } from '../lib/site';
-import { countryFromHeaders } from '../lib/request-geo';
+import { suggestedCountryFromHeaders } from '../lib/request-geo';
 import { serializeStructuredData } from '../lib/structured-data';
 
 const siteDescription = 'Discover who is celebrated today in your country, region and Christian tradition. Search saints, calendars, movable feasts, religious holidays and liturgical information.';
@@ -74,7 +75,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const savedChurch = cookieStore.get('sdd-tradition')?.value;
   const savedTimeZone = cookieStore.get('sdd-timezone')?.value;
   const initialLocale = saved ? normalizePublicLocale(saved) : localeFromAcceptLanguage(requestHeaders.get('accept-language'));
-  const initialCountry = countryFromHeaders(requestHeaders);
+  const initialCountry = suggestedCountryFromHeaders(requestHeaders);
   const initialChurch = savedChurch === 'all' ? 'all' : parseTradition(savedChurch) ?? 'roman-catholic';
 
   const structured = {
@@ -89,7 +90,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return <html lang={initialLocale} suppressHydrationWarning>
     <head><AdSenseBootstrap /></head>
     <body>
-      <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialChurch={initialChurch} initialTimeZone={savedTimeZone}>
+      <LanguageProvider initialLocale={initialLocale} initialCountry={initialCountry} initialCalendarRegion={cookieStore.get(CALENDAR_REGION_COOKIE)?.value} initialChurch={initialChurch} initialTimeZone={savedTimeZone}>
         <SiteChrome>{children}</SiteChrome>
       </LanguageProvider>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />
