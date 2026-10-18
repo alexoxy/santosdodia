@@ -1,0 +1,46 @@
+name: Calendar browser preferences
+on:
+  pull_request:
+    paths:
+      - 'app/components/CalendarExplorer*.tsx'
+      - 'app/components/LanguageProvider.tsx'
+      - 'app/components/TodayPanel.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'app/calendar/page.tsx'
+      - 'app/page.tsx'
+      - 'app/layout.tsx'
+      - 'lib/calendar-preferences.ts'
+      - 'lib/request-geo.ts'
+      - 'scripts/test-calendar-browser.mjs'
+      - '.github/workflows/calendar-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: calendar-browser-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci --include=optional
+      - run: npm run build
+      - name: Install isolated browser test runtime
+        run: |
+          npm install --prefix "$RUNNER_TEMP/calendar-browser" --no-package-lock --ignore-scripts @playwright/test@1.56.1
+          node "$RUNNER_TEMP/calendar-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Test preferences and navigation
+        run: PLAYWRIGHT_MODULE_PATH="$RUNNER_TEMP/calendar-browser/node_modules/playwright/index.mjs" node scripts/test-calendar-browser.mjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: calendar-browser-${{ github.sha }}
+          path: staging/calendar-browser/
+          if-no-files-found: warn
+          retention-days: 14
