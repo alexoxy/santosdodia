@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "implementation-candidate",
+  "status": "implemented-reference",
   "mobilePrimary": [
     {"id":"today","pt":"Hoje","route":"/","icon":"calendar-day","job":"daily-answer"},
     {"id":"calendar","pt":"Calendário","route":"/calendar","icon":"calendar","job":"browse-by-date"},
@@ -42,6 +42,6 @@
     "noSpiritualAnxietyRetention": true,
     "noRequestTimeExternalAcquisition": true,
     "noThinPageScaleBeforeQualityGate": true,
-    "adsensePreparingNoAdBehaviourMutation": true
+    "adsenseNotApprovedNoAdBehaviourMutation": true
   }
 }
