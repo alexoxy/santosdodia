@@ -1,5 +1,9 @@
 # SantosDia — Product Reference v1
 
+## Global calendar context decision — 2026-10-18
+
+The [global calendar context contract](global-calendar-context-contract.md) governs country/calendar selection independently of language and Church/rite. A country can map to several approved calendars; an authority can cover several countries. One person can have multiple observances with different local ranks. The Joana case and cross-surface acceptance examples are mandatory reference scenarios for global rollout. This decision extends the data contract below with explicit rite, institutional calendar and validity context; it does not assert that every dimension is already implemented.
+
 _Status: implementation reference · 2026-08-11_
 
 ## Product
@@ -96,7 +100,7 @@ On failure the platform retains last-known-good production data. New data never 
 Product v1 is usable when a mobile visitor can:
 
 - open the correct local `Today` without timezone ambiguity;
-- choose Church and language;
+- choose Church/rite, country/calendar and language independently, with verified local or institutional refinements where supported;
 - see verified observances with Church terminology;
 - browse another date in a mobile-native calendar/agenda;
 - search by person/date/place;
