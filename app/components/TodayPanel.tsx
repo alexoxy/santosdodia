@@ -189,6 +189,27 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
             {copy.openDay} →
           </a>
         </div>
+        {editorial?.kind === "date" ? (
+          <aside className="institutional-card" aria-label={editorial.title}>
+            <span className="eyebrow">{editorial.eyebrow}</span>
+            <h3>{editorial.title}</h3>
+            <p>{editorial.lead}</p>
+            <p>{editorial.context}</p>
+            <a className="text-link" href={editorial.href}>
+              {editorialCopy.openDate} →
+            </a>
+          </aside>
+        ) : editorial?.kind === "profile" ? (
+          <aside className="institutional-card" aria-label={editorial.title}>
+            <span className="eyebrow">{editorialCopy.profileEyebrow}</span>
+            <h3>{editorial.title}</h3>
+            <p>{editorial.summary}</p>
+            {editorial.paragraph ? <p>{editorial.paragraph}</p> : null}
+            <a className="text-link" href={editorial.href}>
+              {editorialCopy.openProfile} →
+            </a>
+          </aside>
+        ) : null}
         {items.length ? (
           <div className="observance-list">
             {items.slice(0, 18).map((item) => {
@@ -239,28 +260,6 @@ export default function TodayPanel({ initialToday }: { initialToday: PublicToday
             <p>{loading ? copy.loading : copy.noObservances}</p>
           </div>
         )}
-
-        {editorial?.kind === "date" ? (
-          <aside className="institutional-card" aria-label={editorial.title}>
-            <span className="eyebrow">{editorial.eyebrow}</span>
-            <h3>{editorial.title}</h3>
-            <p>{editorial.lead}</p>
-            <p>{editorial.context}</p>
-            <a className="text-link" href={editorial.href}>
-              {editorialCopy.openDate} →
-            </a>
-          </aside>
-        ) : editorial?.kind === "profile" ? (
-          <aside className="institutional-card" aria-label={editorial.title}>
-            <span className="eyebrow">{editorialCopy.profileEyebrow}</span>
-            <h3>{editorial.title}</h3>
-            <p>{editorial.summary}</p>
-            {editorial.paragraph ? <p>{editorial.paragraph}</p> : null}
-            <a className="text-link" href={editorial.href}>
-              {editorialCopy.openProfile} →
-            </a>
-          </aside>
-        ) : null}
 
         <div className="today-actions">
           <a className="btn btn-primary" href="/calendar">
