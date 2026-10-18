@@ -107,6 +107,21 @@ try {
 
   for (let liturgicalYear = 1900; liturgicalYear <= 2200; liturgicalYear += 1) {
     const calculated = roman.calculateRomanLiturgicalYear(liturgicalYear, roman.ROMAN_PORTUGAL_POLICY);
+    const epiphany = calculated.keyDates.epiphany;
+    const baptism = calculated.keyDates['baptism-of-the-lord'];
+    const intervalDates = roman.romanDatesBetweenEpiphanyAndBaptism(liturgicalYear, roman.ROMAN_PORTUGAL_POLICY);
+    const epiphanyDate = date(epiphany);
+    const baptismDate = date(baptism);
+    const principalDayGap = days(epiphany, baptism);
+    const expectedGap = epiphanyDate.getUTCDate() === 7 || epiphanyDate.getUTCDate() === 8 ? 1 : 7;
+    assert(epiphanyDate.getUTCDay() === 0, `${liturgicalYear} Portugal Epiphany must be Sunday.`);
+    assert(principalDayGap === expectedGap, `${liturgicalYear} Portugal Baptism boundary differs from the Epiphany rule.`);
+    assert(intervalDates.length === principalDayGap - 1, `${liturgicalYear} Epiphany/Baptism interval omitted or added a day.`);
+    assert(intervalDates.every((dateISO, index) => {
+      const current = date(dateISO);
+      const expected = new Date(epiphanyDate.getTime() + (index + 1) * 86_400_000);
+      return current.getTime() === expected.getTime() && current.getUTCDay() !== 0 && current < baptismDate;
+    }), `${liturgicalYear} Epiphany/Baptism interval contains an invalid date.`);
     const start = date(calculated.startDate);
     const easter = date(calculated.keyDates['easter-sunday']);
     assert(calculated.weekdayCycle === (liturgicalYear % 2 === 0 ? 'II' : 'I'), `${liturgicalYear} weekday cycle parity drifted.`);

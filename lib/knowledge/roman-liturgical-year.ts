@@ -222,6 +222,22 @@ export function calculateRomanLiturgicalYear(
   };
 }
 
+export function romanDatesBetweenEpiphanyAndBaptism(
+  liturgicalYear: number,
+  policy: RomanJurisdictionPolicy = ROMAN_GENERAL_POLICY
+): string[] {
+  const { keyDates } = calculateRomanLiturgicalYear(liturgicalYear, policy);
+  const epiphany = parseDateISO(keyDates.epiphany);
+  const baptism = parseDateISO(keyDates['baptism-of-the-lord']);
+  const dates: string[] = [];
+
+  for (let date = addDays(epiphany, 1); compareDates(date, baptism) < 0; date = addDays(date, 1)) {
+    dates.push(toISODate(date));
+  }
+
+  return dates;
+}
+
 export function liturgicalYearForDate(dateISO: string): number {
   const date = parseDateISO(dateISO);
   const advent = firstSundayOfAdvent(date.year);
