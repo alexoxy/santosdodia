@@ -51,7 +51,7 @@ O produto está pronto para cada contexto publicado quando todos os critérios a
 ### Infraestrutura e distribuição
 
 - Para cada contexto lançado, Today, calendário, calculador, HTML, JSON/API, JSON-LD e ICS têm semântica equivalente.
-- Geração cobre automaticamente a janela `Y-1 ... Y+3`, sem recolher fontes em tempo de pedido; fontes anuais validam e detetam mudanças.
+- Geração cobre automaticamente a janela `Y ... Y+1` (ano atual e seguinte; decisão do utilizador em 18/10/2026), sem recolher fontes em tempo de pedido; fontes anuais validam e detetam mudanças.
 - ICS mantém UID estável e backlink SantosDia, e atravessa a mudança de ano sem nova subscrição.
 - Falha de fonte preserva o último estado válido; cutover do modelo é atómico e reversível, com histórico e provas preservados.
 

@@ -51,10 +51,10 @@ try {
   assert(temporal.normalizeTimeZone('Not/AZone', 'UTC') === 'UTC', 'Invalid timezone fallback failed.');
   assert(temporal.isValidIanaTimeZone('Europe/Lisbon') === true, 'Europe/Lisbon must be accepted as an IANA timezone.');
 
-  assert(JSON.stringify(rolling.rollingCivilYearWindow(2026)) === JSON.stringify([2025, 2026, 2027, 2028, 2029]), '2026 rolling window must be 2025-2029.');
-  assert(JSON.stringify(rolling.rollingCivilYearWindow(2027)) === JSON.stringify([2026, 2027, 2028, 2029, 2030]), '2027 rollover must retire 2025 from serving and add 2030.');
-  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2026-12-31T23:59:59Z')) === JSON.stringify([2025, 2026, 2027, 2028, 2029]), 'UTC window must remain on 2026 before midnight UTC.');
-  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2027-01-01T00:00:00Z')) === JSON.stringify([2026, 2027, 2028, 2029, 2030]), 'UTC rollover must occur automatically at the year boundary.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindow(2026)) === JSON.stringify([2026, 2027]), '2026 rolling window must contain only 2026 and 2027.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindow(2027)) === JSON.stringify([2027, 2028]), '2027 rollover must retire 2026 from serving and add 2028.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2026-12-31T23:59:59Z')) === JSON.stringify([2026, 2027]), 'UTC window must remain on 2026 before midnight UTC.');
+  assert(JSON.stringify(rolling.rollingCivilYearWindowForUtcInstant('2027-01-01T00:00:00Z')) === JSON.stringify([2027, 2028]), 'UTC rollover must occur automatically at the year boundary.');
   let invalidRollingRejected = false;
   try { rolling.rollingCivilYearWindow(2026, -1, 3); } catch { invalidRollingRejected = true; }
   assert(invalidRollingRejected, 'Negative rolling-window retention must fail closed.');

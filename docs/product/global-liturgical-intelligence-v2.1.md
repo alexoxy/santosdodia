@@ -168,17 +168,19 @@ They are not request-time runtime dependencies.
 
 Serving/materialised annual data follows a rolling civil-year window:
 
-**current civil year − 1 through current civil year + 3**.
+**current civil year and the following civil year (Y and Y+1)**.
 
-Example: during 2026, materialise 2025–2029. When the system enters 2027, materialise 2026–2030 and retire 2025 from the serving window.
+Product-owner decision, 2026-10-18: keep exactly two active civil years. Prepare the next release before rollover; validate it before advancing serving pointers and retiring disposable projections. Canonical evidence and recovery history are retained.
+
+Example: during 2026, serve 2026–2027. When the system enters 2027, serve 2027–2028 and retire 2026 from the active window. This provides approximately 12–24 months of future coverage, not a daily sliding 24-month window.
 
 The hygiene operation is automatic and idempotent:
 
 1. determine current civil year in the configured operational timezone;
-2. ensure all required contexts have materialised releases for `Y-1 ... Y+3`;
+2. ensure all required contexts have materialised releases for `Y ... Y+1`;
 3. verify semantic/hash/authority gates;
 4. update serving pointers atomically;
-5. remove years older than `Y-1` from disposable serving caches/materialised runtime datasets;
+5. remove years older than `Y` from disposable serving caches/materialised runtime datasets;
 6. never delete immutable Evidence Vault releases, provenance, receipts or historical canonical occurrences merely because they left the serving window;
 7. alert only on failed generation, semantic drift or authority conflict.
 
@@ -312,7 +314,7 @@ AdSense recovery is therefore a product-quality gate. A new review is blocked un
 The last development cycle converted several strategy items from intention into enforced infrastructure:
 
 - the first-party text-only surface is now a CI contract; verified livestream remains the sole audiovisual exception and loads only after activation;
-- rolling materialisation and rolling ICS cover civil year `Y-1 ... Y+3`;
+- at this historical snapshot, rolling materialisation and ICS covered `Y-1 ... Y+3`; the 2026-10-18 decision above replaces the active window with `Y ... Y+1`;
 - the public liturgical calculator, civil/liturgical-year mapping, Roman Temporale generation, precedence, colour and transfer scheduling share one deterministic core;
 - the first source-bound Sanctorale shadow rules now compose General Roman, European and Portugal jurisdiction policy and generate multiple years without annual hand-entry;
 - publication remains fail-closed while the new engine runs in shadow against the Portugal acceptance corpus.
@@ -342,7 +344,7 @@ Operational alerts follow one atomic closure routine:
 
 - finish Roman Catholic rank/precedence/transfer/colour semantics;
 - formalise civil-year ↔ liturgical-year mapping;
-- implement rolling materialisation `Y-1 ... Y+3` and automatic hygiene;
+- implement rolling materialisation `Y ... Y+1` and automatic hygiene;
 - generate complete annual calendars from rules + canonical observances;
 - reach 389/389 semantic equivalence for Portugal 2026 before replacing the old read model;
 - verify additional years without hand-entering annual dates.
@@ -407,7 +409,7 @@ Until P1/P2 are stable, do not prioritise:
 ## Product acceptance metrics
 
 - annual calendar generation requires zero routine human intervention;
-- rolling serving window always covers `Y-1 ... Y+3` for launched contexts;
+- rolling serving window always covers `Y ... Y+1` for launched contexts;
 - no serving-cache deletion can delete canonical/Vault history;
 - 100% semantic agreement across canonical engine, Today, Calendar, API and ICS for launched contexts;
 - persistent ICS survives year boundaries without re-subscription;
