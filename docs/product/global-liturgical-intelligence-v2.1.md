@@ -46,7 +46,7 @@ Do not add editorial photography, saint portraits, hero images, thumbnails, gall
 
 Verified livestream is the sole first-party audiovisual content type. A live surface must expose useful text, its Church/tradition, verification status and an official external link before any embed loads. The privacy-enhanced player loads only after explicit user activation; no livestream thumbnail or player dependency may burden the initial textual page.
 
-Advertising is a separate third-party delivery boundary and does not relax the first-party text-only contract. While AdSense is not approved (currently `REMEDIATION_REQUIRED`; `PREPARING` is historical), ad serving stays disabled. After approval, any allowed unit remains consent-aware, lazy, manual, non-overlay and subordinate to reading performance.
+Advertising is a separate third-party delivery boundary and does not relax the first-party text-only contract. While AdSense is not approved, including PREPARING or REMEDIATION_REQUIRED, ad serving stays disabled; `docs/monetization-status.md` records the observed operational state. After approval, any allowed unit remains consent-aware, lazy, manual, non-overlay and subordinate to reading performance.
 
 The delivery architecture follows the same principle: compute and verify heavily outside the request path, then serve compact structured text. Prefer server-rendered output; client JavaScript exists only for interactions that materially require it, including context preferences, search, saved items, calendar actions and user-activated livestream.
 
@@ -338,7 +338,7 @@ Operational alerts follow one atomic closure routine:
 - preserve useful raw evidence even when a bounded acquisition is partial;
 - publication remains fail-closed;
 - resolved error emails are removed only after positive proof;
-- maintain Cloudflare Free, AdSense fail-closed while not approved and last-known-good.
+- maintain Cloudflare Free, AdSense PREPARING and last-known-good.
 
 ### P1 — Perennial liturgical intelligence core
 
