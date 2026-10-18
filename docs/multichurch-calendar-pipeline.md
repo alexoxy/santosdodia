@@ -1,5 +1,9 @@
 # Multi-Church calendar pipeline
 
+## Global scope and provenance contract — 2026-10-18
+
+Apply [the global calendar context contract](global-calendar-context-contract.md) to every source and staging/promotion package. Preserve Church/rite, country applicability, actual jurisdiction or institute, calendar system, date rule, contextual rank and validity. Resolve territorial and institutional calendars by documented ecclesial precedence, not a simple union or most-specific-wins rule. A shared language never authorizes another country's data. News about local devotion cannot establish national rank. Preserve one reviewed person identity across multiple contextual observances; publication decisions remain separate.
+
 ## Objective
 
 Build reliable Roman Catholic, Anglican, Byzantine Orthodox, Coptic Orthodox, Armenian Apostolic, Ethiopian Orthodox Tewahedo and Syriac Orthodox calendars without making the public site depend directly on a third-party API or website.
