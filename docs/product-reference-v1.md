@@ -87,7 +87,7 @@ Coverage is global by architecture and by major Church families; it does not req
 
 ## Incremental operation after baseline
 
-One hourly orchestrator determines which sources are due. It does **not** re-fetch the whole world every hour.
+The source orchestrator runs on the monthly distributed acquisition schedule and determines which sources are due. The separate hourly development task advances the delivery backlog; it does not increase source-acquisition frequency.
 
 `DUE SOURCE → CHEAP CHANGE CHECK → NO_CHANGE | FETCH → RAW → NORMALIZE → RESOLVE → LANGUAGE/TEMPORAL GATES → D1 STAGING → AUTO-PROMOTION WHEN SAFE`
 
