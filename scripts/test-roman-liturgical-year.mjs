@@ -82,9 +82,24 @@ try {
   assert(JSON.stringify(interval2026) === JSON.stringify(['2026-01-05','2026-01-06','2026-01-07','2026-01-08','2026-01-09','2026-01-10']), 'Portugal 2026 interval must include only dates strictly between transferred Epiphany and Baptism.');
   const intervalRows = new Map(epiphanyIntervalShadow.rows.map((row) => [row.dateISO, row]));
   assert(intervalRows.size === 8 && epiphanyIntervalShadow.rows.length === 8, 'Portugal 2026 interval shadow must pin both boundaries and six intervening source rows.');
+  const readMigration = (name) => JSON.parse(fs.readFileSync(path.join(root, `data/migrations/roman-catholic-pt-2026-v2.${name}.json`), 'utf8'));
+  const approvedRows = [
+    ...readMigration('fixed-sanctorale-shadow').mappings,
+    ...readMigration('temporal-shadow').mappings,
+    ...readMigration('movable-transfer-shadow').mappings,
+    ...readMigration('semantic-inventory').remaining
+  ];
+  const approvedBySourceId = new Map(approvedRows.map((row) => [row.sourceOccurrenceId, row]));
+  const intervalSourceIds = new Set();
   for (const row of epiphanyIntervalShadow.rows) {
     assert(/^[a-f0-9]{64}$/u.test(row.sourceRecordHash), `${row.dateISO} lacks an exact SNL source hash.`);
     assert(row.sourceOccurrenceId === `snl-pt-${row.dateISO}-${row.sourceOccurrenceId.split('-').at(-1)}` && /^[a-f0-9]{24}$/u.test(row.sourceOccurrenceId.split('-').at(-1)), `${row.dateISO} has an invalid SNL occurrence ID.`);
+    const approved = approvedBySourceId.get(row.sourceOccurrenceId);
+    assert(approved && approved.sourceRecordHash === row.sourceRecordHash, `${row.dateISO} differs from the approved source record hash.`);
+    assert((approved.expectedDateISO ?? approved.dateISO) === row.dateISO, `${row.dateISO} differs from the approved source date.`);
+    assert((approved.legacyObservanceId ?? approved.canonicalEventId) === row.legacyObservanceId, `${row.dateISO} differs from the approved legacy identity.`);
+    assert(!intervalSourceIds.has(row.sourceOccurrenceId), `${row.dateISO} duplicates an interval source identity.`);
+    intervalSourceIds.add(row.sourceOccurrenceId);
   }
   for (const dateISO of ['2026-01-05','2026-01-08','2026-01-09']) assert(intervalRows.get(dateISO)?.outcome === 'weekday-candidate', `${dateISO} must remain a weekday-family candidate.`);
   assert(intervalRows.get('2026-01-06')?.outcome === 'approved-transfer-origin', 'The Jan 6 source row must remain the approved Epiphany transfer origin.');
