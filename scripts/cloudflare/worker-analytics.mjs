@@ -85,7 +85,7 @@ export async function fetchWorkerAnalytics({ accountId, apiToken, workerName = '
         }) {
           sum { requests errors }
           quantiles { cpuTimeP50 cpuTimeP99 }
-          dimensions { datetime scriptName status }
+          dimensions { scriptName status }
         }
       }
     }
