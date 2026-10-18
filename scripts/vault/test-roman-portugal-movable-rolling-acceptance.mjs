@@ -87,7 +87,7 @@ try {
     assert(safety.publicationAllowed === false && safety.d1MutationAllowed === false, 'Rolling acceptance must remain shadow-only and read-only.');
 
     const expectedWindow = rolling.rollingCivilYearWindow(document.anchorCivilYear, document.window?.pastCivilYears, document.window?.futureCivilYears);
-    assert(JSON.stringify(document.window?.years) === JSON.stringify(expectedWindow), 'Rolling acceptance years must equal the Y-1 through Y+3 engine window.');
+    assert(JSON.stringify(document.window?.years) === JSON.stringify(expectedWindow), 'Research acceptance years must equal the explicitly declared evidence window; this does not determine the active serving window.');
     assert(Array.isArray(document.rules) && document.rules.length === 11, 'Rolling acceptance must contain exactly eleven movable/transfer rule contracts.');
     const ruleContracts = new Map(document.rules.map(rule => [rule.temporalRuleId, rule]));
     assert(ruleContracts.size === 11 && [...ruleContracts.keys()].every(id => annualMappings.has(id)), 'Rolling acceptance rule set must exactly match the eleven approved 2026 movable mappings.');

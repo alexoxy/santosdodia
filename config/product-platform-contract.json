@@ -3,7 +3,7 @@
   "productVersion": "2.1",
   "status": "normative",
   "effectiveDate": "2026-08-22",
-  "lastClarifiedDate": "2026-09-03",
+  "lastClarifiedDate": "2026-10-18",
   "productDefinition": "Global Christian liturgical intelligence platform with a human daily-faith product and reusable machine/calendar infrastructure.",
   "northStar": "Open SantosDia and know what Christian day you are living, why it matters, how to pray it, what comes next, and how to stay connected in your own tradition, place and language.",
   "machinePromise": "Given Church or tradition, jurisdiction, calendar system, civil date or year, timezone when needed, and locale, return authoritative liturgical context and consistent HTML, API, JSON-LD and ICS projections without request-time external acquisition.",
@@ -85,14 +85,11 @@
   },
   "rollingMaterialization": {
     "enabled": true,
-    "pastCivilYears": 1,
-    "futureCivilYears": 3,
+    "pastCivilYears": 0,
+    "futureCivilYears": 1,
     "exampleFor2026": [
-      2025,
       2026,
-      2027,
-      2028,
-      2029
+      2027
     ],
     "rolloverAutomatic": true,
     "servingCacheOlderYearsRetiredAutomatically": true,
@@ -103,7 +100,8 @@
       "generation-failure",
       "semantic-drift",
       "authority-conflict"
-    ]
+    ],
+    "policyDecision": "User decision 2026-10-18: current and next civil years; preserve Vault and canonical history."
   },
   "retentionAndDistribution": {
     "ics": {
@@ -296,7 +294,7 @@
   "hygieneContract": {
     "newArchitectureMustRetireOrJustifyOldPath": true,
     "deleteWithoutProofAllowed": false,
-    "rollingServingWindow": "current-year-minus-1-through-current-year-plus-3",
+    "rollingServingWindow": "current-year-through-next-year",
     "retireServingCacheNotCanonicalHistory": true,
     "removalSequence": [
       "inventory",

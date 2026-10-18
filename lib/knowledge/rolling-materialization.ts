@@ -1,5 +1,5 @@
-export const ROLLING_PAST_CIVIL_YEARS = 1 as const;
-export const ROLLING_FUTURE_CIVIL_YEARS = 3 as const;
+export const ROLLING_PAST_CIVIL_YEARS = 0 as const;
+export const ROLLING_FUTURE_CIVIL_YEARS = 1 as const;
 export const ROLLING_OPERATIONAL_TIMEZONE = 'UTC' as const;
 
 function boundedNonNegativeInteger(value: number, name: string): number {
