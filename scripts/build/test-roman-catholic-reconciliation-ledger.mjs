@@ -57,10 +57,10 @@ const buildLedger = ({
 
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
-assert(ledger.counts.temporale === 146 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 132, 'The ledger must distinguish fourteen TemporalRules from 132 approved TemporalRuleFamily members.');
+assert(ledger.counts.temporale === 156 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 142, 'The ledger must distinguish fourteen TemporalRules from 142 approved TemporalRuleFamily members.');
 assert(ledger.counts.fixedSanctorale === 80 && ledger.counts.fixedSanctoraleDays === 76 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 80 exact Sanctorale occurrences across 76 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 233 && ledger.counts.sourceBoundOccurrences === 237, 'The ledger must distinguish 233 source-bound days from 237 source-bound canonical occurrences.');
-assert(ledger.counts.unresolved === 132, 'Every unreviewed official day must remain explicit and unresolved.');
+assert(ledger.counts.sourceBound === 243 && ledger.counts.sourceBoundOccurrences === 247, 'The ledger must distinguish 243 source-bound days from 247 source-bound canonical occurrences.');
+assert(ledger.counts.unresolved === 122, 'Every unreviewed official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-22')?.classification === 'temporale', 'First Sunday of Lent must remain classified as Temporale.');
@@ -288,4 +288,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 132 precedence-resolved TemporalRuleFamily members + 80 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 237 source-bound occurrences across 233 days, 132 explicit unresolved days and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 142 precedence-resolved TemporalRuleFamily members + 80 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 247 source-bound occurrences across 243 days, 122 explicit unresolved days and no label-derived identity.');

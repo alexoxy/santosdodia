@@ -28,10 +28,10 @@
   "coverage": {
     "explicitOccurrenceAnchors": 80,
     "temporalRuleShadowOccurrences": 14,
-    "temporalRuleFamilyShadowOccurrences": 132,
+    "temporalRuleFamilyShadowOccurrences": 142,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 237,
-    "remainingLegacyOccurrences": 152,
+    "mappedOccurrenceAnchors": 247,
+    "remainingLegacyOccurrences": 142,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
