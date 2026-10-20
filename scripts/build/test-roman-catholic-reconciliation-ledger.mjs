@@ -57,10 +57,10 @@ const buildLedger = ({
 
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
-assert(ledger.counts.temporale === 156 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 142, 'The ledger must distinguish fourteen TemporalRules from 142 approved TemporalRuleFamily members.');
+assert(ledger.counts.temporale === 167 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 153, 'The ledger must distinguish fourteen TemporalRules from 153 approved TemporalRuleFamily members.');
 assert(ledger.counts.fixedSanctorale === 80 && ledger.counts.fixedSanctoraleDays === 76 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 80 exact Sanctorale occurrences across 76 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 243 && ledger.counts.sourceBoundOccurrences === 247, 'The ledger must distinguish 243 source-bound days from 247 source-bound canonical occurrences.');
-assert(ledger.counts.unresolved === 122, 'Every unreviewed official day must remain explicit and unresolved.');
+assert(ledger.counts.sourceBound === 254 && ledger.counts.sourceBoundOccurrences === 258, 'The ledger must distinguish 254 source-bound days from 258 source-bound canonical occurrences.');
+assert(ledger.counts.unresolved === 111, 'Every unreviewed official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-22')?.classification === 'temporale', 'First Sunday of Lent must remain classified as Temporale.');
@@ -72,6 +72,8 @@ assert(ledger.entries.find(item => item.dateISO === '2026-06-26')?.canonicalObse
 assert(ledger.entries.find(item => item.dateISO === '2026-07-10')?.canonicalObservanceId === 'observance:ordinary-time-weekday-14-friday:roman-catholic', 'Fourteenth Friday of Ordinary Time family binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-17')?.classification === 'unresolved', 'Portugal July 17 structural overlay must remain unresolved.');
 assert(ledger.entries.find(item => item.dateISO === '2026-08-03')?.sourceBinding?.legacyObservanceId === 'rc:OrdWeekday18Monday', 'Eighteenth Monday of Ordinary Time family binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-10-30')?.sourceBinding?.legacyObservanceId === 'rc:OrdWeekday30Friday', 'Thirtieth Friday of Ordinary Time family binding drifted.');
+assert(ledger.entries.find(item => item.dateISO === '2026-10-27')?.classification === 'unresolved', 'Portugal October 27 structural overlay must remain unresolved.');
 assert(ledger.entries.find(item => item.dateISO === '2026-11-29')?.perennialRuleId === 'temporal-rule:first-sunday-advent:roman-catholic', 'First Sunday of Advent TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-23')?.canonicalObservanceId === 'observance:lent-weekday-1-monday:roman-catholic', 'First Monday of Lent family binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-05-23')?.sourceBinding?.legacyObservanceId === 'rc:EasterWeekday7Saturday', 'Final Easter weekday family binding drifted.');
@@ -288,4 +290,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 142 precedence-resolved TemporalRuleFamily members + 80 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 247 source-bound occurrences across 243 days, 122 explicit unresolved days and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 153 precedence-resolved TemporalRuleFamily members + 80 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 258 source-bound occurrences across 254 days, 111 explicit unresolved days and no label-derived identity.');

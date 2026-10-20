@@ -35,8 +35,8 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 247,
-    "remainingOccurrences": 142,
+    "sourceBoundOccurrences": 258,
+    "remainingOccurrences": 131,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -48,7 +48,7 @@
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 20
+    "temporal-weekday-family": 9
   },
   "humanReviewBoundary": {
     "occurrenceCount": 20,
@@ -586,27 +586,6 @@
       "semanticFamily": "fixed-person"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-09-22-b3c5284f421a58cd69cbb192",
-      "sourceRecordHash": "d4323ccde7b94fb28199638d901fcd6b97e1b0c6126e2af3b20e707cb1f9729f",
-      "dateISO": "2026-09-22",
-      "canonicalEventId": "rc:OrdWeekday25Tuesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-24-dc6e1b65bdd1d0cd0ec74a27",
-      "sourceRecordHash": "456baf829937ee428ffb71023a664685d6a3871dd23ddf7efe1f70a398c527ac",
-      "dateISO": "2026-09-24",
-      "canonicalEventId": "rc:OrdWeekday25Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-25-e1cb1b8b5d9a7c24976a34ed",
-      "sourceRecordHash": "113135aebbca9dc2732efcfa685be47c3c26c6478b418e5d4344484ba76b753a",
-      "dateISO": "2026-09-25",
-      "canonicalEventId": "rc:OrdWeekday25Friday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-09-26-ce6b1b8a10c22a769588a027",
       "sourceRecordHash": "e69459658915905e4640f643b1c87e021291f56972b12caccaa9ae4584701b85",
       "dateISO": "2026-09-26",
@@ -677,13 +656,6 @@
       "semanticFamily": "fixed-marian-title"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-10-08-524b101de4c77d4e7a5d992d",
-      "sourceRecordHash": "d7efbf7e69ed1b54d14a2442d2c4cabfc9e0aa13cfb2f1394e916f8d0d0a6705",
-      "dateISO": "2026-10-08",
-      "canonicalEventId": "rc:OrdWeekday27Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-10-09-d03038c144ea382cc2f91bf2",
       "sourceRecordHash": "49fef918da166c474008ecd467b603727e7c89ac93c1a5dddbfbada1371d9598",
       "dateISO": "2026-10-09",
@@ -710,20 +682,6 @@
       "dateISO": "2026-10-10",
       "canonicalEventId": "rc:SatMemBVM13",
       "semanticFamily": "saturday-marian-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-12-fea76a1692628c5865f2a327",
-      "sourceRecordHash": "a119fa271c913c397be10bfd1142a32f16c5b8ff4356899ee2f0249fc55a3cb0",
-      "dateISO": "2026-10-12",
-      "canonicalEventId": "rc:OrdWeekday28Monday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-13-2cee1a0d8abc8bb14bbc4808",
-      "sourceRecordHash": "0e00e94303347a9b7ea26e8d0a99b3e7633b8f78477476b20de5a87172bb6373",
-      "dateISO": "2026-10-13",
-      "canonicalEventId": "rc:OrdWeekday28Tuesday",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
@@ -761,20 +719,6 @@
       "semanticFamily": "fixed-collective"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-10-20-b2d0e193dcbe8e3c639acea5",
-      "sourceRecordHash": "bef1d47dd45e0969dbd89bc746fb82aa892eca779709d9ad147d60985759c602",
-      "dateISO": "2026-10-20",
-      "canonicalEventId": "rc:OrdWeekday29Tuesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-21-df2ad630e299565f968e95e7",
-      "sourceRecordHash": "da8e86c2c33bad8a79a9146e0a7462497819c9ef878ecbfd98da1eebedde3514",
-      "dateISO": "2026-10-21",
-      "canonicalEventId": "rc:OrdWeekday29Wednesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-10-22-2d9d67aa059f219de9dc687b",
       "sourceRecordHash": "ed7b4df4a7b84002de33627f1cda53340cea8af0a830ac02686d4c0b3536a48d",
       "dateISO": "2026-10-22",
@@ -803,32 +747,11 @@
       "semanticFamily": "fixed-person"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-10-26-d272ec1595a05b5f81fee54d",
-      "sourceRecordHash": "339ba5c1b18f30dd02df70f84db59609103e6b79d86db368f666894f4c7d11a5",
-      "dateISO": "2026-10-26",
-      "canonicalEventId": "rc:OrdWeekday30Monday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-10-27-1d075d348cea0a826785314b",
       "sourceRecordHash": "f14b970b9c08f6354a360a8b6511063550b60585673c53fe6961be6bec5cf659",
       "dateISO": "2026-10-27",
       "canonicalEventId": "rc:OrdWeekday30Tuesday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-29-935ddb750df84ed72b832265",
-      "sourceRecordHash": "e4ed338ee6851ed34b8db6ea57957cee40b28d9616fe235f4a7a6706317b1f08",
-      "dateISO": "2026-10-29",
-      "canonicalEventId": "rc:OrdWeekday30Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-30-d1201f93d0654a1db65f2465",
-      "sourceRecordHash": "1de84410858a2d5ec8c4c6d08538ad5c9d209aca944fd52b4d4035e372caec17",
-      "dateISO": "2026-10-30",
-      "canonicalEventId": "rc:OrdWeekday30Friday",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-31-f99d598c0f9ce584c1271893",
