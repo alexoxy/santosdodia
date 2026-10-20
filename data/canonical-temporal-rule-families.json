@@ -431,7 +431,7 @@
       "baseOffsetDays": -238,
       "weekRange": {
         "min": 8,
-        "max": 30
+        "max": 34
       },
       "exclusiveStartDateRule": {
         "type": "relative",
