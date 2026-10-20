@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "temporalRuleFamilyModelVersion": "1.4",
+  "temporalRuleFamilyModelVersion": "1.5",
   "status": "repository-reviewed-temporal-rule-family-anchors",
   "families": [
     {
@@ -389,7 +389,13 @@
       "baseOffsetDays": -7,
       "weekRange": {
         "min": 1,
-        "max": 3
+        "max": 6
+      },
+      "exclusiveEndDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "gregorian-easter",
+        "offsetDays": -46
       },
       "weekStrideDays": 7,
       "weekdayOffsets": {

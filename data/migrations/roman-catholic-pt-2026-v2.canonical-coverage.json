@@ -28,10 +28,10 @@
   "coverage": {
     "explicitOccurrenceAnchors": 80,
     "temporalRuleShadowOccurrences": 14,
-    "temporalRuleFamilyShadowOccurrences": 111,
+    "temporalRuleFamilyShadowOccurrences": 115,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 216,
-    "remainingLegacyOccurrences": 173,
+    "mappedOccurrenceAnchors": 220,
+    "remainingLegacyOccurrences": 169,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -47,6 +47,7 @@
     "temporalShadowMustAnchorExactApprovedSourceRow": true,
     "temporalFamilyCandidatesRequirePrecedenceResolution": true,
     "suppressedTemporalFamilyCandidatesMustNotCountAsCoverage": true,
+    "withheldTemporalFamilyCandidatesMustNotCountAsCoverage": true,
     "movableTransferShadowMustResolveThroughCanonicalTemporalRule": true,
     "reviewedJurisdictionTransferRequired": true,
     "movableTransferShadowMustAnchorExactApprovedSourceRow": true,
