@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "status": "epiphany-interval-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "familyId": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+  "candidateOutcomes": {
+    "candidates": 6,
+    "presentSourceOccurrences": 3,
+    "suppressedCandidates": 3
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-01-05-6b518156d4feae2ef222dc94",
+    "snl-pt-2026-01-08-fc47b2946d29fa21d55037e2",
+    "snl-pt-2026-01-09-db23378c81ba4d5d158833d0"
+  ],
+  "promotedMappingDigestSha256": "cb3c8c1272e79308a501f8e6d7d05dea7e667c42b5223d9ce257f788642feaf9",
+  "promotedSuppressionDigestSha256": "06138fd5b67a53def654a1771cff8f6117cfa20bc8d1a5cea1135a99fcede05c",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 205,
+    "remainingLegacyOccurrences": 184
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 208,
+    "remainingLegacyOccurrences": 181,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}

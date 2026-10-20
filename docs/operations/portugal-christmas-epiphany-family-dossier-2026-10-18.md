@@ -1,7 +1,7 @@
 # Portugal 2026 — dossiê da família Natal/Epifania
 
-**Estado:** preparação da regra temporal; sem promoção canónica ou publicação  
-**Data:** 18 de outubro de 2026
+**Estado:** regra temporal implementada em shadow; sem promoção pública ou publicação
+**Data:** 20 de outubro de 2026
 
 ## Evidência de referência
 
@@ -30,19 +30,19 @@ Os IDs e hashes abaixo foram lidos do `effective-preview.json` desse artefacto; 
 
 A aprovação explícita do projeto para 2026 consta em `data/releases/roman-catholic-pt-2026.overlay-approval.json` e inclui `pt-2026-epiphany-transfer`: `2026-01-06` → `2026-01-04`, com a substituição portuguesa `rc-pt:TuesdayAfterEpiphany` na origem. A aprovação autoriza essa decisão litúrgica em 2026; não autoriza escrita em D1, promoção pública, nem inferência automática para outros anos.
 
-## Alteração necessária antes da regra
+## Regra implementada
 
-O catálogo atual de `TemporalRuleFamily` só aceita âncoras `gregorian-easter`, `advent-start` e `ordinary-time-second-sunday`, com candidatos definidos por semana e dia da semana. A sequência portuguesa depende da Epifania efetiva da jurisdição e termina na data efetiva do Batismo. Uma regra fixa de janeiro ou uma família com âncora universal a 6 de janeiro daria datas erradas quando a Epifania é transferida.
+O catálogo `TemporalRuleFamily` aceita agora a âncora jurisdicional `effective-portugal-epiphany` e o limite exclusivo `effective-portugal-baptism-of-the-lord`. A sequência portuguesa depende da Epifania efetiva da jurisdição e termina antes da data efetiva do Batismo; não usa uma data fixa de janeiro nem a Epifania universal como substituto.
 
-O próximo lote de código deve, nesta ordem:
+O lote implementou, nesta ordem:
 
 1. Expor ao motor temporal as datas efetivas de Epifania e Batismo para `roman-portugal`, usando a política de jurisdição já existente.
 2. Definir uma família de dias entre essas duas festas, com identidade canónica independente do rótulo/ID legado e sem incluir os limites.
-3. Gerar candidatos e suppressions para anos em que a Epifania portuguesa cai em domingos diferentes, incluindo os limites de 7/8 de janeiro e o Batismo transferido para segunda-feira.
+3. Gerar candidatos e suppressions para anos em que a Epifania portuguesa cai em domingos diferentes, incluindo os limites de 7/8 de janeiro e o Batismo transferido para segunda-feira; os vetores 1900–2200 provam que o intervalo fica vazio nesses dois casos.
 4. Vincular apenas as linhas 2026 exatas acima, reutilizando a decisão aprovada no destino e na origem; manter as memórias facultativas como resultados de precedência, sem dupla contagem.
 5. Acrescentar vetores plurianuais, hashes, testes de cobertura e recibo shadow. Manter `mutationAllowed: false`, cutover `false`, sem deploy e sem escrita D1.
 
-Não se deve alargar a família enquanto os testes não provarem esses casos de fronteira. As 2026 linhas de 5, 8 e 9 de janeiro são candidatos fonte claros, mas a regra ainda não está pronta para generalização anual. As linhas de 6, 7 e 10 de janeiro têm tratamento de transferência, identidade local ou precedência que deve ficar explícito nos vetores e na equivalência.
+As linhas 2026 de 5, 8 e 9 de janeiro estão ligadas por ID e hash. As linhas de 6, 7 e 10 de janeiro continuam como resultados explícitos de transferência, identidade local ou precedência e não contam como cobertura desta família. A regra é perene; a equivalência anual continua limitada ao artefacto Portugal 2026 aprovado.
 
 ## Critério de conclusão deste lote
 

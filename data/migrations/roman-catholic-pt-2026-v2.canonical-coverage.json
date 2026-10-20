@@ -28,10 +28,10 @@
   "coverage": {
     "explicitOccurrenceAnchors": 80,
     "temporalRuleShadowOccurrences": 14,
-    "temporalRuleFamilyShadowOccurrences": 100,
+    "temporalRuleFamilyShadowOccurrences": 103,
     "movableTransferShadowOccurrences": 11,
-    "mappedOccurrenceAnchors": 205,
-    "remainingLegacyOccurrences": 184,
+    "mappedOccurrenceAnchors": 208,
+    "remainingLegacyOccurrences": 181,
     "requiredForPromotion": 389,
     "promotionAllowed": false
   },
@@ -57,5 +57,5 @@
     "noDropboxPromotionImplied": true,
     "legacyOptionalMemorialRequiresOfficialSourceCodeMF": true
   },
-  "verifiedAt": "2026-09-13"
+  "verifiedAt": "2026-10-20"
 }
