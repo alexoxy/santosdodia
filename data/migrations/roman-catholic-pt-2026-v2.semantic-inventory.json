@@ -34,8 +34,8 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 208,
-    "remainingOccurrences": 181,
+    "sourceBoundOccurrences": 216,
+    "remainingOccurrences": 173,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -47,7 +47,7 @@
     "jurisdiction-structural-overlay": 14,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 58
+    "temporal-weekday-family": 50
   },
   "humanReviewBoundary": {
     "occurrenceCount": 21,
@@ -95,67 +95,11 @@
       "semanticFamily": "fixed-or-major-observance"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-01-12-05453cbdcaee01c9d33e345d",
-      "sourceRecordHash": "fc34048f4b8f85ef1a02644d835219d5f3f6f906bdee84dd352d93c762cb313e",
-      "dateISO": "2026-01-12",
-      "canonicalEventId": "rc:OrdWeekday1Monday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-14-bfeb91031c4f68a5056d2db1",
-      "sourceRecordHash": "ad1c7ccdf12ae3de9f380d9e7396dc54d45d864c3423119d128e75de40742d6c",
-      "dateISO": "2026-01-14",
-      "canonicalEventId": "rc:OrdWeekday1Wednesday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-15-b2e7099b5faffc2d412089be",
-      "sourceRecordHash": "e43fec6157cc81f595bff4cc204a75af692f0d9b006aa9659ef57d64aea5c0d0",
-      "dateISO": "2026-01-15",
-      "canonicalEventId": "rc:OrdWeekday1Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-16-8d30c692710a06168ddfa6aa",
-      "sourceRecordHash": "45295171999f77c93951eedcaea1182716c536973c689fa1a074271768a64783",
-      "dateISO": "2026-01-16",
-      "canonicalEventId": "rc:OrdWeekday1Friday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-19-8f5671cce69f976c35b8b354",
-      "sourceRecordHash": "be5f03b1a82845b415a2b638c9bed0746c64a9f62a402283fcb104ee8c3984ad",
-      "dateISO": "2026-01-19",
-      "canonicalEventId": "rc:OrdWeekday2Monday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-23-5f1340dc8cb1c59c2a85eb40",
-      "sourceRecordHash": "1ae04f0e7d4e33a3fc011a55318b34746369a05fb315e6247c515a07527adc00",
-      "dateISO": "2026-01-23",
-      "canonicalEventId": "rc:OrdWeekday2Friday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-01-26-6b214544d1ff24d4e425c0c9",
       "sourceRecordHash": "215c73d8bedd59c4d68df1e937c47d3b13208f6400efa4c9d3a4640a8ac77240",
       "dateISO": "2026-01-26",
       "canonicalEventId": "rc:StsTimothyTitus",
       "semanticFamily": "fixed-collective"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-29-fa2cf3cbccec9554457655e2",
-      "sourceRecordHash": "ef306cf2a36bc9485315b1458e9778c9044fc71094f218798272d524e8040739",
-      "dateISO": "2026-01-29",
-      "canonicalEventId": "rc:OrdWeekday3Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-30-63c8fc439bccda563da8e298",
-      "sourceRecordHash": "8746e8d0943a81cfa930b52957b667e4223ac11ef6eed28514544f5a8e4914bf",
-      "dateISO": "2026-01-30",
-      "canonicalEventId": "rc:OrdWeekday3Friday",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-02-02-a343789c470d6abc938bd6ab",

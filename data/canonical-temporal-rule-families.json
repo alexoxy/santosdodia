@@ -14,11 +14,29 @@
       "memberProfile": "weekday-monday-saturday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": -42,
-      "weekRange": {"min": 1, "max": 5},
+      "weekRange": {
+        "min": 1,
+        "max": 5
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6},
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3,
+        "thursday": 4,
+        "friday": 5,
+        "saturday": 6
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -32,11 +50,29 @@
       "memberProfile": "weekday-monday-saturday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": 0,
-      "weekRange": {"min": 2, "max": 7},
+      "weekRange": {
+        "min": 2,
+        "max": 7
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6},
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3,
+        "thursday": 4,
+        "friday": 5,
+        "saturday": 6
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-08-22"
     },
     {
@@ -50,11 +86,26 @@
       "memberProfile": "weekday-monday-wednesday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": -7,
-      "weekRange": {"min": 1, "max": 1},
+      "weekRange": {
+        "min": 1,
+        "max": 1
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3},
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -68,11 +119,29 @@
       "memberProfile": "weekday-monday-saturday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": 0,
-      "weekRange": {"min": 1, "max": 1},
+      "weekRange": {
+        "min": 1,
+        "max": 1
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6},
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3,
+        "thursday": 4,
+        "friday": 5,
+        "saturday": 6
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -86,11 +155,24 @@
       "memberProfile": "sunday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": -42,
-      "weekRange": {"min": 2, "max": 5},
+      "weekRange": {
+        "min": 2,
+        "max": 5
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"sunday": 0},
+      "weekdayOffsets": {
+        "sunday": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -104,11 +186,24 @@
       "memberProfile": "sunday",
       "anchor": "gregorian-easter",
       "baseOffsetDays": 0,
-      "weekRange": {"min": 2, "max": 6},
+      "weekRange": {
+        "min": 2,
+        "max": 6
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"sunday": 0},
+      "weekdayOffsets": {
+        "sunday": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -122,11 +217,24 @@
       "memberProfile": "sunday",
       "anchor": "advent-start",
       "baseOffsetDays": 0,
-      "weekRange": {"min": 2, "max": 4},
+      "weekRange": {
+        "min": 2,
+        "max": 4
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"sunday": 0},
+      "weekdayOffsets": {
+        "sunday": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -140,11 +248,25 @@
       "memberProfile": "weekday-tuesday-wednesday",
       "anchor": "advent-start",
       "baseOffsetDays": 0,
-      "weekRange": {"min": 1, "max": 3},
+      "weekRange": {
+        "min": 1,
+        "max": 3
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"tuesday": 2, "wednesday": 3},
+      "weekdayOffsets": {
+        "tuesday": 2,
+        "wednesday": 3
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-13"
     },
     {
@@ -158,11 +280,24 @@
       "memberProfile": "sunday",
       "anchor": "ordinary-time-second-sunday",
       "baseOffsetDays": -7,
-      "weekRange": {"min": 2, "max": 9},
+      "weekRange": {
+        "min": 2,
+        "max": 9
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"sunday": 0},
+      "weekdayOffsets": {
+        "sunday": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -176,11 +311,24 @@
       "memberProfile": "sunday",
       "anchor": "advent-start",
       "baseOffsetDays": -238,
-      "weekRange": {"min": 10, "max": 34},
+      "weekRange": {
+        "min": 10,
+        "max": 34
+      },
       "weekStrideDays": 7,
-      "weekdayOffsets": {"sunday": 0},
+      "weekdayOffsets": {
+        "sunday": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
-      "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+          "claimTypes": [
+            "temporal-cycle-authority"
+          ]
+        }
+      ],
       "verifiedAt": "2026-09-10"
     },
     {
@@ -201,13 +349,66 @@
       "anchor": "effective-portugal-epiphany",
       "boundary": "effective-portugal-baptism-of-the-lord",
       "baseOffsetDays": 1,
-      "weekRange": {"min": 1, "max": 6},
+      "weekRange": {
+        "min": 1,
+        "max": 6
+      },
       "weekStrideDays": 1,
-      "weekdayOffsets": {"day": 0},
+      "weekdayOffsets": {
+        "day": 0
+      },
       "candidateRequiresPrecedenceResolution": true,
       "evidence": [
-        {"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu_proprio_19690321_calendarium-romanum.html","claimTypes":["universal-calendar-authority"]},
-        {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/agenda/agenda.ics","claimTypes":["portugal-annual-calendar"]}
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu_proprio_19690321_calendarium-romanum.html",
+          "claimTypes": [
+            "universal-calendar-authority"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/agenda/agenda.ics",
+          "claimTypes": [
+            "portugal-annual-calendar"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "temporal-rule-family:ordinary-time-weekday-early:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "ordinary-time-weekday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}-{weekday}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:OrdWeekday{week}{weekdayTitle}",
+      "legacyRank": "weekday",
+      "memberProfile": "weekday-monday-saturday",
+      "anchor": "ordinary-time-second-sunday",
+      "baseOffsetDays": -7,
+      "weekRange": {
+        "min": 1,
+        "max": 3
+      },
+      "weekStrideDays": 7,
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3,
+        "thursday": 4,
+        "friday": 5,
+        "saturday": 6
+      },
+      "candidateRequiresPrecedenceResolution": true,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu_proprio_19690321_calendarium-romanum.html",
+          "claimTypes": [
+            "universal-calendar-authority"
+          ]
+        }
       ],
       "verifiedAt": "2026-10-20"
     }
