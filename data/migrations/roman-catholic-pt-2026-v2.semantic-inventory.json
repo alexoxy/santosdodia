@@ -30,12 +30,13 @@
       "movableTransfer.mappings"
     ],
     "suppressedCandidatesCountAsCoverage": false,
+    "withheldCandidatesCountAsCoverage": false,
     "transferOriginsCountAsCoverage": false
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 216,
-    "remainingOccurrences": 173,
+    "sourceBoundOccurrences": 220,
+    "remainingOccurrences": 169,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -47,7 +48,7 @@
     "jurisdiction-structural-overlay": 14,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 50
+    "temporal-weekday-family": 46
   },
   "humanReviewBoundary": {
     "occurrenceCount": 21,
@@ -130,39 +131,11 @@
       "semanticFamily": "portugal-proper"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-02-09-5f80b519d3e2d3f6152f831d",
-      "sourceRecordHash": "5c4f94386c63344b0019e7f1cfd7905b2782bdf09e476d1cccb6e5cb5b5e08c6",
-      "dateISO": "2026-02-09",
-      "canonicalEventId": "rc:OrdWeekday5Monday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-02-11-7014b451076890cc74de5579",
       "sourceRecordHash": "bcd1bb39975930801a00fa49d61581bbef9bf585bfabc8aec7d86c0d548084e4",
       "dateISO": "2026-02-11",
       "canonicalEventId": "rc:OurLadyOfLourdes",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-02-12-0cb2605213f6d5bdd231949e",
-      "sourceRecordHash": "a6e4fdb77d3e2376a8a781eb1c06b9ed8d30f6e0706f6eb07886b44ad60be51e",
-      "dateISO": "2026-02-12",
-      "canonicalEventId": "rc:OrdWeekday5Thursday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-02-13-37a025777fbab8d33255ce81",
-      "sourceRecordHash": "b155c83fc5e9efe1cd8eae6cc0986c1860edf9471aa903697214de98184c3e52",
-      "dateISO": "2026-02-13",
-      "canonicalEventId": "rc:OrdWeekday5Friday",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-02-16-888d7935642618e4ceceafdd",
-      "sourceRecordHash": "0b10de2d4bd2e877687b1aba02097cc89e74f8d598dacf042f4b7abf37c8dd8c",
-      "dateISO": "2026-02-16",
-      "canonicalEventId": "rc:OrdWeekday6Monday",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-02-17-9627449325bd5719c5cbe3e8",

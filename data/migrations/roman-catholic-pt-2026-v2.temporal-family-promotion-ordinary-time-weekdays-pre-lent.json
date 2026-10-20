@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-pre-lent-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-early:roman-catholic",
+  "perennialBoundary": {
+    "exclusiveEndAnchor": "gregorian-easter",
+    "exclusiveEndOffsetDays": -46,
+    "meaning": "ash-wednesday"
+  },
+  "promotedSourceOccurrences": 4,
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-02-09-5f80b519d3e2d3f6152f831d",
+    "snl-pt-2026-02-12-0cb2605213f6d5bdd231949e",
+    "snl-pt-2026-02-13-37a025777fbab8d33255ce81",
+    "snl-pt-2026-02-16-888d7935642618e4ceceafdd"
+  ],
+  "candidateOutcomes": {
+    "candidates": 14,
+    "presentSourceOccurrences": 4,
+    "suppressedCandidates": 9,
+    "withheldJurisdictionRows": 1
+  },
+  "withheldSourceOccurrenceIds": [
+    "snl-pt-2026-02-04-e285ab8cd2b91ecf40f5428a"
+  ],
+  "promotedMappingDigestSha256": "77c49c8eb1def8367fa5fc616c420d1e9ba6140493d6fc6bea47c4b0dd00c9a3",
+  "promotedSuppressionDigestSha256": "fe0d17b0c380b2772055772091573fd5d808dac8451373c15711c23edab8c3d1",
+  "withheldCandidateDigestSha256": "e34c9f58231e43d353881a44b1e0d18e96d90075849397f9997cc9b660e7994c",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 216,
+    "remainingLegacyOccurrences": 173
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 220,
+    "remainingLegacyOccurrences": 169,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}

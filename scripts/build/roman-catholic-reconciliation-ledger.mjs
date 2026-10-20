@@ -174,7 +174,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
   assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
-  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.4' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
+  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.5' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
   assert(temporalFamilyShadow.year === year, 'TemporalRuleFamily shadow year differs from the ledger.');
@@ -278,6 +278,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     const expectedStride = family.anchor === 'effective-portugal-epiphany' ? 1 : 7;
     assert(Number.isInteger(family.baseOffsetDays) && Number.isInteger(family.weekStrideDays) && family.weekStrideDays === expectedStride, `TemporalRuleFamily ${family.id} has invalid date arithmetic.`);
     assert(Number.isInteger(family.weekRange?.min) && Number.isInteger(family.weekRange?.max) && family.weekRange.min <= family.weekRange.max, `TemporalRuleFamily ${family.id} has an invalid week range.`);
+    if (family.exclusiveEndDateRule) temporalDateForYear(year, { id: `${family.id}:exclusive-end`, dateRule: family.exclusiveEndDateRule });
     const familyWeekdays = Object.keys(family.weekdayOffsets ?? {}).sort();
     const expectedMembers = TEMPORAL_FAMILY_MEMBER_PROFILES[family.memberProfile];
     assert(expectedMembers && JSON.stringify(familyWeekdays) === JSON.stringify(expectedMembers), `TemporalRuleFamily ${family.id} has an invalid member/rank profile.`);
@@ -311,9 +312,18 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     assert(!suppressionsByCandidate.has(key), `Duplicate TemporalRuleFamily suppression ${key}.`);
     suppressionsByCandidate.set(key, suppression);
   }
+  const withheldByCandidate = new Map();
+  for (const withheld of temporalFamilyShadow.withheldCandidates ?? []) {
+    const family = familiesById.get(withheld.familyId);
+    assert(family, `Withheld candidate references unknown TemporalRuleFamily ${withheld.familyId}.`);
+    const key = `${withheld.familyId}\u0000${withheld.week}\u0000${withheld.weekday}`;
+    assert(!withheldByCandidate.has(key), `Duplicate withheld TemporalRuleFamily candidate ${key}.`);
+    withheldByCandidate.set(key, withheld);
+  }
 
   const familyByDate = new Map();
   const consumedSuppressions = new Set();
+  const consumedWithheld = new Set();
   for (const family of temporalFamilyDataset.families) {
     const snapshot = snapshotsByFamily.get(family.id);
     const presentLegacyIds = new Set(snapshot.presentLegacyIds);
@@ -331,8 +341,14 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         const key = `${family.id}\u0000${week}\u0000${weekday}`;
         const mapping = mappingsByCandidate.get(key);
         const suppression = suppressionsByCandidate.get(key);
-        assert(Boolean(mapping) !== Boolean(suppression), `TemporalRuleFamily candidate ${key} must be present or suppressed, never both/neither.`);
         const expectedDateISO = familyDateForYear(year, family, week, weekday);
+        const exclusiveEndDateISO = family.exclusiveEndDateRule ? temporalDateForYear(year, { id: `${family.id}:exclusive-end`, dateRule: family.exclusiveEndDateRule }) : null;
+        if (exclusiveEndDateISO && expectedDateISO >= exclusiveEndDateISO) {
+          assert(!mapping && !suppression && !withheldByCandidate.has(key), `TemporalRuleFamily candidate ${key} crosses its exclusive end boundary but has an annual outcome.`);
+          continue;
+        }
+        const withheld = withheldByCandidate.get(key);
+        assert(Number(Boolean(mapping)) + Number(Boolean(suppression)) + Number(Boolean(withheld)) === 1, `TemporalRuleFamily candidate ${key} must be present, suppressed or withheld, never overlapping or absent.`);
         const expectedLegacyId = familyLegacyId(family, week, weekday);
 
         if (suppression) {
@@ -340,6 +356,13 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
           assert(typeof suppression.suppressingLegacyObservanceId === 'string' && suppression.suppressingLegacyObservanceId !== expectedLegacyId, `TemporalRuleFamily suppression ${key} lacks a distinct suppressing identity.`);
           assert(['weekday', 'optional-memorial', 'memorial', 'feast', 'solemnity'].includes(suppression.suppressingRank), `TemporalRuleFamily suppression ${key} has an unsupported rank.`);
           consumedSuppressions.add(key);
+          continue;
+        }
+        if (withheld) {
+          assert(withheld.candidateDateISO === expectedDateISO && withheld.legacyObservanceId === expectedLegacyId, `Withheld TemporalRuleFamily candidate ${key} differs from its calculated identity/date.`);
+          assert(withheld.sourceOccurrenceId?.startsWith(`snl-pt-${expectedDateISO}-`) && /^[a-f0-9]{64}$/u.test(withheld.sourceRecordHash ?? ''), `Withheld TemporalRuleFamily candidate ${key} lacks exact source evidence.`);
+          assert(withheld.reason === 'jurisdiction-structural-overlay-review-required' && withheld.countsAsCoverage === false, `Withheld TemporalRuleFamily candidate ${key} weakened fail-closed policy.`);
+          consumedWithheld.add(key);
           continue;
         }
 
@@ -363,6 +386,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     }
   }
   assert(consumedSuppressions.size === suppressionsByCandidate.size, 'TemporalRuleFamily shadow contains unused precedence suppressions.');
+  assert(consumedWithheld.size === withheldByCandidate.size, 'TemporalRuleFamily shadow contains unused withheld candidates.');
 
   const overlayDecisions = new Map((overlayReview.decisions ?? []).map(decision => [decision.id, decision]));
   const approvedDecisionIds = new Set(overlayApproval.decisionIds ?? []);

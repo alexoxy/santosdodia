@@ -19,7 +19,7 @@ const expectedMemberProfiles = {
 const expectedLegacyRanks = ['weekday', 'solemnity', 'celebration with precedence over solemnities'];
 function assert(condition, message) { if (!condition) throw new Error(message); }
 
-assert(familyDataset?.schemaVersion === 1 && familyDataset?.temporalRuleFamilyModelVersion === '1.4' && familyDataset?.status === 'repository-reviewed-temporal-rule-family-anchors', 'TemporalRuleFamily dataset is invalid.');
+assert(familyDataset?.schemaVersion === 1 && familyDataset?.temporalRuleFamilyModelVersion === '1.5' && familyDataset?.status === 'repository-reviewed-temporal-rule-family-anchors', 'TemporalRuleFamily dataset is invalid.');
 assert(Array.isArray(familyDataset?.families) && familyDataset.families.length === 12, 'TemporalRuleFamily bootstrap must contain the reviewed seasonal, Portugal Epiphany interval and early Ordinary Time weekday families.');
 assert(shadow?.schemaVersion === 1 && shadow?.status === 'approved-release-temporal-family-shadow' && shadow?.sourceReleaseId === 'roman-catholic-pt-2026-v2', 'TemporalRuleFamily shadow snapshot is invalid.');
 assert(shadow?.sourceArtifact?.workflowRunId === 31998552573 && shadow?.sourceArtifact?.artifactId === 9277632698 && shadow?.sourceArtifact?.buildJsonSha256 === '159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06', 'TemporalRuleFamily shadow is not pinned to the approved Portugal artifact.');
@@ -40,6 +40,7 @@ try {
 
   const snapshotFamilies = new Map((shadow.families ?? []).map((item) => [item.familyId, item]));
   const suppressions = new Map((shadow.suppressedCandidates ?? []).map((item) => [`${item.familyId}\u0000${item.week}\u0000${item.weekday}`, item]));
+  const withheldCandidates = new Map((shadow.withheldCandidates ?? []).map((item) => [`${item.familyId}\u0000${item.week}\u0000${item.weekday}`, item]));
   const seenCandidateKeys = new Set();
   const seenPresentLegacyIds = new Set();
   const seenSourceOccurrenceIds = new Set();
@@ -48,6 +49,7 @@ try {
   let candidateCount = 0;
   let presentCount = 0;
   let suppressedCount = 0;
+  let withheldCount = 0;
 
   for (const family of familyDataset.families) {
     assert(family?.churchId === 'church:roman-catholic' && family?.calendarSystem === 'gregorian', `${family?.id} must remain Roman Catholic/Gregorian.`);
@@ -61,6 +63,7 @@ try {
     assert(evidenceHosts.some((host) => host === 'vatican.va' || host.endsWith('.vatican.va')), `${family.id} lacks Holy See evidence.`);
     if (family.anchor === 'effective-portugal-epiphany') assert(family.jurisdictionId === 'jurisdiction:roman-catholic:pt' && family.boundary === 'effective-portugal-baptism-of-the-lord' && evidenceHosts.some((host) => host === 'liturgia.pt' || host.endsWith('.liturgia.pt')), `${family.id} lacks its Portugal boundary evidence.`);
     assert(Number.isInteger(family?.weekRange?.min) && Number.isInteger(family?.weekRange?.max) && family.weekRange.min <= family.weekRange.max, `${family.id} has invalid week range.`);
+    if (family.exclusiveEndDateRule) assert(family.exclusiveEndDateRule.type === 'relative' && family.exclusiveEndDateRule.calendar === 'gregorian' && family.exclusiveEndDateRule.anchor === 'gregorian-easter' && Number.isInteger(family.exclusiveEndDateRule.offsetDays), `${family.id} has an invalid exclusive end boundary.`);
     const snapshot = snapshotFamilies.get(family.id);
     assert(snapshot && Array.isArray(snapshot.presentLegacyIds) && Array.isArray(snapshot.presentMappings), `${family.id} has no approved-release exact presence snapshot.`);
     const presentIds = new Set(snapshot.presentLegacyIds);
@@ -72,15 +75,20 @@ try {
 
     for (let week = family.weekRange.min; week <= family.weekRange.max; week += 1) {
       for (const [weekday, weekdayOffset] of Object.entries(family.weekdayOffsets)) {
-        candidateCount += 1;
         const candidateKey = `${family.id}\u0000${week}\u0000${weekday}`;
-        assert(!seenCandidateKeys.has(candidateKey), `Duplicate temporal family candidate ${candidateKey}.`);
-        seenCandidateKeys.add(candidateKey);
         const offsetDays = family.baseOffsetDays + ((week - 1) * family.weekStrideDays) + weekdayOffset;
         const resolved = family.anchor === 'effective-portugal-epiphany'
           ? { status: 'resolved', dateISO: new Date(Date.UTC(shadow.year, 0, 4 + offsetDays)).toISOString().slice(0, 10) }
           : calendar.resolveDateRule({ type: 'relative', calendar: 'gregorian', anchor: family.anchor, offsetDays }, shadow.year);
         assert(resolved.status === 'resolved', `${candidateKey} failed to resolve.`);
+        const exclusiveEnd = family.exclusiveEndDateRule ? calendar.resolveDateRule(family.exclusiveEndDateRule, shadow.year) : null;
+        if (exclusiveEnd) {
+          assert(exclusiveEnd.status === 'resolved', `${family.id} exclusive end boundary failed to resolve.`);
+          if (resolved.dateISO >= exclusiveEnd.dateISO) continue;
+        }
+        candidateCount += 1;
+        assert(!seenCandidateKeys.has(candidateKey), `Duplicate temporal family candidate ${candidateKey}.`);
+        seenCandidateKeys.add(candidateKey);
         const weekdayToken = weekday.charAt(0).toUpperCase() + weekday.slice(1);
         const legacyId = (family.anchor === 'effective-portugal-epiphany' && family.legacyObservanceIdsBySlot?.[String(week)]) ? family.legacyObservanceIdsBySlot[String(week)] : family.legacyObservanceIdPattern
           .replace('{week}', String(week))
@@ -88,8 +96,9 @@ try {
           .replace('{weekdayShort}', `${weekday.charAt(0).toUpperCase()}${weekday.slice(1, 3)}`)
           .replace('{weekdayTitle}', weekdayToken);
         const suppression = suppressions.get(candidateKey);
+        const withheld = withheldCandidates.get(candidateKey);
         const isPresent = presentIds.has(legacyId);
-        assert(isPresent !== Boolean(suppression), `${candidateKey} must be either present or suppressed, never both/neither.`);
+        assert(Number(isPresent) + Number(Boolean(suppression)) + Number(Boolean(withheld)) === 1, `${candidateKey} must be present, suppressed or withheld, never overlapping or absent.`);
 
         if (isPresent) {
           presentCount += 1;
@@ -111,21 +120,27 @@ try {
           seenSourceOccurrenceIds.add(mapping.sourceOccurrenceId);
           seenSourceRecordHashes.add(mapping.sourceRecordHash);
           seenCanonicalOccurrenceIds.add(mapping.occurrenceId);
-        } else {
+        } else if (suppression) {
           suppressedCount += 1;
           assert(suppression.candidateDateISO === resolved.dateISO, `${candidateKey} suppression date ${suppression.candidateDateISO} differs from generated ${resolved.dateISO}.`);
           assert(typeof suppression.suppressingLegacyObservanceId === 'string' && suppression.suppressingLegacyObservanceId !== legacyId, `${candidateKey} lacks a distinct suppressing observance.`);
           assert(['weekday', 'optional-memorial', 'memorial', 'feast', 'solemnity'].includes(suppression.suppressingRank), `${candidateKey} has unsupported suppressing rank.`);
+        } else {
+          withheldCount += 1;
+          assert(withheld.candidateDateISO === resolved.dateISO && withheld.legacyObservanceId === legacyId, `${candidateKey} withheld identity/date differs from its canonical candidate.`);
+          assert(withheld.sourceOccurrenceId?.startsWith(`snl-pt-${resolved.dateISO}-`) && /^[a-f0-9]{64}$/u.test(withheld.sourceRecordHash ?? ''), `${candidateKey} withheld review row lacks exact SNL evidence.`);
+          assert(withheld.reason === 'jurisdiction-structural-overlay-review-required' && withheld.countsAsCoverage === false, `${candidateKey} withheld review row weakened fail-closed policy.`);
         }
       }
     }
   }
 
-  assert(candidateCount === 150, `Expected 150 temporal family candidates, got ${candidateCount}.`);
-  assert(presentCount === 111 && seenPresentLegacyIds.size === 111, `Expected 111 approved family occurrences, got ${presentCount}.`);
-  assert(seenSourceOccurrenceIds.size === 111 && seenSourceRecordHashes.size === 111 && seenCanonicalOccurrenceIds.size === 111, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
-  assert(suppressedCount === 39 && suppressions.size === 39, `Expected 39 precedence or season-boundary suppressions, got ${suppressedCount}.`);
-  assert(presentCount + suppressedCount === candidateCount, 'Every temporal family candidate must have an explicit precedence outcome.');
+  assert(candidateCount === 164, `Expected 164 temporal family candidates, got ${candidateCount}.`);
+  assert(presentCount === 115 && seenPresentLegacyIds.size === 115, `Expected 115 approved family occurrences, got ${presentCount}.`);
+  assert(seenSourceOccurrenceIds.size === 115 && seenSourceRecordHashes.size === 115 && seenCanonicalOccurrenceIds.size === 115, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
+  assert(suppressedCount === 48 && suppressions.size === 48, `Expected 48 precedence or season-boundary suppressions, got ${suppressedCount}.`);
+  assert(withheldCount === 1 && withheldCandidates.size === 1, `Expected one fail-closed jurisdiction review candidate, got ${withheldCount}.`);
+  assert(presentCount + suppressedCount + withheldCount === candidateCount, 'Every temporal family candidate must have an explicit annual outcome.');
   assert(seenPresentLegacyIds.has('rc:LentWeekday1Monday'), 'Lent family lost its first weekday anchor.');
   assert(seenPresentLegacyIds.has('rc:EasterWeekday7Saturday'), 'Easter family lost its final weekday anchor.');
   assert(seenPresentLegacyIds.has('rc:MonHolyWeek') && seenPresentLegacyIds.has('rc:WedHolyWeek'), 'Holy Week weekday family boundaries drifted.');
@@ -140,6 +155,9 @@ try {
   assert(!seenPresentLegacyIds.has('rc:OrdSunday31') && !seenPresentLegacyIds.has('rc:OrdSunday34'), 'All Saints or Christ the King suppression was lost.');
   assert(seenPresentLegacyIds.has('rc:OrdWeekday1Monday') && seenPresentLegacyIds.has('rc:OrdWeekday3Friday'), 'Early Ordinary Time weekday source bindings are incomplete.');
   assert(!seenPresentLegacyIds.has('rc:OrdWeekday2Tuesday') && suppressions.get('temporal-rule-family:ordinary-time-weekday-early:roman-catholic\u00002\u0000tuesday')?.alternativeSuppressingLegacyObservanceIds?.includes('rc:StSebastian'), 'Multiple approved January 20 alternatives were not preserved.');
+  assert(seenPresentLegacyIds.has('rc:OrdWeekday5Monday') && seenPresentLegacyIds.has('rc:OrdWeekday6Monday'), 'Pre-Lent Ordinary Time weekday source bindings are incomplete.');
+  assert(withheldCandidates.get('temporal-rule-family:ordinary-time-weekday-early:roman-catholic\u00004\u0000wednesday')?.sourceOccurrenceId === 'snl-pt-2026-02-04-e285ab8cd2b91ecf40f5428a', 'Portugal February 4 jurisdiction review boundary was lost.');
+  assert(!seenCandidateKeys.has('temporal-rule-family:ordinary-time-weekday-early:roman-catholic\u00006\u0000wednesday'), 'Ordinary Time weekday family crossed the Ash Wednesday boundary.');
   assert(!seenPresentLegacyIds.has('rc:LentWeekday4Thursday'), 'St Joseph precedence suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:EasterWeekday6Wednesday'), 'Fatima precedence suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:AdventWeekday2Tuesday') && !seenPresentLegacyIds.has('rc:AdventWeekday2Wednesday'), 'Advent precedence suppressions were lost.');
@@ -158,7 +176,7 @@ try {
     assert(octaveSaturday.status === 'resolved' && (Date.parse(`${octaveSaturday.dateISO}T00:00:00Z`) - easterDate.getTime()) / 86400000 === 6, `Easter Octave family failed for ${year}.`);
   }
 
-  console.log(`TemporalRuleFamily test passed: ${candidateCount} candidates = ${presentCount} exact source-bound occurrences + ${suppressedCount} precedence suppressions; no suppressed candidate counts as coverage.`);
+  console.log(`TemporalRuleFamily test passed: ${candidateCount} candidates = ${presentCount} exact source-bound occurrences + ${suppressedCount} precedence suppressions + ${withheldCount} fail-closed review row; no suppressed or withheld candidate counts as coverage.`);
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
