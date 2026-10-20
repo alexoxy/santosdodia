@@ -28,6 +28,7 @@ const ordinaryWeekdayLate1318Receipt = read('data/migrations/roman-catholic-pt-2
 const ordinaryWeekdayLate1924Receipt = read('data/migrations/roman-catholic-pt-2026-v2.temporal-family-promotion-ordinary-time-weekdays-late-19-24.json');
 const ordinaryWeekdayLate2530Receipt = read('data/migrations/roman-catholic-pt-2026-v2.temporal-family-promotion-ordinary-time-weekdays-late-25-30.json');
 const ordinaryWeekdayLate3134Receipt = read('data/migrations/roman-catholic-pt-2026-v2.temporal-family-promotion-ordinary-time-weekdays-late-31-34.json');
+const saturdayMarianReceipt = read('data/migrations/roman-catholic-pt-2026-v2.temporal-family-promotion-saturday-marian.json');
 
 assert(inventory?.schemaVersion === 1 && inventory?.status === 'approved-release-unresolved-semantic-inventory', 'Portugal semantic inventory identity changed unexpectedly.');
 assert(inventory.sourceReleaseId === coverage.sourceReleaseId, 'Semantic inventory targets another source release.');
@@ -42,25 +43,25 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 264 && coveredSourceIds.size === 264, 'Semantic inventory coverage boundary must contain exactly 264 unique approved source rows.');
+assert(coveredRows.length === 278 && coveredSourceIds.size === 278, 'Semantic inventory coverage boundary must contain exactly 278 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
 const ordinaryWeekdayLateFamilyId = ordinaryWeekdayLate812Receipt.familyId;
 const seasonalSundayMappings = families.families.filter((family) => family.familyId.endsWith('-sunday:roman-catholic')).flatMap((family) => family.presentMappings);
-const seasonalCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !family.familyId.includes('ordinary-time-sunday') && !family.familyId.includes('holy-week-weekday') && !family.familyId.includes('easter-octave-weekday') && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
+const seasonalCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !family.familyId.includes('saturday-marian') && !family.familyId.includes('ordinary-time-sunday') && !family.familyId.includes('holy-week-weekday') && !family.familyId.includes('easter-octave-weekday') && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
 const ordinarySundayFamilies = families.families.filter((family) => family.familyId.includes('ordinary-time-sunday'));
 const ordinarySundayMappings = ordinarySundayFamilies.flatMap((family) => family.presentMappings);
 const ordinarySundaySuppressions = families.suppressedCandidates.filter((item) => item.familyId.includes('ordinary-time-sunday'));
 const holyWeekOctaveFamilyIds = new Set(holyWeekOctaveReceipt.families);
 const holyWeekOctaveFamilies = families.families.filter((family) => holyWeekOctaveFamilyIds.has(family.familyId));
 const holyWeekOctaveMappings = holyWeekOctaveFamilies.flatMap((family) => family.presentMappings);
-const ordinaryCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !holyWeekOctaveFamilyIds.has(family.familyId) && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
-const holyWeekOctaveCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
+const ordinaryCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !family.familyId.includes('saturday-marian') && !holyWeekOctaveFamilyIds.has(family.familyId) && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
+const holyWeekOctaveCheckpointMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !family.familyId.includes('saturday-marian') && !adventWeekdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
 const adventWeekdayFamilies = families.families.filter((family) => adventWeekdayFamilyIds.has(family.familyId));
 const adventWeekdayMappings = adventWeekdayFamilies.flatMap((family) => family.presentMappings);
 const adventWeekdaySuppressions = families.suppressedCandidates.filter((item) => adventWeekdayFamilyIds.has(item.familyId));
-const temporalFamilyMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId).flatMap((family) => family.presentMappings);
+const temporalFamilyMappings = families.families.filter((family) => family.familyId !== epiphanyIntervalFamilyId && family.familyId !== ordinaryWeekdayEarlyFamilyId && family.familyId !== ordinaryWeekdayLateFamilyId && !family.familyId.includes('saturday-marian')).flatMap((family) => family.presentMappings);
 assert(seasonalReceipt?.schemaVersion === 1 && seasonalReceipt?.status === 'seasonal-sunday-temporal-family-shadow-promotion' && seasonalReceipt?.mutationAllowed === false, 'Seasonal Sunday promotion receipt is invalid or permits mutation.');
 assert(seasonalReceipt.sourceArtifact.workflowRunId === coverage.sourceArtifact.workflowRunId && seasonalReceipt.sourceArtifact.artifactId === coverage.sourceArtifact.artifactId && seasonalReceipt.sourceArtifact.buildJsonSha256 === coverage.sourceArtifact.buildJsonSha256, 'Seasonal Sunday promotion receipt is not pinned to the approved artifact.');
 assert(seasonalSundayMappings.length === 12 && seasonalReceipt.promotedSourceOccurrences === 12, 'Seasonal Sunday promotion receipt must cover exactly twelve source rows.');
@@ -212,7 +213,18 @@ assert(ordinaryWeekdayLate3134Receipt.candidateOutcomes.candidates === 24 && ord
 assert(createHash('sha256').update(JSON.stringify(ordinaryWeekdayLate3134Mappings)).digest('hex') === ordinaryWeekdayLate3134Receipt.promotedMappingDigestSha256, 'Weeks 31-34 mapping digest drifted.');
 assert(createHash('sha256').update(JSON.stringify(ordinaryWeekdayLate3134Suppressions)).digest('hex') === ordinaryWeekdayLate3134Receipt.promotedSuppressionDigestSha256, 'Weeks 31-34 suppression digest drifted.');
 assert(createHash('sha256').update(JSON.stringify(ordinaryWeekdayLate3134Withheld)).digest('hex') === ordinaryWeekdayLate3134Receipt.withheldCandidateDigestSha256, 'Weeks 31-34 withheld-candidate digest drifted.');
-assert(ordinaryWeekdayLate3134Receipt.coverageBefore.mappedOccurrenceAnchors === 258 && ordinaryWeekdayLate3134Receipt.coverageAfter.mappedOccurrenceAnchors === coverage.coverage.mappedOccurrenceAnchors && ordinaryWeekdayLate3134Receipt.coverageAfter.remainingLegacyOccurrences === coverage.coverage.remainingLegacyOccurrences && ordinaryWeekdayLate3134Receipt.coverageAfter.promotionAllowed === false, 'Weeks 31-34 receipt differs from the fail-closed coverage gate.');
+assert(ordinaryWeekdayLate3134Receipt.coverageBefore.mappedOccurrenceAnchors === 258 && ordinaryWeekdayLate3134Receipt.coverageAfter.mappedOccurrenceAnchors === 264 && ordinaryWeekdayLate3134Receipt.coverageAfter.remainingLegacyOccurrences === 125 && ordinaryWeekdayLate3134Receipt.coverageAfter.promotionAllowed === false, 'Weeks 31-34 historical coverage receipt drifted.');
+
+const saturdayFamilyIds = new Set(saturdayMarianReceipt.familyIds);
+const saturdayMappings = families.families.filter((family) => saturdayFamilyIds.has(family.familyId)).flatMap((family) => family.presentMappings);
+const saturdaySuppressions = families.suppressedCandidates.filter((item) => saturdayFamilyIds.has(item.familyId));
+assert(saturdayMarianReceipt?.schemaVersion === 1 && saturdayMarianReceipt?.status === 'saturday-marian-temporal-family-shadow-promotion' && saturdayMarianReceipt?.mutationAllowed === false && saturdayMarianReceipt?.publicationAllowed === false, 'Saturday Marian promotion receipt is invalid or permits mutation/publication.');
+assert(saturdayMarianReceipt.sourceArtifact.workflowRunId === coverage.sourceArtifact.workflowRunId && saturdayMarianReceipt.sourceArtifact.artifactId === coverage.sourceArtifact.artifactId && saturdayMarianReceipt.sourceArtifact.buildJsonSha256 === coverage.sourceArtifact.buildJsonSha256, 'Saturday Marian receipt is not pinned to the approved artifact.');
+assert(saturdayMarianReceipt.canonicalPolicy.selectionMode === 'optional-alternative' && saturdayMarianReceipt.canonicalPolicy.obligatory === false && saturdayMarianReceipt.canonicalPolicy.precedenceResolutionRequired === true, 'Saturday Marian receipt weakened optionality or precedence policy.');
+assert(saturdayMappings.length === 14 && saturdaySuppressions.length === 18 && saturdayMarianReceipt.candidateOutcomes.candidates === 32, 'Saturday Marian annual candidate partition drifted.');
+assert(createHash('sha256').update(JSON.stringify(saturdayMappings)).digest('hex') === saturdayMarianReceipt.promotedMappingDigestSha256, 'Saturday Marian mapping digest drifted.');
+assert(createHash('sha256').update(JSON.stringify(saturdaySuppressions)).digest('hex') === saturdayMarianReceipt.promotedSuppressionDigestSha256, 'Saturday Marian suppression digest drifted.');
+assert(saturdayMarianReceipt.coverageBefore.mappedOccurrenceAnchors === 264 && saturdayMarianReceipt.coverageAfter.mappedOccurrenceAnchors === coverage.coverage.mappedOccurrenceAnchors && saturdayMarianReceipt.coverageAfter.remainingLegacyOccurrences === coverage.coverage.remainingLegacyOccurrences && saturdayMarianReceipt.coverageAfter.promotionAllowed === false, 'Saturday Marian receipt differs from the fail-closed coverage gate.');
 
 
 const remaining = inventory.remaining ?? [];
@@ -232,16 +244,16 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 125 && remainingSourceIds.size === 125 && remainingSourceHashes.size === 125, 'Semantic inventory must preserve exactly 125 unique unresolved approved-source rows.');
+assert(remaining.length === 111 && remainingSourceIds.size === 111 && remainingSourceHashes.size === 111, 'Semantic inventory must preserve exactly 111 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
-assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 264 && inventory.coverageAtInventory.remainingOccurrences === 125 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
+assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 278 && inventory.coverageAtInventory.remainingOccurrences === 111 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
 
 const actualCounts = Object.fromEntries([...familyCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 assert(JSON.stringify(actualCounts) === JSON.stringify(inventory.familyCounts), 'Semantic family counts differ from the exact unresolved rows.');
-assert(actualCounts['temporal-weekday-family'] === 3 && (actualCounts['temporal-sunday-family'] ?? 0) === 0 && actualCounts['saturday-marian-family'] === 14, 'Algorithmic temporal backlog classification drifted.');
+assert(actualCounts['temporal-weekday-family'] === 3 && (actualCounts['temporal-sunday-family'] ?? 0) === 0 && (actualCounts['saturday-marian-family'] ?? 0) === 0, 'Algorithmic temporal backlog classification drifted.');
 assert(actualCounts['fixed-person'] === 52, 'Fixed-person backlog classification drifted.');
 assert(actualCounts['jurisdiction-structural-overlay'] + actualCounts['portugal-proper'] + actualCounts['jurisdiction-rank-override'] === 20 && inventory.humanReviewBoundary.occurrenceCount === 20, 'Portugal-specific human-review boundary must remain explicit.');
 assert(inventory.classificationPolicy.labelsCreateIdentity === false && inventory.classificationPolicy.annualDateCreatesPerennialRule === false && inventory.classificationPolicy.suppressedCandidatesCountAsCoverage === false && inventory.classificationPolicy.withheldCandidatesCountAsCoverage === false && inventory.classificationPolicy.transferOriginsCountAsCoverage === false, 'Semantic inventory fail-closed policy weakened.');
 
-console.log('Portugal semantic inventory passed: 264 covered + 125 exact unresolved source rows = 389; 17 remaining temporal-family rows and 20 Portugal-specific rows are explicitly partitioned.');
+console.log('Portugal semantic inventory passed: 278 covered + 111 exact unresolved source rows = 389; three remaining temporal-family rows and 20 Portugal-specific rows are explicitly partitioned.');

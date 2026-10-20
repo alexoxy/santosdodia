@@ -8,12 +8,13 @@ const HOLY_SEE_DOMAIN = 'vatican.va';
 const PORTUGAL_RELEASE_ID = 'roman-catholic-pt-2026-v2';
 const TEMPORAL_FAMILY_MEMBER_PROFILES = {
   'sequential-day': ['day'],
+  'saturday': ['saturday'],
   'sunday': ['sunday'],
   'weekday-monday-saturday': ['friday', 'monday', 'saturday', 'thursday', 'tuesday', 'wednesday'],
   'weekday-monday-wednesday': ['monday', 'tuesday', 'wednesday'],
   'weekday-tuesday-wednesday': ['tuesday', 'wednesday']
 };
-const TEMPORAL_FAMILY_RANKS = ['weekday', 'solemnity', 'celebration with precedence over solemnities'];
+const TEMPORAL_FAMILY_RANKS = ['weekday', 'optional-memorial', 'solemnity', 'celebration with precedence over solemnities'];
 
 function daysInYear(year) {
   return ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) ? 366 : 365;
@@ -109,10 +110,8 @@ function temporalDateForYear(year, rule) {
 }
 
 function familyLegacyId(family, week, weekday) {
-  if (family.anchor === 'effective-portugal-epiphany') {
-    const reviewedLegacyId = family.legacyObservanceIdsBySlot?.[String(week)];
-    if (reviewedLegacyId) return reviewedLegacyId;
-  }
+  const reviewedLegacyId = family.legacyObservanceIdsBySlot?.[String(week)];
+  if (reviewedLegacyId) return reviewedLegacyId;
   assert(typeof family.legacyObservanceIdPattern === 'string' && family.legacyObservanceIdPattern.startsWith('rc:'), `TemporalRuleFamily ${family.id} lacks a legacy identity pattern.`);
   return family.legacyObservanceIdPattern
     .replace('{week}', String(week))
@@ -176,7 +175,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
   assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
-  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.6' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
+  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.7' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
   assert(temporalFamilyShadow.year === year, 'TemporalRuleFamily shadow year differs from the ledger.');
@@ -287,6 +286,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     assert(expectedMembers && JSON.stringify(familyWeekdays) === JSON.stringify(expectedMembers), `TemporalRuleFamily ${family.id} has an invalid member/rank profile.`);
     assert(TEMPORAL_FAMILY_RANKS.includes(family.legacyRank), `TemporalRuleFamily ${family.id} has an unsupported source rank.`);
     assert(family.candidateRequiresPrecedenceResolution === true, `TemporalRuleFamily ${family.id} must require explicit precedence resolution.`);
+    if (family.memberProfile === 'saturday') assert(family.selectionMode === 'optional-alternative' && family.obligatory === false, `TemporalRuleFamily ${family.id} must preserve Saturday Marian commemoration as an optional alternative.`);
     familyObservanceId(family, family.weekRange.min, familyWeekdays[0]);
     assert(Array.isArray(family.evidence) && family.evidence.length > 0, `TemporalRuleFamily ${family.id} lacks competent evidence.`);
     if (family.anchor === 'effective-portugal-epiphany') {
@@ -381,7 +381,11 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         assert(mapping.occurrenceId === expectedOccurrenceId, `TemporalRuleFamily mapping ${key} has an invalid canonical Occurrence identity.`);
         assert(typeof mapping.sourceOccurrenceId === 'string' && mapping.sourceOccurrenceId.startsWith(`snl-pt-${expectedDateISO}-`), `TemporalRuleFamily mapping ${key} lacks its exact Portugal source occurrence.`);
         assert(/^[a-f0-9]{64}$/u.test(mapping.sourceRecordHash ?? ''), `TemporalRuleFamily mapping ${key} lacks its exact source record hash.`);
-        assert(mapping.legacyRank === family.legacyRank && mapping.reviewStatus === 'inherited-safe' && mapping.resolution === 'inherit-general-canonical-binding', `TemporalRuleFamily mapping ${key} lacks its approved precedence outcome.`);
+        if (family.memberProfile === 'saturday') {
+          assert(mapping.legacyRank === family.legacyRank && mapping.reviewStatus === 'official-optional-alternative' && mapping.resolution === 'preserve-optional-saturday-marian-choice' && mapping.selectionMode === 'optional-alternative' && mapping.obligatory === false, `TemporalRuleFamily mapping ${key} incorrectly makes the Saturday Marian option obligatory.`);
+        } else {
+          assert(mapping.legacyRank === family.legacyRank && mapping.reviewStatus === 'inherited-safe' && mapping.resolution === 'inherit-general-canonical-binding', `TemporalRuleFamily mapping ${key} lacks its approved precedence outcome.`);
+        }
         assert(!temporalLegacyIds.has(mapping.legacyObservanceId), `Duplicate temporal legacy identity ${mapping.legacyObservanceId}.`);
         assert(!temporalSourceIds.has(mapping.sourceOccurrenceId), `Duplicate temporal source occurrence ${mapping.sourceOccurrenceId}.`);
         assert(!temporalOccurrenceIds.has(mapping.occurrenceId), `Duplicate canonical temporal Occurrence ${mapping.occurrenceId}.`);
@@ -510,7 +514,9 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       perennialRuleId: familyMember.family.id,
       temporalFamilyMember: {
         week: familyMember.mapping.week,
-        weekday: familyMember.mapping.weekday
+        weekday: familyMember.mapping.weekday,
+        selectionMode: familyMember.family.selectionMode ?? 'calendar-binding',
+        obligatory: familyMember.family.obligatory ?? null
       },
       liturgicalRank: familyMember.mapping.legacyRank,
       authorityEvidence: familyMember.family.evidence.map(item => item.url),

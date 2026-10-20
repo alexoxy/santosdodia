@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "temporalRuleFamilyModelVersion": "1.6",
+  "temporalRuleFamilyModelVersion": "1.7",
   "status": "repository-reviewed-temporal-rule-family-anchors",
   "families": [
     {
@@ -465,6 +465,132 @@
         }
       ],
       "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "temporal-rule-family:saturday-marian-early:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "blessed-virgin-mary-on-saturday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:SaturdayBVMOrdWeek{week}",
+      "legacyObservanceIdsBySlot": {
+        "4": "rc:SatMemBVM1",
+        "8": "rc:SatMemBVM2",
+        "9": "rc:SatMemBVM3",
+        "11": "rc:SatMemBVM4",
+        "12": "rc:SatMemBVM5",
+        "13": "rc:SatMemBVM6",
+        "15": "rc:SatMemBVM7",
+        "22": "rc:SatMemBVM8",
+        "23": "rc:SatMemBVM9",
+        "24": "rc:SatMemBVM10",
+        "25": "rc:SatMemBVM11",
+        "26": "rc:SatMemBVM12",
+        "27": "rc:SatMemBVM13",
+        "29": "rc:SatMemBVM14",
+        "30": "rc:SatMemBVM15",
+        "31": "rc:SatMemBVM16",
+        "32": "rc:SatMemBVM17",
+        "34": "rc:SatMemBVM18"
+      },
+      "legacyRank": "optional-memorial",
+      "memberProfile": "saturday",
+      "weekStrideDays": 7,
+      "weekdayOffsets": {
+        "saturday": 6
+      },
+      "candidateRequiresPrecedenceResolution": true,
+      "selectionMode": "optional-alternative",
+      "obligatory": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+          "claimTypes": [
+            "optional-saturday-marian-commemoration",
+            "pastoral-choice-not-obligation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-20",
+      "anchor": "ordinary-time-second-sunday",
+      "baseOffsetDays": -7,
+      "weekRange": {
+        "min": 1,
+        "max": 6
+      },
+      "exclusiveEndDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "gregorian-easter",
+        "offsetDays": -46
+      }
+    },
+    {
+      "id": "temporal-rule-family:saturday-marian-late:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "blessed-virgin-mary-on-saturday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:SaturdayBVMOrdWeek{week}",
+      "legacyObservanceIdsBySlot": {
+        "4": "rc:SatMemBVM1",
+        "8": "rc:SatMemBVM2",
+        "9": "rc:SatMemBVM3",
+        "11": "rc:SatMemBVM4",
+        "12": "rc:SatMemBVM5",
+        "13": "rc:SatMemBVM6",
+        "15": "rc:SatMemBVM7",
+        "22": "rc:SatMemBVM8",
+        "23": "rc:SatMemBVM9",
+        "24": "rc:SatMemBVM10",
+        "25": "rc:SatMemBVM11",
+        "26": "rc:SatMemBVM12",
+        "27": "rc:SatMemBVM13",
+        "29": "rc:SatMemBVM14",
+        "30": "rc:SatMemBVM15",
+        "31": "rc:SatMemBVM16",
+        "32": "rc:SatMemBVM17",
+        "34": "rc:SatMemBVM18"
+      },
+      "legacyRank": "optional-memorial",
+      "memberProfile": "saturday",
+      "weekStrideDays": 7,
+      "weekdayOffsets": {
+        "saturday": 6
+      },
+      "candidateRequiresPrecedenceResolution": true,
+      "selectionMode": "optional-alternative",
+      "obligatory": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html",
+          "claimTypes": [
+            "optional-saturday-marian-commemoration",
+            "pastoral-choice-not-obligation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-20",
+      "anchor": "advent-start",
+      "baseOffsetDays": -238,
+      "weekRange": {
+        "min": 8,
+        "max": 34
+      },
+      "exclusiveStartDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "pentecost",
+        "offsetDays": 0
+      },
+      "exclusiveEndDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "advent-start",
+        "offsetDays": 0
+      }
     }
   ]
 }
