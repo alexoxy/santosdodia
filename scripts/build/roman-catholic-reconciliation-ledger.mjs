@@ -98,9 +98,11 @@ function temporalDateForYear(year, rule) {
   assert(!dateRule.weekdayAdjustment, `TemporalRule ${rule.id} requires unsupported weekday adjustment.`);
   const date = dateRule.anchor === 'gregorian-easter'
     ? gregorianEaster(year)
-    : dateRule.anchor === 'advent-start'
-      ? adventStart(year)
-      : null;
+    : dateRule.anchor === 'pentecost'
+      ? new Date(gregorianEaster(year).getTime() + (49 * 86400000))
+      : dateRule.anchor === 'advent-start'
+        ? adventStart(year)
+        : null;
   assert(date, `TemporalRule ${rule.id} has an unsupported anchor.`);
   date.setUTCDate(date.getUTCDate() + dateRule.offsetDays);
   return date.toISOString().slice(0, 10);
@@ -174,7 +176,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
   assert(/^[a-f0-9]{64}$/u.test(temporalShadow.sourceArtifact?.buildJsonSha256 ?? ''), 'TemporalRule shadow lacks the exact approved build hash.');
   assert(Array.isArray(temporalShadow.mappings), 'TemporalRule shadow mappings are missing.');
   assert(fixedSanctoraleShadow.sourceArtifact?.workflowRunId === temporalShadow.sourceArtifact.workflowRunId && fixedSanctoraleShadow.sourceArtifact?.artifactId === temporalShadow.sourceArtifact.artifactId && fixedSanctoraleShadow.sourceArtifact?.buildJsonSha256 === temporalShadow.sourceArtifact.buildJsonSha256, 'Fixed Sanctorale and TemporalRule shadows must bind the same approved artifact.');
-  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.5' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
+  assert(temporalFamilyDataset?.schemaVersion === 1 && temporalFamilyDataset.temporalRuleFamilyModelVersion === '1.6' && temporalFamilyDataset.status === 'repository-reviewed-temporal-rule-family-anchors' && Array.isArray(temporalFamilyDataset.families), 'Canonical TemporalRuleFamilies are invalid.');
   assert(temporalFamilyShadow?.schemaVersion === 1 && temporalFamilyShadow.status === 'approved-release-temporal-family-shadow', 'Approved TemporalRuleFamily shadow is invalid.');
   assert(temporalFamilyShadow.sourceReleaseId === PORTUGAL_RELEASE_ID && temporalFamilyShadow.mutationAllowed === false, 'TemporalRuleFamily shadow must remain read-only and bound to the approved Portugal release.');
   assert(temporalFamilyShadow.year === year, 'TemporalRuleFamily shadow year differs from the ledger.');
@@ -278,6 +280,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
     const expectedStride = family.anchor === 'effective-portugal-epiphany' ? 1 : 7;
     assert(Number.isInteger(family.baseOffsetDays) && Number.isInteger(family.weekStrideDays) && family.weekStrideDays === expectedStride, `TemporalRuleFamily ${family.id} has invalid date arithmetic.`);
     assert(Number.isInteger(family.weekRange?.min) && Number.isInteger(family.weekRange?.max) && family.weekRange.min <= family.weekRange.max, `TemporalRuleFamily ${family.id} has an invalid week range.`);
+    if (family.exclusiveStartDateRule) temporalDateForYear(year, { id: `${family.id}:exclusive-start`, dateRule: family.exclusiveStartDateRule });
     if (family.exclusiveEndDateRule) temporalDateForYear(year, { id: `${family.id}:exclusive-end`, dateRule: family.exclusiveEndDateRule });
     const familyWeekdays = Object.keys(family.weekdayOffsets ?? {}).sort();
     const expectedMembers = TEMPORAL_FAMILY_MEMBER_PROFILES[family.memberProfile];
@@ -342,6 +345,11 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         const mapping = mappingsByCandidate.get(key);
         const suppression = suppressionsByCandidate.get(key);
         const expectedDateISO = familyDateForYear(year, family, week, weekday);
+        const exclusiveStartDateISO = family.exclusiveStartDateRule ? temporalDateForYear(year, { id: `${family.id}:exclusive-start`, dateRule: family.exclusiveStartDateRule }) : null;
+        if (exclusiveStartDateISO && expectedDateISO <= exclusiveStartDateISO) {
+          assert(!mapping && !suppression && !withheldByCandidate.has(key), `TemporalRuleFamily candidate ${key} crosses its exclusive start boundary but has an annual outcome.`);
+          continue;
+        }
         const exclusiveEndDateISO = family.exclusiveEndDateRule ? temporalDateForYear(year, { id: `${family.id}:exclusive-end`, dateRule: family.exclusiveEndDateRule }) : null;
         if (exclusiveEndDateISO && expectedDateISO >= exclusiveEndDateISO) {
           assert(!mapping && !suppression && !withheldByCandidate.has(key), `TemporalRuleFamily candidate ${key} crosses its exclusive end boundary but has an annual outcome.`);

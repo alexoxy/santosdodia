@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-late-8-12-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+  "perennialBoundaries": {
+    "exclusiveStartAnchor": "pentecost",
+    "exclusiveStartOffsetDays": 0,
+    "exclusiveEndAnchor": "advent-start",
+    "exclusiveEndOffsetDays": 0,
+    "weekNumbering": "backward-from-advent"
+  },
+  "reviewedWeekRange": {
+    "min": 8,
+    "max": 12
+  },
+  "candidateOutcomes": {
+    "candidates": 30,
+    "presentSourceOccurrences": 9,
+    "suppressedCandidates": 21
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-05-28-6c07a6223d02663f4e312b02",
+    "snl-pt-2026-06-08-864f2e498f0f40469d634943",
+    "snl-pt-2026-06-10-7275f56bb30fd1856b07d296",
+    "snl-pt-2026-06-16-24f5eaca4f711d98f468be36",
+    "snl-pt-2026-06-17-cb4738881243416c4eb30365",
+    "snl-pt-2026-06-18-a2098e8c834c8c7472c2e9b8",
+    "snl-pt-2026-06-23-7973c14097fa33937bd37787",
+    "snl-pt-2026-06-25-2dc18430936a3ba0eee67080",
+    "snl-pt-2026-06-26-7f765e0850b939c99bc4e9ef"
+  ],
+  "promotedMappingDigestSha256": "803ac170370409f0ae1db47f4f2108ef2393678c0685a1973bcd320d7cfdb250",
+  "promotedSuppressionDigestSha256": "46aa96398574837cd83967a9c1a82bd2d8aecf1bfb37a811413be832d37133fd",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 220,
+    "remainingLegacyOccurrences": 169
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 229,
+    "remainingLegacyOccurrences": 160,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}
