@@ -34,8 +34,8 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 205,
-    "remainingOccurrences": 184,
+    "sourceBoundOccurrences": 208,
+    "remainingOccurrences": 181,
     "promotionAllowed": false
   },
   "familyCounts": {
@@ -47,7 +47,7 @@
     "jurisdiction-structural-overlay": 14,
     "portugal-proper": 5,
     "saturday-marian-family": 14,
-    "temporal-weekday-family": 61
+    "temporal-weekday-family": 58
   },
   "humanReviewBoundary": {
     "occurrenceCount": 21,
@@ -74,32 +74,11 @@
       "semanticFamily": "fixed-or-major-observance"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-01-05-6b518156d4feae2ef222dc94",
-      "sourceRecordHash": "8b75db2aa7b3a84dfcd34df112f909b66966273957640f552296b11adf8b9df6",
-      "dateISO": "2026-01-05",
-      "canonicalEventId": "rc:ChristmasWeekdayJan5",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-01-06-f745cb764c9415c74b832e35",
       "sourceRecordHash": "0c81a5e464a6cfb98ae4e692a4b957df6f252a171918956c8cb9efd017a0205e",
       "dateISO": "2026-01-06",
       "canonicalEventId": "rc-pt:TuesdayAfterEpiphany",
       "semanticFamily": "portugal-proper"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-08-fc47b2946d29fa21d55037e2",
-      "sourceRecordHash": "3de2c3292bf2f212610e5edd961adee1f524b412a79bdde8f302f50238621b65",
-      "dateISO": "2026-01-08",
-      "canonicalEventId": "rc:DayAfterEpiphanyJan8",
-      "semanticFamily": "temporal-weekday-family"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-09-db23378c81ba4d5d158833d0",
-      "sourceRecordHash": "af261e303bcd72aae905b4c3035dc7de16675af530072a21ffa7a2f414d75ae6",
-      "dateISO": "2026-01-09",
-      "canonicalEventId": "rc:DayAfterEpiphanyJan9",
-      "semanticFamily": "temporal-weekday-family"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-01-10-e63eaa901525edd1fec58393",

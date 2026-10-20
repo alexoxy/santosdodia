@@ -86,6 +86,7 @@ try {
   const approvedRows = [
     ...readMigration('fixed-sanctorale-shadow').mappings,
     ...readMigration('temporal-shadow').mappings,
+    ...readMigration('temporal-family-shadow').families.flatMap((family) => family.presentMappings),
     ...readMigration('movable-transfer-shadow').mappings,
     ...readMigration('semantic-inventory').remaining
   ];
@@ -101,7 +102,7 @@ try {
     assert(!intervalSourceIds.has(row.sourceOccurrenceId), `${row.dateISO} duplicates an interval source identity.`);
     intervalSourceIds.add(row.sourceOccurrenceId);
   }
-  for (const dateISO of ['2026-01-05','2026-01-08','2026-01-09']) assert(intervalRows.get(dateISO)?.outcome === 'weekday-candidate', `${dateISO} must remain a weekday-family candidate.`);
+  for (const dateISO of ['2026-01-05','2026-01-08','2026-01-09']) assert(intervalRows.get(dateISO)?.outcome === 'source-bound-weekday-family', `${dateISO} must remain a source-bound weekday-family member.`);
   assert(intervalRows.get('2026-01-06')?.outcome === 'approved-transfer-origin', 'The Jan 6 source row must remain the approved Epiphany transfer origin.');
   assert(intervalRows.get('2026-01-07')?.outcome === 'saint-precedence-review' && intervalRows.get('2026-01-10')?.outcome === 'saint-precedence-review', 'Optional memorial rows inside the interval must remain explicit precedence cases.');
   assert(intervalRows.get('2026-01-04')?.outcome === 'approved-epiphany-destination' && intervalRows.get('2026-01-11')?.outcome === 'baptism-boundary', 'The Epiphany and Baptism boundary rows must remain explicit and excluded from weekdays.');

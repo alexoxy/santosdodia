@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "temporalRuleFamilyModelVersion": "1.3",
+  "temporalRuleFamilyModelVersion": "1.4",
   "status": "repository-reviewed-temporal-rule-family-anchors",
   "families": [
     {
@@ -182,6 +182,34 @@
       "candidateRequiresPrecedenceResolution": true,
       "evidence": [{"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html","claimTypes":["temporal-cycle-authority"]}],
       "verifiedAt": "2026-09-10"
+    },
+    {
+      "id": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "weekday-after-epiphany",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:EpiphanyIntervalSlot{week}",
+      "legacyObservanceIdsBySlot": {
+        "1": "rc:ChristmasWeekdayJan5",
+        "4": "rc:DayAfterEpiphanyJan8",
+        "5": "rc:DayAfterEpiphanyJan9"
+      },
+      "legacyRank": "weekday",
+      "memberProfile": "sequential-day",
+      "anchor": "effective-portugal-epiphany",
+      "boundary": "effective-portugal-baptism-of-the-lord",
+      "baseOffsetDays": 1,
+      "weekRange": {"min": 1, "max": 6},
+      "weekStrideDays": 1,
+      "weekdayOffsets": {"day": 0},
+      "candidateRequiresPrecedenceResolution": true,
+      "evidence": [
+        {"publisher":"Holy See","url":"https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu_proprio_19690321_calendarium-romanum.html","claimTypes":["universal-calendar-authority"]},
+        {"publisher":"Secretariado Nacional de Liturgia","url":"https://www.liturgia.pt/agenda/agenda.ics","claimTypes":["portugal-annual-calendar"]}
+      ],
+      "verifiedAt": "2026-10-20"
     }
   ]
 }

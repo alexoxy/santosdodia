@@ -1378,9 +1378,82 @@
           "resolution": "inherit-general-canonical-binding"
         }
       ]
+    },
+    {
+      "familyId": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+      "presentLegacyIds": [
+        "rc:ChristmasWeekdayJan5",
+        "rc:DayAfterEpiphanyJan8",
+        "rc:DayAfterEpiphanyJan9"
+      ],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:ChristmasWeekdayJan5",
+          "week": 1,
+          "weekday": "day",
+          "expectedDateISO": "2026-01-05",
+          "occurrenceId": "occurrence:2026-01-05:weekday-after-epiphany-1:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-01-05-6b518156d4feae2ef222dc94",
+          "sourceRecordHash": "8b75db2aa7b3a84dfcd34df112f909b66966273957640f552296b11adf8b9df6",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:DayAfterEpiphanyJan8",
+          "week": 4,
+          "weekday": "day",
+          "expectedDateISO": "2026-01-08",
+          "occurrenceId": "occurrence:2026-01-08:weekday-after-epiphany-4:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-01-08-fc47b2946d29fa21d55037e2",
+          "sourceRecordHash": "3de2c3292bf2f212610e5edd961adee1f524b412a79bdde8f302f50238621b65",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:DayAfterEpiphanyJan9",
+          "week": 5,
+          "weekday": "day",
+          "expectedDateISO": "2026-01-09",
+          "occurrenceId": "occurrence:2026-01-09:weekday-after-epiphany-5:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-01-09-db23378c81ba4d5d158833d0",
+          "sourceRecordHash": "af261e303bcd72aae905b4c3035dc7de16675af530072a21ffa7a2f414d75ae6",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
     }
   ],
   "suppressedCandidates": [
+    {
+      "familyId": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+      "week": 2,
+      "weekday": "day",
+      "candidateDateISO": "2026-01-06",
+      "suppressingLegacyObservanceId": "rc-pt:TuesdayAfterEpiphany",
+      "suppressingRank": "weekday",
+      "resolution": "approved-transfer-origin-replacement"
+    },
+    {
+      "familyId": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+      "week": 3,
+      "weekday": "day",
+      "candidateDateISO": "2026-01-07",
+      "suppressingLegacyObservanceId": "rc:StRayPenyafort",
+      "suppressingRank": "optional-memorial",
+      "resolution": "saint-precedence"
+    },
+    {
+      "familyId": "temporal-rule-family:weekday-after-epiphany:roman-catholic:pt",
+      "week": 6,
+      "weekday": "day",
+      "candidateDateISO": "2026-01-10",
+      "suppressingLegacyObservanceId": "rc:DayAfterEpiphanyJan10",
+      "suppressingRank": "optional-memorial",
+      "resolution": "saint-precedence"
+    },
     {
       "familyId": "temporal-rule-family:advent-weekday-tuesday-wednesday:roman-catholic",
       "week": 2,
