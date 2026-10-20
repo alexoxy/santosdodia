@@ -20,7 +20,7 @@ const expectedLegacyRanks = ['weekday', 'solemnity', 'celebration with precedenc
 function assert(condition, message) { if (!condition) throw new Error(message); }
 
 assert(familyDataset?.schemaVersion === 1 && familyDataset?.temporalRuleFamilyModelVersion === '1.4' && familyDataset?.status === 'repository-reviewed-temporal-rule-family-anchors', 'TemporalRuleFamily dataset is invalid.');
-assert(Array.isArray(familyDataset?.families) && familyDataset.families.length === 11, 'TemporalRuleFamily bootstrap must contain the reviewed seasonal families and Portugal Epiphany interval family.');
+assert(Array.isArray(familyDataset?.families) && familyDataset.families.length === 12, 'TemporalRuleFamily bootstrap must contain the reviewed seasonal, Portugal Epiphany interval and early Ordinary Time weekday families.');
 assert(shadow?.schemaVersion === 1 && shadow?.status === 'approved-release-temporal-family-shadow' && shadow?.sourceReleaseId === 'roman-catholic-pt-2026-v2', 'TemporalRuleFamily shadow snapshot is invalid.');
 assert(shadow?.sourceArtifact?.workflowRunId === 31998552573 && shadow?.sourceArtifact?.artifactId === 9277632698 && shadow?.sourceArtifact?.buildJsonSha256 === '159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06', 'TemporalRuleFamily shadow is not pinned to the approved Portugal artifact.');
 assert(shadow?.year === 2026 && shadow?.mutationAllowed === false, 'TemporalRuleFamily shadow must remain 2026/read-only.');
@@ -121,10 +121,10 @@ try {
     }
   }
 
-  assert(candidateCount === 132, `Expected 132 temporal family candidates, got ${candidateCount}.`);
-  assert(presentCount === 103 && seenPresentLegacyIds.size === 103, `Expected 103 approved family occurrences, got ${presentCount}.`);
-  assert(seenSourceOccurrenceIds.size === 103 && seenSourceRecordHashes.size === 103 && seenCanonicalOccurrenceIds.size === 103, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
-  assert(suppressedCount === 29 && suppressions.size === 29, `Expected 29 precedence or season-boundary suppressions, got ${suppressedCount}.`);
+  assert(candidateCount === 150, `Expected 150 temporal family candidates, got ${candidateCount}.`);
+  assert(presentCount === 111 && seenPresentLegacyIds.size === 111, `Expected 111 approved family occurrences, got ${presentCount}.`);
+  assert(seenSourceOccurrenceIds.size === 111 && seenSourceRecordHashes.size === 111 && seenCanonicalOccurrenceIds.size === 111, 'Every approved TemporalRuleFamily occurrence requires unique source and canonical identities.');
+  assert(suppressedCount === 39 && suppressions.size === 39, `Expected 39 precedence or season-boundary suppressions, got ${suppressedCount}.`);
   assert(presentCount + suppressedCount === candidateCount, 'Every temporal family candidate must have an explicit precedence outcome.');
   assert(seenPresentLegacyIds.has('rc:LentWeekday1Monday'), 'Lent family lost its first weekday anchor.');
   assert(seenPresentLegacyIds.has('rc:EasterWeekday7Saturday'), 'Easter family lost its final weekday anchor.');
@@ -138,6 +138,8 @@ try {
   assert(seenPresentLegacyIds.has('rc:OrdSunday10') && seenPresentLegacyIds.has('rc:OrdSunday33'), 'Late Ordinary Time Sunday family boundaries drifted.');
   assert(!seenPresentLegacyIds.has('rc:OrdSunday7') && !seenPresentLegacyIds.has('rc:OrdSunday9'), 'Lent season-boundary suppressions were lost.');
   assert(!seenPresentLegacyIds.has('rc:OrdSunday31') && !seenPresentLegacyIds.has('rc:OrdSunday34'), 'All Saints or Christ the King suppression was lost.');
+  assert(seenPresentLegacyIds.has('rc:OrdWeekday1Monday') && seenPresentLegacyIds.has('rc:OrdWeekday3Friday'), 'Early Ordinary Time weekday source bindings are incomplete.');
+  assert(!seenPresentLegacyIds.has('rc:OrdWeekday2Tuesday') && suppressions.get('temporal-rule-family:ordinary-time-weekday-early:roman-catholic\u00002\u0000tuesday')?.alternativeSuppressingLegacyObservanceIds?.includes('rc:StSebastian'), 'Multiple approved January 20 alternatives were not preserved.');
   assert(!seenPresentLegacyIds.has('rc:LentWeekday4Thursday'), 'St Joseph precedence suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:EasterWeekday6Wednesday'), 'Fatima precedence suppression was lost.');
   assert(!seenPresentLegacyIds.has('rc:AdventWeekday2Tuesday') && !seenPresentLegacyIds.has('rc:AdventWeekday2Wednesday'), 'Advent precedence suppressions were lost.');

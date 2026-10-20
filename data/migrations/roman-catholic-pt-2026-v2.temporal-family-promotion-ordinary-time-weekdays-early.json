@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-early-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-early:roman-catholic",
+  "promotedSourceOccurrences": 8,
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-01-12-05453cbdcaee01c9d33e345d",
+    "snl-pt-2026-01-14-bfeb91031c4f68a5056d2db1",
+    "snl-pt-2026-01-15-b2e7099b5faffc2d412089be",
+    "snl-pt-2026-01-16-8d30c692710a06168ddfa6aa",
+    "snl-pt-2026-01-19-8f5671cce69f976c35b8b354",
+    "snl-pt-2026-01-23-5f1340dc8cb1c59c2a85eb40",
+    "snl-pt-2026-01-29-fa2cf3cbccec9554457655e2",
+    "snl-pt-2026-01-30-63c8fc439bccda563da8e298"
+  ],
+  "candidateOutcomes": {
+    "candidates": 18,
+    "presentSourceOccurrences": 8,
+    "suppressedCandidates": 10
+  },
+  "promotedMappingDigestSha256": "de28f961af52cebe9f21658a08afbbc8b01dc01225e963631f363b38d13b46e7",
+  "promotedSuppressionDigestSha256": "336a1a5324abd5a3c1f8e93298174896d7f2f2ab96d86d027461314f13fcfe57",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 208,
+    "remainingLegacyOccurrences": 181
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 216,
+    "remainingLegacyOccurrences": 173,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}
