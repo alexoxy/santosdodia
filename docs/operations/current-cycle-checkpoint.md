@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-20 11:10 UTC
+Updated: 2026-10-20 11:20 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-20-v15.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-20-v16.{md,json}`
 
-Status: active implementation; E07.03 is partial; Portugal 2026 semantic reconciliation is 237/389; perennial cutover and every production mutation remain fail-closed.
+Status: active implementation; E07.03 is partial; Portugal 2026 semantic reconciliation is 247/389; perennial cutover and every production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,20 +20,20 @@ Status: active implementation; E07.03 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#376](https://github.com/alexoxy/santosdodia/pull/376) delivered the next post-Pentecost slice of E07.03:
+PR [#378](https://github.com/alexoxy/santosdodia/pull/378) delivered the next post-Pentecost slice of E07.03:
 
-- extended perennial `ordinary-time-weekday-late` candidates from week 12 through week 18;
+- extended perennial `ordinary-time-weekday-late` candidates from week 18 through week 24;
 - reviewed 36 annual candidates against the approved SNL source release;
-- bound eight exact ferial rows and recorded 27 explicit memorial, feast or solemnity precedence outcomes;
-- withheld the 17 July jurisdiction-structural overlay instead of treating it as a universal ferial row;
+- bound ten exact ferial rows and recorded 25 explicit memorial, feast or solemnity precedence outcomes;
+- withheld the 17 August jurisdiction-structural overlay instead of treating Saint Beatriz as a universal ferial row;
 - retained exclusive Pentecost/Advent bounds and backward-from-Advent week numbering;
 - exercised the movable boundary across 2020–2030;
 - updated the coverage gate, semantic inventory, reconciliation ledger, documentation and immutable promotion receipt;
 - preserved `publicationAllowed: false`, zero remote-D1 writes and no deployment.
 
-Validated head: `49be1c67d0bf116e84a712cd5dac2370914dd17a`.
+Validated head: `73b57ecd393f32ed878a02e7cac1837ff9885191`.
 
-Squash merge on `main`: `df206a3ed9c61ee30606f9441025e4d4d2a1a658`.
+Squash merge on `main`: `547aaea0aa2af7e02eb3837343c7c30191210892`.
 
 E07.03 remains `EM_CURSO`; partial progress does not reduce the master task countdown.
 
@@ -41,18 +41,18 @@ E07.03 remains `EM_CURSO`; partial progress does not reduce the master task coun
 
 - Approved source population: **389 occurrences**, **365 civil days**, **1,945 labels**.
 - Direct TemporalRule bindings: **14**.
-- Precedence-surviving TemporalRuleFamily bindings: **132**.
-- Explicit family suppressions/replacements: **96**; two rows remain withheld for jurisdiction review.
+- Precedence-surviving TemporalRuleFamily bindings: **142**.
+- Explicit family suppressions/replacements: **121**; three rows remain withheld for jurisdiction review.
 - Movable/transfer bindings: **11**, including three explicitly approved Portugal transfers.
 - Exact fixed Sanctorale bindings: **80** across 76 civil days.
-- Total canonical migration coverage: **237/389 (60.925%)**.
-- Approved-source occurrences outside the canonical shadow: **152**.
-- Source-bound civil days: **233/365**; unresolved civil days: **132**.
+- Total canonical migration coverage: **247/389 (63.496%)**.
+- Approved-source occurrences outside the canonical shadow: **142**.
+- Source-bound civil days: **243/365**; unresolved civil days: **122**.
 - Full semantic equivalence: `false`; perennial cutover and production promotion: `false`.
 
 | Semantic family | Remaining |
 |---|---:|
-| Temporal weekday families | 30 |
+| Temporal weekday families | 20 |
 | Saturday Marian family | 14 |
 | Fixed individual persons | 52 |
 | Fixed/major non-person observances | 16 |
@@ -61,16 +61,16 @@ E07.03 remains `EM_CURSO`; partial progress does not reduce the master task coun
 | Fixed Marian titles | 8 |
 | Portugal proper identities | 5 |
 | Portugal rank overrides | 2 |
-| **Total** | **152** |
+| **Total** | **142** |
 
 ## CI, email and external proof
 
-PR #376 workflows on the exact validated head:
+PR #378 workflows on the exact validated head:
 
-- Quality #1428, run `39410975947`: success, 64 steps;
-- Product BUILD #96, run `39410975886`: success;
-- Product publish staging #92, run `39410975829`: success;
-- Wikidata retry quality #611, run `39410975871`: success.
+- Quality #1432, run `39413290597`: success, 64 steps;
+- Product BUILD #98, run `39413290662`: success;
+- Product publish staging #94, run `39413290601`: success;
+- Wikidata retry quality #613, run `39413290795`: success.
 
 Local proof passed `npm run check`, `npm audit --audit-level=high` with zero vulnerabilities, the mandatory AdSense fail-closed checker and `npm run cloudflare:build`.
 
@@ -78,24 +78,24 @@ Before implementation, the non-Trash Gmail search for new SantosDia/GitHub/Cloud
 
 Dropbox proof:
 
-- receipt `santosdia-e07-03-ordinary-time-weekdays-13-18-receipt-2026-10-20.json`, ID `id:oANWCGUyYBwAAAAAAAAX-Q`;
-- plan v15 JSON `id:oANWCGUyYBwAAAAAAAAX-A` and Markdown `id:oANWCGUyYBwAAAAAAAAX9w`;
-- staging manifest `id:oANWCGUyYBwAAAAAAAAX7g` and validation `id:oANWCGUyYBwAAAAAAAAX7w`.
+- receipt `santosdia-e07-03-ordinary-time-weekdays-19-24-receipt-2026-10-20.json`, ID `id:oANWCGUyYBwAAAAAAAAYBw`;
+- plan v16 JSON `id:oANWCGUyYBwAAAAAAAAYBg` and Markdown `id:oANWCGUyYBwAAAAAAAAYCw`;
+- staging manifest `id:oANWCGUyYBwAAAAAAAAYAA`, validation `id:oANWCGUyYBwAAAAAAAAYAQ` and release `id:oANWCGUyYBwAAAAAAAAYAg`.
 
-The staging proof confirms 389 occurrences, 365 civil days, 1,945 labels, complete five-locale coverage, `stagingReady: true`, `productionApproved: false` and `productionWriteAllowed: false`.
+The staging proof confirms 389 occurrences, 365 civil days, 1,945 labels, complete five-locale coverage, `productionApproved: false`, `stagingOnly: true` and automatic production writes disabled.
 
 ## Task and deliverable countdown
 
 - Tasks: **16 completed / 210; 194 remaining**.
 - Deliverables: **0 completed / 32; 32 remaining**.
 - No task or deliverable was added, completed or reopened in this execution.
-- E07.03 is partial; technical coverage advanced by eight source rows, but partial work does not reduce the task count.
+- E07.03 is partial; technical coverage advanced by ten source rows, but partial work does not reduce the task count.
 
 ## Repository hygiene
 
-- PR #376 was integrated only after all four workflows passed on the exact head and `main` still matched the expected base.
+- PR #378 was integrated only after all four workflows passed on the exact head and `main` still matched the expected base.
 - The implementation branch was removed automatically after merge; commit, squash commit and recovery history remain available.
-- Issue #355 remains the single live execution record and points to plan v15.
+- Issue #355 remains the single live execution record and points to plan v16.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, media asset or second calendar path was introduced.
 - The generated linguistic snapshot produced locally by validation was excluded from the commit.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
@@ -105,9 +105,9 @@ The staging proof confirms 389 occurrences, 365 civil days, 1,945 labels, comple
 | Product layer | Status | Current proof | Remaining acceptance gate |
 |---|---|---|---|
 | P0 reliability/security/hygiene | Realised core / continuous | Green CI, dependency audit, text-first and D1 guardrails | Continue source-level completeness and safe hygiene |
-| P1 Roman perennial engine | Partial | Liturgical year, precedence/transfers, 80 fixed anchors, 14 direct rules, 132 family members | Bind remaining 152 occurrences and reach 389/389 |
+| P1 Roman perennial engine | Partial | Liturgical year, precedence/transfers, 80 fixed anchors, 14 direct rules, 142 family members | Bind remaining 142 occurrences and reach 389/389 |
 | P2 calculator/API/ICS | Realised core / awaiting equivalence | Shared engine, OpenAPI, Y/Y+1 ICS and snapshots | Prove parity after Portugal cutover |
-| P3 Portugal daily product | Partial | Last-known-good public model plus 237-source shadow | Cut over only after full equivalence and production gate |
+| P3 Portugal daily product | Partial | Last-known-good public model plus 247-source shadow | Cut over only after full equivalence and production gate |
 | Editorial/SEO/AdSense | Partial / gated | Text-first corpus and fail-closed checker | Factual/editorial acceptance and explicit resubmission approval |
 | Global Church kernels | Pending/partial foundations | Independent dimensions and reference engines | Authority-specific Catholic, Orthodox, Anglican, Coptic and later kernels |
 | Multilingual scale | Partial | Ten-locale technical quality gates | Evidence-based language ranking and reviewed translations |
@@ -119,16 +119,16 @@ The staging proof confirms 389 occurrences, 365 civil days, 1,945 labels, comple
 - Late Ordinary Time weekday numbering is calculated backwards from Advent; it is not inferred from annual labels or copied dates.
 - The family begins strictly after Pentecost and ends before Advent, so movable season boundaries cannot leak ferial candidates.
 - Saints, memorials, feasts and solemnities are explicit annual precedence outcomes; suppressed candidates are evidence, not coverage.
-- Portugal rows for 4 February and 17 July remain within the human-review boundary and cannot be promoted by textual similarity.
-- Weeks 19–34 remain unreviewed in this family and must stay outside coverage.
+- Portugal rows for 4 February, 17 July and 17 August remain within the human-review boundary and cannot be promoted by textual similarity.
+- Weeks 25–34 remain unreviewed in this family and must stay outside coverage.
 - A green shadow PR does not authorize production D1, deployment or public cutover.
 - Other Churches retain their own computus, native calendar and competent sources; Roman semantics cannot be copied across traditions.
 
 ## Ordered roadmap
 
-1. Continue E07.03 with Ordinary Time weekday weeks 19–24 as the next coherent, source-reviewed slice.
-2. Progress through weeks 25–34 in bounded batches, retaining explicit precedence outcomes.
-3. Resolve the 4 February and 17 July jurisdiction rows only with competent Portugal authority evidence.
+1. Continue E07.03 with Ordinary Time weekday weeks 25–30 as the next coherent, source-reviewed slice.
+2. Complete weeks 31–34 in a bounded batch, retaining explicit precedence outcomes.
+3. Resolve the 4 February, 17 July and 17 August jurisdiction rows only with competent Portugal authority evidence.
 4. Complete E07.03 only when every applicable Ordinary Time weekday row is source-bound or explicitly withheld by a reviewed reason.
 5. Model the 14 Saturday Marian candidates as a precedence-sensitive family, not fixed duplicates.
 6. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
@@ -139,8 +139,8 @@ The staging proof confirms 389 occurrences, 365 civil days, 1,945 labels, comple
 
 ## Resume and stop rules
 
-- Read issue #355 and the Dropbox v15 plan, then verify GitHub, Gmail and Dropbox before new work.
-- Keep one implementation batch active and continue from E07.03 without repeating weeks 1–18.
+- Read issue #355 and the Dropbox v16 plan, then verify GitHub, Gmail and Dropbox before new work.
+- Keep one implementation batch active and continue from E07.03 without repeating weeks 1–24.
 - Never use CI or health checks to write remote D1.
 - Do not delete an error email without a positive replacement run and promised external-effect proof.
 - Do not merge a PR whose checks belong to an outdated head/base.
