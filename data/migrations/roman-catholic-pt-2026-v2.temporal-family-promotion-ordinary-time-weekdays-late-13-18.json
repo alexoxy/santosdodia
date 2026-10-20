@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-late-13-18-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+  "perennialBoundaries": {
+    "exclusiveStartAnchor": "pentecost",
+    "exclusiveStartOffsetDays": 0,
+    "exclusiveEndAnchor": "advent-start",
+    "exclusiveEndOffsetDays": 0,
+    "weekNumbering": "backward-from-advent"
+  },
+  "reviewedWeekRange": {
+    "min": 13,
+    "max": 18
+  },
+  "candidateOutcomes": {
+    "candidates": 36,
+    "presentSourceOccurrences": 8,
+    "suppressedCandidates": 27,
+    "withheldCandidates": 1
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-07-01-406cf45cf3607fd796ea346c",
+    "snl-pt-2026-07-02-2215bb8cf81d36cf3fad58dd",
+    "snl-pt-2026-07-07-cdd782409fd8e7e14c8706d2",
+    "snl-pt-2026-07-08-d095ceeb59c44407b3b40856",
+    "snl-pt-2026-07-10-6af17adf0c4336b48ef1c804",
+    "snl-pt-2026-07-27-2ee3236e73771bdf8a2ac642",
+    "snl-pt-2026-07-28-485c42629684b6cb4c40d24d",
+    "snl-pt-2026-08-03-132f309698cdca6a8faaec0a"
+  ],
+  "withheldSourceOccurrenceIds": [
+    "snl-pt-2026-07-17-dee64b0d5534c51db7fe4a34"
+  ],
+  "promotedMappingDigestSha256": "ad1378bc3f761486526391325916b898de88056138740145c1bdb7b7335b76b8",
+  "promotedSuppressionDigestSha256": "b51df3b300696ffabe9555fdf85933a46946034cc0852306dfbeef0a1e9c5a6b",
+  "withheldCandidateDigestSha256": "1ce01513efe1c4fe7911c0325553d4fd8ab6a98d255f1c82903a3c6b3fdf326d",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 229,
+    "remainingLegacyOccurrences": 160
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 237,
+    "remainingLegacyOccurrences": 152,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}
