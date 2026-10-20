@@ -1587,6 +1587,130 @@
           "resolution": "inherit-general-canonical-binding"
         }
       ]
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "presentLegacyIds": [
+        "rc:OrdWeekday8Thursday",
+        "rc:OrdWeekday10Monday",
+        "rc:OrdWeekday10Wednesday",
+        "rc:OrdWeekday11Tuesday",
+        "rc:OrdWeekday11Wednesday",
+        "rc:OrdWeekday11Thursday",
+        "rc:OrdWeekday12Tuesday",
+        "rc:OrdWeekday12Thursday",
+        "rc:OrdWeekday12Friday"
+      ],
+      "presentMappings": [
+        {
+          "legacyObservanceId": "rc:OrdWeekday8Thursday",
+          "week": 8,
+          "weekday": "thursday",
+          "expectedDateISO": "2026-05-28",
+          "occurrenceId": "occurrence:2026-05-28:ordinary-time-weekday-8-thursday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-05-28-6c07a6223d02663f4e312b02",
+          "sourceRecordHash": "6e6d2dc0ee379752076ab0887be6a8b940ab65716c062a4bb8bc25d3709a0767",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday10Monday",
+          "week": 10,
+          "weekday": "monday",
+          "expectedDateISO": "2026-06-08",
+          "occurrenceId": "occurrence:2026-06-08:ordinary-time-weekday-10-monday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-08-864f2e498f0f40469d634943",
+          "sourceRecordHash": "ad286a317b58587bf5cb4916a15faf74ee5eff776f46546184b776b19ce34443",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday10Wednesday",
+          "week": 10,
+          "weekday": "wednesday",
+          "expectedDateISO": "2026-06-10",
+          "occurrenceId": "occurrence:2026-06-10:ordinary-time-weekday-10-wednesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-10-7275f56bb30fd1856b07d296",
+          "sourceRecordHash": "ee7b9dc5b8814f2c652981270851235773e5739ebf89fae94f38fe17e60ff0eb",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday11Tuesday",
+          "week": 11,
+          "weekday": "tuesday",
+          "expectedDateISO": "2026-06-16",
+          "occurrenceId": "occurrence:2026-06-16:ordinary-time-weekday-11-tuesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-16-24f5eaca4f711d98f468be36",
+          "sourceRecordHash": "685adf3813016e7dbfeb905ddf8e0341c5cdcf4d91061e2e0f4a48e53937753c",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday11Wednesday",
+          "week": 11,
+          "weekday": "wednesday",
+          "expectedDateISO": "2026-06-17",
+          "occurrenceId": "occurrence:2026-06-17:ordinary-time-weekday-11-wednesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-17-cb4738881243416c4eb30365",
+          "sourceRecordHash": "0f7bf8754acb295049395501b6aebe579d315b9bde6a2ef394b1b60e2c812c24",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday11Thursday",
+          "week": 11,
+          "weekday": "thursday",
+          "expectedDateISO": "2026-06-18",
+          "occurrenceId": "occurrence:2026-06-18:ordinary-time-weekday-11-thursday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-18-a2098e8c834c8c7472c2e9b8",
+          "sourceRecordHash": "0ee78c7d5824ab289b56e9ab78b0eae457ac5b88449fb4e84a0ecd95f97553fd",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday12Tuesday",
+          "week": 12,
+          "weekday": "tuesday",
+          "expectedDateISO": "2026-06-23",
+          "occurrenceId": "occurrence:2026-06-23:ordinary-time-weekday-12-tuesday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-23-7973c14097fa33937bd37787",
+          "sourceRecordHash": "67ed3f7bd492b7c54f738ec2a0b4050a5aa3bfdb859614203b77ec92ea633985",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday12Thursday",
+          "week": 12,
+          "weekday": "thursday",
+          "expectedDateISO": "2026-06-25",
+          "occurrenceId": "occurrence:2026-06-25:ordinary-time-weekday-12-thursday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-25-2dc18430936a3ba0eee67080",
+          "sourceRecordHash": "f5ad2ccf80034f71a50b2b85d0abd4c4458b5c205a4d894d2a453b063982950b",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        },
+        {
+          "legacyObservanceId": "rc:OrdWeekday12Friday",
+          "week": 12,
+          "weekday": "friday",
+          "expectedDateISO": "2026-06-26",
+          "occurrenceId": "occurrence:2026-06-26:ordinary-time-weekday-12-friday:roman-catholic:pt",
+          "sourceOccurrenceId": "snl-pt-2026-06-26-7f765e0850b939c99bc4e9ef",
+          "sourceRecordHash": "b87ac5d0f43f20959b49e91984af133034b1e8ebba281a7f22f1fc9ab1b724ea",
+          "legacyRank": "weekday",
+          "reviewStatus": "inherited-safe",
+          "resolution": "inherit-general-canonical-binding"
+        }
+      ]
     }
   ],
   "suppressedCandidates": [
@@ -1982,6 +2106,186 @@
       "candidateDateISO": "2026-02-17",
       "suppressingLegacyObservanceId": "rc:SevenHolyFounders",
       "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 8,
+      "weekday": "monday",
+      "candidateDateISO": "2026-05-25",
+      "suppressingLegacyObservanceId": "rc:MaryMotherChurch",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 8,
+      "weekday": "tuesday",
+      "candidateDateISO": "2026-05-26",
+      "suppressingLegacyObservanceId": "rc:StPhilipNeri",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 8,
+      "weekday": "wednesday",
+      "candidateDateISO": "2026-05-27",
+      "suppressingLegacyObservanceId": "rc:StAugustineCanterbury",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 8,
+      "weekday": "friday",
+      "candidateDateISO": "2026-05-29",
+      "suppressingLegacyObservanceId": "rc:StPaulVI",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 8,
+      "weekday": "saturday",
+      "candidateDateISO": "2026-05-30",
+      "suppressingLegacyObservanceId": "rc:SatMemBVM2",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "monday",
+      "candidateDateISO": "2026-06-01",
+      "suppressingLegacyObservanceId": "rc:StJustinMartyr",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "tuesday",
+      "candidateDateISO": "2026-06-02",
+      "suppressingLegacyObservanceId": "rc:StsMarcellinusPeter",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "wednesday",
+      "candidateDateISO": "2026-06-03",
+      "suppressingLegacyObservanceId": "rc:StsCharlesLwanga",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "thursday",
+      "candidateDateISO": "2026-06-04",
+      "suppressingLegacyObservanceId": "rc:CorpusChristi",
+      "suppressingRank": "solemnity"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "friday",
+      "candidateDateISO": "2026-06-05",
+      "suppressingLegacyObservanceId": "rc:StBoniface",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 9,
+      "weekday": "saturday",
+      "candidateDateISO": "2026-06-06",
+      "suppressingLegacyObservanceId": "rc:SatMemBVM3",
+      "suppressingRank": "optional-memorial",
+      "alternativeSuppressingLegacyObservanceIds": [
+        "rc:StNorbert"
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 10,
+      "weekday": "tuesday",
+      "candidateDateISO": "2026-06-09",
+      "suppressingLegacyObservanceId": "rc:StEphrem",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 10,
+      "weekday": "thursday",
+      "candidateDateISO": "2026-06-11",
+      "suppressingLegacyObservanceId": "rc:StBarnabasAp",
+      "suppressingRank": "memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 10,
+      "weekday": "friday",
+      "candidateDateISO": "2026-06-12",
+      "suppressingLegacyObservanceId": "rc:SacredHeart",
+      "suppressingRank": "solemnity"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 10,
+      "weekday": "saturday",
+      "candidateDateISO": "2026-06-13",
+      "suppressingLegacyObservanceId": "rc:StAnthonyPadua",
+      "suppressingRank": "feast"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 11,
+      "weekday": "monday",
+      "candidateDateISO": "2026-06-15",
+      "suppressingLegacyObservanceId": "rc:ImmaculateHeart",
+      "suppressingRank": "feast"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 11,
+      "weekday": "friday",
+      "candidateDateISO": "2026-06-19",
+      "suppressingLegacyObservanceId": "rc:StRomuald",
+      "suppressingRank": "optional-memorial"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 11,
+      "weekday": "saturday",
+      "candidateDateISO": "2026-06-20",
+      "suppressingLegacyObservanceId": "rc:SatMemBVM4",
+      "suppressingRank": "optional-memorial",
+      "alternativeSuppressingLegacyObservanceIds": [
+        "rc-pt:BlsSanchaMafaldaTeresa"
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 12,
+      "weekday": "monday",
+      "candidateDateISO": "2026-06-22",
+      "suppressingLegacyObservanceId": "rc:StPaulinusNola",
+      "suppressingRank": "optional-memorial",
+      "alternativeSuppressingLegacyObservanceIds": [
+        "rc:StsJohnFisherThomasMore"
+      ]
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 12,
+      "weekday": "wednesday",
+      "candidateDateISO": "2026-06-24",
+      "suppressingLegacyObservanceId": "rc:NativityJohnBaptist",
+      "suppressingRank": "solemnity"
+    },
+    {
+      "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "week": 12,
+      "weekday": "saturday",
+      "candidateDateISO": "2026-06-27",
+      "suppressingLegacyObservanceId": "rc:SatMemBVM5",
+      "suppressingRank": "optional-memorial",
+      "alternativeSuppressingLegacyObservanceIds": [
+        "rc:StCyrilAlexandria"
+      ]
     }
   ],
   "withheldCandidates": [

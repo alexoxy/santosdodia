@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "temporalRuleFamilyModelVersion": "1.5",
+  "temporalRuleFamilyModelVersion": "1.6",
   "status": "repository-reviewed-temporal-rule-family-anchors",
   "families": [
     {
@@ -396,6 +396,54 @@
         "calendar": "gregorian",
         "anchor": "gregorian-easter",
         "offsetDays": -46
+      },
+      "weekStrideDays": 7,
+      "weekdayOffsets": {
+        "monday": 1,
+        "tuesday": 2,
+        "wednesday": 3,
+        "thursday": 4,
+        "friday": 5,
+        "saturday": 6
+      },
+      "candidateRequiresPrecedenceResolution": true,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu_proprio_19690321_calendarium-romanum.html",
+          "claimTypes": [
+            "universal-calendar-authority"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-20"
+    },
+    {
+      "id": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "calendarSystem": "gregorian",
+      "observanceFamilyKey": "ordinary-time-weekday",
+      "observanceIdPattern": "observance:{observanceFamilyKey}-{week}-{weekday}:roman-catholic",
+      "legacyObservanceIdPattern": "rc:OrdWeekday{week}{weekdayTitle}",
+      "legacyRank": "weekday",
+      "memberProfile": "weekday-monday-saturday",
+      "anchor": "advent-start",
+      "baseOffsetDays": -238,
+      "weekRange": {
+        "min": 8,
+        "max": 12
+      },
+      "exclusiveStartDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "pentecost",
+        "offsetDays": 0
+      },
+      "exclusiveEndDateRule": {
+        "type": "relative",
+        "calendar": "gregorian",
+        "anchor": "advent-start",
+        "offsetDays": 0
       },
       "weekStrideDays": 7,
       "weekdayOffsets": {
