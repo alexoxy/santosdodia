@@ -2369,6 +2369,62 @@
         }
       ],
       "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "recognition:pancras:roman-catholic",
+      "personId": "pancras",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "martyr",
+        "young-martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/12/st--pancras--martyr-on-the--via-aurelia.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "martyr",
+            "young-martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:augustine-canterbury:roman-catholic",
+      "personId": "augustine-canterbury",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "missionary"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/05/27/st--augustine--archbishop-of-canterbury.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "missionary"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }

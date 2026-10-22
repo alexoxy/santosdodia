@@ -948,6 +948,28 @@
         "es": "Santa Rita de Casia",
         "it": "Santa Rita da Cascia"
       }
+    },
+    {
+      "id": "pancras",
+      "primaryObservanceId": "rc:StPancras",
+      "category": "saint",
+      "names": {
+        "en": "Saint Pancras",
+        "pt": "São Pancrácio",
+        "es": "San Pancracio",
+        "it": "San Pancrazio"
+      }
+    },
+    {
+      "id": "augustine-canterbury",
+      "primaryObservanceId": "rc:StAugustineCanterbury",
+      "category": "saint",
+      "names": {
+        "en": "Saint Augustine of Canterbury",
+        "pt": "Santo Agostinho de Cantuária",
+        "es": "San Agustín de Canterbury",
+        "it": "Sant’Agostino di Canterbury"
+      }
     }
   ]
 }
