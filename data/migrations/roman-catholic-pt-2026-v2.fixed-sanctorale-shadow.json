@@ -1248,8 +1248,22 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-26:cosmas-damian:roman-catholic:pt",
+      "observanceId": "observance:cosmas-damian:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:cosmas-damian:general-roman",
+      "legacyObservanceId": "rc:StsCosmasDamian",
+      "expectedDateISO": "2026-09-26",
+      "sourceOccurrenceId": "snl-pt-2026-09-26-d4563d23c6a1f8db3a58a1b4",
+      "sourceRecordHash": "5ba692b36e1128a0975cc41fb38506adfc85dc20ead9366fd941f7167ddc53d7",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-09-09"
+  "verifiedAt": "2026-10-23"
 }

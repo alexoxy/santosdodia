@@ -444,6 +444,11 @@
       "occurrenceId": "occurrence:2026-08-13:pontian-hippolytus:roman-catholic:pt",
       "legacyObservanceId": "rc:StsPontianHippolytus",
       "dateISO": "2026-08-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-26:cosmas-damian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsCosmasDamian",
+      "dateISO": "2026-09-26"
     }
   ]
 }

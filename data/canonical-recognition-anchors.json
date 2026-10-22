@@ -2761,6 +2761,62 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:cosmas-cyrrhus:roman-catholic",
+      "personId": "cosmas-cyrrhus",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "physician",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/26/sts--cosmas-and-damian--martyrs.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "physician",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:damian-cyrrhus:roman-catholic",
+      "personId": "damian-cyrrhus",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "physician",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/26/sts--cosmas-and-damian--martyrs.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "physician",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

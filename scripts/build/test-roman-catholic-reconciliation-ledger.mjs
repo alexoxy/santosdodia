@@ -58,8 +58,8 @@ const buildLedger = ({
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 187 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 173, 'The ledger must distinguish fourteen TemporalRules from 173 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 88 && ledger.counts.fixedSanctoraleDays === 83 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 88 exact Sanctorale occurrences across 83 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 281 && ledger.counts.sourceBoundOccurrences === 286, 'The ledger must distinguish 281 source-bound days from 286 source-bound canonical occurrences.');
+assert(ledger.counts.fixedSanctorale === 89 && ledger.counts.fixedSanctoraleDays === 84 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 89 exact Sanctorale occurrences across 84 civil days and eleven movable/transfer bindings.');
+assert(ledger.counts.sourceBound === 281 && ledger.counts.sourceBoundOccurrences === 287, 'The ledger must distinguish 281 source-bound days from 287 source-bound canonical occurrences.');
 assert(ledger.counts.unresolved === 84, 'Every unreviewed official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
@@ -141,6 +141,33 @@ assert(ledger.entries.find(item => item.dateISO === '2026-12-26')?.canonicalObse
 assert(ledger.entries.find(item => item.dateISO === '2026-02-14')?.canonicalObservanceId === 'observance:cyril-methodius:roman-catholic', 'Saints Cyril and Methodius canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-06-13')?.canonicalObservanceId === 'observance:anthony-lisbon:roman-catholic', 'Saint Anthony canonical binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-08-12')?.classification === 'unresolved', 'An unreviewed day must remain unresolved; text similarity must not create an identity binding.');
+const september26 = ledger.entries.find(item => item.dateISO === '2026-09-26');
+assert(september26?.classification === 'mixed-optional-alternatives'
+  && september26.fixedOptions?.some(item => item.canonicalObservanceId === 'observance:cosmas-damian:roman-catholic')
+  && september26.temporalFamilyOptions?.some(item => item.sourceBinding.legacyObservanceId === 'rc:SatMemBVM11' && item.temporalFamilyMember.selectionMode === 'optional-alternative' && item.temporalFamilyMember.obligatory === false)
+  && september26.optionalAlternatives?.length === 2,
+'Saints Cosmas and Damian and the Saturday Marian commemoration must remain distinct, non-obligatory alternatives.');
+
+const obligatoryOverlapOccurrences = clone(occurrences);
+const obligatoryOverlapRules = clone(rules);
+const obligatoryOverlapShadow = clone(fixedSanctoraleShadow);
+const obligatoryCosmasDamian = obligatoryOverlapOccurrences.occurrences.find(item => item.id === 'occurrence:2026-09-26:cosmas-damian:roman-catholic:pt');
+const obligatoryCosmasDamianRule = obligatoryOverlapRules.rules.find(item => item.id === 'sanctorale-rule:cosmas-damian:general-roman');
+const obligatoryCosmasDamianMapping = obligatoryOverlapShadow.mappings.find(item => item.occurrenceId === obligatoryCosmasDamian.id);
+obligatoryCosmasDamian.rank = 'obligatory-memorial';
+obligatoryCosmasDamian.sourceRankCode = 'MO';
+obligatoryCosmasDamianRule.liturgicalRank = 'obligatory-memorial';
+obligatoryCosmasDamianMapping.canonicalRank = 'obligatory-memorial';
+obligatoryCosmasDamianMapping.sourceRankCode = 'MO';
+let obligatoryOverlapRejected = false;
+try {
+  buildLedger({
+    occurrenceAnchors: obligatoryOverlapOccurrences,
+    sanctoraleRules: obligatoryOverlapRules,
+    fixedSanctoraleMappings: obligatoryOverlapShadow
+  });
+} catch { obligatoryOverlapRejected = true; }
+assert(obligatoryOverlapRejected, 'Only reviewed optional memorials may coexist with the optional Saturday Marian alternative.');
 
 const duplicateDate = clone(report);
 duplicateDate.daily[1].dateISO = duplicateDate.daily[0].dateISO;
@@ -292,4 +319,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 88 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 286 source-bound occurrences across 281 days, 84 explicit unresolved days and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 89 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 287 source-bound occurrences across 281 days, 84 explicit unresolved days and no label-derived identity.');
