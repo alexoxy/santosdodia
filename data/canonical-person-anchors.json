@@ -1058,6 +1058,50 @@
         "es": "San Pedro, exorcista",
         "it": "San Pietro, esorcista"
       }
+    },
+    {
+      "id": "john-fisher-rochester",
+      "primaryObservanceId": "rc:StsJohnFisherThomasMore",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Fisher, Bishop",
+        "pt": "São João Fisher, bispo",
+        "es": "San Juan Fisher, obispo",
+        "it": "San Giovanni Fisher, vescovo"
+      }
+    },
+    {
+      "id": "thomas-more",
+      "primaryObservanceId": "rc:StsJohnFisherThomasMore",
+      "category": "saint",
+      "names": {
+        "en": "Saint Thomas More",
+        "pt": "São Tomás More",
+        "es": "Santo Tomás Moro",
+        "it": "San Tommaso Moro"
+      }
+    },
+    {
+      "id": "pontian-pope",
+      "primaryObservanceId": "rc:StsPontianHippolytus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Pontian, Pope",
+        "pt": "São Ponciano, papa",
+        "es": "San Ponciano, papa",
+        "it": "San Ponziano, papa"
+      }
+    },
+    {
+      "id": "hippolytus-priest-rome",
+      "primaryObservanceId": "rc:StsPontianHippolytus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Hippolytus, Priest",
+        "pt": "Santo Hipólito, presbítero",
+        "es": "San Hipólito, presbítero",
+        "it": "Sant’Ippolito, presbitero"
+      }
     }
   ]
 }

@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 284,
-    "remainingOccurrences": 105,
+    "sourceBoundOccurrences": 286,
+    "remainingOccurrences": 103,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 8,
+    "fixed-collective": 6,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -249,13 +249,6 @@
       "semanticFamily": "fixed-person"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-06-22-2569a6ad0e5914d6a7dcd150",
-      "sourceRecordHash": "9695021235fcec2512c34bebfd1540c93ef13589d2d0b589655a09cb6f7160a5",
-      "dateISO": "2026-06-22",
-      "canonicalEventId": "rc:StsJohnFisherThomasMore",
-      "semanticFamily": "fixed-collective"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-06-27-f7ae2f059bb8cb69a60cae04",
       "sourceRecordHash": "5ec91602771a5e261811bb157d0a5c09d231231dc5314cf6b7e9f9d14f9cce55",
       "dateISO": "2026-06-27",
@@ -380,13 +373,6 @@
       "dateISO": "2026-08-12",
       "canonicalEventId": "rc:StJaneFrancesDeChantal",
       "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-13-db2220ac48c894eb504eb23e",
-      "sourceRecordHash": "05451cf69cd7d3d97a0fcd6e9e5fcbf905242cac2cc90aba9743ef1cd627d2f0",
-      "dateISO": "2026-08-13",
-      "canonicalEventId": "rc:StsPontianHippolytus",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-17-0241bff7957f1b47c3c0b147",

@@ -434,6 +434,16 @@
       "occurrenceId": "occurrence:2026-06-02:marcellinus-peter:roman-catholic:pt",
       "legacyObservanceId": "rc:StsMarcellinusPeter",
       "dateISO": "2026-06-02"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:john-fisher-thomas-more:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsJohnFisherThomasMore",
+      "dateISO": "2026-06-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-13:pontian-hippolytus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPontianHippolytus",
+      "dateISO": "2026-08-13"
     }
   ]
 }

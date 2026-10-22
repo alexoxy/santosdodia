@@ -1220,6 +1220,34 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:john-fisher-thomas-more:roman-catholic:pt",
+      "observanceId": "observance:john-fisher-thomas-more:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-fisher-thomas-more:general-roman",
+      "legacyObservanceId": "rc:StsJohnFisherThomasMore",
+      "expectedDateISO": "2026-06-22",
+      "sourceOccurrenceId": "snl-pt-2026-06-22-2569a6ad0e5914d6a7dcd150",
+      "sourceRecordHash": "9695021235fcec2512c34bebfd1540c93ef13589d2d0b589655a09cb6f7160a5",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-13:pontian-hippolytus:roman-catholic:pt",
+      "observanceId": "observance:pontian-hippolytus:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pontian-hippolytus:general-roman",
+      "legacyObservanceId": "rc:StsPontianHippolytus",
+      "expectedDateISO": "2026-08-13",
+      "sourceOccurrenceId": "snl-pt-2026-08-13-db2220ac48c894eb504eb23e",
+      "sourceRecordHash": "05451cf69cd7d3d97a0fcd6e9e5fcbf905242cac2cc90aba9743ef1cd627d2f0",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
