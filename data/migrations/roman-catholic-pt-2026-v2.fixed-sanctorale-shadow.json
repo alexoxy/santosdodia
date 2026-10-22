@@ -1164,6 +1164,34 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-26:timothy-titus:roman-catholic:pt",
+      "observanceId": "observance:timothy-titus:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:timothy-titus:general-roman",
+      "legacyObservanceId": "rc:StsTimothyTitus",
+      "expectedDateISO": "2026-01-26",
+      "sourceOccurrenceId": "snl-pt-2026-01-26-6b214544d1ff24d4e425c0c9",
+      "sourceRecordHash": "215c73d8bedd59c4d68df1e937c47d3b13208f6400efa4c9d3a4640a8ac77240",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-16:cornelius-cyprian:roman-catholic:pt",
+      "observanceId": "observance:cornelius-cyprian:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:cornelius-cyprian:general-roman",
+      "legacyObservanceId": "rc:StsCorneliusCyprian",
+      "expectedDateISO": "2026-09-16",
+      "sourceOccurrenceId": "snl-pt-2026-09-16-9365a27eaaca929058dcfa90",
+      "sourceRecordHash": "593c31447eab736c50ffc299ffc8000663c3046a9c9b4bcecd8cb4b96a2d439d",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

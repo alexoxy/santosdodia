@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "timothy-titus",
+      "persons": [
+        {
+          "id": "timothy-ephesus",
+          "primaryObservanceId": "rc:StsTimothyTitus",
+          "category": "saint",
+          "names": {
+            "en": "Saint Timothy of Ephesus",
+            "pt": "São Timóteo de Éfeso",
+            "es": "San Timoteo de Éfeso",
+            "it": "San Timoteo di Efeso"
+          }
+        },
+        {
+          "id": "titus-crete",
+          "primaryObservanceId": "rc:StsTimothyTitus",
+          "category": "saint",
+          "names": {
+            "en": "Saint Titus of Crete",
+            "pt": "São Tito de Creta",
+            "es": "San Tito de Creta",
+            "it": "San Tito di Creta"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:timothy-ephesus:roman-catholic",
+          "personId": "timothy-ephesus",
+          "ecclesialTitles": [
+            "bishop",
+            "disciple-of-paul"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/01/26/sts--timothy-and-titus--bishops--disciples-of-st--paul.html"
+        },
+        {
+          "id": "recognition:titus-crete:roman-catholic",
+          "personId": "titus-crete",
+          "ecclesialTitles": [
+            "bishop",
+            "disciple-of-paul"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/01/26/sts--timothy-and-titus--bishops--disciples-of-st--paul.html"
+        }
+      ],
+      "observanceId": "observance:timothy-titus:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:timothy-titus:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsTimothyTitus",
+        "dateISO": "2026-01-26",
+        "sourceOccurrenceId": "snl-pt-2026-01-26-6b214544d1ff24d4e425c0c9",
+        "sourceRecordHash": "215c73d8bedd59c4d68df1e937c47d3b13208f6400efa4c9d3a4640a8ac77240",
+        "sourceLabelPt": "Santos Timóteo e Tito, bispos",
+        "observedDesignation": "Santos Timóteo e Tito, bispos – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-26"
+      }
+    },
+    {
+      "occurrenceKey": "cornelius-cyprian",
+      "persons": [
+        {
+          "id": "cornelius-pope",
+          "primaryObservanceId": "rc:StsCorneliusCyprian",
+          "category": "saint",
+          "names": {
+            "en": "Saint Cornelius, Pope",
+            "pt": "São Cornélio, papa",
+            "es": "San Cornelio, papa",
+            "it": "San Cornelio, papa"
+          }
+        },
+        {
+          "id": "cyprian-carthage",
+          "primaryObservanceId": "rc:StsCorneliusCyprian",
+          "category": "saint",
+          "names": {
+            "en": "Saint Cyprian of Carthage",
+            "pt": "São Cipriano de Cartago",
+            "es": "San Cipriano de Cartago",
+            "it": "San Cipriano di Cartagine"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:cornelius-pope:roman-catholic",
+          "personId": "cornelius-pope",
+          "ecclesialTitles": [
+            "pope",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/09/16/sts--cornelius--pope-and-cyprian--bishop--martyr.html"
+        },
+        {
+          "id": "recognition:cyprian-carthage:roman-catholic",
+          "personId": "cyprian-carthage",
+          "ecclesialTitles": [
+            "bishop",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/09/16/sts--cornelius--pope-and-cyprian--bishop--martyr.html"
+        }
+      ],
+      "observanceId": "observance:cornelius-cyprian:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:cornelius-cyprian:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsCorneliusCyprian",
+        "dateISO": "2026-09-16",
+        "sourceOccurrenceId": "snl-pt-2026-09-16-9365a27eaaca929058dcfa90",
+        "sourceRecordHash": "593c31447eab736c50ffc299ffc8000663c3046a9c9b4bcecd8cb4b96a2d439d",
+        "sourceLabelPt": "Santos Cornélio, papa, e Cipriano, bispo, mártires",
+        "observedDesignation": "Santos Cornélio, papa, e Cipriano, bispo, mártires – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-16"
+      }
+    }
+  ],
+  "reviewDigestSha256": "f613a70489f4e145c687ab79d71cf9b51ae9a6aa6eab7281728013912f66d0af",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

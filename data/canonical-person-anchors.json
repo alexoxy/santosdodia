@@ -970,6 +970,50 @@
         "es": "San Agustín de Canterbury",
         "it": "Sant’Agostino di Canterbury"
       }
+    },
+    {
+      "id": "timothy-ephesus",
+      "primaryObservanceId": "rc:StsTimothyTitus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Timothy of Ephesus",
+        "pt": "São Timóteo de Éfeso",
+        "es": "San Timoteo de Éfeso",
+        "it": "San Timoteo di Efeso"
+      }
+    },
+    {
+      "id": "titus-crete",
+      "primaryObservanceId": "rc:StsTimothyTitus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Titus of Crete",
+        "pt": "São Tito de Creta",
+        "es": "San Tito de Creta",
+        "it": "San Tito di Creta"
+      }
+    },
+    {
+      "id": "cornelius-pope",
+      "primaryObservanceId": "rc:StsCorneliusCyprian",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cornelius, Pope",
+        "pt": "São Cornélio, papa",
+        "es": "San Cornelio, papa",
+        "it": "San Cornelio, papa"
+      }
+    },
+    {
+      "id": "cyprian-carthage",
+      "primaryObservanceId": "rc:StsCorneliusCyprian",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cyprian of Carthage",
+        "pt": "São Cipriano de Cartago",
+        "es": "San Cipriano de Cartago",
+        "it": "San Cipriano di Cartagine"
+      }
     }
   ]
 }

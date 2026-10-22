@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 82, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 82, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 84, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 84, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -117,6 +117,7 @@ const expected = new Map([
   ['observance:ambrose-milan:roman-catholic', ['2026-12-07', 'obligatory-memorial', 'MO', 'rc:StAmbrose']],
   ['observance:gregory-great:roman-catholic', ['2026-09-03', 'obligatory-memorial', 'MO', 'rc:StGregoryGreat']],
   ['observance:francis-de-sales:roman-catholic', ['2026-01-24', 'obligatory-memorial', 'MO', 'rc:StFrancisDeSales']],
+  ['observance:timothy-titus:roman-catholic', ['2026-01-26', 'obligatory-memorial', 'MO', 'rc:StsTimothyTitus']],
   ['observance:alphonsus-liguori:roman-catholic', ['2026-08-01', 'obligatory-memorial', 'MO', 'rc:StAlphonsusMariaDeLiguori']],
   ['observance:athanasius-alexandria:roman-catholic', ['2026-05-02', 'obligatory-memorial', 'MO', 'rc:StAthanasius']],
   ['observance:bonaventure-bagnoregio:roman-catholic', ['2026-07-15', 'obligatory-memorial', 'MO', 'rc:StBonaventure']],
@@ -137,6 +138,7 @@ const expected = new Map([
   ['observance:maximilian-kolbe:roman-catholic', ['2026-08-14', 'obligatory-memorial', 'MO', 'rc:StMaximilianKolbe']],
   ['observance:monica-thagaste:roman-catholic', ['2026-08-27', 'obligatory-memorial', 'MO', 'rc:StMonica']],
   ['observance:pius-pietrelcina:roman-catholic', ['2026-09-23', 'obligatory-memorial', 'MO', 'rc:StPioPietrelcina']],
+  ['observance:cornelius-cyprian:roman-catholic', ['2026-09-16', 'obligatory-memorial', 'MO', 'rc:StsCorneliusCyprian']],
   ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 'MO', 'rc:StElizabethHungary']],
   ['observance:hilary-poitiers:roman-catholic', ['2026-01-13', 'optional-memorial', 'MF', 'rc:StHilaryPoitiers']],
   ['observance:anselm-canterbury:roman-catholic', ['2026-04-21', 'optional-memorial', 'MF', 'rc:StAnselm']],

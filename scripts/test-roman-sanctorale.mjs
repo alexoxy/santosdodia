@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 82, 'Portugal Sanctorale materialization must remain shadow-only with eighty-two reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 84, 'Portugal Sanctorale materialization must remain shadow-only with eighty-four reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -117,6 +117,7 @@ try {
     ['observance:ambrose-milan:roman-catholic', ['2026-12-07', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:gregory-great:roman-catholic', ['2026-09-03', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:francis-de-sales:roman-catholic', ['2026-01-24', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:timothy-titus:roman-catholic', ['2026-01-26', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:alphonsus-liguori:roman-catholic', ['2026-08-01', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:athanasius-alexandria:roman-catholic', ['2026-05-02', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:bonaventure-bagnoregio:roman-catholic', ['2026-07-15', 'obligatory-memorial', 10, 'general-roman']],
@@ -137,6 +138,7 @@ try {
     ['observance:maximilian-kolbe:roman-catholic', ['2026-08-14', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:monica-thagaste:roman-catholic', ['2026-08-27', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:pius-pietrelcina:roman-catholic', ['2026-09-23', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:cornelius-cyprian:roman-catholic', ['2026-09-16', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:hilary-poitiers:roman-catholic', ['2026-01-13', 'optional-memorial', 12, 'general-roman']],
     ['observance:anselm-canterbury:roman-catholic', ['2026-04-21', 'optional-memorial', 12, 'general-roman']],
@@ -156,7 +158,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 82, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 84, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -166,8 +168,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The eighty-two reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The eighty-two reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The eighty-four reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The eighty-four reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     const represented = day?.celebratedCandidateId === candidate.id
@@ -238,7 +240,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: 82 authority-isolated perennial Portugal vectors, including distinct same-day optional memorial choices; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: 84 authority-isolated perennial Portugal vectors, including collective Observances and distinct same-day optional memorial choices; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
