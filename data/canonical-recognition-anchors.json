@@ -2537,6 +2537,78 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:nereus-ardeatina:roman-catholic",
+      "personId": "nereus-ardeatina",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["martyr", "roman-martyr"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/05/12/sts--saints-nereus-and-achilleus--martyrs-on-the--via-ardeatina.html",
+        "claimTypes": ["saint-designation", "identity", "martyr", "roman-martyr"]
+      }],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:achilleus-ardeatina:roman-catholic",
+      "personId": "achilleus-ardeatina",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["martyr", "roman-martyr"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/05/12/sts--saints-nereus-and-achilleus--martyrs-on-the--via-ardeatina.html",
+        "claimTypes": ["saint-designation", "identity", "martyr", "roman-martyr"]
+      }],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:marcellinus-priest-rome:roman-catholic",
+      "personId": "marcellinus-priest-rome",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["priest", "martyr"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/06/02/sts--marcellinus--priest--and-peter--exorcist--martyrs-on-the-vi.html",
+        "claimTypes": ["saint-designation", "identity", "priest", "martyr"]
+      }],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "recognition:peter-exorcist-rome:roman-catholic",
+      "personId": "peter-exorcist-rome",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": ["exorcist", "martyr"],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/06/02/sts--marcellinus--priest--and-peter--exorcist--martyrs-on-the-vi.html",
+        "claimTypes": ["saint-designation", "identity", "exorcist", "martyr"]
+      }],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }

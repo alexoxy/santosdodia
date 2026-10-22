@@ -424,6 +424,16 @@
       "occurrenceId": "occurrence:2026-09-16:cornelius-cyprian:roman-catholic:pt",
       "legacyObservanceId": "rc:StsCorneliusCyprian",
       "dateISO": "2026-09-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:nereus-achilleus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsNereusAchilleus",
+      "dateISO": "2026-05-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-02:marcellinus-peter:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsMarcellinusPeter",
+      "dateISO": "2026-06-02"
     }
   ]
 }

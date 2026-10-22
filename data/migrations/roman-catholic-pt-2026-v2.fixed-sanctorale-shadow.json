@@ -1192,6 +1192,34 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:nereus-achilleus:roman-catholic:pt",
+      "observanceId": "observance:nereus-achilleus:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:nereus-achilleus:general-roman",
+      "legacyObservanceId": "rc:StsNereusAchilleus",
+      "expectedDateISO": "2026-05-12",
+      "sourceOccurrenceId": "snl-pt-2026-05-12-4d22759a8d28bacfb07b2134",
+      "sourceRecordHash": "c660b534e608ef81cbec857289530abdc1a9fbc5c3210a6cb2e6fdbca46e48a1",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-02:marcellinus-peter:roman-catholic:pt",
+      "observanceId": "observance:marcellinus-peter:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:marcellinus-peter:general-roman",
+      "legacyObservanceId": "rc:StsMarcellinusPeter",
+      "expectedDateISO": "2026-06-02",
+      "sourceOccurrenceId": "snl-pt-2026-06-02-73c05462e9883c54bf402090",
+      "sourceRecordHash": "d6a451b19a77f39b5f7eeb7f42e79cf68794ab682f1fc8458c925c2eabd77896",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

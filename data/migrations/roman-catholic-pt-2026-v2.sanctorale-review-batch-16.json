@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "nereus-achilleus",
+      "persons": [
+        {
+          "id": "nereus-ardeatina",
+          "primaryObservanceId": "rc:StsNereusAchilleus",
+          "category": "saint",
+          "names": {"en": "Saint Nereus", "pt": "São Nereu", "es": "San Nereo", "it": "San Nereo"}
+        },
+        {
+          "id": "achilleus-ardeatina",
+          "primaryObservanceId": "rc:StsNereusAchilleus",
+          "category": "saint",
+          "names": {"en": "Saint Achilleus", "pt": "Santo Aquileu", "es": "San Aquileo", "it": "Sant’Achilleo"}
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:nereus-ardeatina:roman-catholic",
+          "personId": "nereus-ardeatina",
+          "ecclesialTitles": ["martyr", "roman-martyr"],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/05/12/sts--saints-nereus-and-achilleus--martyrs-on-the--via-ardeatina.html"
+        },
+        {
+          "id": "recognition:achilleus-ardeatina:roman-catholic",
+          "personId": "achilleus-ardeatina",
+          "ecclesialTitles": ["martyr", "roman-martyr"],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/05/12/sts--saints-nereus-and-achilleus--martyrs-on-the--via-ardeatina.html"
+        }
+      ],
+      "observanceId": "observance:nereus-achilleus:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:nereus-achilleus:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsNereusAchilleus",
+        "dateISO": "2026-05-12",
+        "sourceOccurrenceId": "snl-pt-2026-05-12-4d22759a8d28bacfb07b2134",
+        "sourceRecordHash": "c660b534e608ef81cbec857289530abdc1a9fbc5c3210a6cb2e6fdbca46e48a1",
+        "sourceLabelPt": "Santos Nereu e Aquileu, mártires",
+        "observedDesignation": "Santos Nereu e Aquileu, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12"
+      }
+    },
+    {
+      "occurrenceKey": "marcellinus-peter",
+      "persons": [
+        {
+          "id": "marcellinus-priest-rome",
+          "primaryObservanceId": "rc:StsMarcellinusPeter",
+          "category": "saint",
+          "names": {"en": "Saint Marcellinus, Priest", "pt": "São Marcelino, presbítero", "es": "San Marcelino, presbítero", "it": "San Marcellino, presbitero"}
+        },
+        {
+          "id": "peter-exorcist-rome",
+          "primaryObservanceId": "rc:StsMarcellinusPeter",
+          "category": "saint",
+          "names": {"en": "Saint Peter, Exorcist", "pt": "São Pedro, exorcista", "es": "San Pedro, exorcista", "it": "San Pietro, esorcista"}
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:marcellinus-priest-rome:roman-catholic",
+          "personId": "marcellinus-priest-rome",
+          "ecclesialTitles": ["priest", "martyr"],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/06/02/sts--marcellinus--priest--and-peter--exorcist--martyrs-on-the-vi.html"
+        },
+        {
+          "id": "recognition:peter-exorcist-rome:roman-catholic",
+          "personId": "peter-exorcist-rome",
+          "ecclesialTitles": ["exorcist", "martyr"],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/06/02/sts--marcellinus--priest--and-peter--exorcist--martyrs-on-the-vi.html"
+        }
+      ],
+      "observanceId": "observance:marcellinus-peter:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:marcellinus-peter:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsMarcellinusPeter",
+        "dateISO": "2026-06-02",
+        "sourceOccurrenceId": "snl-pt-2026-06-02-73c05462e9883c54bf402090",
+        "sourceRecordHash": "d6a451b19a77f39b5f7eeb7f42e79cf68794ab682f1fc8458c925c2eabd77896",
+        "sourceLabelPt": "Santos Marcelino e Pedro, mártires",
+        "observedDesignation": "Santos Marcelino e Pedro, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-2"
+      }
+    }
+  ],
+  "reviewDigestSha256": "c09fec9b89927b6b640ebab540fcfa80543c5660e49dc43891a71c219e25b5fd",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

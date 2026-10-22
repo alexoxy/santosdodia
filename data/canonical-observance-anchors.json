@@ -2616,6 +2616,50 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "observance:nereus-achilleus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {"kind": "person", "personId": "nereus-ardeatina", "recognitionId": "recognition:nereus-ardeatina:roman-catholic"},
+        {"kind": "person", "personId": "achilleus-ardeatina", "recognitionId": "recognition:achilleus-ardeatina:roman-catholic"}
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/05/12/sts--saints-nereus-and-achilleus--martyrs-on-the--via-ardeatina.html",
+        "claimTypes": ["observance-attestation", "liturgical-designation"]
+      }],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "observance:marcellinus-peter:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {"kind": "person", "personId": "marcellinus-priest-rome", "recognitionId": "recognition:marcellinus-priest-rome:roman-catholic"},
+        {"kind": "person", "personId": "peter-exorcist-rome", "recognitionId": "recognition:peter-exorcist-rome:roman-catholic"}
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [{
+        "publisher": "Vatican News",
+        "url": "https://www.vaticannews.va/en/saints/06/02/sts--marcellinus--priest--and-peter--exorcist--martyrs-on-the-vi.html",
+        "claimTypes": ["observance-attestation", "liturgical-designation"]
+      }],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }

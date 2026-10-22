@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 282,
-    "remainingOccurrences": 107,
+    "sourceBoundOccurrences": 284,
+    "remainingOccurrences": 105,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 10,
+    "fixed-collective": 8,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -179,13 +179,6 @@
       "semanticFamily": "portugal-proper"
     },
     {
-      "sourceOccurrenceId": "snl-pt-2026-05-12-4d22759a8d28bacfb07b2134",
-      "sourceRecordHash": "c660b534e608ef81cbec857289530abdc1a9fbc5c3210a6cb2e6fdbca46e48a1",
-      "dateISO": "2026-05-12",
-      "canonicalEventId": "rc:StsNereusAchilleus",
-      "semanticFamily": "fixed-collective"
-    },
-    {
       "sourceOccurrenceId": "snl-pt-2026-05-13-e2cf0ccd296063f585975a48",
       "sourceRecordHash": "cbff45fa28834e65bd19f4a252771765f66e7ef303b7559251f87857d32057c0",
       "dateISO": "2026-05-13",
@@ -212,13 +205,6 @@
       "dateISO": "2026-05-29",
       "canonicalEventId": "rc:StPaulVI",
       "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-06-02-73c05462e9883c54bf402090",
-      "sourceRecordHash": "d6a451b19a77f39b5f7eeb7f42e79cf68794ab682f1fc8458c925c2eabd77896",
-      "dateISO": "2026-06-02",
-      "canonicalEventId": "rc:StsMarcellinusPeter",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-06-03-7b32e4efae7a9f52e5c2e488",
