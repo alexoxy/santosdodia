@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "cosmas-damian",
+      "persons": [
+        {
+          "id": "cosmas-cyrrhus",
+          "primaryObservanceId": "rc:StsCosmasDamian",
+          "category": "saint",
+          "names": {
+            "en": "Saint Cosmas",
+            "pt": "São Cosme",
+            "es": "San Cosme",
+            "it": "San Cosma"
+          }
+        },
+        {
+          "id": "damian-cyrrhus",
+          "primaryObservanceId": "rc:StsCosmasDamian",
+          "category": "saint",
+          "names": {
+            "en": "Saint Damian",
+            "pt": "São Damião",
+            "es": "San Damián",
+            "it": "San Damiano"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:cosmas-cyrrhus:roman-catholic",
+          "personId": "cosmas-cyrrhus",
+          "ecclesialTitles": [
+            "physician",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/09/26/sts--cosmas-and-damian--martyrs.html"
+        },
+        {
+          "id": "recognition:damian-cyrrhus:roman-catholic",
+          "personId": "damian-cyrrhus",
+          "ecclesialTitles": [
+            "physician",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/09/26/sts--cosmas-and-damian--martyrs.html"
+        }
+      ],
+      "observanceId": "observance:cosmas-damian:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:cosmas-damian:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsCosmasDamian",
+        "dateISO": "2026-09-26",
+        "sourceOccurrenceId": "snl-pt-2026-09-26-d4563d23c6a1f8db3a58a1b4",
+        "sourceRecordHash": "5ba692b36e1128a0975cc41fb38506adfc85dc20ead9366fd941f7167ddc53d7",
+        "sourceLabelPt": "Santos Cosme e Damião, mártires",
+        "observedDesignation": "Santos Cosme e Damião, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-26"
+      }
+    }
+  ],
+  "reviewDigestSha256": "8c19cab7fbab2da8cc83f94b06c8ea357982736c8bc310eca199a2ac71918fda",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

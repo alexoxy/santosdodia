@@ -1102,6 +1102,28 @@
         "es": "San Hipólito, presbítero",
         "it": "Sant’Ippolito, presbitero"
       }
+    },
+    {
+      "id": "cosmas-cyrrhus",
+      "primaryObservanceId": "rc:StsCosmasDamian",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cosmas",
+        "pt": "São Cosme",
+        "es": "San Cosme",
+        "it": "San Cosma"
+      }
+    },
+    {
+      "id": "damian-cyrrhus",
+      "primaryObservanceId": "rc:StsCosmasDamian",
+      "category": "saint",
+      "names": {
+        "en": "Saint Damian",
+        "pt": "São Damião",
+        "es": "San Damián",
+        "it": "San Damiano"
+      }
     }
   ]
 }

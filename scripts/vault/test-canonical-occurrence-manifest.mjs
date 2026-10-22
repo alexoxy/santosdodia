@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 88, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 88, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 89, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 89, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -148,7 +148,8 @@ const expected = new Map([
   ['observance:anselm-canterbury:roman-catholic', ['2026-04-21', 'optional-memorial', 'MF', 'rc:StAnselm']],
   ['observance:ephrem-syrian:roman-catholic', ['2026-06-09', 'optional-memorial', 'MF', 'rc:StEphrem']],
   ['observance:peter-chrysologus:roman-catholic', ['2026-07-30', 'optional-memorial', 'MF', 'rc:StPeterChrysologus']],
-  ['observance:john-damascene:roman-catholic', ['2026-12-04', 'optional-memorial', 'MF', 'rc:StJohnDamascene']]
+  ['observance:john-damascene:roman-catholic', ['2026-12-04', 'optional-memorial', 'MF', 'rc:StJohnDamascene']],
+  ['observance:cosmas-damian:roman-catholic', ['2026-09-26', 'optional-memorial', 'MF', 'rc:StsCosmasDamian']]
 ]);
 const bridgeByOccurrence = new Map(first.legacyOccurrenceBridges.map((item) => [item.occurrenceId, item]));
 

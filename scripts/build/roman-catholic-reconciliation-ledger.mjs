@@ -389,7 +389,13 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         assert(!temporalLegacyIds.has(mapping.legacyObservanceId), `Duplicate temporal legacy identity ${mapping.legacyObservanceId}.`);
         assert(!temporalSourceIds.has(mapping.sourceOccurrenceId), `Duplicate temporal source occurrence ${mapping.sourceOccurrenceId}.`);
         assert(!temporalOccurrenceIds.has(mapping.occurrenceId), `Duplicate canonical temporal Occurrence ${mapping.occurrenceId}.`);
-        assert(!anchorsByDate.has(expectedDateISO) && !temporalByDate.has(expectedDateISO) && !familyByDate.has(expectedDateISO), `Multiple reviewed bindings exist on ${expectedDateISO}; precedence must be resolved first.`);
+        const fixedBindings = anchorsByDate.get(expectedDateISO) ?? [];
+        const preservesOptionalAlternatives = family.memberProfile === 'saturday'
+          && mapping.selectionMode === 'optional-alternative'
+          && mapping.obligatory === false
+          && fixedBindings.length > 0
+          && fixedBindings.every(item => item.anchor.rank === 'optional-memorial');
+        assert((fixedBindings.length === 0 || preservesOptionalAlternatives) && !temporalByDate.has(expectedDateISO) && !familyByDate.has(expectedDateISO), `Multiple reviewed bindings exist on ${expectedDateISO}; precedence must be resolved first.`);
         temporalLegacyIds.add(mapping.legacyObservanceId);
         temporalSourceIds.add(mapping.sourceOccurrenceId);
         temporalOccurrenceIds.add(mapping.occurrenceId);
@@ -479,6 +485,21 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         reason: 'no-reviewed-official-occurrence-to-perennial-rule-binding'
       };
     }
+    const fixedOptions = (fixed ?? []).map(item => ({
+      canonicalOccurrenceId: item.anchor.id,
+      canonicalObservanceId: item.anchor.observanceId,
+      perennialRuleId: item.rule.id,
+      liturgicalRank: item.anchor.rank,
+      authorityEvidence: item.anchor.evidence.map(evidence => evidence.url),
+      sourceBinding: {
+        releaseId: fixedSanctoraleShadow.sourceReleaseId,
+        legacyObservanceId: item.mapping.legacyObservanceId,
+        sourceOccurrenceId: item.mapping.sourceOccurrenceId,
+        sourceRecordHash: item.mapping.sourceRecordHash,
+        reviewStatus: item.mapping.reviewStatus,
+        resolution: item.mapping.resolution
+      }
+    }));
     if (temporal) return {
       dateISO,
       officialLabel: String(official.label).normalize('NFC').trim(),
@@ -500,35 +521,55 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
         sourceRecordHash: temporal.mapping.sourceRecordHash
       }
     };
-    if (familyMember) return {
-      dateISO,
-      officialLabel: String(official.label).normalize('NFC').trim(),
-      officialSource: OFFICIAL_SOURCE,
-      baselineReferenceEventId: day?.primary?.canonicalEventId ?? null,
-      classification: 'temporale',
-      temporalBindingType: 'rule-family-member',
-      sourceBound: true,
-      releaseEquivalent: true,
-      canonicalOccurrenceId: familyMember.mapping.occurrenceId,
-      canonicalObservanceId: familyMember.canonicalObservanceId,
-      perennialRuleId: familyMember.family.id,
-      temporalFamilyMember: {
-        week: familyMember.mapping.week,
-        weekday: familyMember.mapping.weekday,
-        selectionMode: familyMember.family.selectionMode ?? 'calendar-binding',
-        obligatory: familyMember.family.obligatory ?? null
-      },
-      liturgicalRank: familyMember.mapping.legacyRank,
-      authorityEvidence: familyMember.family.evidence.map(item => item.url),
-      sourceBinding: {
-        releaseId: temporalFamilyShadow.sourceReleaseId,
-        legacyObservanceId: familyMember.mapping.legacyObservanceId,
-        sourceOccurrenceId: familyMember.mapping.sourceOccurrenceId,
-        sourceRecordHash: familyMember.mapping.sourceRecordHash,
-        reviewStatus: familyMember.mapping.reviewStatus,
-        resolution: familyMember.mapping.resolution
-      }
-    };
+    if (familyMember) {
+      const temporalFamilyOption = {
+        canonicalOccurrenceId: familyMember.mapping.occurrenceId,
+        canonicalObservanceId: familyMember.canonicalObservanceId,
+        perennialRuleId: familyMember.family.id,
+        temporalFamilyMember: {
+          week: familyMember.mapping.week,
+          weekday: familyMember.mapping.weekday,
+          selectionMode: familyMember.family.selectionMode ?? 'calendar-binding',
+          obligatory: familyMember.family.obligatory ?? null
+        },
+        liturgicalRank: familyMember.mapping.legacyRank,
+        authorityEvidence: familyMember.family.evidence.map(item => item.url),
+        sourceBinding: {
+          releaseId: temporalFamilyShadow.sourceReleaseId,
+          legacyObservanceId: familyMember.mapping.legacyObservanceId,
+          sourceOccurrenceId: familyMember.mapping.sourceOccurrenceId,
+          sourceRecordHash: familyMember.mapping.sourceRecordHash,
+          reviewStatus: familyMember.mapping.reviewStatus,
+          resolution: familyMember.mapping.resolution
+        }
+      };
+      if (fixedOptions.length > 0) return {
+        dateISO,
+        officialLabel: String(official.label).normalize('NFC').trim(),
+        officialSource: OFFICIAL_SOURCE,
+        baselineReferenceEventId: day?.primary?.canonicalEventId ?? null,
+        classification: 'mixed-optional-alternatives',
+        sourceBound: true,
+        releaseEquivalent: true,
+        fixedOptions,
+        temporalFamilyOptions: [temporalFamilyOption],
+        optionalAlternatives: [
+          ...fixedOptions.map(option => ({ bindingType: 'fixed-sanctorale', ...option })),
+          { bindingType: 'temporal-rule-family-member', ...temporalFamilyOption }
+        ]
+      };
+      return {
+        dateISO,
+        officialLabel: String(official.label).normalize('NFC').trim(),
+        officialSource: OFFICIAL_SOURCE,
+        baselineReferenceEventId: day?.primary?.canonicalEventId ?? null,
+        classification: 'temporale',
+        temporalBindingType: 'rule-family-member',
+        sourceBound: true,
+        releaseEquivalent: true,
+        ...temporalFamilyOption
+      };
+    }
     if (movable) return {
       dateISO,
       officialLabel: String(official.label).normalize('NFC').trim(),
@@ -553,21 +594,6 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       },
       ...(movable.transfer ? { jurisdictionTransfer: movable.transfer } : {})
     };
-    const fixedOptions = fixed.map(item => ({
-      canonicalOccurrenceId: item.anchor.id,
-      canonicalObservanceId: item.anchor.observanceId,
-      perennialRuleId: item.rule.id,
-      liturgicalRank: item.anchor.rank,
-      authorityEvidence: item.anchor.evidence.map(evidence => evidence.url),
-      sourceBinding: {
-        releaseId: fixedSanctoraleShadow.sourceReleaseId,
-        legacyObservanceId: item.mapping.legacyObservanceId,
-        sourceOccurrenceId: item.mapping.sourceOccurrenceId,
-        sourceRecordHash: item.mapping.sourceRecordHash,
-        reviewStatus: item.mapping.reviewStatus,
-        resolution: item.mapping.resolution
-      }
-    }));
     const singleFixed = fixedOptions.length === 1 ? fixedOptions[0] : null;
     return {
       dateISO,
@@ -584,20 +610,24 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
 
   const counts = {
     officialOccurrences: entries.length,
-    temporale: entries.filter(item => item.classification === 'temporale').length,
+    temporale: entries.reduce((total, item) => total + Number(item.classification === 'temporale') + (item.temporalFamilyOptions?.length ?? 0), 0),
     temporalRules: entries.filter(item => item.classification === 'temporale' && item.temporalBindingType !== 'rule-family-member').length,
-    temporalFamilyMembers: entries.filter(item => item.temporalBindingType === 'rule-family-member').length,
+    temporalFamilyMembers: entries.reduce((total, item) => total + Number(item.temporalBindingType === 'rule-family-member') + (item.temporalFamilyOptions?.length ?? 0), 0),
     fixedSanctorale: entries.reduce((total, item) => total + (item.fixedOptions?.length ?? 0), 0),
-    fixedSanctoraleDays: entries.filter(item => item.classification === 'fixed-sanctorale').length,
+    fixedSanctoraleDays: entries.filter(item => (item.fixedOptions?.length ?? 0) > 0).length,
     movableOrTransfer: entries.filter(item => item.classification === 'movable-or-transfer').length,
     unresolved: entries.filter(item => item.classification === 'unresolved').length,
     sourceBound: entries.filter(item => item.sourceBound).length,
-    sourceBoundOccurrences: entries.reduce((total, item) => total + (item.sourceBound ? (item.fixedOptions?.length ?? 1) : 0), 0)
+    sourceBoundOccurrences: entries.reduce((total, item) => {
+      if (!item.sourceBound) return total;
+      const alternatives = (item.fixedOptions?.length ?? 0) + (item.temporalFamilyOptions?.length ?? 0);
+      return total + (alternatives || 1);
+    }, 0)
   };
   assert(counts.officialOccurrences === expectedDays, 'Ledger does not cover every official daily occurrence.');
   return {
     schemaVersion: 1,
-    ledgerModelVersion: '1.1',
+    ledgerModelVersion: '1.2',
     churchId: 'church:roman-catholic',
     jurisdictionId: 'jurisdiction:roman-catholic:pt',
     calendarSystem: 'gregorian',
@@ -612,6 +642,7 @@ export function buildReconciliationLedger(report, occurrenceDataset, ruleDataset
       temporalFamilyCandidateRequiresPrecedenceResolution: true,
       approvedTransferDecisionRequired: true,
       sameDateOptionalMemorialsRemainDistinct: true,
+      optionalSaturdayMarianAndFixedMemorialAlternativesRemainDistinct: true,
       unresolvedRemainsFailClosed: true
     },
     counts,

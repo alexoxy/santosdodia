@@ -2116,6 +2116,30 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-09-26:cosmas-damian:roman-catholic:pt",
+      "observanceId": "observance:cosmas-damian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-26",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-26",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Cosme e Damião, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

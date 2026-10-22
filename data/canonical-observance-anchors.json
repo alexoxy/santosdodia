@@ -2756,6 +2756,41 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "observance:cosmas-damian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "cosmas-cyrrhus",
+          "recognitionId": "recognition:cosmas-cyrrhus:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "damian-cyrrhus",
+          "recognitionId": "recognition:damian-cyrrhus:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/26/sts--cosmas-and-damian--martyrs.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
