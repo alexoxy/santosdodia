@@ -93,7 +93,7 @@
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.6",
-    "next": "15.5.28",
+    "next": "16.4.1",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
