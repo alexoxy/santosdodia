@@ -1014,6 +1014,50 @@
         "es": "San Cipriano de Cartago",
         "it": "San Cipriano di Cartagine"
       }
+    },
+    {
+      "id": "nereus-ardeatina",
+      "primaryObservanceId": "rc:StsNereusAchilleus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Nereus",
+        "pt": "São Nereu",
+        "es": "San Nereo",
+        "it": "San Nereo"
+      }
+    },
+    {
+      "id": "achilleus-ardeatina",
+      "primaryObservanceId": "rc:StsNereusAchilleus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Achilleus",
+        "pt": "Santo Aquileu",
+        "es": "San Aquileo",
+        "it": "Sant’Achilleo"
+      }
+    },
+    {
+      "id": "marcellinus-priest-rome",
+      "primaryObservanceId": "rc:StsMarcellinusPeter",
+      "category": "saint",
+      "names": {
+        "en": "Saint Marcellinus, Priest",
+        "pt": "São Marcelino, presbítero",
+        "es": "San Marcelino, presbítero",
+        "it": "San Marcellino, presbitero"
+      }
+    },
+    {
+      "id": "peter-exorcist-rome",
+      "primaryObservanceId": "rc:StsMarcellinusPeter",
+      "category": "saint",
+      "names": {
+        "en": "Saint Peter, Exorcist",
+        "pt": "São Pedro, exorcista",
+        "es": "San Pedro, exorcista",
+        "it": "San Pietro, esorcista"
+      }
     }
   ]
 }

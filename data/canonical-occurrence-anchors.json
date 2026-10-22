@@ -2020,6 +2020,42 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-05-12:nereus-achilleus:roman-catholic:pt",
+      "observanceId": "observance:nereus-achilleus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-12",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [{
+        "publisher": "Secretariado Nacional de Liturgia",
+        "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12",
+        "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+        "observedDesignation": "Santos Nereu e Aquileu, mártires – MF"
+      }],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-06-02:marcellinus-peter:roman-catholic:pt",
+      "observanceId": "observance:marcellinus-peter:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-02",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [{
+        "publisher": "Secretariado Nacional de Liturgia",
+        "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-2",
+        "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
+        "observedDesignation": "Santos Marcelino e Pedro, mártires – MF"
+      }],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }
