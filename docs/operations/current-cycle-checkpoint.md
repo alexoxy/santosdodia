@@ -29,6 +29,7 @@ PR [#384](https://github.com/alexoxy/santosdodia/pull/384) completed E07.04:
 - exercised season boundaries, precedence and optionality in repository tests;
 - advanced the shadow without treating suppressed candidates as coverage;
 - preserved `publicationAllowed: false`, zero remote-D1 writes and no deployment.
+- corrected the newly surfaced OpenNext support-policy failure by moving Next.js from 15.5.28 to Active LTS 16.4.1 and adopting the required TypeScript JSX settings.
 
 Validated head: `7b6e3a912a9a822bcdf86e067ba15c4c7a2c7167`.
 
@@ -70,7 +71,9 @@ PR #384 workflows on the exact validated head:
 - Product publish staging #100, run `39434366721`: success;
 - Wikidata retry quality #619, run `39434366825`: success.
 
-Local proof passed `npm run check`, `npm audit --audit-level=high` with zero vulnerabilities, the mandatory AdSense fail-closed checker and `npm run cloudflare:build`.
+Local proof passed `npm run check`, `npm audit --audit-level=high` with zero vulnerabilities, the mandatory AdSense fail-closed checker and `npm run cloudflare:build` on Next.js 16.4.1.
+
+Checkpoint PR #385 initially passed 62 Quality steps and then failed at the Cloudflare build because OpenNext refused the now-expired Next.js 15.5.28 support window. The repository was moved to Next.js 16.4.1, supported by current Next.js and OpenNext policy; the complete local pipeline then passed. The remote rerun on the corrected head remains the merge gate; no unsupported-version override was used.
 
 The fresh non-Trash Gmail search on 2026-10-22 for SantosDia failure, error and quota alerts returned zero messages. No email was moved or deleted.
 
@@ -97,6 +100,7 @@ The v19 plan, Markdown and receipt were fetched back from Dropbox and parsed suc
 - PR #384 was integrated only after all four workflows passed on the exact head and `main` still matched the expected base.
 - No implementation PR remains open. Issue #355 is the single live execution record and points to plan v19.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, media asset or second calendar path was introduced.
+- The Next.js upgrade is limited to `package.json`, `package-lock.json` and the required `tsconfig.json` JSX/type-path settings; it introduces no production mutation.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
 - The implementation commit and squash merge remain recoverable through Git history.
 
