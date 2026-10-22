@@ -1972,6 +1972,54 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-01-26:timothy-titus:roman-catholic:pt",
+      "observanceId": "observance:timothy-titus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-01-26",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-26",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Timóteo e Tito, bispos – MO"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-09-16:cornelius-cyprian:roman-catholic:pt",
+      "observanceId": "observance:cornelius-cyprian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-16",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-16",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Cornélio, papa, e Cipriano, bispo, mártires – MO"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }

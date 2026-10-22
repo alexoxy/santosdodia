@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-15.json",
+  "reviewDigestSha256": "f613a70489f4e145c687ab79d71cf9b51ae9a6aa6eab7281728013912f66d0af",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "timothy-ephesus",
+    "titus-crete",
+    "cornelius-pope",
+    "cyprian-carthage"
+  ],
+  "promotedObservanceIds": [
+    "observance:timothy-titus:roman-catholic",
+    "observance:cornelius-cyprian:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 282,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 107
+  },
+  "fixedSanctoraleMappingDigestSha256": "18b8f5631f454b85f261df8434729db8ceede5f10fff215c7c3fada3a5514fc2",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

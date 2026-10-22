@@ -414,6 +414,16 @@
       "occurrenceId": "occurrence:2026-05-27:augustine-canterbury:roman-catholic:pt",
       "legacyObservanceId": "rc:StAugustineCanterbury",
       "dateISO": "2026-05-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-26:timothy-titus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsTimothyTitus",
+      "dateISO": "2026-01-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-16:cornelius-cyprian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsCorneliusCyprian",
+      "dateISO": "2026-09-16"
     }
   ]
 }

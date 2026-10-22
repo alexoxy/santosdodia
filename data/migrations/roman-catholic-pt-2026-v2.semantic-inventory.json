@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 280,
-    "remainingOccurrences": 109,
+    "sourceBoundOccurrences": 282,
+    "remainingOccurrences": 107,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 12,
+    "fixed-collective": 10,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -93,13 +93,6 @@
       "dateISO": "2026-01-11",
       "canonicalEventId": "rc:BaptismLord",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-01-26-6b214544d1ff24d4e425c0c9",
-      "sourceRecordHash": "215c73d8bedd59c4d68df1e937c47d3b13208f6400efa4c9d3a4640a8ac77240",
-      "dateISO": "2026-01-26",
-      "canonicalEventId": "rc:StsTimothyTitus",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-02-02-a343789c470d6abc938bd6ab",
@@ -499,13 +492,6 @@
       "dateISO": "2026-09-15",
       "canonicalEventId": "rc:OurLadyOfSorrows",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-16-9365a27eaaca929058dcfa90",
-      "sourceRecordHash": "593c31447eab736c50ffc299ffc8000663c3046a9c9b4bcecd8cb4b96a2d439d",
-      "dateISO": "2026-09-16",
-      "canonicalEventId": "rc:StsCorneliusCyprian",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-17-5b3cd876d3c030e024f7172c",

@@ -24,7 +24,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-11.json', '48081e95d5d1e6c728741688d44889c7a29d39eeedfb4b51db5d4aace4df6d04'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-12.json', '744cdc97923d7ff5a5a6efe2121610639f8f49eec6ee33b07b0059f12a9a3e6d'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-13.json', '83f0dac3ab362ba6a75997c9c0705ebca2bf281cf8eda0e1c83c0ef22a636d93'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-14.json', 'f58959a164f60ec91c15d455e41fb082464935514d6d694368f5c4af4b06e412']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-14.json', 'f58959a164f60ec91c15d455e41fb082464935514d6d694368f5c4af4b06e412'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-15.json', 'f613a70489f4e145c687ab79d71cf9b51ae9a6aa6eab7281728013912f66d0af']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -102,7 +103,9 @@ for (const fileName of packFiles) {
     assert(receipt?.schemaVersion === 1 && receipt?.status === 'canonical-sanctorale-promotion-completed', `${receiptFile} identity is invalid.`);
     assert(receipt.reviewPack === fileName && receipt.reviewDigestSha256 === candidateDigest, `${receiptFile} is not bound to the exact reviewed pack.`);
     assert(receipt.sourceReleaseId === pack.sourceReleaseId && receipt.runtimePublicationAllowed === false && receipt.productionWriteAllowed === false, `${receiptFile} must remain publication-safe.`);
-    assert(Array.isArray(receipt.promotedPersonIds) && receipt.promotedPersonIds.length === pack.candidates.length, `${receiptFile} promoted Person count differs from its review pack.`);
+    const reviewedPersonIds = pack.candidates.flatMap((candidate) => (candidate.persons ?? [candidate.person]).map((person) => person.id));
+    assert(Array.isArray(receipt.promotedPersonIds) && receipt.promotedPersonIds.length === reviewedPersonIds.length, `${receiptFile} promoted Person count differs from its review pack.`);
+    assert(reviewedPersonIds.every((personId) => receipt.promotedPersonIds.includes(personId)), `${receiptFile} does not enumerate every reviewed Person.`);
   }
 
   const seenPersonIds = new Set();
@@ -117,56 +120,67 @@ for (const fileName of packFiles) {
     candidateCount += 1;
     const source = candidate.source;
     const rankProfile = rankProfiles[source.sourceRankCode];
-    const proposedOccurrenceId = `occurrence:${source.dateISO}:${candidate.person.id}:roman-catholic:pt`;
+    const candidatePeople = candidate.persons ?? [candidate.person];
+    const candidateRecognitions = candidate.recognitions ?? [candidate.recognition];
+    const occurrenceKey = candidate.occurrenceKey ?? candidate.person.id;
+    const proposedOccurrenceId = `occurrence:${source.dateISO}:${occurrenceKey}:roman-catholic:pt`;
+    const collective = candidatePeople.length > 1;
 
-    assert(candidate.person.primaryObservanceId === source.canonicalEventId && candidate.person.category === 'saint', `${candidate.person.id} must remain explicitly bridged to its approved legacy event.`);
-    assert(['en', 'pt', 'es', 'it'].every((locale) => typeof candidate.person.names?.[locale] === 'string' && candidate.person.names[locale].trim().length > 0), `${candidate.person.id} lacks required canonical names.`);
-    assert(candidate.recognition.id === `recognition:${candidate.person.id}:roman-catholic`, `${candidate.person.id} Recognition identity is invalid.`);
-    assert(Array.isArray(candidate.recognition.ecclesialTitles) && candidate.recognition.ecclesialTitles.length >= 2, `${candidate.person.id} Recognition lacks reviewed ecclesial titles.`);
-    assert(/^https:\/\/www\.vaticannews\.va\/en\/saints\//u.test(candidate.recognition.evidenceUrl), `${candidate.person.id} Recognition lacks Vatican News evidence.`);
-    assert(candidate.observanceId === `observance:${candidate.person.id}:roman-catholic`, `${candidate.person.id} Observance identity is invalid.`);
-    assert(candidate.sanctoraleRuleId === `sanctorale-rule:${candidate.person.id}:general-roman`, `${candidate.person.id} Sanctorale rule identity is invalid.`);
-    assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${candidate.person.id} reviewed rank refinement changed unexpectedly.`);
-    assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${candidate.person.id} lacks an exact 2026 date.`);
-    assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${candidate.person.id} source occurrence is not bound to its exact SNL date.`);
-    assert(/^[a-f0-9]{64}$/u.test(source.sourceRecordHash), `${candidate.person.id} source row hash is invalid.`);
-    assert(/^https:\/\/(?:www\.)?liturgia\.pt\/liturgiadiaria\/dia\.php\?data=2026-/u.test(source.snlUrl), `${candidate.person.id} lacks Secretariado Nacional de Liturgia evidence.`);
-    assert(source.sourceLabelPt.trim().length >= 5 && source.observedDesignation === `${source.sourceLabelPt} – ${source.sourceRankCode}`, `${candidate.person.id} Portugal designation/rank evidence is incomplete.`);
+    assert(candidatePeople.length === candidateRecognitions.length && candidatePeople.length > 0, `${occurrenceKey} Person/Recognition cardinality differs.`);
+    for (const person of candidatePeople) {
+      const recognition = candidateRecognitions.find((item) => item.personId === person.id) ?? (candidatePeople.length === 1 ? candidateRecognitions[0] : null);
+      assert(person.primaryObservanceId === source.canonicalEventId && person.category === 'saint', `${person.id} must remain explicitly bridged to its approved legacy event.`);
+      assert(['en', 'pt', 'es', 'it'].every((locale) => typeof person.names?.[locale] === 'string' && person.names[locale].trim().length > 0), `${person.id} lacks required canonical names.`);
+      assert(recognition?.id === `recognition:${person.id}:roman-catholic`, `${person.id} Recognition identity is invalid.`);
+      assert(Array.isArray(recognition.ecclesialTitles) && recognition.ecclesialTitles.length >= 2, `${person.id} Recognition lacks reviewed ecclesial titles.`);
+      assert(/^https:\/\/www\.vaticannews\.va\/en\/saints\//u.test(recognition.evidenceUrl), `${person.id} Recognition lacks Vatican News evidence.`);
+      assert(!seenPersonIds.has(person.id) && !seenRecognitionIds.has(recognition.id), `${person.id} duplicates an identity inside ${fileName}.`);
+      assert(!globalPackPersonIds.has(person.id) && !globalPackRecognitionIds.has(recognition.id), `${person.id} duplicates an identity across Sanctorale review packs.`);
+    }
+    assert(candidate.observanceId === `observance:${occurrenceKey}:roman-catholic`, `${occurrenceKey} Observance identity is invalid.`);
+    assert(candidate.sanctoraleRuleId === `sanctorale-rule:${occurrenceKey}:general-roman`, `${occurrenceKey} Sanctorale rule identity is invalid.`);
+    assert((collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its Person subjects.`);
+    assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${occurrenceKey} reviewed rank refinement changed unexpectedly.`);
+    assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${occurrenceKey} lacks an exact 2026 date.`);
+    assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${occurrenceKey} source occurrence is not bound to its exact SNL date.`);
+    assert(/^[a-f0-9]{64}$/u.test(source.sourceRecordHash), `${occurrenceKey} source row hash is invalid.`);
+    assert(/^https:\/\/(?:www\.)?liturgia\.pt\/liturgiadiaria\/dia\.php\?data=2026-/u.test(source.snlUrl), `${occurrenceKey} lacks Secretariado Nacional de Liturgia evidence.`);
+    assert(source.sourceLabelPt.trim().length >= 5 && source.observedDesignation === `${source.sourceLabelPt} – ${source.sourceRankCode}`, `${occurrenceKey} Portugal designation/rank evidence is incomplete.`);
 
-    assert(!seenPersonIds.has(candidate.person.id) && !seenRecognitionIds.has(candidate.recognition.id) && !seenObservanceIds.has(candidate.observanceId) && !seenRuleIds.has(candidate.sanctoraleRuleId), `${candidate.person.id} duplicates an identity inside ${fileName}.`);
-    assert(!seenLegacyIds.has(source.canonicalEventId) && !seenSourceIds.has(source.sourceOccurrenceId) && !seenSourceHashes.has(source.sourceRecordHash), `${candidate.person.id} duplicates a legacy/source identity inside ${fileName}.`);
-    assert(!globalPackPersonIds.has(candidate.person.id) && !globalPackRecognitionIds.has(candidate.recognition.id) && !globalPackObservanceIds.has(candidate.observanceId) && !globalPackRuleIds.has(candidate.sanctoraleRuleId), `${candidate.person.id} duplicates an identity across Sanctorale review packs.`);
-    assert(!globalPackLegacyIds.has(source.canonicalEventId) && !globalPackSourceIds.has(source.sourceOccurrenceId) && !globalPackSourceHashes.has(source.sourceRecordHash), `${candidate.person.id} duplicates a legacy/source identity across Sanctorale review packs.`);
+    assert(!seenObservanceIds.has(candidate.observanceId) && !seenRuleIds.has(candidate.sanctoraleRuleId), `${occurrenceKey} duplicates an Observance/rule identity inside ${fileName}.`);
+    assert(!seenLegacyIds.has(source.canonicalEventId) && !seenSourceIds.has(source.sourceOccurrenceId) && !seenSourceHashes.has(source.sourceRecordHash), `${occurrenceKey} duplicates a legacy/source identity inside ${fileName}.`);
+    assert(!globalPackObservanceIds.has(candidate.observanceId) && !globalPackRuleIds.has(candidate.sanctoraleRuleId), `${occurrenceKey} duplicates an Observance/rule identity across Sanctorale review packs.`);
+    assert(!globalPackLegacyIds.has(source.canonicalEventId) && !globalPackSourceIds.has(source.sourceOccurrenceId) && !globalPackSourceHashes.has(source.sourceRecordHash), `${occurrenceKey} duplicates a legacy/source identity across Sanctorale review packs.`);
 
     if (promoted) {
       const mapping = fixedByLegacyId.get(source.canonicalEventId);
-      assert(existingPersonIds.has(candidate.person.id), `${candidate.person.id} promotion receipt exists but canonical Person is missing.`);
-      assert(existingRecognitionIds.has(candidate.recognition.id), `${candidate.recognition.id} promotion receipt exists but canonical Recognition is missing.`);
+      for (const person of candidatePeople) assert(existingPersonIds.has(person.id), `${person.id} promotion receipt exists but canonical Person is missing.`);
+      for (const recognition of candidateRecognitions) assert(existingRecognitionIds.has(recognition.id), `${recognition.id} promotion receipt exists but canonical Recognition is missing.`);
       assert(existingObservanceIds.has(candidate.observanceId), `${candidate.observanceId} promotion receipt exists but canonical Observance is missing.`);
       assert(existingRuleIds.has(candidate.sanctoraleRuleId), `${candidate.sanctoraleRuleId} promotion receipt exists but Sanctorale rule is missing.`);
       assert(existingBridgeIds.has(source.canonicalEventId), `${source.canonicalEventId} promotion receipt exists but compatibility bridge is missing.`);
       assert(existingOccurrenceIds.has(proposedOccurrenceId), `${proposedOccurrenceId} promotion receipt exists but canonical Occurrence is missing.`);
-      assert(mapping?.sourceOccurrenceId === source.sourceOccurrenceId && mapping?.sourceRecordHash === source.sourceRecordHash && mapping?.expectedDateISO === source.dateISO, `${candidate.person.id} promoted fixed source binding differs from the reviewed pack.`);
-      assert(receipt.promotedPersonIds.includes(candidate.person.id), `${receiptFile} does not enumerate promoted Person ${candidate.person.id}.`);
+      assert(mapping?.sourceOccurrenceId === source.sourceOccurrenceId && mapping?.sourceRecordHash === source.sourceRecordHash && mapping?.expectedDateISO === source.dateISO, `${occurrenceKey} promoted fixed source binding differs from the reviewed pack.`);
+      for (const person of candidatePeople) assert(receipt.promotedPersonIds.includes(person.id), `${receiptFile} does not enumerate promoted Person ${person.id}.`);
     } else {
-      assert(!existingPersonIds.has(candidate.person.id), `${candidate.person.id} exists canonically before a promotion receipt.`);
-      assert(!existingRecognitionIds.has(candidate.recognition.id), `${candidate.recognition.id} exists canonically before a promotion receipt.`);
+      for (const person of candidatePeople) assert(!existingPersonIds.has(person.id), `${person.id} exists canonically before a promotion receipt.`);
+      for (const recognition of candidateRecognitions) assert(!existingRecognitionIds.has(recognition.id), `${recognition.id} exists canonically before a promotion receipt.`);
       assert(!existingObservanceIds.has(candidate.observanceId), `${candidate.observanceId} exists canonically before a promotion receipt.`);
       assert(!existingRuleIds.has(candidate.sanctoraleRuleId), `${candidate.sanctoraleRuleId} exists canonically before a promotion receipt.`);
       assert(!existingBridgeIds.has(source.canonicalEventId), `${source.canonicalEventId} has a canonical bridge before a promotion receipt.`);
       assert(!existingOccurrenceIds.has(proposedOccurrenceId), `${proposedOccurrenceId} exists canonically before a promotion receipt.`);
-      assert(!fixedBySourceId.has(source.sourceOccurrenceId) && !fixedBySourceHash.has(source.sourceRecordHash), `${candidate.person.id} reuses an already-covered fixed Sanctorale source row.`);
+      assert(!fixedBySourceId.has(source.sourceOccurrenceId) && !fixedBySourceHash.has(source.sourceRecordHash), `${occurrenceKey} reuses an already-covered fixed Sanctorale source row.`);
     }
 
-    seenPersonIds.add(candidate.person.id);
-    seenRecognitionIds.add(candidate.recognition.id);
+    for (const person of candidatePeople) seenPersonIds.add(person.id);
+    for (const recognition of candidateRecognitions) seenRecognitionIds.add(recognition.id);
     seenObservanceIds.add(candidate.observanceId);
     seenRuleIds.add(candidate.sanctoraleRuleId);
     seenLegacyIds.add(source.canonicalEventId);
     seenSourceIds.add(source.sourceOccurrenceId);
     seenSourceHashes.add(source.sourceRecordHash);
-    globalPackPersonIds.add(candidate.person.id);
-    globalPackRecognitionIds.add(candidate.recognition.id);
+    for (const person of candidatePeople) globalPackPersonIds.add(person.id);
+    for (const recognition of candidateRecognitions) globalPackRecognitionIds.add(recognition.id);
     globalPackObservanceIds.add(candidate.observanceId);
     globalPackRuleIds.add(candidate.sanctoraleRuleId);
     globalPackLegacyIds.add(source.canonicalEventId);
@@ -175,5 +189,5 @@ for (const fileName of packFiles) {
   }
 }
 
-assert(globalPackPersonIds.size === candidateCount && globalPackLegacyIds.size === candidateCount && globalPackSourceIds.size === candidateCount && globalPackSourceHashes.size === candidateCount, 'Cross-pack Sanctorale review uniqueness gate failed.');
+assert(globalPackPersonIds.size >= candidateCount && globalPackRecognitionIds.size === globalPackPersonIds.size && globalPackLegacyIds.size === candidateCount && globalPackSourceIds.size === candidateCount && globalPackSourceHashes.size === candidateCount, 'Cross-pack Sanctorale review uniqueness gate failed.');
 console.log(`Portugal v2 Sanctorale review packs passed: ${packFiles.length} pack(s), ${candidateCount} reviewed candidate(s), ${promotedPackCount} promoted pack(s); all authority-bound and publication-safe.`);

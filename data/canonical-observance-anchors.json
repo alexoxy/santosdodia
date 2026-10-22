@@ -2546,6 +2546,76 @@
         }
       ],
       "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "observance:timothy-titus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "timothy-ephesus",
+          "recognitionId": "recognition:timothy-ephesus:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "titus-crete",
+          "recognitionId": "recognition:titus-crete:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/01/26/sts--timothy-and-titus--bishops--disciples-of-st--paul.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "observance:cornelius-cyprian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "cornelius-pope",
+          "recognitionId": "recognition:cornelius-pope:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "cyprian-carthage",
+          "recognitionId": "recognition:cyprian-carthage:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/16/sts--cornelius--pope-and-cyprian--bishop--martyr.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }
