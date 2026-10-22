@@ -404,6 +404,16 @@
       "occurrenceId": "occurrence:2026-05-22:rita-cascia:roman-catholic:pt",
       "legacyObservanceId": "rc:StRitaCascia",
       "dateISO": "2026-05-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:pancras:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPancras",
+      "dateISO": "2026-05-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-27:augustine-canterbury:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineCanterbury",
+      "dateISO": "2026-05-27"
     }
   ]
 }

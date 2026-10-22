@@ -1136,6 +1136,34 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:pancras:roman-catholic:pt",
+      "observanceId": "observance:pancras:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pancras:general-roman",
+      "legacyObservanceId": "rc:StPancras",
+      "expectedDateISO": "2026-05-12",
+      "sourceOccurrenceId": "snl-pt-2026-05-12-55d07e2dc301ee6dea4aeafd",
+      "sourceRecordHash": "b28712f3accf37b6c691042da87c3bc9e6e1d95c6836f400dc582f33577ee747",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-27:augustine-canterbury:roman-catholic:pt",
+      "observanceId": "observance:augustine-canterbury:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:augustine-canterbury:general-roman",
+      "legacyObservanceId": "rc:StAugustineCanterbury",
+      "expectedDateISO": "2026-05-27",
+      "sourceOccurrenceId": "snl-pt-2026-05-27-a841e38d59756875460bb178",
+      "sourceRecordHash": "afff5a92dbc13a620cbf92f6e1c5735917e15e515a1187f552af8f4dc00fe638",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

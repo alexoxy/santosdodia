@@ -1924,6 +1924,54 @@
         }
       ],
       "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "occurrence:2026-05-12:pancras:roman-catholic:pt",
+      "observanceId": "observance:pancras:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-12",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pancrácio, mártir – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-05-27:augustine-canterbury:roman-catholic:pt",
+      "observanceId": "observance:augustine-canterbury:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-05-27",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-27",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Agostinho de Cantuária, bispo – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
     }
   ]
 }
