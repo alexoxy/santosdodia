@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 88, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 93, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 90, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 97, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -117,7 +117,9 @@ for (const [id, people] of [
   ['observance:timothy-titus:roman-catholic', ['timothy-ephesus', 'titus-crete']],
   ['observance:cornelius-cyprian:roman-catholic', ['cornelius-pope', 'cyprian-carthage']],
   ['observance:nereus-achilleus:roman-catholic', ['achilleus-ardeatina', 'nereus-ardeatina']],
-  ['observance:marcellinus-peter:roman-catholic', ['marcellinus-priest-rome', 'peter-exorcist-rome']]
+  ['observance:marcellinus-peter:roman-catholic', ['marcellinus-priest-rome', 'peter-exorcist-rome']],
+  ['observance:john-fisher-thomas-more:roman-catholic', ['john-fisher-rochester', 'thomas-more']],
+  ['observance:pontian-hippolytus:roman-catholic', ['hippolytus-priest-rome', 'pontian-pope']]
 ]) {
   const item = first.observances.find((observance) => observance.observanceId === id);
   assert(item?.observanceKey === 'principal-commemoration', `${id} stable Observance key changed.`);

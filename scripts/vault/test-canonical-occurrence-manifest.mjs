@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 86, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 86, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 88, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 88, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -81,6 +81,8 @@ const expected = new Map([
   ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StPancras']],
   ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StsNereusAchilleus']],
   ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 'MF', 'rc:StsMarcellinusPeter']],
+  ['observance:john-fisher-thomas-more:roman-catholic', ['2026-06-22', 'optional-memorial', 'MF', 'rc:StsJohnFisherThomasMore']],
+  ['observance:pontian-hippolytus:roman-catholic', ['2026-08-13', 'optional-memorial', 'MF', 'rc:StsPontianHippolytus']],
   ['observance:augustine-canterbury:roman-catholic', ['2026-05-27', 'optional-memorial', 'MF', 'rc:StAugustineCanterbury']],
   ['observance:mary-mother-of-god:roman-catholic', ['2026-01-01', 'solemnity', 'SOLENIDADE', 'rc:MaryMotherOfGod']],
   ['observance:thomas-aquinas:roman-catholic', ['2026-01-28', 'obligatory-memorial', 'MO', 'rc:StThomasAquinas']],

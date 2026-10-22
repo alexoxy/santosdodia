@@ -2031,12 +2031,18 @@
       "dateISO": "2026-05-12",
       "rank": "optional-memorial",
       "sourceRankCode": "MF",
-      "evidence": [{
-        "publisher": "Secretariado Nacional de Liturgia",
-        "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12",
-        "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
-        "observedDesignation": "Santos Nereu e Aquileu, mártires – MF"
-      }],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Nereu e Aquileu, mártires – MF"
+        }
+      ],
       "verifiedAt": "2026-10-22"
     },
     {
@@ -2049,12 +2055,66 @@
       "dateISO": "2026-06-02",
       "rank": "optional-memorial",
       "sourceRankCode": "MF",
-      "evidence": [{
-        "publisher": "Secretariado Nacional de Liturgia",
-        "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-2",
-        "claimTypes": ["annual-date", "jurisdictional-observance", "liturgical-rank"],
-        "observedDesignation": "Santos Marcelino e Pedro, mártires – MF"
-      }],
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-2",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Marcelino e Pedro, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-06-22:john-fisher-thomas-more:roman-catholic:pt",
+      "observanceId": "observance:john-fisher-thomas-more:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-22",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-22",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos João Fisher, bispo e Tomás More, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-22"
+    },
+    {
+      "id": "occurrence:2026-08-13:pontian-hippolytus:roman-catholic:pt",
+      "observanceId": "observance:pontian-hippolytus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-13",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-13",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Ponciano, papa, e Hipólito, presbítero, mártires – MF"
+        }
+      ],
       "verifiedAt": "2026-10-22"
     }
   ]

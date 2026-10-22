@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-17.json",
+  "reviewDigestSha256": "a0bb30f211716adebf34291153ad7a84156047794884efe34409193d70fb8f17",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-fisher-rochester",
+    "thomas-more",
+    "pontian-pope",
+    "hippolytus-priest-rome"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-fisher-thomas-more:roman-catholic",
+    "observance:pontian-hippolytus:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 286,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 103
+  },
+  "fixedSanctoraleMappingDigestSha256": "c92f84a23156c41debe50f845db3e911d1ff47ee5b4dcef643f21c82d746e6c0",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}
