@@ -46,7 +46,7 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.3', 'Observance model must support reviewed subjectless collective and non-human identities v1.3.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 96, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.observanceCount === 97, 'Reviewed Observance count changed and requires explicit review.');
 assert(first.manifest.personCoverageCount === 149, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
@@ -83,6 +83,8 @@ const john = first.observances.find((item) => item.observanceId === 'observance:
 assert(john?.observanceKey === 'nativity' && john.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a keyed person-subject feast Observance.');
 const joseph = first.observances.find((item) => item.observanceId === 'observance:saint-joseph:roman-catholic');
 assert(joseph?.observanceKey === 'principal-commemoration' && joseph.observanceType === 'person-commemoration' && joseph.subjects.length === 1 && joseph.subjects[0].personId === 'saint-joseph', 'Saint Joseph must have one Church-scoped canonical Observance without carrying annual date or rank.');
+const josephWorker = first.observances.find((item) => item.observanceId === 'observance:saint-joseph-worker:roman-catholic');
+assert(josephWorker?.observanceKey === 'worker-commemoration' && josephWorker.observanceType === 'person-commemoration' && josephWorker.subjects.length === 1 && josephWorker.subjects[0].personId === 'saint-joseph' && josephWorker.subjects[0].recognitionId === joseph.subjects[0].recognitionId, 'Saint Joseph the Worker must be a second Observance reusing the existing Saint Joseph Person/Recognition pair.');
 const benedict = first.observances.find((item) => item.observanceId === 'observance:benedict-nursia:roman-catholic');
 assert(benedict?.observanceKey === 'principal-commemoration' && benedict.observanceType === 'person-commemoration' && benedict.subjects.length === 1 && benedict.subjects[0].personId === 'benedict-nursia', 'Saint Benedict must have one Church-scoped canonical Observance without carrying annual date or European rank.');
 const bridget = first.observances.find((item) => item.observanceId === 'observance:bridget-sweden:roman-catholic');

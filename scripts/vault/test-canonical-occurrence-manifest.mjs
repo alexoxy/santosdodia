@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 94, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 94, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 95, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 95, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -87,6 +87,7 @@ const expected = new Map([
   ['observance:mary-mother-of-god:roman-catholic', ['2026-01-01', 'solemnity', 'SOLENIDADE', 'rc:MaryMotherOfGod']],
   ['observance:thomas-aquinas:roman-catholic', ['2026-01-28', 'obligatory-memorial', 'MO', 'rc:StThomasAquinas']],
   ['observance:saint-joseph:roman-catholic', ['2026-03-19', 'solemnity', 'SOLENIDADE', 'rc:StJoseph']],
+  ['observance:saint-joseph-worker:roman-catholic', ['2026-05-01', 'optional-memorial', 'MF', 'rc:StJosephWorker']],
   ['observance:mark-evangelist:roman-catholic', ['2026-04-25', 'feast', 'FESTA', 'rc:StMarkEvangelist']],
   ['observance:catherine-siena:roman-catholic', ['2026-04-29', 'feast', 'FESTA', 'rc:StCatherineSiena']],
   ['observance:john-baptist-nativity:roman-catholic', ['2026-06-24', 'solemnity', 'SOLENIDADE', 'rc:NativityJohnBaptist']],

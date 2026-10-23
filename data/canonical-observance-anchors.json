@@ -3188,6 +3188,46 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:saint-joseph-worker:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "worker-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "saint-joseph",
+          "recognitionId": "recognition:saint-joseph:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-1",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/apost_exhortations/documents/hf_jp-ii_exh_15081989_redemptoris-custos.html",
+          "claimTypes": [
+            "same-person-identity",
+            "worker-title",
+            "observance-attestation",
+            "fixed-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

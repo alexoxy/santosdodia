@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "saint-joseph-worker",
+      "persons": [],
+      "recognitions": [],
+      "reusedSubjects": [
+        {
+          "personId": "saint-joseph",
+          "recognitionId": "recognition:saint-joseph:roman-catholic"
+        }
+      ],
+      "identityReuseEvidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/apost_exhortations/documents/hf_jp-ii_exh_15081989_redemptoris-custos.html",
+          "claimTypes": [
+            "same-person-identity",
+            "worker-title",
+            "observance-attestation",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-1",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "jurisdictional-rank"
+          ]
+        }
+      ],
+      "observanceId": "observance:saint-joseph-worker:roman-catholic",
+      "observanceType": "person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:saint-joseph-worker:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJosephWorker",
+        "dateISO": "2026-05-01",
+        "sourceOccurrenceId": "snl-pt-2026-05-01-e450b1fa86cdbfd5db500b7f",
+        "sourceRecordHash": "4b912b26b113b93003dd291cfab548842219fa947a91236b554b49f322009b0c",
+        "sourceLabelPt": "S. José Operário",
+        "observedDesignation": "S. José Operário – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-1"
+      }
+    }
+  ],
+  "reviewDigestSha256": "68a2322a1e1ed9a9f27e319edd3501304597847adaf0ffe4ae8aae06a5ba33c7",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

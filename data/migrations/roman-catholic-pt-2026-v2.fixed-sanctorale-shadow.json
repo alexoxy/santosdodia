@@ -1332,6 +1332,20 @@
       "sourceRankCode": "FESTA",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-01:saint-joseph-worker:roman-catholic:pt",
+      "observanceId": "observance:saint-joseph-worker:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:saint-joseph-worker:general-roman",
+      "legacyObservanceId": "rc:StJosephWorker",
+      "expectedDateISO": "2026-05-01",
+      "sourceOccurrenceId": "snl-pt-2026-05-01-e450b1fa86cdbfd5db500b7f",
+      "sourceRecordHash": "4b912b26b113b93003dd291cfab548842219fa947a91236b554b49f322009b0c",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

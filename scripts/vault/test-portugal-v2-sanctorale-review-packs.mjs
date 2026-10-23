@@ -33,7 +33,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-20.json', 'ee256b35ed2fb388a9b606d75d17ea51a69a7c01e3fb2782718a7e01dc0fc127'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-21.json', '0b440d6cdf85da74bd55ebed54952330e97d08096efa1f12bd6e63422d469f4e'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-22.json', '41d15abc19c8899398838a59a15fed36016541b448aea55a2dd79cab89d38e87'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-23.json', '4d2d7e8e36179974b139f5d5be336b601b31f5a3a77512cf7031e9c8534ba9f7']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-23.json', '4d2d7e8e36179974b139f5d5be336b601b31f5a3a77512cf7031e9c8534ba9f7'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-24.json', '68a2322a1e1ed9a9f27e319edd3501304597847adaf0ffe4ae8aae06a5ba33c7']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -131,6 +132,7 @@ for (const fileName of packFiles) {
     const rankProfile = rankProfiles[source.sourceRankCode];
     const candidatePeople = candidate.persons ?? (candidate.person ? [candidate.person] : []);
     const candidateRecognitions = candidate.recognitions ?? (candidate.recognition ? [candidate.recognition] : []);
+    const reusedSubjects = candidate.reusedSubjects ?? [];
     const occurrenceKey = candidate.occurrenceKey ?? candidate.person?.id;
     const proposedOccurrenceId = `occurrence:${source.dateISO}:${occurrenceKey}:roman-catholic:pt`;
     const collective = candidatePeople.length > 1;
@@ -140,9 +142,16 @@ for (const fileName of packFiles) {
 
     assert(candidatePeople.length === candidateRecognitions.length, `${occurrenceKey} Person/Recognition cardinality differs.`);
     assert(!(subjectlessCollective && subjectlessNonHuman), `${occurrenceKey} cannot be both collective-human and non-human subjectless.`);
-    assert(subjectless ? candidatePeople.length === 0 : candidatePeople.length > 0, subjectless
+    assert(subjectless ? candidatePeople.length === 0 && reusedSubjects.length === 0 : candidatePeople.length + reusedSubjects.length > 0, subjectless
       ? `${occurrenceKey} subjectless Observance must not create Person/Recognition records.`
       : `${occurrenceKey} requires at least one Person/Recognition pair.`);
+    for (const subject of reusedSubjects) {
+      assert(existingPersonIds.has(subject.personId) && existingRecognitionIds.has(subject.recognitionId), `${occurrenceKey} reuses a missing canonical Person/Recognition pair.`);
+      assert(subject.recognitionId === `recognition:${subject.personId}:roman-catholic`, `${occurrenceKey} reused Recognition identity is invalid.`);
+      assert(Array.isArray(candidate.identityReuseEvidence) && candidate.identityReuseEvidence.length >= 2, `${occurrenceKey} requires competent evidence before canonical identity reuse.`);
+      assert(candidate.identityReuseEvidence.some((item) => /^https:\/\/(?:www\.)?vatican\.va\//u.test(item.url) && item.claimTypes?.includes('same-person-identity')), `${occurrenceKey} lacks direct Holy See evidence for same-person reuse.`);
+      assert(candidate.identityReuseEvidence.some((item) => /^https:\/\/(?:www\.)?liturgia\.pt\//u.test(item.url) && item.claimTypes?.includes('observance-attestation')), `${occurrenceKey} lacks exact Portugal observance evidence for identity reuse.`);
+    }
     if (subjectlessCollective) {
       assert(candidate.observanceType === 'collective-commemoration', `${occurrenceKey} subjectless collective must use the dedicated Observance type.`);
       assert(candidate.anonymousPersonsCreated === false, `${occurrenceKey} must explicitly prohibit anonymous Person creation.`);
@@ -190,6 +199,7 @@ for (const fileName of packFiles) {
       const mapping = fixedByLegacyId.get(source.canonicalEventId);
       for (const person of candidatePeople) assert(existingPersonIds.has(person.id), `${person.id} promotion receipt exists but canonical Person is missing.`);
       for (const recognition of candidateRecognitions) assert(existingRecognitionIds.has(recognition.id), `${recognition.id} promotion receipt exists but canonical Recognition is missing.`);
+      for (const subject of reusedSubjects) assert(receipt.reusedPersonIds?.includes(subject.personId), `${receiptFile} does not enumerate reused Person ${subject.personId}.`);
       assert(existingObservanceIds.has(candidate.observanceId), `${candidate.observanceId} promotion receipt exists but canonical Observance is missing.`);
       assert(existingRuleIds.has(candidate.sanctoraleRuleId), `${candidate.sanctoraleRuleId} promotion receipt exists but Sanctorale rule is missing.`);
       assert(existingBridgeIds.has(source.canonicalEventId), `${source.canonicalEventId} promotion receipt exists but compatibility bridge is missing.`);

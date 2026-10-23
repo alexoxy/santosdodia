@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-24.json",
+  "reviewDigestSha256": "68a2322a1e1ed9a9f27e319edd3501304597847adaf0ffe4ae8aae06a5ba33c7",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [],
+  "reusedPersonIds": [
+    "saint-joseph"
+  ],
+  "promotedObservanceIds": [
+    "observance:saint-joseph-worker:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 293,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 96
+  },
+  "fixedSanctoraleMappingDigestSha256": "b0423a1bb8e46a873ad41f1b767b57708ecd1d3b1e96886c1d9cd3bb569725b0",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}
