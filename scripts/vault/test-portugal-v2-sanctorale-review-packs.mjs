@@ -31,7 +31,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-18.json', '8c19cab7fbab2da8cc83f94b06c8ea357982736c8bc310eca199a2ac71918fda'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-19.json', '7c7af2cb7ab9cfac086869dfc6c43496130d6a98a0d409e27a2940689d241158'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-20.json', 'ee256b35ed2fb388a9b606d75d17ea51a69a7c01e3fb2782718a7e01dc0fc127'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-21.json', '0b440d6cdf85da74bd55ebed54952330e97d08096efa1f12bd6e63422d469f4e']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-21.json', '0b440d6cdf85da74bd55ebed54952330e97d08096efa1f12bd6e63422d469f4e'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-22.json', '41d15abc19c8899398838a59a15fed36016541b448aea55a2dd79cab89d38e87']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -109,7 +110,7 @@ for (const fileName of packFiles) {
     assert(receipt?.schemaVersion === 1 && receipt?.status === 'canonical-sanctorale-promotion-completed', `${receiptFile} identity is invalid.`);
     assert(receipt.reviewPack === fileName && receipt.reviewDigestSha256 === candidateDigest, `${receiptFile} is not bound to the exact reviewed pack.`);
     assert(receipt.sourceReleaseId === pack.sourceReleaseId && receipt.runtimePublicationAllowed === false && receipt.productionWriteAllowed === false, `${receiptFile} must remain publication-safe.`);
-    const reviewedPersonIds = pack.candidates.flatMap((candidate) => (candidate.persons ?? [candidate.person]).map((person) => person.id));
+    const reviewedPersonIds = pack.candidates.flatMap((candidate) => (candidate.persons ?? (candidate.person ? [candidate.person] : [])).map((person) => person.id));
     assert(Array.isArray(receipt.promotedPersonIds) && receipt.promotedPersonIds.length === reviewedPersonIds.length, `${receiptFile} promoted Person count differs from its review pack.`);
     assert(reviewedPersonIds.every((personId) => receipt.promotedPersonIds.includes(personId)), `${receiptFile} does not enumerate every reviewed Person.`);
   }
@@ -126,13 +127,25 @@ for (const fileName of packFiles) {
     candidateCount += 1;
     const source = candidate.source;
     const rankProfile = rankProfiles[source.sourceRankCode];
-    const candidatePeople = candidate.persons ?? [candidate.person];
-    const candidateRecognitions = candidate.recognitions ?? [candidate.recognition];
-    const occurrenceKey = candidate.occurrenceKey ?? candidate.person.id;
+    const candidatePeople = candidate.persons ?? (candidate.person ? [candidate.person] : []);
+    const candidateRecognitions = candidate.recognitions ?? (candidate.recognition ? [candidate.recognition] : []);
+    const occurrenceKey = candidate.occurrenceKey ?? candidate.person?.id;
     const proposedOccurrenceId = `occurrence:${source.dateISO}:${occurrenceKey}:roman-catholic:pt`;
     const collective = candidatePeople.length > 1;
+    const subjectlessCollective = candidate.subjectlessCollective === true;
 
-    assert(candidatePeople.length === candidateRecognitions.length && candidatePeople.length > 0, `${occurrenceKey} Person/Recognition cardinality differs.`);
+    assert(candidatePeople.length === candidateRecognitions.length, `${occurrenceKey} Person/Recognition cardinality differs.`);
+    assert(subjectlessCollective ? candidatePeople.length === 0 : candidatePeople.length > 0, subjectlessCollective
+      ? `${occurrenceKey} subjectless collective must not create Person/Recognition records.`
+      : `${occurrenceKey} requires at least one Person/Recognition pair.`);
+    if (subjectlessCollective) {
+      assert(candidate.observanceType === 'collective-commemoration', `${occurrenceKey} subjectless collective must use the dedicated Observance type.`);
+      assert(candidate.anonymousPersonsCreated === false, `${occurrenceKey} must explicitly prohibit anonymous Person creation.`);
+      assert(['en', 'pt'].every((locale) => typeof candidate.collectiveLabels?.[locale] === 'string' && candidate.collectiveLabels[locale].trim().length > 0), `${occurrenceKey} lacks reviewed collective labels.`);
+      assert(Array.isArray(candidate.collectiveEvidence) && candidate.collectiveEvidence.length >= 2, `${occurrenceKey} requires independent competent-authority collective evidence.`);
+      assert(candidate.collectiveEvidence.every((item) => item.claimTypes?.includes('collective-commemoration') && item.claimTypes?.includes('observance-attestation')), `${occurrenceKey} evidence does not attest the collective Observance.`);
+      assert(candidate.collectiveEvidence.some((item) => /^https:\/\/(?:www\.)?vatican\.va\//u.test(item.url)), `${occurrenceKey} lacks direct Holy See evidence.`);
+    }
     for (const person of candidatePeople) {
       const recognition = candidateRecognitions.find((item) => item.personId === person.id) ?? (candidatePeople.length === 1 ? candidateRecognitions[0] : null);
       assert(person.primaryObservanceId === source.canonicalEventId && person.category === 'saint', `${person.id} must remain explicitly bridged to its approved legacy event.`);
@@ -145,7 +158,7 @@ for (const fileName of packFiles) {
     }
     assert(candidate.observanceId === `observance:${occurrenceKey}:roman-catholic`, `${occurrenceKey} Observance identity is invalid.`);
     assert(candidate.sanctoraleRuleId === `sanctorale-rule:${occurrenceKey}:general-roman`, `${occurrenceKey} Sanctorale rule identity is invalid.`);
-    assert((collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its Person subjects.`);
+    assert(subjectlessCollective || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its Person subjects.`);
     assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${occurrenceKey} reviewed rank refinement changed unexpectedly.`);
     assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${occurrenceKey} lacks an exact 2026 date.`);
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${occurrenceKey} source occurrence is not bound to its exact SNL date.`);
@@ -195,5 +208,5 @@ for (const fileName of packFiles) {
   }
 }
 
-assert(globalPackPersonIds.size >= candidateCount && globalPackRecognitionIds.size === globalPackPersonIds.size && globalPackLegacyIds.size === candidateCount && globalPackSourceIds.size === candidateCount && globalPackSourceHashes.size === candidateCount, 'Cross-pack Sanctorale review uniqueness gate failed.');
+assert(globalPackRecognitionIds.size === globalPackPersonIds.size && globalPackLegacyIds.size === candidateCount && globalPackSourceIds.size === candidateCount && globalPackSourceHashes.size === candidateCount, 'Cross-pack Sanctorale review uniqueness gate failed.');
 console.log(`Portugal v2 Sanctorale review packs passed: ${packFiles.length} pack(s), ${candidateCount} reviewed candidate(s), ${promotedPackCount} promoted pack(s); all authority-bound and publication-safe.`);

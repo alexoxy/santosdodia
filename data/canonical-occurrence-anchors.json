@@ -2212,6 +2212,30 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "occurrence:2026-06-30:first-martyrs-rome:roman-catholic:pt",
+      "observanceId": "observance:first-martyrs-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-30",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-30",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Primeiros Santos Mártires da Igreja de Roma – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

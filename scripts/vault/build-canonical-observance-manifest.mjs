@@ -13,7 +13,7 @@ const ecclesialSourcePath = path.join(root, 'data', 'canonical-ecclesial-context
 const ID_PATTERN = /^observance:[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)+$/u;
 const CHURCH_ID_PATTERN = /^church:[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const OBSERVANCE_KEY_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
-const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'feast', 'mystery', 'marian-title', 'marian-solemnity', 'other']);
+const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'collective-commemoration', 'feast', 'mystery', 'marian-title', 'marian-solemnity', 'other']);
 const ALLOWED_SCOPES = new Set(['church-attested', 'jurisdictional', 'local', 'unknown']);
 const FORBIDDEN_OCCURRENCE_KEYS = new Set(['year', 'month', 'day', 'date', 'dateISO', 'feastDate', 'calendarSystem', 'calendarId', 'jurisdictionId', 'rank', 'grade', 'precedence', 'transferRule']);
 
@@ -47,7 +47,7 @@ function assertNoOccurrenceLeak(record) {
 
 export function buildCanonicalObservanceVaultRelease(dataset, personDataset, recognitionDataset, ecclesialDataset, { sourceBytes = null, sourceCommit = null, generatedAt = null } = {}) {
   assert(dataset?.schemaVersion === 1, 'Canonical observance dataset schemaVersion must be 1.');
-  assert(dataset?.observanceModelVersion === '1.1', 'Canonical observance modelVersion must be 1.1.');
+  assert(dataset?.observanceModelVersion === '1.2', 'Canonical observance modelVersion must be 1.2.');
   assert(dataset?.status === 'repository-reviewed-observance-anchors', 'Canonical observance dataset is not repository-reviewed.');
   assert(Array.isArray(dataset?.observances) && dataset.observances.length > 0, 'Canonical observance dataset is empty.');
   assert(personDataset?.schemaVersion === 1 && Array.isArray(personDataset?.people), 'Canonical Person dataset is required for Observance validation.');
@@ -79,7 +79,11 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
     assert(/^\d{4}-\d{2}-\d{2}$/u.test(raw?.verifiedAt ?? ''), `${raw.id} has invalid verifiedAt.`);
     assertNoOccurrenceLeak(raw);
 
-    assert(Array.isArray(raw.subjects) && raw.subjects.length > 0, `${raw.id} requires at least one subject.`);
+    assert(Array.isArray(raw.subjects), `${raw.id} subjects must be an array.`);
+    const subjectlessCollective = raw.observanceType === 'collective-commemoration';
+    assert(subjectlessCollective ? raw.subjects.length === 0 : raw.subjects.length > 0, subjectlessCollective
+      ? `${raw.id} collective-commemoration must not fabricate Person subjects.`
+      : `${raw.id} requires at least one subject.`);
     const subjects = raw.subjects.map((subject, index) => {
       assert(subject?.kind === 'person', `${raw.id} subject ${index} uses unsupported kind ${String(subject?.kind)} in bootstrap.`);
       assert(people.has(subject?.personId), `${raw.id} subject ${index} references unknown Person ${String(subject?.personId)}.`);
@@ -180,7 +184,9 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       canonicalChurchReferenceRequired: true,
       recognitionMustMatchObservanceChurch: true,
       evidenceMustMatchChurchAuthorityDomain: true,
-      multiSubjectReady: true
+      multiSubjectReady: true,
+      subjectlessCollectiveObservanceSupported: true,
+      subjectlessCollectiveMustNotCreatePersons: true
     },
     d1Projection: {
       status: 'deferred',

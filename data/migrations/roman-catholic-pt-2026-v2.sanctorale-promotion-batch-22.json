@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-22.json",
+  "reviewDigestSha256": "41d15abc19c8899398838a59a15fed36016541b448aea55a2dd79cab89d38e87",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [],
+  "promotedObservanceIds": [
+    "observance:first-martyrs-rome:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 291,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 98
+  },
+  "fixedSanctoraleMappingDigestSha256": "60beaae2e52ecf30f283384bbecabb0a646f3ff40ad7722ec0a309a8c267c352",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}
