@@ -489,6 +489,11 @@
       "occurrenceId": "occurrence:2026-05-29:paul-vi:roman-catholic:pt",
       "legacyObservanceId": "rc:StPaulVI",
       "dateISO": "2026-05-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-06:norbert-xanten:roman-catholic:pt",
+      "legacyObservanceId": "rc:StNorbert",
+      "dateISO": "2026-06-06"
     }
   ]
 }

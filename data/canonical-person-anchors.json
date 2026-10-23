@@ -1960,6 +1960,17 @@
         "es": "San Pablo VI",
         "it": "San Paolo VI"
       }
+    },
+    {
+      "id": "norbert-xanten",
+      "primaryObservanceId": "rc:StNorbert",
+      "category": "saint",
+      "names": {
+        "en": "Saint Norbert of Xanten",
+        "pt": "São Norberto de Xanten",
+        "es": "San Norberto de Xanten",
+        "it": "San Norberto di Xanten"
+      }
     }
   ]
 }

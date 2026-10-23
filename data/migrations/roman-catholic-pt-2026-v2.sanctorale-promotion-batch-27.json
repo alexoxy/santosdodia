@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-27.json",
+  "reviewDigestSha256": "21c8f47963106fccfac81f7acf332ed4db84ebb47475970695c994a5b3d54abc",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "norbert-xanten"
+  ],
+  "promotedObservanceIds": [
+    "observance:norbert-xanten:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 296,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 93
+  },
+  "fixedSanctoraleMappingDigestSha256": "70bddfba26a460e4027ab053e10fee47b348a7e21512202ddfec69675c8a8ab4",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

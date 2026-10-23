@@ -2332,6 +2332,31 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "occurrence:2026-06-06:norbert-xanten:roman-catholic:pt",
+      "observanceId": "observance:norbert-xanten:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-06",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-6",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-day-optional-alternative"
+          ],
+          "observedDesignation": "S. Norberto, bispo – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
