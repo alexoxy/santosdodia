@@ -1949,6 +1949,17 @@
         "es": "San Tranquilino Ubiarco, sacerdote",
         "it": "San Tranquilino Ubiarco, sacerdote"
       }
+    },
+    {
+      "id": "paul-vi",
+      "primaryObservanceId": "rc:StPaulVI",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paul VI",
+        "pt": "São Paulo VI",
+        "es": "San Pablo VI",
+        "it": "San Paolo VI"
+      }
     }
   ]
 }

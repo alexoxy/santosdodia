@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 294,
-    "remainingOccurrences": 95,
+    "sourceBoundOccurrences": 295,
+    "remainingOccurrences": 94,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 48,
+    "fixed-person": 47,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -176,13 +176,6 @@
       "dateISO": "2026-05-25",
       "canonicalEventId": "rc:MaryMotherChurch",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-05-29-e652faff241dcbb42c218e9b",
-      "sourceRecordHash": "2fa2f86a10be0ff9a15c8415ed33eef28690dc803a46850d88bd6b8618980238",
-      "dateISO": "2026-05-29",
-      "canonicalEventId": "rc:StPaulVI",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-06-03-7b32e4efae7a9f52e5c2e488",

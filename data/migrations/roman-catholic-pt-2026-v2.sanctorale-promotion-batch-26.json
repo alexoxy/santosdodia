@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-26.json",
+  "reviewDigestSha256": "74f27c141117f8bde14b8ebdefe8c0db27bcd0039612aacdc3bd6a9101e8728f",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "paul-vi"
+  ],
+  "promotedObservanceIds": [
+    "observance:paul-vi:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 295,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 94
+  },
+  "fixedSanctoraleMappingDigestSha256": "6e6cbeb068b800336c445ace6938e4396ab59acad2658be54a66b5950d2bda04",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

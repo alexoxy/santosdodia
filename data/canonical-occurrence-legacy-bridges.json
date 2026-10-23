@@ -484,6 +484,11 @@
       "occurrenceId": "occurrence:2026-05-21:christopher-magallanes-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StChristopherMagallanes",
       "dateISO": "2026-05-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-29:paul-vi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulVI",
+      "dateISO": "2026-05-29"
     }
   ]
 }

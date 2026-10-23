@@ -1360,6 +1360,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-29:paul-vi:roman-catholic:pt",
+      "observanceId": "observance:paul-vi:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paul-vi:general-roman",
+      "legacyObservanceId": "rc:StPaulVI",
+      "expectedDateISO": "2026-05-29",
+      "sourceOccurrenceId": "snl-pt-2026-05-29-e652faff241dcbb42c218e9b",
+      "sourceRecordHash": "2fa2f86a10be0ff9a15c8415ed33eef28690dc803a46850d88bd6b8618980238",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

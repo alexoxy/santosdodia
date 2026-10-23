@@ -4917,6 +4917,34 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:paul-vi:roman-catholic",
+      "personId": "paul-vi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "bishop"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20190125_decreto-celebrazione-paolovi_en.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "bishop"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
