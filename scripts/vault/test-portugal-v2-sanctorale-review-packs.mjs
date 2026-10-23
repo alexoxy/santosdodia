@@ -32,7 +32,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-19.json', '7c7af2cb7ab9cfac086869dfc6c43496130d6a98a0d409e27a2940689d241158'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-20.json', 'ee256b35ed2fb388a9b606d75d17ea51a69a7c01e3fb2782718a7e01dc0fc127'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-21.json', '0b440d6cdf85da74bd55ebed54952330e97d08096efa1f12bd6e63422d469f4e'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-22.json', '41d15abc19c8899398838a59a15fed36016541b448aea55a2dd79cab89d38e87']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-22.json', '41d15abc19c8899398838a59a15fed36016541b448aea55a2dd79cab89d38e87'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-23.json', '4d2d7e8e36179974b139f5d5be336b601b31f5a3a77512cf7031e9c8534ba9f7']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -69,7 +70,8 @@ const globalPackSourceHashes = new Set();
 
 const rankProfiles = {
   MO: { legacyRank: 'memorial', canonicalRank: 'obligatory-memorial' },
-  MF: { legacyRank: 'optional-memorial', canonicalRank: 'optional-memorial' }
+  MF: { legacyRank: 'optional-memorial', canonicalRank: 'optional-memorial' },
+  FESTA: { legacyRank: 'feast', canonicalRank: 'feast' }
 };
 
 let candidateCount = 0;
@@ -133,10 +135,13 @@ for (const fileName of packFiles) {
     const proposedOccurrenceId = `occurrence:${source.dateISO}:${occurrenceKey}:roman-catholic:pt`;
     const collective = candidatePeople.length > 1;
     const subjectlessCollective = candidate.subjectlessCollective === true;
+    const subjectlessNonHuman = candidate.subjectlessNonHuman === true;
+    const subjectless = subjectlessCollective || subjectlessNonHuman;
 
     assert(candidatePeople.length === candidateRecognitions.length, `${occurrenceKey} Person/Recognition cardinality differs.`);
-    assert(subjectlessCollective ? candidatePeople.length === 0 : candidatePeople.length > 0, subjectlessCollective
-      ? `${occurrenceKey} subjectless collective must not create Person/Recognition records.`
+    assert(!(subjectlessCollective && subjectlessNonHuman), `${occurrenceKey} cannot be both collective-human and non-human subjectless.`);
+    assert(subjectless ? candidatePeople.length === 0 : candidatePeople.length > 0, subjectless
+      ? `${occurrenceKey} subjectless Observance must not create Person/Recognition records.`
       : `${occurrenceKey} requires at least one Person/Recognition pair.`);
     if (subjectlessCollective) {
       assert(candidate.observanceType === 'collective-commemoration', `${occurrenceKey} subjectless collective must use the dedicated Observance type.`);
@@ -145,6 +150,16 @@ for (const fileName of packFiles) {
       assert(Array.isArray(candidate.collectiveEvidence) && candidate.collectiveEvidence.length >= 2, `${occurrenceKey} requires independent competent-authority collective evidence.`);
       assert(candidate.collectiveEvidence.every((item) => item.claimTypes?.includes('collective-commemoration') && item.claimTypes?.includes('observance-attestation')), `${occurrenceKey} evidence does not attest the collective Observance.`);
       assert(candidate.collectiveEvidence.some((item) => /^https:\/\/(?:www\.)?vatican\.va\//u.test(item.url)), `${occurrenceKey} lacks direct Holy See evidence.`);
+    }
+    if (subjectlessNonHuman) {
+      assert(candidate.observanceType === 'angelic-commemoration', `${occurrenceKey} non-human Observance must use the dedicated angelic type.`);
+      assert(candidate.personRecordsCreated === false, `${occurrenceKey} must explicitly prohibit Person/Recognition coercion.`);
+      assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(candidate.subjectlessKey ?? ''), `${occurrenceKey} lacks a stable subjectlessKey.`);
+      assert(candidate.nonHumanKind === 'archangels', `${occurrenceKey} non-human kind changed unexpectedly.`);
+      assert(['en', 'pt'].every((locale) => typeof candidate.nonHumanLabels?.[locale] === 'string' && candidate.nonHumanLabels[locale].trim().length > 0), `${occurrenceKey} lacks reviewed non-human labels.`);
+      assert(Array.isArray(candidate.nonHumanEvidence) && candidate.nonHumanEvidence.length >= 2, `${occurrenceKey} requires competent-authority non-human evidence.`);
+      assert(candidate.nonHumanEvidence.every((item) => item.claimTypes?.includes('non-human-subjects') && item.claimTypes?.includes('observance-attestation')), `${occurrenceKey} evidence does not attest the non-human Observance.`);
+      assert(candidate.nonHumanEvidence.some((item) => /^https:\/\/(?:www\.)?vatican\.va\//u.test(item.url)), `${occurrenceKey} lacks direct Holy See non-human evidence.`);
     }
     for (const person of candidatePeople) {
       const recognition = candidateRecognitions.find((item) => item.personId === person.id) ?? (candidatePeople.length === 1 ? candidateRecognitions[0] : null);
@@ -158,7 +173,7 @@ for (const fileName of packFiles) {
     }
     assert(candidate.observanceId === `observance:${occurrenceKey}:roman-catholic`, `${occurrenceKey} Observance identity is invalid.`);
     assert(candidate.sanctoraleRuleId === `sanctorale-rule:${occurrenceKey}:general-roman`, `${occurrenceKey} Sanctorale rule identity is invalid.`);
-    assert(subjectlessCollective || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its Person subjects.`);
+    assert(subjectless || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its subjects.`);
     assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${occurrenceKey} reviewed rank refinement changed unexpectedly.`);
     assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${occurrenceKey} lacks an exact 2026 date.`);
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${occurrenceKey} source occurrence is not bound to its exact SNL date.`);

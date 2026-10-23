@@ -1318,6 +1318,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-29:michael-gabriel-raphael-archangels:roman-catholic:pt",
+      "observanceId": "observance:michael-gabriel-raphael-archangels:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:michael-gabriel-raphael-archangels:general-roman",
+      "legacyObservanceId": "rc:StsArchangels",
+      "expectedDateISO": "2026-09-29",
+      "sourceOccurrenceId": "snl-pt-2026-09-29-eeedb73a306378199c4af52f",
+      "sourceRecordHash": "1aadec918fdd300b76451ce18ed62a6472a51c5c4f51eeb6bb87f696a2767d11",
+      "legacyRank": "feast",
+      "canonicalRank": "feast",
+      "sourceRankCode": "FESTA",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

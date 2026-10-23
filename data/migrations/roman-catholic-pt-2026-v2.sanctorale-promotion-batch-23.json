@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-23.json",
+  "reviewDigestSha256": "4d2d7e8e36179974b139f5d5be336b601b31f5a3a77512cf7031e9c8534ba9f7",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [],
+  "promotedObservanceIds": [
+    "observance:michael-gabriel-raphael-archangels:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 292,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 97
+  },
+  "fixedSanctoraleMappingDigestSha256": "81e5305eeaf3edc9d488c233a45cac936061f49b0403a60502b2a4c02225b0aa",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

@@ -2236,6 +2236,30 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "occurrence:2026-09-29:michael-gabriel-raphael-archangels:roman-catholic:pt",
+      "observanceId": "observance:michael-gabriel-raphael-archangels:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-29",
+      "rank": "feast",
+      "sourceRankCode": "FESTA",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-29",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Miguel, Gabriel e Rafael, Arcanjos – FESTA"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
