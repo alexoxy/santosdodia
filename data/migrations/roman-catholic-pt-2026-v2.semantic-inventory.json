@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 289,
-    "remainingOccurrences": 100,
+    "sourceBoundOccurrences": 290,
+    "remainingOccurrences": 99,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 3,
+    "fixed-collective": 2,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -107,13 +107,6 @@
       "dateISO": "2026-02-04",
       "canonicalEventId": "rc:OrdWeekday4Wednesday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-02-06-41faa5246971dcf6eac5b67e",
-      "sourceRecordHash": "58f88f8b5c178b0e517619c87611a910c29b6dcb03aa4b124bf8572c4d291664",
-      "dateISO": "2026-02-06",
-      "canonicalEventId": "rc:StsPaulMiki",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-02-07-2a9293a5d084c74416c63b3d",

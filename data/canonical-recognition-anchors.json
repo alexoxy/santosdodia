@@ -3489,6 +3489,734 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:paul-miki:roman-catholic",
+      "personId": "paul-miki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:john-soan-goto:roman-catholic",
+      "personId": "john-soan-goto",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:james-kisai:roman-catholic",
+      "personId": "james-kisai",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:peter-baptist-blasquez:roman-catholic",
+      "personId": "peter-baptist-blasquez",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:martin-ascension-aguirre:roman-catholic",
+      "personId": "martin-ascension-aguirre",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:francis-blanco:roman-catholic",
+      "personId": "francis-blanco",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:philip-jesus-las-casas:roman-catholic",
+      "personId": "philip-jesus-las-casas",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:gonsalo-garcia:roman-catholic",
+      "personId": "gonsalo-garcia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:francis-saint-michael-parilla:roman-catholic",
+      "personId": "francis-saint-michael-parilla",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:leo-karasuma:roman-catholic",
+      "personId": "leo-karasuma",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:peter-sukejiro:roman-catholic",
+      "personId": "peter-sukejiro",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:cosmas-takeya:roman-catholic",
+      "personId": "cosmas-takeya",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:paul-ibaraki:roman-catholic",
+      "personId": "paul-ibaraki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:thomas-dangi:roman-catholic",
+      "personId": "thomas-dangi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:paul-suzuki:roman-catholic",
+      "personId": "paul-suzuki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:louis-ibaraki:roman-catholic",
+      "personId": "louis-ibaraki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:anthony-japan-martyr:roman-catholic",
+      "personId": "anthony-japan-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:michael-kozaki:roman-catholic",
+      "personId": "michael-kozaki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:thomas-kozaki:roman-catholic",
+      "personId": "thomas-kozaki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:bonaventure-japan-martyr:roman-catholic",
+      "personId": "bonaventure-japan-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:gabriel-japan-martyr:roman-catholic",
+      "personId": "gabriel-japan-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:john-kinuya:roman-catholic",
+      "personId": "john-kinuya",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:matthias-japan-martyr:roman-catholic",
+      "personId": "matthias-japan-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:francis-meako:roman-catholic",
+      "personId": "francis-meako",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:joachim-sakakibara:roman-catholic",
+      "personId": "joachim-sakakibara",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:francis-adaucto:roman-catholic",
+      "personId": "francis-adaucto",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

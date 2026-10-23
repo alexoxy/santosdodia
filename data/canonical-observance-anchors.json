@@ -2963,6 +2963,162 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:paul-miki-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "paul-miki",
+          "recognitionId": "recognition:paul-miki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "john-soan-goto",
+          "recognitionId": "recognition:john-soan-goto:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "james-kisai",
+          "recognitionId": "recognition:james-kisai:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "peter-baptist-blasquez",
+          "recognitionId": "recognition:peter-baptist-blasquez:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "martin-ascension-aguirre",
+          "recognitionId": "recognition:martin-ascension-aguirre:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "francis-blanco",
+          "recognitionId": "recognition:francis-blanco:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "philip-jesus-las-casas",
+          "recognitionId": "recognition:philip-jesus-las-casas:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "gonsalo-garcia",
+          "recognitionId": "recognition:gonsalo-garcia:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "francis-saint-michael-parilla",
+          "recognitionId": "recognition:francis-saint-michael-parilla:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "leo-karasuma",
+          "recognitionId": "recognition:leo-karasuma:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "peter-sukejiro",
+          "recognitionId": "recognition:peter-sukejiro:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "cosmas-takeya",
+          "recognitionId": "recognition:cosmas-takeya:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "paul-ibaraki",
+          "recognitionId": "recognition:paul-ibaraki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "thomas-dangi",
+          "recognitionId": "recognition:thomas-dangi:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "paul-suzuki",
+          "recognitionId": "recognition:paul-suzuki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "louis-ibaraki",
+          "recognitionId": "recognition:louis-ibaraki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "anthony-japan-martyr",
+          "recognitionId": "recognition:anthony-japan-martyr:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "michael-kozaki",
+          "recognitionId": "recognition:michael-kozaki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "thomas-kozaki",
+          "recognitionId": "recognition:thomas-kozaki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "bonaventure-japan-martyr",
+          "recognitionId": "recognition:bonaventure-japan-martyr:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "gabriel-japan-martyr",
+          "recognitionId": "recognition:gabriel-japan-martyr:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "john-kinuya",
+          "recognitionId": "recognition:john-kinuya:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "matthias-japan-martyr",
+          "recognitionId": "recognition:matthias-japan-martyr:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "francis-meako",
+          "recognitionId": "recognition:francis-meako:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "joachim-sakakibara",
+          "recognitionId": "recognition:joachim-sakakibara:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "francis-adaucto",
+          "recognitionId": "recognition:francis-adaucto:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-6",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

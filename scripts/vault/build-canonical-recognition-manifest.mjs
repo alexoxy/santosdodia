@@ -15,7 +15,7 @@ const JURISDICTION_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const ALLOWED_RECOGNIZED_AS = new Set(['saint', 'blessed', 'venerable', 'servant-of-god', 'commemorated-person', 'other']);
 const ALLOWED_BASES = new Set(['official-church-attestation', 'formal-recognition-event', 'traditional-liturgical-attestation']);
 const ALLOWED_SCOPES = new Set(['church-wide', 'jurisdictional', 'local', 'unknown']);
-const OFFICIAL_PUBLISHERS = new Set(['Holy See', 'Vatican News', 'Orthodox Church in America', 'Patriarchate of Lisbon']);
+const OFFICIAL_PUBLISHERS = new Set(['Holy See', 'Vatican News', 'Orthodox Church in America', 'Patriarchate of Lisbon', 'Secretariado Nacional de Liturgia']);
 const FORBIDDEN_RECOGNITION_KEYS = new Set(['month', 'day', 'date', 'dateISO', 'feastDate', 'calendarSystem', 'rank', 'precedence']);
 
 function argument(name, fallback = null) {

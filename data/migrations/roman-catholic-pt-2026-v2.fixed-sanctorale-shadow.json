@@ -1290,6 +1290,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-06:paul-miki-companions:roman-catholic:pt",
+      "observanceId": "observance:paul-miki-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paul-miki-companions:general-roman",
+      "legacyObservanceId": "rc:StsPaulMiki",
+      "expectedDateISO": "2026-02-06",
+      "sourceOccurrenceId": "snl-pt-2026-02-06-41faa5246971dcf6eac5b67e",
+      "sourceRecordHash": "58f88f8b5c178b0e517619c87611a910c29b6dcb03aa4b124bf8572c4d291664",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
