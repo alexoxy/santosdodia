@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observanceModelVersion": "1.2",
+  "observanceModelVersion": "1.3",
   "status": "repository-reviewed-observance-anchors",
   "observances": [
     {
@@ -3126,6 +3126,7 @@
       "observanceKey": "principal-commemoration",
       "observanceType": "collective-commemoration",
       "subjects": [],
+      "subjectlessKey": "first-martyrs-rome",
       "scope": "church-attested",
       "occurrenceDateImplied": false,
       "calendarSystemImplied": false,
@@ -3148,6 +3149,41 @@
           "claimTypes": [
             "observance-attestation",
             "collective-commemoration"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:michael-gabriel-raphael-archangels:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "angelic-commemoration",
+      "subjects": [],
+      "subjectlessKey": "michael-gabriel-raphael",
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-29",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "non-human-subjects"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/homilies/2007/documents/hf_ben-xvi_hom_20070929_episc-ordinations.html",
+          "claimTypes": [
+            "observance-attestation",
+            "named-archangels",
+            "non-human-subjects"
           ]
         }
       ],

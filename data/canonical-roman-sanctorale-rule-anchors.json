@@ -2439,6 +2439,32 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "sanctorale-rule:michael-gabriel-raphael-archangels:general-roman",
+      "observanceId": "observance:michael-gabriel-raphael-archangels:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 29
+      },
+      "liturgicalRank": "feast",
+      "precedenceClass": "general-marian-or-saint-feast",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-29",
+          "claimTypes": [
+            "fixed-date",
+            "feast",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

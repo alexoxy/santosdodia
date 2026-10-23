@@ -469,6 +469,11 @@
       "occurrenceId": "occurrence:2026-06-30:first-martyrs-rome:roman-catholic:pt",
       "legacyObservanceId": "rc:FirstMartyrsRome",
       "dateISO": "2026-06-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-29:michael-gabriel-raphael-archangels:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsArchangels",
+      "dateISO": "2026-09-29"
     }
   ]
 }
