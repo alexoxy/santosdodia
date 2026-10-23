@@ -1388,6 +1388,292 @@
         "es": "San Lorenzo Ruiz, laico",
         "it": "San Lorenzo Ruiz, laico"
       }
+    },
+    {
+      "id": "paul-miki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paul Miki, Religious",
+        "pt": "São Paulo Miki, religioso",
+        "es": "San Pablo Miki, religioso",
+        "it": "San Paolo Miki, religioso"
+      }
+    },
+    {
+      "id": "john-soan-goto",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Soan de Goto, Religious",
+        "pt": "São João de Goto Soan, religioso",
+        "es": "San Juan Soan de Goto, religioso",
+        "it": "San Giovanni Soan de Goto, religioso"
+      }
+    },
+    {
+      "id": "james-kisai",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint James Kisai, Religious",
+        "pt": "São Tiago Kisai, religioso",
+        "es": "Santiago Kisai, religioso",
+        "it": "San Giacomo Kisai, religioso"
+      }
+    },
+    {
+      "id": "peter-baptist-blasquez",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Peter Baptist Blásquez, Priest",
+        "pt": "São Pedro Baptista Blásquez, presbítero",
+        "es": "San Pedro Bautista Blásquez, sacerdote",
+        "it": "San Pietro Battista Blásquez, sacerdote"
+      }
+    },
+    {
+      "id": "martin-ascension-aguirre",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Martin of the Ascension Aguirre, Priest",
+        "pt": "São Martinho da Ascensão Aguirre, presbítero",
+        "es": "San Martín de la Ascensión Aguirre, sacerdote",
+        "it": "San Martino dell’Ascensione Aguirre, sacerdote"
+      }
+    },
+    {
+      "id": "francis-blanco",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis Blanco, Priest",
+        "pt": "São Francisco Blanco, presbítero",
+        "es": "San Francisco Blanco, sacerdote",
+        "it": "San Francesco Blanco, sacerdote"
+      }
+    },
+    {
+      "id": "philip-jesus-las-casas",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Philip of Jesus de las Casas, Religious",
+        "pt": "São Filipe de Jesus de las Casas, religioso",
+        "es": "San Felipe de Jesús de las Casas, religioso",
+        "it": "San Filippo di Gesù de las Casas, religioso"
+      }
+    },
+    {
+      "id": "gonsalo-garcia",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Gonsalo Garcia, Religious",
+        "pt": "São Gonçalo Garcia, religioso",
+        "es": "San Gonzalo García, religioso",
+        "it": "San Gonzalo Garcia, religioso"
+      }
+    },
+    {
+      "id": "francis-saint-michael-parilla",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis of Saint Michael de la Parilla, Religious",
+        "pt": "São Francisco de São Miguel de la Parilla, religioso",
+        "es": "San Francisco de San Miguel de la Parilla, religioso",
+        "it": "San Francesco di San Michele de la Parilla, religioso"
+      }
+    },
+    {
+      "id": "leo-karasuma",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Leo Karasuma, Catechist",
+        "pt": "São Leão Karasuma, catequista",
+        "es": "San León Karasuma, catequista",
+        "it": "San Leone Karasuma, catechista"
+      }
+    },
+    {
+      "id": "peter-sukejiro",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Peter Sukejiro, Catechist",
+        "pt": "São Pedro Sukejiro, catequista",
+        "es": "San Pedro Sukejiro, catequista",
+        "it": "San Pietro Sukejiro, catechista"
+      }
+    },
+    {
+      "id": "cosmas-takeya",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cosmas Takeya, Catechist",
+        "pt": "São Cosme Takeya, catequista",
+        "es": "San Cosme Takeya, catequista",
+        "it": "San Cosma Takeya, catechista"
+      }
+    },
+    {
+      "id": "paul-ibaraki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paul Ibaraki, Catechist",
+        "pt": "São Paulo Ibaraki, catequista",
+        "es": "San Pablo Ibaraki, catequista",
+        "it": "San Paolo Ibaraki, catechista"
+      }
+    },
+    {
+      "id": "thomas-dangi",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Thomas Dangi, Catechist",
+        "pt": "São Tomé Dangi, catequista",
+        "es": "Santo Tomás Dangi, catequista",
+        "it": "San Tommaso Dangi, catechista"
+      }
+    },
+    {
+      "id": "paul-suzuki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paul Suzuki, Catechist",
+        "pt": "São Paulo Suzuki, catequista",
+        "es": "San Pablo Suzuki, catequista",
+        "it": "San Paolo Suzuki, catechista"
+      }
+    },
+    {
+      "id": "louis-ibaraki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Louis Ibaraki, Neophyte",
+        "pt": "São Luís Ibaraki, neófito",
+        "es": "San Luis Ibaraki, neófito",
+        "it": "San Luigi Ibaraki, neofita"
+      }
+    },
+    {
+      "id": "anthony-japan-martyr",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Anthony, Neophyte",
+        "pt": "Santo António, neófito",
+        "es": "San Antonio, neófito",
+        "it": "Sant’Antonio, neofita"
+      }
+    },
+    {
+      "id": "michael-kozaki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Michael Kozaki, Neophyte",
+        "pt": "São Miguel Kozaki, neófito",
+        "es": "San Miguel Kozaki, neófito",
+        "it": "San Michele Kozaki, neofita"
+      }
+    },
+    {
+      "id": "thomas-kozaki",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Thomas Kozaki, Neophyte",
+        "pt": "São Tomé Kozaki, neófito",
+        "es": "Santo Tomás Kozaki, neófito",
+        "it": "San Tommaso Kozaki, neofita"
+      }
+    },
+    {
+      "id": "bonaventure-japan-martyr",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Bonaventure, Neophyte",
+        "pt": "São Boaventura, neófito",
+        "es": "San Buenaventura, neófito",
+        "it": "San Bonaventura, neofita"
+      }
+    },
+    {
+      "id": "gabriel-japan-martyr",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Gabriel, Neophyte",
+        "pt": "São Gabriel, neófito",
+        "es": "San Gabriel, neófito",
+        "it": "San Gabriele, neofita"
+      }
+    },
+    {
+      "id": "john-kinuya",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Kinuya, Neophyte",
+        "pt": "São João Kinuya, neófito",
+        "es": "San Juan Kinuya, neófito",
+        "it": "San Giovanni Kinuya, neofita"
+      }
+    },
+    {
+      "id": "matthias-japan-martyr",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Matthias, Neophyte",
+        "pt": "São Matias, neófito",
+        "es": "San Matías, neófito",
+        "it": "San Mattia, neofita"
+      }
+    },
+    {
+      "id": "francis-meako",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis of Meako, Neophyte",
+        "pt": "São Francisco de Meako, neófito",
+        "es": "San Francisco de Meako, neófito",
+        "it": "San Francesco di Meako, neofita"
+      }
+    },
+    {
+      "id": "joachim-sakakibara",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Joachim Sakakibara, Neophyte",
+        "pt": "São Joaquim Sakakibara, neófito",
+        "es": "San Joaquín Sakakibara, neófito",
+        "it": "San Gioacchino Sakakibara, neofita"
+      }
+    },
+    {
+      "id": "francis-adaucto",
+      "primaryObservanceId": "rc:StsPaulMiki",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francis Adaucto, Neophyte",
+        "pt": "São Francisco Adaucto, neófito",
+        "es": "San Francisco Adaucto, neófito",
+        "it": "San Francesco Adaucto, neofita"
+      }
     }
   ]
 }

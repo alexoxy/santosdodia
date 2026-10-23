@@ -10,7 +10,7 @@
       "family": "catholic",
       "traditionKey": "roman-catholic",
       "canonicalUrl": "https://www.vatican.va/",
-      "authorityDomains": ["causesanti.va", "patriarcado-lisboa.pt", "vatican.va", "vaticannews.va"],
+      "authorityDomains": ["causesanti.va", "liturgia.pt", "patriarcado-lisboa.pt", "vatican.va", "vaticannews.va"],
       "calendarSystems": ["gregorian"],
       "sourceEvidence": [
         {

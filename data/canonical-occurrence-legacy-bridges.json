@@ -459,6 +459,11 @@
       "occurrenceId": "occurrence:2026-09-28:lawrence-ruiz-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StsLawrenceRuiz",
       "dateISO": "2026-09-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-06:paul-miki-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPaulMiki",
+      "dateISO": "2026-02-06"
     }
   ]
 }
