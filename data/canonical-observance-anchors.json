@@ -2791,6 +2791,72 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:john-brebeuf-isaac-jogues-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "john-brebeuf",
+          "recognitionId": "recognition:john-brebeuf:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "isaac-jogues",
+          "recognitionId": "recognition:isaac-jogues:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "gabriel-lalemant",
+          "recognitionId": "recognition:gabriel-lalemant:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "antoine-daniel",
+          "recognitionId": "recognition:antoine-daniel:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "charles-garnier",
+          "recognitionId": "recognition:charles-garnier:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "noel-chabanel",
+          "recognitionId": "recognition:noel-chabanel:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "rene-goupil",
+          "recognitionId": "recognition:rene-goupil:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "jean-de-la-lande",
+          "recognitionId": "recognition:jean-de-la-lande:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

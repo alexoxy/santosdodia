@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 91, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 99, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 92, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 107, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -128,6 +128,12 @@ for (const [id, people] of [
   assert(JSON.stringify(item.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(people), `${id} Person subjects changed.`);
   assert(new Set(item.subjects.map((subject) => subject.recognitionId)).size === 2, `${id} must bind two distinct Recognitions.`);
 }
+
+const canadianMartyrs = first.observances.find((item) => item.observanceId === 'observance:john-brebeuf-isaac-jogues-companions:roman-catholic');
+const canadianMartyrIds = ['antoine-daniel', 'charles-garnier', 'gabriel-lalemant', 'isaac-jogues', 'jean-de-la-lande', 'john-brebeuf', 'noel-chabanel', 'rene-goupil'];
+assert(canadianMartyrs?.observanceType === 'multi-person-commemoration' && canadianMartyrs.subjects.length === 8, 'Canadian Martyrs must remain one Observance with eight distinct Person subjects.');
+assert(JSON.stringify(canadianMartyrs.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(canadianMartyrIds), 'Canadian Martyrs Person subjects changed.');
+assert(new Set(canadianMartyrs.subjects.map((subject) => subject.recognitionId)).size === 8, 'Canadian Martyrs must bind eight distinct Recognitions.');
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);

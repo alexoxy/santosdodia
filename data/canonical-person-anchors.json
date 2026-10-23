@@ -1124,6 +1124,94 @@
         "es": "San Damián",
         "it": "San Damiano"
       }
+    },
+    {
+      "id": "john-brebeuf",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint John de Brébeuf, Priest",
+        "pt": "São João de Brébeuf, presbítero",
+        "es": "San Juan de Brébeuf, presbítero",
+        "it": "San Giovanni de Brébeuf, presbitero"
+      }
+    },
+    {
+      "id": "isaac-jogues",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Isaac Jogues, Priest",
+        "pt": "Santo Isaac Jogues, presbítero",
+        "es": "San Isaac Jogues, presbítero",
+        "it": "Sant’Isacco Jogues, presbitero"
+      }
+    },
+    {
+      "id": "gabriel-lalemant",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Gabriel Lalemant, Priest",
+        "pt": "São Gabriel Lalemant, presbítero",
+        "es": "San Gabriel Lalemant, presbítero",
+        "it": "San Gabriele Lalemant, presbitero"
+      }
+    },
+    {
+      "id": "antoine-daniel",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Antoine Daniel, Priest",
+        "pt": "Santo António Daniel, presbítero",
+        "es": "San Antonio Daniel, presbítero",
+        "it": "Sant’Antonio Daniel, presbitero"
+      }
+    },
+    {
+      "id": "charles-garnier",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Charles Garnier, Priest",
+        "pt": "São Carlos Garnier, presbítero",
+        "es": "San Carlos Garnier, presbítero",
+        "it": "San Carlo Garnier, presbitero"
+      }
+    },
+    {
+      "id": "noel-chabanel",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Noël Chabanel, Priest",
+        "pt": "São Noël Chabanel, presbítero",
+        "es": "San Noël Chabanel, presbítero",
+        "it": "San Noël Chabanel, presbitero"
+      }
+    },
+    {
+      "id": "rene-goupil",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint René Goupil, Jesuit Lay Brother",
+        "pt": "São René Goupil, irmão jesuíta",
+        "es": "San René Goupil, hermano jesuita",
+        "it": "San René Goupil, fratello gesuita"
+      }
+    },
+    {
+      "id": "jean-de-la-lande",
+      "primaryObservanceId": "rc:StsJeanBrebeuf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Jean de la Lande, Lay Missionary",
+        "pt": "São João de la Lande, missionário leigo",
+        "es": "San Juan de la Lande, misionero laico",
+        "it": "San Giovanni de la Lande, missionario laico"
+      }
     }
   ]
 }
