@@ -4945,6 +4945,34 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:norbert-xanten:roman-catholic",
+      "personId": "norbert-xanten",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "religious-founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/06/st--norbert--bishop--of-magdeburg--founder-of-the-regular-canoni.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop",
+            "religious-founder"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

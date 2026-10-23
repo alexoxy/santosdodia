@@ -1374,6 +1374,21 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-06:norbert-xanten:roman-catholic:pt",
+      "observanceId": "observance:norbert-xanten:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:norbert-xanten:general-roman",
+      "legacyObservanceId": "rc:StNorbert",
+      "expectedDateISO": "2026-06-06",
+      "sourceOccurrenceId": "snl-pt-2026-06-06-f69e7c4527cc7521b56c808a",
+      "sourceRecordHash": "23dc7b28aed1fddf1f1c6a76831b5394b181bff8a56fbcaa67e3739b41266dc1",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding",
+      "sameDaySaturdayMarianOptionPreserved": true
     }
   ],
   "mutationAllowed": false,
