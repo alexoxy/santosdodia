@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-23 00:42 UTC
+Updated: 2026-10-23 18:35 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-23-v26.{md,json}`
+Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-23-v27.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 289/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 290/389; perennial cutover and production mutation remain fail-closed.
 
 ## Operating boundary
 
@@ -20,27 +20,27 @@ Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation i
 
 ## Completed in this execution
 
-PR [#398](https://github.com/alexoxy/santosdodia/pull/398) delivered E07.05 batch 20:
+PR [#400](https://github.com/alexoxy/santosdodia/pull/400) delivered E07.05 batch 21:
 
-- preserved Lourenço Ruiz and fifteen companions as sixteen independent Person/Recognition identities;
-- modelled 28 September as one collective multi-person Observance, with one Portugal 2026 Occurrence and one general-Roman perennial rule;
-- used the Portuguese National Secretariat for Liturgy for local date/rank and the Holy See for the finite sixteen-person enumeration;
+- preserved Paul Miki and twenty-five companions as twenty-six independent Person/Recognition identities;
+- modelled 6 February as one collective multi-person Observance, with one Portugal 2026 Occurrence and one General Roman perennial rule;
+- used the Portuguese National Secretariat for Liturgy for the finite official enumeration and local date/rank, with Vatican corroboration;
 - avoided a collective Person and did not infer identity from translation or name similarity;
 - preserved `publicationAllowed: false`, zero remote-D1 writes and no deployment.
 
-Validated head: `cd32041c4fff40fe00ff73d2a25aba43229cbc78`.
+Validated head: `fa5de0f2138e820859381de5b9626470bdd57ee0`.
 
-Squash merge: `32c796884332751535e397f5d20ffe41ba4103a3`.
+Squash merge: `b31c722929b87f8475ba1efb7f1c7772436f3348`.
 
 E07.05 remains `EM_CURSO`; partial work does not reduce the task countdown.
 
 ## Portugal 2026 ledger
 
 - Approved source: **389 occurrences**, **365 civil days**, **1,945 labels**.
-- Fixed Sanctorale bindings: **91** across **86 civil days**.
-- Total source-bound coverage: **289/389 (74.293%)**.
-- Remaining: **100 occurrences** and **82 civil days**.
-- Source-bound days: **283/365**.
+- Fixed Sanctorale bindings: **92** across **87 civil days**.
+- Total source-bound coverage: **290/389 (74.550%)**.
+- Remaining: **99 occurrences** and **81 civil days**.
+- Source-bound days: **284/365**.
 - Full semantic equivalence, perennial cutover and production promotion: `false`.
 
 | Unresolved family | Remaining |
@@ -50,34 +50,34 @@ E07.05 remains `EM_CURSO`; partial work does not reduce the task countdown.
 | Portugal structural overlays | 14 |
 | Fixed Marian titles | 8 |
 | Portugal proper identities | 5 |
-| Fixed collective observances | 3 |
+| Fixed collective observances | 2 |
 | Portugal rank overrides | 2 |
 | Portugal transfer review | 2 |
-| **Total** | **100** |
+| **Total** | **99** |
 
 ## CI, email and external proof
 
-PR #398 workflows on the exact validated head:
+PR #400 workflows on the exact validated head:
 
-- Quality #1475, run `39878567531`: success, including 64-step smoke path;
-- Sanctorale review #57, run `39878567686`: success;
-- Product BUILD #118, run `39878567539`: success;
-- Product staging #114, run `39878567561`: success;
-- Wikidata retry #635, run `39878567547`: success.
+- Quality run `40003757281`: success, including 64-step smoke path;
+- Sanctorale review #59, run `40003757431`: success;
+- Product BUILD #120, run `40003757200`: success;
+- Product staging #116, run `40003757027`: success;
+- Wikidata retry #637, run `40003756985`: success.
 
-Local proof passed focused Person/Recognition/Observance/Occurrence/Vault tests, Roman Sanctorale 91, semantic inventory 289+100=389, 365/365 reconciliation, full `npm run check`, zero production-dependency audit vulnerabilities, the AdSense fail-closed checker and `npm run cloudflare:build`. The existing non-fatal Turbopack warning in `lib/litcal-mirror.ts` is unchanged.
+Local proof passed focused Person/Recognition/Observance/Occurrence/Vault tests, Roman Sanctorale 92, semantic inventory 290+99=389, 365/365 reconciliation, full `npm run check`, zero production-dependency audit vulnerabilities, the AdSense fail-closed checker and `npm run cloudflare:build`. The existing non-fatal Turbopack warning in `lib/litcal-mirror.ts` is unchanged.
 
-The staging artifact `12469506563` (`sha256:f2486264badf6ac14c3de391edda81165045eff819db0b6559aff8cba1839252`, 380,889 bytes) confirmed 365/365 days, five complete locales, zero false-empty days, 389 approved-source occurrences and `productionApproved: false`.
+The staging artifact `12523242171` (`sha256:a0e9f6c088c27229864ff41dc62f504b0c3faf7038151f3b92b142defac071bf`, 381,037 bytes) and its Dropbox directory for the exact head confirmed 365/365 days, five complete locales, 1,945 labels, 389 approved-source occurrences and `productionApproved: false`.
 
 The initial non-Trash Gmail search found no new SantosDia/GitHub/Cloudflare failure or quota alert. No mail was moved or deleted.
 
 Dropbox proof, fetched after upload and matched byte for byte:
 
-- v26 JSON: `id:oANWCGUyYBwAAAAAAAAYww`, SHA-256 `1fd795fc2bf93a2febda1dbbc0a27e01b927d737ab89a92077a61dc7bc9155f4`, 315,206 bytes;
-- v26 MD: `id:oANWCGUyYBwAAAAAAAAYxA`, SHA-256 `d322bd774370e4219132253403b805b70e8769f88c10c824142f39a9f860d8eb`, 158,254 bytes;
-- batch receipt: `id:oANWCGUyYBwAAAAAAAAYxQ`, SHA-256 `7aa8c54fd58897b03e2c6de1edbde806505a7cd290f7b551d10ccc2f62e902bf`, 2,773 bytes.
+- v27 JSON: `id:oANWCGUyYBwAAAAAAAAY1Q`, SHA-256 `45e4f4364945bbdf7c8deb61179da3a86f693a35458cf63dc8f5f07821c1f3b5`, 317,463 bytes;
+- v27 MD: `id:oANWCGUyYBwAAAAAAAAY1w`, SHA-256 `c08e15f3cb80db67b4820b050f23e4497857959a741ec302e13a79341efc6890`, 159,203 bytes;
+- batch receipt: `id:oANWCGUyYBwAAAAAAAAY1g`, SHA-256 `215b4fb72e7958a7721f6b6d1eea60ab180d3bb99d7b44d24d45eac2abc106b3`, 2,063 bytes.
 
-Issue #355 points to v26 and the batch-20 receipt.
+Issue #355 points to v27 and the batch-21 receipt.
 
 ## Countdown
 
@@ -88,8 +88,8 @@ Issue #355 points to v26 and the batch-20 receipt.
 
 ## Repository hygiene
 
-- PR #398 was integrated only after five workflows passed on the exact head.
-- Its 21 files are confined to the batch; generated translation drift and lateral artifacts were excluded.
+- PR #400 was integrated only after five workflows passed on the exact head.
+- Its 23 files are confined to the batch; generated translation drift and lateral artifacts were excluded.
 - No force push, history rewrite, production deletion, remote-D1 write, deploy, media asset or second calendar path was introduced.
 - Issue #355 remains the single live execution record; no duplicate batch issue was created.
 - Evidence Vault, official-source artifacts, receipts and rollback history remain preserved.
@@ -99,9 +99,9 @@ Issue #355 points to v26 and the batch-20 receipt.
 | Product layer | Status | Proof | Remaining gate |
 |---|---|---|---|
 | P0 reliability/security | Realised core / continuous | Green CI, audit, text-first and D1 guards | Continue safe hygiene |
-| P1 Roman perennial engine | Partial | 289/389 source-bound occurrences | Reach 389/389 |
+| P1 Roman perennial engine | Partial | 290/389 source-bound occurrences | Reach 389/389 |
 | P2 calculator/API/ICS | Core / awaiting equivalence | Shared engine, OpenAPI, Y/Y+1 ICS | Prove parity after cutover |
-| P3 Portugal daily product | Partial | Public baseline plus 289-source shadow | Full equivalence and production gate |
+| P3 Portugal daily product | Partial | Public baseline plus 290-source shadow | Full equivalence and production gate |
 | Editorial/SEO/AdSense | Partial / gated | Text-first corpus and fail-closed checker | Factual/editorial acceptance |
 | Global Church kernels | Pending / foundations | Independent context dimensions | Authority-specific kernels |
 | Multilingual scale | Partial | Ten-locale technical gates | Evidence-based ranking and review |
@@ -111,14 +111,14 @@ Issue #355 points to v26 and the batch-20 receipt.
 ## Decisions and risks
 
 - A collective celebration is an Observance linked to independent people, not a synthetic collective Person.
-- The sixteen-name source proof does not accept biographies, patronages or public navigation; editorial copy remains original and separately fact-checked.
+- The twenty-six-name source proof does not accept biographies, patronages or public navigation; editorial copy remains original and separately fact-checked.
 - Optional memorials remain subject to precedence. Green shadow CI never authorizes production.
 - The remaining Archangels row must not be forced into a human Person model.
 - Other Churches retain their own computus, calendars and competent authorities.
 
 ## Ordered roadmap
 
-1. Continue E07.05 with Paul Miki and companions or the First Martyrs of the Church of Rome.
+1. Continue E07.05 with the First Martyrs of the Church of Rome, without fabricating anonymous Person records.
 2. Resolve Archangels only with an explicit non-human subject model or justified Observance-only representation.
 3. Continue 50 fixed persons, 16 fixed/non-person observances and eight Marian titles in small reviewed batches.
 4. Resolve remaining structural, proper, transfer and rank rows by competent-authority review.
@@ -128,8 +128,8 @@ Issue #355 points to v26 and the batch-20 receipt.
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox v26; verify GitHub, Gmail and Dropbox before new work.
-- Keep one batch active and do not repeat batch 20.
+- Read issue #355 and Dropbox v27; verify GitHub, Gmail and Dropbox before new work.
+- Keep one batch active and do not repeat batch 21.
 - Never use CI or health checks to write remote D1.
 - Do not delete an error email without a positive replacement run and external-effect proof.
 - Do not merge checks from an outdated head/base.
