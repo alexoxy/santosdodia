@@ -1346,6 +1346,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-21:christopher-magallanes-companions:roman-catholic:pt",
+      "observanceId": "observance:christopher-magallanes-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:christopher-magallanes-companions:general-roman",
+      "legacyObservanceId": "rc:StChristopherMagallanes",
+      "expectedDateISO": "2026-05-21",
+      "sourceOccurrenceId": "snl-pt-2026-05-21-356077445664af03f7738147",
+      "sourceRecordHash": "3aa1be82d7b01aac04d62e6e755380b128d27aa03fe605b771bcd278c87e3907",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

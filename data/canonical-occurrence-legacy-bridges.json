@@ -479,6 +479,11 @@
       "occurrenceId": "occurrence:2026-05-01:saint-joseph-worker:roman-catholic:pt",
       "legacyObservanceId": "rc:StJosephWorker",
       "dateISO": "2026-05-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-21:christopher-magallanes-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StChristopherMagallanes",
+      "dateISO": "2026-05-21"
     }
   ]
 }
