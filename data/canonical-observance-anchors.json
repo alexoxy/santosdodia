@@ -2857,6 +2857,112 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:lawrence-ruiz-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "domingo-ibanez-erquicia",
+          "recognitionId": "recognition:domingo-ibanez-erquicia:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "francisco-shoyemon",
+          "recognitionId": "recognition:francisco-shoyemon:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "santiago-kyushei-tomonaga",
+          "recognitionId": "recognition:santiago-kyushei-tomonaga:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "miguel-kurobioye",
+          "recognitionId": "recognition:miguel-kurobioye:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "lucas-alonso-espiritu-santo",
+          "recognitionId": "recognition:lucas-alonso-espiritu-santo:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "mateo-kohioye",
+          "recognitionId": "recognition:mateo-kohioye:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "magdalena-nagasaki",
+          "recognitionId": "recognition:magdalena-nagasaki:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "marina-omura",
+          "recognitionId": "recognition:marina-omura:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "jacinto-jordan-ansalone",
+          "recognitionId": "recognition:jacinto-jordan-ansalone:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "tomas-hioji-nishi",
+          "recognitionId": "recognition:tomas-hioji-nishi:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "antonio-gonzalez-japan-martyr",
+          "recognitionId": "recognition:antonio-gonzalez-japan-martyr:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "guillermo-courtet",
+          "recognitionId": "recognition:guillermo-courtet:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "miguel-aozaraza",
+          "recognitionId": "recognition:miguel-aozaraza:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "vicente-shiwozuka",
+          "recognitionId": "recognition:vicente-shiwozuka:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "lazaro-kyoto",
+          "recognitionId": "recognition:lazaro-kyoto:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "lorenzo-ruiz",
+          "recognitionId": "recognition:lorenzo-ruiz:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

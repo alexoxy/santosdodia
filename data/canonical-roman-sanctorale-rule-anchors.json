@@ -2361,6 +2361,32 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "sanctorale-rule:lawrence-ruiz-companions:general-roman",
+      "observanceId": "observance:lawrence-ruiz-companions:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 28
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-28",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

@@ -2164,6 +2164,30 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "occurrence:2026-09-28:lawrence-ruiz-companions:roman-catholic:pt",
+      "observanceId": "observance:lawrence-ruiz-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-28",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-28",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Lourenço Ruiz e companheiros, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
