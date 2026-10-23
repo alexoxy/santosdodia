@@ -2140,6 +2140,30 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "occurrence:2026-10-19:john-brebeuf-isaac-jogues-companions:roman-catholic:pt",
+      "observanceId": "observance:john-brebeuf-isaac-jogues-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-19",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-19",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos João de Brébeuf e Isaac Jogues, presbíteros, e companheiros, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

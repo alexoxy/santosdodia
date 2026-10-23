@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 287,
-    "remainingOccurrences": 102,
+    "sourceBoundOccurrences": 288,
+    "remainingOccurrences": 101,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 5,
+    "fixed-collective": 4,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -583,13 +583,6 @@
       "dateISO": "2026-10-19",
       "canonicalEventId": "rc:StPaulCross",
       "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-19-bba7079fd1eeb48e28085291",
-      "sourceRecordHash": "e36ee6efbd56ee59e2d995e81e94c35e6777b33bbd7ede1ae661148007c71055",
-      "dateISO": "2026-10-19",
-      "canonicalEventId": "rc:StsJeanBrebeuf",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-22-2d9d67aa059f219de9dc687b",

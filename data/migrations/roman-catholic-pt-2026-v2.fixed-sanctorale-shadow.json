@@ -1262,6 +1262,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-19:john-brebeuf-isaac-jogues-companions:roman-catholic:pt",
+      "observanceId": "observance:john-brebeuf-isaac-jogues-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-brebeuf-isaac-jogues-companions:general-roman",
+      "legacyObservanceId": "rc:StsJeanBrebeuf",
+      "expectedDateISO": "2026-10-19",
+      "sourceOccurrenceId": "snl-pt-2026-10-19-bba7079fd1eeb48e28085291",
+      "sourceRecordHash": "e36ee6efbd56ee59e2d995e81e94c35e6777b33bbd7ede1ae661148007c71055",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

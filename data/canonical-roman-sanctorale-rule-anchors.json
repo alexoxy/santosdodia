@@ -2335,6 +2335,32 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "sanctorale-rule:john-brebeuf-isaac-jogues-companions:general-roman",
+      "observanceId": "observance:john-brebeuf-isaac-jogues-companions:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 19
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-19",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
