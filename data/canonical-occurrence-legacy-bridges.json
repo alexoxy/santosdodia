@@ -464,6 +464,11 @@
       "occurrenceId": "occurrence:2026-02-06:paul-miki-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StsPaulMiki",
       "dateISO": "2026-02-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-30:first-martyrs-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:FirstMartyrsRome",
+      "dateISO": "2026-06-30"
     }
   ]
 }

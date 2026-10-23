@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 290,
-    "remainingOccurrences": 99,
+    "sourceBoundOccurrences": 291,
+    "remainingOccurrences": 98,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 2,
+    "fixed-collective": 1,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -247,13 +247,6 @@
       "dateISO": "2026-06-27",
       "canonicalEventId": "rc:StCyrilAlexandria",
       "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-06-30-6acf4ba42100f123b530f5e3",
-      "sourceRecordHash": "e40f99ac3eadfc02e1089b0025db3b6df4a34c7c4c97d8bfc166cb6def688027",
-      "dateISO": "2026-06-30",
-      "canonicalEventId": "rc:FirstMartyrsRome",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-07-06-9cf5bc757be978b6d3aaffb6",

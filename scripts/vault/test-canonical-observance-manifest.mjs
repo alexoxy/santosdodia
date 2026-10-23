@@ -44,9 +44,9 @@ assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourc
 assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1Changed === false, 'Building Observance must not publish or mutate D1.');
 
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
-assert(first.manifest.observanceModelVersion === '1.1', 'Observance model must use stable-key identity v1.1.');
+assert(first.manifest.observanceModelVersion === '1.2', 'Observance model must support reviewed subjectless collective identity v1.2.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 94, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.observanceCount === 95, 'Reviewed Observance count changed and requires explicit review.');
 assert(first.manifest.personCoverageCount === 149, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
@@ -62,6 +62,8 @@ assert(first.manifest.semantics.multipleObservancesPerSubjectSetSupported === tr
 assert(first.manifest.semantics.recognitionMustMatchObservanceChurch === true, 'Observance must remain Church-scoped through Recognition.');
 assert(first.manifest.semantics.evidenceMustMatchChurchAuthorityDomain === true, 'Observance evidence must remain Church-authority isolated.');
 assert(first.manifest.semantics.multiSubjectReady === true, 'Observance must remain multi-subject ready.');
+assert(first.manifest.semantics.subjectlessCollectiveObservanceSupported === true, 'Observance must support explicitly attested unenumerated collectives.');
+assert(first.manifest.semantics.subjectlessCollectiveMustNotCreatePersons === true, 'Subjectless collective Observances must not fabricate Person records.');
 assert(first.manifest.d1Projection.status === 'deferred', 'Observance identity must not be silently forced into dated occurrence tables.');
 
 const ids = first.observances.map((item) => item.observanceId);
@@ -147,6 +149,11 @@ assert(paulMikiMartyrs?.subjects.length === 26, 'Paul Miki and companions must p
 assert(JSON.stringify(paulMikiMartyrs.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(paulMikiIds), 'Paul Miki companions changed.');
 assert(new Set(paulMikiMartyrs.subjects.map((subject) => subject.recognitionId)).size === 26, 'Paul Miki and companions must bind twenty-six distinct Recognitions.');
 
+const firstMartyrsRome = first.observances.find((item) => item.observanceId === 'observance:first-martyrs-rome:roman-catholic');
+assert(firstMartyrsRome?.observanceKey === 'principal-commemoration' && firstMartyrsRome.observanceType === 'collective-commemoration', 'First Martyrs of the Church of Rome must remain one collective Observance.');
+assert(firstMartyrsRome.subjects.length === 0, 'First Martyrs of the Church of Rome must not fabricate anonymous Person subjects.');
+assert(firstMartyrsRome.evidence.some((item) => item.url.includes('vatican.va/')), 'First Martyrs of the Church of Rome requires direct Holy See collective evidence.');
+
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);
   assert(observance.resolutionStatus === 'canonical-anchor', `${observance.observanceId} lost canonical-anchor status.`);
@@ -201,4 +208,12 @@ duplicateIdentity.observances.push({
 });
 expectFailure('Duplicate canonical Observance identity guard', () => build(duplicateIdentity), 'duplicates canonical Observance identity');
 
-console.log(`Canonical Observance Vault v1.1 test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, stable keys support multiple Observances per subject set, deterministic root ${first.manifest.rootSha256}.`);
+const subjectlessPersonCommemoration = structuredClone(observanceDataset);
+subjectlessPersonCommemoration.observances[0].subjects = [];
+expectFailure('Subjectless person commemoration guard', () => build(subjectlessPersonCommemoration), 'requires at least one subject');
+
+const fabricatedCollectiveSubject = structuredClone(observanceDataset);
+fabricatedCollectiveSubject.observances.find((item) => item.id === 'observance:first-martyrs-rome:roman-catholic').subjects = structuredClone(observanceDataset.observances[0].subjects);
+expectFailure('Collective synthetic Person guard', () => build(fabricatedCollectiveSubject), 'must not fabricate Person subjects');
+
+console.log(`Canonical Observance Vault v1.2 test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, including reviewed subjectless collectives, deterministic root ${first.manifest.rootSha256}.`);

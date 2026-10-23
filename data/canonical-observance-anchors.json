@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observanceModelVersion": "1.1",
+  "observanceModelVersion": "1.2",
   "status": "repository-reviewed-observance-anchors",
   "observances": [
     {
@@ -3115,6 +3115,39 @@
             "observance-attestation",
             "liturgical-designation",
             "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:first-martyrs-rome:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "collective-commemoration",
+      "subjects": [],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-30",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "collective-commemoration"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/audiences/2004/documents/hf_jp-ii_aud_20040630.html",
+          "claimTypes": [
+            "observance-attestation",
+            "collective-commemoration"
           ]
         }
       ],

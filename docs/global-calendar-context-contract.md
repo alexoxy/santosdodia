@@ -32,7 +32,7 @@ Country is a convenient selector, not an authority identifier. The mapping betwe
 
 One reviewed person identity can have multiple recognition assertions, names and observances. Recognition is scoped to the Church and effective date, not inferred from a popular title or national origin. Historical identities must still be reviewed before cross-tradition merges.
 
-An observance requires a stable identity, person/subject reference, Church/rite, applicable calendar or jurisdiction, date rule and calendar system, rank in that context, authority/source, validity period, review state and provenance. Preserve the original ecclesial term when ranks cannot be translated exactly.
+An observance requires a stable identity, Church/rite, applicable calendar or jurisdiction, date rule and calendar system, rank in that context, authority/source, validity period, review state and provenance. It normally references one or more reviewed persons/subjects. When a competent authority explicitly defines an unenumerated collective commemoration, the Observance may instead be subjectless: it must use the dedicated `collective-commemoration` type, carry direct official evidence for the collective identity, and must not manufacture anonymous, placeholder or inferred Person/Recognition records. Preserve the original ecclesial term when ranks cannot be translated exactly.
 
 Maintain national, diocesan, city/site and institutional applicability separately. They are resolved by the relevant Church's approved rules and decrees, including annual precedence and transfers. A simple geographical union, last-write-wins override, or universal rank attached to the person is insufficient.
 

@@ -1304,6 +1304,20 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-30:first-martyrs-rome:roman-catholic:pt",
+      "observanceId": "observance:first-martyrs-rome:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:first-martyrs-rome:general-roman",
+      "legacyObservanceId": "rc:FirstMartyrsRome",
+      "expectedDateISO": "2026-06-30",
+      "sourceOccurrenceId": "snl-pt-2026-06-30-6acf4ba42100f123b530f5e3",
+      "sourceRecordHash": "e40f99ac3eadfc02e1089b0025db3b6df4a34c7c4c97d8bfc166cb6def688027",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
