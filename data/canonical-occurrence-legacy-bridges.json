@@ -474,6 +474,11 @@
       "occurrenceId": "occurrence:2026-09-29:michael-gabriel-raphael-archangels:roman-catholic:pt",
       "legacyObservanceId": "rc:StsArchangels",
       "dateISO": "2026-09-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-01:saint-joseph-worker:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosephWorker",
+      "dateISO": "2026-05-01"
     }
   ]
 }
