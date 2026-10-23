@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-23 18:35 UTC
+Updated: 2026-10-23 19:12 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-23-v27.{md,json}`
+Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-23-v28.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 290/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 291/389; perennial cutover and production mutation remain fail-closed.
 
 ## Operating boundary
 
@@ -20,27 +20,29 @@ Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation i
 
 ## Completed in this execution
 
-PR [#400](https://github.com/alexoxy/santosdodia/pull/400) delivered E07.05 batch 21:
+PR [#402](https://github.com/alexoxy/santosdodia/pull/402) delivered E07.05 batch 22:
 
-- preserved Paul Miki and twenty-five companions as twenty-six independent Person/Recognition identities;
-- modelled 6 February as one collective multi-person Observance, with one Portugal 2026 Occurrence and one General Roman perennial rule;
-- used the Portuguese National Secretariat for Liturgy for the finite official enumeration and local date/rank, with Vatican corroboration;
-- avoided a collective Person and did not infer identity from translation or name similarity;
+- represented the First Martyrs of the Church of Rome as one canonical subjectless collective Observance;
+- introduced Observance model v1.2 and the dedicated `collective-commemoration` type;
+- allows an empty subject list only for an officially attested unenumerated collective and rejects synthetic Person/Recognition records;
+- retained the normal subject requirement for personal and finite multi-person commemorations;
+- bound the Portugal 2026 occurrence on 30 June and optional-memorial rank to the exact SNL source row;
+- used direct SNL and Holy See evidence for the collective identity;
 - preserved `publicationAllowed: false`, zero remote-D1 writes and no deployment.
 
-Validated head: `fa5de0f2138e820859381de5b9626470bdd57ee0`.
+Validated head: `87caacdd3ef7c5b3927b6bb7967eb4ddfe1112c8`.
 
-Squash merge: `b31c722929b87f8475ba1efb7f1c7772436f3348`.
+Squash merge: `ef34c1b0549a40ae111119fba1261b9502648159`.
 
 E07.05 remains `EM_CURSO`; partial work does not reduce the task countdown.
 
 ## Portugal 2026 ledger
 
 - Approved source: **389 occurrences**, **365 civil days**, **1,945 labels**.
-- Fixed Sanctorale bindings: **92** across **87 civil days**.
-- Total source-bound coverage: **290/389 (74.550%)**.
-- Remaining: **99 occurrences** and **81 civil days**.
-- Source-bound days: **284/365**.
+- Fixed Sanctorale bindings: **93** across **88 civil days**.
+- Total source-bound coverage: **291/389 (74.807%)**.
+- Remaining: **98 occurrences** and **80 civil days**.
+- Source-bound days: **285/365**.
 - Full semantic equivalence, perennial cutover and production promotion: `false`.
 
 | Unresolved family | Remaining |
@@ -50,34 +52,37 @@ E07.05 remains `EM_CURSO`; partial work does not reduce the task countdown.
 | Portugal structural overlays | 14 |
 | Fixed Marian titles | 8 |
 | Portugal proper identities | 5 |
-| Fixed collective observances | 2 |
+| Fixed collective observances | 1 |
 | Portugal rank overrides | 2 |
 | Portugal transfer review | 2 |
-| **Total** | **99** |
+| **Total** | **98** |
 
 ## CI, email and external proof
 
-PR #400 workflows on the exact validated head:
+PR #402 workflows on the exact validated head:
 
-- Quality run `40003757281`: success, including 64-step smoke path;
-- Sanctorale review #59, run `40003757431`: success;
-- Product BUILD #120, run `40003757200`: success;
-- Product staging #116, run `40003757027`: success;
-- Wikidata retry #637, run `40003756985`: success.
+- Quality #1483, run `40008623312`: success;
+- Sanctorale review #61, run `40008623271`: success;
+- Product BUILD #122, run `40008623216`: success;
+- Product staging #118, run `40008623923`: success;
+- Wikidata retry #639, run `40008623231`: success.
 
-Local proof passed focused Person/Recognition/Observance/Occurrence/Vault tests, Roman Sanctorale 92, semantic inventory 290+99=389, 365/365 reconciliation, full `npm run check`, zero production-dependency audit vulnerabilities, the AdSense fail-closed checker and `npm run cloudflare:build`. The existing non-fatal Turbopack warning in `lib/litcal-mirror.ts` is unchanged.
+Local proof passed the focused Observance/Occurrence/Sanctorale tests, semantic inventory 291+98=389, 365/365 reconciliation, full `npm run check`, the AdSense fail-closed checker and `npm run cloudflare:build`. The existing non-fatal Turbopack warning in `lib/litcal-mirror.ts` is unchanged.
 
-The staging artifact `12523242171` (`sha256:a0e9f6c088c27229864ff41dc62f504b0c3faf7038151f3b92b142defac071bf`, 381,037 bytes) and its Dropbox directory for the exact head confirmed 365/365 days, five complete locales, 1,945 labels, 389 approved-source occurrences and `productionApproved: false`.
+Dropbox staging for the exact head contains `manifest.json`, `validation.json`, `release.json` and `localization-review.json`. Validation confirms 389 occurrences, 365 days, 1,945 labels and `productionApproved: false`.
 
 The initial non-Trash Gmail search found no new SantosDia/GitHub/Cloudflare failure or quota alert. No mail was moved or deleted.
 
-Dropbox proof, fetched after upload and matched byte for byte:
+Dropbox proof:
 
-- v27 JSON: `id:oANWCGUyYBwAAAAAAAAY1Q`, SHA-256 `45e4f4364945bbdf7c8deb61179da3a86f693a35458cf63dc8f5f07821c1f3b5`, 317,463 bytes;
-- v27 MD: `id:oANWCGUyYBwAAAAAAAAY1w`, SHA-256 `c08e15f3cb80db67b4820b050f23e4497857959a741ec302e13a79341efc6890`, 159,203 bytes;
-- batch receipt: `id:oANWCGUyYBwAAAAAAAAY1g`, SHA-256 `215b4fb72e7958a7721f6b6d1eea60ab180d3bb99d7b44d24d45eac2abc106b3`, 2,063 bytes.
+- v28 JSON: `id:oANWCGUyYBwAAAAAAAAY5w`, SHA-256 `e3479e1cf6076ff81b2f793fdd8c59f0be518a7e6eac6752fa5f9c8a147133b4`, 319,056 bytes;
+- v28 MD: `id:oANWCGUyYBwAAAAAAAAY6A`, SHA-256 `196dd5ed71213b95d2cc2c5c1542b85334267f08afe4ef4656e5945450f1d778`, 160,470 bytes;
+- batch receipt: `id:oANWCGUyYBwAAAAAAAAY6Q`, 2,661 bytes;
+- staging manifest: `id:oANWCGUyYBwAAAAAAAAY2Q`;
+- staging validation: `id:oANWCGUyYBwAAAAAAAAY2g`;
+- staging release: `id:oANWCGUyYBwAAAAAAAAY2w`.
 
-Issue #355 points to v27 and the batch-21 receipt.
+Issue #355 points to v28 and the batch-22 receipt.
 
 ## Countdown
 
@@ -88,20 +93,21 @@ Issue #355 points to v27 and the batch-21 receipt.
 
 ## Repository hygiene
 
-- PR #400 was integrated only after five workflows passed on the exact head.
-- Its 23 files are confined to the batch; generated translation drift and lateral artifacts were excluded.
+- PR #402 was integrated only after five workflows passed on the exact head and expected base.
+- Its 18 files are confined to the collective model and batch; generated translation drift and lateral artifacts were excluded.
 - No force push, history rewrite, production deletion, remote-D1 write, deploy, media asset or second calendar path was introduced.
 - Issue #355 remains the single live execution record; no duplicate batch issue was created.
 - Evidence Vault, official-source artifacts, receipts and rollback history remain preserved.
+- The development branch was created from an explicit main SHA and the merge used the exact expected head.
 
 ## Strategic coverage matrix
 
 | Product layer | Status | Proof | Remaining gate |
 |---|---|---|---|
 | P0 reliability/security | Realised core / continuous | Green CI, audit, text-first and D1 guards | Continue safe hygiene |
-| P1 Roman perennial engine | Partial | 290/389 source-bound occurrences | Reach 389/389 |
+| P1 Roman perennial engine | Partial | 291/389 source-bound occurrences | Reach 389/389 |
 | P2 calculator/API/ICS | Core / awaiting equivalence | Shared engine, OpenAPI, Y/Y+1 ICS | Prove parity after cutover |
-| P3 Portugal daily product | Partial | Public baseline plus 290-source shadow | Full equivalence and production gate |
+| P3 Portugal daily product | Partial | Public baseline plus 291-source shadow | Full equivalence and production gate |
 | Editorial/SEO/AdSense | Partial / gated | Text-first corpus and fail-closed checker | Factual/editorial acceptance |
 | Global Church kernels | Pending / foundations | Independent context dimensions | Authority-specific kernels |
 | Multilingual scale | Partial | Ten-locale technical gates | Evidence-based ranking and review |
@@ -110,16 +116,16 @@ Issue #355 points to v27 and the batch-21 receipt.
 
 ## Decisions and risks
 
-- A collective celebration is an Observance linked to independent people, not a synthetic collective Person.
-- The twenty-six-name source proof does not accept biographies, patronages or public navigation; editorial copy remains original and separately fact-checked.
+- A finite, officially enumerated group remains independent Person/Recognition subjects of a multi-person Observance.
+- An officially attested but unenumerated collective may be Observance-only; it cannot manufacture anonymous people.
 - Optional memorials remain subject to precedence. Green shadow CI never authorizes production.
 - The remaining Archangels row must not be forced into a human Person model.
 - Other Churches retain their own computus, calendars and competent authorities.
 
 ## Ordered roadmap
 
-1. Continue E07.05 with the First Martyrs of the Church of Rome, without fabricating anonymous Person records.
-2. Resolve Archangels only with an explicit non-human subject model or justified Observance-only representation.
+1. Resolve Archangels only with an explicit non-human subject model or justified Observance-only representation.
+2. If that model needs further evidence, continue the next independent fixed person or Marian-title row without blocking E07.05.
 3. Continue 50 fixed persons, 16 fixed/non-person observances and eight Marian titles in small reviewed batches.
 4. Resolve remaining structural, proper, transfer and rank rows by competent-authority review.
 5. Reach 389/389, explain annual differences and run multi-year regeneration.
@@ -128,8 +134,8 @@ Issue #355 points to v27 and the batch-21 receipt.
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox v27; verify GitHub, Gmail and Dropbox before new work.
-- Keep one batch active and do not repeat batch 21.
+- Read issue #355 and Dropbox v28; verify GitHub, Gmail and Dropbox before new work.
+- Keep one batch active and do not repeat batch 22.
 - Never use CI or health checks to write remote D1.
 - Do not delete an error email without a positive replacement run and external-effect proof.
 - Do not merge checks from an outdated head/base.
