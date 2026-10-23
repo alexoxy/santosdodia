@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 288,
-    "remainingOccurrences": 101,
+    "sourceBoundOccurrences": 289,
+    "remainingOccurrences": 100,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-collective": 4,
+    "fixed-collective": 3,
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
     "fixed-person": 50,
@@ -485,13 +485,6 @@
       "dateISO": "2026-09-19",
       "canonicalEventId": "rc:StJanuarius",
       "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-28-1e5eb5aa09e29ef8997145f1",
-      "sourceRecordHash": "e4728cf6e36424c778236dac5c881cc62b87cba9afdf2379149198b845dd3937",
-      "dateISO": "2026-09-28",
-      "canonicalEventId": "rc:StsLawrenceRuiz",
-      "semanticFamily": "fixed-collective"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-28-5d81cc270a1ea95295a9d9b5",

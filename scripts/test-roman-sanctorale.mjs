@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 90, 'Portugal Sanctorale materialization must remain shadow-only with ninety reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 91, 'Portugal Sanctorale materialization must remain shadow-only with ninety-one reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -150,7 +150,8 @@ try {
     ['observance:peter-chrysologus:roman-catholic', ['2026-07-30', 'optional-memorial', 12, 'general-roman']],
     ['observance:john-damascene:roman-catholic', ['2026-12-04', 'optional-memorial', 12, 'general-roman']],
     ['observance:cosmas-damian:roman-catholic', ['2026-09-26', 'optional-memorial', 12, 'general-roman']],
-    ['observance:john-brebeuf-isaac-jogues-companions:roman-catholic', ['2026-10-19', 'optional-memorial', 12, 'general-roman']]
+    ['observance:john-brebeuf-isaac-jogues-companions:roman-catholic', ['2026-10-19', 'optional-memorial', 12, 'general-roman']],
+    ['observance:lawrence-ruiz-companions:roman-catholic', ['2026-09-28', 'optional-memorial', 12, 'general-roman']]
   ]);
 
   for (const candidate of pt2026.candidates) {
@@ -164,7 +165,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 90, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 91, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -174,8 +175,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The ninety reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The ninety reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The ninety-one reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The ninety-one reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     const represented = day?.celebratedCandidateId === candidate.id
@@ -246,7 +247,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: 90 authority-isolated perennial Portugal vectors, including collective Observances and distinct same-day optional memorial choices; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: 91 authority-isolated perennial Portugal vectors, including collective Observances and distinct same-day optional memorial choices; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

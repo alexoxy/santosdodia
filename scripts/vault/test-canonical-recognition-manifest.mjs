@@ -45,8 +45,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 
 assert(first.manifest.artifactType === 'canonical-ecclesial-recognitions', 'Recognition artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Recognition release must target canonical Vault.');
-assert(first.manifest.recognitionCount === 108, 'Reviewed Recognition count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 107, 'Reviewed Recognition Person coverage changed unexpectedly.');
+assert(first.manifest.recognitionCount === 124, 'Reviewed Recognition count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 123, 'Reviewed Recognition Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Recognition canonical Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Recognition Vault write must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/recognitions/v1/current.json', 'Recognition current pointer path changed unexpectedly.');
@@ -95,6 +95,22 @@ for (const required of [
   'recognition:noel-chabanel:roman-catholic',
   'recognition:rene-goupil:roman-catholic',
   'recognition:jean-de-la-lande:roman-catholic',
+  'recognition:domingo-ibanez-erquicia:roman-catholic',
+  'recognition:francisco-shoyemon:roman-catholic',
+  'recognition:santiago-kyushei-tomonaga:roman-catholic',
+  'recognition:miguel-kurobioye:roman-catholic',
+  'recognition:lucas-alonso-espiritu-santo:roman-catholic',
+  'recognition:mateo-kohioye:roman-catholic',
+  'recognition:magdalena-nagasaki:roman-catholic',
+  'recognition:marina-omura:roman-catholic',
+  'recognition:jacinto-jordan-ansalone:roman-catholic',
+  'recognition:tomas-hioji-nishi:roman-catholic',
+  'recognition:antonio-gonzalez-japan-martyr:roman-catholic',
+  'recognition:guillermo-courtet:roman-catholic',
+  'recognition:miguel-aozaraza:roman-catholic',
+  'recognition:vicente-shiwozuka:roman-catholic',
+  'recognition:lazaro-kyoto:roman-catholic',
+  'recognition:lorenzo-ruiz:roman-catholic',
   'recognition:cyril-monk:roman-catholic',
   'recognition:methodius-bishop:roman-catholic',
   'recognition:anthony-lisbon:roman-catholic',

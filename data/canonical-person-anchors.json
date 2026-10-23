@@ -1212,6 +1212,182 @@
         "es": "San Juan de la Lande, misionero laico",
         "it": "San Giovanni de la Lande, missionario laico"
       }
+    },
+    {
+      "id": "domingo-ibanez-erquicia",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Domingo Ibáñez de Erquicia, Priest",
+        "pt": "São Domingos Ibáñez de Erquicia, presbítero",
+        "es": "Santo Domingo Ibáñez de Erquicia, sacerdote",
+        "it": "San Domingo Ibáñez de Erquicia, sacerdote"
+      }
+    },
+    {
+      "id": "francisco-shoyemon",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Francisco Shoyemon, Religious Brother",
+        "pt": "São Francisco Shoyemon, religioso",
+        "es": "San Francisco Shoyemon, religioso",
+        "it": "San Francisco Shoyemon, religioso"
+      }
+    },
+    {
+      "id": "santiago-kyushei-tomonaga",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint James Kyushei Tomonaga of Saint Mary, Priest",
+        "pt": "São Tiago Kyushei Tomonaga de Santa Maria, presbítero",
+        "es": "Santo Santiago Kyushei Tomonaga de Santa María, sacerdote",
+        "it": "San Giacomo Kyushei Tomonaga di Santa Maria, sacerdote"
+      }
+    },
+    {
+      "id": "miguel-kurobioye",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Michael Kurobioye, Lay Catechist",
+        "pt": "São Miguel Kurobioye, catequista leigo",
+        "es": "San Miguel Kurobioye, catequista laico",
+        "it": "San Michele Kurobioye, catechista laico"
+      }
+    },
+    {
+      "id": "lucas-alonso-espiritu-santo",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Luke Alonso of the Holy Spirit, Priest",
+        "pt": "São Lucas Alonso do Espírito Santo, presbítero",
+        "es": "San Lucas Alonso del Espíritu Santo, sacerdote",
+        "it": "San Luca Alonso dello Spirito Santo, sacerdote"
+      }
+    },
+    {
+      "id": "mateo-kohioye",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Matthew Kohioye of the Rosary, Religious Brother",
+        "pt": "São Mateus Kohioye do Rosário, religioso",
+        "es": "San Mateo Kohioye del Rosario, religioso",
+        "it": "San Matteo Kohioye del Rosario, religioso"
+      }
+    },
+    {
+      "id": "magdalena-nagasaki",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Magdalene of Nagasaki, Virgin",
+        "pt": "Santa Madalena de Nagasáki, virgem",
+        "es": "Santa Magdalena de Nagasaki, virgen",
+        "it": "Santa Maddalena di Nagasaki, vergine"
+      }
+    },
+    {
+      "id": "marina-omura",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Marina of Omura, Virgin",
+        "pt": "Santa Marina de Omura, virgem",
+        "es": "Santa Marina de Omura, virgen",
+        "it": "Santa Marina di Omura, vergine"
+      }
+    },
+    {
+      "id": "jacinto-jordan-ansalone",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Hyacinth Jordan Ansalone, Priest",
+        "pt": "São Jacinto Jordão Ansalone, presbítero",
+        "es": "San Jacinto Jordán Ansalone, sacerdote",
+        "it": "San Giacinto Giordano Ansalone, sacerdote"
+      }
+    },
+    {
+      "id": "tomas-hioji-nishi",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Thomas Hioji Nishi of Saint Hyacinth, Priest",
+        "pt": "São Tomás Hioji Nishi de São Jacinto, presbítero",
+        "es": "Santo Tomás Hioji Nishi de San Jacinto, sacerdote",
+        "it": "San Tommaso Hioji Nishi di San Giacinto, sacerdote"
+      }
+    },
+    {
+      "id": "antonio-gonzalez-japan-martyr",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Antonio González, Priest",
+        "pt": "Santo António González, presbítero",
+        "es": "San Antonio González, sacerdote",
+        "it": "Sant’Antonio González, sacerdote"
+      }
+    },
+    {
+      "id": "guillermo-courtet",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Guillaume Courtet (Thomas of Saint Dominic), Priest",
+        "pt": "São Guilherme Courtet (Tomás de São Domingos), presbítero",
+        "es": "San Guillermo Courtet (Tomás de Santo Domingo), sacerdote",
+        "it": "San Guglielmo Courtet (Tommaso di San Domenico), sacerdote"
+      }
+    },
+    {
+      "id": "miguel-aozaraza",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Miguel de Aozaraza, Priest",
+        "pt": "São Miguel de Aozaraza, presbítero",
+        "es": "San Miguel de Aozaraza, sacerdote",
+        "it": "San Michele de Aozaraza, sacerdote"
+      }
+    },
+    {
+      "id": "vicente-shiwozuka",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Vicente Shiwozuka de la Cruz, Priest",
+        "pt": "São Vicente Shiwozuka da Cruz, presbítero",
+        "es": "San Vicente Shiwozuka de la Cruz, sacerdote",
+        "it": "San Vincenzo Shiwozuka della Croce, sacerdote"
+      }
+    },
+    {
+      "id": "lazaro-kyoto",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Lazarus of Kyoto, Layman",
+        "pt": "São Lázaro de Kyoto, leigo",
+        "es": "San Lázaro de Kyoto, laico",
+        "it": "San Lazzaro di Kyoto, laico"
+      }
+    },
+    {
+      "id": "lorenzo-ruiz",
+      "primaryObservanceId": "rc:StsLawrenceRuiz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Lawrence Ruiz, Layman",
+        "pt": "São Lourenço Ruiz, leigo",
+        "es": "San Lorenzo Ruiz, laico",
+        "it": "San Lorenzo Ruiz, laico"
+      }
     }
   ]
 }

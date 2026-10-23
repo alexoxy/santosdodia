@@ -1276,6 +1276,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-28:lawrence-ruiz-companions:roman-catholic:pt",
+      "observanceId": "observance:lawrence-ruiz-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:lawrence-ruiz-companions:general-roman",
+      "legacyObservanceId": "rc:StsLawrenceRuiz",
+      "expectedDateISO": "2026-09-28",
+      "sourceOccurrenceId": "snl-pt-2026-09-28-1e5eb5aa09e29ef8997145f1",
+      "sourceRecordHash": "e4728cf6e36424c778236dac5c881cc62b87cba9afdf2379149198b845dd3937",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

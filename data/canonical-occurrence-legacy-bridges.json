@@ -454,6 +454,11 @@
       "occurrenceId": "occurrence:2026-10-19:john-brebeuf-isaac-jogues-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StsJeanBrebeuf",
       "dateISO": "2026-10-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-28:lawrence-ruiz-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsLawrenceRuiz",
+      "dateISO": "2026-09-28"
     }
   ]
 }

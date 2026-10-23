@@ -3041,6 +3041,454 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:domingo-ibanez-erquicia:roman-catholic",
+      "personId": "domingo-ibanez-erquicia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:francisco-shoyemon:roman-catholic",
+      "personId": "francisco-shoyemon",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious-brother",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious-brother",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:santiago-kyushei-tomonaga:roman-catholic",
+      "personId": "santiago-kyushei-tomonaga",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:miguel-kurobioye:roman-catholic",
+      "personId": "miguel-kurobioye",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:lucas-alonso-espiritu-santo:roman-catholic",
+      "personId": "lucas-alonso-espiritu-santo",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:mateo-kohioye:roman-catholic",
+      "personId": "mateo-kohioye",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious-brother",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious-brother",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:magdalena-nagasaki:roman-catholic",
+      "personId": "magdalena-nagasaki",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:marina-omura:roman-catholic",
+      "personId": "marina-omura",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:jacinto-jordan-ansalone:roman-catholic",
+      "personId": "jacinto-jordan-ansalone",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:tomas-hioji-nishi:roman-catholic",
+      "personId": "tomas-hioji-nishi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:antonio-gonzalez-japan-martyr:roman-catholic",
+      "personId": "antonio-gonzalez-japan-martyr",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:guillermo-courtet:roman-catholic",
+      "personId": "guillermo-courtet",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:miguel-aozaraza:roman-catholic",
+      "personId": "miguel-aozaraza",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:vicente-shiwozuka:roman-catholic",
+      "personId": "vicente-shiwozuka",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:lazaro-kyoto:roman-catholic",
+      "personId": "lazaro-kyoto",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "recognition:lorenzo-ruiz:roman-catholic",
+      "personId": "lorenzo-ruiz",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "layman",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "layman",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }
