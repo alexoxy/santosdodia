@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 293,
-    "remainingOccurrences": 96,
+    "sourceBoundOccurrences": 294,
+    "remainingOccurrences": 95,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 49,
+    "fixed-person": 48,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -169,13 +169,6 @@
       "dateISO": "2026-05-13",
       "canonicalEventId": "rc:OurLadyOfFatima",
       "semanticFamily": "jurisdiction-rank-override"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-05-21-356077445664af03f7738147",
-      "sourceRecordHash": "3aa1be82d7b01aac04d62e6e755380b128d27aa03fe605b771bcd278c87e3907",
-      "dateISO": "2026-05-21",
-      "canonicalEventId": "rc:StChristopherMagallanes",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-05-25-76a3dcda6875837a38fab842",

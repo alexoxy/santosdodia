@@ -3228,6 +3228,166 @@
         }
       ],
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "observance:christopher-magallanes-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "christopher-magallanes",
+          "recognitionId": "recognition:christopher-magallanes:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "roman-adame",
+          "recognitionId": "recognition:roman-adame:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "rodrigo-aguilar",
+          "recognitionId": "recognition:rodrigo-aguilar:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "julius-alvarez",
+          "recognitionId": "recognition:julius-alvarez:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "louis-batis-sainz",
+          "recognitionId": "recognition:louis-batis-sainz:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "augustine-caloca-cortes",
+          "recognitionId": "recognition:augustine-caloca-cortes:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "matthew-correa",
+          "recognitionId": "recognition:matthew-correa:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "atilano-cruz",
+          "recognitionId": "recognition:atilano-cruz:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "michael-de-la-mora",
+          "recognitionId": "recognition:michael-de-la-mora:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "peter-esqueda-ramirez",
+          "recognitionId": "recognition:peter-esqueda-ramirez:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "margarito-flores",
+          "recognitionId": "recognition:margarito-flores:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "jose-isabel-flores",
+          "recognitionId": "recognition:jose-isabel-flores:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "david-galvan",
+          "recognitionId": "recognition:david-galvan:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "peter-maldonado",
+          "recognitionId": "recognition:peter-maldonado:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "jesus-mendez",
+          "recognitionId": "recognition:jesus-mendez:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "justino-orona",
+          "recognitionId": "recognition:justino-orona:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "sabas-reyes",
+          "recognitionId": "recognition:sabas-reyes:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "jose-maria-robles",
+          "recognitionId": "recognition:jose-maria-robles:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "toribio-romo",
+          "recognitionId": "recognition:toribio-romo:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "januario-sanchez-delgadillo",
+          "recognitionId": "recognition:januario-sanchez-delgadillo:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "tranquilino-ubiarco",
+          "recognitionId": "recognition:tranquilino-ubiarco:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "david-uribe",
+          "recognitionId": "recognition:david-uribe:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "manuel-morales",
+          "recognitionId": "recognition:manuel-morales:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "salvador-lara-puente",
+          "recognitionId": "recognition:salvador-lara-puente:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "david-roldan-lara",
+          "recognitionId": "recognition:david-roldan-lara:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "collective-membership"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/pt/homilies/2000/documents/hf_jp-ii_hom_20000521_canonizations.html",
+          "claimTypes": [
+            "observance-attestation",
+            "canonization",
+            "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-23"
     }
   ]
 }

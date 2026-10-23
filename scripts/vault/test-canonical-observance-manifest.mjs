@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.3', 'Observance model must support reviewed subjectless collective and non-human identities v1.3.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 97, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 149, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 98, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 174, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -153,6 +153,12 @@ const paulMikiIds = ['anthony-japan-martyr', 'bonaventure-japan-martyr', 'cosmas
 assert(paulMikiMartyrs?.subjects.length === 26, 'Paul Miki and companions must preserve twenty-six independent Person subjects.');
 assert(JSON.stringify(paulMikiMartyrs.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(paulMikiIds), 'Paul Miki companions changed.');
 assert(new Set(paulMikiMartyrs.subjects.map((subject) => subject.recognitionId)).size === 26, 'Paul Miki and companions must bind twenty-six distinct Recognitions.');
+
+const mexicanMartyrs = first.observances.find((item) => item.observanceId === 'observance:christopher-magallanes-companions:roman-catholic');
+const mexicanMartyrIds = ["atilano-cruz","augustine-caloca-cortes","christopher-magallanes","david-galvan","david-roldan-lara","david-uribe","januario-sanchez-delgadillo","jesus-mendez","jose-isabel-flores","jose-maria-robles","julius-alvarez","justino-orona","louis-batis-sainz","manuel-morales","margarito-flores","matthew-correa","michael-de-la-mora","peter-esqueda-ramirez","peter-maldonado","rodrigo-aguilar","roman-adame","sabas-reyes","salvador-lara-puente","toribio-romo","tranquilino-ubiarco"];
+assert(mexicanMartyrs?.observanceType === 'multi-person-commemoration' && mexicanMartyrs.subjects.length === 25, 'Christopher Magallanes and companions must preserve twenty-five independent Person subjects.');
+assert(JSON.stringify(mexicanMartyrs.subjects.map((subject) => subject.personId).sort()) === JSON.stringify(mexicanMartyrIds), 'Christopher Magallanes companions changed.');
+assert(new Set(mexicanMartyrs.subjects.map((subject) => subject.recognitionId)).size === 25, 'Christopher Magallanes and companions must bind twenty-five distinct Recognitions.');
 
 const firstMartyrsRome = first.observances.find((item) => item.observanceId === 'observance:first-martyrs-rome:roman-catholic');
 assert(firstMartyrsRome?.observanceKey === 'principal-commemoration' && firstMartyrsRome.observanceType === 'collective-commemoration', 'First Martyrs of the Church of Rome must remain one collective Observance.');
