@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-28.json",
+  "reviewDigestSha256": "4a921686f82106386f4152eedba1348c6f34c7acf24d7785eed2727bf79dc037",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "barnabas-apostle"
+  ],
+  "promotedObservanceIds": [
+    "observance:barnabas-apostle:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 297,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 92
+  },
+  "fixedSanctoraleMappingDigestSha256": "8e0d3c088a4314868a61f57168700e601e14cc1dfba25a190b369a377a435d52",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}
