@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "cyril-alexandria",
+        "primaryObservanceId": "rc:StCyrilAlexandria",
+        "category": "saint",
+        "names": {
+          "en": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+          "pt": "São Cirilo de Alexandria, bispo e doutor da Igreja",
+          "es": "San Cirilo de Alejandría, obispo y doctor de la Iglesia",
+          "it": "San Cirillo d'Alessandria, vescovo e dottore della Chiesa"
+        }
+      },
+      "recognition": {
+        "id": "recognition:cyril-alexandria:roman-catholic",
+        "personId": "cyril-alexandria",
+        "ecclesialTitles": [
+          "bishop",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/27/st--cyril-of-alexandria--bishop-and-doctor-of-the-church.html"
+      },
+      "observanceId": "observance:cyril-alexandria:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:cyril-alexandria:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StCyrilAlexandria",
+        "dateISO": "2026-06-27",
+        "sourceOccurrenceId": "snl-pt-2026-06-27-f7ae2f059bb8cb69a60cae04",
+        "sourceRecordHash": "5ec91602771a5e261811bb157d0a5c09d231231dc5314cf6b7e9f9d14f9cce55",
+        "sourceLabelPt": "S. Cirilo de Alexandria, bispo e doutor da Igreja",
+        "observedDesignation": "S. Cirilo de Alexandria, bispo e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-27"
+      }
+    }
+  ],
+  "reviewDigestSha256": "5c61a16f7f130713bd9c6cf357ecd76ad8113be803b14e083cc662f99a52579d",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

@@ -2004,6 +2004,17 @@
         "es": "San Paulino de Nola, obispo",
         "it": "San Paolino da Nola, vescovo"
       }
+    },
+    {
+      "id": "cyril-alexandria",
+      "primaryObservanceId": "rc:StCyrilAlexandria",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cyril of Alexandria, Bishop and Doctor of the Church",
+        "pt": "São Cirilo de Alexandria, bispo e doutor da Igreja",
+        "es": "San Cirilo de Alejandría, obispo y doctor de la Iglesia",
+        "it": "San Cirillo d'Alessandria, vescovo e dottore della Chiesa"
+      }
     }
   ]
 }

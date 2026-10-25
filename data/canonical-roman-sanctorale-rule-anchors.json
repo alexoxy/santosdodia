@@ -2648,6 +2648,33 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "sanctorale-rule:cyril-alexandria:general-roman",
+      "observanceId": "observance:cyril-alexandria:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 27
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-27",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization",
+            "same-day-optional-alternative"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

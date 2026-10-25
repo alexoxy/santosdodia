@@ -509,6 +509,11 @@
       "occurrenceId": "occurrence:2026-06-22:paulinus-nola:roman-catholic:pt",
       "legacyObservanceId": "rc:StPaulinusNola",
       "dateISO": "2026-06-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-27:cyril-alexandria:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCyrilAlexandria",
+      "dateISO": "2026-06-27"
     }
   ]
 }
