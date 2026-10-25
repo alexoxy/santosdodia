@@ -2026,6 +2026,17 @@
         "es": "Santa María Goretti, virgen y mártir",
         "it": "Santa Maria Goretti, vergine e martire"
       }
+    },
+    {
+      "id": "augustine-zhao-rong",
+      "primaryObservanceId": "rc:StAugustineZhaoRong",
+      "category": "saint",
+      "names": {
+        "en": "Saint Augustine Zhao Rong, Priest and Martyr",
+        "pt": "Santo Agostinho Zhao Rong, presbítero e mártir",
+        "es": "San Agustín Zhao Rong, presbítero y mártir",
+        "it": "Sant’Agostino Zhao Rong, sacerdote e martire"
+      }
     }
   ]
 }

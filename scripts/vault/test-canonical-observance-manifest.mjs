@@ -44,10 +44,10 @@ assert(first.buildReceipt.sourceDatasetSha256 !== reformatted.buildReceipt.sourc
 assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1Changed === false, 'Building Observance must not publish or mutate D1.');
 
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
-assert(first.manifest.observanceModelVersion === '1.3', 'Observance model must support reviewed subjectless collective and non-human identities v1.3.');
+assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 105, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 181, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 106, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 182, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -66,6 +66,8 @@ assert(first.manifest.semantics.subjectlessCollectiveObservanceSupported === tru
 assert(first.manifest.semantics.subjectlessCollectiveMustNotCreatePersons === true, 'Subjectless collective Observances must not fabricate Person records.');
 assert(first.manifest.semantics.subjectlessNonHumanObservanceSupported === true, 'Observance must support explicitly attested non-human commemorations without Person coercion.');
 assert(first.manifest.semantics.subjectlessNonHumanMustNotCreatePersons === true, 'Subjectless non-human Observances must not fabricate Person records.');
+assert(first.manifest.semantics.namedPersonWithBoundedCompanionsSupported === true, 'Observance must represent a named person with a bounded, unmaterialized companion group.');
+assert(first.manifest.semantics.boundedCompanionsMustNotCreateAnonymousPersons === true, 'Bounded companion groups must not fabricate anonymous Person records.');
 assert(first.manifest.semantics.subjectlessIdentityKeyRequired === true, 'Every subjectless Observance must have a stable disambiguating key.');
 assert(first.manifest.d1Projection.status === 'deferred', 'Observance identity must not be silently forced into dated occurrence tables.');
 
@@ -185,6 +187,11 @@ assert(archangels?.observanceKey === 'principal-commemoration' && archangels.obs
 assert(archangels.subjects.length === 0 && archangels.subjectlessKey === 'michael-gabriel-raphael', 'Archangels must not be coerced into human Person/Recognition records.');
 assert(archangels.evidence.some((item) => item.url.includes('vatican.va/')), 'Archangels require direct Holy See non-human attestation.');
 
+const zhaoRong = first.observances.find((item) => item.observanceId === 'observance:augustine-zhao-rong-companions:roman-catholic');
+assert(zhaoRong?.observanceType === 'named-person-with-companions-commemoration', 'Augustine Zhao Rong and companions must use the bounded companion-group type.');
+assert(zhaoRong.subjects.length === 1 && zhaoRong.subjects[0].personId === 'augustine-zhao-rong', 'Only the directly identified Augustine Zhao Rong Person may be materialized in this batch.');
+assert(zhaoRong.companionGroup?.attestedCount === 119 && zhaoRong.companionGroup.anonymousPersonsCreated === false, 'The officially bounded 119 companions must remain unmaterialized without anonymous Persons.');
+
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);
   assert(observance.resolutionStatus === 'canonical-anchor', `${observance.observanceId} lost canonical-anchor status.`);
@@ -255,4 +262,16 @@ const fabricatedAngelicPerson = structuredClone(observanceDataset);
 fabricatedAngelicPerson.observances.find((item) => item.id === 'observance:michael-gabriel-raphael-archangels:roman-catholic').subjects = structuredClone(observanceDataset.observances[0].subjects);
 expectFailure('Angelic Person coercion guard', () => build(fabricatedAngelicPerson), 'must not fabricate Person subjects');
 
-console.log(`Canonical Observance Vault v1.3 test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, including reviewed subjectless collectives and non-human commemorations, deterministic root ${first.manifest.rootSha256}.`);
+const missingCompanionGroup = structuredClone(observanceDataset);
+delete missingCompanionGroup.observances.find((item) => item.id === 'observance:augustine-zhao-rong-companions:roman-catholic').companionGroup;
+expectFailure('Bounded companion group guard', () => build(missingCompanionGroup), 'requires a bounded companionGroup');
+
+const fabricatedCompanionPersons = structuredClone(observanceDataset);
+fabricatedCompanionPersons.observances.find((item) => item.id === 'observance:augustine-zhao-rong-companions:roman-catholic').companionGroup.anonymousPersonsCreated = true;
+expectFailure('Anonymous companion Person guard', () => build(fabricatedCompanionPersons), 'must not fabricate anonymous Persons');
+
+const companionGroupOnPerson = structuredClone(observanceDataset);
+companionGroupOnPerson.observances[0].companionGroup = structuredClone(observanceDataset.observances.find((item) => item.id === 'observance:augustine-zhao-rong-companions:roman-catholic').companionGroup);
+expectFailure('Companion group type isolation guard', () => build(companionGroupOnPerson), 'must not define companionGroup');
+
+console.log(`Canonical Observance Vault v1.4 test passed: ${first.observances.length} observances across ${first.manifest.personCoverageCount} people, including bounded companion groups, deterministic root ${first.manifest.rootSha256}.`);

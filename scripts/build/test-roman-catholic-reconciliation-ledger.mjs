@@ -58,9 +58,9 @@ const buildLedger = ({
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 187 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 173, 'The ledger must distinguish fourteen TemporalRules from 173 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 103 && ledger.counts.fixedSanctoraleDays === 97 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 103 exact Sanctorale occurrences across 97 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 292 && ledger.counts.sourceBoundOccurrences === 301, 'The ledger must distinguish 292 source-bound days from 301 source-bound canonical occurrences.');
-assert(ledger.counts.unresolved === 73, 'Every unreviewed official day must remain explicit and unresolved.');
+assert(ledger.counts.fixedSanctorale === 104 && ledger.counts.fixedSanctoraleDays === 98 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 104 exact Sanctorale occurrences across 98 civil days and eleven movable/transfer bindings.');
+assert(ledger.counts.sourceBound === 293 && ledger.counts.sourceBoundOccurrences === 302, 'The ledger must distinguish 293 source-bound days from 302 source-bound canonical occurrences.');
+assert(ledger.counts.unresolved === 72, 'Every unreviewed official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-22')?.classification === 'temporale', 'First Sunday of Lent must remain classified as Temporale.');

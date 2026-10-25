@@ -2478,6 +2478,30 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "occurrence:2026-07-09:augustine-zhao-rong-companions:roman-catholic:pt",
+      "observanceId": "observance:augustine-zhao-rong-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-09",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-9",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Santos Agostinho Zao Rong, presbítero, e companheiros, mártires – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

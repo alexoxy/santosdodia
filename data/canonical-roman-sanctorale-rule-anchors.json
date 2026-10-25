@@ -2701,6 +2701,32 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "sanctorale-rule:augustine-zhao-rong-companions:general-roman",
+      "observanceId": "observance:augustine-zhao-rong-companions:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 7,
+        "day": 9
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-9",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }
