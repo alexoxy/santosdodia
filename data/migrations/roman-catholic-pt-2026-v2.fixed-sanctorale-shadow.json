@@ -1417,8 +1417,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:paulinus-nola:roman-catholic:pt",
+      "observanceId": "observance:paulinus-nola:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paulinus-nola:general-roman",
+      "legacyObservanceId": "rc:StPaulinusNola",
+      "expectedDateISO": "2026-06-22",
+      "sourceOccurrenceId": "snl-pt-2026-06-22-3df5137023fa79cd3c0a09f5",
+      "sourceRecordHash": "f98858d69a1d55998bb9f6b5316f6640726e96f8b4e90cb294c0d63ac0381c4b",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-10-25"
+  "verifiedAt": "2026-10-25",
+  "fixedMappingCount": 101
 }

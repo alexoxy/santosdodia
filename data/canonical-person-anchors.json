@@ -1993,6 +1993,17 @@
         "es": "San Romualdo, abad",
         "it": "San Romualdo, abate"
       }
+    },
+    {
+      "id": "paulinus-nola",
+      "primaryObservanceId": "rc:StPaulinusNola",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paulinus of Nola, Bishop",
+        "pt": "São Paulino de Nola, bispo",
+        "es": "San Paulino de Nola, obispo",
+        "it": "San Paolino da Nola, vescovo"
+      }
     }
   ]
 }

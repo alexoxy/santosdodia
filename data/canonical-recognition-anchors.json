@@ -5029,6 +5029,33 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:paulinus-nola:roman-catholic",
+      "personId": "paulinus-nola",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "pastor"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/22/st--paulinus--bishop-of--nola.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "bishop-of-nola"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }
