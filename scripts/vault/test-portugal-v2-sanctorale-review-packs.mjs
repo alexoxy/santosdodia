@@ -42,7 +42,6 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-29.json', '6c405243024be6eed4effb828d760d304721bfabed1175ed040987fc74b60d67'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-30.json', 'c2ea16b11385cf4759f585aca6932c84a7aaf92ea7bac4bdac45bf20b216bcd4'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-31.json', '5c61a16f7f130713bd9c6cf357ecd76ad8113be803b14e083cc662f99a52579d'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-32.json', 'b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-32.json', 'b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f']
 ]);
 

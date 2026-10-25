@@ -43,7 +43,7 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 301 && coveredSourceIds.size === 301, 'Semantic inventory coverage boundary must contain exactly 300 unique approved source rows.');
+assert(coveredRows.length === 301 && coveredSourceIds.size === 301, 'Semantic inventory coverage boundary must contain exactly 301 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
@@ -245,7 +245,7 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 88 && remainingSourceIds.size === 88 && remainingSourceHashes.size === 88, 'Semantic inventory must preserve exactly 89 unique unresolved approved-source rows.');
+assert(remaining.length === 88 && remainingSourceIds.size === 88 && remainingSourceHashes.size === 88, 'Semantic inventory must preserve exactly 88 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
 assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 301 && inventory.coverageAtInventory.remainingOccurrences === 88 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
