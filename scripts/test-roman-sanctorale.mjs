@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 105, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and five reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 106, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and six reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -87,6 +87,7 @@ try {
     ['observance:cyril-alexandria:roman-catholic', ['2026-06-27', 'optional-memorial', 12, 'general-roman']],
     ['observance:maria-goretti:roman-catholic', ['2026-07-06', 'optional-memorial', 12, 'general-roman']],
     ['observance:henry-ii:roman-catholic', ['2026-07-13', 'optional-memorial', 12, 'general-roman']],
+    ['observance:camillus-de-lellis:roman-catholic', ['2026-07-14', 'optional-memorial', 12, 'general-roman']],
     ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 12, 'general-roman']],
@@ -179,7 +180,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 105, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 106, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -189,8 +190,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The one hundred and five reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The one hundred and five reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The one hundred and six reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The one hundred and six reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     const represented = day?.celebratedCandidateId === candidate.id
@@ -218,6 +219,9 @@ try {
   const july6 = annual2026.finalCalendar.days.find(item => item.dateISO === '2026-07-06');
   assert(mariaGoretti2026 && july6?.optionalCandidateIds.includes(mariaGoretti2026.id), 'Saint Maria Goretti must remain an explicit optional memorial on 6 July 2026.');
 
+  const camillus2026 = pt2026.candidates.find(item => item.observanceId === 'observance:camillus-de-lellis:roman-catholic');
+  const july14 = annual2026.finalCalendar.days.find(item => item.dateISO === '2026-07-14');
+  assert(camillus2026 && july14?.optionalCandidateIds.includes(camillus2026.id), 'Saint Camillus de Lellis must remain an explicit optional memorial on 14 July 2026.');
   const henryII2026 = pt2026.candidates.find(item => item.observanceId === 'observance:henry-ii:roman-catholic');
   const july13 = annual2026.finalCalendar.days.find(item => item.dateISO === '2026-07-13');
   assert(henryII2026 && july13?.optionalCandidateIds.includes(henryII2026.id), 'Saint Henry II must remain an explicit optional memorial on 13 July 2026.');
@@ -284,7 +288,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: 105 authority-isolated perennial Portugal vectors, including Saint Henry II as an explicit 13 July optional memorial, Saint Maria Goretti as an explicit 6 July optional memorial and the previously reviewed alternatives; identity reuse, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: 106 authority-isolated perennial Portugal vectors, including Saint Camillus de Lellis as an explicit 14 July optional memorial, Saint Henry II as an explicit 13 July optional memorial, Saint Maria Goretti as an explicit 6 July optional memorial and the previously reviewed alternatives; identity reuse, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

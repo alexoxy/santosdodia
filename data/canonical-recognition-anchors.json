@@ -5198,6 +5198,44 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:camillus-de-lellis:roman-catholic",
+      "personId": "camillus-de-lellis",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/14/st--camillus--de-lellis--priest--founder-of-the--order-of-the-mi.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/francesco/en/angelus/2013/documents/papa-francesco_angelus_20130714.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "founder",
+            "patronage-attestation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

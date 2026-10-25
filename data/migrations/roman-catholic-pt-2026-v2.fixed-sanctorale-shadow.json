@@ -1487,9 +1487,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-14:camillus-de-lellis:roman-catholic:pt",
+      "observanceId": "observance:camillus-de-lellis:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:camillus-de-lellis:general-roman",
+      "legacyObservanceId": "rc:StCamillusDeLellis",
+      "expectedDateISO": "2026-07-14",
+      "sourceOccurrenceId": "snl-pt-2026-07-14-9cb327de646650d8bb957049",
+      "sourceRecordHash": "f231e2f4a68837eae0f15b93aa079b393d942af38d9b318254c1dbc46eca03c9",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-25",
-  "fixedMappingCount": 105
+  "fixedMappingCount": 106
 }

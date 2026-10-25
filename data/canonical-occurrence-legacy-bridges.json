@@ -529,6 +529,11 @@
       "occurrenceId": "occurrence:2026-07-13:henry-ii:roman-catholic:pt",
       "legacyObservanceId": "rc:StHenry",
       "dateISO": "2026-07-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-14:camillus-de-lellis:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCamillusDeLellis",
+      "dateISO": "2026-07-14"
     }
   ]
 }

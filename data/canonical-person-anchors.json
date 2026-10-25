@@ -2048,6 +2048,17 @@
         "es": "San Enrique II, emperador",
         "it": "Sant'Enrico II, imperatore"
       }
+    },
+    {
+      "id": "camillus-de-lellis",
+      "primaryObservanceId": "rc:StCamillusDeLellis",
+      "category": "saint",
+      "names": {
+        "en": "Saint Camillus de Lellis, Priest",
+        "pt": "São Camilo de Lellis, presbítero",
+        "es": "San Camilo de Lelis, presbítero",
+        "it": "San Camillo de Lellis, sacerdote"
+      }
     }
   ]
 }
