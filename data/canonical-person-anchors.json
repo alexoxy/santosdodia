@@ -2015,6 +2015,17 @@
         "es": "San Cirilo de Alejandría, obispo y doctor de la Iglesia",
         "it": "San Cirillo d'Alessandria, vescovo e dottore della Chiesa"
       }
+    },
+    {
+      "id": "maria-goretti",
+      "primaryObservanceId": "rc:StMariaGoretti",
+      "category": "saint",
+      "names": {
+        "en": "Saint Maria Goretti, Virgin and Martyr",
+        "pt": "Santa Maria Goretti, virgem e mártir",
+        "es": "Santa María Goretti, virgen y mártir",
+        "it": "Santa Maria Goretti, vergine e martire"
+      }
     }
   ]
 }
