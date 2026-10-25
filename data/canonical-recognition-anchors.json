@@ -5095,6 +5095,44 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:maria-goretti:roman-catholic",
+      "personId": "maria-goretti",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/06/st--maria-goretti--virgin-and-martyr.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "virgin",
+            "martyr"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/speeches/2002/july/documents/hf_jp-ii_spe_20020708_santa-maria-goretti.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "canonization",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

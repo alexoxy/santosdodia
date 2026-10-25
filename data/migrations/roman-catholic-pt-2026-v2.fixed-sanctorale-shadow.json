@@ -1445,9 +1445,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-06:maria-goretti:roman-catholic:pt",
+      "observanceId": "observance:maria-goretti:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:maria-goretti:general-roman",
+      "legacyObservanceId": "rc:StMariaGoretti",
+      "expectedDateISO": "2026-07-06",
+      "sourceOccurrenceId": "snl-pt-2026-07-06-9cf5bc757be978b6d3aaffb6",
+      "sourceRecordHash": "53ed0e313c273b9f46ae942dcda5d865d75be810055ba90b7f58385da2d77c1b",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-25",
-  "fixedMappingCount": 102
+  "fixedMappingCount": 103
 }

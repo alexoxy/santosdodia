@@ -514,6 +514,11 @@
       "occurrenceId": "occurrence:2026-06-27:cyril-alexandria:roman-catholic:pt",
       "legacyObservanceId": "rc:StCyrilAlexandria",
       "dateISO": "2026-06-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-06:maria-goretti:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMariaGoretti",
+      "dateISO": "2026-07-06"
     }
   ]
 }

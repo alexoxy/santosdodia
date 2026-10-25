@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-32.json",
+  "reviewDigestSha256": "b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "maria-goretti"
+  ],
+  "promotedObservanceIds": [
+    "observance:maria-goretti:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 301,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 88
+  },
+  "fixedSanctoraleMappingDigestSha256": "2803c7f840ab594e958d04d8e317f411e8a7192aa6ac4ef0156ccb1d31c36a53",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}
