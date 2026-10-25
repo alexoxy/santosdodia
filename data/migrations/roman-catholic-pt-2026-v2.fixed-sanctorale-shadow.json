@@ -1473,9 +1473,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-13:henry-ii:roman-catholic:pt",
+      "observanceId": "observance:henry-ii:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:henry-ii:general-roman",
+      "legacyObservanceId": "rc:StHenry",
+      "expectedDateISO": "2026-07-13",
+      "sourceOccurrenceId": "snl-pt-2026-07-13-a7a1f66014b9c87a975cec08",
+      "sourceRecordHash": "a45ff9cd285dd1f436c45c81e28fca6f02e71beffcfcb9901e918b0d45714734",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-25",
-  "fixedMappingCount": 104
+  "fixedMappingCount": 105
 }

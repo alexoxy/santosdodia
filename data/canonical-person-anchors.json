@@ -2037,6 +2037,17 @@
         "es": "San Agustín Zhao Rong, presbítero y mártir",
         "it": "Sant’Agostino Zhao Rong, sacerdote e martire"
       }
+    },
+    {
+      "id": "henry-ii",
+      "primaryObservanceId": "rc:StHenry",
+      "category": "saint",
+      "names": {
+        "en": "Saint Henry II, Emperor",
+        "pt": "Santo Henrique II, imperador",
+        "es": "San Enrique II, emperador",
+        "it": "Sant'Enrico II, imperatore"
+      }
     }
   ]
 }

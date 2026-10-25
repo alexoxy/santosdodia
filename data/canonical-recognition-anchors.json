@@ -5171,6 +5171,33 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:henry-ii:roman-catholic",
+      "personId": "henry-ii",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "emperor",
+        "layman"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/13/st-henry-ii-emperor.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "emperor"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }
