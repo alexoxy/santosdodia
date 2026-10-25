@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observanceModelVersion": "1.3",
+  "observanceModelVersion": "1.4",
   "status": "repository-reviewed-observance-anchors",
   "observances": [
     {
@@ -3658,6 +3658,81 @@
             "observance-attestation",
             "fixed-date",
             "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "observance:augustine-zhao-rong-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "named-person-with-companions-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "augustine-zhao-rong",
+          "recognitionId": "recognition:augustine-zhao-rong:roman-catholic"
+        }
+      ],
+      "companionGroup": {
+        "groupKey": "martyrs-of-china-companions",
+        "attestedCount": 119,
+        "enumerationStatus": "officially-bounded-not-materialized",
+        "anonymousPersonsCreated": false,
+        "evidence": [
+          {
+            "publisher": "Vatican News",
+            "url": "https://www.vaticannews.va/en/saints/07/09/sts--augustine-zhao-rong--priest-and-companions--chinese-martyrs.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs"
+            ]
+          },
+          {
+            "publisher": "Holy See",
+            "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "canonization"
+            ]
+          }
+        ]
+      },
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-9",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/09/sts--augustine-zhao-rong--priest-and-companions--chinese-martyrs.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity",
+            "bounded-companion-group"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+          "claimTypes": [
+            "observance-attestation",
+            "canonization",
+            "bounded-companion-group"
           ]
         }
       ],

@@ -13,8 +13,9 @@ const ecclesialSourcePath = path.join(root, 'data', 'canonical-ecclesial-context
 const ID_PATTERN = /^observance:[a-z0-9]+(?:-[a-z0-9]+)*(?::[a-z0-9]+(?:-[a-z0-9]+)*)+$/u;
 const CHURCH_ID_PATTERN = /^church:[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const OBSERVANCE_KEY_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
-const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'collective-commemoration', 'angelic-commemoration', 'feast', 'mystery', 'marian-title', 'marian-solemnity', 'other']);
+const ALLOWED_TYPES = new Set(['person-commemoration', 'multi-person-commemoration', 'named-person-with-companions-commemoration', 'collective-commemoration', 'angelic-commemoration', 'feast', 'mystery', 'marian-title', 'marian-solemnity', 'other']);
 const SUBJECTLESS_TYPES = new Set(['collective-commemoration', 'angelic-commemoration']);
+const COMPANION_GROUP_TYPE = 'named-person-with-companions-commemoration';
 const ALLOWED_SCOPES = new Set(['church-attested', 'jurisdictional', 'local', 'unknown']);
 const FORBIDDEN_OCCURRENCE_KEYS = new Set(['year', 'month', 'day', 'date', 'dateISO', 'feastDate', 'calendarSystem', 'calendarId', 'jurisdictionId', 'rank', 'grade', 'precedence', 'transferRule']);
 
@@ -48,7 +49,7 @@ function assertNoOccurrenceLeak(record) {
 
 export function buildCanonicalObservanceVaultRelease(dataset, personDataset, recognitionDataset, ecclesialDataset, { sourceBytes = null, sourceCommit = null, generatedAt = null } = {}) {
   assert(dataset?.schemaVersion === 1, 'Canonical observance dataset schemaVersion must be 1.');
-  assert(dataset?.observanceModelVersion === '1.3', 'Canonical observance modelVersion must be 1.3.');
+  assert(dataset?.observanceModelVersion === '1.4', 'Canonical observance modelVersion must be 1.4.');
   assert(dataset?.status === 'repository-reviewed-observance-anchors', 'Canonical observance dataset is not repository-reviewed.');
   assert(Array.isArray(dataset?.observances) && dataset.observances.length > 0, 'Canonical observance dataset is empty.');
   assert(personDataset?.schemaVersion === 1 && Array.isArray(personDataset?.people), 'Canonical Person dataset is required for Observance validation.');
@@ -102,11 +103,33 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       return { kind: 'person', personId: subject.personId, recognitionId: subject.recognitionId };
     }).sort((left, right) => `${left.personId}:${left.recognitionId}`.localeCompare(`${right.personId}:${right.recognitionId}`));
 
+    const hasCompanionGroup = raw.observanceType === COMPANION_GROUP_TYPE;
+    assert(hasCompanionGroup ? raw.companionGroup !== undefined : raw.companionGroup === undefined, hasCompanionGroup
+      ? `${raw.id} requires a bounded companionGroup.`
+      : `${raw.id} must not define companionGroup for ${raw.observanceType}.`);
+    const companionGroup = hasCompanionGroup ? (() => {
+      const group = raw.companionGroup;
+      assert(OBSERVANCE_KEY_PATTERN.test(group?.groupKey ?? ''), `${raw.id} companionGroup requires a stable groupKey.`);
+      assert(Number.isSafeInteger(group?.attestedCount) && group.attestedCount > 0, `${raw.id} companionGroup requires a positive attestedCount.`);
+      assert(group?.enumerationStatus === 'officially-bounded-not-materialized', `${raw.id} companionGroup must remain explicitly unmaterialized.`);
+      assert(group?.anonymousPersonsCreated === false, `${raw.id} companionGroup must not fabricate anonymous Persons.`);
+      assert(Array.isArray(group?.evidence) && group.evidence.length > 0, `${raw.id} companionGroup requires official evidence.`);
+      const evidence = group.evidence.map((item, index) => {
+        assert(typeof item?.publisher === 'string' && item.publisher.trim().length > 0, `${raw.id} companionGroup evidence ${index} requires a publisher.`);
+        assert(typeof item?.url === 'string' && item.url.startsWith('https://'), `${raw.id} companionGroup evidence ${index} requires an HTTPS URL.`);
+        const companionAuthorityDomains = new Set((churches.get(raw.churchId)?.authorityDomains ?? []).map((value) => String(value).toLowerCase().replace(/^www\./u, '')));
+        assert(companionAuthorityDomains.has(hostname(item.url)), `${raw.id} companionGroup evidence ${index} is outside canonical Church authority domains.`);
+        assert(Array.isArray(item?.claimTypes) && item.claimTypes.includes('bounded-companion-group'), `${raw.id} companionGroup evidence ${index} must attest the bounded group.`);
+        return { publisher: item.publisher.trim(), url: item.url, claimTypes: sortedUnique(item.claimTypes.map(String)) };
+      }).sort((left, right) => left.url.localeCompare(right.url));
+      return { groupKey: group.groupKey, attestedCount: group.attestedCount, enumerationStatus: group.enumerationStatus, anonymousPersonsCreated: false, evidence };
+    })() : null;
+
     // Canonical Observance identity is Church + stable liturgical key + canonical subjects.
     // observanceType is descriptive taxonomy and may evolve without changing identity.
     const canonicalSubjectKey = subjectless
       ? `subjectless:${raw.subjectlessKey}`
-      : subjects.map((item) => `${item.personId}:${item.recognitionId}`).join('|');
+      : `${subjects.map((item) => `${item.personId}:${item.recognitionId}`).join('|')}${companionGroup ? `|companions:${companionGroup.groupKey}:${companionGroup.attestedCount}` : ''}`;
     const canonicalKey = `${raw.churchId}\u0000${raw.observanceKey}\u0000${canonicalSubjectKey}`;
     assert(!canonicalKeys.has(canonicalKey), `${raw.id} duplicates canonical Observance identity.`);
     canonicalKeys.add(canonicalKey);
@@ -137,6 +160,7 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       observanceType: raw.observanceType,
       subjects,
       ...(subjectless ? { subjectlessKey: raw.subjectlessKey } : {}),
+      ...(companionGroup ? { companionGroup } : {}),
       scope: raw.scope,
       occurrenceDateImplied: false,
       calendarSystemImplied: false,
@@ -200,7 +224,9 @@ export function buildCanonicalObservanceVaultRelease(dataset, personDataset, rec
       subjectlessCollectiveMustNotCreatePersons: true,
       subjectlessNonHumanObservanceSupported: true,
       subjectlessNonHumanMustNotCreatePersons: true,
-      subjectlessIdentityKeyRequired: true
+      subjectlessIdentityKeyRequired: true,
+      namedPersonWithBoundedCompanionsSupported: true,
+      boundedCompanionsMustNotCreateAnonymousPersons: true
     },
     d1Projection: {
       status: 'deferred',

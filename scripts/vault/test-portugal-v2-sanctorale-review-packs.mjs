@@ -42,7 +42,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-29.json', '6c405243024be6eed4effb828d760d304721bfabed1175ed040987fc74b60d67'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-30.json', 'c2ea16b11385cf4759f585aca6932c84a7aaf92ea7bac4bdac45bf20b216bcd4'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-31.json', '5c61a16f7f130713bd9c6cf357ecd76ad8113be803b14e083cc662f99a52579d'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-32.json', 'b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-32.json', 'b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-33.json', 'fb5badce4be9169c89886941d6c688188c6cac79f8a816c8f4fdfd82bb495660']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -146,6 +147,7 @@ for (const fileName of packFiles) {
     const collective = candidatePeople.length > 1;
     const subjectlessCollective = candidate.subjectlessCollective === true;
     const subjectlessNonHuman = candidate.subjectlessNonHuman === true;
+    const namedPersonWithCompanions = candidate.namedPersonWithCompanions === true;
     const subjectless = subjectlessCollective || subjectlessNonHuman;
 
     assert(candidatePeople.length === candidateRecognitions.length, `${occurrenceKey} Person/Recognition cardinality differs.`);
@@ -178,6 +180,14 @@ for (const fileName of packFiles) {
       assert(candidate.nonHumanEvidence.every((item) => item.claimTypes?.includes('non-human-subjects') && item.claimTypes?.includes('observance-attestation')), `${occurrenceKey} evidence does not attest the non-human Observance.`);
       assert(candidate.nonHumanEvidence.some((item) => /^https:\/\/(?:www\.)?vatican\.va\//u.test(item.url)), `${occurrenceKey} lacks direct Holy See non-human evidence.`);
     }
+    if (namedPersonWithCompanions) {
+      assert(candidate.observanceType === 'named-person-with-companions-commemoration', `${occurrenceKey} bounded companions must use the dedicated Observance type.`);
+      assert(candidatePeople.length === 1 && reusedSubjects.length === 0, `${occurrenceKey} must materialize exactly one named lead Person.`);
+      assert(candidate.companionGroup?.attestedCount === 119, `${occurrenceKey} must preserve the officially attested 119 companions.`);
+      assert(candidate.companionGroup?.enumerationStatus === 'officially-bounded-not-materialized' && candidate.companionGroup?.anonymousPersonsCreated === false, `${occurrenceKey} must not fabricate anonymous companion Persons.`);
+      assert(Array.isArray(candidate.companionGroup?.evidence) && candidate.companionGroup.evidence.length >= 2, `${occurrenceKey} requires competent official evidence for the bounded companion group.`);
+      assert(candidate.companionGroup.evidence.every((item) => item.claimTypes?.includes('bounded-companion-group')), `${occurrenceKey} companion evidence does not attest the bounded group.`);
+    }
     for (const person of candidatePeople) {
       const recognition = candidateRecognitions.find((item) => item.personId === person.id) ?? (candidatePeople.length === 1 ? candidateRecognitions[0] : null);
       assert(person.primaryObservanceId === source.canonicalEventId && person.category === 'saint', `${person.id} must remain explicitly bridged to its approved legacy event.`);
@@ -190,7 +200,7 @@ for (const fileName of packFiles) {
     }
     assert(candidate.observanceId === `observance:${occurrenceKey}:roman-catholic`, `${occurrenceKey} Observance identity is invalid.`);
     assert(candidate.sanctoraleRuleId === `sanctorale-rule:${occurrenceKey}:general-roman`, `${occurrenceKey} Sanctorale rule identity is invalid.`);
-    assert(subjectless || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its subjects.`);
+    assert(subjectless || namedPersonWithCompanions || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its subjects.`);
     assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${occurrenceKey} reviewed rank refinement changed unexpectedly.`);
     assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${occurrenceKey} lacks an exact 2026 date.`);
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${occurrenceKey} source occurrence is not bound to its exact SNL date.`);

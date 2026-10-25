@@ -1459,9 +1459,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-09:augustine-zhao-rong-companions:roman-catholic:pt",
+      "observanceId": "observance:augustine-zhao-rong-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:augustine-zhao-rong-companions:general-roman",
+      "legacyObservanceId": "rc:StAugustineZhaoRong",
+      "expectedDateISO": "2026-07-09",
+      "sourceOccurrenceId": "snl-pt-2026-07-09-91a0f3829e7d7f22d6a26f94",
+      "sourceRecordHash": "5087d54c88a245a59672afd486f6eb51bd6d53e723016876979b5512b03edb30",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-25",
-  "fixedMappingCount": 103
+  "fixedMappingCount": 104
 }

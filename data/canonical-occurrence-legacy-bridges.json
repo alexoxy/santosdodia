@@ -519,6 +519,11 @@
       "occurrenceId": "occurrence:2026-07-06:maria-goretti:roman-catholic:pt",
       "legacyObservanceId": "rc:StMariaGoretti",
       "dateISO": "2026-07-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-09:augustine-zhao-rong-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineZhaoRong",
+      "dateISO": "2026-07-09"
     }
   ]
 }

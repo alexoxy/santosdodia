@@ -5133,6 +5133,44 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:augustine-zhao-rong:roman-catholic",
+      "personId": "augustine-zhao-rong",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/09/sts--augustine-zhao-rong--priest-and-companions--chinese-martyrs.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "martyr"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "canonization",
+            "martyr"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }
