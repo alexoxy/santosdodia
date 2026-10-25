@@ -1389,8 +1389,22 @@
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding",
       "sameDaySaturdayMarianOptionPreserved": true
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-11:barnabas-apostle:roman-catholic:pt",
+      "observanceId": "observance:barnabas-apostle:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:barnabas-apostle:general-roman",
+      "legacyObservanceId": "rc:StBarnabasAp",
+      "expectedDateISO": "2026-06-11",
+      "sourceOccurrenceId": "snl-pt-2026-06-11-2546b0da6c54fafa4470076e",
+      "sourceRecordHash": "3e513336f52393f13ec1675e3bb3ecd72cff35e9e99e2f7ae877ff1762aef80d",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-10-23"
+  "verifiedAt": "2026-10-25"
 }

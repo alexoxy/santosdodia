@@ -494,6 +494,11 @@
       "occurrenceId": "occurrence:2026-06-06:norbert-xanten:roman-catholic:pt",
       "legacyObservanceId": "rc:StNorbert",
       "dateISO": "2026-06-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-11:barnabas-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBarnabasAp",
+      "dateISO": "2026-06-11"
     }
   ]
 }

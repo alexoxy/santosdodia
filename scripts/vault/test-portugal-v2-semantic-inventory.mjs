@@ -43,7 +43,7 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 296 && coveredSourceIds.size === 296, 'Semantic inventory coverage boundary must contain exactly 296 unique approved source rows.');
+assert(coveredRows.length === 297 && coveredSourceIds.size === 297, 'Semantic inventory coverage boundary must contain exactly 297 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
@@ -245,17 +245,17 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 93 && remainingSourceIds.size === 93 && remainingSourceHashes.size === 93, 'Semantic inventory must preserve exactly 93 unique unresolved approved-source rows.');
+assert(remaining.length === 92 && remainingSourceIds.size === 92 && remainingSourceHashes.size === 92, 'Semantic inventory must preserve exactly 92 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
-assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 296 && inventory.coverageAtInventory.remainingOccurrences === 93 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
+assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 297 && inventory.coverageAtInventory.remainingOccurrences === 92 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
 
 const actualCounts = Object.fromEntries([...familyCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 assert(JSON.stringify(actualCounts) === JSON.stringify(inventory.familyCounts), 'Semantic family counts differ from the exact unresolved rows.');
 assert(actualCounts['temporal-weekday-family'] === 3 && (actualCounts['temporal-sunday-family'] ?? 0) === 0 && (actualCounts['saturday-marian-family'] ?? 0) === 0, 'Algorithmic temporal backlog classification drifted.');
-assert(actualCounts['fixed-person'] === 46, 'Fixed-person backlog classification drifted.');
+assert(actualCounts['fixed-person'] === 45, 'Fixed-person backlog classification drifted.');
 assert((actualCounts['fixed-collective'] ?? 0) === 0, 'Fixed-collective backlog must be empty after the Archangels promotion.');
 assert(actualCounts['jurisdiction-structural-overlay'] + actualCounts['portugal-proper'] + actualCounts['jurisdiction-rank-override'] === 20 && inventory.humanReviewBoundary.occurrenceCount === 20, 'Portugal-specific human-review boundary must remain explicit.');
 assert(inventory.classificationPolicy.labelsCreateIdentity === false && inventory.classificationPolicy.annualDateCreatesPerennialRule === false && inventory.classificationPolicy.suppressedCandidatesCountAsCoverage === false && inventory.classificationPolicy.withheldCandidatesCountAsCoverage === false && inventory.classificationPolicy.transferOriginsCountAsCoverage === false, 'Semantic inventory fail-closed policy weakened.');
 
-console.log('Portugal semantic inventory passed: 296 covered + 93 exact unresolved source rows = 389; three remaining temporal-family rows and 20 Portugal-specific rows are explicitly partitioned.');
+console.log('Portugal semantic inventory passed: 297 covered + 92 exact unresolved source rows = 389; three remaining temporal-family rows and 20 Portugal-specific rows are explicitly partitioned.');

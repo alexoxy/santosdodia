@@ -1971,6 +1971,17 @@
         "es": "San Norberto de Xanten",
         "it": "San Norberto di Xanten"
       }
+    },
+    {
+      "id": "barnabas-apostle",
+      "primaryObservanceId": "rc:StBarnabasAp",
+      "category": "saint",
+      "names": {
+        "en": "Saint Barnabas, Apostle",
+        "pt": "São Barnabé, apóstolo",
+        "es": "San Bernabé, apóstol",
+        "it": "San Barnaba, apostolo"
+      }
     }
   ]
 }
