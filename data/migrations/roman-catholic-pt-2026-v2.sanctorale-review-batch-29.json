@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "romuald-ravenna",
+        "primaryObservanceId": "rc:StRomuald",
+        "category": "saint",
+        "names": {
+          "en": "Saint Romuald, Abbot",
+          "pt": "São Romualdo, abade",
+          "es": "San Romualdo, abad",
+          "it": "San Romualdo, abate"
+        }
+      },
+      "recognition": {
+        "id": "recognition:romuald-ravenna:roman-catholic",
+        "personId": "romuald-ravenna",
+        "ecclesialTitles": [
+          "abbot",
+          "religious-founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/19/st-romuald--abbott--founder-of-the--camaldolese-order.html"
+      },
+      "observanceId": "observance:romuald-ravenna:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:romuald-ravenna:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StRomuald",
+        "dateISO": "2026-06-19",
+        "sourceOccurrenceId": "snl-pt-2026-06-19-1f321a1581d134c16af3c7d9",
+        "sourceRecordHash": "246ec2d8ba7251341149092c2872569742422259311f6f0508697562ae664d09",
+        "sourceLabelPt": "S. Romualdo, abade",
+        "observedDesignation": "S. Romualdo, abade – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-19"
+      }
+    }
+  ],
+  "reviewDigestSha256": "6c405243024be6eed4effb828d760d304721bfabed1175ed040987fc74b60d67",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

@@ -499,6 +499,11 @@
       "occurrenceId": "occurrence:2026-06-11:barnabas-apostle:roman-catholic:pt",
       "legacyObservanceId": "rc:StBarnabasAp",
       "dateISO": "2026-06-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-19:romuald-ravenna:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRomuald",
+      "dateISO": "2026-06-19"
     }
   ]
 }

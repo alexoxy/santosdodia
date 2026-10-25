@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 297,
-    "remainingOccurrences": 92,
+    "sourceBoundOccurrences": 298,
+    "remainingOccurrences": 91,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 45,
+    "fixed-person": 44,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -183,13 +183,6 @@
       "dateISO": "2026-06-03",
       "canonicalEventId": "rc:StsCharlesLwanga",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-06-19-1f321a1581d134c16af3c7d9",
-      "sourceRecordHash": "246ec2d8ba7251341149092c2872569742422259311f6f0508697562ae664d09",
-      "dateISO": "2026-06-19",
-      "canonicalEventId": "rc:StRomuald",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-06-20-3a79989be9379d0e1fad1317",

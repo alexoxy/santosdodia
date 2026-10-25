@@ -2596,6 +2596,32 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "sanctorale-rule:romuald-ravenna:general-roman",
+      "observanceId": "observance:romuald-ravenna:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 6,
+        "day": 19
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-19",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }
