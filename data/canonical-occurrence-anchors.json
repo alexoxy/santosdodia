@@ -2429,6 +2429,31 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "occurrence:2026-06-27:cyril-alexandria:roman-catholic:pt",
+      "observanceId": "observance:cyril-alexandria:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-06-27",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-27",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-day-optional-alternative"
+          ],
+          "observedDesignation": "S. Cirilo de Alexandria, bispo e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

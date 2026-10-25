@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 299,
-    "remainingOccurrences": 90,
+    "sourceBoundOccurrences": 300,
+    "remainingOccurrences": 89,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 43,
+    "fixed-person": 42,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -190,13 +190,6 @@
       "dateISO": "2026-06-20",
       "canonicalEventId": "rc-pt:BlsSanchaMafaldaTeresa",
       "semanticFamily": "portugal-proper"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-06-27-f7ae2f059bb8cb69a60cae04",
-      "sourceRecordHash": "5ec91602771a5e261811bb157d0a5c09d231231dc5314cf6b7e9f9d14f9cce55",
-      "dateISO": "2026-06-27",
-      "canonicalEventId": "rc:StCyrilAlexandria",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-07-06-9cf5bc757be978b6d3aaffb6",

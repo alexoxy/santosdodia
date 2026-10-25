@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 101, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and one reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 102, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and two reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -84,6 +84,7 @@ try {
     ['observance:barnabas-apostle:roman-catholic', ['2026-06-11', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:romuald-ravenna:roman-catholic', ['2026-06-19', 'optional-memorial', 12, 'general-roman']],
     ['observance:paulinus-nola:roman-catholic', ['2026-06-22', 'optional-memorial', 12, 'general-roman']],
+    ['observance:cyril-alexandria:roman-catholic', ['2026-06-27', 'optional-memorial', 12, 'general-roman']],
     ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 12, 'general-roman']],
@@ -175,7 +176,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 101, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 102, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -185,8 +186,8 @@ try {
   }
 
   const annual2026 = materialize.materializeRomanAnnualCalendarWithTransfers(2026, roman.ROMAN_PORTUGAL_POLICY, pt2026.candidates);
-  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The one hundred and one reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
-  assert(annual2026.appliedTransfers.length === 0, 'The one hundred and one reviewed 2026 Sanctorale vectors must not require a transfer.');
+  assert(annual2026.status === 'resolved' && annual2026.finalCalendar, 'The one hundred and two reviewed 2026 Sanctorale rules must resolve through the full annual engine.');
+  assert(annual2026.appliedTransfers.length === 0, 'The one hundred and two reviewed 2026 Sanctorale vectors must not require a transfer.');
   for (const candidate of pt2026.candidates) {
     const day = annual2026.finalCalendar.days.find(item => item.dateISO === candidate.dateISO);
     const represented = day?.celebratedCandidateId === candidate.id
@@ -206,6 +207,9 @@ try {
   const paulinus2026 = pt2026.candidates.find(item => item.observanceId === 'observance:paulinus-nola:roman-catholic');
   const june22 = annual2026.finalCalendar.days.find(item => item.dateISO === '2026-06-22');
   assert(paulinus2026 && june22?.optionalCandidateIds.includes(paulinus2026.id), 'Saint Paulinus of Nola must remain an optional memorial choice on 22 June 2026 alongside the independently preserved John Fisher and Thomas More option.');
+  const cyrilAlexandria2026 = pt2026.candidates.find(item => item.observanceId === 'observance:cyril-alexandria:roman-catholic');
+  const june27 = annual2026.finalCalendar.days.find(item => item.dateISO === '2026-06-27');
+  assert(cyrilAlexandria2026 && june27?.optionalCandidateIds.includes(cyrilAlexandria2026.id), 'Saint Cyril of Alexandria must remain an explicit optional memorial on 27 June 2026 alongside the independently preserved Saturday Marian option.');
 
   const pt2025 = sanctorale.materializeRomanSanctoraleCandidates(2025, rules, policies, 'roman-sanctorale-policy:pt');
   const annual2025 = materialize.materializeRomanAnnualCalendarWithTransfers(2025, roman.ROMAN_PORTUGAL_POLICY, pt2025.candidates);
@@ -269,7 +273,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-  console.log('Roman Sanctorale passed: 101 authority-isolated perennial Portugal vectors, including Saint Paulinus of Nola and John Fisher/Thomas More as independent 22 June optional alternatives, Saint Romuald as an explicit 19 June optional memorial, Saint Barnabas as the obligatory memorial on 11 June and Saint Norbert as an explicit 6 June optional choice alongside the independently preserved Saturday Marian option; identity reuse, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+  console.log('Roman Sanctorale passed: 102 authority-isolated perennial Portugal vectors, including Saint Cyril of Alexandria as an explicit 27 June optional choice alongside the independently preserved Saturday Marian option, Saint Paulinus of Nola and John Fisher/Thomas More as independent 22 June optional alternatives, Saint Romuald as an explicit 19 June optional memorial, Saint Barnabas as the obligatory memorial on 11 June and Saint Norbert as an explicit 6 June optional choice alongside the independently preserved Saturday Marian option; identity reuse, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

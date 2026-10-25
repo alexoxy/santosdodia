@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.3', 'Observance model must support reviewed subjectless collective and non-human identities v1.3.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 103, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 179, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 104, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 180, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -95,6 +95,8 @@ const romuald = first.observances.find((item) => item.observanceId === 'observan
 assert(romuald?.observanceKey === 'principal-commemoration' && romuald.observanceType === 'person-commemoration' && romuald.subjects.length === 1 && romuald.subjects[0].personId === 'romuald-ravenna' && romuald.subjects[0].recognitionId === 'recognition:romuald-ravenna:roman-catholic', 'Saint Romuald must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
 const paulinus = first.observances.find((item) => item.observanceId === 'observance:paulinus-nola:roman-catholic');
 assert(paulinus?.observanceKey === 'principal-commemoration' && paulinus.observanceType === 'person-commemoration' && paulinus.subjects.length === 1 && paulinus.subjects[0].personId === 'paulinus-nola' && paulinus.subjects[0].recognitionId === 'recognition:paulinus-nola:roman-catholic', 'Saint Paulinus of Nola must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
+const cyrilAlexandria = first.observances.find((item) => item.observanceId === 'observance:cyril-alexandria:roman-catholic');
+assert(cyrilAlexandria?.observanceKey === 'principal-commemoration' && cyrilAlexandria.observanceType === 'person-commemoration' && cyrilAlexandria.subjects.length === 1 && cyrilAlexandria.subjects[0].personId === 'cyril-alexandria' && cyrilAlexandria.subjects[0].recognitionId === 'recognition:cyril-alexandria:roman-catholic', 'Saint Cyril of Alexandria must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
 const benedict = first.observances.find((item) => item.observanceId === 'observance:benedict-nursia:roman-catholic');
 assert(benedict?.observanceKey === 'principal-commemoration' && benedict.observanceType === 'person-commemoration' && benedict.subjects.length === 1 && benedict.subjects[0].personId === 'benedict-nursia', 'Saint Benedict must have one Church-scoped canonical Observance without carrying annual date or European rank.');
 const bridget = first.observances.find((item) => item.observanceId === 'observance:bridget-sweden:roman-catholic');

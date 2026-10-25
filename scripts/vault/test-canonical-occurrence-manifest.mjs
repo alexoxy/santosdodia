@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 101, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 101, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 102, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 102, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -84,6 +84,7 @@ const expected = new Map([
   ['observance:barnabas-apostle:roman-catholic', ['2026-06-11', 'obligatory-memorial', 'MO', 'rc:StBarnabasAp']],
   ['observance:romuald-ravenna:roman-catholic', ['2026-06-19', 'optional-memorial', 'MF', 'rc:StRomuald']],
   ['observance:paulinus-nola:roman-catholic', ['2026-06-22', 'optional-memorial', 'MF', 'rc:StPaulinusNola']],
+  ['observance:cyril-alexandria:roman-catholic', ['2026-06-27', 'optional-memorial', 'MF', 'rc:StCyrilAlexandria']],
   ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StPancras']],
   ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StsNereusAchilleus']],
   ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 'MF', 'rc:StsMarcellinusPeter']],
