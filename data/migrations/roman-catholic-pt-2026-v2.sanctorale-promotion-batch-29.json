@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-29.json",
+  "reviewDigestSha256": "6c405243024be6eed4effb828d760d304721bfabed1175ed040987fc74b60d67",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "romuald-ravenna"
+  ],
+  "promotedObservanceIds": [
+    "observance:romuald-ravenna:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 298,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 91
+  },
+  "fixedSanctoraleMappingDigestSha256": "2fa7daae88b45030d307bd21a5bb381c0c3e800c0dd4f03109e8ea7b98a96f43",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

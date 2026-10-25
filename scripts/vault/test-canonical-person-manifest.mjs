@@ -44,7 +44,7 @@ assert(!('sourceDatasetSha256' in first.manifest), 'Immutable canonical manifest
 assert(first.buildReceipt.rootSha256 === first.manifest.rootSha256, 'Build receipt must point to the immutable canonical root it generated.');
 assert(first.buildReceipt.publicationChanged === false, 'Building a canonical release must not imply runtime publication.');
 assert(first.manifest.peopleCount === dataset.people.length, 'Canonical Person manifest count must match the reviewed anchor dataset.');
-assert(first.manifest.peopleCount === 180, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');
+assert(first.manifest.peopleCount === 181, 'The current reviewed canonical Person anchor baseline unexpectedly changed; review the migration explicitly.');
 assert(first.people.length === first.legacyObservanceBridges.length, 'Every migrated Person anchor must retain one explicit legacy observance bridge during compatibility migration.');
 assert(first.manifest.vaultLayer === 'canonical', 'Canonical Person manifest must target the canonical Vault layer.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Writing a canonical Vault release must not itself publish runtime content.');
@@ -72,7 +72,7 @@ for (const personId of [
   'dominic-guzman', 'ignatius-loyola', 'francis-xavier',
   'raymond-penyafort', 'vincent-saragossa', 'angela-merici', 'blaise-sebaste', 'ansgar-hamburg',
   'fidelis-sigmaringen', 'peter-chanel', 'louis-marie-montfort', 'pius-v-pope', 'john-i-pope',
-  'bernardine-siena', 'rita-cascia', 'pancras', 'augustine-canterbury', 'paul-vi', 'norbert-xanten', 'barnabas-apostle',
+  'bernardine-siena', 'rita-cascia', 'pancras', 'augustine-canterbury', 'paul-vi', 'norbert-xanten', 'barnabas-apostle', 'romuald-ravenna',
   'timothy-ephesus', 'titus-crete', 'cornelius-pope', 'cyprian-carthage',
   'john-brebeuf', 'isaac-jogues', 'gabriel-lalemant', 'antoine-daniel',
   'charles-garnier', 'noel-chabanel', 'rene-goupil', 'jean-de-la-lande',

@@ -5001,6 +5001,34 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "recognition:romuald-ravenna:roman-catholic",
+      "personId": "romuald-ravenna",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "abbot",
+        "religious-founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/06/19/st-romuald--abbott--founder-of-the--camaldolese-order.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "abbot",
+            "religious-founder"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-25"
     }
   ]
 }

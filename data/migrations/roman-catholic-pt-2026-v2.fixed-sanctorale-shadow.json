@@ -1403,6 +1403,20 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-19:romuald-ravenna:roman-catholic:pt",
+      "observanceId": "observance:romuald-ravenna:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:romuald-ravenna:general-roman",
+      "legacyObservanceId": "rc:StRomuald",
+      "expectedDateISO": "2026-06-19",
+      "sourceOccurrenceId": "snl-pt-2026-06-19-1f321a1581d134c16af3c7d9",
+      "sourceRecordHash": "246ec2d8ba7251341149092c2872569742422259311f6f0508697562ae664d09",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

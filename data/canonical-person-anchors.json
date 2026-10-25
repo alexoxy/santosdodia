@@ -1982,6 +1982,17 @@
         "es": "San Bernabé, apóstol",
         "it": "San Barnaba, apostolo"
       }
+    },
+    {
+      "id": "romuald-ravenna",
+      "primaryObservanceId": "rc:StRomuald",
+      "category": "saint",
+      "names": {
+        "en": "Saint Romuald, Abbot",
+        "pt": "São Romualdo, abade",
+        "es": "San Romualdo, abad",
+        "it": "San Romualdo, abate"
+      }
     }
   ]
 }
