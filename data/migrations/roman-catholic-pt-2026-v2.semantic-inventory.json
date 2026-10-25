@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 303,
-    "remainingOccurrences": 86,
+    "sourceBoundOccurrences": 304,
+    "remainingOccurrences": 85,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 39,
+    "fixed-person": 38,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -190,13 +190,6 @@
       "dateISO": "2026-06-20",
       "canonicalEventId": "rc-pt:BlsSanchaMafaldaTeresa",
       "semanticFamily": "portugal-proper"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-07-14-9cb327de646650d8bb957049",
-      "sourceRecordHash": "f231e2f4a68837eae0f15b93aa079b393d942af38d9b318254c1dbc46eca03c9",
-      "dateISO": "2026-07-14",
-      "canonicalEventId": "rc:StCamillusDeLellis",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-07-16-8a6070cdc5f0be76ff23c5b2",
