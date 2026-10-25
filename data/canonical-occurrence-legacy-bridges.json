@@ -524,6 +524,11 @@
       "occurrenceId": "occurrence:2026-07-09:augustine-zhao-rong-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StAugustineZhaoRong",
       "dateISO": "2026-07-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-13:henry-ii:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHenry",
+      "dateISO": "2026-07-13"
     }
   ]
 }
