@@ -504,6 +504,11 @@
       "occurrenceId": "occurrence:2026-06-19:romuald-ravenna:roman-catholic:pt",
       "legacyObservanceId": "rc:StRomuald",
       "dateISO": "2026-06-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:paulinus-nola:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulinusNola",
+      "dateISO": "2026-06-22"
     }
   ]
 }

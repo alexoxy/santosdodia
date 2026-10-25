@@ -58,8 +58,8 @@ const buildLedger = ({
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 187 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 173, 'The ledger must distinguish fourteen TemporalRules from 173 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 100 && ledger.counts.fixedSanctoraleDays === 95 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 100 exact Sanctorale occurrences across 95 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 291 && ledger.counts.sourceBoundOccurrences === 298, 'The ledger must distinguish 291 source-bound days from 298 source-bound canonical occurrences.');
+assert(ledger.counts.fixedSanctorale === 101 && ledger.counts.fixedSanctoraleDays === 95 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 101 exact Sanctorale occurrences across 95 civil days and eleven movable/transfer bindings.');
+assert(ledger.counts.sourceBound === 291 && ledger.counts.sourceBoundOccurrences === 299, 'The ledger must distinguish 291 source-bound days from 299 source-bound canonical occurrences.');
 assert(ledger.counts.unresolved === 74, 'Every unreviewed official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
@@ -74,6 +74,8 @@ assert(june6?.classification === 'mixed-optional-alternatives' && june6?.fixedOp
 assert(june6?.temporalFamilyOptions?.some(item => item.sourceBinding.legacyObservanceId === 'rc:SatMemBVM3' && item.temporalFamilyMember.selectionMode === 'optional-alternative' && item.temporalFamilyMember.obligatory === false), 'The distinct Saturday Marian optional memorial must remain available alongside Saint Norbert on 6 June.');
 assert(ledger.entries.find(item => item.dateISO === '2026-06-11')?.canonicalObservanceId === 'observance:barnabas-apostle:roman-catholic' && ledger.entries.find(item => item.dateISO === '2026-06-11')?.sourceBinding?.legacyObservanceId === 'rc:StBarnabasAp', 'Saint Barnabas must retain the exact obligatory-memorial Portugal source binding on 11 June.');
 assert(ledger.entries.find(item => item.dateISO === '2026-06-19')?.canonicalObservanceId === 'observance:romuald-ravenna:roman-catholic' && ledger.entries.find(item => item.dateISO === '2026-06-19')?.sourceBinding?.legacyObservanceId === 'rc:StRomuald', 'Saint Romuald must retain the exact optional-memorial Portugal source binding on 19 June.');
+const june22 = ledger.entries.find(item => item.dateISO === '2026-06-22');
+assert(june22?.classification === 'fixed-sanctorale' && june22?.fixedOptions?.length === 2 && june22.fixedOptions.some(item => item.canonicalObservanceId === 'observance:paulinus-nola:roman-catholic' && item.sourceBinding.legacyObservanceId === 'rc:StPaulinusNola') && june22.fixedOptions.some(item => item.canonicalObservanceId === 'observance:john-fisher-thomas-more:roman-catholic' && item.sourceBinding.legacyObservanceId === 'rc:StsJohnFisherThomasMore'), 'Saint Paulinus of Nola and John Fisher/Thomas More must remain distinct optional alternatives on 22 June.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-04')?.sourceBinding?.legacyObservanceId === 'rc:StElizabethPortugal', 'Saint Elizabeth of Portugal must retain precedence over the optional Saturday Marian candidate.');
 assert(ledger.entries.find(item => item.dateISO === '2026-06-26')?.canonicalObservanceId === 'observance:ordinary-time-weekday-12-friday:roman-catholic', 'Twelfth Friday of Ordinary Time family binding drifted.');
 assert(ledger.entries.find(item => item.dateISO === '2026-07-10')?.canonicalObservanceId === 'observance:ordinary-time-weekday-14-friday:roman-catholic', 'Fourteenth Friday of Ordinary Time family binding drifted.');
@@ -324,4 +326,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 100 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 298 source-bound occurrences across 291 days, 74 explicit unresolved days and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 101 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 299 source-bound occurrences across 291 days, 74 explicit unresolved days and no label-derived identity.');

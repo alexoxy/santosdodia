@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "paulinus-nola",
+        "primaryObservanceId": "rc:StPaulinusNola",
+        "category": "saint",
+        "names": {
+          "en": "Saint Paulinus of Nola, Bishop",
+          "pt": "São Paulino de Nola, bispo",
+          "es": "San Paulino de Nola, obispo",
+          "it": "San Paolino da Nola, vescovo"
+        }
+      },
+      "recognition": {
+        "id": "recognition:paulinus-nola:roman-catholic",
+        "personId": "paulinus-nola",
+        "ecclesialTitles": [
+          "bishop",
+          "pastor"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/22/st--paulinus--bishop-of--nola.html"
+      },
+      "observanceId": "observance:paulinus-nola:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paulinus-nola:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPaulinusNola",
+        "dateISO": "2026-06-22",
+        "sourceOccurrenceId": "snl-pt-2026-06-22-3df5137023fa79cd3c0a09f5",
+        "sourceRecordHash": "f98858d69a1d55998bb9f6b5316f6640726e96f8b4e90cb294c0d63ac0381c4b",
+        "sourceLabelPt": "S. Paulino de Nola, bispo",
+        "observedDesignation": "S. Paulino de Nola, bispo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-22"
+      }
+    }
+  ],
+  "reviewDigestSha256": "c2ea16b11385cf4759f585aca6932c84a7aaf92ea7bac4bdac45bf20b216bcd4",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}
