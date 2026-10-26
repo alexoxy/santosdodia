@@ -3892,6 +3892,45 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "observance:sharbel-makhluf:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "sharbel-makhluf",
+          "recognitionId": "recognition:sharbel-makhluf:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-24",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/24/st--charbel-makhlouf--priest.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

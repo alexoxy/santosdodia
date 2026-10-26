@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 306,
-    "remainingOccurrences": 83,
+    "sourceBoundOccurrences": 307,
+    "remainingOccurrences": 82,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 36,
+    "fixed-person": 35,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -211,13 +211,6 @@
       "dateISO": "2026-07-18",
       "canonicalEventId": "rc-pt:StBartholomewMartyrs",
       "semanticFamily": "portugal-proper"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-07-24-90e95e25cc72c1e14334b861",
-      "sourceRecordHash": "4b6ba897758f91b5c916dc3e468f4565b4a44e6fd8b01948f4e8fdc3fa57a6cd",
-      "dateISO": "2026-07-24",
-      "canonicalEventId": "rc:StSharbelMakhluf",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-07-29-663501f96e2b680651933937",
@@ -639,5 +632,6 @@
       "canonicalEventId": "rc:HolyInnocents",
       "semanticFamily": "fixed-or-major-observance"
     }
-  ]
+  ],
+  "verifiedAt": "2026-10-26"
 }

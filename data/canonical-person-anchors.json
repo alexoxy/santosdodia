@@ -2081,6 +2081,17 @@
         "es": "San Lorenzo de Brindis, presbítero y doctor de la Iglesia",
         "it": "San Lorenzo da Brindisi, presbitero e dottore della Chiesa"
       }
+    },
+    {
+      "id": "sharbel-makhluf",
+      "primaryObservanceId": "rc:StSharbelMakhluf",
+      "category": "saint",
+      "names": {
+        "en": "Saint Charbel Makhlouf, Priest",
+        "pt": "São Sarbélio Makhluf, presbítero",
+        "es": "San Chárbel Makhlouf, presbítero",
+        "it": "San Charbel Makhlouf, sacerdote"
+      }
     }
   ]
 }

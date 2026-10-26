@@ -544,6 +544,11 @@
       "occurrenceId": "occurrence:2026-07-21:lawrence-brindisi:roman-catholic:pt",
       "legacyObservanceId": "rc:StLawrenceBrindisi",
       "dateISO": "2026-07-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-24:sharbel-makhluf:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSharbelMakhluf",
+      "dateISO": "2026-07-24"
     }
   ]
 }
