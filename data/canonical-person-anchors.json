@@ -2125,6 +2125,17 @@
         "es": "San Lázaro de Betania",
         "it": "San Lazzaro di Betania"
       }
+    },
+    {
+      "id": "cajetan-thiene",
+      "primaryObservanceId": "rc:StCajetan",
+      "category": "saint",
+      "names": {
+        "en": "Saint Cajetan of Thiene, Priest",
+        "pt": "São Caetano de Thiene, presbítero",
+        "es": "San Cayetano de Thiene, presbítero",
+        "it": "San Gaetano Thiene, sacerdote"
+      }
     }
   ]
 }

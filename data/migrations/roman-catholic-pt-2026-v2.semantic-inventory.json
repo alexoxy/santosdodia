@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 308,
-    "remainingOccurrences": 81,
+    "sourceBoundOccurrences": 309,
+    "remainingOccurrences": 80,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 34,
+    "fixed-person": 33,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -225,13 +225,6 @@
       "dateISO": "2026-08-06",
       "canonicalEventId": "rc:Transfiguration",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-07-d0874f76fa398cad5eaa118d",
-      "sourceRecordHash": "728206ca4617219aa169d38586e9ab483674d8d62ba759ecfe74b98195be2bd2",
-      "dateISO": "2026-08-07",
-      "canonicalEventId": "rc:StCajetan",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-07-1591b9e5ac59503721f18323",
