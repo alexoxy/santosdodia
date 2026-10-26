@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-39.json",
+  "reviewDigestSha256": "145105cc66cdd6c58de66d2697a8c289988dcdc624d0781d6476930b15071d7f",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "martha-bethany",
+    "mary-bethany",
+    "lazarus-bethany"
+  ],
+  "promotedObservanceIds": [
+    "observance:martha-mary-lazarus:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 308,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 81
+  },
+  "fixedSanctoraleMappingDigestSha256": "683fc8833e24df39ae76e76020395ed87fe4abb45c1916a3108abcaf0f8b5736",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

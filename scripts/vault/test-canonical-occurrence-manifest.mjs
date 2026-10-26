@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 109, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 109, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 110, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 110, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -91,6 +91,7 @@ const expected = new Map([
   ['observance:apollinaris-ravenna:roman-catholic', ['2026-07-20', 'optional-memorial', 'MF', 'rc:StApollinaris']],
   ['observance:lawrence-brindisi:roman-catholic', ['2026-07-21', 'optional-memorial', 'MF', 'rc:StLawrenceBrindisi']],
   ['observance:sharbel-makhluf:roman-catholic', ['2026-07-24', 'optional-memorial', 'MF', 'rc:StSharbelMakhluf']],
+  ['observance:martha-mary-lazarus:roman-catholic', ['2026-07-29', 'obligatory-memorial', 'MO', 'rc:StMartha']],
   ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StPancras']],
   ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StsNereusAchilleus']],
   ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 'MF', 'rc:StsMarcellinusPeter']],

@@ -2092,6 +2092,39 @@
         "es": "San Chárbel Makhlouf, presbítero",
         "it": "San Charbel Makhlouf, sacerdote"
       }
+    },
+    {
+      "id": "martha-bethany",
+      "primaryObservanceId": "martha-mary-lazarus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Martha of Bethany",
+        "pt": "Santa Marta de Betânia",
+        "es": "Santa Marta de Betania",
+        "it": "Santa Marta di Betania"
+      }
+    },
+    {
+      "id": "mary-bethany",
+      "primaryObservanceId": "martha-mary-lazarus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Mary of Bethany",
+        "pt": "Santa Maria de Betânia",
+        "es": "Santa María de Betania",
+        "it": "Santa Maria di Betania"
+      }
+    },
+    {
+      "id": "lazarus-bethany",
+      "primaryObservanceId": "martha-mary-lazarus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Lazarus of Bethany",
+        "pt": "São Lázaro de Betânia",
+        "es": "San Lázaro de Betania",
+        "it": "San Lazzaro di Betania"
+      }
     }
   ]
 }

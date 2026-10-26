@@ -549,6 +549,11 @@
       "occurrenceId": "occurrence:2026-07-24:sharbel-makhluf:roman-catholic:pt",
       "legacyObservanceId": "rc:StSharbelMakhluf",
       "dateISO": "2026-07-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-29:martha-mary-lazarus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartha",
+      "dateISO": "2026-07-29"
     }
   ]
 }
