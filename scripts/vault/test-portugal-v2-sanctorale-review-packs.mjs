@@ -46,7 +46,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-33.json', 'fb5badce4be9169c89886941d6c688188c6cac79f8a816c8f4fdfd82bb495660'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-34.json', '368a10fb2855f7dd1022d98372b75b0ecc9a6789f88162c10cc79b0c1de6e8fe'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-35.json', 'a07676b8fed37cf9a6038c4bc2d4ca3ff2eee6c2a2535f4b3f9682fa464f5116'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-36.json', 'e27a5708afd670e4d1ab0ac3efc72ec93ce7141bd4fc47f998975535ffa6c440']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-36.json', 'e27a5708afd670e4d1ab0ac3efc72ec93ce7141bd4fc47f998975535ffa6c440'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-37.json', 'df032b8eff404e1bdd00198b17e6ebd56c15671a223217f5254b8d9ec160e4be']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -197,7 +198,7 @@ for (const fileName of packFiles) {
       assert(['en', 'pt', 'es', 'it'].every((locale) => typeof person.names?.[locale] === 'string' && person.names[locale].trim().length > 0), `${person.id} lacks required canonical names.`);
       assert(recognition?.id === `recognition:${person.id}:roman-catholic`, `${person.id} Recognition identity is invalid.`);
       assert(Array.isArray(recognition.ecclesialTitles) && recognition.ecclesialTitles.length >= 2, `${person.id} Recognition lacks reviewed ecclesial titles.`);
-      assert(/^https:\/\/(?:www\.)?(?:vaticannews\.va\/en\/saints\/|vatican\.va\/(?:news_services\/liturgy\/saints\/|roman_curia\/congregations\/ccdds\/documents\/)|liturgia\.pt\/liturgiadiaria\/)/u.test(recognition.evidenceUrl), `${person.id} Recognition lacks competent official Catholic evidence.`);
+      assert(/^https:\/\/(?:www\.)?(?:vaticannews\.va\/en\/saints\/|vatican\.va\/(?:content\/[^/]+\/[^/]+\/audiences\/|news_services\/liturgy\/saints\/|roman_curia\/congregations\/ccdds\/documents\/)|liturgia\.pt\/liturgiadiaria\/)/u.test(recognition.evidenceUrl), `${person.id} Recognition lacks competent official Catholic evidence.`);
       assert(!seenPersonIds.has(person.id) && !seenRecognitionIds.has(recognition.id), `${person.id} duplicates an identity inside ${fileName}.`);
       assert(!globalPackPersonIds.has(person.id) && !globalPackRecognitionIds.has(recognition.id), `${person.id} duplicates an identity across Sanctorale review packs.`);
     }

@@ -1515,9 +1515,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-21:lawrence-brindisi:roman-catholic:pt",
+      "observanceId": "observance:lawrence-brindisi:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:lawrence-brindisi:general-roman",
+      "legacyObservanceId": "rc:StLawrenceBrindisi",
+      "expectedDateISO": "2026-07-21",
+      "sourceOccurrenceId": "snl-pt-2026-07-21-49ad6ff65b80b984bdbf6d5e",
+      "sourceRecordHash": "af67029cb9b8cd6dc86fc01449cb302d8a894c705d79b781c69ba2273769df53",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-26",
-  "fixedMappingCount": 107
+  "fixedMappingCount": 108
 }

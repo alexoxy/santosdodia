@@ -534,11 +534,16 @@
       "occurrenceId": "occurrence:2026-07-14:camillus-de-lellis:roman-catholic:pt",
       "legacyObservanceId": "rc:StCamillusDeLellis",
       "dateISO": "2026-07-14"
-  },
-  {
-    "occurrenceId": "occurrence:2026-07-20:apollinaris-ravenna:roman-catholic:pt",
-    "legacyObservanceId": "rc:StApollinaris",
-    "dateISO": "2026-07-20"
-  }
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-20:apollinaris-ravenna:roman-catholic:pt",
+      "legacyObservanceId": "rc:StApollinaris",
+      "dateISO": "2026-07-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-21:lawrence-brindisi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLawrenceBrindisi",
+      "dateISO": "2026-07-21"
+    }
   ]
 }

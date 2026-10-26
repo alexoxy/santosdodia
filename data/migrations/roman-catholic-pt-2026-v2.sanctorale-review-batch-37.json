@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "lawrence-brindisi",
+        "primaryObservanceId": "rc:StLawrenceBrindisi",
+        "category": "saint",
+        "names": {
+          "en": "Saint Lawrence of Brindisi, Priest and Doctor of the Church",
+          "pt": "São Lourenço de Brindes, presbítero e doutor da Igreja",
+          "es": "San Lorenzo de Brindis, presbítero y doctor de la Iglesia",
+          "it": "San Lorenzo da Brindisi, presbitero e dottore della Chiesa"
+        }
+      },
+      "recognition": {
+        "id": "recognition:lawrence-brindisi:roman-catholic",
+        "personId": "lawrence-brindisi",
+        "ecclesialTitles": [
+          "priest",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vatican.va/content/benedict-xvi/en/audiences/2011/documents/hf_ben-xvi_aud_20110323.html"
+      },
+      "observanceId": "observance:lawrence-brindisi:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:lawrence-brindisi:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StLawrenceBrindisi",
+        "dateISO": "2026-07-21",
+        "sourceOccurrenceId": "snl-pt-2026-07-21-49ad6ff65b80b984bdbf6d5e",
+        "sourceRecordHash": "af67029cb9b8cd6dc86fc01449cb302d8a894c705d79b781c69ba2273769df53",
+        "sourceLabelPt": "S. Lourenço de Brindes, presbítero e doutor da Igreja",
+        "observedDesignation": "S. Lourenço de Brindes, presbítero e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-21"
+      }
+    }
+  ],
+  "reviewDigestSha256": "df032b8eff404e1bdd00198b17e6ebd56c15671a223217f5254b8d9ec160e4be",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

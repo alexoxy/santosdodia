@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 305,
-    "remainingOccurrences": 84,
+    "sourceBoundOccurrences": 306,
+    "remainingOccurrences": 83,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 37,
+    "fixed-person": 36,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -211,13 +211,6 @@
       "dateISO": "2026-07-18",
       "canonicalEventId": "rc-pt:StBartholomewMartyrs",
       "semanticFamily": "portugal-proper"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-07-21-49ad6ff65b80b984bdbf6d5e",
-      "sourceRecordHash": "af67029cb9b8cd6dc86fc01449cb302d8a894c705d79b781c69ba2273769df53",
-      "dateISO": "2026-07-21",
-      "canonicalEventId": "rc:StLawrenceBrindisi",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-07-24-90e95e25cc72c1e14334b861",

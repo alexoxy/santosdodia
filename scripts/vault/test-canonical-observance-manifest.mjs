@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 109, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 185, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 110, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 186, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -105,6 +105,8 @@ const camillus = first.observances.find((item) => item.observanceId === 'observa
 assert(camillus?.observanceKey === 'principal-commemoration' && camillus.observanceType === 'person-commemoration' && camillus.subjects.length === 1 && camillus.subjects[0].personId === 'camillus-de-lellis' && camillus.subjects[0].recognitionId === 'recognition:camillus-de-lellis:roman-catholic', 'Saint Camillus must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
 const apollinaris = first.observances.find((item) => item.observanceId === 'observance:apollinaris-ravenna:roman-catholic');
 assert(apollinaris?.observanceKey === 'principal-commemoration' && apollinaris.observanceType === 'person-commemoration' && apollinaris.subjects.length === 1 && apollinaris.subjects[0].personId === 'apollinaris-ravenna' && apollinaris.subjects[0].recognitionId === 'recognition:apollinaris-ravenna:roman-catholic', 'Saint Apollinaris must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
+const lawrenceBrindisi = first.observances.find((item) => item.observanceId === 'observance:lawrence-brindisi:roman-catholic');
+assert(lawrenceBrindisi?.observanceKey === 'principal-commemoration' && lawrenceBrindisi.observanceType === 'person-commemoration' && lawrenceBrindisi.subjects.length === 1 && lawrenceBrindisi.subjects[0].personId === 'lawrence-brindisi' && lawrenceBrindisi.subjects[0].recognitionId === 'recognition:lawrence-brindisi:roman-catholic', 'Saint Lawrence of Brindisi must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
 const henryII = first.observances.find((item) => item.observanceId === 'observance:henry-ii:roman-catholic');
 assert(henryII?.observanceKey === 'principal-commemoration' && henryII.observanceType === 'person-commemoration' && henryII.subjects.length === 1 && henryII.subjects[0].personId === 'henry-ii' && henryII.subjects[0].recognitionId === 'recognition:henry-ii:roman-catholic', 'Saint Henry II must remain one canonical Person/Recognition subject of one Church-scoped Observance.');
 const benedict = first.observances.find((item) => item.observanceId === 'observance:benedict-nursia:roman-catholic');
