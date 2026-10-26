@@ -569,6 +569,11 @@
       "occurrenceId": "occurrence:2026-08-12:jane-frances-de-chantal:roman-catholic:pt",
       "legacyObservanceId": "rc:StJaneFrancesDeChantal",
       "dateISO": "2026-08-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-19:john-eudes:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnEudes",
+      "dateISO": "2026-08-19"
     }
   ]
 }
