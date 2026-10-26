@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "jane-frances-de-chantal",
+        "primaryObservanceId": "rc:StJaneFrancesDeChantal",
+        "category": "saint",
+        "names": {
+          "en": "Saint Jane Frances de Chantal, Religious",
+          "pt": "Santa Joana Francisca de Chantal, religiosa",
+          "es": "Santa Juana Francisca de Chantal, religiosa",
+          "it": "Santa Giovanna Francesca de Chantal, religiosa"
+        }
+      },
+      "recognition": {
+        "id": "recognition:jane-frances-de-chantal:roman-catholic",
+        "personId": "jane-frances-de-chantal",
+        "ecclesialTitles": [
+          "religious",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/12/st--jane-frances-de-chantal--religious.html"
+      },
+      "observanceId": "observance:jane-frances-de-chantal:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:jane-frances-de-chantal:general-roman",
+      "contextualRankBoundary": {
+        "generalRomanPortugal": "optional-memorial",
+        "orderOfTheVisitation": "solemnity",
+        "instituteProperMaterialized": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StJaneFrancesDeChantal",
+        "dateISO": "2026-08-12",
+        "sourceOccurrenceId": "snl-pt-2026-08-12-0b713d89030b77dc95d9e16c",
+        "sourceRecordHash": "d7197ab1608e717013c7db53716ec4ab74ff9e2274352649e638c4a3e9bb1f6e",
+        "sourceLabelPt": "S. Joana Francisca de Chantal, religiosa",
+        "observedDesignation": "S. Joana Francisca de Chantal, religiosa – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-12"
+      }
+    }
+  ],
+  "reviewDigestSha256": "782830e5ca0535315877a5893efd83fbbd74d36097fd573bc739d19cfc502f5c",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

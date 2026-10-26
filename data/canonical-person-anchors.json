@@ -2147,6 +2147,17 @@
         "es": "San Sixto II, papa y mártir",
         "it": "San Sisto II, papa e martire"
       }
+    },
+    {
+      "id": "jane-frances-de-chantal",
+      "primaryObservanceId": "rc:StJaneFrancesDeChantal",
+      "category": "saint",
+      "names": {
+        "en": "Saint Jane Frances de Chantal, Religious",
+        "pt": "Santa Joana Francisca de Chantal, religiosa",
+        "es": "Santa Juana Francisca de Chantal, religiosa",
+        "it": "Santa Giovanna Francesca de Chantal, religiosa"
+      }
     }
   ]
 }

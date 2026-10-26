@@ -1585,9 +1585,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-12:jane-frances-de-chantal:roman-catholic:pt",
+      "observanceId": "observance:jane-frances-de-chantal:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:jane-frances-de-chantal:general-roman",
+      "legacyObservanceId": "rc:StJaneFrancesDeChantal",
+      "expectedDateISO": "2026-08-12",
+      "sourceOccurrenceId": "snl-pt-2026-08-12-0b713d89030b77dc95d9e16c",
+      "sourceRecordHash": "d7197ab1608e717013c7db53716ec4ab74ff9e2274352649e638c4a3e9bb1f6e",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-26",
-  "fixedMappingCount": 112
+  "fixedMappingCount": 113
 }

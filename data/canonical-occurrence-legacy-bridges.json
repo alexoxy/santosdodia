@@ -564,6 +564,11 @@
       "occurrenceId": "occurrence:2026-08-07:sixtus-ii-companions:roman-catholic:pt",
       "legacyObservanceId": "rc:StSixtusIIPope",
       "dateISO": "2026-08-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-12:jane-frances-de-chantal:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJaneFrancesDeChantal",
+      "dateISO": "2026-08-12"
     }
   ]
 }
