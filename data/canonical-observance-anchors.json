@@ -3815,6 +3815,45 @@
         }
       ],
       "verifiedAt": "2026-10-25"
+    },
+    {
+      "id": "observance:apollinaris-ravenna:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "apollinaris-ravenna",
+          "recognitionId": "recognition:apollinaris-ravenna:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-20",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/07/20/st--apollinaris--bishop-of--ravenna-and-martyr-.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

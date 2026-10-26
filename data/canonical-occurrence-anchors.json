@@ -2550,6 +2550,30 @@
         }
       ],
       "verifiedAt": "2026-10-25"
-    }
+  },
+  {
+    "id": "occurrence:2026-07-20:apollinaris-ravenna:roman-catholic:pt",
+    "observanceId": "observance:apollinaris-ravenna:roman-catholic",
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "dateISO": "2026-07-20",
+    "rank": "optional-memorial",
+    "sourceRankCode": "MF",
+    "evidence": [
+      {
+        "publisher": "Secretariado Nacional de Liturgia",
+        "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-20",
+        "claimTypes": [
+          "annual-date",
+          "jurisdictional-observance",
+          "liturgical-rank"
+        ],
+        "observedDesignation": "S. Apolinário, bispo e mártir – MF"
+      }
+    ],
+    "verifiedAt": "2026-10-26"
+  }
   ]
 }

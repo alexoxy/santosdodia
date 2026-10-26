@@ -1501,9 +1501,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-20:apollinaris-ravenna:roman-catholic:pt",
+      "observanceId": "observance:apollinaris-ravenna:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:apollinaris-ravenna:general-roman",
+      "legacyObservanceId": "rc:StApollinaris",
+      "expectedDateISO": "2026-07-20",
+      "sourceOccurrenceId": "snl-pt-2026-07-20-35c90527ac22f88fd2d24374",
+      "sourceRecordHash": "45825faa566839034fa5c9f1c327e7b5c3bd5cd003d9f108054890dcfc5d1970",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-10-25",
-  "fixedMappingCount": 106
+  "verifiedAt": "2026-10-26",
+  "fixedMappingCount": 107
 }
