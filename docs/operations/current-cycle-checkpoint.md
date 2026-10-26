@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-26 07:02 UTC
+Updated: 2026-10-26 10:15 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-26-v41.{md,json}`
+Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-26-v42.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 304/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 305/389; perennial cutover and production mutation remain fail-closed.
 
 ## Operating boundary
 
@@ -20,35 +20,34 @@ Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation i
 
 ## Completed in this execution
 
-PR [#429](https://github.com/alexoxy/santosdodia/pull/429) delivered E07.05 batch 35:
+PR [#432](https://github.com/alexoxy/santosdodia/pull/432) delivered E07.05 batch 36:
 
-- represented Saint Camillus de Lellis as an independent canonical Person, Roman Catholic Recognition and Observance;
-- retained `priest` and `founder` as canonical titles without creating further identities;
-- added a perennial General Roman rule for the optional memorial on 14 July;
+- represented Saint Apollinaris of Ravenna as an independent canonical Person, Roman Catholic Recognition and Church-scoped Observance;
+- retained `bishop` and `martyr` as canonical titles without creating further identities;
+- added a perennial General Roman rule for the optional memorial on 20 July;
 - bound the Portugal 2026 occurrence and `MF` rank to the exact SNL source row;
-- preserved `rc:StCamillusDeLellis` as a legacy bridge rather than a second identity;
-- preserved patronage as evidence without automatically promoting a canonical patronage relation;
+- preserved `rc:StApollinaris` as a legacy bridge rather than a second identity;
 - used competent official sources for identity, date, rank and scope;
-- kept `publicationAllowed: false`, zero remote-D1 writes and no deployment.
+- kept `publicationAllowed: false`, made zero remote-D1 writes and performed no manual deployment.
 
-Validated head: `57bbc5abd2f998532e3173cab0db12f41e09ba97`.
+Validated head: `59d8805bfb71512efae60f5b1b72f08c5bf694da`.
 
-Squash merge: `e348766206d06320298170a1520dc58960c5a73c`.
+Squash merge: `3d67ba664573b9d501bb70460b04a989456579c0`.
 
 E07.05 remains `EM_CURSO`; partial coverage progress does not reduce the formal task countdown.
 
 ## Portugal 2026 ledger
 
 - Approved source: **389 occurrences**, **365 civil days**, **1,945 occurrence labels** in the v2 reconciliation contract.
-- Fixed Sanctorale bindings: **106** across **100 civil dates**.
-- Total source-bound coverage: **304/389 (78.149%)**.
-- Remaining: **85 occurrences** and **70 civil days**.
-- Source-bound days: **295/365**.
+- Fixed Sanctorale bindings: **107** across **101 civil dates**.
+- Total source-bound coverage: **305/389 (78.406%)**.
+- Remaining: **84 occurrences** and **69 civil days**.
+- Source-bound days: **296/365**.
 - Full semantic equivalence, perennial cutover and production promotion: `false`.
 
 | Unresolved family | Remaining |
 |---|---:|
-| Fixed individual persons | 38 |
+| Fixed individual persons | 37 |
 | Fixed/major non-person observances | 16 |
 | Portugal structural overlays | 13 |
 | Fixed Marian titles | 8 |
@@ -57,32 +56,40 @@ E07.05 remains `EM_CURSO`; partial coverage progress does not reduce the formal 
 | Portugal transfer review | 2 |
 | Temporal weekday family | 1 |
 | Fixed collective observances | 0 |
-| **Total** | **85** |
+| **Total** | **84** |
 
-## CI, staging and external proof
+## CI, archive and external proof
 
-PR #429 passed Product BUILD 150, Product publish staging 146, Quality 1539, Wikidata retry quality 668 and Sanctorale review quality 91 on the exact head. The full local `npm run check`, focused canonical reconciliation tests, dependency audit, Cloudflare Free guardrails and the AdSense fail-closed checker passed; the pre-existing Turbopack dynamic-filesystem warning remained non-fatal.
+PR #432 passed Product BUILD, Product publish staging, Quality, Wikidata retry quality and Sanctorale review quality on the exact head. The focused tests, full local `npm run check`, build, dependency audit, Cloudflare Free guardrails, `git diff --check` and the AdSense fail-closed checker passed; the known Turbopack dynamic-filesystem warning remained non-fatal.
 
-The Dropbox integrated-head archive stores `manifest.json`, `reconciliation-ledger.json`, `validation.json` and `release.json` under `e348766206d06320298170a1520dc58960c5a73c`. Validation records the exact integrated `sourceSha`, 365 days, five complete locales, zero false-empty Today cases and `productionApproved: false`.
+The integrated-main workflow checked out exact source `3d67ba664573b9d501bb70460b04a989456579c0`, validated the release and archived four files in Dropbox under:
+
+`/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/3d67ba664573b9d501bb70460b04a989456579c0`
+
+| Artifact | SHA-256 | Bytes |
+|---|---|---:|
+| `manifest.json` | `98aeb5eeb1530ac108180c3a4b7797cf917740803111abca5b098c3718962b96` | 348687 |
+| `validation.json` | `b533fa3939f73c59b2698f6bb6a23103cf2ddd53a1a6f044158ea64d0de3a920` | 1148 |
+| `reconciliation-ledger.json` | `71f7afd5d059b19f037955c5eaa350f2d187509f50a05e9eadc9dd0a0bac8bcc` | 516211 |
+| `release.json` | `6fc252630efd5b3273f717407685d7a724742ff08135ff1099a31dea64c9d3f8` | 2406 |
+
+The archived validation remains `productionApproved: false`.
 
 Official proof:
 
-- SNL 14 July 2026 lists Saint Camillus de Lellis as `MF`, an optional memorial;
-- Vatican News identifies Saint Camillus de Lellis as priest and founder of the Ministers to the Sick;
-- the Holy See attests his founding role and patronage, retained here as evidence only.
+- SNL 20 July 2026 lists Saint Apollinaris as `MF`, an optional memorial;
+- Vatican News identifies Saint Apollinaris as bishop of Ravenna and martyr, commemorated on 20 July.
 
 Dropbox proof:
 
-- v41 JSON: `id:oANWCGUyYBwAAAAAAAAZ3A`, 342,095 bytes;
-- v41 MD: `id:oANWCGUyYBwAAAAAAAAZ3Q`, 188,299 bytes;
-- batch-35 JSON receipt: `id:oANWCGUyYBwAAAAAAAAZ3g`, 2,295 bytes;
-- batch-35 MD receipt: `id:oANWCGUyYBwAAAAAAAAZ3w`, 1,225 bytes;
-- integrated-head manifest: `id:oANWCGUyYBwAAAAAAAAZ0w`;
-- integrated-head validation: `id:oANWCGUyYBwAAAAAAAAZ1A`;
-- integrated-head reconciliation ledger: `id:oANWCGUyYBwAAAAAAAAZ1Q`;
-- integrated-head release: `id:oANWCGUyYBwAAAAAAAAZ1g`.
+- v42 JSON: `id:oANWCGUyYBwAAAAAAAAZ8Q`, 343676 bytes;
+- v42 MD: `id:oANWCGUyYBwAAAAAAAAZ8g`, 190059 bytes;
+- batch-36 JSON receipt: `id:oANWCGUyYBwAAAAAAAAZ8w`, 2532 bytes;
+- batch-36 MD receipt: `id:oANWCGUyYBwAAAAAAAAZ9A`, 1099 bytes;
+- source-evidence JSON: `id:oANWCGUyYBwAAAAAAAAZ4A`, SHA-256 `bb813b1de669916cc960cefef6170b49220aa7eb56a6c5d82bb30887fcfd6498`;
+- source-evidence MD: `id:oANWCGUyYBwAAAAAAAAZ4Q`, SHA-256 `5e0ff416de2224ea4f99e52d8b2ef0d06c10796d705c22aeb7749824549238ee`.
 
-Issue #355 is to point to v41 and the batch-35 receipt after this checkpoint merges.
+Issue #355 is to point to v42 and the batch-36 receipt after this checkpoint merges.
 
 ## Countdown
 
@@ -93,9 +100,11 @@ Issue #355 is to point to v41 and the batch-35 receipt after this checkpoint mer
 
 ## Repository hygiene
 
-- PR #429 was integrated only after checks passed on the exact head and expected base.
-- The batch is confined to Saint Camillus de Lellis, exact official evidence and coverage vectors.
-- No force push, history rewrite, production deletion, remote-D1 write, deploy, media asset or second calendar path was introduced.
+- PR #432 was integrated only after checks passed on the exact head and expected base.
+- The batch is confined to Saint Apollinaris, exact official evidence and coverage vectors.
+- No force push, history rewrite, production deletion, remote-D1 write, manual deploy, media asset or second calendar path was introduced.
+- The automatic post-merge archive workflow did not authorize production mutation.
+- Unrelated Dependabot PR #430 remains untouched.
 - Evidence Vault, official-source artifacts, receipts and rollback history remain preserved.
 
 ## Strategic coverage matrix
@@ -103,9 +112,9 @@ Issue #355 is to point to v41 and the batch-35 receipt after this checkpoint mer
 | Product layer | Status | Proof | Remaining gate |
 |---|---|---|---|
 | P0 reliability/security | Realised core / continuous | Green CI, clean npm audit, text-first and D1 guards | Continue safe hygiene |
-| P1 Roman perennial engine | Partial | 304/389 source-bound occurrences | Reach 389/389 |
+| P1 Roman perennial engine | Partial | 305/389 source-bound occurrences | Reach 389/389 |
 | P2 calculator/API/ICS | Core / awaiting equivalence | Shared engine, OpenAPI, Y/Y+1 ICS | Prove parity after cutover |
-| P3 Portugal daily product | Partial | Public baseline plus 304-source shadow | Full equivalence and production gate |
+| P3 Portugal daily product | Partial | Public baseline plus 305-source shadow | Full equivalence and production gate |
 | Editorial/SEO/AdSense | Partial / gated | Text-first corpus and fail-closed checker | Factual/editorial acceptance |
 | Global Church kernels | Pending / foundations | Independent context dimensions | Authority-specific kernels |
 | Multilingual scale | Partial | Ten-locale technical gates | Evidence-based ranking and review |
@@ -123,7 +132,7 @@ Issue #355 is to point to v41 and the batch-35 receipt after this checkpoint mer
 
 ## Ordered roadmap
 
-1. Review `rc:StApollinaris` on 20 July and prove identity, recognition, exact SNL occurrence, rank and scope from competent sources.
+1. Review `rc:StLawrenceBrindisi` on 21 July and prove identity, recognition, exact SNL occurrence, rank and scope from competent sources.
 2. Keep the perennial General Roman rule separate from the Portugal 2026 materialization.
 3. Continue the remaining fixed persons, fixed/non-person observances and Marian titles in small reviewed batches.
 4. Resolve remaining structural, proper, transfer and rank rows by competent-authority review.
@@ -133,8 +142,8 @@ Issue #355 is to point to v41 and the batch-35 receipt after this checkpoint mer
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox v41; verify GitHub and Dropbox before new work.
-- Keep one batch active and do not repeat batch 35.
+- Read issue #355 and Dropbox v42; verify GitHub and Dropbox before new work.
+- Keep one batch active and do not repeat batch 36.
 - Never use CI or health checks to write remote D1.
 - Do not merge checks from an outdated head/base.
 - Do not publish shadow output or infer identity from text.
