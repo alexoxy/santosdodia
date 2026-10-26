@@ -1543,9 +1543,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-29:martha-mary-lazarus:roman-catholic:pt",
+      "observanceId": "observance:martha-mary-lazarus:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:martha-mary-lazarus:general-roman",
+      "legacyObservanceId": "rc:StMartha",
+      "expectedDateISO": "2026-07-29",
+      "sourceOccurrenceId": "snl-pt-2026-07-29-663501f96e2b680651933937",
+      "sourceRecordHash": "2b7c8e2a56dd9715ecbe4df71f500b51109fc4830827146ffa699d0dd9f9f1fa",
+      "legacyRank": "obligatory-memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-26",
-  "fixedMappingCount": 109
+  "fixedMappingCount": 110
 }

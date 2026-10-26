@@ -5339,6 +5339,88 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:martha-bethany:roman-catholic",
+      "personId": "martha-bethany",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "disciple-of-the-lord",
+        "biblical-saint"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_en.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "sibling-of-mary-and-lazarus"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:mary-bethany:roman-catholic",
+      "personId": "mary-bethany",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "disciple-of-the-lord",
+        "biblical-saint"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_en.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "mary-of-bethany-not-mary-magdalene",
+            "sibling-of-martha-and-lazarus"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:lazarus-bethany:roman-catholic",
+      "personId": "lazarus-bethany",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "disciple-of-the-lord",
+        "biblical-saint"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_en.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "sibling-of-martha-and-mary"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

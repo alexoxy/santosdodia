@@ -3931,6 +3931,56 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "observance:martha-mary-lazarus:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "martha-bethany",
+          "recognitionId": "recognition:martha-bethany:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "mary-bethany",
+          "recognitionId": "recognition:mary-bethany:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "lazarus-bethany",
+          "recognitionId": "recognition:lazarus-bethany:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-29",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation"
+          ]
+        },
+        {
+          "publisher": "Dicastery for Divine Worship and the Discipline of the Sacraments",
+          "url": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20210126_decreto-santi_en.html",
+          "claimTypes": [
+            "observance-attestation",
+            "official-collective-title",
+            "fixed-date",
+            "general-roman-calendar"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }
