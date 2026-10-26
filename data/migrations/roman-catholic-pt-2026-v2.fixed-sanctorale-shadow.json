@@ -1529,9 +1529,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-24:sharbel-makhluf:roman-catholic:pt",
+      "observanceId": "observance:sharbel-makhluf:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:sharbel-makhluf:general-roman",
+      "legacyObservanceId": "rc:StSharbelMakhluf",
+      "expectedDateISO": "2026-07-24",
+      "sourceOccurrenceId": "snl-pt-2026-07-24-90e95e25cc72c1e14334b861",
+      "sourceRecordHash": "4b6ba897758f91b5c916dc3e468f4565b4a44e6fd8b01948f4e8fdc3fa57a6cd",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-26",
-  "fixedMappingCount": 108
+  "fixedMappingCount": 109
 }

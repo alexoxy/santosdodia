@@ -2598,6 +2598,30 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "occurrence:2026-07-24:sharbel-makhluf:roman-catholic:pt",
+      "observanceId": "observance:sharbel-makhluf:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-07-24",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-24",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Sarbélio Makhluf, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

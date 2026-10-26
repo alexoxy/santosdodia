@@ -5300,6 +5300,45 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:sharbel-makhluf:roman-catholic",
+      "personId": "sharbel-makhluf",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "monk",
+        "hermit"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/la/apost_letters/documents/hf_p-vi_apl_19771009_quamvis-libanus.html",
+          "claimTypes": [
+            "canonization",
+            "saint-designation",
+            "identity"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/paul-vi/fr/homilies/1977/documents/hf_p-vi_hom_19771009.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "monk",
+            "hermit"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }
