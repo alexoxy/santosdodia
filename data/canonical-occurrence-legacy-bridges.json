@@ -559,6 +559,11 @@
       "occurrenceId": "occurrence:2026-08-07:cajetan-thiene:roman-catholic:pt",
       "legacyObservanceId": "rc:StCajetan",
       "dateISO": "2026-08-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-07:sixtus-ii-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSixtusIIPope",
+      "dateISO": "2026-08-07"
     }
   ]
 }

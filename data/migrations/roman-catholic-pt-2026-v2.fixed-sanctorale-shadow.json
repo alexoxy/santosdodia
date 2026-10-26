@@ -1571,9 +1571,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-07:sixtus-ii-companions:roman-catholic:pt",
+      "observanceId": "observance:sixtus-ii-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:sixtus-ii-companions:general-roman",
+      "legacyObservanceId": "rc:StSixtusIIPope",
+      "expectedDateISO": "2026-08-07",
+      "sourceOccurrenceId": "snl-pt-2026-08-07-1591b9e5ac59503721f18323",
+      "sourceRecordHash": "16702648976762fa5af87139a12491bd2139ba134e895e188edddb0fd2aaa1f9",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-10-26",
-  "fixedMappingCount": 111
+  "fixedMappingCount": 112
 }

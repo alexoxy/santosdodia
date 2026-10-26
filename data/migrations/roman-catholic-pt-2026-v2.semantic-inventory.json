@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 309,
-    "remainingOccurrences": 80,
+    "sourceBoundOccurrences": 310,
+    "remainingOccurrences": 79,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 33,
+    "fixed-person": 32,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -225,13 +225,6 @@
       "dateISO": "2026-08-06",
       "canonicalEventId": "rc:Transfiguration",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-07-1591b9e5ac59503721f18323",
-      "sourceRecordHash": "16702648976762fa5af87139a12491bd2139ba134e895e188edddb0fd2aaa1f9",
-      "dateISO": "2026-08-07",
-      "canonicalEventId": "rc:StSixtusIIPope",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-12-0b713d89030b77dc95d9e16c",

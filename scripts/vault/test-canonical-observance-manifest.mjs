@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 113, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 191, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 114, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 192, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -205,6 +205,11 @@ const zhaoRong = first.observances.find((item) => item.observanceId === 'observa
 assert(zhaoRong?.observanceType === 'named-person-with-companions-commemoration', 'Augustine Zhao Rong and companions must use the bounded companion-group type.');
 assert(zhaoRong.subjects.length === 1 && zhaoRong.subjects[0].personId === 'augustine-zhao-rong', 'Only the directly identified Augustine Zhao Rong Person may be materialized in this batch.');
 assert(zhaoRong.companionGroup?.attestedCount === 119 && zhaoRong.companionGroup.anonymousPersonsCreated === false, 'The officially bounded 119 companions must remain unmaterialized without anonymous Persons.');
+
+const sixtus = first.observances.find((item) => item.observanceId === 'observance:sixtus-ii-companions:roman-catholic');
+assert(sixtus?.observanceType === 'named-person-with-companions-commemoration', 'Sixtus II and companions must use the bounded companion-group type.');
+assert(sixtus.subjects.length === 1 && sixtus.subjects[0].personId === 'sixtus-ii', 'Only the directly identified Sixtus II Person may be materialized in this batch.');
+assert(sixtus.companionGroup?.attestedCount === 6 && sixtus.companionGroup.anonymousPersonsCreated === false, 'The officially bounded six companions must remain unmaterialized without anonymous Persons.');
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);
