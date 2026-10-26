@@ -2059,17 +2059,28 @@
         "es": "San Camilo de Lelis, presbítero",
         "it": "San Camillo de Lellis, sacerdote"
       }
-  },
-  {
-    "id": "apollinaris-ravenna",
-    "primaryObservanceId": "rc:StApollinaris",
-    "category": "saint",
-    "names": {
-      "en": "Saint Apollinaris, Bishop and Martyr",
-      "pt": "São Apolinário, bispo e mártir",
-      "es": "San Apolinar, obispo y mártir",
-      "it": "Sant’Apollinare, vescovo e martire"
+    },
+    {
+      "id": "apollinaris-ravenna",
+      "primaryObservanceId": "rc:StApollinaris",
+      "category": "saint",
+      "names": {
+        "en": "Saint Apollinaris, Bishop and Martyr",
+        "pt": "São Apolinário, bispo e mártir",
+        "es": "San Apolinar, obispo y mártir",
+        "it": "Sant’Apollinare, vescovo e martire"
+      }
+    },
+    {
+      "id": "lawrence-brindisi",
+      "primaryObservanceId": "rc:StLawrenceBrindisi",
+      "category": "saint",
+      "names": {
+        "en": "Saint Lawrence of Brindisi, Priest and Doctor of the Church",
+        "pt": "São Lourenço de Brindes, presbítero e doutor da Igreja",
+        "es": "San Lorenzo de Brindis, presbítero y doctor de la Iglesia",
+        "it": "San Lorenzo da Brindisi, presbitero e dottore della Chiesa"
+      }
     }
-  }
   ]
 }
