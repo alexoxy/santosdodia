@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 115, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 193, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 116, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 194, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -214,6 +214,10 @@ assert(sixtus.companionGroup?.attestedCount === 6 && sixtus.companionGroup.anony
 const janeFrances = first.observances.find((item) => item.observanceId === 'observance:jane-frances-de-chantal:roman-catholic');
 assert(janeFrances?.observanceType === 'person-commemoration' && janeFrances.subjects?.[0]?.personId === 'jane-frances-de-chantal', 'Saint Jane Frances de Chantal must remain one person-scoped Observance.');
 assert(janeFrances.evidence.some((item) => item.claimTypes?.includes('contextual-rank-distinction')), 'Jane Frances de Chantal must preserve evidence that the Visitation proper rank is context-specific.');
+
+const johnEudes = first.observances.find((item) => item.observanceId === 'observance:john-eudes:roman-catholic');
+assert(johnEudes?.observanceType === 'person-commemoration' && johnEudes.subjects?.[0]?.personId === 'john-eudes', 'Saint John Eudes must remain one person-scoped Observance.');
+assert(johnEudes.evidence.some((item) => item.claimTypes?.includes('contextual-rank-distinction')), 'John Eudes must preserve evidence that institute proper ranks are context-specific.');
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);

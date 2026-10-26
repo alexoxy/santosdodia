@@ -1599,6 +1599,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-19:john-eudes:roman-catholic:pt",
+      "observanceId": "observance:john-eudes:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-eudes:general-roman",
+      "legacyObservanceId": "rc:StJohnEudes",
+      "expectedDateISO": "2026-08-19",
+      "sourceOccurrenceId": "snl-pt-2026-08-19-7592021925eb8d366b8c28e5",
+      "sourceRecordHash": "bd9d2de4b6530f81bf420c7d9209a6e90e40deeea8bc2ac51235a00edd70fedd",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

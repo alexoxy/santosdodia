@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 311,
-    "remainingOccurrences": 78,
+    "sourceBoundOccurrences": 312,
+    "remainingOccurrences": 77,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 31,
+    "fixed-person": 30,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -232,13 +232,6 @@
       "dateISO": "2026-08-17",
       "canonicalEventId": "rc:OrdWeekday20Monday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-19-7592021925eb8d366b8c28e5",
-      "sourceRecordHash": "bd9d2de4b6530f81bf420c7d9209a6e90e40deeea8bc2ac51235a00edd70fedd",
-      "dateISO": "2026-08-19",
-      "canonicalEventId": "rc:StJohnEudes",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-21-3bb0d8183f01222a96745226",

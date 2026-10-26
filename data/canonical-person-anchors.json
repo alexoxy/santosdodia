@@ -2158,6 +2158,17 @@
         "es": "Santa Juana Francisca de Chantal, religiosa",
         "it": "Santa Giovanna Francesca de Chantal, religiosa"
       }
+    },
+    {
+      "id": "john-eudes",
+      "primaryObservanceId": "rc:StJohnEudes",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Eudes, Priest",
+        "pt": "São João Eudes, presbítero",
+        "es": "San Juan Eudes, presbítero",
+        "it": "San Giovanni Eudes, presbitero"
+      }
     }
   ]
 }

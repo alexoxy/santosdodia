@@ -5513,6 +5513,44 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:john-eudes:roman-catholic",
+      "personId": "john-eudes",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/19/st--john-eudes--priest--founder-of-the-eudists.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder-of-the-eudists"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2009/documents/hf_ben-xvi_aud_20090819.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

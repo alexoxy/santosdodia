@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-43.json",
+  "reviewDigestSha256": "1ca7db5447aa29024d16359a020396005b59d688c597adad5b5eb26e37d8edce",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-eudes"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-eudes:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 312,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 77
+  },
+  "fixedSanctoraleMappingDigestSha256": "f987437ab99b692b36373bdad6bd3306b6dc33934bd8b2e177da62e327665749",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}
