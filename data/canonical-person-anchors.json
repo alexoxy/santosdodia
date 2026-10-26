@@ -2136,6 +2136,17 @@
         "es": "San Cayetano de Thiene, presbítero",
         "it": "San Gaetano Thiene, sacerdote"
       }
+    },
+    {
+      "id": "sixtus-ii",
+      "primaryObservanceId": "rc:StSixtusIIPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint Sixtus II, Pope and Martyr",
+        "pt": "São Sisto II, papa e mártir",
+        "es": "San Sixto II, papa y mártir",
+        "it": "San Sisto II, papa e martire"
+      }
     }
   ]
 }

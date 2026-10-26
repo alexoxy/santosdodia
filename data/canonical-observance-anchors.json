@@ -4020,6 +4020,63 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "observance:sixtus-ii-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "named-person-with-companions-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "sixtus-ii",
+          "recognitionId": "recognition:sixtus-ii:roman-catholic"
+        }
+      ],
+      "companionGroup": {
+        "groupKey": "sixtus-ii-deacon-companions",
+        "attestedCount": 6,
+        "enumerationStatus": "officially-bounded-not-materialized",
+        "anonymousPersonsCreated": false,
+        "evidence": [
+          {
+            "publisher": "Vatican News",
+            "url": "https://www.vaticannews.va/en/saints/08/07/sts--sixtus-ii--pope-and-companions--martyrs-.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs"
+            ]
+          }
+        ]
+      },
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-7",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "bounded-companion-group"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/07/sts--sixtus-ii--pope-and-companions--martyrs-.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }
