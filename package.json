@@ -92,10 +92,10 @@
     "security:dependency-test": "node scripts/test-braces-security.mjs"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "1.20.6",
-    "next": "16.4.1",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "@opennextjs/cloudflare": "1.20.13",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/node": "20.19.43",
@@ -105,7 +105,7 @@
     "eslint": "^9.11.1",
     "eslint-config-next": "15.5.28",
     "typescript": "^5.6.3",
-    "wrangler": "4.151.1"
+    "wrangler": "4.152.0"
   },
   "overrides": {
     "js-yaml": "4.3.2",
