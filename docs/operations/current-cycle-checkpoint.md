@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-26 12:04 UTC
+Updated: 2026-10-26 13:17 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-26-v44.{md,json}`
+Master record: issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-26-v45.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 307/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation is 308/389; perennial cutover and production mutation remain fail-closed.
 
 ## Operating boundary
 
@@ -20,34 +20,33 @@ Status: active implementation; E07.05 is partial; Portugal 2026 reconciliation i
 
 ## Completed in this execution
 
-PR [#436](https://github.com/alexoxy/santosdodia/pull/436) delivered E07.05 batch 38:
+PR [#438](https://github.com/alexoxy/santosdodia/pull/438) delivered E07.05 batch 39:
 
-- represented Saint Charbel/Sarbélio Makhluf as an independent canonical Person, Roman Catholic Recognition and Church-scoped Observance;
-- retained `priest`, `monk` and `hermit` as canonical titles without deriving country, rite or calendar selection;
-- added a perennial General Roman rule for the optional memorial on 24 July;
-- bound the Portugal 2026 occurrence and `MF` rank to the exact SNL source row;
-- preserved `rc:StSharbelMakhluf` as a legacy bridge rather than a second identity;
-- used competent official sources for identity, date, rank and scope;
+- represented Martha, Mary and Lazarus of Bethany as three distinct canonical Persons and Roman Catholic Recognitions;
+- created one Church-scoped multi-person Observance without merging Mary of Bethany with Mary Magdalene;
+- added a perennial General Roman rule for the obligatory memorial on 29 July;
+- bound the Portugal 2026 occurrence and `MO` rank to the exact SNL source row;
+- preserved `rc:StMartha` as a legacy bridge rather than an isolated or second identity;
 - kept `publicationAllowed: false`, made zero remote-D1 writes and performed no manual deployment.
 
-Validated head: `4d160abbf1913257f186c25b2e24dfa58a5da150`.
+Validated head: `e7518bc5acefca7eda6a58aebdb60bdd672ce5f1`.
 
-Squash merge: `f8a5649f823f5e9cdcd336a905b531c28d9dda9d`.
+Squash merge: `29ad98312c5c0d515c6ad26fd7f2713ee3e6f946`.
 
 E07.05 remains `EM_CURSO`; partial coverage progress does not reduce the formal task countdown.
 
 ## Portugal 2026 ledger
 
-- Approved source: **389 occurrences**, **365 civil days**, **1,945 occurrence labels** in the v2 reconciliation contract.
-- Fixed Sanctorale bindings: **109** across **103 civil dates**.
-- Total source-bound coverage: **307/389 (78.920%)**.
-- Remaining: **82 occurrences** and **67 civil days**.
-- Source-bound days: **298/365**.
+- Approved source: **389 occurrences**, **365 civil days**.
+- Fixed Sanctorale bindings: **110** across **104 civil dates**.
+- Total source-bound coverage: **308/389 (79.177%)**.
+- Remaining: **81 occurrences** and **66 civil days**.
+- Source-bound days: **299/365**.
 - Full semantic equivalence, perennial cutover and production promotion: `false`.
 
 | Unresolved family | Remaining |
 |---|---:|
-| Fixed individual persons | 35 |
+| Fixed individual persons | 34 |
 | Fixed/major non-person observances | 16 |
 | Portugal structural overlays | 13 |
 | Fixed Marian titles | 8 |
@@ -56,41 +55,38 @@ E07.05 remains `EM_CURSO`; partial coverage progress does not reduce the formal 
 | Portugal transfer review | 2 |
 | Temporal weekday family | 1 |
 | Fixed collective observances | 0 |
-| **Total** | **82** |
+| **Total** | **81** |
 
 ## CI, archive and external proof
 
-PR #436 passed Product BUILD156, Product publish staging152, Quality1552, Wikidata retry quality675 and Sanctorale review quality97 on the exact head. The focused tests, full local `npm run check`, build, dependency audit, `git diff --check` and the AdSense fail-closed checker passed.
+PR #438 passed Product BUILD158, Product publish staging154, Quality1556, Wikidata retry quality677 and Sanctorale review quality99 on the exact head. Focused tests, full local `npm run check`, build, dependency audit, `git diff --check` and the AdSense fail-closed checker passed.
 
-The staging workflow archived the exact reviewed head `4d160abbf1913257f186c25b2e24dfa58a5da150` in Dropbox under:
+The post-merge workflow archived commit `29ad98312c5c0d515c6ad26fd7f2713ee3e6f946` in Dropbox under:
 
-`/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/v2/4d160abbf1913257f186c25b2e24dfa58a5da150`
+`/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/29ad98312c5c0d515c6ad26fd7f2713ee3e6f946`
 
-| Artifact | SHA-256 | Bytes |
+| Artifact | Dropbox file | Bytes |
 |---|---|---:|
-| `manifest.json` | Dropbox `id:oANWCGUyYBwAAAAAAAAaDQ` | 826850 |
-| `validation.json` | Dropbox `id:oANWCGUyYBwAAAAAAAAaDg` | 410 |
-| `localization-review.json` | Dropbox `id:oANWCGUyYBwAAAAAAAAaEA` | 2028 |
-| `release.json` | Dropbox `id:oANWCGUyYBwAAAAAAAAaDw` | 3406 |
+| `manifest.json` | `id:oANWCGUyYBwAAAAAAAAaKQ` | 348687 |
+| `validation.json` | `id:oANWCGUyYBwAAAAAAAAaKg` | 1148 |
+| `reconciliation-ledger.json` | `id:oANWCGUyYBwAAAAAAAAaKw` | 521146 |
+| `release.json` | `id:oANWCGUyYBwAAAAAAAAaLA` | 2406 |
 
-The archived validation remains `productionApproved: false`.
+The exact staging ZIP is `id:oANWCGUyYBwAAAAAAAAaMg`, SHA-256 `6df9775e68e0c965fe223a8315b7c6335157ed02332daff396967a4aa66cc1ec`. Its validation reports 365 days, five complete locales, zero false-empty Today results and `productionApproved: false`.
 
 Official proof:
 
-- SNL 24 July 2026 lists Saint Sarbélio Makhluf as `MF`, an optional memorial;
-- Vatican News and the Holy See identify Saint Charbel as priest, monk and hermit and preserve the canonization evidence.
+- SNL 29 July 2026 lists Saints Martha, Mary and Lazarus as `MO`, an obligatory memorial;
+- the Holy See decree of 26 January 2021 adds the three siblings jointly to the General Roman Calendar and distinguishes Mary of Bethany from Mary Magdalene.
 
 Dropbox proof:
 
-- v44 JSON: `id:oANWCGUyYBwAAAAAAAAaGw`, SHA-256 `d5261e80deb19b4c4012958893bdd89c965d30df989f85114a06cb771e9b52fa`;
-- v44 MD: `id:oANWCGUyYBwAAAAAAAAaHQ`, SHA-256 `e842400ac36a352747eb9b473f2e5c597702396f0345f3923e00464adc9af986`;
-- batch-38 JSON receipt: `id:oANWCGUyYBwAAAAAAAAaIA`, SHA-256 `b35c79399fad06a3f510c480617c8afe9d34ccb07d76c8a53344db8fc2e19578`;
-- batch-38 MD receipt: `id:oANWCGUyYBwAAAAAAAAaHg`, SHA-256 `5112e442066b5ea03b80398bb8ac8d2ac94a1c1c215f15809013939fdab72c46`;
-- source-evidence JSON: `id:oANWCGUyYBwAAAAAAAAaCg`, SHA-256 `ace8012ab2bdb6555db7c13c8d04d161eb0f52a180ca6e5f012928c911944d6a`;
-- source-evidence MD: `id:oANWCGUyYBwAAAAAAAAaCw`, SHA-256 `f4bf294469a31b602980bd66165f48fa43c601444041112e275f9c48c9d4e7ad`;
-- staging ZIP: `id:oANWCGUyYBwAAAAAAAAaHw`, SHA-256 `72fcdefbde4b4e8cf47ce5dc7df4d1b1f3c61e4ea4315241d4b99d3bb8239039`.
-
-Issue #355 points to v44 and the batch-38 receipt.
+- v45 JSON: `id:oANWCGUyYBwAAAAAAAAaNQ`, SHA-256 `b42f38eb51470b04e701dbc63f0d4e5c6e38830eda214e462db3e8b3050d1bc9`;
+- v45 MD: `id:oANWCGUyYBwAAAAAAAAaNA`, SHA-256 `b6a08291840000f4299d1d2e3c4caa1f0cff933cfde8f86e6b57d36a7b202903`;
+- batch-39 JSON receipt: `id:oANWCGUyYBwAAAAAAAAaMw`, SHA-256 `4338af2d9fa41af763ca70a8ac347f4d401e7bf06363edeed0d8b2f8e3caff90`;
+- batch-39 MD receipt: `id:oANWCGUyYBwAAAAAAAAANg`, SHA-256 `2de0382a66f4c96ca16335ca3e80d951f48f31f0f8ea4ed83cde789e6353bbb3`;
+- source-evidence JSON: `id:oANWCGUyYBwAAAAAAAAaIQ`, SHA-256 `9826878f76fdfde54827de92b6a4337df848b20a2a48ed415e7561446fd56ffd`;
+- source-evidence MD: `id:oANWCGUyYBwAAAAAAAAaIg`, SHA-256 `d0a2a8b4acba1308c42411ae7a3bdc5c99a33ddd332d014fdd19425e8fe3e787`.
 
 ## Countdown
 
@@ -101,8 +97,8 @@ Issue #355 points to v44 and the batch-38 receipt.
 
 ## Repository hygiene
 
-- PR #436 was integrated only after checks passed on the exact head and expected base.
-- The batch is confined to Saint Charbel/Sarbélio Makhluf, exact official evidence and coverage vectors.
+- PR #438 was integrated only after checks passed on the exact head and expected base.
+- The batch is confined to the three Bethany siblings, their collective memorial, exact official evidence and coverage vectors.
 - No force push, history rewrite, production deletion, remote-D1 write, manual deploy, media asset or second calendar path was introduced.
 - The automatic post-merge archive workflow did not authorize production mutation.
 - Evidence Vault, official-source artifacts, receipts and rollback history remain preserved.
@@ -112,9 +108,9 @@ Issue #355 points to v44 and the batch-38 receipt.
 | Product layer | Status | Proof | Remaining gate |
 |---|---|---|---|
 | P0 reliability/security | Realised core / continuous | Green CI, clean npm audit, text-first and D1 guards | Continue safe hygiene |
-| P1 Roman perennial engine | Partial | 307/389 source-bound occurrences | Reach 389/389 |
+| P1 Roman perennial engine | Partial | 308/389 source-bound occurrences | Reach 389/389 |
 | P2 calculator/API/ICS | Core / awaiting equivalence | Shared engine, OpenAPI, Y/Y+1 ICS | Prove parity after cutover |
-| P3 Portugal daily product | Partial | Public baseline plus 307-source shadow | Full equivalence and production gate |
+| P3 Portugal daily product | Partial | Public baseline plus 308-source shadow | Full equivalence and production gate |
 | Editorial/SEO/AdSense | Partial / gated | Text-first corpus and fail-closed checker | Factual/editorial acceptance |
 | Global Church kernels | Pending / foundations | Independent context dimensions | Authority-specific kernels |
 | Multilingual scale | Partial | Ten-locale technical gates | Evidence-based ranking and review |
@@ -124,26 +120,26 @@ Issue #355 points to v44 and the batch-38 receipt.
 ## Decisions and risks
 
 - A named saint requires independent Person and Church Recognition evidence before a calendar Observance can bind to it.
+- A collective title may bind multiple proved Persons without collapsing their identities.
 - A General Roman fixed date and rank may become a perennial rule only from competent universal evidence; Portugal 2026 remains a separate jurisdictional materialization.
-- Optional memorials remain explicit alternatives subject to precedence; no source row or translation may silently force celebration.
 - Names, translated labels and shared civil dates never create identity automatically.
 - Archive provenance must be checked directly; this batch's validation `sourceSha` exactly matches the integrated main commit.
 - Green shadow CI never authorizes production. Other Churches retain their own computus, calendars and competent authorities.
 
 ## Ordered roadmap
 
-1. Review `rc:StMartha` on 29 July and prove identity, recognition, exact SNL occurrence, current commemoration form, rank and scope from competent sources.
-2. Keep the perennial General Roman rule separate from the Portugal 2026 materialization.
-3. Continue the remaining fixed persons, fixed/non-person observances and Marian titles in small reviewed batches.
-4. Resolve remaining structural, proper, transfer and rank rows by competent-authority review.
+1. Review `rc:StCajetan` on 7 August and prove identity, recognition, exact SNL occurrence, rank and scope from competent sources.
+2. Preserve `rc:StSixtusIIPope` as an independent optional alternative on the same day; do not infer precedence from ordering.
+3. Continue remaining fixed persons, fixed/non-person observances and Marian titles in small reviewed batches.
+4. Resolve structural, proper, transfer and rank rows by competent-authority review.
 5. Reach 389/389, explain annual differences and run multi-year regeneration.
 6. Prepare cutover package, budget, receipts and rollback; request the production gate before mutation.
 7. Prove Today, Calendar, Search, Calculator, JSON API and ICS parity, then continue the global deliverables.
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox v44; verify GitHub and Dropbox before new work.
-- Keep one batch active and do not repeat batch 38.
+- Read issue #355 and Dropbox v45; verify GitHub and Dropbox before new work.
+- Keep one batch active and do not repeat batch 39.
 - Never use CI or health checks to write remote D1.
 - Do not merge checks from an outdated head/base.
 - Do not publish shadow output or infer identity from text.
