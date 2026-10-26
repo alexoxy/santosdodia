@@ -2059,6 +2059,17 @@
         "es": "San Camilo de Lelis, presbítero",
         "it": "San Camillo de Lellis, sacerdote"
       }
+  },
+  {
+    "id": "apollinaris-ravenna",
+    "primaryObservanceId": "rc:StApollinaris",
+    "category": "saint",
+    "names": {
+      "en": "Saint Apollinaris, Bishop and Martyr",
+      "pt": "São Apolinário, bispo e mártir",
+      "es": "San Apolinar, obispo y mártir",
+      "it": "Sant’Apollinare, vescovo e martire"
     }
+  }
   ]
 }
