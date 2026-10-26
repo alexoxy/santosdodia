@@ -2646,6 +2646,30 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "occurrence:2026-08-07:cajetan-thiene:roman-catholic:pt",
+      "observanceId": "observance:cajetan-thiene:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-07",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-7",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Caetano, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }
