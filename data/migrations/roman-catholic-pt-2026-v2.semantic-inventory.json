@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 310,
-    "remainingOccurrences": 79,
+    "sourceBoundOccurrences": 311,
+    "remainingOccurrences": 78,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 8,
     "fixed-or-major-observance": 16,
-    "fixed-person": 32,
+    "fixed-person": 31,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -225,13 +225,6 @@
       "dateISO": "2026-08-06",
       "canonicalEventId": "rc:Transfiguration",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-12-0b713d89030b77dc95d9e16c",
-      "sourceRecordHash": "d7197ab1608e717013c7db53716ec4ab74ff9e2274352649e638c4a3e9bb1f6e",
-      "dateISO": "2026-08-12",
-      "canonicalEventId": "rc:StJaneFrancesDeChantal",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-17-0241bff7957f1b47c3c0b147",

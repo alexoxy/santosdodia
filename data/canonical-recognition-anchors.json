@@ -5477,6 +5477,42 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:jane-frances-de-chantal:roman-catholic",
+      "personId": "jane-frances-de-chantal",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/12/st--jane-frances-de-chantal--religious.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "religious"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-12",
+          "claimTypes": [
+            "identity",
+            "religious",
+            "founder-of-the-order-of-the-visitation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

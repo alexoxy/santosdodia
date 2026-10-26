@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 112, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and twelve reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 113, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and thirteen reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -94,6 +94,7 @@ try {
     ['observance:martha-mary-lazarus:roman-catholic', ['2026-07-29', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:cajetan-thiene:roman-catholic', ['2026-08-07', 'optional-memorial', 12, 'general-roman']],
     ['observance:sixtus-ii-companions:roman-catholic', ['2026-08-07', 'optional-memorial', 12, 'general-roman']],
+    ['observance:jane-frances-de-chantal:roman-catholic', ['2026-08-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 12, 'general-roman']],
@@ -186,7 +187,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 112, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 113, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -306,7 +307,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-console.log('Roman Sanctorale passed: 112 authority-isolated perennial Portugal vectors, including the independent optional memorials of Saint Sixtus II and companions and Saint Cajetan on 7 August; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+console.log('Roman Sanctorale passed: 113 authority-isolated perennial Portugal vectors, including Saint Jane Frances de Chantal as a general optional memorial distinct from the unmaterialized Visitation proper solemnity; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

@@ -4077,6 +4077,46 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "observance:jane-frances-de-chantal:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "jane-frances-de-chantal",
+          "recognitionId": "recognition:jane-frances-de-chantal:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-12",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "contextual-rank-distinction"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/12/st--jane-frances-de-chantal--religious.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-26"
     }
   ]
 }

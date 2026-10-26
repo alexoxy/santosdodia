@@ -51,7 +51,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-38.json', '10cd4f1d1176bf6b2f40b598fa1fba95598ab821a95b935474dc607603f76576'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-39.json', '145105cc66cdd6c58de66d2697a8c289988dcdc624d0781d6476930b15071d7f'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-40.json', 'fe44120bc0fdb37197bccd09aed33eb5fbc6523f42bdc713c9a2bf1e8c2d2749'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-41.json', '1fe8124a077aab6b26779d7dfdda0e8516068c28cfc269fee2cd281e18cc21b0']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-41.json', '1fe8124a077aab6b26779d7dfdda0e8516068c28cfc269fee2cd281e18cc21b0'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-42.json', '782830e5ca0535315877a5893efd83fbbd74d36097fd573bc739d19cfc502f5c']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
