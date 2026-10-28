@@ -2191,6 +2191,17 @@
         "es": "San José de Calasanz, presbítero",
         "it": "San Giuseppe Calasanzio, presbitero"
       }
+    },
+    {
+      "id": "louis-ix-france",
+      "primaryObservanceId": "rc:StLouis",
+      "category": "saint",
+      "names": {
+        "en": "Saint Louis IX, King of France",
+        "pt": "São Luís de França",
+        "es": "San Luis IX, rey de Francia",
+        "it": "San Luigi IX, re di Francia"
+      }
     }
   ]
 }

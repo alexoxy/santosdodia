@@ -4290,6 +4290,47 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "observance:louis-ix-france:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "louis-ix-france",
+          "recognitionId": "recognition:louis-ix-france:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-25",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "same-date-alternatives-kept-independent"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/25/st--louis---king-of-france-.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

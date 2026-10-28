@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 119, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 196, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 120, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 197, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -230,6 +230,10 @@ assert(queenship.evidence.some((item) => item.claimTypes?.includes('proper-conte
 const josephCalasanz = first.observances.find((item) => item.observanceId === 'observance:joseph-calasanz:roman-catholic');
 assert(josephCalasanz?.observanceType === 'person-commemoration' && josephCalasanz.subjects?.[0]?.personId === 'joseph-calasanz', 'Saint Joseph Calasanz must remain one person-scoped Observance.');
 assert(josephCalasanz.evidence.some((item) => item.claimTypes?.includes('same-date-alternatives-kept-independent')), 'Joseph Calasanz and Saint Louis must remain independent same-date optional memorials.');
+
+const saintLouis = first.observances.find((item) => item.observanceId === 'observance:louis-ix-france:roman-catholic');
+assert(saintLouis?.observanceType === 'person-commemoration' && saintLouis.subjects?.[0]?.personId === 'louis-ix-france', 'Saint Louis must remain one person-scoped Observance.');
+assert(saintLouis.evidence.some((item) => item.claimTypes?.includes('same-date-alternatives-kept-independent')), 'Saint Louis and Joseph Calasanz must remain independent same-date optional memorials.');
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);

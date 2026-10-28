@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 315,
-    "remainingOccurrences": 74,
+    "sourceBoundOccurrences": 316,
+    "remainingOccurrences": 73,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 16,
-    "fixed-person": 28,
+    "fixed-person": 27,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -232,13 +232,6 @@
       "dateISO": "2026-08-17",
       "canonicalEventId": "rc:OrdWeekday20Monday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-25-b6788316a8c4e9cb5762a749",
-      "sourceRecordHash": "e7ba2c942945225495483ee23ce36a01ca4656ad20eb42c4db5e851c49537da1",
-      "dateISO": "2026-08-25",
-      "canonicalEventId": "rc:StLouis",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-29-2d826fedfb9c76412bd23c06",

@@ -1655,6 +1655,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:louis-ix-france:roman-catholic:pt",
+      "observanceId": "observance:louis-ix-france:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:louis-ix-france:general-roman",
+      "legacyObservanceId": "rc:StLouis",
+      "expectedDateISO": "2026-08-25",
+      "sourceOccurrenceId": "snl-pt-2026-08-25-b6788316a8c4e9cb5762a749",
+      "sourceRecordHash": "e7ba2c942945225495483ee23ce36a01ca4656ad20eb42c4db5e851c49537da1",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
