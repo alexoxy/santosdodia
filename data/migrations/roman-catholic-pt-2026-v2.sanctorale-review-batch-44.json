@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "pius-x-pope",
+        "primaryObservanceId": "rc:StPiusX",
+        "category": "saint",
+        "names": {
+          "en": "Saint Pius X, Pope",
+          "pt": "São Pio X, papa",
+          "es": "San Pío X, papa",
+          "it": "San Pio X, papa"
+        }
+      },
+      "recognition": {
+        "id": "recognition:pius-x-pope:roman-catholic",
+        "personId": "pius-x-pope",
+        "ecclesialTitles": [
+          "pope",
+          "bishop"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/21/st--pius-x--pope.html"
+      },
+      "observanceId": "observance:pius-x-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pius-x-pope:general-roman",
+      "contextualBoundary": {
+        "generalRomanPortugal": "obligatory-memorial",
+        "samePageLocalNotesMaterialized": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StPiusX",
+        "dateISO": "2026-08-21",
+        "sourceOccurrenceId": "snl-pt-2026-08-21-3bb0d8183f01222a96745226",
+        "sourceRecordHash": "23b573b25487406fabf4b4faa837c712cb838e526f96c98c1c265527bf72e33f",
+        "sourceLabelPt": "S. Pio X, papa",
+        "observedDesignation": "S. Pio X, papa – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-21"
+      }
+    }
+  ],
+  "reviewDigestSha256": "20f635a0a49548ed8b3087740619ddca60d05fdfa5c25a34c9ad95efbb860436",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

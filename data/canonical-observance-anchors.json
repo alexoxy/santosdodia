@@ -4157,6 +4157,47 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "observance:pius-x-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "pius-x-pope",
+          "recognitionId": "recognition:pius-x-pope:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-21",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "obligatory-memorial",
+            "same-page-local-notes-kept-separate"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/21/st--pius-x--pope.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

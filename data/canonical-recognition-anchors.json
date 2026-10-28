@@ -5551,6 +5551,44 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "recognition:pius-x-pope:roman-catholic",
+      "personId": "pius-x-pope",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "bishop"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/21/st--pius-x--pope.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "pope",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/vatican/en/holy-father/pio-x.html",
+          "claimTypes": [
+            "identity",
+            "pope",
+            "secular-name",
+            "pontificate"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

@@ -574,6 +574,11 @@
       "occurrenceId": "occurrence:2026-08-19:john-eudes:roman-catholic:pt",
       "legacyObservanceId": "rc:StJohnEudes",
       "dateISO": "2026-08-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-21:pius-x-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPiusX",
+      "dateISO": "2026-08-21"
     }
   ]
 }
