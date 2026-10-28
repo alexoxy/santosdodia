@@ -233,8 +233,8 @@ replace('scripts/vault/test-canonical-occurrence-manifest.mjs', [
 ]);
 replace('scripts/vault/test-portugal-v2-canonical-coverage.mjs', [
   ['length === 118 && explicitOccurrences.length', 'length === 119 && explicitOccurrences.length'], ['one hundred and eighteen', 'one hundred and nineteen'],
-  ['length === 118 && explicitBridges.length', 'length === 119 && explicitBridges.length'],
-  ['mappings.length === 118', 'mappings.length === 119'],
+  ['length === 118 && explicitBridges.length', 'length === 119 && explicitBridges.length'], ['the one hundred and eighteen canonical Occurrences', 'the one hundred and nineteen canonical Occurrences'],
+  ['mappings.length === 118', 'mappings.length === 119'], ['exactly one hundred and eighteen exact source bindings', 'exactly one hundred and nineteen exact source bindings'],
   ["fixedSanctoraleMappingDigest === '9f52941d391c5e66f8e201684d56a0735ec48f2a04ade29c375880447d8e09e7'", `fixedSanctoraleMappingDigest === '${mappingDigest}'`],
   ['explicitOccurrenceById.size === 118 && explicitBridgeByOccurrence.size === 118 && fixedMappingByOccurrence.size === 118', 'explicitOccurrenceById.size === 119 && explicitBridgeByOccurrence.size === 119 && fixedMappingByOccurrence.size === 119'],
   ['coveredSourceIds.size === 305 && coveredSourceHashes.size === 305 && coveredOccurrenceIds.size === 305', 'coveredSourceIds.size === 306 && coveredSourceHashes.size === 306 && coveredOccurrenceIds.size === 306'],

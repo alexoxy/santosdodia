@@ -53,7 +53,7 @@ assert(occurrenceDataset?.status === 'repository-reviewed-occurrence-anchors', '
 assert(bridgeDataset?.status === 'repository-reviewed-read-only-compatibility-bridge' && bridgeDataset?.mutationAllowed === false, 'Coverage requires read-only legacy bridges.');
 assert(bridgeDataset?.legacyReleaseId === coverage.sourceReleaseId, 'Legacy bridge targets a different source release.');
 assert(explicitOccurrences.length === 119 && explicitOccurrences.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit canonical Occurrence count must remain exactly one hundred and nineteen.');
-assert(explicitBridges.length === 119 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the one hundred and eighteen canonical Occurrences.');
+assert(explicitBridges.length === 119 && explicitBridges.length === coverage.coverage.explicitOccurrenceAnchors, 'Explicit legacy bridge count must equal the one hundred and nineteen canonical Occurrences.');
 
 assert(fixedSanctoraleShadow?.schemaVersion === 1 && fixedSanctoraleShadow?.status === 'approved-release-fixed-sanctorale-shadow', 'Fixed Sanctorale shadow is invalid.');
 assert(fixedSanctoraleShadow.sourceReleaseId === coverage.sourceReleaseId && fixedSanctoraleShadow.mutationAllowed === false, 'Fixed Sanctorale shadow must target the approved release and remain read-only.');
@@ -61,7 +61,7 @@ assert(fixedSanctoraleShadow.sourceArtifact.workflowRunId === approval.stagingWo
 assert(`sha256:${fixedSanctoraleShadow.sourceArtifact.buildJsonSha256}` === approval.artifacts.release.files['build.json'], 'Fixed Sanctorale shadow build hash differs from approval.');
 assert(fixedSanctoraleShadow.target.churchId === coverage.canonicalTarget.churchId && fixedSanctoraleShadow.target.jurisdictionId === coverage.canonicalTarget.jurisdictionId, 'Fixed Sanctorale shadow Church/Jurisdiction differs from target.');
 assert(fixedSanctoraleShadow.target.calendarSystem === coverage.canonicalTarget.calendarSystem && fixedSanctoraleShadow.target.year === coverage.canonicalTarget.year, 'Fixed Sanctorale shadow calendar/year differs from target.');
-assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 119, 'Fixed Sanctorale shadow must contain exactly one hundred and eighteen exact source bindings.');
+assert(Array.isArray(fixedSanctoraleShadow.mappings) && fixedSanctoraleShadow.mappings.length === 119, 'Fixed Sanctorale shadow must contain exactly one hundred and nineteen exact source bindings.');
 const fixedSanctoraleMappingDigest = createHash('sha256').update(JSON.stringify(fixedSanctoraleShadow.mappings)).digest('hex');
 assert(fixedSanctoraleMappingDigest === 'fd8f2992ee8e31565afebf05bcc1e9e3cd5ad64a1c0ff9d327abf0698151a5e4', `Fixed Sanctorale mapping set differs from the explicitly reviewed approved-artifact rows: ${fixedSanctoraleMappingDigest}.`);
 assert(/^https:\/\/(?:www\.)?liturgia\.pt\//u.test(fixedSanctoraleShadow.authorityEvidence?.portugalAnnualCalendar ?? ''), 'Fixed Sanctorale shadow lacks competent Portugal authority evidence.');
