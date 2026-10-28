@@ -2180,6 +2180,17 @@
         "es": "San Pío X, papa",
         "it": "San Pio X, papa"
       }
+    },
+    {
+      "id": "joseph-calasanz",
+      "primaryObservanceId": "rc:StJosephCalasanz",
+      "category": "saint",
+      "names": {
+        "en": "Saint Joseph Calasanz, Priest",
+        "pt": "São José de Calasanz, presbítero",
+        "es": "San José de Calasanz, presbítero",
+        "it": "San Giuseppe Calasanzio, presbitero"
+      }
     }
   ]
 }

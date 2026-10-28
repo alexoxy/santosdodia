@@ -1641,6 +1641,20 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:joseph-calasanz:roman-catholic:pt",
+      "observanceId": "observance:joseph-calasanz:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:joseph-calasanz:general-roman",
+      "legacyObservanceId": "rc:StJosephCalasanz",
+      "expectedDateISO": "2026-08-25",
+      "sourceOccurrenceId": "snl-pt-2026-08-25-9d39b2030aab128ff54e1165",
+      "sourceRecordHash": "ec4b0d1075e7d9d8067a481244712dc862599b66e50fc10f231a0b789e745c53",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

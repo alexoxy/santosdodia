@@ -2790,6 +2790,30 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "occurrence:2026-08-25:joseph-calasanz:roman-catholic:pt",
+      "observanceId": "observance:joseph-calasanz:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-25",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-25",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. José de Calasanz, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }
