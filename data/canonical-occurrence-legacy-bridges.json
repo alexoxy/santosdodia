@@ -584,6 +584,11 @@
       "occurrenceId": "occurrence:2026-08-22:queenship-mary:roman-catholic:pt",
       "legacyObservanceId": "rc:QueenshipMary",
       "dateISO": "2026-08-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:joseph-calasanz:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosephCalasanz",
+      "dateISO": "2026-08-25"
     }
   ]
 }

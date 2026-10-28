@@ -5589,6 +5589,46 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "recognition:joseph-calasanz:roman-catholic",
+      "personId": "joseph-calasanz",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/25/st--joseph--calasanz--priest--founder-of-piarists.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/leo-xiv/en/apost_exhortations/documents/20251004-dilexi-te.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "priest",
+            "founder",
+            "education-charism"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }
