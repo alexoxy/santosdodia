@@ -5707,6 +5707,37 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "recognition:peter-claver:roman-catholic",
+      "personId": "peter-claver",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "religious",
+        "missionary"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vaticannews.va/en/saints/09/09/st--peter-claver--jesuit--apostle-of--slaves-.html",
+          "claimTypes": [
+            "identity",
+            "priest",
+            "jesuit",
+            "missionary",
+            "death-date",
+            "canonization"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }
