@@ -4331,6 +4331,67 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "observance:john-baptist-martyrdom:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "martyrdom",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "john-baptist",
+          "recognitionId": "recognition:john-baptist:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-29",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "obligatory-memorial",
+            "proper-context-rank-kept-separate"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=145",
+          "claimTypes": [
+            "observance-attestation",
+            "martyrdom",
+            "identity-reuse"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/pt/audiences/2012/documents/hf_ben-xvi_aud_20120829.html",
+          "claimTypes": [
+            "observance-attestation",
+            "roman-calendar-memorial",
+            "nativity-and-martyrdom-distinct-observances",
+            "identity-reuse"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/liturgical-holidays/memorial-of-the-passion-of-saint-john-the-baptist.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "passion-title",
+            "nativity-and-passion-distinct-observances"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

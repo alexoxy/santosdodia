@@ -46,7 +46,7 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 120, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.observanceCount === 121, 'Reviewed Observance count changed and requires explicit review.');
 assert(first.manifest.personCoverageCount === 197, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
@@ -249,17 +249,21 @@ for (const observance of first.observances) {
   }
 }
 
+const johnMartyrdom = first.observances.find((item) => item.observanceId === 'observance:john-baptist-martyrdom:roman-catholic');
+assert(johnMartyrdom?.observanceKey === 'martyrdom' && johnMartyrdom.observanceType === 'person-commemoration' && johnMartyrdom.subjects?.[0]?.personId === 'john-baptist', 'John the Baptist martyrdom must be a distinct Observance reusing the canonical Person.');
+assert(johnMartyrdom.evidence.some((item) => item.claimTypes?.includes('proper-context-rank-kept-separate')), 'The Order of Malta proper feast rank must remain contextual.');
+
 const secondJohnObservance = structuredClone(observanceDataset);
 const johnSource = secondJohnObservance.observances.find((item) => item.id === 'observance:john-baptist-nativity:roman-catholic');
 assert(johnSource, 'John Baptist Nativity fixture is missing.');
 secondJohnObservance.observances.push({
   ...structuredClone(johnSource),
-  id: 'observance:john-baptist-martyrdom:roman-catholic',
-  observanceKey: 'martyrdom',
+  id: 'observance:john-baptist-deposition:roman-catholic',
+  observanceKey: 'deposition',
   observanceType: 'person-commemoration'
 });
 const twoJohnBuild = build(secondJohnObservance);
-assert(twoJohnBuild.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'john-baptist')).length === 2, 'Distinct Observance keys must allow multiple Observances for one Person in one Church.');
+assert(twoJohnBuild.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'john-baptist')).length === 3, 'Distinct Observance keys must allow multiple Observances for one Person in one Church.');
 
 const missingKey = structuredClone(observanceDataset);
 delete missingKey.observances[0].observanceKey;

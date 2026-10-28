@@ -3101,6 +3101,34 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "sanctorale-rule:john-baptist-martyrdom:general-roman",
+      "observanceId": "observance:john-baptist-martyrdom:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 8,
+        "day": 29
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-29",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-calendar",
+            "portugal-materialization",
+            "proper-context-rank-kept-separate",
+            "precedence-not-inferred"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

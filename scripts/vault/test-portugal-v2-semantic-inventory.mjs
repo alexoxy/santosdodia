@@ -43,7 +43,7 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 316 && coveredSourceIds.size === 316, 'Semantic inventory coverage boundary must contain exactly 316 unique approved source rows.');
+assert(coveredRows.length === 317 && coveredSourceIds.size === 317, 'Semantic inventory coverage boundary must contain exactly 317 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
@@ -245,9 +245,9 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 73 && remainingSourceIds.size === 73 && remainingSourceHashes.size === 73, 'Semantic inventory must preserve exactly 73 unique unresolved approved-source rows.');
+assert(remaining.length === 72 && remainingSourceIds.size === 72 && remainingSourceHashes.size === 72, 'Semantic inventory must preserve exactly 72 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
-assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 316 && inventory.coverageAtInventory.remainingOccurrences === 73 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
+assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 317 && inventory.coverageAtInventory.remainingOccurrences === 72 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
 
 const actualCounts = Object.fromEntries([...familyCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
@@ -262,8 +262,9 @@ assert(!remaining.some((row) => row.canonicalEventId === 'rc:StPiusX'), 'Saint P
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:QueenshipMary'), 'Queenship of Mary must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJosephCalasanz'), 'Saint Joseph Calasanz must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StLouis'), 'Saint Louis must leave the unresolved inventory after exact promotion.');
+assert(!remaining.some((row) => row.canonicalEventId === 'rc:BeheadingJohnBaptist'), 'John the Baptist martyrdom must leave the unresolved inventory after exact promotion.');
 assert((actualCounts['fixed-collective'] ?? 0) === 0, 'Fixed-collective backlog must be empty after the Archangels promotion.');
 assert(actualCounts['jurisdiction-structural-overlay'] + actualCounts['portugal-proper'] + actualCounts['jurisdiction-rank-override'] === 20 && inventory.humanReviewBoundary.occurrenceCount === 20, 'Portugal-specific human-review boundary must remain explicit.');
 assert(inventory.classificationPolicy.labelsCreateIdentity === false && inventory.classificationPolicy.annualDateCreatesPerennialRule === false && inventory.classificationPolicy.suppressedCandidatesCountAsCoverage === false && inventory.classificationPolicy.withheldCandidatesCountAsCoverage === false && inventory.classificationPolicy.transferOriginsCountAsCoverage === false, 'Semantic inventory fail-closed policy weakened.');
 
-console.log('Portugal semantic inventory passed: 316 covered + 73 exact unresolved source rows = 389; Saint Louis and Saint Joseph Calasanz are independently source-bound on the shared date, and the temporal/Portugal-specific review boundaries remain explicit.');
+console.log('Portugal semantic inventory passed: 317 covered + 72 exact unresolved source rows = 389; John the Baptist martyrdom reuses the canonical Person; Saint Louis and Saint Joseph Calasanz are independently source-bound on the shared date, and the temporal/Portugal-specific review boundaries remain explicit.');

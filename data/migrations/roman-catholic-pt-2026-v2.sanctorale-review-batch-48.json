@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "john-baptist-martyrdom",
+      "reusedSubjects": [
+        {
+          "personId": "john-baptist",
+          "recognitionId": "recognition:john-baptist:roman-catholic"
+        }
+      ],
+      "identityReuseEvidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-29",
+          "claimTypes": [
+            "observance-attestation",
+            "same-person-identity"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/pt/audiences/2012/documents/hf_ben-xvi_aud_20120829.html",
+          "claimTypes": [
+            "observance-attestation",
+            "same-person-identity",
+            "nativity-and-martyrdom-distinct-observances"
+          ]
+        }
+      ],
+      "observanceId": "observance:john-baptist-martyrdom:roman-catholic",
+      "observanceKey": "martyrdom",
+      "sanctoraleRuleId": "sanctorale-rule:john-baptist-martyrdom:general-roman",
+      "contextualBoundary": {
+        "generalRomanPortugal": "obligatory-memorial",
+        "orderOfMalta": "feast",
+        "properRankPromotedToGeneral": false,
+        "personIdentityReused": true,
+        "precedenceInferred": false
+      },
+      "source": {
+        "canonicalEventId": "rc:BeheadingJohnBaptist",
+        "dateISO": "2026-08-29",
+        "sourceOccurrenceId": "snl-pt-2026-08-29-2d826fedfb9c76412bd23c06",
+        "sourceRecordHash": "0d25b3b7dcd0d8861964f860b757c194343bc75d7bc914373786f4d46f3476b6",
+        "sourceLabelPt": "Martírio de São João Batista",
+        "observedDesignation": "Martírio de São João Batista – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-29"
+      }
+    }
+  ],
+  "reviewDigestSha256": "947f2d88954fbdb9f92529c3e4ced6a6bd786c443e311ba8bcf7563ccadb12ba",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

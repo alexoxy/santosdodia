@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-48.json",
+  "reviewDigestSha256": "947f2d88954fbdb9f92529c3e4ced6a6bd786c443e311ba8bcf7563ccadb12ba",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [],
+  "reusedPersonIds": [
+    "john-baptist"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-baptist-martyrdom:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 317,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 72
+  },
+  "fixedSanctoraleMappingDigestSha256": "fd8f2992ee8e31565afebf05bcc1e9e3cd5ad64a1c0ff9d327abf0698151a5e4",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

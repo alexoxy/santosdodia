@@ -35,13 +35,13 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 316,
-    "remainingOccurrences": 73,
+    "sourceBoundOccurrences": 317,
+    "remainingOccurrences": 72,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
-    "fixed-or-major-observance": 16,
+    "fixed-or-major-observance": 15,
     "fixed-person": 27,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
@@ -232,13 +232,6 @@
       "dateISO": "2026-08-17",
       "canonicalEventId": "rc:OrdWeekday20Monday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-29-2d826fedfb9c76412bd23c06",
-      "sourceRecordHash": "0d25b3b7dcd0d8861964f860b757c194343bc75d7bc914373786f4d46f3476b6",
-      "dateISO": "2026-08-29",
-      "canonicalEventId": "rc:BeheadingJohnBaptist",
-      "semanticFamily": "fixed-or-major-observance"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-05-27f372db03e5c9841ce06c2a",
