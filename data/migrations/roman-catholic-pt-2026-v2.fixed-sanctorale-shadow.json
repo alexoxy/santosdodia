@@ -1627,6 +1627,20 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-22:queenship-mary:roman-catholic:pt",
+      "observanceId": "observance:queenship-mary:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:queenship-mary:general-roman",
+      "legacyObservanceId": "rc:QueenshipMary",
+      "expectedDateISO": "2026-08-22",
+      "sourceOccurrenceId": "snl-pt-2026-08-22-5682a2fac70e8dae5466d6d2",
+      "sourceRecordHash": "4d4afd410b114610f1bab9169dc1e408fc25f62cb15fa9577257d1bcda5a4a51",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

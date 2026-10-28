@@ -2766,6 +2766,30 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "occurrence:2026-08-22:queenship-mary:roman-catholic:pt",
+      "observanceId": "observance:queenship-mary:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-22",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-22",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Virgem santa Maria, Rainha – MO"
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }
