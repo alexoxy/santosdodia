@@ -1613,9 +1613,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-21:pius-x-pope:roman-catholic:pt",
+      "observanceId": "observance:pius-x-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pius-x-pope:general-roman",
+      "legacyObservanceId": "rc:StPiusX",
+      "expectedDateISO": "2026-08-21",
+      "sourceOccurrenceId": "snl-pt-2026-08-21-3bb0d8183f01222a96745226",
+      "sourceRecordHash": "23b573b25487406fabf4b4faa837c712cb838e526f96c98c1c265527bf72e33f",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-10-26",
+  "verifiedAt": "2026-10-28",
   "fixedMappingCount": 113
 }

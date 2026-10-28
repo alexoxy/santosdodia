@@ -2742,6 +2742,30 @@
         }
       ],
       "verifiedAt": "2026-10-26"
+    },
+    {
+      "id": "occurrence:2026-08-21:pius-x-pope:roman-catholic:pt",
+      "observanceId": "observance:pius-x-pope:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-21",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-21",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Pio X, papa – MO"
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

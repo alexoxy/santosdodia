@@ -2169,6 +2169,17 @@
         "es": "San Juan Eudes, presbítero",
         "it": "San Giovanni Eudes, presbitero"
       }
+    },
+    {
+      "id": "pius-x-pope",
+      "primaryObservanceId": "rc:StPiusX",
+      "category": "saint",
+      "names": {
+        "en": "Saint Pius X, Pope",
+        "pt": "São Pio X, papa",
+        "es": "San Pío X, papa",
+        "it": "San Pio X, papa"
+      }
     }
   ]
 }
