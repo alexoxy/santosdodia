@@ -5677,6 +5677,36 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "recognition:teresa-calcutta:roman-catholic",
+      "personId": "teresa-calcutta",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "religious",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20031019_madre-teresa_en.html",
+          "claimTypes": [
+            "identity",
+            "birth-name",
+            "religious-name",
+            "founder",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

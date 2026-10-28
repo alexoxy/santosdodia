@@ -599,6 +599,11 @@
       "occurrenceId": "occurrence:2026-08-29:john-baptist-martyrdom:roman-catholic:pt",
       "legacyObservanceId": "rc:BeheadingJohnBaptist",
       "dateISO": "2026-08-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-05:teresa-calcutta:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMotherTeresa",
+      "dateISO": "2026-09-05"
     }
   ]
 }

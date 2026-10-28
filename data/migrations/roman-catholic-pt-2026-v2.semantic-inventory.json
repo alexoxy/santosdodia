@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 317,
-    "remainingOccurrences": 72,
+    "sourceBoundOccurrences": 318,
+    "remainingOccurrences": 71,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 27,
+    "fixed-person": 26,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -232,13 +232,6 @@
       "dateISO": "2026-08-17",
       "canonicalEventId": "rc:OrdWeekday20Monday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-05-27f372db03e5c9841ce06c2a",
-      "sourceRecordHash": "09cc29463193bbaa50f2eabfbc06275cd4a998948b3e1aba9656c4c950771b2f",
-      "dateISO": "2026-09-05",
-      "canonicalEventId": "rc:StMotherTeresa",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-08-9d6e63c998f08ef419aef6a1",

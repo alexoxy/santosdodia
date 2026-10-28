@@ -1683,6 +1683,20 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-05:teresa-calcutta:roman-catholic:pt",
+      "observanceId": "observance:teresa-calcutta:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:teresa-calcutta:general-roman",
+      "legacyObservanceId": "rc:StMotherTeresa",
+      "expectedDateISO": "2026-09-05",
+      "sourceOccurrenceId": "snl-pt-2026-09-05-27f372db03e5c9841ce06c2a",
+      "sourceRecordHash": "09cc29463193bbaa50f2eabfbc06275cd4a998948b3e1aba9656c4c950771b2f",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
