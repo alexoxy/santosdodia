@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-28 11:02 UTC
+Updated: 2026-10-28 12:45 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-28-v53.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-28-v54.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 316/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 317/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,17 +20,17 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#454](https://github.com/alexoxy/santosdodia/pull/454) delivered E07.05 batch 47:
+PR [#456](https://github.com/alexoxy/santosdodia/pull/456) delivered E07.05 batch 48:
 
-- created the canonical Person and Roman Catholic Recognition for Saint Louis IX of France using official Church evidence;
-- added the distinct Observance, perennial General Roman rule and Portugal 2026 Occurrence for 25 August;
-- bound the exact SNL row `rc:StLouis` as an optional memorial (`MF`);
-- preserved `rc:StJosephCalasanz` as an independently bound optional memorial on the same date;
-- prohibited inferred precedence and kept publication/D1 remote fail-closed.
+- reused the canonical John the Baptist Person and Roman Catholic Recognition;
+- added the distinct Passion/Martyrdom Observance, perennial General Roman rule and Portugal 2026 Occurrence for 29 August;
+- bound the exact SNL row `rc:BeheadingJohnBaptist` as an obligatory memorial (`MO`);
+- preserved the Order of Malta proper feast as contextual rather than universal;
+- prohibited title-derived identity and kept publication/D1 remote fail-closed.
 
-Validated head: `cbe7cd78221742fd81cb80fc9c11ed2169ab3426`.
+Validated head: `24b82e9c8200c91dd8314bfbb53e915d3d4fc0cd`.
 
-Merge on `main`: `5e2c3740c58f118aa48e0e330be7bb81096b71f7`.
+Merge on `main`: `328122f83c8a00fb061827a75dc6674bdb831f6f`.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -40,48 +40,48 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **118** across **110** civil days.
-- Total canonical migration coverage: **316/389 (81.234%)**.
-- Approved-source occurrences outside the canonical shadow: **73**.
-- Source-bound civil days: **305/365**.
-- Civil days wholly without a source-bound canonical occurrence: **60**.
+- Exact fixed Sanctorale bindings: **119** across **111** civil days.
+- Total canonical migration coverage: **317/389 (81.491%)**.
+- Approved-source occurrences outside the canonical shadow: **72**.
+- Source-bound civil days: **306/365**.
+- Civil days wholly without a source-bound canonical occurrence: **59**.
 - Fixed-person backlog: **27**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
-Saint Louis and Saint Joseph Calasanz remain separate identities and optional-memorial alternatives on 25 August. Both exact source rows are bound independently; the shared civil date did not collapse either Occurrence or infer precedence.
+The Nativity and Passion of Saint John the Baptist reuse one canonical person while remaining distinct Observances on 24 June and 29 August. The Order of Malta proper feast remains contextual and was not promoted to a universal rule.
 
 ## CI and external proof
 
-PR #454 workflows on the exact validated head:
+PR #456 workflows on the exact validated head:
 
-- Product BUILD run `40675998486`: success;
-- Product publish staging run `40675998596`: success;
-- Quality run `40675998667`: success;
-- Wikidata retry quality run `40675998459`: success;
-- Sanctorale review quality run `40675998572`: success.
+- Product BUILD run `40688989767`: success;
+- Product publish staging run `40688989645`: success;
+- Quality run `40688989807`: success;
+- Wikidata retry quality run `40688989644`: success;
+- Sanctorale review quality run `40688989655`: success.
 
 Local proof passed `npm run check`, `npm audit --audit-level=high` with zero vulnerabilities, the mandatory AdSense fail-closed checker and `git diff --check`.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAAa1A`, SHA-256 `f5a33ab09ee7751c2a98a9dca2c8d534a92f12c3c79b49c673ca10507c12ceb1`;
-- source MD `id:oANWCGUyYBwAAAAAAAAa1Q`, SHA-256 `94da4916aaffea061ab7d45ce16f80c9bf2aabc5823e3f53eabebe2b8c5b4c35`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAa5w`, SHA-256 `d1093cb232d0cdc7720275117da594887382aa21f5b47a7fba031865e04a7af7`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAAa6A`, SHA-256 `b70667b4c4b68e15b681daad2598bb68a8c197efae12668340b716235f572d5e`;
-- plan v53 JSON `id:oANWCGUyYBwAAAAAAAAa5Q`, SHA-256 `cfa6c454ef76802f7992629636a7c5ff40b8599f580bcbec89246702fc9d6fd3`;
-- plan v53 MD `id:oANWCGUyYBwAAAAAAAAa5g`, SHA-256 `c31390b1caabf8d92d2df6337ffbdb14b4a575a4a0a373cd1a846c3f1c1be10a`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAa6Q`, SHA-256 `011d55ff9e1409a5cbaf7404bdcb4571de234e206dc826e0196f55a1e5833e9b`;
+- source MD `id:oANWCGUyYBwAAAAAAAAa6g`, SHA-256 `cb7845fdc4fb5937d79927f5cb777712007c6c21dceca53f681c5644045bcb92`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAbBg`, SHA-256 `2552da6845492d1b46bc108a2a510181c0b51e9743da4b67bfa1e83e1a99c9d2`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAbBw`, SHA-256 `4abef6e7a694775bbc51f2b519dc1dadf18b4827d956c17896092a99cbe51241`;
+- plan v54 JSON `id:oANWCGUyYBwAAAAAAAAbBA`, SHA-256 `991bb2d141f892878bccc73b638b109c950c0e70e08dd28a60c02b36d7cb8833`;
+- plan v54 MD `id:oANWCGUyYBwAAAAAAAAbBQ`, SHA-256 `d97722eea28c544c90bf676b34ceaa7b7358d7957405a07ce531a9cbaeb6075d`.
 
 Post-merge archive for the exact merge SHA:
 
-`/Apps/SantosDia Orchestrator/Santos do Dia/02_Dados_Eclesiasticos/06_Publicacao/roman-catholic/2026/5e2c3740c58f118aa48e0e330be7bb81096b71f7`
+`/Apps/SantosDia Orchestrator/current/product/archive-328122f83c8a00fb061827a75dc6674bdb831f6f`
 
-- manifest `id:oANWCGUyYBwAAAAAAAAa3A`;
-- validation `id:oANWCGUyYBwAAAAAAAAa3Q`;
-- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAa3g`;
-- release `id:oANWCGUyYBwAAAAAAAAa3w`.
+- manifest `id:oANWCGUyYBwAAAAAAAAbAA`;
+- validation `id:oANWCGUyYBwAAAAAAAAbAQ`;
+- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAbAg`;
+- release `id:oANWCGUyYBwAAAAAAAAbAw`.
 
-Validation run `40676257784` confirms the exact SHA, 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`.
+The merge push produced no staging run. An exact-SHA local reproduction confirms 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`; the receipt explicitly records `validationOrigin=local-exact-merge-reproduction` and a null workflow run ID.
 
 ## Task and deliverable countdown
 
@@ -93,15 +93,15 @@ Validation run `40676257784` confirms the exact SHA, 365 days, five complete loc
 
 ## Repository and production hygiene
 
-- PR #454 was integrated only after the exact head and unchanged base were reverified and all five checks passed.
+- PR #456 was integrated only after the exact head and unchanged base were reverified and all five checks passed.
 - No review thread or submitted review remained pending.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:BeheadingJohnBaptist` on 29 August using competent official sources.
-2. Reuse the canonical John the Baptist Person; model the Passion/Beheading as a distinct Observance without title-derived identity.
+1. Continue E07.05 with `rc:StMotherTeresa` on 5 September using competent official sources.
+2. Preserve proper calendars and patronages only in their proven contexts; do not universalize them.
 3. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 4. Resolve Portugal-specific structural/proper/rank rows by explicit competent-authority review.
 5. Reach 389/389, explain every annual difference and run multi-year regeneration.
@@ -110,8 +110,8 @@ Validation run `40676257784` confirms the exact SHA, 365 days, five complete loc
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v53, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:BeheadingJohnBaptist`; do not repeat Saint Louis or Calasanz.
+- Read issue #355 and Dropbox plan v54, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StMotherTeresa`; do not repeat John the Baptist's Passion.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
