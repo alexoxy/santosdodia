@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 318,
-    "remainingOccurrences": 71,
+    "sourceBoundOccurrences": 319,
+    "remainingOccurrences": 70,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 26,
+    "fixed-person": 25,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -239,13 +239,6 @@
       "dateISO": "2026-09-08",
       "canonicalEventId": "rc:NativityVirginMary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-09-753b3544942002565550ff79",
-      "sourceRecordHash": "7035b9b51aea111c9fa63aa0e576c1f9c83d5760dc14213fcfe4d789b87a8fbb",
-      "dateISO": "2026-09-09",
-      "canonicalEventId": "rc:StPeterClaver",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-12-9161583ebe64bf91b4e6b788",

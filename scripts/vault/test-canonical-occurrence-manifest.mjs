@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 120, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 120, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 121, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 121, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -102,6 +102,7 @@ const expected = new Map([
   ['observance:louis-ix-france:roman-catholic', ['2026-08-25', 'optional-memorial', 'MF', 'rc:StLouis']],
   ['observance:john-baptist-martyrdom:roman-catholic', ['2026-08-29', 'obligatory-memorial', 'MO', 'rc:BeheadingJohnBaptist']],
   ['observance:teresa-calcutta:roman-catholic', ['2026-09-05', 'optional-memorial', 'MF', 'rc:StMotherTeresa']],
+  ['observance:peter-claver:roman-catholic', ['2026-09-09', 'optional-memorial', 'MF', 'rc:StPeterClaver']],
   ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StPancras']],
   ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StsNereusAchilleus']],
   ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 'MF', 'rc:StsMarcellinusPeter']],

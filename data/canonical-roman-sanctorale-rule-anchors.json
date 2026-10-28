@@ -3155,6 +3155,32 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "sanctorale-rule:peter-claver:general-roman",
+      "observanceId": "observance:peter-claver:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 9
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-9",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "portugal-inherits-general-calendar",
+            "proper-institute-ranks-kept-separate"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

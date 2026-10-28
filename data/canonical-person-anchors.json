@@ -2213,6 +2213,17 @@
         "es": "Santa Teresa de Calcuta",
         "it": "Santa Teresa di Calcutta"
       }
+    },
+    {
+      "id": "peter-claver",
+      "primaryObservanceId": "rc:StPeterClaver",
+      "category": "saint",
+      "names": {
+        "en": "Saint Peter Claver",
+        "pt": "São Pedro Claver",
+        "es": "San Pedro Claver",
+        "it": "San Pietro Claver"
+      }
     }
   ]
 }

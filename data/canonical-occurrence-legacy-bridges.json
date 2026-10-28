@@ -604,6 +604,11 @@
       "occurrenceId": "occurrence:2026-09-05:teresa-calcutta:roman-catholic:pt",
       "legacyObservanceId": "rc:StMotherTeresa",
       "dateISO": "2026-09-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-09:peter-claver:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterClaver",
+      "dateISO": "2026-09-09"
     }
   ]
 }

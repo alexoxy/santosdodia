@@ -2887,6 +2887,31 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "occurrence:2026-09-09:peter-claver:roman-catholic:pt",
+      "observanceId": "observance:peter-claver:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-09",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-9",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-date-contexts-kept-independent"
+          ],
+          "observedDesignation": "S. Pedro Claver, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

@@ -1697,6 +1697,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-09:peter-claver:roman-catholic:pt",
+      "observanceId": "observance:peter-claver:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:peter-claver:general-roman",
+      "legacyObservanceId": "rc:StPeterClaver",
+      "expectedDateISO": "2026-09-09",
+      "sourceOccurrenceId": "snl-pt-2026-09-09-753b3544942002565550ff79",
+      "sourceRecordHash": "7035b9b51aea111c9fa63aa0e576c1f9c83d5760dc14213fcfe4d789b87a8fbb",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

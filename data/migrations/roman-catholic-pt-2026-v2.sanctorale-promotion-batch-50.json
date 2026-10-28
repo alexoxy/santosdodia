@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-50.json",
+  "reviewDigestSha256": "9e05534ce782e6646bf9ffc69719284936024d1ef31b57e31397d83e97c4180e",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "peter-claver"
+  ],
+  "promotedObservanceIds": [
+    "observance:peter-claver:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 319,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 70
+  },
+  "fixedSanctoraleMappingDigestSha256": "96a74cb8a36d88150a75e346002c41cab812295b5b8e188d667319d7e35d0dbe",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}
