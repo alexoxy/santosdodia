@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "teresa-calcutta",
+        "primaryObservanceId": "rc:StMotherTeresa",
+        "category": "saint",
+        "names": {
+          "en": "Saint Teresa of Calcutta",
+          "pt": "Santa Teresa de Calcutá",
+          "es": "Santa Teresa de Calcuta",
+          "it": "Santa Teresa di Calcutta"
+        }
+      },
+      "recognition": {
+        "id": "recognition:teresa-calcutta:roman-catholic",
+        "personId": "teresa-calcutta",
+        "ecclesialTitles": [
+          "virgin",
+          "religious",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20031019_madre-teresa_en.html"
+      },
+      "observanceId": "observance:teresa-calcutta:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:teresa-calcutta:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "missionariesOfCharity": "solemnity",
+        "properRankMaterializedAsGeneral": false,
+        "saturdayMarianAlternativeKeptIndependent": true,
+        "patronageClaimsPublished": 0
+      },
+      "source": {
+        "canonicalEventId": "rc:StMotherTeresa",
+        "dateISO": "2026-09-05",
+        "sourceOccurrenceId": "snl-pt-2026-09-05-27f372db03e5c9841ce06c2a",
+        "sourceRecordHash": "09cc29463193bbaa50f2eabfbc06275cd4a998948b3e1aba9656c4c950771b2f",
+        "sourceLabelPt": "S. Teresa de Calcutá, virgem",
+        "observedDesignation": "S. Teresa de Calcutá, virgem – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-5"
+      }
+    }
+  ],
+  "reviewDigestSha256": "f2f154d3061ab0f10b10cfce38a608b9348a1d07672f10ed01fb290d825e8158",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

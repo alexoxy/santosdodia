@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 121, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 197, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 122, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 198, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -248,6 +248,10 @@ for (const observance of first.observances) {
     assert(!(forbidden in observance), `${observance.observanceId} leaked ${forbidden} into Observance.`);
   }
 }
+
+const motherTeresa = first.observances.find((item) => item.observanceId === 'observance:teresa-calcutta:roman-catholic');
+assert(motherTeresa?.observanceType === 'person-commemoration' && motherTeresa.subjects?.[0]?.personId === 'teresa-calcutta', 'Saint Teresa of Calcutta must remain one person-scoped Observance.');
+assert(motherTeresa.evidence.some((item) => item.claimTypes?.includes('proper-institute-rank-kept-separate')), 'The Missionaries of Charity proper solemnity must remain contextual.');
 
 const johnMartyrdom = first.observances.find((item) => item.observanceId === 'observance:john-baptist-martyrdom:roman-catholic');
 assert(johnMartyrdom?.observanceKey === 'martyrdom' && johnMartyrdom.observanceType === 'person-commemoration' && johnMartyrdom.subjects?.[0]?.personId === 'john-baptist', 'John the Baptist martyrdom must be a distinct Observance reusing the canonical Person.');
