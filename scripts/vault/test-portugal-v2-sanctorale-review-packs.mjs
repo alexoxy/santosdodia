@@ -54,7 +54,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-41.json', '1fe8124a077aab6b26779d7dfdda0e8516068c28cfc269fee2cd281e18cc21b0'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-42.json', '782830e5ca0535315877a5893efd83fbbd74d36097fd573bc739d19cfc502f5c'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-43.json', '1ca7db5447aa29024d16359a020396005b59d688c597adad5b5eb26e37d8edce'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-44.json', '20f635a0a49548ed8b3087740619ddca60d05fdfa5c25a34c9ad95efbb860436']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-44.json', '20f635a0a49548ed8b3087740619ddca60d05fdfa5c25a34c9ad95efbb860436'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-45.json', 'b40353531538d6f40035519525db9ce75d0d575d1de8ab275c7ea04119f73a2e']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -211,7 +212,10 @@ for (const fileName of packFiles) {
     }
     assert(candidate.observanceId === `observance:${occurrenceKey}:roman-catholic`, `${occurrenceKey} Observance identity is invalid.`);
     assert(candidate.sanctoraleRuleId === `sanctorale-rule:${occurrenceKey}:general-roman`, `${occurrenceKey} Sanctorale rule identity is invalid.`);
-    assert(subjectless || namedPersonWithCompanions || (collective ? candidate.observanceType === 'multi-person-commemoration' : !candidate.observanceType || candidate.observanceType === 'person-commemoration'), `${occurrenceKey} Observance type does not match its subjects.`);
+    assert(subjectless || namedPersonWithCompanions || (collective
+      ? candidate.observanceType === 'multi-person-commemoration'
+      : !candidate.observanceType || ['person-commemoration', 'marian-title'].includes(candidate.observanceType)),
+    `${occurrenceKey} Observance type does not match its subjects.`);
     assert(rankProfile && source.legacyRank === rankProfile.legacyRank && source.canonicalRank === rankProfile.canonicalRank, `${occurrenceKey} reviewed rank refinement changed unexpectedly.`);
     assert(/^2026-\d{2}-\d{2}$/u.test(source.dateISO), `${occurrenceKey} lacks an exact 2026 date.`);
     assert(source.sourceOccurrenceId.startsWith(`snl-pt-${source.dateISO}-`), `${occurrenceKey} source occurrence is not bound to its exact SNL date.`);

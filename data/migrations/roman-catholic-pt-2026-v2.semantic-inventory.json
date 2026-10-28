@@ -35,12 +35,12 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 313,
-    "remainingOccurrences": 76,
+    "sourceBoundOccurrences": 314,
+    "remainingOccurrences": 75,
     "promotionAllowed": false
   },
   "familyCounts": {
-    "fixed-marian-title": 8,
+    "fixed-marian-title": 7,
     "fixed-or-major-observance": 16,
     "fixed-person": 29,
     "jurisdiction-rank-override": 2,
@@ -232,13 +232,6 @@
       "dateISO": "2026-08-17",
       "canonicalEventId": "rc:OrdWeekday20Monday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-08-22-5682a2fac70e8dae5466d6d2",
-      "sourceRecordHash": "4d4afd410b114610f1bab9169dc1e408fc25f62cb15fa9577257d1bcda5a4a51",
-      "dateISO": "2026-08-22",
-      "canonicalEventId": "rc:QueenshipMary",
-      "semanticFamily": "fixed-marian-title"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-08-25-9d39b2030aab128ff54e1165",

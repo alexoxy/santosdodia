@@ -579,6 +579,11 @@
       "occurrenceId": "occurrence:2026-08-21:pius-x-pope:roman-catholic:pt",
       "legacyObservanceId": "rc:StPiusX",
       "dateISO": "2026-08-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-22:queenship-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:QueenshipMary",
+      "dateISO": "2026-08-22"
     }
   ]
 }

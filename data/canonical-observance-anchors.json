@@ -4198,6 +4198,57 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "observance:queenship-mary:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "queenship",
+      "observanceType": "marian-title",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "mary-of-nazareth",
+          "recognitionId": "recognition:mary-of-nazareth:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-22",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "obligatory-memorial",
+            "proper-contexts-kept-separate"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=138",
+          "claimTypes": [
+            "observance-attestation",
+            "marian-title",
+            "same-person-identity"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2012/documents/hf_ben-xvi_aud_20120822.html",
+          "claimTypes": [
+            "observance-attestation",
+            "fixed-date",
+            "marian-title",
+            "same-person-identity"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

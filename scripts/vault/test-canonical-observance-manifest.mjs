@@ -46,7 +46,7 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 117, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.observanceCount === 118, 'Reviewed Observance count changed and requires explicit review.');
 assert(first.manifest.personCoverageCount === 195, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
@@ -77,9 +77,9 @@ assert(JSON.stringify(ids) === JSON.stringify([...ids].sort()), 'Observance rele
 assert(first.observances.every((item) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(item.observanceKey)), 'Every canonical Observance must expose a stable observanceKey.');
 assert(first.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'matthew-apostle')).length === 2, 'Matthew must demonstrate one Person with separate Church-scoped Observances.');
 const marianObservances = first.observances.filter((item) => item.subjects.some((subject) => subject.personId === 'mary-of-nazareth'));
-assert(marianObservances.length === 3, 'Mary of Nazareth must have three distinct Church-scoped Observances.');
-assert(JSON.stringify(marianObservances.map((item) => item.observanceKey).sort()) === JSON.stringify(['assumption', 'divine-maternity', 'immaculate-conception']), 'Marian Observance keys must remain distinct and stable.');
-assert(marianObservances.every((item) => item.observanceType === 'marian-solemnity' && item.subjects[0].recognitionId === 'recognition:mary-of-nazareth:roman-catholic'), 'Marian Observances must share one Person/Recognition without merging their identities.');
+assert(marianObservances.length === 4, 'Mary of Nazareth must have four distinct Church-scoped Observances.');
+assert(JSON.stringify(marianObservances.map((item) => item.observanceKey).sort()) === JSON.stringify(['assumption', 'divine-maternity', 'immaculate-conception', 'queenship']), 'Marian Observance keys must remain distinct and stable.');
+assert(marianObservances.every((item) => ['marian-solemnity', 'marian-title'].includes(item.observanceType) && item.subjects[0].recognitionId === 'recognition:mary-of-nazareth:roman-catholic'), 'Marian Observances must share one Person/Recognition without merging their identities.');
 
 const john = first.observances.find((item) => item.observanceId === 'observance:john-baptist-nativity:roman-catholic');
 assert(john?.observanceKey === 'nativity' && john.observanceType === 'feast' && john.subjects.length === 1 && john.subjects[0].personId === 'john-baptist', 'John Baptist Nativity must remain a keyed person-subject feast Observance.');
@@ -222,6 +222,10 @@ assert(johnEudes.evidence.some((item) => item.claimTypes?.includes('contextual-r
 const piusX = first.observances.find((item) => item.observanceId === 'observance:pius-x-pope:roman-catholic');
 assert(piusX?.observanceType === 'person-commemoration' && piusX.subjects?.[0]?.personId === 'pius-x-pope', 'Saint Pius X must remain one person-scoped Observance.');
 assert(piusX.evidence.some((item) => item.claimTypes?.includes('same-page-local-notes-kept-separate')), 'Unrelated local observances printed on the same source page must remain separate from Saint Pius X.');
+
+const queenship = first.observances.find((item) => item.observanceId === 'observance:queenship-mary:roman-catholic');
+assert(queenship?.observanceKey === 'queenship' && queenship.observanceType === 'marian-title' && queenship.subjects?.[0]?.personId === 'mary-of-nazareth', 'Queenship of Mary must be a distinct Marian Observance reusing Mary of Nazareth.');
+assert(queenship.evidence.some((item) => item.claimTypes?.includes('proper-contexts-kept-separate')), 'Proper-context celebrations must remain separate from the general Queenship memorial.');
 
 for (const observance of first.observances) {
   assert(observance.entityType === 'Observance', `${observance.observanceId} is not emitted as Observance.`);
