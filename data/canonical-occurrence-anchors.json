@@ -2838,6 +2838,30 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "occurrence:2026-08-29:john-baptist-martyrdom:roman-catholic:pt",
+      "observanceId": "observance:john-baptist-martyrdom:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-08-29",
+      "rank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-29",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "Martírio de São João Batista – MO"
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

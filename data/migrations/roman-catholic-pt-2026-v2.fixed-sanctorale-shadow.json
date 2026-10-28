@@ -1669,6 +1669,20 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-29:john-baptist-martyrdom:roman-catholic:pt",
+      "observanceId": "observance:john-baptist-martyrdom:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-baptist-martyrdom:general-roman",
+      "legacyObservanceId": "rc:BeheadingJohnBaptist",
+      "expectedDateISO": "2026-08-29",
+      "sourceOccurrenceId": "snl-pt-2026-08-29-2d826fedfb9c76412bd23c06",
+      "sourceRecordHash": "0d25b3b7dcd0d8861964f860b757c194343bc75d7bc914373786f4d46f3476b6",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,

@@ -594,6 +594,11 @@
       "occurrenceId": "occurrence:2026-08-25:louis-ix-france:roman-catholic:pt",
       "legacyObservanceId": "rc:StLouis",
       "dateISO": "2026-08-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-29:john-baptist-martyrdom:roman-catholic:pt",
+      "legacyObservanceId": "rc:BeheadingJohnBaptist",
+      "dateISO": "2026-08-29"
     }
   ]
 }
