@@ -3073,6 +3073,34 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "sanctorale-rule:louis-ix-france:general-roman",
+      "observanceId": "observance:louis-ix-france:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 8,
+        "day": 25
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-25",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-calendar",
+            "portugal-materialization",
+            "same-date-alternatives-kept-independent",
+            "precedence-not-inferred"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }

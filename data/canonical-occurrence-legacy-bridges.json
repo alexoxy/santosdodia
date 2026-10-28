@@ -589,6 +589,11 @@
       "occurrenceId": "occurrence:2026-08-25:joseph-calasanz:roman-catholic:pt",
       "legacyObservanceId": "rc:StJosephCalasanz",
       "dateISO": "2026-08-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:louis-ix-france:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLouis",
+      "dateISO": "2026-08-25"
     }
   ]
 }

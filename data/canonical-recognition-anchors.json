@@ -5629,6 +5629,54 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "recognition:louis-ix-france:roman-catholic",
+      "personId": "louis-ix-france",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "king",
+        "layman"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=141",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "king-of-france",
+            "death-date"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/08/25/st--louis---king-of-france-.html",
+          "claimTypes": [
+            "saint-designation",
+            "identity",
+            "king-of-france",
+            "canonization",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/speeches/1997/august/documents/hf_jp-ii_spe_19970824_nunziatura-parigi.html",
+          "claimTypes": [
+            "saint-designation",
+            "king-of-france",
+            "feast-attestation"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-10-28"
     }
   ]
 }
