@@ -2268,6 +2268,17 @@
         "es": "San Wenceslao",
         "it": "San Venceslao"
       }
+    },
+    {
+      "id": "faustina-kowalska",
+      "primaryObservanceId": "rc:StFaustinaKowalska",
+      "category": "saint",
+      "names": {
+        "en": "Saint Faustina Kowalska",
+        "pt": "Santa Faustina Kowalska",
+        "es": "Santa Faustina Kowalska",
+        "it": "Santa Faustina Kowalska"
+      }
     }
   ]
 }

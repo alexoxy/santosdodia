@@ -5856,6 +5856,36 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:faustina-kowalska:roman-catholic",
+      "personId": "faustina-kowalska",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "religious"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/dam/wss/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20200518_decreto-celebrazione-santafaustina_po.html",
+          "claimTypes": [
+            "identity",
+            "virgin",
+            "religious",
+            "canonization",
+            "general-roman-calendar",
+            "liturgical-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

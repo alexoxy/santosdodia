@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 323,
-    "remainingOccurrences": 66,
+    "sourceBoundOccurrences": 324,
+    "remainingOccurrences": 65,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 21,
+    "fixed-person": 20,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -267,13 +267,6 @@
       "dateISO": "2026-10-02",
       "canonicalEventId": "rc:GuardianAngels",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-05-77b84533920b536c8cdc8328",
-      "sourceRecordHash": "e77f8fcb38121bec900be25118efdd5d0b33a8019aa500058529ed704a4e4977",
-      "dateISO": "2026-10-05",
-      "canonicalEventId": "rc:StFaustinaKowalska",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-06-08e0a06f050cd03a37142399",
