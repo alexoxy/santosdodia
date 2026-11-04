@@ -1795,9 +1795,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:denis-rusticus-eleutherius:roman-catholic:pt",
+      "observanceId": "observance:denis-rusticus-eleutherius:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:denis-rusticus-eleutherius:general-roman",
+      "legacyObservanceId": "rc:StDenis",
+      "expectedDateISO": "2026-10-09",
+      "sourceOccurrenceId": "snl-pt-2026-10-09-d03038c144ea382cc2f91bf2",
+      "sourceRecordHash": "49fef918da166c474008ecd467b603727e7c89ac93c1a5dddbfbada1371d9598",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 127
+  "fixedMappingCount": 128
 }

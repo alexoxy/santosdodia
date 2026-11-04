@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 325,
-    "remainingOccurrences": 64,
+    "sourceBoundOccurrences": 326,
+    "remainingOccurrences": 63,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 19,
+    "fixed-person": 18,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -274,13 +274,6 @@
       "dateISO": "2026-10-07",
       "canonicalEventId": "rc:OurLadyOfTheRosary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-09-d03038c144ea382cc2f91bf2",
-      "sourceRecordHash": "49fef918da166c474008ecd467b603727e7c89ac93c1a5dddbfbada1371d9598",
-      "dateISO": "2026-10-09",
-      "canonicalEventId": "rc:StDenis",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-09-a9328f9111964c8c13843287",

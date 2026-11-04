@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-56.json",
+  "reviewDigestSha256": "b29e4987db05ebe60ff585ca0fac673728c0931e8d79c0f84ff8b92185407f2c",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "denis-paris",
+    "rusticus-paris",
+    "eleutherius-paris"
+  ],
+  "promotedObservanceIds": [
+    "observance:denis-rusticus-eleutherius:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 326,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 63
+  },
+  "fixedSanctoraleMappingDigestSha256": "e2c4c230f1b4514a94cc6c86824120985dae8312d11dc819fe4b33cfb7eaaabd",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}
