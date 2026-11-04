@@ -2912,6 +2912,58 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "occurrence:2026-09-17:hildegard-bingen:roman-catholic:pt",
+      "observanceId": "observance:hildegard-bingen:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-17",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-17",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-date-contexts-kept-independent",
+            "proper-institute-ranks-kept-separate"
+          ],
+          "observedDesignation": "S. Hildegarda de Bingen, virgem e doutora da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-09-17:robert-bellarmine:roman-catholic:pt",
+      "observanceId": "observance:robert-bellarmine:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-09-17",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-17",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-date-contexts-kept-independent",
+            "proper-institute-ranks-kept-separate"
+          ],
+          "observedDesignation": "S. Roberto Belarmino, bispo e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

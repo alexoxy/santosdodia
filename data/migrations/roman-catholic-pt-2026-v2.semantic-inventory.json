@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 319,
-    "remainingOccurrences": 70,
+    "sourceBoundOccurrences": 321,
+    "remainingOccurrences": 68,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 25,
+    "fixed-person": 23,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -260,20 +260,6 @@
       "dateISO": "2026-09-15",
       "canonicalEventId": "rc:OurLadyOfSorrows",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-17-5b3cd876d3c030e024f7172c",
-      "sourceRecordHash": "ae18d1a83eb8528954390808fdbace0d0d2bd0d9bcfdba9930de169a78b1f2e2",
-      "dateISO": "2026-09-17",
-      "canonicalEventId": "rc:StHildegardBingen",
-      "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-17-bc740e34d1b995e1c90c8455",
-      "sourceRecordHash": "82c0267e6ee5ed403a192a1c9c8f767e408262fb1c85f55adc401d8d9e59a827",
-      "dateISO": "2026-09-17",
-      "canonicalEventId": "rc:StRobertBellarmine",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-19-2ceac0782836862e97af2eba",
@@ -549,5 +535,5 @@
       "semanticFamily": "fixed-or-major-observance"
     }
   ],
-  "verifiedAt": "2026-10-28"
+  "verifiedAt": "2026-11-04"
 }
