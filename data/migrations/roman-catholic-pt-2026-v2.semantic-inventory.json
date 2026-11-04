@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 328,
-    "remainingOccurrences": 61,
+    "sourceBoundOccurrences": 329,
+    "remainingOccurrences": 60,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 16,
+    "fixed-person": 15,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -274,13 +274,6 @@
       "dateISO": "2026-10-07",
       "canonicalEventId": "rc:OurLadyOfTheRosary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
-      "sourceRecordHash": "7bd8eafc229644b2aae4cba805fbc899c9974b5c05b459e4c6b439d802554317",
-      "dateISO": "2026-10-14",
-      "canonicalEventId": "rc:StCallistusIPope",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-16-c36e435717feba3a961d68e3",

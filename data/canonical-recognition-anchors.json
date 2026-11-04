@@ -6075,6 +6075,43 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:callistus-i:roman-catholic",
+      "personId": "callistus-i",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/vatican/pt/holy-father/callisto-i.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "papacy"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?month=9&year=2026",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "martyrdom",
+            "death-period"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

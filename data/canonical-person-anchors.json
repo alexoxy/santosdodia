@@ -2345,6 +2345,17 @@
         "es": "San Juan Leonardi",
         "it": "San Giovanni Leonardi"
       }
+    },
+    {
+      "id": "callistus-i",
+      "primaryObservanceId": "rc:StCallistusIPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint Callistus I",
+        "pt": "São Calisto I",
+        "es": "San Calixto I",
+        "it": "San Callisto I"
+      }
     }
   ]
 }

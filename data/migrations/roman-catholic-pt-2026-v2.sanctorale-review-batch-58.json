@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "callistus-i",
+        "primaryObservanceId": "rc:StCallistusIPope",
+        "category": "saint",
+        "names": {
+          "en": "Saint Callistus I",
+          "pt": "São Calisto I",
+          "es": "San Calixto I",
+          "it": "San Callisto I"
+        }
+      },
+      "recognition": {
+        "id": "recognition:callistus-i:roman-catholic",
+        "personId": "callistus-i",
+        "ecclesialTitles": [
+          "pope",
+          "martyr"
+        ],
+      "evidenceUrl": "https://mail.liturgia.pt/martirologio/elogio.php?month=9&year=2026"
+      },
+      "observanceId": "observance:callistus-i:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:callistus-i:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "popeAndMartyrSourceBound": true,
+        "patronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StCallistusIPope",
+        "dateISO": "2026-10-14",
+        "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
+        "sourceRecordHash": "7bd8eafc229644b2aae4cba805fbc899c9974b5c05b459e4c6b439d802554317",
+        "sourceLabelPt": "S. Calisto I, papa e mártir",
+        "observedDesignation": "S. Calisto I, papa e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-14"
+      }
+    }
+  ],
+  "reviewDigestSha256": "8970205adc27eace6d2338da6408ba7859c99c992e5e7bfe1f80566472ed9e0d",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

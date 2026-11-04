@@ -3410,6 +3410,31 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "sanctorale-rule:callistus-i:general-roman",
+      "observanceId": "observance:callistus-i:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 14
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-14",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

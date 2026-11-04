@@ -654,6 +654,11 @@
       "occurrenceId": "occurrence:2026-10-09:john-leonardi:roman-catholic:pt",
       "legacyObservanceId": "rc:StJohnLeonardi",
       "dateISO": "2026-10-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-14:callistus-i:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCallistusIPope",
+      "dateISO": "2026-10-14"
     }
   ]
 }

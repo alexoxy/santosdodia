@@ -1837,9 +1837,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-14:callistus-i:roman-catholic:pt",
+      "observanceId": "observance:callistus-i:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:callistus-i:general-roman",
+      "legacyObservanceId": "rc:StCallistusIPope",
+      "expectedDateISO": "2026-10-14",
+      "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
+      "sourceRecordHash": "7bd8eafc229644b2aae4cba805fbc899c9974b5c05b459e4c6b439d802554317",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 130
+  "fixedMappingCount": 131
 }
