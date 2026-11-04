@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-54.json",
+  "reviewDigestSha256": "95ff22b4b8f912003e91f4682afadedfd9338e6caefab93f5c21aedb4791cd5b",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "faustina-kowalska"
+  ],
+  "promotedObservanceIds": [
+    "observance:faustina-kowalska:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 324,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 65
+  },
+  "fixedSanctoraleMappingDigestSha256": "06570eb5e6e719175d5155b5fe853f23d113c76119fb636280e19bddd1f745f0",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

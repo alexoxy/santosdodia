@@ -629,6 +629,11 @@
       "occurrenceId": "occurrence:2026-09-28:wenceslaus-bohemia:roman-catholic:pt",
       "legacyObservanceId": "rc:StWenceslaus",
       "dateISO": "2026-09-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-05:faustina-kowalska:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFaustinaKowalska",
+      "dateISO": "2026-10-05"
     }
   ]
 }

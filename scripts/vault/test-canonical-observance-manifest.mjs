@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 127, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 203, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 128, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 204, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -251,6 +251,8 @@ for (const observance of first.observances) {
 
 const wenceslaus = first.observances.find((item) => item.observanceId === 'observance:wenceslaus-bohemia:roman-catholic');
 assert(wenceslaus?.subjects?.[0]?.personId === 'wenceslaus-bohemia', 'Saint Wenceslaus must remain a distinct person-scoped Observance.');
+const faustina = first.observances.find((item) => item.observanceId === 'observance:faustina-kowalska:roman-catholic');
+assert(faustina?.subjects?.[0]?.personId === 'faustina-kowalska', 'Saint Faustina Kowalska must remain a distinct person-scoped Observance.');
 
 const januarius = first.observances.find((item) => item.observanceId === 'observance:januarius-benevento:roman-catholic');
 assert(januarius?.subjects?.[0]?.personId === 'januarius-benevento', 'Saint Januarius must remain a distinct person-scoped Observance.');
