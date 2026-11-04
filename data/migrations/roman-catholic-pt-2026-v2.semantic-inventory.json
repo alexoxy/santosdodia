@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 329,
-    "remainingOccurrences": 60,
+    "sourceBoundOccurrences": 331,
+    "remainingOccurrences": 58,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 15,
+    "fixed-person": 13,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -274,20 +274,6 @@
       "dateISO": "2026-10-07",
       "canonicalEventId": "rc:OurLadyOfTheRosary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-16-c36e435717feba3a961d68e3",
-      "sourceRecordHash": "f16071b86d7a10bbba78345c8994404eb13ea80cb4c320593a11764a1c250a21",
-      "dateISO": "2026-10-16",
-      "canonicalEventId": "rc:StHedwig",
-      "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-16-42ba6c794a4dce057d6fab69",
-      "sourceRecordHash": "46d0cbbeb30541ab3295a9a1b3528d062f1e272b80a2929c87eac9070523fb0a",
-      "dateISO": "2026-10-16",
-      "canonicalEventId": "rc:StMargaretAlacoque",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-19-5a3c4acfe1b261e78486f1c1",

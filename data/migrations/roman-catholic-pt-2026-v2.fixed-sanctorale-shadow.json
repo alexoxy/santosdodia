@@ -1851,9 +1851,37 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:hedwig-of-silesia:roman-catholic:pt",
+      "observanceId": "observance:hedwig-of-silesia:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:hedwig-of-silesia:general-roman",
+      "legacyObservanceId": "rc:StHedwig",
+      "expectedDateISO": "2026-10-16",
+      "sourceOccurrenceId": "snl-pt-2026-10-16-c36e435717feba3a961d68e3",
+      "sourceRecordHash": "f16071b86d7a10bbba78345c8994404eb13ea80cb4c320593a11764a1c250a21",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:margaret-mary-alacoque:roman-catholic:pt",
+      "observanceId": "observance:margaret-mary-alacoque:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:margaret-mary-alacoque:general-roman",
+      "legacyObservanceId": "rc:StMargaretAlacoque",
+      "expectedDateISO": "2026-10-16",
+      "sourceOccurrenceId": "snl-pt-2026-10-16-42ba6c794a4dce057d6fab69",
+      "sourceRecordHash": "46d0cbbeb30541ab3295a9a1b3528d062f1e272b80a2929c87eac9070523fb0a",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 131
+  "fixedMappingCount": 133
 }

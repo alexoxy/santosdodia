@@ -3158,6 +3158,54 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-10-16:hedwig-of-silesia:roman-catholic:pt",
+      "observanceId": "observance:hedwig-of-silesia:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-16",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-16",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Hedwiges, religiosa – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-10-16:margaret-mary-alacoque:roman-catholic:pt",
+      "observanceId": "observance:margaret-mary-alacoque:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-16",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-16",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Margarida Maria Alacoque, virgem – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

@@ -2356,6 +2356,28 @@
         "es": "San Calixto I",
         "it": "San Callisto I"
       }
+    },
+    {
+      "id": "hedwig-of-silesia",
+      "primaryObservanceId": "rc:StHedwig",
+      "category": "saint",
+      "names": {
+        "en": "Saint Hedwig of Silesia",
+        "pt": "Santa Hedviges",
+        "es": "Santa Eduviges de Silesia",
+        "it": "Santa Edvige di Slesia"
+      }
+    },
+    {
+      "id": "margaret-mary-alacoque",
+      "primaryObservanceId": "rc:StMargaretAlacoque",
+      "category": "saint",
+      "names": {
+        "en": "Saint Margaret Mary Alacoque",
+        "pt": "Santa Margarida Maria Alacoque",
+        "es": "Santa Margarita María Alacoque",
+        "it": "Santa Margherita Maria Alacoque"
+      }
     }
   ]
 }
