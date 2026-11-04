@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 130, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 208, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 132, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 210, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -255,6 +255,11 @@ const faustina = first.observances.find((item) => item.observanceId === 'observa
 assert(faustina?.subjects?.[0]?.personId === 'faustina-kowalska', 'Saint Faustina Kowalska must remain a distinct person-scoped Observance.');
 const bruno = first.observances.find((item) => item.observanceId === 'observance:bruno-carthusian:roman-catholic');
 assert(bruno?.subjects?.[0]?.personId === 'bruno-carthusian', 'Saint Bruno must remain a distinct person-scoped Observance.');
+const newman = first.observances.find((item) => item.observanceId === 'observance:john-henry-newman:roman-catholic');
+assert(newman?.subjects?.[0]?.personId === 'john-henry-newman', 'Saint John Henry Newman must remain a distinct person-scoped Observance.');
+const leonardi = first.observances.find((item) => item.observanceId === 'observance:john-leonardi:roman-catholic');
+assert(leonardi?.subjects?.[0]?.personId === 'john-leonardi', 'Saint John Leonardi must remain a distinct person-scoped Observance.');
+
 const denisCompanions = first.observances.find((item) => item.observanceId === 'observance:denis-rusticus-eleutherius:roman-catholic');
 assert(denisCompanions?.observanceType === 'multi-person-commemoration'
   && JSON.stringify(denisCompanions.subjects.map((item) => item.personId).sort()) === JSON.stringify(['denis-paris', 'eleutherius-paris', 'rusticus-paris']),

@@ -1809,9 +1809,37 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:john-henry-newman:roman-catholic:pt",
+      "observanceId": "observance:john-henry-newman:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-henry-newman:general-roman",
+      "legacyObservanceId": "rc:StJohnHenryNewman",
+      "expectedDateISO": "2026-10-09",
+      "sourceOccurrenceId": "snl-pt-2026-10-09-a9328f9111964c8c13843287",
+      "sourceRecordHash": "a1131e89db2f1fd50fe1fc68fd03a05b39e3cad7d54aeb42188200905b9cd9f9",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:john-leonardi:roman-catholic:pt",
+      "observanceId": "observance:john-leonardi:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-leonardi:general-roman",
+      "legacyObservanceId": "rc:StJohnLeonardi",
+      "expectedDateISO": "2026-10-09",
+      "sourceOccurrenceId": "snl-pt-2026-10-09-7a799b9a9d12efe130706928",
+      "sourceRecordHash": "a19898b6af7aabf28772d3173602d27f500b5f7fccbc0e3334645e42908b5c27",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 128
+  "fixedMappingCount": 130
 }

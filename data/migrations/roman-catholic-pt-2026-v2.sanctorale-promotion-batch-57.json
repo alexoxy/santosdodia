@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-57.json",
+  "reviewDigestSha256": "5eb8563b1ab146201d83b86200e7980552b164766d6423164560665728f8158c",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-henry-newman",
+    "john-leonardi"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-henry-newman:roman-catholic",
+    "observance:john-leonardi:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 328,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 61
+  },
+  "fixedSanctoraleMappingDigestSha256": "395bfe173b0ad5b89807b87738992b5ff01bc9c26fc01681dcb65e9304446f2a",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

@@ -3084,6 +3084,56 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-10-09:john-henry-newman:roman-catholic:pt",
+      "observanceId": "observance:john-henry-newman:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-09",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-date-alternatives-kept-independent"
+          ],
+          "observedDesignation": "S. João Henrique Newman, presbítero e doutor da Igreja – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-10-09:john-leonardi:roman-catholic:pt",
+      "observanceId": "observance:john-leonardi:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-09",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank",
+            "same-date-alternatives-kept-independent"
+          ],
+          "observedDesignation": "S. João Leonardo, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }
