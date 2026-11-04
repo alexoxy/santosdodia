@@ -2323,6 +2323,28 @@
         "es": "San Eleuterio de París",
         "it": "Sant’Eleuterio di Parigi"
       }
+    },
+    {
+      "id": "john-henry-newman",
+      "primaryObservanceId": "rc:StJohnHenryNewman",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Henry Newman",
+        "pt": "São João Henrique Newman",
+        "es": "San John Henry Newman",
+        "it": "San Giovanni Enrico Newman"
+      }
+    },
+    {
+      "id": "john-leonardi",
+      "primaryObservanceId": "rc:StJohnLeonardi",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Leonardi",
+        "pt": "São João Leonardo",
+        "es": "San Juan Leonardi",
+        "it": "San Giovanni Leonardi"
+      }
     }
   ]
 }

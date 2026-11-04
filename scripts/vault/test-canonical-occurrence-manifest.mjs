@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 128, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 128, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 130, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 130, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -110,6 +110,8 @@ const expected = new Map([
   ['observance:faustina-kowalska:roman-catholic', ['2026-10-05', 'optional-memorial', 'MF', 'rc:StFaustinaKowalska']],
   ['observance:bruno-carthusian:roman-catholic', ['2026-10-06', 'optional-memorial', 'MF', 'rc:StBruno']],
   ['observance:denis-rusticus-eleutherius:roman-catholic', ['2026-10-09', 'optional-memorial', 'MF', 'rc:StDenis']],
+  ['observance:john-henry-newman:roman-catholic', ['2026-10-09', 'optional-memorial', 'MF', 'rc:StJohnHenryNewman']],
+  ['observance:john-leonardi:roman-catholic', ['2026-10-09', 'optional-memorial', 'MF', 'rc:StJohnLeonardi']],
   ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StPancras']],
   ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 'MF', 'rc:StsNereusAchilleus']],
   ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 'MF', 'rc:StsMarcellinusPeter']],

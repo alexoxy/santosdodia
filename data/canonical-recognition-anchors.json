@@ -6007,6 +6007,74 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:john-henry-newman:roman-catholic",
+      "personId": "john-henry-newman",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "cardinal",
+        "doctor-of-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/libretti/2019/20191013-libretto-canonizzazione.pdf",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "cardinalate",
+            "canonization"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/romancuria/pt/dicasteri/dicastero-culto-divino-e-disciplina-sacramenti/documenti/20251109-decreto-iscrizione-newman.html",
+          "claimTypes": [
+            "doctor-of-church",
+            "general-roman-calendar-inscription"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:john-leonardi:roman-catholic",
+      "personId": "john-leonardi",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "religious-founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/pt/audiences/2009/documents/hf_ben-xvi_aud_20091007.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "canonization",
+            "religious-foundation",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

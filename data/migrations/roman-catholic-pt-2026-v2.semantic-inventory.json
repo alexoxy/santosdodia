@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 326,
-    "remainingOccurrences": 63,
+    "sourceBoundOccurrences": 328,
+    "remainingOccurrences": 61,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 18,
+    "fixed-person": 16,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -274,20 +274,6 @@
       "dateISO": "2026-10-07",
       "canonicalEventId": "rc:OurLadyOfTheRosary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-09-a9328f9111964c8c13843287",
-      "sourceRecordHash": "a1131e89db2f1fd50fe1fc68fd03a05b39e3cad7d54aeb42188200905b9cd9f9",
-      "dateISO": "2026-10-09",
-      "canonicalEventId": "rc:StJohnHenryNewman",
-      "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-09-7a799b9a9d12efe130706928",
-      "sourceRecordHash": "a19898b6af7aabf28772d3173602d27f500b5f7fccbc0e3334645e42908b5c27",
-      "dateISO": "2026-10-09",
-      "canonicalEventId": "rc:StJohnLeonardi",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-14-5566fe98311b72494f4c0231",
