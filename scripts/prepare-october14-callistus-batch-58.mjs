@@ -153,6 +153,7 @@ write('data/migrations/roman-catholic-pt-2026-v2.sanctorale-promotion-batch-58.j
 const replace = (path, replacements) => {
   let text = fs.readFileSync(path, 'utf8');
   for (const [from, to] of replacements) {
+    if (text.includes(to)) continue;
     if (from instanceof RegExp) {
       if (from.test(text)) text = text.replace(from, to);
       else if (!text.includes(to)) throw new Error(`Missing expected pattern in ${path}: ${from}`);
