@@ -4694,7 +4694,7 @@
           "publisher": "Secretariado Nacional de Liturgia",
           "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-09",
           "claimTypes": [
-          "observance-attestation",
+            "observance-attestation",
             "subject-enumeration",
             "denis-rusticus-eleutherius",
             "martyrdom-tradition"
