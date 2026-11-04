@@ -2224,6 +2224,28 @@
         "es": "San Pedro Claver",
         "it": "San Pietro Claver"
       }
+    },
+    {
+      "id": "hildegard-bingen",
+      "primaryObservanceId": "rc:StHildegardBingen",
+      "category": "saint",
+      "names": {
+        "en": "Saint Hildegard of Bingen",
+        "pt": "Santa Hildegarda de Bingen",
+        "es": "Santa Hildegarda de Bingen",
+        "it": "Santa Ildegarda di Bingen"
+      }
+    },
+    {
+      "id": "robert-bellarmine",
+      "primaryObservanceId": "rc:StRobertBellarmine",
+      "category": "saint",
+      "names": {
+        "en": "Saint Robert Bellarmine",
+        "pt": "São Roberto Belarmino",
+        "es": "San Roberto Belarmino",
+        "it": "San Roberto Bellarmino"
+      }
     }
   ]
 }

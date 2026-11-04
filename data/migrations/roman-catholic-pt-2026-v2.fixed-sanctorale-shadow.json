@@ -1711,9 +1711,37 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-17:hildegard-bingen:roman-catholic:pt",
+      "observanceId": "observance:hildegard-bingen:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:hildegard-bingen:general-roman",
+      "legacyObservanceId": "rc:StHildegardBingen",
+      "expectedDateISO": "2026-09-17",
+      "sourceOccurrenceId": "snl-pt-2026-09-17-5b3cd876d3c030e024f7172c",
+      "sourceRecordHash": "ae18d1a83eb8528954390808fdbace0d0d2bd0d9bcfdba9930de169a78b1f2e2",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-17:robert-bellarmine:roman-catholic:pt",
+      "observanceId": "observance:robert-bellarmine:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:robert-bellarmine:general-roman",
+      "legacyObservanceId": "rc:StRobertBellarmine",
+      "expectedDateISO": "2026-09-17",
+      "sourceOccurrenceId": "snl-pt-2026-09-17-bc740e34d1b995e1c90c8455",
+      "sourceRecordHash": "82c0267e6ee5ed403a192a1c9c8f767e408262fb1c85f55adc401d8d9e59a827",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-10-28",
-  "fixedMappingCount": 113
+  "verifiedAt": "2026-11-04",
+  "fixedMappingCount": 114
 }

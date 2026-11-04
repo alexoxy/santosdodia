@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 123, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 199, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 125, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 201, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -248,6 +248,11 @@ for (const observance of first.observances) {
     assert(!(forbidden in observance), `${observance.observanceId} leaked ${forbidden} into Observance.`);
   }
 }
+
+const hildegard = first.observances.find((item) => item.observanceId === 'observance:hildegard-bingen:roman-catholic');
+assert(hildegard?.subjects?.[0]?.personId === 'hildegard-bingen', 'Saint Hildegard must remain a distinct person-scoped Observance.');
+const bellarmine = first.observances.find((item) => item.observanceId === 'observance:robert-bellarmine:roman-catholic');
+assert(bellarmine?.subjects?.[0]?.personId === 'robert-bellarmine', 'Saint Robert Bellarmine must remain a distinct person-scoped Observance.');
 
 const peterClaver = first.observances.find((item) => item.observanceId === 'observance:peter-claver:roman-catholic');
 assert(peterClaver?.observanceType === 'person-commemoration' && peterClaver.subjects?.[0]?.personId === 'peter-claver', 'Saint Peter Claver must remain one person-scoped Observance.');

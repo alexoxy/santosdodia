@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 121, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and twenty-one reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 123, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and twenty-three reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -103,6 +103,8 @@ try {
     ['observance:john-baptist-martyrdom:roman-catholic', ['2026-08-29', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:teresa-calcutta:roman-catholic', ['2026-09-05', 'optional-memorial', 12, 'general-roman']],
     ['observance:peter-claver:roman-catholic', ['2026-09-09', 'optional-memorial', 12, 'general-roman']],
+    ['observance:hildegard-bingen:roman-catholic', ['2026-09-17', 'optional-memorial', 12, 'general-roman']],
+    ['observance:robert-bellarmine:roman-catholic', ['2026-09-17', 'optional-memorial', 12, 'general-roman']],
     ['observance:pancras:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:nereus-achilleus:roman-catholic', ['2026-05-12', 'optional-memorial', 12, 'general-roman']],
     ['observance:marcellinus-peter:roman-catholic', ['2026-06-02', 'optional-memorial', 12, 'general-roman']],
@@ -195,7 +197,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 121, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 123, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -315,7 +317,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-console.log('Roman Sanctorale passed: 121 authority-isolated perennial Portugal vectors, including Saint Peter Claver with his proper institute ranks and scoped patronage evidence kept separate; Saint Teresa of Calcutta retains her proper institute solemnity; a distinct John the Baptist martyrdom Observance reuses the canonical Person; Saint Louis and Saint Joseph Calasanz remain independent optional memorials on their shared date; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+console.log('Roman Sanctorale passed: 123 authority-isolated perennial Portugal vectors, including Saints Hildegard of Bingen and Robert Bellarmine as independent 17 September optional memorials; Saint Peter Claver with his proper institute ranks and scoped patronage evidence kept separate; Saint Teresa of Calcutta retains her proper institute solemnity; a distinct John the Baptist martyrdom Observance reuses the canonical Person; Saint Louis and Saint Joseph Calasanz remain independent optional memorials on their shared date; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

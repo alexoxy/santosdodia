@@ -4458,6 +4458,72 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "observance:hildegard-bingen:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "hildegard-bingen",
+          "recognitionId": "recognition:hildegard-bingen:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-17",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "same-date-contexts-kept-independent",
+            "proper-institute-ranks-kept-separate"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "observance:robert-bellarmine:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "robert-bellarmine",
+          "recognitionId": "recognition:robert-bellarmine:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-17",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "same-date-contexts-kept-independent",
+            "proper-institute-ranks-kept-separate"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

@@ -5738,6 +5738,67 @@
         }
       ],
       "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "recognition:hildegard-bingen:roman-catholic",
+      "personId": "hildegard-bingen",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "religious",
+        "abbess",
+        "doctor-of-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/apost_letters/documents/hf_ben-xvi_apl_20121007_ildegarda-bingen.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "doctor-of-church",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:robert-bellarmine:roman-catholic",
+      "personId": "robert-bellarmine",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "religious",
+        "bishop",
+        "cardinal",
+        "doctor-of-church"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2011/documents/hf_ben-xvi_aud_20110223.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "doctor-of-church",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }
