@@ -619,6 +619,11 @@
       "occurrenceId": "occurrence:2026-09-17:robert-bellarmine:roman-catholic:pt",
       "legacyObservanceId": "rc:StRobertBellarmine",
       "dateISO": "2026-09-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-19:januarius-benevento:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJanuarius",
+      "dateISO": "2026-09-19"
     }
   ]
 }

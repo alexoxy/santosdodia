@@ -2246,6 +2246,17 @@
         "es": "San Roberto Belarmino",
         "it": "San Roberto Bellarmino"
       }
+    },
+    {
+      "id": "januarius-benevento",
+      "primaryObservanceId": "rc:StJanuarius",
+      "category": "saint",
+      "names": {
+        "en": "Saint Januarius",
+        "pt": "São Januário",
+        "es": "San Jenaro",
+        "it": "San Gennaro"
+      }
     }
   ]
 }

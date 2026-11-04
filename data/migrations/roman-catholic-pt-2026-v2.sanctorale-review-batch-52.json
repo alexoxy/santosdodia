@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "januarius-benevento",
+        "primaryObservanceId": "rc:StJanuarius",
+        "category": "saint",
+        "names": {
+          "en": "Saint Januarius",
+          "pt": "São Januário",
+          "es": "San Jenaro",
+          "it": "San Gennaro"
+        }
+      },
+      "recognition": {
+        "id": "recognition:januarius-benevento:roman-catholic",
+        "personId": "januarius-benevento",
+        "ecclesialTitles": [
+          "bishop",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/09/19/st--januarius--bishop-of--benevento-and-martyr.html"
+      },
+      "observanceId": "observance:januarius-benevento:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:januarius-benevento:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "naplesPatronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StJanuarius",
+        "dateISO": "2026-09-19",
+        "sourceOccurrenceId": "snl-pt-2026-09-19-2ceac0782836862e97af2eba",
+        "sourceRecordHash": "116df1cbb60e094c1b5891fa2582da12a2aba2ddd7b0e0c0796c6028cd5b528f",
+        "sourceLabelPt": "S. Januário, bispo e mártir",
+        "observedDesignation": "S. Januário, bispo e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-19"
+      }
+    }
+  ],
+  "reviewDigestSha256": "0c46d520e612ee3285c437cfa5a899e648071110964fe6ed3c7345d8cd85aa28",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

@@ -3233,6 +3233,31 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "sanctorale-rule:januarius-benevento:general-roman",
+      "observanceId": "observance:januarius-benevento:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 9,
+        "day": 19
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-19",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "portugal-inherits-general-calendar"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }
