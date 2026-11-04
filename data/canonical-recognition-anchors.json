@@ -5799,6 +5799,35 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:januarius-benevento:roman-catholic",
+      "personId": "januarius-benevento",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/09/19/st--januarius--bishop-of--benevento-and-martyr.html",
+          "claimTypes": [
+            "identity",
+            "bishop-of-benevento",
+            "martyr",
+            "death-period",
+            "liturgical-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

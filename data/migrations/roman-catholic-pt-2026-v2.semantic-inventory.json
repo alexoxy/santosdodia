@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 321,
-    "remainingOccurrences": 68,
+    "sourceBoundOccurrences": 322,
+    "remainingOccurrences": 67,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 23,
+    "fixed-person": 22,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -260,13 +260,6 @@
       "dateISO": "2026-09-15",
       "canonicalEventId": "rc:OurLadyOfSorrows",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-09-19-2ceac0782836862e97af2eba",
-      "sourceRecordHash": "116df1cbb60e094c1b5891fa2582da12a2aba2ddd7b0e0c0796c6028cd5b528f",
-      "dateISO": "2026-09-19",
-      "canonicalEventId": "rc:StJanuarius",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-09-28-5d81cc270a1ea95295a9d9b5",

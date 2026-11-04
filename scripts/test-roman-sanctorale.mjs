@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 123, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and twenty-three reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 124, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and twenty-four reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -169,6 +169,7 @@ try {
     ['observance:agatha-sicily:roman-catholic', ['2026-02-05', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:maximilian-kolbe:roman-catholic', ['2026-08-14', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:monica-thagaste:roman-catholic', ['2026-08-27', 'obligatory-memorial', 10, 'general-roman']],
+    ['observance:januarius-benevento:roman-catholic', ['2026-09-19', 'optional-memorial', 12, 'general-roman']],
     ['observance:pius-pietrelcina:roman-catholic', ['2026-09-23', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:cornelius-cyprian:roman-catholic', ['2026-09-16', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 10, 'general-roman']],
@@ -197,7 +198,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 123, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 124, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -317,7 +318,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-console.log('Roman Sanctorale passed: 123 authority-isolated perennial Portugal vectors, including Saints Hildegard of Bingen and Robert Bellarmine as independent 17 September optional memorials; Saint Peter Claver with his proper institute ranks and scoped patronage evidence kept separate; Saint Teresa of Calcutta retains her proper institute solemnity; a distinct John the Baptist martyrdom Observance reuses the canonical Person; Saint Louis and Saint Joseph Calasanz remain independent optional memorials on their shared date; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+console.log('Roman Sanctorale passed: 124 authority-isolated perennial Portugal vectors, including Saint Januarius on 19 September; Saints Hildegard of Bingen and Robert Bellarmine as independent 17 September optional memorials; Saint Peter Claver with his proper institute ranks and scoped patronage evidence kept separate; Saint Teresa of Calcutta retains her proper institute solemnity; a distinct John the Baptist martyrdom Observance reuses the canonical Person; Saint Louis and Saint Joseph Calasanz remain independent optional memorials on their shared date; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }
