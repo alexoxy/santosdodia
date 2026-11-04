@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-11-04 10:50 UTC
+Updated: 2026-11-04 11:31 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-04-v61.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-04-v62.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 325/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 326/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,18 +20,18 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#470](https://github.com/alexoxy/santosdodia/pull/470) delivered E07.05 batch 55:
+PR [#473](https://github.com/alexoxy/santosdodia/pull/473) delivered E07.05 batch 56:
 
-- created the canonical Person and Roman Catholic Recognition for Saint Bruno, priest and founder of the Carthusians;
-- added the Observance, perennial General Roman rule and Portugal 2026 Occurrence for 6 October;
-- bound the exact SNL row `rc:StBruno` as an optional memorial (`MF`);
-- preserved Benedictine and Cistercian proper grades as contextual rather than universal;
-- kept patronage outside this batch because no competent exact contextual claim was promoted;
+- created canonical Persons and Roman Catholic Recognitions for Denis/Dinis of Paris, Rusticus/Rústico and Eleutherius/Eleutério;
+- added one collective Observance, a perennial General Roman rule and Portugal 2026 Occurrence for 9 October;
+- bound the exact SNL row `rc:StDenis` as an optional memorial (`MF`);
+- preserved the Martirology roles of bishop, priest and deacon, recording but not inferring through a differing Vatican News wording;
+- kept John Henry Newman and John Leonardi as independent same-day alternatives;
 - kept publication and remote D1 fail-closed.
 
-Validated head: `b2f52cfd58f13e23e1633976218731f485b2de90`; validated tree: `a6c90ac85a32a9a462b474477930913be908e328`.
+Validated head: `f4ff890457fd43a7bb9d425ea991de1d3f23efa3`; validated tree: `7506ba5c39172ef2dc901506238d33291045fd8e`.
 
-Merge on `main`: `9a731a12b0860e125d24fac485bca6fd55becb9f`. The merged tree is exactly the validated tree.
+Merge on `main`: `91ca331067379f0ee39e3892636c6b0a10bc79df`. The merged tree is exactly the validated tree.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -41,45 +41,45 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **127** across **117** civil days.
-- Total canonical migration coverage: **325/389 (83.548%)**.
-- Approved-source occurrences outside the canonical shadow: **64**.
-- Source-bound civil days: **310/365**.
-- Civil days wholly without a source-bound canonical occurrence: **55**.
-- Fixed-person backlog: **19**.
+- Exact fixed Sanctorale bindings: **128** across **118** civil days.
+- Total canonical migration coverage: **326/389 (83.805%)**.
+- Approved-source occurrences outside the canonical shadow: **63**.
+- Source-bound civil days: **311/365**.
+- Civil days wholly without a source-bound canonical occurrence: **54**.
+- Fixed-person backlog: **18**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
-Saint Bruno is the General Roman optional memorial on 6 October. Proper-calendar grades remain contextual; translations and local devotion do not create separate identities or universal patronage.
+Denis, Rusticus and Eleutherius are three independently identified subjects in one General Roman optional memorial on 9 October. Translation and collective wording do not create or merge identities.
 
 ## CI and external proof
 
-PR #470 workflows on the exact validated head:
+PR #473 workflows on the exact validated head:
 
-- Product BUILD run `41815764504`: success;
-- Product publish staging run `41815764772`: success;
-- Quality run `41815764571`: success;
-- Wikidata retry quality run `41815764844`: success;
-- Sanctorale review quality run `41815764692`: success.
+- Product BUILD run `41819988799`: success;
+- Product publish staging run `41819988713`: success;
+- Quality run `41819988642`: success;
+- Wikidata retry quality run `41819988641`: success;
+- Sanctorale review quality run `41819988551`: success.
 
 Local proof passed focused tests, `npm run check`, the mandatory AdSense fail-closed checker, `npm audit --audit-level=high` and `git diff --check`. The audit still reports 18 moderate transitive findings; the automatic forced fix is breaking and was not applied in this calendar batch.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAAbsQ`, SHA-256 `6b5c24b7b912b0efffabf7ebb6875205b86bcac7665ee21fc4d532676805fb14`;
-- source MD `id:oANWCGUyYBwAAAAAAAAbsA`, SHA-256 `8e3cde6bdb77626e82289e137fde62bb925d12618dbdd5fca4dafa7a42492ee0`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAbwg`, SHA-256 `525b767bc71f0fff33c4ecb12d25bef6705a9790e4340505e7f6a40e10edb494`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAAbww`, SHA-256 `37b9582f47e7ec6294edfd754cf3a33b0fff90a35199e9e468b59ac0bfcc88c2`;
-- plan v61 JSON `id:oANWCGUyYBwAAAAAAAAbxA`, SHA-256 `6c92bcbcec9bdfd729ba07ccfd62ba756af86b286ce20f49282cc3ce4b33ad40`;
-- plan v61 MD `id:oANWCGUyYBwAAAAAAAAbxQ`, SHA-256 `e8a119e0c45bf15472e4cbdc64bd9343330c3fb0807ffc97d3ae5afb2aef7cc2`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAb2w`, SHA-256 `b91b69a251606b0934ff5cd7ad78f08b22fe2429be4ee94defe6bdd0d5b4dcca`;
+- source MD `id:oANWCGUyYBwAAAAAAAAb3A`, SHA-256 `c0d00d88072cf6c776cf179e1839836d89a3b80df4a7a604326fa241cf9e4f4f`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAb3Q`, SHA-256 `239c96b1afcf726018168816bd0a21f028fdc4defc0dc42cf0ce6e662988e074`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAb3g`, SHA-256 `9b8450c6414c87b0e3af03222500fc5e005ecba614d4308487e9a45de3ed981e`;
+- plan v62 JSON `id:oANWCGUyYBwAAAAAAAAb3w`, SHA-256 `9f6b5ad061b288eaff3b9a0e44f0133ae502593990b4c7b26601d53104fd4c9d`;
+- plan v62 MD `id:oANWCGUyYBwAAAAAAAAb4A`, SHA-256 `06bf17880952ad2d7f4c74e2e6fff886d0e9b5840b45a1054f4938897ac2a044`.
 
 Post-merge archive:
 
-- ZIP `id:oANWCGUyYBwAAAAAAAAbwA`, path `/Apps/SantosDia Orchestrator/current/product/archive-9a731a12b0860e125d24fac485bca6fd55becb9f.zip`;
-- SHA-256 `3829e31f9593c20b0d92d5397d2171640445f4ffe28950b846b651a076177816`;
+- ZIP `id:oANWCGUyYBwAAAAAAAAb1Q`, path `/Apps/SantosDia Orchestrator/current/product/archive-91ca331067379f0ee39e3892636c6b0a10bc79df.zip`;
+- SHA-256 `6d1b0c053de22776a84b7aa43f5d8913f124cc6b3d0611ea3e45d3ed55a3eba3`;
 - contains build, manifest, reconciliation ledger, release, release SQL and validation.
 
-Staging artifact `13314920595` was archived only after tree equivalence was confirmed. Its workflow source `c92012bc56da8a9aa4c5aa1de4be1297ba2d5795`, validated head and final merge all have tree `a6c90ac85a32a9a462b474477930913be908e328`. The validation records 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`.
+Staging artifact `13315878726` was archived only after tree equivalence was confirmed. Its workflow source `2ef59a145f9adb2d40454fb3c8defbd0f7177402`, validated head and final merge all have tree `7506ba5c39172ef2dc901506238d33291045fd8e`. The validation records 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`.
 
 ## Task and deliverable countdown
 
@@ -91,14 +91,14 @@ Staging artifact `13314920595` was archived only after tree equivalence was conf
 
 ## Repository and production hygiene
 
-- PR #470 was integrated only after the exact head, tree and unchanged base were reverified and all five checks passed.
+- PR #473 was integrated only after the exact head, tree and unchanged base were reverified and all five checks passed.
 - No review thread or submitted review remained pending.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:StDenis` on 9 October using competent official sources and explicit subject review.
+1. Continue E07.05 with `rc:StJohnHenryNewman` and `rc:StJohnLeonardi` on 9 October, preserving the two optional memorials as independent alternatives.
 2. Publish patronages only where a competent authority proves the exact claim and context.
 3. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 4. Resolve Portugal-specific structural/proper/rank rows by explicit competent-authority review.
@@ -108,8 +108,8 @@ Staging artifact `13314920595` was archived only after tree equivalence was conf
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v61, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:StDenis`; do not repeat Saint Bruno.
+- Read issue #355 and Dropbox plan v62, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StJohnHenryNewman` and `rc:StJohnLeonardi`; do not repeat Denis and companions.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
