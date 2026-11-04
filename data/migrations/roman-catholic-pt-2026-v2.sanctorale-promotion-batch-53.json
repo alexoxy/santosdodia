@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-53.json",
+  "reviewDigestSha256": "732bc11486f82a6ce71d1d05ea99b29ee6b25d7df6fd820e7fd5c59d9ec9e35a",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "wenceslaus-bohemia"
+  ],
+  "promotedObservanceIds": [
+    "observance:wenceslaus-bohemia:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 323,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 66
+  },
+  "fixedSanctoraleMappingDigestSha256": "348ef8cc69dd0eeea806afc25bf05b0905e3110a1aa7c7fa9d01530431c3d92a",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

@@ -1753,9 +1753,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-28:wenceslaus-bohemia:roman-catholic:pt",
+      "observanceId": "observance:wenceslaus-bohemia:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:wenceslaus-bohemia:general-roman",
+      "legacyObservanceId": "rc:StWenceslaus",
+      "expectedDateISO": "2026-09-28",
+      "sourceOccurrenceId": "snl-pt-2026-09-28-5d81cc270a1ea95295a9d9b5",
+      "sourceRecordHash": "58ed6857828dee73d3c623aa4e574da2714a2cd66bcde45c29e2949d07d81998",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 115
+  "fixedMappingCount": 125
 }
