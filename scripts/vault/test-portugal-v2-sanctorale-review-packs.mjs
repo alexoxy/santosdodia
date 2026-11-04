@@ -64,7 +64,8 @@ const approvedDigests = new Map([
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-51.json', '2d5c16b393731796139d52eb053c479475ec24859e2b205b1fdb73bbaaaa458b'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-52.json', '0c46d520e612ee3285c437cfa5a899e648071110964fe6ed3c7345d8cd85aa28'],
   ['roman-catholic-pt-2026-v2.sanctorale-review-batch-53.json', '732bc11486f82a6ce71d1d05ea99b29ee6b25d7df6fd820e7fd5c59d9ec9e35a'],
-  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-54.json', '95ff22b4b8f912003e91f4682afadedfd9338e6caefab93f5c21aedb4791cd5b']
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-54.json', '95ff22b4b8f912003e91f4682afadedfd9338e6caefab93f5c21aedb4791cd5b'],
+  ['roman-catholic-pt-2026-v2.sanctorale-review-batch-55.json', 'b7794efa6f473cd8e9f0008ea1bb11fd25ae41c9beee3de1c57688d6c387e431']
 ]);
 
 assert(packFiles.length > 0, 'At least one reviewed Portugal v2 Sanctorale pack must exist.');
@@ -215,7 +216,7 @@ for (const fileName of packFiles) {
       assert(['en', 'pt', 'es', 'it'].every((locale) => typeof person.names?.[locale] === 'string' && person.names[locale].trim().length > 0), `${person.id} lacks required canonical names.`);
       assert(recognition?.id === `recognition:${person.id}:roman-catholic`, `${person.id} Recognition identity is invalid.`);
       assert(Array.isArray(recognition.ecclesialTitles) && recognition.ecclesialTitles.length >= 2, `${person.id} Recognition lacks reviewed ecclesial titles.`);
-      assert(/^https:\/\/(?:www\.)?(?:vaticannews\.va\/en\/saints\/|vatican\.va\/(?:content\/[^/]+\/[^/]+\/(?:audiences|apost_letters)\/|content\/dam\/wss\/roman_curia\/congregations\/ccdds\/documents\/|news_services\/liturgy\/saints\/|roman_curia\/congregations\/ccdds\/documents\/)|liturgia\.pt\/liturgiadiaria\/)/u.test(recognition.evidenceUrl), `${person.id} Recognition lacks competent official Catholic evidence.`);
+      assert(/^https:\/\/(?:www\.)?(?:vaticannews\.va\/en\/saints\/|vatican\.va\/(?:content\/[^/]+\/[^/]+\/(?:audiences|apost_letters|messages)\/|content\/dam\/wss\/roman_curia\/congregations\/ccdds\/documents\/|news_services\/liturgy\/saints\/|roman_curia\/congregations\/ccdds\/documents\/)|liturgia\.pt\/liturgiadiaria\/)/u.test(recognition.evidenceUrl), `${person.id} Recognition lacks competent official Catholic evidence.`);
       assert(!seenPersonIds.has(person.id) && !seenRecognitionIds.has(recognition.id), `${person.id} duplicates an identity inside ${fileName}.`);
       assert(!globalPackPersonIds.has(person.id) && !globalPackRecognitionIds.has(recognition.id), `${person.id} duplicates an identity across Sanctorale review packs.`);
     }

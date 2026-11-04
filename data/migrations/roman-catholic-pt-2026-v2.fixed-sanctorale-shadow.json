@@ -1781,9 +1781,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-06:bruno-carthusian:roman-catholic:pt",
+      "observanceId": "observance:bruno-carthusian:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:bruno-carthusian:general-roman",
+      "legacyObservanceId": "rc:StBruno",
+      "expectedDateISO": "2026-10-06",
+      "sourceOccurrenceId": "snl-pt-2026-10-06-08e0a06f050cd03a37142399",
+      "sourceRecordHash": "f708b9b92c8780bb90325abcca8d0a2aea297eef28bbd7839c1d5a0a9dde8812",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 126
+  "fixedMappingCount": 127
 }

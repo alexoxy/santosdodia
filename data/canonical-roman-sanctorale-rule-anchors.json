@@ -3308,6 +3308,31 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "sanctorale-rule:bruno-carthusian:general-roman",
+      "observanceId": "observance:bruno-carthusian:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 6
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-6",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "portugal-inherits-general-calendar"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

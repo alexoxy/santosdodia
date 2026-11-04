@@ -3036,6 +3036,30 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "occurrence:2026-10-06:bruno-carthusian:roman-catholic:pt",
+      "observanceId": "observance:bruno-carthusian:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-10-06",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-6",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Bruno, presbítero – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

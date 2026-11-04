@@ -43,7 +43,7 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 324 && coveredSourceIds.size === 324, 'Semantic inventory coverage boundary must contain exactly 324 unique approved source rows.');
+assert(coveredRows.length === 325 && coveredSourceIds.size === 325, 'Semantic inventory coverage boundary must contain exactly 325 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
@@ -245,20 +245,21 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 65 && remainingSourceIds.size === 65 && remainingSourceHashes.size === 65, 'Semantic inventory must preserve exactly 65 unique unresolved approved-source rows.');
+assert(remaining.length === 64 && remainingSourceIds.size === 64 && remainingSourceHashes.size === 64, 'Semantic inventory must preserve exactly 64 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
-assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 324 && inventory.coverageAtInventory.remainingOccurrences === 65 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
+assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 325 && inventory.coverageAtInventory.remainingOccurrences === 64 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
 
 const actualCounts = Object.fromEntries([...familyCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 assert(JSON.stringify(actualCounts) === JSON.stringify(inventory.familyCounts), 'Semantic family counts differ from the exact unresolved rows.');
 assert(actualCounts['temporal-weekday-family'] === 3 && (actualCounts['temporal-sunday-family'] ?? 0) === 0 && (actualCounts['saturday-marian-family'] ?? 0) === 0, 'Algorithmic temporal backlog classification drifted.');
-assert(actualCounts['fixed-person'] === 20, 'Fixed-person backlog classification drifted.');
+assert(actualCounts['fixed-person'] === 19, 'Fixed-person backlog classification drifted.');
 assert(actualCounts['fixed-marian-title'] === 7, 'Fixed Marian-title backlog classification drifted.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StSixtusIIPope'), 'Saint Sixtus II and companions must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJaneFrancesDeChantal'), 'Saint Jane Frances de Chantal must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StWenceslaus'), 'Saint Wenceslaus must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StFaustinaKowalska'), 'Saint Faustina Kowalska must leave the unresolved inventory after exact promotion.');
+assert(!remaining.some((row) => row.canonicalEventId === 'rc:StBruno'), 'Saint Bruno must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJanuarius'), 'Saint Januarius must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StHildegardBingen'), 'Saint Hildegard must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StRobertBellarmine'), 'Saint Robert Bellarmine must leave the unresolved inventory after exact promotion.');
@@ -274,4 +275,4 @@ assert((actualCounts['fixed-collective'] ?? 0) === 0, 'Fixed-collective backlog 
 assert(actualCounts['jurisdiction-structural-overlay'] + actualCounts['portugal-proper'] + actualCounts['jurisdiction-rank-override'] === 20 && inventory.humanReviewBoundary.occurrenceCount === 20, 'Portugal-specific human-review boundary must remain explicit.');
 assert(inventory.classificationPolicy.labelsCreateIdentity === false && inventory.classificationPolicy.annualDateCreatesPerennialRule === false && inventory.classificationPolicy.suppressedCandidatesCountAsCoverage === false && inventory.classificationPolicy.withheldCandidatesCountAsCoverage === false && inventory.classificationPolicy.transferOriginsCountAsCoverage === false, 'Semantic inventory fail-closed policy weakened.');
 
-console.log('Portugal semantic inventory passed: 324 covered + 65 exact unresolved source rows = 389; Saint Faustina Kowalska is source-bound on 5 October; Saint Wenceslaus is source-bound on 28 September; Saint Januarius is source-bound on 19 September; Saints Hildegard and Robert Bellarmine remain independent on their shared date; Saint Peter Claver is source-bound while proper institute ranks and scoped patronage evidence remain contextual; John the Baptist martyrdom reuses the canonical Person; Saint Louis and Saint Joseph Calasanz are independently source-bound on the shared date, and the temporal/Portugal-specific review boundaries remain explicit.');
+console.log('Portugal semantic inventory passed: 325 covered + 64 exact unresolved source rows = 389; Saint Bruno is source-bound on 6 October; Saint Faustina Kowalska is source-bound on 5 October; Saint Wenceslaus is source-bound on 28 September; Saint Januarius is source-bound on 19 September; Saints Hildegard and Robert Bellarmine remain independent on their shared date; Saint Peter Claver is source-bound while proper institute ranks and scoped patronage evidence remain contextual; John the Baptist martyrdom reuses the canonical Person; Saint Louis and Saint Joseph Calasanz are independently source-bound on the shared date, and the temporal/Portugal-specific review boundaries remain explicit.');
