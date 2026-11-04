@@ -3435,6 +3435,58 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "sanctorale-rule:hedwig-of-silesia:general-roman",
+      "observanceId": "observance:hedwig-of-silesia:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 16
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-16",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar",
+            "same-date-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "sanctorale-rule:margaret-mary-alacoque:general-roman",
+      "observanceId": "observance:margaret-mary-alacoque:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 10,
+        "day": 16
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-16",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar",
+            "same-date-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

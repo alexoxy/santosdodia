@@ -6112,6 +6112,85 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:hedwig-of-silesia:roman-catholic",
+      "personId": "hedwig-of-silesia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "religious",
+        "duchess"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=175",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "religious-life",
+            "ducal-status",
+            "canonization",
+            "death-date"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-16",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "religious-life",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:margaret-mary-alacoque:roman-catholic",
+      "personId": "margaret-mary-alacoque",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "religious"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=176",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "virginity",
+            "religious-life",
+            "death-date"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-16",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "religious-life",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

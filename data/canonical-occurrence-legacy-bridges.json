@@ -659,6 +659,16 @@
       "occurrenceId": "occurrence:2026-10-14:callistus-i:roman-catholic:pt",
       "legacyObservanceId": "rc:StCallistusIPope",
       "dateISO": "2026-10-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:hedwig-of-silesia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHedwig",
+      "dateISO": "2026-10-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:margaret-mary-alacoque:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMargaretAlacoque",
+      "dateISO": "2026-10-16"
     }
   ]
 }
