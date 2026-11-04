@@ -2257,6 +2257,17 @@
         "es": "San Jenaro",
         "it": "San Gennaro"
       }
+    },
+    {
+      "id": "wenceslaus-bohemia",
+      "primaryObservanceId": "rc:StWenceslaus",
+      "category": "saint",
+      "names": {
+        "en": "Saint Wenceslaus",
+        "pt": "São Venceslau",
+        "es": "San Wenceslao",
+        "it": "San Venceslao"
+      }
     }
   ]
 }

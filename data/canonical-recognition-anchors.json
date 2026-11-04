@@ -19,7 +19,7 @@
       "observanceDateImplied": false,
       "evidence": [
         {
-          "publisher": "Holy See",
+          "publisher": "Vatican News",
           "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2006/documents/hf_ben-xvi_aud_20060830.html",
           "claimTypes": [
             "identity",
@@ -5823,6 +5823,34 @@
             "bishop-of-benevento",
             "martyr",
             "death-period",
+            "liturgical-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:wenceslaus-bohemia:roman-catholic",
+      "personId": "wenceslaus-bohemia",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "ruler",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vaticannews.va/en/saints/09/28.html",
+          "claimTypes": [
+            "identity",
+            "ruler-of-bohemia",
+            "martyr",
             "liturgical-date"
           ]
         }

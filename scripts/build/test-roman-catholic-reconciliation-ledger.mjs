@@ -58,8 +58,8 @@ const buildLedger = ({
 const ledger = buildLedger();
 assert(ledger.counts.officialOccurrences === 365, 'Ledger must cover every Portugal 2026 day.');
 assert(ledger.counts.temporale === 187 && ledger.counts.temporalRules === 14 && ledger.counts.temporalFamilyMembers === 173, 'The ledger must distinguish fourteen TemporalRules from 173 approved TemporalRuleFamily members.');
-assert(ledger.counts.fixedSanctorale === 124 && ledger.counts.fixedSanctoraleDays === 115 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 124 exact Sanctorale occurrences across 115 civil days and eleven movable/transfer bindings.');
-assert(ledger.counts.sourceBound === 308 && ledger.counts.sourceBoundOccurrences === 322, 'The ledger must distinguish 308 source-bound days from 322 source-bound canonical occurrences.');
+assert(ledger.counts.fixedSanctorale === 125 && ledger.counts.fixedSanctoraleDays === 115 && ledger.counts.movableOrTransfer === 11, 'The ledger must preserve 125 exact Sanctorale occurrences across 115 civil days and eleven movable/transfer bindings.');
+assert(ledger.counts.sourceBound === 308 && ledger.counts.sourceBoundOccurrences === 323, 'The ledger must distinguish 308 source-bound days from 323 source-bound canonical occurrences.');
 assert(ledger.counts.unresolved === 57, 'Every wholly unbound official day must remain explicit and unresolved.');
 assert(ledger.fullSemanticEquivalence === false && ledger.publicationAllowed === false, 'Partial ledger must never authorize perennial cutover.');
 assert(ledger.entries.find(item => item.dateISO === '2026-02-18')?.perennialRuleId === 'temporal-rule:ash-wednesday:roman-catholic', 'Ash Wednesday TemporalRule binding drifted.');
@@ -183,6 +183,8 @@ assert(september19?.classification === 'mixed-optional-alternatives'
   && september19.temporalFamilyOptions?.some(item => item.sourceBinding?.legacyObservanceId === 'rc:SatMemBVM10')
   && september19.optionalAlternatives?.length === 2,
 'Saint Januarius and the Saturday Marian commemoration must remain distinct optional alternatives on 19 September.');
+const september28 = ledger.entries.find(item => item.dateISO === '2026-09-28');
+assert(september28?.classification === 'fixed-sanctorale' && september28.fixedOptions?.some(item => item.canonicalObservanceId === 'observance:wenceslaus-bohemia:roman-catholic' && item.sourceBinding?.legacyObservanceId === 'rc:StWenceslaus'), 'Saint Wenceslaus must retain the exact optional-memorial source binding on 28 September.');
 const september26 = ledger.entries.find(item => item.dateISO === '2026-09-26');
 assert(september26?.classification === 'mixed-optional-alternatives'
   && september26.fixedOptions?.some(item => item.canonicalObservanceId === 'observance:cosmas-damian:roman-catholic')
@@ -361,4 +363,4 @@ let wrongMovableArtifactRejected = false;
 try { buildLedger({ movableTransferMappings: wrongMovableArtifact }); } catch { wrongMovableArtifactRejected = true; }
 assert(wrongMovableArtifactRejected, 'Movable mappings from another artifact must fail closed.');
 
-console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 124 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 322 source-bound occurrences across 308 days, 57 wholly unbound days and no label-derived identity.');
+console.log('Portugal reconciliation ledger passed: 365/365 classified, 14 TemporalRules + 173 precedence-resolved TemporalRuleFamily members + 125 exact fixed Sanctorale occurrences + 11 movable/transfer bindings = 323 source-bound occurrences across 308 days, 57 wholly unbound days and no label-derived identity.');
