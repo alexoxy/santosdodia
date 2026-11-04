@@ -4651,6 +4651,65 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "observance:denis-rusticus-eleutherius:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "multi-person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "denis-paris",
+          "recognitionId": "recognition:denis-paris:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "rusticus-paris",
+          "recognitionId": "recognition:rusticus-paris:roman-catholic"
+        },
+        {
+          "kind": "person",
+          "personId": "eleutherius-paris",
+          "recognitionId": "recognition:eleutherius-paris:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-09",
+          "claimTypes": [
+          "observance-attestation",
+            "subject-enumeration",
+            "denis-rusticus-eleutherius",
+            "martyrdom-tradition"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/pt/santo-do-dia/10/09/ss--dinis--bispo--e-companheiros--martires-de-paris.html",
+          "claimTypes": [
+            "observance-attestation",
+            "martyrs-of-paris"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

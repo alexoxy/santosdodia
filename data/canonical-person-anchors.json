@@ -2290,6 +2290,39 @@
         "es": "San Bruno de Colonia",
         "it": "San Bruno di Colonia"
       }
+    },
+    {
+      "id": "denis-paris",
+      "primaryObservanceId": "rc:StDenis",
+      "category": "saint",
+      "names": {
+        "en": "Saint Denis of Paris",
+        "pt": "São Dinis de Paris",
+        "es": "San Dionisio de París",
+        "it": "San Dionigi di Parigi"
+      }
+    },
+    {
+      "id": "rusticus-paris",
+      "primaryObservanceId": "rc:StDenis",
+      "category": "saint",
+      "names": {
+        "en": "Saint Rusticus of Paris",
+        "pt": "São Rústico de Paris",
+        "es": "San Rústico de París",
+        "it": "San Rustico di Parigi"
+      }
+    },
+    {
+      "id": "eleutherius-paris",
+      "primaryObservanceId": "rc:StDenis",
+      "category": "saint",
+      "names": {
+        "en": "Saint Eleutherius of Paris",
+        "pt": "Santo Eleutério de Paris",
+        "es": "San Eleuterio de París",
+        "it": "Sant’Eleuterio di Parigi"
+      }
     }
   ]
 }

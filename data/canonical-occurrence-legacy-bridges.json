@@ -639,6 +639,11 @@
       "occurrenceId": "occurrence:2026-10-06:bruno-carthusian:roman-catholic:pt",
       "legacyObservanceId": "rc:StBruno",
       "dateISO": "2026-10-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:denis-rusticus-eleutherius:roman-catholic:pt",
+      "legacyObservanceId": "rc:StDenis",
+      "dateISO": "2026-10-09"
     }
   ]
 }
