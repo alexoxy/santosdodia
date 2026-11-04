@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-10-28 14:10 UTC
+Updated: 2026-11-04 07:52 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-10-28-v56.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-04-v57.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 319/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 321/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,17 +20,17 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#460](https://github.com/alexoxy/santosdodia/pull/460) delivered E07.05 batch 50:
+PR [#462](https://github.com/alexoxy/santosdodia/pull/462) delivered E07.05 batch 51:
 
-- created the canonical Person and Roman Catholic Recognition for Saint Peter Claver;
-- added the distinct Observance, perennial General Roman rule and Portugal 2026 Occurrence for 9 September;
-- bound the exact SNL row `rc:StPeterClaver` as an optional memorial (`MF`);
-- preserved institute proper ranks and same-day proper observances as independent contexts;
-- archived the historical patronage as scoped evidence without publishing a contextual patronage entity, and kept publication/D1 remote fail-closed.
+- created distinct canonical Persons and Roman Catholic Recognitions for Saint Hildegard of Bingen and Saint Robert Bellarmine;
+- added two independent Observances, perennial General Roman rules and Portugal 2026 Occurrences for 17 September;
+- bound the exact SNL rows `rc:StHildegardBingen` and `rc:StRobertBellarmine` as optional memorials (`MF`);
+- preserved Benedictine/Cistercian and Jesuit proper ranks as independent contexts;
+- kept publication and remote D1 fail-closed.
 
-Validated head: `ae4759beba15f74f23de1eda519f3e2c7dbe4222`.
+Validated head: `6161b4f677fb9271f11f347db18d6b2e93571685`; validated tree: `7ff600c6de5f477779d0fa73794bb3bec628cfbb`.
 
-Merge on `main`: `eadd35fce84d86d33b4c1410fe50205b2beeb839`.
+Merge on `main`: `f7ac06d24f7a84244908e97c7df62aba702a7ad6`.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -40,48 +40,48 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **121** across **113** civil days.
-- Total canonical migration coverage: **319/389 (82.005%)**.
-- Approved-source occurrences outside the canonical shadow: **70**.
-- Source-bound civil days: **307/365**.
-- Civil days wholly without a source-bound canonical occurrence: **58**.
-- Fixed-person backlog: **25**.
+- Exact fixed Sanctorale bindings: **123** across **114** civil days.
+- Total canonical migration coverage: **321/389 (82.519%)**.
+- Approved-source occurrences outside the canonical shadow: **68**.
+- Source-bound civil days: **308/365**.
+- Civil days wholly without a source-bound canonical occurrence: **57**.
+- Fixed-person backlog: **23**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
-Saint Peter Claver is an optional memorial in the General Roman Calendar on 9 September. Proper ranks for the Society of Jesus, Comboni Missionaries and Missionary Sisters of Saint Peter Claver remain contextual. The historical patronage is retained as scoped evidence and was not published as a contextual patronage entity.
+Saint Hildegard of Bingen and Saint Robert Bellarmine are independent optional memorials on 17 September. Hildegard's Benedictine/Cistercian proper entries and Bellarmine's obligatory Jesuit memorial remain contextual and were not universalized.
 
 ## CI and external proof
 
-PR #460 workflows on the exact validated head:
+PR #462 workflows on the exact validated head:
 
-- Product BUILD run `40702001239`: success;
-- Product publish staging run `40702001253`: success;
-- Quality run `40702001265`: success;
-- Wikidata retry quality run `40702001226`: success;
-- Sanctorale review quality run `40702001299`: success.
+- Product BUILD run `41794278791`: success;
+- Product publish staging run `41794278594`: success;
+- Quality run `41794278436`: success;
+- Wikidata retry quality run `41794278328`: success;
+- Sanctorale review quality run `41794278473`: success.
 
-Local proof passed focused tests, `npm run check`, `npm audit --audit-level=high` with zero vulnerabilities, clean regeneration, the mandatory AdSense fail-closed checker and `git diff --check`.
+Local proof passed focused tests, `npm run check`, the mandatory AdSense fail-closed checker and `git diff --check`. `npm audit --audit-level=high` passed, but reported 18 moderate transitive findings; the offered automatic fix is breaking and was not applied in this calendar batch.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAAbIw`, SHA-256 `d54d35a770af0358b4fd58704efe06d81bf5bff192c48f6e7798853d80f007dc`;
-- source MD `id:oANWCGUyYBwAAAAAAAAbIg`, SHA-256 `fef0e70e14e89fa3bd5dcb7139c28aa32de9a0eaf23a103e4d6db381270c2e1c`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAbOA`, SHA-256 `0c16be144397647b734023876c0fe90a8e37067bf6da0ddbf94735188ae613b4`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAAbOQ`, SHA-256 `a3e2b7623966dbd6a392480eb0117cb717f6f3c0f667892d40f2824f4f3b040e`;
-- plan v56 JSON `id:oANWCGUyYBwAAAAAAAAbOg`, SHA-256 `d22c94980c28afa2d61fe261503e43aaf35f05dcd34980bddf572b3ac00ff67d`;
-- plan v56 MD `id:oANWCGUyYBwAAAAAAAAbOw`, SHA-256 `23ae05a68ee7fce976447d59f9d3074ddefe1725ebaa6d7961f7c0b53750c119`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAbPw`, SHA-256 `194728e4c6611566ee73a059b3139a167f147cc7583acffd1268c72059a35edd`;
+- source MD `id:oANWCGUyYBwAAAAAAAAbQA`, SHA-256 `a2abbb373e6b183adc9b82109c838c204292abe72403bc0d11e0a77712edfc74`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAbWg`, SHA-256 `05690c9afa3ac5912e2df3388bd3e44d750961705c80f56f42d0e7f44775cd79`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAbXQ`, SHA-256 `440cc820329ff65792163712f6e5ce807e892e61bcde22c4de9843a83847ec1b`;
+- plan v57 JSON `id:oANWCGUyYBwAAAAAAAAbWw`, SHA-256 `f354cda386dcf2eece09cf1eefc988ef382eb4b59f8cd1538ed276e4ea46c715`;
+- plan v57 MD `id:oANWCGUyYBwAAAAAAAAbXA`, SHA-256 `41757eb878c411e5d1da7b56243a66314d7bcdb6ae87405d32b9d37f46b54745`.
 
 Post-merge archive for the exact merge SHA:
 
-`/Apps/SantosDia Orchestrator/current/product/archive-eadd35fce84d86d33b4c1410fe50205b2beeb839`
+`/Apps/SantosDia Orchestrator/current/product/archive-f7ac06d24f7a84244908e97c7df62aba702a7ad6`
 
-- manifest `id:oANWCGUyYBwAAAAAAAAbNQ`;
-- validation `id:oANWCGUyYBwAAAAAAAAbNA`;
-- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAbNg`;
-- release `id:oANWCGUyYBwAAAAAAAAbNw`.
+- manifest `id:oANWCGUyYBwAAAAAAAAbUQ`;
+- validation `id:oANWCGUyYBwAAAAAAAAbVA`;
+- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAbUw`;
+- release `id:oANWCGUyYBwAAAAAAAAbUg`.
 
-The post-merge archive uses an exact-SHA local reproduction and references PR staging run `40702001253` and artifact `12821099699`. It confirms 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`; the receipt records `validationOrigin=local-exact-merge-reproduction` and a null post-merge workflow run ID.
+The post-merge archive uses an exact-SHA local reproduction and references PR staging run `41794278594` and artifact `13304404122`. It confirms 365 days, five complete locales, zero `falseEmptyToday` and `productionApproved=false`; the receipt records `validationOrigin=local-exact-merge-reproduction`, tree equivalence and a null post-merge workflow run ID.
 
 ## Task and deliverable countdown
 
@@ -93,14 +93,14 @@ The post-merge archive uses an exact-SHA local reproduction and references PR st
 
 ## Repository and production hygiene
 
-- PR #460 was integrated only after the exact head and unchanged base were reverified and all five checks passed.
+- PR #462 was integrated only after the exact head, corrected complete tree and unchanged base were reverified and all five checks passed.
 - No review thread or submitted review remained pending.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:StHildegardBingen` and `rc:StRobertBellarmine` on 17 September as independent records using competent official sources.
+1. Continue E07.05 with `rc:StJanuarius` on 19 September using competent official sources.
 2. Publish patronages only where a competent authority proves the exact claim and context.
 3. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 4. Resolve Portugal-specific structural/proper/rank rows by explicit competent-authority review.
@@ -110,8 +110,8 @@ The post-merge archive uses an exact-SHA local reproduction and references PR st
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v56, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:StHildegardBingen` and `rc:StRobertBellarmine`; do not repeat Saint Peter Claver.
+- Read issue #355 and Dropbox plan v57, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StJanuarius`; do not repeat Hildegard of Bingen or Robert Bellarmine.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
