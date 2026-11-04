@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-11-04 08:21 UTC
+Updated: 2026-11-04 08:51 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-04-v58.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-04-v59.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 322/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 323/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,18 +20,18 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#464](https://github.com/alexoxy/santosdodia/pull/464) delivered E07.05 batch 52:
+PR [#466](https://github.com/alexoxy/santosdodia/pull/466) delivered E07.05 batch 53:
 
-- created the canonical Person and Roman Catholic Recognition for Saint Januarius, bishop of Benevento and martyr;
-- added the Observance, perennial General Roman rule and Portugal 2026 Occurrence for 19 September;
-- bound the exact SNL row `rc:StJanuarius` as an optional memorial (`MF`);
-- preserved the optional Saturday Marian memorial as a distinct alternative on the same date;
-- kept the Naples patronage outside this batch pending explicit contextual modelling;
+- created the canonical Person and Roman Catholic Recognition for Saint Wenceslaus, duke of Bohemia and martyr;
+- added the Observance, perennial General Roman rule and Portugal 2026 Occurrence for 28 September;
+- bound the exact SNL row `rc:StWenceslaus` as an optional memorial (`MF`);
+- preserved Saints Lawrence Ruiz and companions as a distinct alternative on the same date;
+- kept Czech and Bohemian patronage outside this batch pending explicit contextual modelling;
 - kept publication and remote D1 fail-closed.
 
-Validated head: `3db89add09dff1bde1970ea5925c890853116b89`; validated tree: `b19697246cb9ce9dfb1eeb3c06dbeeb1bf7bef7a`.
+Validated head: `cb57f4a681e52b96cd9ded3d24f852c6bcce7f57`; validated tree: `140669f09a8814a3109df8d40732c71edd5f2cb2`.
 
-Merge on `main`: `b17ca5643e61d46fb3a456fe0128bf8d06d1a85d`.
+Merge on `main`: `4a67be697213f914c5262bfe9dc14e42d71d748f`. The merged tree is exactly the validated tree.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -41,49 +41,49 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **124** across **115** civil days.
-- Total canonical migration coverage: **322/389 (82.776%)**.
-- Approved-source occurrences outside the canonical shadow: **67**.
+- Exact fixed Sanctorale bindings: **125** across **115** civil days.
+- Total canonical migration coverage: **323/389 (83.033%)**.
+- Approved-source occurrences outside the canonical shadow: **66**.
 - Source-bound civil days: **308/365**.
 - Civil days wholly without a source-bound canonical occurrence: **57**.
-- Fixed-person backlog: **22**.
+- Fixed-person backlog: **21**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
-Saint Januarius and the optional Saturday Marian memorial are independent alternatives on 19 September. Language variants do not create separate identities; the Naples patronage remains contextual and was not universalized.
+Saint Wenceslaus and Saints Lawrence Ruiz and companions are independent alternatives on 28 September. Language variants do not create separate identities; Czech and Bohemian patronage remains contextual and was not universalized.
 
 ## CI and external proof
 
-PR #464 workflows on the exact validated head:
+PR #466 workflows on the exact validated head:
 
-- Product BUILD run `41797528601`: success;
-- Product publish staging run `41797528367`: success;
-- Quality run `41797528419`: success;
-- Wikidata retry quality run `41797528980`: success;
-- Sanctorale review quality run `41797528614`: success.
+- Product BUILD run `41801482175`: success;
+- Product publish staging run `41801482266`: success;
+- Quality run `41801482238`: success;
+- Wikidata retry quality run `41801482303`: success;
+- Sanctorale review quality run `41801482255`: success.
 
-Local proof passed focused tests, `npm run check`, the mandatory AdSense fail-closed checker, `npm audit --audit-level=high` and `git diff --check`. The audit still reports 18 moderate transitive findings; the automatic fix is breaking and was not applied in this calendar batch.
+Local proof passed focused tests, `npm run check`, the mandatory AdSense fail-closed checker, `npm audit --audit-level=high` and `git diff --check`. The audit still reports 18 moderate transitive findings; the automatic forced fix is breaking and was not applied in this calendar batch.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAAbXg`, SHA-256 `9cbf0cf95749154b53ca285d966eadb29a919564a752a97ab95dd904d55cdcd6`;
-- source MD `id:oANWCGUyYBwAAAAAAAAbXw`, SHA-256 `7980c414c8eb62a91a5dedfde69f74f3ba0733a8419928b84cedf62789ac71df`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAbdQ`, SHA-256 `cde0e776fec362f2a81db095a6e605f141caa962c2d22289cb29f510a7bb849e`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAAbeA`, SHA-256 `934488fd2c50f6341a80f2bd6ad6c99ecdf66c912de4bd1d52663b84d3caab18`;
-- plan v58 JSON `id:oANWCGUyYBwAAAAAAAAbdg`, SHA-256 `022838b4114b685b9891023ee7abf0976aeeb7b6927cb19bda280d830b5cd64f`;
-- plan v58 MD `id:oANWCGUyYBwAAAAAAAAbdw`, SHA-256 `58b4475d6e47d325e26116f58e13edb3d26397c56394e8c4ba0091011e6073d4`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAbhA`, SHA-256 `78ed3a46dd0050010ce130238d267aed7331822de445044089bee0e46625c5d1`;
+- source MD `id:oANWCGUyYBwAAAAAAAAbgw`, SHA-256 `f06975a3d12a42212907add61ecee29f4cac8ea312db192bebe950c20efe97dd`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAbjw`, SHA-256 `a59e2798a4bf00c6db056be3373eed4238b35342d1075a791c8aa8139ae9dc4f`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAbjQ`, SHA-256 `5a192ea2896356ea708ab7983911b6f8a4ab5518f1b43c6853febd11dacc7afb`;
+- plan v59 JSON `id:oANWCGUyYBwAAAAAAAAbkg`, SHA-256 `19619209734ca7571bcb33bc9394fbca9df8efecd8d7770c2a8b2666a0a25883`;
+- plan v59 MD `id:oANWCGUyYBwAAAAAAAAbkw`, SHA-256 `fa2369ae6f83030782cd9b679d548664364ecdcfcb315ccfd300d1b454a6de0c`.
 
 Post-merge archive:
 
-`/Apps/SantosDia Orchestrator/current/product/archive-b17ca5643e61d46fb3a456fe0128bf8d06d1a85d`
+`/Apps/SantosDia Orchestrator/current/product/archive-4a67be697213f914c5262bfe9dc14e42d71d748f`
 
-- manifest `id:oANWCGUyYBwAAAAAAAAbcA`;
-- validation `id:oANWCGUyYBwAAAAAAAAbdA`;
-- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAbcQ`;
-- release `id:oANWCGUyYBwAAAAAAAAbcg`;
-- release SQL `id:oANWCGUyYBwAAAAAAAAbcw`.
+- manifest `id:oANWCGUyYBwAAAAAAAAbhg`, SHA-256 `80de966daf73cdec60d9af5e523c38301f8aad18a971e75d2630869f7cb4d39f`;
+- reconciliation ledger `id:oANWCGUyYBwAAAAAAAAbhw`, SHA-256 `473d7431b95f99b19136812a3ef1d98674a6a3e796219e2da772fbc42662b1bd`;
+- release `id:oANWCGUyYBwAAAAAAAAbiA`, SHA-256 `a7d29f6f65731550c0aaa2c3c17e549271523de096eda13dfb33d9fa6da9feda`;
+- release SQL `id:oANWCGUyYBwAAAAAAAAbig`, SHA-256 `a92b1ad0460ee34ce5164a716893c7c529ca78cbafa0ced7b27bc1186420f9f9`;
+- validation `id:oANWCGUyYBwAAAAAAAAbiQ`, SHA-256 `9bd9783827590625980963bf1512a86375e1ad4690492e7830ab6378a1b365ff`.
 
-Staging artifact `13305743652`, digest `sha256:9c2830a95a58ad7bbf7af7d0b4ac6fb8dcbedd362045fd9c3fb64615b332fb87`, was archived only after exact tree equivalence was confirmed. The validation records 365 days, five complete locales, zero `falseEmptyToday`, `fullSemanticEquivalence=false`, `publicationAllowed=false` and `productionApproved=false`.
+Staging artifact `13307018665`, digest `sha256:6c13f2eb8c730115fef28af5c8854ae26196a5bfb65a678f093a2a83de5068c5`, was archived only after tree equivalence was confirmed. Its workflow source was GitHub's tentative merge `03393412c916de56c7e7675571b7a79264fd5fbc`, whose tree equals the final merged tree. The validation records 365 days, five complete locales, zero `falseEmptyToday`, `fullSemanticEquivalence=false`, `publicationAllowed=false` and `productionApproved=false`.
 
 ## Task and deliverable countdown
 
@@ -95,14 +95,15 @@ Staging artifact `13305743652`, digest `sha256:9c2830a95a58ad7bbf7af7d0b4ac6fb8d
 
 ## Repository and production hygiene
 
-- PR #464 was integrated only after the exact head, tree and unchanged base were reverified and all five checks passed.
+- PR #466 was integrated only after the exact head, tree and unchanged base were reverified and all five checks passed.
 - No review thread or submitted review remained pending.
+- Unrelated Dependabot PR #430 remained outside this batch.
 - No force push, history rewrite, production data deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
 - Evidence Vault objects, annual source artifacts, receipts and rollback history remain preserved.
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:StWenceslaus` on 28 September using competent official sources.
+1. Continue E07.05 with `rc:StFaustinaKowalska` on 5 October using competent official sources.
 2. Publish patronages only where a competent authority proves the exact claim and context.
 3. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 4. Resolve Portugal-specific structural/proper/rank rows by explicit competent-authority review.
@@ -112,8 +113,8 @@ Staging artifact `13305743652`, digest `sha256:9c2830a95a58ad7bbf7af7d0b4ac6fb8d
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v58, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:StWenceslaus`; do not repeat Saint Januarius.
+- Read issue #355 and Dropbox plan v59, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StFaustinaKowalska`; do not repeat Saint Wenceslaus.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
