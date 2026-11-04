@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 324,
-    "remainingOccurrences": 65,
+    "sourceBoundOccurrences": 325,
+    "remainingOccurrences": 64,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 20,
+    "fixed-person": 19,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -267,13 +267,6 @@
       "dateISO": "2026-10-02",
       "canonicalEventId": "rc:GuardianAngels",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-10-06-08e0a06f050cd03a37142399",
-      "sourceRecordHash": "f708b9b92c8780bb90325abcca8d0a2aea297eef28bbd7839c1d5a0a9dde8812",
-      "dateISO": "2026-10-06",
-      "canonicalEventId": "rc:StBruno",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-10-07-35e0a202b3a671399f360542",

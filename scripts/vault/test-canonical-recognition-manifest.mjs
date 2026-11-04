@@ -45,8 +45,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 
 assert(first.manifest.artifactType === 'canonical-ecclesial-recognitions', 'Recognition artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Recognition release must target canonical Vault.');
-assert(first.manifest.recognitionCount === 205, 'Reviewed Recognition count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 204, 'Reviewed Recognition Person coverage changed unexpectedly.');
+assert(first.manifest.recognitionCount === 206, 'Reviewed Recognition count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 205, 'Reviewed Recognition Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Recognition canonical Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Recognition Vault write must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/recognitions/v1/current.json', 'Recognition current pointer path changed unexpectedly.');
@@ -75,6 +75,7 @@ for (const required of [
   'recognition:januarius-benevento:roman-catholic',
   'recognition:wenceslaus-bohemia:roman-catholic',
   'recognition:faustina-kowalska:roman-catholic',
+  'recognition:bruno-carthusian:roman-catholic',
   'recognition:saint-joseph:roman-catholic',
   'recognition:benedict-nursia:roman-catholic',
   'recognition:bridget-sweden:roman-catholic',

@@ -5886,6 +5886,37 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:bruno-carthusian:roman-catholic",
+      "personId": "bruno-carthusian",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "hermit",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/pt/messages/pont_messages/2001/documents/hf_jp-ii_mes_20010515_san-bruno.html",
+          "claimTypes": [
+            "identity",
+            "priest",
+            "hermit",
+            "founder",
+            "carthusian-family",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-04"
     }
   ]
 }

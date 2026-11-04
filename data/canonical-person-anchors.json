@@ -2279,6 +2279,17 @@
         "es": "Santa Faustina Kowalska",
         "it": "Santa Faustina Kowalska"
       }
+    },
+    {
+      "id": "bruno-carthusian",
+      "primaryObservanceId": "rc:StBruno",
+      "category": "saint",
+      "names": {
+        "en": "Saint Bruno of Cologne",
+        "pt": "São Bruno",
+        "es": "San Bruno de Colonia",
+        "it": "San Bruno di Colonia"
+      }
     }
   ]
 }
