@@ -6243,6 +6243,57 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:john-paul-ii:roman-catholic",
+      "personId": "john-paul-ii",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "pope",
+        "bishop"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/biografia/documents/hf_jp-ii_spe_20190722_biografia.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "papacy",
+            "birth-date",
+            "death-date",
+            "canonization"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/dam/wss/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140529_decreto-calendario-generale-gxxiii-gpii_en.html",
+          "claimTypes": [
+            "ecclesial-status",
+            "canonization",
+            "general-roman-calendar",
+            "optional-memorial",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-22",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "papacy",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

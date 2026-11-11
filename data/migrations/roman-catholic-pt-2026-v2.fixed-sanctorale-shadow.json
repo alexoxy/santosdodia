@@ -1893,9 +1893,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-22:john-paul-ii:roman-catholic:pt",
+      "observanceId": "observance:john-paul-ii:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-paul-ii:general-roman",
+      "legacyObservanceId": "rc:StJohnPaulII",
+      "expectedDateISO": "2026-10-22",
+      "sourceOccurrenceId": "snl-pt-2026-10-22-2d9d67aa059f219de9dc687b",
+      "sourceRecordHash": "ed7b4df4a7b84002de33627f1cda53340cea8af0a830ac02686d4c0b3536a48d",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 134
+  "fixedMappingCount": 135
 }

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-61.json",
+  "reviewDigestSha256": "aa6c210986a720f77c87d7e9908b249d6160a3b4623f1335292d4e417a296171",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-paul-ii"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-paul-ii:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 333,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 56
+  },
+  "fixedSanctoraleMappingDigestSha256": "903575c6a642164edaaf4e134b6f7b2eba9cc650b2ab01bc567d93e0e7481716",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
