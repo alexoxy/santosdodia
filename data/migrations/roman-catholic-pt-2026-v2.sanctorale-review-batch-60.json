@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "paul-of-the-cross",
+        "primaryObservanceId": "rc:StPaulCross",
+        "category": "saint",
+        "names": {
+          "en": "Saint Paul of the Cross",
+          "pt": "São Paulo da Cruz",
+          "es": "San Pablo de la Cruz",
+          "it": "San Paolo della Croce"
+        }
+      },
+      "recognition": {
+        "id": "recognition:paul-of-the-cross:roman-catholic",
+        "personId": "paul-of-the-cross",
+        "ecclesialTitles": [
+          "priest",
+          "founder"
+        ],
+        "evidenceUrl": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-19"
+      },
+      "observanceId": "observance:paul-of-the-cross:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paul-of-the-cross:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "passionistProper2026": "solemnity",
+        "institutionalRankKeptContextual": true,
+        "sameDateAlternativesKeptIndependent": true,
+        "patronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StPaulCross",
+        "dateISO": "2026-10-19",
+        "sourceOccurrenceId": "snl-pt-2026-10-19-5a3c4acfe1b261e78486f1c1",
+        "sourceRecordHash": "9ce09b023afc7dd24e87e536672fc916bb0392e5c3837505ea8d19bc5ee93cf4",
+        "sourceLabelPt": "S. Paulo da Cruz, presbítero",
+        "observedDesignation": "S. Paulo da Cruz, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-19"
+      }
+    }
+  ],
+  "reviewDigestSha256": "f36f83e81f16f9c1fbdcb85dc348f8e3e3685b2eb08843f505838426fca0f397",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

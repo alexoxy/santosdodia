@@ -2378,6 +2378,17 @@
         "es": "Santa Margarita María Alacoque",
         "it": "Santa Margherita Maria Alacoque"
       }
+    },
+    {
+      "id": "paul-of-the-cross",
+      "primaryObservanceId": "rc:StPaulCross",
+      "category": "saint",
+      "names": {
+        "en": "Saint Paul of the Cross",
+        "pt": "São Paulo da Cruz",
+        "es": "San Pablo de la Cruz",
+        "it": "San Paolo della Croce"
+      }
     }
   ]
 }
