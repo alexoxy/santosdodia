@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "clement-i-pope",
+        "primaryObservanceId": "rc:StClementIPope",
+        "category": "saint",
+        "names": {
+          "en": "Saint Clement I",
+          "pt": "São Clemente I",
+          "es": "San Clemente I",
+          "it": "San Clemente I"
+        }
+      },
+      "recognition": {
+        "id": "recognition:clement-i-pope:roman-catholic",
+        "personId": "clement-i-pope",
+        "ecclesialTitles": [
+          "pope",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vatican.va/content/benedict-xvi/en/audiences/2007/documents/hf_ben-xvi_aud_20070307.html"
+      },
+      "observanceId": "observance:clement-i-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:clement-i-pope:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StClementIPope",
+        "dateISO": "2026-11-23",
+        "sourceOccurrenceId": "snl-pt-2026-11-23-66e04829ecf01ea414a20950",
+        "sourceRecordHash": "eb391e8384a4ae0ec039c15ad641e9df23b83a1d736ea523cb16261c4dde8118",
+        "sourceLabelPt": "S. Clemente I, papa e mártir",
+        "observedDesignation": "S. Clemente I, papa e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-23"
+      }
+    },
+    {
+      "person": {
+        "id": "columban-luxeuil",
+        "primaryObservanceId": "rc:StColumban",
+        "category": "saint",
+        "names": {
+          "en": "Saint Columban",
+          "pt": "São Columbano",
+          "es": "San Columbano",
+          "it": "San Colombano"
+        }
+      },
+      "recognition": {
+        "id": "recognition:columban-luxeuil:roman-catholic",
+        "personId": "columban-luxeuil",
+        "ecclesialTitles": [
+          "abbot",
+          "priest",
+          "missionary"
+        ],
+        "evidenceUrl": "https://www.vatican.va/content/benedict-xvi/en/audiences/2008/documents/hf_ben-xvi_aud_20080611.html"
+      },
+      "observanceId": "observance:columban-luxeuil:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:columban-luxeuil:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "cistercianProper2026": "optional-memorial",
+        "institutionalContextKeptSeparate": true,
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StColumban",
+        "dateISO": "2026-11-23",
+        "sourceOccurrenceId": "snl-pt-2026-11-23-6a3830f808141259fc4d93f5",
+        "sourceRecordHash": "d51e10e60ba18cc7b4ab640b4d53d2d582ea43f619ca4ba65c666325582a9a5d",
+        "sourceLabelPt": "S. Columbano, abade",
+        "observedDesignation": "S. Columbano, abade – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-23"
+      }
+    }
+  ],
+  "reviewDigestSha256": "443737cb7829fe9eeb51572bcb3ed7362229c917e766ff1e233f1fc85e69ac50",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

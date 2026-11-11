@@ -704,6 +704,16 @@
       "occurrenceId": "occurrence:2026-11-16:margaret-of-scotland:roman-catholic:pt",
       "legacyObservanceId": "rc:StMargaretScotland",
       "dateISO": "2026-11-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-23:clement-i-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StClementIPope",
+      "dateISO": "2026-11-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-23:columban-luxeuil:roman-catholic:pt",
+      "legacyObservanceId": "rc:StColumban",
+      "dateISO": "2026-11-23"
     }
   ]
 }

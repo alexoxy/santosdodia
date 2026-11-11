@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 338,
-    "remainingOccurrences": 51,
+    "sourceBoundOccurrences": 340,
+    "remainingOccurrences": 49,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 6,
+    "fixed-person": 4,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -323,20 +323,6 @@
       "dateISO": "2026-11-21",
       "canonicalEventId": "rc:PresentationMary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-23-66e04829ecf01ea414a20950",
-      "sourceRecordHash": "eb391e8384a4ae0ec039c15ad641e9df23b83a1d736ea523cb16261c4dde8118",
-      "dateISO": "2026-11-23",
-      "canonicalEventId": "rc:StClementIPope",
-      "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-23-6a3830f808141259fc4d93f5",
-      "sourceRecordHash": "d51e10e60ba18cc7b4ab640b4d53d2d582ea43f619ca4ba65c666325582a9a5d",
-      "dateISO": "2026-11-23",
-      "canonicalEventId": "rc:StColumban",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-11-24-0d92880655ca29c9708bf28d",

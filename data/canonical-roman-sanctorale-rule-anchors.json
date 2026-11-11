@@ -3669,6 +3669,58 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "sanctorale-rule:clement-i-pope:general-roman",
+      "observanceId": "observance:clement-i-pope:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 23
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-23",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar",
+            "same-date-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "sanctorale-rule:columban-luxeuil:general-roman",
+      "observanceId": "observance:columban-luxeuil:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 23
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-23",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar",
+            "same-date-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

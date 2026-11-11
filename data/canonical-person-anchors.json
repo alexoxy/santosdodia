@@ -2455,6 +2455,28 @@
         "es": "Santa Margarita de Escocia",
         "it": "Santa Margherita di Scozia"
       }
+    },
+    {
+      "id": "clement-i-pope",
+      "primaryObservanceId": "rc:StClementIPope",
+      "category": "saint",
+      "names": {
+        "en": "Saint Clement I",
+        "pt": "São Clemente I",
+        "es": "San Clemente I",
+        "it": "San Clemente I"
+      }
+    },
+    {
+      "id": "columban-luxeuil",
+      "primaryObservanceId": "rc:StColumban",
+      "category": "saint",
+      "names": {
+        "en": "Saint Columban",
+        "pt": "São Columbano",
+        "es": "San Columbano",
+        "it": "San Colombano"
+      }
     }
   ]
 }

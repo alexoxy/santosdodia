@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-66.json",
+  "reviewDigestSha256": "443737cb7829fe9eeb51572bcb3ed7362229c917e766ff1e233f1fc85e69ac50",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "clement-i-pope",
+    "columban-luxeuil"
+  ],
+  "promotedObservanceIds": [
+    "observance:clement-i-pope:roman-catholic",
+    "observance:columban-luxeuil:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 340,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 49
+  },
+  "fixedSanctoraleMappingDigestSha256": "19e0be7316c894282483e42388a0f632ae5c7012933b3576648e3824f29ee3f7",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
