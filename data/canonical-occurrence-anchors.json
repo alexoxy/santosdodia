@@ -3302,6 +3302,30 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "occurrence:2026-11-03:martin-de-porres:roman-catholic:pt",
+      "observanceId": "observance:martin-de-porres:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-03",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-3",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Martinho de Porres, religioso – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

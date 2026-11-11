@@ -2422,6 +2422,17 @@
         "es": "San Antonio María Claret",
         "it": "Sant'Antonio Maria Claret"
       }
+    },
+    {
+      "id": "martin-de-porres",
+      "primaryObservanceId": "rc:StMartinPorres",
+      "category": "saint",
+      "names": {
+        "en": "Saint Martin de Porres",
+        "pt": "São Martinho de Porres",
+        "es": "San Martín de Porres",
+        "it": "San Martino de Porres"
+      }
     }
   ]
 }

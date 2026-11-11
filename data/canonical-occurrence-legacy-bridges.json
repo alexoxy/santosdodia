@@ -689,6 +689,11 @@
       "occurrenceId": "occurrence:2026-10-24:anthony-mary-claret:roman-catholic:pt",
       "legacyObservanceId": "rc:StAnthonyMaryClaret",
       "dateISO": "2026-10-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-03:martin-de-porres:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartinPorres",
+      "dateISO": "2026-11-03"
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-64.json",
+  "reviewDigestSha256": "77e8fd083b809fef0d5f0efb57050f5bd2e9a6bc0a1296d76d59d46c204fa0cb",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "martin-de-porres"
+  ],
+  "promotedObservanceIds": [
+    "observance:martin-de-porres:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 336,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 53
+  },
+  "fixedSanctoraleMappingDigestSha256": "b1a196c192674e844e902743b9a452e042fddb0e861add860ad563fad6f2f9db",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

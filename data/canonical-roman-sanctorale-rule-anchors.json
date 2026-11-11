@@ -3591,6 +3591,32 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "sanctorale-rule:martin-de-porres:general-roman",
+      "observanceId": "observance:martin-de-porres:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 3
+      },
+      "liturgicalRank": "optional-memorial",
+      "precedenceClass": "optional-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-3",
+          "claimTypes": [
+            "fixed-date",
+            "optional-memorial",
+            "general-roman-calendar",
+            "contextual-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }
