@@ -2411,6 +2411,17 @@
         "es": "San Juan de Capistrano",
         "it": "San Giovanni da Capestrano"
       }
+    },
+    {
+      "id": "anthony-mary-claret",
+      "primaryObservanceId": "rc:StAnthonyMaryClaret",
+      "category": "saint",
+      "names": {
+        "en": "Saint Anthony Mary Claret",
+        "pt": "Santo António Maria Claret",
+        "es": "San Antonio María Claret",
+        "it": "Sant'Antonio Maria Claret"
+      }
     }
   ]
 }

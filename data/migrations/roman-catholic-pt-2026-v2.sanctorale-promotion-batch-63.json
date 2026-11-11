@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-63.json",
+  "reviewDigestSha256": "5f3031318235154c0e1bce0f366a41bbb21173ec6d2fd12a6451a549a50eb53e",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "anthony-mary-claret"
+  ],
+  "promotedObservanceIds": [
+    "observance:anthony-mary-claret:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 335,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 54
+  },
+  "fixedSanctoraleMappingDigestSha256": "95c9d0c8f369daa3edcd1607268352ed337356c01bdb7cb2143772f2abe62e2d",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

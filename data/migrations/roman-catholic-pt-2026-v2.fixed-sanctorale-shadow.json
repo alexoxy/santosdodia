@@ -1921,9 +1921,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-24:anthony-mary-claret:roman-catholic:pt",
+      "observanceId": "observance:anthony-mary-claret:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:anthony-mary-claret:general-roman",
+      "legacyObservanceId": "rc:StAnthonyMaryClaret",
+      "expectedDateISO": "2026-10-24",
+      "sourceOccurrenceId": "snl-pt-2026-10-24-0d12f5faa2b67b6ded439033",
+      "sourceRecordHash": "ca0dea63d820389b70bc77ae1eff321ecaa9638c28a316eefd83dbf5ec7ed400",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 136
+  "fixedMappingCount": 137
 }

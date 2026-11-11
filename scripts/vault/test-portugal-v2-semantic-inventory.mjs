@@ -43,7 +43,7 @@ const coveredRows = [
   ...movable.mappings
 ];
 const coveredSourceIds = new Set(coveredRows.map((row) => row.sourceOccurrenceId));
-assert(coveredRows.length === 334 && coveredSourceIds.size === 334, 'Semantic inventory coverage boundary must contain exactly 334 unique approved source rows.');
+assert(coveredRows.length === 335 && coveredSourceIds.size === 335, 'Semantic inventory coverage boundary must contain exactly 335 unique approved source rows.');
 const adventWeekdayFamilyIds = new Set(adventWeekdayReceipt.families);
 const epiphanyIntervalFamilyId = epiphanyIntervalReceipt.familyId;
 const ordinaryWeekdayEarlyFamilyId = ordinaryWeekdayEarlyReceipt.familyId;
@@ -245,21 +245,22 @@ for (const row of remaining) {
   familyCounts.set(row.semanticFamily, (familyCounts.get(row.semanticFamily) ?? 0) + 1);
 }
 
-assert(remaining.length === 55 && remainingSourceIds.size === 55 && remainingSourceHashes.size === 55, 'Semantic inventory must preserve exactly 55 unique unresolved approved-source rows.');
+assert(remaining.length === 54 && remainingSourceIds.size === 54 && remainingSourceHashes.size === 54, 'Semantic inventory must preserve exactly 54 unique unresolved approved-source rows.');
 assert(coveredSourceIds.size + remainingSourceIds.size === 389, 'Covered and unresolved source identities must partition all 389 approved occurrences.');
-assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 334 && inventory.coverageAtInventory.remainingOccurrences === 55 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
+assert(inventory.coverageAtInventory.approvedSourceOccurrences === 389 && inventory.coverageAtInventory.sourceBoundOccurrences === 335 && inventory.coverageAtInventory.remainingOccurrences === 54 && inventory.coverageAtInventory.promotionAllowed === false, 'Semantic inventory coverage summary drifted or unlocked promotion.');
 assert(remainingSourceIds.has('snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4'), 'Portugal December 24 morning form must remain in the human-review inventory.');
 
 const actualCounts = Object.fromEntries([...familyCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
 assert(JSON.stringify(actualCounts) === JSON.stringify(inventory.familyCounts), 'Semantic family counts differ from the exact unresolved rows.');
 assert(actualCounts['temporal-weekday-family'] === 3 && (actualCounts['temporal-sunday-family'] ?? 0) === 0 && (actualCounts['saturday-marian-family'] ?? 0) === 0, 'Algorithmic temporal backlog classification drifted.');
-assert(actualCounts['fixed-person'] === 10, 'Fixed-person backlog classification drifted.');
+assert(actualCounts['fixed-person'] === 9, 'Fixed-person backlog classification drifted.');
 assert(actualCounts['fixed-marian-title'] === 7, 'Fixed Marian-title backlog classification drifted.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StSixtusIIPope'), 'Saint Sixtus II and companions must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJaneFrancesDeChantal'), 'Saint Jane Frances de Chantal must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StWenceslaus'), 'Saint Wenceslaus must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StFaustinaKowalska'), 'Saint Faustina Kowalska must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StBruno'), 'Saint Bruno must leave the unresolved inventory after exact promotion.');
+assert(!remaining.some((row) => row.canonicalEventId === 'rc:StAnthonyMaryClaret'), 'Saint Anthony Mary Claret must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJohnCapistrano'), 'Saint John of Capistrano must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StJohnPaulII'), 'Saint John Paul II must leave the unresolved inventory after exact promotion.');
 assert(!remaining.some((row) => row.canonicalEventId === 'rc:StPaulCross'), 'Saint Paul of the Cross must leave the unresolved inventory after exact promotion.');
@@ -284,4 +285,4 @@ assert((actualCounts['fixed-collective'] ?? 0) === 0, 'Fixed-collective backlog 
 assert(actualCounts['jurisdiction-structural-overlay'] + actualCounts['portugal-proper'] + actualCounts['jurisdiction-rank-override'] === 20 && inventory.humanReviewBoundary.occurrenceCount === 20, 'Portugal-specific human-review boundary must remain explicit.');
 assert(inventory.classificationPolicy.labelsCreateIdentity === false && inventory.classificationPolicy.annualDateCreatesPerennialRule === false && inventory.classificationPolicy.suppressedCandidatesCountAsCoverage === false && inventory.classificationPolicy.withheldCandidatesCountAsCoverage === false && inventory.classificationPolicy.transferOriginsCountAsCoverage === false, 'Semantic inventory fail-closed policy weakened.');
 
-console.log('Portugal semantic inventory passed: 334 covered + 55 exact unresolved source rows = 389; Saint John of Capistrano is source-bound on 23 October with the Franciscan proper rank kept contextual; Saint Bruno is source-bound on 6 October; the temporal/Portugal-specific review boundaries remain explicit.');
+console.log('Portugal semantic inventory passed: 335 covered + 54 exact unresolved source rows = 389; Saint Anthony Mary Claret is source-bound on 24 October with the Claretian proper rank kept contextual; Saint Bruno is source-bound on 6 October; the temporal/Portugal-specific review boundaries remain explicit.');
