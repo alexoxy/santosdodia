@@ -6191,6 +6191,58 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "recognition:paul-of-the-cross:roman-catholic",
+      "personId": "paul-of-the-cross",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/santos/santo_v.php?cod_santo=180",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "founder",
+            "birth-year",
+            "death-date"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/roman_curia/pontifical_academies/cult-martyrum/martiri/010.html",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "founder",
+            "canonization",
+            "death-year"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-19",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "founder",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

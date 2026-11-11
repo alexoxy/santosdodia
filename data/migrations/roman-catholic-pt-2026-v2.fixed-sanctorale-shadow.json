@@ -1879,9 +1879,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-19:paul-of-the-cross:roman-catholic:pt",
+      "observanceId": "observance:paul-of-the-cross:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:paul-of-the-cross:general-roman",
+      "legacyObservanceId": "rc:StPaulCross",
+      "expectedDateISO": "2026-10-19",
+      "sourceOccurrenceId": "snl-pt-2026-10-19-5a3c4acfe1b261e78486f1c1",
+      "sourceRecordHash": "9ce09b023afc7dd24e87e536672fc916bb0392e5c3837505ea8d19bc5ee93cf4",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
-  "verifiedAt": "2026-11-04",
-  "fixedMappingCount": 133
+  "verifiedAt": "2026-11-11",
+  "fixedMappingCount": 134
 }

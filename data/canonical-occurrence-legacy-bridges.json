@@ -669,6 +669,11 @@
       "occurrenceId": "occurrence:2026-10-16:margaret-mary-alacoque:roman-catholic:pt",
       "legacyObservanceId": "rc:StMargaretAlacoque",
       "dateISO": "2026-10-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-19:paul-of-the-cross:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulCross",
+      "dateISO": "2026-10-19"
     }
   ]
 }

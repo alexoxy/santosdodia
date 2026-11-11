@@ -4869,6 +4869,38 @@
         }
       ],
       "verifiedAt": "2026-11-04"
+    },
+    {
+      "id": "observance:paul-of-the-cross:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "paul-of-the-cross",
+          "recognitionId": "recognition:paul-of-the-cross:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-19",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "same-date-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }
