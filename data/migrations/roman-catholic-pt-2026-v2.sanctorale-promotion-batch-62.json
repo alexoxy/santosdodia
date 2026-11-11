@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-62.json",
+  "reviewDigestSha256": "95b78c7c43a8990269780a36f0bdfa6ce982cc6b530aed000659f7575012a8c0",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-of-capistrano"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-of-capistrano:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 334,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 55
+  },
+  "fixedSanctoraleMappingDigestSha256": "4662d5c9044e33605cc6f08d54eb9541addd099d9c0a7a27efcaac48442cea93",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
