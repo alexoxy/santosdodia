@@ -2400,6 +2400,17 @@
         "es": "San Juan Pablo II",
         "it": "San Giovanni Paolo II"
       }
+    },
+    {
+      "id": "john-of-capistrano",
+      "primaryObservanceId": "rc:StJohnCapistrano",
+      "category": "saint",
+      "names": {
+        "en": "Saint John of Capistrano",
+        "pt": "São João de Capistrano",
+        "es": "San Juan de Capistrano",
+        "it": "San Giovanni da Capestrano"
+      }
     }
   ]
 }

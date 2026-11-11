@@ -1907,9 +1907,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-23:john-of-capistrano:roman-catholic:pt",
+      "observanceId": "observance:john-of-capistrano:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-of-capistrano:general-roman",
+      "legacyObservanceId": "rc:StJohnCapistrano",
+      "expectedDateISO": "2026-10-23",
+      "sourceOccurrenceId": "snl-pt-2026-10-23-a2ade784a299fb0b8c30f8d3",
+      "sourceRecordHash": "7e067e45de894b07edb980ea8b9704a8e4024c6b72021e5e6ba17d806aff1c35",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 135
+  "fixedMappingCount": 136
 }

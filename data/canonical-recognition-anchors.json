@@ -6294,6 +6294,48 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:john-of-capistrano:roman-catholic",
+      "personId": "john-of-capistrano",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "religious",
+        "missionary"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/santos/santo_v.php?cod_santo=181",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "religious-order",
+            "birth-date",
+            "death-date"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/press/sinodo/documents/bollettino_23_ii_speciale-africa-2009/02_inglese/b29_02.html",
+          "claimTypes": [
+            "ecclesial-status",
+            "priesthood",
+            "franciscan-order",
+            "optional-memorial",
+            "fixed-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

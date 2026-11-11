@@ -679,6 +679,11 @@
       "occurrenceId": "occurrence:2026-10-22:john-paul-ii:roman-catholic:pt",
       "legacyObservanceId": "rc:StJohnPaulII",
       "dateISO": "2026-10-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-23:john-of-capistrano:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnCapistrano",
+      "dateISO": "2026-10-23"
     }
   ]
 }
