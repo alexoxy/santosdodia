@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "gertrude-the-great",
+        "primaryObservanceId": "rc:StGertrudeGreat",
+        "category": "saint",
+        "names": {
+          "en": "Saint Gertrude the Great",
+          "pt": "Santa Gertrudes",
+          "es": "Santa Gertrudis la Magna",
+          "it": "Santa Gertrude la Grande"
+        }
+      },
+      "recognition": {
+        "id": "recognition:gertrude-the-great:roman-catholic",
+        "personId": "gertrude-the-great",
+        "ecclesialTitles": [
+          "virgin",
+          "cistercian"
+        ],
+        "evidenceUrl": "https://www.vatican.va/content/benedict-xvi/pt/audiences/2010/documents/hf_ben-xvi_aud_20101006.html"
+      },
+      "observanceId": "observance:gertrude-the-great:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:gertrude-the-great:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "benedictineProper2026": "obligatory-memorial",
+        "cistercianProper2026": "feast",
+        "dehonianProper2026": "obligatory-memorial",
+        "institutionalRanksKeptContextual": true,
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StGertrudeGreat",
+        "dateISO": "2026-11-16",
+        "sourceOccurrenceId": "snl-pt-2026-11-16-f0eb14fec23ed50e8ad4e64d",
+        "sourceRecordHash": "08fab6337dc7342e438ce8e19591d783cc0dc350e2e29595740b85c49684d224",
+        "sourceLabelPt": "S. Gertrudes, virgem",
+        "observedDesignation": "S. Gertrudes, virgem – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-16"
+      }
+    },
+    {
+      "person": {
+        "id": "margaret-of-scotland",
+        "primaryObservanceId": "rc:StMargaretScotland",
+        "category": "saint",
+        "names": {
+          "en": "Saint Margaret of Scotland",
+          "pt": "Santa Margarida da Escócia",
+          "es": "Santa Margarita de Escocia",
+          "it": "Santa Margherita di Scozia"
+        }
+      },
+      "recognition": {
+        "id": "recognition:margaret-of-scotland:roman-catholic",
+        "personId": "margaret-of-scotland",
+        "ecclesialTitles": [
+          "queen",
+          "mother",
+          "laywoman"
+        ],
+        "evidenceUrl": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-16"
+      },
+      "observanceId": "observance:margaret-of-scotland:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:margaret-of-scotland:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StMargaretScotland",
+        "dateISO": "2026-11-16",
+        "sourceOccurrenceId": "snl-pt-2026-11-16-bfa726f8b26659de5d5bb9f6",
+        "sourceRecordHash": "35fbe8b6a29820610a61d18e6661651b754d7fe8aa86f4d4ddd5813127c3492a",
+        "sourceLabelPt": "S. Margarida da Escócia",
+        "observedDesignation": "S. Margarida da Escócia – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-16"
+      }
+    }
+  ],
+  "reviewDigestSha256": "8617726ab27b4335ed48614208fb8846c975558b266cda1e638afd8949649cd5",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

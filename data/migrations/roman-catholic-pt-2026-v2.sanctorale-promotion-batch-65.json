@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-65.json",
+  "reviewDigestSha256": "8617726ab27b4335ed48614208fb8846c975558b266cda1e638afd8949649cd5",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "gertrude-the-great",
+    "margaret-of-scotland"
+  ],
+  "promotedObservanceIds": [
+    "observance:gertrude-the-great:roman-catholic",
+    "observance:margaret-of-scotland:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 338,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 51
+  },
+  "fixedSanctoraleMappingDigestSha256": "9c7b12a5a9784fd1c1011f7c32be118947813eb263d33faaed4c3534646761b7",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
