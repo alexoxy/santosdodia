@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-11-11 15:38 UTC
+Updated: 2026-11-11 15:58 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-11-v72.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-11-v73.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 340/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 341/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,17 +20,18 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#496](https://github.com/alexoxy/santosdodia/pull/496) delivered E07.05 batch 66:
+PR [#498](https://github.com/alexoxy/santosdodia/pull/498) delivered E07.05 batch 67:
 
-- created separate canonical Person, Roman Catholic Recognition and Observance chains for Saint Clement I and Saint Columban;
-- added perennial General Roman rules and exact Portugal 2026 occurrences for 23 November;
-- bound `rc:StClementIPope` and `rc:StColumban` as independent optional memorials (`MF`);
-- retained the Cistercian proper of Saint Columban as an institutional context;
+- created a canonical Person and Roman Catholic Recognition for Saint Andrew Dung-Lac;
+- modeled the observance as a named-person-with-companions commemoration containing 117 attested martyrs;
+- retained 116 officially bounded companions without materializing anonymous Persons;
+- added the perennial General Roman rule and exact Portugal 2026 obligatory memorial (`MO`) for 24 November;
+- retained Vila Real Cathedral, Franciscan and Dominican entries as contextual propers;
 - kept runtime publication and remote D1 fail-closed.
 
-Validated head: `67d3b5fc1e3e7b7703f41b7d55a2b3bb048bf88d`; validated tree: `bf8f4eb46ce2d7f657be5d1af3567e7c4ad38a1f`.
+Validated head: `d8a7c4009ecbf4cdfb91b96862873f677721404c`; validated tree: `d6616b9f9b7a2ece7bcc01351e8f5f7abd033c0b`.
 
-CI merge `21dffd4a08880b6fdc15d1ae04b05e36bb4add7e`, validated head and functional merge `83c21ac6b84824613e36257449dbd693a9aec1e1` have the exact same tree.
+CI merge `03211471bd5c6209da45139d6e3cf859dd4a57d7`, validated head and signed functional merge `59ead41e396e4f4f352f07f26bef8680141391fb` have the exact same tree.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -40,37 +41,37 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **142** across **126** civil days.
-- Total canonical migration coverage: **340/389 (87.404%)**.
-- Approved-source occurrences outside the canonical shadow: **49**.
-- Source-bound civil days: **318/365**.
-- Civil days wholly without a source-bound canonical occurrence: **47**.
-- Fixed-person backlog: **4**.
+- Exact fixed Sanctorale bindings: **143** across **127** civil days.
+- Total canonical migration coverage: **341/389 (87.661%)**.
+- Approved-source occurrences outside the canonical shadow: **48**.
+- Source-bound civil days: **319/365**.
+- Civil days wholly without a source-bound canonical occurrence: **46**.
+- Fixed-person backlog: **3**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
 ## CI and external proof
 
-PR #496 workflows on the exact validated head:
+PR #498 workflows on the exact validated head:
 
-- Product BUILD `43049067552`: success;
-- Product publish staging `43049067496`: success;
-- Quality `43049067678`: success;
-- Wikidata retry quality `43049067592`: success;
-- Sanctorale review quality `43049067988`: success.
+- Product BUILD `43052576078`: success;
+- Product publish staging `43052576222`: success;
+- Quality `43052575967`: success;
+- Wikidata retry quality `43052576045`: success;
+- Sanctorale review quality `43052576115`: success.
 
 Focused tests, `npm run check`, the mandatory AdSense checker, `npm audit --audit-level=high` and `git diff --check` passed. The current audit retains 10 moderate transitive findings; the forced fix is breaking and was not applied.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAActA`, SHA-256 `dbe32deffa5b1083d3c0c59bde8f4a46e0d003a9748eea5250bfcf2f9a3db4ae`;
-- source MD `id:oANWCGUyYBwAAAAAAAAcuQ`, SHA-256 `5aa332cd2ffb58cebd7ff4921637530c3df42cd3565600fff7284cac35d43d1e`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAcug`, SHA-256 `266ccc168b0e64c5a717c4e6f2f7fa1fdb21a5728b69b172acea14312f9b7688`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAActw`, SHA-256 `83e856464e97c9e383cefad4e8a9eb0ad1df343f16f667973db6affb34f3e245`;
-- plan v72 JSON `id:oANWCGUyYBwAAAAAAAAcvA`, SHA-256 `b90b397e1e0fe2190f20217a45d544064482319543fd0f70539accb5f9e20076`;
-- plan v72 MD `id:oANWCGUyYBwAAAAAAAAcuw`, SHA-256 `df7d1c5da80b965e75bc45f0dfa57c8071f415f0f1c36cce8802b9162fd0e37e`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAczA`, SHA-256 `70b1e113d12151e83d002325f0f6b4fb68479590aae4e7c89f495d4d5d7a3a6b`;
+- source MD `id:oANWCGUyYBwAAAAAAAAczw`, SHA-256 `30ecfe0985ab0a39c4fdb4c9eeb78cc1653afcc1a059175afb6f3e5af20b33bc`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAczg`, SHA-256 `e05d2751d88863171d3c97baa0f7410913514219b6701abe0ec96e43ba0d288a`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAczQ`, SHA-256 `9e33d211f0b94644eecde2f9c9ec722c622db28dc50bf248b4a9e1aa989af1d6`;
+- plan v73 JSON `id:oANWCGUyYBwAAAAAAAAc1w`, SHA-256 `965245ed55c3e9be3699f9461765f94460f00e3ba12138e1babb7773d1634431`;
+- plan v73 MD `id:oANWCGUyYBwAAAAAAAAc1g`, SHA-256 `13b1eb87fe943c1b090823a91a252f7479ba025db7ed14ef70a648d370b5b744`.
 
-Staging artifact `13869211402`, ZIP digest `sha256:6a14f59a3b0c003e7676b6bae559ef2e841fd567b77f407c497759f645cdbc92`, was archived as `id:oANWCGUyYBwAAAAAAAActg`. It contains the six expected release files and remains `productionApproved=false`.
+Staging artifact `13870376013`, ZIP digest `sha256:9369d679fe422467b03abe75b2a4b2189a66e3d373c7335c229d808d7b81681c`, was archived as `id:oANWCGUyYBwAAAAAAAAc0A`. It contains the six expected release files and remains `productionApproved=false`.
 
 ## Task and deliverable countdown
 
@@ -81,7 +82,7 @@ Staging artifact `13869211402`, ZIP digest `sha256:6a14f59a3b0c003e7676b6bae559e
 
 ## Repository and production hygiene
 
-- PR #496 was integrated only after the exact head, unchanged base and all five checks were verified.
+- PR #498 was integrated only after the exact head, unchanged base and all five checks were verified.
 - The CI merge tree, validated head tree and functional merge tree are identical.
 - No review or review thread remained pending.
 - No force push, history rewrite, production deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
@@ -89,7 +90,7 @@ Staging artifact `13869211402`, ZIP digest `sha256:6a14f59a3b0c003e7676b6bae559e
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:StAndrewDungLac` on 24 November, preserving the collective composition of the martyrs and exact identity, authority, rank and jurisdiction boundaries.
+1. Continue E07.05 with `rc:StCatherineAlexandria` on 25 November, preserving exact identity, authority, rank and contextual-proper boundaries.
 2. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 3. Resolve Portugal-specific structural/proper/rank rows through competent-authority review.
 4. Reach 389/389, explain every annual difference and run multi-year regeneration.
@@ -98,8 +99,8 @@ Staging artifact `13869211402`, ZIP digest `sha256:6a14f59a3b0c003e7676b6bae559e
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v72, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:StAndrewDungLac`; do not repeat the 23 November batch.
+- Read issue #355 and Dropbox plan v73, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StCatherineAlexandria`; do not repeat the 24 November batch.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
