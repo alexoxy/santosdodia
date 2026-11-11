@@ -2033,9 +2033,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-09:juan-diego-cuauhtlatoatzin:roman-catholic:pt",
+      "observanceId": "observance:juan-diego-cuauhtlatoatzin:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:juan-diego-cuauhtlatoatzin:general-roman",
+      "legacyObservanceId": "rc:JuanDiego",
+      "expectedDateISO": "2026-12-09",
+      "sourceOccurrenceId": "snl-pt-2026-12-09-faeec407f430a64dd9bc86cd",
+      "sourceRecordHash": "6edf53c5069d314deb5201d3eab586033cae8073768a896318d95911319b51ba",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 144
+  "fixedMappingCount": 145
 }

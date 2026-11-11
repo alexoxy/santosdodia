@@ -57,7 +57,7 @@ try {
 
   sanctorale.validateRomanSanctoraleInputs(rules, policies);
   const pt2026 = sanctorale.materializeRomanSanctoraleCandidates(2026, rules, policies, 'roman-sanctorale-policy:pt');
-  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 144, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and forty-four reviewed rules.');
+  assert(pt2026.publicationAllowed === false && pt2026.candidates.length === 145, 'Portugal Sanctorale materialization must remain shadow-only with one hundred and forty-five reviewed rules.');
   assert(pt2026.jurisdictionId === 'jurisdiction:roman-catholic:pt', 'Portugal Sanctorale materialization jurisdiction drifted.');
 
   const expected = new Map([
@@ -191,6 +191,7 @@ try {
     ['observance:columban-luxeuil:roman-catholic', ['2026-11-23', 'optional-memorial', 12, 'general-roman']],
     ['observance:andrew-dung-lac-companions:roman-catholic', ['2026-11-24', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:catherine-alexandria:roman-catholic', ['2026-11-25', 'optional-memorial', 12, 'general-roman']],
+    ['observance:juan-diego-cuauhtlatoatzin:roman-catholic', ['2026-12-09', 'optional-memorial', 12, 'general-roman']],
     ['observance:cornelius-cyprian:roman-catholic', ['2026-09-16', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:elizabeth-hungary:roman-catholic', ['2026-11-17', 'obligatory-memorial', 10, 'general-roman']],
     ['observance:hilary-poitiers:roman-catholic', ['2026-01-13', 'optional-memorial', 12, 'general-roman']],
@@ -218,7 +219,7 @@ try {
     assert(candidate.id === `sanctorale:${candidate.observanceId}:jurisdiction:roman-catholic:pt:2026`, `${candidate.observanceId} stable candidate ID drifted.`);
   }
 
-  assert(occurrences.occurrences.length === 144, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
+  assert(occurrences.occurrences.length === 145, 'Occurrence anchor count changed; update the Sanctorale equivalence vector intentionally.');
   for (const occurrence of occurrences.occurrences) {
     const candidate = pt2026.candidates.find(item => item.observanceId === occurrence.observanceId);
     assert(candidate, `Missing perennial Sanctorale candidate for ${occurrence.observanceId}.`);
@@ -338,7 +339,7 @@ try {
   try { sanctorale.validateRomanSanctoraleInputs(wrongSolemnity, policies); } catch { wrongSolemnityRejected = true; }
   assert(wrongSolemnityRejected, 'Sanctorale rank/isSolemnity mismatch must fail closed.');
 
-console.log('Roman Sanctorale passed: 144 authority-isolated perennial Portugal vectors, including Saint Catherine of Alexandria on 25 November with contextual alternatives kept independent; Saint Andrew Dung-Lac with 116 bounded, unmaterialized companions on 24 November; Saint Clement I and Saint Columban as independent alternatives on 23 November; Saint Bruno on 6 October; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
+console.log('Roman Sanctorale passed: 145 authority-isolated perennial Portugal vectors, including Saint Juan Diego on 9 December with the Guadalupan association and Passionist proper kept contextually distinct; Saint Catherine of Alexandria on 25 November with contextual alternatives kept independent; Saint Andrew Dung-Lac with 116 bounded, unmaterialized companions on 24 November; Saint Clement I and Saint Columban as independent alternatives on 23 November; Saint Bruno on 6 October; identity reuse, bounded companions, multi-person, subjectless collective and non-human Observances; three distinct Marian solemnities, 2026 canonical equivalence, 2025 regeneration, 2023 Saint Joseph transfer and specific-over-general overrides.');
 } finally {
   fs.rmSync(temporaryDirectory, { recursive: true, force: true });
 }

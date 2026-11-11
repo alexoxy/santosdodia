@@ -724,6 +724,11 @@
       "occurrenceId": "occurrence:2026-11-25:catherine-alexandria:roman-catholic:pt",
       "legacyObservanceId": "rc:StCatherineAlexandria",
       "dateISO": "2026-11-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-09:juan-diego-cuauhtlatoatzin:roman-catholic:pt",
+      "legacyObservanceId": "rc:JuanDiego",
+      "dateISO": "2026-12-09"
     }
   ]
 }

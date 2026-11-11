@@ -2499,6 +2499,17 @@
         "es": "Santa Catalina de Alejandría",
         "it": "Santa Caterina d’Alessandria"
       }
+    },
+    {
+      "id": "juan-diego-cuauhtlatoatzin",
+      "primaryObservanceId": "rc:JuanDiego",
+      "category": "saint",
+      "names": {
+        "en": "Saint Juan Diego Cuauhtlatoatzin",
+        "pt": "São João Diogo Cuauhtlatoatzin",
+        "es": "San Juan Diego Cuauhtlatoatzin",
+        "it": "San Juan Diego Cuauhtlatoatzin"
+      }
     }
   ]
 }

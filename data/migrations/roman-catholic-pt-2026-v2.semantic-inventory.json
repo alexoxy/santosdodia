@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 342,
-    "remainingOccurrences": 47,
+    "sourceBoundOccurrences": 343,
+    "remainingOccurrences": 46,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 2,
+    "fixed-person": 1,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -330,13 +330,6 @@
       "dateISO": "2026-12-05",
       "canonicalEventId": "rc:AdventWeekday1Saturday",
       "semanticFamily": "jurisdiction-structural-overlay"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-12-09-faeec407f430a64dd9bc86cd",
-      "sourceRecordHash": "6edf53c5069d314deb5201d3eab586033cae8073768a896318d95911319b51ba",
-      "dateISO": "2026-12-09",
-      "canonicalEventId": "rc:JuanDiego",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-12-10-57e242ccf72c1a8245720286",

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-69.json",
+  "reviewDigestSha256": "6835ab6654da86aa85d8f97cd68c9d53637faaca44d13776715563b83ccc0724",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "juan-diego-cuauhtlatoatzin"
+  ],
+  "promotedObservanceIds": [
+    "observance:juan-diego-cuauhtlatoatzin:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 343,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 46
+  },
+  "fixedSanctoraleMappingDigestSha256": "3605a3947a25b2ac71e77a2fef35b1bc99992a89f1046470d4622be47096906a",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

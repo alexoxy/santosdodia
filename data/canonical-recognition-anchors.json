@@ -6642,6 +6642,46 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:juan-diego-cuauhtlatoatzin:roman-catholic",
+      "personId": "juan-diego-cuauhtlatoatzin",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "formal-recognition-event",
+      "ecclesialTitles": [
+        "layman",
+        "marian-visionary"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2002/documents/hf_jp-ii_hom_20020731_canonization-mexico.html",
+          "claimTypes": [
+            "identity",
+            "canonization",
+            "saint-designation",
+            "indigenous-identity",
+            "guadalupe-association"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/martirologio/elogio.php?data=2025-12-09",
+          "claimTypes": [
+            "identity",
+            "saint-designation",
+            "indigenous-origin",
+            "guadalupe-association",
+            "death-year"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }
