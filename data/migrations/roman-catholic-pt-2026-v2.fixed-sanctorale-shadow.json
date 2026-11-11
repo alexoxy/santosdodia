@@ -2019,9 +2019,23 @@
       "sourceRankCode": "MO",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-25:catherine-alexandria:roman-catholic:pt",
+      "observanceId": "observance:catherine-alexandria:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:catherine-alexandria:general-roman",
+      "legacyObservanceId": "rc:StCatherineAlexandria",
+      "expectedDateISO": "2026-11-25",
+      "sourceOccurrenceId": "snl-pt-2026-11-25-1ac6f5e76e77386a765b5284",
+      "sourceRecordHash": "8c8f50639a4a677193f0865f434386a2e8cb637f15f877a0524fb98354dbc020",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 143
+  "fixedMappingCount": 144
 }

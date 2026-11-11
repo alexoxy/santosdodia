@@ -6602,6 +6602,46 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:catherine-alexandria:roman-catholic",
+      "personId": "catherine-alexandria",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "virgin",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-25",
+          "claimTypes": [
+            "identity",
+            "saint-designation",
+            "virginity",
+            "martyrdom",
+            "alexandria-association",
+            "uncertain-death-date"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/25/st--catherine-of-alexandria.html",
+          "claimTypes": [
+            "identity",
+            "saint-designation",
+            "martyrdom",
+            "traditional-biography"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

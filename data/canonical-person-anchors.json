@@ -2488,6 +2488,17 @@
         "es": "San Andrés Dung-Lac, presbítero y mártir",
         "it": "Sant’Andrea Dung-Lac, sacerdote e martire"
       }
+    },
+    {
+      "id": "catherine-alexandria",
+      "primaryObservanceId": "rc:StCatherineAlexandria",
+      "category": "saint",
+      "names": {
+        "en": "Saint Catherine of Alexandria",
+        "pt": "Santa Catarina de Alexandria",
+        "es": "Santa Catalina de Alejandría",
+        "it": "Santa Caterina d’Alessandria"
+      }
     }
   ]
 }
