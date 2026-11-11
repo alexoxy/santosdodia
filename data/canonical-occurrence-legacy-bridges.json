@@ -694,6 +694,16 @@
       "occurrenceId": "occurrence:2026-11-03:martin-de-porres:roman-catholic:pt",
       "legacyObservanceId": "rc:StMartinPorres",
       "dateISO": "2026-11-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-16:gertrude-the-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StGertrudeGreat",
+      "dateISO": "2026-11-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-16:margaret-of-scotland:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMargaretScotland",
+      "dateISO": "2026-11-16"
     }
   ]
 }

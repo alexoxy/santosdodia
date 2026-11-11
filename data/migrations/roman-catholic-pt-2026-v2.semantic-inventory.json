@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 336,
-    "remainingOccurrences": 53,
+    "sourceBoundOccurrences": 338,
+    "remainingOccurrences": 51,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 8,
+    "fixed-person": 6,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -309,20 +309,6 @@
       "dateISO": "2026-11-09",
       "canonicalEventId": "rc:DedicationLateran",
       "semanticFamily": "fixed-or-major-observance"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-16-f0eb14fec23ed50e8ad4e64d",
-      "sourceRecordHash": "08fab6337dc7342e438ce8e19591d783cc0dc350e2e29595740b85c49684d224",
-      "dateISO": "2026-11-16",
-      "canonicalEventId": "rc:StGertrudeGreat",
-      "semanticFamily": "fixed-person"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-16-bfa726f8b26659de5d5bb9f6",
-      "sourceRecordHash": "35fbe8b6a29820610a61d18e6661651b754d7fe8aa86f4d4ddd5813127c3492a",
-      "dateISO": "2026-11-16",
-      "canonicalEventId": "rc:StMargaretScotland",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-11-18-32fa7fd861ed08ec5c33565a",

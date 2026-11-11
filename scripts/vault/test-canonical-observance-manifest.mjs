@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 140, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 218, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 142, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 220, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -264,6 +264,11 @@ const hedwig = first.observances.find((item) => item.observanceId === 'observanc
 assert(hedwig?.subjects?.[0]?.personId === 'hedwig-of-silesia', 'Saint Hedwig must remain a distinct person-scoped Observance.');
 const alacoque = first.observances.find((item) => item.observanceId === 'observance:margaret-mary-alacoque:roman-catholic');
 assert(alacoque?.subjects?.[0]?.personId === 'margaret-mary-alacoque', 'Saint Margaret Mary Alacoque must remain a distinct person-scoped Observance.');
+
+const gertrude = first.observances.find((row) => row.observanceId === 'observance:gertrude-the-great:roman-catholic');
+assert(gertrude?.subjects?.[0]?.personId === 'gertrude-the-great', 'Saint Gertrude must remain a distinct person-scoped Observance.');
+const margaretScotland = first.observances.find((row) => row.observanceId === 'observance:margaret-of-scotland:roman-catholic');
+assert(margaretScotland?.subjects?.[0]?.personId === 'margaret-of-scotland', 'Saint Margaret of Scotland must remain a distinct person-scoped Observance.');
 
 const martinDePorres = first.observances.find((row) => row.observanceId === 'observance:martin-de-porres:roman-catholic');
 assert(martinDePorres?.subjects?.[0]?.personId === 'martin-de-porres', 'Saint Martin de Porres must remain a distinct person-scoped Observance.');

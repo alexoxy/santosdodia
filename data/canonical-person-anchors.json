@@ -2433,6 +2433,28 @@
         "es": "San Martín de Porres",
         "it": "San Martino de Porres"
       }
+    },
+    {
+      "id": "gertrude-the-great",
+      "primaryObservanceId": "rc:StGertrudeGreat",
+      "category": "saint",
+      "names": {
+        "en": "Saint Gertrude the Great",
+        "pt": "Santa Gertrudes",
+        "es": "Santa Gertrudis la Magna",
+        "it": "Santa Gertrude la Grande"
+      }
+    },
+    {
+      "id": "margaret-of-scotland",
+      "primaryObservanceId": "rc:StMargaretScotland",
+      "category": "saint",
+      "names": {
+        "en": "Saint Margaret of Scotland",
+        "pt": "Santa Margarida da Escócia",
+        "es": "Santa Margarita de Escocia",
+        "it": "Santa Margherita di Scozia"
+      }
     }
   ]
 }

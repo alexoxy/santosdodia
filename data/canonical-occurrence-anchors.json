@@ -3326,6 +3326,54 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "occurrence:2026-11-16:gertrude-the-great:roman-catholic:pt",
+      "observanceId": "observance:gertrude-the-great:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-16",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-16",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Gertrudes, virgem – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "occurrence:2026-11-16:margaret-of-scotland:roman-catholic:pt",
+      "observanceId": "observance:margaret-of-scotland:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "jurisdiction:roman-catholic:pt",
+      "calendarSystem": "gregorian",
+      "year": 2026,
+      "dateISO": "2026-11-16",
+      "rank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-16",
+          "claimTypes": [
+            "annual-date",
+            "jurisdictional-observance",
+            "liturgical-rank"
+          ],
+          "observedDesignation": "S. Margarida da Escócia – MF"
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }
