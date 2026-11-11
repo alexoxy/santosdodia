@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 340,
-    "remainingOccurrences": 49,
+    "sourceBoundOccurrences": 341,
+    "remainingOccurrences": 48,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 4,
+    "fixed-person": 3,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -323,13 +323,6 @@
       "dateISO": "2026-11-21",
       "canonicalEventId": "rc:PresentationMary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-24-0d92880655ca29c9708bf28d",
-      "sourceRecordHash": "2553a653abd3a004d3666df76af79dbfa70913d13981c605e89483e5f8f429b5",
-      "dateISO": "2026-11-24",
-      "canonicalEventId": "rc:StAndrewDungLac",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-11-25-1ac6f5e76e77386a765b5284",

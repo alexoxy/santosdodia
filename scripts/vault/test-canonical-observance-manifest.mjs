@@ -46,8 +46,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.d1C
 assert(first.manifest.artifactType === 'canonical-liturgical-observances', 'Observance artifact type changed unexpectedly.');
 assert(first.manifest.observanceModelVersion === '1.4', 'Observance model must support bounded companion groups v1.4.');
 assert(first.manifest.vaultLayer === 'canonical', 'Observance release must target canonical Vault.');
-assert(first.manifest.observanceCount === 144, 'Reviewed Observance count changed and requires explicit review.');
-assert(first.manifest.personCoverageCount === 222, 'Reviewed Observance Person coverage changed unexpectedly.');
+assert(first.manifest.observanceCount === 145, 'Reviewed Observance count changed and requires explicit review.');
+assert(first.manifest.personCoverageCount === 223, 'Reviewed Observance Person coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:orthodox-church-america', 'church:roman-catholic']), 'Observance Churches changed unexpectedly.');
 assert(first.manifest.runtimePublicationAllowed === false, 'Observance Vault build must not imply runtime publication.');
 assert(first.manifest.currentPointerPath === '/vault/canonical/observances/v1/current.json', 'Observance current pointer path changed unexpectedly.');
@@ -264,6 +264,11 @@ const hedwig = first.observances.find((item) => item.observanceId === 'observanc
 assert(hedwig?.subjects?.[0]?.personId === 'hedwig-of-silesia', 'Saint Hedwig must remain a distinct person-scoped Observance.');
 const alacoque = first.observances.find((item) => item.observanceId === 'observance:margaret-mary-alacoque:roman-catholic');
 assert(alacoque?.subjects?.[0]?.personId === 'margaret-mary-alacoque', 'Saint Margaret Mary Alacoque must remain a distinct person-scoped Observance.');
+
+const dungLac = first.observances.find((row) => row.observanceId === 'observance:andrew-dung-lac-companions:roman-catholic');
+assert(dungLac?.observanceType === 'named-person-with-companions-commemoration', 'Saint Andrew Dung-Lac and companions must use the bounded companion-group type.');
+assert(dungLac.subjects.length === 1 && dungLac.subjects[0].personId === 'andrew-dung-lac', 'Only the directly reviewed Saint Andrew Dung-Lac Person may be materialized in this batch.');
+assert(dungLac.companionGroup?.attestedCount === 116 && dungLac.companionGroup.anonymousPersonsCreated === false, 'The officially bounded 116 companions must remain unmaterialized without inferred Persons.');
 
 const clement = first.observances.find((row) => row.observanceId === 'observance:clement-i-pope:roman-catholic');
 assert(clement?.subjects?.[0]?.personId === 'clement-i-pope', 'Saint Clement I must remain a distinct person-scoped Observance.');

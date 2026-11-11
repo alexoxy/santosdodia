@@ -2477,6 +2477,17 @@
         "es": "San Columbano",
         "it": "San Colombano"
       }
+    },
+    {
+      "id": "andrew-dung-lac",
+      "primaryObservanceId": "rc:StAndrewDungLac",
+      "category": "saint",
+      "names": {
+        "en": "Saint Andrew Dung-Lac, Priest and Martyr",
+        "pt": "Santo André Dung-Lac, presbítero e mártir",
+        "es": "San Andrés Dung-Lac, presbítero y mártir",
+        "it": "Sant’Andrea Dung-Lac, sacerdote e martire"
+      }
     }
   ]
 }

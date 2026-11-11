@@ -2005,9 +2005,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-24:andrew-dung-lac-companions:roman-catholic:pt",
+      "observanceId": "observance:andrew-dung-lac-companions:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:andrew-dung-lac-companions:general-roman",
+      "legacyObservanceId": "rc:StAndrewDungLac",
+      "expectedDateISO": "2026-11-24",
+      "sourceOccurrenceId": "snl-pt-2026-11-24-0d92880655ca29c9708bf28d",
+      "sourceRecordHash": "2553a653abd3a004d3666df76af79dbfa70913d13981c605e89483e5f8f429b5",
+      "legacyRank": "memorial",
+      "canonicalRank": "obligatory-memorial",
+      "sourceRankCode": "MO",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 142
+  "fixedMappingCount": 143
 }

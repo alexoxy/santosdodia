@@ -3721,6 +3721,32 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "sanctorale-rule:andrew-dung-lac-companions:general-roman",
+      "observanceId": "observance:andrew-dung-lac-companions:roman-catholic",
+      "scopeKey": "general-roman",
+      "dateRule": {
+        "type": "fixed",
+        "month": 11,
+        "day": 24
+      },
+      "liturgicalRank": "obligatory-memorial",
+      "precedenceClass": "general-obligatory-memorial",
+      "isSolemnity": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-24",
+          "claimTypes": [
+            "fixed-date",
+            "obligatory-memorial",
+            "general-roman-calendar",
+            "bounded-companion-group"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

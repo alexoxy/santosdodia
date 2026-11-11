@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "andrew-dung-lac",
+        "primaryObservanceId": "rc:StAndrewDungLac",
+        "category": "saint",
+        "names": {
+          "en": "Saint Andrew Dung-Lac, Priest and Martyr",
+          "pt": "Santo André Dung-Lac, presbítero e mártir",
+          "es": "San Andrés Dung-Lac, presbítero y mártir",
+          "it": "Sant’Andrea Dung-Lac, sacerdote e martire"
+        }
+      },
+      "recognition": {
+        "id": "recognition:andrew-dung-lac:roman-catholic",
+        "personId": "andrew-dung-lac",
+        "churchId": "church:roman-catholic",
+        "jurisdictionId": "global",
+        "recognizedAs": "saint",
+        "recognitionBasis": "official-church-attestation",
+        "ecclesialTitles": [
+          "priest",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/11/24/sts--andrew-d_ng-lc--and-his-companions--martyrs.html"
+      },
+      "namedPersonWithCompanions": true,
+      "companionGroup": {
+        "groupKey": "martyrs-of-vietnam-companions",
+        "attestedCount": 116,
+        "enumerationStatus": "officially-bounded-not-materialized",
+        "anonymousPersonsCreated": false,
+        "evidence": [
+          {
+            "publisher": "Secretariado Nacional de Liturgia",
+            "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-24",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs",
+              "official-enumeration"
+            ]
+          },
+          {
+            "publisher": "Holy See",
+            "url": "https://www.vatican.va/news_services/liturgy/saints/index_saints_en.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "canonization"
+            ]
+          },
+          {
+            "publisher": "Vatican News",
+            "url": "https://www.vaticannews.va/en/saints/11/24/sts--andrew-d_ng-lc--and-his-companions--martyrs.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs",
+              "canonization"
+            ]
+          }
+        ]
+      },
+      "observanceId": "observance:andrew-dung-lac-companions:roman-catholic",
+      "observanceType": "named-person-with-companions-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:andrew-dung-lac-companions:general-roman",
+      "occurrenceKey": "andrew-dung-lac-companions",
+      "source": {
+        "canonicalEventId": "rc:StAndrewDungLac",
+        "dateISO": "2026-11-24",
+        "sourceOccurrenceId": "snl-pt-2026-11-24-0d92880655ca29c9708bf28d",
+        "sourceRecordHash": "2553a653abd3a004d3666df76af79dbfa70913d13981c605e89483e5f8f429b5",
+        "sourceLabelPt": "Santos André Dung-Lac, presbítero, e companheiros, mártires",
+        "observedDesignation": "Santos André Dung-Lac, presbítero, e companheiros, mártires – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-24"
+      }
+    }
+  ],
+  "reviewDigestSha256": "c29e3a808e7f020eece799d6b91b4b2a544fb51174674d59cec8fafecc4feca9",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
