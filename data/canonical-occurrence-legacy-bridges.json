@@ -714,6 +714,11 @@
       "occurrenceId": "occurrence:2026-11-23:columban-luxeuil:roman-catholic:pt",
       "legacyObservanceId": "rc:StColumban",
       "dateISO": "2026-11-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-24:andrew-dung-lac-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAndrewDungLac",
+      "dateISO": "2026-11-24"
     }
   ]
 }

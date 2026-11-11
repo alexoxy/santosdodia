@@ -6553,6 +6553,55 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:andrew-dung-lac:roman-catholic",
+      "personId": "andrew-dung-lac",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "priest",
+        "martyr"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/24/sts--andrew-d_ng-lc--and-his-companions--martyrs.html",
+          "claimTypes": [
+            "identity",
+            "saint-designation",
+            "priesthood",
+            "martyrdom",
+            "canonization"
+          ]
+        },
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/news_services/liturgy/saints/index_saints_en.html",
+          "claimTypes": [
+            "identity",
+            "saint-designation",
+            "canonization",
+            "collective-membership"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-24",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "liturgical-commemoration",
+            "collective-membership"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

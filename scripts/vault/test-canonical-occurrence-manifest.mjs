@@ -50,8 +50,8 @@ assert(first.buildReceipt.publicationChanged === false && first.buildReceipt.pro
 
 assert(first.manifest.artifactType === 'canonical-liturgical-occurrences', 'Occurrence artifact type changed unexpectedly.');
 assert(first.manifest.vaultLayer === 'canonical', 'Occurrence release must target canonical Vault.');
-assert(first.manifest.occurrenceCount === 142, 'Reviewed Occurrence count changed and requires explicit review.');
-assert(first.manifest.legacyBridgeCount === 142, 'Reviewed legacy bridge count changed and requires explicit review.');
+assert(first.manifest.occurrenceCount === 143, 'Reviewed Occurrence count changed and requires explicit review.');
+assert(first.manifest.legacyBridgeCount === 143, 'Reviewed legacy bridge count changed and requires explicit review.');
 assert(JSON.stringify(first.manifest.churches) === JSON.stringify(['church:roman-catholic']), 'Church coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.jurisdictions) === JSON.stringify(['jurisdiction:roman-catholic:pt']), 'Jurisdiction coverage changed unexpectedly.');
 assert(JSON.stringify(first.manifest.years) === JSON.stringify([2026]), 'Year coverage changed unexpectedly.');
@@ -198,6 +198,7 @@ const expected = new Map([
   ['observance:margaret-of-scotland:roman-catholic', ['2026-11-16', 'optional-memorial', 'MF', 'rc:StMargaretScotland']],
   ['observance:clement-i-pope:roman-catholic', ['2026-11-23', 'optional-memorial', 'MF', 'rc:StClementIPope']],
   ['observance:columban-luxeuil:roman-catholic', ['2026-11-23', 'optional-memorial', 'MF', 'rc:StColumban']],
+  ['observance:andrew-dung-lac-companions:roman-catholic', ['2026-11-24', 'obligatory-memorial', 'MO', 'rc:StAndrewDungLac']],
   ['observance:lawrence-ruiz-companions:roman-catholic', ['2026-09-28', 'optional-memorial', 'MF', 'rc:StsLawrenceRuiz']],
   ['observance:paul-miki-companions:roman-catholic', ['2026-02-06', 'obligatory-memorial', 'MO', 'rc:StsPaulMiki']],
   ['observance:first-martyrs-rome:roman-catholic', ['2026-06-30', 'optional-memorial', 'MF', 'rc:FirstMartyrsRome']],

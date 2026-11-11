@@ -5157,6 +5157,85 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "observance:andrew-dung-lac-companions:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "named-person-with-companions-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "andrew-dung-lac",
+          "recognitionId": "recognition:andrew-dung-lac:roman-catholic"
+        }
+      ],
+      "companionGroup": {
+        "groupKey": "martyrs-of-vietnam-companions",
+        "attestedCount": 116,
+        "enumerationStatus": "officially-bounded-not-materialized",
+        "anonymousPersonsCreated": false,
+        "evidence": [
+          {
+            "publisher": "Secretariado Nacional de Liturgia",
+            "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-24",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs",
+              "official-enumeration"
+            ]
+          },
+          {
+            "publisher": "Holy See",
+            "url": "https://www.vatican.va/news_services/liturgy/saints/index_saints_en.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "canonization"
+            ]
+          },
+          {
+            "publisher": "Vatican News",
+            "url": "https://www.vaticannews.va/en/saints/11/24/sts--andrew-d_ng-lc--and-his-companions--martyrs.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs",
+              "canonization"
+            ]
+          }
+        ]
+      },
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-24",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "obligatory-memorial",
+            "bounded-companion-group"
+          ]
+        },
+        {
+          "publisher": "Vatican News",
+          "url": "https://www.vaticannews.va/en/saints/11/24/sts--andrew-d_ng-lc--and-his-companions--martyrs.html",
+          "claimTypes": [
+            "observance-attestation",
+            "identity",
+            "bounded-companion-group",
+            "martyrs"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

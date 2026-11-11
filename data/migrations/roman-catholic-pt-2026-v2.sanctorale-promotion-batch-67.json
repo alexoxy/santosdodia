@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-67.json",
+  "reviewDigestSha256": "c29e3a808e7f020eece799d6b91b4b2a544fb51174674d59cec8fafecc4feca9",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "andrew-dung-lac"
+  ],
+  "promotedObservanceIds": [
+    "observance:andrew-dung-lac-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 341,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 48
+  },
+  "fixedSanctoraleMappingDigestSha256": "a07258c263053c15b1f7efc907fc55d1933eca7b642b3d25ac40dc5980f92e9c",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
