@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-21.json",
+  "reviewDigestSha256": "0b440d6cdf85da74bd55ebed54952330e97d08096efa1f12bd6e63422d469f4e",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "paul-miki",
+    "john-soan-goto",
+    "james-kisai",
+    "peter-baptist-blasquez",
+    "martin-ascension-aguirre",
+    "francis-blanco",
+    "philip-jesus-las-casas",
+    "gonsalo-garcia",
+    "francis-saint-michael-parilla",
+    "leo-karasuma",
+    "peter-sukejiro",
+    "cosmas-takeya",
+    "paul-ibaraki",
+    "thomas-dangi",
+    "paul-suzuki",
+    "louis-ibaraki",
+    "anthony-japan-martyr",
+    "michael-kozaki",
+    "thomas-kozaki",
+    "bonaventure-japan-martyr",
+    "gabriel-japan-martyr",
+    "john-kinuya",
+    "matthias-japan-martyr",
+    "francis-meako",
+    "joachim-sakakibara",
+    "francis-adaucto"
+  ],
+  "promotedObservanceIds": [
+    "observance:paul-miki-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 290,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 99
+  },
+  "fixedSanctoraleMappingDigestSha256": "7bdf169b8c19140697a244f92c0e36227d2e849ca79ee6047b01c720c94ec91f",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

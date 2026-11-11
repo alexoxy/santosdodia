@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "bridgeVersion": "1.0",
+  "status": "repository-reviewed-read-only-compatibility-bridge",
+  "legacyReleaseId": "roman-catholic-pt-2026-v2",
+  "mutationAllowed": false,
+  "bridges": [
+    {
+      "occurrenceId": "occurrence:2026-01-01:mary-mother-of-god:roman-catholic:pt",
+      "legacyObservanceId": "rc:MaryMotherOfGod",
+      "dateISO": "2026-01-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-28:thomas-aquinas:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThomasAquinas",
+      "dateISO": "2026-01-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-03-19:saint-joseph:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJoseph",
+      "dateISO": "2026-03-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-25:mark-evangelist:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMarkEvangelist",
+      "dateISO": "2026-04-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-29:catherine-siena:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCatherineSiena",
+      "dateISO": "2026-04-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-24:john-baptist-nativity:roman-catholic:pt",
+      "legacyObservanceId": "rc:NativityJohnBaptist",
+      "dateISO": "2026-06-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-29:peter-paul:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPeterPaulAp",
+      "dateISO": "2026-06-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-03:thomas-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThomasAp",
+      "dateISO": "2026-07-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-04:elizabeth-portugal:roman-catholic:pt",
+      "legacyObservanceId": "rc:StElizabethPortugal",
+      "dateISO": "2026-07-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-11:benedict-nursia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBenedict",
+      "dateISO": "2026-07-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-22:mary-magdalene:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMaryMagdalene",
+      "dateISO": "2026-07-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-23:bridget-sweden:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBridget",
+      "dateISO": "2026-07-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-25:james-greater-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJamesAp",
+      "dateISO": "2026-07-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-15:assumption-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:Assumption",
+      "dateISO": "2026-08-15"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-21:matthew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMatthewEvangelist",
+      "dateISO": "2026-09-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-08:immaculate-conception-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:ImmaculateConception",
+      "dateISO": "2026-12-08"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-14:matthias-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMatthias",
+      "dateISO": "2026-05-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-24:bartholomew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBartholomewAp",
+      "dateISO": "2026-08-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-28:simon-jude-apostles:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSimonStJudeAp",
+      "dateISO": "2026-10-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-30:andrew-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAndrewAp",
+      "dateISO": "2026-11-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-10:lawrence-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLawrenceDeacon",
+      "dateISO": "2026-08-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-26:stephen-protomartyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StStephenProtomartyr",
+      "dateISO": "2026-12-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-14:cyril-methodius:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsCyrilMethodius",
+      "dateISO": "2026-02-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-13:anthony-lisbon:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnthonyPadua",
+      "dateISO": "2026-06-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-17:anthony-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnthonyEgypt",
+      "dateISO": "2026-01-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-11:clare-assisi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StClare",
+      "dateISO": "2026-08-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-15:teresa-avila:roman-catholic:pt",
+      "legacyObservanceId": "rc:StTeresaJesus",
+      "dateISO": "2026-10-15"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-28:augustine-hippo:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineHippo",
+      "dateISO": "2026-08-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-30:jerome-stridon:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJerome",
+      "dateISO": "2026-09-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-01:therese-lisieux:roman-catholic:pt",
+      "legacyObservanceId": "rc:StThereseChildJesus",
+      "dateISO": "2026-10-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-08:dominic-guzman:roman-catholic:pt",
+      "legacyObservanceId": "rc:StDominic",
+      "dateISO": "2026-08-08"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-31:ignatius-loyola:roman-catholic:pt",
+      "legacyObservanceId": "rc:StIgnatiusLoyola",
+      "dateISO": "2026-07-31"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-03:francis-xavier:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFrancisXavier",
+      "dateISO": "2026-12-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-14:john-cross:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnCross",
+      "dateISO": "2026-12-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-07:ambrose-milan:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAmbrose",
+      "dateISO": "2026-12-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-03:gregory-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StGregoryGreat",
+      "dateISO": "2026-09-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-24:francis-de-sales:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFrancisDeSales",
+      "dateISO": "2026-01-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-01:alphonsus-liguori:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAlphonsusMariaDeLiguori",
+      "dateISO": "2026-08-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-02:athanasius-alexandria:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAthanasius",
+      "dateISO": "2026-05-02"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-15:bonaventure-bagnoregio:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBonaventure",
+      "dateISO": "2026-07-15"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-20:bernard-clairvaux:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBernardClairvaux",
+      "dateISO": "2026-08-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-10:leo-great:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLeoGreat",
+      "dateISO": "2026-11-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-17:ignatius-antioch:roman-catholic:pt",
+      "legacyObservanceId": "rc:StIgnatiusAntioch",
+      "dateISO": "2026-10-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-21:agnes-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAgnes",
+      "dateISO": "2026-01-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-31:john-bosco:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnBosco",
+      "dateISO": "2026-01-31"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-10:scholastica-nursia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StScholastica",
+      "dateISO": "2026-02-10"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-04:charles-borromeo:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCharlesBorromeo",
+      "dateISO": "2026-11-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-11:martin-tours:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartinTours",
+      "dateISO": "2026-11-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-01:justin-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJustinMartyr",
+      "dateISO": "2026-06-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-05:boniface-mainz:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBoniface",
+      "dateISO": "2026-06-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-26:philip-neri:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPhilipNeri",
+      "dateISO": "2026-05-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-04:john-mary-vianney:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJeanVianney",
+      "dateISO": "2026-08-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-12:josaphat-kuntsevych:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosaphat",
+      "dateISO": "2026-11-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-05:agatha-sicily:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAgatha",
+      "dateISO": "2026-02-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-14:maximilian-kolbe:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMaximilianKolbe",
+      "dateISO": "2026-08-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-27:monica-thagaste:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMonica",
+      "dateISO": "2026-08-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-23:pius-pietrelcina:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPioPietrelcina",
+      "dateISO": "2026-09-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-17:elizabeth-hungary:roman-catholic:pt",
+      "legacyObservanceId": "rc:StElizabethHungary",
+      "dateISO": "2026-11-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-13:hilary-poitiers:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHilaryPoitiers",
+      "dateISO": "2026-01-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-21:anselm-canterbury:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnselm",
+      "dateISO": "2026-04-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-09:ephrem-syrian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StEphrem",
+      "dateISO": "2026-06-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-30:peter-chrysologus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterChrysologus",
+      "dateISO": "2026-07-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-12-04:john-damascene:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnDamascene",
+      "dateISO": "2026-12-04"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:fabian-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFabianPope",
+      "dateISO": "2026-01-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-20:sebastian-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSebastian",
+      "dateISO": "2026-01-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-13:martin-i-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartinPope",
+      "dateISO": "2026-04-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:george-martyr:roman-catholic:pt",
+      "legacyObservanceId": "rc:StGeorge",
+      "dateISO": "2026-04-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-23:adalbert-prague:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAdalbert",
+      "dateISO": "2026-04-23"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-07:raymond-penyafort:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRayPenyafort",
+      "dateISO": "2026-01-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-22:vincent-saragossa:roman-catholic:pt",
+      "legacyObservanceId": "rc:StVincentDeacon",
+      "dateISO": "2026-01-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-27:angela-merici:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAngelaMerici",
+      "dateISO": "2026-01-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-03:blaise-sebaste:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBlase",
+      "dateISO": "2026-02-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-03:ansgar-hamburg:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAnsgar",
+      "dateISO": "2026-02-03"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-24:fidelis-sigmaringen:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFidelisSigmaringen",
+      "dateISO": "2026-04-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-28:peter-chanel:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterChanel",
+      "dateISO": "2026-04-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-28:louis-marie-montfort:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLouisGrignionMontfort",
+      "dateISO": "2026-04-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-04-30:pius-v-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPiusV",
+      "dateISO": "2026-04-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-18:john-i-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnIPope",
+      "dateISO": "2026-05-18"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-20:bernardine-siena:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBernardineSiena",
+      "dateISO": "2026-05-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-22:rita-cascia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRitaCascia",
+      "dateISO": "2026-05-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:pancras:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPancras",
+      "dateISO": "2026-05-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-27:augustine-canterbury:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineCanterbury",
+      "dateISO": "2026-05-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-01-26:timothy-titus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsTimothyTitus",
+      "dateISO": "2026-01-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-16:cornelius-cyprian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsCorneliusCyprian",
+      "dateISO": "2026-09-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-12:nereus-achilleus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsNereusAchilleus",
+      "dateISO": "2026-05-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-02:marcellinus-peter:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsMarcellinusPeter",
+      "dateISO": "2026-06-02"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:john-fisher-thomas-more:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsJohnFisherThomasMore",
+      "dateISO": "2026-06-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-13:pontian-hippolytus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPontianHippolytus",
+      "dateISO": "2026-08-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-26:cosmas-damian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsCosmasDamian",
+      "dateISO": "2026-09-26"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-19:john-brebeuf-isaac-jogues-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsJeanBrebeuf",
+      "dateISO": "2026-10-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-28:lawrence-ruiz-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsLawrenceRuiz",
+      "dateISO": "2026-09-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-02-06:paul-miki-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsPaulMiki",
+      "dateISO": "2026-02-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-30:first-martyrs-rome:roman-catholic:pt",
+      "legacyObservanceId": "rc:FirstMartyrsRome",
+      "dateISO": "2026-06-30"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-29:michael-gabriel-raphael-archangels:roman-catholic:pt",
+      "legacyObservanceId": "rc:StsArchangels",
+      "dateISO": "2026-09-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-01:saint-joseph-worker:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosephWorker",
+      "dateISO": "2026-05-01"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-21:christopher-magallanes-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StChristopherMagallanes",
+      "dateISO": "2026-05-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-05-29:paul-vi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulVI",
+      "dateISO": "2026-05-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-06:norbert-xanten:roman-catholic:pt",
+      "legacyObservanceId": "rc:StNorbert",
+      "dateISO": "2026-06-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-11:barnabas-apostle:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBarnabasAp",
+      "dateISO": "2026-06-11"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-19:romuald-ravenna:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRomuald",
+      "dateISO": "2026-06-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-22:paulinus-nola:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulinusNola",
+      "dateISO": "2026-06-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-06-27:cyril-alexandria:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCyrilAlexandria",
+      "dateISO": "2026-06-27"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-06:maria-goretti:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMariaGoretti",
+      "dateISO": "2026-07-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-09:augustine-zhao-rong-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StAugustineZhaoRong",
+      "dateISO": "2026-07-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-13:henry-ii:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHenry",
+      "dateISO": "2026-07-13"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-14:camillus-de-lellis:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCamillusDeLellis",
+      "dateISO": "2026-07-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-20:apollinaris-ravenna:roman-catholic:pt",
+      "legacyObservanceId": "rc:StApollinaris",
+      "dateISO": "2026-07-20"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-21:lawrence-brindisi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLawrenceBrindisi",
+      "dateISO": "2026-07-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-24:sharbel-makhluf:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSharbelMakhluf",
+      "dateISO": "2026-07-24"
+    },
+    {
+      "occurrenceId": "occurrence:2026-07-29:martha-mary-lazarus:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMartha",
+      "dateISO": "2026-07-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-07:cajetan-thiene:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCajetan",
+      "dateISO": "2026-08-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-07:sixtus-ii-companions:roman-catholic:pt",
+      "legacyObservanceId": "rc:StSixtusIIPope",
+      "dateISO": "2026-08-07"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-12:jane-frances-de-chantal:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJaneFrancesDeChantal",
+      "dateISO": "2026-08-12"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-19:john-eudes:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnEudes",
+      "dateISO": "2026-08-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-21:pius-x-pope:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPiusX",
+      "dateISO": "2026-08-21"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-22:queenship-mary:roman-catholic:pt",
+      "legacyObservanceId": "rc:QueenshipMary",
+      "dateISO": "2026-08-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:joseph-calasanz:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJosephCalasanz",
+      "dateISO": "2026-08-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-25:louis-ix-france:roman-catholic:pt",
+      "legacyObservanceId": "rc:StLouis",
+      "dateISO": "2026-08-25"
+    },
+    {
+      "occurrenceId": "occurrence:2026-08-29:john-baptist-martyrdom:roman-catholic:pt",
+      "legacyObservanceId": "rc:BeheadingJohnBaptist",
+      "dateISO": "2026-08-29"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-05:teresa-calcutta:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMotherTeresa",
+      "dateISO": "2026-09-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-09:peter-claver:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPeterClaver",
+      "dateISO": "2026-09-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-17:hildegard-bingen:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHildegardBingen",
+      "dateISO": "2026-09-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-17:robert-bellarmine:roman-catholic:pt",
+      "legacyObservanceId": "rc:StRobertBellarmine",
+      "dateISO": "2026-09-17"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-19:januarius-benevento:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJanuarius",
+      "dateISO": "2026-09-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-09-28:wenceslaus-bohemia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StWenceslaus",
+      "dateISO": "2026-09-28"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-05:faustina-kowalska:roman-catholic:pt",
+      "legacyObservanceId": "rc:StFaustinaKowalska",
+      "dateISO": "2026-10-05"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-06:bruno-carthusian:roman-catholic:pt",
+      "legacyObservanceId": "rc:StBruno",
+      "dateISO": "2026-10-06"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:denis-rusticus-eleutherius:roman-catholic:pt",
+      "legacyObservanceId": "rc:StDenis",
+      "dateISO": "2026-10-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:john-henry-newman:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnHenryNewman",
+      "dateISO": "2026-10-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-09:john-leonardi:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnLeonardi",
+      "dateISO": "2026-10-09"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-14:callistus-i:roman-catholic:pt",
+      "legacyObservanceId": "rc:StCallistusIPope",
+      "dateISO": "2026-10-14"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:hedwig-of-silesia:roman-catholic:pt",
+      "legacyObservanceId": "rc:StHedwig",
+      "dateISO": "2026-10-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-16:margaret-mary-alacoque:roman-catholic:pt",
+      "legacyObservanceId": "rc:StMargaretAlacoque",
+      "dateISO": "2026-10-16"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-19:paul-of-the-cross:roman-catholic:pt",
+      "legacyObservanceId": "rc:StPaulCross",
+      "dateISO": "2026-10-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-22:john-paul-ii:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnPaulII",
+      "dateISO": "2026-10-22"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-23:john-of-capistrano:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnCapistrano",
+      "dateISO": "2026-10-23"
+    }
+  ]
+}

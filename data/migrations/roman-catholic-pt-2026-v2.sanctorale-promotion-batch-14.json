@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-14.json",
+  "reviewDigestSha256": "f58959a164f60ec91c15d455e41fb082464935514d6d694368f5c4af4b06e412",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "pancras",
+    "augustine-canterbury"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 280,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 109
+  },
+  "fixedSanctoraleMappingDigestSha256": "fb7677eea94573ce9ea5b0ec215404b4c15be4b326f55363e8e609fe9e5d64b6",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

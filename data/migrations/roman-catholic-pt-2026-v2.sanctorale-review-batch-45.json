@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "queenship-mary",
+      "persons": [],
+      "recognitions": [],
+      "reusedSubjects": [
+        {
+          "personId": "mary-of-nazareth",
+          "recognitionId": "recognition:mary-of-nazareth:roman-catholic"
+        }
+      ],
+      "identityReuseEvidence": [
+        {
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/benedict-xvi/en/audiences/2012/documents/hf_ben-xvi_aud_20120822.html",
+          "claimTypes": [
+            "same-person-identity",
+            "marian-title",
+            "observance-attestation",
+            "fixed-date"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-22",
+          "claimTypes": [
+            "same-person-identity",
+            "observance-attestation",
+            "liturgical-designation",
+            "jurisdictional-rank"
+          ]
+        }
+      ],
+      "observanceId": "observance:queenship-mary:roman-catholic",
+      "observanceType": "marian-title",
+      "sanctoraleRuleId": "sanctorale-rule:queenship-mary:general-roman",
+      "contextualBoundary": {
+        "generalRomanPortugal": "obligatory-memorial",
+        "properContextCelebrationsMaterialized": false
+      },
+      "source": {
+        "canonicalEventId": "rc:QueenshipMary",
+        "dateISO": "2026-08-22",
+        "sourceOccurrenceId": "snl-pt-2026-08-22-5682a2fac70e8dae5466d6d2",
+        "sourceRecordHash": "4d4afd410b114610f1bab9169dc1e408fc25f62cb15fa9577257d1bcda5a4a51",
+        "sourceLabelPt": "Virgem santa Maria, Rainha",
+        "observedDesignation": "Virgem santa Maria, Rainha – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-22"
+      }
+    }
+  ],
+  "reviewDigestSha256": "b40353531538d6f40035519525db9ce75d0d575d1de8ab275c7ea04119f73a2e",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-2.json",
+  "reviewDigestSha256": "167062ead74a3821b62ea6c45e0e06a00b6ed4e9cffdfe4573286535d01a3b6b",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "augustine-hippo",
+    "jerome-stridon",
+    "therese-lisieux"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 93,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 296
+  },
+  "fixedSanctoraleMappingDigestSha256": "18480fc697990be7f1cdfa4b4fc165b32e4496b162d20f78640a1b09c31a2b4e",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}

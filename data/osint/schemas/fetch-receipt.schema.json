@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.santosdodia.com/schemas/fetch-receipt.schema.json",
+  "title": "SantosDia OSINT fetch receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receiptVersion", "runId", "sourceId", "requestedUrl", "startedAt", "finishedAt", "status", "content"],
+  "properties": {
+    "receiptVersion": {"const": "1.0"},
+    "runId": {"type": "string"},
+    "sourceId": {"type": "string"},
+    "requestedUrl": {"type": "string", "format": "uri"},
+    "finalUrl": {"type": "string", "format": "uri"},
+    "startedAt": {"type": "string", "format": "date-time"},
+    "finishedAt": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["fetched", "not-modified", "blocked", "failed", "skipped-policy"]},
+    "http": {"type": "object", "properties": {"status": {"type": "integer"}, "etag": {"type": "string"}, "lastModified": {"type": "string"}, "contentType": {"type": "string"}, "redirects": {"type": "array", "items": {"type": "string", "format": "uri"}}}},
+    "content": {"type": "object", "required": ["sha256", "bytes"], "properties": {"sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "bytes": {"type": "integer", "minimum": 0}, "archivePath": {"type": "string"}, "mimeType": {"type": "string"}}},
+    "policy": {"type": "object", "properties": {"robotsSnapshotSha256": {"type": "string"}, "licenceStatus": {"enum": ["open", "restricted", "unknown", "metadata-only"]}, "allowedUse": {"type": "array", "items": {"enum": ["archive", "extract-facts", "republish-metadata", "republish-content", "media-link-only"]}}},
+    "error": {"type": "object", "properties": {"code": {"type": "string"}, "message": {"type": "string"}, "retryable": {"type": "boolean"}}}
+  }
+}

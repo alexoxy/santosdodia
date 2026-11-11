@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "augustine-zhao-rong",
+        "primaryObservanceId": "rc:StAugustineZhaoRong",
+        "category": "saint",
+        "names": {
+          "en": "Saint Augustine Zhao Rong, Priest and Martyr",
+          "pt": "Santo Agostinho Zhao Rong, presbítero e mártir",
+          "es": "San Agustín Zhao Rong, presbítero y mártir",
+          "it": "Sant’Agostino Zhao Rong, sacerdote e martire"
+        }
+      },
+      "recognition": {
+        "id": "recognition:augustine-zhao-rong:roman-catholic",
+        "personId": "augustine-zhao-rong",
+        "churchId": "church:roman-catholic",
+        "jurisdictionId": "global",
+        "recognizedAs": "saint",
+        "recognitionBasis": "official-church-attestation",
+        "ecclesialTitles": [
+          "priest",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/09/sts--augustine-zhao-rong--priest-and-companions--chinese-martyrs.html"
+      },
+      "namedPersonWithCompanions": true,
+      "companionGroup": {
+        "groupKey": "martyrs-of-china-companions",
+        "attestedCount": 119,
+        "enumerationStatus": "officially-bounded-not-materialized",
+        "anonymousPersonsCreated": false,
+        "evidence": [
+          {
+            "publisher": "Vatican News",
+            "url": "https://www.vaticannews.va/en/saints/07/09/sts--augustine-zhao-rong--priest-and-companions--chinese-martyrs.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "martyrs"
+            ]
+          },
+          {
+            "publisher": "Holy See",
+            "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/2000/documents/hf_jp-ii_hom_20001001_canonization.html",
+            "claimTypes": [
+              "bounded-companion-group",
+              "observance-attestation",
+              "canonization"
+            ]
+          }
+        ]
+      },
+      "observanceId": "observance:augustine-zhao-rong-companions:roman-catholic",
+      "observanceType": "named-person-with-companions-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:augustine-zhao-rong-companions:general-roman",
+      "occurrenceKey": "augustine-zhao-rong-companions",
+      "source": {
+        "canonicalEventId": "rc:StAugustineZhaoRong",
+        "dateISO": "2026-07-09",
+        "sourceOccurrenceId": "snl-pt-2026-07-09-91a0f3829e7d7f22d6a26f94",
+        "sourceRecordHash": "5087d54c88a245a59672afd486f6eb51bd6d53e723016876979b5512b03edb30",
+        "sourceLabelPt": "Santos Agostinho Zao Rong, presbítero, e companheiros, mártires",
+        "observedDesignation": "Santos Agostinho Zao Rong, presbítero, e companheiros, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-9"
+      }
+    }
+  ],
+  "reviewDigestSha256": "fb5badce4be9169c89886941d6c688188c6cac79f8a816c8f4fdfd82bb495660",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

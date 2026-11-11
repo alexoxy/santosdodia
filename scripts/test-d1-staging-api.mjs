@@ -1,0 +1,133 @@
+import { createHash } from 'node:crypto';
+import {
+  applyBatchWithRollback,
+  provisionProductionDatabase,
+  provisionStagingDatabase,
+  validateBatchPackage
+} from './d1-staging-api.mjs';
+
+const databaseId = '123e4567-e89b-42d3-a456-426614174000';
+const productionId = '223e4567-e89b-42d3-a456-426614174001';
+const bookmark = '00000001-00000002-00004e2f-testbookmark';
+const restoredBookmark = '00000001-00000003-00004e30-restored';
+const statements = ['INSERT INTO example (id) VALUES (1);', 'UPDATE example SET id = 1 WHERE id = 1;'];
+const batchPackage = {
+  schemaVersion: 1,
+  execution: 'D1Database.batch',
+  atomic: true,
+  sourceSqlSha256: 'a'.repeat(64),
+  statementsSha256: createHash('sha256').update(JSON.stringify(statements)).digest('hex'),
+  statementCount: statements.length,
+  statements
+};
+
+function response(payload, status = 200) {
+  return {
+    ok: status >= 200 && status < 300,
+    status,
+    async json() { return payload; }
+  };
+}
+
+validateBatchPackage(batchPackage);
+try {
+  validateBatchPackage({ ...batchPackage, statements: ['BEGIN;'] });
+  throw new Error('Unsafe transaction control was accepted.');
+} catch (error) {
+  if (!String(error.message).includes('transaction control') && !String(error.message).includes('mismatch')) throw error;
+}
+
+const successCalls = [];
+const successFetch = async (url, options = {}) => {
+  successCalls.push({ url, options });
+  if (url.endsWith('/time_travel/bookmark')) return response({ success: true, result: { bookmark } });
+  if (url.endsWith('/query')) {
+    const body = JSON.parse(options.body);
+    if (typeof body.sql !== 'string') throw new Error('Multi-statement SQL payload was malformed.');
+    if (!body.sql.includes('INSERT INTO example') || !body.sql.includes('UPDATE example')) throw new Error('Multi-statement SQL omitted a batch statement.');
+    if ('batch' in body) throw new Error('Deprecated custom batch payload was used.');
+    return response({ success: true, result: [{ success: true, results: [] }, { success: true, results: [] }] });
+  }
+  throw new Error(`Unexpected success URL ${url}`);
+};
+const applied = await applyBatchWithRollback({
+  accountId: 'account', token: 'token', databaseId, batchPackage, fetchImpl: successFetch
+});
+if (applied.statementCount !== 2 || successCalls.length !== 2) throw new Error('Successful D1 batch flow is incorrect.');
+
+const failureCalls = [];
+const failureFetch = async (url, options = {}) => {
+  failureCalls.push({ url, options });
+  if (url.endsWith('/time_travel/bookmark')) return response({ success: true, result: { bookmark } });
+  if (url.endsWith('/query')) return response({ success: false, errors: [{ message: 'simulated batch failure' }] }, 500);
+  if (url.includes('/time_travel/restore?bookmark=')) {
+    return response({ success: true, result: { message: 'Database restored successfully', previous_bookmark: bookmark, bookmark: restoredBookmark } });
+  }
+  throw new Error(`Unexpected failure URL ${url}`);
+};
+try {
+  await applyBatchWithRollback({
+    accountId: 'account', token: 'token', databaseId, batchPackage, fetchImpl: failureFetch
+  });
+  throw new Error('Failed D1 batch did not throw.');
+} catch (error) {
+  if (!String(error.message).includes('was restored')) throw error;
+}
+if (failureCalls.length !== 3 || !failureCalls[2].url.includes(encodeURIComponent(bookmark))) {
+  throw new Error('Failed D1 batch did not invoke bookmark restore.');
+}
+
+const provisionCalls = [];
+const provisionFetch = async (url, options = {}) => {
+  provisionCalls.push({ url, options });
+  return response({
+    success: true,
+    result: [{ uuid: databaseId, name: 'santosdodia-staging', jurisdiction: 'eu' }]
+  });
+};
+const provision = await provisionStagingDatabase({ accountId: 'account', token: 'token', fetchImpl: provisionFetch });
+if (provision.created !== false || provision.database.uuid !== databaseId || provisionCalls.length !== 1) {
+  throw new Error('Existing staging database was not reused safely.');
+}
+
+const productionReuseCalls = [];
+const productionReuseFetch = async (url, options = {}) => {
+  productionReuseCalls.push({ url, options });
+  return response({
+    success: true,
+    result: [{ uuid: productionId, name: 'santosdodia-production', jurisdiction: 'eu' }]
+  });
+};
+const productionReuse = await provisionProductionDatabase({ accountId: 'account', token: 'token', fetchImpl: productionReuseFetch });
+if (productionReuse.created !== false || productionReuse.database.uuid !== productionId || productionReuseCalls.length !== 1) {
+  throw new Error('Existing production database was not reused safely.');
+}
+
+const productionCreateCalls = [];
+const productionCreateFetch = async (url, options = {}) => {
+  productionCreateCalls.push({ url, options });
+  if (options.method === 'POST') {
+    const body = JSON.parse(options.body);
+    if (body.name !== 'santosdodia-production' || body.jurisdiction !== 'eu' || body.primary_location_hint !== 'weur') {
+      throw new Error('Production creation request was not pinned to the expected EU database identity.');
+    }
+    return response({ success: true, result: { uuid: productionId, name: 'santosdodia-production', jurisdiction: 'eu' } });
+  }
+  return response({ success: true, result: [] });
+};
+const productionCreate = await provisionProductionDatabase({ accountId: 'account', token: 'token', fetchImpl: productionCreateFetch });
+if (productionCreate.created !== true || productionCreate.database.uuid !== productionId || productionCreateCalls.length !== 2) {
+  throw new Error('Production database was not created through the bounded lookup-then-create flow.');
+}
+
+for (const invalid of ['production', 'santosdodia-prod', 'santosdodia-staging']) {
+  let rejected = false;
+  try {
+    await provisionProductionDatabase({ accountId: 'account', token: 'token', name: invalid, fetchImpl: productionReuseFetch });
+  } catch {
+    rejected = true;
+  }
+  if (!rejected) throw new Error(`Unexpected production D1 name was accepted: ${invalid}`);
+}
+
+console.log('D1 staging and production provisioning safeguards passed.');

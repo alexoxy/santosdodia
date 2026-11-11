@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-13.json",
+  "reviewDigestSha256": "83f0dac3ab362ba6a75997c9c0705ebca2bf281cf8eda0e1c83c0ef22a636d93",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "bernardine-siena",
+    "rita-cascia"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 143,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 246
+  },
+  "fixedSanctoraleMappingDigestSha256": "fcefa8b3d7c131945bf31c54212387ef1592dd2046f7fcf6fa3d3440c5aea4d0",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "apollinaris-ravenna",
+        "primaryObservanceId": "rc:StApollinaris",
+        "category": "saint",
+        "names": {
+          "en": "Saint Apollinaris, Bishop and Martyr",
+          "pt": "São Apolinário, bispo e mártir",
+          "es": "San Apolinar, obispo y mártir",
+          "it": "Sant’Apollinare, vescovo e martire"
+        }
+      },
+      "recognition": {
+        "id": "recognition:apollinaris-ravenna:roman-catholic",
+        "personId": "apollinaris-ravenna",
+        "ecclesialTitles": [
+          "bishop",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/20/st--apollinaris--bishop-of--ravenna-and-martyr-.html"
+      },
+      "observanceId": "observance:apollinaris-ravenna:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:apollinaris-ravenna:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StApollinaris",
+        "dateISO": "2026-07-20",
+        "sourceOccurrenceId": "snl-pt-2026-07-20-35c90527ac22f88fd2d24374",
+        "sourceRecordHash": "45825faa566839034fa5c9f1c327e7b5c3bd5cd003d9f108054890dcfc5d1970",
+        "sourceLabelPt": "S. Apolinário, bispo e mártir",
+        "observedDesignation": "S. Apolinário, bispo e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-20"
+      }
+    }
+  ],
+  "reviewDigestSha256": "e27a5708afd670e4d1ab0ac3efc72ec93ce7141bd4fc47f998975535ffa6c440",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-42.json",
+  "reviewDigestSha256": "782830e5ca0535315877a5893efd83fbbd74d36097fd573bc739d19cfc502f5c",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "jane-frances-de-chantal"
+  ],
+  "promotedObservanceIds": [
+    "observance:jane-frances-de-chantal:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 311,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 78
+  },
+  "fixedSanctoraleMappingDigestSha256": "6f6dcebfc32b7c2b8204e4d1b218c7f92666a5839aa82474289f265bbfb2aba1",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

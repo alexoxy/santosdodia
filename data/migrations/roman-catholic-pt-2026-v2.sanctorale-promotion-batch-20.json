@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-20.json",
+  "reviewDigestSha256": "ee256b35ed2fb388a9b606d75d17ea51a69a7c01e3fb2782718a7e01dc0fc127",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "domingo-ibanez-erquicia",
+    "francisco-shoyemon",
+    "santiago-kyushei-tomonaga",
+    "miguel-kurobioye",
+    "lucas-alonso-espiritu-santo",
+    "mateo-kohioye",
+    "magdalena-nagasaki",
+    "marina-omura",
+    "jacinto-jordan-ansalone",
+    "tomas-hioji-nishi",
+    "antonio-gonzalez-japan-martyr",
+    "guillermo-courtet",
+    "miguel-aozaraza",
+    "vicente-shiwozuka",
+    "lazaro-kyoto",
+    "lorenzo-ruiz"
+  ],
+  "promotedObservanceIds": [
+    "observance:lawrence-ruiz-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 289,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 100
+  },
+  "fixedSanctoraleMappingDigestSha256": "d4b20dbeaae7a5781eb8a0a7c0c981690e4f733abf4265ee1fd1982856326bcd",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

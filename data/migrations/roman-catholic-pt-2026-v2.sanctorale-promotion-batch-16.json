@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-16.json",
+  "reviewDigestSha256": "c09fec9b89927b6b640ebab540fcfa80543c5660e49dc43891a71c219e25b5fd",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "nereus-ardeatina",
+    "achilleus-ardeatina",
+    "marcellinus-priest-rome",
+    "peter-exorcist-rome"
+  ],
+  "promotedObservanceIds": [
+    "observance:nereus-achilleus:roman-catholic",
+    "observance:marcellinus-peter:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 284,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 105
+  },
+  "fixedSanctoraleMappingDigestSha256": "ffe6ad22c06e3498e00604371a7b8161479a211adae19dd3627d3cc08b2eaefd",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

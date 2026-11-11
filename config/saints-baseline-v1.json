@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "saints-v1",
+  "domain": "saints",
+  "strategy": "build-once-freeze-then-incremental-events",
+  "publicationStatus": "staging-only",
+  "states": ["candidate", "church-confirmed", "publishable-locale", "withheld", "retired"],
+  "principles": {
+    "personAndObservanceAreSeparate": true,
+    "namesAreNotIdentity": true,
+    "maryIsOnePerson": true,
+    "historicalBaselineIsImmutableAfterFreeze": true,
+    "postFreezeChangesAreEventsOrVersionedCorrections": true,
+    "churchRecognitionAndCalendarInclusionAreSeparateClaims": true,
+    "localizedDisplayRequiresValidatedLocalizedName": true,
+    "sourceLanguageNeverControlsDisplayLanguage": true,
+    "weakSourceNeverOverwritesStrongerBaseline": true
+  },
+  "layers": {
+    "candidateUniverse": {
+      "purpose": "high-recall discovery only",
+      "sources": ["wikidata"],
+      "mayCreateCanonicalPerson": false,
+      "mayPublish": false
+    },
+    "churchConfirmation": {
+      "purpose": "establish that the person is recognized or commemorated in a specific Church or jurisdiction",
+      "minimumIndependentSources": 2,
+      "allowSingleAuthoritativeSource": true,
+      "authoritativeClasses": ["A1", "A2"],
+      "mustPreserveChurchSpecificRecognitionType": true,
+      "mayCreateCanonicalPerson": true,
+      "mayPublish": false
+    },
+    "localizedDisplay": {
+      "purpose": "establish the preferred natural-language name for each supported locale",
+      "locales": ["en", "es", "pt", "fr", "fil", "ru", "sw", "de", "it", "pl"],
+      "requireLocaleScript": true,
+      "allowTransliterationAsCanonical": false,
+      "allowUnverifiedMachineTranslationAsCanonical": false,
+      "missingNameAction": "withhold-in-that-locale"
+    }
+  },
+  "traditionPartitions": [
+    {
+      "id": "roman-catholic",
+      "family": "catholic",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["holy-see-vatican", "vatican-news-liturgical-holidays-pt", "portugal-national-liturgy-secretariat"],
+      "incrementalWatch": ["dicastery-causes-saints", "holy-see-vatican", "holy-see-press-office"],
+      "recognitionTypes": ["beatified", "canonized", "equipollent-beatification", "equipollent-canonization", "calendar-commemoration-added"]
+    },
+    {
+      "id": "eastern-orthodox",
+      "family": "eastern-orthodox",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["orthodox-church-in-america", "goarch-planner"],
+      "incrementalWatch": ["orthodox-church-in-america", "goarch-planner"],
+      "recognitionTypes": ["glorified", "calendar-commemoration-added", "calendar-commemoration-changed"],
+      "note": "Recognition remains jurisdiction-specific; OCA/GOARCH do not stand in for every autocephalous Church."
+    },
+    {
+      "id": "coptic-orthodox",
+      "family": "oriental-orthodox",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["coptic-orthodox-patriarchate"],
+      "incrementalWatch": ["coptic-orthodox-patriarchate"],
+      "recognitionTypes": ["sainthood-recognized", "martyrdom-recognized", "calendar-commemoration-added"]
+    },
+    {
+      "id": "armenian-apostolic",
+      "family": "oriental-orthodox",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["armenian-apostolic-church"],
+      "incrementalWatch": ["armenian-apostolic-church"],
+      "recognitionTypes": ["sainthood-recognized", "calendar-commemoration-added"],
+      "processStatus": "official-source-mapping-incomplete"
+    },
+    {
+      "id": "ethiopian-orthodox",
+      "family": "oriental-orthodox",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["ethiopian-mahibere-kidusan"],
+      "incrementalWatch": ["ethiopian-mahibere-kidusan"],
+      "recognitionTypes": ["sainthood-recognized", "martyrdom-recognized", "calendar-commemoration-added"],
+      "processStatus": "holy-synod-is-decision-authority-source-is-church-department"
+    },
+    {
+      "id": "syriac-orthodox",
+      "family": "oriental-orthodox",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["syriac-orthodox-western-us"],
+      "incrementalWatch": [],
+      "recognitionTypes": ["sainthood-recognized", "calendar-commemoration-added"],
+      "processStatus": "jurisdictional-source-only-patriarchal-recognition-source-still-required"
+    },
+    {
+      "id": "anglican",
+      "family": "anglican",
+      "candidateSources": ["wikidata"],
+      "confirmationSources": ["anglican-communion-office", "church-of-england", "episcopal-church-usa"],
+      "incrementalWatch": ["church-of-england", "episcopal-church-usa"],
+      "recognitionTypes": ["calendar-commemoration-added", "calendar-commemoration-changed", "calendar-commemoration-removed"],
+      "doNotUseRecognitionTerm": "canonization"
+    }
+  ],
+  "freezeGates": {
+    "stableEntityId": true,
+    "identityConflictCount": 0,
+    "highSeverityClaimConflicts": 0,
+    "completeProvenance": true,
+    "churchConfirmationRequired": true,
+    "recognitionTypeRequired": true,
+    "baselineManifestRequired": true,
+    "rootSha256Required": true,
+    "dropboxSnapshotRequired": true,
+    "d1StagingReconciliationRequired": true
+  },
+  "postFreeze": {
+    "fullRebuildCadence": "never-routine",
+    "annualReconciliation": true,
+    "newRecognitionHandling": "append-recognition-event-and-link-person",
+    "newPersonHandling": "create-candidate-resolve-confirm-localize-append",
+    "officialCorrectionHandling": "versioned-correction-event",
+    "calendarChangeHandling": "update-observance-not-person",
+    "nameCorrectionHandling": "versioned-localized-name-correction"
+  }
+}

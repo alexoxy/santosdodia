@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "barnabas-apostle",
+        "primaryObservanceId": "rc:StBarnabasAp",
+        "category": "saint",
+        "names": {
+          "en": "Saint Barnabas, Apostle",
+          "pt": "São Barnabé, apóstolo",
+          "es": "San Bernabé, apóstol",
+          "it": "San Barnaba, apostolo"
+        }
+      },
+      "recognition": {
+        "id": "recognition:barnabas-apostle:roman-catholic",
+        "personId": "barnabas-apostle",
+        "ecclesialTitles": [
+          "apostle",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/11/st--barnabas--apostle.html"
+      },
+      "observanceId": "observance:barnabas-apostle:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:barnabas-apostle:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBarnabasAp",
+        "dateISO": "2026-06-11",
+        "sourceOccurrenceId": "snl-pt-2026-06-11-2546b0da6c54fafa4470076e",
+        "sourceRecordHash": "3e513336f52393f13ec1675e3bb3ecd72cff35e9e99e2f7ae877ff1762aef80d",
+        "sourceLabelPt": "S. Barnabé, apóstolo",
+        "observedDesignation": "S. Barnabé, apóstolo – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-11"
+      }
+    }
+  ],
+  "reviewDigestSha256": "4a921686f82106386f4152eedba1348c6f34c7acf24d7785eed2727bf79dc037",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

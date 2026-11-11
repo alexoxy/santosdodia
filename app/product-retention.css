@@ -1,0 +1,38 @@
+/* Retention-oriented product layer. Keeps core content readable and mobile-first. */
+
+.main-nav a[aria-current="page"]{color:var(--navy-950);text-decoration:underline;text-decoration-color:var(--gold-500);text-decoration-thickness:2px;text-underline-offset:8px}
+.mobile-product-nav a.is-active{background:var(--gold-100);color:var(--navy-950)}
+.mobile-product-nav a.is-active span{color:#8a681d}
+
+.save-saint-button{width:100%;justify-content:center;gap:7px}
+.profile-save-card p{margin:10px 0 0;color:var(--muted);font-size:.82rem;line-height:1.45}
+
+.saved-saints-panel{padding:26px;border-radius:22px;background:#fff;border:1px solid rgba(16,42,67,.08)}
+.saved-saints-panel h1{margin:6px 0 0;font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:500;letter-spacing:-.03em}
+.saved-saints-list{display:grid;gap:10px;margin-top:22px}
+.saved-saint-card{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 18px;border:1px solid rgba(16,42,67,.09);border-radius:16px;background:#fbfcfc}
+.saved-saint-card h2{margin:0;font-family:var(--serif);font-size:1.15rem;font-weight:600}
+.saved-saint-card h2 a{color:inherit;text-decoration:none}
+.saved-saint-card h2 a:hover{text-decoration:underline;text-underline-offset:3px}
+.saved-saint-card p{margin:4px 0 0;color:var(--muted);font-size:.76rem}
+.saved-remove{border:0;background:none;cursor:pointer;font:inherit;white-space:nowrap}
+.saved-empty{display:grid;justify-items:center;gap:12px;padding:42px 20px;text-align:center}
+.saved-empty span{font-size:2rem;color:#9a7726}
+.saved-empty p{margin:0;font-family:var(--serif);font-size:1.35rem}
+.saved-empty small{max-width:520px;color:var(--muted);line-height:1.55}
+
+.prayer-hub{max-width:980px;margin:0 auto}
+.prayer-hub-hero{background:linear-gradient(135deg,#fff 0%,#faf7ef 100%)}
+.retention-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.retention-feature-card{min-height:220px;padding:24px;display:flex;flex-direction:column;border-radius:20px;background:#fff;border:1px solid rgba(16,42,67,.09)}
+.retention-feature-card>span{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--gold-100);color:#8a681d;font-weight:800}
+.retention-feature-card h2{margin:20px 0 8px;font-family:var(--serif);font-size:1.35rem;font-weight:600}
+.retention-feature-card p{margin:0 0 18px;color:var(--muted);line-height:1.55}
+.retention-feature-card .text-link{margin-top:auto}
+
+@media (max-width:760px){
+  .retention-feature-grid{grid-template-columns:1fr}
+  .retention-feature-card{min-height:0;padding:20px}
+  .saved-saints-panel{padding:20px;border-radius:18px}
+  .saved-saint-card{align-items:flex-start;padding:15px}
+}

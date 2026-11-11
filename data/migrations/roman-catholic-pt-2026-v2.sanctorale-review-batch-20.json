@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "lawrence-ruiz-companions",
+      "persons": [
+        {
+          "id": "domingo-ibanez-erquicia",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Domingo Ibáñez de Erquicia, Priest",
+            "pt": "São Domingos Ibáñez de Erquicia, presbítero",
+            "es": "Santo Domingo Ibáñez de Erquicia, sacerdote",
+            "it": "San Domingo Ibáñez de Erquicia, sacerdote"
+          }
+        },
+        {
+          "id": "francisco-shoyemon",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Francisco Shoyemon, Religious Brother",
+            "pt": "São Francisco Shoyemon, religioso",
+            "es": "San Francisco Shoyemon, religioso",
+            "it": "San Francisco Shoyemon, religioso"
+          }
+        },
+        {
+          "id": "santiago-kyushei-tomonaga",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint James Kyushei Tomonaga of Saint Mary, Priest",
+            "pt": "São Tiago Kyushei Tomonaga de Santa Maria, presbítero",
+            "es": "Santo Santiago Kyushei Tomonaga de Santa María, sacerdote",
+            "it": "San Giacomo Kyushei Tomonaga di Santa Maria, sacerdote"
+          }
+        },
+        {
+          "id": "miguel-kurobioye",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Michael Kurobioye, Lay Catechist",
+            "pt": "São Miguel Kurobioye, catequista leigo",
+            "es": "San Miguel Kurobioye, catequista laico",
+            "it": "San Michele Kurobioye, catechista laico"
+          }
+        },
+        {
+          "id": "lucas-alonso-espiritu-santo",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Luke Alonso of the Holy Spirit, Priest",
+            "pt": "São Lucas Alonso do Espírito Santo, presbítero",
+            "es": "San Lucas Alonso del Espíritu Santo, sacerdote",
+            "it": "San Luca Alonso dello Spirito Santo, sacerdote"
+          }
+        },
+        {
+          "id": "mateo-kohioye",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Matthew Kohioye of the Rosary, Religious Brother",
+            "pt": "São Mateus Kohioye do Rosário, religioso",
+            "es": "San Mateo Kohioye del Rosario, religioso",
+            "it": "San Matteo Kohioye del Rosario, religioso"
+          }
+        },
+        {
+          "id": "magdalena-nagasaki",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Magdalene of Nagasaki, Virgin",
+            "pt": "Santa Madalena de Nagasáki, virgem",
+            "es": "Santa Magdalena de Nagasaki, virgen",
+            "it": "Santa Maddalena di Nagasaki, vergine"
+          }
+        },
+        {
+          "id": "marina-omura",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Marina of Omura, Virgin",
+            "pt": "Santa Marina de Omura, virgem",
+            "es": "Santa Marina de Omura, virgen",
+            "it": "Santa Marina di Omura, vergine"
+          }
+        },
+        {
+          "id": "jacinto-jordan-ansalone",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Hyacinth Jordan Ansalone, Priest",
+            "pt": "São Jacinto Jordão Ansalone, presbítero",
+            "es": "San Jacinto Jordán Ansalone, sacerdote",
+            "it": "San Giacinto Giordano Ansalone, sacerdote"
+          }
+        },
+        {
+          "id": "tomas-hioji-nishi",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Thomas Hioji Nishi of Saint Hyacinth, Priest",
+            "pt": "São Tomás Hioji Nishi de São Jacinto, presbítero",
+            "es": "Santo Tomás Hioji Nishi de San Jacinto, sacerdote",
+            "it": "San Tommaso Hioji Nishi di San Giacinto, sacerdote"
+          }
+        },
+        {
+          "id": "antonio-gonzalez-japan-martyr",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Antonio González, Priest",
+            "pt": "Santo António González, presbítero",
+            "es": "San Antonio González, sacerdote",
+            "it": "Sant’Antonio González, sacerdote"
+          }
+        },
+        {
+          "id": "guillermo-courtet",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Guillaume Courtet (Thomas of Saint Dominic), Priest",
+            "pt": "São Guilherme Courtet (Tomás de São Domingos), presbítero",
+            "es": "San Guillermo Courtet (Tomás de Santo Domingo), sacerdote",
+            "it": "San Guglielmo Courtet (Tommaso di San Domenico), sacerdote"
+          }
+        },
+        {
+          "id": "miguel-aozaraza",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Miguel de Aozaraza, Priest",
+            "pt": "São Miguel de Aozaraza, presbítero",
+            "es": "San Miguel de Aozaraza, sacerdote",
+            "it": "San Michele de Aozaraza, sacerdote"
+          }
+        },
+        {
+          "id": "vicente-shiwozuka",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Vicente Shiwozuka de la Cruz, Priest",
+            "pt": "São Vicente Shiwozuka da Cruz, presbítero",
+            "es": "San Vicente Shiwozuka de la Cruz, sacerdote",
+            "it": "San Vincenzo Shiwozuka della Croce, sacerdote"
+          }
+        },
+        {
+          "id": "lazaro-kyoto",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Lazarus of Kyoto, Layman",
+            "pt": "São Lázaro de Kyoto, leigo",
+            "es": "San Lázaro de Kyoto, laico",
+            "it": "San Lazzaro di Kyoto, laico"
+          }
+        },
+        {
+          "id": "lorenzo-ruiz",
+          "primaryObservanceId": "rc:StsLawrenceRuiz",
+          "category": "saint",
+          "names": {
+            "en": "Saint Lawrence Ruiz, Layman",
+            "pt": "São Lourenço Ruiz, leigo",
+            "es": "San Lorenzo Ruiz, laico",
+            "it": "San Lorenzo Ruiz, laico"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:domingo-ibanez-erquicia:roman-catholic",
+          "personId": "domingo-ibanez-erquicia",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:francisco-shoyemon:roman-catholic",
+          "personId": "francisco-shoyemon",
+          "ecclesialTitles": [
+            "religious-brother",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:santiago-kyushei-tomonaga:roman-catholic",
+          "personId": "santiago-kyushei-tomonaga",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:miguel-kurobioye:roman-catholic",
+          "personId": "miguel-kurobioye",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:lucas-alonso-espiritu-santo:roman-catholic",
+          "personId": "lucas-alonso-espiritu-santo",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:mateo-kohioye:roman-catholic",
+          "personId": "mateo-kohioye",
+          "ecclesialTitles": [
+            "religious-brother",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:magdalena-nagasaki:roman-catholic",
+          "personId": "magdalena-nagasaki",
+          "ecclesialTitles": [
+            "virgin",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:marina-omura:roman-catholic",
+          "personId": "marina-omura",
+          "ecclesialTitles": [
+            "virgin",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:jacinto-jordan-ansalone:roman-catholic",
+          "personId": "jacinto-jordan-ansalone",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:tomas-hioji-nishi:roman-catholic",
+          "personId": "tomas-hioji-nishi",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:antonio-gonzalez-japan-martyr:roman-catholic",
+          "personId": "antonio-gonzalez-japan-martyr",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:guillermo-courtet:roman-catholic",
+          "personId": "guillermo-courtet",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:miguel-aozaraza:roman-catholic",
+          "personId": "miguel-aozaraza",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:vicente-shiwozuka:roman-catholic",
+          "personId": "vicente-shiwozuka",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:lazaro-kyoto:roman-catholic",
+          "personId": "lazaro-kyoto",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        },
+        {
+          "id": "recognition:lorenzo-ruiz:roman-catholic",
+          "personId": "lorenzo-ruiz",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_19871018_ruiz-compagni_sp.html"
+        }
+      ],
+      "observanceId": "observance:lawrence-ruiz-companions:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:lawrence-ruiz-companions:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsLawrenceRuiz",
+        "dateISO": "2026-09-28",
+        "sourceOccurrenceId": "snl-pt-2026-09-28-1e5eb5aa09e29ef8997145f1",
+        "sourceRecordHash": "e4728cf6e36424c778236dac5c881cc62b87cba9afdf2379149198b845dd3937",
+        "sourceLabelPt": "Santos Lourenço Ruiz e companheiros, mártires",
+        "observedDesignation": "Santos Lourenço Ruiz e companheiros, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-28"
+      }
+    }
+  ],
+  "reviewDigestSha256": "ee256b35ed2fb388a9b606d75d17ea51a69a7c01e3fb2782718a7e01dc0fc127",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

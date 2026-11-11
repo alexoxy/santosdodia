@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-25.json",
+  "reviewDigestSha256": "e9471beb6a129effeb29447055b4234ce9925573e0c5f233cdad8715790127f2",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "christopher-magallanes",
+    "roman-adame",
+    "rodrigo-aguilar",
+    "julius-alvarez",
+    "louis-batis-sainz",
+    "augustine-caloca-cortes",
+    "matthew-correa",
+    "atilano-cruz",
+    "michael-de-la-mora",
+    "peter-esqueda-ramirez",
+    "margarito-flores",
+    "jose-isabel-flores",
+    "david-galvan",
+    "peter-maldonado",
+    "jesus-mendez",
+    "justino-orona",
+    "sabas-reyes",
+    "jose-maria-robles",
+    "toribio-romo",
+    "januario-sanchez-delgadillo",
+    "tranquilino-ubiarco",
+    "david-uribe",
+    "manuel-morales",
+    "salvador-lara-puente",
+    "david-roldan-lara"
+  ],
+  "promotedObservanceIds": [
+    "observance:christopher-magallanes-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 294,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 95
+  },
+  "fixedSanctoraleMappingDigestSha256": "c83d36995244789905216368a3bf51e5ae7aeb261f24d3c71cb10277a52cc2b1",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

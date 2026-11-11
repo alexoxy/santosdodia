@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "peter-claver",
+        "primaryObservanceId": "rc:StPeterClaver",
+        "category": "saint",
+        "names": {
+          "en": "Saint Peter Claver",
+          "pt": "São Pedro Claver",
+          "es": "San Pedro Claver",
+          "it": "San Pietro Claver"
+        }
+      },
+      "recognition": {
+        "id": "recognition:peter-claver:roman-catholic",
+        "personId": "peter-claver",
+        "ecclesialTitles": [
+          "priest",
+          "religious",
+          "missionary"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/09/09/st--peter-claver--jesuit--apostle-of--slaves-.html"
+      },
+      "observanceId": "observance:peter-claver:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:peter-claver:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "societyOfJesusAndComboni": "obligatory-memorial-or-feast",
+        "missionarySistersOfSaintPeterClaver": "solemnity",
+        "properRanksMaterializedAsGeneral": false,
+        "sameDateContextsKeptIndependent": true,
+        "patronageClaimsPublished": 0,
+        "scopedPatronageEvidenceRetained": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StPeterClaver",
+        "dateISO": "2026-09-09",
+        "sourceOccurrenceId": "snl-pt-2026-09-09-753b3544942002565550ff79",
+        "sourceRecordHash": "7035b9b51aea111c9fa63aa0e576c1f9c83d5760dc14213fcfe4d789b87a8fbb",
+        "sourceLabelPt": "S. Pedro Claver, presbítero",
+        "observedDesignation": "S. Pedro Claver, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-9"
+      }
+    }
+  ],
+  "reviewDigestSha256": "9e05534ce782e6646bf9ffc69719284936024d1ef31b57e31397d83e97c4180e",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

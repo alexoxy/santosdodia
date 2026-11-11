@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "christopher-magallanes-companions",
+      "persons": [
+        {
+          "id": "christopher-magallanes",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Christopher Magallanes, Priest",
+            "pt": "São Cristóvão Magallanes, presbítero",
+            "es": "San Cristóbal Magallanes, sacerdote",
+            "it": "San Cristoforo Magallanes, sacerdote"
+          }
+        },
+        {
+          "id": "roman-adame",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Roman Adame, Priest",
+            "pt": "São Romão Adame, presbítero",
+            "es": "San Román Adame, sacerdote",
+            "it": "San Romano Adame, sacerdote"
+          }
+        },
+        {
+          "id": "rodrigo-aguilar",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Rodrigo Aguilar, Priest",
+            "pt": "São Rodrigo Aguilar, presbítero",
+            "es": "San Rodrigo Aguilar, sacerdote",
+            "it": "San Rodrigo Aguilar, sacerdote"
+          }
+        },
+        {
+          "id": "julius-alvarez",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Julius Álvarez, Priest",
+            "pt": "São Júlio Álvarez, presbítero",
+            "es": "San Julio Álvarez, sacerdote",
+            "it": "San Giulio Álvarez, sacerdote"
+          }
+        },
+        {
+          "id": "louis-batis-sainz",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Louis Batis Sáinz, Priest",
+            "pt": "São Luís Batis Sáinz, presbítero",
+            "es": "San Luis Batis Sáinz, sacerdote",
+            "it": "San Luigi Batis Sáinz, sacerdote"
+          }
+        },
+        {
+          "id": "augustine-caloca-cortes",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Augustine Caloca Cortés, Priest",
+            "pt": "São Agostinho Caloca Cortés, presbítero",
+            "es": "San Agustín Caloca Cortés, sacerdote",
+            "it": "San Agostino Caloca Cortés, sacerdote"
+          }
+        },
+        {
+          "id": "matthew-correa",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Matthew Correa, Priest",
+            "pt": "São Mateus Correa, presbítero",
+            "es": "San Mateo Correa, sacerdote",
+            "it": "San Matteo Correa, sacerdote"
+          }
+        },
+        {
+          "id": "atilano-cruz",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Atilano Cruz, Priest",
+            "pt": "São Atilano Cruz, presbítero",
+            "es": "San Atilano Cruz, sacerdote",
+            "it": "San Atilano Cruz, sacerdote"
+          }
+        },
+        {
+          "id": "michael-de-la-mora",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Michael de la Mora, Priest",
+            "pt": "São Miguel de la Mora, presbítero",
+            "es": "San Miguel de la Mora, sacerdote",
+            "it": "San Michele de la Mora, sacerdote"
+          }
+        },
+        {
+          "id": "peter-esqueda-ramirez",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Peter Esqueda Ramírez, Priest",
+            "pt": "São Pedro Esqueda Ramírez, presbítero",
+            "es": "San Pedro Esqueda Ramírez, sacerdote",
+            "it": "San Pietro Esqueda Ramírez, sacerdote"
+          }
+        },
+        {
+          "id": "margarito-flores",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Margarito Flores, Priest",
+            "pt": "São Margarido Flores, presbítero",
+            "es": "San Margarito Flores, sacerdote",
+            "it": "San Margarito Flores, sacerdote"
+          }
+        },
+        {
+          "id": "jose-isabel-flores",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint José Isabel Flores, Priest",
+            "pt": "São José Isabel Flores, presbítero",
+            "es": "San José Isabel Flores, sacerdote",
+            "it": "San José Isabel Flores, sacerdote"
+          }
+        },
+        {
+          "id": "david-galvan",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint David Galván, Priest",
+            "pt": "São David Galván, presbítero",
+            "es": "San David Galván, sacerdote",
+            "it": "San David Galván, sacerdote"
+          }
+        },
+        {
+          "id": "peter-maldonado",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Peter Maldonado, Priest",
+            "pt": "São Pedro Maldonado, presbítero",
+            "es": "San Pedro Maldonado, sacerdote",
+            "it": "San Pietro Maldonado, sacerdote"
+          }
+        },
+        {
+          "id": "jesus-mendez",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Jesús Méndez, Priest",
+            "pt": "São Jesus Méndez, presbítero",
+            "es": "San Jesús Méndez, sacerdote",
+            "it": "San Jesús Méndez, sacerdote"
+          }
+        },
+        {
+          "id": "justino-orona",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Justino Orona, Priest",
+            "pt": "São Justino Orona, presbítero",
+            "es": "San Justino Orona, sacerdote",
+            "it": "San Giustino Orona, sacerdote"
+          }
+        },
+        {
+          "id": "sabas-reyes",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Sabas Reyes, Priest",
+            "pt": "São Sabas Reyes, presbítero",
+            "es": "San Sabás Reyes, sacerdote",
+            "it": "San Sabas Reyes, sacerdote"
+          }
+        },
+        {
+          "id": "jose-maria-robles",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint José María Robles, Priest",
+            "pt": "São José Maria Robles, presbítero",
+            "es": "San José María Robles, sacerdote",
+            "it": "San José María Robles, sacerdote"
+          }
+        },
+        {
+          "id": "toribio-romo",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Toribio Romo, Priest",
+            "pt": "São Toríbio Romo, presbítero",
+            "es": "San Toribio Romo, sacerdote",
+            "it": "San Toribio Romo, sacerdote"
+          }
+        },
+        {
+          "id": "januario-sanchez-delgadillo",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Jenaro Sánchez Delgadillo, Priest",
+            "pt": "São Januário Sánchez Delgadillo, presbítero",
+            "es": "San Jenaro Sánchez Delgadillo, sacerdote",
+            "it": "San Gennaro Sánchez Delgadillo, sacerdote"
+          }
+        },
+        {
+          "id": "tranquilino-ubiarco",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Tranquilino Ubiarco, Priest",
+            "pt": "São Tranquilino Ubiarco, presbítero",
+            "es": "San Tranquilino Ubiarco, sacerdote",
+            "it": "San Tranquilino Ubiarco, sacerdote"
+          }
+        },
+        {
+          "id": "david-uribe",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint David Uribe, Priest",
+            "pt": "São David Uribe, presbítero",
+            "es": "San David Uribe, sacerdote",
+            "it": "San David Uribe, sacerdote"
+          }
+        },
+        {
+          "id": "manuel-morales",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Manuel Morales, Layman",
+            "pt": "São Manuel Morales, leigo",
+            "es": "San Manuel Morales, laico",
+            "it": "San Manuel Morales, laico"
+          }
+        },
+        {
+          "id": "salvador-lara-puente",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint Salvador Lara Puente, Layman",
+            "pt": "São Salvador Lara Puente, leigo",
+            "es": "San Salvador Lara Puente, laico",
+            "it": "San Salvador Lara Puente, laico"
+          }
+        },
+        {
+          "id": "david-roldan-lara",
+          "primaryObservanceId": "rc:StChristopherMagallanes",
+          "category": "saint",
+          "names": {
+            "en": "Saint David Roldán Lara, Layman",
+            "pt": "São David Roldán Lara, leigo",
+            "es": "San David Roldán Lara, laico",
+            "it": "San David Roldán Lara, laico"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:christopher-magallanes:roman-catholic",
+          "personId": "christopher-magallanes",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:roman-adame:roman-catholic",
+          "personId": "roman-adame",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:rodrigo-aguilar:roman-catholic",
+          "personId": "rodrigo-aguilar",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:julius-alvarez:roman-catholic",
+          "personId": "julius-alvarez",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:louis-batis-sainz:roman-catholic",
+          "personId": "louis-batis-sainz",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:augustine-caloca-cortes:roman-catholic",
+          "personId": "augustine-caloca-cortes",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:matthew-correa:roman-catholic",
+          "personId": "matthew-correa",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:atilano-cruz:roman-catholic",
+          "personId": "atilano-cruz",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:michael-de-la-mora:roman-catholic",
+          "personId": "michael-de-la-mora",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:peter-esqueda-ramirez:roman-catholic",
+          "personId": "peter-esqueda-ramirez",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:margarito-flores:roman-catholic",
+          "personId": "margarito-flores",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:jose-isabel-flores:roman-catholic",
+          "personId": "jose-isabel-flores",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:david-galvan:roman-catholic",
+          "personId": "david-galvan",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:peter-maldonado:roman-catholic",
+          "personId": "peter-maldonado",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:jesus-mendez:roman-catholic",
+          "personId": "jesus-mendez",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:justino-orona:roman-catholic",
+          "personId": "justino-orona",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:sabas-reyes:roman-catholic",
+          "personId": "sabas-reyes",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:jose-maria-robles:roman-catholic",
+          "personId": "jose-maria-robles",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:toribio-romo:roman-catholic",
+          "personId": "toribio-romo",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:januario-sanchez-delgadillo:roman-catholic",
+          "personId": "januario-sanchez-delgadillo",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:tranquilino-ubiarco:roman-catholic",
+          "personId": "tranquilino-ubiarco",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:david-uribe:roman-catholic",
+          "personId": "david-uribe",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:manuel-morales:roman-catholic",
+          "personId": "manuel-morales",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:salvador-lara-puente:roman-catholic",
+          "personId": "salvador-lara-puente",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        },
+        {
+          "id": "recognition:david-roldan-lara:roman-catholic",
+          "personId": "david-roldan-lara",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+        }
+      ],
+      "observanceId": "observance:christopher-magallanes-companions:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:christopher-magallanes-companions:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StChristopherMagallanes",
+        "dateISO": "2026-05-21",
+        "sourceOccurrenceId": "snl-pt-2026-05-21-356077445664af03f7738147",
+        "sourceRecordHash": "3aa1be82d7b01aac04d62e6e755380b128d27aa03fe605b771bcd278c87e3907",
+        "sourceLabelPt": "Santos Cristóvão Magallanes, presbítero, e companheiros, mártires",
+        "observedDesignation": "Santos Cristóvão Magallanes, presbítero, e companheiros, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-21"
+      }
+    }
+  ],
+  "reviewDigestSha256": "e9471beb6a129effeb29447055b4234ce9925573e0c5f233cdad8715790127f2",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

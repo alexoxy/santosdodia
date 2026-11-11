@@ -1,0 +1,70 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# Cloudflare OpenNext
+/.open-next/
+.dev.vars
+cloudflare-env.d.ts
+
+# production
+/build
+
+# Dropbox-first staging and generated diagnostics
+/artifacts/
+/staging/
+/tmp/
+/data/generated/litcal-staging-manifest.json
+/data/generated/calendar-staging/
+/data/generated/ecclesiastical-directory/snapshots/
+
+# OSINT raw, normalized staging and policy-evidence captures are archived externally, never committed
+/data/osint/runs/
+/data/osint/staging/
+/data/osint/policy-runs/
+
+# External source trees are never vendored; only compact provenance manifests
+# and validated normalized responses may be tracked.
+/vendor/litcal-api/
+
+# local databases and raw captures
+*.sqlite
+*.sqlite3
+*.db
+*.html.gz
+*.snapshot.html
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

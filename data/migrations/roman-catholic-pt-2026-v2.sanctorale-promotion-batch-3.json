@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-3.json",
+  "reviewDigestSha256": "3a125eb283da6ca7be7b699109257887361f516f060e44ee5f8f98b97e90e9dc",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "dominic-guzman",
+    "ignatius-loyola",
+    "francis-xavier"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 96,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 293
+  },
+  "fixedSanctoraleMappingDigestSha256": "707290628d022ef2d98d32c55946be0f9fc376ca1cce1ce8039f49577941b660",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-37.json",
+  "reviewDigestSha256": "df032b8eff404e1bdd00198b17e6ebd56c15671a223217f5254b8d9ec160e4be",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "lawrence-brindisi"
+  ],
+  "promotedObservanceIds": [
+    "observance:lawrence-brindisi:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 306,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 83
+  },
+  "fixedSanctoraleMappingDigestSha256": "c73dbfc3fbc564434adad735d55072cdd566b0f237af486ad1b8cdd76a9544b4",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

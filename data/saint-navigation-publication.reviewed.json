@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "publicationAllowed": false,
+  "productionMutation": false,
+  "decisions": [
+    {
+      "decision": "publish-reviewed-identity-observance",
+      "publicationScope": "identity-observance-only",
+      "personEntityId": "wikidata:Q43982",
+      "observanceIds": [
+        "vatican-news-08-24-1c1396c122a886ff60b4"
+      ],
+      "reviewer": "santosdia-editorial-agent",
+      "reviewedAt": "2026-08-15T17:45:00Z"
+    },
+    {
+      "decision": "publish-reviewed-identity-observance",
+      "publicationScope": "identity-observance-only",
+      "personEntityId": "wikidata:Q37278",
+      "observanceIds": [
+        "vatican-news-08-26-4b1925134f5093eaad7c"
+      ],
+      "reviewer": "santosdia-editorial-agent",
+      "reviewedAt": "2026-08-15T17:45:00Z"
+    }
+  ]
+}

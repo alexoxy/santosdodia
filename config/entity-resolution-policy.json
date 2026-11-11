@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "mode": "multilingual-person-resolution",
+  "principles": {
+    "namesAreNotIdentity": true,
+    "stableEntityIdOwnsAllLocalizedNames": true,
+    "sourceLanguageNeverControlsDisplayLanguage": true,
+    "transliterationIsForMatchingNotCanonicalDisplay": true,
+    "contradictoryStrongFactsBlockAutomaticMerge": true,
+    "everyLocalizedNameRequiresEvidence": true,
+    "everyAutomaticMergeRequiresExplainableSignals": true
+  },
+  "identifierSchemes": [
+    "wikidata",
+    "viaf",
+    "isni",
+    "holy-see",
+    "catholic-hierarchy",
+    "gcatholic",
+    "goarch",
+    "oca",
+    "coptic-patriarchate",
+    "armenian-mother-see",
+    "church-of-england"
+  ],
+  "matching": {
+    "automaticLinkThreshold": 0.92,
+    "reviewThreshold": 0.72,
+    "minimumStrongSignalsForNameBasedLink": 2,
+    "weights": {
+      "exactExternalIdentifier": 1.0,
+      "officialSourceCrossReference": 0.95,
+      "exactNormalizedNameSameLocale": 0.28,
+      "crossScriptTransliterationMatch": 0.18,
+      "sameBirthDate": 0.22,
+      "sameDeathDate": 0.30,
+      "sameBirthPlace": 0.12,
+      "sameDeathPlace": 0.14,
+      "sameChurchTradition": 0.08,
+      "sameOfficeOrTitle": 0.08
+    },
+    "hardVetoes": [
+      "different-exact-external-identifiers-in-same-scheme",
+      "incompatible-precise-death-dates",
+      "incompatible-precise-birth-dates-without-source-conflict",
+      "person-versus-nonperson-type",
+      "explicit-source-distinguishes-two-persons"
+    ]
+  },
+  "localizedNames": {
+    "canonicalDisplayKey": "entity_id+locale",
+    "preferredNameTypes": ["official", "established-exonym", "editorial", "source-label"],
+    "displayPriority": ["official", "established-exonym", "editorial", "verified-source-label"],
+    "neverDisplayAsCanonical": ["machine-transliteration", "search-transliteration", "unverified-machine-translation"],
+    "minimumIndependentSourcesForEstablishedName": 2,
+    "allowSingleAuthoritativeSource": true,
+    "scriptGateByLocale": {
+      "ru": ["Cyrl"],
+      "en": ["Latn"],
+      "es": ["Latn"],
+      "pt": ["Latn"],
+      "fr": ["Latn"],
+      "fil": ["Latn"],
+      "sw": ["Latn"],
+      "de": ["Latn"],
+      "it": ["Latn"],
+      "pl": ["Latn"]
+    },
+    "missingLocalizedNamePolicy": "withhold-entity-from-locale-until-name-candidate-is-validated"
+  },
+  "counterValidation": {
+    "preferOfficialChurchNameLists": true,
+    "useWikidataAsCrossLanguageIdentifierAndCandidateSource": true,
+    "useIndependentReferenceSourcesForCorroboration": true,
+    "requireSourceIndependenceForTwoSourceRule": true,
+    "preserveCompetingNameFormsAsAliases": true,
+    "neverOverwriteAValidatedLocalNameWithAWeakerSource": true
+  }
+}

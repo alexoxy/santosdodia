@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "hilary-poitiers",
+        "primaryObservanceId": "rc:StHilaryPoitiers",
+        "category": "saint",
+        "names": {
+          "en": "Saint Hilary of Poitiers",
+          "pt": "São Hilário de Poitiers",
+          "es": "San Hilario de Poitiers",
+          "it": "Sant'Ilario di Poitiers"
+        }
+      },
+      "recognition": {
+        "id": "recognition:hilary-poitiers:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/13/st--hilary-of-poitiers--bishop-and-doctor-.html"
+      },
+      "observanceId": "observance:hilary-poitiers:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:hilary-poitiers:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StHilaryPoitiers",
+        "sourceOccurrenceId": "snl-pt-2026-01-13-20fc387be5aaaabb52ab4633",
+        "sourceRecordHash": "a2c7df8d74de9edfe82a0350af13044e3b8dfc20170c7bcca83916cb65bcebbe",
+        "dateISO": "2026-01-13",
+        "sourceLabelPt": "S. Hilário, bispo e doutor da Igreja",
+        "observedDesignation": "S. Hilário, bispo e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-13"
+      }
+    },
+    {
+      "person": {
+        "id": "anselm-canterbury",
+        "primaryObservanceId": "rc:StAnselm",
+        "category": "saint",
+        "names": {
+          "en": "Saint Anselm of Canterbury",
+          "pt": "Santo Anselmo de Cantuária",
+          "es": "San Anselmo de Canterbury",
+          "it": "Sant'Anselmo di Canterbury"
+        }
+      },
+      "recognition": {
+        "id": "recognition:anselm-canterbury:roman-catholic",
+        "ecclesialTitles": [
+          "archbishop",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/04/21/st-anselm--archbishop-of--canterbury-and-doctor-of-the-church.html"
+      },
+      "observanceId": "observance:anselm-canterbury:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:anselm-canterbury:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAnselm",
+        "sourceOccurrenceId": "snl-pt-2026-04-21-c0b995a9db08105b59eb34b6",
+        "sourceRecordHash": "5c38871bf6d8a789b2220077daa66d8bcdb5d56e9c9a7268b34cb041fe06e267",
+        "dateISO": "2026-04-21",
+        "sourceLabelPt": "S. Anselmo, bispo e doutor da Igreja",
+        "observedDesignation": "S. Anselmo, bispo e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-4-21"
+      }
+    },
+    {
+      "person": {
+        "id": "ephrem-syrian",
+        "primaryObservanceId": "rc:StEphrem",
+        "category": "saint",
+        "names": {
+          "en": "Saint Ephrem the Syrian",
+          "pt": "Santo Efrém",
+          "es": "San Efrén de Siria",
+          "it": "Sant'Efrem il Siro"
+        }
+      },
+      "recognition": {
+        "id": "recognition:ephrem-syrian:roman-catholic",
+        "ecclesialTitles": [
+          "deacon",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/09/st--ephrem--deacon-and-doctor--of-the-church.html"
+      },
+      "observanceId": "observance:ephrem-syrian:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:ephrem-syrian:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StEphrem",
+        "sourceOccurrenceId": "snl-pt-2026-06-09-c38e22cdf66ebc659beef9ac",
+        "sourceRecordHash": "efc0c7ca14f3164faa550d54afd471882371876a8496cd3a6f46fb77cd582798",
+        "dateISO": "2026-06-09",
+        "sourceLabelPt": "S. Efrém, diácono e doutor da Igreja",
+        "observedDesignation": "S. Efrém, diácono e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-9"
+      }
+    },
+    {
+      "person": {
+        "id": "peter-chrysologus",
+        "primaryObservanceId": "rc:StPeterChrysologus",
+        "category": "saint",
+        "names": {
+          "en": "Saint Peter Chrysologus",
+          "pt": "São Pedro Crisólogo",
+          "es": "San Pedro Crisólogo",
+          "it": "San Pietro Crisologo"
+        }
+      },
+      "recognition": {
+        "id": "recognition:peter-chrysologus:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/30/st--peter-chrysologus--bishop-of--ravenna-and-doctor-of-the-chur.html"
+      },
+      "observanceId": "observance:peter-chrysologus:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:peter-chrysologus:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPeterChrysologus",
+        "sourceOccurrenceId": "snl-pt-2026-07-30-ab44e23f899d0d336552550e",
+        "sourceRecordHash": "968e4b9c6385ceb34633878aeb2e0e81e87c6786351c74b093841e27b24d99ed",
+        "dateISO": "2026-07-30",
+        "sourceLabelPt": "S. Pedro Crisólogo, bispo e doutor da Igreja",
+        "observedDesignation": "S. Pedro Crisólogo, bispo e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-7-30"
+      }
+    },
+    {
+      "person": {
+        "id": "john-damascene",
+        "primaryObservanceId": "rc:StJohnDamascene",
+        "category": "saint",
+        "names": {
+          "en": "Saint John Damascene",
+          "pt": "São João Damasceno",
+          "es": "San Juan Damasceno",
+          "it": "San Giovanni Damasceno"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-damascene:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/12/04/st--john--damasceno--priest-and-doctor-of-the-church.html"
+      },
+      "observanceId": "observance:john-damascene:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-damascene:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJohnDamascene",
+        "sourceOccurrenceId": "snl-pt-2026-12-04-5f49989eddbcd90d840d890f",
+        "sourceRecordHash": "e4fb143f25e4e25e9eeea7fadcdc686459203b91c085b006b88b90bf2123748b",
+        "dateISO": "2026-12-04",
+        "sourceLabelPt": "S. João Damasceno, presbítero e doutor da Igreja",
+        "observedDesignation": "S. João Damasceno, presbítero e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-4"
+      }
+    }
+  ],
+  "reviewDigestSha256": "7af9e680eee683ef89129c227da0a2f0dfd98a5491eabda51601c1ec95f5bb52",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-03"
+}

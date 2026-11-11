@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-18.json",
+  "reviewDigestSha256": "8c19cab7fbab2da8cc83f94b06c8ea357982736c8bc310eca199a2ac71918fda",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "cosmas-cyrrhus",
+    "damian-cyrrhus"
+  ],
+  "promotedObservanceIds": [
+    "observance:cosmas-damian:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 287,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 102
+  },
+  "fixedSanctoraleMappingDigestSha256": "1a71cde083d72761522039498c4b61105e7ea5345150fbb9fb46f07ccaadc4e5",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

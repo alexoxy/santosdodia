@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "sharbel-makhluf",
+        "primaryObservanceId": "rc:StSharbelMakhluf",
+        "category": "saint",
+        "names": {
+          "en": "Saint Charbel Makhlouf, Priest",
+          "pt": "São Sarbélio Makhluf, presbítero",
+          "es": "San Chárbel Makhlouf, presbítero",
+          "it": "San Charbel Makhlouf, sacerdote"
+        }
+      },
+      "recognition": {
+        "id": "recognition:sharbel-makhluf:roman-catholic",
+        "personId": "sharbel-makhluf",
+        "ecclesialTitles": [
+          "priest",
+          "monk",
+          "hermit"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/24/st--charbel-makhlouf--priest.html"
+      },
+      "observanceId": "observance:sharbel-makhluf:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:sharbel-makhluf:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StSharbelMakhluf",
+        "dateISO": "2026-07-24",
+        "sourceOccurrenceId": "snl-pt-2026-07-24-90e95e25cc72c1e14334b861",
+        "sourceRecordHash": "4b6ba897758f91b5c916dc3e468f4565b4a44e6fd8b01948f4e8fdc3fa57a6cd",
+        "sourceLabelPt": "S. Sarbélio Makhluf, presbítero",
+        "observedDesignation": "S. Sarbélio Makhluf, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-24"
+      }
+    }
+  ],
+  "reviewDigestSha256": "10cd4f1d1176bf6b2f40b598fa1fba95598ab821a95b935474dc607603f76576",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-26"
+}

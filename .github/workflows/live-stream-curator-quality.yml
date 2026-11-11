@@ -1,0 +1,53 @@
+name: Live stream curator quality
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'data/live-streams.ts'
+      - 'data/live-streams.base.json'
+      - 'data/generated/live-streams.json'
+      - 'data/source-registry/seed.json'
+      - 'scripts/media/**'
+      - '.github/workflows/curate-live-streams.yml'
+      - '.github/workflows/live-stream-curator-quality.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/live-streams.ts'
+      - 'data/live-streams.base.json'
+      - 'data/generated/live-streams.json'
+      - 'scripts/media/**'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --include=optional
+
+      - name: Test discovery and lifecycle rules
+        run: node scripts/media/test-live-stream-curator.mjs
+
+      - name: Validate generated registry contract
+        run: |
+          node -e "const r=require('./data/generated/live-streams.json'); if(r.schemaVersion!==1||!Array.isArray(r.sources)||!r.sources.some(s=>s.id==='vatican-media')) process.exit(1)"
+          node -e "const r=require('./data/generated/live-streams.json'); const ids=new Set; for(const s of r.sources){if(ids.has(s.id)||!s.sourceUrl||(!s.liveUrl&&!s.archiveUrl))process.exit(1);ids.add(s.id)}"
+
+      - name: Typecheck live registry consumer
+        run: npm run typecheck

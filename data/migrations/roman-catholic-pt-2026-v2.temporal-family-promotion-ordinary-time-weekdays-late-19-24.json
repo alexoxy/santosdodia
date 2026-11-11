@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-late-19-24-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+  "perennialBoundaries": {
+    "exclusiveStartAnchor": "pentecost",
+    "exclusiveStartOffsetDays": 0,
+    "exclusiveEndAnchor": "advent-start",
+    "exclusiveEndOffsetDays": 0,
+    "weekNumbering": "backward-from-advent"
+  },
+  "reviewedWeekRange": {
+    "min": 19,
+    "max": 24
+  },
+  "candidateOutcomes": {
+    "candidates": 36,
+    "presentSourceOccurrences": 10,
+    "suppressedCandidates": 25,
+    "withheldCandidates": 1
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-08-18-18019d38b364cb8eceee5b2c",
+    "snl-pt-2026-08-26-ada834085c5fdc12ca8dbc0e",
+    "snl-pt-2026-08-31-0c06443842105356f60581c9",
+    "snl-pt-2026-09-01-c8d0c30af2b70dfc9c451ef4",
+    "snl-pt-2026-09-02-1dfdabcfa46006a1391ac533",
+    "snl-pt-2026-09-04-88531bb7cf4cc8cfb9884cb4",
+    "snl-pt-2026-09-07-47e098162f9891d6ac553cfd",
+    "snl-pt-2026-09-10-52634b8a169ebb26aa2920f5",
+    "snl-pt-2026-09-11-892c2820d106bfe04153acc5",
+    "snl-pt-2026-09-18-9ae5af446f1f9f6ea0a6255f"
+  ],
+  "withheldSourceOccurrenceIds": [
+    "snl-pt-2026-08-17-0241bff7957f1b47c3c0b147"
+  ],
+  "promotedMappingDigestSha256": "fd2d27535555f8bfc3e1120ec411f3840509b4a3f39e703846a34d0fbfca6c17",
+  "promotedSuppressionDigestSha256": "80bf8c1438fa98d8b22acf481265e32ae2ae0d89306674d9777de564f2adf6b3",
+  "withheldCandidateDigestSha256": "b555ad8f1c244edfa22b96e36136e8a6aed2b59cdb3981bd13c18c7fe398493a",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 237,
+    "remainingLegacyOccurrences": 152
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 247,
+    "remainingLegacyOccurrences": 142,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}

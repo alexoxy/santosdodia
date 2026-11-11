@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-44.json",
+  "reviewDigestSha256": "20f635a0a49548ed8b3087740619ddca60d05fdfa5c25a34c9ad95efbb860436",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "pius-x-pope"
+  ],
+  "promotedObservanceIds": [
+    "observance:pius-x-pope:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 313,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 76
+  },
+  "fixedSanctoraleMappingDigestSha256": "d7403a803626f432d189d536f3d6f219ca545502c1d0cf9439cce47db3e3761f",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

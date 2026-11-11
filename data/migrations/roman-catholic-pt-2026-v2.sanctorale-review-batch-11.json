@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "raymond-penyafort",
+        "primaryObservanceId": "rc:StRayPenyafort",
+        "category": "saint",
+        "names": {
+          "en": "Saint Raymond of Penyafort",
+          "pt": "São Raimundo de Penaforte",
+          "es": "San Raimundo de Peñafort",
+          "it": "San Raimondo di Peñafort"
+        }
+      },
+      "recognition": {
+        "id": "recognition:raymond-penyafort:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "canon-lawyer"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/07/st--raymond-of--penyafort--dominican--co-founder-of-the-mercedar.html"
+      },
+      "observanceId": "observance:raymond-penyafort:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:raymond-penyafort:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StRayPenyafort",
+        "dateISO": "2026-01-07",
+        "sourceOccurrenceId": "snl-pt-2026-01-07-aa0e0be0ee494f93f9744adf",
+        "sourceRecordHash": "b24bbcefabeaec256d3f26619b223f859a08853b55bc9c51c9a7dbc9016f2078",
+        "sourceLabelPt": "S. Raimundo de Penaforte, presbítero",
+        "observedDesignation": "S. Raimundo de Penaforte, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-7"
+      }
+    },
+    {
+      "person": {
+        "id": "vincent-saragossa",
+        "primaryObservanceId": "rc:StVincentDeacon",
+        "category": "saint",
+        "names": {
+          "en": "Saint Vincent of Saragossa",
+          "pt": "São Vicente de Saragoça",
+          "es": "San Vicente de Zaragoza",
+          "it": "San Vincenzo di Saragozza"
+        }
+      },
+      "recognition": {
+        "id": "recognition:vincent-saragossa:roman-catholic",
+        "ecclesialTitles": [
+          "deacon",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/22/saint-vincent--spanish-deacon-and-martyr.html"
+      },
+      "observanceId": "observance:vincent-saragossa:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:vincent-saragossa:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StVincentDeacon",
+        "dateISO": "2026-01-22",
+        "sourceOccurrenceId": "snl-pt-2026-01-22-410cc1a9d045cd3c46142a4e",
+        "sourceRecordHash": "b9925c539ba9ac2407b18917a62b99c96ea21108244d990b2e526ba58153a1ea",
+        "sourceLabelPt": "S. Vicente, diácono e mártir",
+        "observedDesignation": "S. Vicente, diácono e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-22"
+      }
+    },
+    {
+      "person": {
+        "id": "angela-merici",
+        "primaryObservanceId": "rc:StAngelaMerici",
+        "category": "saint",
+        "names": {
+          "en": "Saint Angela Merici",
+          "pt": "Santa Ângela Mérici",
+          "es": "Santa Ángela de Mérici",
+          "it": "Sant’Angela Merici"
+        }
+      },
+      "recognition": {
+        "id": "recognition:angela-merici:roman-catholic",
+        "ecclesialTitles": [
+          "virgin",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/01/27.html"
+      },
+      "observanceId": "observance:angela-merici:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:angela-merici:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAngelaMerici",
+        "dateISO": "2026-01-27",
+        "sourceOccurrenceId": "snl-pt-2026-01-27-017a460e68995f03f0ed9ea5",
+        "sourceRecordHash": "5628f8e593fcf5fa18480b241ea8e35baf977780a8e495ee8dc01bc3a9d3d263",
+        "sourceLabelPt": "S. Ângela Mérici, virgem",
+        "observedDesignation": "S. Ângela Mérici, virgem – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-1-27"
+      }
+    },
+    {
+      "person": {
+        "id": "blaise-sebaste",
+        "primaryObservanceId": "rc:StBlase",
+        "category": "saint",
+        "names": {
+          "en": "Saint Blaise of Sebaste",
+          "pt": "São Brás de Sebaste",
+          "es": "San Blas de Sebaste",
+          "it": "San Biagio di Sebaste"
+        }
+      },
+      "recognition": {
+        "id": "recognition:blaise-sebaste:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/02/03/st--blaise--bishop-of--sebaste-and-martyr.html"
+      },
+      "observanceId": "observance:blaise-sebaste:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:blaise-sebaste:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StBlase",
+        "dateISO": "2026-02-03",
+        "sourceOccurrenceId": "snl-pt-2026-02-03-f6cfae4c4905fc656171ba55",
+        "sourceRecordHash": "6f9a935d0e9cb34dafb5696ad8b6db68df2c652fecd3c819f2be2f7e654a32f7",
+        "sourceLabelPt": "S. Brás, bispo e mártir",
+        "observedDesignation": "S. Brás, bispo e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3"
+      }
+    },
+    {
+      "person": {
+        "id": "ansgar-hamburg",
+        "primaryObservanceId": "rc:StAnsgar",
+        "category": "saint",
+        "names": {
+          "en": "Saint Ansgar",
+          "pt": "São Óscar",
+          "es": "San Óscar",
+          "it": "Sant’Ansgario"
+        }
+      },
+      "recognition": {
+        "id": "recognition:ansgar-hamburg:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "missionary"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/02/03/st---ansgario--oskar---bishop-of--hamburg-and-bremen--apostle-of.html"
+      },
+      "observanceId": "observance:ansgar-hamburg:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:ansgar-hamburg:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAnsgar",
+        "dateISO": "2026-02-03",
+        "sourceOccurrenceId": "snl-pt-2026-02-03-495b0cda007df4907aea452d",
+        "sourceRecordHash": "326fe236c842036cbe68aeb84952f41ad586461a225a896fcf7a96a92bd98832",
+        "sourceLabelPt": "S. Óscar, bispo",
+        "observedDesignation": "S. Óscar, bispo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-2-3"
+      }
+    }
+  ],
+  "reviewDigestSha256": "48081e95d5d1e6c728741688d44889c7a29d39eeedfb4b51db5d4aace4df6d04",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

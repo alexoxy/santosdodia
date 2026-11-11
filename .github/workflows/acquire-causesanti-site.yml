@@ -1,0 +1,96 @@
+name: Archive Causes of Saints primary source
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/causesanti-source.json'
+      - 'scripts/osint/adapters/causesanti-site.mjs'
+      - '.github/workflows/acquire-causesanti-site.yml'
+  schedule:
+    - cron: '17 3 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: causesanti-primary-source-dump
+  cancel-in-progress: false
+
+jobs:
+  crawl-and-archive:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Gate stable source acquisition
+        id: cadence
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != "schedule" ] || [ "$(date -u +%m)" = "01" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Full Causes of Saints acquisition enabled."
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Stable source: monthly trigger retained for registry compatibility; external acquisition runs annually in January."
+          fi
+
+      - name: Checkout
+        if: steps.cadence.outputs.run == 'true'
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        if: steps.cadence.outputs.run == 'true'
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install locked dependencies
+        if: steps.cadence.outputs.run == 'true'
+        run: npm ci --include=optional
+
+      - name: Validate safety boundaries
+        if: steps.cadence.outputs.run == 'true'
+        run: |
+          npm run publication:boundary-test
+          npm run autonomy:test
+          npm run cloudflare:guardrails-audit
+          npm run repo:audit
+
+      - name: Crawl Causes of Saints into immutable raw staging
+        if: steps.cadence.outputs.run == 'true'
+        env:
+          # Pushes validate the complete path quickly; scheduled/manual runs retain the full crawl.
+          CAUSESANTI_MAX_URLS: ${{ github.event_name == 'push' && '60' || '6000' }}
+          CAUSESANTI_DELAY_MS: '2000'
+          CAUSESANTI_REQUEST_TIMEOUT_MS: '60000'
+          CAUSESANTI_MAX_ATTEMPTS: '4'
+        run: node scripts/osint/adapters/causesanti-site.mjs
+
+      - name: Upload crawl evidence
+        if: always() && steps.cadence.outputs.run == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: causesanti-primary-source-${{ github.run_id }}
+          path: data/osint/runs/causesanti/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Archive immutable raw dump in Dropbox
+        if: always() && steps.cadence.outputs.run == 'true'
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+          # Canary evidence cannot replace the authoritative full-crawl index.
+          CAUSESANTI_ARCHIVE_STREAM: ${{ github.event_name == 'push' && 'sources/causesanti-va/canary' || 'sources/causesanti-va/raw' }}
+        run: |
+          if [ -d data/osint/runs/causesanti ] && find data/osint/runs/causesanti -name summary.json -print -quit | grep -q .; then
+            node scripts/archive-to-dropbox.mjs --stream "$CAUSESANTI_ARCHIVE_STREAM" --source data/osint/runs/causesanti
+          else
+            echo "CauseSanti crawl produced no summary.json; refusing a receipt-less success" >&2
+            exit 1
+          fi

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-35.json",
+  "reviewDigestSha256": "a07676b8fed37cf9a6038c4bc2d4ca3ff2eee6c2a2535f4b3f9682fa464f5116",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "camillus-de-lellis"
+  ],
+  "promotedObservanceIds": [
+    "observance:camillus-de-lellis:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 304,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 85
+  },
+  "fixedSanctoraleMappingDigestSha256": "160a241b0f5e61f637bdfef3816080026272ead70986cd17eac68ec56ee95b88",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "status": "late-advent-fixed-temporal-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "temporalRuleIds": [
+    "temporal-rule:advent-weekday-december-17:roman-catholic",
+    "temporal-rule:advent-weekday-december-18:roman-catholic",
+    "temporal-rule:advent-weekday-december-19:roman-catholic",
+    "temporal-rule:advent-weekday-december-20:roman-catholic",
+    "temporal-rule:advent-weekday-december-21:roman-catholic",
+    "temporal-rule:advent-weekday-december-22:roman-catholic",
+    "temporal-rule:advent-weekday-december-23:roman-catholic",
+    "temporal-rule:advent-weekday-december-24:roman-catholic"
+  ],
+  "candidateOutcomes": {
+    "candidates": 8,
+    "presentSourceOccurrences": 6,
+    "precedenceSuppressedCandidates": 1,
+    "withheldJurisdictionRows": 1
+  },
+  "precedenceSuppressedCandidates": [
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-20:roman-catholic",
+      "expectedDateISO": "2026-12-20",
+      "winningLegacyObservanceId": "rc:Advent4",
+      "reason": "Sunday of Advent has precedence over the late-Advent weekday candidate."
+    }
+  ],
+  "withheldJurisdictionRows": [
+    {
+      "temporalRuleId": "temporal-rule:advent-weekday-december-24:roman-catholic",
+      "expectedDateISO": "2026-12-24",
+      "legacyObservanceId": "rc:AdventWeekdayDec24",
+      "sourceOccurrenceId": "snl-pt-2026-12-24-d12c962ba23beb9e81fa91e4",
+      "sourceRecordHash": "718b7f1eae705269e7768e4f60fe689c9d205b08f635801e32e0667acc92ab65",
+      "reason": "Portugal source designates the morning form; jurisdiction-specific structural equivalence remains under human review."
+    }
+  ],
+  "promotedSourceOccurrences": 6,
+  "promotedMappingDigestSha256": "cb3285bf743e0358a85230d89d78cda4b9094ddf5ac89872507dda1e2195a875",
+  "temporalRuleMappingDigestSha256": "36c0e5c5fe42eecc147f8485b8c8089cc59e6b4c249722f6f306b66bdaafa442",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 196,
+    "remainingLegacyOccurrences": 193
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 202,
+    "remainingLegacyOccurrences": 187,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "competent Holy See temporal-cycle authority for the perennial December 17-24 sequence",
+    "fixed Gregorian dates stored as canonical TemporalRules without annual dates in their identity",
+    "exact approved Portugal 2026 source occurrence and record hash for each promoted row",
+    "explicit annual precedence outcome for the fourth Sunday of Advent",
+    "explicit Portugal human-review boundary for the December 24 morning form"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-13"
+}

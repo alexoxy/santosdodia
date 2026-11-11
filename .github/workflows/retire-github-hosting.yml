@@ -1,0 +1,33 @@
+name: Retire stale hosting
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type RETIRE_STALE_GITHUB_HOSTING to run cleanup
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  deployments: write
+  pages: write
+
+concurrency:
+  group: retire-stale-hosting
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    if: inputs.confirm == 'RETIRE_STALE_GITHUB_HOSTING'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Retire Vercel, GitHub Pages and merged branches
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SANTOSDIA_SITE_URL: https://www.santosdodia.com
+        run: node scripts/retire-github-hosting.mjs

@@ -1,0 +1,7 @@
+import type { NextRequest } from 'next/server';
+import { parseTradition } from '../../../../data/observances';
+import { parseDiscoveryDate,searchDiscoveryObservances,searchDiscoveryTopics,topicDescription,topicLabel,topicPath } from '../../../../data/discovery';
+import { normalizeLocale } from '../../../../lib/i18n';
+import { displayObservanceName,displayPatronages } from '../../../../lib/locale-display';
+
+export function GET(request:NextRequest){const params=request.nextUrl.searchParams,q=params.get('q')??'',locale=normalizeLocale(params.get('locale')??request.headers.get('accept-language')),year=Number(params.get('year')??new Date().getUTCFullYear()),tradition=parseTradition(params.get('tradition')),date=parseDiscoveryDate(q,year);const topics=searchDiscoveryTopics(q,locale).slice(0,30).map(topic=>({slug:topic.slug,kind:topic.kind,label:topicLabel(topic,locale),description:topicDescription(topic,locale),path:topicPath(topic),observanceIds:topic.observanceIds}));const observances=searchDiscoveryObservances(q,year,locale).filter(item=>!tradition||item.traditions.includes(tradition)).slice(0,100).map(item=>({...item,name:displayObservanceName(item.names,locale,item.name),patronages:displayPatronages(item.patronages,locale),profilePath:`/saint/${item.id}`,dayPath:`/day/${item.dateISO}`}));return Response.json({data:{topics,observances},meta:{query:q,locale,year,tradition,date,count:topics.length+observances.length}},{headers:{'Cache-Control':'public, s-maxage=600, stale-while-revalidate=86400','Access-Control-Allow-Origin':'*'}})}

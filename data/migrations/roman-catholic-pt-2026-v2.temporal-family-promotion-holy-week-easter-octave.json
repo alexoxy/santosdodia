@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "status": "holy-week-easter-octave-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "families": [
+    "temporal-rule-family:holy-week-weekday:roman-catholic",
+    "temporal-rule-family:easter-octave-weekday:roman-catholic"
+  ],
+  "candidateOutcomes": {
+    "candidates": 9,
+    "presentSourceOccurrences": 9,
+    "suppressedCandidates": 0
+  },
+  "promotedSourceOccurrences": 9,
+  "promotedMappingDigestSha256": "29960393e74f4ee3339b843a27d52de99ba44cf13b924bbfa4d4a4927de11951",
+  "temporalFamilyMappingDigestSha256": "178dbb20308863f64f38a7ebe0e3c119d181537feba1ae952829c46415d1bdf3",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 183,
+    "remainingLegacyOccurrences": 206
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 192,
+    "remainingLegacyOccurrences": 197,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "competent Holy See temporal-cycle authority",
+    "deterministic Gregorian Easter anchor without annual dates in perennial rules",
+    "exact approved Portugal 2026 source occurrence and record hash",
+    "inherited-safe General Roman binding"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-10"
+}

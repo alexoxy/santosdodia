@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "status": "approved-release-movable-transfer-shadow",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "target": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "policyId": "roman-portugal"
+  },
+  "authorityEvidence": {
+    "universalCalendar": "https://www.vatican.va/content/paul-vi/en/motu_proprio/documents/hf_p-vi_motu-proprio_19690214_mysterii-paschalis.html",
+    "portugalAnnualCalendar": "https://www.liturgia.pt/liturgiadiaria/",
+    "portugalTransferRules": "https://www.liturgia.pt/documentos/ano_lit.php"
+  },
+  "overlayEvidence": {
+    "reviewFile": "data/releases/roman-catholic-pt-2026.overlay-review.json",
+    "approvalFile": "data/releases/roman-catholic-pt-2026.overlay-approval.json"
+  },
+  "mappings": [
+    {
+      "temporalRuleId": "temporal-rule:epiphany:roman-catholic",
+      "principalDay": "epiphany",
+      "occurrenceId": "occurrence:2026-01-04:epiphany:roman-catholic:pt",
+      "legacyObservanceId": "rc:Epiphany",
+      "baseDateISO": "2026-01-06",
+      "expectedDateISO": "2026-01-04",
+      "sourceOccurrenceId": "snl-pt-2026-01-04-1225bff32e5ee2c8827ee794",
+      "sourceRecordHash": "00d06256e9ce8669f021f3d068eb2053d4298df8d13c12de6bde63b4714def23",
+      "legacyRank": "solemnity",
+      "reviewStatus": "approved",
+      "resolution": "pending-transfer-destination",
+      "transfer": {
+        "decisionId": "pt-2026-epiphany-transfer",
+        "fromDateISO": "2026-01-06",
+        "toDateISO": "2026-01-04",
+        "originReplacement": {
+          "legacyObservanceId": "rc-pt:TuesdayAfterEpiphany",
+          "sourceOccurrenceId": "snl-pt-2026-01-06-f745cb764c9415c74b832e35",
+          "sourceRecordHash": "0c81a5e464a6cfb98ae4e692a4b957df6f252a171918956c8cb9efd017a0205e"
+        }
+      }
+    },
+    {
+      "temporalRuleId": "temporal-rule:palm-sunday:roman-catholic",
+      "principalDay": "palm-sunday",
+      "occurrenceId": "occurrence:2026-03-29:palm-sunday:roman-catholic:pt",
+      "legacyObservanceId": "rc:PalmSun",
+      "baseDateISO": "2026-03-29",
+      "expectedDateISO": "2026-03-29",
+      "sourceOccurrenceId": "snl-pt-2026-03-29-339fb898058233b023272800",
+      "sourceRecordHash": "cfba0c252cc354711c3c0833e817cca03038a0007c8a0cf2116817d20c619fe4",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-thursday:roman-catholic",
+      "principalDay": "holy-thursday",
+      "occurrenceId": "occurrence:2026-04-02:holy-thursday:roman-catholic:pt",
+      "legacyObservanceId": "rc:HolyThurs",
+      "baseDateISO": "2026-04-02",
+      "expectedDateISO": "2026-04-02",
+      "sourceOccurrenceId": "snl-pt-2026-04-02-ffc92fe91f559b9da02c9f6b",
+      "sourceRecordHash": "91a3ce6d369bdcac3fe3604a8f09cf3cb311065c8fcece14b3a2375ddfca1510",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:good-friday:roman-catholic",
+      "principalDay": "good-friday",
+      "occurrenceId": "occurrence:2026-04-03:good-friday:roman-catholic:pt",
+      "legacyObservanceId": "rc:GoodFri",
+      "baseDateISO": "2026-04-03",
+      "expectedDateISO": "2026-04-03",
+      "sourceOccurrenceId": "snl-pt-2026-04-03-117c3154ad8a4fa9abe8784a",
+      "sourceRecordHash": "e6932e39bd91b9c2463835c0e49e5a4c55823c7b226772814c2014e3d5d682a7",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:holy-saturday:roman-catholic",
+      "principalDay": "holy-saturday",
+      "occurrenceId": "occurrence:2026-04-04:holy-saturday:roman-catholic:pt",
+      "legacyObservanceId": "rc:EasterVigil",
+      "baseDateISO": "2026-04-04",
+      "expectedDateISO": "2026-04-04",
+      "sourceOccurrenceId": "snl-pt-2026-04-04-a36aaa067ec59ae85740b496",
+      "sourceRecordHash": "2a98b5d6232109abcc8d83992b0795f4afd9de03868443a509ef3730bca93093",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:ascension:roman-catholic",
+      "principalDay": "ascension",
+      "occurrenceId": "occurrence:2026-05-17:ascension:roman-catholic:pt",
+      "legacyObservanceId": "rc:Ascension",
+      "baseDateISO": "2026-05-14",
+      "expectedDateISO": "2026-05-17",
+      "sourceOccurrenceId": "snl-pt-2026-05-17-6b79a1bebe953ed0bd519567",
+      "sourceRecordHash": "28c66ee717dc84a7796b814675af1e176faa208ad44369398a898508398c24f1",
+      "legacyRank": "solemnity",
+      "reviewStatus": "approved",
+      "resolution": "pending-transfer-destination",
+      "transfer": {
+        "decisionId": "pt-2026-ascension-transfer",
+        "fromDateISO": "2026-05-14",
+        "toDateISO": "2026-05-17",
+        "originReplacement": {
+          "legacyObservanceId": "rc:StMatthias",
+          "sourceOccurrenceId": "snl-pt-2026-05-14-b6d5fbb9a8a61bc977a4e588",
+          "sourceRecordHash": "d63bb4ec2f937b8d2be9e97f4240ea78c6debc8d95f1c059b5070ed55241497a"
+        }
+      }
+    },
+    {
+      "temporalRuleId": "temporal-rule:trinity-sunday:roman-catholic",
+      "principalDay": "trinity-sunday",
+      "occurrenceId": "occurrence:2026-05-31:trinity-sunday:roman-catholic:pt",
+      "legacyObservanceId": "rc:Trinity",
+      "baseDateISO": "2026-05-31",
+      "expectedDateISO": "2026-05-31",
+      "sourceOccurrenceId": "snl-pt-2026-05-31-7e862864c5d20bb4b4acd324",
+      "sourceRecordHash": "8e665c6153e4913c14224ad250edd25111ff8f68ca3bd96bba49dcc769c69723",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:corpus-christi:roman-catholic",
+      "principalDay": "corpus-christi",
+      "occurrenceId": "occurrence:2026-06-04:corpus-christi:roman-catholic:pt",
+      "legacyObservanceId": "rc:CorpusChristi",
+      "baseDateISO": "2026-06-04",
+      "expectedDateISO": "2026-06-04",
+      "sourceOccurrenceId": "snl-pt-2026-06-04-d10ebe9249bbdfce2def71c4",
+      "sourceRecordHash": "d5b2186a0929c8220d45b9257dd89bea42b4ed3820c70abfdb511034348ad926",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:sacred-heart:roman-catholic",
+      "principalDay": "sacred-heart",
+      "occurrenceId": "occurrence:2026-06-12:sacred-heart:roman-catholic:pt",
+      "legacyObservanceId": "rc:SacredHeart",
+      "baseDateISO": "2026-06-12",
+      "expectedDateISO": "2026-06-12",
+      "sourceOccurrenceId": "snl-pt-2026-06-12-8f0933ea6274cc1f4b5899bb",
+      "sourceRecordHash": "bab2180cf585235706cc30db7aba8c8f60f93d4786612978243bd69277c5b2b6",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    },
+    {
+      "temporalRuleId": "temporal-rule:immaculate-heart:roman-catholic",
+      "occurrenceId": "occurrence:2026-06-15:immaculate-heart:roman-catholic:pt",
+      "legacyObservanceId": "rc:ImmaculateHeart",
+      "baseDateISO": "2026-06-13",
+      "expectedDateISO": "2026-06-15",
+      "sourceOccurrenceId": "snl-pt-2026-06-15-ae5d3adc1246bfbd5ac0f288",
+      "sourceRecordHash": "92a5df94169803fd33d5f72c6d27c426f9e6b11b6ffd30ef0858359fc773ab37",
+      "legacyRank": "feast",
+      "reviewStatus": "approved",
+      "resolution": "pending-transfer-destination",
+      "transfer": {
+        "decisionId": "pt-2026-immaculate-heart-transfer",
+        "fromDateISO": "2026-06-13",
+        "toDateISO": "2026-06-15",
+        "originReplacement": {
+          "legacyObservanceId": "rc:StAnthonyPadua",
+          "sourceOccurrenceId": "snl-pt-2026-06-13-4e549d5ad5e1f061eb868645",
+          "sourceRecordHash": "2feb90127b367646c3bff7355345facbc9af6ebb29fd083ede4e0c002c361a52",
+          "decisionId": "pt-2026-anthony-lisbon-rank"
+        }
+      }
+    },
+    {
+      "temporalRuleId": "temporal-rule:christ-the-king:roman-catholic",
+      "principalDay": "christ-the-king",
+      "occurrenceId": "occurrence:2026-11-22:christ-the-king:roman-catholic:pt",
+      "legacyObservanceId": "rc:ChristKing",
+      "baseDateISO": "2026-11-22",
+      "expectedDateISO": "2026-11-22",
+      "sourceOccurrenceId": "snl-pt-2026-11-22-df91229140cb916e5a75ebfa",
+      "sourceRecordHash": "623b9e48a1f5ea81867fe9a5cb99f6ee8d3f5d4701e3acda151e8ba5a98f65b6",
+      "legacyRank": "solemnity",
+      "reviewStatus": "inherited-safe",
+      "resolution": "inherit-general-canonical-binding"
+    }
+  ],
+  "mutationAllowed": false,
+  "verifiedAt": "2026-08-29"
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "vatican-news-saint-of-day-pt",
+  "sourcePublisher": "Vatican News",
+  "locale": "pt",
+  "tradition": "roman-catholic",
+  "policy": "reviewed-exact-source-binding",
+  "bindings": [
+    {"bindingId":"vatican-pt-anthony-lisbon","canonicalPersonId":"anthony-lisbon","qid":"Q167477","month":6,"day":13,"acceptedLabels":["Santo António de Pádua","Santo António de Lisboa","Santo António de Lisboa e de Pádua"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-francis-assisi","canonicalPersonId":"francis-assisi","qid":"Q676555","month":10,"day":4,"acceptedLabels":["São Francisco de Assis"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-clare-assisi","canonicalPersonId":"clare-assisi","qid":"Q191107","month":8,"day":11,"acceptedLabels":["Santa Clara de Assis"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-teresa-avila","canonicalPersonId":"teresa-avila","qid":"Q174880","month":10,"day":15,"acceptedLabels":["Santa Teresa de Jesus","Santa Teresa de Jesus, virgem e doutora da Igreja","Santa Teresa de Ávila"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-joseph","canonicalPersonId":"joseph","qid":"Q128267","month":3,"day":19,"acceptedLabels":["São José","São José, esposo da Bem-Aventurada Virgem Maria","São José, esposo da Virgem Maria"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-mark-evangelist","canonicalPersonId":"mark-evangelist","qid":"Q31966","month":4,"day":25,"acceptedLabels":["São Marcos","São Marcos Evangelista","São Marcos, evangelista"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-james-greater","canonicalPersonId":"james-greater","qid":"Q43999","month":7,"day":25,"acceptedLabels":["São Tiago Maior","São Tiago Apóstolo","São Tiago, apóstolo"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-luke-evangelist","canonicalPersonId":"luke-evangelist","qid":"Q128538","month":10,"day":18,"acceptedLabels":["São Lucas","São Lucas Evangelista","São Lucas, evangelista"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-andrew-apostle","canonicalPersonId":"andrew-apostle","qid":"Q43399","month":11,"day":30,"acceptedLabels":["Santo André","Santo André Apóstolo","Santo André, apóstolo"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-john-baptist","canonicalPersonId":"john-baptist","qid":"Q40662","month":6,"day":24,"acceptedLabels":["São João Batista","Natividade de São João Batista"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]},
+    {"bindingId":"vatican-pt-stephen-first-martyr","canonicalPersonId":"stephen-first-martyr","qid":"Q161775","month":12,"day":26,"acceptedLabels":["Santo Estêvão","Santo Estêvão, primeiro mártir","Santo Estêvão, protomártir"],"reviewedAt":"2026-08-15","allowedClaimClasses":["localized-source-label"]}
+  ]
+}

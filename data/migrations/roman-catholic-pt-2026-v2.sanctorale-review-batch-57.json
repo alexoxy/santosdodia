@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "john-henry-newman",
+        "primaryObservanceId": "rc:StJohnHenryNewman",
+        "category": "saint",
+        "names": {
+          "en": "Saint John Henry Newman",
+          "pt": "São João Henrique Newman",
+          "es": "San John Henry Newman",
+          "it": "San Giovanni Enrico Newman"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-henry-newman:roman-catholic",
+        "personId": "john-henry-newman",
+        "ecclesialTitles": [
+          "priest",
+          "cardinal",
+          "doctor-of-church"
+        ],
+        "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09"
+      },
+      "observanceId": "observance:john-henry-newman:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-henry-newman:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "doctorTitleSourceBound": true,
+        "recentGeneralCalendarInscriptionSourceBound": true,
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StJohnHenryNewman",
+        "dateISO": "2026-10-09",
+        "sourceOccurrenceId": "snl-pt-2026-10-09-a9328f9111964c8c13843287",
+        "sourceRecordHash": "a1131e89db2f1fd50fe1fc68fd03a05b39e3cad7d54aeb42188200905b9cd9f9",
+        "sourceLabelPt": "S. João Henrique Newman, presbítero e doutor da Igreja",
+        "observedDesignation": "S. João Henrique Newman, presbítero e doutor da Igreja – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09"
+      }
+    },
+    {
+      "person": {
+        "id": "john-leonardi",
+        "primaryObservanceId": "rc:StJohnLeonardi",
+        "category": "saint",
+        "names": {
+          "en": "Saint John Leonardi",
+          "pt": "São João Leonardo",
+          "es": "San Juan Leonardi",
+          "it": "San Giovanni Leonardi"
+        }
+      },
+      "recognition": {
+        "id": "recognition:john-leonardi:roman-catholic",
+        "personId": "john-leonardi",
+        "ecclesialTitles": [
+          "priest",
+          "religious-founder"
+        ],
+        "evidenceUrl": "https://www.vatican.va/content/benedict-xvi/pt/audiences/2009/documents/hf_ben-xvi_aud_20091007.html"
+      },
+      "observanceId": "observance:john-leonardi:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:john-leonardi:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "pharmacistPatronageAttestedButNotPromoted": true,
+        "sameDateAlternativesKeptIndependent": true
+      },
+      "source": {
+        "canonicalEventId": "rc:StJohnLeonardi",
+        "dateISO": "2026-10-09",
+        "sourceOccurrenceId": "snl-pt-2026-10-09-7a799b9a9d12efe130706928",
+        "sourceRecordHash": "a19898b6af7aabf28772d3173602d27f500b5f7fccbc0e3334645e42908b5c27",
+        "sourceLabelPt": "S. João Leonardo, presbítero",
+        "observedDesignation": "S. João Leonardo, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-09"
+      }
+    }
+  ],
+  "reviewDigestSha256": "5eb8563b1ab146201d83b86200e7980552b164766d6423164560665728f8158c",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

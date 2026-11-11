@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-4.json",
+  "reviewDigestSha256": "cccb4c22979975a05fad2457f0d16ed82ef77765e6bdb92bcfc8c80b488817b9",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-cross",
+    "ambrose-milan",
+    "gregory-great",
+    "francis-de-sales",
+    "alphonsus-liguori"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 101,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 288
+  },
+  "fixedSanctoraleMappingDigestSha256": "95b41505a11d7a4e0314908d56d79ae78d85de166d93e10bb257d0a1886abb23",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}

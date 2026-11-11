@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-33.json",
+  "reviewDigestSha256": "fb5badce4be9169c89886941d6c688188c6cac79f8a816c8f4fdfd82bb495660",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "augustine-zhao-rong"
+  ],
+  "promotedObservanceIds": [
+    "observance:augustine-zhao-rong-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 302,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 87
+  },
+  "fixedSanctoraleMappingDigestSha256": "2d9f17d720ae76c2812ad95ecf7d04396e70c416775d4ea8d7c9504a8360abdb",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

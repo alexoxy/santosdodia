@@ -1,0 +1,170 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cache } from "react";
+import AnnualDateEditorialSection from "../../components/AnnualDateEditorialSection";
+import DayView from "../../components/DayView";
+import { getAnnualDateEditorial } from "../../../data/date-editorial-registry";
+import type { Locale } from "../../../lib/i18n";
+import { publicSaintProfilePath } from "../../../lib/public-entity-links";
+import { buildPublicToday } from "../../../lib/public-today";
+import { requestPublicLocale } from "../../../lib/request-public-locale";
+import { SITE_ORIGIN } from "../../../lib/site";
+import { serializeStructuredData } from "../../../lib/structured-data";
+
+const MONTH_DAY_RE = /^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+function resolveAnnualDate(monthDay: string, referenceYear = new Date().getUTCFullYear()) {
+  if (!MONTH_DAY_RE.test(monthDay)) return null;
+  const [month, day] = monthDay.split("-").map(Number);
+  for (let offset = 0; offset <= 8; offset += 1) {
+    const year = referenceYear + offset;
+    const candidate = new Date(Date.UTC(year, month - 1, day));
+    if (
+      candidate.getUTCFullYear() === year &&
+      candidate.getUTCMonth() === month - 1 &&
+      candidate.getUTCDate() === day
+    ) return `${year}-${monthDay}`;
+  }
+  return null;
+}
+
+function annualDateLabel(dateISO: string, locale: Locale) {
+  return new Intl.DateTimeFormat(locale, {
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${dateISO}T00:00:00Z`));
+}
+
+function annualTitle(locale: Locale, label: string) {
+  if (locale === "pt") return `Santos e celebrações cristãs de ${label}`;
+  if (locale === "es") return `Santos y celebraciones cristianas del ${label}`;
+  if (locale === "fr") return `Saints et célébrations chrétiennes du ${label}`;
+  if (locale === "it") return `Santi e celebrazioni cristiane del ${label}`;
+  if (locale === "de") return `Heilige und christliche Feiern am ${label}`;
+  if (locale === "pl") return `Święci i obchody chrześcijańskie: ${label}`;
+  if (locale === "ru") return `Святые и христианские празднования: ${label}`;
+  if (locale === "fil") return `Mga santo at pagdiriwang Kristiyano sa ${label}`;
+  if (locale === "sw") return `Watakatifu na maadhimisho ya Kikristo: ${label}`;
+  return `Saints and Christian celebrations on ${label}`;
+}
+
+function annualDescription(locale: Locale, label: string, names: string[], total: number) {
+  const suffix = total > names.length;
+  const joined = names.join(", ");
+  if (locale === "pt") return names.length
+    ? `Conheça os santos e celebrações cristãs associados a ${label}: ${joined}${suffix ? ", entre outros" : ""}. Consulte diferenças entre tradições e calendários cristãos.`
+    : `Consulte os santos e celebrações cristãs associados a ${label}, organizados por tradição e sistema de calendário.`;
+  if (locale === "es") return names.length
+    ? `Conoce los santos y celebraciones cristianas asociados al ${label}: ${joined}${suffix ? ", entre otros" : ""}. Consulta las diferencias entre tradiciones y calendarios cristianos.`
+    : `Consulta los santos y celebraciones cristianas asociados al ${label}, organizados por tradición y sistema de calendario.`;
+  if (locale === "fr") return names.length
+    ? `Découvrez les saints et célébrations chrétiennes associés au ${label} : ${joined}${suffix ? ", entre autres" : ""}. Comparez les traditions et calendriers chrétiens.`
+    : `Consultez les saints et célébrations chrétiennes associés au ${label}, classés par tradition et système de calendrier.`;
+  if (locale === "it") return names.length
+    ? `Scopri i santi e le celebrazioni cristiane associati al ${label}: ${joined}${suffix ? ", e altri" : ""}. Confronta tradizioni e calendari cristiani.`
+    : `Consulta i santi e le celebrazioni cristiane associati al ${label}, organizzati per tradizione e sistema di calendario.`;
+  return names.length
+    ? `Discover saints and Christian celebrations associated with ${label}: ${joined}${suffix ? ", and more" : ""}. Compare Christian traditions and calendar systems.`
+    : `Explore saints and Christian celebrations associated with ${label}, organized by tradition and calendar system.`;
+}
+
+const loadAnnualDate = cache((dateISO: string, locale: Locale) => buildPublicToday({
+  date: dateISO,
+  locale,
+  timeZone: "UTC",
+  timeZoneSource: "explicit-date",
+  filters: {},
+}));
+
+export async function generateMetadata({ params }: { params: Promise<{ monthDay: string }> }): Promise<Metadata> {
+  const { monthDay } = await params;
+  const dateISO = resolveAnnualDate(monthDay);
+  const locale = await requestPublicLocale();
+  if (!dateISO) return { title: "Invalid date", robots: { index: false, follow: false } };
+  const label = annualDateLabel(dateISO, locale);
+  const { data: items } = await loadAnnualDate(dateISO, locale);
+  const names = items.slice(0, 5).map(item => item.name);
+  const editorial = getAnnualDateEditorial(monthDay, locale);
+  const title = annualTitle(locale, label);
+  const description = editorial?.lead ?? annualDescription(locale, label, names, items.length);
+  const canonical = `/date/${monthDay}`;
+  const metadata = {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: { title, description, url: canonical, type: "website" as const },
+    twitter: { card: "summary" as const, title, description },
+  };
+  if (!items.length) return { ...metadata, robots: { index: false, follow: true } };
+  return {
+    ...metadata,
+    robots: { index: Boolean(editorial), follow: true },
+  };
+}
+
+export default async function AnnualDayPage({ params }: { params: Promise<{ monthDay: string }> }) {
+  const { monthDay } = await params;
+  const dateISO = resolveAnnualDate(monthDay);
+  if (!dateISO) notFound();
+  const locale = await requestPublicLocale();
+  const label = annualDateLabel(dateISO, locale);
+  const { data: items } = await loadAnnualDate(dateISO, locale);
+  const editorial = getAnnualDateEditorial(monthDay, locale);
+  const url = `${SITE_ORIGIN}/date/${monthDay}`;
+  const title = annualTitle(locale, label);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": url,
+        url,
+        name: title,
+        description: editorial?.lead,
+        inLanguage: locale,
+        isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
+        mainEntity: { "@id": `${url}#observances` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${url}#observances`,
+        name: title,
+        numberOfItems: items.length,
+        itemListElement: items.map((item, index) => {
+          const profilePath = publicSaintProfilePath(item.id, locale);
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            url: profilePath
+              ? `${SITE_ORIGIN}${profilePath}`
+              : `${url}#observance-${encodeURIComponent(item.id)}`,
+          };
+        }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumbs`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Santos do Dia", item: SITE_ORIGIN },
+          { "@type": "ListItem", position: 2, name: label, item: url },
+        ],
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(jsonLd) }} />
+      <DayView
+        dateISO={dateISO}
+        mode="annual"
+        initialItems={items}
+        initialLocale={locale}
+        initialTradition="all"
+      />
+      <AnnualDateEditorialSection monthDay={monthDay} locale={locale} items={items} />
+    </>
+  );
+}

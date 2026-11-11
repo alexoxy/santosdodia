@@ -1,0 +1,67 @@
+name: Ecclesiastical OSINT Monitor
+
+on:
+  schedule:
+    - cron: '17 6 12 * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/osint-monitor.yml'
+      - 'scripts/monitor-ecclesiastical-osint.mjs'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ecclesiastical-osint-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    environment: dropbox-archive
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch official source changes
+        run: npm run osint:monitor
+
+      - name: Validate generated JSON
+        run: node -e "JSON.parse(require('node:fs').readFileSync('data/generated/osint/holy-see-latest.json','utf8'))"
+
+      - name: Upload candidate package for Dropbox staging
+        uses: actions/upload-artifact@v7
+        with:
+          name: ecclesiastical-osint-candidates-${{ github.run_id }}
+          path: data/generated/osint/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Archive candidate package in Dropbox
+        env:
+          DROPBOX_APP_KEY: ${{ secrets.DROPBOX_APP_KEY }}
+          DROPBOX_APP_SECRET: ${{ secrets.DROPBOX_APP_SECRET }}
+          DROPBOX_REFRESH_TOKEN: ${{ secrets.DROPBOX_REFRESH_TOKEN }}
+        run: node scripts/archive-to-dropbox.mjs --stream ecclesiastical-osint --source data/generated/osint
+
+      - name: Record staging summary
+        run: |
+          {
+            echo '## Ecclesiastical OSINT staging'
+            echo '- Official-source candidate JSON: validated'
+            echo '- GitHub publication or pull request: not attempted'
+            echo '- Next gate: archive in Dropbox, normalize, review and approve before database promotion'
+            echo "- Workflow run: ${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

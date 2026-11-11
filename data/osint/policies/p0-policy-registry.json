@@ -1,0 +1,37 @@
+{
+  "policyVersion": "1.0",
+  "reviewedAt": "2026-08-06T22:30:00Z",
+  "defaultDecision": "blocked",
+  "sources": [
+    {"id":"holy-see-vatican","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"holy-see-press-office","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"vatican-news-liturgical-holidays-pt","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"portugal-national-liturgy-secretariat","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"catholic-hierarchy","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"gcatholic","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"arautos-liturgia-diaria","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"goarch-planner","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"orthodox-calendar-api-ispovednik","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"orthodox-church-in-america","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"coptic-orthodox-patriarchate","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"armenian-apostolic-church","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"anglican-communion-office","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"church-of-england","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {"id":"episcopal-church-usa","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]},
+    {
+      "id":"wikidata",
+      "decision":"approved",
+      "acquisitionMode":"sparql-api",
+      "robotsPolicy":"api-contract",
+      "licenceStatus":"open",
+      "licenceName":"CC0 1.0",
+      "allowedUses":["facts","identifiers","labels","descriptions","source-links"],
+      "rateLimitPerMinute":6,
+      "evidence":[
+        "https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service",
+        "https://www.wikidata.org/wiki/Wikidata:Copyright"
+      ]
+    },
+    {"id":"openbible","decision":"pending","acquisitionMode":"blocked","robotsPolicy":"pending","licenceStatus":"unknown","allowedUses":[]}
+  ]
+}

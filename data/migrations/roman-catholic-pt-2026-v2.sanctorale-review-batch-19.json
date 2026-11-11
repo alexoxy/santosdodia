@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "john-brebeuf-isaac-jogues-companions",
+      "persons": [
+        {
+          "id": "john-brebeuf",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint John de Brébeuf, Priest",
+            "pt": "São João de Brébeuf, presbítero",
+            "es": "San Juan de Brébeuf, presbítero",
+            "it": "San Giovanni de Brébeuf, presbitero"
+          }
+        },
+        {
+          "id": "isaac-jogues",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Isaac Jogues, Priest",
+            "pt": "Santo Isaac Jogues, presbítero",
+            "es": "San Isaac Jogues, presbítero",
+            "it": "Sant’Isacco Jogues, presbitero"
+          }
+        },
+        {
+          "id": "gabriel-lalemant",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Gabriel Lalemant, Priest",
+            "pt": "São Gabriel Lalemant, presbítero",
+            "es": "San Gabriel Lalemant, presbítero",
+            "it": "San Gabriele Lalemant, presbitero"
+          }
+        },
+        {
+          "id": "antoine-daniel",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Antoine Daniel, Priest",
+            "pt": "Santo António Daniel, presbítero",
+            "es": "San Antonio Daniel, presbítero",
+            "it": "Sant’Antonio Daniel, presbitero"
+          }
+        },
+        {
+          "id": "charles-garnier",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Charles Garnier, Priest",
+            "pt": "São Carlos Garnier, presbítero",
+            "es": "San Carlos Garnier, presbítero",
+            "it": "San Carlo Garnier, presbitero"
+          }
+        },
+        {
+          "id": "noel-chabanel",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Noël Chabanel, Priest",
+            "pt": "São Noël Chabanel, presbítero",
+            "es": "San Noël Chabanel, presbítero",
+            "it": "San Noël Chabanel, presbitero"
+          }
+        },
+        {
+          "id": "rene-goupil",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint René Goupil, Jesuit Lay Brother",
+            "pt": "São René Goupil, irmão jesuíta",
+            "es": "San René Goupil, hermano jesuita",
+            "it": "San René Goupil, fratello gesuita"
+          }
+        },
+        {
+          "id": "jean-de-la-lande",
+          "primaryObservanceId": "rc:StsJeanBrebeuf",
+          "category": "saint",
+          "names": {
+            "en": "Saint Jean de la Lande, Lay Missionary",
+            "pt": "São João de la Lande, missionário leigo",
+            "es": "San Juan de la Lande, misionero laico",
+            "it": "San Giovanni de la Lande, missionario laico"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:john-brebeuf:roman-catholic",
+          "personId": "john-brebeuf",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:isaac-jogues:roman-catholic",
+          "personId": "isaac-jogues",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:gabriel-lalemant:roman-catholic",
+          "personId": "gabriel-lalemant",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:antoine-daniel:roman-catholic",
+          "personId": "antoine-daniel",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:charles-garnier:roman-catholic",
+          "personId": "charles-garnier",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:noel-chabanel:roman-catholic",
+          "personId": "noel-chabanel",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:rene-goupil:roman-catholic",
+          "personId": "rene-goupil",
+          "ecclesialTitles": [
+            "religious-brother",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        },
+        {
+          "id": "recognition:jean-de-la-lande:roman-catholic",
+          "personId": "jean-de-la-lande",
+          "ecclesialTitles": [
+            "lay-missionary",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/10/19/sts--john-de-brebeuf-and-isaac-jogues--priests-and-companions--j.html"
+        }
+      ],
+      "observanceId": "observance:john-brebeuf-isaac-jogues-companions:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:john-brebeuf-isaac-jogues-companions:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsJeanBrebeuf",
+        "dateISO": "2026-10-19",
+        "sourceOccurrenceId": "snl-pt-2026-10-19-bba7079fd1eeb48e28085291",
+        "sourceRecordHash": "e36ee6efbd56ee59e2d995e81e94c35e6777b33bbd7ede1ae661148007c71055",
+        "sourceLabelPt": "Santos João de Brébeuf e Isaac Jogues, presbíteros, e companheiros, mártires",
+        "observedDesignation": "Santos João de Brébeuf e Isaac Jogues, presbíteros, e companheiros, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-19"
+      }
+    }
+  ],
+  "reviewDigestSha256": "7c7af2cb7ab9cfac086869dfc6c43496130d6a98a0d409e27a2940689d241158",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

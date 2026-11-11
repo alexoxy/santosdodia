@@ -1,0 +1,22 @@
+import type { Locale } from '../lib/i18n';
+import { getAnnualDateEditorial as getAnnualDateEditorialBatch1 } from './date-editorial';
+import { getAnnualDateEditorialBatch2 } from './date-editorial-batch-2';
+import { getAnnualDateEditorialBatch3 } from './date-editorial-batch-3';
+import { getAnnualDateEditorialBatch4 } from './date-editorial-batch-4';
+import { getAnnualDateEditorialBatch5 } from './date-editorial-batch-5';
+import { getAnnualDateEditorialBatch6 } from './date-editorial-batch-6';
+import { getAnnualDateEditorialBatch7 } from './date-editorial-batch-7';
+
+export function getAnnualDateEditorial(monthDay: string, locale: Locale) {
+  return getAnnualDateEditorialBatch1(monthDay, locale)
+    ?? getAnnualDateEditorialBatch2(monthDay, locale)
+    ?? getAnnualDateEditorialBatch3(monthDay, locale)
+    ?? getAnnualDateEditorialBatch4(monthDay, locale)
+    ?? getAnnualDateEditorialBatch5(monthDay, locale)
+    ?? getAnnualDateEditorialBatch6(monthDay, locale)
+    ?? getAnnualDateEditorialBatch7(monthDay, locale);
+}
+
+export function hasAnnualDateEditorial(monthDay: string, locale: Locale) {
+  return Boolean(getAnnualDateEditorial(monthDay, locale));
+}

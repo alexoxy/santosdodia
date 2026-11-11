@@ -1,0 +1,144 @@
+name: AdSense readiness
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/ads.txt/**'
+      - 'app/about/**'
+      - 'app/advertising/**'
+      - 'app/privacy/**'
+      - 'app/saint/**'
+      - 'app/day/**'
+      - 'app/date/**'
+      - 'app/calendar/**'
+      - 'app/explore/**'
+      - 'app/liturgy/**'
+      - 'app/churches/**'
+      - 'app/church/**'
+      - 'app/jurisdiction/**'
+      - 'app/holidays/**'
+      - 'app/live/**'
+      - 'app/leaders/**'
+      - 'app/leader/**'
+      - 'app/layout.tsx'
+      - 'app/ads.css'
+      - 'app/components/AdSenseBootstrap.tsx'
+      - 'app/components/AdSlot.tsx'
+      - 'app/components/CalendarSyncCenter.tsx'
+      - 'app/components/TraditionFeeds.tsx'
+      - 'app/components/AdvertisingPrivacyNotice.tsx'
+      - 'app/components/PrivacyChoicesLink.tsx'
+      - 'app/components/SaintProfile.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'app/components/TodayPanel.tsx'
+      - 'app/page.tsx'
+      - 'app/sitemap.ts'
+      - 'data/saint-biographies*.ts'
+      - 'data/saint-biography*.ts'
+      - 'data/date-editorial*.ts'
+      - 'data/editorial/**'
+      - 'lib/adsense.ts'
+      - 'lib/calendar-publication-readiness.ts'
+      - 'next.config.ts'
+      - 'scripts/check-adsense-readiness.mjs'
+      - 'scripts/check-search-footprint.mjs'
+      - 'scripts/audit-editorial-corpus.mjs'
+      - 'scripts/audit-annual-date-editorial.mjs'
+      - 'docs/editorial-content-policy.md'
+      - 'docs/adsense-activation-checklist.md'
+      - '.github/workflows/adsense-readiness.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/ads.txt/**'
+      - 'app/about/**'
+      - 'app/advertising/**'
+      - 'app/privacy/**'
+      - 'app/saint/**'
+      - 'app/day/**'
+      - 'app/date/**'
+      - 'app/calendar/**'
+      - 'app/explore/**'
+      - 'app/liturgy/**'
+      - 'app/churches/**'
+      - 'app/church/**'
+      - 'app/jurisdiction/**'
+      - 'app/holidays/**'
+      - 'app/live/**'
+      - 'app/leaders/**'
+      - 'app/leader/**'
+      - 'app/layout.tsx'
+      - 'app/ads.css'
+      - 'app/components/AdSenseBootstrap.tsx'
+      - 'app/components/AdSlot.tsx'
+      - 'app/components/CalendarSyncCenter.tsx'
+      - 'app/components/TraditionFeeds.tsx'
+      - 'app/components/AdvertisingPrivacyNotice.tsx'
+      - 'app/components/PrivacyChoicesLink.tsx'
+      - 'app/components/SaintProfile.tsx'
+      - 'app/components/SiteChrome.tsx'
+      - 'app/components/TodayPanel.tsx'
+      - 'app/page.tsx'
+      - 'app/sitemap.ts'
+      - 'data/saint-biographies*.ts'
+      - 'data/saint-biography*.ts'
+      - 'data/date-editorial*.ts'
+      - 'data/editorial/**'
+      - 'lib/adsense.ts'
+      - 'lib/calendar-publication-readiness.ts'
+      - 'next.config.ts'
+      - 'scripts/check-adsense-readiness.mjs'
+      - 'scripts/check-search-footprint.mjs'
+      - 'scripts/audit-editorial-corpus.mjs'
+      - 'scripts/audit-annual-date-editorial.mjs'
+      - 'docs/editorial-content-policy.md'
+      - 'docs/adsense-activation-checklist.md'
+      - '.github/workflows/adsense-readiness.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+      - name: Audit monetization and editorial boundaries
+        run: node scripts/check-adsense-readiness.mjs
+      - name: Audit search publication footprint
+        run: node scripts/check-search-footprint.mjs
+      - name: Audit indexed annual-date editorial depth
+        run: node scripts/audit-annual-date-editorial.mjs
+
+  production:
+    if: github.event_name == 'push'
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify deployed ads.txt ownership record
+        shell: bash
+        env:
+          EXPECTED_SELLER: pub-2568362274337344
+        run: |
+          set -euo pipefail
+          for attempt in {1..24}; do
+            ads_url="https://www.santosdodia.com/ads.txt?adsense-check=${GITHUB_SHA}-${attempt}"
+            if curl --fail --silent --show-error --location --max-time 20 \
+              -H 'Cache-Control: no-cache' "$ads_url" -o /tmp/ads.txt \
+              && grep -Fxq "google.com, ${EXPECTED_SELLER}, DIRECT, f08c47fec0942fa0" /tmp/ads.txt; then
+              echo 'Production ads.txt exposes the expected Google AdSense seller record.'
+              exit 0
+            fi
+            echo "Attempt ${attempt}: waiting for the production ads.txt record."
+            sleep 5
+          done
+
+          echo 'Production ads.txt did not expose the expected Google seller record.'
+          cat /tmp/ads.txt 2>/dev/null || true
+          exit 1

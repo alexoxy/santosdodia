@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-sunday-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "families": [
+    "temporal-rule-family:ordinary-time-sunday-early:roman-catholic",
+    "temporal-rule-family:ordinary-time-sunday-late:roman-catholic"
+  ],
+  "candidateOutcomes": {
+    "candidates": 33,
+    "presentSourceOccurrences": 28,
+    "suppressedCandidates": 5
+  },
+  "promotedSourceOccurrences": 28,
+  "promotedMappingDigestSha256": "5b67f9ea51b0f57997eef2a98f65fdbee9ff691b2089fe2bf7ad63a88e6a394e",
+  "promotedSuppressionDigestSha256": "a88abe13487aa61edbff95375fbd2e12e47eb805bab460ac67e0d45bcec3e12a",
+  "temporalFamilyMappingDigestSha256": "373750e2c6fc4d79d7dc037b732f88c19bb558ad6d470a54dfa2858d1732da10",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 155,
+    "remainingLegacyOccurrences": 234
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 183,
+    "remainingLegacyOccurrences": 206,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "competent Holy See temporal-cycle authority",
+    "deterministic second-Sunday-of-Ordinary-Time and Advent anchors",
+    "two-segment numbering with exact 2026 present-or-suppressed outcomes",
+    "exact approved Portugal 2026 source occurrence and record hash",
+    "inherited-safe General Roman binding"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-10"
+}

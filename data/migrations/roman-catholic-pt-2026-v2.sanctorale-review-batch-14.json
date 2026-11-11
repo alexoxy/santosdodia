@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "pancras",
+        "primaryObservanceId": "rc:StPancras",
+        "category": "saint",
+        "names": {
+          "en": "Saint Pancras",
+          "pt": "São Pancrácio",
+          "es": "San Pancracio",
+          "it": "San Pancrazio"
+        }
+      },
+      "recognition": {
+        "id": "recognition:pancras:roman-catholic",
+        "ecclesialTitles": [
+          "martyr",
+          "young-martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/12/st--pancras--martyr-on-the--via-aurelia.html"
+      },
+      "observanceId": "observance:pancras:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:pancras:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StPancras",
+        "dateISO": "2026-05-12",
+        "sourceOccurrenceId": "snl-pt-2026-05-12-55d07e2dc301ee6dea4aeafd",
+        "sourceRecordHash": "b28712f3accf37b6c691042da87c3bc9e6e1d95c6836f400dc582f33577ee747",
+        "sourceLabelPt": "S. Pancrácio, mártir",
+        "observedDesignation": "S. Pancrácio, mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-12"
+      }
+    },
+    {
+      "person": {
+        "id": "augustine-canterbury",
+        "primaryObservanceId": "rc:StAugustineCanterbury",
+        "category": "saint",
+        "names": {
+          "en": "Saint Augustine of Canterbury",
+          "pt": "Santo Agostinho de Cantuária",
+          "es": "San Agustín de Canterbury",
+          "it": "Sant’Agostino di Canterbury"
+        }
+      },
+      "recognition": {
+        "id": "recognition:augustine-canterbury:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "missionary"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/05/27/st--augustine--archbishop-of-canterbury.html"
+      },
+      "observanceId": "observance:augustine-canterbury:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:augustine-canterbury:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAugustineCanterbury",
+        "dateISO": "2026-05-27",
+        "sourceOccurrenceId": "snl-pt-2026-05-27-a841e38d59756875460bb178",
+        "sourceRecordHash": "afff5a92dbc13a620cbf92f6e1c5735917e15e515a1187f552af8f4dc00fe638",
+        "sourceLabelPt": "S. Agostinho de Cantuária, bispo",
+        "observedDesignation": "S. Agostinho de Cantuária, bispo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-5-27"
+      }
+    }
+  ],
+  "reviewDigestSha256": "f58959a164f60ec91c15d455e41fb082464935514d6d694368f5c4af4b06e412",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

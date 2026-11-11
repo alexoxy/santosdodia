@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-11T14:13:00+01:00",
+  "status": "research-only",
+  "coreRule": "Person identity is global; ecclesial recognition, terminology, cultus and liturgical commemoration are church-specific assertions and must never be inferred from another tradition.",
+  "hardGuardrails": [
+    "Never map every notable Christian person to saint.",
+    "Never map founder, reformer, prophet, pioneer, missionary or theologian to saint unless that church explicitly does so.",
+    "Never infer blessed, venerable, servant-of-God or equivalent statuses outside a church that formally uses those categories.",
+    "Never infer a single founder where the church describes a movement, coalition or multiple founders.",
+    "Never create a feast day from a birth date, death date, anniversary or institutional celebration unless an authoritative church source treats it as a liturgical or official observance.",
+    "Never treat use of the biblical/general word saint as evidence of a canonized or formally recognized saint category.",
+    "If a church has no equivalent category, store no ecclesial recognition rather than manufacturing one.",
+    "If theology or local practice is unresolved, publish the person's historical role only and mark ecclesial recognition as unknown/unresolved."
+  ],
+  "personIdentityModel": {
+    "person_id": "Stable cross-tradition identity.",
+    "historical_roles": ["founder", "cofounder", "reformer", "pioneer", "missionary", "theologian", "teacher", "pastor", "bishop", "patriarch", "pope", "evangelist", "martyr-historical", "writer", "leader"],
+    "ecclesial_recognition_assertions": "Zero or more assertions scoped to church_body/jurisdiction and sourced independently.",
+    "localized_names": "Entity-linked labels by locale/script; not translated ad hoc from another church's preferred name."
+  },
+  "recognitionTypes": {
+    "canonized-saint": "Formal saint recognition where the source church uses an equivalent normative category.",
+    "blessed": "Formal beatified/blessed status only where the source church uses it normatively.",
+    "venerable": "Formal status only where the source church uses it normatively.",
+    "servant-of-god": "Formal cause/status only where the source church uses it normatively.",
+    "glorified-saint": "Orthodox or other church-specific formal glorification/canonization terminology, preserving the church's vocabulary.",
+    "commemorated-person": "Person included in an authorized commemorative/liturgical calendar without importing Catholic canonization semantics.",
+    "saint-broad-usage": "Church explicitly uses saint in a broad Christian sense rather than as a canonized class.",
+    "martyr-recognized": "Church-specific recognition as martyr where explicitly sourced.",
+    "holy-person-or-witness": "Authorized church vocabulary such as holy person, witness, teacher or similar.",
+    "founder": "Historical/ecclesial role as founder; not a sanctity status.",
+    "cofounder": "Historical/ecclesial role as cofounder; not a sanctity status.",
+    "reformer": "Historical/ecclesial role; not a sanctity status.",
+    "pioneer": "Historical/ecclesial role; not a sanctity status.",
+    "prophetic-messenger": "Only when the church itself officially describes the person in prophetic terms; not equivalent to saint.",
+    "leader": "Institutional office/leadership role; not a sanctity status.",
+    "none": "No sourced church-specific recognition category.",
+    "unknown": "Not yet determined from authoritative church sources."
+  },
+  "requiredAssertionFields": [
+    "person_id",
+    "church_body_id",
+    "jurisdiction_id",
+    "recognition_type",
+    "source_id",
+    "source_url",
+    "source_term_original",
+    "effective_date_or_interval",
+    "liturgical_commemoration",
+    "observance_id_if_any",
+    "confidence",
+    "review_state"
+  ],
+  "familyGuidance": [
+    {
+      "family": "catholic-latin",
+      "rule": "Use formal canonical recognition stages and liturgical calendar assertions. Founder/reformer roles remain separate from sanctity status even when the same person is also canonized."
+    },
+    {
+      "family": "eastern-catholic",
+      "rule": "Preserve the vocabulary and recognition practice of the relevant Church sui iuris; do not project Latin terminology or calendar rank automatically."
+    },
+    {
+      "family": "eastern-orthodox",
+      "rule": "Use the relevant autocephalous/autonomous Church's own terminology and synodal acts for glorification/canonization and commemoration. Do not create Catholic-style blessed/venerable stages."
+    },
+    {
+      "family": "oriental-orthodox",
+      "rule": "Use each Church's own synaxarial, patriarchal or synodal terminology. Recognition and calendar status are church-specific."
+    },
+    {
+      "family": "anglican",
+      "rule": "Model authorized saints, holy persons, martyrs, teachers, witnesses or commemorations exactly as the province's calendar describes them; no universal Anglican canonization schema."
+    },
+    {
+      "family": "lutheran",
+      "rule": "Model festivals/commemorations and historical figures per member church. Do not infer a sanctity status merely because a person is commemorated."
+    },
+    {
+      "family": "methodist",
+      "rule": "United Methodist usage can call faithful Christians saints in a broad sense but has no system electing people to sainthood and does not treat saints as mediators. John Wesley is founder of the Methodist movement; founder and saint semantics must remain separate."
+    },
+    {
+      "family": "baptist",
+      "rule": "No universal Baptist sanctoral or central recognition system is assumed. Baptist bodies stress local-church independence; store founders/pioneers/pastors/theologians only when historically sourced, and do not invent a universal founder or saint category."
+    },
+    {
+      "family": "pentecostal",
+      "rule": "Do not infer a universal founder or sanctoral. For Assemblies of God, official history describes formation by a broad coalition of ministers; historical founders/pioneers may be represented individually without saint semantics."
+    },
+    {
+      "family": "adventist",
+      "rule": "Represent James White, Ellen G. White and Joseph Bates as cofounders where sourced. Ellen G. White may additionally carry a church-specific prophetic-messenger assertion because official Adventist sources describe her ministry in prophetic terms. Do not label these figures saints unless an authoritative Adventist source explicitly uses that category in the relevant sense."
+    },
+    {
+      "family": "friends",
+      "rule": "George Fox may be represented as founder/central early figure where sourced. Do not create saint, blessed, feast-day or cultus semantics absent authoritative Quaker practice."
+    },
+    {
+      "family": "salvation-army",
+      "rule": "Represent William and Catherine Booth as founders where sourced. The Salvation Army's history and leadership data are not a saint calendar."
+    },
+    {
+      "family": "reformed",
+      "rule": "Do not infer a single founder for the broad Reformed/Presbyterian/Congregational family. Store reformers and founders only at the church/movement scope supported by sources."
+    },
+    {
+      "family": "anabaptist",
+      "rule": "Do not infer Menno Simons or another historical figure as universal founder of all Anabaptist churches. Preserve movement/church-specific historical roles."
+    },
+    {
+      "family": "other-or-unknown",
+      "rule": "Default to no ecclesial recognition. Discover theology, polity and terminology from authoritative sources before assigning any recognition class."
+    }
+  ],
+  "presentationRules": [
+    "The public UI must use the source church's terminology, localized into the user's language only when a validated equivalent exists.",
+    "A founder page may appear in SantosDia even when there is no feast or saint-of-the-day entry.",
+    "A historical person may be important to a church without having any liturgical observance.",
+    "Search facets must separate recognition status from historical role.",
+    "Today/calendar pages show only sourced observances; biography/history pages may show founders, reformers, pioneers and leaders independently of the calendar."
+  ]
+}

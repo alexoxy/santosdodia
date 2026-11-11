@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "joseph-calasanz",
+        "primaryObservanceId": "rc:StJosephCalasanz",
+        "category": "saint",
+        "names": {
+          "en": "Saint Joseph Calasanz, Priest",
+          "pt": "São José de Calasanz, presbítero",
+          "es": "San José de Calasanz, presbítero",
+          "it": "San Giuseppe Calasanzio, presbitero"
+        }
+      },
+      "recognition": {
+        "id": "recognition:joseph-calasanz:roman-catholic",
+        "personId": "joseph-calasanz",
+        "ecclesialTitles": [
+          "priest",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/25/st--joseph--calasanz--priest--founder-of-piarists.html"
+      },
+      "observanceId": "observance:joseph-calasanz:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:joseph-calasanz:general-roman",
+      "contextualBoundary": {
+        "generalRomanPortugal": "optional-memorial",
+        "sameDateSaintLouis": "optional-memorial",
+        "sameDateAlternativesMaterializedIndependently": true,
+        "precedenceInferred": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StJosephCalasanz",
+        "dateISO": "2026-08-25",
+        "sourceOccurrenceId": "snl-pt-2026-08-25-9d39b2030aab128ff54e1165",
+        "sourceRecordHash": "ec4b0d1075e7d9d8067a481244712dc862599b66e50fc10f231a0b789e745c53",
+        "sourceLabelPt": "S. José de Calasanz, presbítero",
+        "observedDesignation": "S. José de Calasanz, presbítero – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-25"
+      }
+    }
+  ],
+  "reviewDigestSha256": "8cfe266e33845b1dedb83ddf5ebac2980b7e4e250e2d8ec851e16d7fa15975c4",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

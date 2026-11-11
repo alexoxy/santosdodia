@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-12.json",
+  "reviewDigestSha256": "744cdc97923d7ff5a5a6efe2121610639f8f49eec6ee33b07b0059f12a9a3e6d",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "fidelis-sigmaringen",
+    "peter-chanel",
+    "louis-marie-montfort",
+    "pius-v-pope",
+    "john-i-pope"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 141,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 248
+  },
+  "fixedSanctoraleMappingDigestSha256": "27640d390a125bc3a011d592bc6002ac540d785bfecf688c79102e3783bafbfc",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-09"
+}

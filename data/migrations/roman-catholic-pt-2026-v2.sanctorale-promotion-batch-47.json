@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-47.json",
+  "reviewDigestSha256": "ac1cbb496c2e8b98e2259eee9681990ba6104bea7b14290e2577baaa34ec9e12",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "louis-ix-france"
+  ],
+  "promotedObservanceIds": [
+    "observance:louis-ix-france:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 316,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 73
+  },
+  "fixedSanctoraleMappingDigestSha256": "9f52941d391c5e66f8e201684d56a0735ec48f2a04ade29c375880447d8e09e7",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

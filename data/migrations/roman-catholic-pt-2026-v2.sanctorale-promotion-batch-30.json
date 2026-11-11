@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-30.json",
+  "reviewDigestSha256": "c2ea16b11385cf4759f585aca6932c84a7aaf92ea7bac4bdac45bf20b216bcd4",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "paulinus-nola"
+  ],
+  "promotedObservanceIds": [
+    "observance:paulinus-nola:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 299,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 90
+  },
+  "fixedSanctoraleMappingDigestSha256": "a40aa90974942b1f486b27bafb93052019116cae4ce12571acd3ea4ef1fd7282",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

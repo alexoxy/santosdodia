@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-7.json",
+  "reviewDigestSha256": "d202a84a23baaaf98f81a4e600cbb7880d146b26dc7a234886543115cb33d2fa",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "justin-martyr",
+    "boniface-mainz",
+    "philip-neri",
+    "john-mary-vianney",
+    "josaphat-kuntsevych"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 116,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 273
+  },
+  "fixedSanctoraleMappingDigestSha256": "e9d0bc6446ab7822260563f663941b3bb527376a245f5b1d54c61832fee6d984",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-09-03"
+}

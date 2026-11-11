@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "augustine-hippo",
+        "primaryObservanceId": "rc:StAugustineHippo",
+        "category": "saint",
+        "names": {
+          "en": "Saint Augustine of Hippo",
+          "pt": "Santo Agostinho de Hipona",
+          "es": "San Agustín de Hipona",
+          "it": "Sant’Agostino d’Ippona"
+        }
+      },
+      "recognition": {
+        "id": "recognition:augustine-hippo:roman-catholic",
+        "ecclesialTitles": [
+          "bishop",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/28/st---augustine--bishop-of-hyppo-and-doctor-of-the-church.html"
+      },
+      "observanceId": "observance:augustine-hippo:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:augustine-hippo:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StAugustineHippo",
+        "sourceOccurrenceId": "snl-pt-2026-08-28-f5f59c736128177d104e1994",
+        "sourceRecordHash": "d0cfa3d73c5a106794faad608c44e70373cbba447d165423d8b50df10ba456e7",
+        "dateISO": "2026-08-28",
+        "sourceLabelPt": "S. Agostinho, bispo e doutor da Igreja",
+        "observedDesignation": "S. Agostinho, bispo e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-28"
+      }
+    },
+    {
+      "person": {
+        "id": "jerome-stridon",
+        "primaryObservanceId": "rc:StJerome",
+        "category": "saint",
+        "names": {
+          "en": "Saint Jerome",
+          "pt": "São Jerónimo",
+          "es": "San Jerónimo",
+          "it": "San Girolamo"
+        }
+      },
+      "recognition": {
+        "id": "recognition:jerome-stridon:roman-catholic",
+        "ecclesialTitles": [
+          "priest",
+          "doctor-of-the-church"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/09/30/st--jerome--priest-and-doctor-of-the-church.html"
+      },
+      "observanceId": "observance:jerome-stridon:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:jerome-stridon:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StJerome",
+        "sourceOccurrenceId": "snl-pt-2026-09-30-14bbd0abe20545e308e4281f",
+        "sourceRecordHash": "eec50c57f318fcda0e202582734b716fdd94944d3720aa8d48d52272fc61bb5c",
+        "dateISO": "2026-09-30",
+        "sourceLabelPt": "S. Jerónimo, presbítero e doutor da Igreja",
+        "observedDesignation": "S. Jerónimo, presbítero e doutor da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-9-30"
+      }
+    },
+    {
+      "person": {
+        "id": "therese-lisieux",
+        "primaryObservanceId": "rc:StThereseChildJesus",
+        "category": "saint",
+        "names": {
+          "en": "Saint Thérèse of Lisieux",
+          "pt": "Santa Teresa do Menino Jesus",
+          "es": "Santa Teresa del Niño Jesús",
+          "it": "Santa Teresa di Lisieux"
+        }
+      },
+      "recognition": {
+        "id": "recognition:therese-lisieux:roman-catholic",
+        "ecclesialTitles": [
+          "virgin",
+          "doctor-of-the-church",
+          "carmelite",
+          "patron-of-missions"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/10/01/st--therese-of-the-child-jesus--carmelite---virgin-doctor-of-the.html"
+      },
+      "observanceId": "observance:therese-lisieux:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:therese-lisieux:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StThereseChildJesus",
+        "sourceOccurrenceId": "snl-pt-2026-10-01-592396c33ae7eb39025c5d87",
+        "sourceRecordHash": "411029dcb4ca67430bb3438e5b3e18676411b9c2dbfedf9aa826c0355f61585e",
+        "dateISO": "2026-10-01",
+        "sourceLabelPt": "S. Teresa do Menino Jesus, virgem e doutora da Igreja",
+        "observedDesignation": "S. Teresa do Menino Jesus, virgem e doutora da Igreja – MO",
+        "legacyRank": "memorial",
+        "sourceRankCode": "MO",
+        "canonicalRank": "obligatory-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-1"
+      }
+    }
+  ],
+  "reviewDigestSha256": "167062ead74a3821b62ea6c45e0e06a00b6ed4e9cffdfe4573286535d01a3b6b",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-08-31"
+}

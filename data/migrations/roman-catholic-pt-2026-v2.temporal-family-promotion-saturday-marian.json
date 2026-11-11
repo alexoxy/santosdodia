@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "status": "saturday-marian-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "workflowRunId": 31998552573
+  },
+  "familyIds": [
+    "temporal-rule-family:saturday-marian-early:roman-catholic",
+    "temporal-rule-family:saturday-marian-late:roman-catholic"
+  ],
+  "canonicalPolicy": {
+    "selectionMode": "optional-alternative",
+    "obligatory": false,
+    "precedenceResolutionRequired": true,
+    "officialAuthorityUrl": "https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20030317_ordinamento-messale_en.html"
+  },
+  "candidateOutcomes": {
+    "candidates": 32,
+    "presentSourceOccurrences": 14,
+    "suppressedCandidates": 18,
+    "withheldCandidates": 0
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-05-30-8f94214040de2b144cbae6c8",
+    "snl-pt-2026-06-06-7ec3efc3033313985a9c8a8a",
+    "snl-pt-2026-06-20-f92fc4950eb058647fe49397",
+    "snl-pt-2026-06-27-5aa10ddd9e44844f4ba124bb",
+    "snl-pt-2026-09-05-d772503ec771dffc3ca8520c",
+    "snl-pt-2026-09-19-c0abc2a9b29e77329cd62557",
+    "snl-pt-2026-09-26-ce6b1b8a10c22a769588a027",
+    "snl-pt-2026-10-03-1399484adf95f993e169a69e",
+    "snl-pt-2026-10-10-f6627763a34b7bfa06000e16",
+    "snl-pt-2026-10-24-d26352bf44b0cd37cea9ece2",
+    "snl-pt-2026-10-31-f99d598c0f9ce584c1271893",
+    "snl-pt-2026-11-07-de641ea82595f37cf31bc628",
+    "snl-pt-2026-11-14-010cc36b2427d339274b7ab2",
+    "snl-pt-2026-11-28-fdc2f09bdd23bb8d7bf075cb"
+  ],
+  "promotedMappingDigestSha256": "af731099775c99721f18a14340cf0c0b9482249adb7f2b5714a4cf1ec9e20281",
+  "promotedSuppressionDigestSha256": "000ad73475c32748dd395c5dc5c1b84dc42507ab2dfabca0d1e5ff0bd9cccbd3",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 264,
+    "remainingLegacyOccurrences": 125
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 278,
+    "remainingLegacyOccurrences": 111,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}

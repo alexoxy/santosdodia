@@ -1,0 +1,51 @@
+{
+  "registryVersion": "0.1.0",
+  "status": "baseline-v1-source-candidates",
+  "publicationAllowed": false,
+  "note": "These sources extend discovery and source mapping only. Acquisition remains blocked until each source has an explicit access/licence/robots policy decision.",
+  "sources": [
+    {
+      "id": "dicastery-causes-saints",
+      "name": "Dicastery for the Causes of Saints",
+      "url": "https://www.causesanti.va/",
+      "traditions": ["catholic"],
+      "languages": ["it", "en", "pt", "es", "fr"],
+      "domains": ["causes", "decrees", "beatifications", "canonizations", "recognition-events", "documents"],
+      "access": ["html"],
+      "authorityClass": "A1",
+      "authorityScore": 100,
+      "priority": "P0",
+      "recommendedRole": "incremental-recognition-watch",
+      "notes": "Primary Dicastery source for causes, decrees and recognition lifecycle events; not treated as a complete historical saint catalog."
+    },
+    {
+      "id": "ethiopian-mahibere-kidusan",
+      "name": "Ethiopian Orthodox Tewahdo Church Sunday School Department — Mahibere Kidusan",
+      "url": "https://eotcmk.org/",
+      "traditions": ["oriental-orthodox", "ethiopian-orthodox"],
+      "languages": ["am", "en"],
+      "domains": ["saints", "feasts", "calendar", "holy-synod", "recognition-events", "documents"],
+      "access": ["html"],
+      "authorityClass": "A2",
+      "authorityScore": 93,
+      "priority": "P0",
+      "recommendedRole": "church-corroboration-and-recognition-watch",
+      "notes": "Church-accredited department publishing saint material and Holy Synod statements. Recognition claims should preserve the Holy Synod as the decision authority."
+    },
+    {
+      "id": "syriac-orthodox-western-us",
+      "name": "Syriac Orthodox Church of Antioch — Archdiocese of the Western United States",
+      "url": "https://www.soc-wus.org/",
+      "traditions": ["oriental-orthodox", "syriac-orthodox"],
+      "jurisdictions": ["US-WEST-SYRIAC"],
+      "languages": ["en", "syr"],
+      "domains": ["saints", "calendar", "feasts", "paschalion", "patriarchate-news"],
+      "access": ["html"],
+      "authorityClass": "A2",
+      "authorityScore": 90,
+      "priority": "P0",
+      "recommendedRole": "jurisdictional-corroboration",
+      "notes": "Official archdiocesan source. Its saints page states some listed dates may differ from the official feast day, so it cannot by itself establish a universal Syriac feast date."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "releaseScope": "roman-catholic-pt-2026-overlay-v2",
+  "year": 2026,
+  "churchId": "roman-catholic",
+  "jurisdictionId": "pt",
+  "approved": true,
+  "approvalMode": "explicit-project-owner-instruction",
+  "approvalScope": "liturgical-decisions-only",
+  "approvedAt": "2026-08-16T23:45:00+02:00",
+  "instruction": "avança",
+  "decisionCount": 15,
+  "decisionIds": [
+    "pt-2026-epiphany-transfer",
+    "pt-2026-five-wounds",
+    "pt-2026-cyril-methodius-rank",
+    "pt-2026-catherine-siena-rank",
+    "pt-2026-joan-portugal",
+    "pt-2026-fatima-rank",
+    "pt-2026-ascension-transfer",
+    "pt-2026-anthony-lisbon-rank",
+    "pt-2026-immaculate-heart-transfer",
+    "pt-2026-sancha-mafalda-teresa",
+    "pt-2026-elizabeth-portugal-rank",
+    "pt-2026-benedict-rank",
+    "pt-2026-mount-carmel-rank",
+    "pt-2026-bartholomew-martyrs",
+    "pt-2026-bridget-rank"
+  ],
+  "preparedPlan": {
+    "mainCommit": "ed5b767323eb6835293ca3c54a92a3dd3cc02111",
+    "workflowRunId": 31937313819,
+    "artifactId": 9261021327,
+    "snlIcsSha256": "9f5ff147268e6230fba01a133bda58dca58cefd0f26f60a855ed25fb3bedf4da"
+  },
+  "verification": {
+    "effectivePreviewWorkflowRunId": 31938025260,
+    "effectivePreviewArtifactId": 9261212456,
+    "effectivePreviewArtifactSha256": "06a81b36fa63a638a61d45d752a135b9a96c3bcb749f3af4dccabbdf70dbff94",
+    "sourceOccurrences": 389,
+    "civilDays": 365,
+    "blockingSourceRows": 17,
+    "liturgicalDecisions": 15
+  },
+  "productionWriteAllowed": false,
+  "safety": {
+    "thisReceiptApprovesLiturgicalDecisionsOnly": true,
+    "d1ProductionReleaseRequiresSeparateReleaseGate": true,
+    "automaticFutureProductionWrites": false,
+    "newOrChangedBlockingDeltaRequiresNewApproval": true
+  }
+}

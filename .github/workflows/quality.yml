@@ -1,0 +1,255 @@
+name: Quality
+
+on:
+  push:
+    branches:
+      - main
+      - cloudflare-preview
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=optional
+
+      - name: Audit repository hygiene and data economy
+        run: npm run repo:audit
+
+      - name: Enforce text-first public surface
+        run: npm run surface:text-first-test
+
+      - name: Enforce AdSense review guardrail
+        run: node scripts/check-adsense-readiness.mjs
+
+      - name: Test Portugal publication queue safety
+        run: node scripts/product/test-portugal-saint-publication-queue.mjs
+
+      - name: Test Portugal P0 review pack safety
+        run: node scripts/product/test-portugal-p0-review-pack.mjs
+
+      - name: Test public publication boundaries
+        run: npm run publication:boundary-test
+
+      - name: Test autonomous data-plane policy
+        run: npm run autonomy:test
+
+      - name: Test autonomous corroboration and reviewed source bindings
+        run: npm run autonomy:corroboration-test
+
+      - name: Audit partitioned agent lanes
+        run: npm run autonomy:lanes-audit
+
+      - name: Audit Saints Baseline v1 freeze and source plan
+        run: npm run saints:baseline-audit
+
+      - name: Test Saints Baseline v1 resumable watermark logic
+        run: npm run saints:baseline-test
+
+      - name: Test ordered Saints Baseline v1 normalization watermarks
+        run: npm run saints:baseline-normalization-test
+
+      - name: Audit Dropbox-only Saints Baseline normalizer
+        run: npm run saints:baseline-normalizer-audit
+
+      - name: Test locale-isolated Saints Baseline language review
+        run: node scripts/baseline/test-wikidata-baseline-language-review.mjs
+
+      - name: Audit Saints Baseline language editor
+        run: node scripts/baseline/audit-wikidata-baseline-language-editor.mjs
+
+      - name: Test global cross-batch candidate identity ledger
+        run: npm run saints:baseline-identity-test
+
+      - name: Audit global candidate identity ledger
+        run: npm run saints:baseline-identity-audit
+
+      - name: Test Dropbox REVIEWED batch discovery
+        run: npm run dropbox:batch-list-test
+
+      - name: Test chunked Saints Baseline D1 import watermarks
+        run: npm run saints:baseline-import-test
+
+      - name: Audit reviewed-only Saints Baseline D1 importer
+        run: npm run saints:baseline-importer-audit
+
+      - name: Test reviewed D1 chunk and withheld-name semantics
+        run: npm run db:reviewed-chunk-test
+
+      - name: Test shared autonomous D1 daily budget
+        run: npm run db:d1-budget-test
+
+      - name: Test temporal core and calendar bridge
+        run: npm run temporal:test
+
+      - name: Test multilingual date formatting
+        run: npm run linguistic:date-test
+
+      - name: Test display-label whitespace normalization
+        run: npm run linguistic:text-test
+
+      - name: Audit deterministic linguistic quality
+        run: npm run linguistic:audit
+
+      - name: Validate translation quality
+        run: npm run translations:validate
+
+      - name: Audit automation registry
+        run: npm run automation:audit
+
+      - name: Test automation registry safeguards
+        run: npm run automation:test
+
+      - name: Test canonical Person Vault release
+        run: npm run vault:test
+
+      - name: Test immutable Dropbox canonical Vault uploader
+        run: node scripts/vault/test-dropbox-canonical-uploader.mjs
+
+      - name: Guard canonical Vault workflow safety
+        run: node scripts/vault/test-canonical-vault-workflow.mjs
+
+      - name: Test bounded Dropbox archive hygiene
+        run: npm run dropbox:archive-test
+
+      - name: Test Dropbox OAuth transient retry
+        run: npm run dropbox:oauth-test
+
+      - name: Audit Cloudflare Free operating boundary
+        run: npm run cloudflare:guardrails-audit
+
+      - name: Test Cloudflare Free guardrails
+        run: npm run cloudflare:guardrails-test
+
+      - name: Audit all installed dependencies
+        run: npm audit --audit-level=high
+
+      - name: Test Wikidata staging normalization
+        run: npm run osint:normalize-test
+
+      - name: Test provisional knowledge D1 batch semantics
+        run: npm run db:knowledge-batch-test
+
+      - name: Audit curated data quality
+        run: npm run data:audit
+
+      - name: Audit first-party editorial corpus depth
+        run: npm run editorial:corpus-audit
+
+      - name: Audit claim-specific editorial evidence
+        run: npm run claims:audit
+
+      - name: Audit ecclesiastical directory sources and records
+        run: npm run leaders:audit
+
+      - name: Audit Church-specific calendar engines
+        run: npm run calendar:audit
+
+      - name: Test calendar engines against official reference dates
+        run: npm run calendar:reference-test
+
+      - name: Test Dropbox normalized package conversion
+        run: npm run calendar:normalize-test
+
+      - name: Test immutable Dropbox staging approvals
+        run: npm run calendar:approval-test
+
+      - name: Test publication-safe D1 calendar reads
+        run: npm run calendar:read-model-test
+
+      - name: Test guarded calendar staging SQL generation
+        run: npm run calendar:staging-test
+
+      - name: Test database migrations, idempotency and rollback
+        run: npm run db:migrations-test
+
+      - name: Test portable D1 SQL parsing
+        run: npm run db:sql-parser-test
+
+      - name: Test Wrangler D1 local compatibility
+        run: npm run db:d1-local-test
+
+      - name: Test ephemeral D1 staging config paths
+        run: npm run db:d1-staging-config-test
+
+      - name: Test remote D1 staging rollback safeguards
+        run: npm run db:d1-remote-safety-test
+
+      - name: Validate API and OpenAPI contracts
+        run: npm run api:validate
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js application
+        run: npm run build
+
+      - name: Build Cloudflare Worker
+        run: npm run cloudflare:build
+
+      - name: Local production-build smoke test
+        shell: bash
+        run: |
+          npm run start -- --hostname 127.0.0.1 > /tmp/santosdodia-next.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid || true' EXIT
+
+          for attempt in {1..30}; do
+            http_code="$(curl --silent --show-error --output /tmp/santosdodia-status.json --write-out '%{http_code}' http://127.0.0.1:3000/api/v1/system/status || true)"
+
+            if [ "$http_code" = "000" ]; then
+              sleep 1
+              continue
+            fi
+
+            echo "Health endpoint returned HTTP ${http_code}:"
+            cat /tmp/santosdodia-status.json || true
+            echo
+
+            if [ "$http_code" = "200" ] && node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/santosdodia-status.json','utf8')); if(body.status!=='ok') process.exit(1)"; then
+              calendar_code="$(curl --silent --show-error --output /tmp/santosdodia-calendar.json --write-out '%{http_code}' 'http://127.0.0.1:3000/api/v1/observances?year=2026&month=9&locale=en&tradition=roman-catholic&country=PT&calendarVersion=roman-portugal-v1' || true)"
+              echo "Calendar endpoint returned HTTP ${calendar_code}:"
+              cat /tmp/santosdodia-calendar.json || true
+              echo
+
+              if [ "$calendar_code" != "200" ]; then
+                echo "Calendar semantic smoke check did not return HTTP 200."
+                exit 1
+              fi
+
+              node -e "const body=JSON.parse(require('node:fs').readFileSync('/tmp/santosdodia-calendar.json','utf8')); const items=Array.isArray(body.data)?body.data:[]; const match=items.some(item=>item.dateISO==='2026-09-20' && Array.isArray(item.traditions) && item.traditions.includes('roman-catholic')); if(!match){console.error('Expected Roman Catholic observance for 2026-09-20 was not returned.'); process.exit(1)}"
+              exit 0
+            fi
+
+            echo "Application health check did not pass."
+            cat /tmp/santosdodia-next.log || true
+            exit 1
+          done
+
+          echo "Application did not become reachable within 30 seconds."
+          cat /tmp/santosdodia-next.log || true
+          exit 1

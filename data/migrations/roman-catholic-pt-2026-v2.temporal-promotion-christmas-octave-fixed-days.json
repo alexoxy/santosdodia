@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "status": "christmas-octave-fixed-temporal-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06"
+  },
+  "temporalRuleIds": [
+    "temporal-rule:christmas-octave-day-5:roman-catholic",
+    "temporal-rule:christmas-octave-day-6:roman-catholic",
+    "temporal-rule:christmas-octave-day-7:roman-catholic"
+  ],
+  "candidateOutcomes": {
+    "candidates": 3,
+    "presentSourceOccurrences": 3,
+    "suppressedCandidates": 0,
+    "withheldJurisdictionRows": 0
+  },
+  "promotedSourceOccurrences": 3,
+  "promotedMappingDigestSha256": "bbe56832e2bd84e3994e56f26188254962504ddf260af87979605e9dfd30a9d6",
+  "temporalRuleMappingDigestSha256": "c02a1a89eb1279c9b16152907eb45a75856f4aedf404fb68cacdd68dbf013983",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 202,
+    "remainingLegacyOccurrences": 187
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 205,
+    "remainingLegacyOccurrences": 184,
+    "promotionAllowed": false
+  },
+  "classificationBasis": [
+    "Holy See authority for days within the Octave of Christmas",
+    "canonical fifth, sixth and seventh octave-day identities already reviewed in the repository localization bridge",
+    "fixed Gregorian dates stored as perennial TemporalRules without annual years",
+    "exact approved Portugal 2026 source occurrence, weekday rank and record hash for each promoted row"
+  ],
+  "labelsCreateIdentity": false,
+  "annualDateCreatesPerennialRule": false,
+  "mutationAllowed": false,
+  "verifiedAt": "2026-09-13"
+}

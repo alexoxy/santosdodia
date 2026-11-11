@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "norbert-xanten",
+        "primaryObservanceId": "rc:StNorbert",
+        "category": "saint",
+        "names": {
+          "en": "Saint Norbert of Xanten",
+          "pt": "São Norberto de Xanten",
+          "es": "San Norberto de Xanten",
+          "it": "San Norberto di Xanten"
+        }
+      },
+      "recognition": {
+        "id": "recognition:norbert-xanten:roman-catholic",
+        "personId": "norbert-xanten",
+        "ecclesialTitles": [
+          "bishop",
+          "religious-founder"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/06/06/st--norbert--bishop--of-magdeburg--founder-of-the-regular-canoni.html"
+      },
+      "observanceId": "observance:norbert-xanten:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:norbert-xanten:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StNorbert",
+        "dateISO": "2026-06-06",
+        "sourceOccurrenceId": "snl-pt-2026-06-06-f69e7c4527cc7521b56c808a",
+        "sourceRecordHash": "23dc7b28aed1fddf1f1c6a76831b5394b181bff8a56fbcaa67e3739b41266dc1",
+        "sourceLabelPt": "S. Norberto, bispo",
+        "observedDesignation": "S. Norberto, bispo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-6-6",
+        "sameDayOptionalAlternative": {
+          "legacyObservanceId": "rc:SatMemBVM3",
+          "sourceOccurrenceId": "snl-pt-2026-06-06-7ec3efc3033313985a9c8a8a",
+          "selectionMode": "optional-alternative",
+          "mustRemainDistinct": true
+        }
+      }
+    }
+  ],
+  "reviewDigestSha256": "21c8f47963106fccfac81f7acf332ed4db84ebb47475970695c994a5b3d54abc",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

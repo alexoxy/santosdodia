@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "status": "normative",
+  "principles": {
+    "naturalLanguageOverLiteralTranslation": true,
+    "localeSpecificRules": true,
+    "neverTitleCaseByCss": true,
+    "datesUseIntlBeforeEditorialOverrides": true,
+    "preserveOfficialNames": true,
+    "preserveSourceLanguageWhenTranslationIsUnverified": true,
+    "machineTranslationIsNeverSilentlyCanonical": true,
+    "punctuationMustFollowTargetLanguage": true,
+    "typographyMustFollowTargetLanguage": true,
+    "noInventedAbbreviations": true,
+    "noInventedEcclesiasticalTerminology": true
+  },
+  "locales": {
+    "pt": {
+      "variant": "pt-PT",
+      "authority": "Priberam",
+      "dateLocale": "pt-PT",
+      "rules": [
+        "months-and-weekdays-lowercase-in-running-date-text",
+        "date-prepositions-de-and-em-remain-lowercase",
+        "avoid-brazilian-portuguese-forms-when-a-pt-PT-form-is-required",
+        "use-portuguese-angle-and-curly-punctuation-only-where-editorially-appropriate"
+      ],
+      "forbiddenPatterns": [
+        {"id":"pt-capital-de-date","pattern":"\\b(?:Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\\s+De\\b","flags":"u"},
+        {"id":"pt-capital-em-date","pattern":"\\bEm\\s+(?:Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\\b","flags":"u"}
+      ]
+    },
+    "en": {"variant":"en-GB","authority":"Oxford English Dictionary","dateLocale":"en-GB","rules":["use-British-English-default","do-not-insert-date-prepositions-from-other-languages"]},
+    "es": {"variant":"es","authority":"RAE","dateLocale":"es-ES","rules":["use-Spanish-date-prepositions-and-casing","opening-question-and-exclamation-marks-when-required"]},
+    "fr": {"variant":"fr","authority":"Académie française","dateLocale":"fr-FR","rules":["use-French-date-casing","French-punctuation-spacing-must-be-preserved"]},
+    "de": {"variant":"de-DE","authority":"Duden","dateLocale":"de-DE","rules":["German-nouns-retain-required-capitals","date-punctuation-follows-German-convention"]},
+    "it": {"variant":"it","authority":"Treccani / Accademia della Crusca","dateLocale":"it-IT","rules":["use-Italian-date-casing-and-prepositions"]},
+    "pl": {"variant":"pl","authority":"WSJP / PWN","dateLocale":"pl-PL","rules":["use-Polish-inflected-month-form-produced-by-Intl"]},
+    "ru": {"variant":"ru","authority":"Грамота.ру","dateLocale":"ru-RU","rules":["use-Russian-genitive-month-form-produced-by-Intl","do-not-transliterate-when-canonical-Cyrillic-is-available"]},
+    "fil": {"variant":"fil","authority":"Komisyon sa Wikang Filipino","dateLocale":"fil-PH","rules":["prefer-curated-Filipino-over-English-fallback-when-reviewed"]},
+    "sw": {"variant":"sw","authority":"BAKITA","dateLocale":"sw-TZ","rules":["prefer-curated-Kiswahili-over-English-fallback-when-reviewed"]}
+  },
+  "translationGate": {
+    "requiredFields": ["locale", "sourceLocale", "sourceTextHash", "translationMethod", "qualityStatus"],
+    "allowedQualityStatus": ["official", "editorial", "verified-machine-assisted", "transliterated", "source-only", "unavailable"],
+    "autoPublishStatuses": ["official", "editorial", "verified-machine-assisted"],
+    "blockEnglishFallbackAsTranslation": true,
+    "requireTerminologyValidation": true,
+    "requirePunctuationValidation": true,
+    "requireDateFormattingValidation": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-19.json",
+  "reviewDigestSha256": "7c7af2cb7ab9cfac086869dfc6c43496130d6a98a0d409e27a2940689d241158",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "john-brebeuf",
+    "isaac-jogues",
+    "gabriel-lalemant",
+    "antoine-daniel",
+    "charles-garnier",
+    "noel-chabanel",
+    "rene-goupil",
+    "jean-de-la-lande"
+  ],
+  "promotedObservanceIds": [
+    "observance:john-brebeuf-isaac-jogues-companions:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 288,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 101
+  },
+  "fixedSanctoraleMappingDigestSha256": "c3a4bf8afcf042cad3e7bb02c00391ab2fdc889a6661ca20468f5cfd90d2ebbd",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-23"
+}

@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-11T16:30:00+01:00",
+  "status": "research-planning-only",
+  "activation": {
+    "automaticAcquisition": false,
+    "automaticProductionWrites": false,
+    "rule": "A partition becomes executable only after its authority source, access method, robots/terms/licence and adapter contract are approved in the active policy registry."
+  },
+  "selectionRule": "Include a Church body in the user-facing calendar baseline only when authoritative evidence establishes an actual sanctoral, menologion, synaxarium, calendar of saints, festivals or commemorated persons. Preserve that Church's terminology and jurisdiction; never infer Catholic canonization semantics.",
+  "priorities": {
+    "P0": "Existing SantosDia source/engine or a clear official calendar source; build first.",
+    "P1": "Strong official source confirmed; adapter/source-policy work required.",
+    "P2": "Valid global expansion frontier; discover Church-specific normative calendar before ingestion."
+  },
+  "executionPartitions": [
+    {
+      "id": "catholic-latin-general",
+      "churchBodyId": "catholic-latin",
+      "family": "catholic",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "general-roman",
+      "calendarSystems": ["gregorian"],
+      "priority": "P0",
+      "sourceIds": ["vatican-ddw", "litcal-api"],
+      "sourceState": "existing-in-repository",
+      "adapterState": "existing-partial",
+      "publicationGoal": "General Roman Calendar observances and rules with Holy See provenance."
+    },
+    {
+      "id": "catholic-latin-portugal",
+      "churchBodyId": "catholic-latin",
+      "family": "catholic",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "PT",
+      "calendarSystems": ["gregorian"],
+      "priority": "P0",
+      "sourceIds": ["litcal-api", "portugal-national-liturgy-secretariat"],
+      "sourceState": "mixed-existing-and-policy-review",
+      "adapterState": "existing-partial",
+      "publicationGoal": "Portugal national proper layered over the General Roman Calendar."
+    },
+    {
+      "id": "eastern-catholic-ugcc",
+      "churchBodyId": "ukrainian-greek-catholic",
+      "family": "eastern-catholic",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "UGCC",
+      "calendarSystems": ["gregorian-new-style", "church-specific"],
+      "priority": "P1",
+      "sourceCandidates": [
+        "https://ugcc.ua/library/worship/",
+        "https://direct.ugcc.ua/data/tserkovnyy-kalendar-ugkts-na-2026-rik-8059/"
+      ],
+      "sourceState": "official-confirmed-policy-review-required",
+      "adapterState": "needed",
+      "publicationGoal": "UGCC Menologion and annual church calendar using UGCC terms and Synodal decisions."
+    },
+    {
+      "id": "orthodox-goarch",
+      "churchBodyId": "greek-orthodox-archdiocese-america",
+      "family": "eastern-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "GOARCH-US",
+      "calendarSystems": ["revised-julian", "orthodox-paschalion"],
+      "priority": "P0",
+      "sourceIds": ["goarch-planner"],
+      "sourceState": "existing-in-repository",
+      "adapterState": "existing-partial",
+      "publicationGoal": "GOARCH saints, feasts, readings and fasting calendar with English/Greek evidence."
+    },
+    {
+      "id": "orthodox-oca",
+      "churchBodyId": "orthodox-church-in-america",
+      "family": "eastern-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "OCA",
+      "calendarSystems": ["church-specific", "orthodox-paschalion"],
+      "priority": "P0",
+      "sourceIds": ["oca-lives"],
+      "sourceState": "existing-in-repository",
+      "adapterState": "existing-partial",
+      "publicationGoal": "OCA daily feasts and saints; biography text remains rights-gated."
+    },
+    {
+      "id": "orthodox-russian",
+      "churchBodyId": "russian-orthodox-church",
+      "family": "eastern-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "Moscow-Patriarchate",
+      "calendarSystems": ["julian-fixed", "orthodox-paschalion"],
+      "priority": "P1",
+      "sourceCandidates": ["https://patriarchia.ru/", "https://patriarchia.ru/document/118307"],
+      "sourceState": "official-confirmed-policy-review-required",
+      "adapterState": "needed",
+      "publicationGoal": "Official Patriarchal calendar, preserving old-style and civil-date mapping."
+    },
+    {
+      "id": "orthodox-romanian",
+      "churchBodyId": "romanian-orthodox-church",
+      "family": "eastern-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "Romanian-Patriarchate",
+      "calendarSystems": ["revised-julian-fixed", "orthodox-paschalion"],
+      "priority": "P1",
+      "sourceCandidates": ["https://basilica.ro/en/category/feasts-and-saints/"],
+      "sourceState": "official-confirmed-policy-review-required",
+      "adapterState": "needed",
+      "publicationGoal": "Romanian Orthodox daily calendar plus Synodal additions and effective dates."
+    },
+    {
+      "id": "oriental-coptic-southern-us-pilot",
+      "churchBodyId": "coptic-orthodox",
+      "family": "oriental-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "Coptic-Southern-US",
+      "calendarSystems": ["coptic"],
+      "priority": "P0",
+      "sourceIds": ["suscopts-synaxarium"],
+      "sourceState": "existing-official-jurisdiction-source",
+      "adapterState": "existing-partial",
+      "publicationGoal": "Pilot Coptic Synaxarium/calendar adapter without claiming universal patriarchal jurisdiction."
+    },
+    {
+      "id": "oriental-armenian-mother-see",
+      "churchBodyId": "armenian-apostolic",
+      "family": "oriental-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "Mother-See-Holy-Etchmiadzin",
+      "calendarSystems": ["armenian", "church-specific"],
+      "priority": "P0",
+      "sourceIds": ["armenian-mother-see"],
+      "sourceState": "existing-in-repository",
+      "adapterState": "existing-partial",
+      "publicationGoal": "Official Mother See saints, feasts and movable-calendar observances."
+    },
+    {
+      "id": "oriental-ethiopian",
+      "churchBodyId": "ethiopian-orthodox-tewahedo",
+      "family": "oriental-orthodox",
+      "calendarSemantics": "sanctoral-normative",
+      "jurisdiction": "Ethiopian-Orthodox-Tewahedo",
+      "calendarSystems": ["ethiopian"],
+      "priority": "P0",
+      "sourceIds": ["ethiopian-church"],
+      "sourceState": "existing-but-review-gated",
+      "adapterState": "partial-needs-hardening",
+      "publicationGoal": "Ethiopian calendar/Senksar mapping while preserving Ethiopian dates and recurring commemorations."
+    },
+    {
+      "id": "oriental-syriac",
+      "churchBodyId": "syriac-orthodox-church",
+      "family": "oriental-orthodox",
+      "calendarSemantics": "church-specific-normative",
+      "jurisdiction": "Syriac-Orthodox-Patriarchate",
+      "calendarSystems": ["church-specific"],
+      "priority": "P0",
+      "sourceIds": ["syriac-patriarchate"],
+      "sourceState": "existing-but-review-gated",
+      "adapterState": "source-discovery-needed",
+      "publicationGoal": "Do not publish a full calendar until an authoritative complete patriarchal/jurisdictional calendar endpoint is verified."
+    },
+    {
+      "id": "anglican-church-of-england",
+      "churchBodyId": "church-of-england",
+      "family": "anglican",
+      "calendarSemantics": "commemorative-normative",
+      "jurisdiction": "England",
+      "calendarSystems": ["gregorian", "church-year"],
+      "priority": "P0",
+      "sourceIds": ["cofe-calendar", "cofe-lesser"],
+      "sourceState": "existing-in-repository",
+      "adapterState": "existing-partial",
+      "publicationGoal": "Principal Feasts, Festivals, Lesser Festivals and Commemorations using Church of England vocabulary."
+    },
+    {
+      "id": "lutheran-elca",
+      "churchBodyId": "evangelical-lutheran-church-in-america",
+      "family": "lutheran",
+      "calendarSemantics": "commemorative-normative",
+      "jurisdiction": "ELCA-US",
+      "calendarSystems": ["gregorian", "church-year"],
+      "priority": "P1",
+      "sourceCandidates": ["https://www.elca.org/worship-with-us/church-year-and-observances"],
+      "sourceState": "official-confirmed-policy-review-required",
+      "adapterState": "needed",
+      "publicationGoal": "Lesser festivals and commemorations; preserve ELCA terminology rather than Catholic saint ranks."
+    },
+    {
+      "id": "lutheran-lcms",
+      "churchBodyId": "lutheran-church-missouri-synod",
+      "family": "lutheran",
+      "calendarSemantics": "commemorative-normative",
+      "jurisdiction": "LCMS-US",
+      "calendarSystems": ["gregorian", "church-year"],
+      "priority": "P1",
+      "sourceCandidates": [
+        "https://www.lcms.org/worship/church-year",
+        "https://www.lcms.org/worship/church-year/commemorations"
+      ],
+      "sourceState": "official-confirmed-policy-review-required",
+      "adapterState": "needed",
+      "publicationGoal": "Feasts, festivals and commemorations using the LCMS sanctoral/calendar semantics."
+    }
+  ],
+  "expansionFrontiers": [
+    {
+      "id": "eastern-catholic-other-sui-iuris",
+      "priority": "P2",
+      "discoveryRoot": "holy-see-dicastery-eastern-churches",
+      "rule": "One partition per sui iuris Church; never inherit the Latin calendar by default."
+    },
+    {
+      "id": "eastern-orthodox-other-autocephalous-autonomous",
+      "priority": "P2",
+      "discoveryRoots": ["ecumenical-patriarchate", "world-council-of-churches"],
+      "rule": "One Church-body partition with its own fixed-calendar system, Paschalion, local saints and Synodal authority."
+    },
+    {
+      "id": "oriental-orthodox-other-jurisdictions",
+      "priority": "P2",
+      "discoveryRoot": "world-council-of-churches",
+      "rule": "Add Eritrean, Malankara and additional Coptic/Armenian/Syriac jurisdictions only from their own authoritative sources."
+    },
+    {
+      "id": "anglican-global-provinces",
+      "priority": "P2",
+      "discoveryRoot": "anglican-communion-office",
+      "knownScope": "42 autonomous Member Churches plus five Extra-Provincial areas at research time",
+      "rule": "A province enters the calendar product only after its authorized commemorative calendar is found; Church of England is not a universal proxy."
+    },
+    {
+      "id": "lutheran-global-member-churches",
+      "priority": "P2",
+      "discoveryRoot": "lutheran-world-federation",
+      "rule": "Only member Churches with an explicit festival/commemoration calendar enter the saints/commemorations product."
+    },
+    {
+      "id": "old-catholic-member-churches",
+      "priority": "P2",
+      "discoveryRoot": "union-of-utrecht",
+      "rule": "Resolve calendar and recognition semantics per member Church before publication."
+    }
+  ],
+  "baselineExitCriteria": {
+    "minimum": [
+      "Every published partition has an authoritative Church source.",
+      "Every published observance carries Church/jurisdiction and original terminology.",
+      "Every date rule is tested across relevant calendar/timezone boundaries.",
+      "Every person is identity-resolved without borrowing recognition status from another Church.",
+      "Every published locale has a validated display label or an explicit fallback state.",
+      "No partition requires a Worker build for routine data refresh.",
+      "Last-known-good and rollback receipts exist before automatic promotion is enabled."
+    ]
+  }
+}

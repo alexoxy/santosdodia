@@ -1,0 +1,123 @@
+.ad-slot {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ad-slot .ad-label {
+  display: block;
+  margin-bottom: .35rem;
+  text-align: center;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .58;
+}
+
+.ad-slot-top {
+  min-height: 108px;
+  margin: 0;
+}
+
+.ad-slot-sidebar {
+  min-height: 280px;
+  margin: 0;
+}
+
+.site-top-ad {
+  width: min(1180px, 100%);
+  margin: 0 auto 1.5rem;
+}
+
+.site-monetized-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.site-content-frame {
+  min-width: 0;
+  width: 100%;
+}
+
+.site-main.site-main-with-ad-rail {
+  width: min(1512px, calc(100% - 32px));
+}
+
+.site-main-with-ad-rail .site-monetized-grid {
+  grid-template-columns: minmax(0, 1180px) 300px;
+  justify-content: center;
+}
+
+.site-ad-sidebar-rail {
+  position: sticky;
+  top: 6.75rem;
+  min-width: 0;
+  width: 300px;
+}
+
+/* The homepage and rich saint profiles keep their existing local placement
+   rules: content first, then a separate desktop rail. These remain layout
+   columns/panels, never viewport overlays. */
+.home-monetized-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.home-monetized-layout.has-ad-rail {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
+.home-monetized-main {
+  min-width: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ad-sidebar-rail {
+  position: sticky;
+  top: 6.75rem;
+  min-width: 0;
+}
+
+.saint-profile-actions .ad-sidebar-rail {
+  margin-top: 1rem;
+}
+
+/* Advertising must remain part of the document layout. No ad container here
+   uses fixed positioning, transforms over content or negative overlap. */
+@media (max-width: 1360px) {
+  .site-main.site-main-with-ad-rail {
+    width: min(1180px, calc(100% - 32px));
+  }
+
+  .site-main-with-ad-rail .site-monetized-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .site-ad-sidebar-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .home-monetized-layout.has-ad-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-sidebar-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ad-slot-top {
+    min-height: 90px;
+  }
+
+  .site-top-ad {
+    margin-bottom: 1rem;
+  }
+}

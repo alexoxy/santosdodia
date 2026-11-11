@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-52.json",
+  "reviewDigestSha256": "0c46d520e612ee3285c437cfa5a899e648071110964fe6ed3c7345d8cd85aa28",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "januarius-benevento"
+  ],
+  "promotedObservanceIds": [
+    "observance:januarius-benevento:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 322,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 67
+  },
+  "fixedSanctoraleMappingDigestSha256": "e4913a2272f57557d843b7c1b0a79aed291cc5a04e6a1c00fb8ca53ea0eb7390",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

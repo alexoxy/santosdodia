@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "jurisdictionModelVersion": "1.0",
+  "status": "repository-reviewed-jurisdiction-anchors",
+  "jurisdictions": [
+    {
+      "id": "jurisdiction:roman-catholic:pt",
+      "entityType": "Jurisdiction",
+      "churchId": "church:roman-catholic",
+      "kind": "national-liturgical-context",
+      "countryCode": "PT",
+      "authorityDomains": ["liturgia.pt"],
+      "calendarSystems": ["gregorian"],
+      "sourceEvidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/",
+          "claimTypes": ["jurisdictional-liturgical-authority", "portugal-calendar-context"]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/agenda/agenda.ics",
+          "claimTypes": ["official-calendar-feed", "portugal-calendar-context"]
+        }
+      ],
+      "verifiedAt": "2026-08-22"
+    }
+  ]
+}

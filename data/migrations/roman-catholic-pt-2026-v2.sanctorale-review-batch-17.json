@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "occurrenceKey": "john-fisher-thomas-more",
+      "persons": [
+        {
+          "id": "john-fisher-rochester",
+          "primaryObservanceId": "rc:StsJohnFisherThomasMore",
+          "category": "saint",
+          "names": {
+            "en": "Saint John Fisher, Bishop",
+            "pt": "São João Fisher, bispo",
+            "es": "San Juan Fisher, obispo",
+            "it": "San Giovanni Fisher, vescovo"
+          }
+        },
+        {
+          "id": "thomas-more",
+          "primaryObservanceId": "rc:StsJohnFisherThomasMore",
+          "category": "saint",
+          "names": {
+            "en": "Saint Thomas More",
+            "pt": "São Tomás More",
+            "es": "Santo Tomás Moro",
+            "it": "San Tommaso Moro"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:john-fisher-rochester:roman-catholic",
+          "personId": "john-fisher-rochester",
+          "ecclesialTitles": [
+            "bishop",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/06/22/sts--john-fisher--bishop-of--rochester--and-thomas-moore---engli.html"
+        },
+        {
+          "id": "recognition:thomas-more:roman-catholic",
+          "personId": "thomas-more",
+          "ecclesialTitles": [
+            "layman",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/06/22/saint-thomas-more.html"
+        }
+      ],
+      "observanceId": "observance:john-fisher-thomas-more:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:john-fisher-thomas-more:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsJohnFisherThomasMore",
+        "dateISO": "2026-06-22",
+        "sourceOccurrenceId": "snl-pt-2026-06-22-2569a6ad0e5914d6a7dcd150",
+        "sourceRecordHash": "9695021235fcec2512c34bebfd1540c93ef13589d2d0b589655a09cb6f7160a5",
+        "sourceLabelPt": "Santos João Fisher, bispo e Tomás More, mártires",
+        "observedDesignation": "Santos João Fisher, bispo e Tomás More, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-6-22"
+      }
+    },
+    {
+      "occurrenceKey": "pontian-hippolytus",
+      "persons": [
+        {
+          "id": "pontian-pope",
+          "primaryObservanceId": "rc:StsPontianHippolytus",
+          "category": "saint",
+          "names": {
+            "en": "Saint Pontian, Pope",
+            "pt": "São Ponciano, papa",
+            "es": "San Ponciano, papa",
+            "it": "San Ponziano, papa"
+          }
+        },
+        {
+          "id": "hippolytus-priest-rome",
+          "primaryObservanceId": "rc:StsPontianHippolytus",
+          "category": "saint",
+          "names": {
+            "en": "Saint Hippolytus, Priest",
+            "pt": "Santo Hipólito, presbítero",
+            "es": "San Hipólito, presbítero",
+            "it": "Sant’Ippolito, presbitero"
+          }
+        }
+      ],
+      "recognitions": [
+        {
+          "id": "recognition:pontian-pope:roman-catholic",
+          "personId": "pontian-pope",
+          "ecclesialTitles": [
+            "pope",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/08/13/sts--pontian--pope-and--hippolytus-priest--martyrs.html"
+        },
+        {
+          "id": "recognition:hippolytus-priest-rome:roman-catholic",
+          "personId": "hippolytus-priest-rome",
+          "ecclesialTitles": [
+            "priest",
+            "martyr"
+          ],
+          "evidenceUrl": "https://www.vaticannews.va/en/saints/08/13/sts--pontian--pope-and--hippolytus-priest--martyrs.html"
+        }
+      ],
+      "observanceId": "observance:pontian-hippolytus:roman-catholic",
+      "observanceType": "multi-person-commemoration",
+      "sanctoraleRuleId": "sanctorale-rule:pontian-hippolytus:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StsPontianHippolytus",
+        "dateISO": "2026-08-13",
+        "sourceOccurrenceId": "snl-pt-2026-08-13-db2220ac48c894eb504eb23e",
+        "sourceRecordHash": "05451cf69cd7d3d97a0fcd6e9e5fcbf905242cac2cc90aba9743ef1cd627d2f0",
+        "sourceLabelPt": "Santos Ponciano, papa, e Hipólito, presbítero, mártires",
+        "observedDesignation": "Santos Ponciano, papa, e Hipólito, presbítero, mártires – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-13"
+      }
+    }
+  ],
+  "reviewDigestSha256": "a0bb30f211716adebf34291153ad7a84156047794884efe34409193d70fb8f17",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-22"
+}

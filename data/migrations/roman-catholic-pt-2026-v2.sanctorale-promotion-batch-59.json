@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-59.json",
+  "reviewDigestSha256": "46606ca8d14b804f630f2b4bf7678a9e016948e3f21649f0f58c6fd6b6905454",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "hedwig-of-silesia",
+    "margaret-mary-alacoque"
+  ],
+  "promotedObservanceIds": [
+    "observance:hedwig-of-silesia:roman-catholic",
+    "observance:margaret-mary-alacoque:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 331,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 58
+  },
+  "fixedSanctoraleMappingDigestSha256": "85406115279a605d2c8daf0693d79da26bf1b5c8b96c5b01d5f6253aea542275",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-04"
+}

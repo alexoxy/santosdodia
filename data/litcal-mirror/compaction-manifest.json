@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "migratedAt": "2026-08-03T12:36:25.851Z",
+  "fileCount": 88,
+  "eventCount": 49297,
+  "beforeBytes": 56630011,
+  "afterBytes": 10692682,
+  "reductionRatio": 0.8112,
+  "rawRecovery": "Legacy raw payloads remain recoverable from Git history until the separately approved history-cleanup operation. Future raw snapshots are archived in Dropbox before normalization.",
+  "activeTreeFormat": "santosdia-litcal-runtime-fallback"
+}

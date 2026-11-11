@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "santosdodia",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-02",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "santosdodia",
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "CALENDAR_DB",
+      "database_name": "santosdodia-production",
+      "database_id": "e1ad3640-b334-49d1-a6fc-a73f54924803",
+      "migrations_dir": "db/migrations",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1,
+  },
+}

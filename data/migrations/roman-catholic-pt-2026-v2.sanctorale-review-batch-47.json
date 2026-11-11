@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "louis-ix-france",
+        "primaryObservanceId": "rc:StLouis",
+        "category": "saint",
+        "names": {
+          "en": "Saint Louis IX, King of France",
+          "pt": "São Luís de França",
+          "es": "San Luis IX, rey de Francia",
+          "it": "San Luigi IX, re di Francia"
+        }
+      },
+      "recognition": {
+        "id": "recognition:louis-ix-france:roman-catholic",
+        "personId": "louis-ix-france",
+        "ecclesialTitles": [
+          "king",
+          "layman"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/08/25/st--louis---king-of-france-.html"
+      },
+      "observanceId": "observance:louis-ix-france:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:louis-ix-france:general-roman",
+      "contextualBoundary": {
+        "generalRomanPortugal": "optional-memorial",
+        "sameDateJosephCalasanz": "optional-memorial",
+        "sameDateAlternativesMaterializedIndependently": true,
+        "precedenceInferred": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StLouis",
+        "dateISO": "2026-08-25",
+        "sourceOccurrenceId": "snl-pt-2026-08-25-b6788316a8c4e9cb5762a749",
+        "sourceRecordHash": "e7ba2c942945225495483ee23ce36a01ca4656ad20eb42c4db5e851c49537da1",
+        "sourceLabelPt": "S. Luís de França",
+        "observedDesignation": "S. Luís de França – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-8-25"
+      }
+    }
+  ],
+  "reviewDigestSha256": "ac1cbb496c2e8b98e2259eee9681990ba6104bea7b14290e2577baaa34ec9e12",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

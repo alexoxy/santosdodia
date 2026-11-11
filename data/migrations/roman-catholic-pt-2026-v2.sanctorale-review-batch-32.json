@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "maria-goretti",
+        "primaryObservanceId": "rc:StMariaGoretti",
+        "category": "saint",
+        "names": {
+          "en": "Saint Maria Goretti, Virgin and Martyr",
+          "pt": "Santa Maria Goretti, virgem e mártir",
+          "es": "Santa María Goretti, virgen y mártir",
+          "it": "Santa Maria Goretti, vergine e martire"
+        }
+      },
+      "recognition": {
+        "id": "recognition:maria-goretti:roman-catholic",
+        "personId": "maria-goretti",
+        "ecclesialTitles": [
+          "virgin",
+          "martyr"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/06/st--maria-goretti--virgin-and-martyr.html"
+      },
+      "observanceId": "observance:maria-goretti:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:maria-goretti:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StMariaGoretti",
+        "dateISO": "2026-07-06",
+        "sourceOccurrenceId": "snl-pt-2026-07-06-9cf5bc757be978b6d3aaffb6",
+        "sourceRecordHash": "53ed0e313c273b9f46ae942dcda5d865d75be810055ba90b7f58385da2d77c1b",
+        "sourceLabelPt": "S. Maria Goretti, virgem e mártir",
+        "observedDesignation": "S. Maria Goretti, virgem e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://liturgia.pt/liturgiadiaria/dia.php?data=2026-7-6"
+      }
+    }
+  ],
+  "reviewDigestSha256": "b4a67f5a73f02f60c0b53d80e0b536f2461e0707cc47ca11c8f24d796723509f",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-49.json",
+  "reviewDigestSha256": "f2f154d3061ab0f10b10cfce38a608b9348a1d07672f10ed01fb290d825e8158",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "teresa-calcutta"
+  ],
+  "promotedObservanceIds": [
+    "observance:teresa-calcutta:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 318,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 71
+  },
+  "fixedSanctoraleMappingDigestSha256": "9d5add77ab133027cc2174034d40942d6086b7f9bfc681ba4430105b1a3959ee",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-28"
+}

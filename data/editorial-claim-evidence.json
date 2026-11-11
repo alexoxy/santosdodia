@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-08-07",
+  "evidence": [
+    {
+      "observanceId": "our-lady-lourdes",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Lourdes — 02-11",
+      "status": "corroborated",
+      "source": {
+        "catalogSourceId": "lourdes-sanctuary",
+        "name": "Sanctuary of Our Lady of Lourdes",
+        "url": "https://www.lourdes-france.com/en/feast-of-our-lady-of-lourdes/",
+        "kind": "official"
+      },
+      "unresolvedClaims": []
+    },
+    {
+      "observanceId": "fatima",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Fátima — 05-13",
+      "status": "corroborated",
+      "source": {
+        "catalogSourceId": "fatima-shrine",
+        "name": "Shrine of Fatima",
+        "url": "https://www.fatima.pt/en/",
+        "kind": "official"
+      },
+      "unresolvedClaims": []
+    },
+    {
+      "observanceId": "anthony-lisbon",
+      "claimType": "observance-name-date-and-local-rank",
+      "claimValue": "Saint Anthony of Lisbon — 06-13 — solemnity in Lisbon",
+      "status": "corroborated",
+      "source": {
+        "catalogSourceId": "lisbon-patriarchate",
+        "name": "Patriarchate of Lisbon diocesan calendar 2025–2026",
+        "url": "https://www.patriarcado-lisboa.pt/site/docs/2025797programa_2025-26-web.pdf",
+        "kind": "official"
+      },
+      "unresolvedClaims": []
+    },
+    {
+      "observanceId": "our-lady-carmel",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Our Lady of Mount Carmel — 07-16",
+      "status": "corroborated",
+      "source": {
+        "catalogSourceId": "carmelite-order",
+        "name": "Order of Carmelites",
+        "url": "https://carmelite.org/news/feast-of-our-lady-of-mount-carmel/",
+        "kind": "official"
+      },
+      "unresolvedClaims": []
+    },
+    {
+      "observanceId": "teresa-avila",
+      "claimType": "observance-name-and-date",
+      "claimValue": "Saint Teresa of Jesus — 10-15",
+      "status": "corroborated",
+      "source": {
+        "catalogSourceId": "vatican-teresa",
+        "name": "Holy See",
+        "url": "https://www.vatican.va/content/john-paul-ii/en/homilies/1999/documents/hf_jp-ii_hom_15101999_univ-eccl.html",
+        "kind": "official"
+      },
+      "unresolvedClaims": []
+    }
+  ]
+}

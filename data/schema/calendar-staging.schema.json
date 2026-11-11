@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.santosdodia.com/schemas/calendar-staging.schema.json",
+  "title": "SantosDia multi-Church calendar staging package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "run", "sources", "policies", "rules", "occurrences", "labels"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "createdAt", "retrievedAt", "dropboxManifestPath", "manifestSha256", "status"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "retrievedAt": { "type": "string", "format": "date-time" },
+        "dropboxManifestPath": { "type": "string", "pattern": "^/Santos do Dia/02_Dados_Eclesiasticos/" },
+        "manifestSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "status": { "enum": ["provisional", "validated", "rejected"] },
+        "validationReportPath": { "type": "string" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "churchId", "name", "url", "authority", "usagePolicy"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "churchId": { "type": "string", "minLength": 1 },
+          "jurisdictionId": { "type": ["string", "null"] },
+          "name": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" },
+          "authority": { "enum": ["official-church", "official-jurisdiction", "official-local-church", "reference-engine", "reference-directory", "osint-corroboration"] },
+          "usagePolicy": { "type": "string", "minLength": 1 },
+          "copyrightPolicy": { "type": ["string", "null"] },
+          "active": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "churchId", "engineId", "fixedDatePolicy", "calendarSystem", "sourceId", "validationStatus"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "churchId": { "type": "string", "minLength": 1 },
+          "jurisdictionId": { "type": ["string", "null"] },
+          "engineId": { "type": "string", "minLength": 1 },
+          "fixedDatePolicy": { "type": "string", "minLength": 1 },
+          "calendarSystem": { "type": "string", "minLength": 1 },
+          "effectiveFrom": { "type": ["string", "null"], "format": "date" },
+          "effectiveTo": { "type": ["string", "null"], "format": "date" },
+          "sourceId": { "type": "string", "minLength": 1 },
+          "validationStatus": { "enum": ["provisional", "cross-checked", "verified", "retired"] }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "churchId", "canonicalEventId", "ruleType", "calendarSystem", "sourceId", "validationStatus"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "churchId": { "type": "string", "minLength": 1 },
+          "jurisdictionId": { "type": ["string", "null"] },
+          "canonicalEventId": { "type": "string", "minLength": 1 },
+          "ruleType": { "enum": ["fixed-date", "easter-offset", "weekday-relative-to-fixed-date", "weekday-relative-to-easter", "native-calendar-date", "annual-source-table", "transfer-or-omission"] },
+          "calendarSystem": { "type": "string", "minLength": 1 },
+          "anchorEventId": { "type": ["string", "null"] },
+          "offsetDays": { "type": ["integer", "null"] },
+          "month": { "type": ["integer", "null"], "minimum": 1, "maximum": 13 },
+          "day": { "type": ["integer", "null"], "minimum": 1, "maximum": 31 },
+          "nativeMonth": { "type": ["string", "null"] },
+          "nativeDay": { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
+          "weekdayRule": { "type": ["string", "null"] },
+          "dateRangeStart": { "type": ["string", "null"], "format": "date" },
+          "dateRangeEnd": { "type": ["string", "null"], "format": "date" },
+          "effectiveFrom": { "type": ["string", "null"], "format": "date" },
+          "effectiveTo": { "type": ["string", "null"], "format": "date" },
+          "sourceId": { "type": "string", "minLength": 1 },
+          "validationStatus": { "enum": ["provisional", "cross-checked", "verified", "rejected", "retired"] }
+        }
+      }
+    },
+    "occurrences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "churchId", "canonicalEventId", "dateIso", "sourceId", "validationStatus", "publicationStatus"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "churchId": { "type": "string", "minLength": 1 },
+          "jurisdictionId": { "type": ["string", "null"] },
+          "canonicalEventId": { "type": "string", "minLength": 1 },
+          "dateIso": { "type": "string", "format": "date" },
+          "endDateIso": { "type": ["string", "null"], "format": "date" },
+          "nativeCalendarSystem": { "type": ["string", "null"] },
+          "nativeYear": { "type": ["integer", "null"] },
+          "nativeMonth": { "type": ["string", "null"] },
+          "nativeDay": { "type": ["integer", "null"] },
+          "rankCode": { "type": ["string", "null"] },
+          "colourCode": { "type": ["string", "null"] },
+          "ruleId": { "type": ["string", "null"] },
+          "sourceId": { "type": "string", "minLength": 1 },
+          "sourceRecordUrl": { "type": ["string", "null"], "format": "uri" },
+          "sourceRecordHash": { "type": ["string", "null"] },
+          "validationStatus": { "enum": ["provisional", "cross-checked", "verified", "rejected"] },
+          "publicationStatus": { "enum": ["withheld", "publishable"] }
+        }
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["occurrenceId", "locale", "name", "translationStatus"],
+        "properties": {
+          "occurrenceId": { "type": "string", "minLength": 1 },
+          "locale": { "enum": ["en", "es", "pt", "fr", "fil", "ru", "sw", "de", "it", "pl"] },
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": ["string", "null"] },
+          "translationStatus": { "enum": ["source", "reviewed", "assisted", "missing", "rejected"] },
+          "sourceLocale": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "henry-ii",
+        "primaryObservanceId": "rc:StHenry",
+        "category": "saint",
+        "names": {
+          "en": "Saint Henry II, Emperor",
+          "pt": "Santo Henrique II, imperador",
+          "es": "San Enrique II, emperador",
+          "it": "Sant'Enrico II, imperatore"
+        }
+      },
+      "recognition": {
+        "id": "recognition:henry-ii:roman-catholic",
+        "personId": "henry-ii",
+        "ecclesialTitles": [
+          "emperor",
+          "layman"
+        ],
+        "evidenceUrl": "https://www.vaticannews.va/en/saints/07/13/st-henry-ii-emperor.html"
+      },
+      "observanceId": "observance:henry-ii:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:henry-ii:general-roman",
+      "source": {
+        "canonicalEventId": "rc:StHenry",
+        "dateISO": "2026-07-13",
+        "sourceOccurrenceId": "snl-pt-2026-07-13-a7a1f66014b9c87a975cec08",
+        "sourceRecordHash": "a45ff9cd285dd1f436c45c81e28fca6f02e71beffcfcb9901e918b0d45714734",
+        "sourceLabelPt": "S. Henrique",
+        "observedDesignation": "S. Henrique – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-07-13"
+      }
+    }
+  ],
+  "reviewDigestSha256": "368a10fb2855f7dd1022d98372b75b0ecc9a6789f88162c10cc79b0c1de6e8fe",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-10-25"
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "status": "ordinary-time-weekday-late-31-34-temporal-family-shadow-promotion",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "familyId": "temporal-rule-family:ordinary-time-weekday-late:roman-catholic",
+  "perennialBoundaries": {
+    "exclusiveStartAnchor": "pentecost",
+    "exclusiveStartOffsetDays": 0,
+    "exclusiveEndAnchor": "advent-start",
+    "exclusiveEndOffsetDays": 0,
+    "weekNumbering": "backward-from-advent"
+  },
+  "reviewedWeekRange": {
+    "min": 31,
+    "max": 34
+  },
+  "candidateOutcomes": {
+    "candidates": 24,
+    "presentSourceOccurrences": 6,
+    "suppressedCandidates": 17,
+    "withheldCandidates": 1
+  },
+  "promotedSourceOccurrenceIds": [
+    "snl-pt-2026-11-05-8aad8869ef08300f8f64d624",
+    "snl-pt-2026-11-13-009a418746af6ba86eb3560a",
+    "snl-pt-2026-11-19-20b1ae29eee0bf20644b225a",
+    "snl-pt-2026-11-20-638e07b93948dc403d8d7317",
+    "snl-pt-2026-11-26-0d3eb9204d39858f1d9f9680",
+    "snl-pt-2026-11-27-26c689538c7579fd94ce744a"
+  ],
+  "withheldSourceOccurrenceIds": [
+    "snl-pt-2026-11-06-0b6ca82418e6dc1911faebc5"
+  ],
+  "promotedMappingDigestSha256": "4e25aa4f933785cda2ab3c342a96dff1f2dff57bae2c8ebcb1236ccf8b9c0f2d",
+  "promotedSuppressionDigestSha256": "fa1bcef810ca1452c3e4e4e2b69efea135a91bbf5edf8840f59312368eeede74",
+  "withheldCandidateDigestSha256": "caf8fe12582db0bd8612274af588388f74b47f37872cfc8b124d4b8da9924a34",
+  "coverageBefore": {
+    "mappedOccurrenceAnchors": 258,
+    "remainingLegacyOccurrences": 131
+  },
+  "coverageAfter": {
+    "mappedOccurrenceAnchors": 264,
+    "remainingLegacyOccurrences": 125,
+    "promotionAllowed": false
+  },
+  "mutationAllowed": false,
+  "publicationAllowed": false,
+  "verifiedAt": "2026-10-20"
+}
