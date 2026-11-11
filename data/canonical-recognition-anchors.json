@@ -6336,6 +6336,38 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "recognition:anthony-mary-claret:roman-catholic",
+      "personId": "anthony-mary-claret",
+      "churchId": "church:roman-catholic",
+      "jurisdictionId": "global",
+      "recognizedAs": "saint",
+      "recognitionBasis": "official-church-attestation",
+      "ecclesialTitles": [
+        "bishop",
+        "missionary",
+        "founder"
+      ],
+      "scope": "church-wide",
+      "calendarMembershipImplied": false,
+      "observanceDateImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-10-24",
+          "claimTypes": [
+            "identity",
+            "ecclesial-status",
+            "priesthood",
+            "episcopate",
+            "missionary-work",
+            "founder-status",
+            "death-date"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

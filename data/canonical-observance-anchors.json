@@ -4965,6 +4965,38 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "observance:anthony-mary-claret:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "anthony-mary-claret",
+          "recognitionId": "recognition:anthony-mary-claret:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-24",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "contextual-alternatives-kept-independent"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

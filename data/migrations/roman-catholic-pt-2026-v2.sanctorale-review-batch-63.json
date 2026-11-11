@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "anthony-mary-claret",
+        "primaryObservanceId": "rc:StAnthonyMaryClaret",
+        "category": "saint",
+        "names": {
+          "en": "Saint Anthony Mary Claret",
+          "pt": "Santo António Maria Claret",
+          "es": "San Antonio María Claret",
+          "it": "Sant'Antonio Maria Claret"
+        }
+      },
+      "recognition": {
+        "id": "recognition:anthony-mary-claret:roman-catholic",
+        "personId": "anthony-mary-claret",
+        "ecclesialTitles": [
+          "bishop",
+          "missionary",
+          "founder"
+        ],
+        "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-24"
+      },
+      "observanceId": "observance:anthony-mary-claret:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:anthony-mary-claret:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "vaticanIdentityEvidence": {
+          "claim": "bishop-founder-canonized-fixed-death-date-24-october",
+          "publisher": "Vatican City State",
+          "url": "https://www.vaticanstate.va/en/component/content/article/october-24-saint-anthony-mary-claret.html",
+          "publicationStatus": "evidence-only"
+        },
+        "portugalContextualAlternativesKeptIndependent": true,
+        "contextualRanksKeptSeparate": true,
+        "claretianProperRank": "solemnity",
+        "saturdayMemorialOfMaryKeptIndependent": true,
+        "bejaSaintSisenandoSolemnityKeptIndependent": true,
+        "patronageEvidence": {
+          "claim": "co-patron-of-diocese-of-las-palmas",
+          "publisher": "Claretian Missionaries",
+          "url": "https://www.claret.org/our-congregation/st-anthony-mary-claret/",
+          "publicationStatus": "evidence-only"
+        },
+        "patronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StAnthonyMaryClaret",
+        "dateISO": "2026-10-24",
+        "sourceOccurrenceId": "snl-pt-2026-10-24-0d12f5faa2b67b6ded439033",
+        "sourceRecordHash": "ca0dea63d820389b70bc77ae1eff321ecaa9638c28a316eefd83dbf5ec7ed400",
+        "sourceLabelPt": "S. António Maria Claret, bispo",
+        "observedDesignation": "S. António Maria Claret, bispo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-10-24"
+      }
+    }
+  ],
+  "reviewDigestSha256": "5f3031318235154c0e1bce0f366a41bbb21173ec6d2fd12a6451a549a50eb53e",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
