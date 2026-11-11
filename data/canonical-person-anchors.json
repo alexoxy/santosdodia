@@ -2389,6 +2389,17 @@
         "es": "San Pablo de la Cruz",
         "it": "San Paolo della Croce"
       }
+    },
+    {
+      "id": "john-paul-ii",
+      "primaryObservanceId": "rc:StJohnPaulII",
+      "category": "saint",
+      "names": {
+        "en": "Saint John Paul II",
+        "pt": "São João Paulo II",
+        "es": "San Juan Pablo II",
+        "it": "San Giovanni Paolo II"
+      }
     }
   ]
 }

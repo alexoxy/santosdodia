@@ -674,6 +674,11 @@
       "occurrenceId": "occurrence:2026-10-19:paul-of-the-cross:roman-catholic:pt",
       "legacyObservanceId": "rc:StPaulCross",
       "dateISO": "2026-10-19"
+    },
+    {
+      "occurrenceId": "occurrence:2026-10-22:john-paul-ii:roman-catholic:pt",
+      "legacyObservanceId": "rc:StJohnPaulII",
+      "dateISO": "2026-10-22"
     }
   ]
 }
