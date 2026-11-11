@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "juan-diego-cuauhtlatoatzin",
+        "primaryObservanceId": "rc:JuanDiego",
+        "category": "saint",
+        "names": {
+          "en": "Saint Juan Diego Cuauhtlatoatzin",
+          "pt": "São João Diogo Cuauhtlatoatzin",
+          "es": "San Juan Diego Cuauhtlatoatzin",
+          "it": "San Juan Diego Cuauhtlatoatzin"
+        }
+      },
+      "recognition": {
+        "id": "recognition:juan-diego-cuauhtlatoatzin:roman-catholic",
+        "personId": "juan-diego-cuauhtlatoatzin",
+        "churchId": "church:roman-catholic",
+        "jurisdictionId": "global",
+        "recognizedAs": "saint",
+        "recognitionBasis": "formal-recognition-event",
+        "ecclesialTitles": [
+          "layman",
+          "marian-visionary"
+        ],
+        "evidenceUrl": "https://www.vatican.va/news_services/liturgy/saints/ns_lit_doc_20020731_juan-diego_po.html"
+      },
+      "observanceId": "observance:juan-diego-cuauhtlatoatzin:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:juan-diego-cuauhtlatoatzin:general-roman",
+      "occurrenceKey": "juan-diego-cuauhtlatoatzin",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "indigenousIdentityPreserved": true,
+        "guadalupeAssociationSourceAttested": true,
+        "ourLadyOfGuadalupeObservanceConflated": false,
+        "passionistBlessedBernardoSilvestrelliKeptIndependent": true,
+        "localOrInstitutionalRankUniversalized": false
+      },
+      "source": {
+        "canonicalEventId": "rc:JuanDiego",
+        "dateISO": "2026-12-09",
+        "sourceOccurrenceId": "snl-pt-2026-12-09-faeec407f430a64dd9bc86cd",
+        "sourceRecordHash": "6edf53c5069d314deb5201d3eab586033cae8073768a896318d95911319b51ba",
+        "sourceLabelPt": "S. João Diogo",
+        "observedDesignation": "S. João Diogo – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-12-9"
+      }
+    }
+  ],
+  "reviewDigestSha256": "6835ab6654da86aa85d8f97cd68c9d53637faaca44d13776715563b83ccc0724",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
