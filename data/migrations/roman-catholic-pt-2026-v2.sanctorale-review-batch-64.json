@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "martin-de-porres",
+        "primaryObservanceId": "rc:StMartinPorres",
+        "category": "saint",
+        "names": {
+          "en": "Saint Martin de Porres",
+          "pt": "São Martinho de Porres",
+          "es": "San Martín de Porres",
+          "it": "San Martino de Porres"
+        }
+      },
+      "recognition": {
+        "id": "recognition:martin-de-porres:roman-catholic",
+        "personId": "martin-de-porres",
+        "ecclesialTitles": [
+          "religious",
+          "dominican-brother"
+        ],
+        "evidenceUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-3"
+      },
+      "observanceId": "observance:martin-de-porres:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:martin-de-porres:general-roman",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "vaticanIdentityEvidence": {
+          "claim": "canonization-approved-religious-charity",
+          "publisher": "Holy See",
+          "url": "https://www.vatican.va/content/john-xxiii/es/speeches/1962/documents/hf_j-xxiii_spe_19620412_de-porres.html",
+          "publicationStatus": "evidence-only"
+        },
+        "portugalContextualAlternativesKeptIndependent": true,
+        "contextualRanksKeptSeparate": true,
+        "dominicanProperRank": "feast",
+        "vianaCathedralDedicationKeptIndependent": true,
+        "jesuitRupertMayerKeptIndependent": true,
+        "passionistPioCampidelliKeptIndependent": true,
+        "patronageEvidence": {
+          "claim": "heavenly-patron-of-dominican-cooperator-brothers",
+          "publisher": "Order of Preachers",
+          "url": "https://es.op.org/santos/s-martini-de-porres/",
+          "publicationStatus": "evidence-only"
+        },
+        "patronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StMartinPorres",
+        "dateISO": "2026-11-03",
+        "sourceOccurrenceId": "snl-pt-2026-11-03-0b7154e0895de737831b7baf",
+        "sourceRecordHash": "b96c07c2ba9885553d86654c429a004a347ce29faeac9e4f6b935a53c1c01345",
+        "sourceLabelPt": "S. Martinho de Porres, religioso",
+        "observedDesignation": "S. Martinho de Porres, religioso – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-3"
+      }
+    }
+  ],
+  "reviewDigestSha256": "77e8fd083b809fef0d5f0efb57050f5bd2e9a6bc0a1296d76d59d46c204fa0cb",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

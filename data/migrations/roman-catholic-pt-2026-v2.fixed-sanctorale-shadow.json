@@ -1935,9 +1935,23 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-03:martin-de-porres:roman-catholic:pt",
+      "observanceId": "observance:martin-de-porres:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:martin-de-porres:general-roman",
+      "legacyObservanceId": "rc:StMartinPorres",
+      "expectedDateISO": "2026-11-03",
+      "sourceOccurrenceId": "snl-pt-2026-11-03-0b7154e0895de737831b7baf",
+      "sourceRecordHash": "b96c07c2ba9885553d86654c429a004a347ce29faeac9e4f6b935a53c1c01345",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 137
+  "fixedMappingCount": 138
 }
