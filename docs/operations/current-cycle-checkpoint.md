@@ -1,12 +1,12 @@
 # SantosDia — Global Vision Implementation Checkpoint
 
-Updated: 2026-11-11 16:54 UTC
+Updated: 2026-11-11 17:58 UTC
 
 Normative strategy: `docs/product/global-liturgical-intelligence-v2.1.md`
 
-Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-11-v74.{md,json}`
+Master execution record: GitHub issue #355 and Dropbox plan `santosdia-entregaveis-2026-11-11-v75.{md,json}`
 
-Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 342/389; perennial cutover and production mutation remain fail-closed.
+Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconciliation is 343/389; perennial cutover and production mutation remain fail-closed.
 
 ## Continuity and operating boundary
 
@@ -20,18 +20,18 @@ Status: active implementation; E07.05 is partial; Portugal 2026 semantic reconci
 
 ## Completed in this execution
 
-PR [#500](https://github.com/alexoxy/santosdodia/pull/500) delivered E07.05 batch 68:
+PR [#502](https://github.com/alexoxy/santosdodia/pull/502) delivered E07.05 batch 69:
 
-- created a canonical Person and Roman Catholic Recognition for Saint Catherine of Alexandria;
-- retained the competent source's explicit traditional attribution and uncertainty instead of presenting the narrative as certain history;
-- added the perennial General Roman rule and exact Portugal 2026 optional memorial (`MF`) for 25 November;
-- kept Carmelite Blessed Ana of Jesus, the Order of Malta commemoration and diocesan anniversaries as separate contextual entries;
-- retained traditional patronage evidence for later scoped review without publishing it as a universal claim;
+- created a canonical Person and Roman Catholic Recognition for Saint Juan Diego Cuauhtlatoatzin;
+- preserved his indigenous identity and the Guadalupan association as sourced context without conflating him with the observance of Our Lady of Guadalupe;
+- added the perennial General Roman rule and exact Portugal 2026 optional memorial (`MF`) for 9 December;
+- kept the Passionist proper of Blessed Bernardo Maria Silvestrelli and the day's other contextual entries separate;
+- inferred or published no patronage claim;
 - kept runtime publication and remote D1 fail-closed.
 
-Validated head: `76565481daf15714309cd593969d2cd39e270924`; validated tree: `864f98239ed4688baf83c4c4f0aca247213675b0`.
+Validated head: `8b7516d885f46494fc512d520fd2731afded9f0f`; validated tree: `9d9af9a69ad11b627739cf45f9434a6b920dbe88`.
 
-CI merge `0789a6a39f72751e192695a86595e162abdde7be`, validated head and signed functional merge `f7f337cc99dcfa1e871e3063de0a022bd64310e8` have the exact same tree.
+CI merge `3ba56407b0bb7b1585e3714a21fe01559bddfa37`, validated head and signed functional merge `a6d80f202161825cc0cf0b9be3557495ed0303f2` have the exact same tree.
 
 E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task countdown.
 
@@ -41,37 +41,37 @@ E07.05 remains `EM_CURSO`; this partial batch does not reduce the master task co
 - Direct TemporalRule bindings: **14**.
 - Precedence-surviving TemporalRuleFamily bindings: **173**.
 - Movable/transfer bindings: **11**.
-- Exact fixed Sanctorale bindings: **144** across **128** civil days.
-- Total canonical migration coverage: **342/389 (87.918%)**.
-- Approved-source occurrences outside the canonical shadow: **47**.
-- Source-bound civil days: **320/365**.
-- Civil days wholly without a source-bound canonical occurrence: **45**.
-- Fixed-person backlog: **2**.
+- Exact fixed Sanctorale bindings: **145** across **129** civil days.
+- Total canonical migration coverage: **343/389 (88.175%)**.
+- Approved-source occurrences outside the canonical shadow: **46**.
+- Source-bound civil days: **321/365**.
+- Civil days wholly without a source-bound canonical occurrence: **44**.
+- Fixed-person backlog: **1**.
 - Full semantic equivalence: `false`.
 - Perennial read-model cutover and production promotion: `false`.
 
 ## CI and external proof
 
-PR #500 workflows on the exact validated head:
+PR #502 workflows on the exact validated head:
 
-- Product BUILD `43061250617`: success;
-- Product publish staging `43061250606`: success;
-- Quality `43061250927`: success;
-- Wikidata retry quality `43061250476`: success;
-- Sanctorale review quality `43061250547`: success.
+- Product BUILD `43072014302`: success;
+- Product publish staging `43072014402`: success;
+- Quality `43072014200`: success;
+- Wikidata retry quality `43072014466`: success;
+- Sanctorale review quality `43072014208`: success.
 
 Focused tests, `npm run check`, the mandatory AdSense checker, `npm audit --audit-level=high` and `git diff --check` passed. The current audit retains 10 moderate transitive findings; the forced fix is breaking and was not applied.
 
 Dropbox proof:
 
-- source JSON `id:oANWCGUyYBwAAAAAAAAc5g`, SHA-256 `77dc32b0c101bc6f81bd90db9a1b1f4fb7e6a9cc414811c117a6548f6885cc5e`;
-- source MD `id:oANWCGUyYBwAAAAAAAAc4g`, SHA-256 `7cec90d089d1a5dd6c9c9dc1d3755b2f2c69bbf5cf36528a35cd98433545e02f`;
-- receipt JSON `id:oANWCGUyYBwAAAAAAAAc5A`, SHA-256 `ad8955334049df0ded06bfc977ff40350cad047838cdcd51eb88acb3410c26c2`;
-- receipt MD `id:oANWCGUyYBwAAAAAAAAc5Q`, SHA-256 `b2ec47b003d600d486aacb95a9030bbde25085f8e4a2b1307894f6ef781c0b5c`;
-- plan v74 JSON `id:oANWCGUyYBwAAAAAAAAc7A`, SHA-256 `c049dc881e23508552187b3230ce4837060a6b7bb37076ec6370c1f0384e1ef5`;
-- plan v74 MD `id:oANWCGUyYBwAAAAAAAAc7Q`, SHA-256 `2cfa28efa3b169a1d50aed13c1ee382e9e714891637d677ee170933a5631bc91`.
+- source JSON `id:oANWCGUyYBwAAAAAAAAc-A`, SHA-256 `7fca608bb3a029e89a668f58ad3de634b999337cb60f80ea238419cc217786f4`;
+- source MD `id:oANWCGUyYBwAAAAAAAAc_A`, SHA-256 `6722d08ae309779984046800e2dd3b01ef39b53f3a9ae38d7f449feda6c911ac`;
+- receipt JSON `id:oANWCGUyYBwAAAAAAAAc-g`, SHA-256 `35caabc6e570dfe753941e6930756e3de47220ba136acb0a98c6bc5f491db917`;
+- receipt MD `id:oANWCGUyYBwAAAAAAAAc-w`, SHA-256 `015f215884f3fadabce0a246630b5986774404f70831ac44fc7c453120e37e44`;
+- plan v75 JSON `id:oANWCGUyYBwAAAAAAAAdAw`, SHA-256 `52a02cab6ef9487658535eaa8105a35f5dda9ffa4610c591bdce7839c42ca9f9`;
+- plan v75 MD `id:oANWCGUyYBwAAAAAAAAdAg`, SHA-256 `429ad2a680df123ad14726c4b60a481c9eaa6b6818e5927c9874d64c2a447185`.
 
-Staging artifact `13873477946`, ZIP digest `sha256:3935493573d8eec0e1c9373d17a5c475d2f56d0389c61bdbc36ff9599124eb93`, was archived as `id:oANWCGUyYBwAAAAAAAAc4w`. It contains the six expected release files and remains `productionApproved=false`.
+Staging artifact `13877948009`, ZIP digest `sha256:c060faf6dbeafc39d3136d41593a7df3e6af67cb3a597d63984eb54ce73c1473`, was archived as `id:oANWCGUyYBwAAAAAAAAc-Q`. It contains the six expected release files and remains `productionApproved=false`.
 
 ## Task and deliverable countdown
 
@@ -82,7 +82,7 @@ Staging artifact `13873477946`, ZIP digest `sha256:3935493573d8eec0e1c9373d17a5c
 
 ## Repository and production hygiene
 
-- PR #500 was integrated only after the exact head, unchanged base and all five checks were verified.
+- PR #502 was integrated only after the exact head, unchanged base and all five checks were verified.
 - The CI merge tree, validated head tree and functional merge tree are identical.
 - No review or review thread remained pending.
 - No force push, history rewrite, production deletion, remote-D1 write, deployment, DNS/WAF mutation or AdSense activation occurred.
@@ -90,7 +90,7 @@ Staging artifact `13873477946`, ZIP digest `sha256:3935493573d8eec0e1c9373d17a5c
 
 ## Ordered next actions
 
-1. Continue E07.05 with `rc:JuanDiego` on 9 December, preserving exact identity, the Guadalupan context, authority, rank and contextual-proper boundaries.
+1. Continue E07.05 with `rc:StDamasusIPope` on 11 December, preserving exact identity, competent authority, rank and contextual-proper boundaries.
 2. Continue source-coherent fixed Sanctorale, collective and Marian-title batches.
 3. Resolve Portugal-specific structural/proper/rank rows through competent-authority review.
 4. Reach 389/389, explain every annual difference and run multi-year regeneration.
@@ -99,8 +99,8 @@ Staging artifact `13873477946`, ZIP digest `sha256:3935493573d8eec0e1c9373d17a5c
 
 ## Resume and stop rules
 
-- Read issue #355 and Dropbox plan v74, then verify GitHub and Dropbox before new work.
-- Keep one implementation batch active and continue from `rc:JuanDiego`; do not repeat the 25 November batch.
+- Read issue #355 and Dropbox plan v75, then verify GitHub and Dropbox before new work.
+- Keep one implementation batch active and continue from `rc:StDamasusIPope`; do not repeat the 9 December batch.
 - Never use CI or health checks to write remote D1.
 - Do not merge a PR whose checks belong to an outdated head/base.
 - Do not publish shadow output, infer identity from text, or conflate country, locale, Church, jurisdiction, calendar and timezone.
