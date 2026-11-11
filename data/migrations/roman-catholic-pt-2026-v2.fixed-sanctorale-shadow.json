@@ -1977,9 +1977,37 @@
       "sourceRankCode": "MF",
       "reviewStatus": "source-bound-exact",
       "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-23:clement-i-pope:roman-catholic:pt",
+      "observanceId": "observance:clement-i-pope:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:clement-i-pope:general-roman",
+      "legacyObservanceId": "rc:StClementIPope",
+      "expectedDateISO": "2026-11-23",
+      "sourceOccurrenceId": "snl-pt-2026-11-23-66e04829ecf01ea414a20950",
+      "sourceRecordHash": "eb391e8384a4ae0ec039c15ad641e9df23b83a1d736ea523cb16261c4dde8118",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
+    },
+    {
+      "occurrenceId": "occurrence:2026-11-23:columban-luxeuil:roman-catholic:pt",
+      "observanceId": "observance:columban-luxeuil:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:columban-luxeuil:general-roman",
+      "legacyObservanceId": "rc:StColumban",
+      "expectedDateISO": "2026-11-23",
+      "sourceOccurrenceId": "snl-pt-2026-11-23-6a3830f808141259fc4d93f5",
+      "sourceRecordHash": "d51e10e60ba18cc7b4ab640b4d53d2d582ea43f619ca4ba65c666325582a9a5d",
+      "legacyRank": "optional-memorial",
+      "canonicalRank": "optional-memorial",
+      "sourceRankCode": "MF",
+      "reviewStatus": "source-bound-exact",
+      "resolution": "exact-fixed-date-binding"
     }
   ],
   "mutationAllowed": false,
   "verifiedAt": "2026-11-11",
-  "fixedMappingCount": 140
+  "fixedMappingCount": 142
 }
