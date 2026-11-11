@@ -35,14 +35,14 @@
   },
   "coverageAtInventory": {
     "approvedSourceOccurrences": 389,
-    "sourceBoundOccurrences": 341,
-    "remainingOccurrences": 48,
+    "sourceBoundOccurrences": 342,
+    "remainingOccurrences": 47,
     "promotionAllowed": false
   },
   "familyCounts": {
     "fixed-marian-title": 7,
     "fixed-or-major-observance": 15,
-    "fixed-person": 3,
+    "fixed-person": 2,
     "jurisdiction-rank-override": 2,
     "jurisdiction-structural-overlay": 13,
     "portugal-proper": 5,
@@ -323,13 +323,6 @@
       "dateISO": "2026-11-21",
       "canonicalEventId": "rc:PresentationMary",
       "semanticFamily": "fixed-marian-title"
-    },
-    {
-      "sourceOccurrenceId": "snl-pt-2026-11-25-1ac6f5e76e77386a765b5284",
-      "sourceRecordHash": "8c8f50639a4a677193f0865f434386a2e8cb637f15f877a0524fb98354dbc020",
-      "dateISO": "2026-11-25",
-      "canonicalEventId": "rc:StCatherineAlexandria",
-      "semanticFamily": "fixed-person"
     },
     {
       "sourceOccurrenceId": "snl-pt-2026-12-05-8f48ceca3194e29bef8f7248",

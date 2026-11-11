@@ -5236,6 +5236,47 @@
         }
       ],
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "observance:catherine-alexandria:roman-catholic",
+      "churchId": "church:roman-catholic",
+      "observanceKey": "principal-commemoration",
+      "observanceType": "person-commemoration",
+      "subjects": [
+        {
+          "kind": "person",
+          "personId": "catherine-alexandria",
+          "recognitionId": "recognition:catherine-alexandria:roman-catholic"
+        }
+      ],
+      "scope": "church-attested",
+      "occurrenceDateImplied": false,
+      "calendarSystemImplied": false,
+      "jurisdictionImplied": false,
+      "rankImplied": false,
+      "precedenceImplied": false,
+      "evidence": [
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-25",
+          "claimTypes": [
+            "observance-attestation",
+            "liturgical-designation",
+            "optional-memorial",
+            "contextual-alternatives-kept-independent"
+          ]
+        },
+        {
+          "publisher": "Secretariado Nacional de Liturgia",
+          "url": "https://liturgia.pt/santos/santo_v.php?cod_santo=242",
+          "claimTypes": [
+            "observance-attestation",
+            "virginity",
+            "martyrdom"
+          ]
+        }
+      ],
+      "verifiedAt": "2026-11-11"
     }
   ]
 }

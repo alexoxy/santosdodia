@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-sanctorale-promotion-completed",
+  "reviewPack": "roman-catholic-pt-2026-v2.sanctorale-review-batch-68.json",
+  "reviewDigestSha256": "16117e407ca54a43e856d19522233d2faebde2df897565906dd64d599b103a7f",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "promotedPersonIds": [
+    "catherine-alexandria"
+  ],
+  "promotedObservanceIds": [
+    "observance:catherine-alexandria:roman-catholic"
+  ],
+  "canonicalCoverageAfterPromotion": {
+    "mappedOccurrenceAnchors": 342,
+    "requiredForPromotion": 389,
+    "remainingLegacyOccurrences": 47
+  },
+  "fixedSanctoraleMappingDigestSha256": "e96668903daf790ed04f4b06e42035b4bbc2061362f64b673681a6ed475de4f6",
+  "runtimePublicationAllowed": false,
+  "productionWriteAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}

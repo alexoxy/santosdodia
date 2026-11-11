@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "status": "reviewed-sanctorale-promotion-candidate-pack",
+  "sourceReleaseId": "roman-catholic-pt-2026-v2",
+  "sourceArtifact": {
+    "workflowRunId": 31998552573,
+    "artifactId": 9277632698,
+    "artifactName": "portugal-product-v2-31998552573",
+    "artifactSha256": "a7c4bb8664d67bdec9097757072138506bd89a5b1c2698a266b8e82c28828cde",
+    "buildJsonSha256": "159f38f1ee763517ee4dfae738237ced2c7f243146ba3f593e5b096feaaafc06",
+    "releaseJsonSha256": "0a7c5653b8b97e1dc411af8bbffff82ac7715b0e753be98ea0f376799ac6c7ed",
+    "sourceCommit": "8c0a999a7fe150af04808b43aec524ec35a6004c"
+  },
+  "canonicalTarget": {
+    "churchId": "church:roman-catholic",
+    "jurisdictionId": "jurisdiction:roman-catholic:pt",
+    "calendarSystem": "gregorian",
+    "year": 2026,
+    "occurrenceModelVersion": "1.0"
+  },
+  "candidates": [
+    {
+      "person": {
+        "id": "catherine-alexandria",
+        "primaryObservanceId": "rc:StCatherineAlexandria",
+        "category": "saint",
+        "names": {
+          "en": "Saint Catherine of Alexandria",
+          "pt": "Santa Catarina de Alexandria",
+          "es": "Santa Catalina de Alejandría",
+          "it": "Santa Caterina d’Alessandria"
+        }
+      },
+      "recognition": {
+        "id": "recognition:catherine-alexandria:roman-catholic",
+        "personId": "catherine-alexandria",
+        "churchId": "church:roman-catholic",
+        "jurisdictionId": "global",
+        "recognizedAs": "saint",
+        "recognitionBasis": "official-church-attestation",
+        "ecclesialTitles": [
+          "virgin",
+          "martyr"
+        ],
+        "evidenceUrl": "https://mail.liturgia.pt/martirologio/elogio.php?data=2026-11-25"
+      },
+      "observanceId": "observance:catherine-alexandria:roman-catholic",
+      "sanctoraleRuleId": "sanctorale-rule:catherine-alexandria:general-roman",
+      "occurrenceKey": "catherine-alexandria",
+      "contextualBoundary": {
+        "generalRoman": "optional-memorial",
+        "portugal2026": "optional-memorial",
+        "deathDateCertain": false,
+        "traditionLanguagePreserved": true,
+        "carmeliteBlessedAnneOfJesusKeptIndependent": true,
+        "orderOfMaltaCommemorationKeptIndependent": true,
+        "diocesanAnniversariesKeptIndependent": true,
+        "patronageEvidence": {
+          "publisher": "Vatican City State",
+          "url": "https://vaticanstate.va/en/state-and-government/general-informations/saint-of-the-day/3085-25-november-catherine-of-alexandria-virgin-and-martyr.html",
+          "claims": [
+            "studies",
+            "teachers",
+            "potters",
+            "religious-orders",
+            "italian-municipalities"
+          ],
+          "publicationStatus": "evidence-only"
+        },
+        "patronagePublished": false
+      },
+      "source": {
+        "canonicalEventId": "rc:StCatherineAlexandria",
+        "dateISO": "2026-11-25",
+        "sourceOccurrenceId": "snl-pt-2026-11-25-1ac6f5e76e77386a765b5284",
+        "sourceRecordHash": "8c8f50639a4a677193f0865f434386a2e8cb637f15f877a0524fb98354dbc020",
+        "sourceLabelPt": "S. Catarina de Alexandria, virgem e mártir",
+        "observedDesignation": "S. Catarina de Alexandria, virgem e mártir – MF",
+        "legacyRank": "optional-memorial",
+        "sourceRankCode": "MF",
+        "canonicalRank": "optional-memorial",
+        "snlUrl": "https://www.liturgia.pt/liturgiadiaria/dia.php?data=2026-11-25"
+      }
+    }
+  ],
+  "reviewDigestSha256": "16117e407ca54a43e856d19522233d2faebde2df897565906dd64d599b103a7f",
+  "mutationAllowed": false,
+  "promotionAllowed": false,
+  "verifiedAt": "2026-11-11"
+}
