@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run security:dependency-test && npm run repo:audit && npm run surface:text-first-test && npm run publication:boundary-test && npm run autonomy:test && npm run autonomy:corroboration-test && npm run autonomy:lanes-audit && npm run saints:baseline-audit && npm run saints:baseline-test && npm run saints:baseline-normalization-test && npm run saints:baseline-normalizer-audit && npm run saints:baseline-identity-test && npm run saints:baseline-identity-audit && npm run dropbox:batch-list-test && npm run saints:baseline-import-test && npm run saints:baseline-importer-audit && npm run temporal:test && npm run linguistic:date-test && npm run linguistic:text-test && npm run linguistic:audit && npm run translations:validate && npm run automation:audit && npm run automation:test && npm run vault:test && npm run dropbox:archive-test && npm run dropbox:oauth-test && npm run cloudflare:guardrails-audit && npm run cloudflare:guardrails-test && npm run db:d1-budget-test && npm run osint:registry-audit && npm run osint:normalize-test && npm run db:knowledge-batch-test && npm run db:reviewed-chunk-test && npm run data:audit && npm run editorial:corpus-audit && npm run claims:audit && npm run leaders:audit && npm run calendar:audit && npm run calendar:reference-test && npm run calendar:reconciliation-test && npm run calendar:normalize-test && npm run calendar:approval-test && npm run calendar:read-model-test && npm run calendar:staging-test && npm run db:migrations-test && npm run db:sql-parser-test && npm run db:d1-local-test && npm run db:d1-staging-config-test && npm run db:d1-remote-safety-test && npm run api:validate && npm run typecheck && npm run lint && npm run build",
     "cloudflare:build": "opennextjs-cloudflare build",
+    "cloudflare:runtime-test": "node scripts/cloudflare/test-bundled-worker-runtime.cjs",
     "cloudflare:preview": "opennextjs-cloudflare preview",
     "cloudflare:deploy": "opennextjs-cloudflare deploy",
     "cloudflare:upload": "opennextjs-cloudflare upload",
@@ -92,7 +93,7 @@
     "security:dependency-test": "node scripts/test-braces-security.mjs"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "1.20.6",
+    "@opennextjs/cloudflare": "1.20.17",
     "next": "16.4.6",
     "react": "19.3.1",
     "react-dom": "19.3.1"
@@ -104,6 +105,7 @@
     "braces": "file:vendor/braces",
     "eslint": "^9.11.1",
     "eslint-config-next": "15.5.28",
+    "miniflare": "5.20261012.1-beta",
     "typescript": "^5.6.3",
     "wrangler": "4.151.1"
   },
